@@ -32,10 +32,10 @@ import type {
   LocationsClient,
   LocationProtos,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -57,7 +57,7 @@ export class IndexEndpointServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('aiplatform');
@@ -70,12 +70,12 @@ export class IndexEndpointServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
+  innerApiCalls: {[name: string]: Function};
   iamClient: IamClient;
   locationsClient: LocationsClient;
-  pathTemplates: { [name: string]: gax.PathTemplate };
+  pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
-  indexEndpointServiceStub?: Promise<{ [name: string]: Function }>;
+  indexEndpointServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of IndexEndpointServiceClient.
@@ -151,7 +151,7 @@ export class IndexEndpointServiceClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -422,12 +422,12 @@ export class IndexEndpointServiceClient {
         {
           selector: 'google.cloud.location.Locations.GetLocation',
           get: '/ui/{name=projects/*/locations/*}',
-          additional_bindings: [{ get: '/v1/{name=projects/*/locations/*}' }],
+          additional_bindings: [{get: '/v1/{name=projects/*/locations/*}'}],
         },
         {
           selector: 'google.cloud.location.Locations.ListLocations',
           get: '/ui/{name=projects/*}/locations',
-          additional_bindings: [{ get: '/v1/{name=projects/*}/locations' }],
+          additional_bindings: [{get: '/v1/{name=projects/*}/locations'}],
         },
         {
           selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',
@@ -720,7 +720,7 @@ export class IndexEndpointServiceClient {
             {
               post: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}:cancel',
             },
-            { post: '/v1/{name=projects/*/locations/*/operations/*}:cancel' },
+            {post: '/v1/{name=projects/*/locations/*/operations/*}:cancel'},
             {
               post: '/v1/{name=projects/*/locations/*/datasets/*/operations/*}:cancel',
             },
@@ -859,10 +859,8 @@ export class IndexEndpointServiceClient {
           selector: 'google.longrunning.Operations.DeleteOperation',
           delete: '/ui/{name=projects/*/locations/*/operations/*}',
           additional_bindings: [
-            {
-              delete: '/ui/{name=projects/*/locations/*/agents/*/operations/*}',
-            },
-            { delete: '/ui/{name=projects/*/locations/*/apps/*/operations/*}' },
+            {delete: '/ui/{name=projects/*/locations/*/agents/*/operations/*}'},
+            {delete: '/ui/{name=projects/*/locations/*/apps/*/operations/*}'},
             {
               delete:
                 '/ui/{name=projects/*/locations/*/datasets/*/operations/*}',
@@ -963,9 +961,7 @@ export class IndexEndpointServiceClient {
               delete:
                 '/ui/{name=projects/*/locations/*/migratableResources/*/operations/*}',
             },
-            {
-              delete: '/ui/{name=projects/*/locations/*/models/*/operations/*}',
-            },
+            {delete: '/ui/{name=projects/*/locations/*/models/*/operations/*}'},
             {
               delete:
                 '/ui/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',
@@ -1050,7 +1046,7 @@ export class IndexEndpointServiceClient {
               delete:
                 '/ui/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}',
             },
-            { delete: '/v1/{name=projects/*/locations/*/operations/*}' },
+            {delete: '/v1/{name=projects/*/locations/*/operations/*}'},
             {
               delete:
                 '/v1/{name=projects/*/locations/*/datasets/*/operations/*}',
@@ -1135,9 +1131,7 @@ export class IndexEndpointServiceClient {
               delete:
                 '/v1/{name=projects/*/locations/*/migratableResources/*/operations/*}',
             },
-            {
-              delete: '/v1/{name=projects/*/locations/*/models/*/operations/*}',
-            },
+            {delete: '/v1/{name=projects/*/locations/*/models/*/operations/*}'},
             {
               delete:
                 '/v1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',
@@ -1234,18 +1228,16 @@ export class IndexEndpointServiceClient {
               delete:
                 '/v1/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}',
             },
-            { delete: '/v1/{name=reasoningEngines/*/sessions/*/operations/*}' },
+            {delete: '/v1/{name=reasoningEngines/*/sessions/*/operations/*}'},
           ],
         },
         {
           selector: 'google.longrunning.Operations.GetOperation',
           get: '/ui/{name=projects/*/locations/*/operations/*}',
           additional_bindings: [
-            { get: '/ui/{name=projects/*/locations/*/agents/*/operations/*}' },
-            { get: '/ui/{name=projects/*/locations/*/apps/*/operations/*}' },
-            {
-              get: '/ui/{name=projects/*/locations/*/datasets/*/operations/*}',
-            },
+            {get: '/ui/{name=projects/*/locations/*/agents/*/operations/*}'},
+            {get: '/ui/{name=projects/*/locations/*/apps/*/operations/*}'},
+            {get: '/ui/{name=projects/*/locations/*/datasets/*/operations/*}'},
             {
               get: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}',
             },
@@ -1267,9 +1259,7 @@ export class IndexEndpointServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/edgeDevices/*/operations/*}',
             },
-            {
-              get: '/ui/{name=projects/*/locations/*/endpoints/*/operations/*}',
-            },
+            {get: '/ui/{name=projects/*/locations/*/endpoints/*/operations/*}'},
             {
               get: '/ui/{name=projects/*/locations/*/extensionControllers/*/operations/*}',
             },
@@ -1297,7 +1287,7 @@ export class IndexEndpointServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/tuningJobs/*/operations/*}',
             },
-            { get: '/ui/{name=projects/*/locations/*/indexes/*/operations/*}' },
+            {get: '/ui/{name=projects/*/locations/*/indexes/*/operations/*}'},
             {
               get: '/ui/{name=projects/*/locations/*/indexEndpoints/*/operations/*}',
             },
@@ -1322,7 +1312,7 @@ export class IndexEndpointServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/migratableResources/*/operations/*}',
             },
-            { get: '/ui/{name=projects/*/locations/*/models/*/operations/*}' },
+            {get: '/ui/{name=projects/*/locations/*/models/*/operations/*}'},
             {
               get: '/ui/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',
             },
@@ -1338,7 +1328,7 @@ export class IndexEndpointServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/persistentResources/*/operations/*}',
             },
-            { get: '/ui/{name=projects/*/locations/*/studies/*/operations/*}' },
+            {get: '/ui/{name=projects/*/locations/*/studies/*/operations/*}'},
             {
               get: '/ui/{name=projects/*/locations/*/studies/*/trials/*/operations/*}',
             },
@@ -1351,9 +1341,7 @@ export class IndexEndpointServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/ragEngineConfig/operations/*}',
             },
-            {
-              get: '/ui/{name=projects/*/locations/*/schedules/*/operations/*}',
-            },
+            {get: '/ui/{name=projects/*/locations/*/schedules/*/operations/*}'},
             {
               get: '/ui/{name=projects/*/locations/*/specialistPools/*/operations/*}',
             },
@@ -1384,10 +1372,8 @@ export class IndexEndpointServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}',
             },
-            { get: '/v1/{name=projects/*/locations/*/operations/*}' },
-            {
-              get: '/v1/{name=projects/*/locations/*/datasets/*/operations/*}',
-            },
+            {get: '/v1/{name=projects/*/locations/*/operations/*}'},
+            {get: '/v1/{name=projects/*/locations/*/datasets/*/operations/*}'},
             {
               get: '/v1/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}',
             },
@@ -1403,9 +1389,7 @@ export class IndexEndpointServiceClient {
             {
               get: '/v1/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}',
             },
-            {
-              get: '/v1/{name=projects/*/locations/*/endpoints/*/operations/*}',
-            },
+            {get: '/v1/{name=projects/*/locations/*/endpoints/*/operations/*}'},
             {
               get: '/v1/{name=projects/*/locations/*/featurestores/*/operations/*}',
             },
@@ -1427,7 +1411,7 @@ export class IndexEndpointServiceClient {
             {
               get: '/v1/{name=projects/*/locations/*/tuningJobs/*/operations/*}',
             },
-            { get: '/v1/{name=projects/*/locations/*/indexes/*/operations/*}' },
+            {get: '/v1/{name=projects/*/locations/*/indexes/*/operations/*}'},
             {
               get: '/v1/{name=projects/*/locations/*/indexEndpoints/*/operations/*}',
             },
@@ -1449,7 +1433,7 @@ export class IndexEndpointServiceClient {
             {
               get: '/v1/{name=projects/*/locations/*/migratableResources/*/operations/*}',
             },
-            { get: '/v1/{name=projects/*/locations/*/models/*/operations/*}' },
+            {get: '/v1/{name=projects/*/locations/*/models/*/operations/*}'},
             {
               get: '/v1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',
             },
@@ -1477,7 +1461,7 @@ export class IndexEndpointServiceClient {
             {
               get: '/v1/{name=projects/*/locations/*/reasoningEngines/*/sessions/*/operations/*}',
             },
-            { get: '/v1/{name=projects/*/locations/*/studies/*/operations/*}' },
+            {get: '/v1/{name=projects/*/locations/*/studies/*/operations/*}'},
             {
               get: '/v1/{name=projects/*/locations/*/studies/*/trials/*/operations/*}',
             },
@@ -1490,9 +1474,7 @@ export class IndexEndpointServiceClient {
             {
               get: '/v1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}',
             },
-            {
-              get: '/v1/{name=projects/*/locations/*/schedules/*/operations/*}',
-            },
+            {get: '/v1/{name=projects/*/locations/*/schedules/*/operations/*}'},
             {
               get: '/v1/{name=projects/*/locations/*/specialistPools/*/operations/*}',
             },
@@ -1520,16 +1502,16 @@ export class IndexEndpointServiceClient {
             {
               get: '/v1/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}',
             },
-            { get: '/v1/{name=reasoningEngines/*/sessions/*/operations/*}' },
+            {get: '/v1/{name=reasoningEngines/*/sessions/*/operations/*}'},
           ],
         },
         {
           selector: 'google.longrunning.Operations.ListOperations',
           get: '/ui/{name=projects/*/locations/*}/operations',
           additional_bindings: [
-            { get: '/ui/{name=projects/*/locations/*/agents/*}/operations' },
-            { get: '/ui/{name=projects/*/locations/*/apps/*}/operations' },
-            { get: '/ui/{name=projects/*/locations/*/datasets/*}/operations' },
+            {get: '/ui/{name=projects/*/locations/*/agents/*}/operations'},
+            {get: '/ui/{name=projects/*/locations/*/apps/*}/operations'},
+            {get: '/ui/{name=projects/*/locations/*/datasets/*}/operations'},
             {
               get: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*}/operations',
             },
@@ -1545,16 +1527,12 @@ export class IndexEndpointServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/deploymentResourcePools/*}/operations',
             },
-            {
-              get: '/ui/{name=projects/*/locations/*/edgeDevices/*}/operations',
-            },
-            { get: '/ui/{name=projects/*/locations/*/endpoints/*}/operations' },
+            {get: '/ui/{name=projects/*/locations/*/edgeDevices/*}/operations'},
+            {get: '/ui/{name=projects/*/locations/*/endpoints/*}/operations'},
             {
               get: '/ui/{name=projects/*/locations/*/extensionControllers/*}/operations',
             },
-            {
-              get: '/ui/{name=projects/*/locations/*/extensions/*}/operations',
-            },
+            {get: '/ui/{name=projects/*/locations/*/extensions/*}/operations'},
             {
               get: '/ui/{name=projects/*/locations/*/featurestores/*}/operations',
             },
@@ -1564,19 +1542,15 @@ export class IndexEndpointServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*}/operations',
             },
-            {
-              get: '/ui/{name=projects/*/locations/*/customJobs/*}/operations',
-            },
+            {get: '/ui/{name=projects/*/locations/*/customJobs/*}/operations'},
             {
               get: '/ui/{name=projects/*/locations/*/dataLabelingJobs/*}/operations',
             },
             {
               get: '/ui/{name=projects/*/locations/*/hyperparameterTuningJobs/*}/operations',
             },
-            {
-              get: '/ui/{name=projects/*/locations/*/tuningJobs/*}/operations',
-            },
-            { get: '/ui/{name=projects/*/locations/*/indexes/*}/operations' },
+            {get: '/ui/{name=projects/*/locations/*/tuningJobs/*}/operations'},
+            {get: '/ui/{name=projects/*/locations/*/indexes/*}/operations'},
             {
               get: '/ui/{name=projects/*/locations/*/indexEndpoints/*}/operations',
             },
@@ -1601,7 +1575,7 @@ export class IndexEndpointServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/migratableResources/*}/operations',
             },
-            { get: '/ui/{name=projects/*/locations/*/models/*}/operations' },
+            {get: '/ui/{name=projects/*/locations/*/models/*}/operations'},
             {
               get: '/ui/{name=projects/*/locations/*/models/*/evaluations/*}/operations',
             },
@@ -1614,7 +1588,7 @@ export class IndexEndpointServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/notebookRuntimeTemplates/*}/operations',
             },
-            { get: '/ui/{name=projects/*/locations/*/studies/*}/operations' },
+            {get: '/ui/{name=projects/*/locations/*/studies/*}/operations'},
             {
               get: '/ui/{name=projects/*/locations/*/studies/*/trials/*}/operations',
             },
@@ -1630,7 +1604,7 @@ export class IndexEndpointServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/ragEngineConfig}/operations',
             },
-            { get: '/ui/{name=projects/*/locations/*/schedules/*}/operations' },
+            {get: '/ui/{name=projects/*/locations/*/schedules/*}/operations'},
             {
               get: '/ui/{name=projects/*/locations/*/specialistPools/*}/operations',
             },
@@ -1661,8 +1635,8 @@ export class IndexEndpointServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}:wait',
             },
-            { get: '/v1/{name=projects/*/locations/*}/operations' },
-            { get: '/v1/{name=projects/*/locations/*/datasets/*}/operations' },
+            {get: '/v1/{name=projects/*/locations/*}/operations'},
+            {get: '/v1/{name=projects/*/locations/*/datasets/*}/operations'},
             {
               get: '/v1/{name=projects/*/locations/*/datasets/*/dataItems/*}/operations',
             },
@@ -1678,7 +1652,7 @@ export class IndexEndpointServiceClient {
             {
               get: '/v1/{name=projects/*/locations/*/deploymentResourcePools/*}/operations',
             },
-            { get: '/v1/{name=projects/*/locations/*/endpoints/*}/operations' },
+            {get: '/v1/{name=projects/*/locations/*/endpoints/*}/operations'},
             {
               get: '/v1/{name=projects/*/locations/*/featurestores/*}/operations',
             },
@@ -1688,19 +1662,15 @@ export class IndexEndpointServiceClient {
             {
               get: '/v1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*}/operations',
             },
-            {
-              get: '/v1/{name=projects/*/locations/*/customJobs/*}/operations',
-            },
+            {get: '/v1/{name=projects/*/locations/*/customJobs/*}/operations'},
             {
               get: '/v1/{name=projects/*/locations/*/dataLabelingJobs/*}/operations',
             },
             {
               get: '/v1/{name=projects/*/locations/*/hyperparameterTuningJobs/*}/operations',
             },
-            {
-              get: '/v1/{name=projects/*/locations/*/tuningJobs/*}/operations',
-            },
-            { get: '/v1/{name=projects/*/locations/*/indexes/*}/operations' },
+            {get: '/v1/{name=projects/*/locations/*/tuningJobs/*}/operations'},
+            {get: '/v1/{name=projects/*/locations/*/indexes/*}/operations'},
             {
               get: '/v1/{name=projects/*/locations/*/indexEndpoints/*}/operations',
             },
@@ -1722,7 +1692,7 @@ export class IndexEndpointServiceClient {
             {
               get: '/v1/{name=projects/*/locations/*/migratableResources/*}/operations',
             },
-            { get: '/v1/{name=projects/*/locations/*/models/*}/operations' },
+            {get: '/v1/{name=projects/*/locations/*/models/*}/operations'},
             {
               get: '/v1/{name=projects/*/locations/*/models/*/evaluations/*}/operations',
             },
@@ -1741,7 +1711,7 @@ export class IndexEndpointServiceClient {
             {
               get: '/v1/{name=projects/*/locations/*/reasoningEngines/*/sessions/*}/operations',
             },
-            { get: '/v1/{name=projects/*/locations/*/studies/*}/operations' },
+            {get: '/v1/{name=projects/*/locations/*/studies/*}/operations'},
             {
               get: '/v1/{name=projects/*/locations/*/studies/*/trials/*}/operations',
             },
@@ -1757,13 +1727,11 @@ export class IndexEndpointServiceClient {
             {
               get: '/v1/{name=projects/*/locations/*/ragEngineConfig}/operations',
             },
-            {
-              get: '/v1/{name=projects/*/locations/*/ragCorpora/*}/operations',
-            },
+            {get: '/v1/{name=projects/*/locations/*/ragCorpora/*}/operations'},
             {
               get: '/v1/{name=projects/*/locations/*/ragCorpora/*/ragFiles/*}/operations',
             },
-            { get: '/v1/{name=projects/*/locations/*/schedules/*}/operations' },
+            {get: '/v1/{name=projects/*/locations/*/schedules/*}/operations'},
             {
               get: '/v1/{name=projects/*/locations/*/specialistPools/*}/operations',
             },
@@ -1791,7 +1759,7 @@ export class IndexEndpointServiceClient {
             {
               get: '/v1/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}:wait',
             },
-            { get: '/v1/{name=reasoningEngines/*/sessions/*}/operations' },
+            {get: '/v1/{name=reasoningEngines/*/sessions/*}/operations'},
           ],
         },
         {
@@ -1948,7 +1916,7 @@ export class IndexEndpointServiceClient {
             {
               post: '/ui/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}:wait',
             },
-            { post: '/v1/{name=projects/*/locations/*/operations/*}:wait' },
+            {post: '/v1/{name=projects/*/locations/*/operations/*}:wait'},
             {
               post: '/v1/{name=projects/*/locations/*/datasets/*/operations/*}:wait',
             },
@@ -2161,7 +2129,7 @@ export class IndexEndpointServiceClient {
       'google.cloud.aiplatform.v1.IndexEndpointService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -2201,7 +2169,7 @@ export class IndexEndpointServiceClient {
           (this._protos as any).google.cloud.aiplatform.v1.IndexEndpointService,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -2217,7 +2185,7 @@ export class IndexEndpointServiceClient {
     ];
     for (const methodName of indexEndpointServiceStubMethods) {
       const callPromise = this.indexEndpointServiceStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -2420,7 +2388,7 @@ export class IndexEndpointServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getIndexEndpoint request %j', request);
@@ -2560,7 +2528,7 @@ export class IndexEndpointServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'index_endpoint.name': request.indexEndpoint!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateIndexEndpoint request %j', request);
@@ -2713,7 +2681,7 @@ export class IndexEndpointServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2770,7 +2738,7 @@ export class IndexEndpointServiceClient {
     this._log.info('createIndexEndpoint long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -2884,7 +2852,7 @@ export class IndexEndpointServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2941,7 +2909,7 @@ export class IndexEndpointServiceClient {
     this._log.info('deleteIndexEndpoint long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3059,7 +3027,7 @@ export class IndexEndpointServiceClient {
       this._gaxModule.routingHeader.fromParams({
         index_endpoint: request.indexEndpoint ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3116,7 +3084,7 @@ export class IndexEndpointServiceClient {
     this._log.info('deployIndex long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3234,7 +3202,7 @@ export class IndexEndpointServiceClient {
       this._gaxModule.routingHeader.fromParams({
         index_endpoint: request.indexEndpoint ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3291,7 +3259,7 @@ export class IndexEndpointServiceClient {
     this._log.info('undeployIndex long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3411,7 +3379,7 @@ export class IndexEndpointServiceClient {
       this._gaxModule.routingHeader.fromParams({
         index_endpoint: request.indexEndpoint ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3468,7 +3436,7 @@ export class IndexEndpointServiceClient {
     this._log.info('mutateDeployedIndex long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3602,7 +3570,7 @@ export class IndexEndpointServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3696,7 +3664,7 @@ export class IndexEndpointServiceClient {
       });
     const defaultCallSettings = this._defaults['listIndexEndpoints'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listIndexEndpoints stream %j', request);
@@ -3772,7 +3740,7 @@ export class IndexEndpointServiceClient {
       });
     const defaultCallSettings = this._defaults['listIndexEndpoints'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listIndexEndpoints iterate %j', request);
@@ -7984,14 +7952,14 @@ export class IndexEndpointServiceClient {
    */
   close(): Promise<void> {
     if (this.indexEndpointServiceStub && !this._terminated) {
-      return this.indexEndpointServiceStub.then((stub) => {
+      return this.indexEndpointServiceStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.iamClient.close().catch((err) => {
+        this.iamClient.close().catch(err => {
           throw err;
         });
-        this.locationsClient.close().catch((err) => {
+        this.locationsClient.close().catch(err => {
           throw err;
         });
         void this.operationsClient.close();

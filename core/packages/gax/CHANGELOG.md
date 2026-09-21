@@ -6,6 +6,57 @@
 [1]: https://www.npmjs.com/package/gax-nodejs?activeTab=versions
 
 
+## [6.4.0](https://github.com/googleapis/google-cloud-node/compare/google-gax-v6.3.0...google-gax-v6.4.0) (2026-09-15)
+
+
+### Features
+
+* **gax:** O11y tracer helper updates ([#9269](https://github.com/googleapis/google-cloud-node/issues/9269)) ([ee3b95b](https://github.com/googleapis/google-cloud-node/commit/ee3b95b4dc5c4128adf22656f50675cdd2845597))
+* PNPM workspace ([#8973](https://github.com/googleapis/google-cloud-node/issues/8973)) ([1ea27c9](https://github.com/googleapis/google-cloud-node/commit/1ea27c9c9bf4e4cbf79381321dcb9bce7951a76f))
+
+## [6.3.0](https://github.com/googleapis/google-cloud-node/compare/google-gax-v6.2.0...google-gax-v6.3.0) (2026-09-09)
+
+
+### Features
+
+* **gax:** Attach internalMethodName to otherArgs in constructSettings ([#9266](https://github.com/googleapis/google-cloud-node/issues/9266)) ([65450ab](https://github.com/googleapis/google-cloud-node/commit/65450ab4e7f9f1f17e1566ac30b8846bc38e0dd9))
+
+## [6.2.0](https://github.com/googleapis/google-cloud-node/compare/google-gax-v6.1.0...google-gax-v6.2.0) (2026-09-03)
+
+
+### Features
+
+* **generator:** Add internalTelemetryInfo configuration to nunjucks templates ([#9174](https://github.com/googleapis/google-cloud-node/issues/9174)) ([9320305](https://github.com/googleapis/google-cloud-node/commit/932030548323f0181bb175b0519a6e77cbe64cad))
+
+## [6.1.0](https://github.com/googleapis/google-cloud-node/compare/google-gax-v6.0.3...google-gax-v6.1.0) (2026-08-26)
+
+
+### Features
+
+* Add Otel Tracing helpers and tests ([#9070](https://github.com/googleapis/google-cloud-node/issues/9070)) ([5111d52](https://github.com/googleapis/google-cloud-node/commit/5111d528f91c07da232a181d5636bcaeccd765a7))
+* **gax:** Accept clientOptions in createApiCall for telemetry tracing ([#9176](https://github.com/googleapis/google-cloud-node/issues/9176)) ([257a895](https://github.com/googleapis/google-cloud-node/commit/257a895e361472f0b04cb87bcb20798530a08aed))
+
+
+### Bug Fixes
+
+* **gax:** Fix several missing files from the monorepo merge ([#9209](https://github.com/googleapis/google-cloud-node/issues/9209)) ([6fcd94d](https://github.com/googleapis/google-cloud-node/commit/6fcd94d507befa4805a2d257b3f312458ac2c48c))
+* Turn on the gax vulnerability tests again ([#9204](https://github.com/googleapis/google-cloud-node/issues/9204)) ([09609c8](https://github.com/googleapis/google-cloud-node/commit/09609c8796f975740f8eb3fae95fbdfec2e05209))
+
+## [6.0.3](https://github.com/googleapis/google-cloud-node/compare/google-gax-v6.0.2...google-gax-v6.0.3) (2026-08-21)
+
+
+### Bug Fixes
+
+* Validate path parameters and prevent traversal/injection in REST transcoder - tests relocated ([#9166](https://github.com/googleapis/google-cloud-node/issues/9166)) ([8a2b491](https://github.com/googleapis/google-cloud-node/commit/8a2b4911fafba437c436b86e7282d37f60de9374))
+* Validate path parameters and prevent traversal/injection in REST transcoder ([#9151](https://github.com/googleapis/google-cloud-node/issues/9151)) ([0152a8e](https://github.com/googleapis/google-cloud-node/commit/0152a8ee36592d90f435336fda95993c9cbd227a))
+
+## [6.0.2](https://github.com/googleapis/google-cloud-node/compare/google-gax-v6.0.1...google-gax-v6.0.2) (2026-08-12)
+
+
+### Bug Fixes
+
+* Ensure node 22 dependencies are up to date so they get the latest patches for core and handwritten libraries ([#9116](https://github.com/googleapis/google-cloud-node/issues/9116)) ([fad57ff](https://github.com/googleapis/google-cloud-node/commit/fad57ff4b9164712426a041fc61db035859f9043))
+
 ## [6.0.1](https://github.com/googleapis/google-cloud-node/compare/google-gax-v6.0.0...google-gax-v6.0.1) (2026-08-10)
 
 

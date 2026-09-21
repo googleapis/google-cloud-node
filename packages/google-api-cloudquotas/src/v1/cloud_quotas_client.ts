@@ -26,10 +26,10 @@ import type {
   PaginationCallback,
   GaxCall,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -57,7 +57,7 @@ export class CloudQuotasClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('cloudquotas');
@@ -70,9 +70,9 @@ export class CloudQuotasClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
-  pathTemplates: { [name: string]: gax.PathTemplate };
-  cloudQuotasStub?: Promise<{ [name: string]: Function }>;
+  innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
+  cloudQuotasStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of CloudQuotasClient.
@@ -148,7 +148,7 @@ export class CloudQuotasClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -273,7 +273,7 @@ export class CloudQuotasClient {
       'google.api.cloudquotas.v1.CloudQuotas',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -313,7 +313,7 @@ export class CloudQuotasClient {
           (this._protos as any).google.api.cloudquotas.v1.CloudQuotas,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -327,7 +327,7 @@ export class CloudQuotasClient {
     ];
     for (const methodName of cloudQuotasStubMethods) {
       const callPromise = this.cloudQuotasStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -522,7 +522,7 @@ export class CloudQuotasClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getQuotaInfo request %j', request);
@@ -659,7 +659,7 @@ export class CloudQuotasClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getQuotaPreference request %j', request);
@@ -812,7 +812,7 @@ export class CloudQuotasClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createQuotaPreference request %j', request);
@@ -971,7 +971,7 @@ export class CloudQuotasClient {
       this._gaxModule.routingHeader.fromParams({
         'quota_preference.name': request.quotaPreference!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateQuotaPreference request %j', request);
@@ -1124,7 +1124,7 @@ export class CloudQuotasClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1199,7 +1199,7 @@ export class CloudQuotasClient {
       });
     const defaultCallSettings = this._defaults['listQuotaInfos'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listQuotaInfos stream %j', request);
@@ -1256,7 +1256,7 @@ export class CloudQuotasClient {
       });
     const defaultCallSettings = this._defaults['listQuotaInfos'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listQuotaInfos iterate %j', request);
@@ -1384,7 +1384,7 @@ export class CloudQuotasClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1475,7 +1475,7 @@ export class CloudQuotasClient {
       });
     const defaultCallSettings = this._defaults['listQuotaPreferences'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listQuotaPreferences stream %j', request);
@@ -1548,7 +1548,7 @@ export class CloudQuotasClient {
       });
     const defaultCallSettings = this._defaults['listQuotaPreferences'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listQuotaPreferences iterate %j', request);
@@ -2270,7 +2270,7 @@ export class CloudQuotasClient {
    */
   close(): Promise<void> {
     if (this.cloudQuotasStub && !this._terminated) {
-      return this.cloudQuotasStub.then((stub) => {
+      return this.cloudQuotasStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

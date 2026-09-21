@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as vizierserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -51,7 +51,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -155,9 +155,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -277,7 +277,7 @@ describe('v1.VizierServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.vizierServiceStub, undefined);
@@ -285,12 +285,12 @@ describe('v1.VizierServiceClient', () => {
       assert(client.vizierServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.vizierServiceStub);
@@ -299,14 +299,14 @@ describe('v1.VizierServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.vizierServiceStub, undefined);
@@ -315,7 +315,7 @@ describe('v1.VizierServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -323,7 +323,7 @@ describe('v1.VizierServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -335,7 +335,7 @@ describe('v1.VizierServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -358,7 +358,7 @@ describe('v1.VizierServiceClient', () => {
   describe('createStudy', () => {
     it('invokes createStudy without error', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -389,7 +389,7 @@ describe('v1.VizierServiceClient', () => {
 
     it('invokes createStudy without error using callback', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -436,7 +436,7 @@ describe('v1.VizierServiceClient', () => {
 
     it('invokes createStudy with error', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -467,7 +467,7 @@ describe('v1.VizierServiceClient', () => {
 
     it('invokes createStudy with closed client', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -480,7 +480,7 @@ describe('v1.VizierServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createStudy(request), expectedError);
@@ -490,7 +490,7 @@ describe('v1.VizierServiceClient', () => {
   describe('getStudy', () => {
     it('invokes getStudy without error', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -521,7 +521,7 @@ describe('v1.VizierServiceClient', () => {
 
     it('invokes getStudy without error using callback', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -568,7 +568,7 @@ describe('v1.VizierServiceClient', () => {
 
     it('invokes getStudy with error', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -596,7 +596,7 @@ describe('v1.VizierServiceClient', () => {
 
     it('invokes getStudy with closed client', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -609,7 +609,7 @@ describe('v1.VizierServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getStudy(request), expectedError);
@@ -619,7 +619,7 @@ describe('v1.VizierServiceClient', () => {
   describe('deleteStudy', () => {
     it('invokes deleteStudy without error', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -650,7 +650,7 @@ describe('v1.VizierServiceClient', () => {
 
     it('invokes deleteStudy without error using callback', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -697,7 +697,7 @@ describe('v1.VizierServiceClient', () => {
 
     it('invokes deleteStudy with error', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -728,7 +728,7 @@ describe('v1.VizierServiceClient', () => {
 
     it('invokes deleteStudy with closed client', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -741,7 +741,7 @@ describe('v1.VizierServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteStudy(request), expectedError);
@@ -751,7 +751,7 @@ describe('v1.VizierServiceClient', () => {
   describe('lookupStudy', () => {
     it('invokes lookupStudy without error', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -782,7 +782,7 @@ describe('v1.VizierServiceClient', () => {
 
     it('invokes lookupStudy without error using callback', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -829,7 +829,7 @@ describe('v1.VizierServiceClient', () => {
 
     it('invokes lookupStudy with error', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -860,7 +860,7 @@ describe('v1.VizierServiceClient', () => {
 
     it('invokes lookupStudy with closed client', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -873,7 +873,7 @@ describe('v1.VizierServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.lookupStudy(request), expectedError);
@@ -883,7 +883,7 @@ describe('v1.VizierServiceClient', () => {
   describe('createTrial', () => {
     it('invokes createTrial without error', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -914,7 +914,7 @@ describe('v1.VizierServiceClient', () => {
 
     it('invokes createTrial without error using callback', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -961,7 +961,7 @@ describe('v1.VizierServiceClient', () => {
 
     it('invokes createTrial with error', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -992,7 +992,7 @@ describe('v1.VizierServiceClient', () => {
 
     it('invokes createTrial with closed client', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1005,7 +1005,7 @@ describe('v1.VizierServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createTrial(request), expectedError);
@@ -1015,7 +1015,7 @@ describe('v1.VizierServiceClient', () => {
   describe('getTrial', () => {
     it('invokes getTrial without error', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1046,7 +1046,7 @@ describe('v1.VizierServiceClient', () => {
 
     it('invokes getTrial without error using callback', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1093,7 +1093,7 @@ describe('v1.VizierServiceClient', () => {
 
     it('invokes getTrial with error', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1121,7 +1121,7 @@ describe('v1.VizierServiceClient', () => {
 
     it('invokes getTrial with closed client', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1134,7 +1134,7 @@ describe('v1.VizierServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getTrial(request), expectedError);
@@ -1144,7 +1144,7 @@ describe('v1.VizierServiceClient', () => {
   describe('addTrialMeasurement', () => {
     it('invokes addTrialMeasurement without error', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1176,7 +1176,7 @@ describe('v1.VizierServiceClient', () => {
 
     it('invokes addTrialMeasurement without error using callback', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1223,7 +1223,7 @@ describe('v1.VizierServiceClient', () => {
 
     it('invokes addTrialMeasurement with error', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1254,7 +1254,7 @@ describe('v1.VizierServiceClient', () => {
 
     it('invokes addTrialMeasurement with closed client', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1267,7 +1267,7 @@ describe('v1.VizierServiceClient', () => {
       );
       request.trialName = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.addTrialMeasurement(request), expectedError);
@@ -1277,7 +1277,7 @@ describe('v1.VizierServiceClient', () => {
   describe('completeTrial', () => {
     it('invokes completeTrial without error', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1308,7 +1308,7 @@ describe('v1.VizierServiceClient', () => {
 
     it('invokes completeTrial without error using callback', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1355,7 +1355,7 @@ describe('v1.VizierServiceClient', () => {
 
     it('invokes completeTrial with error', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1386,7 +1386,7 @@ describe('v1.VizierServiceClient', () => {
 
     it('invokes completeTrial with closed client', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1399,7 +1399,7 @@ describe('v1.VizierServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.completeTrial(request), expectedError);
@@ -1409,7 +1409,7 @@ describe('v1.VizierServiceClient', () => {
   describe('deleteTrial', () => {
     it('invokes deleteTrial without error', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1440,7 +1440,7 @@ describe('v1.VizierServiceClient', () => {
 
     it('invokes deleteTrial without error using callback', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1487,7 +1487,7 @@ describe('v1.VizierServiceClient', () => {
 
     it('invokes deleteTrial with error', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1518,7 +1518,7 @@ describe('v1.VizierServiceClient', () => {
 
     it('invokes deleteTrial with closed client', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1531,7 +1531,7 @@ describe('v1.VizierServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteTrial(request), expectedError);
@@ -1541,7 +1541,7 @@ describe('v1.VizierServiceClient', () => {
   describe('stopTrial', () => {
     it('invokes stopTrial without error', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1572,7 +1572,7 @@ describe('v1.VizierServiceClient', () => {
 
     it('invokes stopTrial without error using callback', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1619,7 +1619,7 @@ describe('v1.VizierServiceClient', () => {
 
     it('invokes stopTrial with error', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1647,7 +1647,7 @@ describe('v1.VizierServiceClient', () => {
 
     it('invokes stopTrial with closed client', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1660,7 +1660,7 @@ describe('v1.VizierServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.stopTrial(request), expectedError);
@@ -1670,7 +1670,7 @@ describe('v1.VizierServiceClient', () => {
   describe('listOptimalTrials', () => {
     it('invokes listOptimalTrials without error', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1701,7 +1701,7 @@ describe('v1.VizierServiceClient', () => {
 
     it('invokes listOptimalTrials without error using callback', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1748,7 +1748,7 @@ describe('v1.VizierServiceClient', () => {
 
     it('invokes listOptimalTrials with error', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1779,7 +1779,7 @@ describe('v1.VizierServiceClient', () => {
 
     it('invokes listOptimalTrials with closed client', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1792,7 +1792,7 @@ describe('v1.VizierServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.listOptimalTrials(request), expectedError);
@@ -1802,7 +1802,7 @@ describe('v1.VizierServiceClient', () => {
   describe('suggestTrials', () => {
     it('invokes suggestTrials without error', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1835,7 +1835,7 @@ describe('v1.VizierServiceClient', () => {
 
     it('invokes suggestTrials without error using callback', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1889,7 +1889,7 @@ describe('v1.VizierServiceClient', () => {
 
     it('invokes suggestTrials with call error', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1920,7 +1920,7 @@ describe('v1.VizierServiceClient', () => {
 
     it('invokes suggestTrials with LRO error', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1953,7 +1953,7 @@ describe('v1.VizierServiceClient', () => {
 
     it('invokes checkSuggestTrialsProgress without error', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1961,8 +1961,8 @@ describe('v1.VizierServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkSuggestTrialsProgress(
@@ -1975,7 +1975,7 @@ describe('v1.VizierServiceClient', () => {
 
     it('invokes checkSuggestTrialsProgress with error', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1996,7 +1996,7 @@ describe('v1.VizierServiceClient', () => {
   describe('checkTrialEarlyStoppingState', () => {
     it('invokes checkTrialEarlyStoppingState without error', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2029,7 +2029,7 @@ describe('v1.VizierServiceClient', () => {
 
     it('invokes checkTrialEarlyStoppingState without error using callback', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2083,7 +2083,7 @@ describe('v1.VizierServiceClient', () => {
 
     it('invokes checkTrialEarlyStoppingState with call error', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2117,7 +2117,7 @@ describe('v1.VizierServiceClient', () => {
 
     it('invokes checkTrialEarlyStoppingState with LRO error', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2150,7 +2150,7 @@ describe('v1.VizierServiceClient', () => {
 
     it('invokes checkCheckTrialEarlyStoppingStateProgress without error', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2158,8 +2158,8 @@ describe('v1.VizierServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -2173,7 +2173,7 @@ describe('v1.VizierServiceClient', () => {
 
     it('invokes checkCheckTrialEarlyStoppingStateProgress with error', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2194,7 +2194,7 @@ describe('v1.VizierServiceClient', () => {
   describe('listStudies', () => {
     it('invokes listStudies without error', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2227,7 +2227,7 @@ describe('v1.VizierServiceClient', () => {
 
     it('invokes listStudies without error using callback', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2276,7 +2276,7 @@ describe('v1.VizierServiceClient', () => {
 
     it('invokes listStudies with error', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2307,7 +2307,7 @@ describe('v1.VizierServiceClient', () => {
 
     it('invokes listStudiesStream without error', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2353,15 +2353,15 @@ describe('v1.VizierServiceClient', () => {
       assert(
         (client.descriptors.page.listStudies.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listStudiesStream with error', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2404,15 +2404,15 @@ describe('v1.VizierServiceClient', () => {
       assert(
         (client.descriptors.page.listStudies.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listStudies without error', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2447,15 +2447,15 @@ describe('v1.VizierServiceClient', () => {
       assert(
         (client.descriptors.page.listStudies.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listStudies with error', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2489,9 +2489,9 @@ describe('v1.VizierServiceClient', () => {
       assert(
         (client.descriptors.page.listStudies.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2499,7 +2499,7 @@ describe('v1.VizierServiceClient', () => {
   describe('listTrials', () => {
     it('invokes listTrials without error', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2532,7 +2532,7 @@ describe('v1.VizierServiceClient', () => {
 
     it('invokes listTrials without error using callback', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2581,7 +2581,7 @@ describe('v1.VizierServiceClient', () => {
 
     it('invokes listTrials with error', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2612,7 +2612,7 @@ describe('v1.VizierServiceClient', () => {
 
     it('invokes listTrialsStream without error', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2658,15 +2658,15 @@ describe('v1.VizierServiceClient', () => {
       assert(
         (client.descriptors.page.listTrials.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listTrialsStream with error', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2709,15 +2709,15 @@ describe('v1.VizierServiceClient', () => {
       assert(
         (client.descriptors.page.listTrials.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listTrials without error', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2752,15 +2752,15 @@ describe('v1.VizierServiceClient', () => {
       assert(
         (client.descriptors.page.listTrials.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listTrials with error', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2794,16 +2794,16 @@ describe('v1.VizierServiceClient', () => {
       assert(
         (client.descriptors.page.listTrials.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2833,7 +2833,7 @@ describe('v1.VizierServiceClient', () => {
     });
     it('invokes getIamPolicy without error using callback', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2871,7 +2871,7 @@ describe('v1.VizierServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2881,7 +2881,7 @@ describe('v1.VizierServiceClient', () => {
     });
     it('invokes getIamPolicy with error', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2913,7 +2913,7 @@ describe('v1.VizierServiceClient', () => {
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2943,7 +2943,7 @@ describe('v1.VizierServiceClient', () => {
     });
     it('invokes setIamPolicy without error using callback', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2981,7 +2981,7 @@ describe('v1.VizierServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2991,7 +2991,7 @@ describe('v1.VizierServiceClient', () => {
     });
     it('invokes setIamPolicy with error', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3023,7 +3023,7 @@ describe('v1.VizierServiceClient', () => {
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3056,7 +3056,7 @@ describe('v1.VizierServiceClient', () => {
     });
     it('invokes testIamPermissions without error using callback', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3094,7 +3094,7 @@ describe('v1.VizierServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3104,7 +3104,7 @@ describe('v1.VizierServiceClient', () => {
     });
     it('invokes testIamPermissions with error', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3139,7 +3139,7 @@ describe('v1.VizierServiceClient', () => {
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3169,7 +3169,7 @@ describe('v1.VizierServiceClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3213,7 +3213,7 @@ describe('v1.VizierServiceClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3248,7 +3248,7 @@ describe('v1.VizierServiceClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3296,7 +3296,7 @@ describe('v1.VizierServiceClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3337,7 +3337,7 @@ describe('v1.VizierServiceClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3358,7 +3358,7 @@ describe('v1.VizierServiceClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -3386,7 +3386,7 @@ describe('v1.VizierServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3396,7 +3396,7 @@ describe('v1.VizierServiceClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -3420,7 +3420,7 @@ describe('v1.VizierServiceClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3442,7 +3442,7 @@ describe('v1.VizierServiceClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -3470,7 +3470,7 @@ describe('v1.VizierServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3480,7 +3480,7 @@ describe('v1.VizierServiceClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -3504,7 +3504,7 @@ describe('v1.VizierServiceClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3526,7 +3526,7 @@ describe('v1.VizierServiceClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -3554,7 +3554,7 @@ describe('v1.VizierServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3564,7 +3564,7 @@ describe('v1.VizierServiceClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -3588,7 +3588,7 @@ describe('v1.VizierServiceClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -3623,7 +3623,7 @@ describe('v1.VizierServiceClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3661,7 +3661,7 @@ describe('v1.VizierServiceClient', () => {
         annotation: 'annotationValue',
       };
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3748,7 +3748,7 @@ describe('v1.VizierServiceClient', () => {
         annotation_spec: 'annotationSpecValue',
       };
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3825,7 +3825,7 @@ describe('v1.VizierServiceClient', () => {
         artifact: 'artifactValue',
       };
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3900,7 +3900,7 @@ describe('v1.VizierServiceClient', () => {
         batch_prediction_job: 'batchPredictionJobValue',
       };
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3977,7 +3977,7 @@ describe('v1.VizierServiceClient', () => {
         cached_content: 'cachedContentValue',
       };
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4042,7 +4042,7 @@ describe('v1.VizierServiceClient', () => {
         context: 'contextValue',
       };
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4117,7 +4117,7 @@ describe('v1.VizierServiceClient', () => {
         custom_job: 'customJobValue',
       };
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4182,7 +4182,7 @@ describe('v1.VizierServiceClient', () => {
         data_item: 'dataItemValue',
       };
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4257,7 +4257,7 @@ describe('v1.VizierServiceClient', () => {
         data_labeling_job: 'dataLabelingJobValue',
       };
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4322,7 +4322,7 @@ describe('v1.VizierServiceClient', () => {
         dataset: 'datasetValue',
       };
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4387,7 +4387,7 @@ describe('v1.VizierServiceClient', () => {
         dataset_version: 'datasetVersionValue',
       };
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4463,7 +4463,7 @@ describe('v1.VizierServiceClient', () => {
         deployment_resource_pool: 'deploymentResourcePoolValue',
       };
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4545,7 +4545,7 @@ describe('v1.VizierServiceClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4621,7 +4621,7 @@ describe('v1.VizierServiceClient', () => {
         execution: 'executionValue',
       };
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4696,7 +4696,7 @@ describe('v1.VizierServiceClient', () => {
         feature_group: 'featureGroupValue',
       };
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4760,7 +4760,7 @@ describe('v1.VizierServiceClient', () => {
         feature_online_store: 'featureOnlineStoreValue',
       };
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4838,7 +4838,7 @@ describe('v1.VizierServiceClient', () => {
         feature_view: 'featureViewValue',
       };
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4915,7 +4915,7 @@ describe('v1.VizierServiceClient', () => {
         feature_view: 'featureViewValue',
       };
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4991,7 +4991,7 @@ describe('v1.VizierServiceClient', () => {
         featurestore: 'featurestoreValue',
       };
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5055,7 +5055,7 @@ describe('v1.VizierServiceClient', () => {
         hyperparameter_tuning_job: 'hyperparameterTuningJobValue',
       };
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5136,7 +5136,7 @@ describe('v1.VizierServiceClient', () => {
         index: 'indexValue',
       };
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5200,7 +5200,7 @@ describe('v1.VizierServiceClient', () => {
         index_endpoint: 'indexEndpointValue',
       };
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5263,7 +5263,7 @@ describe('v1.VizierServiceClient', () => {
         location: 'locationValue',
       };
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5314,7 +5314,7 @@ describe('v1.VizierServiceClient', () => {
         metadata_schema: 'metadataSchemaValue',
       };
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5391,7 +5391,7 @@ describe('v1.VizierServiceClient', () => {
         metadata_store: 'metadataStoreValue',
       };
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5455,7 +5455,7 @@ describe('v1.VizierServiceClient', () => {
         model: 'modelValue',
       };
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5519,7 +5519,7 @@ describe('v1.VizierServiceClient', () => {
         model_deployment_monitoring_job: 'modelDeploymentMonitoringJobValue',
       };
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5599,7 +5599,7 @@ describe('v1.VizierServiceClient', () => {
         evaluation: 'evaluationValue',
       };
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5676,7 +5676,7 @@ describe('v1.VizierServiceClient', () => {
         slice: 'sliceValue',
       };
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5783,7 +5783,7 @@ describe('v1.VizierServiceClient', () => {
         nas_job: 'nasJobValue',
       };
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5848,7 +5848,7 @@ describe('v1.VizierServiceClient', () => {
         nas_trial_detail: 'nasTrialDetailValue',
       };
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5924,7 +5924,7 @@ describe('v1.VizierServiceClient', () => {
         notebook_execution_job: 'notebookExecutionJobValue',
       };
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6005,7 +6005,7 @@ describe('v1.VizierServiceClient', () => {
         notebook_runtime: 'notebookRuntimeValue',
       };
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6070,7 +6070,7 @@ describe('v1.VizierServiceClient', () => {
         notebook_runtime_template: 'notebookRuntimeTemplateValue',
       };
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6151,7 +6151,7 @@ describe('v1.VizierServiceClient', () => {
         persistent_resource: 'persistentResourceValue',
       };
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6228,7 +6228,7 @@ describe('v1.VizierServiceClient', () => {
         pipeline_job: 'pipelineJobValue',
       };
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6292,7 +6292,7 @@ describe('v1.VizierServiceClient', () => {
         endpoint: 'endpointValue',
       };
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6372,7 +6372,7 @@ describe('v1.VizierServiceClient', () => {
         feature: 'featureValue',
       };
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6475,7 +6475,7 @@ describe('v1.VizierServiceClient', () => {
         feature: 'featureValue',
       };
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6599,7 +6599,7 @@ describe('v1.VizierServiceClient', () => {
         model: 'modelValue',
       };
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6690,7 +6690,7 @@ describe('v1.VizierServiceClient', () => {
         model: 'modelValue',
       };
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6743,7 +6743,7 @@ describe('v1.VizierServiceClient', () => {
         rag_corpus: 'ragCorpusValue',
       };
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6806,7 +6806,7 @@ describe('v1.VizierServiceClient', () => {
         location: 'locationValue',
       };
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6860,7 +6860,7 @@ describe('v1.VizierServiceClient', () => {
         rag_file: 'ragFileValue',
       };
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6935,7 +6935,7 @@ describe('v1.VizierServiceClient', () => {
         reasoning_engine: 'reasoningEngineValue',
       };
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7001,7 +7001,7 @@ describe('v1.VizierServiceClient', () => {
         saved_query: 'savedQueryValue',
       };
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7076,7 +7076,7 @@ describe('v1.VizierServiceClient', () => {
         schedule: 'scheduleValue',
       };
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7141,7 +7141,7 @@ describe('v1.VizierServiceClient', () => {
         session: 'sessionValue',
       };
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7218,7 +7218,7 @@ describe('v1.VizierServiceClient', () => {
         event: 'eventValue',
       };
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7305,7 +7305,7 @@ describe('v1.VizierServiceClient', () => {
         specialist_pool: 'specialistPoolValue',
       };
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7370,7 +7370,7 @@ describe('v1.VizierServiceClient', () => {
         study: 'studyValue',
       };
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7434,7 +7434,7 @@ describe('v1.VizierServiceClient', () => {
         tensorboard: 'tensorboardValue',
       };
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7499,7 +7499,7 @@ describe('v1.VizierServiceClient', () => {
         experiment: 'experimentValue',
       };
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7595,7 +7595,7 @@ describe('v1.VizierServiceClient', () => {
         run: 'runValue',
       };
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7684,7 +7684,7 @@ describe('v1.VizierServiceClient', () => {
         time_series: 'timeSeriesValue',
       };
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7807,7 +7807,7 @@ describe('v1.VizierServiceClient', () => {
         training_pipeline: 'trainingPipelineValue',
       };
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7876,7 +7876,7 @@ describe('v1.VizierServiceClient', () => {
         trial: 'trialValue',
       };
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7951,7 +7951,7 @@ describe('v1.VizierServiceClient', () => {
         tuning_job: 'tuningJobValue',
       };
       const client = new vizierserviceModule.v1.VizierServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as geocodeserviceModule from '../src';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -43,7 +43,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -179,7 +179,7 @@ describe('v4.GeocodeServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new geocodeserviceModule.v4.GeocodeServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.geocodeServiceStub, undefined);
@@ -187,12 +187,12 @@ describe('v4.GeocodeServiceClient', () => {
       assert(client.geocodeServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new geocodeserviceModule.v4.GeocodeServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.geocodeServiceStub);
@@ -201,14 +201,14 @@ describe('v4.GeocodeServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new geocodeserviceModule.v4.GeocodeServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.geocodeServiceStub, undefined);
@@ -217,7 +217,7 @@ describe('v4.GeocodeServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -225,7 +225,7 @@ describe('v4.GeocodeServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new geocodeserviceModule.v4.GeocodeServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -237,7 +237,7 @@ describe('v4.GeocodeServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new geocodeserviceModule.v4.GeocodeServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -260,7 +260,7 @@ describe('v4.GeocodeServiceClient', () => {
   describe('geocodeAddress', () => {
     it('invokes geocodeAddress without error', async () => {
       const client = new geocodeserviceModule.v4.GeocodeServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -291,7 +291,7 @@ describe('v4.GeocodeServiceClient', () => {
 
     it('invokes geocodeAddress without error using callback', async () => {
       const client = new geocodeserviceModule.v4.GeocodeServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -338,7 +338,7 @@ describe('v4.GeocodeServiceClient', () => {
 
     it('invokes geocodeAddress with error', async () => {
       const client = new geocodeserviceModule.v4.GeocodeServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -369,7 +369,7 @@ describe('v4.GeocodeServiceClient', () => {
 
     it('invokes geocodeAddress with closed client', async () => {
       const client = new geocodeserviceModule.v4.GeocodeServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -382,7 +382,7 @@ describe('v4.GeocodeServiceClient', () => {
       );
       request.addressQuery = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.geocodeAddress(request), expectedError);
@@ -392,7 +392,7 @@ describe('v4.GeocodeServiceClient', () => {
   describe('geocodeLocation', () => {
     it('invokes geocodeLocation without error', async () => {
       const client = new geocodeserviceModule.v4.GeocodeServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -423,7 +423,7 @@ describe('v4.GeocodeServiceClient', () => {
 
     it('invokes geocodeLocation without error using callback', async () => {
       const client = new geocodeserviceModule.v4.GeocodeServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -470,7 +470,7 @@ describe('v4.GeocodeServiceClient', () => {
 
     it('invokes geocodeLocation with error', async () => {
       const client = new geocodeserviceModule.v4.GeocodeServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -501,7 +501,7 @@ describe('v4.GeocodeServiceClient', () => {
 
     it('invokes geocodeLocation with closed client', async () => {
       const client = new geocodeserviceModule.v4.GeocodeServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -514,7 +514,7 @@ describe('v4.GeocodeServiceClient', () => {
       );
       request.locationQuery = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.geocodeLocation(request), expectedError);
@@ -524,7 +524,7 @@ describe('v4.GeocodeServiceClient', () => {
   describe('geocodePlace', () => {
     it('invokes geocodePlace without error', async () => {
       const client = new geocodeserviceModule.v4.GeocodeServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -555,7 +555,7 @@ describe('v4.GeocodeServiceClient', () => {
 
     it('invokes geocodePlace without error using callback', async () => {
       const client = new geocodeserviceModule.v4.GeocodeServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -602,7 +602,7 @@ describe('v4.GeocodeServiceClient', () => {
 
     it('invokes geocodePlace with error', async () => {
       const client = new geocodeserviceModule.v4.GeocodeServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -633,7 +633,7 @@ describe('v4.GeocodeServiceClient', () => {
 
     it('invokes geocodePlace with closed client', async () => {
       const client = new geocodeserviceModule.v4.GeocodeServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -646,7 +646,7 @@ describe('v4.GeocodeServiceClient', () => {
       );
       request.place = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.geocodePlace(request), expectedError);

@@ -1,6 +1,13 @@
 # Changelog
 
 
+## [4.0.2](https://github.com/googleapis/google-cloud-node/compare/proto3-json-serializer-v4.0.1...proto3-json-serializer-v4.0.2) (2026-08-12)
+
+
+### Bug Fixes
+
+* **docs:** Add correct homepage URL in /core/packages/proto3-json-serializer-nodejs ([#9131](https://github.com/googleapis/google-cloud-node/issues/9131)) ([b57db40](https://github.com/googleapis/google-cloud-node/commit/b57db40532da54a036339405d4b385d26383bb13))
+
 ## [4.0.1](https://github.com/googleapis/google-cloud-node/compare/proto3-json-serializer-v4.0.0...proto3-json-serializer-v4.0.1) (2026-08-10)
 
 

@@ -45,6 +45,7 @@ export class API {
   restNumericEnums: boolean;
   documentationUri: any;
   newIssueUri: string;
+  enableTelemetryTracing?: boolean;
   title?: string;
 
   static isIgnoredService(
@@ -112,6 +113,7 @@ export class API {
     this.documentationUri =
       options.serviceYaml?.publishing?.documentation_uri ?? '';
     this.newIssueUri = options.serviceYaml?.publishing?.new_issue_uri ?? '';
+    this.enableTelemetryTracing = options.enableTelemetryTracing ?? false;
     this.title = options.serviceYaml?.title;
 
     const [allResourceDatabase, resourceDatabase] =

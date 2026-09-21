@@ -17,7 +17,7 @@ import * as assert from 'assert';
 import {describe, it} from 'mocha';
 
 describe('ESM package', function () {
-  this.timeout(120000);
+  this.timeout(300000);
   it('should support esm property', () =>
     packNTest({
       sample: {

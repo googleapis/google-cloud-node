@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as gsuiteaddonsModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -242,7 +242,7 @@ describe('v1.GSuiteAddOnsClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.gSuiteAddOnsStub, undefined);
@@ -250,12 +250,12 @@ describe('v1.GSuiteAddOnsClient', () => {
       assert(client.gSuiteAddOnsStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.gSuiteAddOnsStub);
@@ -264,14 +264,14 @@ describe('v1.GSuiteAddOnsClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.gSuiteAddOnsStub, undefined);
@@ -280,7 +280,7 @@ describe('v1.GSuiteAddOnsClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -288,7 +288,7 @@ describe('v1.GSuiteAddOnsClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -300,7 +300,7 @@ describe('v1.GSuiteAddOnsClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -323,7 +323,7 @@ describe('v1.GSuiteAddOnsClient', () => {
   describe('getAuthorization', () => {
     it('invokes getAuthorization without error', async () => {
       const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -354,7 +354,7 @@ describe('v1.GSuiteAddOnsClient', () => {
 
     it('invokes getAuthorization without error using callback', async () => {
       const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -401,7 +401,7 @@ describe('v1.GSuiteAddOnsClient', () => {
 
     it('invokes getAuthorization with error', async () => {
       const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -432,7 +432,7 @@ describe('v1.GSuiteAddOnsClient', () => {
 
     it('invokes getAuthorization with closed client', async () => {
       const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -445,7 +445,7 @@ describe('v1.GSuiteAddOnsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getAuthorization(request), expectedError);
@@ -455,7 +455,7 @@ describe('v1.GSuiteAddOnsClient', () => {
   describe('createDeployment', () => {
     it('invokes createDeployment without error', async () => {
       const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -486,7 +486,7 @@ describe('v1.GSuiteAddOnsClient', () => {
 
     it('invokes createDeployment without error using callback', async () => {
       const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -533,7 +533,7 @@ describe('v1.GSuiteAddOnsClient', () => {
 
     it('invokes createDeployment with error', async () => {
       const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -564,7 +564,7 @@ describe('v1.GSuiteAddOnsClient', () => {
 
     it('invokes createDeployment with closed client', async () => {
       const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -577,7 +577,7 @@ describe('v1.GSuiteAddOnsClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createDeployment(request), expectedError);
@@ -587,7 +587,7 @@ describe('v1.GSuiteAddOnsClient', () => {
   describe('replaceDeployment', () => {
     it('invokes replaceDeployment without error', async () => {
       const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -619,7 +619,7 @@ describe('v1.GSuiteAddOnsClient', () => {
 
     it('invokes replaceDeployment without error using callback', async () => {
       const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -667,7 +667,7 @@ describe('v1.GSuiteAddOnsClient', () => {
 
     it('invokes replaceDeployment with error', async () => {
       const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -699,7 +699,7 @@ describe('v1.GSuiteAddOnsClient', () => {
 
     it('invokes replaceDeployment with closed client', async () => {
       const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -713,7 +713,7 @@ describe('v1.GSuiteAddOnsClient', () => {
       );
       request.deployment.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.replaceDeployment(request), expectedError);
@@ -723,7 +723,7 @@ describe('v1.GSuiteAddOnsClient', () => {
   describe('getDeployment', () => {
     it('invokes getDeployment without error', async () => {
       const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -754,7 +754,7 @@ describe('v1.GSuiteAddOnsClient', () => {
 
     it('invokes getDeployment without error using callback', async () => {
       const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -801,7 +801,7 @@ describe('v1.GSuiteAddOnsClient', () => {
 
     it('invokes getDeployment with error', async () => {
       const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -832,7 +832,7 @@ describe('v1.GSuiteAddOnsClient', () => {
 
     it('invokes getDeployment with closed client', async () => {
       const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -845,7 +845,7 @@ describe('v1.GSuiteAddOnsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getDeployment(request), expectedError);
@@ -855,7 +855,7 @@ describe('v1.GSuiteAddOnsClient', () => {
   describe('deleteDeployment', () => {
     it('invokes deleteDeployment without error', async () => {
       const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -886,7 +886,7 @@ describe('v1.GSuiteAddOnsClient', () => {
 
     it('invokes deleteDeployment without error using callback', async () => {
       const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -933,7 +933,7 @@ describe('v1.GSuiteAddOnsClient', () => {
 
     it('invokes deleteDeployment with error', async () => {
       const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -964,7 +964,7 @@ describe('v1.GSuiteAddOnsClient', () => {
 
     it('invokes deleteDeployment with closed client', async () => {
       const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -977,7 +977,7 @@ describe('v1.GSuiteAddOnsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteDeployment(request), expectedError);
@@ -987,7 +987,7 @@ describe('v1.GSuiteAddOnsClient', () => {
   describe('installDeployment', () => {
     it('invokes installDeployment without error', async () => {
       const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1018,7 +1018,7 @@ describe('v1.GSuiteAddOnsClient', () => {
 
     it('invokes installDeployment without error using callback', async () => {
       const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1065,7 +1065,7 @@ describe('v1.GSuiteAddOnsClient', () => {
 
     it('invokes installDeployment with error', async () => {
       const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1096,7 +1096,7 @@ describe('v1.GSuiteAddOnsClient', () => {
 
     it('invokes installDeployment with closed client', async () => {
       const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1109,7 +1109,7 @@ describe('v1.GSuiteAddOnsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.installDeployment(request), expectedError);
@@ -1119,7 +1119,7 @@ describe('v1.GSuiteAddOnsClient', () => {
   describe('uninstallDeployment', () => {
     it('invokes uninstallDeployment without error', async () => {
       const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1151,7 +1151,7 @@ describe('v1.GSuiteAddOnsClient', () => {
 
     it('invokes uninstallDeployment without error using callback', async () => {
       const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1198,7 +1198,7 @@ describe('v1.GSuiteAddOnsClient', () => {
 
     it('invokes uninstallDeployment with error', async () => {
       const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1229,7 +1229,7 @@ describe('v1.GSuiteAddOnsClient', () => {
 
     it('invokes uninstallDeployment with closed client', async () => {
       const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1242,7 +1242,7 @@ describe('v1.GSuiteAddOnsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.uninstallDeployment(request), expectedError);
@@ -1252,7 +1252,7 @@ describe('v1.GSuiteAddOnsClient', () => {
   describe('getInstallStatus', () => {
     it('invokes getInstallStatus without error', async () => {
       const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1283,7 +1283,7 @@ describe('v1.GSuiteAddOnsClient', () => {
 
     it('invokes getInstallStatus without error using callback', async () => {
       const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1330,7 +1330,7 @@ describe('v1.GSuiteAddOnsClient', () => {
 
     it('invokes getInstallStatus with error', async () => {
       const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1361,7 +1361,7 @@ describe('v1.GSuiteAddOnsClient', () => {
 
     it('invokes getInstallStatus with closed client', async () => {
       const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1374,7 +1374,7 @@ describe('v1.GSuiteAddOnsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getInstallStatus(request), expectedError);
@@ -1384,7 +1384,7 @@ describe('v1.GSuiteAddOnsClient', () => {
   describe('listDeployments', () => {
     it('invokes listDeployments without error', async () => {
       const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1423,7 +1423,7 @@ describe('v1.GSuiteAddOnsClient', () => {
 
     it('invokes listDeployments without error using callback', async () => {
       const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1478,7 +1478,7 @@ describe('v1.GSuiteAddOnsClient', () => {
 
     it('invokes listDeployments with error', async () => {
       const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1509,7 +1509,7 @@ describe('v1.GSuiteAddOnsClient', () => {
 
     it('invokes listDeploymentsStream without error', async () => {
       const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1561,15 +1561,15 @@ describe('v1.GSuiteAddOnsClient', () => {
       assert(
         (client.descriptors.page.listDeployments.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listDeploymentsStream with error', async () => {
       const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1610,15 +1610,15 @@ describe('v1.GSuiteAddOnsClient', () => {
       assert(
         (client.descriptors.page.listDeployments.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDeployments without error', async () => {
       const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1659,15 +1659,15 @@ describe('v1.GSuiteAddOnsClient', () => {
       assert(
         (client.descriptors.page.listDeployments.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDeployments with error', async () => {
       const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1699,9 +1699,9 @@ describe('v1.GSuiteAddOnsClient', () => {
       assert(
         (client.descriptors.page.listDeployments.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1713,7 +1713,7 @@ describe('v1.GSuiteAddOnsClient', () => {
         project: 'projectValue',
       };
       const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1752,7 +1752,7 @@ describe('v1.GSuiteAddOnsClient', () => {
         deployment: 'deploymentValue',
       };
       const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1801,7 +1801,7 @@ describe('v1.GSuiteAddOnsClient', () => {
         deployment: 'deploymentValue',
       };
       const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1852,7 +1852,7 @@ describe('v1.GSuiteAddOnsClient', () => {
         project: 'projectValue',
       };
       const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

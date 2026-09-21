@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as examplesModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, operationsProtos, LocationProtos } from 'google-gax';
+import {protobuf, operationsProtos, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -237,7 +237,7 @@ describe('v3.ExamplesClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new examplesModule.v3.ExamplesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.examplesStub, undefined);
@@ -245,12 +245,12 @@ describe('v3.ExamplesClient', () => {
       assert(client.examplesStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new examplesModule.v3.ExamplesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.examplesStub);
@@ -259,14 +259,14 @@ describe('v3.ExamplesClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new examplesModule.v3.ExamplesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.examplesStub, undefined);
@@ -275,7 +275,7 @@ describe('v3.ExamplesClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -283,7 +283,7 @@ describe('v3.ExamplesClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new examplesModule.v3.ExamplesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -295,7 +295,7 @@ describe('v3.ExamplesClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new examplesModule.v3.ExamplesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -318,7 +318,7 @@ describe('v3.ExamplesClient', () => {
   describe('createExample', () => {
     it('invokes createExample without error', async () => {
       const client = new examplesModule.v3.ExamplesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -349,7 +349,7 @@ describe('v3.ExamplesClient', () => {
 
     it('invokes createExample without error using callback', async () => {
       const client = new examplesModule.v3.ExamplesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -396,7 +396,7 @@ describe('v3.ExamplesClient', () => {
 
     it('invokes createExample with error', async () => {
       const client = new examplesModule.v3.ExamplesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -427,7 +427,7 @@ describe('v3.ExamplesClient', () => {
 
     it('invokes createExample with closed client', async () => {
       const client = new examplesModule.v3.ExamplesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -440,7 +440,7 @@ describe('v3.ExamplesClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createExample(request), expectedError);
@@ -450,7 +450,7 @@ describe('v3.ExamplesClient', () => {
   describe('deleteExample', () => {
     it('invokes deleteExample without error', async () => {
       const client = new examplesModule.v3.ExamplesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -481,7 +481,7 @@ describe('v3.ExamplesClient', () => {
 
     it('invokes deleteExample without error using callback', async () => {
       const client = new examplesModule.v3.ExamplesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -528,7 +528,7 @@ describe('v3.ExamplesClient', () => {
 
     it('invokes deleteExample with error', async () => {
       const client = new examplesModule.v3.ExamplesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -559,7 +559,7 @@ describe('v3.ExamplesClient', () => {
 
     it('invokes deleteExample with closed client', async () => {
       const client = new examplesModule.v3.ExamplesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -572,7 +572,7 @@ describe('v3.ExamplesClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteExample(request), expectedError);
@@ -582,7 +582,7 @@ describe('v3.ExamplesClient', () => {
   describe('getExample', () => {
     it('invokes getExample without error', async () => {
       const client = new examplesModule.v3.ExamplesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -613,7 +613,7 @@ describe('v3.ExamplesClient', () => {
 
     it('invokes getExample without error using callback', async () => {
       const client = new examplesModule.v3.ExamplesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -660,7 +660,7 @@ describe('v3.ExamplesClient', () => {
 
     it('invokes getExample with error', async () => {
       const client = new examplesModule.v3.ExamplesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -691,7 +691,7 @@ describe('v3.ExamplesClient', () => {
 
     it('invokes getExample with closed client', async () => {
       const client = new examplesModule.v3.ExamplesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -704,7 +704,7 @@ describe('v3.ExamplesClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getExample(request), expectedError);
@@ -714,7 +714,7 @@ describe('v3.ExamplesClient', () => {
   describe('updateExample', () => {
     it('invokes updateExample without error', async () => {
       const client = new examplesModule.v3.ExamplesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -746,7 +746,7 @@ describe('v3.ExamplesClient', () => {
 
     it('invokes updateExample without error using callback', async () => {
       const client = new examplesModule.v3.ExamplesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -794,7 +794,7 @@ describe('v3.ExamplesClient', () => {
 
     it('invokes updateExample with error', async () => {
       const client = new examplesModule.v3.ExamplesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -826,7 +826,7 @@ describe('v3.ExamplesClient', () => {
 
     it('invokes updateExample with closed client', async () => {
       const client = new examplesModule.v3.ExamplesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -840,7 +840,7 @@ describe('v3.ExamplesClient', () => {
       );
       request.example.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateExample(request), expectedError);
@@ -850,7 +850,7 @@ describe('v3.ExamplesClient', () => {
   describe('listExamples', () => {
     it('invokes listExamples without error', async () => {
       const client = new examplesModule.v3.ExamplesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -889,7 +889,7 @@ describe('v3.ExamplesClient', () => {
 
     it('invokes listExamples without error using callback', async () => {
       const client = new examplesModule.v3.ExamplesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -944,7 +944,7 @@ describe('v3.ExamplesClient', () => {
 
     it('invokes listExamples with error', async () => {
       const client = new examplesModule.v3.ExamplesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -975,7 +975,7 @@ describe('v3.ExamplesClient', () => {
 
     it('invokes listExamplesStream without error', async () => {
       const client = new examplesModule.v3.ExamplesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1027,15 +1027,15 @@ describe('v3.ExamplesClient', () => {
       assert(
         (client.descriptors.page.listExamples.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listExamplesStream with error', async () => {
       const client = new examplesModule.v3.ExamplesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1078,15 +1078,15 @@ describe('v3.ExamplesClient', () => {
       assert(
         (client.descriptors.page.listExamples.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listExamples without error', async () => {
       const client = new examplesModule.v3.ExamplesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1127,15 +1127,15 @@ describe('v3.ExamplesClient', () => {
       assert(
         (client.descriptors.page.listExamples.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listExamples with error', async () => {
       const client = new examplesModule.v3.ExamplesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1167,16 +1167,16 @@ describe('v3.ExamplesClient', () => {
       assert(
         (client.descriptors.page.listExamples.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new examplesModule.v3.ExamplesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1206,7 +1206,7 @@ describe('v3.ExamplesClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new examplesModule.v3.ExamplesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1250,7 +1250,7 @@ describe('v3.ExamplesClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new examplesModule.v3.ExamplesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1285,7 +1285,7 @@ describe('v3.ExamplesClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new examplesModule.v3.ExamplesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1333,7 +1333,7 @@ describe('v3.ExamplesClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new examplesModule.v3.ExamplesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1374,7 +1374,7 @@ describe('v3.ExamplesClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new examplesModule.v3.ExamplesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1395,7 +1395,7 @@ describe('v3.ExamplesClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new examplesModule.v3.ExamplesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1423,7 +1423,7 @@ describe('v3.ExamplesClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1433,7 +1433,7 @@ describe('v3.ExamplesClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new examplesModule.v3.ExamplesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1457,7 +1457,7 @@ describe('v3.ExamplesClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new examplesModule.v3.ExamplesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1479,7 +1479,7 @@ describe('v3.ExamplesClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new examplesModule.v3.ExamplesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1507,7 +1507,7 @@ describe('v3.ExamplesClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1517,7 +1517,7 @@ describe('v3.ExamplesClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new examplesModule.v3.ExamplesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1541,7 +1541,7 @@ describe('v3.ExamplesClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new examplesModule.v3.ExamplesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1563,7 +1563,7 @@ describe('v3.ExamplesClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new examplesModule.v3.ExamplesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1591,7 +1591,7 @@ describe('v3.ExamplesClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1601,7 +1601,7 @@ describe('v3.ExamplesClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new examplesModule.v3.ExamplesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1625,7 +1625,7 @@ describe('v3.ExamplesClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new examplesModule.v3.ExamplesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1660,7 +1660,7 @@ describe('v3.ExamplesClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new examplesModule.v3.ExamplesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1696,7 +1696,7 @@ describe('v3.ExamplesClient', () => {
         agent: 'agentValue',
       };
       const client = new examplesModule.v3.ExamplesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1760,7 +1760,7 @@ describe('v3.ExamplesClient', () => {
         agent: 'agentValue',
       };
       const client = new examplesModule.v3.ExamplesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1839,7 +1839,7 @@ describe('v3.ExamplesClient', () => {
         agent: 'agentValue',
       };
       const client = new examplesModule.v3.ExamplesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1918,7 +1918,7 @@ describe('v3.ExamplesClient', () => {
         changelog: 'changelogValue',
       };
       const client = new examplesModule.v3.ExamplesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1995,7 +1995,7 @@ describe('v3.ExamplesClient', () => {
         continuous_test_result: 'continuousTestResultValue',
       };
       const client = new examplesModule.v3.ExamplesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2107,7 +2107,7 @@ describe('v3.ExamplesClient', () => {
         deployment: 'deploymentValue',
       };
       const client = new examplesModule.v3.ExamplesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2194,7 +2194,7 @@ describe('v3.ExamplesClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new examplesModule.v3.ExamplesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2270,7 +2270,7 @@ describe('v3.ExamplesClient', () => {
         environment: 'environmentValue',
       };
       const client = new examplesModule.v3.ExamplesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2347,7 +2347,7 @@ describe('v3.ExamplesClient', () => {
         example: 'exampleValue',
       };
       const client = new examplesModule.v3.ExamplesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2435,7 +2435,7 @@ describe('v3.ExamplesClient', () => {
         experiment: 'experimentValue',
       };
       const client = new examplesModule.v3.ExamplesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2522,7 +2522,7 @@ describe('v3.ExamplesClient', () => {
         flow: 'flowValue',
       };
       const client = new examplesModule.v3.ExamplesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2598,7 +2598,7 @@ describe('v3.ExamplesClient', () => {
         flow: 'flowValue',
       };
       const client = new examplesModule.v3.ExamplesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2691,7 +2691,7 @@ describe('v3.ExamplesClient', () => {
         generator: 'generatorValue',
       };
       const client = new examplesModule.v3.ExamplesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2767,7 +2767,7 @@ describe('v3.ExamplesClient', () => {
         intent: 'intentValue',
       };
       const client = new examplesModule.v3.ExamplesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2841,7 +2841,7 @@ describe('v3.ExamplesClient', () => {
         location: 'locationValue',
       };
       const client = new examplesModule.v3.ExamplesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2893,7 +2893,7 @@ describe('v3.ExamplesClient', () => {
         page: 'pageValue',
       };
       const client = new examplesModule.v3.ExamplesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2980,7 +2980,7 @@ describe('v3.ExamplesClient', () => {
         playbook: 'playbookValue',
       };
       const client = new examplesModule.v3.ExamplesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3057,7 +3057,7 @@ describe('v3.ExamplesClient', () => {
         version: 'versionValue',
       };
       const client = new examplesModule.v3.ExamplesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3141,7 +3141,7 @@ describe('v3.ExamplesClient', () => {
         project: 'projectValue',
       };
       const client = new examplesModule.v3.ExamplesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3185,7 +3185,7 @@ describe('v3.ExamplesClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new examplesModule.v3.ExamplesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3330,7 +3330,7 @@ describe('v3.ExamplesClient', () => {
         transition_route_group: 'transitionRouteGroupValue',
       };
       const client = new examplesModule.v3.ExamplesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3455,7 +3455,7 @@ describe('v3.ExamplesClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new examplesModule.v3.ExamplesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3580,7 +3580,7 @@ describe('v3.ExamplesClient', () => {
         transition_route_group: 'transitionRouteGroupValue',
       };
       const client = new examplesModule.v3.ExamplesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3685,7 +3685,7 @@ describe('v3.ExamplesClient', () => {
         security_settings: 'securitySettingsValue',
       };
       const client = new examplesModule.v3.ExamplesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3754,7 +3754,7 @@ describe('v3.ExamplesClient', () => {
         test_case: 'testCaseValue',
       };
       const client = new examplesModule.v3.ExamplesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3831,7 +3831,7 @@ describe('v3.ExamplesClient', () => {
         result: 'resultValue',
       };
       const client = new examplesModule.v3.ExamplesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3918,7 +3918,7 @@ describe('v3.ExamplesClient', () => {
         tool: 'toolValue',
       };
       const client = new examplesModule.v3.ExamplesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3995,7 +3995,7 @@ describe('v3.ExamplesClient', () => {
         version: 'versionValue',
       };
       const client = new examplesModule.v3.ExamplesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4083,7 +4083,7 @@ describe('v3.ExamplesClient', () => {
         version: 'versionValue',
       };
       const client = new examplesModule.v3.ExamplesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4170,7 +4170,7 @@ describe('v3.ExamplesClient', () => {
         webhook: 'webhookValue',
       };
       const client = new examplesModule.v3.ExamplesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

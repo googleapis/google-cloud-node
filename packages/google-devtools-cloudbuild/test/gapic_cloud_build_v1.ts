@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as cloudbuildModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, LROperation, operationsProtos } from 'google-gax';
+import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -149,9 +149,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -269,7 +269,7 @@ describe('v1.CloudBuildClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.cloudBuildStub, undefined);
@@ -277,12 +277,12 @@ describe('v1.CloudBuildClient', () => {
       assert(client.cloudBuildStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.cloudBuildStub);
@@ -291,14 +291,14 @@ describe('v1.CloudBuildClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.cloudBuildStub, undefined);
@@ -307,7 +307,7 @@ describe('v1.CloudBuildClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -315,7 +315,7 @@ describe('v1.CloudBuildClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -327,7 +327,7 @@ describe('v1.CloudBuildClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -350,7 +350,7 @@ describe('v1.CloudBuildClient', () => {
   describe('getBuild', () => {
     it('invokes getBuild without error', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -378,7 +378,7 @@ describe('v1.CloudBuildClient', () => {
 
     it('invokes getBuild without error using callback', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -422,7 +422,7 @@ describe('v1.CloudBuildClient', () => {
 
     it('invokes getBuild with error', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -447,7 +447,7 @@ describe('v1.CloudBuildClient', () => {
 
     it('invokes getBuild with closed client', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -457,7 +457,7 @@ describe('v1.CloudBuildClient', () => {
       // path template: projects/*/locations/{location=*}/builds/*
       request.name = 'projects/value/locations/value/builds/value';
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getBuild(request), expectedError);
@@ -467,7 +467,7 @@ describe('v1.CloudBuildClient', () => {
   describe('cancelBuild', () => {
     it('invokes cancelBuild without error', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -495,7 +495,7 @@ describe('v1.CloudBuildClient', () => {
 
     it('invokes cancelBuild without error using callback', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -539,7 +539,7 @@ describe('v1.CloudBuildClient', () => {
 
     it('invokes cancelBuild with error', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -567,7 +567,7 @@ describe('v1.CloudBuildClient', () => {
 
     it('invokes cancelBuild with closed client', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -577,7 +577,7 @@ describe('v1.CloudBuildClient', () => {
       // path template: projects/*/locations/{location=*}/builds/*
       request.name = 'projects/value/locations/value/builds/value';
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.cancelBuild(request), expectedError);
@@ -587,7 +587,7 @@ describe('v1.CloudBuildClient', () => {
   describe('createBuildTrigger', () => {
     it('invokes createBuildTrigger without error', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -616,7 +616,7 @@ describe('v1.CloudBuildClient', () => {
 
     it('invokes createBuildTrigger without error using callback', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -660,7 +660,7 @@ describe('v1.CloudBuildClient', () => {
 
     it('invokes createBuildTrigger with error', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -688,7 +688,7 @@ describe('v1.CloudBuildClient', () => {
 
     it('invokes createBuildTrigger with closed client', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -698,7 +698,7 @@ describe('v1.CloudBuildClient', () => {
       // path template: projects/*/locations/{location=*}
       request.parent = 'projects/value/locations/value';
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createBuildTrigger(request), expectedError);
@@ -708,7 +708,7 @@ describe('v1.CloudBuildClient', () => {
   describe('getBuildTrigger', () => {
     it('invokes getBuildTrigger without error', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -736,7 +736,7 @@ describe('v1.CloudBuildClient', () => {
 
     it('invokes getBuildTrigger without error using callback', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -780,7 +780,7 @@ describe('v1.CloudBuildClient', () => {
 
     it('invokes getBuildTrigger with error', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -808,7 +808,7 @@ describe('v1.CloudBuildClient', () => {
 
     it('invokes getBuildTrigger with closed client', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -818,7 +818,7 @@ describe('v1.CloudBuildClient', () => {
       // path template: projects/*/locations/{location=*}/triggers/*
       request.name = 'projects/value/locations/value/triggers/value';
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getBuildTrigger(request), expectedError);
@@ -828,7 +828,7 @@ describe('v1.CloudBuildClient', () => {
   describe('deleteBuildTrigger', () => {
     it('invokes deleteBuildTrigger without error', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -857,7 +857,7 @@ describe('v1.CloudBuildClient', () => {
 
     it('invokes deleteBuildTrigger without error using callback', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -901,7 +901,7 @@ describe('v1.CloudBuildClient', () => {
 
     it('invokes deleteBuildTrigger with error', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -929,7 +929,7 @@ describe('v1.CloudBuildClient', () => {
 
     it('invokes deleteBuildTrigger with closed client', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -939,7 +939,7 @@ describe('v1.CloudBuildClient', () => {
       // path template: projects/*/locations/{location=*}/triggers/*
       request.name = 'projects/value/locations/value/triggers/value';
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteBuildTrigger(request), expectedError);
@@ -949,7 +949,7 @@ describe('v1.CloudBuildClient', () => {
   describe('updateBuildTrigger', () => {
     it('invokes updateBuildTrigger without error', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -980,7 +980,7 @@ describe('v1.CloudBuildClient', () => {
 
     it('invokes updateBuildTrigger without error using callback', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1026,7 +1026,7 @@ describe('v1.CloudBuildClient', () => {
 
     it('invokes updateBuildTrigger with error', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1056,7 +1056,7 @@ describe('v1.CloudBuildClient', () => {
 
     it('invokes updateBuildTrigger with closed client', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1068,7 +1068,7 @@ describe('v1.CloudBuildClient', () => {
       request.trigger.resourceName =
         'projects/value/locations/value/triggers/value';
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateBuildTrigger(request), expectedError);
@@ -1078,7 +1078,7 @@ describe('v1.CloudBuildClient', () => {
   describe('receiveTriggerWebhook', () => {
     it('invokes receiveTriggerWebhook without error', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1120,7 +1120,7 @@ describe('v1.CloudBuildClient', () => {
 
     it('invokes receiveTriggerWebhook without error using callback', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1177,7 +1177,7 @@ describe('v1.CloudBuildClient', () => {
 
     it('invokes receiveTriggerWebhook with error', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1221,7 +1221,7 @@ describe('v1.CloudBuildClient', () => {
 
     it('invokes receiveTriggerWebhook with closed client', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1244,7 +1244,7 @@ describe('v1.CloudBuildClient', () => {
       );
       request.name = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1257,7 +1257,7 @@ describe('v1.CloudBuildClient', () => {
   describe('getWorkerPool', () => {
     it('invokes getWorkerPool without error', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1285,7 +1285,7 @@ describe('v1.CloudBuildClient', () => {
 
     it('invokes getWorkerPool without error using callback', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1329,7 +1329,7 @@ describe('v1.CloudBuildClient', () => {
 
     it('invokes getWorkerPool with error', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1357,7 +1357,7 @@ describe('v1.CloudBuildClient', () => {
 
     it('invokes getWorkerPool with closed client', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1367,7 +1367,7 @@ describe('v1.CloudBuildClient', () => {
       // path template: projects/*/locations/{location=*}/workerPools/*
       request.name = 'projects/value/locations/value/workerPools/value';
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getWorkerPool(request), expectedError);
@@ -1377,7 +1377,7 @@ describe('v1.CloudBuildClient', () => {
   describe('getDefaultServiceAccount', () => {
     it('invokes getDefaultServiceAccount without error', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1406,7 +1406,7 @@ describe('v1.CloudBuildClient', () => {
 
     it('invokes getDefaultServiceAccount without error using callback', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1450,7 +1450,7 @@ describe('v1.CloudBuildClient', () => {
 
     it('invokes getDefaultServiceAccount with error', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1481,7 +1481,7 @@ describe('v1.CloudBuildClient', () => {
 
     it('invokes getDefaultServiceAccount with closed client', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1491,7 +1491,7 @@ describe('v1.CloudBuildClient', () => {
       // path template: projects/*/locations/{location=*}/defaultServiceAccount
       request.name = 'projects/value/locations/value/defaultServiceAccount';
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1504,7 +1504,7 @@ describe('v1.CloudBuildClient', () => {
   describe('createBuild', () => {
     it('invokes createBuild without error', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1533,7 +1533,7 @@ describe('v1.CloudBuildClient', () => {
 
     it('invokes createBuild without error using callback', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1584,7 +1584,7 @@ describe('v1.CloudBuildClient', () => {
 
     it('invokes createBuild with call error', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1612,7 +1612,7 @@ describe('v1.CloudBuildClient', () => {
 
     it('invokes createBuild with LRO error', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1642,7 +1642,7 @@ describe('v1.CloudBuildClient', () => {
 
     it('invokes checkCreateBuildProgress without error', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1650,8 +1650,8 @@ describe('v1.CloudBuildClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateBuildProgress(
@@ -1664,7 +1664,7 @@ describe('v1.CloudBuildClient', () => {
 
     it('invokes checkCreateBuildProgress with error', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1682,7 +1682,7 @@ describe('v1.CloudBuildClient', () => {
   describe('retryBuild', () => {
     it('invokes retryBuild without error', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1711,7 +1711,7 @@ describe('v1.CloudBuildClient', () => {
 
     it('invokes retryBuild without error using callback', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1762,7 +1762,7 @@ describe('v1.CloudBuildClient', () => {
 
     it('invokes retryBuild with call error', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1790,7 +1790,7 @@ describe('v1.CloudBuildClient', () => {
 
     it('invokes retryBuild with LRO error', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1820,7 +1820,7 @@ describe('v1.CloudBuildClient', () => {
 
     it('invokes checkRetryBuildProgress without error', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1828,8 +1828,8 @@ describe('v1.CloudBuildClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkRetryBuildProgress(
@@ -1842,7 +1842,7 @@ describe('v1.CloudBuildClient', () => {
 
     it('invokes checkRetryBuildProgress with error', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1860,7 +1860,7 @@ describe('v1.CloudBuildClient', () => {
   describe('approveBuild', () => {
     it('invokes approveBuild without error', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1889,7 +1889,7 @@ describe('v1.CloudBuildClient', () => {
 
     it('invokes approveBuild without error using callback', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1940,7 +1940,7 @@ describe('v1.CloudBuildClient', () => {
 
     it('invokes approveBuild with call error', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1968,7 +1968,7 @@ describe('v1.CloudBuildClient', () => {
 
     it('invokes approveBuild with LRO error', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1998,7 +1998,7 @@ describe('v1.CloudBuildClient', () => {
 
     it('invokes checkApproveBuildProgress without error', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2006,8 +2006,8 @@ describe('v1.CloudBuildClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkApproveBuildProgress(
@@ -2020,7 +2020,7 @@ describe('v1.CloudBuildClient', () => {
 
     it('invokes checkApproveBuildProgress with error', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2038,7 +2038,7 @@ describe('v1.CloudBuildClient', () => {
   describe('runBuildTrigger', () => {
     it('invokes runBuildTrigger without error', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2068,7 +2068,7 @@ describe('v1.CloudBuildClient', () => {
 
     it('invokes runBuildTrigger without error using callback', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2119,7 +2119,7 @@ describe('v1.CloudBuildClient', () => {
 
     it('invokes runBuildTrigger with call error', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2147,7 +2147,7 @@ describe('v1.CloudBuildClient', () => {
 
     it('invokes runBuildTrigger with LRO error', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2177,7 +2177,7 @@ describe('v1.CloudBuildClient', () => {
 
     it('invokes checkRunBuildTriggerProgress without error', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2185,8 +2185,8 @@ describe('v1.CloudBuildClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkRunBuildTriggerProgress(
@@ -2199,7 +2199,7 @@ describe('v1.CloudBuildClient', () => {
 
     it('invokes checkRunBuildTriggerProgress with error', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2220,7 +2220,7 @@ describe('v1.CloudBuildClient', () => {
   describe('createWorkerPool', () => {
     it('invokes createWorkerPool without error', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2250,7 +2250,7 @@ describe('v1.CloudBuildClient', () => {
 
     it('invokes createWorkerPool without error using callback', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2301,7 +2301,7 @@ describe('v1.CloudBuildClient', () => {
 
     it('invokes createWorkerPool with call error', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2329,7 +2329,7 @@ describe('v1.CloudBuildClient', () => {
 
     it('invokes createWorkerPool with LRO error', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2359,7 +2359,7 @@ describe('v1.CloudBuildClient', () => {
 
     it('invokes checkCreateWorkerPoolProgress without error', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2367,8 +2367,8 @@ describe('v1.CloudBuildClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateWorkerPoolProgress(
@@ -2381,7 +2381,7 @@ describe('v1.CloudBuildClient', () => {
 
     it('invokes checkCreateWorkerPoolProgress with error', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2402,7 +2402,7 @@ describe('v1.CloudBuildClient', () => {
   describe('deleteWorkerPool', () => {
     it('invokes deleteWorkerPool without error', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2432,7 +2432,7 @@ describe('v1.CloudBuildClient', () => {
 
     it('invokes deleteWorkerPool without error using callback', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2483,7 +2483,7 @@ describe('v1.CloudBuildClient', () => {
 
     it('invokes deleteWorkerPool with call error', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2511,7 +2511,7 @@ describe('v1.CloudBuildClient', () => {
 
     it('invokes deleteWorkerPool with LRO error', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2541,7 +2541,7 @@ describe('v1.CloudBuildClient', () => {
 
     it('invokes checkDeleteWorkerPoolProgress without error', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2549,8 +2549,8 @@ describe('v1.CloudBuildClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteWorkerPoolProgress(
@@ -2563,7 +2563,7 @@ describe('v1.CloudBuildClient', () => {
 
     it('invokes checkDeleteWorkerPoolProgress with error', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2584,7 +2584,7 @@ describe('v1.CloudBuildClient', () => {
   describe('updateWorkerPool', () => {
     it('invokes updateWorkerPool without error', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2616,7 +2616,7 @@ describe('v1.CloudBuildClient', () => {
 
     it('invokes updateWorkerPool without error using callback', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2669,7 +2669,7 @@ describe('v1.CloudBuildClient', () => {
 
     it('invokes updateWorkerPool with call error', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2699,7 +2699,7 @@ describe('v1.CloudBuildClient', () => {
 
     it('invokes updateWorkerPool with LRO error', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2731,7 +2731,7 @@ describe('v1.CloudBuildClient', () => {
 
     it('invokes checkUpdateWorkerPoolProgress without error', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2739,8 +2739,8 @@ describe('v1.CloudBuildClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateWorkerPoolProgress(
@@ -2753,7 +2753,7 @@ describe('v1.CloudBuildClient', () => {
 
     it('invokes checkUpdateWorkerPoolProgress with error', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2774,7 +2774,7 @@ describe('v1.CloudBuildClient', () => {
   describe('listBuilds', () => {
     it('invokes listBuilds without error', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2804,7 +2804,7 @@ describe('v1.CloudBuildClient', () => {
 
     it('invokes listBuilds without error using callback', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2850,7 +2850,7 @@ describe('v1.CloudBuildClient', () => {
 
     it('invokes listBuilds with error', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2878,7 +2878,7 @@ describe('v1.CloudBuildClient', () => {
 
     it('invokes listBuildsStream without error', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2921,15 +2921,15 @@ describe('v1.CloudBuildClient', () => {
       assert(
         (client.descriptors.page.listBuilds.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listBuildsStream with error', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2969,15 +2969,15 @@ describe('v1.CloudBuildClient', () => {
       assert(
         (client.descriptors.page.listBuilds.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listBuilds without error', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3009,15 +3009,15 @@ describe('v1.CloudBuildClient', () => {
       assert(
         (client.descriptors.page.listBuilds.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listBuilds with error', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3048,9 +3048,9 @@ describe('v1.CloudBuildClient', () => {
       assert(
         (client.descriptors.page.listBuilds.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -3058,7 +3058,7 @@ describe('v1.CloudBuildClient', () => {
   describe('listBuildTriggers', () => {
     it('invokes listBuildTriggers without error', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3094,7 +3094,7 @@ describe('v1.CloudBuildClient', () => {
 
     it('invokes listBuildTriggers without error using callback', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3123,8 +3123,7 @@ describe('v1.CloudBuildClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.devtools.cloudbuild.v1.IBuildTrigger[]
-              | null,
+              protos.google.devtools.cloudbuild.v1.IBuildTrigger[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -3148,7 +3147,7 @@ describe('v1.CloudBuildClient', () => {
 
     it('invokes listBuildTriggers with error', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3176,7 +3175,7 @@ describe('v1.CloudBuildClient', () => {
 
     it('invokes listBuildTriggersStream without error', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3226,15 +3225,15 @@ describe('v1.CloudBuildClient', () => {
       assert(
         (client.descriptors.page.listBuildTriggers.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listBuildTriggersStream with error', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3273,15 +3272,15 @@ describe('v1.CloudBuildClient', () => {
       assert(
         (client.descriptors.page.listBuildTriggers.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listBuildTriggers without error', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3320,15 +3319,15 @@ describe('v1.CloudBuildClient', () => {
       assert(
         (client.descriptors.page.listBuildTriggers.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listBuildTriggers with error', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3358,9 +3357,9 @@ describe('v1.CloudBuildClient', () => {
       assert(
         (client.descriptors.page.listBuildTriggers.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -3368,7 +3367,7 @@ describe('v1.CloudBuildClient', () => {
   describe('listWorkerPools', () => {
     it('invokes listWorkerPools without error', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3404,7 +3403,7 @@ describe('v1.CloudBuildClient', () => {
 
     it('invokes listWorkerPools without error using callback', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3456,7 +3455,7 @@ describe('v1.CloudBuildClient', () => {
 
     it('invokes listWorkerPools with error', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3484,7 +3483,7 @@ describe('v1.CloudBuildClient', () => {
 
     it('invokes listWorkerPoolsStream without error', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3533,15 +3532,15 @@ describe('v1.CloudBuildClient', () => {
       assert(
         (client.descriptors.page.listWorkerPools.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listWorkerPoolsStream with error', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3579,15 +3578,15 @@ describe('v1.CloudBuildClient', () => {
       assert(
         (client.descriptors.page.listWorkerPools.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listWorkerPools without error', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3625,15 +3624,15 @@ describe('v1.CloudBuildClient', () => {
       assert(
         (client.descriptors.page.listWorkerPools.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listWorkerPools with error', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3663,9 +3662,9 @@ describe('v1.CloudBuildClient', () => {
       assert(
         (client.descriptors.page.listWorkerPools.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -3680,7 +3679,7 @@ describe('v1.CloudBuildClient', () => {
         key: 'keyValue',
       };
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3754,7 +3753,7 @@ describe('v1.CloudBuildClient', () => {
         location: 'locationValue',
       };
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3817,7 +3816,7 @@ describe('v1.CloudBuildClient', () => {
         location: 'locationValue',
       };
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3866,7 +3865,7 @@ describe('v1.CloudBuildClient', () => {
         network: 'networkValue',
       };
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3914,7 +3913,7 @@ describe('v1.CloudBuildClient', () => {
         project: 'projectValue',
       };
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3953,7 +3952,7 @@ describe('v1.CloudBuildClient', () => {
         build: 'buildValue',
       };
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4002,7 +4001,7 @@ describe('v1.CloudBuildClient', () => {
         config: 'configValue',
       };
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4052,7 +4051,7 @@ describe('v1.CloudBuildClient', () => {
         build: 'buildValue',
       };
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4130,7 +4129,7 @@ describe('v1.CloudBuildClient', () => {
         config: 'configValue',
       };
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4209,7 +4208,7 @@ describe('v1.CloudBuildClient', () => {
         trigger: 'triggerValue',
       };
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4287,7 +4286,7 @@ describe('v1.CloudBuildClient', () => {
         trigger: 'triggerValue',
       };
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4341,7 +4340,7 @@ describe('v1.CloudBuildClient', () => {
         repository: 'repositoryValue',
       };
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4416,7 +4415,7 @@ describe('v1.CloudBuildClient', () => {
         version: 'versionValue',
       };
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4479,7 +4478,7 @@ describe('v1.CloudBuildClient', () => {
         service_account: 'serviceAccountValue',
       };
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4532,7 +4531,7 @@ describe('v1.CloudBuildClient', () => {
         subscription: 'subscriptionValue',
       };
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4584,7 +4583,7 @@ describe('v1.CloudBuildClient', () => {
         topic: 'topicValue',
       };
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4634,7 +4633,7 @@ describe('v1.CloudBuildClient', () => {
         worker_pool: 'workerPoolValue',
       };
       const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

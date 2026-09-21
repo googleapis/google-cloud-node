@@ -4,6 +4,27 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/compute?activeTab=versions
 
+## [7.4.0](https://github.com/googleapis/google-cloud-node/compare/compute-v7.3.0...compute-v7.4.0) (2026-09-15)
+
+
+### Features
+
+* Update API sources and regenerate ([#9293](https://github.com/googleapis/google-cloud-node/issues/9293)) ([07ae774](https://github.com/googleapis/google-cloud-node/commit/07ae774a8e52185a3598c878513377e7a019f127))
+
+## [7.3.0](https://github.com/googleapis/google-cloud-node/compare/compute-v7.2.0...compute-v7.3.0) (2026-09-08)
+
+
+### Features
+
+* Upgrade librarian gapic-generator-typescript to v5.2.0 ([c249594](https://github.com/googleapis/google-cloud-node/commit/c249594c6ef41e4b36f1ef8869341a4c98c092b0))
+
+## [7.2.0](https://github.com/googleapis/google-cloud-node/compare/compute-v7.1.0...compute-v7.2.0) (2026-09-02)
+
+
+### Features
+
+* Update API sources and regenerate ([#9219](https://github.com/googleapis/google-cloud-node/issues/9219)) ([09ff86e](https://github.com/googleapis/google-cloud-node/commit/09ff86ef811de9215c587496ece57ff8b5fb2b77))
+
 ## [7.1.0](https://github.com/googleapis/google-cloud-node/compare/compute-v7.0.0...compute-v7.1.0) (2026-08-10)
 
 

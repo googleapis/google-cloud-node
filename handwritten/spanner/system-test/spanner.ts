@@ -138,6 +138,7 @@ describe('Spanner', () => {
             INSTANCE_CONFIG.config,
           ),
           nodeCount: 1,
+          edition: 2, // ENTERPRISE
           displayName: 'Test name for instance.',
           labels: {
             created: Math.round(Date.now() / 1000).toString(), // current time
@@ -6999,6 +7000,230 @@ describe('Spanner', () => {
           Name: name,
         },
       ]);
+    });
+  });
+
+  describe('Queues', () => {
+    const QUEUE_NAME = 'MyQueue';
+    let gsqlQueueSupported = true;
+    let pgQueueSupported = true;
+
+    before(async () => {
+      try {
+        const queueDdl = `CREATE QUEUE ${QUEUE_NAME} (
+          Id INT64 NOT NULL,
+          Payload STRING(MAX) NOT NULL
+        ) PRIMARY KEY (Id)`;
+        const [operation] = await DATABASE.updateSchema(queueDdl);
+        await operation.promise();
+      } catch (err: any) {
+        if (
+          err.code === 9 ||
+          err.code === 12 ||
+          err.message.includes('UNIMPLEMENTED')
+        ) {
+          gsqlQueueSupported = false;
+        } else if (err.code == 6) { 
+          // ALREADY_EXISTS. Continue testing. 
+          gsqlQueueSupported = true;
+        } else {
+          throw err;
+        }
+      }
+
+      try {
+        const pgQueueDdl = `CREATE QUEUE ${QUEUE_NAME} (
+          id bigint NOT NULL,
+          "Payload" varchar NOT NULL,
+          PRIMARY KEY (id)
+        )`;
+        const [pgOperation] = await PG_DATABASE.updateSchema(pgQueueDdl);
+        await pgOperation.promise();
+      } catch (err: any) {
+        if (
+          err.code === 9 ||
+          err.code === 12 ||
+          err.message.includes('UNIMPLEMENTED')
+        ) {
+          pgQueueSupported = false;
+        } else if (err.code == 6) {
+          // ALREADY_EXISTS. Continue testing. 
+          pgQueueSupported = true;
+        } else {
+          throw err;
+        }
+      }
+    });
+
+    it('should send and ack a message in GoogleSQL', async function () {
+      if (!gsqlQueueSupported || IS_EMULATOR_ENABLED) {
+        this.skip();
+      }
+
+      try {
+        await DATABASE.runTransactionAsync(async transaction => {
+          transaction.queueSend(QUEUE_NAME, [123], {
+            payload: {foo: 'bar'},
+          });
+          await transaction.commit();
+        });
+
+        await DATABASE.runTransactionAsync(async transaction => {
+          transaction.queueAck(QUEUE_NAME, [123]);
+          await transaction.commit();
+        });
+      } catch (err: any) {
+        if (
+          err.code === 9 ||
+          err.code === 12 ||
+          err.message.includes('UNIMPLEMENTED')
+        ) {
+          this.skip();
+        } else {
+          throw err;
+        }
+      }
+    });
+
+    it('should send and ack a message in PostgreSQL', async function () {
+      if (!pgQueueSupported || IS_EMULATOR_ENABLED) {
+        this.skip();
+      }
+
+      try {
+        await PG_DATABASE.runTransactionAsync(async transaction => {
+          transaction.queueSend(QUEUE_NAME, [456], {
+            payload: {foo: 'bar'},
+          });
+          await transaction.commit();
+        });
+
+        await PG_DATABASE.runTransactionAsync(async transaction => {
+          transaction.queueAck(QUEUE_NAME, [456]);
+          await transaction.commit();
+        });
+      } catch (err: any) {
+        if (
+          err.code === 9 ||
+          err.code === 12 ||
+          err.message.includes('UNIMPLEMENTED')
+        ) {
+          this.skip();
+        } else {
+          throw err;
+        }
+      }
+    });
+
+    it('should fail to send without payload and handle ignoreNotFound properly for non-existing key in GoogleSQL', async function () {
+      if (!gsqlQueueSupported || IS_EMULATOR_ENABLED) {
+        this.skip();
+      }
+
+      try {
+        await assert.rejects(async () => {
+          await DATABASE.runTransactionAsync(async transaction => {
+            transaction.queueSend(QUEUE_NAME, [789]);
+            await transaction.commit();
+          });
+        });
+
+        await assert.rejects(async () => {
+          await DATABASE.runTransactionAsync(async transaction => {
+            transaction.queueAck(QUEUE_NAME, [999]);
+            await transaction.commit();
+          });
+        });
+
+        await assert.rejects(async () => {
+          await DATABASE.runTransactionAsync(async transaction => {
+            transaction.queueAck(QUEUE_NAME, [999], {ignoreNotFound: false});
+            await transaction.commit();
+          });
+        });
+
+        await DATABASE.runTransactionAsync(async transaction => {
+          transaction.queueAck(QUEUE_NAME, [999], {ignoreNotFound: true});
+          await transaction.commit();
+        });
+      } catch (err: any) {
+        if (
+          err.code === 9 ||
+          err.code === 12 ||
+          err.message.includes('UNIMPLEMENTED')
+        ) {
+          this.skip();
+        } else {
+          throw err;
+        }
+      }
+    });
+
+    it('should fail to send without payload and handle ignoreNotFound properly for non-existing key in PostgreSQL', async function () {
+      if (!pgQueueSupported || IS_EMULATOR_ENABLED) {
+        this.skip();
+      }
+
+      try {
+        await assert.rejects(async () => {
+          await PG_DATABASE.runTransactionAsync(async transaction => {
+            transaction.queueSend(QUEUE_NAME, [790]);
+            await transaction.commit();
+          });
+        });
+
+        await assert.rejects(async () => {
+          await PG_DATABASE.runTransactionAsync(async transaction => {
+            transaction.queueAck(QUEUE_NAME, [999]);
+            await transaction.commit();
+          });
+        });
+
+        await assert.rejects(async () => {
+          await PG_DATABASE.runTransactionAsync(async transaction => {
+            transaction.queueAck(QUEUE_NAME, [999], {ignoreNotFound: false});
+            await transaction.commit();
+          });
+        });
+
+        await PG_DATABASE.runTransactionAsync(async transaction => {
+          transaction.queueAck(QUEUE_NAME, [999], {ignoreNotFound: true});
+          await transaction.commit();
+        });
+      } catch (err: any) {
+        if (
+          err.code === 9 ||
+          err.code === 12 ||
+          err.message.includes('UNIMPLEMENTED')
+        ) {
+          this.skip();
+        } else {
+          throw err;
+        }
+      }
+    });
+
+    after(async () => {
+      if (gsqlQueueSupported) {
+        try {
+          const [gsqlOperation] = await DATABASE.updateSchema(
+            "DROP QUEUE " + QUEUE_NAME
+          );
+          await gsqlOperation.promise();
+        } catch (err) {
+          // Ignore cleanup errors
+        }
+      }
+      if (pgQueueSupported) {
+        try {
+          const [pgOperation] = await PG_DATABASE.updateSchema(
+            "DROP QUEUE " + QUEUE_NAME
+          );
+          await pgOperation.promise();
+        } catch (err) {
+          // Ignore cleanup errors
+        }
+      }
     });
   });
 

@@ -129,6 +129,7 @@
     "packages/google-cloud-apiregistry": {},
     "packages/google-cloud-apphub": {},
     "packages/google-cloud-appoptimize": {},
+    "packages/google-cloud-apptopology": {},
     "packages/google-cloud-asset": {},
     "packages/google-cloud-assuredworkloads": {},
     "packages/google-cloud-auditmanager": {},
@@ -206,6 +207,7 @@
     "packages/google-cloud-firestore-api": {
       "component": "google-cloud-firestore-api"
     },
+    "packages/google-cloud-ftp": {},
     "packages/google-cloud-functions": {},
     "packages/google-cloud-gdchardwaremanagement": {},
     "packages/google-cloud-geminidataanalytics": {},
@@ -309,6 +311,7 @@
     "packages/google-cloud-webrisk": {},
     "packages/google-cloud-websecurityscanner": {},
     "packages/google-cloud-workflows": {},
+    "packages/google-cloud-workloadidentity": {},
     "packages/google-cloud-workloadmanager": {},
     "packages/google-cloud-workstations": {},
     "packages/google-container": {},
@@ -345,6 +348,7 @@
     "packages/google-shopping-merchant-inventories": {},
     "packages/google-shopping-merchant-issueresolution": {},
     "packages/google-shopping-merchant-lfp": {},
+    "packages/google-shopping-merchant-loyaltycustomers": {},
     "packages/google-shopping-merchant-notifications": {},
     "packages/google-shopping-merchant-ordertracking": {},
     "packages/google-shopping-merchant-products": {},

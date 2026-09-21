@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as edgenetworkModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -50,7 +50,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -154,9 +154,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -274,7 +274,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.edgeNetworkStub, undefined);
@@ -282,12 +282,12 @@ describe('v1.EdgeNetworkClient', () => {
       assert(client.edgeNetworkStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.edgeNetworkStub);
@@ -296,14 +296,14 @@ describe('v1.EdgeNetworkClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.edgeNetworkStub, undefined);
@@ -312,7 +312,7 @@ describe('v1.EdgeNetworkClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -320,7 +320,7 @@ describe('v1.EdgeNetworkClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -332,7 +332,7 @@ describe('v1.EdgeNetworkClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -355,7 +355,7 @@ describe('v1.EdgeNetworkClient', () => {
   describe('initializeZone', () => {
     it('invokes initializeZone without error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -386,7 +386,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes initializeZone without error using callback', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -433,7 +433,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes initializeZone with error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -464,7 +464,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes initializeZone with closed client', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -477,7 +477,7 @@ describe('v1.EdgeNetworkClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.initializeZone(request), expectedError);
@@ -487,7 +487,7 @@ describe('v1.EdgeNetworkClient', () => {
   describe('getZone', () => {
     it('invokes getZone without error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
@@ -520,7 +520,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes getZone without error using callback', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
@@ -569,7 +569,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes getZone with error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
@@ -599,7 +599,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes getZone with closed client', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
@@ -613,7 +613,7 @@ describe('v1.EdgeNetworkClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getZone(request), expectedError);
@@ -624,7 +624,7 @@ describe('v1.EdgeNetworkClient', () => {
   describe('getNetwork', () => {
     it('invokes getNetwork without error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -655,7 +655,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes getNetwork without error using callback', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -702,7 +702,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes getNetwork with error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -733,7 +733,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes getNetwork with closed client', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -746,7 +746,7 @@ describe('v1.EdgeNetworkClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getNetwork(request), expectedError);
@@ -756,7 +756,7 @@ describe('v1.EdgeNetworkClient', () => {
   describe('diagnoseNetwork', () => {
     it('invokes diagnoseNetwork without error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -787,7 +787,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes diagnoseNetwork without error using callback', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -834,7 +834,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes diagnoseNetwork with error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -865,7 +865,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes diagnoseNetwork with closed client', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -878,7 +878,7 @@ describe('v1.EdgeNetworkClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.diagnoseNetwork(request), expectedError);
@@ -888,7 +888,7 @@ describe('v1.EdgeNetworkClient', () => {
   describe('getSubnet', () => {
     it('invokes getSubnet without error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -919,7 +919,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes getSubnet without error using callback', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -966,7 +966,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes getSubnet with error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -994,7 +994,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes getSubnet with closed client', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1007,7 +1007,7 @@ describe('v1.EdgeNetworkClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getSubnet(request), expectedError);
@@ -1017,7 +1017,7 @@ describe('v1.EdgeNetworkClient', () => {
   describe('getInterconnect', () => {
     it('invokes getInterconnect without error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1048,7 +1048,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes getInterconnect without error using callback', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1095,7 +1095,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes getInterconnect with error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1126,7 +1126,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes getInterconnect with closed client', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1139,7 +1139,7 @@ describe('v1.EdgeNetworkClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getInterconnect(request), expectedError);
@@ -1149,7 +1149,7 @@ describe('v1.EdgeNetworkClient', () => {
   describe('diagnoseInterconnect', () => {
     it('invokes diagnoseInterconnect without error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1181,7 +1181,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes diagnoseInterconnect without error using callback', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1228,7 +1228,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes diagnoseInterconnect with error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1259,7 +1259,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes diagnoseInterconnect with closed client', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1272,7 +1272,7 @@ describe('v1.EdgeNetworkClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.diagnoseInterconnect(request), expectedError);
@@ -1282,7 +1282,7 @@ describe('v1.EdgeNetworkClient', () => {
   describe('getInterconnectAttachment', () => {
     it('invokes getInterconnectAttachment without error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1314,7 +1314,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes getInterconnectAttachment without error using callback', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1361,7 +1361,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes getInterconnectAttachment with error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1395,7 +1395,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes getInterconnectAttachment with closed client', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1408,7 +1408,7 @@ describe('v1.EdgeNetworkClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1421,7 +1421,7 @@ describe('v1.EdgeNetworkClient', () => {
   describe('getRouter', () => {
     it('invokes getRouter without error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1452,7 +1452,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes getRouter without error using callback', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1499,7 +1499,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes getRouter with error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1527,7 +1527,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes getRouter with closed client', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1540,7 +1540,7 @@ describe('v1.EdgeNetworkClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getRouter(request), expectedError);
@@ -1550,7 +1550,7 @@ describe('v1.EdgeNetworkClient', () => {
   describe('diagnoseRouter', () => {
     it('invokes diagnoseRouter without error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1581,7 +1581,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes diagnoseRouter without error using callback', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1628,7 +1628,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes diagnoseRouter with error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1659,7 +1659,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes diagnoseRouter with closed client', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1672,7 +1672,7 @@ describe('v1.EdgeNetworkClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.diagnoseRouter(request), expectedError);
@@ -1682,7 +1682,7 @@ describe('v1.EdgeNetworkClient', () => {
   describe('createNetwork', () => {
     it('invokes createNetwork without error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1715,7 +1715,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes createNetwork without error using callback', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1769,7 +1769,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes createNetwork with call error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1800,7 +1800,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes createNetwork with LRO error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1833,7 +1833,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes checkCreateNetworkProgress without error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1841,8 +1841,8 @@ describe('v1.EdgeNetworkClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateNetworkProgress(
@@ -1855,7 +1855,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes checkCreateNetworkProgress with error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1876,7 +1876,7 @@ describe('v1.EdgeNetworkClient', () => {
   describe('deleteNetwork', () => {
     it('invokes deleteNetwork without error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1909,7 +1909,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes deleteNetwork without error using callback', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1963,7 +1963,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes deleteNetwork with call error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1994,7 +1994,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes deleteNetwork with LRO error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2027,7 +2027,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes checkDeleteNetworkProgress without error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2035,8 +2035,8 @@ describe('v1.EdgeNetworkClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteNetworkProgress(
@@ -2049,7 +2049,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes checkDeleteNetworkProgress with error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2070,7 +2070,7 @@ describe('v1.EdgeNetworkClient', () => {
   describe('createSubnet', () => {
     it('invokes createSubnet without error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2102,7 +2102,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes createSubnet without error using callback', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2156,7 +2156,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes createSubnet with call error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2187,7 +2187,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes createSubnet with LRO error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2220,7 +2220,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes checkCreateSubnetProgress without error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2228,8 +2228,8 @@ describe('v1.EdgeNetworkClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateSubnetProgress(
@@ -2242,7 +2242,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes checkCreateSubnetProgress with error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2260,7 +2260,7 @@ describe('v1.EdgeNetworkClient', () => {
   describe('updateSubnet', () => {
     it('invokes updateSubnet without error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2293,7 +2293,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes updateSubnet without error using callback', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2348,7 +2348,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes updateSubnet with call error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2380,7 +2380,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes updateSubnet with LRO error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2414,7 +2414,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes checkUpdateSubnetProgress without error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2422,8 +2422,8 @@ describe('v1.EdgeNetworkClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateSubnetProgress(
@@ -2436,7 +2436,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes checkUpdateSubnetProgress with error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2454,7 +2454,7 @@ describe('v1.EdgeNetworkClient', () => {
   describe('deleteSubnet', () => {
     it('invokes deleteSubnet without error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2486,7 +2486,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes deleteSubnet without error using callback', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2540,7 +2540,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes deleteSubnet with call error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2571,7 +2571,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes deleteSubnet with LRO error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2604,7 +2604,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes checkDeleteSubnetProgress without error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2612,8 +2612,8 @@ describe('v1.EdgeNetworkClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteSubnetProgress(
@@ -2626,7 +2626,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes checkDeleteSubnetProgress with error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2644,7 +2644,7 @@ describe('v1.EdgeNetworkClient', () => {
   describe('createInterconnectAttachment', () => {
     it('invokes createInterconnectAttachment without error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2677,7 +2677,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes createInterconnectAttachment without error using callback', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2731,7 +2731,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes createInterconnectAttachment with call error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2765,7 +2765,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes createInterconnectAttachment with LRO error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2798,7 +2798,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes checkCreateInterconnectAttachmentProgress without error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2806,8 +2806,8 @@ describe('v1.EdgeNetworkClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -2821,7 +2821,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes checkCreateInterconnectAttachmentProgress with error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2842,7 +2842,7 @@ describe('v1.EdgeNetworkClient', () => {
   describe('deleteInterconnectAttachment', () => {
     it('invokes deleteInterconnectAttachment without error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2875,7 +2875,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes deleteInterconnectAttachment without error using callback', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2929,7 +2929,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes deleteInterconnectAttachment with call error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2963,7 +2963,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes deleteInterconnectAttachment with LRO error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2996,7 +2996,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes checkDeleteInterconnectAttachmentProgress without error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3004,8 +3004,8 @@ describe('v1.EdgeNetworkClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -3019,7 +3019,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes checkDeleteInterconnectAttachmentProgress with error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3040,7 +3040,7 @@ describe('v1.EdgeNetworkClient', () => {
   describe('createRouter', () => {
     it('invokes createRouter without error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3072,7 +3072,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes createRouter without error using callback', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3126,7 +3126,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes createRouter with call error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3157,7 +3157,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes createRouter with LRO error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3190,7 +3190,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes checkCreateRouterProgress without error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3198,8 +3198,8 @@ describe('v1.EdgeNetworkClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateRouterProgress(
@@ -3212,7 +3212,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes checkCreateRouterProgress with error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3230,7 +3230,7 @@ describe('v1.EdgeNetworkClient', () => {
   describe('updateRouter', () => {
     it('invokes updateRouter without error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3263,7 +3263,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes updateRouter without error using callback', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3318,7 +3318,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes updateRouter with call error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3350,7 +3350,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes updateRouter with LRO error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3384,7 +3384,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes checkUpdateRouterProgress without error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3392,8 +3392,8 @@ describe('v1.EdgeNetworkClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateRouterProgress(
@@ -3406,7 +3406,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes checkUpdateRouterProgress with error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3424,7 +3424,7 @@ describe('v1.EdgeNetworkClient', () => {
   describe('deleteRouter', () => {
     it('invokes deleteRouter without error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3456,7 +3456,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes deleteRouter without error using callback', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3510,7 +3510,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes deleteRouter with call error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3541,7 +3541,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes deleteRouter with LRO error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3574,7 +3574,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes checkDeleteRouterProgress without error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3582,8 +3582,8 @@ describe('v1.EdgeNetworkClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteRouterProgress(
@@ -3596,7 +3596,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes checkDeleteRouterProgress with error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3614,7 +3614,7 @@ describe('v1.EdgeNetworkClient', () => {
   describe('listZones', () => {
     it('invokes listZones without error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
@@ -3649,7 +3649,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes listZones without error using callback', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
@@ -3700,7 +3700,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes listZones with error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
@@ -3730,7 +3730,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes listZonesStream without error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
@@ -3778,15 +3778,15 @@ describe('v1.EdgeNetworkClient', () => {
       assert(
         (client.descriptors.page.listZones.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listZonesStream with error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
@@ -3831,15 +3831,15 @@ describe('v1.EdgeNetworkClient', () => {
       assert(
         (client.descriptors.page.listZones.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listZones without error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
@@ -3875,15 +3875,15 @@ describe('v1.EdgeNetworkClient', () => {
       assert(
         (client.descriptors.page.listZones.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listZones with error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
@@ -3918,9 +3918,9 @@ describe('v1.EdgeNetworkClient', () => {
       assert(
         (client.descriptors.page.listZones.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -3928,7 +3928,7 @@ describe('v1.EdgeNetworkClient', () => {
   describe('listNetworks', () => {
     it('invokes listNetworks without error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3961,7 +3961,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes listNetworks without error using callback', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4010,7 +4010,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes listNetworks with error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4041,7 +4041,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes listNetworksStream without error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4087,15 +4087,15 @@ describe('v1.EdgeNetworkClient', () => {
       assert(
         (client.descriptors.page.listNetworks.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listNetworksStream with error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4138,15 +4138,15 @@ describe('v1.EdgeNetworkClient', () => {
       assert(
         (client.descriptors.page.listNetworks.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listNetworks without error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4181,15 +4181,15 @@ describe('v1.EdgeNetworkClient', () => {
       assert(
         (client.descriptors.page.listNetworks.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listNetworks with error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4221,9 +4221,9 @@ describe('v1.EdgeNetworkClient', () => {
       assert(
         (client.descriptors.page.listNetworks.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4231,7 +4231,7 @@ describe('v1.EdgeNetworkClient', () => {
   describe('listSubnets', () => {
     it('invokes listSubnets without error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4264,7 +4264,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes listSubnets without error using callback', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4313,7 +4313,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes listSubnets with error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4344,7 +4344,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes listSubnetsStream without error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4390,15 +4390,15 @@ describe('v1.EdgeNetworkClient', () => {
       assert(
         (client.descriptors.page.listSubnets.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listSubnetsStream with error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4441,15 +4441,15 @@ describe('v1.EdgeNetworkClient', () => {
       assert(
         (client.descriptors.page.listSubnets.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listSubnets without error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4484,15 +4484,15 @@ describe('v1.EdgeNetworkClient', () => {
       assert(
         (client.descriptors.page.listSubnets.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listSubnets with error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4526,9 +4526,9 @@ describe('v1.EdgeNetworkClient', () => {
       assert(
         (client.descriptors.page.listSubnets.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4536,7 +4536,7 @@ describe('v1.EdgeNetworkClient', () => {
   describe('listInterconnects', () => {
     it('invokes listInterconnects without error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4575,7 +4575,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes listInterconnects without error using callback', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4630,7 +4630,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes listInterconnects with error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4661,7 +4661,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes listInterconnectsStream without error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4713,15 +4713,15 @@ describe('v1.EdgeNetworkClient', () => {
       assert(
         (client.descriptors.page.listInterconnects.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listInterconnectsStream with error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4762,15 +4762,15 @@ describe('v1.EdgeNetworkClient', () => {
       assert(
         (client.descriptors.page.listInterconnects.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listInterconnects without error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4811,15 +4811,15 @@ describe('v1.EdgeNetworkClient', () => {
       assert(
         (client.descriptors.page.listInterconnects.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listInterconnects with error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4852,9 +4852,9 @@ describe('v1.EdgeNetworkClient', () => {
       assert(
         (client.descriptors.page.listInterconnects.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4862,7 +4862,7 @@ describe('v1.EdgeNetworkClient', () => {
   describe('listInterconnectAttachments', () => {
     it('invokes listInterconnectAttachments without error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4902,7 +4902,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes listInterconnectAttachments without error using callback', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4959,7 +4959,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes listInterconnectAttachments with error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4993,7 +4993,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes listInterconnectAttachmentsStream without error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5065,7 +5065,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes listInterconnectAttachmentsStream with error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5126,7 +5126,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('uses async iteration with listInterconnectAttachments without error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5180,7 +5180,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('uses async iteration with listInterconnectAttachments with error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5227,7 +5227,7 @@ describe('v1.EdgeNetworkClient', () => {
   describe('listRouters', () => {
     it('invokes listRouters without error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5260,7 +5260,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes listRouters without error using callback', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5309,7 +5309,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes listRouters with error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5340,7 +5340,7 @@ describe('v1.EdgeNetworkClient', () => {
 
     it('invokes listRoutersStream without error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5386,15 +5386,15 @@ describe('v1.EdgeNetworkClient', () => {
       assert(
         (client.descriptors.page.listRouters.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listRoutersStream with error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5437,15 +5437,15 @@ describe('v1.EdgeNetworkClient', () => {
       assert(
         (client.descriptors.page.listRouters.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listRouters without error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5480,15 +5480,15 @@ describe('v1.EdgeNetworkClient', () => {
       assert(
         (client.descriptors.page.listRouters.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listRouters with error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5522,16 +5522,16 @@ describe('v1.EdgeNetworkClient', () => {
       assert(
         (client.descriptors.page.listRouters.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5561,7 +5561,7 @@ describe('v1.EdgeNetworkClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5605,7 +5605,7 @@ describe('v1.EdgeNetworkClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5640,7 +5640,7 @@ describe('v1.EdgeNetworkClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5688,7 +5688,7 @@ describe('v1.EdgeNetworkClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5729,7 +5729,7 @@ describe('v1.EdgeNetworkClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5750,7 +5750,7 @@ describe('v1.EdgeNetworkClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5778,7 +5778,7 @@ describe('v1.EdgeNetworkClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -5788,7 +5788,7 @@ describe('v1.EdgeNetworkClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5812,7 +5812,7 @@ describe('v1.EdgeNetworkClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5834,7 +5834,7 @@ describe('v1.EdgeNetworkClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5862,7 +5862,7 @@ describe('v1.EdgeNetworkClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -5872,7 +5872,7 @@ describe('v1.EdgeNetworkClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5896,7 +5896,7 @@ describe('v1.EdgeNetworkClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5918,7 +5918,7 @@ describe('v1.EdgeNetworkClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5946,7 +5946,7 @@ describe('v1.EdgeNetworkClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -5956,7 +5956,7 @@ describe('v1.EdgeNetworkClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5980,7 +5980,7 @@ describe('v1.EdgeNetworkClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -6015,7 +6015,7 @@ describe('v1.EdgeNetworkClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6052,7 +6052,7 @@ describe('v1.EdgeNetworkClient', () => {
         interconnect: 'interconnectValue',
       };
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6128,7 +6128,7 @@ describe('v1.EdgeNetworkClient', () => {
         interconnect_attachment: 'interconnectAttachmentValue',
       };
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6222,7 +6222,7 @@ describe('v1.EdgeNetworkClient', () => {
         location: 'locationValue',
       };
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6273,7 +6273,7 @@ describe('v1.EdgeNetworkClient', () => {
         network: 'networkValue',
       };
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6346,7 +6346,7 @@ describe('v1.EdgeNetworkClient', () => {
         project: 'projectValue',
       };
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6387,7 +6387,7 @@ describe('v1.EdgeNetworkClient', () => {
         router: 'routerValue',
       };
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6463,7 +6463,7 @@ describe('v1.EdgeNetworkClient', () => {
         subnet: 'subnetValue',
       };
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6538,7 +6538,7 @@ describe('v1.EdgeNetworkClient', () => {
         zone: 'zoneValue',
       };
       const client = new edgenetworkModule.v1.EdgeNetworkClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

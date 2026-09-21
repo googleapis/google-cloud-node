@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as groupserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -239,7 +239,7 @@ describe('v3.GroupServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new groupserviceModule.v3.GroupServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.groupServiceStub, undefined);
@@ -247,12 +247,12 @@ describe('v3.GroupServiceClient', () => {
       assert(client.groupServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new groupserviceModule.v3.GroupServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.groupServiceStub);
@@ -261,14 +261,14 @@ describe('v3.GroupServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new groupserviceModule.v3.GroupServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.groupServiceStub, undefined);
@@ -277,7 +277,7 @@ describe('v3.GroupServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -285,7 +285,7 @@ describe('v3.GroupServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new groupserviceModule.v3.GroupServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -297,7 +297,7 @@ describe('v3.GroupServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new groupserviceModule.v3.GroupServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -320,7 +320,7 @@ describe('v3.GroupServiceClient', () => {
   describe('getGroup', () => {
     it('invokes getGroup without error', async () => {
       const client = new groupserviceModule.v3.GroupServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -351,7 +351,7 @@ describe('v3.GroupServiceClient', () => {
 
     it('invokes getGroup without error using callback', async () => {
       const client = new groupserviceModule.v3.GroupServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -398,7 +398,7 @@ describe('v3.GroupServiceClient', () => {
 
     it('invokes getGroup with error', async () => {
       const client = new groupserviceModule.v3.GroupServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -426,7 +426,7 @@ describe('v3.GroupServiceClient', () => {
 
     it('invokes getGroup with closed client', async () => {
       const client = new groupserviceModule.v3.GroupServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -439,7 +439,7 @@ describe('v3.GroupServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getGroup(request), expectedError);
@@ -449,7 +449,7 @@ describe('v3.GroupServiceClient', () => {
   describe('createGroup', () => {
     it('invokes createGroup without error', async () => {
       const client = new groupserviceModule.v3.GroupServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -480,7 +480,7 @@ describe('v3.GroupServiceClient', () => {
 
     it('invokes createGroup without error using callback', async () => {
       const client = new groupserviceModule.v3.GroupServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -527,7 +527,7 @@ describe('v3.GroupServiceClient', () => {
 
     it('invokes createGroup with error', async () => {
       const client = new groupserviceModule.v3.GroupServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -558,7 +558,7 @@ describe('v3.GroupServiceClient', () => {
 
     it('invokes createGroup with closed client', async () => {
       const client = new groupserviceModule.v3.GroupServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -571,7 +571,7 @@ describe('v3.GroupServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createGroup(request), expectedError);
@@ -581,7 +581,7 @@ describe('v3.GroupServiceClient', () => {
   describe('updateGroup', () => {
     it('invokes updateGroup without error', async () => {
       const client = new groupserviceModule.v3.GroupServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -613,7 +613,7 @@ describe('v3.GroupServiceClient', () => {
 
     it('invokes updateGroup without error using callback', async () => {
       const client = new groupserviceModule.v3.GroupServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -661,7 +661,7 @@ describe('v3.GroupServiceClient', () => {
 
     it('invokes updateGroup with error', async () => {
       const client = new groupserviceModule.v3.GroupServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -693,7 +693,7 @@ describe('v3.GroupServiceClient', () => {
 
     it('invokes updateGroup with closed client', async () => {
       const client = new groupserviceModule.v3.GroupServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -707,7 +707,7 @@ describe('v3.GroupServiceClient', () => {
       );
       request.group.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateGroup(request), expectedError);
@@ -717,7 +717,7 @@ describe('v3.GroupServiceClient', () => {
   describe('deleteGroup', () => {
     it('invokes deleteGroup without error', async () => {
       const client = new groupserviceModule.v3.GroupServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -748,7 +748,7 @@ describe('v3.GroupServiceClient', () => {
 
     it('invokes deleteGroup without error using callback', async () => {
       const client = new groupserviceModule.v3.GroupServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -795,7 +795,7 @@ describe('v3.GroupServiceClient', () => {
 
     it('invokes deleteGroup with error', async () => {
       const client = new groupserviceModule.v3.GroupServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -826,7 +826,7 @@ describe('v3.GroupServiceClient', () => {
 
     it('invokes deleteGroup with closed client', async () => {
       const client = new groupserviceModule.v3.GroupServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -839,7 +839,7 @@ describe('v3.GroupServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteGroup(request), expectedError);
@@ -849,7 +849,7 @@ describe('v3.GroupServiceClient', () => {
   describe('listGroups', () => {
     it('invokes listGroups without error', async () => {
       const client = new groupserviceModule.v3.GroupServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -882,7 +882,7 @@ describe('v3.GroupServiceClient', () => {
 
     it('invokes listGroups without error using callback', async () => {
       const client = new groupserviceModule.v3.GroupServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -931,7 +931,7 @@ describe('v3.GroupServiceClient', () => {
 
     it('invokes listGroups with error', async () => {
       const client = new groupserviceModule.v3.GroupServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -962,7 +962,7 @@ describe('v3.GroupServiceClient', () => {
 
     it('invokes listGroupsStream without error', async () => {
       const client = new groupserviceModule.v3.GroupServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1005,15 +1005,15 @@ describe('v3.GroupServiceClient', () => {
       assert(
         (client.descriptors.page.listGroups.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listGroupsStream with error', async () => {
       const client = new groupserviceModule.v3.GroupServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1053,15 +1053,15 @@ describe('v3.GroupServiceClient', () => {
       assert(
         (client.descriptors.page.listGroups.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listGroups without error', async () => {
       const client = new groupserviceModule.v3.GroupServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1096,15 +1096,15 @@ describe('v3.GroupServiceClient', () => {
       assert(
         (client.descriptors.page.listGroups.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listGroups with error', async () => {
       const client = new groupserviceModule.v3.GroupServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1138,9 +1138,9 @@ describe('v3.GroupServiceClient', () => {
       assert(
         (client.descriptors.page.listGroups.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1148,7 +1148,7 @@ describe('v3.GroupServiceClient', () => {
   describe('listGroupMembers', () => {
     it('invokes listGroupMembers without error', async () => {
       const client = new groupserviceModule.v3.GroupServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1181,7 +1181,7 @@ describe('v3.GroupServiceClient', () => {
 
     it('invokes listGroupMembers without error using callback', async () => {
       const client = new groupserviceModule.v3.GroupServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1230,7 +1230,7 @@ describe('v3.GroupServiceClient', () => {
 
     it('invokes listGroupMembers with error', async () => {
       const client = new groupserviceModule.v3.GroupServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1261,7 +1261,7 @@ describe('v3.GroupServiceClient', () => {
 
     it('invokes listGroupMembersStream without error', async () => {
       const client = new groupserviceModule.v3.GroupServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1304,15 +1304,15 @@ describe('v3.GroupServiceClient', () => {
       assert(
         (client.descriptors.page.listGroupMembers.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listGroupMembersStream with error', async () => {
       const client = new groupserviceModule.v3.GroupServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1350,15 +1350,15 @@ describe('v3.GroupServiceClient', () => {
       assert(
         (client.descriptors.page.listGroupMembers.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listGroupMembers without error', async () => {
       const client = new groupserviceModule.v3.GroupServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1393,15 +1393,15 @@ describe('v3.GroupServiceClient', () => {
       assert(
         (client.descriptors.page.listGroupMembers.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listGroupMembers with error', async () => {
       const client = new groupserviceModule.v3.GroupServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1433,9 +1433,9 @@ describe('v3.GroupServiceClient', () => {
       assert(
         (client.descriptors.page.listGroupMembers.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1448,7 +1448,7 @@ describe('v3.GroupServiceClient', () => {
         alert_policy: 'alertPolicyValue',
       };
       const client = new groupserviceModule.v3.GroupServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1511,7 +1511,7 @@ describe('v3.GroupServiceClient', () => {
         condition: 'conditionValue',
       };
       const client = new groupserviceModule.v3.GroupServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1589,7 +1589,7 @@ describe('v3.GroupServiceClient', () => {
         channel_descriptor: 'channelDescriptorValue',
       };
       const client = new groupserviceModule.v3.GroupServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1654,7 +1654,7 @@ describe('v3.GroupServiceClient', () => {
         group: 'groupValue',
       };
       const client = new groupserviceModule.v3.GroupServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1703,7 +1703,7 @@ describe('v3.GroupServiceClient', () => {
         notification_channel: 'notificationChannelValue',
       };
       const client = new groupserviceModule.v3.GroupServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1768,7 +1768,7 @@ describe('v3.GroupServiceClient', () => {
         service: 'serviceValue',
       };
       const client = new groupserviceModule.v3.GroupServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1818,7 +1818,7 @@ describe('v3.GroupServiceClient', () => {
         service_level_objective: 'serviceLevelObjectiveValue',
       };
       const client = new groupserviceModule.v3.GroupServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1900,7 +1900,7 @@ describe('v3.GroupServiceClient', () => {
         uptime_check_config: 'uptimeCheckConfigValue',
       };
       const client = new groupserviceModule.v3.GroupServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1965,7 +1965,7 @@ describe('v3.GroupServiceClient', () => {
         alert_policy: 'alertPolicyValue',
       };
       const client = new groupserviceModule.v3.GroupServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2029,7 +2029,7 @@ describe('v3.GroupServiceClient', () => {
         condition: 'conditionValue',
       };
       const client = new groupserviceModule.v3.GroupServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2111,7 +2111,7 @@ describe('v3.GroupServiceClient', () => {
         channel_descriptor: 'channelDescriptorValue',
       };
       const client = new groupserviceModule.v3.GroupServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2176,7 +2176,7 @@ describe('v3.GroupServiceClient', () => {
         group: 'groupValue',
       };
       const client = new groupserviceModule.v3.GroupServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2238,7 +2238,7 @@ describe('v3.GroupServiceClient', () => {
         notification_channel: 'notificationChannelValue',
       };
       const client = new groupserviceModule.v3.GroupServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2303,7 +2303,7 @@ describe('v3.GroupServiceClient', () => {
         service: 'serviceValue',
       };
       const client = new groupserviceModule.v3.GroupServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2367,7 +2367,7 @@ describe('v3.GroupServiceClient', () => {
         service_level_objective: 'serviceLevelObjectiveValue',
       };
       const client = new groupserviceModule.v3.GroupServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2453,7 +2453,7 @@ describe('v3.GroupServiceClient', () => {
         uptime_check_config: 'uptimeCheckConfigValue',
       };
       const client = new groupserviceModule.v3.GroupServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2517,7 +2517,7 @@ describe('v3.GroupServiceClient', () => {
         project: 'projectValue',
       };
       const client = new groupserviceModule.v3.GroupServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2556,7 +2556,7 @@ describe('v3.GroupServiceClient', () => {
         alert_policy: 'alertPolicyValue',
       };
       const client = new groupserviceModule.v3.GroupServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2619,7 +2619,7 @@ describe('v3.GroupServiceClient', () => {
         condition: 'conditionValue',
       };
       const client = new groupserviceModule.v3.GroupServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2696,7 +2696,7 @@ describe('v3.GroupServiceClient', () => {
         channel_descriptor: 'channelDescriptorValue',
       };
       const client = new groupserviceModule.v3.GroupServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2761,7 +2761,7 @@ describe('v3.GroupServiceClient', () => {
         group: 'groupValue',
       };
       const client = new groupserviceModule.v3.GroupServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2810,7 +2810,7 @@ describe('v3.GroupServiceClient', () => {
         notification_channel: 'notificationChannelValue',
       };
       const client = new groupserviceModule.v3.GroupServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2875,7 +2875,7 @@ describe('v3.GroupServiceClient', () => {
         service: 'serviceValue',
       };
       const client = new groupserviceModule.v3.GroupServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2928,7 +2928,7 @@ describe('v3.GroupServiceClient', () => {
         service_level_objective: 'serviceLevelObjectiveValue',
       };
       const client = new groupserviceModule.v3.GroupServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3010,7 +3010,7 @@ describe('v3.GroupServiceClient', () => {
         uptime_check_config: 'uptimeCheckConfigValue',
       };
       const client = new groupserviceModule.v3.GroupServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3075,7 +3075,7 @@ describe('v3.GroupServiceClient', () => {
         snooze: 'snoozeValue',
       };
       const client = new groupserviceModule.v3.GroupServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

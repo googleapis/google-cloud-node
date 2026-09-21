@@ -36,6 +36,7 @@ import {
 import {MessageOptions} from '../src/topic';
 import {TestResources} from '../test/testResources';
 import {GoogleError} from 'google-gax';
+import {waitForMessage, waitForMessages, withSubscriptionScope} from './common';
 
 const pubsub = new PubSub();
 
@@ -122,10 +123,7 @@ describe('pubsub', () => {
     for (let i = 0; i < 6; i++) {
       await topic.topic.publishMessage(message);
     }
-    return new Promise<Message>((resolve, reject) => {
-      sub.sub.on('error', reject);
-      sub.sub.once('message', resolve);
-    });
+    return waitForMessage(sub.sub);
   }
 
   before(async () => {
@@ -217,14 +215,25 @@ describe('pubsub', () => {
     });
 
     it('should publish a message', async () => {
-      const testTopic = await generateTopic('pub-msg');
-      const topic = testTopic.topic;
-      const message = {
-        data: Buffer.from('message from me'),
-        orderingKey: 'a',
-      };
-
-      const result = await topic.publishMessage(message);
+      const tname = generateTopicName('publish');
+      const sname = generateSubName('publish');
+      
+      const [topic] = await pubsub.topic(tname).get({autoCreate: true});
+      const [subscription] = await topic.subscription(sname).get({autoCreate: true});
+      
+      // --- From sample (publishMessage.js) ---
+      const data = 'Hello, world!';
+      const dataBuffer = Buffer.from(data);
+      const messageId = await topic.publishMessage({data: dataBuffer});
+      console.log(`Message ${messageId} published.`);
+      
+      // --- From test (topics.test.ts) ---
+      const message = await waitForMessage(subscription, {
+        timeoutMs: 10000,
+        timeoutErrorMessage: 'Timeout',
+      });
+      
+      assert.strictEqual(message.data.toString(), data);
     });
 
     it('should publish a message with attributes', async () => {
@@ -536,107 +545,79 @@ describe('pubsub', () => {
       const testTopic = await generateTopic('dne-sub');
       const subscription = testTopic.topic.subscription(generateSubName('dne-sub'));
 
-      await new Promise((res, rej) => {
-        subscription.on('error', (err: {code: number}) => {
-          assert.strictEqual(err.code, 5);
-          subscription.close(res);
-        });
+      await withSubscriptionScope(subscription, scope => {
+        return new Promise<void>((res, rej) => {
+          scope.on('error', async (err: {code: number}) => {
+            try {
+              assert.strictEqual(err.code, 5);
+              await subscription.close();
+              res();
+            } catch (e) {
+              rej(e);
+            }
+          });
 
-        subscription.on('message', () => {
-          rej(new Error('Should not have been called.'));
+          scope.on('message', () => {
+            rej(new Error('Should not have been called.'));
+          });
         });
       });
     });
 
     it('should receive the published messages', async () => {
       const pop = await subPop('recv', 1);
-      let messageCount = 0;
       const subscription = pop.subs[0];
 
-      await new Promise((res, rej) => {
-        subscription.on('error', rej);
-
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        subscription.on('message', message => {
-          assert.deepStrictEqual(message.data, Buffer.from('hello'));
-          message.ack();
-
-          if (++messageCount === 10) {
-            subscription.close(res);
-          }
-        });
+      const messages = await waitForMessages(subscription, {
+        count: 10,
+        filter: msg => {
+          assert.deepStrictEqual(msg.data, Buffer.from('hello'));
+          return true;
+        },
+        closeWhenDone: true,
       });
+      assert.strictEqual(messages.length, 10);
     });
 
     it('should ack the message', async () => {
       const pop = await subPop('ack', 1);
       const subscription = pop.subs[0];
 
-      await new Promise((res, rej) => {
-        let finished = false;
-        subscription.on('error', () => {
-          if (!finished) {
-            finished = true;
-            subscription.close(rej);
-          }
-        });
-        subscription.on('message', ack);
-
-        function ack(message: Message) {
-          if (!finished) {
-            finished = true;
-            message.ack();
-            subscription.close(res);
-          }
-        }
+      const message = await waitForMessage(subscription, {
+        autoAck: true,
+        closeWhenDone: true,
       });
+      assert.ok(message);
     });
 
     it('should nack the message', async () => {
       const pop = await subPop('nack', 1);
       const subscription = pop.subs[0];
 
-      await new Promise((res, rej) => {
-        let finished = false;
-        subscription.on('error', () => {
-          if (!finished) {
-            finished = true;
-            subscription.close(rej);
-          }
-        });
-        subscription.on('message', nack);
-
-        function nack(message: Message) {
-          if (!finished) {
-            finished = true;
-            message.nack();
-            subscription.close(res);
-          }
-        }
+      const message = await waitForMessage(subscription, {
+        autoAck: false,
+        onMessage: msg => {
+          msg.nack();
+        },
+        closeWhenDone: true,
       });
+      assert.ok(message);
     });
 
     it('should respect flow control limits', async () => {
       const maxMessages = 3;
-      let messageCount = 0;
 
       const pop = await subPop('fcl', 1);
       const subscription = pop.topic.subscription(pop.testSubs[0].name, {
         flowControl: {maxMessages, allowExcessMessages: false},
       });
 
-      await new Promise((res, rej) => {
-        subscription.on('error', rej);
-        subscription.on('message', onMessage);
-
-        function onMessage() {
-          if (++messageCount < maxMessages) {
-            return;
-          }
-
-          subscription.close(res);
-        }
+      const messages = await waitForMessages(subscription, {
+        count: maxMessages,
+        autoAck: false,
+        closeWhenDone: true,
       });
+      assert.strictEqual(messages.length, maxMessages);
     });
 
     it('should send and receive large messages', async () => {
@@ -645,16 +626,12 @@ describe('pubsub', () => {
       const data = crypto.randomBytes(9000000); // 9mb
 
       const messageId = await pop.topic.publishMessage({data});
-      await new Promise((res, rej) => {
-        subscription.on('error', rej).on('message', (message: Message) => {
-          if (message.id !== messageId) {
-            return;
-          }
-
-          assert.deepStrictEqual(data, message.data);
-          subscription.close(res);
-        });
+      const message = await waitForMessage(subscription, {
+        filter: msg => msg.id === messageId,
+        autoAck: true,
+        closeWhenDone: true,
       });
+      assert.deepStrictEqual(data, message.data);
     });
 
     it('should detach subscriptions', async () => {
@@ -862,9 +839,13 @@ describe('pubsub', () => {
       type WorkCallback = (arg: Message, resolve: Function) => void;
       function makeMessagePromise(subscription: Subscription, workCallback: WorkCallback): Promise<void> {
         return new Promise(resolve => {
-          subscription.on('message', (arg: Message) => {
-            workCallback(arg, resolve);
-          });
+          const messageHandler = (arg: Message) => {
+            workCallback(arg, () => {
+              subscription.removeListener('message', messageHandler);
+              resolve();
+            });
+          };
+          subscription.on('message', messageHandler);
         });
       }
 

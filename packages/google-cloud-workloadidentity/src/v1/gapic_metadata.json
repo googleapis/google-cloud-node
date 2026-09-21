@@ -1,0 +1,33 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.workloadidentity.v1",
+  "libraryPackage": "@google-cloud/workloadidentity",
+  "services": {
+    "WorkloadIdentity": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "WorkloadIdentityClient",
+          "rpcs": {
+            "GenerateServiceAgents": {
+              "methods": [
+                "generateServiceAgents"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "WorkloadIdentityClient",
+          "rpcs": {
+            "GenerateServiceAgents": {
+              "methods": [
+                "generateServiceAgents"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

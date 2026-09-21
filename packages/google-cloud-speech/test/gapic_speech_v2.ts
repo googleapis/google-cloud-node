@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as speechModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -50,7 +50,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -168,9 +168,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -288,7 +288,7 @@ describe('v2.SpeechClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.speechStub, undefined);
@@ -296,12 +296,12 @@ describe('v2.SpeechClient', () => {
       assert(client.speechStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.speechStub);
@@ -310,14 +310,14 @@ describe('v2.SpeechClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.speechStub, undefined);
@@ -326,7 +326,7 @@ describe('v2.SpeechClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -334,7 +334,7 @@ describe('v2.SpeechClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -346,7 +346,7 @@ describe('v2.SpeechClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -369,7 +369,7 @@ describe('v2.SpeechClient', () => {
   describe('getRecognizer', () => {
     it('invokes getRecognizer without error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -400,7 +400,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes getRecognizer without error using callback', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -447,7 +447,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes getRecognizer with error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -478,7 +478,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes getRecognizer with closed client', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -491,7 +491,7 @@ describe('v2.SpeechClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getRecognizer(request), expectedError);
@@ -501,7 +501,7 @@ describe('v2.SpeechClient', () => {
   describe('recognize', () => {
     it('invokes recognize without error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -532,7 +532,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes recognize without error using callback', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -579,7 +579,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes recognize with error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -607,7 +607,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes recognize with closed client', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -620,7 +620,7 @@ describe('v2.SpeechClient', () => {
       );
       request.recognizer = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.recognize(request), expectedError);
@@ -630,7 +630,7 @@ describe('v2.SpeechClient', () => {
   describe('getConfig', () => {
     it('invokes getConfig without error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -661,7 +661,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes getConfig without error using callback', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -708,7 +708,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes getConfig with error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -736,7 +736,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes getConfig with closed client', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -749,7 +749,7 @@ describe('v2.SpeechClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getConfig(request), expectedError);
@@ -759,7 +759,7 @@ describe('v2.SpeechClient', () => {
   describe('updateConfig', () => {
     it('invokes updateConfig without error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -791,7 +791,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes updateConfig without error using callback', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -839,7 +839,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes updateConfig with error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -871,7 +871,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes updateConfig with closed client', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -885,7 +885,7 @@ describe('v2.SpeechClient', () => {
       );
       request.config.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateConfig(request), expectedError);
@@ -895,7 +895,7 @@ describe('v2.SpeechClient', () => {
   describe('getCustomClass', () => {
     it('invokes getCustomClass without error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -926,7 +926,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes getCustomClass without error using callback', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -973,7 +973,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes getCustomClass with error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1004,7 +1004,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes getCustomClass with closed client', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1017,7 +1017,7 @@ describe('v2.SpeechClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getCustomClass(request), expectedError);
@@ -1027,7 +1027,7 @@ describe('v2.SpeechClient', () => {
   describe('getPhraseSet', () => {
     it('invokes getPhraseSet without error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1058,7 +1058,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes getPhraseSet without error using callback', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1105,7 +1105,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes getPhraseSet with error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1136,7 +1136,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes getPhraseSet with closed client', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1149,7 +1149,7 @@ describe('v2.SpeechClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getPhraseSet(request), expectedError);
@@ -1159,7 +1159,7 @@ describe('v2.SpeechClient', () => {
   describe('createRecognizer', () => {
     it('invokes createRecognizer without error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1192,7 +1192,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes createRecognizer without error using callback', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1246,7 +1246,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes createRecognizer with call error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1277,7 +1277,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes createRecognizer with LRO error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1310,7 +1310,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes checkCreateRecognizerProgress without error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1318,8 +1318,8 @@ describe('v2.SpeechClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateRecognizerProgress(
@@ -1332,7 +1332,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes checkCreateRecognizerProgress with error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1353,7 +1353,7 @@ describe('v2.SpeechClient', () => {
   describe('updateRecognizer', () => {
     it('invokes updateRecognizer without error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1387,7 +1387,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes updateRecognizer without error using callback', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1442,7 +1442,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes updateRecognizer with call error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1474,7 +1474,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes updateRecognizer with LRO error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1508,7 +1508,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes checkUpdateRecognizerProgress without error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1516,8 +1516,8 @@ describe('v2.SpeechClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateRecognizerProgress(
@@ -1530,7 +1530,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes checkUpdateRecognizerProgress with error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1551,7 +1551,7 @@ describe('v2.SpeechClient', () => {
   describe('deleteRecognizer', () => {
     it('invokes deleteRecognizer without error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1584,7 +1584,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes deleteRecognizer without error using callback', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1638,7 +1638,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes deleteRecognizer with call error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1669,7 +1669,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes deleteRecognizer with LRO error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1702,7 +1702,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes checkDeleteRecognizerProgress without error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1710,8 +1710,8 @@ describe('v2.SpeechClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteRecognizerProgress(
@@ -1724,7 +1724,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes checkDeleteRecognizerProgress with error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1745,7 +1745,7 @@ describe('v2.SpeechClient', () => {
   describe('undeleteRecognizer', () => {
     it('invokes undeleteRecognizer without error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1778,7 +1778,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes undeleteRecognizer without error using callback', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1832,7 +1832,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes undeleteRecognizer with call error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1863,7 +1863,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes undeleteRecognizer with LRO error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1896,7 +1896,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes checkUndeleteRecognizerProgress without error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1904,8 +1904,8 @@ describe('v2.SpeechClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUndeleteRecognizerProgress(
@@ -1918,7 +1918,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes checkUndeleteRecognizerProgress with error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1939,7 +1939,7 @@ describe('v2.SpeechClient', () => {
   describe('batchRecognize', () => {
     it('invokes batchRecognize without error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1972,7 +1972,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes batchRecognize without error using callback', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2026,7 +2026,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes batchRecognize with call error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2057,7 +2057,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes batchRecognize with LRO error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2090,7 +2090,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes checkBatchRecognizeProgress without error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2098,8 +2098,8 @@ describe('v2.SpeechClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkBatchRecognizeProgress(
@@ -2112,7 +2112,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes checkBatchRecognizeProgress with error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2133,7 +2133,7 @@ describe('v2.SpeechClient', () => {
   describe('createCustomClass', () => {
     it('invokes createCustomClass without error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2166,7 +2166,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes createCustomClass without error using callback', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2220,7 +2220,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes createCustomClass with call error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2251,7 +2251,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes createCustomClass with LRO error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2284,7 +2284,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes checkCreateCustomClassProgress without error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2292,8 +2292,8 @@ describe('v2.SpeechClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateCustomClassProgress(
@@ -2306,7 +2306,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes checkCreateCustomClassProgress with error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2327,7 +2327,7 @@ describe('v2.SpeechClient', () => {
   describe('updateCustomClass', () => {
     it('invokes updateCustomClass without error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2361,7 +2361,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes updateCustomClass without error using callback', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2416,7 +2416,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes updateCustomClass with call error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2448,7 +2448,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes updateCustomClass with LRO error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2482,7 +2482,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes checkUpdateCustomClassProgress without error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2490,8 +2490,8 @@ describe('v2.SpeechClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateCustomClassProgress(
@@ -2504,7 +2504,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes checkUpdateCustomClassProgress with error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2525,7 +2525,7 @@ describe('v2.SpeechClient', () => {
   describe('deleteCustomClass', () => {
     it('invokes deleteCustomClass without error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2558,7 +2558,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes deleteCustomClass without error using callback', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2612,7 +2612,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes deleteCustomClass with call error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2643,7 +2643,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes deleteCustomClass with LRO error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2676,7 +2676,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes checkDeleteCustomClassProgress without error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2684,8 +2684,8 @@ describe('v2.SpeechClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteCustomClassProgress(
@@ -2698,7 +2698,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes checkDeleteCustomClassProgress with error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2719,7 +2719,7 @@ describe('v2.SpeechClient', () => {
   describe('undeleteCustomClass', () => {
     it('invokes undeleteCustomClass without error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2752,7 +2752,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes undeleteCustomClass without error using callback', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2806,7 +2806,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes undeleteCustomClass with call error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2837,7 +2837,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes undeleteCustomClass with LRO error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2870,7 +2870,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes checkUndeleteCustomClassProgress without error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2878,8 +2878,8 @@ describe('v2.SpeechClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUndeleteCustomClassProgress(
@@ -2892,7 +2892,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes checkUndeleteCustomClassProgress with error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2913,7 +2913,7 @@ describe('v2.SpeechClient', () => {
   describe('createPhraseSet', () => {
     it('invokes createPhraseSet without error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2946,7 +2946,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes createPhraseSet without error using callback', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3000,7 +3000,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes createPhraseSet with call error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3031,7 +3031,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes createPhraseSet with LRO error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3064,7 +3064,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes checkCreatePhraseSetProgress without error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3072,8 +3072,8 @@ describe('v2.SpeechClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreatePhraseSetProgress(
@@ -3086,7 +3086,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes checkCreatePhraseSetProgress with error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3107,7 +3107,7 @@ describe('v2.SpeechClient', () => {
   describe('updatePhraseSet', () => {
     it('invokes updatePhraseSet without error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3141,7 +3141,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes updatePhraseSet without error using callback', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3196,7 +3196,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes updatePhraseSet with call error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3228,7 +3228,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes updatePhraseSet with LRO error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3262,7 +3262,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes checkUpdatePhraseSetProgress without error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3270,8 +3270,8 @@ describe('v2.SpeechClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdatePhraseSetProgress(
@@ -3284,7 +3284,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes checkUpdatePhraseSetProgress with error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3305,7 +3305,7 @@ describe('v2.SpeechClient', () => {
   describe('deletePhraseSet', () => {
     it('invokes deletePhraseSet without error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3338,7 +3338,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes deletePhraseSet without error using callback', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3392,7 +3392,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes deletePhraseSet with call error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3423,7 +3423,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes deletePhraseSet with LRO error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3456,7 +3456,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes checkDeletePhraseSetProgress without error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3464,8 +3464,8 @@ describe('v2.SpeechClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeletePhraseSetProgress(
@@ -3478,7 +3478,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes checkDeletePhraseSetProgress with error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3499,7 +3499,7 @@ describe('v2.SpeechClient', () => {
   describe('undeletePhraseSet', () => {
     it('invokes undeletePhraseSet without error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3532,7 +3532,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes undeletePhraseSet without error using callback', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3586,7 +3586,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes undeletePhraseSet with call error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3617,7 +3617,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes undeletePhraseSet with LRO error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3650,7 +3650,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes checkUndeletePhraseSetProgress without error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3658,8 +3658,8 @@ describe('v2.SpeechClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUndeletePhraseSetProgress(
@@ -3672,7 +3672,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes checkUndeletePhraseSetProgress with error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3693,7 +3693,7 @@ describe('v2.SpeechClient', () => {
   describe('streamingRecognize', () => {
     it('invokes streamingRecognize without error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3738,7 +3738,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes streamingRecognize with error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3783,7 +3783,7 @@ describe('v2.SpeechClient', () => {
   describe('listRecognizers', () => {
     it('invokes listRecognizers without error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3816,7 +3816,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes listRecognizers without error using callback', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3865,7 +3865,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes listRecognizers with error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3896,7 +3896,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes listRecognizersStream without error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3942,15 +3942,15 @@ describe('v2.SpeechClient', () => {
       assert(
         (client.descriptors.page.listRecognizers.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listRecognizersStream with error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3991,15 +3991,15 @@ describe('v2.SpeechClient', () => {
       assert(
         (client.descriptors.page.listRecognizers.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listRecognizers without error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4034,15 +4034,15 @@ describe('v2.SpeechClient', () => {
       assert(
         (client.descriptors.page.listRecognizers.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listRecognizers with error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4074,9 +4074,9 @@ describe('v2.SpeechClient', () => {
       assert(
         (client.descriptors.page.listRecognizers.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4084,7 +4084,7 @@ describe('v2.SpeechClient', () => {
   describe('listCustomClasses', () => {
     it('invokes listCustomClasses without error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4117,7 +4117,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes listCustomClasses without error using callback', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4166,7 +4166,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes listCustomClasses with error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4197,7 +4197,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes listCustomClassesStream without error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4243,15 +4243,15 @@ describe('v2.SpeechClient', () => {
       assert(
         (client.descriptors.page.listCustomClasses.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listCustomClassesStream with error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4292,15 +4292,15 @@ describe('v2.SpeechClient', () => {
       assert(
         (client.descriptors.page.listCustomClasses.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listCustomClasses without error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4335,15 +4335,15 @@ describe('v2.SpeechClient', () => {
       assert(
         (client.descriptors.page.listCustomClasses.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listCustomClasses with error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4375,9 +4375,9 @@ describe('v2.SpeechClient', () => {
       assert(
         (client.descriptors.page.listCustomClasses.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4385,7 +4385,7 @@ describe('v2.SpeechClient', () => {
   describe('listPhraseSets', () => {
     it('invokes listPhraseSets without error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4418,7 +4418,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes listPhraseSets without error using callback', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4467,7 +4467,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes listPhraseSets with error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4498,7 +4498,7 @@ describe('v2.SpeechClient', () => {
 
     it('invokes listPhraseSetsStream without error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4544,15 +4544,15 @@ describe('v2.SpeechClient', () => {
       assert(
         (client.descriptors.page.listPhraseSets.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listPhraseSetsStream with error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4593,15 +4593,15 @@ describe('v2.SpeechClient', () => {
       assert(
         (client.descriptors.page.listPhraseSets.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listPhraseSets without error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4636,15 +4636,15 @@ describe('v2.SpeechClient', () => {
       assert(
         (client.descriptors.page.listPhraseSets.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listPhraseSets with error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4676,16 +4676,16 @@ describe('v2.SpeechClient', () => {
       assert(
         (client.descriptors.page.listPhraseSets.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4715,7 +4715,7 @@ describe('v2.SpeechClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4759,7 +4759,7 @@ describe('v2.SpeechClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4794,7 +4794,7 @@ describe('v2.SpeechClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4842,7 +4842,7 @@ describe('v2.SpeechClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4883,7 +4883,7 @@ describe('v2.SpeechClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4904,7 +4904,7 @@ describe('v2.SpeechClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -4932,7 +4932,7 @@ describe('v2.SpeechClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -4942,7 +4942,7 @@ describe('v2.SpeechClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -4966,7 +4966,7 @@ describe('v2.SpeechClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4988,7 +4988,7 @@ describe('v2.SpeechClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5016,7 +5016,7 @@ describe('v2.SpeechClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -5026,7 +5026,7 @@ describe('v2.SpeechClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5050,7 +5050,7 @@ describe('v2.SpeechClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5072,7 +5072,7 @@ describe('v2.SpeechClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5100,7 +5100,7 @@ describe('v2.SpeechClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -5110,7 +5110,7 @@ describe('v2.SpeechClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5134,7 +5134,7 @@ describe('v2.SpeechClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5169,7 +5169,7 @@ describe('v2.SpeechClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5204,7 +5204,7 @@ describe('v2.SpeechClient', () => {
         location: 'locationValue',
       };
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5255,7 +5255,7 @@ describe('v2.SpeechClient', () => {
         crypto_key: 'cryptoKeyValue',
       };
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5332,7 +5332,7 @@ describe('v2.SpeechClient', () => {
         crypto_key_version: 'cryptoKeyVersionValue',
       };
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5422,7 +5422,7 @@ describe('v2.SpeechClient', () => {
         custom_class: 'customClassValue',
       };
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5485,7 +5485,7 @@ describe('v2.SpeechClient', () => {
         location: 'locationValue',
       };
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5535,7 +5535,7 @@ describe('v2.SpeechClient', () => {
         phrase_set: 'phraseSetValue',
       };
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5597,7 +5597,7 @@ describe('v2.SpeechClient', () => {
         project: 'projectValue',
       };
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5637,7 +5637,7 @@ describe('v2.SpeechClient', () => {
         recognizer: 'recognizerValue',
       };
       const client = new speechModule.v2.SpeechClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

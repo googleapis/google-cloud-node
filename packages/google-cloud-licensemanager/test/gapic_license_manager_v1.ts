@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as licensemanagerModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -50,7 +50,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -154,9 +154,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -279,7 +279,7 @@ describe('v1.LicenseManagerClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.licenseManagerStub, undefined);
@@ -287,12 +287,12 @@ describe('v1.LicenseManagerClient', () => {
       assert(client.licenseManagerStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.licenseManagerStub);
@@ -301,14 +301,14 @@ describe('v1.LicenseManagerClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.licenseManagerStub, undefined);
@@ -317,7 +317,7 @@ describe('v1.LicenseManagerClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -325,7 +325,7 @@ describe('v1.LicenseManagerClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -337,7 +337,7 @@ describe('v1.LicenseManagerClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -360,7 +360,7 @@ describe('v1.LicenseManagerClient', () => {
   describe('getConfiguration', () => {
     it('invokes getConfiguration without error', async () => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -391,7 +391,7 @@ describe('v1.LicenseManagerClient', () => {
 
     it('invokes getConfiguration without error using callback', async () => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -438,7 +438,7 @@ describe('v1.LicenseManagerClient', () => {
 
     it('invokes getConfiguration with error', async () => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -469,7 +469,7 @@ describe('v1.LicenseManagerClient', () => {
 
     it('invokes getConfiguration with closed client', async () => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -482,7 +482,7 @@ describe('v1.LicenseManagerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getConfiguration(request), expectedError);
@@ -492,7 +492,7 @@ describe('v1.LicenseManagerClient', () => {
   describe('getInstance', () => {
     it('invokes getInstance without error', async () => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -523,7 +523,7 @@ describe('v1.LicenseManagerClient', () => {
 
     it('invokes getInstance without error using callback', async () => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -570,7 +570,7 @@ describe('v1.LicenseManagerClient', () => {
 
     it('invokes getInstance with error', async () => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -601,7 +601,7 @@ describe('v1.LicenseManagerClient', () => {
 
     it('invokes getInstance with closed client', async () => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -614,7 +614,7 @@ describe('v1.LicenseManagerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getInstance(request), expectedError);
@@ -624,7 +624,7 @@ describe('v1.LicenseManagerClient', () => {
   describe('queryConfigurationLicenseUsage', () => {
     it('invokes queryConfigurationLicenseUsage without error', async () => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -656,7 +656,7 @@ describe('v1.LicenseManagerClient', () => {
 
     it('invokes queryConfigurationLicenseUsage without error using callback', async () => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -703,7 +703,7 @@ describe('v1.LicenseManagerClient', () => {
 
     it('invokes queryConfigurationLicenseUsage with error', async () => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -737,7 +737,7 @@ describe('v1.LicenseManagerClient', () => {
 
     it('invokes queryConfigurationLicenseUsage with closed client', async () => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -750,7 +750,7 @@ describe('v1.LicenseManagerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -763,7 +763,7 @@ describe('v1.LicenseManagerClient', () => {
   describe('getProduct', () => {
     it('invokes getProduct without error', async () => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -794,7 +794,7 @@ describe('v1.LicenseManagerClient', () => {
 
     it('invokes getProduct without error using callback', async () => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -841,7 +841,7 @@ describe('v1.LicenseManagerClient', () => {
 
     it('invokes getProduct with error', async () => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -872,7 +872,7 @@ describe('v1.LicenseManagerClient', () => {
 
     it('invokes getProduct with closed client', async () => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -885,7 +885,7 @@ describe('v1.LicenseManagerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getProduct(request), expectedError);
@@ -895,7 +895,7 @@ describe('v1.LicenseManagerClient', () => {
   describe('createConfiguration', () => {
     it('invokes createConfiguration without error', async () => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -928,7 +928,7 @@ describe('v1.LicenseManagerClient', () => {
 
     it('invokes createConfiguration without error using callback', async () => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -982,7 +982,7 @@ describe('v1.LicenseManagerClient', () => {
 
     it('invokes createConfiguration with call error', async () => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1013,7 +1013,7 @@ describe('v1.LicenseManagerClient', () => {
 
     it('invokes createConfiguration with LRO error', async () => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1046,7 +1046,7 @@ describe('v1.LicenseManagerClient', () => {
 
     it('invokes checkCreateConfigurationProgress without error', async () => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1054,8 +1054,8 @@ describe('v1.LicenseManagerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateConfigurationProgress(
@@ -1068,7 +1068,7 @@ describe('v1.LicenseManagerClient', () => {
 
     it('invokes checkCreateConfigurationProgress with error', async () => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1089,7 +1089,7 @@ describe('v1.LicenseManagerClient', () => {
   describe('updateConfiguration', () => {
     it('invokes updateConfiguration without error', async () => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1123,7 +1123,7 @@ describe('v1.LicenseManagerClient', () => {
 
     it('invokes updateConfiguration without error using callback', async () => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1178,7 +1178,7 @@ describe('v1.LicenseManagerClient', () => {
 
     it('invokes updateConfiguration with call error', async () => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1210,7 +1210,7 @@ describe('v1.LicenseManagerClient', () => {
 
     it('invokes updateConfiguration with LRO error', async () => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1244,7 +1244,7 @@ describe('v1.LicenseManagerClient', () => {
 
     it('invokes checkUpdateConfigurationProgress without error', async () => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1252,8 +1252,8 @@ describe('v1.LicenseManagerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateConfigurationProgress(
@@ -1266,7 +1266,7 @@ describe('v1.LicenseManagerClient', () => {
 
     it('invokes checkUpdateConfigurationProgress with error', async () => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1287,7 +1287,7 @@ describe('v1.LicenseManagerClient', () => {
   describe('deleteConfiguration', () => {
     it('invokes deleteConfiguration without error', async () => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1320,7 +1320,7 @@ describe('v1.LicenseManagerClient', () => {
 
     it('invokes deleteConfiguration without error using callback', async () => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1374,7 +1374,7 @@ describe('v1.LicenseManagerClient', () => {
 
     it('invokes deleteConfiguration with call error', async () => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1405,7 +1405,7 @@ describe('v1.LicenseManagerClient', () => {
 
     it('invokes deleteConfiguration with LRO error', async () => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1438,7 +1438,7 @@ describe('v1.LicenseManagerClient', () => {
 
     it('invokes checkDeleteConfigurationProgress without error', async () => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1446,8 +1446,8 @@ describe('v1.LicenseManagerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteConfigurationProgress(
@@ -1460,7 +1460,7 @@ describe('v1.LicenseManagerClient', () => {
 
     it('invokes checkDeleteConfigurationProgress with error', async () => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1481,7 +1481,7 @@ describe('v1.LicenseManagerClient', () => {
   describe('deactivateConfiguration', () => {
     it('invokes deactivateConfiguration without error', async () => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1514,7 +1514,7 @@ describe('v1.LicenseManagerClient', () => {
 
     it('invokes deactivateConfiguration without error using callback', async () => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1568,7 +1568,7 @@ describe('v1.LicenseManagerClient', () => {
 
     it('invokes deactivateConfiguration with call error', async () => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1602,7 +1602,7 @@ describe('v1.LicenseManagerClient', () => {
 
     it('invokes deactivateConfiguration with LRO error', async () => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1635,7 +1635,7 @@ describe('v1.LicenseManagerClient', () => {
 
     it('invokes checkDeactivateConfigurationProgress without error', async () => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1643,8 +1643,8 @@ describe('v1.LicenseManagerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -1658,7 +1658,7 @@ describe('v1.LicenseManagerClient', () => {
 
     it('invokes checkDeactivateConfigurationProgress with error', async () => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1679,7 +1679,7 @@ describe('v1.LicenseManagerClient', () => {
   describe('reactivateConfiguration', () => {
     it('invokes reactivateConfiguration without error', async () => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1712,7 +1712,7 @@ describe('v1.LicenseManagerClient', () => {
 
     it('invokes reactivateConfiguration without error using callback', async () => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1766,7 +1766,7 @@ describe('v1.LicenseManagerClient', () => {
 
     it('invokes reactivateConfiguration with call error', async () => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1800,7 +1800,7 @@ describe('v1.LicenseManagerClient', () => {
 
     it('invokes reactivateConfiguration with LRO error', async () => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1833,7 +1833,7 @@ describe('v1.LicenseManagerClient', () => {
 
     it('invokes checkReactivateConfigurationProgress without error', async () => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1841,8 +1841,8 @@ describe('v1.LicenseManagerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -1856,7 +1856,7 @@ describe('v1.LicenseManagerClient', () => {
 
     it('invokes checkReactivateConfigurationProgress with error', async () => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1877,7 +1877,7 @@ describe('v1.LicenseManagerClient', () => {
   describe('listConfigurations', () => {
     it('invokes listConfigurations without error', async () => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1917,7 +1917,7 @@ describe('v1.LicenseManagerClient', () => {
 
     it('invokes listConfigurations without error using callback', async () => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1949,8 +1949,7 @@ describe('v1.LicenseManagerClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.licensemanager.v1.IConfiguration[]
-              | null,
+              protos.google.cloud.licensemanager.v1.IConfiguration[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -1974,7 +1973,7 @@ describe('v1.LicenseManagerClient', () => {
 
     it('invokes listConfigurations with error', async () => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2005,7 +2004,7 @@ describe('v1.LicenseManagerClient', () => {
 
     it('invokes listConfigurationsStream without error', async () => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2058,15 +2057,15 @@ describe('v1.LicenseManagerClient', () => {
       assert(
         (client.descriptors.page.listConfigurations.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listConfigurationsStream with error', async () => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2108,15 +2107,15 @@ describe('v1.LicenseManagerClient', () => {
       assert(
         (client.descriptors.page.listConfigurations.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listConfigurations without error', async () => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2158,15 +2157,15 @@ describe('v1.LicenseManagerClient', () => {
       assert(
         (client.descriptors.page.listConfigurations.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listConfigurations with error', async () => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2199,9 +2198,9 @@ describe('v1.LicenseManagerClient', () => {
       assert(
         (client.descriptors.page.listConfigurations.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2209,7 +2208,7 @@ describe('v1.LicenseManagerClient', () => {
   describe('listInstances', () => {
     it('invokes listInstances without error', async () => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2248,7 +2247,7 @@ describe('v1.LicenseManagerClient', () => {
 
     it('invokes listInstances without error using callback', async () => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2303,7 +2302,7 @@ describe('v1.LicenseManagerClient', () => {
 
     it('invokes listInstances with error', async () => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2334,7 +2333,7 @@ describe('v1.LicenseManagerClient', () => {
 
     it('invokes listInstancesStream without error', async () => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2386,15 +2385,15 @@ describe('v1.LicenseManagerClient', () => {
       assert(
         (client.descriptors.page.listInstances.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listInstancesStream with error', async () => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2435,15 +2434,15 @@ describe('v1.LicenseManagerClient', () => {
       assert(
         (client.descriptors.page.listInstances.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listInstances without error', async () => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2484,15 +2483,15 @@ describe('v1.LicenseManagerClient', () => {
       assert(
         (client.descriptors.page.listInstances.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listInstances with error', async () => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2524,9 +2523,9 @@ describe('v1.LicenseManagerClient', () => {
       assert(
         (client.descriptors.page.listInstances.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2534,7 +2533,7 @@ describe('v1.LicenseManagerClient', () => {
   describe('aggregateUsage', () => {
     it('invokes aggregateUsage without error', async () => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2573,7 +2572,7 @@ describe('v1.LicenseManagerClient', () => {
 
     it('invokes aggregateUsage without error using callback', async () => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2628,7 +2627,7 @@ describe('v1.LicenseManagerClient', () => {
 
     it('invokes aggregateUsage with error', async () => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2659,7 +2658,7 @@ describe('v1.LicenseManagerClient', () => {
 
     it('invokes aggregateUsageStream without error', async () => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2711,15 +2710,15 @@ describe('v1.LicenseManagerClient', () => {
       assert(
         (client.descriptors.page.aggregateUsage.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes aggregateUsageStream with error', async () => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2760,15 +2759,15 @@ describe('v1.LicenseManagerClient', () => {
       assert(
         (client.descriptors.page.aggregateUsage.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with aggregateUsage without error', async () => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2809,15 +2808,15 @@ describe('v1.LicenseManagerClient', () => {
       assert(
         (client.descriptors.page.aggregateUsage.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with aggregateUsage with error', async () => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2849,9 +2848,9 @@ describe('v1.LicenseManagerClient', () => {
       assert(
         (client.descriptors.page.aggregateUsage.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2859,7 +2858,7 @@ describe('v1.LicenseManagerClient', () => {
   describe('listProducts', () => {
     it('invokes listProducts without error', async () => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2898,7 +2897,7 @@ describe('v1.LicenseManagerClient', () => {
 
     it('invokes listProducts without error using callback', async () => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2953,7 +2952,7 @@ describe('v1.LicenseManagerClient', () => {
 
     it('invokes listProducts with error', async () => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2984,7 +2983,7 @@ describe('v1.LicenseManagerClient', () => {
 
     it('invokes listProductsStream without error', async () => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3036,15 +3035,15 @@ describe('v1.LicenseManagerClient', () => {
       assert(
         (client.descriptors.page.listProducts.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listProductsStream with error', async () => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3087,15 +3086,15 @@ describe('v1.LicenseManagerClient', () => {
       assert(
         (client.descriptors.page.listProducts.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listProducts without error', async () => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3136,15 +3135,15 @@ describe('v1.LicenseManagerClient', () => {
       assert(
         (client.descriptors.page.listProducts.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listProducts with error', async () => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3176,16 +3175,16 @@ describe('v1.LicenseManagerClient', () => {
       assert(
         (client.descriptors.page.listProducts.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3215,7 +3214,7 @@ describe('v1.LicenseManagerClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3259,7 +3258,7 @@ describe('v1.LicenseManagerClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3294,7 +3293,7 @@ describe('v1.LicenseManagerClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3342,7 +3341,7 @@ describe('v1.LicenseManagerClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3383,7 +3382,7 @@ describe('v1.LicenseManagerClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3404,7 +3403,7 @@ describe('v1.LicenseManagerClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -3432,7 +3431,7 @@ describe('v1.LicenseManagerClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3442,7 +3441,7 @@ describe('v1.LicenseManagerClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -3466,7 +3465,7 @@ describe('v1.LicenseManagerClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3488,7 +3487,7 @@ describe('v1.LicenseManagerClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -3516,7 +3515,7 @@ describe('v1.LicenseManagerClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3526,7 +3525,7 @@ describe('v1.LicenseManagerClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -3550,7 +3549,7 @@ describe('v1.LicenseManagerClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3572,7 +3571,7 @@ describe('v1.LicenseManagerClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -3600,7 +3599,7 @@ describe('v1.LicenseManagerClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3610,7 +3609,7 @@ describe('v1.LicenseManagerClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -3634,7 +3633,7 @@ describe('v1.LicenseManagerClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -3669,7 +3668,7 @@ describe('v1.LicenseManagerClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3705,7 +3704,7 @@ describe('v1.LicenseManagerClient', () => {
         configuration: 'configurationValue',
       };
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3769,7 +3768,7 @@ describe('v1.LicenseManagerClient', () => {
         instance: 'instanceValue',
       };
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3832,7 +3831,7 @@ describe('v1.LicenseManagerClient', () => {
         location: 'locationValue',
       };
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3882,7 +3881,7 @@ describe('v1.LicenseManagerClient', () => {
         product: 'productValue',
       };
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3944,7 +3943,7 @@ describe('v1.LicenseManagerClient', () => {
         project: 'projectValue',
       };
       const client = new licensemanagerModule.v1.LicenseManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

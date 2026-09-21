@@ -1218,6 +1218,9 @@ export namespace google {
 
                         /** ReadRowsRequest offset */
                         offset?: (number|Long|string|null);
+
+                        /** ReadRowsRequest arrowSerializationOptions */
+                        arrowSerializationOptions?: (google.cloud.bigquery.storage.v1.IArrowSerializationOptions|null);
                     }
 
                     /** Represents a ReadRowsRequest. */
@@ -1234,6 +1237,12 @@ export namespace google {
 
                         /** ReadRowsRequest offset. */
                         public offset: (number|Long|string);
+
+                        /** ReadRowsRequest arrowSerializationOptions. */
+                        public arrowSerializationOptions?: (google.cloud.bigquery.storage.v1.IArrowSerializationOptions|null);
+
+                        /** ReadRowsRequest outputFormatSerializationOptions. */
+                        public outputFormatSerializationOptions?: "arrowSerializationOptions";
 
                         /**
                          * Creates a new ReadRowsRequest instance using the specified properties.
@@ -1639,6 +1648,9 @@ export namespace google {
 
                         /** ReadRowsResponse uncompressedByteSize */
                         uncompressedByteSize?: (number|Long|string|null);
+
+                        /** ReadRowsResponse totalEstimatedRowCount */
+                        totalEstimatedRowCount?: (number|Long|string|null);
                     }
 
                     /** Represents a ReadRowsResponse. */
@@ -1673,6 +1685,9 @@ export namespace google {
 
                         /** ReadRowsResponse uncompressedByteSize. */
                         public uncompressedByteSize?: (number|Long|string|null);
+
+                        /** ReadRowsResponse totalEstimatedRowCount. */
+                        public totalEstimatedRowCount?: (number|Long|string|null);
 
                         /** ReadRowsResponse rows. */
                         public rows?: ("avroRows"|"arrowRecordBatch");
@@ -2090,6 +2105,9 @@ export namespace google {
 
                         /** AppendRowsRequest defaultMissingValueInterpretation */
                         defaultMissingValueInterpretation?: (google.cloud.bigquery.storage.v1.AppendRowsRequest.MissingValueInterpretation|keyof typeof google.cloud.bigquery.storage.v1.AppendRowsRequest.MissingValueInterpretation|null);
+
+                        /** AppendRowsRequest clientStats */
+                        clientStats?: (google.cloud.bigquery.storage.v1.IClientStats|null);
                     }
 
                     /** Represents an AppendRowsRequest. */
@@ -2121,6 +2139,9 @@ export namespace google {
 
                         /** AppendRowsRequest defaultMissingValueInterpretation. */
                         public defaultMissingValueInterpretation: (google.cloud.bigquery.storage.v1.AppendRowsRequest.MissingValueInterpretation|keyof typeof google.cloud.bigquery.storage.v1.AppendRowsRequest.MissingValueInterpretation);
+
+                        /** AppendRowsRequest clientStats. */
+                        public clientStats?: (google.cloud.bigquery.storage.v1.IClientStats|null);
 
                         /** AppendRowsRequest rows. */
                         public rows?: ("protoRows"|"arrowRows");
@@ -3592,6 +3613,354 @@ export namespace google {
                         enum RowErrorCode {
                             ROW_ERROR_CODE_UNSPECIFIED = 0,
                             FIELDS_ERROR = 1
+                        }
+                    }
+
+                    /** Properties of a ClientStats. */
+                    interface IClientStats {
+
+                        /** ClientStats requestStats */
+                        requestStats?: (google.cloud.bigquery.storage.v1.ClientStats.IRequestStats|null);
+
+                        /** ClientStats windowStats */
+                        windowStats?: (google.cloud.bigquery.storage.v1.ClientStats.IWindowStats|null);
+                    }
+
+                    /** Represents a ClientStats. */
+                    class ClientStats implements IClientStats {
+
+                        /**
+                         * Constructs a new ClientStats.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.storage.v1.IClientStats);
+
+                        /** ClientStats requestStats. */
+                        public requestStats?: (google.cloud.bigquery.storage.v1.ClientStats.IRequestStats|null);
+
+                        /** ClientStats windowStats. */
+                        public windowStats?: (google.cloud.bigquery.storage.v1.ClientStats.IWindowStats|null);
+
+                        /**
+                         * Creates a new ClientStats instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ClientStats instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.storage.v1.IClientStats): google.cloud.bigquery.storage.v1.ClientStats;
+
+                        /**
+                         * Encodes the specified ClientStats message. Does not implicitly {@link google.cloud.bigquery.storage.v1.ClientStats.verify|verify} messages.
+                         * @param message ClientStats message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.storage.v1.IClientStats, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ClientStats message, length delimited. Does not implicitly {@link google.cloud.bigquery.storage.v1.ClientStats.verify|verify} messages.
+                         * @param message ClientStats message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.storage.v1.IClientStats, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ClientStats message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ClientStats
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.storage.v1.ClientStats;
+
+                        /**
+                         * Decodes a ClientStats message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ClientStats
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.storage.v1.ClientStats;
+
+                        /**
+                         * Verifies a ClientStats message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ClientStats message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ClientStats
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.storage.v1.ClientStats;
+
+                        /**
+                         * Creates a plain object from a ClientStats message. Also converts values to other types if specified.
+                         * @param message ClientStats
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.storage.v1.ClientStats, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ClientStats to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ClientStats
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace ClientStats {
+
+                        /** Properties of a RequestStats. */
+                        interface IRequestStats {
+
+                            /** RequestStats sendTimeMillis */
+                            sendTimeMillis?: (number|Long|string|null);
+
+                            /** RequestStats queuedRequestsCount */
+                            queuedRequestsCount?: (number|Long|string|null);
+                        }
+
+                        /** Represents a RequestStats. */
+                        class RequestStats implements IRequestStats {
+
+                            /**
+                             * Constructs a new RequestStats.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.bigquery.storage.v1.ClientStats.IRequestStats);
+
+                            /** RequestStats sendTimeMillis. */
+                            public sendTimeMillis?: (number|Long|string|null);
+
+                            /** RequestStats queuedRequestsCount. */
+                            public queuedRequestsCount?: (number|Long|string|null);
+
+                            /**
+                             * Creates a new RequestStats instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns RequestStats instance
+                             */
+                            public static create(properties?: google.cloud.bigquery.storage.v1.ClientStats.IRequestStats): google.cloud.bigquery.storage.v1.ClientStats.RequestStats;
+
+                            /**
+                             * Encodes the specified RequestStats message. Does not implicitly {@link google.cloud.bigquery.storage.v1.ClientStats.RequestStats.verify|verify} messages.
+                             * @param message RequestStats message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.bigquery.storage.v1.ClientStats.IRequestStats, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified RequestStats message, length delimited. Does not implicitly {@link google.cloud.bigquery.storage.v1.ClientStats.RequestStats.verify|verify} messages.
+                             * @param message RequestStats message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.bigquery.storage.v1.ClientStats.IRequestStats, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a RequestStats message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns RequestStats
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.storage.v1.ClientStats.RequestStats;
+
+                            /**
+                             * Decodes a RequestStats message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns RequestStats
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.storage.v1.ClientStats.RequestStats;
+
+                            /**
+                             * Verifies a RequestStats message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a RequestStats message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns RequestStats
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.storage.v1.ClientStats.RequestStats;
+
+                            /**
+                             * Creates a plain object from a RequestStats message. Also converts values to other types if specified.
+                             * @param message RequestStats
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.bigquery.storage.v1.ClientStats.RequestStats, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this RequestStats to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for RequestStats
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a WindowStats. */
+                        interface IWindowStats {
+
+                            /** WindowStats maxResponseLatencyMillis */
+                            maxResponseLatencyMillis?: (number|Long|string|null);
+
+                            /** WindowStats avgResponseLatencyMillis */
+                            avgResponseLatencyMillis?: (number|Long|string|null);
+
+                            /** WindowStats longestWaitNoResponseMillis */
+                            longestWaitNoResponseMillis?: (number|Long|string|null);
+
+                            /** WindowStats requestsSentCount */
+                            requestsSentCount?: (number|Long|string|null);
+
+                            /** WindowStats responsesReceivedCount */
+                            responsesReceivedCount?: (number|Long|string|null);
+
+                            /** WindowStats bytesSentCount */
+                            bytesSentCount?: (number|Long|string|null);
+
+                            /** WindowStats windowStartTimeEpochMillis */
+                            windowStartTimeEpochMillis?: (number|Long|string|null);
+
+                            /** WindowStats windowMillis */
+                            windowMillis?: (number|Long|string|null);
+                        }
+
+                        /** Represents a WindowStats. */
+                        class WindowStats implements IWindowStats {
+
+                            /**
+                             * Constructs a new WindowStats.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.bigquery.storage.v1.ClientStats.IWindowStats);
+
+                            /** WindowStats maxResponseLatencyMillis. */
+                            public maxResponseLatencyMillis?: (number|Long|string|null);
+
+                            /** WindowStats avgResponseLatencyMillis. */
+                            public avgResponseLatencyMillis?: (number|Long|string|null);
+
+                            /** WindowStats longestWaitNoResponseMillis. */
+                            public longestWaitNoResponseMillis?: (number|Long|string|null);
+
+                            /** WindowStats requestsSentCount. */
+                            public requestsSentCount?: (number|Long|string|null);
+
+                            /** WindowStats responsesReceivedCount. */
+                            public responsesReceivedCount?: (number|Long|string|null);
+
+                            /** WindowStats bytesSentCount. */
+                            public bytesSentCount?: (number|Long|string|null);
+
+                            /** WindowStats windowStartTimeEpochMillis. */
+                            public windowStartTimeEpochMillis?: (number|Long|string|null);
+
+                            /** WindowStats windowMillis. */
+                            public windowMillis?: (number|Long|string|null);
+
+                            /**
+                             * Creates a new WindowStats instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns WindowStats instance
+                             */
+                            public static create(properties?: google.cloud.bigquery.storage.v1.ClientStats.IWindowStats): google.cloud.bigquery.storage.v1.ClientStats.WindowStats;
+
+                            /**
+                             * Encodes the specified WindowStats message. Does not implicitly {@link google.cloud.bigquery.storage.v1.ClientStats.WindowStats.verify|verify} messages.
+                             * @param message WindowStats message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.bigquery.storage.v1.ClientStats.IWindowStats, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified WindowStats message, length delimited. Does not implicitly {@link google.cloud.bigquery.storage.v1.ClientStats.WindowStats.verify|verify} messages.
+                             * @param message WindowStats message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.bigquery.storage.v1.ClientStats.IWindowStats, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a WindowStats message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns WindowStats
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.storage.v1.ClientStats.WindowStats;
+
+                            /**
+                             * Decodes a WindowStats message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns WindowStats
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.storage.v1.ClientStats.WindowStats;
+
+                            /**
+                             * Verifies a WindowStats message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a WindowStats message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns WindowStats
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.storage.v1.ClientStats.WindowStats;
+
+                            /**
+                             * Creates a plain object from a WindowStats message. Also converts values to other types if specified.
+                             * @param message WindowStats
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.bigquery.storage.v1.ClientStats.WindowStats, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this WindowStats to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for WindowStats
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
                     }
 

@@ -27,10 +27,10 @@ import type {
   PaginationCallback,
   GaxCall,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -52,7 +52,7 @@ export class SnapshotsClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('compute');
@@ -65,8 +65,8 @@ export class SnapshotsClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
-  snapshotsStub?: Promise<{ [name: string]: Function }>;
+  innerApiCalls: {[name: string]: Function};
+  snapshotsStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of SnapshotsClient.
@@ -141,14 +141,14 @@ export class SnapshotsClient {
     const clientConfig = opts?.clientConfig ?? {};
     // Implicitly enable HTTP transport for the APIs that use REST as transport (e.g. Google Cloud Compute).
     if (!opts) {
-      opts = { fallback: true };
+      opts = {fallback: true};
     } else {
       opts.fallback = opts.fallback ?? true;
     }
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
     if (servicePath !== this._servicePath && !('scopes' in opts)) {
@@ -219,7 +219,7 @@ export class SnapshotsClient {
       'google.cloud.compute.v1beta.Snapshots',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -259,7 +259,7 @@ export class SnapshotsClient {
           (this._protos as any).google.cloud.compute.v1beta.Snapshots,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -267,6 +267,7 @@ export class SnapshotsClient {
       'aggregatedList',
       'delete',
       'get',
+      'getEffectiveRecycleBinRule',
       'getIamPolicy',
       'insert',
       'list',
@@ -277,7 +278,7 @@ export class SnapshotsClient {
     ];
     for (const methodName of snapshotsStubMethods) {
       const callPromise = this.snapshotsStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -507,7 +508,7 @@ export class SnapshotsClient {
         project: request.project ?? '',
         snapshot: request.snapshot ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('delete request %j', request);
@@ -647,7 +648,7 @@ export class SnapshotsClient {
         project: request.project ?? '',
         snapshot: request.snapshot ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('get request %j', request);
@@ -674,6 +675,154 @@ export class SnapshotsClient {
           {} | undefined,
         ]) => {
           this._log.info('get response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Returns the effective recycle bin rule for a snapshot by merging org and
+   * project level rules. If no rules are defined at org and project level, the
+   * standard default rule is returned.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.snapshot
+   *   Name of the Snapshot resource to get the effective recycle bin rule for.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.compute.v1beta.SnapshotsGetEffectiveRecycleBinRuleResponse|SnapshotsGetEffectiveRecycleBinRuleResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/snapshots.get_effective_recycle_bin_rule.js</caption>
+   * region_tag:compute_v1beta_generated_Snapshots_GetEffectiveRecycleBinRule_async
+   */
+  getEffectiveRecycleBinRule(
+    request?: protos.google.cloud.compute.v1beta.IGetEffectiveRecycleBinRuleSnapshotRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1beta.ISnapshotsGetEffectiveRecycleBinRuleResponse,
+      (
+        | protos.google.cloud.compute.v1beta.IGetEffectiveRecycleBinRuleSnapshotRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  getEffectiveRecycleBinRule(
+    request: protos.google.cloud.compute.v1beta.IGetEffectiveRecycleBinRuleSnapshotRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1beta.ISnapshotsGetEffectiveRecycleBinRuleResponse,
+      | protos.google.cloud.compute.v1beta.IGetEffectiveRecycleBinRuleSnapshotRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getEffectiveRecycleBinRule(
+    request: protos.google.cloud.compute.v1beta.IGetEffectiveRecycleBinRuleSnapshotRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1beta.ISnapshotsGetEffectiveRecycleBinRuleResponse,
+      | protos.google.cloud.compute.v1beta.IGetEffectiveRecycleBinRuleSnapshotRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getEffectiveRecycleBinRule(
+    request?: protos.google.cloud.compute.v1beta.IGetEffectiveRecycleBinRuleSnapshotRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.compute.v1beta.ISnapshotsGetEffectiveRecycleBinRuleResponse,
+          | protos.google.cloud.compute.v1beta.IGetEffectiveRecycleBinRuleSnapshotRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1beta.ISnapshotsGetEffectiveRecycleBinRuleResponse,
+      | protos.google.cloud.compute.v1beta.IGetEffectiveRecycleBinRuleSnapshotRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1beta.ISnapshotsGetEffectiveRecycleBinRuleResponse,
+      (
+        | protos.google.cloud.compute.v1beta.IGetEffectiveRecycleBinRuleSnapshotRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        project: request.project ?? '',
+        snapshot: request.snapshot ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getEffectiveRecycleBinRule request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.compute.v1beta.ISnapshotsGetEffectiveRecycleBinRuleResponse,
+          | protos.google.cloud.compute.v1beta.IGetEffectiveRecycleBinRuleSnapshotRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getEffectiveRecycleBinRule response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getEffectiveRecycleBinRule(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.compute.v1beta.ISnapshotsGetEffectiveRecycleBinRuleResponse,
+          (
+            | protos.google.cloud.compute.v1beta.IGetEffectiveRecycleBinRuleSnapshotRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getEffectiveRecycleBinRule response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -793,7 +942,7 @@ export class SnapshotsClient {
         project: request.project ?? '',
         resource: request.resource ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getIamPolicy request %j', request);
@@ -955,7 +1104,7 @@ export class SnapshotsClient {
       this._gaxModule.routingHeader.fromParams({
         project: request.project ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('insert request %j', request);
@@ -1110,7 +1259,7 @@ export class SnapshotsClient {
         project: request.project ?? '',
         resource: request.resource ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('setIamPolicy request %j', request);
@@ -1258,7 +1407,7 @@ export class SnapshotsClient {
         project: request.project ?? '',
         resource: request.resource ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('setLabels request %j', request);
@@ -1412,7 +1561,7 @@ export class SnapshotsClient {
         project: request.project ?? '',
         resource: request.resource ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('testIamPermissions request %j', request);
@@ -1574,7 +1723,7 @@ export class SnapshotsClient {
         project: request.project ?? '',
         snapshot: request.snapshot ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateKmsKey request %j', request);
@@ -1770,7 +1919,7 @@ export class SnapshotsClient {
       });
     const defaultCallSettings = this._defaults['aggregatedList'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('aggregatedList iterate %j', request);
@@ -1953,7 +2102,7 @@ export class SnapshotsClient {
       this._gaxModule.routingHeader.fromParams({
         project: request.project ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2102,7 +2251,7 @@ export class SnapshotsClient {
       });
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('list stream %j', request);
@@ -2235,7 +2384,7 @@ export class SnapshotsClient {
       });
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('list iterate %j', request);
@@ -2254,7 +2403,7 @@ export class SnapshotsClient {
    */
   close(): Promise<void> {
     if (this.snapshotsStub && !this._terminated) {
-      return this.snapshotsStub.then((stub) => {
+      return this.snapshotsStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

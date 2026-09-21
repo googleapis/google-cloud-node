@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as usageserviceModule from '../src';
 
-import { protobuf, LROperation, operationsProtos } from 'google-gax';
+import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -43,7 +43,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -211,7 +211,7 @@ describe('v1beta.UsageServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new usageserviceModule.v1beta.UsageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.usageServiceStub, undefined);
@@ -219,12 +219,12 @@ describe('v1beta.UsageServiceClient', () => {
       assert(client.usageServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new usageserviceModule.v1beta.UsageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.usageServiceStub);
@@ -233,14 +233,14 @@ describe('v1beta.UsageServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new usageserviceModule.v1beta.UsageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.usageServiceStub, undefined);
@@ -249,7 +249,7 @@ describe('v1beta.UsageServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -257,7 +257,7 @@ describe('v1beta.UsageServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new usageserviceModule.v1beta.UsageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -269,7 +269,7 @@ describe('v1beta.UsageServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new usageserviceModule.v1beta.UsageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -292,7 +292,7 @@ describe('v1beta.UsageServiceClient', () => {
   describe('queryUsageHistories', () => {
     it('invokes queryUsageHistories without error', async () => {
       const client = new usageserviceModule.v1beta.UsageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -324,7 +324,7 @@ describe('v1beta.UsageServiceClient', () => {
 
     it('invokes queryUsageHistories without error using callback', async () => {
       const client = new usageserviceModule.v1beta.UsageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -371,7 +371,7 @@ describe('v1beta.UsageServiceClient', () => {
 
     it('invokes queryUsageHistories with error', async () => {
       const client = new usageserviceModule.v1beta.UsageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -402,7 +402,7 @@ describe('v1beta.UsageServiceClient', () => {
 
     it('invokes queryUsageHistories with closed client', async () => {
       const client = new usageserviceModule.v1beta.UsageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -415,7 +415,7 @@ describe('v1beta.UsageServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.queryUsageHistories(request), expectedError);
@@ -425,7 +425,7 @@ describe('v1beta.UsageServiceClient', () => {
   describe('queryForecasts', () => {
     it('invokes queryForecasts without error', async () => {
       const client = new usageserviceModule.v1beta.UsageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -456,7 +456,7 @@ describe('v1beta.UsageServiceClient', () => {
 
     it('invokes queryForecasts without error using callback', async () => {
       const client = new usageserviceModule.v1beta.UsageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -503,7 +503,7 @@ describe('v1beta.UsageServiceClient', () => {
 
     it('invokes queryForecasts with error', async () => {
       const client = new usageserviceModule.v1beta.UsageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -534,7 +534,7 @@ describe('v1beta.UsageServiceClient', () => {
 
     it('invokes queryForecasts with closed client', async () => {
       const client = new usageserviceModule.v1beta.UsageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -547,7 +547,7 @@ describe('v1beta.UsageServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.queryForecasts(request), expectedError);
@@ -557,7 +557,7 @@ describe('v1beta.UsageServiceClient', () => {
   describe('queryReservations', () => {
     it('invokes queryReservations without error', async () => {
       const client = new usageserviceModule.v1beta.UsageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -588,7 +588,7 @@ describe('v1beta.UsageServiceClient', () => {
 
     it('invokes queryReservations without error using callback', async () => {
       const client = new usageserviceModule.v1beta.UsageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -635,7 +635,7 @@ describe('v1beta.UsageServiceClient', () => {
 
     it('invokes queryReservations with error', async () => {
       const client = new usageserviceModule.v1beta.UsageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -666,7 +666,7 @@ describe('v1beta.UsageServiceClient', () => {
 
     it('invokes queryReservations with closed client', async () => {
       const client = new usageserviceModule.v1beta.UsageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -679,7 +679,7 @@ describe('v1beta.UsageServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.queryReservations(request), expectedError);
@@ -689,7 +689,7 @@ describe('v1beta.UsageServiceClient', () => {
   describe('exportUsageHistories', () => {
     it('invokes exportUsageHistories without error', async () => {
       const client = new usageserviceModule.v1beta.UsageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -722,7 +722,7 @@ describe('v1beta.UsageServiceClient', () => {
 
     it('invokes exportUsageHistories without error using callback', async () => {
       const client = new usageserviceModule.v1beta.UsageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -776,7 +776,7 @@ describe('v1beta.UsageServiceClient', () => {
 
     it('invokes exportUsageHistories with call error', async () => {
       const client = new usageserviceModule.v1beta.UsageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -807,7 +807,7 @@ describe('v1beta.UsageServiceClient', () => {
 
     it('invokes exportUsageHistories with LRO error', async () => {
       const client = new usageserviceModule.v1beta.UsageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -840,7 +840,7 @@ describe('v1beta.UsageServiceClient', () => {
 
     it('invokes checkExportUsageHistoriesProgress without error', async () => {
       const client = new usageserviceModule.v1beta.UsageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -848,8 +848,8 @@ describe('v1beta.UsageServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkExportUsageHistoriesProgress(
@@ -862,7 +862,7 @@ describe('v1beta.UsageServiceClient', () => {
 
     it('invokes checkExportUsageHistoriesProgress with error', async () => {
       const client = new usageserviceModule.v1beta.UsageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -883,7 +883,7 @@ describe('v1beta.UsageServiceClient', () => {
   describe('exportForecasts', () => {
     it('invokes exportForecasts without error', async () => {
       const client = new usageserviceModule.v1beta.UsageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -916,7 +916,7 @@ describe('v1beta.UsageServiceClient', () => {
 
     it('invokes exportForecasts without error using callback', async () => {
       const client = new usageserviceModule.v1beta.UsageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -970,7 +970,7 @@ describe('v1beta.UsageServiceClient', () => {
 
     it('invokes exportForecasts with call error', async () => {
       const client = new usageserviceModule.v1beta.UsageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1001,7 +1001,7 @@ describe('v1beta.UsageServiceClient', () => {
 
     it('invokes exportForecasts with LRO error', async () => {
       const client = new usageserviceModule.v1beta.UsageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1034,7 +1034,7 @@ describe('v1beta.UsageServiceClient', () => {
 
     it('invokes checkExportForecastsProgress without error', async () => {
       const client = new usageserviceModule.v1beta.UsageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1042,8 +1042,8 @@ describe('v1beta.UsageServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkExportForecastsProgress(
@@ -1056,7 +1056,7 @@ describe('v1beta.UsageServiceClient', () => {
 
     it('invokes checkExportForecastsProgress with error', async () => {
       const client = new usageserviceModule.v1beta.UsageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1077,7 +1077,7 @@ describe('v1beta.UsageServiceClient', () => {
   describe('exportReservationsUsage', () => {
     it('invokes exportReservationsUsage without error', async () => {
       const client = new usageserviceModule.v1beta.UsageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1110,7 +1110,7 @@ describe('v1beta.UsageServiceClient', () => {
 
     it('invokes exportReservationsUsage without error using callback', async () => {
       const client = new usageserviceModule.v1beta.UsageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1164,7 +1164,7 @@ describe('v1beta.UsageServiceClient', () => {
 
     it('invokes exportReservationsUsage with call error', async () => {
       const client = new usageserviceModule.v1beta.UsageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1198,7 +1198,7 @@ describe('v1beta.UsageServiceClient', () => {
 
     it('invokes exportReservationsUsage with LRO error', async () => {
       const client = new usageserviceModule.v1beta.UsageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1231,7 +1231,7 @@ describe('v1beta.UsageServiceClient', () => {
 
     it('invokes checkExportReservationsUsageProgress without error', async () => {
       const client = new usageserviceModule.v1beta.UsageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1239,8 +1239,8 @@ describe('v1beta.UsageServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -1254,7 +1254,7 @@ describe('v1beta.UsageServiceClient', () => {
 
     it('invokes checkExportReservationsUsageProgress with error', async () => {
       const client = new usageserviceModule.v1beta.UsageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1281,7 +1281,7 @@ describe('v1beta.UsageServiceClient', () => {
         forecast: 'forecastValue',
       };
       const client = new usageserviceModule.v1beta.UsageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1360,7 +1360,7 @@ describe('v1beta.UsageServiceClient', () => {
         reservation: 'reservationValue',
       };
       const client = new usageserviceModule.v1beta.UsageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1438,7 +1438,7 @@ describe('v1beta.UsageServiceClient', () => {
         location: 'locationValue',
       };
       const client = new usageserviceModule.v1beta.UsageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1488,7 +1488,7 @@ describe('v1beta.UsageServiceClient', () => {
         forecast: 'forecastValue',
       };
       const client = new usageserviceModule.v1beta.UsageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1567,7 +1567,7 @@ describe('v1beta.UsageServiceClient', () => {
         reservation: 'reservationValue',
       };
       const client = new usageserviceModule.v1beta.UsageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1650,7 +1650,7 @@ describe('v1beta.UsageServiceClient', () => {
         forecast: 'forecastValue',
       };
       const client = new usageserviceModule.v1beta.UsageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1729,7 +1729,7 @@ describe('v1beta.UsageServiceClient', () => {
         reservation: 'reservationValue',
       };
       const client = new usageserviceModule.v1beta.UsageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

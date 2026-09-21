@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as aggregateproductstatusesserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -170,7 +170,7 @@ describe('v1beta.AggregateProductStatusesServiceClient', () => {
     it('sets apiEndpoint according to universe domain camelCase', () => {
       const client =
         new aggregateproductstatusesserviceModule.v1beta.AggregateProductStatusesServiceClient(
-          { universeDomain: 'example.com' },
+          {universeDomain: 'example.com'},
         );
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'merchantapi.example.com');
@@ -179,7 +179,7 @@ describe('v1beta.AggregateProductStatusesServiceClient', () => {
     it('sets apiEndpoint according to universe domain snakeCase', () => {
       const client =
         new aggregateproductstatusesserviceModule.v1beta.AggregateProductStatusesServiceClient(
-          { universe_domain: 'example.com' },
+          {universe_domain: 'example.com'},
         );
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'merchantapi.example.com');
@@ -206,7 +206,7 @@ describe('v1beta.AggregateProductStatusesServiceClient', () => {
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client =
             new aggregateproductstatusesserviceModule.v1beta.AggregateProductStatusesServiceClient(
-              { universeDomain: 'configured.example.com' },
+              {universeDomain: 'configured.example.com'},
             );
           const servicePath = client.apiEndpoint;
           assert.strictEqual(servicePath, 'merchantapi.configured.example.com');
@@ -221,7 +221,7 @@ describe('v1beta.AggregateProductStatusesServiceClient', () => {
     it('does not allow setting both universeDomain and universe_domain', () => {
       assert.throws(() => {
         new aggregateproductstatusesserviceModule.v1beta.AggregateProductStatusesServiceClient(
-          { universe_domain: 'example.com', universeDomain: 'example.net' },
+          {universe_domain: 'example.com', universeDomain: 'example.net'},
         );
       });
     });
@@ -254,7 +254,7 @@ describe('v1beta.AggregateProductStatusesServiceClient', () => {
       const client =
         new aggregateproductstatusesserviceModule.v1beta.AggregateProductStatusesServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -263,15 +263,15 @@ describe('v1beta.AggregateProductStatusesServiceClient', () => {
       assert(client.aggregateProductStatusesServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new aggregateproductstatusesserviceModule.v1beta.AggregateProductStatusesServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.aggregateProductStatusesServiceStub);
@@ -280,16 +280,16 @@ describe('v1beta.AggregateProductStatusesServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new aggregateproductstatusesserviceModule.v1beta.AggregateProductStatusesServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -299,7 +299,7 @@ describe('v1beta.AggregateProductStatusesServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -309,7 +309,7 @@ describe('v1beta.AggregateProductStatusesServiceClient', () => {
       const client =
         new aggregateproductstatusesserviceModule.v1beta.AggregateProductStatusesServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -324,7 +324,7 @@ describe('v1beta.AggregateProductStatusesServiceClient', () => {
       const client =
         new aggregateproductstatusesserviceModule.v1beta.AggregateProductStatusesServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -350,7 +350,7 @@ describe('v1beta.AggregateProductStatusesServiceClient', () => {
       const client =
         new aggregateproductstatusesserviceModule.v1beta.AggregateProductStatusesServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -393,7 +393,7 @@ describe('v1beta.AggregateProductStatusesServiceClient', () => {
       const client =
         new aggregateproductstatusesserviceModule.v1beta.AggregateProductStatusesServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -453,7 +453,7 @@ describe('v1beta.AggregateProductStatusesServiceClient', () => {
       const client =
         new aggregateproductstatusesserviceModule.v1beta.AggregateProductStatusesServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -490,7 +490,7 @@ describe('v1beta.AggregateProductStatusesServiceClient', () => {
       const client =
         new aggregateproductstatusesserviceModule.v1beta.AggregateProductStatusesServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -565,7 +565,7 @@ describe('v1beta.AggregateProductStatusesServiceClient', () => {
       const client =
         new aggregateproductstatusesserviceModule.v1beta.AggregateProductStatusesServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -629,7 +629,7 @@ describe('v1beta.AggregateProductStatusesServiceClient', () => {
       const client =
         new aggregateproductstatusesserviceModule.v1beta.AggregateProductStatusesServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -686,7 +686,7 @@ describe('v1beta.AggregateProductStatusesServiceClient', () => {
       const client =
         new aggregateproductstatusesserviceModule.v1beta.AggregateProductStatusesServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -740,7 +740,7 @@ describe('v1beta.AggregateProductStatusesServiceClient', () => {
       const client =
         new aggregateproductstatusesserviceModule.v1beta.AggregateProductStatusesServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -782,7 +782,7 @@ describe('v1beta.AggregateProductStatusesServiceClient', () => {
       const client =
         new aggregateproductstatusesserviceModule.v1beta.AggregateProductStatusesServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );

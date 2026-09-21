@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as confidentialcomputingModule from '../src';
 
-import { protobuf, LocationProtos } from 'google-gax';
+import {protobuf, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -43,7 +43,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -77,9 +77,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -214,7 +214,7 @@ describe('v1.ConfidentialComputingClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client =
         new confidentialcomputingModule.v1.ConfidentialComputingClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.confidentialComputingStub, undefined);
@@ -222,13 +222,13 @@ describe('v1.ConfidentialComputingClient', () => {
       assert(client.confidentialComputingStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new confidentialcomputingModule.v1.ConfidentialComputingClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.confidentialComputingStub);
@@ -237,15 +237,15 @@ describe('v1.ConfidentialComputingClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new confidentialcomputingModule.v1.ConfidentialComputingClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.confidentialComputingStub, undefined);
@@ -254,7 +254,7 @@ describe('v1.ConfidentialComputingClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -263,7 +263,7 @@ describe('v1.ConfidentialComputingClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new confidentialcomputingModule.v1.ConfidentialComputingClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -276,7 +276,7 @@ describe('v1.ConfidentialComputingClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new confidentialcomputingModule.v1.ConfidentialComputingClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon
@@ -300,7 +300,7 @@ describe('v1.ConfidentialComputingClient', () => {
     it('invokes createChallenge without error', async () => {
       const client =
         new confidentialcomputingModule.v1.ConfidentialComputingClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -332,7 +332,7 @@ describe('v1.ConfidentialComputingClient', () => {
     it('invokes createChallenge without error using callback', async () => {
       const client =
         new confidentialcomputingModule.v1.ConfidentialComputingClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -380,7 +380,7 @@ describe('v1.ConfidentialComputingClient', () => {
     it('invokes createChallenge with error', async () => {
       const client =
         new confidentialcomputingModule.v1.ConfidentialComputingClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -412,7 +412,7 @@ describe('v1.ConfidentialComputingClient', () => {
     it('invokes createChallenge with closed client', async () => {
       const client =
         new confidentialcomputingModule.v1.ConfidentialComputingClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -425,7 +425,7 @@ describe('v1.ConfidentialComputingClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createChallenge(request), expectedError);
@@ -436,7 +436,7 @@ describe('v1.ConfidentialComputingClient', () => {
     it('invokes verifyAttestation without error', async () => {
       const client =
         new confidentialcomputingModule.v1.ConfidentialComputingClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -468,7 +468,7 @@ describe('v1.ConfidentialComputingClient', () => {
     it('invokes verifyAttestation without error using callback', async () => {
       const client =
         new confidentialcomputingModule.v1.ConfidentialComputingClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -516,7 +516,7 @@ describe('v1.ConfidentialComputingClient', () => {
     it('invokes verifyAttestation with error', async () => {
       const client =
         new confidentialcomputingModule.v1.ConfidentialComputingClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -548,7 +548,7 @@ describe('v1.ConfidentialComputingClient', () => {
     it('invokes verifyAttestation with closed client', async () => {
       const client =
         new confidentialcomputingModule.v1.ConfidentialComputingClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -561,7 +561,7 @@ describe('v1.ConfidentialComputingClient', () => {
       );
       request.challenge = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.verifyAttestation(request), expectedError);
@@ -572,7 +572,7 @@ describe('v1.ConfidentialComputingClient', () => {
     it('invokes verifyConfidentialSpace without error', async () => {
       const client =
         new confidentialcomputingModule.v1.ConfidentialComputingClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -605,7 +605,7 @@ describe('v1.ConfidentialComputingClient', () => {
     it('invokes verifyConfidentialSpace without error using callback', async () => {
       const client =
         new confidentialcomputingModule.v1.ConfidentialComputingClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -653,7 +653,7 @@ describe('v1.ConfidentialComputingClient', () => {
     it('invokes verifyConfidentialSpace with error', async () => {
       const client =
         new confidentialcomputingModule.v1.ConfidentialComputingClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -688,7 +688,7 @@ describe('v1.ConfidentialComputingClient', () => {
     it('invokes verifyConfidentialSpace with closed client', async () => {
       const client =
         new confidentialcomputingModule.v1.ConfidentialComputingClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -701,7 +701,7 @@ describe('v1.ConfidentialComputingClient', () => {
       );
       request.challenge = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -715,7 +715,7 @@ describe('v1.ConfidentialComputingClient', () => {
     it('invokes verifyConfidentialGke without error', async () => {
       const client =
         new confidentialcomputingModule.v1.ConfidentialComputingClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -748,7 +748,7 @@ describe('v1.ConfidentialComputingClient', () => {
     it('invokes verifyConfidentialGke without error using callback', async () => {
       const client =
         new confidentialcomputingModule.v1.ConfidentialComputingClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -796,7 +796,7 @@ describe('v1.ConfidentialComputingClient', () => {
     it('invokes verifyConfidentialGke with error', async () => {
       const client =
         new confidentialcomputingModule.v1.ConfidentialComputingClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -831,7 +831,7 @@ describe('v1.ConfidentialComputingClient', () => {
     it('invokes verifyConfidentialGke with closed client', async () => {
       const client =
         new confidentialcomputingModule.v1.ConfidentialComputingClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -844,7 +844,7 @@ describe('v1.ConfidentialComputingClient', () => {
       );
       request.challenge = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -857,7 +857,7 @@ describe('v1.ConfidentialComputingClient', () => {
     it('invokes getLocation without error', async () => {
       const client =
         new confidentialcomputingModule.v1.ConfidentialComputingClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -888,7 +888,7 @@ describe('v1.ConfidentialComputingClient', () => {
     it('invokes getLocation without error using callback', async () => {
       const client =
         new confidentialcomputingModule.v1.ConfidentialComputingClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -933,7 +933,7 @@ describe('v1.ConfidentialComputingClient', () => {
     it('invokes getLocation with error', async () => {
       const client =
         new confidentialcomputingModule.v1.ConfidentialComputingClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -969,7 +969,7 @@ describe('v1.ConfidentialComputingClient', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client =
         new confidentialcomputingModule.v1.ConfidentialComputingClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1018,7 +1018,7 @@ describe('v1.ConfidentialComputingClient', () => {
     it('uses async iteration with listLocations with error', async () => {
       const client =
         new confidentialcomputingModule.v1.ConfidentialComputingClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1067,7 +1067,7 @@ describe('v1.ConfidentialComputingClient', () => {
       };
       const client =
         new confidentialcomputingModule.v1.ConfidentialComputingClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1132,7 +1132,7 @@ describe('v1.ConfidentialComputingClient', () => {
       };
       const client =
         new confidentialcomputingModule.v1.ConfidentialComputingClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1196,7 +1196,7 @@ describe('v1.ConfidentialComputingClient', () => {
       };
       const client =
         new confidentialcomputingModule.v1.ConfidentialComputingClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();

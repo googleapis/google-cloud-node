@@ -43,6 +43,11 @@ function main(challenge) {
    *  Optional. A collection of fields that modify the token output.
    */
   // const options = {}
+  /**
+   *  Optional. Optional platform security architecture hint for the verifier
+   *  engine. Defaults to `VIRTUALIZED_CVM` behavior if unspecified.
+   */
+  // const platformType = {}
 
   // Imports the Confidentialcomputing library
   const {ConfidentialComputingClient} = require('@google-cloud/confidentialcomputing').v1;

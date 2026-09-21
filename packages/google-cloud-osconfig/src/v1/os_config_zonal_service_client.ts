@@ -28,10 +28,10 @@ import type {
   PaginationCallback,
   GaxCall,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -56,7 +56,7 @@ export class OsConfigZonalServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('os-config');
@@ -69,10 +69,10 @@ export class OsConfigZonalServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
-  pathTemplates: { [name: string]: gax.PathTemplate };
+  innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
-  osConfigZonalServiceStub?: Promise<{ [name: string]: Function }>;
+  osConfigZonalServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of OsConfigZonalServiceClient.
@@ -148,7 +148,7 @@ export class OsConfigZonalServiceClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -338,7 +338,7 @@ export class OsConfigZonalServiceClient {
       'google.cloud.osconfig.v1.OsConfigZonalService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -378,7 +378,7 @@ export class OsConfigZonalServiceClient {
           (this._protos as any).google.cloud.osconfig.v1.OsConfigZonalService,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -398,7 +398,7 @@ export class OsConfigZonalServiceClient {
     ];
     for (const methodName of osConfigZonalServiceStubMethods) {
       const callPromise = this.osConfigZonalServiceStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -606,7 +606,7 @@ export class OsConfigZonalServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getOSPolicyAssignment request %j', request);
@@ -758,7 +758,7 @@ export class OsConfigZonalServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getOSPolicyAssignmentReport request %j', request);
@@ -900,7 +900,7 @@ export class OsConfigZonalServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getInventory request %j', request);
@@ -1048,7 +1048,7 @@ export class OsConfigZonalServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getVulnerabilityReport request %j', request);
@@ -1218,7 +1218,7 @@ export class OsConfigZonalServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1275,7 +1275,7 @@ export class OsConfigZonalServiceClient {
     this._log.info('createOSPolicyAssignment long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -1398,7 +1398,7 @@ export class OsConfigZonalServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'os_policy_assignment.name': request.osPolicyAssignment!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1455,7 +1455,7 @@ export class OsConfigZonalServiceClient {
     this._log.info('updateOSPolicyAssignment long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -1578,7 +1578,7 @@ export class OsConfigZonalServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1635,7 +1635,7 @@ export class OsConfigZonalServiceClient {
     this._log.info('deleteOSPolicyAssignment long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -1746,7 +1746,7 @@ export class OsConfigZonalServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1815,7 +1815,7 @@ export class OsConfigZonalServiceClient {
       });
     const defaultCallSettings = this._defaults['listOsPolicyAssignments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listOSPolicyAssignments stream %j', request);
@@ -1866,7 +1866,7 @@ export class OsConfigZonalServiceClient {
       });
     const defaultCallSettings = this._defaults['listOsPolicyAssignments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listOSPolicyAssignments iterate %j', request);
@@ -1972,7 +1972,7 @@ export class OsConfigZonalServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2042,7 +2042,7 @@ export class OsConfigZonalServiceClient {
     const defaultCallSettings =
       this._defaults['listOsPolicyAssignmentRevisions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listOSPolicyAssignmentRevisions stream %j', request);
@@ -2094,7 +2094,7 @@ export class OsConfigZonalServiceClient {
     const defaultCallSettings =
       this._defaults['listOsPolicyAssignmentRevisions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listOSPolicyAssignmentRevisions iterate %j', request);
@@ -2224,7 +2224,7 @@ export class OsConfigZonalServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2316,7 +2316,7 @@ export class OsConfigZonalServiceClient {
       });
     const defaultCallSettings = this._defaults['listOsPolicyAssignmentReports'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listOSPolicyAssignmentReports stream %j', request);
@@ -2390,7 +2390,7 @@ export class OsConfigZonalServiceClient {
       });
     const defaultCallSettings = this._defaults['listOsPolicyAssignmentReports'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listOSPolicyAssignmentReports iterate %j', request);
@@ -2506,7 +2506,7 @@ export class OsConfigZonalServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2585,7 +2585,7 @@ export class OsConfigZonalServiceClient {
       });
     const defaultCallSettings = this._defaults['listInventories'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listInventories stream %j', request);
@@ -2646,7 +2646,7 @@ export class OsConfigZonalServiceClient {
       });
     const defaultCallSettings = this._defaults['listInventories'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listInventories iterate %j', request);
@@ -2773,7 +2773,7 @@ export class OsConfigZonalServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2863,7 +2863,7 @@ export class OsConfigZonalServiceClient {
       });
     const defaultCallSettings = this._defaults['listVulnerabilityReports'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listVulnerabilityReports stream %j', request);
@@ -2935,7 +2935,7 @@ export class OsConfigZonalServiceClient {
       });
     const defaultCallSettings = this._defaults['listVulnerabilityReports'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listVulnerabilityReports iterate %j', request);
@@ -3285,7 +3285,7 @@ export class OsConfigZonalServiceClient {
    */
   close(): Promise<void> {
     if (this.osConfigZonalServiceStub && !this._terminated) {
-      return this.osConfigZonalServiceStub.then((stub) => {
+      return this.osConfigZonalServiceStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

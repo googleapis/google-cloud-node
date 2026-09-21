@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as userlistdirectlicenseserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -170,7 +170,7 @@ describe('v1.UserListDirectLicenseServiceClient', () => {
     it('sets apiEndpoint according to universe domain camelCase', () => {
       const client =
         new userlistdirectlicenseserviceModule.v1.UserListDirectLicenseServiceClient(
-          { universeDomain: 'example.com' },
+          {universeDomain: 'example.com'},
         );
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'datamanager.example.com');
@@ -179,7 +179,7 @@ describe('v1.UserListDirectLicenseServiceClient', () => {
     it('sets apiEndpoint according to universe domain snakeCase', () => {
       const client =
         new userlistdirectlicenseserviceModule.v1.UserListDirectLicenseServiceClient(
-          { universe_domain: 'example.com' },
+          {universe_domain: 'example.com'},
         );
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'datamanager.example.com');
@@ -206,7 +206,7 @@ describe('v1.UserListDirectLicenseServiceClient', () => {
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client =
             new userlistdirectlicenseserviceModule.v1.UserListDirectLicenseServiceClient(
-              { universeDomain: 'configured.example.com' },
+              {universeDomain: 'configured.example.com'},
             );
           const servicePath = client.apiEndpoint;
           assert.strictEqual(servicePath, 'datamanager.configured.example.com');
@@ -221,7 +221,7 @@ describe('v1.UserListDirectLicenseServiceClient', () => {
     it('does not allow setting both universeDomain and universe_domain', () => {
       assert.throws(() => {
         new userlistdirectlicenseserviceModule.v1.UserListDirectLicenseServiceClient(
-          { universe_domain: 'example.com', universeDomain: 'example.net' },
+          {universe_domain: 'example.com', universeDomain: 'example.net'},
         );
       });
     });
@@ -254,7 +254,7 @@ describe('v1.UserListDirectLicenseServiceClient', () => {
       const client =
         new userlistdirectlicenseserviceModule.v1.UserListDirectLicenseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -263,15 +263,15 @@ describe('v1.UserListDirectLicenseServiceClient', () => {
       assert(client.userListDirectLicenseServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new userlistdirectlicenseserviceModule.v1.UserListDirectLicenseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.userListDirectLicenseServiceStub);
@@ -280,16 +280,16 @@ describe('v1.UserListDirectLicenseServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new userlistdirectlicenseserviceModule.v1.UserListDirectLicenseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -299,7 +299,7 @@ describe('v1.UserListDirectLicenseServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -309,7 +309,7 @@ describe('v1.UserListDirectLicenseServiceClient', () => {
       const client =
         new userlistdirectlicenseserviceModule.v1.UserListDirectLicenseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -324,7 +324,7 @@ describe('v1.UserListDirectLicenseServiceClient', () => {
       const client =
         new userlistdirectlicenseserviceModule.v1.UserListDirectLicenseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -350,7 +350,7 @@ describe('v1.UserListDirectLicenseServiceClient', () => {
       const client =
         new userlistdirectlicenseserviceModule.v1.UserListDirectLicenseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -385,7 +385,7 @@ describe('v1.UserListDirectLicenseServiceClient', () => {
       const client =
         new userlistdirectlicenseserviceModule.v1.UserListDirectLicenseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -435,7 +435,7 @@ describe('v1.UserListDirectLicenseServiceClient', () => {
       const client =
         new userlistdirectlicenseserviceModule.v1.UserListDirectLicenseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -472,7 +472,7 @@ describe('v1.UserListDirectLicenseServiceClient', () => {
       const client =
         new userlistdirectlicenseserviceModule.v1.UserListDirectLicenseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -486,7 +486,7 @@ describe('v1.UserListDirectLicenseServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -501,7 +501,7 @@ describe('v1.UserListDirectLicenseServiceClient', () => {
       const client =
         new userlistdirectlicenseserviceModule.v1.UserListDirectLicenseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -536,7 +536,7 @@ describe('v1.UserListDirectLicenseServiceClient', () => {
       const client =
         new userlistdirectlicenseserviceModule.v1.UserListDirectLicenseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -586,7 +586,7 @@ describe('v1.UserListDirectLicenseServiceClient', () => {
       const client =
         new userlistdirectlicenseserviceModule.v1.UserListDirectLicenseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -623,7 +623,7 @@ describe('v1.UserListDirectLicenseServiceClient', () => {
       const client =
         new userlistdirectlicenseserviceModule.v1.UserListDirectLicenseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -637,7 +637,7 @@ describe('v1.UserListDirectLicenseServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -652,7 +652,7 @@ describe('v1.UserListDirectLicenseServiceClient', () => {
       const client =
         new userlistdirectlicenseserviceModule.v1.UserListDirectLicenseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -688,7 +688,7 @@ describe('v1.UserListDirectLicenseServiceClient', () => {
       const client =
         new userlistdirectlicenseserviceModule.v1.UserListDirectLicenseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -739,7 +739,7 @@ describe('v1.UserListDirectLicenseServiceClient', () => {
       const client =
         new userlistdirectlicenseserviceModule.v1.UserListDirectLicenseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -777,7 +777,7 @@ describe('v1.UserListDirectLicenseServiceClient', () => {
       const client =
         new userlistdirectlicenseserviceModule.v1.UserListDirectLicenseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -792,7 +792,7 @@ describe('v1.UserListDirectLicenseServiceClient', () => {
       );
       request.userListDirectLicense.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -807,7 +807,7 @@ describe('v1.UserListDirectLicenseServiceClient', () => {
       const client =
         new userlistdirectlicenseserviceModule.v1.UserListDirectLicenseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -850,7 +850,7 @@ describe('v1.UserListDirectLicenseServiceClient', () => {
       const client =
         new userlistdirectlicenseserviceModule.v1.UserListDirectLicenseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -883,8 +883,7 @@ describe('v1.UserListDirectLicenseServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.ads.datamanager.v1.IUserListDirectLicense[]
-              | null,
+              protos.google.ads.datamanager.v1.IUserListDirectLicense[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -910,7 +909,7 @@ describe('v1.UserListDirectLicenseServiceClient', () => {
       const client =
         new userlistdirectlicenseserviceModule.v1.UserListDirectLicenseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -947,7 +946,7 @@ describe('v1.UserListDirectLicenseServiceClient', () => {
       const client =
         new userlistdirectlicenseserviceModule.v1.UserListDirectLicenseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1019,7 +1018,7 @@ describe('v1.UserListDirectLicenseServiceClient', () => {
       const client =
         new userlistdirectlicenseserviceModule.v1.UserListDirectLicenseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1080,7 +1079,7 @@ describe('v1.UserListDirectLicenseServiceClient', () => {
       const client =
         new userlistdirectlicenseserviceModule.v1.UserListDirectLicenseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1137,7 +1136,7 @@ describe('v1.UserListDirectLicenseServiceClient', () => {
       const client =
         new userlistdirectlicenseserviceModule.v1.UserListDirectLicenseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1192,7 +1191,7 @@ describe('v1.UserListDirectLicenseServiceClient', () => {
       const client =
         new userlistdirectlicenseserviceModule.v1.UserListDirectLicenseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1245,7 +1244,7 @@ describe('v1.UserListDirectLicenseServiceClient', () => {
       const client =
         new userlistdirectlicenseserviceModule.v1.UserListDirectLicenseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1312,7 +1311,7 @@ describe('v1.UserListDirectLicenseServiceClient', () => {
       const client =
         new userlistdirectlicenseserviceModule.v1.UserListDirectLicenseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1379,7 +1378,7 @@ describe('v1.UserListDirectLicenseServiceClient', () => {
       const client =
         new userlistdirectlicenseserviceModule.v1.UserListDirectLicenseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1463,7 +1462,7 @@ describe('v1.UserListDirectLicenseServiceClient', () => {
       const client =
         new userlistdirectlicenseserviceModule.v1.UserListDirectLicenseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1548,7 +1547,7 @@ describe('v1.UserListDirectLicenseServiceClient', () => {
       const client =
         new userlistdirectlicenseserviceModule.v1.UserListDirectLicenseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );

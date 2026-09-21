@@ -30,6 +30,11 @@
                 "generateAutonomousDatabaseWallet"
               ]
             },
+            "GetAutonomousDatabaseRefreshableClones": {
+              "methods": [
+                "getAutonomousDatabaseRefreshableClones"
+              ]
+            },
             "GetOdbNetwork": {
               "methods": [
                 "getOdbNetwork"
@@ -153,6 +158,11 @@
             "FailoverAutonomousDatabase": {
               "methods": [
                 "failoverAutonomousDatabase"
+              ]
+            },
+            "RefreshAutonomousDatabase": {
+              "methods": [
+                "refreshAutonomousDatabase"
               ]
             },
             "CreateOdbNetwork": {
@@ -483,6 +493,11 @@
                 "generateAutonomousDatabaseWallet"
               ]
             },
+            "GetAutonomousDatabaseRefreshableClones": {
+              "methods": [
+                "getAutonomousDatabaseRefreshableClones"
+              ]
+            },
             "GetOdbNetwork": {
               "methods": [
                 "getOdbNetwork"
@@ -606,6 +621,11 @@
             "FailoverAutonomousDatabase": {
               "methods": [
                 "failoverAutonomousDatabase"
+              ]
+            },
+            "RefreshAutonomousDatabase": {
+              "methods": [
+                "refreshAutonomousDatabase"
               ]
             },
             "CreateOdbNetwork": {

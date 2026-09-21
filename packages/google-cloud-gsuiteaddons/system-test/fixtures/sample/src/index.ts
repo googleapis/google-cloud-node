@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import { GSuiteAddOnsClient } from '@google-cloud/gsuiteaddons';
+import {GSuiteAddOnsClient} from '@google-cloud/gsuiteaddons';
 
 // check that the client class type name can be used
 function doStuffWithGSuiteAddOnsClient(client: GSuiteAddOnsClient) {

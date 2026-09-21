@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as aclconfigserviceModule from '../src';
 
-import { protobuf, LocationProtos } from 'google-gax';
+import {protobuf, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -43,7 +43,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -77,9 +77,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -207,7 +207,7 @@ describe('v1alpha.AclConfigServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new aclconfigserviceModule.v1alpha.AclConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.aclConfigServiceStub, undefined);
@@ -215,12 +215,12 @@ describe('v1alpha.AclConfigServiceClient', () => {
       assert(client.aclConfigServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new aclconfigserviceModule.v1alpha.AclConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.aclConfigServiceStub);
@@ -229,14 +229,14 @@ describe('v1alpha.AclConfigServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new aclconfigserviceModule.v1alpha.AclConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.aclConfigServiceStub, undefined);
@@ -245,7 +245,7 @@ describe('v1alpha.AclConfigServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -253,7 +253,7 @@ describe('v1alpha.AclConfigServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new aclconfigserviceModule.v1alpha.AclConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -265,7 +265,7 @@ describe('v1alpha.AclConfigServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new aclconfigserviceModule.v1alpha.AclConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -288,7 +288,7 @@ describe('v1alpha.AclConfigServiceClient', () => {
   describe('updateAclConfig', () => {
     it('invokes updateAclConfig without error', async () => {
       const client = new aclconfigserviceModule.v1alpha.AclConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -320,7 +320,7 @@ describe('v1alpha.AclConfigServiceClient', () => {
 
     it('invokes updateAclConfig without error using callback', async () => {
       const client = new aclconfigserviceModule.v1alpha.AclConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -368,7 +368,7 @@ describe('v1alpha.AclConfigServiceClient', () => {
 
     it('invokes updateAclConfig with error', async () => {
       const client = new aclconfigserviceModule.v1alpha.AclConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -400,7 +400,7 @@ describe('v1alpha.AclConfigServiceClient', () => {
 
     it('invokes updateAclConfig with closed client', async () => {
       const client = new aclconfigserviceModule.v1alpha.AclConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -414,7 +414,7 @@ describe('v1alpha.AclConfigServiceClient', () => {
       );
       request.aclConfig.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateAclConfig(request), expectedError);
@@ -424,7 +424,7 @@ describe('v1alpha.AclConfigServiceClient', () => {
   describe('getAclConfig', () => {
     it('invokes getAclConfig without error', async () => {
       const client = new aclconfigserviceModule.v1alpha.AclConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -455,7 +455,7 @@ describe('v1alpha.AclConfigServiceClient', () => {
 
     it('invokes getAclConfig without error using callback', async () => {
       const client = new aclconfigserviceModule.v1alpha.AclConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -502,7 +502,7 @@ describe('v1alpha.AclConfigServiceClient', () => {
 
     it('invokes getAclConfig with error', async () => {
       const client = new aclconfigserviceModule.v1alpha.AclConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -533,7 +533,7 @@ describe('v1alpha.AclConfigServiceClient', () => {
 
     it('invokes getAclConfig with closed client', async () => {
       const client = new aclconfigserviceModule.v1alpha.AclConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -546,7 +546,7 @@ describe('v1alpha.AclConfigServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getAclConfig(request), expectedError);
@@ -555,7 +555,7 @@ describe('v1alpha.AclConfigServiceClient', () => {
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new aclconfigserviceModule.v1alpha.AclConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -585,7 +585,7 @@ describe('v1alpha.AclConfigServiceClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new aclconfigserviceModule.v1alpha.AclConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -629,7 +629,7 @@ describe('v1alpha.AclConfigServiceClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new aclconfigserviceModule.v1alpha.AclConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -664,7 +664,7 @@ describe('v1alpha.AclConfigServiceClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new aclconfigserviceModule.v1alpha.AclConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -712,7 +712,7 @@ describe('v1alpha.AclConfigServiceClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new aclconfigserviceModule.v1alpha.AclConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -759,7 +759,7 @@ describe('v1alpha.AclConfigServiceClient', () => {
         location: 'locationValue',
       };
       const client = new aclconfigserviceModule.v1alpha.AclConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -810,7 +810,7 @@ describe('v1alpha.AclConfigServiceClient', () => {
         engine: 'engineValue',
       };
       const client = new aclconfigserviceModule.v1alpha.AclConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -885,7 +885,7 @@ describe('v1alpha.AclConfigServiceClient', () => {
         evaluation: 'evaluationValue',
       };
       const client = new aclconfigserviceModule.v1alpha.AclConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -947,7 +947,7 @@ describe('v1alpha.AclConfigServiceClient', () => {
         project: 'projectValue',
       };
       const client = new aclconfigserviceModule.v1alpha.AclConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -988,7 +988,7 @@ describe('v1alpha.AclConfigServiceClient', () => {
         data_store: 'dataStoreValue',
       };
       const client = new aclconfigserviceModule.v1alpha.AclConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1092,7 +1092,7 @@ describe('v1alpha.AclConfigServiceClient', () => {
         document: 'documentValue',
       };
       const client = new aclconfigserviceModule.v1alpha.AclConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1239,7 +1239,7 @@ describe('v1alpha.AclConfigServiceClient', () => {
         chunk: 'chunkValue',
       };
       const client = new aclconfigserviceModule.v1alpha.AclConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1402,7 +1402,7 @@ describe('v1alpha.AclConfigServiceClient', () => {
         control: 'controlValue',
       };
       const client = new aclconfigserviceModule.v1alpha.AclConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1528,7 +1528,7 @@ describe('v1alpha.AclConfigServiceClient', () => {
         conversation: 'conversationValue',
       };
       const client = new aclconfigserviceModule.v1alpha.AclConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1655,7 +1655,7 @@ describe('v1alpha.AclConfigServiceClient', () => {
         custom_tuning_model: 'customTuningModelValue',
       };
       const client = new aclconfigserviceModule.v1alpha.AclConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1781,7 +1781,7 @@ describe('v1alpha.AclConfigServiceClient', () => {
         data_store: 'dataStoreValue',
       };
       const client = new aclconfigserviceModule.v1alpha.AclConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1890,7 +1890,7 @@ describe('v1alpha.AclConfigServiceClient', () => {
         schema: 'schemaValue',
       };
       const client = new aclconfigserviceModule.v1alpha.AclConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2016,7 +2016,7 @@ describe('v1alpha.AclConfigServiceClient', () => {
         serving_config: 'servingConfigValue',
       };
       const client = new aclconfigserviceModule.v1alpha.AclConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2144,7 +2144,7 @@ describe('v1alpha.AclConfigServiceClient', () => {
         answer: 'answerValue',
       };
       const client = new aclconfigserviceModule.v1alpha.AclConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2289,7 +2289,7 @@ describe('v1alpha.AclConfigServiceClient', () => {
         session: 'sessionValue',
       };
       const client = new aclconfigserviceModule.v1alpha.AclConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2414,7 +2414,7 @@ describe('v1alpha.AclConfigServiceClient', () => {
         data_store: 'dataStoreValue',
       };
       const client = new aclconfigserviceModule.v1alpha.AclConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2523,7 +2523,7 @@ describe('v1alpha.AclConfigServiceClient', () => {
         target_site: 'targetSiteValue',
       };
       const client = new aclconfigserviceModule.v1alpha.AclConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2649,7 +2649,7 @@ describe('v1alpha.AclConfigServiceClient', () => {
         control: 'controlValue',
       };
       const client = new aclconfigserviceModule.v1alpha.AclConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2775,7 +2775,7 @@ describe('v1alpha.AclConfigServiceClient', () => {
         conversation: 'conversationValue',
       };
       const client = new aclconfigserviceModule.v1alpha.AclConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2901,7 +2901,7 @@ describe('v1alpha.AclConfigServiceClient', () => {
         serving_config: 'servingConfigValue',
       };
       const client = new aclconfigserviceModule.v1alpha.AclConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3028,7 +3028,7 @@ describe('v1alpha.AclConfigServiceClient', () => {
         answer: 'answerValue',
       };
       const client = new aclconfigserviceModule.v1alpha.AclConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3171,7 +3171,7 @@ describe('v1alpha.AclConfigServiceClient', () => {
         session: 'sessionValue',
       };
       const client = new aclconfigserviceModule.v1alpha.AclConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3294,7 +3294,7 @@ describe('v1alpha.AclConfigServiceClient', () => {
         data_store: 'dataStoreValue',
       };
       const client = new aclconfigserviceModule.v1alpha.AclConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3375,7 +3375,7 @@ describe('v1alpha.AclConfigServiceClient', () => {
         document: 'documentValue',
       };
       const client = new aclconfigserviceModule.v1alpha.AclConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3502,7 +3502,7 @@ describe('v1alpha.AclConfigServiceClient', () => {
         chunk: 'chunkValue',
       };
       const client = new aclconfigserviceModule.v1alpha.AclConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3644,7 +3644,7 @@ describe('v1alpha.AclConfigServiceClient', () => {
         control: 'controlValue',
       };
       const client = new aclconfigserviceModule.v1alpha.AclConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3739,7 +3739,7 @@ describe('v1alpha.AclConfigServiceClient', () => {
         conversation: 'conversationValue',
       };
       const client = new aclconfigserviceModule.v1alpha.AclConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3846,7 +3846,7 @@ describe('v1alpha.AclConfigServiceClient', () => {
         custom_tuning_model: 'customTuningModelValue',
       };
       const client = new aclconfigserviceModule.v1alpha.AclConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3952,7 +3952,7 @@ describe('v1alpha.AclConfigServiceClient', () => {
         data_store: 'dataStoreValue',
       };
       const client = new aclconfigserviceModule.v1alpha.AclConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4041,7 +4041,7 @@ describe('v1alpha.AclConfigServiceClient', () => {
         schema: 'schemaValue',
       };
       const client = new aclconfigserviceModule.v1alpha.AclConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4134,7 +4134,7 @@ describe('v1alpha.AclConfigServiceClient', () => {
         serving_config: 'servingConfigValue',
       };
       const client = new aclconfigserviceModule.v1alpha.AclConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4241,7 +4241,7 @@ describe('v1alpha.AclConfigServiceClient', () => {
         answer: 'answerValue',
       };
       const client = new aclconfigserviceModule.v1alpha.AclConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4365,7 +4365,7 @@ describe('v1alpha.AclConfigServiceClient', () => {
         session: 'sessionValue',
       };
       const client = new aclconfigserviceModule.v1alpha.AclConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4462,7 +4462,7 @@ describe('v1alpha.AclConfigServiceClient', () => {
         data_store: 'dataStoreValue',
       };
       const client = new aclconfigserviceModule.v1alpha.AclConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4551,7 +4551,7 @@ describe('v1alpha.AclConfigServiceClient', () => {
         target_site: 'targetSiteValue',
       };
       const client = new aclconfigserviceModule.v1alpha.AclConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4658,7 +4658,7 @@ describe('v1alpha.AclConfigServiceClient', () => {
         sample_query: 'sampleQueryValue',
       };
       const client = new aclconfigserviceModule.v1alpha.AclConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4733,7 +4733,7 @@ describe('v1alpha.AclConfigServiceClient', () => {
         sample_query_set: 'sampleQuerySetValue',
       };
       const client = new aclconfigserviceModule.v1alpha.AclConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

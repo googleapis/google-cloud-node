@@ -26,10 +26,10 @@ import type {
   PaginationCallback,
   GaxCall,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -51,7 +51,7 @@ export class AnalyticsAdminServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('admin');
@@ -64,9 +64,9 @@ export class AnalyticsAdminServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
-  pathTemplates: { [name: string]: gax.PathTemplate };
-  analyticsAdminServiceStub?: Promise<{ [name: string]: Function }>;
+  innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
+  analyticsAdminServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of AnalyticsAdminServiceClient.
@@ -143,7 +143,7 @@ export class AnalyticsAdminServiceClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -479,7 +479,7 @@ export class AnalyticsAdminServiceClient {
       'google.analytics.admin.v1alpha.AnalyticsAdminService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -520,7 +520,7 @@ export class AnalyticsAdminServiceClient {
             .AnalyticsAdminService,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -684,7 +684,7 @@ export class AnalyticsAdminServiceClient {
     ];
     for (const methodName of analyticsAdminServiceStubMethods) {
       const callPromise = this.analyticsAdminServiceStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -889,7 +889,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getAccount request %j', request);
@@ -1035,7 +1035,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteAccount request %j', request);
@@ -1178,7 +1178,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'account.name': request.account!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateAccount request %j', request);
@@ -1320,7 +1320,7 @@ export class AnalyticsAdminServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('provisionAccountTicket request %j', request);
@@ -1459,7 +1459,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getProperty request %j', request);
@@ -1591,7 +1591,7 @@ export class AnalyticsAdminServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createProperty request %j', request);
@@ -1740,7 +1740,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteProperty request %j', request);
@@ -1884,7 +1884,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'property.name': request.property!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateProperty request %j', request);
@@ -2033,7 +2033,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createFirebaseLink request %j', request);
@@ -2178,7 +2178,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteFirebaseLink request %j', request);
@@ -2326,7 +2326,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getGlobalSiteTag request %j', request);
@@ -2471,7 +2471,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createGoogleAdsLink request %j', request);
@@ -2619,7 +2619,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'google_ads_link.name': request.googleAdsLink!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateGoogleAdsLink request %j', request);
@@ -2762,7 +2762,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteGoogleAdsLink request %j', request);
@@ -2909,7 +2909,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getDataSharingSettings request %j', request);
@@ -3054,7 +3054,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getMeasurementProtocolSecret request %j', request);
@@ -3200,7 +3200,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createMeasurementProtocolSecret request %j', request);
@@ -3351,7 +3351,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteMeasurementProtocolSecret request %j', request);
@@ -3504,7 +3504,7 @@ export class AnalyticsAdminServiceClient {
         'measurement_protocol_secret.name':
           request.measurementProtocolSecret!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateMeasurementProtocolSecret request %j', request);
@@ -3666,7 +3666,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         property: request.property ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('acknowledgeUserDataCollection request %j', request);
@@ -3811,7 +3811,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getSKAdNetworkConversionValueSchema request %j', request);
@@ -3963,7 +3963,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info(
@@ -4117,7 +4117,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info(
@@ -4273,7 +4273,7 @@ export class AnalyticsAdminServiceClient {
         'skadnetwork_conversion_value_schema.name':
           request.skadnetworkConversionValueSchema!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info(
@@ -4426,7 +4426,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getGoogleSignalsSettings request %j', request);
@@ -4576,7 +4576,7 @@ export class AnalyticsAdminServiceClient {
         'google_signals_settings.name':
           request.googleSignalsSettings!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateGoogleSignalsSettings request %j', request);
@@ -4724,7 +4724,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this.warn(
@@ -4880,7 +4880,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'conversion_event.name': request.conversionEvent!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this.warn(
@@ -5032,7 +5032,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this.warn(
@@ -5184,7 +5184,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this.warn(
@@ -5329,7 +5329,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createKeyEvent request %j', request);
@@ -5472,7 +5472,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'key_event.name': request.keyEvent!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateKeyEvent request %j', request);
@@ -5611,7 +5611,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getKeyEvent request %j', request);
@@ -5747,7 +5747,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteKeyEvent request %j', request);
@@ -5891,7 +5891,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getDisplayVideo360AdvertiserLink request %j', request);
@@ -6046,7 +6046,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createDisplayVideo360AdvertiserLink request %j', request);
@@ -6196,7 +6196,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteDisplayVideo360AdvertiserLink request %j', request);
@@ -6350,7 +6350,7 @@ export class AnalyticsAdminServiceClient {
         'display_video_360_advertiser_link.name':
           request.displayVideo_360AdvertiserLink!.name?.toString() ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateDisplayVideo360AdvertiserLink request %j', request);
@@ -6500,7 +6500,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info(
@@ -6658,7 +6658,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info(
@@ -6816,7 +6816,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info(
@@ -6975,7 +6975,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info(
@@ -7136,7 +7136,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info(
@@ -7294,7 +7294,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createCustomDimension request %j', request);
@@ -7441,7 +7441,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'custom_dimension.name': request.customDimension!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateCustomDimension request %j', request);
@@ -7585,7 +7585,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('archiveCustomDimension request %j', request);
@@ -7729,7 +7729,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getCustomDimension request %j', request);
@@ -7874,7 +7874,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createCustomMetric request %j', request);
@@ -8021,7 +8021,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'custom_metric.name': request.customMetric!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateCustomMetric request %j', request);
@@ -8165,7 +8165,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('archiveCustomMetric request %j', request);
@@ -8303,7 +8303,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getCustomMetric request %j', request);
@@ -8449,7 +8449,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getDataRetentionSettings request %j', request);
@@ -8599,7 +8599,7 @@ export class AnalyticsAdminServiceClient {
         'data_retention_settings.name':
           request.dataRetentionSettings!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateDataRetentionSettings request %j', request);
@@ -8744,7 +8744,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createDataStream request %j', request);
@@ -8888,7 +8888,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteDataStream request %j', request);
@@ -9035,7 +9035,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'data_stream.name': request.dataStream!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateDataStream request %j', request);
@@ -9173,7 +9173,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getDataStream request %j', request);
@@ -9313,7 +9313,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getAudience request %j', request);
@@ -9449,7 +9449,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createAudience request %j', request);
@@ -9592,7 +9592,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'audience.name': request.audience!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateAudience request %j', request);
@@ -9729,7 +9729,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('archiveAudience request %j', request);
@@ -9873,7 +9873,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getSearchAds360Link request %j', request);
@@ -10018,7 +10018,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createSearchAds360Link request %j', request);
@@ -10162,7 +10162,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteSearchAds360Link request %j', request);
@@ -10309,7 +10309,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'search_ads_360_link.name': request.searchAds_360Link!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateSearchAds360Link request %j', request);
@@ -10453,7 +10453,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getAttributionSettings request %j', request);
@@ -10602,7 +10602,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'attribution_settings.name': request.attributionSettings!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateAttributionSettings request %j', request);
@@ -10833,7 +10833,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         entity: request.entity ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('runAccessReport request %j', request);
@@ -10980,7 +10980,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createAccessBinding request %j', request);
@@ -11126,7 +11126,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getAccessBinding request %j', request);
@@ -11269,7 +11269,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'access_binding.name': request.accessBinding!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateAccessBinding request %j', request);
@@ -11414,7 +11414,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteAccessBinding request %j', request);
@@ -11568,7 +11568,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('batchCreateAccessBindings request %j', request);
@@ -11721,7 +11721,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('batchGetAccessBindings request %j', request);
@@ -11873,7 +11873,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('batchUpdateAccessBindings request %j', request);
@@ -12023,7 +12023,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('batchDeleteAccessBindings request %j', request);
@@ -12167,7 +12167,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getExpandedDataSet request %j', request);
@@ -12312,7 +12312,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createExpandedDataSet request %j', request);
@@ -12462,7 +12462,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'expanded_data_set.name': request.expandedDataSet!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateExpandedDataSet request %j', request);
@@ -12605,7 +12605,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteExpandedDataSet request %j', request);
@@ -12743,7 +12743,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getChannelGroup request %j', request);
@@ -12889,7 +12889,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createChannelGroup request %j', request);
@@ -13039,7 +13039,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'channel_group.name': request.channelGroup!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateChannelGroup request %j', request);
@@ -13183,7 +13183,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteChannelGroup request %j', request);
@@ -13328,7 +13328,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createBigQueryLink request %j', request);
@@ -13467,7 +13467,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getBigQueryLink request %j', request);
@@ -13611,7 +13611,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteBigQueryLink request %j', request);
@@ -13760,7 +13760,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'bigquery_link.name': request.bigqueryLink!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateBigQueryLink request %j', request);
@@ -13908,7 +13908,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getEnhancedMeasurementSettings request %j', request);
@@ -14066,7 +14066,7 @@ export class AnalyticsAdminServiceClient {
         'enhanced_measurement_settings.name':
           request.enhancedMeasurementSettings!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateEnhancedMeasurementSettings request %j', request);
@@ -14211,7 +14211,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getAdSenseLink request %j', request);
@@ -14358,7 +14358,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createAdSenseLink request %j', request);
@@ -14503,7 +14503,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteAdSenseLink request %j', request);
@@ -14647,7 +14647,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getEventCreateRule request %j', request);
@@ -14792,7 +14792,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createEventCreateRule request %j', request);
@@ -14942,7 +14942,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'event_create_rule.name': request.eventCreateRule!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateEventCreateRule request %j', request);
@@ -15086,7 +15086,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteEventCreateRule request %j', request);
@@ -15230,7 +15230,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getEventEditRule request %j', request);
@@ -15375,7 +15375,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createEventEditRule request %j', request);
@@ -15525,7 +15525,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'event_edit_rule.name': request.eventEditRule!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateEventEditRule request %j', request);
@@ -15668,7 +15668,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteEventEditRule request %j', request);
@@ -15815,7 +15815,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('reorderEventEditRules request %j', request);
@@ -15965,7 +15965,7 @@ export class AnalyticsAdminServiceClient {
         'data_redaction_settings.name':
           request.dataRedactionSettings!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateDataRedactionSettings request %j', request);
@@ -16111,7 +16111,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getDataRedactionSettings request %j', request);
@@ -16256,7 +16256,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getCalculatedMetric request %j', request);
@@ -16411,7 +16411,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createCalculatedMetric request %j', request);
@@ -16558,7 +16558,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'calculated_metric.name': request.calculatedMetric!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateCalculatedMetric request %j', request);
@@ -16703,7 +16703,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteCalculatedMetric request %j', request);
@@ -16845,7 +16845,7 @@ export class AnalyticsAdminServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createRollupProperty request %j', request);
@@ -16993,7 +16993,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getRollupPropertySourceLink request %j', request);
@@ -17141,7 +17141,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createRollupPropertySourceLink request %j', request);
@@ -17294,7 +17294,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteRollupPropertySourceLink request %j', request);
@@ -17445,7 +17445,7 @@ export class AnalyticsAdminServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('provisionSubproperty request %j', request);
@@ -17591,7 +17591,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createSubpropertyEventFilter request %j', request);
@@ -17737,7 +17737,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getSubpropertyEventFilter request %j', request);
@@ -17886,7 +17886,7 @@ export class AnalyticsAdminServiceClient {
         'subproperty_event_filter.name':
           request.subpropertyEventFilter!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateSubpropertyEventFilter request %j', request);
@@ -18032,7 +18032,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteSubpropertyEventFilter request %j', request);
@@ -18179,7 +18179,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createReportingDataAnnotation request %j', request);
@@ -18325,7 +18325,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getReportingDataAnnotation request %j', request);
@@ -18474,7 +18474,7 @@ export class AnalyticsAdminServiceClient {
         'reporting_data_annotation.name':
           request.reportingDataAnnotation!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateReportingDataAnnotation request %j', request);
@@ -18620,7 +18620,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteReportingDataAnnotation request %j', request);
@@ -18787,7 +18787,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('submitUserDeletion request %j', request);
@@ -18936,7 +18936,7 @@ export class AnalyticsAdminServiceClient {
         'subproperty_sync_config.name':
           request.subpropertySyncConfig!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateSubpropertySyncConfig request %j', request);
@@ -19082,7 +19082,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getSubpropertySyncConfig request %j', request);
@@ -19228,7 +19228,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getReportingIdentitySettings request %j', request);
@@ -19379,7 +19379,7 @@ export class AnalyticsAdminServiceClient {
         'reporting_identity_settings.name':
           request.reportingIdentitySettings!.name?.toString() ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateReportingIdentitySettings request %j', request);
@@ -19529,7 +19529,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getUserProvidedDataSettings request %j', request);
@@ -19682,7 +19682,7 @@ export class AnalyticsAdminServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -19753,7 +19753,7 @@ export class AnalyticsAdminServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listAccounts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listAccounts stream %j', request);
@@ -19806,7 +19806,7 @@ export class AnalyticsAdminServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listAccounts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listAccounts iterate %j', request);
@@ -19910,7 +19910,7 @@ export class AnalyticsAdminServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -19977,7 +19977,7 @@ export class AnalyticsAdminServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listAccountSummaries'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listAccountSummaries stream %j', request);
@@ -20026,7 +20026,7 @@ export class AnalyticsAdminServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listAccountSummaries'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listAccountSummaries iterate %j', request);
@@ -20155,7 +20155,7 @@ export class AnalyticsAdminServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -20243,7 +20243,7 @@ export class AnalyticsAdminServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listProperties'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listProperties stream %j', request);
@@ -20313,7 +20313,7 @@ export class AnalyticsAdminServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listProperties'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listProperties iterate %j', request);
@@ -20426,7 +20426,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -20501,7 +20501,7 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listFirebaseLinks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listFirebaseLinks stream %j', request);
@@ -20558,7 +20558,7 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listFirebaseLinks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listFirebaseLinks iterate %j', request);
@@ -20668,7 +20668,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -20741,7 +20741,7 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listGoogleAdsLinks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listGoogleAdsLinks stream %j', request);
@@ -20796,7 +20796,7 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listGoogleAdsLinks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listGoogleAdsLinks iterate %j', request);
@@ -20909,7 +20909,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -20985,7 +20985,7 @@ export class AnalyticsAdminServiceClient {
     const defaultCallSettings =
       this._defaults['listMeasurementProtocolSecrets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listMeasurementProtocolSecrets stream %j', request);
@@ -21043,7 +21043,7 @@ export class AnalyticsAdminServiceClient {
     const defaultCallSettings =
       this._defaults['listMeasurementProtocolSecrets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listMeasurementProtocolSecrets iterate %j', request);
@@ -21158,7 +21158,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -21242,7 +21242,7 @@ export class AnalyticsAdminServiceClient {
     const defaultCallSettings =
       this._defaults['listSkAdNetworkConversionValueSchemas'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listSKAdNetworkConversionValueSchemas stream %j', request);
@@ -21302,7 +21302,7 @@ export class AnalyticsAdminServiceClient {
     const defaultCallSettings =
       this._defaults['listSkAdNetworkConversionValueSchemas'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listSKAdNetworkConversionValueSchemas iterate %j', request);
@@ -21444,7 +21444,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         account: request.account ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -21545,7 +21545,7 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['searchChangeHistoryEvents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('searchChangeHistoryEvents stream %j', request);
@@ -21628,7 +21628,7 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['searchChangeHistoryEvents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('searchChangeHistoryEvents iterate %j', request);
@@ -21742,7 +21742,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this.warn(
@@ -21821,7 +21821,7 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listConversionEvents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this.warn(
@@ -21882,7 +21882,7 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listConversionEvents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this.warn(
@@ -21998,7 +21998,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -22071,7 +22071,7 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listKeyEvents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listKeyEvents stream %j', request);
@@ -22126,7 +22126,7 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listKeyEvents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listKeyEvents iterate %j', request);
@@ -22237,7 +22237,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -22318,7 +22318,7 @@ export class AnalyticsAdminServiceClient {
     const defaultCallSettings =
       this._defaults['listDisplayVideo360AdvertiserLinks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listDisplayVideo360AdvertiserLinks stream %j', request);
@@ -22375,7 +22375,7 @@ export class AnalyticsAdminServiceClient {
     const defaultCallSettings =
       this._defaults['listDisplayVideo360AdvertiserLinks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listDisplayVideo360AdvertiserLinks iterate %j', request);
@@ -22487,7 +22487,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -22576,7 +22576,7 @@ export class AnalyticsAdminServiceClient {
     const defaultCallSettings =
       this._defaults['listDisplayVideo360AdvertiserLinkProposals'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info(
@@ -22637,7 +22637,7 @@ export class AnalyticsAdminServiceClient {
     const defaultCallSettings =
       this._defaults['listDisplayVideo360AdvertiserLinkProposals'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info(
@@ -22752,7 +22752,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -22825,7 +22825,7 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listCustomDimensions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listCustomDimensions stream %j', request);
@@ -22880,7 +22880,7 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listCustomDimensions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listCustomDimensions iterate %j', request);
@@ -22990,7 +22990,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -23063,7 +23063,7 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listCustomMetrics'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listCustomMetrics stream %j', request);
@@ -23118,7 +23118,7 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listCustomMetrics'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listCustomMetrics iterate %j', request);
@@ -23228,7 +23228,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -23301,7 +23301,7 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listDataStreams'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listDataStreams stream %j', request);
@@ -23356,7 +23356,7 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listDataStreams'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listDataStreams iterate %j', request);
@@ -23468,7 +23468,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -23541,7 +23541,7 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listAudiences'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listAudiences stream %j', request);
@@ -23596,7 +23596,7 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listAudiences'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listAudiences iterate %j', request);
@@ -23707,7 +23707,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -23781,7 +23781,7 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listSearchAds360Links'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listSearchAds360Links stream %j', request);
@@ -23837,7 +23837,7 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listSearchAds360Links'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listSearchAds360Links iterate %j', request);
@@ -23949,7 +23949,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -24024,7 +24024,7 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listAccessBindings'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listAccessBindings stream %j', request);
@@ -24081,7 +24081,7 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listAccessBindings'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listAccessBindings iterate %j', request);
@@ -24191,7 +24191,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -24264,7 +24264,7 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listExpandedDataSets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listExpandedDataSets stream %j', request);
@@ -24319,7 +24319,7 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listExpandedDataSets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listExpandedDataSets iterate %j', request);
@@ -24430,7 +24430,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -24504,7 +24504,7 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listChannelGroups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listChannelGroups stream %j', request);
@@ -24560,7 +24560,7 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listChannelGroups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listChannelGroups iterate %j', request);
@@ -24672,7 +24672,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -24747,7 +24747,7 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listBigQueryLinks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listBigQueryLinks stream %j', request);
@@ -24804,7 +24804,7 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listBigQueryLinks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listBigQueryLinks iterate %j', request);
@@ -24916,7 +24916,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -24991,7 +24991,7 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listAdSenseLinks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listAdSenseLinks stream %j', request);
@@ -25048,7 +25048,7 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listAdSenseLinks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listAdSenseLinks iterate %j', request);
@@ -25158,7 +25158,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -25231,7 +25231,7 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listEventCreateRules'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listEventCreateRules stream %j', request);
@@ -25286,7 +25286,7 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listEventCreateRules'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listEventCreateRules iterate %j', request);
@@ -25396,7 +25396,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -25469,7 +25469,7 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listEventEditRules'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listEventEditRules stream %j', request);
@@ -25524,7 +25524,7 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listEventEditRules'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listEventEditRules iterate %j', request);
@@ -25634,7 +25634,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -25707,7 +25707,7 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listCalculatedMetrics'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listCalculatedMetrics stream %j', request);
@@ -25762,7 +25762,7 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listCalculatedMetrics'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listCalculatedMetrics iterate %j', request);
@@ -25876,7 +25876,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -25951,7 +25951,7 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listRollupPropertySourceLinks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listRollupPropertySourceLinks stream %j', request);
@@ -26008,7 +26008,7 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listRollupPropertySourceLinks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listRollupPropertySourceLinks iterate %j', request);
@@ -26121,7 +26121,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -26197,7 +26197,7 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listSubpropertyEventFilters'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listSubpropertyEventFilters stream %j', request);
@@ -26255,7 +26255,7 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listSubpropertyEventFilters'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listSubpropertyEventFilters iterate %j', request);
@@ -26413,7 +26413,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -26534,7 +26534,7 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listReportingDataAnnotations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listReportingDataAnnotations stream %j', request);
@@ -26637,7 +26637,7 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listReportingDataAnnotations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listReportingDataAnnotations iterate %j', request);
@@ -26750,7 +26750,7 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -26826,7 +26826,7 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listSubpropertySyncConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listSubpropertySyncConfigs stream %j', request);
@@ -26884,7 +26884,7 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listSubpropertySyncConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listSubpropertySyncConfigs iterate %j', request);
@@ -28356,7 +28356,7 @@ export class AnalyticsAdminServiceClient {
    */
   close(): Promise<void> {
     if (this.analyticsAdminServiceStub && !this._terminated) {
-      return this.analyticsAdminServiceStub.then((stub) => {
+      return this.analyticsAdminServiceStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

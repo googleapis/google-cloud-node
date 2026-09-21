@@ -27,7 +27,7 @@ import type {
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -49,7 +49,7 @@ export class GeocodeServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('geocode');
@@ -62,8 +62,8 @@ export class GeocodeServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
-  geocodeServiceStub?: Promise<{ [name: string]: Function }>;
+  innerApiCalls: {[name: string]: Function};
+  geocodeServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of GeocodeServiceClient.
@@ -139,7 +139,7 @@ export class GeocodeServiceClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -200,7 +200,7 @@ export class GeocodeServiceClient {
       'google.maps.geocode.v4.GeocodeService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -240,7 +240,7 @@ export class GeocodeServiceClient {
           (this._protos as any).google.maps.geocode.v4.GeocodeService,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -251,7 +251,7 @@ export class GeocodeServiceClient {
     ];
     for (const methodName of geocodeServiceStubMethods) {
       const callPromise = this.geocodeServiceStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -462,7 +462,7 @@ export class GeocodeServiceClient {
       this._gaxModule.routingHeader.fromParams({
         address_query: request.addressQuery ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('geocodeAddress request %j', request);
@@ -608,7 +608,7 @@ export class GeocodeServiceClient {
       this._gaxModule.routingHeader.fromParams({
         location_query: request.locationQuery ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('geocodeLocation request %j', request);
@@ -740,7 +740,7 @@ export class GeocodeServiceClient {
       this._gaxModule.routingHeader.fromParams({
         place: request.place ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('geocodePlace request %j', request);
@@ -794,7 +794,7 @@ export class GeocodeServiceClient {
    */
   close(): Promise<void> {
     if (this.geocodeServiceStub && !this._terminated) {
-      return this.geocodeServiceStub.then((stub) => {
+      return this.geocodeServiceStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

@@ -5,6 +5,20 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/common?activeTab=versions
 
+## [8.1.0](https://github.com/googleapis/google-cloud-node/compare/common-v8.0.2...common-v8.1.0) (2026-09-15)
+
+
+### Features
+
+* PNPM workspace ([#8973](https://github.com/googleapis/google-cloud-node/issues/8973)) ([1ea27c9](https://github.com/googleapis/google-cloud-node/commit/1ea27c9c9bf4e4cbf79381321dcb9bce7951a76f))
+
+## [8.0.2](https://github.com/googleapis/google-cloud-node/compare/common-v8.0.1...common-v8.0.2) (2026-08-26)
+
+
+### Bug Fixes
+
+* Patch the vulnerability for Bigquery and other REST based clients ([#9188](https://github.com/googleapis/google-cloud-node/issues/9188)) ([94aac1e](https://github.com/googleapis/google-cloud-node/commit/94aac1eb121d6bbfbd92007befe8b8f159b4d379))
+
 ## [8.0.1](https://github.com/googleapis/google-cloud-node/compare/common-v8.0.0...common-v8.0.1) (2026-08-10)
 
 

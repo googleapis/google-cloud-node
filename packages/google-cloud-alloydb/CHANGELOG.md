@@ -1,5 +1,26 @@
 # Changelog
 
+## [3.3.0](https://github.com/googleapis/google-cloud-node/compare/alloydb-v3.2.0...alloydb-v3.3.0) (2026-09-15)
+
+
+### Features
+
+* Update API sources and regenerate ([#9293](https://github.com/googleapis/google-cloud-node/issues/9293)) ([07ae774](https://github.com/googleapis/google-cloud-node/commit/07ae774a8e52185a3598c878513377e7a019f127))
+
+## [3.2.0](https://github.com/googleapis/google-cloud-node/compare/alloydb-v3.1.0...alloydb-v3.2.0) (2026-09-08)
+
+
+### Features
+
+* Upgrade librarian gapic-generator-typescript to v5.2.0 ([c249594](https://github.com/googleapis/google-cloud-node/commit/c249594c6ef41e4b36f1ef8869341a4c98c092b0))
+
+## [3.1.0](https://github.com/googleapis/google-cloud-node/compare/alloydb-v3.0.0...alloydb-v3.1.0) (2026-08-21)
+
+
+### Features
+
+* Update sources and regenerate ([#9170](https://github.com/googleapis/google-cloud-node/issues/9170)) ([827fab0](https://github.com/googleapis/google-cloud-node/commit/827fab0ba7fc2067c800ae2cdd92fd21527380bf))
+
 ## [3.0.0](https://github.com/googleapis/google-cloud-node/compare/alloydb-v2.7.0...alloydb-v3.0.0) (2026-08-04)
 
 

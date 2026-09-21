@@ -4,6 +4,20 @@
 
 [1]: https://www.npmjs.com/package/PACKAGE NAME?activeTab=versions
 
+## [7.1.0](https://github.com/googleapis/google-cloud-node/compare/dlp-v7.0.1...dlp-v7.1.0) (2026-09-03)
+
+
+### Features
+
+* Update API sources and regenerate ([#9238](https://github.com/googleapis/google-cloud-node/issues/9238)) ([4c2bc95](https://github.com/googleapis/google-cloud-node/commit/4c2bc9510562e753340276ff5b21e1f18c71e7b2))
+
+## [7.0.1](https://github.com/googleapis/google-cloud-node/compare/dlp-v7.0.0...dlp-v7.0.1) (2026-08-12)
+
+
+### Bug Fixes
+
+* Upgrade generated package dependencies to Node 22 version for all core, handwritten and generated dependencies ([#9129](https://github.com/googleapis/google-cloud-node/issues/9129)) ([5f01912](https://github.com/googleapis/google-cloud-node/commit/5f0191225b96dabe41daa9f9d57a8c72749bf62d))
+
 ## [7.0.0](https://github.com/googleapis/google-cloud-node/compare/dlp-v6.7.0...dlp-v7.0.0) (2026-08-04)
 
 

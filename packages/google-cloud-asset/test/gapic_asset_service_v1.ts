@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as assetserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, LROperation, operationsProtos } from 'google-gax';
+import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -149,9 +149,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -271,7 +271,7 @@ describe('v1.AssetServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.assetServiceStub, undefined);
@@ -279,12 +279,12 @@ describe('v1.AssetServiceClient', () => {
       assert(client.assetServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.assetServiceStub);
@@ -293,14 +293,14 @@ describe('v1.AssetServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.assetServiceStub, undefined);
@@ -309,7 +309,7 @@ describe('v1.AssetServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -317,7 +317,7 @@ describe('v1.AssetServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -329,7 +329,7 @@ describe('v1.AssetServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -352,7 +352,7 @@ describe('v1.AssetServiceClient', () => {
   describe('batchGetAssetsHistory', () => {
     it('invokes batchGetAssetsHistory without error', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -384,7 +384,7 @@ describe('v1.AssetServiceClient', () => {
 
     it('invokes batchGetAssetsHistory without error using callback', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -431,7 +431,7 @@ describe('v1.AssetServiceClient', () => {
 
     it('invokes batchGetAssetsHistory with error', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -465,7 +465,7 @@ describe('v1.AssetServiceClient', () => {
 
     it('invokes batchGetAssetsHistory with closed client', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -478,7 +478,7 @@ describe('v1.AssetServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -491,7 +491,7 @@ describe('v1.AssetServiceClient', () => {
   describe('createFeed', () => {
     it('invokes createFeed without error', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -522,7 +522,7 @@ describe('v1.AssetServiceClient', () => {
 
     it('invokes createFeed without error using callback', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -569,7 +569,7 @@ describe('v1.AssetServiceClient', () => {
 
     it('invokes createFeed with error', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -600,7 +600,7 @@ describe('v1.AssetServiceClient', () => {
 
     it('invokes createFeed with closed client', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -613,7 +613,7 @@ describe('v1.AssetServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createFeed(request), expectedError);
@@ -623,7 +623,7 @@ describe('v1.AssetServiceClient', () => {
   describe('getFeed', () => {
     it('invokes getFeed without error', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -654,7 +654,7 @@ describe('v1.AssetServiceClient', () => {
 
     it('invokes getFeed without error using callback', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -701,7 +701,7 @@ describe('v1.AssetServiceClient', () => {
 
     it('invokes getFeed with error', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -729,7 +729,7 @@ describe('v1.AssetServiceClient', () => {
 
     it('invokes getFeed with closed client', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -742,7 +742,7 @@ describe('v1.AssetServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getFeed(request), expectedError);
@@ -752,7 +752,7 @@ describe('v1.AssetServiceClient', () => {
   describe('listFeeds', () => {
     it('invokes listFeeds without error', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -783,7 +783,7 @@ describe('v1.AssetServiceClient', () => {
 
     it('invokes listFeeds without error using callback', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -830,7 +830,7 @@ describe('v1.AssetServiceClient', () => {
 
     it('invokes listFeeds with error', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -858,7 +858,7 @@ describe('v1.AssetServiceClient', () => {
 
     it('invokes listFeeds with closed client', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -871,7 +871,7 @@ describe('v1.AssetServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.listFeeds(request), expectedError);
@@ -881,7 +881,7 @@ describe('v1.AssetServiceClient', () => {
   describe('updateFeed', () => {
     it('invokes updateFeed without error', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -913,7 +913,7 @@ describe('v1.AssetServiceClient', () => {
 
     it('invokes updateFeed without error using callback', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -961,7 +961,7 @@ describe('v1.AssetServiceClient', () => {
 
     it('invokes updateFeed with error', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -993,7 +993,7 @@ describe('v1.AssetServiceClient', () => {
 
     it('invokes updateFeed with closed client', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1007,7 +1007,7 @@ describe('v1.AssetServiceClient', () => {
       );
       request.feed.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateFeed(request), expectedError);
@@ -1017,7 +1017,7 @@ describe('v1.AssetServiceClient', () => {
   describe('deleteFeed', () => {
     it('invokes deleteFeed without error', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1048,7 +1048,7 @@ describe('v1.AssetServiceClient', () => {
 
     it('invokes deleteFeed without error using callback', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1095,7 +1095,7 @@ describe('v1.AssetServiceClient', () => {
 
     it('invokes deleteFeed with error', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1126,7 +1126,7 @@ describe('v1.AssetServiceClient', () => {
 
     it('invokes deleteFeed with closed client', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1139,7 +1139,7 @@ describe('v1.AssetServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteFeed(request), expectedError);
@@ -1149,7 +1149,7 @@ describe('v1.AssetServiceClient', () => {
   describe('analyzeIamPolicy', () => {
     it('invokes analyzeIamPolicy without error', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1181,7 +1181,7 @@ describe('v1.AssetServiceClient', () => {
 
     it('invokes analyzeIamPolicy without error using callback', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1229,7 +1229,7 @@ describe('v1.AssetServiceClient', () => {
 
     it('invokes analyzeIamPolicy with error', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1261,7 +1261,7 @@ describe('v1.AssetServiceClient', () => {
 
     it('invokes analyzeIamPolicy with closed client', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1275,7 +1275,7 @@ describe('v1.AssetServiceClient', () => {
       );
       request.analysisQuery.scope = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.analyzeIamPolicy(request), expectedError);
@@ -1285,7 +1285,7 @@ describe('v1.AssetServiceClient', () => {
   describe('analyzeMove', () => {
     it('invokes analyzeMove without error', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1316,7 +1316,7 @@ describe('v1.AssetServiceClient', () => {
 
     it('invokes analyzeMove without error using callback', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1363,7 +1363,7 @@ describe('v1.AssetServiceClient', () => {
 
     it('invokes analyzeMove with error', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1394,7 +1394,7 @@ describe('v1.AssetServiceClient', () => {
 
     it('invokes analyzeMove with closed client', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1407,7 +1407,7 @@ describe('v1.AssetServiceClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.analyzeMove(request), expectedError);
@@ -1417,7 +1417,7 @@ describe('v1.AssetServiceClient', () => {
   describe('queryAssets', () => {
     it('invokes queryAssets without error', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1448,7 +1448,7 @@ describe('v1.AssetServiceClient', () => {
 
     it('invokes queryAssets without error using callback', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1495,7 +1495,7 @@ describe('v1.AssetServiceClient', () => {
 
     it('invokes queryAssets with error', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1526,7 +1526,7 @@ describe('v1.AssetServiceClient', () => {
 
     it('invokes queryAssets with closed client', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1539,7 +1539,7 @@ describe('v1.AssetServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.queryAssets(request), expectedError);
@@ -1549,7 +1549,7 @@ describe('v1.AssetServiceClient', () => {
   describe('createSavedQuery', () => {
     it('invokes createSavedQuery without error', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1580,7 +1580,7 @@ describe('v1.AssetServiceClient', () => {
 
     it('invokes createSavedQuery without error using callback', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1627,7 +1627,7 @@ describe('v1.AssetServiceClient', () => {
 
     it('invokes createSavedQuery with error', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1658,7 +1658,7 @@ describe('v1.AssetServiceClient', () => {
 
     it('invokes createSavedQuery with closed client', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1671,7 +1671,7 @@ describe('v1.AssetServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createSavedQuery(request), expectedError);
@@ -1681,7 +1681,7 @@ describe('v1.AssetServiceClient', () => {
   describe('getSavedQuery', () => {
     it('invokes getSavedQuery without error', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1712,7 +1712,7 @@ describe('v1.AssetServiceClient', () => {
 
     it('invokes getSavedQuery without error using callback', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1759,7 +1759,7 @@ describe('v1.AssetServiceClient', () => {
 
     it('invokes getSavedQuery with error', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1790,7 +1790,7 @@ describe('v1.AssetServiceClient', () => {
 
     it('invokes getSavedQuery with closed client', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1803,7 +1803,7 @@ describe('v1.AssetServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getSavedQuery(request), expectedError);
@@ -1813,7 +1813,7 @@ describe('v1.AssetServiceClient', () => {
   describe('updateSavedQuery', () => {
     it('invokes updateSavedQuery without error', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1845,7 +1845,7 @@ describe('v1.AssetServiceClient', () => {
 
     it('invokes updateSavedQuery without error using callback', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1893,7 +1893,7 @@ describe('v1.AssetServiceClient', () => {
 
     it('invokes updateSavedQuery with error', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1925,7 +1925,7 @@ describe('v1.AssetServiceClient', () => {
 
     it('invokes updateSavedQuery with closed client', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1939,7 +1939,7 @@ describe('v1.AssetServiceClient', () => {
       );
       request.savedQuery.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateSavedQuery(request), expectedError);
@@ -1949,7 +1949,7 @@ describe('v1.AssetServiceClient', () => {
   describe('deleteSavedQuery', () => {
     it('invokes deleteSavedQuery without error', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1980,7 +1980,7 @@ describe('v1.AssetServiceClient', () => {
 
     it('invokes deleteSavedQuery without error using callback', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2027,7 +2027,7 @@ describe('v1.AssetServiceClient', () => {
 
     it('invokes deleteSavedQuery with error', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2058,7 +2058,7 @@ describe('v1.AssetServiceClient', () => {
 
     it('invokes deleteSavedQuery with closed client', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2071,7 +2071,7 @@ describe('v1.AssetServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteSavedQuery(request), expectedError);
@@ -2081,7 +2081,7 @@ describe('v1.AssetServiceClient', () => {
   describe('batchGetEffectiveIamPolicies', () => {
     it('invokes batchGetEffectiveIamPolicies without error', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2113,7 +2113,7 @@ describe('v1.AssetServiceClient', () => {
 
     it('invokes batchGetEffectiveIamPolicies without error using callback', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2160,7 +2160,7 @@ describe('v1.AssetServiceClient', () => {
 
     it('invokes batchGetEffectiveIamPolicies with error', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2194,7 +2194,7 @@ describe('v1.AssetServiceClient', () => {
 
     it('invokes batchGetEffectiveIamPolicies with closed client', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2207,7 +2207,7 @@ describe('v1.AssetServiceClient', () => {
       );
       request.scope = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -2220,7 +2220,7 @@ describe('v1.AssetServiceClient', () => {
   describe('exportAssets', () => {
     it('invokes exportAssets without error', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2252,7 +2252,7 @@ describe('v1.AssetServiceClient', () => {
 
     it('invokes exportAssets without error using callback', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2306,7 +2306,7 @@ describe('v1.AssetServiceClient', () => {
 
     it('invokes exportAssets with call error', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2337,7 +2337,7 @@ describe('v1.AssetServiceClient', () => {
 
     it('invokes exportAssets with LRO error', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2370,7 +2370,7 @@ describe('v1.AssetServiceClient', () => {
 
     it('invokes checkExportAssetsProgress without error', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2378,8 +2378,8 @@ describe('v1.AssetServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkExportAssetsProgress(
@@ -2392,7 +2392,7 @@ describe('v1.AssetServiceClient', () => {
 
     it('invokes checkExportAssetsProgress with error', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2410,7 +2410,7 @@ describe('v1.AssetServiceClient', () => {
   describe('analyzeIamPolicyLongrunning', () => {
     it('invokes analyzeIamPolicyLongrunning without error', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2444,7 +2444,7 @@ describe('v1.AssetServiceClient', () => {
 
     it('invokes analyzeIamPolicyLongrunning without error using callback', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2499,7 +2499,7 @@ describe('v1.AssetServiceClient', () => {
 
     it('invokes analyzeIamPolicyLongrunning with call error', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2534,7 +2534,7 @@ describe('v1.AssetServiceClient', () => {
 
     it('invokes analyzeIamPolicyLongrunning with LRO error', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2568,7 +2568,7 @@ describe('v1.AssetServiceClient', () => {
 
     it('invokes checkAnalyzeIamPolicyLongrunningProgress without error', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2576,8 +2576,8 @@ describe('v1.AssetServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -2591,7 +2591,7 @@ describe('v1.AssetServiceClient', () => {
 
     it('invokes checkAnalyzeIamPolicyLongrunningProgress with error', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2612,7 +2612,7 @@ describe('v1.AssetServiceClient', () => {
   describe('listAssets', () => {
     it('invokes listAssets without error', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2645,7 +2645,7 @@ describe('v1.AssetServiceClient', () => {
 
     it('invokes listAssets without error using callback', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2694,7 +2694,7 @@ describe('v1.AssetServiceClient', () => {
 
     it('invokes listAssets with error', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2725,7 +2725,7 @@ describe('v1.AssetServiceClient', () => {
 
     it('invokes listAssetsStream without error', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2768,15 +2768,15 @@ describe('v1.AssetServiceClient', () => {
       assert(
         (client.descriptors.page.listAssets.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listAssetsStream with error', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2816,15 +2816,15 @@ describe('v1.AssetServiceClient', () => {
       assert(
         (client.descriptors.page.listAssets.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listAssets without error', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2859,15 +2859,15 @@ describe('v1.AssetServiceClient', () => {
       assert(
         (client.descriptors.page.listAssets.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listAssets with error', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2901,9 +2901,9 @@ describe('v1.AssetServiceClient', () => {
       assert(
         (client.descriptors.page.listAssets.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2911,7 +2911,7 @@ describe('v1.AssetServiceClient', () => {
   describe('searchAllResources', () => {
     it('invokes searchAllResources without error', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2951,7 +2951,7 @@ describe('v1.AssetServiceClient', () => {
 
     it('invokes searchAllResources without error using callback', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2983,8 +2983,7 @@ describe('v1.AssetServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.asset.v1.IResourceSearchResult[]
-              | null,
+              protos.google.cloud.asset.v1.IResourceSearchResult[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -3008,7 +3007,7 @@ describe('v1.AssetServiceClient', () => {
 
     it('invokes searchAllResources with error', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3039,7 +3038,7 @@ describe('v1.AssetServiceClient', () => {
 
     it('invokes searchAllResourcesStream without error', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3092,15 +3091,15 @@ describe('v1.AssetServiceClient', () => {
       assert(
         (client.descriptors.page.searchAllResources.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes searchAllResourcesStream with error', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3142,15 +3141,15 @@ describe('v1.AssetServiceClient', () => {
       assert(
         (client.descriptors.page.searchAllResources.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with searchAllResources without error', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3192,15 +3191,15 @@ describe('v1.AssetServiceClient', () => {
       assert(
         (client.descriptors.page.searchAllResources.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with searchAllResources with error', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3233,9 +3232,9 @@ describe('v1.AssetServiceClient', () => {
       assert(
         (client.descriptors.page.searchAllResources.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -3243,7 +3242,7 @@ describe('v1.AssetServiceClient', () => {
   describe('searchAllIamPolicies', () => {
     it('invokes searchAllIamPolicies without error', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3283,7 +3282,7 @@ describe('v1.AssetServiceClient', () => {
 
     it('invokes searchAllIamPolicies without error using callback', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3315,8 +3314,7 @@ describe('v1.AssetServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.asset.v1.IIamPolicySearchResult[]
-              | null,
+              protos.google.cloud.asset.v1.IIamPolicySearchResult[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -3340,7 +3338,7 @@ describe('v1.AssetServiceClient', () => {
 
     it('invokes searchAllIamPolicies with error', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3371,7 +3369,7 @@ describe('v1.AssetServiceClient', () => {
 
     it('invokes searchAllIamPoliciesStream without error', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3424,15 +3422,15 @@ describe('v1.AssetServiceClient', () => {
       assert(
         (client.descriptors.page.searchAllIamPolicies.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes searchAllIamPoliciesStream with error', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3474,15 +3472,15 @@ describe('v1.AssetServiceClient', () => {
       assert(
         (client.descriptors.page.searchAllIamPolicies.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with searchAllIamPolicies without error', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3524,15 +3522,15 @@ describe('v1.AssetServiceClient', () => {
       assert(
         (client.descriptors.page.searchAllIamPolicies.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with searchAllIamPolicies with error', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3565,9 +3563,9 @@ describe('v1.AssetServiceClient', () => {
       assert(
         (client.descriptors.page.searchAllIamPolicies.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -3575,7 +3573,7 @@ describe('v1.AssetServiceClient', () => {
   describe('listSavedQueries', () => {
     it('invokes listSavedQueries without error', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3608,7 +3606,7 @@ describe('v1.AssetServiceClient', () => {
 
     it('invokes listSavedQueries without error using callback', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3657,7 +3655,7 @@ describe('v1.AssetServiceClient', () => {
 
     it('invokes listSavedQueries with error', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3688,7 +3686,7 @@ describe('v1.AssetServiceClient', () => {
 
     it('invokes listSavedQueriesStream without error', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3734,15 +3732,15 @@ describe('v1.AssetServiceClient', () => {
       assert(
         (client.descriptors.page.listSavedQueries.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listSavedQueriesStream with error', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3783,15 +3781,15 @@ describe('v1.AssetServiceClient', () => {
       assert(
         (client.descriptors.page.listSavedQueries.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listSavedQueries without error', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3826,15 +3824,15 @@ describe('v1.AssetServiceClient', () => {
       assert(
         (client.descriptors.page.listSavedQueries.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listSavedQueries with error', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3866,9 +3864,9 @@ describe('v1.AssetServiceClient', () => {
       assert(
         (client.descriptors.page.listSavedQueries.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -3876,7 +3874,7 @@ describe('v1.AssetServiceClient', () => {
   describe('analyzeOrgPolicies', () => {
     it('invokes analyzeOrgPolicies without error', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3916,7 +3914,7 @@ describe('v1.AssetServiceClient', () => {
 
     it('invokes analyzeOrgPolicies without error using callback', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3973,7 +3971,7 @@ describe('v1.AssetServiceClient', () => {
 
     it('invokes analyzeOrgPolicies with error', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4004,7 +4002,7 @@ describe('v1.AssetServiceClient', () => {
 
     it('invokes analyzeOrgPoliciesStream without error', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4059,15 +4057,15 @@ describe('v1.AssetServiceClient', () => {
       assert(
         (client.descriptors.page.analyzeOrgPolicies.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes analyzeOrgPoliciesStream with error', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4111,15 +4109,15 @@ describe('v1.AssetServiceClient', () => {
       assert(
         (client.descriptors.page.analyzeOrgPolicies.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with analyzeOrgPolicies without error', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4161,15 +4159,15 @@ describe('v1.AssetServiceClient', () => {
       assert(
         (client.descriptors.page.analyzeOrgPolicies.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with analyzeOrgPolicies with error', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4202,9 +4200,9 @@ describe('v1.AssetServiceClient', () => {
       assert(
         (client.descriptors.page.analyzeOrgPolicies.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4212,7 +4210,7 @@ describe('v1.AssetServiceClient', () => {
   describe('analyzeOrgPolicyGovernedContainers', () => {
     it('invokes analyzeOrgPolicyGovernedContainers without error', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4253,7 +4251,7 @@ describe('v1.AssetServiceClient', () => {
 
     it('invokes analyzeOrgPolicyGovernedContainers without error using callback', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4310,7 +4308,7 @@ describe('v1.AssetServiceClient', () => {
 
     it('invokes analyzeOrgPolicyGovernedContainers with error', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4344,7 +4342,7 @@ describe('v1.AssetServiceClient', () => {
 
     it('invokes analyzeOrgPolicyGovernedContainersStream without error', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4416,7 +4414,7 @@ describe('v1.AssetServiceClient', () => {
 
     it('invokes analyzeOrgPolicyGovernedContainersStream with error', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4477,7 +4475,7 @@ describe('v1.AssetServiceClient', () => {
 
     it('uses async iteration with analyzeOrgPolicyGovernedContainers without error', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4531,7 +4529,7 @@ describe('v1.AssetServiceClient', () => {
 
     it('uses async iteration with analyzeOrgPolicyGovernedContainers with error', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4578,7 +4576,7 @@ describe('v1.AssetServiceClient', () => {
   describe('analyzeOrgPolicyGovernedAssets', () => {
     it('invokes analyzeOrgPolicyGovernedAssets without error', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4618,7 +4616,7 @@ describe('v1.AssetServiceClient', () => {
 
     it('invokes analyzeOrgPolicyGovernedAssets without error using callback', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4675,7 +4673,7 @@ describe('v1.AssetServiceClient', () => {
 
     it('invokes analyzeOrgPolicyGovernedAssets with error', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4709,7 +4707,7 @@ describe('v1.AssetServiceClient', () => {
 
     it('invokes analyzeOrgPolicyGovernedAssetsStream without error', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4781,7 +4779,7 @@ describe('v1.AssetServiceClient', () => {
 
     it('invokes analyzeOrgPolicyGovernedAssetsStream with error', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4842,7 +4840,7 @@ describe('v1.AssetServiceClient', () => {
 
     it('uses async iteration with analyzeOrgPolicyGovernedAssets without error', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4896,7 +4894,7 @@ describe('v1.AssetServiceClient', () => {
 
     it('uses async iteration with analyzeOrgPolicyGovernedAssets with error', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4942,7 +4940,7 @@ describe('v1.AssetServiceClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4963,7 +4961,7 @@ describe('v1.AssetServiceClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -4991,7 +4989,7 @@ describe('v1.AssetServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -5001,7 +4999,7 @@ describe('v1.AssetServiceClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5025,7 +5023,7 @@ describe('v1.AssetServiceClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5047,7 +5045,7 @@ describe('v1.AssetServiceClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5075,7 +5073,7 @@ describe('v1.AssetServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -5085,7 +5083,7 @@ describe('v1.AssetServiceClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5109,7 +5107,7 @@ describe('v1.AssetServiceClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5131,7 +5129,7 @@ describe('v1.AssetServiceClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5159,7 +5157,7 @@ describe('v1.AssetServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -5169,7 +5167,7 @@ describe('v1.AssetServiceClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5193,7 +5191,7 @@ describe('v1.AssetServiceClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5228,7 +5226,7 @@ describe('v1.AssetServiceClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5263,7 +5261,7 @@ describe('v1.AssetServiceClient', () => {
         access_level: 'accessLevelValue',
       };
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5314,7 +5312,7 @@ describe('v1.AssetServiceClient', () => {
         access_policy: 'accessPolicyValue',
       };
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5353,7 +5351,7 @@ describe('v1.AssetServiceClient', () => {
         feed: 'feedValue',
       };
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5402,7 +5400,7 @@ describe('v1.AssetServiceClient', () => {
         saved_query: 'savedQueryValue',
       };
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5458,7 +5456,7 @@ describe('v1.AssetServiceClient', () => {
         instance: 'instanceValue',
       };
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5521,7 +5519,7 @@ describe('v1.AssetServiceClient', () => {
         feed: 'feedValue',
       };
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5577,7 +5575,7 @@ describe('v1.AssetServiceClient', () => {
         saved_query: 'savedQueryValue',
       };
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5639,7 +5637,7 @@ describe('v1.AssetServiceClient', () => {
         project: 'projectValue',
       };
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5678,7 +5676,7 @@ describe('v1.AssetServiceClient', () => {
         feed: 'feedValue',
       };
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5727,7 +5725,7 @@ describe('v1.AssetServiceClient', () => {
         saved_query: 'savedQueryValue',
       };
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5789,7 +5787,7 @@ describe('v1.AssetServiceClient', () => {
         service_perimeter: 'servicePerimeterValue',
       };
       const client = new assetserviceModule.v1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

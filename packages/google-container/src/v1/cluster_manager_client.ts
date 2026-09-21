@@ -26,10 +26,10 @@ import type {
   PaginationCallback,
   GaxCall,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -51,7 +51,7 @@ export class ClusterManagerClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('container');
@@ -64,9 +64,9 @@ export class ClusterManagerClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
-  pathTemplates: { [name: string]: gax.PathTemplate };
-  clusterManagerStub?: Promise<{ [name: string]: Function }>;
+  innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
+  clusterManagerStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of ClusterManagerClient.
@@ -142,7 +142,7 @@ export class ClusterManagerClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -229,7 +229,7 @@ export class ClusterManagerClient {
       'google.container.v1.ClusterManager',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -269,7 +269,7 @@ export class ClusterManagerClient {
           (this._protos as any).google.container.v1.ClusterManager,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -310,10 +310,11 @@ export class ClusterManagerClient {
       'checkAutopilotCompatibility',
       'fetchClusterUpgradeInfo',
       'fetchNodePoolUpgradeInfo',
+      'completeControlPlaneUpgrade',
     ];
     for (const methodName of clusterManagerStubMethods) {
       const callPromise = this.clusterManagerStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -521,7 +522,7 @@ export class ClusterManagerClient {
         project_id: request.projectId?.toString() ?? '',
         zone: request.zone ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listClusters request %j', request);
@@ -661,7 +662,7 @@ export class ClusterManagerClient {
         zone: request.zone ?? '',
         cluster_id: request.clusterId?.toString() ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getCluster request %j', request);
@@ -813,7 +814,7 @@ export class ClusterManagerClient {
         project_id: request.projectId?.toString() ?? '',
         zone: request.zone ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createCluster request %j', request);
@@ -955,7 +956,7 @@ export class ClusterManagerClient {
         zone: request.zone ?? '',
         cluster_id: request.clusterId?.toString() ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateCluster request %j', request);
@@ -1152,6 +1153,9 @@ export class ClusterManagerClient {
    *   default behavior, i.e. according to the chosen autoscaling profile.
    * @param {google.container.v1.TaintConfig} request.taintConfig
    *   The taint configuration for the node pool.
+   * @param {google.container.v1.NodePool.NodePoolMaintenancePolicy} [request.maintenancePolicy]
+   *   Optional. Specifies the maintenance policy for the node pool, including
+   *   maintenance exclusion options.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1228,7 +1232,7 @@ export class ClusterManagerClient {
         cluster_id: request.clusterId?.toString() ?? '',
         node_pool_id: request.nodePoolId?.toString() ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateNodePool request %j', request);
@@ -1383,7 +1387,7 @@ export class ClusterManagerClient {
         cluster_id: request.clusterId?.toString() ?? '',
         node_pool_id: request.nodePoolId?.toString() ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('setNodePoolAutoscaling request %j', request);
@@ -1539,7 +1543,7 @@ export class ClusterManagerClient {
         zone: request.zone ?? '',
         cluster_id: request.clusterId?.toString() ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('setLoggingService request %j', request);
@@ -1701,7 +1705,7 @@ export class ClusterManagerClient {
         zone: request.zone ?? '',
         cluster_id: request.clusterId?.toString() ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('setMonitoringService request %j', request);
@@ -1846,7 +1850,7 @@ export class ClusterManagerClient {
         zone: request.zone ?? '',
         cluster_id: request.clusterId?.toString() ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('setAddonsConfig request %j', request);
@@ -1998,7 +2002,7 @@ export class ClusterManagerClient {
         zone: request.zone ?? '',
         cluster_id: request.clusterId?.toString() ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this.warn(
@@ -2154,7 +2158,7 @@ export class ClusterManagerClient {
         zone: request.zone ?? '',
         cluster_id: request.clusterId?.toString() ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateMaster request %j', request);
@@ -2300,7 +2304,7 @@ export class ClusterManagerClient {
         zone: request.zone ?? '',
         cluster_id: request.clusterId?.toString() ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('setMasterAuth request %j', request);
@@ -2448,7 +2452,7 @@ export class ClusterManagerClient {
         zone: request.zone ?? '',
         cluster_id: request.clusterId?.toString() ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteCluster request %j', request);
@@ -2585,7 +2589,7 @@ export class ClusterManagerClient {
         project_id: request.projectId?.toString() ?? '',
         zone: request.zone ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listOperations request %j', request);
@@ -2725,7 +2729,7 @@ export class ClusterManagerClient {
         zone: request.zone ?? '',
         operation_id: request.operationId?.toString() ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getOperation request %j', request);
@@ -2865,7 +2869,7 @@ export class ClusterManagerClient {
         zone: request.zone ?? '',
         operation_id: request.operationId?.toString() ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('cancelOperation request %j', request);
@@ -3001,7 +3005,7 @@ export class ClusterManagerClient {
         project_id: request.projectId?.toString() ?? '',
         zone: request.zone ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getServerConfig request %j', request);
@@ -3127,7 +3131,7 @@ export class ClusterManagerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getJSONWebKeys request %j', request);
@@ -3267,7 +3271,7 @@ export class ClusterManagerClient {
         zone: request.zone ?? '',
         cluster_id: request.clusterId?.toString() ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listNodePools request %j', request);
@@ -3412,7 +3416,7 @@ export class ClusterManagerClient {
         cluster_id: request.clusterId?.toString() ?? '',
         node_pool_id: request.nodePoolId?.toString() ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getNodePool request %j', request);
@@ -3555,7 +3559,7 @@ export class ClusterManagerClient {
         zone: request.zone ?? '',
         cluster_id: request.clusterId?.toString() ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createNodePool request %j', request);
@@ -3700,7 +3704,7 @@ export class ClusterManagerClient {
         cluster_id: request.clusterId?.toString() ?? '',
         node_pool_id: request.nodePoolId?.toString() ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteNodePool request %j', request);
@@ -3835,7 +3839,7 @@ export class ClusterManagerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('completeNodePoolUpgrade request %j', request);
@@ -3997,7 +4001,7 @@ export class ClusterManagerClient {
         cluster_id: request.clusterId?.toString() ?? '',
         node_pool_id: request.nodePoolId?.toString() ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('rollbackNodePoolUpgrade request %j', request);
@@ -4157,7 +4161,7 @@ export class ClusterManagerClient {
         cluster_id: request.clusterId?.toString() ?? '',
         node_pool_id: request.nodePoolId?.toString() ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('setNodePoolManagement request %j', request);
@@ -4308,7 +4312,7 @@ export class ClusterManagerClient {
         zone: request.zone ?? '',
         cluster_id: request.clusterId?.toString() ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('setLabels request %j', request);
@@ -4450,7 +4454,7 @@ export class ClusterManagerClient {
         zone: request.zone ?? '',
         cluster_id: request.clusterId?.toString() ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('setLegacyAbac request %j', request);
@@ -4592,7 +4596,7 @@ export class ClusterManagerClient {
         zone: request.zone ?? '',
         cluster_id: request.clusterId?.toString() ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('startIPRotation request %j', request);
@@ -4734,7 +4738,7 @@ export class ClusterManagerClient {
         zone: request.zone ?? '',
         cluster_id: request.clusterId?.toString() ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('completeIPRotation request %j', request);
@@ -4885,7 +4889,7 @@ export class ClusterManagerClient {
         cluster_id: request.clusterId?.toString() ?? '',
         node_pool_id: request.nodePoolId?.toString() ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('setNodePoolSize request %j', request);
@@ -5029,7 +5033,7 @@ export class ClusterManagerClient {
         zone: request.zone ?? '',
         cluster_id: request.clusterId?.toString() ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('setNetworkPolicy request %j', request);
@@ -5180,7 +5184,7 @@ export class ClusterManagerClient {
         zone: request.zone ?? '',
         cluster_id: request.clusterId?.toString() ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('setMaintenancePolicy request %j', request);
@@ -5322,7 +5326,7 @@ export class ClusterManagerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('checkAutopilotCompatibility request %j', request);
@@ -5463,7 +5467,7 @@ export class ClusterManagerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('fetchClusterUpgradeInfo request %j', request);
@@ -5605,7 +5609,7 @@ export class ClusterManagerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('fetchNodePoolUpgradeInfo request %j', request);
@@ -5635,6 +5639,153 @@ export class ClusterManagerClient {
           {} | undefined,
         ]) => {
           this._log.info('fetchNodePoolUpgradeInfo response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * CompleteControlPlaneUpgrade completes the rollback-safe upgrade by
+   * performing the step two upgrade for a specific cluster.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name (project, location, cluster) of the cluster to complete
+   *   upgrade. Specified in the format `projects/* /locations/* /clusters/*`.
+   * @param {string} [request.version]
+   *   Optional. API request version that initiates this operation.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.container.v1.Operation|Operation}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cluster_manager.complete_control_plane_upgrade.js</caption>
+   * region_tag:container_v1_generated_ClusterManager_CompleteControlPlaneUpgrade_async
+   */
+  completeControlPlaneUpgrade(
+    request?: protos.google.container.v1.ICompleteControlPlaneUpgradeRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.container.v1.IOperation,
+      (
+        | protos.google.container.v1.ICompleteControlPlaneUpgradeRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  completeControlPlaneUpgrade(
+    request: protos.google.container.v1.ICompleteControlPlaneUpgradeRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.container.v1.IOperation,
+      | protos.google.container.v1.ICompleteControlPlaneUpgradeRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  completeControlPlaneUpgrade(
+    request: protos.google.container.v1.ICompleteControlPlaneUpgradeRequest,
+    callback: Callback<
+      protos.google.container.v1.IOperation,
+      | protos.google.container.v1.ICompleteControlPlaneUpgradeRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  completeControlPlaneUpgrade(
+    request?: protos.google.container.v1.ICompleteControlPlaneUpgradeRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.container.v1.IOperation,
+          | protos.google.container.v1.ICompleteControlPlaneUpgradeRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.container.v1.IOperation,
+      | protos.google.container.v1.ICompleteControlPlaneUpgradeRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.container.v1.IOperation,
+      (
+        | protos.google.container.v1.ICompleteControlPlaneUpgradeRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('completeControlPlaneUpgrade request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.container.v1.IOperation,
+          | protos.google.container.v1.ICompleteControlPlaneUpgradeRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('completeControlPlaneUpgrade response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .completeControlPlaneUpgrade(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.container.v1.IOperation,
+          (
+            | protos.google.container.v1.ICompleteControlPlaneUpgradeRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('completeControlPlaneUpgrade response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -5760,7 +5911,7 @@ export class ClusterManagerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5837,7 +5988,7 @@ export class ClusterManagerClient {
       });
     const defaultCallSettings = this._defaults['listUsableSubnetworks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listUsableSubnetworks stream %j', request);
@@ -5896,7 +6047,7 @@ export class ClusterManagerClient {
       });
     const defaultCallSettings = this._defaults['listUsableSubnetworks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listUsableSubnetworks iterate %j', request);
@@ -6110,7 +6261,7 @@ export class ClusterManagerClient {
    */
   close(): Promise<void> {
     if (this.clusterManagerStub && !this._terminated) {
-      return this.clusterManagerStub.then((stub) => {
+      return this.clusterManagerStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

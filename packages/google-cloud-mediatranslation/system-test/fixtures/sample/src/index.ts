@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import { SpeechTranslationServiceClient } from '@google-cloud/media-translation';
+import {SpeechTranslationServiceClient} from '@google-cloud/media-translation';
 
 // check that the client class type name can be used
 function doStuffWithSpeechTranslationServiceClient(

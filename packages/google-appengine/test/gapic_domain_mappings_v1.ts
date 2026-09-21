@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as domainmappingsModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, LROperation, operationsProtos } from 'google-gax';
+import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -149,9 +149,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -271,7 +271,7 @@ describe('v1.DomainMappingsClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new domainmappingsModule.v1.DomainMappingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.domainMappingsStub, undefined);
@@ -279,12 +279,12 @@ describe('v1.DomainMappingsClient', () => {
       assert(client.domainMappingsStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new domainmappingsModule.v1.DomainMappingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.domainMappingsStub);
@@ -293,14 +293,14 @@ describe('v1.DomainMappingsClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new domainmappingsModule.v1.DomainMappingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.domainMappingsStub, undefined);
@@ -309,7 +309,7 @@ describe('v1.DomainMappingsClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -317,7 +317,7 @@ describe('v1.DomainMappingsClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new domainmappingsModule.v1.DomainMappingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -329,7 +329,7 @@ describe('v1.DomainMappingsClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new domainmappingsModule.v1.DomainMappingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -352,7 +352,7 @@ describe('v1.DomainMappingsClient', () => {
   describe('getDomainMapping', () => {
     it('invokes getDomainMapping without error', async () => {
       const client = new domainmappingsModule.v1.DomainMappingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -383,7 +383,7 @@ describe('v1.DomainMappingsClient', () => {
 
     it('invokes getDomainMapping without error using callback', async () => {
       const client = new domainmappingsModule.v1.DomainMappingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -430,7 +430,7 @@ describe('v1.DomainMappingsClient', () => {
 
     it('invokes getDomainMapping with error', async () => {
       const client = new domainmappingsModule.v1.DomainMappingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -461,7 +461,7 @@ describe('v1.DomainMappingsClient', () => {
 
     it('invokes getDomainMapping with closed client', async () => {
       const client = new domainmappingsModule.v1.DomainMappingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -474,7 +474,7 @@ describe('v1.DomainMappingsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getDomainMapping(request), expectedError);
@@ -484,7 +484,7 @@ describe('v1.DomainMappingsClient', () => {
   describe('createDomainMapping', () => {
     it('invokes createDomainMapping without error', async () => {
       const client = new domainmappingsModule.v1.DomainMappingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -517,7 +517,7 @@ describe('v1.DomainMappingsClient', () => {
 
     it('invokes createDomainMapping without error using callback', async () => {
       const client = new domainmappingsModule.v1.DomainMappingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -571,7 +571,7 @@ describe('v1.DomainMappingsClient', () => {
 
     it('invokes createDomainMapping with call error', async () => {
       const client = new domainmappingsModule.v1.DomainMappingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -602,7 +602,7 @@ describe('v1.DomainMappingsClient', () => {
 
     it('invokes createDomainMapping with LRO error', async () => {
       const client = new domainmappingsModule.v1.DomainMappingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -635,7 +635,7 @@ describe('v1.DomainMappingsClient', () => {
 
     it('invokes checkCreateDomainMappingProgress without error', async () => {
       const client = new domainmappingsModule.v1.DomainMappingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -643,8 +643,8 @@ describe('v1.DomainMappingsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateDomainMappingProgress(
@@ -657,7 +657,7 @@ describe('v1.DomainMappingsClient', () => {
 
     it('invokes checkCreateDomainMappingProgress with error', async () => {
       const client = new domainmappingsModule.v1.DomainMappingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -678,7 +678,7 @@ describe('v1.DomainMappingsClient', () => {
   describe('updateDomainMapping', () => {
     it('invokes updateDomainMapping without error', async () => {
       const client = new domainmappingsModule.v1.DomainMappingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -711,7 +711,7 @@ describe('v1.DomainMappingsClient', () => {
 
     it('invokes updateDomainMapping without error using callback', async () => {
       const client = new domainmappingsModule.v1.DomainMappingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -765,7 +765,7 @@ describe('v1.DomainMappingsClient', () => {
 
     it('invokes updateDomainMapping with call error', async () => {
       const client = new domainmappingsModule.v1.DomainMappingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -796,7 +796,7 @@ describe('v1.DomainMappingsClient', () => {
 
     it('invokes updateDomainMapping with LRO error', async () => {
       const client = new domainmappingsModule.v1.DomainMappingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -829,7 +829,7 @@ describe('v1.DomainMappingsClient', () => {
 
     it('invokes checkUpdateDomainMappingProgress without error', async () => {
       const client = new domainmappingsModule.v1.DomainMappingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -837,8 +837,8 @@ describe('v1.DomainMappingsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateDomainMappingProgress(
@@ -851,7 +851,7 @@ describe('v1.DomainMappingsClient', () => {
 
     it('invokes checkUpdateDomainMappingProgress with error', async () => {
       const client = new domainmappingsModule.v1.DomainMappingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -872,7 +872,7 @@ describe('v1.DomainMappingsClient', () => {
   describe('deleteDomainMapping', () => {
     it('invokes deleteDomainMapping without error', async () => {
       const client = new domainmappingsModule.v1.DomainMappingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -905,7 +905,7 @@ describe('v1.DomainMappingsClient', () => {
 
     it('invokes deleteDomainMapping without error using callback', async () => {
       const client = new domainmappingsModule.v1.DomainMappingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -959,7 +959,7 @@ describe('v1.DomainMappingsClient', () => {
 
     it('invokes deleteDomainMapping with call error', async () => {
       const client = new domainmappingsModule.v1.DomainMappingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -990,7 +990,7 @@ describe('v1.DomainMappingsClient', () => {
 
     it('invokes deleteDomainMapping with LRO error', async () => {
       const client = new domainmappingsModule.v1.DomainMappingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1023,7 +1023,7 @@ describe('v1.DomainMappingsClient', () => {
 
     it('invokes checkDeleteDomainMappingProgress without error', async () => {
       const client = new domainmappingsModule.v1.DomainMappingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1031,8 +1031,8 @@ describe('v1.DomainMappingsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteDomainMappingProgress(
@@ -1045,7 +1045,7 @@ describe('v1.DomainMappingsClient', () => {
 
     it('invokes checkDeleteDomainMappingProgress with error', async () => {
       const client = new domainmappingsModule.v1.DomainMappingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1066,7 +1066,7 @@ describe('v1.DomainMappingsClient', () => {
   describe('listDomainMappings', () => {
     it('invokes listDomainMappings without error', async () => {
       const client = new domainmappingsModule.v1.DomainMappingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1100,7 +1100,7 @@ describe('v1.DomainMappingsClient', () => {
 
     it('invokes listDomainMappings without error using callback', async () => {
       const client = new domainmappingsModule.v1.DomainMappingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1149,7 +1149,7 @@ describe('v1.DomainMappingsClient', () => {
 
     it('invokes listDomainMappings with error', async () => {
       const client = new domainmappingsModule.v1.DomainMappingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1180,7 +1180,7 @@ describe('v1.DomainMappingsClient', () => {
 
     it('invokes listDomainMappingsStream without error', async () => {
       const client = new domainmappingsModule.v1.DomainMappingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1226,15 +1226,15 @@ describe('v1.DomainMappingsClient', () => {
       assert(
         (client.descriptors.page.listDomainMappings.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listDomainMappingsStream with error', async () => {
       const client = new domainmappingsModule.v1.DomainMappingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1275,15 +1275,15 @@ describe('v1.DomainMappingsClient', () => {
       assert(
         (client.descriptors.page.listDomainMappings.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDomainMappings without error', async () => {
       const client = new domainmappingsModule.v1.DomainMappingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1318,15 +1318,15 @@ describe('v1.DomainMappingsClient', () => {
       assert(
         (client.descriptors.page.listDomainMappings.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDomainMappings with error', async () => {
       const client = new domainmappingsModule.v1.DomainMappingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1358,9 +1358,9 @@ describe('v1.DomainMappingsClient', () => {
       assert(
         (client.descriptors.page.listDomainMappings.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1375,7 +1375,7 @@ describe('v1.DomainMappingsClient', () => {
         instance: 'instanceValue',
       };
       const client = new domainmappingsModule.v1.DomainMappingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

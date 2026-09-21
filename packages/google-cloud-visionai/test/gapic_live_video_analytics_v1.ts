@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as livevideoanalyticsModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -51,7 +51,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -155,9 +155,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -282,7 +282,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.liveVideoAnalyticsStub, undefined);
@@ -290,12 +290,12 @@ describe('v1.LiveVideoAnalyticsClient', () => {
       assert(client.liveVideoAnalyticsStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.liveVideoAnalyticsStub);
@@ -304,14 +304,14 @@ describe('v1.LiveVideoAnalyticsClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.liveVideoAnalyticsStub, undefined);
@@ -320,7 +320,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -328,7 +328,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -340,7 +340,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -363,7 +363,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
   describe('resolveOperatorInfo', () => {
     it('invokes resolveOperatorInfo without error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -395,7 +395,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
 
     it('invokes resolveOperatorInfo without error using callback', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -442,7 +442,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
 
     it('invokes resolveOperatorInfo with error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -473,7 +473,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
 
     it('invokes resolveOperatorInfo with closed client', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -486,7 +486,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.resolveOperatorInfo(request), expectedError);
@@ -496,7 +496,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
   describe('getOperator', () => {
     it('invokes getOperator without error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -527,7 +527,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
 
     it('invokes getOperator without error using callback', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -574,7 +574,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
 
     it('invokes getOperator with error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -605,7 +605,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
 
     it('invokes getOperator with closed client', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -618,7 +618,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getOperator(request), expectedError);
@@ -628,7 +628,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
   describe('getAnalysis', () => {
     it('invokes getAnalysis without error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -659,7 +659,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
 
     it('invokes getAnalysis without error using callback', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -706,7 +706,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
 
     it('invokes getAnalysis with error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -737,7 +737,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
 
     it('invokes getAnalysis with closed client', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -750,7 +750,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getAnalysis(request), expectedError);
@@ -760,7 +760,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
   describe('getProcess', () => {
     it('invokes getProcess without error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -791,7 +791,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
 
     it('invokes getProcess without error using callback', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -838,7 +838,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
 
     it('invokes getProcess with error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -869,7 +869,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
 
     it('invokes getProcess with closed client', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -882,7 +882,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getProcess(request), expectedError);
@@ -892,7 +892,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
   describe('createOperator', () => {
     it('invokes createOperator without error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -925,7 +925,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
 
     it('invokes createOperator without error using callback', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -979,7 +979,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
 
     it('invokes createOperator with call error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1010,7 +1010,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
 
     it('invokes createOperator with LRO error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1043,7 +1043,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
 
     it('invokes checkCreateOperatorProgress without error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1051,8 +1051,8 @@ describe('v1.LiveVideoAnalyticsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateOperatorProgress(
@@ -1065,7 +1065,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
 
     it('invokes checkCreateOperatorProgress with error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1086,7 +1086,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
   describe('updateOperator', () => {
     it('invokes updateOperator without error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1120,7 +1120,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
 
     it('invokes updateOperator without error using callback', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1175,7 +1175,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
 
     it('invokes updateOperator with call error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1207,7 +1207,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
 
     it('invokes updateOperator with LRO error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1241,7 +1241,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
 
     it('invokes checkUpdateOperatorProgress without error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1249,8 +1249,8 @@ describe('v1.LiveVideoAnalyticsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateOperatorProgress(
@@ -1263,7 +1263,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
 
     it('invokes checkUpdateOperatorProgress with error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1284,7 +1284,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
   describe('deleteOperator', () => {
     it('invokes deleteOperator without error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1317,7 +1317,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
 
     it('invokes deleteOperator without error using callback', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1371,7 +1371,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
 
     it('invokes deleteOperator with call error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1402,7 +1402,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
 
     it('invokes deleteOperator with LRO error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1435,7 +1435,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
 
     it('invokes checkDeleteOperatorProgress without error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1443,8 +1443,8 @@ describe('v1.LiveVideoAnalyticsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteOperatorProgress(
@@ -1457,7 +1457,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
 
     it('invokes checkDeleteOperatorProgress with error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1478,7 +1478,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
   describe('createAnalysis', () => {
     it('invokes createAnalysis without error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1511,7 +1511,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
 
     it('invokes createAnalysis without error using callback', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1565,7 +1565,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
 
     it('invokes createAnalysis with call error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1596,7 +1596,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
 
     it('invokes createAnalysis with LRO error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1629,7 +1629,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
 
     it('invokes checkCreateAnalysisProgress without error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1637,8 +1637,8 @@ describe('v1.LiveVideoAnalyticsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateAnalysisProgress(
@@ -1651,7 +1651,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
 
     it('invokes checkCreateAnalysisProgress with error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1672,7 +1672,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
   describe('updateAnalysis', () => {
     it('invokes updateAnalysis without error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1706,7 +1706,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
 
     it('invokes updateAnalysis without error using callback', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1761,7 +1761,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
 
     it('invokes updateAnalysis with call error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1793,7 +1793,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
 
     it('invokes updateAnalysis with LRO error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1827,7 +1827,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
 
     it('invokes checkUpdateAnalysisProgress without error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1835,8 +1835,8 @@ describe('v1.LiveVideoAnalyticsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateAnalysisProgress(
@@ -1849,7 +1849,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
 
     it('invokes checkUpdateAnalysisProgress with error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1870,7 +1870,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
   describe('deleteAnalysis', () => {
     it('invokes deleteAnalysis without error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1903,7 +1903,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
 
     it('invokes deleteAnalysis without error using callback', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1957,7 +1957,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
 
     it('invokes deleteAnalysis with call error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1988,7 +1988,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
 
     it('invokes deleteAnalysis with LRO error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2021,7 +2021,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
 
     it('invokes checkDeleteAnalysisProgress without error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2029,8 +2029,8 @@ describe('v1.LiveVideoAnalyticsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteAnalysisProgress(
@@ -2043,7 +2043,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
 
     it('invokes checkDeleteAnalysisProgress with error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2064,7 +2064,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
   describe('createProcess', () => {
     it('invokes createProcess without error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2097,7 +2097,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
 
     it('invokes createProcess without error using callback', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2151,7 +2151,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
 
     it('invokes createProcess with call error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2182,7 +2182,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
 
     it('invokes createProcess with LRO error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2215,7 +2215,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
 
     it('invokes checkCreateProcessProgress without error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2223,8 +2223,8 @@ describe('v1.LiveVideoAnalyticsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateProcessProgress(
@@ -2237,7 +2237,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
 
     it('invokes checkCreateProcessProgress with error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2258,7 +2258,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
   describe('updateProcess', () => {
     it('invokes updateProcess without error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2292,7 +2292,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
 
     it('invokes updateProcess without error using callback', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2347,7 +2347,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
 
     it('invokes updateProcess with call error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2379,7 +2379,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
 
     it('invokes updateProcess with LRO error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2413,7 +2413,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
 
     it('invokes checkUpdateProcessProgress without error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2421,8 +2421,8 @@ describe('v1.LiveVideoAnalyticsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateProcessProgress(
@@ -2435,7 +2435,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
 
     it('invokes checkUpdateProcessProgress with error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2456,7 +2456,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
   describe('deleteProcess', () => {
     it('invokes deleteProcess without error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2489,7 +2489,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
 
     it('invokes deleteProcess without error using callback', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2543,7 +2543,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
 
     it('invokes deleteProcess with call error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2574,7 +2574,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
 
     it('invokes deleteProcess with LRO error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2607,7 +2607,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
 
     it('invokes checkDeleteProcessProgress without error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2615,8 +2615,8 @@ describe('v1.LiveVideoAnalyticsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteProcessProgress(
@@ -2629,7 +2629,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
 
     it('invokes checkDeleteProcessProgress with error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2650,7 +2650,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
   describe('batchRunProcess', () => {
     it('invokes batchRunProcess without error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2683,7 +2683,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
 
     it('invokes batchRunProcess without error using callback', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2737,7 +2737,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
 
     it('invokes batchRunProcess with call error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2768,7 +2768,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
 
     it('invokes batchRunProcess with LRO error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2801,7 +2801,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
 
     it('invokes checkBatchRunProcessProgress without error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2809,8 +2809,8 @@ describe('v1.LiveVideoAnalyticsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkBatchRunProcessProgress(
@@ -2823,7 +2823,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
 
     it('invokes checkBatchRunProcessProgress with error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2844,7 +2844,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
   describe('listPublicOperators', () => {
     it('invokes listPublicOperators without error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2878,7 +2878,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
 
     it('invokes listPublicOperators without error using callback', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2927,7 +2927,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
 
     it('invokes listPublicOperators with error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2958,7 +2958,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
 
     it('invokes listPublicOperatorsStream without error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3004,15 +3004,15 @@ describe('v1.LiveVideoAnalyticsClient', () => {
       assert(
         (client.descriptors.page.listPublicOperators.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listPublicOperatorsStream with error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3053,15 +3053,15 @@ describe('v1.LiveVideoAnalyticsClient', () => {
       assert(
         (client.descriptors.page.listPublicOperators.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listPublicOperators without error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3096,15 +3096,15 @@ describe('v1.LiveVideoAnalyticsClient', () => {
       assert(
         (client.descriptors.page.listPublicOperators.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listPublicOperators with error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3136,9 +3136,9 @@ describe('v1.LiveVideoAnalyticsClient', () => {
       assert(
         (client.descriptors.page.listPublicOperators.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -3146,7 +3146,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
   describe('listOperators', () => {
     it('invokes listOperators without error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3179,7 +3179,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
 
     it('invokes listOperators without error using callback', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3228,7 +3228,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
 
     it('invokes listOperators with error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3259,7 +3259,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
 
     it('invokes listOperatorsStream without error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3305,15 +3305,15 @@ describe('v1.LiveVideoAnalyticsClient', () => {
       assert(
         (client.descriptors.page.listOperators.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listOperatorsStream with error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3354,15 +3354,15 @@ describe('v1.LiveVideoAnalyticsClient', () => {
       assert(
         (client.descriptors.page.listOperators.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listOperators without error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3397,15 +3397,15 @@ describe('v1.LiveVideoAnalyticsClient', () => {
       assert(
         (client.descriptors.page.listOperators.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listOperators with error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3437,9 +3437,9 @@ describe('v1.LiveVideoAnalyticsClient', () => {
       assert(
         (client.descriptors.page.listOperators.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -3447,7 +3447,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
   describe('listAnalyses', () => {
     it('invokes listAnalyses without error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3480,7 +3480,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
 
     it('invokes listAnalyses without error using callback', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3529,7 +3529,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
 
     it('invokes listAnalyses with error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3560,7 +3560,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
 
     it('invokes listAnalysesStream without error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3606,15 +3606,15 @@ describe('v1.LiveVideoAnalyticsClient', () => {
       assert(
         (client.descriptors.page.listAnalyses.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listAnalysesStream with error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3657,15 +3657,15 @@ describe('v1.LiveVideoAnalyticsClient', () => {
       assert(
         (client.descriptors.page.listAnalyses.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listAnalyses without error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3700,15 +3700,15 @@ describe('v1.LiveVideoAnalyticsClient', () => {
       assert(
         (client.descriptors.page.listAnalyses.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listAnalyses with error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3740,9 +3740,9 @@ describe('v1.LiveVideoAnalyticsClient', () => {
       assert(
         (client.descriptors.page.listAnalyses.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -3750,7 +3750,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
   describe('listProcesses', () => {
     it('invokes listProcesses without error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3783,7 +3783,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
 
     it('invokes listProcesses without error using callback', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3832,7 +3832,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
 
     it('invokes listProcesses with error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3863,7 +3863,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
 
     it('invokes listProcessesStream without error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3909,15 +3909,15 @@ describe('v1.LiveVideoAnalyticsClient', () => {
       assert(
         (client.descriptors.page.listProcesses.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listProcessesStream with error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3958,15 +3958,15 @@ describe('v1.LiveVideoAnalyticsClient', () => {
       assert(
         (client.descriptors.page.listProcesses.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listProcesses without error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4001,15 +4001,15 @@ describe('v1.LiveVideoAnalyticsClient', () => {
       assert(
         (client.descriptors.page.listProcesses.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listProcesses with error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4041,16 +4041,16 @@ describe('v1.LiveVideoAnalyticsClient', () => {
       assert(
         (client.descriptors.page.listProcesses.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4080,7 +4080,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
     });
     it('invokes getIamPolicy without error using callback', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4118,7 +4118,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -4128,7 +4128,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
     });
     it('invokes getIamPolicy with error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4160,7 +4160,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4190,7 +4190,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
     });
     it('invokes setIamPolicy without error using callback', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4228,7 +4228,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -4238,7 +4238,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
     });
     it('invokes setIamPolicy with error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4270,7 +4270,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4303,7 +4303,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
     });
     it('invokes testIamPermissions without error using callback', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4341,7 +4341,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -4351,7 +4351,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
     });
     it('invokes testIamPermissions with error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4386,7 +4386,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4416,7 +4416,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4460,7 +4460,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4495,7 +4495,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4543,7 +4543,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4584,7 +4584,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4605,7 +4605,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -4633,7 +4633,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -4643,7 +4643,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -4667,7 +4667,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4689,7 +4689,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -4717,7 +4717,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -4727,7 +4727,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -4751,7 +4751,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4773,7 +4773,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -4801,7 +4801,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -4811,7 +4811,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -4835,7 +4835,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -4870,7 +4870,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4907,7 +4907,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
         analysis: 'analysisValue',
       };
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4984,7 +4984,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
         annotation: 'annotationValue',
       };
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5070,7 +5070,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
         application: 'applicationValue',
       };
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5135,7 +5135,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
         asset: 'assetValue',
       };
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5211,7 +5211,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
         channel: 'channelValue',
       };
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5286,7 +5286,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
         cluster: 'clusterValue',
       };
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5351,7 +5351,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
         collection: 'collectionValue',
       };
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5426,7 +5426,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
         corpus: 'corpusValue',
       };
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5491,7 +5491,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
         data_schema: 'dataSchemaValue',
       };
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5567,7 +5567,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
         draft: 'draftValue',
       };
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5643,7 +5643,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
         event: 'eventValue',
       };
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5719,7 +5719,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
         index: 'indexValue',
       };
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5794,7 +5794,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
         index_endpoint: 'indexEndpointValue',
       };
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5859,7 +5859,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
         instance: 'instanceValue',
       };
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5933,7 +5933,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
         location: 'locationValue',
       };
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5983,7 +5983,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
         operator: 'operatorValue',
       };
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6048,7 +6048,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
         process: 'processValue',
       };
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6123,7 +6123,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
         processor: 'processorValue',
       };
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6188,7 +6188,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
         search_config: 'searchConfigValue',
       };
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6264,7 +6264,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
         search_hypernym: 'searchHypernymValue',
       };
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6342,7 +6342,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
         series: 'seriesValue',
       };
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6418,7 +6418,7 @@ describe('v1.LiveVideoAnalyticsClient', () => {
         stream: 'streamValue',
       };
       const client = new livevideoanalyticsModule.v1.LiveVideoAnalyticsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

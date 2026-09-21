@@ -705,6 +705,16 @@ export namespace google {
                     PINT_US = 8
                 }
 
+                /** OvulationTestResult enum. */
+                enum OvulationTestResult {
+                    OVULATION_TEST_RESULT_UNSPECIFIED = 0,
+                    NEGATIVE = 1,
+                    LUTEINIZING_HORMONE_SURGE = 2,
+                    ESTROGEN_SURGE = 3,
+                    POSITIVE = 4,
+                    INDETERMINATE = 5
+                }
+
                 /** Properties of an ActiveZoneMinutes. */
                 interface IActiveZoneMinutes {
 
@@ -4452,18 +4462,187 @@ export namespace google {
                     /** ExerciseType enum. */
                     enum ExerciseType {
                         EXERCISE_TYPE_UNSPECIFIED = 0,
-                        RUNNING = 1,
-                        WALKING = 2,
+                        AEROBIC_WORKOUT = 13,
+                        ARCHERY = 47,
+                        ASSAULT_BIKE = 164,
+                        BACKPACKING = 181,
+                        BADMINTON = 48,
+                        BALLET = 103,
+                        BALLROOM_DANCE = 156,
+                        BARRE_CLASS = 49,
+                        BASEBALL = 50,
+                        BASKETBALL = 51,
                         BIKING = 3,
-                        SWIMMING = 4,
-                        HIKING = 5,
-                        YOGA = 6,
-                        PILATES = 7,
-                        WORKOUT = 8,
+                        BILLIARDS = 180,
+                        BODY_WEIGHT = 149,
+                        BOOTCAMP = 14,
+                        BOWLING = 52,
+                        BOXING = 53,
+                        BREAKDANCING = 157,
+                        CALISTHENICS = 54,
+                        CANOEING = 15,
+                        CARDIO_SCULPT = 129,
+                        CARDIO_WORKOUT = 140,
+                        CARPENTRY = 108,
+                        CHEERLEADING = 165,
+                        CIRCUIT_TRAINING = 16,
+                        CLEANING = 105,
+                        CLIMBING = 55,
+                        CORE_TRAINING = 17,
+                        CRICKET = 56,
+                        CROQUET = 111,
+                        CROSS_COUNTRY_SKI = 18,
+                        CROSS_TRAINING = 57,
+                        CROSSFIT = 19,
+                        CURLING = 58,
+                        DANCING = 20,
+                        DIVING = 59,
+                        ELECTRIC_BIKE = 152,
+                        ELECTRIC_SCOOTER = 168,
+                        ELLIPTICAL = 21,
+                        EQUESTRIAN_SPORTS = 60,
+                        EXERCISE_CLASS = 61,
+                        FENCING = 62,
+                        FIELD_HOCKEY = 113,
+                        FISHING = 63,
+                        FITNESS_GAMING = 64,
+                        FOILING = 175,
+                        FOOTBALL_AMERICAN = 65,
+                        FOOTBALL_AUSTRALIAN = 66,
+                        FREE_WEIGHTS = 148,
+                        FRISBEE_PLAYING_GENERAL = 67,
+                        FUNCTIONAL_STRENGTH_TRAINING = 68,
+                        GARDENING = 107,
+                        GOLF = 22,
+                        GYMNASTICS = 69,
+                        HANDBALL = 70,
+                        HAND_CYCLING = 71,
                         HIIT = 9,
-                        WEIGHTLIFTING = 10,
+                        HIKING = 5,
+                        HIP_HOP = 158,
+                        HOCKEY = 72,
+                        HOEING = 109,
+                        HOUSEHOLD_CHORES = 137,
+                        HUNTING = 73,
+                        ICE_SKATING = 127,
+                        INCLINE_RUN = 142,
+                        INCLINE_WALK = 146,
+                        INDOOR_CLIMBING = 23,
+                        INTERVAL_WORKOUT = 24,
+                        JAZZ_DANCE = 154,
+                        JIU_JITSU = 160,
+                        JUMPING_ROPE = 74,
+                        KARATE = 159,
+                        KAYAKING = 25,
+                        KICKBOXING = 26,
+                        KITESURFING = 172,
+                        LACROSSE = 75,
+                        MARTIAL_ARTS = 27,
+                        MEDITATE = 28,
+                        MODERN_DANCE = 153,
+                        MOTOCROSS = 114,
+                        MOTORCYCLE = 121,
+                        MOUNTAIN_BIKE = 128,
+                        MOWING_LAWN = 106,
+                        MUAY_THAI = 162,
+                        MULTISPORT = 76,
+                        MUSICAL_PERFORMANCE = 163,
+                        NORDIC_WALKING = 145,
+                        ORIENTEERING = 115,
+                        OTHER = 12,
+                        OUTDOOR_BIKE = 29,
+                        OUTDOOR_WORKOUT = 30,
+                        PADDLEBOARDING = 31,
+                        PADEL = 176,
+                        PAINTING = 170,
+                        PARAGLIDING = 78,
+                        PARKOUR = 166,
+                        PICKELBALL = 79,
+                        PILATES = 7,
+                        POLO = 116,
+                        POWERLIFTING = 32,
+                        POWER_WALKING = 143,
+                        RACKET_SPORTS = 169,
+                        RACQUETBALL = 80,
+                        RESISTANCE_BANDS = 151,
+                        ROCK_CLIMBING = 123,
+                        ROLLERBLADING = 33,
+                        ROLLER_SKATING = 118,
+                        ROWING = 81,
+                        ROWING_MACHINE = 34,
+                        RUCKING = 144,
+                        RUGBY = 82,
+                        RUNNING = 1,
+                        SAILING = 83,
+                        SCOOTERING = 167,
+                        SCUBA_DIVING = 84,
+                        SHOOTING = 104,
+                        SHOVELING = 171,
+                        SKATEBOARDING = 117,
+                        SKATING = 35,
+                        SKIING = 36,
+                        SKYDIVING = 182,
+                        SNORKELING = 37,
+                        SNOWBOARDING = 38,
+                        SNOWMOBILING = 179,
+                        SNOWSHOEING = 85,
+                        SNOW_SPORT = 86,
+                        SOCCER = 87,
+                        SOFTBALL = 88,
+                        SPEED_SKATING = 178,
+                        SPINNING = 39,
+                        SPORT = 40,
+                        SQUASH = 89,
+                        STAIRCLIMBER = 41,
+                        STATIONARY_BIKE = 139,
+                        STEP_TRAINING = 90,
                         STRENGTH_TRAINING = 11,
-                        OTHER = 12
+                        STRETCHING = 42,
+                        STROLLER_WALK = 122,
+                        SURFING = 43,
+                        SWIMMING = 4,
+                        SWIMMING_OPEN_WATER = 91,
+                        SWIMMING_POOL = 101,
+                        SYNCHRONIZED_SWIMMING = 177,
+                        TABATA_WORKOUT = 130,
+                        TABLE_TENNIS = 92,
+                        TAEKWONDO = 161,
+                        TAI_CHI = 93,
+                        TANGO = 155,
+                        TENNIS = 44,
+                        TRACK_AND_FIELD = 94,
+                        TRAIL_RUN = 141,
+                        TRAMPOLINE = 119,
+                        TREADMILL = 45,
+                        TREADMILL_WALK = 138,
+                        TRX = 131,
+                        ULTIMATE_FRISBEE = 112,
+                        UNICYCLING = 102,
+                        VOLLEYBALL = 95,
+                        VOLLEYBALL_BEACH = 120,
+                        WAKEBOARDING = 173,
+                        WALKING = 2,
+                        WALK_WITH_WEIGHTS = 147,
+                        WATER_AEROBICS = 96,
+                        WATER_JOGGING = 126,
+                        WATER_POLO = 97,
+                        WATER_SKIING = 124,
+                        WATER_SPORT = 98,
+                        WATER_VOLLEYBALL = 125,
+                        WEEDING = 110,
+                        WEIGHTLIFTING = 10,
+                        WEIGHT_MACHINES = 150,
+                        WEIGHTS = 46,
+                        WHEELCHAIR = 99,
+                        WINDSURFING = 174,
+                        WORKOUT = 8,
+                        WRESTLING = 100,
+                        YOGA = 6,
+                        YOGA_BIKRAM = 132,
+                        YOGA_HATHA = 133,
+                        YOGA_POWER = 134,
+                        YOGA_VINYASA = 135,
+                        ZUMBA = 136
                     }
                 }
 
@@ -8691,6 +8870,9 @@ export namespace google {
 
                     /** Sleep updateTime */
                     updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Sleep shortAwakenings */
+                    shortAwakenings?: (google.devicesandservices.health.v4.Sleep.ISleepStage[]|null);
                 }
 
                 /** Represents a Sleep. */
@@ -8725,6 +8907,9 @@ export namespace google {
 
                     /** Sleep updateTime. */
                     public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Sleep shortAwakenings. */
+                    public shortAwakenings: google.devicesandservices.health.v4.Sleep.ISleepStage[];
 
                     /**
                      * Creates a new Sleep instance using the specified properties.
@@ -9071,6 +9256,9 @@ export namespace google {
 
                         /** SleepMetadata externalId */
                         externalId?: (string|null);
+
+                        /** SleepMetadata mainSleep */
+                        mainSleep?: (boolean|null);
                     }
 
                     /** Represents a SleepMetadata. */
@@ -9096,6 +9284,9 @@ export namespace google {
 
                         /** SleepMetadata externalId. */
                         public externalId: string;
+
+                        /** SleepMetadata mainSleep. */
+                        public mainSleep: boolean;
 
                         /**
                          * Creates a new SleepMetadata instance using the specified properties.
@@ -11271,6 +11462,569 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a MenstrualPeriod. */
+                interface IMenstrualPeriod {
+
+                    /** MenstrualPeriod interval */
+                    interval?: (google.devicesandservices.health.v4.IObservationTimeInterval|null);
+
+                    /** MenstrualPeriod notes */
+                    notes?: (string|null);
+                }
+
+                /** Represents a MenstrualPeriod. */
+                class MenstrualPeriod implements IMenstrualPeriod {
+
+                    /**
+                     * Constructs a new MenstrualPeriod.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devicesandservices.health.v4.IMenstrualPeriod);
+
+                    /** MenstrualPeriod interval. */
+                    public interval?: (google.devicesandservices.health.v4.IObservationTimeInterval|null);
+
+                    /** MenstrualPeriod notes. */
+                    public notes: string;
+
+                    /**
+                     * Creates a new MenstrualPeriod instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MenstrualPeriod instance
+                     */
+                    public static create(properties?: google.devicesandservices.health.v4.IMenstrualPeriod): google.devicesandservices.health.v4.MenstrualPeriod;
+
+                    /**
+                     * Encodes the specified MenstrualPeriod message. Does not implicitly {@link google.devicesandservices.health.v4.MenstrualPeriod.verify|verify} messages.
+                     * @param message MenstrualPeriod message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devicesandservices.health.v4.IMenstrualPeriod, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MenstrualPeriod message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.MenstrualPeriod.verify|verify} messages.
+                     * @param message MenstrualPeriod message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devicesandservices.health.v4.IMenstrualPeriod, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MenstrualPeriod message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MenstrualPeriod
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devicesandservices.health.v4.MenstrualPeriod;
+
+                    /**
+                     * Decodes a MenstrualPeriod message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MenstrualPeriod
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devicesandservices.health.v4.MenstrualPeriod;
+
+                    /**
+                     * Verifies a MenstrualPeriod message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MenstrualPeriod message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MenstrualPeriod
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devicesandservices.health.v4.MenstrualPeriod;
+
+                    /**
+                     * Creates a plain object from a MenstrualPeriod message. Also converts values to other types if specified.
+                     * @param message MenstrualPeriod
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devicesandservices.health.v4.MenstrualPeriod, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MenstrualPeriod to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for MenstrualPeriod
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an OvulationTest. */
+                interface IOvulationTest {
+
+                    /** OvulationTest sampleTime */
+                    sampleTime?: (google.devicesandservices.health.v4.IObservationSampleTime|null);
+
+                    /** OvulationTest result */
+                    result?: (google.devicesandservices.health.v4.OvulationTestResult|keyof typeof google.devicesandservices.health.v4.OvulationTestResult|null);
+                }
+
+                /** Represents an OvulationTest. */
+                class OvulationTest implements IOvulationTest {
+
+                    /**
+                     * Constructs a new OvulationTest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devicesandservices.health.v4.IOvulationTest);
+
+                    /** OvulationTest sampleTime. */
+                    public sampleTime?: (google.devicesandservices.health.v4.IObservationSampleTime|null);
+
+                    /** OvulationTest result. */
+                    public result: (google.devicesandservices.health.v4.OvulationTestResult|keyof typeof google.devicesandservices.health.v4.OvulationTestResult);
+
+                    /**
+                     * Creates a new OvulationTest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns OvulationTest instance
+                     */
+                    public static create(properties?: google.devicesandservices.health.v4.IOvulationTest): google.devicesandservices.health.v4.OvulationTest;
+
+                    /**
+                     * Encodes the specified OvulationTest message. Does not implicitly {@link google.devicesandservices.health.v4.OvulationTest.verify|verify} messages.
+                     * @param message OvulationTest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devicesandservices.health.v4.IOvulationTest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified OvulationTest message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.OvulationTest.verify|verify} messages.
+                     * @param message OvulationTest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devicesandservices.health.v4.IOvulationTest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an OvulationTest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns OvulationTest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devicesandservices.health.v4.OvulationTest;
+
+                    /**
+                     * Decodes an OvulationTest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns OvulationTest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devicesandservices.health.v4.OvulationTest;
+
+                    /**
+                     * Verifies an OvulationTest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an OvulationTest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns OvulationTest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devicesandservices.health.v4.OvulationTest;
+
+                    /**
+                     * Creates a plain object from an OvulationTest message. Also converts values to other types if specified.
+                     * @param message OvulationTest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devicesandservices.health.v4.OvulationTest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this OvulationTest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for OvulationTest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a Symptoms. */
+                interface ISymptoms {
+
+                    /** Symptoms sampleTime */
+                    sampleTime?: (google.devicesandservices.health.v4.IObservationSampleTime|null);
+
+                    /** Symptoms symptoms */
+                    symptoms?: (google.devicesandservices.health.v4.Symptoms.SymptomValue[]|null);
+                }
+
+                /** Represents a Symptoms. */
+                class Symptoms implements ISymptoms {
+
+                    /**
+                     * Constructs a new Symptoms.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devicesandservices.health.v4.ISymptoms);
+
+                    /** Symptoms sampleTime. */
+                    public sampleTime?: (google.devicesandservices.health.v4.IObservationSampleTime|null);
+
+                    /** Symptoms symptoms. */
+                    public symptoms: google.devicesandservices.health.v4.Symptoms.SymptomValue[];
+
+                    /**
+                     * Creates a new Symptoms instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Symptoms instance
+                     */
+                    public static create(properties?: google.devicesandservices.health.v4.ISymptoms): google.devicesandservices.health.v4.Symptoms;
+
+                    /**
+                     * Encodes the specified Symptoms message. Does not implicitly {@link google.devicesandservices.health.v4.Symptoms.verify|verify} messages.
+                     * @param message Symptoms message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devicesandservices.health.v4.ISymptoms, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Symptoms message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.Symptoms.verify|verify} messages.
+                     * @param message Symptoms message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devicesandservices.health.v4.ISymptoms, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Symptoms message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Symptoms
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devicesandservices.health.v4.Symptoms;
+
+                    /**
+                     * Decodes a Symptoms message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Symptoms
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devicesandservices.health.v4.Symptoms;
+
+                    /**
+                     * Verifies a Symptoms message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Symptoms message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Symptoms
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devicesandservices.health.v4.Symptoms;
+
+                    /**
+                     * Creates a plain object from a Symptoms message. Also converts values to other types if specified.
+                     * @param message Symptoms
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devicesandservices.health.v4.Symptoms, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Symptoms to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Symptoms
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace Symptoms {
+
+                    /** SymptomValue enum. */
+                    enum SymptomValue {
+                        SYMPTOM_VALUE_UNSPECIFIED = 0,
+                        CRAMPS = 1,
+                        HEADACHE = 2,
+                        TENDER_BREASTS = 3,
+                        ACNE = 4,
+                        SICK = 5,
+                        BLOATED = 6,
+                        HOT_FLASHES = 7,
+                        PMS = 8,
+                        COUGH = 9,
+                        FEVER = 10,
+                        DIFFICULTY_BREATHING = 11,
+                        BACK_PAIN = 12,
+                        SHAKINESS = 13,
+                        HUNGER = 14,
+                        SWEATING = 15,
+                        ANXIETY = 16,
+                        THIRST = 17,
+                        FREQUENT_URINATION = 18,
+                        BLURRED_VISION = 19,
+                        OTHER = 20,
+                        SEX_DRIVE_HIGH = 21,
+                        SEX_DRIVE_MEDIUM = 22,
+                        SEX_DRIVE_LOW = 23,
+                        HEART_PALPITATIONS = 24,
+                        FAINTING = 25,
+                        CHEST_PAIN = 26,
+                        FATIGUE = 27,
+                        CONFUSION = 28,
+                        DIZZINESS = 29,
+                        ABDOMINAL_PAIN = 30,
+                        BLADDER_LEAKS = 31,
+                        BLEEDING_GUMS = 32,
+                        BRAIN_FOG = 33,
+                        BURNING_MOUTH = 34,
+                        CONSTIPATION = 35,
+                        CRAVINGS = 36,
+                        DECREASED_APPETITE = 37,
+                        DIARRHEA = 38,
+                        DRAWING_PAIN = 39,
+                        DRY_EYES = 40,
+                        DRY_HAIR = 41,
+                        DRY_SKIN = 42,
+                        EXHAUSTION = 43,
+                        FEEL_GOOD = 44,
+                        FOOD_AVERSIONS = 45,
+                        HAIR_LOSS = 46,
+                        HEARTBURN = 47,
+                        HYPERPIGMENTATION = 48,
+                        INCREASED_APPETITE = 49,
+                        INCREASED_APPETITE_V2 = 50,
+                        INSOMNIA = 51,
+                        JOINT_PAIN = 52,
+                        LEG_CRAMPS = 53,
+                        MILKY_NIPPLE_DISCHARGE = 54,
+                        NAUSEA = 55,
+                        NIGHT_SWEATS = 56,
+                        NORMAL_DIGESTION = 57,
+                        NORMAL_STOOL = 58,
+                        PERINEUM_PAIN = 59,
+                        SLEEPINESS = 60,
+                        STRETCH_MARKS = 61,
+                        SWELLING = 62,
+                        VAGINAL_DRYNESS = 63,
+                        VAGINAL_ITCHING = 64,
+                        VOMITING = 65
+                    }
+                }
+
+                /** Properties of a Moods. */
+                interface IMoods {
+
+                    /** Moods sampleTime */
+                    sampleTime?: (google.devicesandservices.health.v4.IObservationSampleTime|null);
+
+                    /** Moods moods */
+                    moods?: (google.devicesandservices.health.v4.Moods.Mood[]|null);
+
+                    /** Moods valences */
+                    valences?: (google.devicesandservices.health.v4.Moods.Valence[]|null);
+                }
+
+                /** Represents a Moods. */
+                class Moods implements IMoods {
+
+                    /**
+                     * Constructs a new Moods.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devicesandservices.health.v4.IMoods);
+
+                    /** Moods sampleTime. */
+                    public sampleTime?: (google.devicesandservices.health.v4.IObservationSampleTime|null);
+
+                    /** Moods moods. */
+                    public moods: google.devicesandservices.health.v4.Moods.Mood[];
+
+                    /** Moods valences. */
+                    public valences: google.devicesandservices.health.v4.Moods.Valence[];
+
+                    /**
+                     * Creates a new Moods instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Moods instance
+                     */
+                    public static create(properties?: google.devicesandservices.health.v4.IMoods): google.devicesandservices.health.v4.Moods;
+
+                    /**
+                     * Encodes the specified Moods message. Does not implicitly {@link google.devicesandservices.health.v4.Moods.verify|verify} messages.
+                     * @param message Moods message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devicesandservices.health.v4.IMoods, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Moods message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.Moods.verify|verify} messages.
+                     * @param message Moods message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devicesandservices.health.v4.IMoods, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Moods message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Moods
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devicesandservices.health.v4.Moods;
+
+                    /**
+                     * Decodes a Moods message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Moods
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devicesandservices.health.v4.Moods;
+
+                    /**
+                     * Verifies a Moods message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Moods message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Moods
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devicesandservices.health.v4.Moods;
+
+                    /**
+                     * Creates a plain object from a Moods message. Also converts values to other types if specified.
+                     * @param message Moods
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devicesandservices.health.v4.Moods, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Moods to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Moods
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace Moods {
+
+                    /** Mood enum. */
+                    enum Mood {
+                        MOOD_UNSPECIFIED = 0,
+                        AMAZED = 1,
+                        AMUSED = 2,
+                        ANGRY = 3,
+                        ANNOYED = 4,
+                        ANXIOUS = 5,
+                        HAPPY = 6,
+                        CONTENT = 7,
+                        SAD = 8,
+                        WORRIED = 9,
+                        FRUSTRATED = 10,
+                        EXCITED = 11,
+                        CALM = 12,
+                        STRESSED = 13,
+                        ASHAMED = 14,
+                        BRAVE = 15,
+                        CONFIDENT = 16,
+                        DISAPPOINTED = 17,
+                        DISCOURAGED = 18,
+                        DISGUSTED = 19,
+                        DRAINED = 20,
+                        EMBARRASSED = 21,
+                        GRATEFUL = 22,
+                        GUILTY = 23,
+                        HOPEFUL = 24,
+                        HOPELESS = 25,
+                        INDIFFERENT = 26,
+                        IRRITATED = 27,
+                        JEALOUS = 28,
+                        JOYFUL = 29,
+                        LONELY = 30,
+                        OVERWHELMED = 31,
+                        PASSIONATE = 32,
+                        PEACEFUL = 33,
+                        PROUD = 34,
+                        RELIEVED = 35,
+                        SATISFIED = 36,
+                        SCARED = 37,
+                        SURPRISED = 38,
+                        ENERGIZED = 39,
+                        FATIGUED = 40,
+                        VERY_CALM = 41,
+                        VERY_STRESSED = 42,
+                        NEUTRAL = 43,
+                        AFRAID = 44,
+                        HURTING = 45,
+                        BORED = 46,
+                        BITTER = 47,
+                        ENVIOUS = 48,
+                        CONFUSED = 49,
+                        CURIOUS = 50,
+                        AWESTRUCK = 51,
+                        INSPIRED = 52,
+                        LONGING = 53,
+                        ACCOMPLISHED = 54,
+                        LOVING = 55,
+                        COMPASSIONATE = 56
+                    }
+
+                    /** Valence enum. */
+                    enum Valence {
+                        VALENCE_UNSPECIFIED = 0,
+                        UNPLEASANT = 1,
+                        BASELINE = 2,
+                        PLEASANT = 3
+                    }
+                }
+
                 /** Properties of a MedicalDeviceInfo. */
                 interface IMedicalDeviceInfo {
 
@@ -11722,6 +12476,18 @@ export namespace google {
                     /** DataPoint bloodGlucose */
                     bloodGlucose?: (google.devicesandservices.health.v4.IBloodGlucose|null);
 
+                    /** DataPoint menstrualPeriod */
+                    menstrualPeriod?: (google.devicesandservices.health.v4.IMenstrualPeriod|null);
+
+                    /** DataPoint ovulationTest */
+                    ovulationTest?: (google.devicesandservices.health.v4.IOvulationTest|null);
+
+                    /** DataPoint symptoms */
+                    symptoms?: (google.devicesandservices.health.v4.ISymptoms|null);
+
+                    /** DataPoint moods */
+                    moods?: (google.devicesandservices.health.v4.IMoods|null);
+
                     /** DataPoint name */
                     name?: (string|null);
 
@@ -11852,6 +12618,18 @@ export namespace google {
                     /** DataPoint bloodGlucose. */
                     public bloodGlucose?: (google.devicesandservices.health.v4.IBloodGlucose|null);
 
+                    /** DataPoint menstrualPeriod. */
+                    public menstrualPeriod?: (google.devicesandservices.health.v4.IMenstrualPeriod|null);
+
+                    /** DataPoint ovulationTest. */
+                    public ovulationTest?: (google.devicesandservices.health.v4.IOvulationTest|null);
+
+                    /** DataPoint symptoms. */
+                    public symptoms?: (google.devicesandservices.health.v4.ISymptoms|null);
+
+                    /** DataPoint moods. */
+                    public moods?: (google.devicesandservices.health.v4.IMoods|null);
+
                     /** DataPoint name. */
                     public name: string;
 
@@ -11859,7 +12637,7 @@ export namespace google {
                     public dataSource?: (google.devicesandservices.health.v4.IDataSource|null);
 
                     /** DataPoint data. */
-                    public data?: ("steps"|"floors"|"heartRate"|"sleep"|"dailyRestingHeartRate"|"dailyHeartRateVariability"|"exercise"|"weight"|"altitude"|"distance"|"bodyFat"|"activeZoneMinutes"|"heartRateVariability"|"dailySleepTemperatureDerivations"|"sedentaryPeriod"|"runVo2Max"|"oxygenSaturation"|"dailyOxygenSaturation"|"activityLevel"|"vo2Max"|"dailyVo2Max"|"nutritionLog"|"irregularRhythmNotification"|"electrocardiogram"|"dailyHeartRateZones"|"hydrationLog"|"food"|"timeInHeartRateZone"|"activeMinutes"|"respiratoryRateSleepSummary"|"dailyRespiratoryRate"|"swimLengthsData"|"height"|"basalEnergyBurned"|"coreBodyTemperature"|"activeEnergyBurned"|"foodMeasurementUnit"|"bloodGlucose");
+                    public data?: ("steps"|"floors"|"heartRate"|"sleep"|"dailyRestingHeartRate"|"dailyHeartRateVariability"|"exercise"|"weight"|"altitude"|"distance"|"bodyFat"|"activeZoneMinutes"|"heartRateVariability"|"dailySleepTemperatureDerivations"|"sedentaryPeriod"|"runVo2Max"|"oxygenSaturation"|"dailyOxygenSaturation"|"activityLevel"|"vo2Max"|"dailyVo2Max"|"nutritionLog"|"irregularRhythmNotification"|"electrocardiogram"|"dailyHeartRateZones"|"hydrationLog"|"food"|"timeInHeartRateZone"|"activeMinutes"|"respiratoryRateSleepSummary"|"dailyRespiratoryRate"|"swimLengthsData"|"height"|"basalEnergyBurned"|"coreBodyTemperature"|"activeEnergyBurned"|"foodMeasurementUnit"|"bloodGlucose"|"menstrualPeriod"|"ovulationTest"|"symptoms"|"moods");
 
                     /**
                      * Creates a new DataPoint instance using the specified properties.

@@ -4,6 +4,20 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/speech?activeTab=versions
 
+## [8.1.0](https://github.com/googleapis/google-cloud-node/compare/speech-v8.0.1...speech-v8.1.0) (2026-09-08)
+
+
+### Features
+
+* Upgrade librarian gapic-generator-typescript to v5.2.0 ([c249594](https://github.com/googleapis/google-cloud-node/commit/c249594c6ef41e4b36f1ef8869341a4c98c092b0))
+
+## [8.0.1](https://github.com/googleapis/google-cloud-node/compare/speech-v8.0.0...speech-v8.0.1) (2026-08-12)
+
+
+### Bug Fixes
+
+* Upgrade generated package dependencies to Node 22 version for all core, handwritten and generated dependencies ([#9129](https://github.com/googleapis/google-cloud-node/issues/9129)) ([5f01912](https://github.com/googleapis/google-cloud-node/commit/5f0191225b96dabe41daa9f9d57a8c72749bf62d))
+
 ## [8.0.0](https://github.com/googleapis/google-cloud-node/compare/speech-v7.5.0...speech-v8.0.0) (2026-08-04)
 
 

@@ -32,10 +32,10 @@ import type {
   LocationsClient,
   LocationProtos,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -57,7 +57,7 @@ export class VmwareEngineClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('vmwareengine');
@@ -70,12 +70,12 @@ export class VmwareEngineClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
+  innerApiCalls: {[name: string]: Function};
   iamClient: IamClient;
   locationsClient: LocationsClient;
-  pathTemplates: { [name: string]: gax.PathTemplate };
+  pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
-  vmwareEngineStub?: Promise<{ [name: string]: Function }>;
+  vmwareEngineStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of VmwareEngineClient.
@@ -151,7 +151,7 @@ export class VmwareEngineClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -960,7 +960,7 @@ export class VmwareEngineClient {
       'google.cloud.vmwareengine.v1.VmwareEngine',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -1000,7 +1000,7 @@ export class VmwareEngineClient {
           (this._protos as any).google.cloud.vmwareengine.v1.VmwareEngine,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -1082,7 +1082,7 @@ export class VmwareEngineClient {
     ];
     for (const methodName of vmwareEngineStubMethods) {
       const callPromise = this.vmwareEngineStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -1287,7 +1287,7 @@ export class VmwareEngineClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getPrivateCloud request %j', request);
@@ -1422,7 +1422,7 @@ export class VmwareEngineClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getCluster request %j', request);
@@ -1552,7 +1552,7 @@ export class VmwareEngineClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getNode request %j', request);
@@ -1696,7 +1696,7 @@ export class VmwareEngineClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getExternalAddress request %j', request);
@@ -1831,7 +1831,7 @@ export class VmwareEngineClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getSubnet request %j', request);
@@ -1975,7 +1975,7 @@ export class VmwareEngineClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getExternalAccessRule request %j', request);
@@ -2116,7 +2116,7 @@ export class VmwareEngineClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getLoggingServer request %j', request);
@@ -2257,7 +2257,7 @@ export class VmwareEngineClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getNodeType request %j', request);
@@ -2402,7 +2402,7 @@ export class VmwareEngineClient {
       this._gaxModule.routingHeader.fromParams({
         private_cloud: request.privateCloud ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('showNsxCredentials request %j', request);
@@ -2561,7 +2561,7 @@ export class VmwareEngineClient {
       this._gaxModule.routingHeader.fromParams({
         private_cloud: request.privateCloud ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('showVcenterCredentials request %j', request);
@@ -2702,7 +2702,7 @@ export class VmwareEngineClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getDnsForwarding request %j', request);
@@ -2846,7 +2846,7 @@ export class VmwareEngineClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getNetworkPeering request %j', request);
@@ -2993,7 +2993,7 @@ export class VmwareEngineClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getHcxActivationKey request %j', request);
@@ -3134,7 +3134,7 @@ export class VmwareEngineClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getNetworkPolicy request %j', request);
@@ -3281,7 +3281,7 @@ export class VmwareEngineClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getManagementDnsZoneBinding request %j', request);
@@ -3431,7 +3431,7 @@ export class VmwareEngineClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getVmwareEngineNetwork request %j', request);
@@ -3580,7 +3580,7 @@ export class VmwareEngineClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getPrivateConnection request %j', request);
@@ -3730,7 +3730,7 @@ export class VmwareEngineClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getDnsBindPermission request %j', request);
@@ -3910,7 +3910,7 @@ export class VmwareEngineClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3967,7 +3967,7 @@ export class VmwareEngineClient {
     this._log.info('createPrivateCloud long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4095,7 +4095,7 @@ export class VmwareEngineClient {
       this._gaxModule.routingHeader.fromParams({
         'private_cloud.name': request.privateCloud!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4152,7 +4152,7 @@ export class VmwareEngineClient {
     this._log.info('updatePrivateCloud long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4300,7 +4300,7 @@ export class VmwareEngineClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4357,7 +4357,7 @@ export class VmwareEngineClient {
     this._log.info('deletePrivateCloud long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4479,7 +4479,7 @@ export class VmwareEngineClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4536,7 +4536,7 @@ export class VmwareEngineClient {
     this._log.info('undeletePrivateCloud long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4675,7 +4675,7 @@ export class VmwareEngineClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4732,7 +4732,7 @@ export class VmwareEngineClient {
     this._log.info('createCluster long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4862,7 +4862,7 @@ export class VmwareEngineClient {
       this._gaxModule.routingHeader.fromParams({
         'cluster.name': request.cluster!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4919,7 +4919,7 @@ export class VmwareEngineClient {
     this._log.info('updateCluster long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -5041,7 +5041,7 @@ export class VmwareEngineClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5098,7 +5098,7 @@ export class VmwareEngineClient {
     this._log.info('deleteCluster long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -5246,7 +5246,7 @@ export class VmwareEngineClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5303,7 +5303,7 @@ export class VmwareEngineClient {
     this._log.info('createExternalAddress long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -5442,7 +5442,7 @@ export class VmwareEngineClient {
       this._gaxModule.routingHeader.fromParams({
         'external_address.name': request.externalAddress!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5499,7 +5499,7 @@ export class VmwareEngineClient {
     this._log.info('updateExternalAddress long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -5632,7 +5632,7 @@ export class VmwareEngineClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5689,7 +5689,7 @@ export class VmwareEngineClient {
     this._log.info('deleteExternalAddress long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -5812,7 +5812,7 @@ export class VmwareEngineClient {
       this._gaxModule.routingHeader.fromParams({
         'subnet.name': request.subnet!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5869,7 +5869,7 @@ export class VmwareEngineClient {
     this._log.info('updateSubnet long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -6015,7 +6015,7 @@ export class VmwareEngineClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6072,7 +6072,7 @@ export class VmwareEngineClient {
     this._log.info('createExternalAccessRule long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -6206,7 +6206,7 @@ export class VmwareEngineClient {
       this._gaxModule.routingHeader.fromParams({
         'external_access_rule.name': request.externalAccessRule!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6263,7 +6263,7 @@ export class VmwareEngineClient {
     this._log.info('updateExternalAccessRule long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -6394,7 +6394,7 @@ export class VmwareEngineClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6451,7 +6451,7 @@ export class VmwareEngineClient {
     this._log.info('deleteExternalAccessRule long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -6597,7 +6597,7 @@ export class VmwareEngineClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6654,7 +6654,7 @@ export class VmwareEngineClient {
     this._log.info('createLoggingServer long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -6788,7 +6788,7 @@ export class VmwareEngineClient {
       this._gaxModule.routingHeader.fromParams({
         'logging_server.name': request.loggingServer!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6845,7 +6845,7 @@ export class VmwareEngineClient {
     this._log.info('updateLoggingServer long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -6976,7 +6976,7 @@ export class VmwareEngineClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -7033,7 +7033,7 @@ export class VmwareEngineClient {
     this._log.info('deleteLoggingServer long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -7165,7 +7165,7 @@ export class VmwareEngineClient {
       this._gaxModule.routingHeader.fromParams({
         private_cloud: request.privateCloud ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -7222,7 +7222,7 @@ export class VmwareEngineClient {
     this._log.info('resetNsxCredentials long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -7364,7 +7364,7 @@ export class VmwareEngineClient {
       this._gaxModule.routingHeader.fromParams({
         private_cloud: request.privateCloud ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -7421,7 +7421,7 @@ export class VmwareEngineClient {
     this._log.info('resetVcenterCredentials long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -7555,7 +7555,7 @@ export class VmwareEngineClient {
       this._gaxModule.routingHeader.fromParams({
         'dns_forwarding.name': request.dnsForwarding!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -7612,7 +7612,7 @@ export class VmwareEngineClient {
     this._log.info('updateDnsForwarding long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -7759,7 +7759,7 @@ export class VmwareEngineClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -7816,7 +7816,7 @@ export class VmwareEngineClient {
     this._log.info('createNetworkPeering long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -7950,7 +7950,7 @@ export class VmwareEngineClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -8007,7 +8007,7 @@ export class VmwareEngineClient {
     this._log.info('deleteNetworkPeering long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -8142,7 +8142,7 @@ export class VmwareEngineClient {
       this._gaxModule.routingHeader.fromParams({
         'network_peering.name': request.networkPeering!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -8199,7 +8199,7 @@ export class VmwareEngineClient {
     this._log.info('updateNetworkPeering long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -8345,7 +8345,7 @@ export class VmwareEngineClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -8402,7 +8402,7 @@ export class VmwareEngineClient {
     this._log.info('createHcxActivationKey long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -8551,7 +8551,7 @@ export class VmwareEngineClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -8608,7 +8608,7 @@ export class VmwareEngineClient {
     this._log.info('createNetworkPolicy long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -8752,7 +8752,7 @@ export class VmwareEngineClient {
       this._gaxModule.routingHeader.fromParams({
         'network_policy.name': request.networkPolicy!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -8809,7 +8809,7 @@ export class VmwareEngineClient {
     this._log.info('updateNetworkPolicy long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -8942,7 +8942,7 @@ export class VmwareEngineClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -8999,7 +8999,7 @@ export class VmwareEngineClient {
     this._log.info('deleteNetworkPolicy long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -9152,7 +9152,7 @@ export class VmwareEngineClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -9215,7 +9215,7 @@ export class VmwareEngineClient {
     this._log.info('createManagementDnsZoneBinding long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -9350,7 +9350,7 @@ export class VmwareEngineClient {
         'management_dns_zone_binding.name':
           request.managementDnsZoneBinding!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -9413,7 +9413,7 @@ export class VmwareEngineClient {
     this._log.info('updateManagementDnsZoneBinding long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -9546,7 +9546,7 @@ export class VmwareEngineClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -9609,7 +9609,7 @@ export class VmwareEngineClient {
     this._log.info('deleteManagementDnsZoneBinding long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -9741,7 +9741,7 @@ export class VmwareEngineClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -9804,7 +9804,7 @@ export class VmwareEngineClient {
     this._log.info('repairManagementDnsZoneBinding long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -9954,7 +9954,7 @@ export class VmwareEngineClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -10011,7 +10011,7 @@ export class VmwareEngineClient {
     this._log.info('createVmwareEngineNetwork long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -10147,7 +10147,7 @@ export class VmwareEngineClient {
       this._gaxModule.routingHeader.fromParams({
         'vmware_engine_network.name': request.vmwareEngineNetwork!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -10204,7 +10204,7 @@ export class VmwareEngineClient {
     this._log.info('updateVmwareEngineNetwork long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -10343,7 +10343,7 @@ export class VmwareEngineClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -10400,7 +10400,7 @@ export class VmwareEngineClient {
     this._log.info('deleteVmwareEngineNetwork long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -10546,7 +10546,7 @@ export class VmwareEngineClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -10603,7 +10603,7 @@ export class VmwareEngineClient {
     this._log.info('createPrivateConnection long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -10738,7 +10738,7 @@ export class VmwareEngineClient {
       this._gaxModule.routingHeader.fromParams({
         'private_connection.name': request.privateConnection!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -10795,7 +10795,7 @@ export class VmwareEngineClient {
     this._log.info('updatePrivateConnection long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -10928,7 +10928,7 @@ export class VmwareEngineClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -10985,7 +10985,7 @@ export class VmwareEngineClient {
     this._log.info('deletePrivateConnection long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -11124,7 +11124,7 @@ export class VmwareEngineClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -11181,7 +11181,7 @@ export class VmwareEngineClient {
     this._log.info('grantDnsBindPermission long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -11319,7 +11319,7 @@ export class VmwareEngineClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -11376,7 +11376,7 @@ export class VmwareEngineClient {
     this._log.info('revokeDnsBindPermission long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -11527,7 +11527,7 @@ export class VmwareEngineClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -11638,7 +11638,7 @@ export class VmwareEngineClient {
       });
     const defaultCallSettings = this._defaults['listPrivateClouds'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listPrivateClouds stream %j', request);
@@ -11731,7 +11731,7 @@ export class VmwareEngineClient {
       });
     const defaultCallSettings = this._defaults['listPrivateClouds'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listPrivateClouds iterate %j', request);
@@ -11867,7 +11867,7 @@ export class VmwareEngineClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -11966,7 +11966,7 @@ export class VmwareEngineClient {
       });
     const defaultCallSettings = this._defaults['listClusters'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listClusters stream %j', request);
@@ -12047,7 +12047,7 @@ export class VmwareEngineClient {
       });
     const defaultCallSettings = this._defaults['listClusters'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listClusters iterate %j', request);
@@ -12157,7 +12157,7 @@ export class VmwareEngineClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -12236,7 +12236,7 @@ export class VmwareEngineClient {
       });
     const defaultCallSettings = this._defaults['listNodes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listNodes stream %j', request);
@@ -12297,7 +12297,7 @@ export class VmwareEngineClient {
       });
     const defaultCallSettings = this._defaults['listNodes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listNodes iterate %j', request);
@@ -12446,7 +12446,7 @@ export class VmwareEngineClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -12557,7 +12557,7 @@ export class VmwareEngineClient {
       });
     const defaultCallSettings = this._defaults['listExternalAddresses'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listExternalAddresses stream %j', request);
@@ -12650,7 +12650,7 @@ export class VmwareEngineClient {
       });
     const defaultCallSettings = this._defaults['listExternalAddresses'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listExternalAddresses iterate %j', request);
@@ -12768,7 +12768,7 @@ export class VmwareEngineClient {
       this._gaxModule.routingHeader.fromParams({
         network_policy: request.networkPolicy ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -12855,7 +12855,7 @@ export class VmwareEngineClient {
     const defaultCallSettings =
       this._defaults['fetchNetworkPolicyExternalAddresses'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('fetchNetworkPolicyExternalAddresses stream %j', request);
@@ -12918,7 +12918,7 @@ export class VmwareEngineClient {
     const defaultCallSettings =
       this._defaults['fetchNetworkPolicyExternalAddresses'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('fetchNetworkPolicyExternalAddresses iterate %j', request);
@@ -13034,7 +13034,7 @@ export class VmwareEngineClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -13113,7 +13113,7 @@ export class VmwareEngineClient {
       });
     const defaultCallSettings = this._defaults['listSubnets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listSubnets stream %j', request);
@@ -13174,7 +13174,7 @@ export class VmwareEngineClient {
       });
     const defaultCallSettings = this._defaults['listSubnets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listSubnets iterate %j', request);
@@ -13322,7 +13322,7 @@ export class VmwareEngineClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -13433,7 +13433,7 @@ export class VmwareEngineClient {
       });
     const defaultCallSettings = this._defaults['listExternalAccessRules'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listExternalAccessRules stream %j', request);
@@ -13526,7 +13526,7 @@ export class VmwareEngineClient {
       });
     const defaultCallSettings = this._defaults['listExternalAccessRules'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listExternalAccessRules iterate %j', request);
@@ -13676,7 +13676,7 @@ export class VmwareEngineClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -13788,7 +13788,7 @@ export class VmwareEngineClient {
       });
     const defaultCallSettings = this._defaults['listLoggingServers'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listLoggingServers stream %j', request);
@@ -13882,7 +13882,7 @@ export class VmwareEngineClient {
       });
     const defaultCallSettings = this._defaults['listLoggingServers'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listLoggingServers iterate %j', request);
@@ -14023,7 +14023,7 @@ export class VmwareEngineClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -14127,7 +14127,7 @@ export class VmwareEngineClient {
       });
     const defaultCallSettings = this._defaults['listNodeTypes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listNodeTypes stream %j', request);
@@ -14213,7 +14213,7 @@ export class VmwareEngineClient {
       });
     const defaultCallSettings = this._defaults['listNodeTypes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listNodeTypes iterate %j', request);
@@ -14360,7 +14360,7 @@ export class VmwareEngineClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -14469,7 +14469,7 @@ export class VmwareEngineClient {
       });
     const defaultCallSettings = this._defaults['listNetworkPeerings'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listNetworkPeerings stream %j', request);
@@ -14560,7 +14560,7 @@ export class VmwareEngineClient {
       });
     const defaultCallSettings = this._defaults['listNetworkPeerings'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listNetworkPeerings iterate %j', request);
@@ -14680,7 +14680,7 @@ export class VmwareEngineClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -14762,7 +14762,7 @@ export class VmwareEngineClient {
       });
     const defaultCallSettings = this._defaults['listPeeringRoutes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listPeeringRoutes stream %j', request);
@@ -14826,7 +14826,7 @@ export class VmwareEngineClient {
       });
     const defaultCallSettings = this._defaults['listPeeringRoutes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listPeeringRoutes iterate %j', request);
@@ -14943,7 +14943,7 @@ export class VmwareEngineClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -15023,7 +15023,7 @@ export class VmwareEngineClient {
       });
     const defaultCallSettings = this._defaults['listHcxActivationKeys'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listHcxActivationKeys stream %j', request);
@@ -15085,7 +15085,7 @@ export class VmwareEngineClient {
       });
     const defaultCallSettings = this._defaults['listHcxActivationKeys'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listHcxActivationKeys iterate %j', request);
@@ -15232,7 +15232,7 @@ export class VmwareEngineClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -15342,7 +15342,7 @@ export class VmwareEngineClient {
       });
     const defaultCallSettings = this._defaults['listNetworkPolicies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listNetworkPolicies stream %j', request);
@@ -15434,7 +15434,7 @@ export class VmwareEngineClient {
       });
     const defaultCallSettings = this._defaults['listNetworkPolicies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listNetworkPolicies iterate %j', request);
@@ -15583,7 +15583,7 @@ export class VmwareEngineClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -15695,7 +15695,7 @@ export class VmwareEngineClient {
       });
     const defaultCallSettings = this._defaults['listManagementDnsZoneBindings'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listManagementDnsZoneBindings stream %j', request);
@@ -15789,7 +15789,7 @@ export class VmwareEngineClient {
       });
     const defaultCallSettings = this._defaults['listManagementDnsZoneBindings'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listManagementDnsZoneBindings iterate %j', request);
@@ -15935,7 +15935,7 @@ export class VmwareEngineClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -16044,7 +16044,7 @@ export class VmwareEngineClient {
       });
     const defaultCallSettings = this._defaults['listVmwareEngineNetworks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listVmwareEngineNetworks stream %j', request);
@@ -16135,7 +16135,7 @@ export class VmwareEngineClient {
       });
     const defaultCallSettings = this._defaults['listVmwareEngineNetworks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listVmwareEngineNetworks iterate %j', request);
@@ -16281,7 +16281,7 @@ export class VmwareEngineClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -16390,7 +16390,7 @@ export class VmwareEngineClient {
       });
     const defaultCallSettings = this._defaults['listPrivateConnections'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listPrivateConnections stream %j', request);
@@ -16481,7 +16481,7 @@ export class VmwareEngineClient {
       });
     const defaultCallSettings = this._defaults['listPrivateConnections'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listPrivateConnections iterate %j', request);
@@ -16594,7 +16594,7 @@ export class VmwareEngineClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -16677,7 +16677,7 @@ export class VmwareEngineClient {
     const defaultCallSettings =
       this._defaults['listPrivateConnectionPeeringRoutes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listPrivateConnectionPeeringRoutes stream %j', request);
@@ -16736,7 +16736,7 @@ export class VmwareEngineClient {
     const defaultCallSettings =
       this._defaults['listPrivateConnectionPeeringRoutes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listPrivateConnectionPeeringRoutes iterate %j', request);
@@ -18280,14 +18280,14 @@ export class VmwareEngineClient {
    */
   close(): Promise<void> {
     if (this.vmwareEngineStub && !this._terminated) {
-      return this.vmwareEngineStub.then((stub) => {
+      return this.vmwareEngineStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.iamClient.close().catch((err) => {
+        this.iamClient.close().catch(err => {
           throw err;
         });
-        this.locationsClient.close().catch((err) => {
+        this.locationsClient.close().catch(err => {
           throw err;
         });
         void this.operationsClient.close();

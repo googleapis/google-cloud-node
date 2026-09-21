@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as deploymentresourcepoolserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -51,7 +51,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -155,9 +155,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -208,7 +208,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
     it('sets apiEndpoint according to universe domain camelCase', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
-          { universeDomain: 'example.com' },
+          {universeDomain: 'example.com'},
         );
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'aiplatform.example.com');
@@ -217,7 +217,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
     it('sets apiEndpoint according to universe domain snakeCase', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
-          { universe_domain: 'example.com' },
+          {universe_domain: 'example.com'},
         );
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'aiplatform.example.com');
@@ -244,7 +244,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client =
             new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
-              { universeDomain: 'configured.example.com' },
+              {universeDomain: 'configured.example.com'},
             );
           const servicePath = client.apiEndpoint;
           assert.strictEqual(servicePath, 'aiplatform.configured.example.com');
@@ -259,7 +259,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
     it('does not allow setting both universeDomain and universe_domain', () => {
       assert.throws(() => {
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
-          { universe_domain: 'example.com', universeDomain: 'example.net' },
+          {universe_domain: 'example.com', universeDomain: 'example.net'},
         );
       });
     });
@@ -292,7 +292,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -301,15 +301,15 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       assert(client.deploymentResourcePoolServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.deploymentResourcePoolServiceStub);
@@ -318,16 +318,16 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -337,7 +337,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -347,7 +347,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -362,7 +362,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -388,7 +388,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -423,7 +423,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -473,7 +473,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -510,7 +510,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -524,7 +524,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -539,7 +539,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -575,7 +575,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -632,7 +632,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -669,7 +669,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -705,7 +705,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -714,8 +714,8 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -731,7 +731,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -755,7 +755,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -792,7 +792,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -850,7 +850,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -888,7 +888,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -925,7 +925,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -934,8 +934,8 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -951,7 +951,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -975,7 +975,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1011,7 +1011,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1068,7 +1068,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1105,7 +1105,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1141,7 +1141,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1150,8 +1150,8 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -1167,7 +1167,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1191,7 +1191,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1234,7 +1234,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1294,7 +1294,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1331,7 +1331,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1406,7 +1406,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1470,7 +1470,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1527,7 +1527,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1577,7 +1577,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1620,7 +1620,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1678,7 +1678,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1712,7 +1712,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1765,9 +1765,9 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       assert(
         (client.descriptors.page.queryDeployedModels.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1775,7 +1775,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1817,9 +1817,9 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       assert(
         (client.descriptors.page.queryDeployedModels.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1827,7 +1827,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1869,9 +1869,9 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       assert(
         (client.descriptors.page.queryDeployedModels.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1879,7 +1879,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1913,9 +1913,9 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       assert(
         (client.descriptors.page.queryDeployedModels.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1924,7 +1924,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1957,7 +1957,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1996,7 +1996,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2008,7 +2008,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2043,7 +2043,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2076,7 +2076,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2115,7 +2115,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2127,7 +2127,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2162,7 +2162,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2198,7 +2198,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2237,7 +2237,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2249,7 +2249,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2287,7 +2287,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2320,7 +2320,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2367,7 +2367,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2405,7 +2405,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2456,7 +2456,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2500,7 +2500,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2524,7 +2524,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2553,7 +2553,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2565,7 +2565,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2592,7 +2592,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2617,7 +2617,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2646,7 +2646,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2658,7 +2658,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2685,7 +2685,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2710,7 +2710,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2739,7 +2739,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2751,7 +2751,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2778,7 +2778,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2816,7 +2816,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2857,7 +2857,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2947,7 +2947,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -3027,7 +3027,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -3105,7 +3105,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -3185,7 +3185,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -3253,7 +3253,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -3331,7 +3331,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -3399,7 +3399,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -3477,7 +3477,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -3545,7 +3545,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -3613,7 +3613,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -3692,7 +3692,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -3777,7 +3777,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -3856,7 +3856,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -3934,7 +3934,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -4001,7 +4001,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -4082,7 +4082,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -4162,7 +4162,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -4241,7 +4241,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -4308,7 +4308,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -4392,7 +4392,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -4459,7 +4459,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -4525,7 +4525,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -4579,7 +4579,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -4659,7 +4659,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -4726,7 +4726,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -4793,7 +4793,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -4876,7 +4876,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -4956,7 +4956,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -5066,7 +5066,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -5134,7 +5134,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -5213,7 +5213,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -5297,7 +5297,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -5365,7 +5365,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -5449,7 +5449,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -5529,7 +5529,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -5594,7 +5594,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -5637,7 +5637,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -5720,7 +5720,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -5826,7 +5826,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -5953,7 +5953,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -6047,7 +6047,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -6103,7 +6103,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -6169,7 +6169,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -6226,7 +6226,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -6304,7 +6304,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -6373,7 +6373,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -6451,7 +6451,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -6519,7 +6519,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -6599,7 +6599,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -6689,7 +6689,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -6757,7 +6757,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -6824,7 +6824,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -6892,7 +6892,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -6991,7 +6991,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -7083,7 +7083,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -7209,7 +7209,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -7281,7 +7281,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -7359,7 +7359,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       const client =
         new deploymentresourcepoolserviceModule.v1.DeploymentResourcePoolServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );

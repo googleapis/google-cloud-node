@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as storagetransferserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, LROperation, operationsProtos } from 'google-gax';
+import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -149,9 +149,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -286,7 +286,7 @@ describe('v1.StorageTransferServiceClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client =
         new storagetransferserviceModule.v1.StorageTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.storageTransferServiceStub, undefined);
@@ -294,13 +294,13 @@ describe('v1.StorageTransferServiceClient', () => {
       assert(client.storageTransferServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new storagetransferserviceModule.v1.StorageTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.storageTransferServiceStub);
@@ -309,15 +309,15 @@ describe('v1.StorageTransferServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new storagetransferserviceModule.v1.StorageTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.storageTransferServiceStub, undefined);
@@ -326,7 +326,7 @@ describe('v1.StorageTransferServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -335,7 +335,7 @@ describe('v1.StorageTransferServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new storagetransferserviceModule.v1.StorageTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -348,7 +348,7 @@ describe('v1.StorageTransferServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new storagetransferserviceModule.v1.StorageTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon
@@ -372,7 +372,7 @@ describe('v1.StorageTransferServiceClient', () => {
     it('invokes getGoogleServiceAccount without error', async () => {
       const client =
         new storagetransferserviceModule.v1.StorageTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -405,7 +405,7 @@ describe('v1.StorageTransferServiceClient', () => {
     it('invokes getGoogleServiceAccount without error using callback', async () => {
       const client =
         new storagetransferserviceModule.v1.StorageTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -453,7 +453,7 @@ describe('v1.StorageTransferServiceClient', () => {
     it('invokes getGoogleServiceAccount with error', async () => {
       const client =
         new storagetransferserviceModule.v1.StorageTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -488,7 +488,7 @@ describe('v1.StorageTransferServiceClient', () => {
     it('invokes getGoogleServiceAccount with closed client', async () => {
       const client =
         new storagetransferserviceModule.v1.StorageTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -501,7 +501,7 @@ describe('v1.StorageTransferServiceClient', () => {
       );
       request.projectId = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -515,7 +515,7 @@ describe('v1.StorageTransferServiceClient', () => {
     it('invokes createTransferJob without error', async () => {
       const client =
         new storagetransferserviceModule.v1.StorageTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -533,7 +533,7 @@ describe('v1.StorageTransferServiceClient', () => {
     it('invokes createTransferJob without error using callback', async () => {
       const client =
         new storagetransferserviceModule.v1.StorageTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -567,7 +567,7 @@ describe('v1.StorageTransferServiceClient', () => {
     it('invokes createTransferJob with error', async () => {
       const client =
         new storagetransferserviceModule.v1.StorageTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -585,7 +585,7 @@ describe('v1.StorageTransferServiceClient', () => {
     it('invokes createTransferJob with closed client', async () => {
       const client =
         new storagetransferserviceModule.v1.StorageTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -593,7 +593,7 @@ describe('v1.StorageTransferServiceClient', () => {
         new protos.google.storagetransfer.v1.CreateTransferJobRequest(),
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createTransferJob(request), expectedError);
@@ -604,7 +604,7 @@ describe('v1.StorageTransferServiceClient', () => {
     it('invokes updateTransferJob without error', async () => {
       const client =
         new storagetransferserviceModule.v1.StorageTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -636,7 +636,7 @@ describe('v1.StorageTransferServiceClient', () => {
     it('invokes updateTransferJob without error using callback', async () => {
       const client =
         new storagetransferserviceModule.v1.StorageTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -684,7 +684,7 @@ describe('v1.StorageTransferServiceClient', () => {
     it('invokes updateTransferJob with error', async () => {
       const client =
         new storagetransferserviceModule.v1.StorageTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -716,7 +716,7 @@ describe('v1.StorageTransferServiceClient', () => {
     it('invokes updateTransferJob with closed client', async () => {
       const client =
         new storagetransferserviceModule.v1.StorageTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -729,7 +729,7 @@ describe('v1.StorageTransferServiceClient', () => {
       );
       request.jobName = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateTransferJob(request), expectedError);
@@ -740,7 +740,7 @@ describe('v1.StorageTransferServiceClient', () => {
     it('invokes getTransferJob without error', async () => {
       const client =
         new storagetransferserviceModule.v1.StorageTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -772,7 +772,7 @@ describe('v1.StorageTransferServiceClient', () => {
     it('invokes getTransferJob without error using callback', async () => {
       const client =
         new storagetransferserviceModule.v1.StorageTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -820,7 +820,7 @@ describe('v1.StorageTransferServiceClient', () => {
     it('invokes getTransferJob with error', async () => {
       const client =
         new storagetransferserviceModule.v1.StorageTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -852,7 +852,7 @@ describe('v1.StorageTransferServiceClient', () => {
     it('invokes getTransferJob with closed client', async () => {
       const client =
         new storagetransferserviceModule.v1.StorageTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -865,7 +865,7 @@ describe('v1.StorageTransferServiceClient', () => {
       );
       request.jobName = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getTransferJob(request), expectedError);
@@ -876,7 +876,7 @@ describe('v1.StorageTransferServiceClient', () => {
     it('invokes pauseTransferOperation without error', async () => {
       const client =
         new storagetransferserviceModule.v1.StorageTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -909,7 +909,7 @@ describe('v1.StorageTransferServiceClient', () => {
     it('invokes pauseTransferOperation without error using callback', async () => {
       const client =
         new storagetransferserviceModule.v1.StorageTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -957,7 +957,7 @@ describe('v1.StorageTransferServiceClient', () => {
     it('invokes pauseTransferOperation with error', async () => {
       const client =
         new storagetransferserviceModule.v1.StorageTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -992,7 +992,7 @@ describe('v1.StorageTransferServiceClient', () => {
     it('invokes pauseTransferOperation with closed client', async () => {
       const client =
         new storagetransferserviceModule.v1.StorageTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1005,7 +1005,7 @@ describe('v1.StorageTransferServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1019,7 +1019,7 @@ describe('v1.StorageTransferServiceClient', () => {
     it('invokes resumeTransferOperation without error', async () => {
       const client =
         new storagetransferserviceModule.v1.StorageTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1052,7 +1052,7 @@ describe('v1.StorageTransferServiceClient', () => {
     it('invokes resumeTransferOperation without error using callback', async () => {
       const client =
         new storagetransferserviceModule.v1.StorageTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1100,7 +1100,7 @@ describe('v1.StorageTransferServiceClient', () => {
     it('invokes resumeTransferOperation with error', async () => {
       const client =
         new storagetransferserviceModule.v1.StorageTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1135,7 +1135,7 @@ describe('v1.StorageTransferServiceClient', () => {
     it('invokes resumeTransferOperation with closed client', async () => {
       const client =
         new storagetransferserviceModule.v1.StorageTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1148,7 +1148,7 @@ describe('v1.StorageTransferServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1162,7 +1162,7 @@ describe('v1.StorageTransferServiceClient', () => {
     it('invokes deleteTransferJob without error', async () => {
       const client =
         new storagetransferserviceModule.v1.StorageTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1194,7 +1194,7 @@ describe('v1.StorageTransferServiceClient', () => {
     it('invokes deleteTransferJob without error using callback', async () => {
       const client =
         new storagetransferserviceModule.v1.StorageTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1242,7 +1242,7 @@ describe('v1.StorageTransferServiceClient', () => {
     it('invokes deleteTransferJob with error', async () => {
       const client =
         new storagetransferserviceModule.v1.StorageTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1274,7 +1274,7 @@ describe('v1.StorageTransferServiceClient', () => {
     it('invokes deleteTransferJob with closed client', async () => {
       const client =
         new storagetransferserviceModule.v1.StorageTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1287,7 +1287,7 @@ describe('v1.StorageTransferServiceClient', () => {
       );
       request.jobName = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteTransferJob(request), expectedError);
@@ -1298,7 +1298,7 @@ describe('v1.StorageTransferServiceClient', () => {
     it('invokes createAgentPool without error', async () => {
       const client =
         new storagetransferserviceModule.v1.StorageTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1330,7 +1330,7 @@ describe('v1.StorageTransferServiceClient', () => {
     it('invokes createAgentPool without error using callback', async () => {
       const client =
         new storagetransferserviceModule.v1.StorageTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1378,7 +1378,7 @@ describe('v1.StorageTransferServiceClient', () => {
     it('invokes createAgentPool with error', async () => {
       const client =
         new storagetransferserviceModule.v1.StorageTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1410,7 +1410,7 @@ describe('v1.StorageTransferServiceClient', () => {
     it('invokes createAgentPool with closed client', async () => {
       const client =
         new storagetransferserviceModule.v1.StorageTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1423,7 +1423,7 @@ describe('v1.StorageTransferServiceClient', () => {
       );
       request.projectId = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createAgentPool(request), expectedError);
@@ -1434,7 +1434,7 @@ describe('v1.StorageTransferServiceClient', () => {
     it('invokes updateAgentPool without error', async () => {
       const client =
         new storagetransferserviceModule.v1.StorageTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1467,7 +1467,7 @@ describe('v1.StorageTransferServiceClient', () => {
     it('invokes updateAgentPool without error using callback', async () => {
       const client =
         new storagetransferserviceModule.v1.StorageTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1516,7 +1516,7 @@ describe('v1.StorageTransferServiceClient', () => {
     it('invokes updateAgentPool with error', async () => {
       const client =
         new storagetransferserviceModule.v1.StorageTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1549,7 +1549,7 @@ describe('v1.StorageTransferServiceClient', () => {
     it('invokes updateAgentPool with closed client', async () => {
       const client =
         new storagetransferserviceModule.v1.StorageTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1563,7 +1563,7 @@ describe('v1.StorageTransferServiceClient', () => {
       );
       request.agentPool.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateAgentPool(request), expectedError);
@@ -1574,7 +1574,7 @@ describe('v1.StorageTransferServiceClient', () => {
     it('invokes getAgentPool without error', async () => {
       const client =
         new storagetransferserviceModule.v1.StorageTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1606,7 +1606,7 @@ describe('v1.StorageTransferServiceClient', () => {
     it('invokes getAgentPool without error using callback', async () => {
       const client =
         new storagetransferserviceModule.v1.StorageTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1654,7 +1654,7 @@ describe('v1.StorageTransferServiceClient', () => {
     it('invokes getAgentPool with error', async () => {
       const client =
         new storagetransferserviceModule.v1.StorageTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1686,7 +1686,7 @@ describe('v1.StorageTransferServiceClient', () => {
     it('invokes getAgentPool with closed client', async () => {
       const client =
         new storagetransferserviceModule.v1.StorageTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1699,7 +1699,7 @@ describe('v1.StorageTransferServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getAgentPool(request), expectedError);
@@ -1710,7 +1710,7 @@ describe('v1.StorageTransferServiceClient', () => {
     it('invokes deleteAgentPool without error', async () => {
       const client =
         new storagetransferserviceModule.v1.StorageTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1742,7 +1742,7 @@ describe('v1.StorageTransferServiceClient', () => {
     it('invokes deleteAgentPool without error using callback', async () => {
       const client =
         new storagetransferserviceModule.v1.StorageTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1790,7 +1790,7 @@ describe('v1.StorageTransferServiceClient', () => {
     it('invokes deleteAgentPool with error', async () => {
       const client =
         new storagetransferserviceModule.v1.StorageTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1822,7 +1822,7 @@ describe('v1.StorageTransferServiceClient', () => {
     it('invokes deleteAgentPool with closed client', async () => {
       const client =
         new storagetransferserviceModule.v1.StorageTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1835,7 +1835,7 @@ describe('v1.StorageTransferServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteAgentPool(request), expectedError);
@@ -1846,7 +1846,7 @@ describe('v1.StorageTransferServiceClient', () => {
     it('invokes runTransferJob without error', async () => {
       const client =
         new storagetransferserviceModule.v1.StorageTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1880,7 +1880,7 @@ describe('v1.StorageTransferServiceClient', () => {
     it('invokes runTransferJob without error using callback', async () => {
       const client =
         new storagetransferserviceModule.v1.StorageTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1935,7 +1935,7 @@ describe('v1.StorageTransferServiceClient', () => {
     it('invokes runTransferJob with call error', async () => {
       const client =
         new storagetransferserviceModule.v1.StorageTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1967,7 +1967,7 @@ describe('v1.StorageTransferServiceClient', () => {
     it('invokes runTransferJob with LRO error', async () => {
       const client =
         new storagetransferserviceModule.v1.StorageTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2001,7 +2001,7 @@ describe('v1.StorageTransferServiceClient', () => {
     it('invokes checkRunTransferJobProgress without error', async () => {
       const client =
         new storagetransferserviceModule.v1.StorageTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2009,8 +2009,8 @@ describe('v1.StorageTransferServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkRunTransferJobProgress(
@@ -2024,7 +2024,7 @@ describe('v1.StorageTransferServiceClient', () => {
     it('invokes checkRunTransferJobProgress with error', async () => {
       const client =
         new storagetransferserviceModule.v1.StorageTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2046,7 +2046,7 @@ describe('v1.StorageTransferServiceClient', () => {
     it('invokes listTransferJobs without error', async () => {
       const client =
         new storagetransferserviceModule.v1.StorageTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2072,7 +2072,7 @@ describe('v1.StorageTransferServiceClient', () => {
     it('invokes listTransferJobs without error using callback', async () => {
       const client =
         new storagetransferserviceModule.v1.StorageTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2114,7 +2114,7 @@ describe('v1.StorageTransferServiceClient', () => {
     it('invokes listTransferJobs with error', async () => {
       const client =
         new storagetransferserviceModule.v1.StorageTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2132,7 +2132,7 @@ describe('v1.StorageTransferServiceClient', () => {
     it('invokes listTransferJobsStream without error', async () => {
       const client =
         new storagetransferserviceModule.v1.StorageTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2180,7 +2180,7 @@ describe('v1.StorageTransferServiceClient', () => {
     it('invokes listTransferJobsStream with error', async () => {
       const client =
         new storagetransferserviceModule.v1.StorageTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2217,7 +2217,7 @@ describe('v1.StorageTransferServiceClient', () => {
     it('uses async iteration with listTransferJobs without error', async () => {
       const client =
         new storagetransferserviceModule.v1.StorageTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2254,7 +2254,7 @@ describe('v1.StorageTransferServiceClient', () => {
     it('uses async iteration with listTransferJobs with error', async () => {
       const client =
         new storagetransferserviceModule.v1.StorageTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2284,7 +2284,7 @@ describe('v1.StorageTransferServiceClient', () => {
     it('invokes listAgentPools without error', async () => {
       const client =
         new storagetransferserviceModule.v1.StorageTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2318,7 +2318,7 @@ describe('v1.StorageTransferServiceClient', () => {
     it('invokes listAgentPools without error using callback', async () => {
       const client =
         new storagetransferserviceModule.v1.StorageTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2368,7 +2368,7 @@ describe('v1.StorageTransferServiceClient', () => {
     it('invokes listAgentPools with error', async () => {
       const client =
         new storagetransferserviceModule.v1.StorageTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2400,7 +2400,7 @@ describe('v1.StorageTransferServiceClient', () => {
     it('invokes listAgentPoolsStream without error', async () => {
       const client =
         new storagetransferserviceModule.v1.StorageTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2446,16 +2446,16 @@ describe('v1.StorageTransferServiceClient', () => {
       assert(
         (client.descriptors.page.listAgentPools.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listAgentPoolsStream with error', async () => {
       const client =
         new storagetransferserviceModule.v1.StorageTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2496,16 +2496,16 @@ describe('v1.StorageTransferServiceClient', () => {
       assert(
         (client.descriptors.page.listAgentPools.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listAgentPools without error', async () => {
       const client =
         new storagetransferserviceModule.v1.StorageTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2540,16 +2540,16 @@ describe('v1.StorageTransferServiceClient', () => {
       assert(
         (client.descriptors.page.listAgentPools.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listAgentPools with error', async () => {
       const client =
         new storagetransferserviceModule.v1.StorageTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2581,9 +2581,9 @@ describe('v1.StorageTransferServiceClient', () => {
       assert(
         (client.descriptors.page.listAgentPools.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2591,7 +2591,7 @@ describe('v1.StorageTransferServiceClient', () => {
     it('invokes getOperation without error', async () => {
       const client =
         new storagetransferserviceModule.v1.StorageTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2613,7 +2613,7 @@ describe('v1.StorageTransferServiceClient', () => {
     it('invokes getOperation without error using callback', async () => {
       const client =
         new storagetransferserviceModule.v1.StorageTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -2641,7 +2641,7 @@ describe('v1.StorageTransferServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2652,7 +2652,7 @@ describe('v1.StorageTransferServiceClient', () => {
     it('invokes getOperation with error', async () => {
       const client =
         new storagetransferserviceModule.v1.StorageTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -2677,7 +2677,7 @@ describe('v1.StorageTransferServiceClient', () => {
     it('invokes cancelOperation without error', async () => {
       const client =
         new storagetransferserviceModule.v1.StorageTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2700,7 +2700,7 @@ describe('v1.StorageTransferServiceClient', () => {
     it('invokes cancelOperation without error using callback', async () => {
       const client =
         new storagetransferserviceModule.v1.StorageTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -2728,7 +2728,7 @@ describe('v1.StorageTransferServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2739,7 +2739,7 @@ describe('v1.StorageTransferServiceClient', () => {
     it('invokes cancelOperation with error', async () => {
       const client =
         new storagetransferserviceModule.v1.StorageTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -2764,7 +2764,7 @@ describe('v1.StorageTransferServiceClient', () => {
     it('invokes deleteOperation without error', async () => {
       const client =
         new storagetransferserviceModule.v1.StorageTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2787,7 +2787,7 @@ describe('v1.StorageTransferServiceClient', () => {
     it('invokes deleteOperation without error using callback', async () => {
       const client =
         new storagetransferserviceModule.v1.StorageTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -2815,7 +2815,7 @@ describe('v1.StorageTransferServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2826,7 +2826,7 @@ describe('v1.StorageTransferServiceClient', () => {
     it('invokes deleteOperation with error', async () => {
       const client =
         new storagetransferserviceModule.v1.StorageTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -2851,7 +2851,7 @@ describe('v1.StorageTransferServiceClient', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client =
         new storagetransferserviceModule.v1.StorageTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -2887,7 +2887,7 @@ describe('v1.StorageTransferServiceClient', () => {
     it('uses async iteration with listOperations with error', async () => {
       const client =
         new storagetransferserviceModule.v1.StorageTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2923,7 +2923,7 @@ describe('v1.StorageTransferServiceClient', () => {
       };
       const client =
         new storagetransferserviceModule.v1.StorageTransferServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();

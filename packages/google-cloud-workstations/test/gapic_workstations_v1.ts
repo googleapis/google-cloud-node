@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as workstationsModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -51,7 +51,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -155,9 +155,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -280,7 +280,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.workstationsStub, undefined);
@@ -288,12 +288,12 @@ describe('v1.WorkstationsClient', () => {
       assert(client.workstationsStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.workstationsStub);
@@ -302,14 +302,14 @@ describe('v1.WorkstationsClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.workstationsStub, undefined);
@@ -318,7 +318,7 @@ describe('v1.WorkstationsClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -326,7 +326,7 @@ describe('v1.WorkstationsClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -338,7 +338,7 @@ describe('v1.WorkstationsClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -361,7 +361,7 @@ describe('v1.WorkstationsClient', () => {
   describe('getWorkstationCluster', () => {
     it('invokes getWorkstationCluster without error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -393,7 +393,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('invokes getWorkstationCluster without error using callback', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -440,7 +440,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('invokes getWorkstationCluster with error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -474,7 +474,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('invokes getWorkstationCluster with closed client', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -487,7 +487,7 @@ describe('v1.WorkstationsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -500,7 +500,7 @@ describe('v1.WorkstationsClient', () => {
   describe('getWorkstationConfig', () => {
     it('invokes getWorkstationConfig without error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -532,7 +532,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('invokes getWorkstationConfig without error using callback', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -579,7 +579,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('invokes getWorkstationConfig with error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -610,7 +610,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('invokes getWorkstationConfig with closed client', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -623,7 +623,7 @@ describe('v1.WorkstationsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getWorkstationConfig(request), expectedError);
@@ -633,7 +633,7 @@ describe('v1.WorkstationsClient', () => {
   describe('getWorkstation', () => {
     it('invokes getWorkstation without error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -664,7 +664,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('invokes getWorkstation without error using callback', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -711,7 +711,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('invokes getWorkstation with error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -742,7 +742,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('invokes getWorkstation with closed client', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -755,7 +755,7 @@ describe('v1.WorkstationsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getWorkstation(request), expectedError);
@@ -765,7 +765,7 @@ describe('v1.WorkstationsClient', () => {
   describe('generateAccessToken', () => {
     it('invokes generateAccessToken without error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -797,7 +797,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('invokes generateAccessToken without error using callback', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -844,7 +844,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('invokes generateAccessToken with error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -875,7 +875,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('invokes generateAccessToken with closed client', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -888,7 +888,7 @@ describe('v1.WorkstationsClient', () => {
       );
       request.workstation = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.generateAccessToken(request), expectedError);
@@ -898,7 +898,7 @@ describe('v1.WorkstationsClient', () => {
   describe('createWorkstationCluster', () => {
     it('invokes createWorkstationCluster without error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -931,7 +931,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('invokes createWorkstationCluster without error using callback', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -985,7 +985,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('invokes createWorkstationCluster with call error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1019,7 +1019,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('invokes createWorkstationCluster with LRO error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1052,7 +1052,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('invokes checkCreateWorkstationClusterProgress without error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1060,8 +1060,8 @@ describe('v1.WorkstationsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -1075,7 +1075,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('invokes checkCreateWorkstationClusterProgress with error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1096,7 +1096,7 @@ describe('v1.WorkstationsClient', () => {
   describe('updateWorkstationCluster', () => {
     it('invokes updateWorkstationCluster without error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1130,7 +1130,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('invokes updateWorkstationCluster without error using callback', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1185,7 +1185,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('invokes updateWorkstationCluster with call error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1220,7 +1220,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('invokes updateWorkstationCluster with LRO error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1254,7 +1254,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('invokes checkUpdateWorkstationClusterProgress without error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1262,8 +1262,8 @@ describe('v1.WorkstationsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -1277,7 +1277,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('invokes checkUpdateWorkstationClusterProgress with error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1298,7 +1298,7 @@ describe('v1.WorkstationsClient', () => {
   describe('deleteWorkstationCluster', () => {
     it('invokes deleteWorkstationCluster without error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1331,7 +1331,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('invokes deleteWorkstationCluster without error using callback', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1385,7 +1385,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('invokes deleteWorkstationCluster with call error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1419,7 +1419,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('invokes deleteWorkstationCluster with LRO error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1452,7 +1452,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('invokes checkDeleteWorkstationClusterProgress without error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1460,8 +1460,8 @@ describe('v1.WorkstationsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -1475,7 +1475,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('invokes checkDeleteWorkstationClusterProgress with error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1496,7 +1496,7 @@ describe('v1.WorkstationsClient', () => {
   describe('createWorkstationConfig', () => {
     it('invokes createWorkstationConfig without error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1529,7 +1529,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('invokes createWorkstationConfig without error using callback', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1583,7 +1583,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('invokes createWorkstationConfig with call error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1617,7 +1617,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('invokes createWorkstationConfig with LRO error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1650,7 +1650,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('invokes checkCreateWorkstationConfigProgress without error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1658,8 +1658,8 @@ describe('v1.WorkstationsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -1673,7 +1673,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('invokes checkCreateWorkstationConfigProgress with error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1694,7 +1694,7 @@ describe('v1.WorkstationsClient', () => {
   describe('updateWorkstationConfig', () => {
     it('invokes updateWorkstationConfig without error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1728,7 +1728,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('invokes updateWorkstationConfig without error using callback', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1783,7 +1783,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('invokes updateWorkstationConfig with call error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1818,7 +1818,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('invokes updateWorkstationConfig with LRO error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1852,7 +1852,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('invokes checkUpdateWorkstationConfigProgress without error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1860,8 +1860,8 @@ describe('v1.WorkstationsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -1875,7 +1875,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('invokes checkUpdateWorkstationConfigProgress with error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1896,7 +1896,7 @@ describe('v1.WorkstationsClient', () => {
   describe('deleteWorkstationConfig', () => {
     it('invokes deleteWorkstationConfig without error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1929,7 +1929,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('invokes deleteWorkstationConfig without error using callback', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1983,7 +1983,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('invokes deleteWorkstationConfig with call error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2017,7 +2017,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('invokes deleteWorkstationConfig with LRO error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2050,7 +2050,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('invokes checkDeleteWorkstationConfigProgress without error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2058,8 +2058,8 @@ describe('v1.WorkstationsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -2073,7 +2073,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('invokes checkDeleteWorkstationConfigProgress with error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2094,7 +2094,7 @@ describe('v1.WorkstationsClient', () => {
   describe('createWorkstation', () => {
     it('invokes createWorkstation without error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2127,7 +2127,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('invokes createWorkstation without error using callback', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2181,7 +2181,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('invokes createWorkstation with call error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2212,7 +2212,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('invokes createWorkstation with LRO error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2245,7 +2245,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('invokes checkCreateWorkstationProgress without error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2253,8 +2253,8 @@ describe('v1.WorkstationsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateWorkstationProgress(
@@ -2267,7 +2267,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('invokes checkCreateWorkstationProgress with error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2288,7 +2288,7 @@ describe('v1.WorkstationsClient', () => {
   describe('updateWorkstation', () => {
     it('invokes updateWorkstation without error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2322,7 +2322,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('invokes updateWorkstation without error using callback', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2377,7 +2377,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('invokes updateWorkstation with call error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2409,7 +2409,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('invokes updateWorkstation with LRO error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2443,7 +2443,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('invokes checkUpdateWorkstationProgress without error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2451,8 +2451,8 @@ describe('v1.WorkstationsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateWorkstationProgress(
@@ -2465,7 +2465,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('invokes checkUpdateWorkstationProgress with error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2486,7 +2486,7 @@ describe('v1.WorkstationsClient', () => {
   describe('deleteWorkstation', () => {
     it('invokes deleteWorkstation without error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2519,7 +2519,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('invokes deleteWorkstation without error using callback', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2573,7 +2573,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('invokes deleteWorkstation with call error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2604,7 +2604,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('invokes deleteWorkstation with LRO error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2637,7 +2637,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('invokes checkDeleteWorkstationProgress without error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2645,8 +2645,8 @@ describe('v1.WorkstationsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteWorkstationProgress(
@@ -2659,7 +2659,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('invokes checkDeleteWorkstationProgress with error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2680,7 +2680,7 @@ describe('v1.WorkstationsClient', () => {
   describe('startWorkstation', () => {
     it('invokes startWorkstation without error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2713,7 +2713,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('invokes startWorkstation without error using callback', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2767,7 +2767,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('invokes startWorkstation with call error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2798,7 +2798,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('invokes startWorkstation with LRO error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2831,7 +2831,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('invokes checkStartWorkstationProgress without error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2839,8 +2839,8 @@ describe('v1.WorkstationsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkStartWorkstationProgress(
@@ -2853,7 +2853,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('invokes checkStartWorkstationProgress with error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2874,7 +2874,7 @@ describe('v1.WorkstationsClient', () => {
   describe('stopWorkstation', () => {
     it('invokes stopWorkstation without error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2907,7 +2907,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('invokes stopWorkstation without error using callback', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2961,7 +2961,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('invokes stopWorkstation with call error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2992,7 +2992,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('invokes stopWorkstation with LRO error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3025,7 +3025,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('invokes checkStopWorkstationProgress without error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3033,8 +3033,8 @@ describe('v1.WorkstationsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkStopWorkstationProgress(
@@ -3047,7 +3047,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('invokes checkStopWorkstationProgress with error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3068,7 +3068,7 @@ describe('v1.WorkstationsClient', () => {
   describe('listWorkstationClusters', () => {
     it('invokes listWorkstationClusters without error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3108,7 +3108,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('invokes listWorkstationClusters without error using callback', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3140,8 +3140,7 @@ describe('v1.WorkstationsClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.workstations.v1.IWorkstationCluster[]
-              | null,
+              protos.google.cloud.workstations.v1.IWorkstationCluster[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -3165,7 +3164,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('invokes listWorkstationClusters with error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3199,7 +3198,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('invokes listWorkstationClustersStream without error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3268,7 +3267,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('invokes listWorkstationClustersStream with error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3326,7 +3325,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('uses async iteration with listWorkstationClusters without error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3380,7 +3379,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('uses async iteration with listWorkstationClusters with error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3427,7 +3426,7 @@ describe('v1.WorkstationsClient', () => {
   describe('listWorkstationConfigs', () => {
     it('invokes listWorkstationConfigs without error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3467,7 +3466,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('invokes listWorkstationConfigs without error using callback', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3499,8 +3498,7 @@ describe('v1.WorkstationsClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.workstations.v1.IWorkstationConfig[]
-              | null,
+              protos.google.cloud.workstations.v1.IWorkstationConfig[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -3524,7 +3522,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('invokes listWorkstationConfigs with error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3558,7 +3556,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('invokes listWorkstationConfigsStream without error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3625,7 +3623,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('invokes listWorkstationConfigsStream with error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3681,7 +3679,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('uses async iteration with listWorkstationConfigs without error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3735,7 +3733,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('uses async iteration with listWorkstationConfigs with error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3782,7 +3780,7 @@ describe('v1.WorkstationsClient', () => {
   describe('listUsableWorkstationConfigs', () => {
     it('invokes listUsableWorkstationConfigs without error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3822,7 +3820,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('invokes listUsableWorkstationConfigs without error using callback', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3854,8 +3852,7 @@ describe('v1.WorkstationsClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.workstations.v1.IWorkstationConfig[]
-              | null,
+              protos.google.cloud.workstations.v1.IWorkstationConfig[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -3879,7 +3876,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('invokes listUsableWorkstationConfigs with error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3913,7 +3910,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('invokes listUsableWorkstationConfigsStream without error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3983,7 +3980,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('invokes listUsableWorkstationConfigsStream with error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4042,7 +4039,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('uses async iteration with listUsableWorkstationConfigs without error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4096,7 +4093,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('uses async iteration with listUsableWorkstationConfigs with error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4143,7 +4140,7 @@ describe('v1.WorkstationsClient', () => {
   describe('listWorkstations', () => {
     it('invokes listWorkstations without error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4182,7 +4179,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('invokes listWorkstations without error using callback', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4237,7 +4234,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('invokes listWorkstations with error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4268,7 +4265,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('invokes listWorkstationsStream without error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4320,15 +4317,15 @@ describe('v1.WorkstationsClient', () => {
       assert(
         (client.descriptors.page.listWorkstations.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listWorkstationsStream with error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4369,15 +4366,15 @@ describe('v1.WorkstationsClient', () => {
       assert(
         (client.descriptors.page.listWorkstations.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listWorkstations without error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4418,15 +4415,15 @@ describe('v1.WorkstationsClient', () => {
       assert(
         (client.descriptors.page.listWorkstations.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listWorkstations with error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4459,9 +4456,9 @@ describe('v1.WorkstationsClient', () => {
       assert(
         (client.descriptors.page.listWorkstations.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4469,7 +4466,7 @@ describe('v1.WorkstationsClient', () => {
   describe('listUsableWorkstations', () => {
     it('invokes listUsableWorkstations without error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4509,7 +4506,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('invokes listUsableWorkstations without error using callback', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4564,7 +4561,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('invokes listUsableWorkstations with error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4598,7 +4595,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('invokes listUsableWorkstationsStream without error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4664,7 +4661,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('invokes listUsableWorkstationsStream with error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4719,7 +4716,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('uses async iteration with listUsableWorkstations without error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4772,7 +4769,7 @@ describe('v1.WorkstationsClient', () => {
 
     it('uses async iteration with listUsableWorkstations with error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4818,7 +4815,7 @@ describe('v1.WorkstationsClient', () => {
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4848,7 +4845,7 @@ describe('v1.WorkstationsClient', () => {
     });
     it('invokes getIamPolicy without error using callback', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4886,7 +4883,7 @@ describe('v1.WorkstationsClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -4896,7 +4893,7 @@ describe('v1.WorkstationsClient', () => {
     });
     it('invokes getIamPolicy with error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4928,7 +4925,7 @@ describe('v1.WorkstationsClient', () => {
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4958,7 +4955,7 @@ describe('v1.WorkstationsClient', () => {
     });
     it('invokes setIamPolicy without error using callback', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4996,7 +4993,7 @@ describe('v1.WorkstationsClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -5006,7 +5003,7 @@ describe('v1.WorkstationsClient', () => {
     });
     it('invokes setIamPolicy with error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5038,7 +5035,7 @@ describe('v1.WorkstationsClient', () => {
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5071,7 +5068,7 @@ describe('v1.WorkstationsClient', () => {
     });
     it('invokes testIamPermissions without error using callback', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5109,7 +5106,7 @@ describe('v1.WorkstationsClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -5119,7 +5116,7 @@ describe('v1.WorkstationsClient', () => {
     });
     it('invokes testIamPermissions with error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5154,7 +5151,7 @@ describe('v1.WorkstationsClient', () => {
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5184,7 +5181,7 @@ describe('v1.WorkstationsClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5228,7 +5225,7 @@ describe('v1.WorkstationsClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5263,7 +5260,7 @@ describe('v1.WorkstationsClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5311,7 +5308,7 @@ describe('v1.WorkstationsClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5352,7 +5349,7 @@ describe('v1.WorkstationsClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5373,7 +5370,7 @@ describe('v1.WorkstationsClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5401,7 +5398,7 @@ describe('v1.WorkstationsClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -5411,7 +5408,7 @@ describe('v1.WorkstationsClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5435,7 +5432,7 @@ describe('v1.WorkstationsClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5457,7 +5454,7 @@ describe('v1.WorkstationsClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5485,7 +5482,7 @@ describe('v1.WorkstationsClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -5495,7 +5492,7 @@ describe('v1.WorkstationsClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5519,7 +5516,7 @@ describe('v1.WorkstationsClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5541,7 +5538,7 @@ describe('v1.WorkstationsClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5569,7 +5566,7 @@ describe('v1.WorkstationsClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -5579,7 +5576,7 @@ describe('v1.WorkstationsClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5603,7 +5600,7 @@ describe('v1.WorkstationsClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5638,7 +5635,7 @@ describe('v1.WorkstationsClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5673,7 +5670,7 @@ describe('v1.WorkstationsClient', () => {
         location: 'locationValue',
       };
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5721,7 +5718,7 @@ describe('v1.WorkstationsClient', () => {
         project: 'projectValue',
       };
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5763,7 +5760,7 @@ describe('v1.WorkstationsClient', () => {
         workstation: 'workstationValue',
       };
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5851,7 +5848,7 @@ describe('v1.WorkstationsClient', () => {
         workstation_cluster: 'workstationClusterValue',
       };
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5929,7 +5926,7 @@ describe('v1.WorkstationsClient', () => {
         workstation_config: 'workstationConfigValue',
       };
       const client = new workstationsModule.v1.WorkstationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

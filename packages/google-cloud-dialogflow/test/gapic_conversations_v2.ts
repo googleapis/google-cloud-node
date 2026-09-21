@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as conversationsModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, LocationProtos } from 'google-gax';
+import {protobuf, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -239,7 +239,7 @@ describe('v2.ConversationsClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.conversationsStub, undefined);
@@ -247,12 +247,12 @@ describe('v2.ConversationsClient', () => {
       assert(client.conversationsStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.conversationsStub);
@@ -261,14 +261,14 @@ describe('v2.ConversationsClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.conversationsStub, undefined);
@@ -277,7 +277,7 @@ describe('v2.ConversationsClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -285,7 +285,7 @@ describe('v2.ConversationsClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -297,7 +297,7 @@ describe('v2.ConversationsClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -320,7 +320,7 @@ describe('v2.ConversationsClient', () => {
   describe('createConversation', () => {
     it('invokes createConversation without error', async () => {
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -352,7 +352,7 @@ describe('v2.ConversationsClient', () => {
 
     it('invokes createConversation without error using callback', async () => {
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -399,7 +399,7 @@ describe('v2.ConversationsClient', () => {
 
     it('invokes createConversation with error', async () => {
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -430,7 +430,7 @@ describe('v2.ConversationsClient', () => {
 
     it('invokes createConversation with closed client', async () => {
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -443,7 +443,7 @@ describe('v2.ConversationsClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createConversation(request), expectedError);
@@ -453,7 +453,7 @@ describe('v2.ConversationsClient', () => {
   describe('getConversation', () => {
     it('invokes getConversation without error', async () => {
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -484,7 +484,7 @@ describe('v2.ConversationsClient', () => {
 
     it('invokes getConversation without error using callback', async () => {
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -531,7 +531,7 @@ describe('v2.ConversationsClient', () => {
 
     it('invokes getConversation with error', async () => {
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -562,7 +562,7 @@ describe('v2.ConversationsClient', () => {
 
     it('invokes getConversation with closed client', async () => {
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -575,7 +575,7 @@ describe('v2.ConversationsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getConversation(request), expectedError);
@@ -585,7 +585,7 @@ describe('v2.ConversationsClient', () => {
   describe('completeConversation', () => {
     it('invokes completeConversation without error', async () => {
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -617,7 +617,7 @@ describe('v2.ConversationsClient', () => {
 
     it('invokes completeConversation without error using callback', async () => {
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -664,7 +664,7 @@ describe('v2.ConversationsClient', () => {
 
     it('invokes completeConversation with error', async () => {
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -695,7 +695,7 @@ describe('v2.ConversationsClient', () => {
 
     it('invokes completeConversation with closed client', async () => {
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -708,7 +708,7 @@ describe('v2.ConversationsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.completeConversation(request), expectedError);
@@ -718,7 +718,7 @@ describe('v2.ConversationsClient', () => {
   describe('ingestContextReferences', () => {
     it('invokes ingestContextReferences without error', async () => {
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -750,7 +750,7 @@ describe('v2.ConversationsClient', () => {
 
     it('invokes ingestContextReferences without error using callback', async () => {
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -797,7 +797,7 @@ describe('v2.ConversationsClient', () => {
 
     it('invokes ingestContextReferences with error', async () => {
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -831,7 +831,7 @@ describe('v2.ConversationsClient', () => {
 
     it('invokes ingestContextReferences with closed client', async () => {
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -844,7 +844,7 @@ describe('v2.ConversationsClient', () => {
       );
       request.conversation = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -857,7 +857,7 @@ describe('v2.ConversationsClient', () => {
   describe('suggestConversationSummary', () => {
     it('invokes suggestConversationSummary without error', async () => {
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -889,7 +889,7 @@ describe('v2.ConversationsClient', () => {
 
     it('invokes suggestConversationSummary without error using callback', async () => {
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -936,7 +936,7 @@ describe('v2.ConversationsClient', () => {
 
     it('invokes suggestConversationSummary with error', async () => {
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -970,7 +970,7 @@ describe('v2.ConversationsClient', () => {
 
     it('invokes suggestConversationSummary with closed client', async () => {
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -983,7 +983,7 @@ describe('v2.ConversationsClient', () => {
       );
       request.conversation = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -996,7 +996,7 @@ describe('v2.ConversationsClient', () => {
   describe('generateStatelessSummary', () => {
     it('invokes generateStatelessSummary without error', async () => {
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1029,7 +1029,7 @@ describe('v2.ConversationsClient', () => {
 
     it('invokes generateStatelessSummary without error using callback', async () => {
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1077,7 +1077,7 @@ describe('v2.ConversationsClient', () => {
 
     it('invokes generateStatelessSummary with error', async () => {
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1112,7 +1112,7 @@ describe('v2.ConversationsClient', () => {
 
     it('invokes generateStatelessSummary with closed client', async () => {
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1126,7 +1126,7 @@ describe('v2.ConversationsClient', () => {
       );
       request.statelessConversation.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1139,7 +1139,7 @@ describe('v2.ConversationsClient', () => {
   describe('generateStatelessSuggestion', () => {
     it('invokes generateStatelessSuggestion without error', async () => {
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1171,7 +1171,7 @@ describe('v2.ConversationsClient', () => {
 
     it('invokes generateStatelessSuggestion without error using callback', async () => {
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1218,7 +1218,7 @@ describe('v2.ConversationsClient', () => {
 
     it('invokes generateStatelessSuggestion with error', async () => {
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1252,7 +1252,7 @@ describe('v2.ConversationsClient', () => {
 
     it('invokes generateStatelessSuggestion with closed client', async () => {
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1265,7 +1265,7 @@ describe('v2.ConversationsClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1278,7 +1278,7 @@ describe('v2.ConversationsClient', () => {
   describe('searchKnowledge', () => {
     it('invokes searchKnowledge without error', async () => {
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1314,7 +1314,7 @@ describe('v2.ConversationsClient', () => {
 
     it('invokes searchKnowledge without error using callback', async () => {
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1366,7 +1366,7 @@ describe('v2.ConversationsClient', () => {
 
     it('invokes searchKnowledge with error', async () => {
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1402,7 +1402,7 @@ describe('v2.ConversationsClient', () => {
 
     it('invokes searchKnowledge with closed client', async () => {
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1420,7 +1420,7 @@ describe('v2.ConversationsClient', () => {
       );
       request.conversation = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.searchKnowledge(request), expectedError);
@@ -1430,7 +1430,7 @@ describe('v2.ConversationsClient', () => {
   describe('generateSuggestions', () => {
     it('invokes generateSuggestions without error', async () => {
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1462,7 +1462,7 @@ describe('v2.ConversationsClient', () => {
 
     it('invokes generateSuggestions without error using callback', async () => {
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1509,7 +1509,7 @@ describe('v2.ConversationsClient', () => {
 
     it('invokes generateSuggestions with error', async () => {
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1540,7 +1540,7 @@ describe('v2.ConversationsClient', () => {
 
     it('invokes generateSuggestions with closed client', async () => {
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1553,7 +1553,7 @@ describe('v2.ConversationsClient', () => {
       );
       request.conversation = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.generateSuggestions(request), expectedError);
@@ -1563,7 +1563,7 @@ describe('v2.ConversationsClient', () => {
   describe('listConversations', () => {
     it('invokes listConversations without error', async () => {
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1602,7 +1602,7 @@ describe('v2.ConversationsClient', () => {
 
     it('invokes listConversations without error using callback', async () => {
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1657,7 +1657,7 @@ describe('v2.ConversationsClient', () => {
 
     it('invokes listConversations with error', async () => {
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1688,7 +1688,7 @@ describe('v2.ConversationsClient', () => {
 
     it('invokes listConversationsStream without error', async () => {
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1740,15 +1740,15 @@ describe('v2.ConversationsClient', () => {
       assert(
         (client.descriptors.page.listConversations.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listConversationsStream with error', async () => {
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1789,15 +1789,15 @@ describe('v2.ConversationsClient', () => {
       assert(
         (client.descriptors.page.listConversations.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listConversations without error', async () => {
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1838,15 +1838,15 @@ describe('v2.ConversationsClient', () => {
       assert(
         (client.descriptors.page.listConversations.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listConversations with error', async () => {
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1878,9 +1878,9 @@ describe('v2.ConversationsClient', () => {
       assert(
         (client.descriptors.page.listConversations.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1888,7 +1888,7 @@ describe('v2.ConversationsClient', () => {
   describe('listMessages', () => {
     it('invokes listMessages without error', async () => {
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1921,7 +1921,7 @@ describe('v2.ConversationsClient', () => {
 
     it('invokes listMessages without error using callback', async () => {
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1970,7 +1970,7 @@ describe('v2.ConversationsClient', () => {
 
     it('invokes listMessages with error', async () => {
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2001,7 +2001,7 @@ describe('v2.ConversationsClient', () => {
 
     it('invokes listMessagesStream without error', async () => {
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2047,15 +2047,15 @@ describe('v2.ConversationsClient', () => {
       assert(
         (client.descriptors.page.listMessages.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listMessagesStream with error', async () => {
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2098,15 +2098,15 @@ describe('v2.ConversationsClient', () => {
       assert(
         (client.descriptors.page.listMessages.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listMessages without error', async () => {
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2141,15 +2141,15 @@ describe('v2.ConversationsClient', () => {
       assert(
         (client.descriptors.page.listMessages.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listMessages with error', async () => {
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2181,16 +2181,16 @@ describe('v2.ConversationsClient', () => {
       assert(
         (client.descriptors.page.listMessages.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2220,7 +2220,7 @@ describe('v2.ConversationsClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2264,7 +2264,7 @@ describe('v2.ConversationsClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2299,7 +2299,7 @@ describe('v2.ConversationsClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2347,7 +2347,7 @@ describe('v2.ConversationsClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2395,7 +2395,7 @@ describe('v2.ConversationsClient', () => {
         conversation_dataset: 'conversationDatasetValue',
       };
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2472,7 +2472,7 @@ describe('v2.ConversationsClient', () => {
         location: 'locationValue',
       };
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2525,7 +2525,7 @@ describe('v2.ConversationsClient', () => {
         generator: 'generatorValue',
       };
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2590,7 +2590,7 @@ describe('v2.ConversationsClient', () => {
         evaluation: 'evaluationValue',
       };
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2682,7 +2682,7 @@ describe('v2.ConversationsClient', () => {
         location: 'locationValue',
       };
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2730,7 +2730,7 @@ describe('v2.ConversationsClient', () => {
         project: 'projectValue',
       };
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2768,7 +2768,7 @@ describe('v2.ConversationsClient', () => {
         project: 'projectValue',
       };
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2807,7 +2807,7 @@ describe('v2.ConversationsClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2870,7 +2870,7 @@ describe('v2.ConversationsClient', () => {
         environment: 'environmentValue',
       };
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2937,7 +2937,7 @@ describe('v2.ConversationsClient', () => {
         context: 'contextValue',
       };
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3063,7 +3063,7 @@ describe('v2.ConversationsClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3184,7 +3184,7 @@ describe('v2.ConversationsClient', () => {
         project: 'projectValue',
       };
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3230,7 +3230,7 @@ describe('v2.ConversationsClient', () => {
         intent: 'intentValue',
       };
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3292,7 +3292,7 @@ describe('v2.ConversationsClient', () => {
         context: 'contextValue',
       };
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3371,7 +3371,7 @@ describe('v2.ConversationsClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3447,7 +3447,7 @@ describe('v2.ConversationsClient', () => {
         version: 'versionValue',
       };
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3508,7 +3508,7 @@ describe('v2.ConversationsClient', () => {
         answer_record: 'answerRecordValue',
       };
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3571,7 +3571,7 @@ describe('v2.ConversationsClient', () => {
         message: 'messageValue',
       };
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3649,7 +3649,7 @@ describe('v2.ConversationsClient', () => {
         conversation_model: 'conversationModelValue',
       };
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3715,7 +3715,7 @@ describe('v2.ConversationsClient', () => {
         evaluation: 'evaluationValue',
       };
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3798,7 +3798,7 @@ describe('v2.ConversationsClient', () => {
         participant: 'participantValue',
       };
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3878,7 +3878,7 @@ describe('v2.ConversationsClient', () => {
         conversation_profile: 'conversationProfileValue',
       };
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3943,7 +3943,7 @@ describe('v2.ConversationsClient', () => {
         conversation: 'conversationValue',
       };
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4006,7 +4006,7 @@ describe('v2.ConversationsClient', () => {
         knowledge_base: 'knowledgeBaseValue',
       };
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4070,7 +4070,7 @@ describe('v2.ConversationsClient', () => {
         document: 'documentValue',
       };
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4148,7 +4148,7 @@ describe('v2.ConversationsClient', () => {
         location: 'locationValue',
       };
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4212,7 +4212,7 @@ describe('v2.ConversationsClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4291,7 +4291,7 @@ describe('v2.ConversationsClient', () => {
         environment: 'environmentValue',
       };
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4374,7 +4374,7 @@ describe('v2.ConversationsClient', () => {
         context: 'contextValue',
       };
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4520,7 +4520,7 @@ describe('v2.ConversationsClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4661,7 +4661,7 @@ describe('v2.ConversationsClient', () => {
         location: 'locationValue',
       };
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4723,7 +4723,7 @@ describe('v2.ConversationsClient', () => {
         intent: 'intentValue',
       };
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4803,7 +4803,7 @@ describe('v2.ConversationsClient', () => {
         context: 'contextValue',
       };
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4904,7 +4904,7 @@ describe('v2.ConversationsClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5009,7 +5009,7 @@ describe('v2.ConversationsClient', () => {
         version: 'versionValue',
       };
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5087,7 +5087,7 @@ describe('v2.ConversationsClient', () => {
         answer_record: 'answerRecordValue',
       };
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5166,7 +5166,7 @@ describe('v2.ConversationsClient', () => {
         message: 'messageValue',
       };
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5266,7 +5266,7 @@ describe('v2.ConversationsClient', () => {
         conversation_model: 'conversationModelValue',
       };
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5349,7 +5349,7 @@ describe('v2.ConversationsClient', () => {
         evaluation: 'evaluationValue',
       };
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5455,7 +5455,7 @@ describe('v2.ConversationsClient', () => {
         participant: 'participantValue',
       };
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5560,7 +5560,7 @@ describe('v2.ConversationsClient', () => {
         conversation_profile: 'conversationProfileValue',
       };
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5643,7 +5643,7 @@ describe('v2.ConversationsClient', () => {
         conversation: 'conversationValue',
       };
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5722,7 +5722,7 @@ describe('v2.ConversationsClient', () => {
         knowledge_base: 'knowledgeBaseValue',
       };
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5802,7 +5802,7 @@ describe('v2.ConversationsClient', () => {
         document: 'documentValue',
       };
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5907,7 +5907,7 @@ describe('v2.ConversationsClient', () => {
         siptrunk: 'siptrunkValue',
       };
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5971,7 +5971,7 @@ describe('v2.ConversationsClient', () => {
         tool: 'toolValue',
       };
       const client = new conversationsModule.v2.ConversationsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

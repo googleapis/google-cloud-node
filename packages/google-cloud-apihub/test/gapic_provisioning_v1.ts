@@ -19,8 +19,8 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it, beforeEach, afterEach } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it, beforeEach, afterEach} from 'mocha';
 import * as provisioningModule from '../src';
 
 import {
@@ -49,7 +49,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -115,9 +115,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -132,7 +132,7 @@ describe('v1.ProvisioningClient', () => {
       getClient: sinon.stub().resolves({
         getRequestHeaders: sinon
           .stub()
-          .resolves({ Authorization: 'Bearer SOME_TOKEN' }),
+          .resolves({Authorization: 'Bearer SOME_TOKEN'}),
       }),
     } as unknown as GoogleAuth;
   });
@@ -258,12 +258,12 @@ describe('v1.ProvisioningClient', () => {
       assert(client.provisioningStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new provisioningModule.v1.ProvisioningClient({
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.provisioningStub);
@@ -272,12 +272,12 @@ describe('v1.ProvisioningClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new provisioningModule.v1.ProvisioningClient({
         auth: googleAuth,
         projectId: 'bogus',
@@ -288,7 +288,7 @@ describe('v1.ProvisioningClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -453,7 +453,7 @@ describe('v1.ProvisioningClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getApiHubInstance(request), expectedError);
@@ -586,7 +586,7 @@ describe('v1.ProvisioningClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.lookupApiHubInstance(request), expectedError);
@@ -755,8 +755,8 @@ describe('v1.ProvisioningClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateApiHubInstanceProgress(
@@ -949,8 +949,8 @@ describe('v1.ProvisioningClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteApiHubInstanceProgress(
@@ -1140,7 +1140,7 @@ describe('v1.ProvisioningClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new provisioningModule.v1.ProvisioningClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1230,7 +1230,7 @@ describe('v1.ProvisioningClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1314,7 +1314,7 @@ describe('v1.ProvisioningClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1398,7 +1398,7 @@ describe('v1.ProvisioningClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1467,7 +1467,7 @@ describe('v1.ProvisioningClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new provisioningModule.v1.ProvisioningClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1503,7 +1503,7 @@ describe('v1.ProvisioningClient', () => {
         api: 'apiValue',
       };
       const client = new provisioningModule.v1.ProvisioningClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1567,7 +1567,7 @@ describe('v1.ProvisioningClient', () => {
         api_hub_instance: 'apiHubInstanceValue',
       };
       const client = new provisioningModule.v1.ProvisioningClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1634,7 +1634,7 @@ describe('v1.ProvisioningClient', () => {
         operation: 'operationValue',
       };
       const client = new provisioningModule.v1.ProvisioningClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1720,7 +1720,7 @@ describe('v1.ProvisioningClient', () => {
         attribute: 'attributeValue',
       };
       const client = new provisioningModule.v1.ProvisioningClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1784,7 +1784,7 @@ describe('v1.ProvisioningClient', () => {
         curation: 'curationValue',
       };
       const client = new provisioningModule.v1.ProvisioningClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1850,7 +1850,7 @@ describe('v1.ProvisioningClient', () => {
         definition: 'definitionValue',
       };
       const client = new provisioningModule.v1.ProvisioningClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1936,7 +1936,7 @@ describe('v1.ProvisioningClient', () => {
         dependency: 'dependencyValue',
       };
       const client = new provisioningModule.v1.ProvisioningClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2000,7 +2000,7 @@ describe('v1.ProvisioningClient', () => {
         deployment: 'deploymentValue',
       };
       const client = new provisioningModule.v1.ProvisioningClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2064,7 +2064,7 @@ describe('v1.ProvisioningClient', () => {
         discovered_api_observation: 'discoveredApiObservationValue',
       };
       const client = new provisioningModule.v1.ProvisioningClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2146,7 +2146,7 @@ describe('v1.ProvisioningClient', () => {
         discovered_api_operation: 'discoveredApiOperationValue',
       };
       const client = new provisioningModule.v1.ProvisioningClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2244,7 +2244,7 @@ describe('v1.ProvisioningClient', () => {
         external_api: 'externalApiValue',
       };
       const client = new provisioningModule.v1.ProvisioningClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2308,7 +2308,7 @@ describe('v1.ProvisioningClient', () => {
         host_project_registration: 'hostProjectRegistrationValue',
       };
       const client = new provisioningModule.v1.ProvisioningClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2388,7 +2388,7 @@ describe('v1.ProvisioningClient', () => {
         location: 'locationValue',
       };
       const client = new provisioningModule.v1.ProvisioningClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2438,7 +2438,7 @@ describe('v1.ProvisioningClient', () => {
         plugin: 'pluginValue',
       };
       const client = new provisioningModule.v1.ProvisioningClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2503,7 +2503,7 @@ describe('v1.ProvisioningClient', () => {
         instance: 'instanceValue',
       };
       const client = new provisioningModule.v1.ProvisioningClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2576,7 +2576,7 @@ describe('v1.ProvisioningClient', () => {
         project: 'projectValue',
       };
       const client = new provisioningModule.v1.ProvisioningClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2616,7 +2616,7 @@ describe('v1.ProvisioningClient', () => {
         runtime_project_attachment: 'runtimeProjectAttachmentValue',
       };
       const client = new provisioningModule.v1.ProvisioningClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2699,7 +2699,7 @@ describe('v1.ProvisioningClient', () => {
         spec: 'specValue',
       };
       const client = new provisioningModule.v1.ProvisioningClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2785,7 +2785,7 @@ describe('v1.ProvisioningClient', () => {
         plugin: 'pluginValue',
       };
       const client = new provisioningModule.v1.ProvisioningClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2850,7 +2850,7 @@ describe('v1.ProvisioningClient', () => {
         version: 'versionValue',
       };
       const client = new provisioningModule.v1.ProvisioningClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

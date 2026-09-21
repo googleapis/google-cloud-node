@@ -30,10 +30,10 @@ import type {
   LocationsClient,
   LocationProtos,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -59,7 +59,7 @@ export class CatalogServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('dataplex');
@@ -72,11 +72,11 @@ export class CatalogServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
+  innerApiCalls: {[name: string]: Function};
   locationsClient: LocationsClient;
-  pathTemplates: { [name: string]: gax.PathTemplate };
+  pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
-  catalogServiceStub?: Promise<{ [name: string]: Function }>;
+  catalogServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of CatalogServiceClient.
@@ -152,7 +152,7 @@ export class CatalogServiceClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -628,21 +628,21 @@ export class CatalogServiceClient {
           selector: 'google.longrunning.Operations.DeleteOperation',
           delete: '/v1/{name=projects/*/locations/*/operations/*}',
           additional_bindings: [
-            { delete: '/v1/{name=organizations/*/locations/*/operations/*}' },
+            {delete: '/v1/{name=organizations/*/locations/*/operations/*}'},
           ],
         },
         {
           selector: 'google.longrunning.Operations.GetOperation',
           get: '/v1/{name=projects/*/locations/*/operations/*}',
           additional_bindings: [
-            { get: '/v1/{name=organizations/*/locations/*/operations/*}' },
+            {get: '/v1/{name=organizations/*/locations/*/operations/*}'},
           ],
         },
         {
           selector: 'google.longrunning.Operations.ListOperations',
           get: '/v1/{name=projects/*/locations/*}/operations',
           additional_bindings: [
-            { get: '/v1/{name=organizations/*/locations/*}/operations' },
+            {get: '/v1/{name=organizations/*/locations/*}/operations'},
           ],
         },
       ];
@@ -802,7 +802,7 @@ export class CatalogServiceClient {
       'google.cloud.dataplex.v1.CatalogService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -842,7 +842,7 @@ export class CatalogServiceClient {
           (this._protos as any).google.cloud.dataplex.v1.CatalogService,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -888,7 +888,7 @@ export class CatalogServiceClient {
     ];
     for (const methodName of catalogServiceStubMethods) {
       const callPromise = this.catalogServiceStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -1089,7 +1089,7 @@ export class CatalogServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getEntryType request %j', request);
@@ -1218,7 +1218,7 @@ export class CatalogServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getAspectType request %j', request);
@@ -1347,7 +1347,7 @@ export class CatalogServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getEntryGroup request %j', request);
@@ -1499,7 +1499,7 @@ export class CatalogServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createEntry request %j', request);
@@ -1659,7 +1659,7 @@ export class CatalogServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'entry.name': request.entry!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateEntry request %j', request);
@@ -1788,7 +1788,7 @@ export class CatalogServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteEntry request %j', request);
@@ -1927,7 +1927,7 @@ export class CatalogServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getEntry request %j', request);
@@ -2069,7 +2069,7 @@ export class CatalogServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('lookupEntry request %j', request);
@@ -2228,7 +2228,7 @@ export class CatalogServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('modifyEntry request %j', request);
@@ -2357,7 +2357,7 @@ export class CatalogServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getMetadataJob request %j', request);
@@ -2497,7 +2497,7 @@ export class CatalogServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('cancelMetadataJob request %j', request);
@@ -2641,7 +2641,7 @@ export class CatalogServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createEntryLink request %j', request);
@@ -2785,7 +2785,7 @@ export class CatalogServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'entry_link.name': request.entryLink!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateEntryLink request %j', request);
@@ -2920,7 +2920,7 @@ export class CatalogServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteEntryLink request %j', request);
@@ -3069,7 +3069,7 @@ export class CatalogServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('lookupContext request %j', request);
@@ -3198,7 +3198,7 @@ export class CatalogServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getEntryLink request %j', request);
@@ -3333,7 +3333,7 @@ export class CatalogServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getMetadataFeed request %j', request);
@@ -3489,7 +3489,7 @@ export class CatalogServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3546,7 +3546,7 @@ export class CatalogServiceClient {
     this._log.info('createEntryType long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3663,7 +3663,7 @@ export class CatalogServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'entry_type.name': request.entryType!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3720,7 +3720,7 @@ export class CatalogServiceClient {
     this._log.info('updateEntryType long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3836,7 +3836,7 @@ export class CatalogServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3893,7 +3893,7 @@ export class CatalogServiceClient {
     this._log.info('deleteEntryType long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4014,7 +4014,7 @@ export class CatalogServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4071,7 +4071,7 @@ export class CatalogServiceClient {
     this._log.info('createAspectType long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4188,7 +4188,7 @@ export class CatalogServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'aspect_type.name': request.aspectType!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4245,7 +4245,7 @@ export class CatalogServiceClient {
     this._log.info('updateAspectType long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4362,7 +4362,7 @@ export class CatalogServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4419,7 +4419,7 @@ export class CatalogServiceClient {
     this._log.info('deleteAspectType long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4540,7 +4540,7 @@ export class CatalogServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4597,7 +4597,7 @@ export class CatalogServiceClient {
     this._log.info('createEntryGroup long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4714,7 +4714,7 @@ export class CatalogServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'entry_group.name': request.entryGroup!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4771,7 +4771,7 @@ export class CatalogServiceClient {
     this._log.info('updateEntryGroup long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4888,7 +4888,7 @@ export class CatalogServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4945,7 +4945,7 @@ export class CatalogServiceClient {
     this._log.info('deleteEntryGroup long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -5067,7 +5067,7 @@ export class CatalogServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5124,7 +5124,7 @@ export class CatalogServiceClient {
     this._log.info('createMetadataJob long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -5245,7 +5245,7 @@ export class CatalogServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5302,7 +5302,7 @@ export class CatalogServiceClient {
     this._log.info('createMetadataFeed long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -5415,7 +5415,7 @@ export class CatalogServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5472,7 +5472,7 @@ export class CatalogServiceClient {
     this._log.info('deleteMetadataFeed long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -5590,7 +5590,7 @@ export class CatalogServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'metadata_feed.name': request.metadataFeed!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5647,7 +5647,7 @@ export class CatalogServiceClient {
     this._log.info('updateMetadataFeed long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -5774,7 +5774,7 @@ export class CatalogServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5861,7 +5861,7 @@ export class CatalogServiceClient {
       });
     const defaultCallSettings = this._defaults['listEntryTypes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listEntryTypes stream %j', request);
@@ -5930,7 +5930,7 @@ export class CatalogServiceClient {
       });
     const defaultCallSettings = this._defaults['listEntryTypes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listEntryTypes iterate %j', request);
@@ -6054,7 +6054,7 @@ export class CatalogServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6141,7 +6141,7 @@ export class CatalogServiceClient {
       });
     const defaultCallSettings = this._defaults['listAspectTypes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listAspectTypes stream %j', request);
@@ -6210,7 +6210,7 @@ export class CatalogServiceClient {
       });
     const defaultCallSettings = this._defaults['listAspectTypes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listAspectTypes iterate %j', request);
@@ -6326,7 +6326,7 @@ export class CatalogServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6405,7 +6405,7 @@ export class CatalogServiceClient {
       });
     const defaultCallSettings = this._defaults['listEntryGroups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listEntryGroups stream %j', request);
@@ -6466,7 +6466,7 @@ export class CatalogServiceClient {
       });
     const defaultCallSettings = this._defaults['listEntryGroups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listEntryGroups iterate %j', request);
@@ -6595,7 +6595,7 @@ export class CatalogServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6693,7 +6693,7 @@ export class CatalogServiceClient {
       });
     const defaultCallSettings = this._defaults['listEntries'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listEntries stream %j', request);
@@ -6773,7 +6773,7 @@ export class CatalogServiceClient {
       });
     const defaultCallSettings = this._defaults['listEntries'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listEntries iterate %j', request);
@@ -6894,7 +6894,7 @@ export class CatalogServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6984,7 +6984,7 @@ export class CatalogServiceClient {
       });
     const defaultCallSettings = this._defaults['searchEntries'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('searchEntries stream %j', request);
@@ -7056,7 +7056,7 @@ export class CatalogServiceClient {
       });
     const defaultCallSettings = this._defaults['searchEntries'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('searchEntries iterate %j', request);
@@ -7179,7 +7179,7 @@ export class CatalogServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -7265,7 +7265,7 @@ export class CatalogServiceClient {
       });
     const defaultCallSettings = this._defaults['listMetadataJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listMetadataJobs stream %j', request);
@@ -7333,7 +7333,7 @@ export class CatalogServiceClient {
       });
     const defaultCallSettings = this._defaults['listMetadataJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listMetadataJobs iterate %j', request);
@@ -7453,7 +7453,7 @@ export class CatalogServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -7536,7 +7536,7 @@ export class CatalogServiceClient {
       });
     const defaultCallSettings = this._defaults['lookupEntryLinks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('lookupEntryLinks stream %j', request);
@@ -7601,7 +7601,7 @@ export class CatalogServiceClient {
       });
     const defaultCallSettings = this._defaults['lookupEntryLinks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('lookupEntryLinks iterate %j', request);
@@ -7724,7 +7724,7 @@ export class CatalogServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -7810,7 +7810,7 @@ export class CatalogServiceClient {
       });
     const defaultCallSettings = this._defaults['listMetadataFeeds'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listMetadataFeeds stream %j', request);
@@ -7878,7 +7878,7 @@ export class CatalogServiceClient {
       });
     const defaultCallSettings = this._defaults['listMetadataFeeds'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listMetadataFeeds iterate %j', request);
@@ -10407,11 +10407,11 @@ export class CatalogServiceClient {
    */
   close(): Promise<void> {
     if (this.catalogServiceStub && !this._terminated) {
-      return this.catalogServiceStub.then((stub) => {
+      return this.catalogServiceStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch((err) => {
+        this.locationsClient.close().catch(err => {
           throw err;
         });
         void this.operationsClient.close();

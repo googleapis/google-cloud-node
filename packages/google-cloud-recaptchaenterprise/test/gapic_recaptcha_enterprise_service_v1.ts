@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as recaptchaenterpriseserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -170,7 +170,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
     it('sets apiEndpoint according to universe domain camelCase', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
-          { universeDomain: 'example.com' },
+          {universeDomain: 'example.com'},
         );
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'recaptchaenterprise.example.com');
@@ -179,7 +179,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
     it('sets apiEndpoint according to universe domain snakeCase', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
-          { universe_domain: 'example.com' },
+          {universe_domain: 'example.com'},
         );
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'recaptchaenterprise.example.com');
@@ -206,7 +206,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client =
             new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
-              { universeDomain: 'configured.example.com' },
+              {universeDomain: 'configured.example.com'},
             );
           const servicePath = client.apiEndpoint;
           assert.strictEqual(
@@ -224,7 +224,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
     it('does not allow setting both universeDomain and universe_domain', () => {
       assert.throws(() => {
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
-          { universe_domain: 'example.com', universeDomain: 'example.net' },
+          {universe_domain: 'example.com', universeDomain: 'example.net'},
         );
       });
     });
@@ -257,7 +257,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -266,15 +266,15 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       assert(client.recaptchaEnterpriseServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.recaptchaEnterpriseServiceStub);
@@ -283,16 +283,16 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -302,7 +302,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -312,7 +312,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -327,7 +327,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -353,7 +353,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -387,7 +387,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -437,7 +437,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -471,7 +471,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -485,7 +485,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createAssessment(request), expectedError);
@@ -497,7 +497,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -532,7 +532,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -582,7 +582,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -616,7 +616,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -630,7 +630,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.annotateAssessment(request), expectedError);
@@ -642,7 +642,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -676,7 +676,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -726,7 +726,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -757,7 +757,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -771,7 +771,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createKey(request), expectedError);
@@ -783,7 +783,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -818,7 +818,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -868,7 +868,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -905,7 +905,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -919,7 +919,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       );
       request.key = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -934,7 +934,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -968,7 +968,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1018,7 +1018,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1049,7 +1049,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1063,7 +1063,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getKey(request), expectedError);
@@ -1075,7 +1075,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1110,7 +1110,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1161,7 +1161,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1193,7 +1193,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1208,7 +1208,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       );
       request.key.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateKey(request), expectedError);
@@ -1220,7 +1220,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1254,7 +1254,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1304,7 +1304,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1335,7 +1335,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1349,7 +1349,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteKey(request), expectedError);
@@ -1361,7 +1361,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1395,7 +1395,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1445,7 +1445,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1479,7 +1479,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1493,7 +1493,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.migrateKey(request), expectedError);
@@ -1505,7 +1505,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1539,7 +1539,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1589,7 +1589,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1623,7 +1623,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1637,7 +1637,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.addIpOverride(request), expectedError);
@@ -1649,7 +1649,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1683,7 +1683,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1733,7 +1733,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1767,7 +1767,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1781,7 +1781,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.removeIpOverride(request), expectedError);
@@ -1793,7 +1793,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1827,7 +1827,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1877,7 +1877,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1911,7 +1911,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1925,10 +1925,299 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getMetrics(request), expectedError);
+    });
+  });
+
+  describe('getPolicy', () => {
+    it('invokes getPolicy without error', async () => {
+      const client =
+        new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recaptchaenterprise.v1.GetPolicyRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recaptchaenterprise.v1.GetPolicyRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.recaptchaenterprise.v1.Policy(),
+      );
+      client.innerApiCalls.getPolicy = stubSimpleCall(expectedResponse);
+      const [response] = await client.getPolicy(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getPolicy without error using callback', async () => {
+      const client =
+        new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recaptchaenterprise.v1.GetPolicyRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recaptchaenterprise.v1.GetPolicyRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.recaptchaenterprise.v1.Policy(),
+      );
+      client.innerApiCalls.getPolicy =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getPolicy(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.recaptchaenterprise.v1.IPolicy | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getPolicy with error', async () => {
+      const client =
+        new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recaptchaenterprise.v1.GetPolicyRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recaptchaenterprise.v1.GetPolicyRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getPolicy = stubSimpleCall(undefined, expectedError);
+      await assert.rejects(client.getPolicy(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getPolicy with closed client', async () => {
+      const client =
+        new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recaptchaenterprise.v1.GetPolicyRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recaptchaenterprise.v1.GetPolicyRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(client.getPolicy(request), expectedError);
+    });
+  });
+
+  describe('updatePolicy', () => {
+    it('invokes updatePolicy without error', async () => {
+      const client =
+        new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recaptchaenterprise.v1.UpdatePolicyRequest(),
+      );
+      request.policy ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recaptchaenterprise.v1.UpdatePolicyRequest',
+        ['policy', 'name'],
+      );
+      request.policy.name = defaultValue1;
+      const expectedHeaderRequestParams = `policy.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.recaptchaenterprise.v1.Policy(),
+      );
+      client.innerApiCalls.updatePolicy = stubSimpleCall(expectedResponse);
+      const [response] = await client.updatePolicy(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updatePolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updatePolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updatePolicy without error using callback', async () => {
+      const client =
+        new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recaptchaenterprise.v1.UpdatePolicyRequest(),
+      );
+      request.policy ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recaptchaenterprise.v1.UpdatePolicyRequest',
+        ['policy', 'name'],
+      );
+      request.policy.name = defaultValue1;
+      const expectedHeaderRequestParams = `policy.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.recaptchaenterprise.v1.Policy(),
+      );
+      client.innerApiCalls.updatePolicy =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updatePolicy(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.recaptchaenterprise.v1.IPolicy | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updatePolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updatePolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updatePolicy with error', async () => {
+      const client =
+        new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recaptchaenterprise.v1.UpdatePolicyRequest(),
+      );
+      request.policy ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recaptchaenterprise.v1.UpdatePolicyRequest',
+        ['policy', 'name'],
+      );
+      request.policy.name = defaultValue1;
+      const expectedHeaderRequestParams = `policy.name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updatePolicy = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.updatePolicy(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updatePolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updatePolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updatePolicy with closed client', async () => {
+      const client =
+        new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recaptchaenterprise.v1.UpdatePolicyRequest(),
+      );
+      request.policy ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recaptchaenterprise.v1.UpdatePolicyRequest',
+        ['policy', 'name'],
+      );
+      request.policy.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(client.updatePolicy(request), expectedError);
     });
   });
 
@@ -1937,7 +2226,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1972,7 +2261,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2022,7 +2311,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2056,7 +2345,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2070,7 +2359,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createFirewallPolicy(request), expectedError);
@@ -2082,7 +2371,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2116,7 +2405,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2166,7 +2455,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2200,7 +2489,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2214,7 +2503,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getFirewallPolicy(request), expectedError);
@@ -2226,7 +2515,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2262,7 +2551,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2313,7 +2602,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2348,7 +2637,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2363,7 +2652,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       );
       request.firewallPolicy.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateFirewallPolicy(request), expectedError);
@@ -2375,7 +2664,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2410,7 +2699,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2460,7 +2749,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2494,7 +2783,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2508,7 +2797,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteFirewallPolicy(request), expectedError);
@@ -2520,7 +2809,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2555,7 +2844,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2605,7 +2894,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2642,7 +2931,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2656,7 +2945,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -2671,7 +2960,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2713,7 +3002,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2771,7 +3060,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2802,7 +3091,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2855,9 +3144,9 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       assert(
         (client.descriptors.page.listKeys.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2865,7 +3154,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2909,9 +3198,9 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       assert(
         (client.descriptors.page.listKeys.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2919,7 +3208,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2960,9 +3249,9 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       assert(
         (client.descriptors.page.listKeys.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2970,7 +3259,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -3004,9 +3293,9 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       assert(
         (client.descriptors.page.listKeys.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -3016,7 +3305,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -3058,7 +3347,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -3118,7 +3407,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -3152,7 +3441,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -3208,9 +3497,9 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       assert(
         (client.descriptors.page.listIpOverrides.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -3218,7 +3507,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -3263,9 +3552,9 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       assert(
         (client.descriptors.page.listIpOverrides.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -3273,7 +3562,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -3316,9 +3605,9 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       assert(
         (client.descriptors.page.listIpOverrides.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -3326,7 +3615,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -3360,9 +3649,9 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       assert(
         (client.descriptors.page.listIpOverrides.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -3372,7 +3661,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -3415,7 +3704,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -3475,7 +3764,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -3509,7 +3798,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -3565,9 +3854,9 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       assert(
         (client.descriptors.page.listFirewallPolicies.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -3575,7 +3864,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -3620,9 +3909,9 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       assert(
         (client.descriptors.page.listFirewallPolicies.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -3630,7 +3919,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -3673,9 +3962,9 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       assert(
         (client.descriptors.page.listFirewallPolicies.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -3683,7 +3972,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -3717,9 +4006,9 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       assert(
         (client.descriptors.page.listFirewallPolicies.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -3729,7 +4018,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -3772,7 +4061,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -3832,7 +4121,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -3869,7 +4158,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -3941,7 +4230,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -4002,7 +4291,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -4059,7 +4348,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -4109,7 +4398,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -4153,7 +4442,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -4213,7 +4502,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -4250,7 +4539,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -4325,7 +4614,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -4389,7 +4678,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -4446,7 +4735,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -4496,7 +4785,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -4540,7 +4829,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -4600,7 +4889,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -4635,7 +4924,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -4710,7 +4999,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -4774,7 +5063,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -4832,7 +5121,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -4888,7 +5177,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -4940,7 +5229,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -4996,7 +5285,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -5048,7 +5337,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -5091,6 +5380,58 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       });
     });
 
+    describe('policy', async () => {
+      const fakePath = '/rendered/path/policy';
+      const expectedParameters = {
+        project: 'projectValue',
+        key: 'keyValue',
+      };
+      const client =
+        new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      client.pathTemplates.policyPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.policyPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('policyPath', () => {
+        const result = client.policyPath('projectValue', 'keyValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.policyPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromPolicyName', () => {
+        const result = client.matchProjectFromPolicyName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.policyPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchKeyFromPolicyName', () => {
+        const result = client.matchKeyFromPolicyName(fakePath);
+        assert.strictEqual(result, 'keyValue');
+        assert(
+          (client.pathTemplates.policyPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
@@ -5099,7 +5440,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -5141,7 +5482,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -5207,7 +5548,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const client =
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );

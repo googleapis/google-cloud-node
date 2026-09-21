@@ -26,10 +26,10 @@ import type {
   PaginationCallback,
   GaxCall,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -51,7 +51,7 @@ export class TripServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('fleetengine');
@@ -64,9 +64,9 @@ export class TripServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
-  pathTemplates: { [name: string]: gax.PathTemplate };
-  tripServiceStub?: Promise<{ [name: string]: Function }>;
+  innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
+  tripServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of TripServiceClient.
@@ -142,7 +142,7 @@ export class TripServiceClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -226,7 +226,7 @@ export class TripServiceClient {
       'maps.fleetengine.v1.TripService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -266,7 +266,7 @@ export class TripServiceClient {
           (this._protos as any).maps.fleetengine.v1.TripService,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -280,7 +280,7 @@ export class TripServiceClient {
     ];
     for (const methodName of tripServiceStubMethods) {
       const callPromise = this.tripServiceStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -526,13 +526,13 @@ export class TripServiceClient {
           .match(RegExp('(?<provider_id>providers/[^/]+)'));
         if (match) {
           const parameterValue = match.groups?.['provider_id'] ?? fieldValue;
-          Object.assign(routingParameter, { provider_id: parameterValue });
+          Object.assign(routingParameter, {provider_id: parameterValue});
         }
       }
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createTrip request %j', request);
@@ -696,13 +696,13 @@ export class TripServiceClient {
           .match(RegExp('(?<provider_id>providers/[^/]+)'));
         if (match) {
           const parameterValue = match.groups?.['provider_id'] ?? fieldValue;
-          Object.assign(routingParameter, { provider_id: parameterValue });
+          Object.assign(routingParameter, {provider_id: parameterValue});
         }
       }
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getTrip request %j', request);
@@ -839,13 +839,13 @@ export class TripServiceClient {
           .match(RegExp('(?<provider_id>providers/[^/]+)'));
         if (match) {
           const parameterValue = match.groups?.['provider_id'] ?? fieldValue;
-          Object.assign(routingParameter, { provider_id: parameterValue });
+          Object.assign(routingParameter, {provider_id: parameterValue});
         }
       }
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteTrip request %j', request);
@@ -993,13 +993,13 @@ export class TripServiceClient {
           .match(RegExp('(?<provider_id>providers/[^/]+)'));
         if (match) {
           const parameterValue = match.groups?.['provider_id'] ?? fieldValue;
-          Object.assign(routingParameter, { provider_id: parameterValue });
+          Object.assign(routingParameter, {provider_id: parameterValue});
         }
       }
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('reportBillableTrip request %j', request);
@@ -1180,13 +1180,13 @@ export class TripServiceClient {
           .match(RegExp('(?<provider_id>providers/[^/]+)'));
         if (match) {
           const parameterValue = match.groups?.['provider_id'] ?? fieldValue;
-          Object.assign(routingParameter, { provider_id: parameterValue });
+          Object.assign(routingParameter, {provider_id: parameterValue});
         }
       }
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateTrip request %j', request);
@@ -1343,13 +1343,13 @@ export class TripServiceClient {
           .match(RegExp('(?<provider_id>providers/[^/]+)'));
         if (match) {
           const parameterValue = match.groups?.['provider_id'] ?? fieldValue;
-          Object.assign(routingParameter, { provider_id: parameterValue });
+          Object.assign(routingParameter, {provider_id: parameterValue});
         }
       }
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1437,7 +1437,7 @@ export class TripServiceClient {
           .match(RegExp('(?<provider_id>providers/[^/]+)'));
         if (match) {
           const parameterValue = match.groups?.['provider_id'] ?? fieldValue;
-          Object.assign(routingParameter, { provider_id: parameterValue });
+          Object.assign(routingParameter, {provider_id: parameterValue});
         }
       }
     }
@@ -1445,7 +1445,7 @@ export class TripServiceClient {
       this._gaxModule.routingHeader.fromParams(routingParameter);
     const defaultCallSettings = this._defaults['searchTrips'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('searchTrips stream %j', request);
@@ -1517,7 +1517,7 @@ export class TripServiceClient {
           .match(RegExp('(?<provider_id>providers/[^/]+)'));
         if (match) {
           const parameterValue = match.groups?.['provider_id'] ?? fieldValue;
-          Object.assign(routingParameter, { provider_id: parameterValue });
+          Object.assign(routingParameter, {provider_id: parameterValue});
         }
       }
     }
@@ -1525,7 +1525,7 @@ export class TripServiceClient {
       this._gaxModule.routingHeader.fromParams(routingParameter);
     const defaultCallSettings = this._defaults['searchTrips'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('searchTrips iterate %j', request);
@@ -1619,7 +1619,7 @@ export class TripServiceClient {
    */
   close(): Promise<void> {
     if (this.tripServiceStub && !this._terminated) {
-      return this.tripServiceStub.then((stub) => {
+      return this.tripServiceStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

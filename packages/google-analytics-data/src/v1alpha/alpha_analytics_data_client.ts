@@ -28,10 +28,10 @@ import type {
   PaginationCallback,
   GaxCall,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -53,7 +53,7 @@ export class AlphaAnalyticsDataClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('data');
@@ -66,10 +66,10 @@ export class AlphaAnalyticsDataClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
-  pathTemplates: { [name: string]: gax.PathTemplate };
+  innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
-  alphaAnalyticsDataStub?: Promise<{ [name: string]: Function }>;
+  alphaAnalyticsDataStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of AlphaAnalyticsDataClient.
@@ -145,7 +145,7 @@ export class AlphaAnalyticsDataClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -292,7 +292,7 @@ export class AlphaAnalyticsDataClient {
       'google.analytics.data.v1alpha.AlphaAnalyticsData',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -333,7 +333,7 @@ export class AlphaAnalyticsDataClient {
             .AlphaAnalyticsData,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -351,12 +351,13 @@ export class AlphaAnalyticsDataClient {
       'queryReportTask',
       'getReportTask',
       'listReportTasks',
+      'chat',
       'runReport',
       'getMetadata',
     ];
     for (const methodName of alphaAnalyticsDataStubMethods) {
       const callPromise = this.alphaAnalyticsDataStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -450,6 +451,7 @@ export class AlphaAnalyticsDataClient {
   static get scopes() {
     return [
       'https://www.googleapis.com/auth/analytics',
+      'https://www.googleapis.com/auth/analytics.chatbot.read',
       'https://www.googleapis.com/auth/analytics.readonly',
     ];
   }
@@ -634,7 +636,7 @@ export class AlphaAnalyticsDataClient {
       this._gaxModule.routingHeader.fromParams({
         property: request.property ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('runFunnelReport request %j', request);
@@ -816,7 +818,7 @@ export class AlphaAnalyticsDataClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('queryAudienceList request %j', request);
@@ -965,7 +967,7 @@ export class AlphaAnalyticsDataClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getAudienceList request %j', request);
@@ -1128,7 +1130,7 @@ export class AlphaAnalyticsDataClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createRecurringAudienceList request %j', request);
@@ -1283,7 +1285,7 @@ export class AlphaAnalyticsDataClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getRecurringAudienceList request %j', request);
@@ -1428,7 +1430,7 @@ export class AlphaAnalyticsDataClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getPropertyQuotasSnapshot request %j', request);
@@ -1596,7 +1598,7 @@ export class AlphaAnalyticsDataClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('queryReportTask request %j', request);
@@ -1736,7 +1738,7 @@ export class AlphaAnalyticsDataClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getReportTask request %j', request);
@@ -1766,6 +1768,151 @@ export class AlphaAnalyticsDataClient {
           {} | undefined,
         ]) => {
           this._log.info('getReportTask response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Provides a chat interface for interacting with Google Analytics data
+   * through the API.
+   *
+   * This product uses AI and may display inaccurate info. Your chat activity
+   * may be used to improve the product and your use is subject to Google's
+   * [Terms](https://policies.google.com/terms),
+   * [AI Use
+   * Policy](https://policies.google.com/terms/generative-ai/use-policy), and
+   * [Privacy Policy](https://policies.google.com/privacy).
+   * [Learn more about Chat AI
+   * Privacy](https://support.google.com/helpguide/answer/14185196).
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.property
+   *   Required. The property to chat about.
+   *   Format: properties/{property}
+   * @param {string} request.userQuery
+   *   Required. The user's query.
+   * @param {string} [request.sessionId]
+   *   Optional. Provide this session ID to continue an existing conversation
+   *   and maintain context. If this field is empty or unset, a new chat
+   *   session is created. Invalid session IDs will result in an error.
+   * @param {boolean} [request.returnPropertyQuota]
+   *   Optional. If true, the response will include the current state of this
+   *   Analytics Property's quota. Quota is returned in
+   *   [PropertyChatQuota](#PropertyChatQuota).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.analytics.data.v1alpha.ChatResponse|ChatResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/alpha_analytics_data.chat.js</caption>
+   * region_tag:analyticsdata_v1alpha_generated_AlphaAnalyticsData_Chat_async
+   */
+  chat(
+    request?: protos.google.analytics.data.v1alpha.IChatRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.analytics.data.v1alpha.IChatResponse,
+      protos.google.analytics.data.v1alpha.IChatRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  chat(
+    request: protos.google.analytics.data.v1alpha.IChatRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.analytics.data.v1alpha.IChatResponse,
+      protos.google.analytics.data.v1alpha.IChatRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  chat(
+    request: protos.google.analytics.data.v1alpha.IChatRequest,
+    callback: Callback<
+      protos.google.analytics.data.v1alpha.IChatResponse,
+      protos.google.analytics.data.v1alpha.IChatRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  chat(
+    request?: protos.google.analytics.data.v1alpha.IChatRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.analytics.data.v1alpha.IChatResponse,
+          protos.google.analytics.data.v1alpha.IChatRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.analytics.data.v1alpha.IChatResponse,
+      protos.google.analytics.data.v1alpha.IChatRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.analytics.data.v1alpha.IChatResponse,
+      protos.google.analytics.data.v1alpha.IChatRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        property: request.property ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('chat request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.data.v1alpha.IChatResponse,
+          protos.google.analytics.data.v1alpha.IChatRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('chat response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .chat(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.data.v1alpha.IChatResponse,
+          protos.google.analytics.data.v1alpha.IChatRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('chat response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1961,7 +2108,7 @@ export class AlphaAnalyticsDataClient {
       this._gaxModule.routingHeader.fromParams({
         property: request.property ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('runReport request %j', request);
@@ -2114,7 +2261,7 @@ export class AlphaAnalyticsDataClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getMetadata request %j', request);
@@ -2287,7 +2434,7 @@ export class AlphaAnalyticsDataClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2344,7 +2491,7 @@ export class AlphaAnalyticsDataClient {
     this._log.info('createAudienceList long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -2468,7 +2615,7 @@ export class AlphaAnalyticsDataClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2525,7 +2672,7 @@ export class AlphaAnalyticsDataClient {
     this._log.info('createReportTask long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -2653,7 +2800,7 @@ export class AlphaAnalyticsDataClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2728,7 +2875,7 @@ export class AlphaAnalyticsDataClient {
       });
     const defaultCallSettings = this._defaults['listAudienceLists'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listAudienceLists stream %j', request);
@@ -2785,7 +2932,7 @@ export class AlphaAnalyticsDataClient {
       });
     const defaultCallSettings = this._defaults['listAudienceLists'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listAudienceLists iterate %j', request);
@@ -2910,7 +3057,7 @@ export class AlphaAnalyticsDataClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2987,7 +3134,7 @@ export class AlphaAnalyticsDataClient {
       });
     const defaultCallSettings = this._defaults['listRecurringAudienceLists'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listRecurringAudienceLists stream %j', request);
@@ -3046,7 +3193,7 @@ export class AlphaAnalyticsDataClient {
       });
     const defaultCallSettings = this._defaults['listRecurringAudienceLists'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listRecurringAudienceLists iterate %j', request);
@@ -3152,7 +3299,7 @@ export class AlphaAnalyticsDataClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3221,7 +3368,7 @@ export class AlphaAnalyticsDataClient {
       });
     const defaultCallSettings = this._defaults['listReportTasks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listReportTasks stream %j', request);
@@ -3272,7 +3419,7 @@ export class AlphaAnalyticsDataClient {
       });
     const defaultCallSettings = this._defaults['listReportTasks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listReportTasks iterate %j', request);
@@ -3710,7 +3857,7 @@ export class AlphaAnalyticsDataClient {
    */
   close(): Promise<void> {
     if (this.alphaAnalyticsDataStub && !this._terminated) {
-      return this.alphaAnalyticsDataStub.then((stub) => {
+      return this.alphaAnalyticsDataStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

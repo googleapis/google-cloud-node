@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as servicemonitoringserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -206,7 +206,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client =
             new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient(
-              { universeDomain: 'configured.example.com' },
+              {universeDomain: 'configured.example.com'},
             );
           const servicePath = client.apiEndpoint;
           assert.strictEqual(servicePath, 'monitoring.configured.example.com');
@@ -251,7 +251,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client =
         new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.serviceMonitoringServiceStub, undefined);
@@ -259,13 +259,13 @@ describe('v3.ServiceMonitoringServiceClient', () => {
       assert(client.serviceMonitoringServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.serviceMonitoringServiceStub);
@@ -274,15 +274,15 @@ describe('v3.ServiceMonitoringServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.serviceMonitoringServiceStub, undefined);
@@ -291,7 +291,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -300,7 +300,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -313,7 +313,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon
@@ -337,7 +337,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
     it('invokes createService without error', async () => {
       const client =
         new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -369,7 +369,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
     it('invokes createService without error using callback', async () => {
       const client =
         new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -417,7 +417,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
     it('invokes createService with error', async () => {
       const client =
         new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -449,7 +449,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
     it('invokes createService with closed client', async () => {
       const client =
         new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -462,7 +462,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createService(request), expectedError);
@@ -473,7 +473,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
     it('invokes getService without error', async () => {
       const client =
         new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -505,7 +505,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
     it('invokes getService without error using callback', async () => {
       const client =
         new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -553,7 +553,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
     it('invokes getService with error', async () => {
       const client =
         new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -585,7 +585,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
     it('invokes getService with closed client', async () => {
       const client =
         new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -598,7 +598,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getService(request), expectedError);
@@ -609,7 +609,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
     it('invokes updateService without error', async () => {
       const client =
         new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -642,7 +642,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
     it('invokes updateService without error using callback', async () => {
       const client =
         new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -691,7 +691,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
     it('invokes updateService with error', async () => {
       const client =
         new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -724,7 +724,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
     it('invokes updateService with closed client', async () => {
       const client =
         new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -738,7 +738,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
       );
       request.service.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateService(request), expectedError);
@@ -749,7 +749,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
     it('invokes deleteService without error', async () => {
       const client =
         new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -781,7 +781,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
     it('invokes deleteService without error using callback', async () => {
       const client =
         new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -829,7 +829,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
     it('invokes deleteService with error', async () => {
       const client =
         new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -861,7 +861,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
     it('invokes deleteService with closed client', async () => {
       const client =
         new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -874,7 +874,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteService(request), expectedError);
@@ -885,7 +885,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
     it('invokes createServiceLevelObjective without error', async () => {
       const client =
         new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -918,7 +918,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
     it('invokes createServiceLevelObjective without error using callback', async () => {
       const client =
         new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -966,7 +966,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
     it('invokes createServiceLevelObjective with error', async () => {
       const client =
         new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1001,7 +1001,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
     it('invokes createServiceLevelObjective with closed client', async () => {
       const client =
         new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1014,7 +1014,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1028,7 +1028,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
     it('invokes getServiceLevelObjective without error', async () => {
       const client =
         new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1061,7 +1061,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
     it('invokes getServiceLevelObjective without error using callback', async () => {
       const client =
         new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1109,7 +1109,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
     it('invokes getServiceLevelObjective with error', async () => {
       const client =
         new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1144,7 +1144,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
     it('invokes getServiceLevelObjective with closed client', async () => {
       const client =
         new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1157,7 +1157,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1171,7 +1171,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
     it('invokes updateServiceLevelObjective without error', async () => {
       const client =
         new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1205,7 +1205,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
     it('invokes updateServiceLevelObjective without error using callback', async () => {
       const client =
         new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1254,7 +1254,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
     it('invokes updateServiceLevelObjective with error', async () => {
       const client =
         new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1290,7 +1290,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
     it('invokes updateServiceLevelObjective with closed client', async () => {
       const client =
         new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1304,7 +1304,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
       );
       request.serviceLevelObjective.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1318,7 +1318,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
     it('invokes deleteServiceLevelObjective without error', async () => {
       const client =
         new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1351,7 +1351,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
     it('invokes deleteServiceLevelObjective without error using callback', async () => {
       const client =
         new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1399,7 +1399,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
     it('invokes deleteServiceLevelObjective with error', async () => {
       const client =
         new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1434,7 +1434,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
     it('invokes deleteServiceLevelObjective with closed client', async () => {
       const client =
         new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1447,7 +1447,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1461,7 +1461,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
     it('invokes listServices without error', async () => {
       const client =
         new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1495,7 +1495,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
     it('invokes listServices without error using callback', async () => {
       const client =
         new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1545,7 +1545,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
     it('invokes listServices with error', async () => {
       const client =
         new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1577,7 +1577,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
     it('invokes listServicesStream without error', async () => {
       const client =
         new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1620,16 +1620,16 @@ describe('v3.ServiceMonitoringServiceClient', () => {
       assert(
         (client.descriptors.page.listServices.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listServicesStream with error', async () => {
       const client =
         new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1669,16 +1669,16 @@ describe('v3.ServiceMonitoringServiceClient', () => {
       assert(
         (client.descriptors.page.listServices.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listServices without error', async () => {
       const client =
         new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1713,16 +1713,16 @@ describe('v3.ServiceMonitoringServiceClient', () => {
       assert(
         (client.descriptors.page.listServices.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listServices with error', async () => {
       const client =
         new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1754,9 +1754,9 @@ describe('v3.ServiceMonitoringServiceClient', () => {
       assert(
         (client.descriptors.page.listServices.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1765,7 +1765,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
     it('invokes listServiceLevelObjectives without error', async () => {
       const client =
         new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1806,7 +1806,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
     it('invokes listServiceLevelObjectives without error using callback', async () => {
       const client =
         new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1838,8 +1838,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.monitoring.v3.IServiceLevelObjective[]
-              | null,
+              protos.google.monitoring.v3.IServiceLevelObjective[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -1864,7 +1863,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
     it('invokes listServiceLevelObjectives with error', async () => {
       const client =
         new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1899,7 +1898,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
     it('invokes listServiceLevelObjectivesStream without error', async () => {
       const client =
         new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1967,7 +1966,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
     it('invokes listServiceLevelObjectivesStream with error', async () => {
       const client =
         new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2024,7 +2023,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
     it('uses async iteration with listServiceLevelObjectives without error', async () => {
       const client =
         new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2079,7 +2078,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
     it('uses async iteration with listServiceLevelObjectives with error', async () => {
       const client =
         new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2132,7 +2131,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
       };
       const client =
         new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2196,7 +2195,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
       };
       const client =
         new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2275,7 +2274,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
       };
       const client =
         new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2341,7 +2340,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
       };
       const client =
         new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2391,7 +2390,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
       };
       const client =
         new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2457,7 +2456,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
       };
       const client =
         new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2508,7 +2507,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
       };
       const client =
         new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2591,7 +2590,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
       };
       const client =
         new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2657,7 +2656,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
       };
       const client =
         new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2722,7 +2721,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
       };
       const client =
         new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2805,7 +2804,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
       };
       const client =
         new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2871,7 +2870,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
       };
       const client =
         new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2934,7 +2933,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
       };
       const client =
         new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3000,7 +2999,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
       };
       const client =
         new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3065,7 +3064,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
       };
       const client =
         new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3152,7 +3151,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
       };
       const client =
         new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3217,7 +3216,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
       };
       const client =
         new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3257,7 +3256,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
       };
       const client =
         new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3321,7 +3320,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
       };
       const client =
         new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3399,7 +3398,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
       };
       const client =
         new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3465,7 +3464,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
       };
       const client =
         new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3515,7 +3514,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
       };
       const client =
         new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3581,7 +3580,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
       };
       const client =
         new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3635,7 +3634,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
       };
       const client =
         new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3718,7 +3717,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
       };
       const client =
         new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3784,7 +3783,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
       };
       const client =
         new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();

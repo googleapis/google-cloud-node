@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as modelmonitoringserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -51,7 +51,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -155,9 +155,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -244,7 +244,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client =
             new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient(
-              { universeDomain: 'configured.example.com' },
+              {universeDomain: 'configured.example.com'},
             );
           const servicePath = client.apiEndpoint;
           assert.strictEqual(servicePath, 'aiplatform.configured.example.com');
@@ -289,7 +289,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.modelMonitoringServiceStub, undefined);
@@ -297,13 +297,13 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
       assert(client.modelMonitoringServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.modelMonitoringServiceStub);
@@ -312,15 +312,15 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.modelMonitoringServiceStub, undefined);
@@ -329,7 +329,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -338,7 +338,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -351,7 +351,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon
@@ -375,7 +375,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
     it('invokes getModelMonitor without error', async () => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -407,7 +407,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
     it('invokes getModelMonitor without error using callback', async () => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -455,7 +455,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
     it('invokes getModelMonitor with error', async () => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -487,7 +487,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
     it('invokes getModelMonitor with closed client', async () => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -500,7 +500,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getModelMonitor(request), expectedError);
@@ -511,7 +511,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
     it('invokes createModelMonitoringJob without error', async () => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -544,7 +544,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
     it('invokes createModelMonitoringJob without error using callback', async () => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -592,7 +592,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
     it('invokes createModelMonitoringJob with error', async () => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -627,7 +627,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
     it('invokes createModelMonitoringJob with closed client', async () => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -640,7 +640,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -654,7 +654,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
     it('invokes getModelMonitoringJob without error', async () => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -687,7 +687,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
     it('invokes getModelMonitoringJob without error using callback', async () => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -735,7 +735,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
     it('invokes getModelMonitoringJob with error', async () => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -770,7 +770,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
     it('invokes getModelMonitoringJob with closed client', async () => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -783,7 +783,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -797,7 +797,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
     it('invokes createModelMonitor without error', async () => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -831,7 +831,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
     it('invokes createModelMonitor without error using callback', async () => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -886,7 +886,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
     it('invokes createModelMonitor with call error', async () => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -918,7 +918,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
     it('invokes createModelMonitor with LRO error', async () => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -952,7 +952,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
     it('invokes checkCreateModelMonitorProgress without error', async () => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -960,8 +960,8 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateModelMonitorProgress(
@@ -975,7 +975,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
     it('invokes checkCreateModelMonitorProgress with error', async () => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -997,7 +997,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
     it('invokes updateModelMonitor without error', async () => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1032,7 +1032,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
     it('invokes updateModelMonitor without error using callback', async () => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1088,7 +1088,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
     it('invokes updateModelMonitor with call error', async () => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1121,7 +1121,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
     it('invokes updateModelMonitor with LRO error', async () => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1156,7 +1156,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
     it('invokes checkUpdateModelMonitorProgress without error', async () => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1164,8 +1164,8 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateModelMonitorProgress(
@@ -1179,7 +1179,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
     it('invokes checkUpdateModelMonitorProgress with error', async () => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1201,7 +1201,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
     it('invokes deleteModelMonitor without error', async () => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1235,7 +1235,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
     it('invokes deleteModelMonitor without error using callback', async () => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1290,7 +1290,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
     it('invokes deleteModelMonitor with call error', async () => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1322,7 +1322,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
     it('invokes deleteModelMonitor with LRO error', async () => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1356,7 +1356,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
     it('invokes checkDeleteModelMonitorProgress without error', async () => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1364,8 +1364,8 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteModelMonitorProgress(
@@ -1379,7 +1379,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
     it('invokes checkDeleteModelMonitorProgress with error', async () => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1401,7 +1401,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
     it('invokes deleteModelMonitoringJob without error', async () => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1435,7 +1435,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
     it('invokes deleteModelMonitoringJob without error using callback', async () => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1490,7 +1490,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
     it('invokes deleteModelMonitoringJob with call error', async () => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1525,7 +1525,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
     it('invokes deleteModelMonitoringJob with LRO error', async () => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1559,7 +1559,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
     it('invokes checkDeleteModelMonitoringJobProgress without error', async () => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1567,8 +1567,8 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -1583,7 +1583,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
     it('invokes checkDeleteModelMonitoringJobProgress with error', async () => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1605,7 +1605,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
     it('invokes listModelMonitors without error', async () => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1645,7 +1645,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
     it('invokes listModelMonitors without error using callback', async () => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1677,8 +1677,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.aiplatform.v1beta1.IModelMonitor[]
-              | null,
+              protos.google.cloud.aiplatform.v1beta1.IModelMonitor[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -1703,7 +1702,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
     it('invokes listModelMonitors with error', async () => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1735,7 +1734,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
     it('invokes listModelMonitorsStream without error', async () => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1788,16 +1787,16 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
       assert(
         (client.descriptors.page.listModelMonitors.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listModelMonitorsStream with error', async () => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1839,16 +1838,16 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
       assert(
         (client.descriptors.page.listModelMonitors.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listModelMonitors without error', async () => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1890,16 +1889,16 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
       assert(
         (client.descriptors.page.listModelMonitors.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listModelMonitors with error', async () => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1932,9 +1931,9 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
       assert(
         (client.descriptors.page.listModelMonitors.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1943,7 +1942,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
     it('invokes listModelMonitoringJobs without error', async () => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1984,7 +1983,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
     it('invokes listModelMonitoringJobs without error using callback', async () => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2042,7 +2041,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
     it('invokes listModelMonitoringJobs with error', async () => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2077,7 +2076,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
     it('invokes listModelMonitoringJobsStream without error', async () => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2147,7 +2146,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
     it('invokes listModelMonitoringJobsStream with error', async () => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2206,7 +2205,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
     it('uses async iteration with listModelMonitoringJobs without error', async () => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2261,7 +2260,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
     it('uses async iteration with listModelMonitoringJobs with error', async () => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2309,7 +2308,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
     it('invokes searchModelMonitoringStats without error', async () => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2350,7 +2349,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
     it('invokes searchModelMonitoringStats without error using callback', async () => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2408,7 +2407,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
     it('invokes searchModelMonitoringStats with error', async () => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2443,7 +2442,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
     it('invokes searchModelMonitoringStatsStream without error', async () => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2513,7 +2512,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
     it('invokes searchModelMonitoringStatsStream with error', async () => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2572,7 +2571,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
     it('uses async iteration with searchModelMonitoringStats without error', async () => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2627,7 +2626,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
     it('uses async iteration with searchModelMonitoringStats with error', async () => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2675,7 +2674,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
     it('invokes searchModelMonitoringAlerts without error', async () => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2716,7 +2715,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
     it('invokes searchModelMonitoringAlerts without error using callback', async () => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2774,7 +2773,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
     it('invokes searchModelMonitoringAlerts with error', async () => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2809,7 +2808,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
     it('invokes searchModelMonitoringAlertsStream without error', async () => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2882,7 +2881,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
     it('invokes searchModelMonitoringAlertsStream with error', async () => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2944,7 +2943,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
     it('uses async iteration with searchModelMonitoringAlerts without error', async () => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2999,7 +2998,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
     it('uses async iteration with searchModelMonitoringAlerts with error', async () => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3046,7 +3045,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
     it('invokes getIamPolicy without error', async () => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3077,7 +3076,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
     it('invokes getIamPolicy without error using callback', async () => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3115,7 +3114,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3126,7 +3125,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
     it('invokes getIamPolicy with error', async () => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3159,7 +3158,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
     it('invokes setIamPolicy without error', async () => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3190,7 +3189,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
     it('invokes setIamPolicy without error using callback', async () => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3228,7 +3227,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3239,7 +3238,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
     it('invokes setIamPolicy with error', async () => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3272,7 +3271,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
     it('invokes testIamPermissions without error', async () => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3306,7 +3305,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
     it('invokes testIamPermissions without error using callback', async () => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3344,7 +3343,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3355,7 +3354,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
     it('invokes testIamPermissions with error', async () => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3391,7 +3390,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
     it('invokes getLocation without error', async () => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3422,7 +3421,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
     it('invokes getLocation without error using callback', async () => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3467,7 +3466,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
     it('invokes getLocation with error', async () => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3503,7 +3502,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3552,7 +3551,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
     it('uses async iteration with listLocations with error', async () => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3594,7 +3593,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
     it('invokes getOperation without error', async () => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3616,7 +3615,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
     it('invokes getOperation without error using callback', async () => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -3644,7 +3643,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3655,7 +3654,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
     it('invokes getOperation with error', async () => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -3680,7 +3679,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
     it('invokes cancelOperation without error', async () => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3703,7 +3702,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
     it('invokes cancelOperation without error using callback', async () => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -3731,7 +3730,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3742,7 +3741,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
     it('invokes cancelOperation with error', async () => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -3767,7 +3766,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
     it('invokes deleteOperation without error', async () => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3790,7 +3789,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
     it('invokes deleteOperation without error using callback', async () => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -3818,7 +3817,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3829,7 +3828,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
     it('invokes deleteOperation with error', async () => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -3854,7 +3853,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -3890,7 +3889,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
     it('uses async iteration with listOperations with error', async () => {
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3929,7 +3928,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
       };
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4017,7 +4016,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
       };
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4095,7 +4094,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
       };
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4171,7 +4170,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
       };
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4249,7 +4248,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
       };
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4315,7 +4314,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
       };
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4391,7 +4390,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
       };
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4457,7 +4456,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
       };
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4533,7 +4532,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
       };
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4599,7 +4598,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
       };
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4665,7 +4664,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
       };
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4742,7 +4741,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
       };
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4825,7 +4824,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
       };
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4901,7 +4900,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
       };
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4967,7 +4966,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
       };
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5043,7 +5042,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
       };
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5108,7 +5107,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
       };
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5174,7 +5173,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
       };
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5253,7 +5252,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
       };
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5361,7 +5360,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
       };
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5440,7 +5439,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
       };
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5518,7 +5517,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
       };
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5595,7 +5594,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
       };
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5660,7 +5659,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
       };
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5742,7 +5741,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
       };
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5807,7 +5806,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
       };
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5871,7 +5870,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
       };
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5923,7 +5922,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
       };
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6000,7 +5999,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
       };
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6078,7 +6077,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
       };
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6143,7 +6142,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
       };
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6208,7 +6207,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
       };
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6289,7 +6288,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
       };
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6367,7 +6366,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
       };
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6475,7 +6474,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
       };
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6541,7 +6540,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
       };
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6634,7 +6633,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
       };
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6700,7 +6699,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
       };
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6777,7 +6776,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
       };
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6859,7 +6858,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
       };
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6925,7 +6924,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
       };
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7007,7 +7006,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
       };
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7073,7 +7072,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
       };
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7151,7 +7150,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
       };
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7216,7 +7215,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
       };
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7297,7 +7296,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
       };
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7401,7 +7400,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
       };
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7526,7 +7525,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
       };
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7618,7 +7617,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
       };
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7672,7 +7671,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
       };
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7738,7 +7737,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
       };
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7813,7 +7812,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
       };
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7868,7 +7867,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
       };
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7946,7 +7945,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
       };
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8033,7 +8032,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
       };
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8100,7 +8099,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
       };
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8198,7 +8197,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
       };
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8274,7 +8273,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
       };
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8340,7 +8339,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
       };
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8418,7 +8417,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
       };
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8506,7 +8505,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
       };
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8572,7 +8571,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
       };
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8637,7 +8636,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
       };
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8703,7 +8702,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
       };
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8800,7 +8799,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
       };
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8890,7 +8889,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
       };
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9014,7 +9013,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
       };
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9084,7 +9083,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
       };
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9160,7 +9159,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
       };
       const client =
         new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();

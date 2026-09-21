@@ -4,6 +4,20 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/recaptcha-enterprise?activeTab=versions
 
+## [7.2.0](https://github.com/googleapis/google-cloud-node/compare/recaptcha-enterprise-v7.1.0...recaptcha-enterprise-v7.2.0) (2026-09-08)
+
+
+### Features
+
+* Upgrade librarian gapic-generator-typescript to v5.2.0 ([c249594](https://github.com/googleapis/google-cloud-node/commit/c249594c6ef41e4b36f1ef8869341a4c98c092b0))
+
+## [7.1.0](https://github.com/googleapis/google-cloud-node/compare/recaptcha-enterprise-v7.0.0...recaptcha-enterprise-v7.1.0) (2026-08-21)
+
+
+### Features
+
+* Update API sources and regenerate ([#9140](https://github.com/googleapis/google-cloud-node/issues/9140)) ([863bc96](https://github.com/googleapis/google-cloud-node/commit/863bc964abda34bc82b58409af164ff9c7346c55))
+
 ## [7.0.0](https://github.com/googleapis/google-cloud-node/compare/recaptcha-enterprise-v6.4.2...recaptcha-enterprise-v7.0.0) (2026-08-04)
 
 

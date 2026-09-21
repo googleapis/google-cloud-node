@@ -32,10 +32,10 @@ import type {
   LocationsClient,
   LocationProtos,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -68,7 +68,7 @@ export class KeyManagementServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('kms');
@@ -81,12 +81,12 @@ export class KeyManagementServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
+  innerApiCalls: {[name: string]: Function};
   iamClient: IamClient;
   locationsClient: LocationsClient;
-  pathTemplates: { [name: string]: gax.PathTemplate };
+  pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
-  keyManagementServiceStub?: Promise<{ [name: string]: Function }>;
+  keyManagementServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of KeyManagementServiceClient.
@@ -162,7 +162,7 @@ export class KeyManagementServiceClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -434,7 +434,7 @@ export class KeyManagementServiceClient {
       'google.cloud.kms.v1.KeyManagementService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -474,7 +474,7 @@ export class KeyManagementServiceClient {
           (this._protos as any).google.cloud.kms.v1.KeyManagementService,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -517,7 +517,7 @@ export class KeyManagementServiceClient {
     ];
     for (const methodName of keyManagementServiceStubMethods) {
       const callPromise = this.keyManagementServiceStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -714,7 +714,7 @@ export class KeyManagementServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getKeyRing request %j', request);
@@ -841,7 +841,7 @@ export class KeyManagementServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getCryptoKey request %j', request);
@@ -969,7 +969,7 @@ export class KeyManagementServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getCryptoKeyVersion request %j', request);
@@ -1109,7 +1109,7 @@ export class KeyManagementServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getPublicKey request %j', request);
@@ -1244,7 +1244,7 @@ export class KeyManagementServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getImportJob request %j', request);
@@ -1373,7 +1373,7 @@ export class KeyManagementServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getRetiredResource request %j', request);
@@ -1508,7 +1508,7 @@ export class KeyManagementServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createKeyRing request %j', request);
@@ -1663,7 +1663,7 @@ export class KeyManagementServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createCryptoKey request %j', request);
@@ -1805,7 +1805,7 @@ export class KeyManagementServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createCryptoKeyVersion request %j', request);
@@ -2036,7 +2036,7 @@ export class KeyManagementServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('importCryptoKeyVersion request %j', request);
@@ -2222,7 +2222,7 @@ export class KeyManagementServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info(
@@ -2398,7 +2398,7 @@ export class KeyManagementServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info(
@@ -2552,7 +2552,7 @@ export class KeyManagementServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createImportJob request %j', request);
@@ -2678,7 +2678,7 @@ export class KeyManagementServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'crypto_key.name': request.cryptoKey!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateCryptoKey request %j', request);
@@ -2824,7 +2824,7 @@ export class KeyManagementServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'crypto_key_version.name': request.cryptoKeyVersion!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateCryptoKeyVersion request %j', request);
@@ -2973,7 +2973,7 @@ export class KeyManagementServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateCryptoKeyPrimaryVersion request %j', request);
@@ -3131,7 +3131,7 @@ export class KeyManagementServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('destroyCryptoKeyVersion request %j', request);
@@ -3277,7 +3277,7 @@ export class KeyManagementServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('restoreCryptoKeyVersion request %j', request);
@@ -3481,7 +3481,7 @@ export class KeyManagementServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('encrypt request %j', request);
@@ -3656,7 +3656,7 @@ export class KeyManagementServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('decrypt request %j', request);
@@ -3868,7 +3868,7 @@ export class KeyManagementServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('rawEncrypt request %j', request);
@@ -4060,7 +4060,7 @@ export class KeyManagementServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('rawDecrypt request %j', request);
@@ -4243,7 +4243,7 @@ export class KeyManagementServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('asymmetricSign request %j', request);
@@ -4399,7 +4399,7 @@ export class KeyManagementServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('asymmetricDecrypt request %j', request);
@@ -4550,7 +4550,7 @@ export class KeyManagementServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('macSign request %j', request);
@@ -4722,7 +4722,7 @@ export class KeyManagementServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('macVerify request %j', request);
@@ -4876,7 +4876,7 @@ export class KeyManagementServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('decapsulate request %j', request);
@@ -5012,7 +5012,7 @@ export class KeyManagementServiceClient {
       this._gaxModule.routingHeader.fromParams({
         location: request.location ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('generateRandomBytes request %j', request);
@@ -5165,7 +5165,7 @@ export class KeyManagementServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5222,7 +5222,7 @@ export class KeyManagementServiceClient {
     this._log.info('deleteCryptoKey long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -5345,7 +5345,7 @@ export class KeyManagementServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5402,7 +5402,7 @@ export class KeyManagementServiceClient {
     this._log.info('deleteCryptoKeyVersion long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -5520,7 +5520,7 @@ export class KeyManagementServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5604,7 +5604,7 @@ export class KeyManagementServiceClient {
       });
     const defaultCallSettings = this._defaults['listKeyRings'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listKeyRings stream %j', request);
@@ -5672,7 +5672,7 @@ export class KeyManagementServiceClient {
       });
     const defaultCallSettings = this._defaults['listKeyRings'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listKeyRings iterate %j', request);
@@ -5788,7 +5788,7 @@ export class KeyManagementServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5873,7 +5873,7 @@ export class KeyManagementServiceClient {
       });
     const defaultCallSettings = this._defaults['listCryptoKeys'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listCryptoKeys stream %j', request);
@@ -5942,7 +5942,7 @@ export class KeyManagementServiceClient {
       });
     const defaultCallSettings = this._defaults['listCryptoKeys'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listCryptoKeys iterate %j', request);
@@ -6067,7 +6067,7 @@ export class KeyManagementServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6155,7 +6155,7 @@ export class KeyManagementServiceClient {
       });
     const defaultCallSettings = this._defaults['listCryptoKeyVersions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listCryptoKeyVersions stream %j', request);
@@ -6225,7 +6225,7 @@ export class KeyManagementServiceClient {
       });
     const defaultCallSettings = this._defaults['listCryptoKeyVersions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listCryptoKeyVersions iterate %j', request);
@@ -6339,7 +6339,7 @@ export class KeyManagementServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6422,7 +6422,7 @@ export class KeyManagementServiceClient {
       });
     const defaultCallSettings = this._defaults['listImportJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listImportJobs stream %j', request);
@@ -6489,7 +6489,7 @@ export class KeyManagementServiceClient {
       });
     const defaultCallSettings = this._defaults['listImportJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listImportJobs iterate %j', request);
@@ -6605,7 +6605,7 @@ export class KeyManagementServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6682,7 +6682,7 @@ export class KeyManagementServiceClient {
       });
     const defaultCallSettings = this._defaults['listRetiredResources'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listRetiredResources stream %j', request);
@@ -6741,7 +6741,7 @@ export class KeyManagementServiceClient {
       });
     const defaultCallSettings = this._defaults['listRetiredResources'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listRetiredResources iterate %j', request);
@@ -8029,14 +8029,14 @@ export class KeyManagementServiceClient {
    */
   close(): Promise<void> {
     if (this.keyManagementServiceStub && !this._terminated) {
-      return this.keyManagementServiceStub.then((stub) => {
+      return this.keyManagementServiceStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.iamClient.close().catch((err) => {
+        this.iamClient.close().catch(err => {
           throw err;
         });
-        this.locationsClient.close().catch((err) => {
+        this.locationsClient.close().catch(err => {
           throw err;
         });
         void this.operationsClient.close();

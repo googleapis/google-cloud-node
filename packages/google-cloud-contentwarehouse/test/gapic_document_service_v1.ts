@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as documentserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -242,7 +242,7 @@ describe('v1.DocumentServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.documentServiceStub, undefined);
@@ -250,12 +250,12 @@ describe('v1.DocumentServiceClient', () => {
       assert(client.documentServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.documentServiceStub);
@@ -264,14 +264,14 @@ describe('v1.DocumentServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.documentServiceStub, undefined);
@@ -280,7 +280,7 @@ describe('v1.DocumentServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -288,7 +288,7 @@ describe('v1.DocumentServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -300,7 +300,7 @@ describe('v1.DocumentServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -323,7 +323,7 @@ describe('v1.DocumentServiceClient', () => {
   describe('createDocument', () => {
     it('invokes createDocument without error', async () => {
       const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -354,7 +354,7 @@ describe('v1.DocumentServiceClient', () => {
 
     it('invokes createDocument without error using callback', async () => {
       const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -401,7 +401,7 @@ describe('v1.DocumentServiceClient', () => {
 
     it('invokes createDocument with error', async () => {
       const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -432,7 +432,7 @@ describe('v1.DocumentServiceClient', () => {
 
     it('invokes createDocument with closed client', async () => {
       const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -445,7 +445,7 @@ describe('v1.DocumentServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createDocument(request), expectedError);
@@ -455,7 +455,7 @@ describe('v1.DocumentServiceClient', () => {
   describe('getDocument', () => {
     it('invokes getDocument without error', async () => {
       const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -486,7 +486,7 @@ describe('v1.DocumentServiceClient', () => {
 
     it('invokes getDocument without error using callback', async () => {
       const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -533,7 +533,7 @@ describe('v1.DocumentServiceClient', () => {
 
     it('invokes getDocument with error', async () => {
       const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -564,7 +564,7 @@ describe('v1.DocumentServiceClient', () => {
 
     it('invokes getDocument with closed client', async () => {
       const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -577,7 +577,7 @@ describe('v1.DocumentServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getDocument(request), expectedError);
@@ -587,7 +587,7 @@ describe('v1.DocumentServiceClient', () => {
   describe('updateDocument', () => {
     it('invokes updateDocument without error', async () => {
       const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -618,7 +618,7 @@ describe('v1.DocumentServiceClient', () => {
 
     it('invokes updateDocument without error using callback', async () => {
       const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -665,7 +665,7 @@ describe('v1.DocumentServiceClient', () => {
 
     it('invokes updateDocument with error', async () => {
       const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -696,7 +696,7 @@ describe('v1.DocumentServiceClient', () => {
 
     it('invokes updateDocument with closed client', async () => {
       const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -709,7 +709,7 @@ describe('v1.DocumentServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateDocument(request), expectedError);
@@ -719,7 +719,7 @@ describe('v1.DocumentServiceClient', () => {
   describe('deleteDocument', () => {
     it('invokes deleteDocument without error', async () => {
       const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -750,7 +750,7 @@ describe('v1.DocumentServiceClient', () => {
 
     it('invokes deleteDocument without error using callback', async () => {
       const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -797,7 +797,7 @@ describe('v1.DocumentServiceClient', () => {
 
     it('invokes deleteDocument with error', async () => {
       const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -828,7 +828,7 @@ describe('v1.DocumentServiceClient', () => {
 
     it('invokes deleteDocument with closed client', async () => {
       const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -841,7 +841,7 @@ describe('v1.DocumentServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteDocument(request), expectedError);
@@ -851,7 +851,7 @@ describe('v1.DocumentServiceClient', () => {
   describe('lockDocument', () => {
     it('invokes lockDocument without error', async () => {
       const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -882,7 +882,7 @@ describe('v1.DocumentServiceClient', () => {
 
     it('invokes lockDocument without error using callback', async () => {
       const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -929,7 +929,7 @@ describe('v1.DocumentServiceClient', () => {
 
     it('invokes lockDocument with error', async () => {
       const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -960,7 +960,7 @@ describe('v1.DocumentServiceClient', () => {
 
     it('invokes lockDocument with closed client', async () => {
       const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -973,7 +973,7 @@ describe('v1.DocumentServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.lockDocument(request), expectedError);
@@ -983,7 +983,7 @@ describe('v1.DocumentServiceClient', () => {
   describe('fetchAcl', () => {
     it('invokes fetchAcl without error', async () => {
       const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1014,7 +1014,7 @@ describe('v1.DocumentServiceClient', () => {
 
     it('invokes fetchAcl without error using callback', async () => {
       const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1061,7 +1061,7 @@ describe('v1.DocumentServiceClient', () => {
 
     it('invokes fetchAcl with error', async () => {
       const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1089,7 +1089,7 @@ describe('v1.DocumentServiceClient', () => {
 
     it('invokes fetchAcl with closed client', async () => {
       const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1102,7 +1102,7 @@ describe('v1.DocumentServiceClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.fetchAcl(request), expectedError);
@@ -1112,7 +1112,7 @@ describe('v1.DocumentServiceClient', () => {
   describe('setAcl', () => {
     it('invokes setAcl without error', async () => {
       const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1143,7 +1143,7 @@ describe('v1.DocumentServiceClient', () => {
 
     it('invokes setAcl without error using callback', async () => {
       const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1190,7 +1190,7 @@ describe('v1.DocumentServiceClient', () => {
 
     it('invokes setAcl with error', async () => {
       const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1218,7 +1218,7 @@ describe('v1.DocumentServiceClient', () => {
 
     it('invokes setAcl with closed client', async () => {
       const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1231,7 +1231,7 @@ describe('v1.DocumentServiceClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.setAcl(request), expectedError);
@@ -1241,7 +1241,7 @@ describe('v1.DocumentServiceClient', () => {
   describe('searchDocuments', () => {
     it('invokes searchDocuments without error', async () => {
       const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1280,7 +1280,7 @@ describe('v1.DocumentServiceClient', () => {
 
     it('invokes searchDocuments without error using callback', async () => {
       const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1337,7 +1337,7 @@ describe('v1.DocumentServiceClient', () => {
 
     it('invokes searchDocuments with error', async () => {
       const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1368,7 +1368,7 @@ describe('v1.DocumentServiceClient', () => {
 
     it('invokes searchDocumentsStream without error', async () => {
       const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1423,15 +1423,15 @@ describe('v1.DocumentServiceClient', () => {
       assert(
         (client.descriptors.page.searchDocuments.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes searchDocumentsStream with error', async () => {
       const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1475,15 +1475,15 @@ describe('v1.DocumentServiceClient', () => {
       assert(
         (client.descriptors.page.searchDocuments.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with searchDocuments without error', async () => {
       const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1525,15 +1525,15 @@ describe('v1.DocumentServiceClient', () => {
       assert(
         (client.descriptors.page.searchDocuments.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with searchDocuments with error', async () => {
       const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1566,9 +1566,9 @@ describe('v1.DocumentServiceClient', () => {
       assert(
         (client.descriptors.page.searchDocuments.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1583,7 +1583,7 @@ describe('v1.DocumentServiceClient', () => {
         document_link: 'documentLinkValue',
       };
       const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1658,7 +1658,7 @@ describe('v1.DocumentServiceClient', () => {
         document_schema: 'documentSchemaValue',
       };
       const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1723,7 +1723,7 @@ describe('v1.DocumentServiceClient', () => {
         document: 'documentValue',
       };
       const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1802,7 +1802,7 @@ describe('v1.DocumentServiceClient', () => {
         reference_id: 'referenceIdValue',
       };
       const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1885,7 +1885,7 @@ describe('v1.DocumentServiceClient', () => {
         rule_set: 'ruleSetValue',
       };
       const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1949,7 +1949,7 @@ describe('v1.DocumentServiceClient', () => {
         context: 'contextValue',
       };
       const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

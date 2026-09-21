@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as versionsModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -50,7 +50,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -154,9 +154,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -274,7 +274,7 @@ describe('v3beta1.VersionsClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new versionsModule.v3beta1.VersionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.versionsStub, undefined);
@@ -282,12 +282,12 @@ describe('v3beta1.VersionsClient', () => {
       assert(client.versionsStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new versionsModule.v3beta1.VersionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.versionsStub);
@@ -296,14 +296,14 @@ describe('v3beta1.VersionsClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new versionsModule.v3beta1.VersionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.versionsStub, undefined);
@@ -312,7 +312,7 @@ describe('v3beta1.VersionsClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -320,7 +320,7 @@ describe('v3beta1.VersionsClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new versionsModule.v3beta1.VersionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -332,7 +332,7 @@ describe('v3beta1.VersionsClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new versionsModule.v3beta1.VersionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -355,7 +355,7 @@ describe('v3beta1.VersionsClient', () => {
   describe('getVersion', () => {
     it('invokes getVersion without error', async () => {
       const client = new versionsModule.v3beta1.VersionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -386,7 +386,7 @@ describe('v3beta1.VersionsClient', () => {
 
     it('invokes getVersion without error using callback', async () => {
       const client = new versionsModule.v3beta1.VersionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -433,7 +433,7 @@ describe('v3beta1.VersionsClient', () => {
 
     it('invokes getVersion with error', async () => {
       const client = new versionsModule.v3beta1.VersionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -464,7 +464,7 @@ describe('v3beta1.VersionsClient', () => {
 
     it('invokes getVersion with closed client', async () => {
       const client = new versionsModule.v3beta1.VersionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -477,7 +477,7 @@ describe('v3beta1.VersionsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getVersion(request), expectedError);
@@ -487,7 +487,7 @@ describe('v3beta1.VersionsClient', () => {
   describe('updateVersion', () => {
     it('invokes updateVersion without error', async () => {
       const client = new versionsModule.v3beta1.VersionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -519,7 +519,7 @@ describe('v3beta1.VersionsClient', () => {
 
     it('invokes updateVersion without error using callback', async () => {
       const client = new versionsModule.v3beta1.VersionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -567,7 +567,7 @@ describe('v3beta1.VersionsClient', () => {
 
     it('invokes updateVersion with error', async () => {
       const client = new versionsModule.v3beta1.VersionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -599,7 +599,7 @@ describe('v3beta1.VersionsClient', () => {
 
     it('invokes updateVersion with closed client', async () => {
       const client = new versionsModule.v3beta1.VersionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -613,7 +613,7 @@ describe('v3beta1.VersionsClient', () => {
       );
       request.version.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateVersion(request), expectedError);
@@ -623,7 +623,7 @@ describe('v3beta1.VersionsClient', () => {
   describe('deleteVersion', () => {
     it('invokes deleteVersion without error', async () => {
       const client = new versionsModule.v3beta1.VersionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -654,7 +654,7 @@ describe('v3beta1.VersionsClient', () => {
 
     it('invokes deleteVersion without error using callback', async () => {
       const client = new versionsModule.v3beta1.VersionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -701,7 +701,7 @@ describe('v3beta1.VersionsClient', () => {
 
     it('invokes deleteVersion with error', async () => {
       const client = new versionsModule.v3beta1.VersionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -732,7 +732,7 @@ describe('v3beta1.VersionsClient', () => {
 
     it('invokes deleteVersion with closed client', async () => {
       const client = new versionsModule.v3beta1.VersionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -745,7 +745,7 @@ describe('v3beta1.VersionsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteVersion(request), expectedError);
@@ -755,7 +755,7 @@ describe('v3beta1.VersionsClient', () => {
   describe('compareVersions', () => {
     it('invokes compareVersions without error', async () => {
       const client = new versionsModule.v3beta1.VersionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -786,7 +786,7 @@ describe('v3beta1.VersionsClient', () => {
 
     it('invokes compareVersions without error using callback', async () => {
       const client = new versionsModule.v3beta1.VersionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -833,7 +833,7 @@ describe('v3beta1.VersionsClient', () => {
 
     it('invokes compareVersions with error', async () => {
       const client = new versionsModule.v3beta1.VersionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -864,7 +864,7 @@ describe('v3beta1.VersionsClient', () => {
 
     it('invokes compareVersions with closed client', async () => {
       const client = new versionsModule.v3beta1.VersionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -877,7 +877,7 @@ describe('v3beta1.VersionsClient', () => {
       );
       request.baseVersion = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.compareVersions(request), expectedError);
@@ -887,7 +887,7 @@ describe('v3beta1.VersionsClient', () => {
   describe('createVersion', () => {
     it('invokes createVersion without error', async () => {
       const client = new versionsModule.v3beta1.VersionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -920,7 +920,7 @@ describe('v3beta1.VersionsClient', () => {
 
     it('invokes createVersion without error using callback', async () => {
       const client = new versionsModule.v3beta1.VersionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -974,7 +974,7 @@ describe('v3beta1.VersionsClient', () => {
 
     it('invokes createVersion with call error', async () => {
       const client = new versionsModule.v3beta1.VersionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1005,7 +1005,7 @@ describe('v3beta1.VersionsClient', () => {
 
     it('invokes createVersion with LRO error', async () => {
       const client = new versionsModule.v3beta1.VersionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1038,7 +1038,7 @@ describe('v3beta1.VersionsClient', () => {
 
     it('invokes checkCreateVersionProgress without error', async () => {
       const client = new versionsModule.v3beta1.VersionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1046,8 +1046,8 @@ describe('v3beta1.VersionsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateVersionProgress(
@@ -1060,7 +1060,7 @@ describe('v3beta1.VersionsClient', () => {
 
     it('invokes checkCreateVersionProgress with error', async () => {
       const client = new versionsModule.v3beta1.VersionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1081,7 +1081,7 @@ describe('v3beta1.VersionsClient', () => {
   describe('loadVersion', () => {
     it('invokes loadVersion without error', async () => {
       const client = new versionsModule.v3beta1.VersionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1113,7 +1113,7 @@ describe('v3beta1.VersionsClient', () => {
 
     it('invokes loadVersion without error using callback', async () => {
       const client = new versionsModule.v3beta1.VersionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1167,7 +1167,7 @@ describe('v3beta1.VersionsClient', () => {
 
     it('invokes loadVersion with call error', async () => {
       const client = new versionsModule.v3beta1.VersionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1198,7 +1198,7 @@ describe('v3beta1.VersionsClient', () => {
 
     it('invokes loadVersion with LRO error', async () => {
       const client = new versionsModule.v3beta1.VersionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1231,7 +1231,7 @@ describe('v3beta1.VersionsClient', () => {
 
     it('invokes checkLoadVersionProgress without error', async () => {
       const client = new versionsModule.v3beta1.VersionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1239,8 +1239,8 @@ describe('v3beta1.VersionsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkLoadVersionProgress(
@@ -1253,7 +1253,7 @@ describe('v3beta1.VersionsClient', () => {
 
     it('invokes checkLoadVersionProgress with error', async () => {
       const client = new versionsModule.v3beta1.VersionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1271,7 +1271,7 @@ describe('v3beta1.VersionsClient', () => {
   describe('listVersions', () => {
     it('invokes listVersions without error', async () => {
       const client = new versionsModule.v3beta1.VersionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1310,7 +1310,7 @@ describe('v3beta1.VersionsClient', () => {
 
     it('invokes listVersions without error using callback', async () => {
       const client = new versionsModule.v3beta1.VersionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1342,8 +1342,7 @@ describe('v3beta1.VersionsClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.dialogflow.cx.v3beta1.IVersion[]
-              | null,
+              protos.google.cloud.dialogflow.cx.v3beta1.IVersion[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -1367,7 +1366,7 @@ describe('v3beta1.VersionsClient', () => {
 
     it('invokes listVersions with error', async () => {
       const client = new versionsModule.v3beta1.VersionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1398,7 +1397,7 @@ describe('v3beta1.VersionsClient', () => {
 
     it('invokes listVersionsStream without error', async () => {
       const client = new versionsModule.v3beta1.VersionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1451,15 +1450,15 @@ describe('v3beta1.VersionsClient', () => {
       assert(
         (client.descriptors.page.listVersions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listVersionsStream with error', async () => {
       const client = new versionsModule.v3beta1.VersionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1503,15 +1502,15 @@ describe('v3beta1.VersionsClient', () => {
       assert(
         (client.descriptors.page.listVersions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listVersions without error', async () => {
       const client = new versionsModule.v3beta1.VersionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1553,15 +1552,15 @@ describe('v3beta1.VersionsClient', () => {
       assert(
         (client.descriptors.page.listVersions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listVersions with error', async () => {
       const client = new versionsModule.v3beta1.VersionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1594,16 +1593,16 @@ describe('v3beta1.VersionsClient', () => {
       assert(
         (client.descriptors.page.listVersions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new versionsModule.v3beta1.VersionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1633,7 +1632,7 @@ describe('v3beta1.VersionsClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new versionsModule.v3beta1.VersionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1677,7 +1676,7 @@ describe('v3beta1.VersionsClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new versionsModule.v3beta1.VersionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1712,7 +1711,7 @@ describe('v3beta1.VersionsClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new versionsModule.v3beta1.VersionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1760,7 +1759,7 @@ describe('v3beta1.VersionsClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new versionsModule.v3beta1.VersionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1801,7 +1800,7 @@ describe('v3beta1.VersionsClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new versionsModule.v3beta1.VersionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1822,7 +1821,7 @@ describe('v3beta1.VersionsClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new versionsModule.v3beta1.VersionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1850,7 +1849,7 @@ describe('v3beta1.VersionsClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1860,7 +1859,7 @@ describe('v3beta1.VersionsClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new versionsModule.v3beta1.VersionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1884,7 +1883,7 @@ describe('v3beta1.VersionsClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new versionsModule.v3beta1.VersionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1906,7 +1905,7 @@ describe('v3beta1.VersionsClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new versionsModule.v3beta1.VersionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1934,7 +1933,7 @@ describe('v3beta1.VersionsClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1944,7 +1943,7 @@ describe('v3beta1.VersionsClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new versionsModule.v3beta1.VersionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1968,7 +1967,7 @@ describe('v3beta1.VersionsClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new versionsModule.v3beta1.VersionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1990,7 +1989,7 @@ describe('v3beta1.VersionsClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new versionsModule.v3beta1.VersionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2018,7 +2017,7 @@ describe('v3beta1.VersionsClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2028,7 +2027,7 @@ describe('v3beta1.VersionsClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new versionsModule.v3beta1.VersionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2052,7 +2051,7 @@ describe('v3beta1.VersionsClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new versionsModule.v3beta1.VersionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2087,7 +2086,7 @@ describe('v3beta1.VersionsClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new versionsModule.v3beta1.VersionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2123,7 +2122,7 @@ describe('v3beta1.VersionsClient', () => {
         agent: 'agentValue',
       };
       const client = new versionsModule.v3beta1.VersionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2187,7 +2186,7 @@ describe('v3beta1.VersionsClient', () => {
         agent: 'agentValue',
       };
       const client = new versionsModule.v3beta1.VersionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2266,7 +2265,7 @@ describe('v3beta1.VersionsClient', () => {
         agent: 'agentValue',
       };
       const client = new versionsModule.v3beta1.VersionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2345,7 +2344,7 @@ describe('v3beta1.VersionsClient', () => {
         changelog: 'changelogValue',
       };
       const client = new versionsModule.v3beta1.VersionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2422,7 +2421,7 @@ describe('v3beta1.VersionsClient', () => {
         continuous_test_result: 'continuousTestResultValue',
       };
       const client = new versionsModule.v3beta1.VersionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2533,7 +2532,7 @@ describe('v3beta1.VersionsClient', () => {
         conversation: 'conversationValue',
       };
       const client = new versionsModule.v3beta1.VersionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2610,7 +2609,7 @@ describe('v3beta1.VersionsClient', () => {
         deployment: 'deploymentValue',
       };
       const client = new versionsModule.v3beta1.VersionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2697,7 +2696,7 @@ describe('v3beta1.VersionsClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new versionsModule.v3beta1.VersionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2773,7 +2772,7 @@ describe('v3beta1.VersionsClient', () => {
         environment: 'environmentValue',
       };
       const client = new versionsModule.v3beta1.VersionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2850,7 +2849,7 @@ describe('v3beta1.VersionsClient', () => {
         example: 'exampleValue',
       };
       const client = new versionsModule.v3beta1.VersionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2938,7 +2937,7 @@ describe('v3beta1.VersionsClient', () => {
         experiment: 'experimentValue',
       };
       const client = new versionsModule.v3beta1.VersionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3025,7 +3024,7 @@ describe('v3beta1.VersionsClient', () => {
         flow: 'flowValue',
       };
       const client = new versionsModule.v3beta1.VersionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3101,7 +3100,7 @@ describe('v3beta1.VersionsClient', () => {
         flow: 'flowValue',
       };
       const client = new versionsModule.v3beta1.VersionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3194,7 +3193,7 @@ describe('v3beta1.VersionsClient', () => {
         generator: 'generatorValue',
       };
       const client = new versionsModule.v3beta1.VersionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3270,7 +3269,7 @@ describe('v3beta1.VersionsClient', () => {
         intent: 'intentValue',
       };
       const client = new versionsModule.v3beta1.VersionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3344,7 +3343,7 @@ describe('v3beta1.VersionsClient', () => {
         location: 'locationValue',
       };
       const client = new versionsModule.v3beta1.VersionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3396,7 +3395,7 @@ describe('v3beta1.VersionsClient', () => {
         page: 'pageValue',
       };
       const client = new versionsModule.v3beta1.VersionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3483,7 +3482,7 @@ describe('v3beta1.VersionsClient', () => {
         playbook: 'playbookValue',
       };
       const client = new versionsModule.v3beta1.VersionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3560,7 +3559,7 @@ describe('v3beta1.VersionsClient', () => {
         version: 'versionValue',
       };
       const client = new versionsModule.v3beta1.VersionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3644,7 +3643,7 @@ describe('v3beta1.VersionsClient', () => {
         project: 'projectValue',
       };
       const client = new versionsModule.v3beta1.VersionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3688,7 +3687,7 @@ describe('v3beta1.VersionsClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new versionsModule.v3beta1.VersionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3833,7 +3832,7 @@ describe('v3beta1.VersionsClient', () => {
         transition_route_group: 'transitionRouteGroupValue',
       };
       const client = new versionsModule.v3beta1.VersionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3958,7 +3957,7 @@ describe('v3beta1.VersionsClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new versionsModule.v3beta1.VersionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4083,7 +4082,7 @@ describe('v3beta1.VersionsClient', () => {
         transition_route_group: 'transitionRouteGroupValue',
       };
       const client = new versionsModule.v3beta1.VersionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4188,7 +4187,7 @@ describe('v3beta1.VersionsClient', () => {
         security_settings: 'securitySettingsValue',
       };
       const client = new versionsModule.v3beta1.VersionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4257,7 +4256,7 @@ describe('v3beta1.VersionsClient', () => {
         test_case: 'testCaseValue',
       };
       const client = new versionsModule.v3beta1.VersionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4334,7 +4333,7 @@ describe('v3beta1.VersionsClient', () => {
         result: 'resultValue',
       };
       const client = new versionsModule.v3beta1.VersionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4421,7 +4420,7 @@ describe('v3beta1.VersionsClient', () => {
         tool: 'toolValue',
       };
       const client = new versionsModule.v3beta1.VersionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4498,7 +4497,7 @@ describe('v3beta1.VersionsClient', () => {
         version: 'versionValue',
       };
       const client = new versionsModule.v3beta1.VersionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4586,7 +4585,7 @@ describe('v3beta1.VersionsClient', () => {
         version: 'versionValue',
       };
       const client = new versionsModule.v3beta1.VersionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4673,7 +4672,7 @@ describe('v3beta1.VersionsClient', () => {
         webhook: 'webhookValue',
       };
       const client = new versionsModule.v3beta1.VersionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

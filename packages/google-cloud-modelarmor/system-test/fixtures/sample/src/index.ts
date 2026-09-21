@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import { ModelArmorClient } from '@google-cloud/modelarmor';
+import {ModelArmorClient} from '@google-cloud/modelarmor';
 
 // check that the client class type name can be used
 function doStuffWithModelArmorClient(client: ModelArmorClient) {

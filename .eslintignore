@@ -1,7 +1,16 @@
 **/node_modules
+**/build
+**/system-test
+**/test/fixtures
+**/samples/generated
+**/.coverage
 **/coverage
+**/baselines
+**/baselines-esm
+**/.test-out*
 test/fixtures
 build/
 docs/
 protos/
 packages/
+**/types.d.ts

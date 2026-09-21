@@ -19,8 +19,8 @@
 import * as v1 from './v1/index.js';
 const VideoIntelligenceServiceClient = v1.VideoIntelligenceServiceClient;
 type VideoIntelligenceServiceClient = v1.VideoIntelligenceServiceClient;
-export { v1, VideoIntelligenceServiceClient };
-export default { v1, VideoIntelligenceServiceClient };
+export {v1, VideoIntelligenceServiceClient};
+export default {v1, VideoIntelligenceServiceClient};
 // @ts-ignore
 import * as protos from '../../protos/protos.js';
-export { protos };
+export {protos};

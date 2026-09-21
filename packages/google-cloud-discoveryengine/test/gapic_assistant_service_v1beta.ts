@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as assistantserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, LocationProtos } from 'google-gax';
+import {protobuf, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -138,9 +138,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -265,7 +265,7 @@ describe('v1beta.AssistantServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new assistantserviceModule.v1beta.AssistantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.assistantServiceStub, undefined);
@@ -273,12 +273,12 @@ describe('v1beta.AssistantServiceClient', () => {
       assert(client.assistantServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new assistantserviceModule.v1beta.AssistantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.assistantServiceStub);
@@ -287,14 +287,14 @@ describe('v1beta.AssistantServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new assistantserviceModule.v1beta.AssistantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.assistantServiceStub, undefined);
@@ -303,7 +303,7 @@ describe('v1beta.AssistantServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -311,7 +311,7 @@ describe('v1beta.AssistantServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new assistantserviceModule.v1beta.AssistantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -323,7 +323,7 @@ describe('v1beta.AssistantServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new assistantserviceModule.v1beta.AssistantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -346,7 +346,7 @@ describe('v1beta.AssistantServiceClient', () => {
   describe('createAssistant', () => {
     it('invokes createAssistant without error', async () => {
       const client = new assistantserviceModule.v1beta.AssistantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -377,7 +377,7 @@ describe('v1beta.AssistantServiceClient', () => {
 
     it('invokes createAssistant without error using callback', async () => {
       const client = new assistantserviceModule.v1beta.AssistantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -424,7 +424,7 @@ describe('v1beta.AssistantServiceClient', () => {
 
     it('invokes createAssistant with error', async () => {
       const client = new assistantserviceModule.v1beta.AssistantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -455,7 +455,7 @@ describe('v1beta.AssistantServiceClient', () => {
 
     it('invokes createAssistant with closed client', async () => {
       const client = new assistantserviceModule.v1beta.AssistantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -468,7 +468,7 @@ describe('v1beta.AssistantServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createAssistant(request), expectedError);
@@ -478,7 +478,7 @@ describe('v1beta.AssistantServiceClient', () => {
   describe('deleteAssistant', () => {
     it('invokes deleteAssistant without error', async () => {
       const client = new assistantserviceModule.v1beta.AssistantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -509,7 +509,7 @@ describe('v1beta.AssistantServiceClient', () => {
 
     it('invokes deleteAssistant without error using callback', async () => {
       const client = new assistantserviceModule.v1beta.AssistantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -556,7 +556,7 @@ describe('v1beta.AssistantServiceClient', () => {
 
     it('invokes deleteAssistant with error', async () => {
       const client = new assistantserviceModule.v1beta.AssistantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -587,7 +587,7 @@ describe('v1beta.AssistantServiceClient', () => {
 
     it('invokes deleteAssistant with closed client', async () => {
       const client = new assistantserviceModule.v1beta.AssistantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -600,7 +600,7 @@ describe('v1beta.AssistantServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteAssistant(request), expectedError);
@@ -610,7 +610,7 @@ describe('v1beta.AssistantServiceClient', () => {
   describe('updateAssistant', () => {
     it('invokes updateAssistant without error', async () => {
       const client = new assistantserviceModule.v1beta.AssistantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -642,7 +642,7 @@ describe('v1beta.AssistantServiceClient', () => {
 
     it('invokes updateAssistant without error using callback', async () => {
       const client = new assistantserviceModule.v1beta.AssistantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -690,7 +690,7 @@ describe('v1beta.AssistantServiceClient', () => {
 
     it('invokes updateAssistant with error', async () => {
       const client = new assistantserviceModule.v1beta.AssistantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -722,7 +722,7 @@ describe('v1beta.AssistantServiceClient', () => {
 
     it('invokes updateAssistant with closed client', async () => {
       const client = new assistantserviceModule.v1beta.AssistantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -736,7 +736,7 @@ describe('v1beta.AssistantServiceClient', () => {
       );
       request.assistant.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateAssistant(request), expectedError);
@@ -746,7 +746,7 @@ describe('v1beta.AssistantServiceClient', () => {
   describe('getAssistant', () => {
     it('invokes getAssistant without error', async () => {
       const client = new assistantserviceModule.v1beta.AssistantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -777,7 +777,7 @@ describe('v1beta.AssistantServiceClient', () => {
 
     it('invokes getAssistant without error using callback', async () => {
       const client = new assistantserviceModule.v1beta.AssistantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -824,7 +824,7 @@ describe('v1beta.AssistantServiceClient', () => {
 
     it('invokes getAssistant with error', async () => {
       const client = new assistantserviceModule.v1beta.AssistantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -855,7 +855,7 @@ describe('v1beta.AssistantServiceClient', () => {
 
     it('invokes getAssistant with closed client', async () => {
       const client = new assistantserviceModule.v1beta.AssistantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -868,7 +868,7 @@ describe('v1beta.AssistantServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getAssistant(request), expectedError);
@@ -878,7 +878,7 @@ describe('v1beta.AssistantServiceClient', () => {
   describe('streamAssist', () => {
     it('invokes streamAssist without error', async () => {
       const client = new assistantserviceModule.v1beta.AssistantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -924,7 +924,7 @@ describe('v1beta.AssistantServiceClient', () => {
 
     it('invokes streamAssist without error and gaxServerStreamingRetries enabled', async () => {
       const client = new assistantserviceModule.v1beta.AssistantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
         gaxServerStreamingRetries: true,
       });
@@ -971,7 +971,7 @@ describe('v1beta.AssistantServiceClient', () => {
 
     it('invokes streamAssist with error', async () => {
       const client = new assistantserviceModule.v1beta.AssistantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1016,7 +1016,7 @@ describe('v1beta.AssistantServiceClient', () => {
 
     it('invokes streamAssist with closed client', async () => {
       const client = new assistantserviceModule.v1beta.AssistantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1029,11 +1029,11 @@ describe('v1beta.AssistantServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       const stream = client.streamAssist(request, {
-        retryRequestOptions: { noResponseRetries: 0 },
+        retryRequestOptions: {noResponseRetries: 0},
       });
       const promise = new Promise((resolve, reject) => {
         stream.on(
@@ -1061,7 +1061,7 @@ describe('v1beta.AssistantServiceClient', () => {
   describe('listAssistants', () => {
     it('invokes listAssistants without error', async () => {
       const client = new assistantserviceModule.v1beta.AssistantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1100,7 +1100,7 @@ describe('v1beta.AssistantServiceClient', () => {
 
     it('invokes listAssistants without error using callback', async () => {
       const client = new assistantserviceModule.v1beta.AssistantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1132,8 +1132,7 @@ describe('v1beta.AssistantServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.discoveryengine.v1beta.IAssistant[]
-              | null,
+              protos.google.cloud.discoveryengine.v1beta.IAssistant[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -1157,7 +1156,7 @@ describe('v1beta.AssistantServiceClient', () => {
 
     it('invokes listAssistants with error', async () => {
       const client = new assistantserviceModule.v1beta.AssistantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1188,7 +1187,7 @@ describe('v1beta.AssistantServiceClient', () => {
 
     it('invokes listAssistantsStream without error', async () => {
       const client = new assistantserviceModule.v1beta.AssistantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1241,15 +1240,15 @@ describe('v1beta.AssistantServiceClient', () => {
       assert(
         (client.descriptors.page.listAssistants.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listAssistantsStream with error', async () => {
       const client = new assistantserviceModule.v1beta.AssistantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1291,15 +1290,15 @@ describe('v1beta.AssistantServiceClient', () => {
       assert(
         (client.descriptors.page.listAssistants.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listAssistants without error', async () => {
       const client = new assistantserviceModule.v1beta.AssistantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1341,15 +1340,15 @@ describe('v1beta.AssistantServiceClient', () => {
       assert(
         (client.descriptors.page.listAssistants.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listAssistants with error', async () => {
       const client = new assistantserviceModule.v1beta.AssistantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1382,16 +1381,16 @@ describe('v1beta.AssistantServiceClient', () => {
       assert(
         (client.descriptors.page.listAssistants.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new assistantserviceModule.v1beta.AssistantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1421,7 +1420,7 @@ describe('v1beta.AssistantServiceClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new assistantserviceModule.v1beta.AssistantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1465,7 +1464,7 @@ describe('v1beta.AssistantServiceClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new assistantserviceModule.v1beta.AssistantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1500,7 +1499,7 @@ describe('v1beta.AssistantServiceClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new assistantserviceModule.v1beta.AssistantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1548,7 +1547,7 @@ describe('v1beta.AssistantServiceClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new assistantserviceModule.v1beta.AssistantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1595,7 +1594,7 @@ describe('v1beta.AssistantServiceClient', () => {
         location: 'locationValue',
       };
       const client = new assistantserviceModule.v1beta.AssistantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1648,7 +1647,7 @@ describe('v1beta.AssistantServiceClient', () => {
         assist_answer: 'assistAnswerValue',
       };
       const client = new assistantserviceModule.v1beta.AssistantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1747,7 +1746,7 @@ describe('v1beta.AssistantServiceClient', () => {
         assistant: 'assistantValue',
       };
       const client = new assistantserviceModule.v1beta.AssistantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1834,7 +1833,7 @@ describe('v1beta.AssistantServiceClient', () => {
         engine: 'engineValue',
       };
       const client = new assistantserviceModule.v1beta.AssistantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1909,7 +1908,7 @@ describe('v1beta.AssistantServiceClient', () => {
         evaluation: 'evaluationValue',
       };
       const client = new assistantserviceModule.v1beta.AssistantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1973,7 +1972,7 @@ describe('v1beta.AssistantServiceClient', () => {
         grounding_config: 'groundingConfigValue',
       };
       const client = new assistantserviceModule.v1beta.AssistantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2038,7 +2037,7 @@ describe('v1beta.AssistantServiceClient', () => {
         identity_mapping_store: 'identityMappingStoreValue',
       };
       const client = new assistantserviceModule.v1beta.AssistantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2119,7 +2118,7 @@ describe('v1beta.AssistantServiceClient', () => {
         license_config: 'licenseConfigValue',
       };
       const client = new assistantserviceModule.v1beta.AssistantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2181,7 +2180,7 @@ describe('v1beta.AssistantServiceClient', () => {
         project: 'projectValue',
       };
       const client = new assistantserviceModule.v1beta.AssistantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2220,7 +2219,7 @@ describe('v1beta.AssistantServiceClient', () => {
         location: 'locationValue',
       };
       const client = new assistantserviceModule.v1beta.AssistantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2284,7 +2283,7 @@ describe('v1beta.AssistantServiceClient', () => {
         cmek_config: 'cmekConfigValue',
       };
       const client = new assistantserviceModule.v1beta.AssistantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2364,7 +2363,7 @@ describe('v1beta.AssistantServiceClient', () => {
         data_store: 'dataStoreValue',
       };
       const client = new assistantserviceModule.v1beta.AssistantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2468,7 +2467,7 @@ describe('v1beta.AssistantServiceClient', () => {
         document: 'documentValue',
       };
       const client = new assistantserviceModule.v1beta.AssistantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2615,7 +2614,7 @@ describe('v1beta.AssistantServiceClient', () => {
         chunk: 'chunkValue',
       };
       const client = new assistantserviceModule.v1beta.AssistantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2778,7 +2777,7 @@ describe('v1beta.AssistantServiceClient', () => {
         control: 'controlValue',
       };
       const client = new assistantserviceModule.v1beta.AssistantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2904,7 +2903,7 @@ describe('v1beta.AssistantServiceClient', () => {
         conversation: 'conversationValue',
       };
       const client = new assistantserviceModule.v1beta.AssistantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3031,7 +3030,7 @@ describe('v1beta.AssistantServiceClient', () => {
         custom_tuning_model: 'customTuningModelValue',
       };
       const client = new assistantserviceModule.v1beta.AssistantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3157,7 +3156,7 @@ describe('v1beta.AssistantServiceClient', () => {
         data_store: 'dataStoreValue',
       };
       const client = new assistantserviceModule.v1beta.AssistantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3266,7 +3265,7 @@ describe('v1beta.AssistantServiceClient', () => {
         schema: 'schemaValue',
       };
       const client = new assistantserviceModule.v1beta.AssistantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3392,7 +3391,7 @@ describe('v1beta.AssistantServiceClient', () => {
         serving_config: 'servingConfigValue',
       };
       const client = new assistantserviceModule.v1beta.AssistantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3520,7 +3519,7 @@ describe('v1beta.AssistantServiceClient', () => {
         answer: 'answerValue',
       };
       const client = new assistantserviceModule.v1beta.AssistantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3665,7 +3664,7 @@ describe('v1beta.AssistantServiceClient', () => {
         session: 'sessionValue',
       };
       const client = new assistantserviceModule.v1beta.AssistantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3790,7 +3789,7 @@ describe('v1beta.AssistantServiceClient', () => {
         data_store: 'dataStoreValue',
       };
       const client = new assistantserviceModule.v1beta.AssistantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3899,7 +3898,7 @@ describe('v1beta.AssistantServiceClient', () => {
         sitemap: 'sitemapValue',
       };
       const client = new assistantserviceModule.v1beta.AssistantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4026,7 +4025,7 @@ describe('v1beta.AssistantServiceClient', () => {
         target_site: 'targetSiteValue',
       };
       const client = new assistantserviceModule.v1beta.AssistantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4154,7 +4153,7 @@ describe('v1beta.AssistantServiceClient', () => {
         session: 'sessionValue',
       };
       const client = new assistantserviceModule.v1beta.AssistantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4298,7 +4297,7 @@ describe('v1beta.AssistantServiceClient', () => {
         control: 'controlValue',
       };
       const client = new assistantserviceModule.v1beta.AssistantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4424,7 +4423,7 @@ describe('v1beta.AssistantServiceClient', () => {
         conversation: 'conversationValue',
       };
       const client = new assistantserviceModule.v1beta.AssistantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4550,7 +4549,7 @@ describe('v1beta.AssistantServiceClient', () => {
         serving_config: 'servingConfigValue',
       };
       const client = new assistantserviceModule.v1beta.AssistantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4677,7 +4676,7 @@ describe('v1beta.AssistantServiceClient', () => {
         answer: 'answerValue',
       };
       const client = new assistantserviceModule.v1beta.AssistantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4820,7 +4819,7 @@ describe('v1beta.AssistantServiceClient', () => {
         session: 'sessionValue',
       };
       const client = new assistantserviceModule.v1beta.AssistantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4943,7 +4942,7 @@ describe('v1beta.AssistantServiceClient', () => {
         data_store: 'dataStoreValue',
       };
       const client = new assistantserviceModule.v1beta.AssistantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5024,7 +5023,7 @@ describe('v1beta.AssistantServiceClient', () => {
         document: 'documentValue',
       };
       const client = new assistantserviceModule.v1beta.AssistantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5151,7 +5150,7 @@ describe('v1beta.AssistantServiceClient', () => {
         chunk: 'chunkValue',
       };
       const client = new assistantserviceModule.v1beta.AssistantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5293,7 +5292,7 @@ describe('v1beta.AssistantServiceClient', () => {
         control: 'controlValue',
       };
       const client = new assistantserviceModule.v1beta.AssistantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5388,7 +5387,7 @@ describe('v1beta.AssistantServiceClient', () => {
         conversation: 'conversationValue',
       };
       const client = new assistantserviceModule.v1beta.AssistantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5495,7 +5494,7 @@ describe('v1beta.AssistantServiceClient', () => {
         custom_tuning_model: 'customTuningModelValue',
       };
       const client = new assistantserviceModule.v1beta.AssistantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5601,7 +5600,7 @@ describe('v1beta.AssistantServiceClient', () => {
         data_store: 'dataStoreValue',
       };
       const client = new assistantserviceModule.v1beta.AssistantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5690,7 +5689,7 @@ describe('v1beta.AssistantServiceClient', () => {
         schema: 'schemaValue',
       };
       const client = new assistantserviceModule.v1beta.AssistantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5783,7 +5782,7 @@ describe('v1beta.AssistantServiceClient', () => {
         serving_config: 'servingConfigValue',
       };
       const client = new assistantserviceModule.v1beta.AssistantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5890,7 +5889,7 @@ describe('v1beta.AssistantServiceClient', () => {
         answer: 'answerValue',
       };
       const client = new assistantserviceModule.v1beta.AssistantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6014,7 +6013,7 @@ describe('v1beta.AssistantServiceClient', () => {
         session: 'sessionValue',
       };
       const client = new assistantserviceModule.v1beta.AssistantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6111,7 +6110,7 @@ describe('v1beta.AssistantServiceClient', () => {
         data_store: 'dataStoreValue',
       };
       const client = new assistantserviceModule.v1beta.AssistantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6200,7 +6199,7 @@ describe('v1beta.AssistantServiceClient', () => {
         sitemap: 'sitemapValue',
       };
       const client = new assistantserviceModule.v1beta.AssistantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6308,7 +6307,7 @@ describe('v1beta.AssistantServiceClient', () => {
         target_site: 'targetSiteValue',
       };
       const client = new assistantserviceModule.v1beta.AssistantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6415,7 +6414,7 @@ describe('v1beta.AssistantServiceClient', () => {
         sample_query: 'sampleQueryValue',
       };
       const client = new assistantserviceModule.v1beta.AssistantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6490,7 +6489,7 @@ describe('v1beta.AssistantServiceClient', () => {
         sample_query_set: 'sampleQuerySetValue',
       };
       const client = new assistantserviceModule.v1beta.AssistantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6555,7 +6554,7 @@ describe('v1beta.AssistantServiceClient', () => {
         user_store: 'userStoreValue',
       };
       const client = new assistantserviceModule.v1beta.AssistantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

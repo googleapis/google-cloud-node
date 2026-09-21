@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.1.0](https://github.com/googleapis/google-cloud-node/compare/run-v4.0.0...run-v4.1.0) (2026-09-08)
+
+
+### Features
+
+* Upgrade librarian gapic-generator-typescript to v5.2.0 ([c249594](https://github.com/googleapis/google-cloud-node/commit/c249594c6ef41e4b36f1ef8869341a4c98c092b0))
+
 ## [4.0.0](https://github.com/googleapis/google-cloud-node/compare/run-v3.3.0...run-v4.0.0) (2026-08-04)
 
 

@@ -872,6 +872,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "platformType": {
+                          "type": "PlatformType",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -899,6 +906,13 @@
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
                             }
+                          }
+                        },
+                        "PlatformType": {
+                          "values": {
+                            "PLATFORM_TYPE_UNSPECIFIED": 0,
+                            "VIRTUALIZED_CVM": 1,
+                            "BARE_METAL_VTPM": 2
                           }
                         }
                       }

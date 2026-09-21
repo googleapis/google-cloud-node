@@ -15,21 +15,33 @@
 import {Client} from './lib/client.js';
 import {ClientConfig, PoolConfig} from './lib/config.js';
 import {DatabaseError} from './lib/errors.js';
+import {BuiltinOids, TypeOverrides, types} from './lib/pg/types.js';
 import {escapeIdentifier, escapeLiteral} from './lib/pg/utilities.js';
 import {Pool} from './lib/pool.js';
 import {Query} from './lib/query.js';
-import {FieldDef, QueryConfig, QueryResult} from './lib/types.js';
+import {
+  FieldDef,
+  ITypeOverrides,
+  QueryConfig,
+  QueryResult,
+  TypeParser,
+} from './lib/types.js';
 
 export {
+  BuiltinOids,
   Client,
   ClientConfig,
   DatabaseError,
   FieldDef,
+  ITypeOverrides,
   Pool,
   PoolConfig,
   Query,
   QueryConfig,
   QueryResult,
+  TypeOverrides,
+  TypeParser,
   escapeIdentifier,
   escapeLiteral,
+  types,
 };

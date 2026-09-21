@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import { CloudLocationFinderClient } from '@google-cloud/locationfinder';
+import {CloudLocationFinderClient} from '@google-cloud/locationfinder';
 
 // check that the client class type name can be used
 function doStuffWithCloudLocationFinderClient(

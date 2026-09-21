@@ -16,5 +16,5 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export { BigQueryReadClient } from './big_query_read_client';
-export { BigQueryWriteClient } from './big_query_write_client';
+export {BigQueryReadClient} from './big_query_read_client';
+export {BigQueryWriteClient} from './big_query_write_client';

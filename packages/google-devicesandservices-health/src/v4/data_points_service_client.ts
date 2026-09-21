@@ -28,10 +28,10 @@ import type {
   PaginationCallback,
   GaxCall,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -54,7 +54,7 @@ export class DataPointsServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('health');
@@ -67,10 +67,10 @@ export class DataPointsServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
-  pathTemplates: { [name: string]: gax.PathTemplate };
+  innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
-  dataPointsServiceStub?: Promise<{ [name: string]: Function }>;
+  dataPointsServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of DataPointsServiceClient.
@@ -146,7 +146,7 @@ export class DataPointsServiceClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -318,7 +318,7 @@ export class DataPointsServiceClient {
       'google.devicesandservices.health.v4.DataPointsService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -359,7 +359,7 @@ export class DataPointsServiceClient {
             .DataPointsService,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -376,7 +376,7 @@ export class DataPointsServiceClient {
     ];
     for (const methodName of dataPointsServiceStubMethods) {
       const callPromise = this.dataPointsServiceStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -470,9 +470,19 @@ export class DataPointsServiceClient {
   static get scopes() {
     return [
       'https://www.googleapis.com/auth/googlehealth.activity_and_fitness.readonly',
+      'https://www.googleapis.com/auth/googlehealth.activity_and_fitness.writeonly',
       'https://www.googleapis.com/auth/googlehealth.health_metrics_and_measurements.readonly',
+      'https://www.googleapis.com/auth/googlehealth.health_metrics_and_measurements.writeonly',
       'https://www.googleapis.com/auth/googlehealth.location.readonly',
+      'https://www.googleapis.com/auth/googlehealth.logged_symptoms.readonly',
+      'https://www.googleapis.com/auth/googlehealth.logged_symptoms.writeonly',
+      'https://www.googleapis.com/auth/googlehealth.mindfulness.readonly',
+      'https://www.googleapis.com/auth/googlehealth.mindfulness.writeonly',
+      'https://www.googleapis.com/auth/googlehealth.nutrition.writeonly',
+      'https://www.googleapis.com/auth/googlehealth.reproductive_health.readonly',
+      'https://www.googleapis.com/auth/googlehealth.reproductive_health.writeonly',
       'https://www.googleapis.com/auth/googlehealth.sleep.readonly',
+      'https://www.googleapis.com/auth/googlehealth.sleep.writeonly',
     ];
   }
 
@@ -594,7 +604,7 @@ export class DataPointsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getDataPoint request %j', request);
@@ -686,10 +696,14 @@ export class DataPointsServiceClient {
    *
    *   The supported values are:
    *
-   *   - `users/me/dataSourceFamilies/all-sources` - default value
-   *   - `users/me/dataSourceFamilies/google-wearables` - tracker devices
-   *   - `users/me/dataSourceFamilies/google-sources` - Google first party
-   *     sources
+   *   - `users/me/dataSourceFamilies/all-sources` - Default value. Includes data
+   *   from all available data sources.
+   *   - `users/me/dataSourceFamilies/google-wearables` - Includes data from
+   *   Google and Fitbit tracker devices (such as Fitbit trackers and Pixel
+   *   Watch). Excludes manually logged data.
+   *   - `users/me/dataSourceFamilies/google-sources` - Includes first-party
+   *   Google data, such as data from tracker devices, manually logged data, and
+   *   Health Connect.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -776,7 +790,7 @@ export class DataPointsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('dailyRollUpDataPoints request %j', request);
@@ -946,7 +960,7 @@ export class DataPointsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('exportExerciseTcx request %j', request);
@@ -1099,7 +1113,7 @@ export class DataPointsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1156,7 +1170,7 @@ export class DataPointsServiceClient {
     this._log.info('createDataPoint long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -1273,7 +1287,7 @@ export class DataPointsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'data_point.name': request.dataPoint!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1330,7 +1344,7 @@ export class DataPointsServiceClient {
     this._log.info('updateDataPoint long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -1460,7 +1474,7 @@ export class DataPointsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1517,7 +1531,7 @@ export class DataPointsServiceClient {
     this._log.info('batchDeleteDataPoints long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -1742,7 +1756,7 @@ export class DataPointsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1927,7 +1941,7 @@ export class DataPointsServiceClient {
       });
     const defaultCallSettings = this._defaults['listDataPoints'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listDataPoints stream %j', request);
@@ -2094,7 +2108,7 @@ export class DataPointsServiceClient {
       });
     const defaultCallSettings = this._defaults['listDataPoints'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listDataPoints iterate %j', request);
@@ -2144,12 +2158,14 @@ export class DataPointsServiceClient {
    *
    *   Format: `users/me/dataSourceFamilies/{data_source_family}`
    *
-   *   The supported values are:
-   *
-   *   - `users/me/dataSourceFamilies/all-sources` - default value
-   *   - `users/me/dataSourceFamilies/google-wearables` - tracker devices
-   *   - `users/me/dataSourceFamilies/google-sources` - Google first party
-   *     sources
+   *   - `users/me/dataSourceFamilies/all-sources` - Default value. Includes data
+   *   from all available data sources.
+   *   - `users/me/dataSourceFamilies/google-wearables` - Includes data from
+   *   Google and Fitbit tracker devices (such as Fitbit trackers and Pixel
+   *   Watch). Excludes manually logged data.
+   *   - `users/me/dataSourceFamilies/google-sources` - Includes first-party
+   *   Google data, such as data from tracker devices, manually logged data, and
+   *   Health Connect.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2233,7 +2249,7 @@ export class DataPointsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2304,12 +2320,14 @@ export class DataPointsServiceClient {
    *
    *   Format: `users/me/dataSourceFamilies/{data_source_family}`
    *
-   *   The supported values are:
-   *
-   *   - `users/me/dataSourceFamilies/all-sources` - default value
-   *   - `users/me/dataSourceFamilies/google-wearables` - tracker devices
-   *   - `users/me/dataSourceFamilies/google-sources` - Google first party
-   *     sources
+   *   - `users/me/dataSourceFamilies/all-sources` - Default value. Includes data
+   *   from all available data sources.
+   *   - `users/me/dataSourceFamilies/google-wearables` - Includes data from
+   *   Google and Fitbit tracker devices (such as Fitbit trackers and Pixel
+   *   Watch). Excludes manually logged data.
+   *   - `users/me/dataSourceFamilies/google-sources` - Includes first-party
+   *   Google data, such as data from tracker devices, manually logged data, and
+   *   Health Connect.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -2335,7 +2353,7 @@ export class DataPointsServiceClient {
       });
     const defaultCallSettings = this._defaults['reconcileDataPoints'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('reconcileDataPoints stream %j', request);
@@ -2387,12 +2405,14 @@ export class DataPointsServiceClient {
    *
    *   Format: `users/me/dataSourceFamilies/{data_source_family}`
    *
-   *   The supported values are:
-   *
-   *   - `users/me/dataSourceFamilies/all-sources` - default value
-   *   - `users/me/dataSourceFamilies/google-wearables` - tracker devices
-   *   - `users/me/dataSourceFamilies/google-sources` - Google first party
-   *     sources
+   *   - `users/me/dataSourceFamilies/all-sources` - Default value. Includes data
+   *   from all available data sources.
+   *   - `users/me/dataSourceFamilies/google-wearables` - Includes data from
+   *   Google and Fitbit tracker devices (such as Fitbit trackers and Pixel
+   *   Watch). Excludes manually logged data.
+   *   - `users/me/dataSourceFamilies/google-sources` - Includes first-party
+   *   Google data, such as data from tracker devices, manually logged data, and
+   *   Health Connect.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -2419,7 +2439,7 @@ export class DataPointsServiceClient {
       });
     const defaultCallSettings = this._defaults['reconcileDataPoints'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('reconcileDataPoints iterate %j', request);
@@ -2452,7 +2472,7 @@ export class DataPointsServiceClient {
    *   The maximum range for all other data types is 90 days.
    * @param {google.protobuf.Duration} request.windowSize
    *   Required. The size of the time window to group data points into before
-   *   applying the aggregation functions.
+   *   applying the aggregation functions. Must be at least 1 second.
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of data points to return.
    *   If unspecified, at most 1440 data points will be returned.
@@ -2471,10 +2491,14 @@ export class DataPointsServiceClient {
    *
    *   The supported values are:
    *
-   *   - `users/me/dataSourceFamilies/all-sources` - default value
-   *   - `users/me/dataSourceFamilies/google-wearables` - tracker devices
-   *   - `users/me/dataSourceFamilies/google-sources` - Google first party
-   *     sources
+   *   - `users/me/dataSourceFamilies/all-sources` - Default value. Includes data
+   *   from all available data sources.
+   *   - `users/me/dataSourceFamilies/google-wearables` - Includes data from
+   *   Google and Fitbit tracker devices (such as Fitbit trackers and Pixel
+   *   Watch). Excludes manually logged data.
+   *   - `users/me/dataSourceFamilies/google-sources` - Includes first-party
+   *   Google data, such as data from tracker devices, manually logged data, and
+   *   Health Connect.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2558,7 +2582,7 @@ export class DataPointsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2612,7 +2636,7 @@ export class DataPointsServiceClient {
    *   The maximum range for all other data types is 90 days.
    * @param {google.protobuf.Duration} request.windowSize
    *   Required. The size of the time window to group data points into before
-   *   applying the aggregation functions.
+   *   applying the aggregation functions. Must be at least 1 second.
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of data points to return.
    *   If unspecified, at most 1440 data points will be returned.
@@ -2631,10 +2655,14 @@ export class DataPointsServiceClient {
    *
    *   The supported values are:
    *
-   *   - `users/me/dataSourceFamilies/all-sources` - default value
-   *   - `users/me/dataSourceFamilies/google-wearables` - tracker devices
-   *   - `users/me/dataSourceFamilies/google-sources` - Google first party
-   *     sources
+   *   - `users/me/dataSourceFamilies/all-sources` - Default value. Includes data
+   *   from all available data sources.
+   *   - `users/me/dataSourceFamilies/google-wearables` - Includes data from
+   *   Google and Fitbit tracker devices (such as Fitbit trackers and Pixel
+   *   Watch). Excludes manually logged data.
+   *   - `users/me/dataSourceFamilies/google-sources` - Includes first-party
+   *   Google data, such as data from tracker devices, manually logged data, and
+   *   Health Connect.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -2660,7 +2688,7 @@ export class DataPointsServiceClient {
       });
     const defaultCallSettings = this._defaults['rollUpDataPoints'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('rollUpDataPoints stream %j', request);
@@ -2695,7 +2723,7 @@ export class DataPointsServiceClient {
    *   The maximum range for all other data types is 90 days.
    * @param {google.protobuf.Duration} request.windowSize
    *   Required. The size of the time window to group data points into before
-   *   applying the aggregation functions.
+   *   applying the aggregation functions. Must be at least 1 second.
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of data points to return.
    *   If unspecified, at most 1440 data points will be returned.
@@ -2714,10 +2742,14 @@ export class DataPointsServiceClient {
    *
    *   The supported values are:
    *
-   *   - `users/me/dataSourceFamilies/all-sources` - default value
-   *   - `users/me/dataSourceFamilies/google-wearables` - tracker devices
-   *   - `users/me/dataSourceFamilies/google-sources` - Google first party
-   *     sources
+   *   - `users/me/dataSourceFamilies/all-sources` - Default value. Includes data
+   *   from all available data sources.
+   *   - `users/me/dataSourceFamilies/google-wearables` - Includes data from
+   *   Google and Fitbit tracker devices (such as Fitbit trackers and Pixel
+   *   Watch). Excludes manually logged data.
+   *   - `users/me/dataSourceFamilies/google-sources` - Includes first-party
+   *   Google data, such as data from tracker devices, manually logged data, and
+   *   Health Connect.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -2744,7 +2776,7 @@ export class DataPointsServiceClient {
       });
     const defaultCallSettings = this._defaults['rollUpDataPoints'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('rollUpDataPoints iterate %j', request);
@@ -3097,7 +3129,7 @@ export class DataPointsServiceClient {
    */
   close(): Promise<void> {
     if (this.dataPointsServiceStub && !this._terminated) {
-      return this.dataPointsServiceStub.then((stub) => {
+      return this.dataPointsServiceStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

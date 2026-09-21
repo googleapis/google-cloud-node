@@ -33,7 +33,7 @@ import type {
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -55,7 +55,7 @@ export class AlloyDBCSQLAdminClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('alloydb');
@@ -68,12 +68,12 @@ export class AlloyDBCSQLAdminClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
+  innerApiCalls: {[name: string]: Function};
   iamClient: IamClient;
   locationsClient: LocationsClient;
-  pathTemplates: { [name: string]: gax.PathTemplate };
+  pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
-  alloyDBCSQLAdminStub?: Promise<{ [name: string]: Function }>;
+  alloyDBCSQLAdminStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of AlloyDBCSQLAdminClient.
@@ -149,7 +149,7 @@ export class AlloyDBCSQLAdminClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -305,7 +305,7 @@ export class AlloyDBCSQLAdminClient {
       'google.cloud.alloydb.v1alpha.AlloyDBCSQLAdmin',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -345,14 +345,14 @@ export class AlloyDBCSQLAdminClient {
           (this._protos as any).google.cloud.alloydb.v1alpha.AlloyDBCSQLAdmin,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const alloyDBCSQLAdminStubMethods = ['restoreFromCloudSqL'];
     for (const methodName of alloyDBCSQLAdminStubMethods) {
       const callPromise = this.alloyDBCSQLAdminStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -570,7 +570,7 @@ export class AlloyDBCSQLAdminClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -627,7 +627,7 @@ export class AlloyDBCSQLAdminClient {
     this._log.info('restoreFromCloudSQL long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -1575,14 +1575,14 @@ export class AlloyDBCSQLAdminClient {
    */
   close(): Promise<void> {
     if (this.alloyDBCSQLAdminStub && !this._terminated) {
-      return this.alloyDBCSQLAdminStub.then((stub) => {
+      return this.alloyDBCSQLAdminStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.iamClient.close().catch((err) => {
+        this.iamClient.close().catch(err => {
           throw err;
         });
-        this.locationsClient.close().catch((err) => {
+        this.locationsClient.close().catch(err => {
           throw err;
         });
         void this.operationsClient.close();

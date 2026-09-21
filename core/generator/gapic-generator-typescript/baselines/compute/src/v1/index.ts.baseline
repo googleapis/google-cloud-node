@@ -16,5 +16,5 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export { AddressesClient } from './addresses_client';
-export { RegionOperationsClient } from './region_operations_client';
+export {AddressesClient} from './addresses_client';
+export {RegionOperationsClient} from './region_operations_client';

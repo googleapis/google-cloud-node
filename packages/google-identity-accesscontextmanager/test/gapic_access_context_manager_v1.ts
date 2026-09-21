@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as accesscontextmanagerModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, LROperation, operationsProtos } from 'google-gax';
+import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -149,9 +149,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -284,7 +284,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.accessContextManagerStub, undefined);
@@ -292,13 +292,13 @@ describe('v1.AccessContextManagerClient', () => {
       assert(client.accessContextManagerStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.accessContextManagerStub);
@@ -307,15 +307,15 @@ describe('v1.AccessContextManagerClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.accessContextManagerStub, undefined);
@@ -324,7 +324,7 @@ describe('v1.AccessContextManagerClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -333,7 +333,7 @@ describe('v1.AccessContextManagerClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -346,7 +346,7 @@ describe('v1.AccessContextManagerClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon
@@ -370,7 +370,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes getAccessPolicy without error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -402,7 +402,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes getAccessPolicy without error using callback', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -450,7 +450,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes getAccessPolicy with error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -482,7 +482,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes getAccessPolicy with closed client', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -495,7 +495,7 @@ describe('v1.AccessContextManagerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getAccessPolicy(request), expectedError);
@@ -506,7 +506,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes getAccessLevel without error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -538,7 +538,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes getAccessLevel without error using callback', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -586,7 +586,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes getAccessLevel with error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -618,7 +618,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes getAccessLevel with closed client', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -631,7 +631,7 @@ describe('v1.AccessContextManagerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getAccessLevel(request), expectedError);
@@ -642,7 +642,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes getServicePerimeter without error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -675,7 +675,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes getServicePerimeter without error using callback', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -723,7 +723,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes getServicePerimeter with error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -755,7 +755,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes getServicePerimeter with closed client', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -768,7 +768,7 @@ describe('v1.AccessContextManagerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getServicePerimeter(request), expectedError);
@@ -779,7 +779,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes getGcpUserAccessBinding without error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -812,7 +812,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes getGcpUserAccessBinding without error using callback', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -860,7 +860,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes getGcpUserAccessBinding with error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -895,7 +895,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes getGcpUserAccessBinding with closed client', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -908,7 +908,7 @@ describe('v1.AccessContextManagerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -922,7 +922,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes setIamPolicy without error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -954,7 +954,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes setIamPolicy without error using callback', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1002,7 +1002,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes setIamPolicy with error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1034,7 +1034,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes setIamPolicy with closed client', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1047,7 +1047,7 @@ describe('v1.AccessContextManagerClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.setIamPolicy(request), expectedError);
@@ -1058,7 +1058,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes getIamPolicy without error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1090,7 +1090,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes getIamPolicy without error using callback', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1138,7 +1138,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes getIamPolicy with error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1170,7 +1170,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes getIamPolicy with closed client', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1183,7 +1183,7 @@ describe('v1.AccessContextManagerClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getIamPolicy(request), expectedError);
@@ -1194,7 +1194,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes testIamPermissions without error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1227,7 +1227,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes testIamPermissions without error using callback', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1275,7 +1275,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes testIamPermissions with error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1307,7 +1307,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes testIamPermissions with closed client', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1320,7 +1320,7 @@ describe('v1.AccessContextManagerClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.testIamPermissions(request), expectedError);
@@ -1331,7 +1331,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes createAccessPolicy without error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1351,7 +1351,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes createAccessPolicy without error using callback', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1392,7 +1392,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes createAccessPolicy with call error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1410,7 +1410,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes createAccessPolicy with LRO error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1430,7 +1430,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes checkCreateAccessPolicyProgress without error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1438,8 +1438,8 @@ describe('v1.AccessContextManagerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateAccessPolicyProgress(
@@ -1453,7 +1453,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes checkCreateAccessPolicyProgress with error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1475,7 +1475,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes updateAccessPolicy without error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1510,7 +1510,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes updateAccessPolicy without error using callback', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1566,7 +1566,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes updateAccessPolicy with call error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1599,7 +1599,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes updateAccessPolicy with LRO error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1634,7 +1634,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes checkUpdateAccessPolicyProgress without error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1642,8 +1642,8 @@ describe('v1.AccessContextManagerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateAccessPolicyProgress(
@@ -1657,7 +1657,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes checkUpdateAccessPolicyProgress with error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1679,7 +1679,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes deleteAccessPolicy without error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1713,7 +1713,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes deleteAccessPolicy without error using callback', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1768,7 +1768,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes deleteAccessPolicy with call error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1800,7 +1800,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes deleteAccessPolicy with LRO error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1834,7 +1834,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes checkDeleteAccessPolicyProgress without error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1842,8 +1842,8 @@ describe('v1.AccessContextManagerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteAccessPolicyProgress(
@@ -1857,7 +1857,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes checkDeleteAccessPolicyProgress with error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1879,7 +1879,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes createAccessLevel without error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1913,7 +1913,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes createAccessLevel without error using callback', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1968,7 +1968,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes createAccessLevel with call error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2000,7 +2000,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes createAccessLevel with LRO error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2034,7 +2034,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes checkCreateAccessLevelProgress without error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2042,8 +2042,8 @@ describe('v1.AccessContextManagerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateAccessLevelProgress(
@@ -2057,7 +2057,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes checkCreateAccessLevelProgress with error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2079,7 +2079,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes updateAccessLevel without error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2114,7 +2114,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes updateAccessLevel without error using callback', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2170,7 +2170,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes updateAccessLevel with call error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2203,7 +2203,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes updateAccessLevel with LRO error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2238,7 +2238,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes checkUpdateAccessLevelProgress without error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2246,8 +2246,8 @@ describe('v1.AccessContextManagerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateAccessLevelProgress(
@@ -2261,7 +2261,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes checkUpdateAccessLevelProgress with error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2283,7 +2283,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes deleteAccessLevel without error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2317,7 +2317,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes deleteAccessLevel without error using callback', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2372,7 +2372,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes deleteAccessLevel with call error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2404,7 +2404,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes deleteAccessLevel with LRO error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2438,7 +2438,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes checkDeleteAccessLevelProgress without error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2446,8 +2446,8 @@ describe('v1.AccessContextManagerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteAccessLevelProgress(
@@ -2461,7 +2461,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes checkDeleteAccessLevelProgress with error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2483,7 +2483,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes replaceAccessLevels without error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2517,7 +2517,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes replaceAccessLevels without error using callback', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2572,7 +2572,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes replaceAccessLevels with call error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2604,7 +2604,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes replaceAccessLevels with LRO error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2638,7 +2638,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes checkReplaceAccessLevelsProgress without error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2646,8 +2646,8 @@ describe('v1.AccessContextManagerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkReplaceAccessLevelsProgress(
@@ -2661,7 +2661,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes checkReplaceAccessLevelsProgress with error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2683,7 +2683,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes createServicePerimeter without error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2717,7 +2717,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes createServicePerimeter without error using callback', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2772,7 +2772,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes createServicePerimeter with call error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2807,7 +2807,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes createServicePerimeter with LRO error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2841,7 +2841,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes checkCreateServicePerimeterProgress without error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2849,8 +2849,8 @@ describe('v1.AccessContextManagerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateServicePerimeterProgress(
@@ -2864,7 +2864,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes checkCreateServicePerimeterProgress with error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2886,7 +2886,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes updateServicePerimeter without error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2921,7 +2921,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes updateServicePerimeter without error using callback', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2977,7 +2977,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes updateServicePerimeter with call error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3013,7 +3013,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes updateServicePerimeter with LRO error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3048,7 +3048,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes checkUpdateServicePerimeterProgress without error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3056,8 +3056,8 @@ describe('v1.AccessContextManagerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateServicePerimeterProgress(
@@ -3071,7 +3071,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes checkUpdateServicePerimeterProgress with error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3093,7 +3093,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes deleteServicePerimeter without error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3127,7 +3127,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes deleteServicePerimeter without error using callback', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3182,7 +3182,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes deleteServicePerimeter with call error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3217,7 +3217,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes deleteServicePerimeter with LRO error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3251,7 +3251,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes checkDeleteServicePerimeterProgress without error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3259,8 +3259,8 @@ describe('v1.AccessContextManagerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteServicePerimeterProgress(
@@ -3274,7 +3274,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes checkDeleteServicePerimeterProgress with error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3296,7 +3296,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes replaceServicePerimeters without error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3330,7 +3330,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes replaceServicePerimeters without error using callback', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3385,7 +3385,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes replaceServicePerimeters with call error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3420,7 +3420,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes replaceServicePerimeters with LRO error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3454,7 +3454,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes checkReplaceServicePerimetersProgress without error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3462,8 +3462,8 @@ describe('v1.AccessContextManagerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -3478,7 +3478,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes checkReplaceServicePerimetersProgress with error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3500,7 +3500,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes commitServicePerimeters without error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3534,7 +3534,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes commitServicePerimeters without error using callback', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3589,7 +3589,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes commitServicePerimeters with call error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3624,7 +3624,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes commitServicePerimeters with LRO error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3658,7 +3658,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes checkCommitServicePerimetersProgress without error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3666,8 +3666,8 @@ describe('v1.AccessContextManagerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -3682,7 +3682,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes checkCommitServicePerimetersProgress with error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3704,7 +3704,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes createGcpUserAccessBinding without error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3738,7 +3738,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes createGcpUserAccessBinding without error using callback', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3793,7 +3793,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes createGcpUserAccessBinding with call error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3828,7 +3828,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes createGcpUserAccessBinding with LRO error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3862,7 +3862,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes checkCreateGcpUserAccessBindingProgress without error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3870,8 +3870,8 @@ describe('v1.AccessContextManagerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -3886,7 +3886,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes checkCreateGcpUserAccessBindingProgress with error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3908,7 +3908,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes updateGcpUserAccessBinding without error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3943,7 +3943,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes updateGcpUserAccessBinding without error using callback', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3999,7 +3999,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes updateGcpUserAccessBinding with call error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4035,7 +4035,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes updateGcpUserAccessBinding with LRO error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4070,7 +4070,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes checkUpdateGcpUserAccessBindingProgress without error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4078,8 +4078,8 @@ describe('v1.AccessContextManagerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -4094,7 +4094,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes checkUpdateGcpUserAccessBindingProgress with error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4116,7 +4116,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes deleteGcpUserAccessBinding without error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4150,7 +4150,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes deleteGcpUserAccessBinding without error using callback', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4205,7 +4205,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes deleteGcpUserAccessBinding with call error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4240,7 +4240,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes deleteGcpUserAccessBinding with LRO error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4274,7 +4274,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes checkDeleteGcpUserAccessBindingProgress without error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4282,8 +4282,8 @@ describe('v1.AccessContextManagerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -4298,7 +4298,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes checkDeleteGcpUserAccessBindingProgress with error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4320,7 +4320,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes listAccessPolicies without error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4347,7 +4347,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes listAccessPolicies without error using callback', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4391,7 +4391,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes listAccessPolicies with error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4409,7 +4409,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes listAccessPoliciesStream without error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4460,7 +4460,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes listAccessPoliciesStream with error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4500,7 +4500,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('uses async iteration with listAccessPolicies without error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4538,7 +4538,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('uses async iteration with listAccessPolicies with error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4569,7 +4569,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes listAccessLevels without error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4609,7 +4609,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes listAccessLevels without error using callback', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4667,7 +4667,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes listAccessLevels with error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4699,7 +4699,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes listAccessLevelsStream without error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4754,16 +4754,16 @@ describe('v1.AccessContextManagerClient', () => {
       assert(
         (client.descriptors.page.listAccessLevels.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listAccessLevelsStream with error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4807,16 +4807,16 @@ describe('v1.AccessContextManagerClient', () => {
       assert(
         (client.descriptors.page.listAccessLevels.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listAccessLevels without error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4858,16 +4858,16 @@ describe('v1.AccessContextManagerClient', () => {
       assert(
         (client.descriptors.page.listAccessLevels.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listAccessLevels with error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4900,9 +4900,9 @@ describe('v1.AccessContextManagerClient', () => {
       assert(
         (client.descriptors.page.listAccessLevels.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4911,7 +4911,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes listServicePerimeters without error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4952,7 +4952,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes listServicePerimeters without error using callback', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5010,7 +5010,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes listServicePerimeters with error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5045,7 +5045,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes listServicePerimetersStream without error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5115,7 +5115,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes listServicePerimetersStream with error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5174,7 +5174,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('uses async iteration with listServicePerimeters without error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5229,7 +5229,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('uses async iteration with listServicePerimeters with error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5277,7 +5277,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes listGcpUserAccessBindings without error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5318,7 +5318,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes listGcpUserAccessBindings without error using callback', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5376,7 +5376,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes listGcpUserAccessBindings with error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5411,7 +5411,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes listGcpUserAccessBindingsStream without error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5481,7 +5481,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes listGcpUserAccessBindingsStream with error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5540,7 +5540,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('uses async iteration with listGcpUserAccessBindings without error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5595,7 +5595,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('uses async iteration with listGcpUserAccessBindings with error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5642,7 +5642,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes getOperation without error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5664,7 +5664,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes getOperation without error using callback', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -5692,7 +5692,7 @@ describe('v1.AccessContextManagerClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -5703,7 +5703,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes getOperation with error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -5728,7 +5728,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes cancelOperation without error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5751,7 +5751,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes cancelOperation without error using callback', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -5779,7 +5779,7 @@ describe('v1.AccessContextManagerClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -5790,7 +5790,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes cancelOperation with error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -5815,7 +5815,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes deleteOperation without error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5838,7 +5838,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes deleteOperation without error using callback', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -5866,7 +5866,7 @@ describe('v1.AccessContextManagerClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -5877,7 +5877,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('invokes deleteOperation with error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -5902,7 +5902,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -5938,7 +5938,7 @@ describe('v1.AccessContextManagerClient', () => {
     it('uses async iteration with listOperations with error', async () => {
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5974,7 +5974,7 @@ describe('v1.AccessContextManagerClient', () => {
       };
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6026,7 +6026,7 @@ describe('v1.AccessContextManagerClient', () => {
       };
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6066,7 +6066,7 @@ describe('v1.AccessContextManagerClient', () => {
       };
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6131,7 +6131,7 @@ describe('v1.AccessContextManagerClient', () => {
       };
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6171,7 +6171,7 @@ describe('v1.AccessContextManagerClient', () => {
       };
       const client =
         new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();

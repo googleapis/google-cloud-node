@@ -86,6 +86,7 @@ export class Generator {
   restNumericEnums?: boolean;
   mixinsOverride?: string[];
   format?: string | string[];
+  enableTelemetryTracing?: boolean;
 
   private root: protobuf.Root;
 
@@ -128,14 +129,17 @@ export class Generator {
           'INTERNAL ERROR: Cannot find ServiceConfig type in proto JSON',
         );
       }
-      const deserialized = serializer.fromProto3JSON(ServiceConfig, json);
+      const deserialized = serializer.fromProto3JSON(
+        ServiceConfig as protobuf.Type,
+        json,
+      );
       if (!deserialized) {
         throw new Error(
           'ERROR: Cannot parse the content of gRPC service config',
         );
       }
       this.grpcServiceConfig = ServiceConfig.toObject(
-        deserialized,
+        deserialized as protobuf.Message,
       ) as protos.grpc.service_config.ServiceConfig;
     }
   }
@@ -227,6 +231,12 @@ export class Generator {
     }
   }
 
+  private readEnableTelemetryTracing() {
+    if (this.paramMap['enable-telemetry-tracing'] === 'true') {
+      this.enableTelemetryTracing = true;
+    }
+  }
+
   private readLegacyProtoLoad() {
     if (this.paramMap['legacy-proto-load'] === 'true') {
       this.legacyProtoLoad = true;
@@ -274,6 +284,7 @@ export class Generator {
       this.readLegacyProtoLoad();
       this.readRestNumericEnums();
       this.readFormat();
+      this.readEnableTelemetryTracing();
     }
   }
 
@@ -334,6 +345,7 @@ export class Generator {
       legacyProtoLoad: this.legacyProtoLoad,
       restNumericEnums: this.restNumericEnums,
       mixinsOverridden: this.mixinsOverride !== undefined,
+      enableTelemetryTracing: this.enableTelemetryTracing,
     });
     return api;
   }

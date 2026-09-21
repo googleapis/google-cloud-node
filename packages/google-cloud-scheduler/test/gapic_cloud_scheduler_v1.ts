@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as cloudschedulerModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, LocationProtos } from 'google-gax';
+import {protobuf, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -242,7 +242,7 @@ describe('v1.CloudSchedulerClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.cloudSchedulerStub, undefined);
@@ -250,12 +250,12 @@ describe('v1.CloudSchedulerClient', () => {
       assert(client.cloudSchedulerStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.cloudSchedulerStub);
@@ -264,14 +264,14 @@ describe('v1.CloudSchedulerClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.cloudSchedulerStub, undefined);
@@ -280,7 +280,7 @@ describe('v1.CloudSchedulerClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -288,7 +288,7 @@ describe('v1.CloudSchedulerClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -300,7 +300,7 @@ describe('v1.CloudSchedulerClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -323,7 +323,7 @@ describe('v1.CloudSchedulerClient', () => {
   describe('getJob', () => {
     it('invokes getJob without error', async () => {
       const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -354,7 +354,7 @@ describe('v1.CloudSchedulerClient', () => {
 
     it('invokes getJob without error using callback', async () => {
       const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -401,7 +401,7 @@ describe('v1.CloudSchedulerClient', () => {
 
     it('invokes getJob with error', async () => {
       const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -429,7 +429,7 @@ describe('v1.CloudSchedulerClient', () => {
 
     it('invokes getJob with closed client', async () => {
       const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -442,7 +442,7 @@ describe('v1.CloudSchedulerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getJob(request), expectedError);
@@ -452,7 +452,7 @@ describe('v1.CloudSchedulerClient', () => {
   describe('createJob', () => {
     it('invokes createJob without error', async () => {
       const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -483,7 +483,7 @@ describe('v1.CloudSchedulerClient', () => {
 
     it('invokes createJob without error using callback', async () => {
       const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -530,7 +530,7 @@ describe('v1.CloudSchedulerClient', () => {
 
     it('invokes createJob with error', async () => {
       const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -558,7 +558,7 @@ describe('v1.CloudSchedulerClient', () => {
 
     it('invokes createJob with closed client', async () => {
       const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -571,7 +571,7 @@ describe('v1.CloudSchedulerClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createJob(request), expectedError);
@@ -581,7 +581,7 @@ describe('v1.CloudSchedulerClient', () => {
   describe('updateJob', () => {
     it('invokes updateJob without error', async () => {
       const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -613,7 +613,7 @@ describe('v1.CloudSchedulerClient', () => {
 
     it('invokes updateJob without error using callback', async () => {
       const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -661,7 +661,7 @@ describe('v1.CloudSchedulerClient', () => {
 
     it('invokes updateJob with error', async () => {
       const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -690,7 +690,7 @@ describe('v1.CloudSchedulerClient', () => {
 
     it('invokes updateJob with closed client', async () => {
       const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -704,7 +704,7 @@ describe('v1.CloudSchedulerClient', () => {
       );
       request.job.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateJob(request), expectedError);
@@ -714,7 +714,7 @@ describe('v1.CloudSchedulerClient', () => {
   describe('deleteJob', () => {
     it('invokes deleteJob without error', async () => {
       const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -745,7 +745,7 @@ describe('v1.CloudSchedulerClient', () => {
 
     it('invokes deleteJob without error using callback', async () => {
       const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -792,7 +792,7 @@ describe('v1.CloudSchedulerClient', () => {
 
     it('invokes deleteJob with error', async () => {
       const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -820,7 +820,7 @@ describe('v1.CloudSchedulerClient', () => {
 
     it('invokes deleteJob with closed client', async () => {
       const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -833,7 +833,7 @@ describe('v1.CloudSchedulerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteJob(request), expectedError);
@@ -843,7 +843,7 @@ describe('v1.CloudSchedulerClient', () => {
   describe('pauseJob', () => {
     it('invokes pauseJob without error', async () => {
       const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -874,7 +874,7 @@ describe('v1.CloudSchedulerClient', () => {
 
     it('invokes pauseJob without error using callback', async () => {
       const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -921,7 +921,7 @@ describe('v1.CloudSchedulerClient', () => {
 
     it('invokes pauseJob with error', async () => {
       const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -949,7 +949,7 @@ describe('v1.CloudSchedulerClient', () => {
 
     it('invokes pauseJob with closed client', async () => {
       const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -962,7 +962,7 @@ describe('v1.CloudSchedulerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.pauseJob(request), expectedError);
@@ -972,7 +972,7 @@ describe('v1.CloudSchedulerClient', () => {
   describe('resumeJob', () => {
     it('invokes resumeJob without error', async () => {
       const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1003,7 +1003,7 @@ describe('v1.CloudSchedulerClient', () => {
 
     it('invokes resumeJob without error using callback', async () => {
       const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1050,7 +1050,7 @@ describe('v1.CloudSchedulerClient', () => {
 
     it('invokes resumeJob with error', async () => {
       const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1078,7 +1078,7 @@ describe('v1.CloudSchedulerClient', () => {
 
     it('invokes resumeJob with closed client', async () => {
       const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1091,7 +1091,7 @@ describe('v1.CloudSchedulerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.resumeJob(request), expectedError);
@@ -1101,7 +1101,7 @@ describe('v1.CloudSchedulerClient', () => {
   describe('runJob', () => {
     it('invokes runJob without error', async () => {
       const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1132,7 +1132,7 @@ describe('v1.CloudSchedulerClient', () => {
 
     it('invokes runJob without error using callback', async () => {
       const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1179,7 +1179,7 @@ describe('v1.CloudSchedulerClient', () => {
 
     it('invokes runJob with error', async () => {
       const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1207,7 +1207,7 @@ describe('v1.CloudSchedulerClient', () => {
 
     it('invokes runJob with closed client', async () => {
       const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1220,7 +1220,7 @@ describe('v1.CloudSchedulerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.runJob(request), expectedError);
@@ -1230,7 +1230,7 @@ describe('v1.CloudSchedulerClient', () => {
   describe('listJobs', () => {
     it('invokes listJobs without error', async () => {
       const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1263,7 +1263,7 @@ describe('v1.CloudSchedulerClient', () => {
 
     it('invokes listJobs without error using callback', async () => {
       const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1312,7 +1312,7 @@ describe('v1.CloudSchedulerClient', () => {
 
     it('invokes listJobs with error', async () => {
       const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1340,7 +1340,7 @@ describe('v1.CloudSchedulerClient', () => {
 
     it('invokes listJobsStream without error', async () => {
       const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1383,15 +1383,15 @@ describe('v1.CloudSchedulerClient', () => {
       assert(
         (client.descriptors.page.listJobs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listJobsStream with error', async () => {
       const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1431,15 +1431,15 @@ describe('v1.CloudSchedulerClient', () => {
       assert(
         (client.descriptors.page.listJobs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listJobs without error', async () => {
       const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1473,15 +1473,15 @@ describe('v1.CloudSchedulerClient', () => {
       assert(
         (client.descriptors.page.listJobs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listJobs with error', async () => {
       const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1514,16 +1514,16 @@ describe('v1.CloudSchedulerClient', () => {
       assert(
         (client.descriptors.page.listJobs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1553,7 +1553,7 @@ describe('v1.CloudSchedulerClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1597,7 +1597,7 @@ describe('v1.CloudSchedulerClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1632,7 +1632,7 @@ describe('v1.CloudSchedulerClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1680,7 +1680,7 @@ describe('v1.CloudSchedulerClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1728,7 +1728,7 @@ describe('v1.CloudSchedulerClient', () => {
         job: 'jobValue',
       };
       const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1791,7 +1791,7 @@ describe('v1.CloudSchedulerClient', () => {
         location: 'locationValue',
       };
       const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1839,7 +1839,7 @@ describe('v1.CloudSchedulerClient', () => {
         project: 'projectValue',
       };
       const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

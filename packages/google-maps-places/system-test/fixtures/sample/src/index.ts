@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import { PlacesClient } from '@googlemaps/places';
+import {PlacesClient} from '@googlemaps/places';
 
 // check that the client class type name can be used
 function doStuffWithPlacesClient(client: PlacesClient) {

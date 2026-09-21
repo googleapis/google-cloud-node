@@ -28,14 +28,14 @@ import type {
   PaginationCallback,
   GaxCall,
 } from 'google-gax';
-import { Transform, PassThrough } from 'stream';
+import {Transform, PassThrough} from 'stream';
 // @ts-ignore
 import type * as protos from '../../../protos/protos.js';
 import * as messaging_client_config from './messaging_client_config.json';
 import fs from 'fs';
 import path from 'path';
-import { fileURLToPath } from 'url';
-import { getJSON } from '../json-helper.cjs';
+import {fileURLToPath} from 'url';
+import {getJSON} from '../json-helper.cjs';
 // @ts-ignore
 const dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -49,7 +49,7 @@ const gapicConfig = getJSON(path.join(dirname, 'messaging_client_config.json'));
 const jsonProtos = getJSON(
   path.join(dirname, '..', '..', '..', 'protos/protos.json'),
 );
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 const version = getJSON(
   path.join(dirname, '..', '..', '..', '..', 'package.json'),
 ).version;
@@ -69,7 +69,7 @@ export class MessagingClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('showcase');
@@ -81,10 +81,10 @@ export class MessagingClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
-  pathTemplates: { [name: string]: gax.PathTemplate };
+  innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
-  messagingStub?: Promise<{ [name: string]: Function }>;
+  messagingStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of MessagingClient.
@@ -161,7 +161,7 @@ export class MessagingClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -318,21 +318,21 @@ export class MessagingClient {
           post: '/v1beta1/{resource=users/*}:setIamPolicy',
           body: '*',
           additional_bindings: [
-            { post: '/v1beta1/{resource=rooms/*}:setIamPolicy', body: '*' },
+            {post: '/v1beta1/{resource=rooms/*}:setIamPolicy', body: '*'},
             {
               post: '/v1beta1/{resource=rooms/*/blurbs/*}:setIamPolicy',
               body: '*',
             },
-            { post: '/v1beta1/{resource=sequences/*}:setIamPolicy', body: '*' },
+            {post: '/v1beta1/{resource=sequences/*}:setIamPolicy', body: '*'},
           ],
         },
         {
           selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',
           get: '/v1beta1/{resource=users/*}:getIamPolicy',
           additional_bindings: [
-            { get: '/v1beta1/{resource=rooms/*}:getIamPolicy' },
-            { get: '/v1beta1/{resource=rooms/*/blurbs/*}:getIamPolicy' },
-            { get: '/v1beta1/{resource=sequences/*}:getIamPolicy' },
+            {get: '/v1beta1/{resource=rooms/*}:getIamPolicy'},
+            {get: '/v1beta1/{resource=rooms/*/blurbs/*}:getIamPolicy'},
+            {get: '/v1beta1/{resource=sequences/*}:getIamPolicy'},
           ],
         },
         {
@@ -340,10 +340,7 @@ export class MessagingClient {
           post: '/v1beta1/{resource=users/*}:testIamPermissions',
           body: '*',
           additional_bindings: [
-            {
-              post: '/v1beta1/{resource=rooms/*}:testIamPermissions',
-              body: '*',
-            },
+            {post: '/v1beta1/{resource=rooms/*}:testIamPermissions', body: '*'},
             {
               post: '/v1beta1/{resource=rooms/*/blurbs/*}:testIamPermissions',
               body: '*',
@@ -395,7 +392,7 @@ export class MessagingClient {
       'google.showcase.v1beta1.Messaging',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -435,7 +432,7 @@ export class MessagingClient {
           (this._protos as any).google.showcase.v1beta1.Messaging,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -457,11 +454,11 @@ export class MessagingClient {
     ];
     for (const methodName of messagingStubMethods) {
       const callPromise = this.messagingStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               if (methodName in this.descriptors.stream) {
-                const stream = new PassThrough({ objectMode: true });
+                const stream = new PassThrough({objectMode: true});
                 setImmediate(() => {
                   stream.emit(
                     'error',
@@ -660,7 +657,7 @@ export class MessagingClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createRoom request %j', request);
@@ -784,7 +781,7 @@ export class MessagingClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getRoom request %j', request);
@@ -911,7 +908,7 @@ export class MessagingClient {
       this._gaxModule.routingHeader.fromParams({
         'room.name': request.room!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateRoom request %j', request);
@@ -1035,7 +1032,7 @@ export class MessagingClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteRoom request %j', request);
@@ -1164,7 +1161,7 @@ export class MessagingClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createBlurb request %j', request);
@@ -1288,7 +1285,7 @@ export class MessagingClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getBlurb request %j', request);
@@ -1415,7 +1412,7 @@ export class MessagingClient {
       this._gaxModule.routingHeader.fromParams({
         'blurb.name': request.blurb!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateBlurb request %j', request);
@@ -1539,7 +1536,7 @@ export class MessagingClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteBlurb request %j', request);
@@ -1616,7 +1613,7 @@ export class MessagingClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('streamBlurbs stream %j', options);
@@ -1670,7 +1667,7 @@ export class MessagingClient {
       optionsOrCallback = {};
     }
     const options = optionsOrCallback as CallOptions;
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('sendBlurbs stream %j', options);
@@ -1695,7 +1692,7 @@ export class MessagingClient {
    * region_tag:localhost_v1beta1_generated_Messaging_Connect_async
    */
   connect(options?: CallOptions): gax.CancellableStream {
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('connect stream %j', options);
@@ -1816,7 +1813,7 @@ export class MessagingClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1873,7 +1870,7 @@ export class MessagingClient {
     this._log.info('searchBlurbs long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -1969,7 +1966,7 @@ export class MessagingClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2031,7 +2028,7 @@ export class MessagingClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listRooms'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listRooms stream %j', request);
@@ -2077,7 +2074,7 @@ export class MessagingClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listRooms'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listRooms iterate %j', request);
@@ -2178,7 +2175,7 @@ export class MessagingClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2247,7 +2244,7 @@ export class MessagingClient {
       });
     const defaultCallSettings = this._defaults['listBlurbs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listBlurbs stream %j', request);
@@ -2300,7 +2297,7 @@ export class MessagingClient {
       });
     const defaultCallSettings = this._defaults['listBlurbs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listBlurbs iterate %j', request);
@@ -2734,7 +2731,7 @@ export class MessagingClient {
    */
   close(): Promise<void> {
     if (this.messagingStub && !this._terminated) {
-      return this.messagingStub.then((stub) => {
+      return this.messagingStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

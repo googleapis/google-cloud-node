@@ -26,10 +26,10 @@ import type {
   PaginationCallback,
   GaxCall,
 } from 'google-gax';
-import { Transform, PassThrough } from 'stream';
+import {Transform, PassThrough} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -51,7 +51,7 @@ export class LoggingServiceV2Client {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('logging-api');
@@ -64,9 +64,9 @@ export class LoggingServiceV2Client {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
-  pathTemplates: { [name: string]: gax.PathTemplate };
-  loggingServiceV2Stub?: Promise<{ [name: string]: Function }>;
+  innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
+  loggingServiceV2Stub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of LoggingServiceV2Client.
@@ -142,7 +142,7 @@ export class LoggingServiceV2Client {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -347,7 +347,7 @@ export class LoggingServiceV2Client {
       'google.logging.v2.LoggingServiceV2',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -387,7 +387,7 @@ export class LoggingServiceV2Client {
           (this._protos as any).google.logging.v2.LoggingServiceV2,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -401,11 +401,11 @@ export class LoggingServiceV2Client {
     ];
     for (const methodName of loggingServiceV2StubMethods) {
       const callPromise = this.loggingServiceV2Stub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               if (methodName in this.descriptors.stream) {
-                const stream = new PassThrough({ objectMode: true });
+                const stream = new PassThrough({objectMode: true});
                 setImmediate(() => {
                   stream.emit(
                     'error',
@@ -627,7 +627,7 @@ export class LoggingServiceV2Client {
       this._gaxModule.routingHeader.fromParams({
         log_name: request.logName ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteLog request %j', request);
@@ -820,7 +820,7 @@ export class LoggingServiceV2Client {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('writeLogEntries request %j', request);
@@ -882,7 +882,7 @@ export class LoggingServiceV2Client {
    * region_tag:logging_v2_generated_LoggingServiceV2_TailLogEntries_async
    */
   tailLogEntries(options?: CallOptions): gax.CancellableStream {
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('tailLogEntries stream %j', options);
@@ -1009,7 +1009,7 @@ export class LoggingServiceV2Client {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1105,7 +1105,7 @@ export class LoggingServiceV2Client {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listLogEntries'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listLogEntries stream %j', request);
@@ -1185,7 +1185,7 @@ export class LoggingServiceV2Client {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listLogEntries'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listLogEntries iterate %j', request);
@@ -1288,7 +1288,7 @@ export class LoggingServiceV2Client {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1358,7 +1358,7 @@ export class LoggingServiceV2Client {
     const defaultCallSettings =
       this._defaults['listMonitoredResourceDescriptors'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listMonitoredResourceDescriptors stream %j', request);
@@ -1407,7 +1407,7 @@ export class LoggingServiceV2Client {
     const defaultCallSettings =
       this._defaults['listMonitoredResourceDescriptors'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listMonitoredResourceDescriptors iterate %j', request);
@@ -1530,7 +1530,7 @@ export class LoggingServiceV2Client {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1621,7 +1621,7 @@ export class LoggingServiceV2Client {
       });
     const defaultCallSettings = this._defaults['listLogs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listLogs stream %j', request);
@@ -1696,7 +1696,7 @@ export class LoggingServiceV2Client {
       });
     const defaultCallSettings = this._defaults['listLogs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listLogs iterate %j', request);
@@ -3378,7 +3378,7 @@ export class LoggingServiceV2Client {
    */
   close(): Promise<void> {
     if (this.loggingServiceV2Stub && !this._terminated) {
-      return this.loggingServiceV2Stub.then((stub) => {
+      return this.loggingServiceV2Stub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

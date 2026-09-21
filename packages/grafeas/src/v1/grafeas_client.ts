@@ -26,10 +26,10 @@ import type {
   PaginationCallback,
   GaxCall,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -64,7 +64,7 @@ export class GrafeasClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('grafeas');
@@ -77,9 +77,9 @@ export class GrafeasClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
-  pathTemplates: { [name: string]: gax.PathTemplate };
-  grafeasStub?: Promise<{ [name: string]: Function }>;
+  innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
+  grafeasStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of GrafeasClient.
@@ -155,7 +155,7 @@ export class GrafeasClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -252,7 +252,7 @@ export class GrafeasClient {
       'grafeas.v1.Grafeas',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -290,7 +290,7 @@ export class GrafeasClient {
           (this._protos as any).grafeas.v1.Grafeas,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -312,7 +312,7 @@ export class GrafeasClient {
     ];
     for (const methodName of grafeasStubMethods) {
       const callPromise = this.grafeasStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -503,7 +503,7 @@ export class GrafeasClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getOccurrence request %j', request);
@@ -630,7 +630,7 @@ export class GrafeasClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteOccurrence request %j', request);
@@ -757,7 +757,7 @@ export class GrafeasClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createOccurrence request %j', request);
@@ -884,7 +884,7 @@ export class GrafeasClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('batchCreateOccurrences request %j', request);
@@ -1013,7 +1013,7 @@ export class GrafeasClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateOccurrence request %j', request);
@@ -1139,7 +1139,7 @@ export class GrafeasClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getOccurrenceNote request %j', request);
@@ -1264,7 +1264,7 @@ export class GrafeasClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getNote request %j', request);
@@ -1389,7 +1389,7 @@ export class GrafeasClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteNote request %j', request);
@@ -1518,7 +1518,7 @@ export class GrafeasClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createNote request %j', request);
@@ -1645,7 +1645,7 @@ export class GrafeasClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('batchCreateNotes request %j', request);
@@ -1774,7 +1774,7 @@ export class GrafeasClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateNote request %j', request);
@@ -1916,7 +1916,7 @@ export class GrafeasClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1991,7 +1991,7 @@ export class GrafeasClient {
       });
     const defaultCallSettings = this._defaults['listOccurrences'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listOccurrences stream %j', request);
@@ -2050,7 +2050,7 @@ export class GrafeasClient {
       });
     const defaultCallSettings = this._defaults['listOccurrences'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listOccurrences iterate %j', request);
@@ -2156,7 +2156,7 @@ export class GrafeasClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2231,7 +2231,7 @@ export class GrafeasClient {
       });
     const defaultCallSettings = this._defaults['listNotes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listNotes stream %j', request);
@@ -2290,7 +2290,7 @@ export class GrafeasClient {
       });
     const defaultCallSettings = this._defaults['listNotes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listNotes iterate %j', request);
@@ -2391,7 +2391,7 @@ export class GrafeasClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2459,7 +2459,7 @@ export class GrafeasClient {
       });
     const defaultCallSettings = this._defaults['listNoteOccurrences'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listNoteOccurrences stream %j', request);
@@ -2511,7 +2511,7 @@ export class GrafeasClient {
       });
     const defaultCallSettings = this._defaults['listNoteOccurrences'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listNoteOccurrences iterate %j', request);
@@ -2630,7 +2630,7 @@ export class GrafeasClient {
    */
   close(): Promise<void> {
     if (this.grafeasStub && !this._terminated) {
-      return this.grafeasStub.then((stub) => {
+      return this.grafeasStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

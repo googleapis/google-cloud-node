@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it, beforeEach, afterEach } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it, beforeEach, afterEach} from 'mocha';
 import * as mcmearningsserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { GoogleAuth, protobuf } from 'google-gax';
+import {GoogleAuth, protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -134,7 +134,7 @@ describe('v1.McmEarningsServiceClient', () => {
       getClient: sinon.stub().resolves({
         getRequestHeaders: sinon
           .stub()
-          .resolves({ Authorization: 'Bearer SOME_TOKEN' }),
+          .resolves({Authorization: 'Bearer SOME_TOKEN'}),
       }),
     } as unknown as GoogleAuth;
   });
@@ -262,12 +262,12 @@ describe('v1.McmEarningsServiceClient', () => {
       assert(client.mcmEarningsServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.mcmEarningsServiceStub);
@@ -276,12 +276,12 @@ describe('v1.McmEarningsServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
         auth: googleAuth,
         projectId: 'bogus',
@@ -292,7 +292,7 @@ describe('v1.McmEarningsServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -335,7 +335,7 @@ describe('v1.McmEarningsServiceClient', () => {
   describe('fetchMcmEarnings', () => {
     it('invokes fetchMcmEarnings without error', async () => {
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -368,7 +368,7 @@ describe('v1.McmEarningsServiceClient', () => {
 
     it('invokes fetchMcmEarnings without error using callback', async () => {
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -417,7 +417,7 @@ describe('v1.McmEarningsServiceClient', () => {
 
     it('invokes fetchMcmEarnings with error', async () => {
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -448,7 +448,7 @@ describe('v1.McmEarningsServiceClient', () => {
 
     it('invokes fetchMcmEarningsStream without error', async () => {
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -494,15 +494,15 @@ describe('v1.McmEarningsServiceClient', () => {
       assert(
         (client.descriptors.page.fetchMcmEarnings.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes fetchMcmEarningsStream with error', async () => {
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -543,9 +543,9 @@ describe('v1.McmEarningsServiceClient', () => {
       assert(
         (client.descriptors.page.fetchMcmEarnings.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -586,15 +586,15 @@ describe('v1.McmEarningsServiceClient', () => {
       assert(
         (client.descriptors.page.fetchMcmEarnings.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with fetchMcmEarnings with error', async () => {
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -626,9 +626,9 @@ describe('v1.McmEarningsServiceClient', () => {
       assert(
         (client.descriptors.page.fetchMcmEarnings.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -642,7 +642,7 @@ describe('v1.McmEarningsServiceClient', () => {
         ad_break: 'adBreakValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -706,7 +706,7 @@ describe('v1.McmEarningsServiceClient', () => {
         ad_review_center_ad: 'adReviewCenterAdValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -775,7 +775,7 @@ describe('v1.McmEarningsServiceClient', () => {
         ad_rule: 'adRuleValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -824,7 +824,7 @@ describe('v1.McmEarningsServiceClient', () => {
         ad_spot: 'adSpotValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -873,7 +873,7 @@ describe('v1.McmEarningsServiceClient', () => {
         ad_unit: 'adUnitValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -922,7 +922,7 @@ describe('v1.McmEarningsServiceClient', () => {
         application: 'applicationValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -974,7 +974,7 @@ describe('v1.McmEarningsServiceClient', () => {
         audience_segment: 'audienceSegmentValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1027,7 +1027,7 @@ describe('v1.McmEarningsServiceClient', () => {
         bandwidth_group: 'bandwidthGroupValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1073,6 +1073,58 @@ describe('v1.McmEarningsServiceClient', () => {
       });
     });
 
+    describe('breakTemplate', async () => {
+      const fakePath = '/rendered/path/breakTemplate';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        break_template: 'breakTemplateValue',
+      };
+      const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.breakTemplatePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.breakTemplatePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('breakTemplatePath', () => {
+        const result = client.breakTemplatePath(
+          'networkCodeValue',
+          'breakTemplateValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.breakTemplatePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromBreakTemplateName', () => {
+        const result = client.matchNetworkCodeFromBreakTemplateName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (client.pathTemplates.breakTemplatePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchBreakTemplateFromBreakTemplateName', () => {
+        const result = client.matchBreakTemplateFromBreakTemplateName(fakePath);
+        assert.strictEqual(result, 'breakTemplateValue');
+        assert(
+          (client.pathTemplates.breakTemplatePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('browser', async () => {
       const fakePath = '/rendered/path/browser';
       const expectedParameters = {
@@ -1080,7 +1132,7 @@ describe('v1.McmEarningsServiceClient', () => {
         browser: 'browserValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1129,7 +1181,7 @@ describe('v1.McmEarningsServiceClient', () => {
         browser_language: 'browserLanguageValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1182,7 +1234,7 @@ describe('v1.McmEarningsServiceClient', () => {
         cdn_config: 'cdnConfigValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1234,7 +1286,7 @@ describe('v1.McmEarningsServiceClient', () => {
         child_publisher: 'childPublisherValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1287,7 +1339,7 @@ describe('v1.McmEarningsServiceClient', () => {
         cms_metadata_key: 'cmsMetadataKeyValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1340,7 +1392,7 @@ describe('v1.McmEarningsServiceClient', () => {
         cms_metadata_value: 'cmsMetadataValueValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1397,7 +1449,7 @@ describe('v1.McmEarningsServiceClient', () => {
         company: 'companyValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1446,7 +1498,7 @@ describe('v1.McmEarningsServiceClient', () => {
         contact: 'contactValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1495,7 +1547,7 @@ describe('v1.McmEarningsServiceClient', () => {
         content: 'contentValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1544,7 +1596,7 @@ describe('v1.McmEarningsServiceClient', () => {
         content_bundle: 'contentBundleValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1596,7 +1648,7 @@ describe('v1.McmEarningsServiceClient', () => {
         content_label: 'contentLabelValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1648,7 +1700,7 @@ describe('v1.McmEarningsServiceClient', () => {
         creative: 'creativeValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1697,7 +1749,7 @@ describe('v1.McmEarningsServiceClient', () => {
         creative_set: 'creativeSetValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1749,7 +1801,7 @@ describe('v1.McmEarningsServiceClient', () => {
         creative_template: 'creativeTemplateValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1799,6 +1851,59 @@ describe('v1.McmEarningsServiceClient', () => {
       });
     });
 
+    describe('creativeWrapper', async () => {
+      const fakePath = '/rendered/path/creativeWrapper';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        creative_wrapper: 'creativeWrapperValue',
+      };
+      const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.creativeWrapperPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.creativeWrapperPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('creativeWrapperPath', () => {
+        const result = client.creativeWrapperPath(
+          'networkCodeValue',
+          'creativeWrapperValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.creativeWrapperPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromCreativeWrapperName', () => {
+        const result = client.matchNetworkCodeFromCreativeWrapperName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (client.pathTemplates.creativeWrapperPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchCreativeWrapperFromCreativeWrapperName', () => {
+        const result =
+          client.matchCreativeWrapperFromCreativeWrapperName(fakePath);
+        assert.strictEqual(result, 'creativeWrapperValue');
+        assert(
+          (client.pathTemplates.creativeWrapperPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('customField', async () => {
       const fakePath = '/rendered/path/customField';
       const expectedParameters = {
@@ -1806,7 +1911,7 @@ describe('v1.McmEarningsServiceClient', () => {
         custom_field: 'customFieldValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1858,7 +1963,7 @@ describe('v1.McmEarningsServiceClient', () => {
         custom_targeting_key: 'customTargetingKeyValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1921,7 +2026,7 @@ describe('v1.McmEarningsServiceClient', () => {
         custom_targeting_value: 'customTargetingValueValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1979,6 +2084,232 @@ describe('v1.McmEarningsServiceClient', () => {
       });
     });
 
+    describe('daiAuthenticationKey', async () => {
+      const fakePath = '/rendered/path/daiAuthenticationKey';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        dai_authentication_key: 'daiAuthenticationKeyValue',
+      };
+      const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.daiAuthenticationKeyPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.daiAuthenticationKeyPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('daiAuthenticationKeyPath', () => {
+        const result = client.daiAuthenticationKeyPath(
+          'networkCodeValue',
+          'daiAuthenticationKeyValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.daiAuthenticationKeyPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromDaiAuthenticationKeyName', () => {
+        const result =
+          client.matchNetworkCodeFromDaiAuthenticationKeyName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (
+            client.pathTemplates.daiAuthenticationKeyPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchDaiAuthenticationKeyFromDaiAuthenticationKeyName', () => {
+        const result =
+          client.matchDaiAuthenticationKeyFromDaiAuthenticationKeyName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'daiAuthenticationKeyValue');
+        assert(
+          (
+            client.pathTemplates.daiAuthenticationKeyPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('daiEncodingProfile', async () => {
+      const fakePath = '/rendered/path/daiEncodingProfile';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        dai_encoding_profile: 'daiEncodingProfileValue',
+      };
+      const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.daiEncodingProfilePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.daiEncodingProfilePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('daiEncodingProfilePath', () => {
+        const result = client.daiEncodingProfilePath(
+          'networkCodeValue',
+          'daiEncodingProfileValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.daiEncodingProfilePathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromDaiEncodingProfileName', () => {
+        const result =
+          client.matchNetworkCodeFromDaiEncodingProfileName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (
+            client.pathTemplates.daiEncodingProfilePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchDaiEncodingProfileFromDaiEncodingProfileName', () => {
+        const result =
+          client.matchDaiEncodingProfileFromDaiEncodingProfileName(fakePath);
+        assert.strictEqual(result, 'daiEncodingProfileValue');
+        assert(
+          (
+            client.pathTemplates.daiEncodingProfilePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('daiSession', async () => {
+      const fakePath = '/rendered/path/daiSession';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        dai_session: 'daiSessionValue',
+      };
+      const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.daiSessionPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.daiSessionPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('daiSessionPath', () => {
+        const result = client.daiSessionPath(
+          'networkCodeValue',
+          'daiSessionValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.daiSessionPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromDaiSessionName', () => {
+        const result = client.matchNetworkCodeFromDaiSessionName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (client.pathTemplates.daiSessionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchDaiSessionFromDaiSessionName', () => {
+        const result = client.matchDaiSessionFromDaiSessionName(fakePath);
+        assert.strictEqual(result, 'daiSessionValue');
+        assert(
+          (client.pathTemplates.daiSessionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('defaultThirdPartyDataDeclaration', async () => {
+      const fakePath = '/rendered/path/defaultThirdPartyDataDeclaration';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+      };
+      const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.defaultThirdPartyDataDeclarationPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.defaultThirdPartyDataDeclarationPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('defaultThirdPartyDataDeclarationPath', () => {
+        const result =
+          client.defaultThirdPartyDataDeclarationPath('networkCodeValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.defaultThirdPartyDataDeclarationPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromDefaultThirdPartyDataDeclarationName', () => {
+        const result =
+          client.matchNetworkCodeFromDefaultThirdPartyDataDeclarationName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (
+            client.pathTemplates.defaultThirdPartyDataDeclarationPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('deviceCapability', async () => {
       const fakePath = '/rendered/path/deviceCapability';
       const expectedParameters = {
@@ -1986,7 +2317,7 @@ describe('v1.McmEarningsServiceClient', () => {
         device_capability: 'deviceCapabilityValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2043,7 +2374,7 @@ describe('v1.McmEarningsServiceClient', () => {
         device_category: 'deviceCategoryValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2096,7 +2427,7 @@ describe('v1.McmEarningsServiceClient', () => {
         device_manufacturer: 'deviceManufacturerValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2159,7 +2490,7 @@ describe('v1.McmEarningsServiceClient', () => {
         entity_signals_mapping: 'entitySignalsMappingValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2224,7 +2555,7 @@ describe('v1.McmEarningsServiceClient', () => {
         geo_target: 'geoTargetValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2276,7 +2607,7 @@ describe('v1.McmEarningsServiceClient', () => {
         label: 'labelValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2325,7 +2656,7 @@ describe('v1.McmEarningsServiceClient', () => {
         line_item: 'lineItemValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2374,7 +2705,7 @@ describe('v1.McmEarningsServiceClient', () => {
         linked_device: 'linkedDeviceValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2426,7 +2757,7 @@ describe('v1.McmEarningsServiceClient', () => {
         live_stream: 'liveStreamValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2478,7 +2809,7 @@ describe('v1.McmEarningsServiceClient', () => {
         live_stream_event: 'liveStreamEventValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2531,7 +2862,7 @@ describe('v1.McmEarningsServiceClient', () => {
         mobile_carrier: 'mobileCarrierValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2583,7 +2914,7 @@ describe('v1.McmEarningsServiceClient', () => {
         mobile_device: 'mobileDeviceValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2635,7 +2966,7 @@ describe('v1.McmEarningsServiceClient', () => {
         mobile_device_submodel: 'mobileDeviceSubmodelValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2693,13 +3024,65 @@ describe('v1.McmEarningsServiceClient', () => {
       });
     });
 
+    describe('nativeStyle', async () => {
+      const fakePath = '/rendered/path/nativeStyle';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        native_style: 'nativeStyleValue',
+      };
+      const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.nativeStylePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.nativeStylePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('nativeStylePath', () => {
+        const result = client.nativeStylePath(
+          'networkCodeValue',
+          'nativeStyleValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.nativeStylePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromNativeStyleName', () => {
+        const result = client.matchNetworkCodeFromNativeStyleName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (client.pathTemplates.nativeStylePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchNativeStyleFromNativeStyleName', () => {
+        const result = client.matchNativeStyleFromNativeStyleName(fakePath);
+        assert.strictEqual(result, 'nativeStyleValue');
+        assert(
+          (client.pathTemplates.nativeStylePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('network', async () => {
       const fakePath = '/rendered/path/network';
       const expectedParameters = {
         network_code: 'networkCodeValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2738,7 +3121,7 @@ describe('v1.McmEarningsServiceClient', () => {
         operating_system: 'operatingSystemValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2791,7 +3174,7 @@ describe('v1.McmEarningsServiceClient', () => {
         operating_system_version: 'operatingSystemVersionValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2856,7 +3239,7 @@ describe('v1.McmEarningsServiceClient', () => {
         order: 'orderValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2898,6 +3281,55 @@ describe('v1.McmEarningsServiceClient', () => {
       });
     });
 
+    describe('partner', async () => {
+      const fakePath = '/rendered/path/partner';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        partner: 'partnerValue',
+      };
+      const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.partnerPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.partnerPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('partnerPath', () => {
+        const result = client.partnerPath('networkCodeValue', 'partnerValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.partnerPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromPartnerName', () => {
+        const result = client.matchNetworkCodeFromPartnerName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (client.pathTemplates.partnerPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchPartnerFromPartnerName', () => {
+        const result = client.matchPartnerFromPartnerName(fakePath);
+        assert.strictEqual(result, 'partnerValue');
+        assert(
+          (client.pathTemplates.partnerPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('placement', async () => {
       const fakePath = '/rendered/path/placement';
       const expectedParameters = {
@@ -2905,7 +3337,7 @@ describe('v1.McmEarningsServiceClient', () => {
         placement: 'placementValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2957,7 +3389,7 @@ describe('v1.McmEarningsServiceClient', () => {
         private_auction: 'privateAuctionValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3010,7 +3442,7 @@ describe('v1.McmEarningsServiceClient', () => {
         private_auction_deal: 'privateAuctionDealValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3073,7 +3505,7 @@ describe('v1.McmEarningsServiceClient', () => {
         programmatic_buyer: 'programmaticBuyerValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3136,7 +3568,7 @@ describe('v1.McmEarningsServiceClient', () => {
         report: 'reportValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3185,7 +3617,7 @@ describe('v1.McmEarningsServiceClient', () => {
         rich_media_ads_company: 'richMediaAdsCompanyValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3248,7 +3680,7 @@ describe('v1.McmEarningsServiceClient', () => {
         role: 'roleValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3297,7 +3729,7 @@ describe('v1.McmEarningsServiceClient', () => {
         site: 'siteValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3346,7 +3778,7 @@ describe('v1.McmEarningsServiceClient', () => {
         slate: 'slateValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3395,7 +3827,7 @@ describe('v1.McmEarningsServiceClient', () => {
         suggested_ad_unit: 'suggestedAdUnitValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3448,7 +3880,7 @@ describe('v1.McmEarningsServiceClient', () => {
         targeting_preset: 'targetingPresetValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3501,7 +3933,7 @@ describe('v1.McmEarningsServiceClient', () => {
         taxonomy_category: 'taxonomyCategoryValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3558,7 +3990,7 @@ describe('v1.McmEarningsServiceClient', () => {
         team: 'teamValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3607,7 +4039,7 @@ describe('v1.McmEarningsServiceClient', () => {
         third_party_company: 'thirdPartyCompanyValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3670,7 +4102,7 @@ describe('v1.McmEarningsServiceClient', () => {
         user: 'userValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3712,6 +4144,69 @@ describe('v1.McmEarningsServiceClient', () => {
       });
     });
 
+    describe('viewabilityProvider', async () => {
+      const fakePath = '/rendered/path/viewabilityProvider';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        viewability_provider: 'viewabilityProviderValue',
+      };
+      const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.viewabilityProviderPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.viewabilityProviderPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('viewabilityProviderPath', () => {
+        const result = client.viewabilityProviderPath(
+          'networkCodeValue',
+          'viewabilityProviderValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.viewabilityProviderPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromViewabilityProviderName', () => {
+        const result =
+          client.matchNetworkCodeFromViewabilityProviderName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (
+            client.pathTemplates.viewabilityProviderPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchViewabilityProviderFromViewabilityProviderName', () => {
+        const result =
+          client.matchViewabilityProviderFromViewabilityProviderName(fakePath);
+        assert.strictEqual(result, 'viewabilityProviderValue');
+        assert(
+          (
+            client.pathTemplates.viewabilityProviderPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('webProperty', async () => {
       const fakePath = '/rendered/path/webProperty';
       const expectedParameters = {
@@ -3719,7 +4214,7 @@ describe('v1.McmEarningsServiceClient', () => {
         web_property: 'webPropertyValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

@@ -210,7 +210,7 @@ describe('LeaseManager', () => {
         assert.strictEqual(fakeLog!.called, true);
         assert.strictEqual(
           fakeLog!.fields!.severity,
-          loggingUtils.LogSeverity.INFO,
+          'INFO',
         );
         assert.strictEqual(fakeLog!.args![1] as string, 'a');
         assert.strictEqual(fakeLog!.args![2] as string, 'b');
@@ -243,7 +243,7 @@ describe('LeaseManager', () => {
       assert.strictEqual(fakeLog.called, true);
       assert.strictEqual(
         fakeLog.fields!.severity,
-        loggingUtils.LogSeverity.ERROR,
+        'ERROR',
       );
       assert.strictEqual(
         (fakeLog.args![0] as string).includes('exception'),
@@ -404,7 +404,7 @@ describe('LeaseManager', () => {
         assert.strictEqual(removeStub.callCount, badMessages.length);
         assert.strictEqual(
           fakeLog.fields!.severity,
-          loggingUtils.LogSeverity.WARNING,
+          'WARNING',
         );
         assert.strictEqual(fakeLog.called, true);
 

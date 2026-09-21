@@ -115,4 +115,31 @@ describe('Query Class', () => {
       q.catch(() => {});
     });
   });
+
+  it('should resolve thenable promise via query.resolve()', async () => {
+    const q = new Query<{rowCount: number}>('SELECT 1');
+    q.resolve({rowCount: 5});
+    const res = await q;
+    assert.strictEqual(res.rowCount, 5);
+  });
+
+  it('should ignore duplicate query.resolve() calls and retain first resolved value', async () => {
+    const q = new Query<{rowCount: number}>('SELECT 1');
+    q.resolve({rowCount: 5});
+    q.resolve({rowCount: 10});
+    const res = await q;
+    assert.strictEqual(res.rowCount, 5);
+  });
+
+  it('should ignore duplicate query.reject() calls and retain first rejection error', async () => {
+    const q = new Query('SELECT 1');
+    q.reject(new Error('First rejection'));
+    q.reject(new Error('Second rejection'));
+    try {
+      await q;
+      assert.fail('Expected query promise to reject');
+    } catch (err: unknown) {
+      assert.strictEqual((err as Error).message, 'First rejection');
+    }
+  });
 });

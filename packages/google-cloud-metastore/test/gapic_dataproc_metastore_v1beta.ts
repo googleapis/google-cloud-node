@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as dataprocmetastoreModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -51,7 +51,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -155,9 +155,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -205,7 +205,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     }
     it('sets apiEndpoint according to universe domain camelCase', () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        { universeDomain: 'example.com' },
+        {universeDomain: 'example.com'},
       );
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'metastore.example.com');
@@ -213,7 +213,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
 
     it('sets apiEndpoint according to universe domain snakeCase', () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        { universe_domain: 'example.com' },
+        {universe_domain: 'example.com'},
       );
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'metastore.example.com');
@@ -285,7 +285,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -294,14 +294,14 @@ describe('v1beta.DataprocMetastoreClient', () => {
       assert(client.dataprocMetastoreStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.dataprocMetastoreStub);
@@ -310,15 +310,15 @@ describe('v1beta.DataprocMetastoreClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -328,7 +328,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -337,7 +337,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -351,7 +351,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -376,7 +376,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes getService without error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -409,7 +409,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes getService without error using callback', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -458,7 +458,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes getService with error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -491,7 +491,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes getService with closed client', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -505,7 +505,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getService(request), expectedError);
@@ -516,7 +516,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes getMetadataImport without error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -549,7 +549,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes getMetadataImport without error using callback', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -598,7 +598,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes getMetadataImport with error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -631,7 +631,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes getMetadataImport with closed client', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -645,7 +645,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getMetadataImport(request), expectedError);
@@ -656,7 +656,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes getBackup without error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -689,7 +689,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes getBackup without error using callback', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -738,7 +738,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes getBackup with error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -768,7 +768,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes getBackup with closed client', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -782,7 +782,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getBackup(request), expectedError);
@@ -793,7 +793,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes removeIamPolicy without error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -826,7 +826,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes removeIamPolicy without error using callback', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -875,7 +875,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes removeIamPolicy with error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -908,7 +908,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes removeIamPolicy with closed client', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -922,7 +922,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.removeIamPolicy(request), expectedError);
@@ -933,7 +933,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes createService without error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -968,7 +968,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes createService without error using callback', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1024,7 +1024,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes createService with call error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1057,7 +1057,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes createService with LRO error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1092,7 +1092,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes checkCreateServiceProgress without error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1101,8 +1101,8 @@ describe('v1beta.DataprocMetastoreClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateServiceProgress(
@@ -1116,7 +1116,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes checkCreateServiceProgress with error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1139,7 +1139,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes updateService without error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1175,7 +1175,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes updateService without error using callback', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1232,7 +1232,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes updateService with call error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1266,7 +1266,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes updateService with LRO error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1302,7 +1302,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes checkUpdateServiceProgress without error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1311,8 +1311,8 @@ describe('v1beta.DataprocMetastoreClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateServiceProgress(
@@ -1326,7 +1326,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes checkUpdateServiceProgress with error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1349,7 +1349,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes deleteService without error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1384,7 +1384,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes deleteService without error using callback', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1440,7 +1440,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes deleteService with call error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1473,7 +1473,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes deleteService with LRO error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1508,7 +1508,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes checkDeleteServiceProgress without error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1517,8 +1517,8 @@ describe('v1beta.DataprocMetastoreClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteServiceProgress(
@@ -1532,7 +1532,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes checkDeleteServiceProgress with error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1555,7 +1555,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes createMetadataImport without error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1590,7 +1590,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes createMetadataImport without error using callback', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1646,7 +1646,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes createMetadataImport with call error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1679,7 +1679,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes createMetadataImport with LRO error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1714,7 +1714,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes checkCreateMetadataImportProgress without error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1723,8 +1723,8 @@ describe('v1beta.DataprocMetastoreClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateMetadataImportProgress(
@@ -1738,7 +1738,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes checkCreateMetadataImportProgress with error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1761,7 +1761,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes updateMetadataImport without error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1797,7 +1797,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes updateMetadataImport without error using callback', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1854,7 +1854,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes updateMetadataImport with call error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1888,7 +1888,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes updateMetadataImport with LRO error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1924,7 +1924,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes checkUpdateMetadataImportProgress without error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1933,8 +1933,8 @@ describe('v1beta.DataprocMetastoreClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateMetadataImportProgress(
@@ -1948,7 +1948,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes checkUpdateMetadataImportProgress with error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1971,7 +1971,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes exportMetadata without error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2006,7 +2006,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes exportMetadata without error using callback', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2062,7 +2062,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes exportMetadata with call error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2095,7 +2095,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes exportMetadata with LRO error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2130,7 +2130,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes checkExportMetadataProgress without error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2139,8 +2139,8 @@ describe('v1beta.DataprocMetastoreClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkExportMetadataProgress(
@@ -2154,7 +2154,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes checkExportMetadataProgress with error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2177,7 +2177,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes restoreService without error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2212,7 +2212,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes restoreService without error using callback', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2268,7 +2268,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes restoreService with call error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2301,7 +2301,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes restoreService with LRO error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2336,7 +2336,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes checkRestoreServiceProgress without error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2345,8 +2345,8 @@ describe('v1beta.DataprocMetastoreClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkRestoreServiceProgress(
@@ -2360,7 +2360,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes checkRestoreServiceProgress with error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2383,7 +2383,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes createBackup without error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2417,7 +2417,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes createBackup without error using callback', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2473,7 +2473,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes createBackup with call error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2506,7 +2506,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes createBackup with LRO error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2541,7 +2541,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes checkCreateBackupProgress without error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2550,8 +2550,8 @@ describe('v1beta.DataprocMetastoreClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateBackupProgress(
@@ -2565,7 +2565,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes checkCreateBackupProgress with error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2585,7 +2585,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes deleteBackup without error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2619,7 +2619,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes deleteBackup without error using callback', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2675,7 +2675,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes deleteBackup with call error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2708,7 +2708,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes deleteBackup with LRO error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2743,7 +2743,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes checkDeleteBackupProgress without error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2752,8 +2752,8 @@ describe('v1beta.DataprocMetastoreClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteBackupProgress(
@@ -2767,7 +2767,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes checkDeleteBackupProgress with error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2787,7 +2787,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes queryMetadata without error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2822,7 +2822,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes queryMetadata without error using callback', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2878,7 +2878,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes queryMetadata with call error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2911,7 +2911,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes queryMetadata with LRO error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2946,7 +2946,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes checkQueryMetadataProgress without error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2955,8 +2955,8 @@ describe('v1beta.DataprocMetastoreClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkQueryMetadataProgress(
@@ -2970,7 +2970,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes checkQueryMetadataProgress with error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2993,7 +2993,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes moveTableToDatabase without error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3028,7 +3028,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes moveTableToDatabase without error using callback', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3084,7 +3084,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes moveTableToDatabase with call error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3117,7 +3117,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes moveTableToDatabase with LRO error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3152,7 +3152,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes checkMoveTableToDatabaseProgress without error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3161,8 +3161,8 @@ describe('v1beta.DataprocMetastoreClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkMoveTableToDatabaseProgress(
@@ -3176,7 +3176,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes checkMoveTableToDatabaseProgress with error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3199,7 +3199,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes alterMetadataResourceLocation without error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3234,7 +3234,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes alterMetadataResourceLocation without error using callback', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3290,7 +3290,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes alterMetadataResourceLocation with call error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3326,7 +3326,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes alterMetadataResourceLocation with LRO error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3361,7 +3361,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes checkAlterMetadataResourceLocationProgress without error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3370,8 +3370,8 @@ describe('v1beta.DataprocMetastoreClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -3386,7 +3386,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes checkAlterMetadataResourceLocationProgress with error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3409,7 +3409,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes listServices without error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3450,7 +3450,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes listServices without error using callback', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3507,7 +3507,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes listServices with error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3540,7 +3540,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes listServicesStream without error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3593,16 +3593,16 @@ describe('v1beta.DataprocMetastoreClient', () => {
       assert(
         (client.descriptors.page.listServices.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listServicesStream with error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3646,16 +3646,16 @@ describe('v1beta.DataprocMetastoreClient', () => {
       assert(
         (client.descriptors.page.listServices.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listServices without error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3697,16 +3697,16 @@ describe('v1beta.DataprocMetastoreClient', () => {
       assert(
         (client.descriptors.page.listServices.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listServices with error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3739,9 +3739,9 @@ describe('v1beta.DataprocMetastoreClient', () => {
       assert(
         (client.descriptors.page.listServices.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -3750,7 +3750,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes listMetadataImports without error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3792,7 +3792,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes listMetadataImports without error using callback', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3825,8 +3825,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.metastore.v1beta.IMetadataImport[]
-              | null,
+              protos.google.cloud.metastore.v1beta.IMetadataImport[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -3851,7 +3850,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes listMetadataImports with error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3884,7 +3883,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes listMetadataImportsStream without error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3938,16 +3937,16 @@ describe('v1beta.DataprocMetastoreClient', () => {
       assert(
         (client.descriptors.page.listMetadataImports.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listMetadataImportsStream with error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3990,16 +3989,16 @@ describe('v1beta.DataprocMetastoreClient', () => {
       assert(
         (client.descriptors.page.listMetadataImports.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listMetadataImports without error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4042,16 +4041,16 @@ describe('v1beta.DataprocMetastoreClient', () => {
       assert(
         (client.descriptors.page.listMetadataImports.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listMetadataImports with error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4085,9 +4084,9 @@ describe('v1beta.DataprocMetastoreClient', () => {
       assert(
         (client.descriptors.page.listMetadataImports.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4096,7 +4095,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes listBackups without error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4137,7 +4136,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes listBackups without error using callback', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4194,7 +4193,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes listBackups with error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4227,7 +4226,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes listBackupsStream without error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4280,16 +4279,16 @@ describe('v1beta.DataprocMetastoreClient', () => {
       assert(
         (client.descriptors.page.listBackups.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listBackupsStream with error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4333,16 +4332,16 @@ describe('v1beta.DataprocMetastoreClient', () => {
       assert(
         (client.descriptors.page.listBackups.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listBackups without error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4384,16 +4383,16 @@ describe('v1beta.DataprocMetastoreClient', () => {
       assert(
         (client.descriptors.page.listBackups.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listBackups with error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4428,9 +4427,9 @@ describe('v1beta.DataprocMetastoreClient', () => {
       assert(
         (client.descriptors.page.listBackups.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4438,7 +4437,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes getIamPolicy without error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4470,7 +4469,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes getIamPolicy without error using callback', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4509,7 +4508,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -4520,7 +4519,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes getIamPolicy with error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4554,7 +4553,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes setIamPolicy without error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4586,7 +4585,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes setIamPolicy without error using callback', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4625,7 +4624,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -4636,7 +4635,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes setIamPolicy with error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4670,7 +4669,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes testIamPermissions without error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4705,7 +4704,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes testIamPermissions without error using callback', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4744,7 +4743,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -4755,7 +4754,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes testIamPermissions with error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4792,7 +4791,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes getLocation without error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4824,7 +4823,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes getLocation without error using callback', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4870,7 +4869,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes getLocation with error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4907,7 +4906,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4957,7 +4956,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('uses async iteration with listLocations with error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5000,7 +4999,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes getOperation without error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5023,7 +5022,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes getOperation without error using callback', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5052,7 +5051,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -5063,7 +5062,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes getOperation with error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5089,7 +5088,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5113,7 +5112,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes cancelOperation without error using callback', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5142,7 +5141,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -5153,7 +5152,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes cancelOperation with error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5179,7 +5178,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5203,7 +5202,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes deleteOperation without error using callback', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5232,7 +5231,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -5243,7 +5242,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('invokes deleteOperation with error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5269,7 +5268,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5306,7 +5305,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
     it('uses async iteration with listOperations with error', async () => {
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5345,7 +5344,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
       };
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5422,7 +5421,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
       };
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5488,7 +5487,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
       };
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5553,7 +5552,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
       };
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5606,7 +5605,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
       };
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5683,7 +5682,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
       };
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5733,7 +5732,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
       };
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5775,7 +5774,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
       };
       const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );

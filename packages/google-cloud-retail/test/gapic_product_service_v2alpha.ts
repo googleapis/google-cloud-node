@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as productserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -50,7 +50,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -154,9 +154,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -277,7 +277,7 @@ describe('v2alpha.ProductServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.productServiceStub, undefined);
@@ -285,12 +285,12 @@ describe('v2alpha.ProductServiceClient', () => {
       assert(client.productServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.productServiceStub);
@@ -299,14 +299,14 @@ describe('v2alpha.ProductServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.productServiceStub, undefined);
@@ -315,7 +315,7 @@ describe('v2alpha.ProductServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -323,7 +323,7 @@ describe('v2alpha.ProductServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -335,7 +335,7 @@ describe('v2alpha.ProductServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -358,7 +358,7 @@ describe('v2alpha.ProductServiceClient', () => {
   describe('createProduct', () => {
     it('invokes createProduct without error', async () => {
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -389,7 +389,7 @@ describe('v2alpha.ProductServiceClient', () => {
 
     it('invokes createProduct without error using callback', async () => {
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -436,7 +436,7 @@ describe('v2alpha.ProductServiceClient', () => {
 
     it('invokes createProduct with error', async () => {
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -467,7 +467,7 @@ describe('v2alpha.ProductServiceClient', () => {
 
     it('invokes createProduct with closed client', async () => {
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -480,7 +480,7 @@ describe('v2alpha.ProductServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createProduct(request), expectedError);
@@ -490,7 +490,7 @@ describe('v2alpha.ProductServiceClient', () => {
   describe('getProduct', () => {
     it('invokes getProduct without error', async () => {
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -521,7 +521,7 @@ describe('v2alpha.ProductServiceClient', () => {
 
     it('invokes getProduct without error using callback', async () => {
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -568,7 +568,7 @@ describe('v2alpha.ProductServiceClient', () => {
 
     it('invokes getProduct with error', async () => {
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -599,7 +599,7 @@ describe('v2alpha.ProductServiceClient', () => {
 
     it('invokes getProduct with closed client', async () => {
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -612,7 +612,7 @@ describe('v2alpha.ProductServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getProduct(request), expectedError);
@@ -622,7 +622,7 @@ describe('v2alpha.ProductServiceClient', () => {
   describe('updateProduct', () => {
     it('invokes updateProduct without error', async () => {
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -654,7 +654,7 @@ describe('v2alpha.ProductServiceClient', () => {
 
     it('invokes updateProduct without error using callback', async () => {
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -702,7 +702,7 @@ describe('v2alpha.ProductServiceClient', () => {
 
     it('invokes updateProduct with error', async () => {
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -734,7 +734,7 @@ describe('v2alpha.ProductServiceClient', () => {
 
     it('invokes updateProduct with closed client', async () => {
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -748,7 +748,7 @@ describe('v2alpha.ProductServiceClient', () => {
       );
       request.product.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateProduct(request), expectedError);
@@ -758,7 +758,7 @@ describe('v2alpha.ProductServiceClient', () => {
   describe('deleteProduct', () => {
     it('invokes deleteProduct without error', async () => {
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -789,7 +789,7 @@ describe('v2alpha.ProductServiceClient', () => {
 
     it('invokes deleteProduct without error using callback', async () => {
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -836,7 +836,7 @@ describe('v2alpha.ProductServiceClient', () => {
 
     it('invokes deleteProduct with error', async () => {
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -867,7 +867,7 @@ describe('v2alpha.ProductServiceClient', () => {
 
     it('invokes deleteProduct with closed client', async () => {
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -880,7 +880,7 @@ describe('v2alpha.ProductServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteProduct(request), expectedError);
@@ -890,7 +890,7 @@ describe('v2alpha.ProductServiceClient', () => {
   describe('purgeProducts', () => {
     it('invokes purgeProducts without error', async () => {
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -923,7 +923,7 @@ describe('v2alpha.ProductServiceClient', () => {
 
     it('invokes purgeProducts without error using callback', async () => {
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -977,7 +977,7 @@ describe('v2alpha.ProductServiceClient', () => {
 
     it('invokes purgeProducts with call error', async () => {
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1008,7 +1008,7 @@ describe('v2alpha.ProductServiceClient', () => {
 
     it('invokes purgeProducts with LRO error', async () => {
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1041,7 +1041,7 @@ describe('v2alpha.ProductServiceClient', () => {
 
     it('invokes checkPurgeProductsProgress without error', async () => {
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1049,8 +1049,8 @@ describe('v2alpha.ProductServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkPurgeProductsProgress(
@@ -1063,7 +1063,7 @@ describe('v2alpha.ProductServiceClient', () => {
 
     it('invokes checkPurgeProductsProgress with error', async () => {
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1084,7 +1084,7 @@ describe('v2alpha.ProductServiceClient', () => {
   describe('importProducts', () => {
     it('invokes importProducts without error', async () => {
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1117,7 +1117,7 @@ describe('v2alpha.ProductServiceClient', () => {
 
     it('invokes importProducts without error using callback', async () => {
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1171,7 +1171,7 @@ describe('v2alpha.ProductServiceClient', () => {
 
     it('invokes importProducts with call error', async () => {
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1202,7 +1202,7 @@ describe('v2alpha.ProductServiceClient', () => {
 
     it('invokes importProducts with LRO error', async () => {
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1235,7 +1235,7 @@ describe('v2alpha.ProductServiceClient', () => {
 
     it('invokes checkImportProductsProgress without error', async () => {
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1243,8 +1243,8 @@ describe('v2alpha.ProductServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkImportProductsProgress(
@@ -1257,7 +1257,7 @@ describe('v2alpha.ProductServiceClient', () => {
 
     it('invokes checkImportProductsProgress with error', async () => {
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1278,7 +1278,7 @@ describe('v2alpha.ProductServiceClient', () => {
   describe('exportProducts', () => {
     it('invokes exportProducts without error', async () => {
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1311,7 +1311,7 @@ describe('v2alpha.ProductServiceClient', () => {
 
     it('invokes exportProducts without error using callback', async () => {
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1365,7 +1365,7 @@ describe('v2alpha.ProductServiceClient', () => {
 
     it('invokes exportProducts with call error', async () => {
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1396,7 +1396,7 @@ describe('v2alpha.ProductServiceClient', () => {
 
     it('invokes exportProducts with LRO error', async () => {
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1429,7 +1429,7 @@ describe('v2alpha.ProductServiceClient', () => {
 
     it('invokes checkExportProductsProgress without error', async () => {
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1437,8 +1437,8 @@ describe('v2alpha.ProductServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkExportProductsProgress(
@@ -1451,7 +1451,7 @@ describe('v2alpha.ProductServiceClient', () => {
 
     it('invokes checkExportProductsProgress with error', async () => {
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1472,7 +1472,7 @@ describe('v2alpha.ProductServiceClient', () => {
   describe('setInventory', () => {
     it('invokes setInventory without error', async () => {
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1505,7 +1505,7 @@ describe('v2alpha.ProductServiceClient', () => {
 
     it('invokes setInventory without error using callback', async () => {
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1560,7 +1560,7 @@ describe('v2alpha.ProductServiceClient', () => {
 
     it('invokes setInventory with call error', async () => {
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1592,7 +1592,7 @@ describe('v2alpha.ProductServiceClient', () => {
 
     it('invokes setInventory with LRO error', async () => {
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1626,7 +1626,7 @@ describe('v2alpha.ProductServiceClient', () => {
 
     it('invokes checkSetInventoryProgress without error', async () => {
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1634,8 +1634,8 @@ describe('v2alpha.ProductServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkSetInventoryProgress(
@@ -1648,7 +1648,7 @@ describe('v2alpha.ProductServiceClient', () => {
 
     it('invokes checkSetInventoryProgress with error', async () => {
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1666,7 +1666,7 @@ describe('v2alpha.ProductServiceClient', () => {
   describe('addFulfillmentPlaces', () => {
     it('invokes addFulfillmentPlaces without error', async () => {
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1699,7 +1699,7 @@ describe('v2alpha.ProductServiceClient', () => {
 
     it('invokes addFulfillmentPlaces without error using callback', async () => {
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1753,7 +1753,7 @@ describe('v2alpha.ProductServiceClient', () => {
 
     it('invokes addFulfillmentPlaces with call error', async () => {
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1784,7 +1784,7 @@ describe('v2alpha.ProductServiceClient', () => {
 
     it('invokes addFulfillmentPlaces with LRO error', async () => {
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1817,7 +1817,7 @@ describe('v2alpha.ProductServiceClient', () => {
 
     it('invokes checkAddFulfillmentPlacesProgress without error', async () => {
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1825,8 +1825,8 @@ describe('v2alpha.ProductServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkAddFulfillmentPlacesProgress(
@@ -1839,7 +1839,7 @@ describe('v2alpha.ProductServiceClient', () => {
 
     it('invokes checkAddFulfillmentPlacesProgress with error', async () => {
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1860,7 +1860,7 @@ describe('v2alpha.ProductServiceClient', () => {
   describe('removeFulfillmentPlaces', () => {
     it('invokes removeFulfillmentPlaces without error', async () => {
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1893,7 +1893,7 @@ describe('v2alpha.ProductServiceClient', () => {
 
     it('invokes removeFulfillmentPlaces without error using callback', async () => {
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1947,7 +1947,7 @@ describe('v2alpha.ProductServiceClient', () => {
 
     it('invokes removeFulfillmentPlaces with call error', async () => {
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1981,7 +1981,7 @@ describe('v2alpha.ProductServiceClient', () => {
 
     it('invokes removeFulfillmentPlaces with LRO error', async () => {
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2014,7 +2014,7 @@ describe('v2alpha.ProductServiceClient', () => {
 
     it('invokes checkRemoveFulfillmentPlacesProgress without error', async () => {
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2022,8 +2022,8 @@ describe('v2alpha.ProductServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -2037,7 +2037,7 @@ describe('v2alpha.ProductServiceClient', () => {
 
     it('invokes checkRemoveFulfillmentPlacesProgress with error', async () => {
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2058,7 +2058,7 @@ describe('v2alpha.ProductServiceClient', () => {
   describe('addLocalInventories', () => {
     it('invokes addLocalInventories without error', async () => {
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2091,7 +2091,7 @@ describe('v2alpha.ProductServiceClient', () => {
 
     it('invokes addLocalInventories without error using callback', async () => {
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2145,7 +2145,7 @@ describe('v2alpha.ProductServiceClient', () => {
 
     it('invokes addLocalInventories with call error', async () => {
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2176,7 +2176,7 @@ describe('v2alpha.ProductServiceClient', () => {
 
     it('invokes addLocalInventories with LRO error', async () => {
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2209,7 +2209,7 @@ describe('v2alpha.ProductServiceClient', () => {
 
     it('invokes checkAddLocalInventoriesProgress without error', async () => {
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2217,8 +2217,8 @@ describe('v2alpha.ProductServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkAddLocalInventoriesProgress(
@@ -2231,7 +2231,7 @@ describe('v2alpha.ProductServiceClient', () => {
 
     it('invokes checkAddLocalInventoriesProgress with error', async () => {
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2252,7 +2252,7 @@ describe('v2alpha.ProductServiceClient', () => {
   describe('removeLocalInventories', () => {
     it('invokes removeLocalInventories without error', async () => {
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2285,7 +2285,7 @@ describe('v2alpha.ProductServiceClient', () => {
 
     it('invokes removeLocalInventories without error using callback', async () => {
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2339,7 +2339,7 @@ describe('v2alpha.ProductServiceClient', () => {
 
     it('invokes removeLocalInventories with call error', async () => {
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2373,7 +2373,7 @@ describe('v2alpha.ProductServiceClient', () => {
 
     it('invokes removeLocalInventories with LRO error', async () => {
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2406,7 +2406,7 @@ describe('v2alpha.ProductServiceClient', () => {
 
     it('invokes checkRemoveLocalInventoriesProgress without error', async () => {
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2414,8 +2414,8 @@ describe('v2alpha.ProductServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkRemoveLocalInventoriesProgress(
@@ -2428,7 +2428,7 @@ describe('v2alpha.ProductServiceClient', () => {
 
     it('invokes checkRemoveLocalInventoriesProgress with error', async () => {
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2449,7 +2449,7 @@ describe('v2alpha.ProductServiceClient', () => {
   describe('listProducts', () => {
     it('invokes listProducts without error', async () => {
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2482,7 +2482,7 @@ describe('v2alpha.ProductServiceClient', () => {
 
     it('invokes listProducts without error using callback', async () => {
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2531,7 +2531,7 @@ describe('v2alpha.ProductServiceClient', () => {
 
     it('invokes listProducts with error', async () => {
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2562,7 +2562,7 @@ describe('v2alpha.ProductServiceClient', () => {
 
     it('invokes listProductsStream without error', async () => {
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2608,15 +2608,15 @@ describe('v2alpha.ProductServiceClient', () => {
       assert(
         (client.descriptors.page.listProducts.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listProductsStream with error', async () => {
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2659,15 +2659,15 @@ describe('v2alpha.ProductServiceClient', () => {
       assert(
         (client.descriptors.page.listProducts.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listProducts without error', async () => {
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2702,15 +2702,15 @@ describe('v2alpha.ProductServiceClient', () => {
       assert(
         (client.descriptors.page.listProducts.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listProducts with error', async () => {
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2742,16 +2742,16 @@ describe('v2alpha.ProductServiceClient', () => {
       assert(
         (client.descriptors.page.listProducts.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2781,7 +2781,7 @@ describe('v2alpha.ProductServiceClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2825,7 +2825,7 @@ describe('v2alpha.ProductServiceClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2860,7 +2860,7 @@ describe('v2alpha.ProductServiceClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2908,7 +2908,7 @@ describe('v2alpha.ProductServiceClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2949,7 +2949,7 @@ describe('v2alpha.ProductServiceClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2970,7 +2970,7 @@ describe('v2alpha.ProductServiceClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2998,7 +2998,7 @@ describe('v2alpha.ProductServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3008,7 +3008,7 @@ describe('v2alpha.ProductServiceClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -3032,7 +3032,7 @@ describe('v2alpha.ProductServiceClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3054,7 +3054,7 @@ describe('v2alpha.ProductServiceClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -3082,7 +3082,7 @@ describe('v2alpha.ProductServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3092,7 +3092,7 @@ describe('v2alpha.ProductServiceClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -3116,7 +3116,7 @@ describe('v2alpha.ProductServiceClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3138,7 +3138,7 @@ describe('v2alpha.ProductServiceClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -3166,7 +3166,7 @@ describe('v2alpha.ProductServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3176,7 +3176,7 @@ describe('v2alpha.ProductServiceClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -3200,7 +3200,7 @@ describe('v2alpha.ProductServiceClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -3235,7 +3235,7 @@ describe('v2alpha.ProductServiceClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3269,7 +3269,7 @@ describe('v2alpha.ProductServiceClient', () => {
         project: 'projectValue',
       };
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3309,7 +3309,7 @@ describe('v2alpha.ProductServiceClient', () => {
         catalog: 'catalogValue',
       };
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3377,7 +3377,7 @@ describe('v2alpha.ProductServiceClient', () => {
         branch: 'branchValue',
       };
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3452,7 +3452,7 @@ describe('v2alpha.ProductServiceClient', () => {
         catalog: 'catalogValue',
       };
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3516,7 +3516,7 @@ describe('v2alpha.ProductServiceClient', () => {
         catalog: 'catalogValue',
       };
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3584,7 +3584,7 @@ describe('v2alpha.ProductServiceClient', () => {
         control: 'controlValue',
       };
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3657,7 +3657,7 @@ describe('v2alpha.ProductServiceClient', () => {
         project: 'projectValue',
       };
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3698,7 +3698,7 @@ describe('v2alpha.ProductServiceClient', () => {
         merchant_center_account_link: 'merchantCenterAccountLinkValue',
       };
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3795,7 +3795,7 @@ describe('v2alpha.ProductServiceClient', () => {
         model: 'modelValue',
       };
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3872,7 +3872,7 @@ describe('v2alpha.ProductServiceClient', () => {
         product: 'productValue',
       };
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3956,7 +3956,7 @@ describe('v2alpha.ProductServiceClient', () => {
         project: 'projectValue',
       };
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3997,7 +3997,7 @@ describe('v2alpha.ProductServiceClient', () => {
         serving_config: 'servingConfigValue',
       };
       const client = new productserviceModule.v2alpha.ProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

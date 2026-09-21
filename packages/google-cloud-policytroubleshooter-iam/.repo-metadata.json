@@ -8,7 +8,7 @@
     "issue_tracker": "https://issuetracker.google.com/issues/new?component=690790&template=1814512",
     "language": "nodejs",
     "library_type": "GAPIC_AUTO",
-    "name": "policytroubleshooter",
+    "name": "iam",
     "name_pretty": "Policy Troubleshooter",
     "product_documentation": "https://cloud.google.com/policy-intelligence/docs",
     "release_level": "preview",

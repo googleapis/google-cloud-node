@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as placesModule from '../src';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -43,7 +43,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -174,7 +174,7 @@ describe('v1.PlacesClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new placesModule.v1.PlacesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.placesStub, undefined);
@@ -182,12 +182,12 @@ describe('v1.PlacesClient', () => {
       assert(client.placesStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new placesModule.v1.PlacesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.placesStub);
@@ -196,14 +196,14 @@ describe('v1.PlacesClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new placesModule.v1.PlacesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.placesStub, undefined);
@@ -212,7 +212,7 @@ describe('v1.PlacesClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -220,7 +220,7 @@ describe('v1.PlacesClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new placesModule.v1.PlacesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -232,7 +232,7 @@ describe('v1.PlacesClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new placesModule.v1.PlacesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -255,7 +255,7 @@ describe('v1.PlacesClient', () => {
   describe('searchNearby', () => {
     it('invokes searchNearby without error', async () => {
       const client = new placesModule.v1.PlacesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -272,7 +272,7 @@ describe('v1.PlacesClient', () => {
 
     it('invokes searchNearby without error using callback', async () => {
       const client = new placesModule.v1.PlacesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -305,7 +305,7 @@ describe('v1.PlacesClient', () => {
 
     it('invokes searchNearby with error', async () => {
       const client = new placesModule.v1.PlacesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -322,7 +322,7 @@ describe('v1.PlacesClient', () => {
 
     it('invokes searchNearby with closed client', async () => {
       const client = new placesModule.v1.PlacesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -330,7 +330,7 @@ describe('v1.PlacesClient', () => {
         new protos.google.maps.places.v1.SearchNearbyRequest(),
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.searchNearby(request), expectedError);
@@ -340,7 +340,7 @@ describe('v1.PlacesClient', () => {
   describe('searchText', () => {
     it('invokes searchText without error', async () => {
       const client = new placesModule.v1.PlacesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -357,7 +357,7 @@ describe('v1.PlacesClient', () => {
 
     it('invokes searchText without error using callback', async () => {
       const client = new placesModule.v1.PlacesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -390,7 +390,7 @@ describe('v1.PlacesClient', () => {
 
     it('invokes searchText with error', async () => {
       const client = new placesModule.v1.PlacesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -407,7 +407,7 @@ describe('v1.PlacesClient', () => {
 
     it('invokes searchText with closed client', async () => {
       const client = new placesModule.v1.PlacesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -415,7 +415,7 @@ describe('v1.PlacesClient', () => {
         new protos.google.maps.places.v1.SearchTextRequest(),
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.searchText(request), expectedError);
@@ -425,7 +425,7 @@ describe('v1.PlacesClient', () => {
   describe('getPhotoMedia', () => {
     it('invokes getPhotoMedia without error', async () => {
       const client = new placesModule.v1.PlacesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -456,7 +456,7 @@ describe('v1.PlacesClient', () => {
 
     it('invokes getPhotoMedia without error using callback', async () => {
       const client = new placesModule.v1.PlacesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -503,7 +503,7 @@ describe('v1.PlacesClient', () => {
 
     it('invokes getPhotoMedia with error', async () => {
       const client = new placesModule.v1.PlacesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -534,7 +534,7 @@ describe('v1.PlacesClient', () => {
 
     it('invokes getPhotoMedia with closed client', async () => {
       const client = new placesModule.v1.PlacesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -547,7 +547,7 @@ describe('v1.PlacesClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getPhotoMedia(request), expectedError);
@@ -557,7 +557,7 @@ describe('v1.PlacesClient', () => {
   describe('getPlace', () => {
     it('invokes getPlace without error', async () => {
       const client = new placesModule.v1.PlacesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -588,7 +588,7 @@ describe('v1.PlacesClient', () => {
 
     it('invokes getPlace without error using callback', async () => {
       const client = new placesModule.v1.PlacesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -635,7 +635,7 @@ describe('v1.PlacesClient', () => {
 
     it('invokes getPlace with error', async () => {
       const client = new placesModule.v1.PlacesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -663,7 +663,7 @@ describe('v1.PlacesClient', () => {
 
     it('invokes getPlace with closed client', async () => {
       const client = new placesModule.v1.PlacesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -676,7 +676,7 @@ describe('v1.PlacesClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getPlace(request), expectedError);
@@ -686,7 +686,7 @@ describe('v1.PlacesClient', () => {
   describe('autocompletePlaces', () => {
     it('invokes autocompletePlaces without error', async () => {
       const client = new placesModule.v1.PlacesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -704,7 +704,7 @@ describe('v1.PlacesClient', () => {
 
     it('invokes autocompletePlaces without error using callback', async () => {
       const client = new placesModule.v1.PlacesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -737,7 +737,7 @@ describe('v1.PlacesClient', () => {
 
     it('invokes autocompletePlaces with error', async () => {
       const client = new placesModule.v1.PlacesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -754,7 +754,7 @@ describe('v1.PlacesClient', () => {
 
     it('invokes autocompletePlaces with closed client', async () => {
       const client = new placesModule.v1.PlacesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -762,7 +762,7 @@ describe('v1.PlacesClient', () => {
         new protos.google.maps.places.v1.AutocompletePlacesRequest(),
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.autocompletePlaces(request), expectedError);
@@ -777,7 +777,7 @@ describe('v1.PlacesClient', () => {
         photo: 'photoValue',
       };
       const client = new placesModule.v1.PlacesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -826,7 +826,7 @@ describe('v1.PlacesClient', () => {
         photo_reference: 'photoReferenceValue',
       };
       const client = new placesModule.v1.PlacesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -877,7 +877,7 @@ describe('v1.PlacesClient', () => {
         place_id: 'placeIdValue',
       };
       const client = new placesModule.v1.PlacesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -916,7 +916,7 @@ describe('v1.PlacesClient', () => {
         review: 'reviewValue',
       };
       const client = new placesModule.v1.PlacesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

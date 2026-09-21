@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as phonenumbersModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, LocationProtos } from 'google-gax';
+import {protobuf, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -239,7 +239,7 @@ describe('v2beta1.PhoneNumbersClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new phonenumbersModule.v2beta1.PhoneNumbersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.phoneNumbersStub, undefined);
@@ -247,12 +247,12 @@ describe('v2beta1.PhoneNumbersClient', () => {
       assert(client.phoneNumbersStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new phonenumbersModule.v2beta1.PhoneNumbersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.phoneNumbersStub);
@@ -261,14 +261,14 @@ describe('v2beta1.PhoneNumbersClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new phonenumbersModule.v2beta1.PhoneNumbersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.phoneNumbersStub, undefined);
@@ -277,7 +277,7 @@ describe('v2beta1.PhoneNumbersClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -285,7 +285,7 @@ describe('v2beta1.PhoneNumbersClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new phonenumbersModule.v2beta1.PhoneNumbersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -297,7 +297,7 @@ describe('v2beta1.PhoneNumbersClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new phonenumbersModule.v2beta1.PhoneNumbersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -320,7 +320,7 @@ describe('v2beta1.PhoneNumbersClient', () => {
   describe('updatePhoneNumber', () => {
     it('invokes updatePhoneNumber without error', async () => {
       const client = new phonenumbersModule.v2beta1.PhoneNumbersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -352,7 +352,7 @@ describe('v2beta1.PhoneNumbersClient', () => {
 
     it('invokes updatePhoneNumber without error using callback', async () => {
       const client = new phonenumbersModule.v2beta1.PhoneNumbersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -400,7 +400,7 @@ describe('v2beta1.PhoneNumbersClient', () => {
 
     it('invokes updatePhoneNumber with error', async () => {
       const client = new phonenumbersModule.v2beta1.PhoneNumbersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -432,7 +432,7 @@ describe('v2beta1.PhoneNumbersClient', () => {
 
     it('invokes updatePhoneNumber with closed client', async () => {
       const client = new phonenumbersModule.v2beta1.PhoneNumbersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -446,7 +446,7 @@ describe('v2beta1.PhoneNumbersClient', () => {
       );
       request.phoneNumber.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updatePhoneNumber(request), expectedError);
@@ -456,7 +456,7 @@ describe('v2beta1.PhoneNumbersClient', () => {
   describe('deletePhoneNumber', () => {
     it('invokes deletePhoneNumber without error', async () => {
       const client = new phonenumbersModule.v2beta1.PhoneNumbersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -487,7 +487,7 @@ describe('v2beta1.PhoneNumbersClient', () => {
 
     it('invokes deletePhoneNumber without error using callback', async () => {
       const client = new phonenumbersModule.v2beta1.PhoneNumbersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -534,7 +534,7 @@ describe('v2beta1.PhoneNumbersClient', () => {
 
     it('invokes deletePhoneNumber with error', async () => {
       const client = new phonenumbersModule.v2beta1.PhoneNumbersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -565,7 +565,7 @@ describe('v2beta1.PhoneNumbersClient', () => {
 
     it('invokes deletePhoneNumber with closed client', async () => {
       const client = new phonenumbersModule.v2beta1.PhoneNumbersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -578,7 +578,7 @@ describe('v2beta1.PhoneNumbersClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deletePhoneNumber(request), expectedError);
@@ -588,7 +588,7 @@ describe('v2beta1.PhoneNumbersClient', () => {
   describe('undeletePhoneNumber', () => {
     it('invokes undeletePhoneNumber without error', async () => {
       const client = new phonenumbersModule.v2beta1.PhoneNumbersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -620,7 +620,7 @@ describe('v2beta1.PhoneNumbersClient', () => {
 
     it('invokes undeletePhoneNumber without error using callback', async () => {
       const client = new phonenumbersModule.v2beta1.PhoneNumbersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -667,7 +667,7 @@ describe('v2beta1.PhoneNumbersClient', () => {
 
     it('invokes undeletePhoneNumber with error', async () => {
       const client = new phonenumbersModule.v2beta1.PhoneNumbersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -698,7 +698,7 @@ describe('v2beta1.PhoneNumbersClient', () => {
 
     it('invokes undeletePhoneNumber with closed client', async () => {
       const client = new phonenumbersModule.v2beta1.PhoneNumbersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -711,7 +711,7 @@ describe('v2beta1.PhoneNumbersClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.undeletePhoneNumber(request), expectedError);
@@ -721,7 +721,7 @@ describe('v2beta1.PhoneNumbersClient', () => {
   describe('listPhoneNumbers', () => {
     it('invokes listPhoneNumbers without error', async () => {
       const client = new phonenumbersModule.v2beta1.PhoneNumbersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -760,7 +760,7 @@ describe('v2beta1.PhoneNumbersClient', () => {
 
     it('invokes listPhoneNumbers without error using callback', async () => {
       const client = new phonenumbersModule.v2beta1.PhoneNumbersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -792,8 +792,7 @@ describe('v2beta1.PhoneNumbersClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.dialogflow.v2beta1.IPhoneNumber[]
-              | null,
+              protos.google.cloud.dialogflow.v2beta1.IPhoneNumber[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -817,7 +816,7 @@ describe('v2beta1.PhoneNumbersClient', () => {
 
     it('invokes listPhoneNumbers with error', async () => {
       const client = new phonenumbersModule.v2beta1.PhoneNumbersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -848,7 +847,7 @@ describe('v2beta1.PhoneNumbersClient', () => {
 
     it('invokes listPhoneNumbersStream without error', async () => {
       const client = new phonenumbersModule.v2beta1.PhoneNumbersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -901,15 +900,15 @@ describe('v2beta1.PhoneNumbersClient', () => {
       assert(
         (client.descriptors.page.listPhoneNumbers.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listPhoneNumbersStream with error', async () => {
       const client = new phonenumbersModule.v2beta1.PhoneNumbersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -951,15 +950,15 @@ describe('v2beta1.PhoneNumbersClient', () => {
       assert(
         (client.descriptors.page.listPhoneNumbers.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listPhoneNumbers without error', async () => {
       const client = new phonenumbersModule.v2beta1.PhoneNumbersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1001,15 +1000,15 @@ describe('v2beta1.PhoneNumbersClient', () => {
       assert(
         (client.descriptors.page.listPhoneNumbers.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listPhoneNumbers with error', async () => {
       const client = new phonenumbersModule.v2beta1.PhoneNumbersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1042,16 +1041,16 @@ describe('v2beta1.PhoneNumbersClient', () => {
       assert(
         (client.descriptors.page.listPhoneNumbers.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new phonenumbersModule.v2beta1.PhoneNumbersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1081,7 +1080,7 @@ describe('v2beta1.PhoneNumbersClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new phonenumbersModule.v2beta1.PhoneNumbersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1125,7 +1124,7 @@ describe('v2beta1.PhoneNumbersClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new phonenumbersModule.v2beta1.PhoneNumbersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1160,7 +1159,7 @@ describe('v2beta1.PhoneNumbersClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new phonenumbersModule.v2beta1.PhoneNumbersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1208,7 +1207,7 @@ describe('v2beta1.PhoneNumbersClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new phonenumbersModule.v2beta1.PhoneNumbersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1255,7 +1254,7 @@ describe('v2beta1.PhoneNumbersClient', () => {
         location: 'locationValue',
       };
       const client = new phonenumbersModule.v2beta1.PhoneNumbersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1308,7 +1307,7 @@ describe('v2beta1.PhoneNumbersClient', () => {
         generator: 'generatorValue',
       };
       const client = new phonenumbersModule.v2beta1.PhoneNumbersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1373,7 +1372,7 @@ describe('v2beta1.PhoneNumbersClient', () => {
         evaluation: 'evaluationValue',
       };
       const client = new phonenumbersModule.v2beta1.PhoneNumbersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1464,7 +1463,7 @@ describe('v2beta1.PhoneNumbersClient', () => {
         project: 'projectValue',
       };
       const client = new phonenumbersModule.v2beta1.PhoneNumbersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1502,7 +1501,7 @@ describe('v2beta1.PhoneNumbersClient', () => {
         project: 'projectValue',
       };
       const client = new phonenumbersModule.v2beta1.PhoneNumbersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1541,7 +1540,7 @@ describe('v2beta1.PhoneNumbersClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new phonenumbersModule.v2beta1.PhoneNumbersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1604,7 +1603,7 @@ describe('v2beta1.PhoneNumbersClient', () => {
         environment: 'environmentValue',
       };
       const client = new phonenumbersModule.v2beta1.PhoneNumbersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1671,7 +1670,7 @@ describe('v2beta1.PhoneNumbersClient', () => {
         context: 'contextValue',
       };
       const client = new phonenumbersModule.v2beta1.PhoneNumbersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1797,7 +1796,7 @@ describe('v2beta1.PhoneNumbersClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new phonenumbersModule.v2beta1.PhoneNumbersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1918,7 +1917,7 @@ describe('v2beta1.PhoneNumbersClient', () => {
         project: 'projectValue',
       };
       const client = new phonenumbersModule.v2beta1.PhoneNumbersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1964,7 +1963,7 @@ describe('v2beta1.PhoneNumbersClient', () => {
         intent: 'intentValue',
       };
       const client = new phonenumbersModule.v2beta1.PhoneNumbersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2026,7 +2025,7 @@ describe('v2beta1.PhoneNumbersClient', () => {
         context: 'contextValue',
       };
       const client = new phonenumbersModule.v2beta1.PhoneNumbersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2105,7 +2104,7 @@ describe('v2beta1.PhoneNumbersClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new phonenumbersModule.v2beta1.PhoneNumbersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2181,7 +2180,7 @@ describe('v2beta1.PhoneNumbersClient', () => {
         version: 'versionValue',
       };
       const client = new phonenumbersModule.v2beta1.PhoneNumbersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2242,7 +2241,7 @@ describe('v2beta1.PhoneNumbersClient', () => {
         answer_record: 'answerRecordValue',
       };
       const client = new phonenumbersModule.v2beta1.PhoneNumbersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2305,7 +2304,7 @@ describe('v2beta1.PhoneNumbersClient', () => {
         message: 'messageValue',
       };
       const client = new phonenumbersModule.v2beta1.PhoneNumbersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2384,7 +2383,7 @@ describe('v2beta1.PhoneNumbersClient', () => {
         participant: 'participantValue',
       };
       const client = new phonenumbersModule.v2beta1.PhoneNumbersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2464,7 +2463,7 @@ describe('v2beta1.PhoneNumbersClient', () => {
         conversation_profile: 'conversationProfileValue',
       };
       const client = new phonenumbersModule.v2beta1.PhoneNumbersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2529,7 +2528,7 @@ describe('v2beta1.PhoneNumbersClient', () => {
         conversation: 'conversationValue',
       };
       const client = new phonenumbersModule.v2beta1.PhoneNumbersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2592,7 +2591,7 @@ describe('v2beta1.PhoneNumbersClient', () => {
         knowledge_base: 'knowledgeBaseValue',
       };
       const client = new phonenumbersModule.v2beta1.PhoneNumbersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2656,7 +2655,7 @@ describe('v2beta1.PhoneNumbersClient', () => {
         document: 'documentValue',
       };
       const client = new phonenumbersModule.v2beta1.PhoneNumbersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2734,7 +2733,7 @@ describe('v2beta1.PhoneNumbersClient', () => {
         location: 'locationValue',
       };
       const client = new phonenumbersModule.v2beta1.PhoneNumbersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2798,7 +2797,7 @@ describe('v2beta1.PhoneNumbersClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new phonenumbersModule.v2beta1.PhoneNumbersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2877,7 +2876,7 @@ describe('v2beta1.PhoneNumbersClient', () => {
         environment: 'environmentValue',
       };
       const client = new phonenumbersModule.v2beta1.PhoneNumbersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2960,7 +2959,7 @@ describe('v2beta1.PhoneNumbersClient', () => {
         context: 'contextValue',
       };
       const client = new phonenumbersModule.v2beta1.PhoneNumbersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3106,7 +3105,7 @@ describe('v2beta1.PhoneNumbersClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new phonenumbersModule.v2beta1.PhoneNumbersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3247,7 +3246,7 @@ describe('v2beta1.PhoneNumbersClient', () => {
         location: 'locationValue',
       };
       const client = new phonenumbersModule.v2beta1.PhoneNumbersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3309,7 +3308,7 @@ describe('v2beta1.PhoneNumbersClient', () => {
         intent: 'intentValue',
       };
       const client = new phonenumbersModule.v2beta1.PhoneNumbersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3389,7 +3388,7 @@ describe('v2beta1.PhoneNumbersClient', () => {
         context: 'contextValue',
       };
       const client = new phonenumbersModule.v2beta1.PhoneNumbersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3490,7 +3489,7 @@ describe('v2beta1.PhoneNumbersClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new phonenumbersModule.v2beta1.PhoneNumbersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3595,7 +3594,7 @@ describe('v2beta1.PhoneNumbersClient', () => {
         version: 'versionValue',
       };
       const client = new phonenumbersModule.v2beta1.PhoneNumbersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3673,7 +3672,7 @@ describe('v2beta1.PhoneNumbersClient', () => {
         answer_record: 'answerRecordValue',
       };
       const client = new phonenumbersModule.v2beta1.PhoneNumbersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3752,7 +3751,7 @@ describe('v2beta1.PhoneNumbersClient', () => {
         message: 'messageValue',
       };
       const client = new phonenumbersModule.v2beta1.PhoneNumbersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3853,7 +3852,7 @@ describe('v2beta1.PhoneNumbersClient', () => {
         participant: 'participantValue',
       };
       const client = new phonenumbersModule.v2beta1.PhoneNumbersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3958,7 +3957,7 @@ describe('v2beta1.PhoneNumbersClient', () => {
         conversation_profile: 'conversationProfileValue',
       };
       const client = new phonenumbersModule.v2beta1.PhoneNumbersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4041,7 +4040,7 @@ describe('v2beta1.PhoneNumbersClient', () => {
         conversation: 'conversationValue',
       };
       const client = new phonenumbersModule.v2beta1.PhoneNumbersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4120,7 +4119,7 @@ describe('v2beta1.PhoneNumbersClient', () => {
         knowledge_base: 'knowledgeBaseValue',
       };
       const client = new phonenumbersModule.v2beta1.PhoneNumbersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4200,7 +4199,7 @@ describe('v2beta1.PhoneNumbersClient', () => {
         document: 'documentValue',
       };
       const client = new phonenumbersModule.v2beta1.PhoneNumbersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4305,7 +4304,7 @@ describe('v2beta1.PhoneNumbersClient', () => {
         phone_number: 'phoneNumberValue',
       };
       const client = new phonenumbersModule.v2beta1.PhoneNumbersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4383,7 +4382,7 @@ describe('v2beta1.PhoneNumbersClient', () => {
         phone_number: 'phoneNumberValue',
       };
       const client = new phonenumbersModule.v2beta1.PhoneNumbersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4446,7 +4445,7 @@ describe('v2beta1.PhoneNumbersClient', () => {
         siptrunk: 'siptrunkValue',
       };
       const client = new phonenumbersModule.v2beta1.PhoneNumbersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4510,7 +4509,7 @@ describe('v2beta1.PhoneNumbersClient', () => {
         tool: 'toolValue',
       };
       const client = new phonenumbersModule.v2beta1.PhoneNumbersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

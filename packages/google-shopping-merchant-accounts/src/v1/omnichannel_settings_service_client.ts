@@ -26,10 +26,10 @@ import type {
   PaginationCallback,
   GaxCall,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -54,7 +54,7 @@ export class OmnichannelSettingsServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('accounts');
@@ -67,9 +67,9 @@ export class OmnichannelSettingsServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
-  pathTemplates: { [name: string]: gax.PathTemplate };
-  omnichannelSettingsServiceStub?: Promise<{ [name: string]: Function }>;
+  innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
+  omnichannelSettingsServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of OmnichannelSettingsServiceClient.
@@ -146,7 +146,7 @@ export class OmnichannelSettingsServiceClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -291,7 +291,7 @@ export class OmnichannelSettingsServiceClient {
       'google.shopping.merchant.accounts.v1.OmnichannelSettingsService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -332,7 +332,7 @@ export class OmnichannelSettingsServiceClient {
             .OmnichannelSettingsService,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -345,7 +345,7 @@ export class OmnichannelSettingsServiceClient {
     ];
     for (const methodName of omnichannelSettingsServiceStubMethods) {
       const callPromise = this.omnichannelSettingsServiceStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -550,7 +550,7 @@ export class OmnichannelSettingsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getOmnichannelSetting request %j', request);
@@ -696,7 +696,7 @@ export class OmnichannelSettingsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createOmnichannelSetting request %j', request);
@@ -855,7 +855,7 @@ export class OmnichannelSettingsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'omnichannel_setting.name': request.omnichannelSetting!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateOmnichannelSetting request %j', request);
@@ -1000,7 +1000,7 @@ export class OmnichannelSettingsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('requestInventoryVerification request %j', request);
@@ -1153,7 +1153,7 @@ export class OmnichannelSettingsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1228,7 +1228,7 @@ export class OmnichannelSettingsServiceClient {
       });
     const defaultCallSettings = this._defaults['listOmnichannelSettings'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listOmnichannelSettings stream %j', request);
@@ -1285,7 +1285,7 @@ export class OmnichannelSettingsServiceClient {
       });
     const defaultCallSettings = this._defaults['listOmnichannelSettings'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listOmnichannelSettings iterate %j', request);
@@ -2055,7 +2055,7 @@ export class OmnichannelSettingsServiceClient {
    */
   close(): Promise<void> {
     if (this.omnichannelSettingsServiceStub && !this._terminated) {
-      return this.omnichannelSettingsServiceStub.then((stub) => {
+      return this.omnichannelSettingsServiceStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

@@ -813,6 +813,9 @@ export namespace google {
 
                     /** AnswerQueryRequest query */
                     query?: (string|null);
+
+                    /** AnswerQueryRequest filter */
+                    filter?: (string|null);
                 }
 
                 /** Represents an AnswerQueryRequest. */
@@ -826,6 +829,9 @@ export namespace google {
 
                     /** AnswerQueryRequest query. */
                     public query: string;
+
+                    /** AnswerQueryRequest filter. */
+                    public filter: string;
 
                     /**
                      * Creates a new AnswerQueryRequest instance using the specified properties.
@@ -1531,6 +1537,9 @@ export namespace google {
 
                     /** DocumentChunk document */
                     document?: (google.developers.knowledge.v1.IDocument|null);
+
+                    /** DocumentChunk relevanceScore */
+                    relevanceScore?: (number|null);
                 }
 
                 /** Represents a DocumentChunk. */
@@ -1553,6 +1562,9 @@ export namespace google {
 
                     /** DocumentChunk document. */
                     public document?: (google.developers.knowledge.v1.IDocument|null);
+
+                    /** DocumentChunk relevanceScore. */
+                    public relevanceScore?: (number|null);
 
                     /**
                      * Creates a new DocumentChunk instance using the specified properties.

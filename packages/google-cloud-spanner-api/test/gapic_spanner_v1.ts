@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as spannerModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -138,9 +138,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -258,7 +258,7 @@ describe('v1.SpannerClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new spannerModule.v1.SpannerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.spannerStub, undefined);
@@ -266,12 +266,12 @@ describe('v1.SpannerClient', () => {
       assert(client.spannerStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new spannerModule.v1.SpannerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.spannerStub);
@@ -280,14 +280,14 @@ describe('v1.SpannerClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new spannerModule.v1.SpannerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.spannerStub, undefined);
@@ -296,7 +296,7 @@ describe('v1.SpannerClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -304,7 +304,7 @@ describe('v1.SpannerClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new spannerModule.v1.SpannerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -316,7 +316,7 @@ describe('v1.SpannerClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new spannerModule.v1.SpannerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -339,7 +339,7 @@ describe('v1.SpannerClient', () => {
   describe('createSession', () => {
     it('invokes createSession without error', async () => {
       const client = new spannerModule.v1.SpannerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -370,7 +370,7 @@ describe('v1.SpannerClient', () => {
 
     it('invokes createSession without error using callback', async () => {
       const client = new spannerModule.v1.SpannerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -417,7 +417,7 @@ describe('v1.SpannerClient', () => {
 
     it('invokes createSession with error', async () => {
       const client = new spannerModule.v1.SpannerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -448,7 +448,7 @@ describe('v1.SpannerClient', () => {
 
     it('invokes createSession with closed client', async () => {
       const client = new spannerModule.v1.SpannerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -461,7 +461,7 @@ describe('v1.SpannerClient', () => {
       );
       request.database = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createSession(request), expectedError);
@@ -471,7 +471,7 @@ describe('v1.SpannerClient', () => {
   describe('batchCreateSessions', () => {
     it('invokes batchCreateSessions without error', async () => {
       const client = new spannerModule.v1.SpannerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -503,7 +503,7 @@ describe('v1.SpannerClient', () => {
 
     it('invokes batchCreateSessions without error using callback', async () => {
       const client = new spannerModule.v1.SpannerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -550,7 +550,7 @@ describe('v1.SpannerClient', () => {
 
     it('invokes batchCreateSessions with error', async () => {
       const client = new spannerModule.v1.SpannerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -581,7 +581,7 @@ describe('v1.SpannerClient', () => {
 
     it('invokes batchCreateSessions with closed client', async () => {
       const client = new spannerModule.v1.SpannerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -594,7 +594,7 @@ describe('v1.SpannerClient', () => {
       );
       request.database = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.batchCreateSessions(request), expectedError);
@@ -604,7 +604,7 @@ describe('v1.SpannerClient', () => {
   describe('getSession', () => {
     it('invokes getSession without error', async () => {
       const client = new spannerModule.v1.SpannerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -635,7 +635,7 @@ describe('v1.SpannerClient', () => {
 
     it('invokes getSession without error using callback', async () => {
       const client = new spannerModule.v1.SpannerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -682,7 +682,7 @@ describe('v1.SpannerClient', () => {
 
     it('invokes getSession with error', async () => {
       const client = new spannerModule.v1.SpannerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -713,7 +713,7 @@ describe('v1.SpannerClient', () => {
 
     it('invokes getSession with closed client', async () => {
       const client = new spannerModule.v1.SpannerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -726,7 +726,7 @@ describe('v1.SpannerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getSession(request), expectedError);
@@ -736,7 +736,7 @@ describe('v1.SpannerClient', () => {
   describe('deleteSession', () => {
     it('invokes deleteSession without error', async () => {
       const client = new spannerModule.v1.SpannerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -767,7 +767,7 @@ describe('v1.SpannerClient', () => {
 
     it('invokes deleteSession without error using callback', async () => {
       const client = new spannerModule.v1.SpannerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -814,7 +814,7 @@ describe('v1.SpannerClient', () => {
 
     it('invokes deleteSession with error', async () => {
       const client = new spannerModule.v1.SpannerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -845,7 +845,7 @@ describe('v1.SpannerClient', () => {
 
     it('invokes deleteSession with closed client', async () => {
       const client = new spannerModule.v1.SpannerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -858,7 +858,7 @@ describe('v1.SpannerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteSession(request), expectedError);
@@ -868,7 +868,7 @@ describe('v1.SpannerClient', () => {
   describe('executeSql', () => {
     it('invokes executeSql without error', async () => {
       const client = new spannerModule.v1.SpannerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -899,7 +899,7 @@ describe('v1.SpannerClient', () => {
 
     it('invokes executeSql without error using callback', async () => {
       const client = new spannerModule.v1.SpannerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -946,7 +946,7 @@ describe('v1.SpannerClient', () => {
 
     it('invokes executeSql with error', async () => {
       const client = new spannerModule.v1.SpannerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -977,7 +977,7 @@ describe('v1.SpannerClient', () => {
 
     it('invokes executeSql with closed client', async () => {
       const client = new spannerModule.v1.SpannerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -990,7 +990,7 @@ describe('v1.SpannerClient', () => {
       );
       request.session = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.executeSql(request), expectedError);
@@ -1000,7 +1000,7 @@ describe('v1.SpannerClient', () => {
   describe('executeBatchDml', () => {
     it('invokes executeBatchDml without error', async () => {
       const client = new spannerModule.v1.SpannerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1031,7 +1031,7 @@ describe('v1.SpannerClient', () => {
 
     it('invokes executeBatchDml without error using callback', async () => {
       const client = new spannerModule.v1.SpannerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1078,7 +1078,7 @@ describe('v1.SpannerClient', () => {
 
     it('invokes executeBatchDml with error', async () => {
       const client = new spannerModule.v1.SpannerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1109,7 +1109,7 @@ describe('v1.SpannerClient', () => {
 
     it('invokes executeBatchDml with closed client', async () => {
       const client = new spannerModule.v1.SpannerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1122,7 +1122,7 @@ describe('v1.SpannerClient', () => {
       );
       request.session = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.executeBatchDml(request), expectedError);
@@ -1132,7 +1132,7 @@ describe('v1.SpannerClient', () => {
   describe('read', () => {
     it('invokes read without error', async () => {
       const client = new spannerModule.v1.SpannerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1162,7 +1162,7 @@ describe('v1.SpannerClient', () => {
 
     it('invokes read without error using callback', async () => {
       const client = new spannerModule.v1.SpannerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1207,7 +1207,7 @@ describe('v1.SpannerClient', () => {
 
     it('invokes read with error', async () => {
       const client = new spannerModule.v1.SpannerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1234,7 +1234,7 @@ describe('v1.SpannerClient', () => {
 
     it('invokes read with closed client', async () => {
       const client = new spannerModule.v1.SpannerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1247,7 +1247,7 @@ describe('v1.SpannerClient', () => {
       );
       request.session = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.read(request), expectedError);
@@ -1257,7 +1257,7 @@ describe('v1.SpannerClient', () => {
   describe('beginTransaction', () => {
     it('invokes beginTransaction without error', async () => {
       const client = new spannerModule.v1.SpannerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1288,7 +1288,7 @@ describe('v1.SpannerClient', () => {
 
     it('invokes beginTransaction without error using callback', async () => {
       const client = new spannerModule.v1.SpannerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1335,7 +1335,7 @@ describe('v1.SpannerClient', () => {
 
     it('invokes beginTransaction with error', async () => {
       const client = new spannerModule.v1.SpannerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1366,7 +1366,7 @@ describe('v1.SpannerClient', () => {
 
     it('invokes beginTransaction with closed client', async () => {
       const client = new spannerModule.v1.SpannerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1379,7 +1379,7 @@ describe('v1.SpannerClient', () => {
       );
       request.session = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.beginTransaction(request), expectedError);
@@ -1389,7 +1389,7 @@ describe('v1.SpannerClient', () => {
   describe('commit', () => {
     it('invokes commit without error', async () => {
       const client = new spannerModule.v1.SpannerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1420,7 +1420,7 @@ describe('v1.SpannerClient', () => {
 
     it('invokes commit without error using callback', async () => {
       const client = new spannerModule.v1.SpannerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1467,7 +1467,7 @@ describe('v1.SpannerClient', () => {
 
     it('invokes commit with error', async () => {
       const client = new spannerModule.v1.SpannerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1495,7 +1495,7 @@ describe('v1.SpannerClient', () => {
 
     it('invokes commit with closed client', async () => {
       const client = new spannerModule.v1.SpannerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1508,7 +1508,7 @@ describe('v1.SpannerClient', () => {
       );
       request.session = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.commit(request), expectedError);
@@ -1518,7 +1518,7 @@ describe('v1.SpannerClient', () => {
   describe('rollback', () => {
     it('invokes rollback without error', async () => {
       const client = new spannerModule.v1.SpannerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1549,7 +1549,7 @@ describe('v1.SpannerClient', () => {
 
     it('invokes rollback without error using callback', async () => {
       const client = new spannerModule.v1.SpannerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1596,7 +1596,7 @@ describe('v1.SpannerClient', () => {
 
     it('invokes rollback with error', async () => {
       const client = new spannerModule.v1.SpannerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1624,7 +1624,7 @@ describe('v1.SpannerClient', () => {
 
     it('invokes rollback with closed client', async () => {
       const client = new spannerModule.v1.SpannerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1637,7 +1637,7 @@ describe('v1.SpannerClient', () => {
       );
       request.session = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.rollback(request), expectedError);
@@ -1647,7 +1647,7 @@ describe('v1.SpannerClient', () => {
   describe('partitionQuery', () => {
     it('invokes partitionQuery without error', async () => {
       const client = new spannerModule.v1.SpannerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1678,7 +1678,7 @@ describe('v1.SpannerClient', () => {
 
     it('invokes partitionQuery without error using callback', async () => {
       const client = new spannerModule.v1.SpannerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1725,7 +1725,7 @@ describe('v1.SpannerClient', () => {
 
     it('invokes partitionQuery with error', async () => {
       const client = new spannerModule.v1.SpannerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1756,7 +1756,7 @@ describe('v1.SpannerClient', () => {
 
     it('invokes partitionQuery with closed client', async () => {
       const client = new spannerModule.v1.SpannerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1769,7 +1769,7 @@ describe('v1.SpannerClient', () => {
       );
       request.session = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.partitionQuery(request), expectedError);
@@ -1779,7 +1779,7 @@ describe('v1.SpannerClient', () => {
   describe('partitionRead', () => {
     it('invokes partitionRead without error', async () => {
       const client = new spannerModule.v1.SpannerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1810,7 +1810,7 @@ describe('v1.SpannerClient', () => {
 
     it('invokes partitionRead without error using callback', async () => {
       const client = new spannerModule.v1.SpannerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1857,7 +1857,7 @@ describe('v1.SpannerClient', () => {
 
     it('invokes partitionRead with error', async () => {
       const client = new spannerModule.v1.SpannerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1888,7 +1888,7 @@ describe('v1.SpannerClient', () => {
 
     it('invokes partitionRead with closed client', async () => {
       const client = new spannerModule.v1.SpannerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1901,7 +1901,7 @@ describe('v1.SpannerClient', () => {
       );
       request.session = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.partitionRead(request), expectedError);
@@ -1911,7 +1911,7 @@ describe('v1.SpannerClient', () => {
   describe('executeStreamingSql', () => {
     it('invokes executeStreamingSql without error', async () => {
       const client = new spannerModule.v1.SpannerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1955,7 +1955,7 @@ describe('v1.SpannerClient', () => {
 
     it('invokes executeStreamingSql without error and gaxServerStreamingRetries enabled', async () => {
       const client = new spannerModule.v1.SpannerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
         gaxServerStreamingRetries: true,
       });
@@ -2000,7 +2000,7 @@ describe('v1.SpannerClient', () => {
 
     it('invokes executeStreamingSql with error', async () => {
       const client = new spannerModule.v1.SpannerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2043,7 +2043,7 @@ describe('v1.SpannerClient', () => {
 
     it('invokes executeStreamingSql with closed client', async () => {
       const client = new spannerModule.v1.SpannerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2056,11 +2056,11 @@ describe('v1.SpannerClient', () => {
       );
       request.session = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       const stream = client.executeStreamingSql(request, {
-        retryRequestOptions: { noResponseRetries: 0 },
+        retryRequestOptions: {noResponseRetries: 0},
       });
       const promise = new Promise((resolve, reject) => {
         stream.on(
@@ -2086,7 +2086,7 @@ describe('v1.SpannerClient', () => {
   describe('streamingRead', () => {
     it('invokes streamingRead without error', async () => {
       const client = new spannerModule.v1.SpannerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2130,7 +2130,7 @@ describe('v1.SpannerClient', () => {
 
     it('invokes streamingRead without error and gaxServerStreamingRetries enabled', async () => {
       const client = new spannerModule.v1.SpannerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
         gaxServerStreamingRetries: true,
       });
@@ -2175,7 +2175,7 @@ describe('v1.SpannerClient', () => {
 
     it('invokes streamingRead with error', async () => {
       const client = new spannerModule.v1.SpannerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2218,7 +2218,7 @@ describe('v1.SpannerClient', () => {
 
     it('invokes streamingRead with closed client', async () => {
       const client = new spannerModule.v1.SpannerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2231,11 +2231,11 @@ describe('v1.SpannerClient', () => {
       );
       request.session = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       const stream = client.streamingRead(request, {
-        retryRequestOptions: { noResponseRetries: 0 },
+        retryRequestOptions: {noResponseRetries: 0},
       });
       const promise = new Promise((resolve, reject) => {
         stream.on(
@@ -2261,7 +2261,7 @@ describe('v1.SpannerClient', () => {
   describe('batchWrite', () => {
     it('invokes batchWrite without error', async () => {
       const client = new spannerModule.v1.SpannerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2305,7 +2305,7 @@ describe('v1.SpannerClient', () => {
 
     it('invokes batchWrite without error and gaxServerStreamingRetries enabled', async () => {
       const client = new spannerModule.v1.SpannerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
         gaxServerStreamingRetries: true,
       });
@@ -2350,7 +2350,7 @@ describe('v1.SpannerClient', () => {
 
     it('invokes batchWrite with error', async () => {
       const client = new spannerModule.v1.SpannerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2393,7 +2393,7 @@ describe('v1.SpannerClient', () => {
 
     it('invokes batchWrite with closed client', async () => {
       const client = new spannerModule.v1.SpannerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2406,11 +2406,11 @@ describe('v1.SpannerClient', () => {
       );
       request.session = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       const stream = client.batchWrite(request, {
-        retryRequestOptions: { noResponseRetries: 0 },
+        retryRequestOptions: {noResponseRetries: 0},
       });
       const promise = new Promise((resolve, reject) => {
         stream.on(
@@ -2436,7 +2436,7 @@ describe('v1.SpannerClient', () => {
   describe('fetchCacheUpdate', () => {
     it('invokes fetchCacheUpdate without error', async () => {
       const client = new spannerModule.v1.SpannerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2477,7 +2477,7 @@ describe('v1.SpannerClient', () => {
 
     it('invokes fetchCacheUpdate without error and gaxServerStreamingRetries enabled', async () => {
       const client = new spannerModule.v1.SpannerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
         gaxServerStreamingRetries: true,
       });
@@ -2519,7 +2519,7 @@ describe('v1.SpannerClient', () => {
 
     it('invokes fetchCacheUpdate with error', async () => {
       const client = new spannerModule.v1.SpannerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2559,7 +2559,7 @@ describe('v1.SpannerClient', () => {
 
     it('invokes fetchCacheUpdate with closed client', async () => {
       const client = new spannerModule.v1.SpannerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2572,11 +2572,11 @@ describe('v1.SpannerClient', () => {
       );
       request.database = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       const stream = client.fetchCacheUpdate(request, {
-        retryRequestOptions: { noResponseRetries: 0 },
+        retryRequestOptions: {noResponseRetries: 0},
       });
       const promise = new Promise((resolve, reject) => {
         stream.on('data', (response: protos.google.spanner.v1.CacheUpdate) => {
@@ -2599,7 +2599,7 @@ describe('v1.SpannerClient', () => {
   describe('listSessions', () => {
     it('invokes listSessions without error', async () => {
       const client = new spannerModule.v1.SpannerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2632,7 +2632,7 @@ describe('v1.SpannerClient', () => {
 
     it('invokes listSessions without error using callback', async () => {
       const client = new spannerModule.v1.SpannerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2681,7 +2681,7 @@ describe('v1.SpannerClient', () => {
 
     it('invokes listSessions with error', async () => {
       const client = new spannerModule.v1.SpannerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2712,7 +2712,7 @@ describe('v1.SpannerClient', () => {
 
     it('invokes listSessionsStream without error', async () => {
       const client = new spannerModule.v1.SpannerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2755,15 +2755,15 @@ describe('v1.SpannerClient', () => {
       assert(
         (client.descriptors.page.listSessions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listSessionsStream with error', async () => {
       const client = new spannerModule.v1.SpannerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2803,15 +2803,15 @@ describe('v1.SpannerClient', () => {
       assert(
         (client.descriptors.page.listSessions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listSessions without error', async () => {
       const client = new spannerModule.v1.SpannerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2846,15 +2846,15 @@ describe('v1.SpannerClient', () => {
       assert(
         (client.descriptors.page.listSessions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listSessions with error', async () => {
       const client = new spannerModule.v1.SpannerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2886,9 +2886,9 @@ describe('v1.SpannerClient', () => {
       assert(
         (client.descriptors.page.listSessions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2902,7 +2902,7 @@ describe('v1.SpannerClient', () => {
         database: 'databaseValue',
       };
       const client = new spannerModule.v1.SpannerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2967,7 +2967,7 @@ describe('v1.SpannerClient', () => {
         session: 'sessionValue',
       };
       const client = new spannerModule.v1.SpannerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

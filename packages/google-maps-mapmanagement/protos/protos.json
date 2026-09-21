@@ -6,6 +6,931 @@
           "nested": {
             "mapmanagement": {
               "nested": {
+                "v2": {
+                  "options": {
+                    "csharp_namespace": "Google.Maps.MapManagement.V2",
+                    "go_package": "cloud.google.com/go/maps/mapmanagement/apiv2/mapmanagementpb;mapmanagementpb",
+                    "java_multiple_files": true,
+                    "java_outer_classname": "MapManagementServiceProto",
+                    "java_package": "com.google.maps.mapmanagement.v2",
+                    "objc_class_prefix": "GMMGMTV2MAIN",
+                    "php_namespace": "Google\\Maps\\MapManagement\\V2",
+                    "(google.api.resource_definition).type": "mapmanagement.googleapis.com/Dataset",
+                    "(google.api.resource_definition).pattern": "projects/{project}/datasets/{dataset}",
+                    "(google.api.resource_definition).plural": "datasets",
+                    "(google.api.resource_definition).singular": "dataset"
+                  },
+                  "nested": {
+                    "MapManagement": {
+                      "options": {
+                        "(google.api.default_host)": "mapmanagement.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "CreateMapConfig": {
+                          "requestType": "CreateMapConfigRequest",
+                          "responseType": "MapConfig",
+                          "options": {
+                            "(google.api.http).post": "/v2/{parent=projects/*}/mapConfigs",
+                            "(google.api.http).body": "map_config",
+                            "(google.api.method_signature)": "parent,map_config"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2/{parent=projects/*}/mapConfigs",
+                                "body": "map_config"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,map_config"
+                            }
+                          ]
+                        },
+                        "GetMapConfig": {
+                          "requestType": "GetMapConfigRequest",
+                          "responseType": "MapConfig",
+                          "options": {
+                            "(google.api.http).get": "/v2/{name=projects/*/mapConfigs/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2/{name=projects/*/mapConfigs/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListMapConfigs": {
+                          "requestType": "ListMapConfigsRequest",
+                          "responseType": "ListMapConfigsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v2/{parent=projects/*}/mapConfigs",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2/{parent=projects/*}/mapConfigs"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "UpdateMapConfig": {
+                          "requestType": "UpdateMapConfigRequest",
+                          "responseType": "MapConfig",
+                          "options": {
+                            "(google.api.http).patch": "/v2/{map_config.name=projects/*/mapConfigs/*}",
+                            "(google.api.http).body": "map_config",
+                            "(google.api.method_signature)": "map_config,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v2/{map_config.name=projects/*/mapConfigs/*}",
+                                "body": "map_config"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "map_config,update_mask"
+                            }
+                          ]
+                        },
+                        "DeleteMapConfig": {
+                          "requestType": "DeleteMapConfigRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v2/{name=projects/*/mapConfigs/*}",
+                            "(google.api.method_signature)": "name,force"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v2/{name=projects/*/mapConfigs/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,force"
+                            }
+                          ]
+                        },
+                        "CreateStyleConfig": {
+                          "requestType": "CreateStyleConfigRequest",
+                          "responseType": "StyleConfig",
+                          "options": {
+                            "(google.api.http).post": "/v2/{parent=projects/*}/styleConfigs",
+                            "(google.api.http).body": "style_config",
+                            "(google.api.method_signature)": "parent,style_config"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2/{parent=projects/*}/styleConfigs",
+                                "body": "style_config"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,style_config"
+                            }
+                          ]
+                        },
+                        "GetStyleConfig": {
+                          "requestType": "GetStyleConfigRequest",
+                          "responseType": "StyleConfig",
+                          "options": {
+                            "(google.api.http).get": "/v2/{name=projects/*/styleConfigs/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2/{name=projects/*/styleConfigs/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListStyleConfigs": {
+                          "requestType": "ListStyleConfigsRequest",
+                          "responseType": "ListStyleConfigsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v2/{parent=projects/*}/styleConfigs",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2/{parent=projects/*}/styleConfigs"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "UpdateStyleConfig": {
+                          "requestType": "UpdateStyleConfigRequest",
+                          "responseType": "StyleConfig",
+                          "options": {
+                            "(google.api.http).patch": "/v2/{style_config.name=projects/*/styleConfigs/*}",
+                            "(google.api.http).body": "style_config",
+                            "(google.api.method_signature)": "style_config,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v2/{style_config.name=projects/*/styleConfigs/*}",
+                                "body": "style_config"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "style_config,update_mask"
+                            }
+                          ]
+                        },
+                        "DeleteStyleConfig": {
+                          "requestType": "DeleteStyleConfigRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v2/{name=projects/*/styleConfigs/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v2/{name=projects/*/styleConfigs/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "CreateMapContextConfig": {
+                          "requestType": "CreateMapContextConfigRequest",
+                          "responseType": "MapContextConfig",
+                          "options": {
+                            "(google.api.http).post": "/v2/{parent=projects/*/mapConfigs/*}/mapContextConfigs",
+                            "(google.api.http).body": "map_context_config",
+                            "(google.api.method_signature)": "parent,map_context_config"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2/{parent=projects/*/mapConfigs/*}/mapContextConfigs",
+                                "body": "map_context_config"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,map_context_config"
+                            }
+                          ]
+                        },
+                        "GetMapContextConfig": {
+                          "requestType": "GetMapContextConfigRequest",
+                          "responseType": "MapContextConfig",
+                          "options": {
+                            "(google.api.http).get": "/v2/{name=projects/*/mapConfigs/*/mapContextConfigs/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2/{name=projects/*/mapConfigs/*/mapContextConfigs/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListMapContextConfigs": {
+                          "requestType": "ListMapContextConfigsRequest",
+                          "responseType": "ListMapContextConfigsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v2/{parent=projects/*/mapConfigs/*}/mapContextConfigs",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2/{parent=projects/*/mapConfigs/*}/mapContextConfigs"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "UpdateMapContextConfig": {
+                          "requestType": "UpdateMapContextConfigRequest",
+                          "responseType": "MapContextConfig",
+                          "options": {
+                            "(google.api.http).patch": "/v2/{map_context_config.name=projects/*/mapConfigs/*/mapContextConfigs/*}",
+                            "(google.api.http).body": "map_context_config",
+                            "(google.api.method_signature)": "map_context_config,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v2/{map_context_config.name=projects/*/mapConfigs/*/mapContextConfigs/*}",
+                                "body": "map_context_config"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "map_context_config,update_mask"
+                            }
+                          ]
+                        },
+                        "DeleteMapContextConfig": {
+                          "requestType": "DeleteMapContextConfigRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v2/{name=projects/*/mapConfigs/*/mapContextConfigs/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v2/{name=projects/*/mapConfigs/*/mapContextConfigs/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "MapRenderingType": {
+                      "values": {
+                        "RASTER": 0,
+                        "VECTOR": 1
+                      }
+                    },
+                    "StyleConfigView": {
+                      "values": {
+                        "STYLE_CONFIG_VIEW_UNSPECIFIED": 0,
+                        "FULL": 1,
+                        "METADATA_ONLY": 2
+                      }
+                    },
+                    "CreateMapConfigRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
+                          }
+                        },
+                        "mapConfig": {
+                          "type": "MapConfig",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "GetMapConfigRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "mapmanagement.googleapis.com/MapConfig"
+                          }
+                        }
+                      }
+                    },
+                    "ListMapConfigsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListMapConfigsResponse": {
+                      "fields": {
+                        "mapConfigs": {
+                          "rule": "repeated",
+                          "type": "MapConfig",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "UpdateMapConfigRequest": {
+                      "fields": {
+                        "mapConfig": {
+                          "type": "MapConfig",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteMapConfigRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "mapmanagement.googleapis.com/MapConfig"
+                          }
+                        },
+                        "force": {
+                          "type": "bool",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "MapFeatures": {
+                      "oneofs": {
+                        "_poiBoostLevel": {
+                          "oneof": [
+                            "poiBoostLevel"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "simpleFeatures": {
+                          "rule": "repeated",
+                          "type": "SimpleFeature",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "poiBoostLevel": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "SimpleFeature": {
+                          "values": {
+                            "SIMPLE_FEATURE_UNSPECIFIED": 0,
+                            "FLATTEN_BUILDINGS": 1,
+                            "ICONIC_ICONS": 2
+                          }
+                        }
+                      }
+                    },
+                    "MapConfig": {
+                      "options": {
+                        "(google.api.resource).type": "mapmanagement.googleapis.com/MapConfig",
+                        "(google.api.resource).pattern": "projects/{project}/mapConfigs/{map_config}",
+                        "(google.api.resource).plural": "mapConfigs",
+                        "(google.api.resource).singular": "mapConfig"
+                      },
+                      "oneofs": {
+                        "_createTime": {
+                          "oneof": [
+                            "createTime"
+                          ]
+                        },
+                        "_updateTime": {
+                          "oneof": [
+                            "updateTime"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "mapId": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "mapFeatures": {
+                          "type": "MapFeatures",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "mapType": {
+                          "type": "MapRenderingType",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "StyleConfig": {
+                      "options": {
+                        "(google.api.resource).type": "mapmanagement.googleapis.com/StyleConfig",
+                        "(google.api.resource).pattern": "projects/{project}/styleConfigs/{style_config}",
+                        "(google.api.resource).plural": "styleConfigs",
+                        "(google.api.resource).singular": "styleConfig"
+                      },
+                      "oneofs": {
+                        "_createTime": {
+                          "oneof": [
+                            "createTime"
+                          ]
+                        },
+                        "_updateTime": {
+                          "oneof": [
+                            "updateTime"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "styleId": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "jsonStyleSheet": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "styleSheet": {
+                          "type": "google.protobuf.Struct",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "CreateStyleConfigRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
+                          }
+                        },
+                        "styleConfig": {
+                          "type": "StyleConfig",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "GetStyleConfigRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "mapmanagement.googleapis.com/StyleConfig"
+                          }
+                        }
+                      }
+                    },
+                    "ListStyleConfigsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "view": {
+                          "type": "StyleConfigView",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListStyleConfigsResponse": {
+                      "fields": {
+                        "styleConfigs": {
+                          "rule": "repeated",
+                          "type": "StyleConfig",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "UpdateStyleConfigRequest": {
+                      "fields": {
+                        "styleConfig": {
+                          "type": "StyleConfig",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteStyleConfigRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "mapmanagement.googleapis.com/StyleConfig"
+                          }
+                        }
+                      }
+                    },
+                    "MapContextConfig": {
+                      "options": {
+                        "(google.api.resource).type": "mapmanagement.googleapis.com/MapContextConfig",
+                        "(google.api.resource).pattern": "projects/{project}/mapConfigs/{map_config}/mapContextConfigs/{map_context_config}",
+                        "(google.api.resource).plural": "mapContextConfigs",
+                        "(google.api.resource).singular": "mapContextConfig"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        },
+                        "mapConfig": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "mapmanagement.googleapis.com/MapConfig"
+                          }
+                        },
+                        "styleConfig": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "mapmanagement.googleapis.com/StyleConfig"
+                          }
+                        },
+                        "dataset": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.resource_reference).type": "mapmanagement.googleapis.com/Dataset"
+                          }
+                        },
+                        "alias": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "mapVariants": {
+                          "rule": "repeated",
+                          "type": "MapVariant",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "MapVariant": {
+                          "values": {
+                            "ROADMAP": 0,
+                            "ROADMAP_DARK": 1,
+                            "SATELLITE": 2,
+                            "TERRAIN": 3,
+                            "TERRAIN_DARK": 4,
+                            "NAVIGATION": 5,
+                            "NAVIGATION_LOW_LIGHT": 6,
+                            "TRANSIT": 7,
+                            "TRANSIT_DARK": 8,
+                            "ABSTRACT3D": 9,
+                            "PHOTOREALISTIC3D": 10
+                          }
+                        }
+                      }
+                    },
+                    "CreateMapContextConfigRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "mapmanagement.googleapis.com/MapConfig"
+                          }
+                        },
+                        "mapContextConfig": {
+                          "type": "MapContextConfig",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "GetMapContextConfigRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "mapmanagement.googleapis.com/MapContextConfig"
+                          }
+                        }
+                      }
+                    },
+                    "ListMapContextConfigsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "mapmanagement.googleapis.com/MapConfig"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListMapContextConfigsResponse": {
+                      "fields": {
+                        "mapContextConfigs": {
+                          "rule": "repeated",
+                          "type": "MapContextConfig",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "UpdateMapContextConfigRequest": {
+                      "fields": {
+                        "mapContextConfig": {
+                          "type": "MapContextConfig",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteMapContextConfigRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "mapmanagement.googleapis.com/MapContextConfig"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
                 "v2beta": {
                   "options": {
                     "csharp_namespace": "Google.Maps.MapManagement.V2Beta",
@@ -3091,6 +4016,69 @@
                 "paths": {
                   "rule": "repeated",
                   "type": "string",
+                  "id": 1
+                }
+              }
+            },
+            "Struct": {
+              "fields": {
+                "fields": {
+                  "keyType": "string",
+                  "type": "Value",
+                  "id": 1
+                }
+              }
+            },
+            "Value": {
+              "oneofs": {
+                "kind": {
+                  "oneof": [
+                    "nullValue",
+                    "numberValue",
+                    "stringValue",
+                    "boolValue",
+                    "structValue",
+                    "listValue"
+                  ]
+                }
+              },
+              "fields": {
+                "nullValue": {
+                  "type": "NullValue",
+                  "id": 1
+                },
+                "numberValue": {
+                  "type": "double",
+                  "id": 2
+                },
+                "stringValue": {
+                  "type": "string",
+                  "id": 3
+                },
+                "boolValue": {
+                  "type": "bool",
+                  "id": 4
+                },
+                "structValue": {
+                  "type": "Struct",
+                  "id": 5
+                },
+                "listValue": {
+                  "type": "ListValue",
+                  "id": 6
+                }
+              }
+            },
+            "NullValue": {
+              "values": {
+                "NULL_VALUE": 0
+              }
+            },
+            "ListValue": {
+              "fields": {
+                "values": {
+                  "rule": "repeated",
+                  "type": "Value",
                   "id": 1
                 }
               }

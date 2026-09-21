@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it, beforeEach, afterEach } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it, beforeEach, afterEach} from 'mocha';
 import * as reservationslotsModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { GoogleAuth, protobuf } from 'google-gax';
+import {GoogleAuth, protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -134,7 +134,7 @@ describe('v1beta.ReservationSlotsClient', () => {
       getClient: sinon.stub().resolves({
         getRequestHeaders: sinon
           .stub()
-          .resolves({ Authorization: 'Bearer SOME_TOKEN' }),
+          .resolves({Authorization: 'Bearer SOME_TOKEN'}),
       }),
     } as unknown as GoogleAuth;
   });
@@ -262,12 +262,12 @@ describe('v1beta.ReservationSlotsClient', () => {
       assert(client.reservationSlotsStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new reservationslotsModule.v1beta.ReservationSlotsClient({
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.reservationSlotsStub);
@@ -276,12 +276,12 @@ describe('v1beta.ReservationSlotsClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new reservationslotsModule.v1beta.ReservationSlotsClient({
         auth: googleAuth,
         projectId: 'bogus',
@@ -292,7 +292,7 @@ describe('v1beta.ReservationSlotsClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -510,10 +510,199 @@ describe('v1beta.ReservationSlotsClient', () => {
       );
       request.reservationSlot = defaultValue4;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.get(request), expectedError);
+    });
+  });
+
+  describe('getHealth', () => {
+    it('invokes getHealth without error', async () => {
+      const client = new reservationslotsModule.v1beta.ReservationSlotsClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1beta.GetHealthReservationSlotRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1beta.GetHealthReservationSlotRequest',
+        ['project'],
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1beta.GetHealthReservationSlotRequest',
+        ['zone'],
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1beta.GetHealthReservationSlotRequest',
+        ['parentName'],
+      );
+      request.parentName = defaultValue3;
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.cloud.compute.v1beta.GetHealthReservationSlotRequest',
+        ['reservationSlot'],
+      );
+      request.reservationSlot = defaultValue4;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&parent_name=${defaultValue3 ?? ''}&reservation_slot=${defaultValue4 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1beta.Operation(),
+      );
+      client.innerApiCalls.getHealth = stubSimpleCall(expectedResponse);
+      const [response] = await client.getHealth(request);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getHealth as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getHealth as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getHealth without error using callback', async () => {
+      const client = new reservationslotsModule.v1beta.ReservationSlotsClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1beta.GetHealthReservationSlotRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1beta.GetHealthReservationSlotRequest',
+        ['project'],
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1beta.GetHealthReservationSlotRequest',
+        ['zone'],
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1beta.GetHealthReservationSlotRequest',
+        ['parentName'],
+      );
+      request.parentName = defaultValue3;
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.cloud.compute.v1beta.GetHealthReservationSlotRequest',
+        ['reservationSlot'],
+      );
+      request.reservationSlot = defaultValue4;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&parent_name=${defaultValue3 ?? ''}&reservation_slot=${defaultValue4 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1beta.Operation(),
+      );
+      client.innerApiCalls.getHealth =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getHealth(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.compute.v1beta.IOperation | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getHealth as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getHealth as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getHealth with error', async () => {
+      const client = new reservationslotsModule.v1beta.ReservationSlotsClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1beta.GetHealthReservationSlotRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1beta.GetHealthReservationSlotRequest',
+        ['project'],
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1beta.GetHealthReservationSlotRequest',
+        ['zone'],
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1beta.GetHealthReservationSlotRequest',
+        ['parentName'],
+      );
+      request.parentName = defaultValue3;
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.cloud.compute.v1beta.GetHealthReservationSlotRequest',
+        ['reservationSlot'],
+      );
+      request.reservationSlot = defaultValue4;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&parent_name=${defaultValue3 ?? ''}&reservation_slot=${defaultValue4 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getHealth = stubSimpleCall(undefined, expectedError);
+      await assert.rejects(client.getHealth(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getHealth as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getHealth as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getHealth with closed client', async () => {
+      const client = new reservationslotsModule.v1beta.ReservationSlotsClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1beta.GetHealthReservationSlotRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1beta.GetHealthReservationSlotRequest',
+        ['project'],
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1beta.GetHealthReservationSlotRequest',
+        ['zone'],
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1beta.GetHealthReservationSlotRequest',
+        ['parentName'],
+      );
+      request.parentName = defaultValue3;
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.cloud.compute.v1beta.GetHealthReservationSlotRequest',
+        ['reservationSlot'],
+      );
+      request.reservationSlot = defaultValue4;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(client.getHealth(request), expectedError);
     });
   });
 
@@ -702,7 +891,7 @@ describe('v1beta.ReservationSlotsClient', () => {
       );
       request.reservationSlot = defaultValue4;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getVersion(request), expectedError);
@@ -891,7 +1080,7 @@ describe('v1beta.ReservationSlotsClient', () => {
       );
       request.reservationSlot = defaultValue4;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.update(request), expectedError);
@@ -901,7 +1090,7 @@ describe('v1beta.ReservationSlotsClient', () => {
   describe('list', () => {
     it('invokes list without error', async () => {
       const client = new reservationslotsModule.v1beta.ReservationSlotsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -949,7 +1138,7 @@ describe('v1beta.ReservationSlotsClient', () => {
 
     it('invokes list without error using callback', async () => {
       const client = new reservationslotsModule.v1beta.ReservationSlotsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -990,8 +1179,7 @@ describe('v1beta.ReservationSlotsClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.compute.v1beta.IReservationSlot[]
-              | null,
+              protos.google.cloud.compute.v1beta.IReservationSlot[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -1014,7 +1202,7 @@ describe('v1beta.ReservationSlotsClient', () => {
 
     it('invokes list with error', async () => {
       const client = new reservationslotsModule.v1beta.ReservationSlotsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1051,7 +1239,7 @@ describe('v1beta.ReservationSlotsClient', () => {
 
     it('invokes listStream without error', async () => {
       const client = new reservationslotsModule.v1beta.ReservationSlotsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1114,15 +1302,15 @@ describe('v1beta.ReservationSlotsClient', () => {
       assert(
         (client.descriptors.page.list.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listStream with error', async () => {
       const client = new reservationslotsModule.v1beta.ReservationSlotsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1176,9 +1364,9 @@ describe('v1beta.ReservationSlotsClient', () => {
       assert(
         (client.descriptors.page.list.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1235,15 +1423,15 @@ describe('v1beta.ReservationSlotsClient', () => {
       assert(
         (client.descriptors.page.list.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with list with error', async () => {
       const client = new reservationslotsModule.v1beta.ReservationSlotsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1287,9 +1475,9 @@ describe('v1beta.ReservationSlotsClient', () => {
       assert(
         (client.descriptors.page.list.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });

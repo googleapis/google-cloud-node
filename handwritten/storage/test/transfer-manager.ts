@@ -38,8 +38,7 @@ import {GaxiosOptions, GaxiosResponse} from 'gaxios';
 import {GCCL_GCS_CMD_KEY} from '../src/nodejs-common/util.js';
 import {AuthClient, GoogleAuth} from 'google-auth-library';
 import {tmpdir} from 'os';
-import fs from 'fs';
-import {promises as fsp, Stats} from 'fs';
+import fs, {promises as fsp, Stats} from 'fs';
 import * as sinon from 'sinon';
 import {DownloadResponseWithStatus, SkipReason} from '../src/file.js';
 
@@ -636,7 +635,7 @@ describe('Transfer Manager', () => {
     });
 
     it('should disable individual sharded chunk validation in download calls', async () => {
-      let shardedValidationOption: any = undefined;
+      let shardedValidationOption: boolean | string | undefined = undefined;
       sandbox.stub(file, 'download').callsFake(async options => {
         shardedValidationOption = (options as DownloadOptions).validation;
         return [Buffer.alloc(100)];
@@ -810,7 +809,7 @@ describe('Transfer Manager', () => {
         fakeHelper.abortUpload.resolves();
         return fakeHelper;
       };
-      assert.rejects(
+      await assert.rejects(
         transferManager.uploadFileInChunks(
           filePath,
           {autoAbortFailure: false},
@@ -885,7 +884,7 @@ describe('Transfer Manager', () => {
           return {token: '', res: undefined};
         }
 
-        async getRequestHeaders() {
+        async getRequestHeaders(): Promise<any> {
           return {};
         }
 
@@ -895,7 +894,7 @@ describe('Transfer Manager', () => {
           assert(opts.headers);
           assert('x-goog-api-client' in opts.headers);
           assert.match(
-            opts.headers['x-goog-api-client'],
+            (opts.headers as any)['x-goog-api-client'],
             /gccl-gcs-cmd\/tm.upload_sharded/
           );
 
@@ -926,7 +925,7 @@ describe('Transfer Manager', () => {
           return {token: '', res: undefined};
         }
 
-        async getRequestHeaders() {
+        async getRequestHeaders(): Promise<any> {
           return {};
         }
 
@@ -935,7 +934,7 @@ describe('Transfer Manager', () => {
 
           assert(opts.headers);
           assert('User-Agent' in opts.headers);
-          assert.match(opts.headers['User-Agent'], /gcloud-node/);
+          assert.match((opts.headers as any)['User-Agent'], /gcloud-node/);
 
           return {
             data: Buffer.from(

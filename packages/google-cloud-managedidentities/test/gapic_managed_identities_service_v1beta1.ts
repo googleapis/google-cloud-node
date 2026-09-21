@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as managedidentitiesserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, LROperation, operationsProtos } from 'google-gax';
+import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -149,9 +149,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -202,7 +202,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
     it('sets apiEndpoint according to universe domain camelCase', () => {
       const client =
         new managedidentitiesserviceModule.v1beta1.ManagedIdentitiesServiceClient(
-          { universeDomain: 'example.com' },
+          {universeDomain: 'example.com'},
         );
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'managedidentities.example.com');
@@ -211,7 +211,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
     it('sets apiEndpoint according to universe domain snakeCase', () => {
       const client =
         new managedidentitiesserviceModule.v1beta1.ManagedIdentitiesServiceClient(
-          { universe_domain: 'example.com' },
+          {universe_domain: 'example.com'},
         );
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'managedidentities.example.com');
@@ -238,7 +238,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client =
             new managedidentitiesserviceModule.v1beta1.ManagedIdentitiesServiceClient(
-              { universeDomain: 'configured.example.com' },
+              {universeDomain: 'configured.example.com'},
             );
           const servicePath = client.apiEndpoint;
           assert.strictEqual(
@@ -256,7 +256,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
     it('does not allow setting both universeDomain and universe_domain', () => {
       assert.throws(() => {
         new managedidentitiesserviceModule.v1beta1.ManagedIdentitiesServiceClient(
-          { universe_domain: 'example.com', universeDomain: 'example.net' },
+          {universe_domain: 'example.com', universeDomain: 'example.net'},
         );
       });
     });
@@ -289,7 +289,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const client =
         new managedidentitiesserviceModule.v1beta1.ManagedIdentitiesServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -298,15 +298,15 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       assert(client.managedIdentitiesServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new managedidentitiesserviceModule.v1beta1.ManagedIdentitiesServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.managedIdentitiesServiceStub);
@@ -315,16 +315,16 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new managedidentitiesserviceModule.v1beta1.ManagedIdentitiesServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -334,7 +334,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -344,7 +344,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const client =
         new managedidentitiesserviceModule.v1beta1.ManagedIdentitiesServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -359,7 +359,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const client =
         new managedidentitiesserviceModule.v1beta1.ManagedIdentitiesServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -385,7 +385,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const client =
         new managedidentitiesserviceModule.v1beta1.ManagedIdentitiesServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -420,7 +420,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const client =
         new managedidentitiesserviceModule.v1beta1.ManagedIdentitiesServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -470,7 +470,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const client =
         new managedidentitiesserviceModule.v1beta1.ManagedIdentitiesServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -504,7 +504,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const client =
         new managedidentitiesserviceModule.v1beta1.ManagedIdentitiesServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -518,7 +518,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.resetAdminPassword(request), expectedError);
@@ -530,7 +530,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const client =
         new managedidentitiesserviceModule.v1beta1.ManagedIdentitiesServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -564,7 +564,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const client =
         new managedidentitiesserviceModule.v1beta1.ManagedIdentitiesServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -614,7 +614,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const client =
         new managedidentitiesserviceModule.v1beta1.ManagedIdentitiesServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -645,7 +645,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const client =
         new managedidentitiesserviceModule.v1beta1.ManagedIdentitiesServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -659,7 +659,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getDomain(request), expectedError);
@@ -671,7 +671,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const client =
         new managedidentitiesserviceModule.v1beta1.ManagedIdentitiesServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -707,7 +707,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const client =
         new managedidentitiesserviceModule.v1beta1.ManagedIdentitiesServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -764,7 +764,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const client =
         new managedidentitiesserviceModule.v1beta1.ManagedIdentitiesServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -801,7 +801,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const client =
         new managedidentitiesserviceModule.v1beta1.ManagedIdentitiesServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -837,7 +837,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const client =
         new managedidentitiesserviceModule.v1beta1.ManagedIdentitiesServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -846,8 +846,8 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -863,7 +863,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const client =
         new managedidentitiesserviceModule.v1beta1.ManagedIdentitiesServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -887,7 +887,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const client =
         new managedidentitiesserviceModule.v1beta1.ManagedIdentitiesServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -923,7 +923,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const client =
         new managedidentitiesserviceModule.v1beta1.ManagedIdentitiesServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -981,7 +981,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const client =
         new managedidentitiesserviceModule.v1beta1.ManagedIdentitiesServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1016,7 +1016,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const client =
         new managedidentitiesserviceModule.v1beta1.ManagedIdentitiesServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1053,7 +1053,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const client =
         new managedidentitiesserviceModule.v1beta1.ManagedIdentitiesServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1062,8 +1062,8 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateDomainProgress(
@@ -1078,7 +1078,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const client =
         new managedidentitiesserviceModule.v1beta1.ManagedIdentitiesServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1099,7 +1099,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const client =
         new managedidentitiesserviceModule.v1beta1.ManagedIdentitiesServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1134,7 +1134,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const client =
         new managedidentitiesserviceModule.v1beta1.ManagedIdentitiesServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1191,7 +1191,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const client =
         new managedidentitiesserviceModule.v1beta1.ManagedIdentitiesServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1225,7 +1225,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const client =
         new managedidentitiesserviceModule.v1beta1.ManagedIdentitiesServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1261,7 +1261,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const client =
         new managedidentitiesserviceModule.v1beta1.ManagedIdentitiesServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1270,8 +1270,8 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteDomainProgress(
@@ -1286,7 +1286,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const client =
         new managedidentitiesserviceModule.v1beta1.ManagedIdentitiesServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1307,7 +1307,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const client =
         new managedidentitiesserviceModule.v1beta1.ManagedIdentitiesServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1342,7 +1342,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const client =
         new managedidentitiesserviceModule.v1beta1.ManagedIdentitiesServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1399,7 +1399,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const client =
         new managedidentitiesserviceModule.v1beta1.ManagedIdentitiesServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1433,7 +1433,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const client =
         new managedidentitiesserviceModule.v1beta1.ManagedIdentitiesServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1469,7 +1469,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const client =
         new managedidentitiesserviceModule.v1beta1.ManagedIdentitiesServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1478,8 +1478,8 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkAttachTrustProgress(
@@ -1494,7 +1494,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const client =
         new managedidentitiesserviceModule.v1beta1.ManagedIdentitiesServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1515,7 +1515,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const client =
         new managedidentitiesserviceModule.v1beta1.ManagedIdentitiesServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1551,7 +1551,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const client =
         new managedidentitiesserviceModule.v1beta1.ManagedIdentitiesServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1608,7 +1608,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const client =
         new managedidentitiesserviceModule.v1beta1.ManagedIdentitiesServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1642,7 +1642,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const client =
         new managedidentitiesserviceModule.v1beta1.ManagedIdentitiesServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1678,7 +1678,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const client =
         new managedidentitiesserviceModule.v1beta1.ManagedIdentitiesServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1687,8 +1687,8 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkReconfigureTrustProgress(
@@ -1703,7 +1703,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const client =
         new managedidentitiesserviceModule.v1beta1.ManagedIdentitiesServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1727,7 +1727,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const client =
         new managedidentitiesserviceModule.v1beta1.ManagedIdentitiesServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1762,7 +1762,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const client =
         new managedidentitiesserviceModule.v1beta1.ManagedIdentitiesServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1819,7 +1819,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const client =
         new managedidentitiesserviceModule.v1beta1.ManagedIdentitiesServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1853,7 +1853,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const client =
         new managedidentitiesserviceModule.v1beta1.ManagedIdentitiesServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1889,7 +1889,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const client =
         new managedidentitiesserviceModule.v1beta1.ManagedIdentitiesServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1898,8 +1898,8 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDetachTrustProgress(
@@ -1914,7 +1914,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const client =
         new managedidentitiesserviceModule.v1beta1.ManagedIdentitiesServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1935,7 +1935,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const client =
         new managedidentitiesserviceModule.v1beta1.ManagedIdentitiesServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1971,7 +1971,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const client =
         new managedidentitiesserviceModule.v1beta1.ManagedIdentitiesServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2028,7 +2028,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const client =
         new managedidentitiesserviceModule.v1beta1.ManagedIdentitiesServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2062,7 +2062,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const client =
         new managedidentitiesserviceModule.v1beta1.ManagedIdentitiesServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2098,7 +2098,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const client =
         new managedidentitiesserviceModule.v1beta1.ManagedIdentitiesServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2107,8 +2107,8 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkValidateTrustProgress(
@@ -2123,7 +2123,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const client =
         new managedidentitiesserviceModule.v1beta1.ManagedIdentitiesServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2147,7 +2147,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const client =
         new managedidentitiesserviceModule.v1beta1.ManagedIdentitiesServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2189,7 +2189,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const client =
         new managedidentitiesserviceModule.v1beta1.ManagedIdentitiesServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2222,8 +2222,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.managedidentities.v1beta1.IDomain[]
-              | null,
+              protos.google.cloud.managedidentities.v1beta1.IDomain[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -2249,7 +2248,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const client =
         new managedidentitiesserviceModule.v1beta1.ManagedIdentitiesServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2283,7 +2282,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const client =
         new managedidentitiesserviceModule.v1beta1.ManagedIdentitiesServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2337,9 +2336,9 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       assert(
         (client.descriptors.page.listDomains.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2347,7 +2346,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const client =
         new managedidentitiesserviceModule.v1beta1.ManagedIdentitiesServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2392,9 +2391,9 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       assert(
         (client.descriptors.page.listDomains.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2402,7 +2401,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const client =
         new managedidentitiesserviceModule.v1beta1.ManagedIdentitiesServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2445,9 +2444,9 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       assert(
         (client.descriptors.page.listDomains.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2455,7 +2454,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const client =
         new managedidentitiesserviceModule.v1beta1.ManagedIdentitiesServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2491,9 +2490,9 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       assert(
         (client.descriptors.page.listDomains.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2509,7 +2508,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const client =
         new managedidentitiesserviceModule.v1beta1.ManagedIdentitiesServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2575,7 +2574,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const client =
         new managedidentitiesserviceModule.v1beta1.ManagedIdentitiesServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2626,7 +2625,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const client =
         new managedidentitiesserviceModule.v1beta1.ManagedIdentitiesServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );

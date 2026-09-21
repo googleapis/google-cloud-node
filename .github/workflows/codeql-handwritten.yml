@@ -29,6 +29,7 @@ jobs:
       # only required for workflows in private repositories
       actions: read
       contents: read
+      issues: write # Added for creating issues on failure
 
     strategy:
       fail-fast: false
@@ -69,3 +70,11 @@ jobs:
         build-mode: ${{ matrix.build-mode }}
     - name: Perform CodeQL Analysis for handwritten
       uses: github/codeql-action/analyze@8aad20d150bbac5944a9f9d289da16a4b0d87c1e # v4.36.2
+
+    - name: Create issue on failure
+      if: ${{ failure() }}
+      uses: googleapis/librarian/.github/actions/create-issue-on-failure@baf9b8078c5e98cb90b53088f284fb7b060e195b # main
+      with:
+        title: "CodeQL Advanced - handwritten failed"
+        body: "The daily scheduled task CodeQL Advanced - handwritten failed."
+        mention: "@googleapis/cloud-sdk-nodejs-team"

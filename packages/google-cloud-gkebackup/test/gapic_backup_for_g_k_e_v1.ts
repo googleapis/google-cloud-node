@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as backupforgkeModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -51,7 +51,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -155,9 +155,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -277,7 +277,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.backupForGKEStub, undefined);
@@ -285,12 +285,12 @@ describe('v1.BackupForGKEClient', () => {
       assert(client.backupForGKEStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.backupForGKEStub);
@@ -299,14 +299,14 @@ describe('v1.BackupForGKEClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.backupForGKEStub, undefined);
@@ -315,7 +315,7 @@ describe('v1.BackupForGKEClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -323,7 +323,7 @@ describe('v1.BackupForGKEClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -335,7 +335,7 @@ describe('v1.BackupForGKEClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -358,7 +358,7 @@ describe('v1.BackupForGKEClient', () => {
   describe('getBackupPlan', () => {
     it('invokes getBackupPlan without error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -389,7 +389,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes getBackupPlan without error using callback', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -436,7 +436,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes getBackupPlan with error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -467,7 +467,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes getBackupPlan with closed client', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -480,7 +480,7 @@ describe('v1.BackupForGKEClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getBackupPlan(request), expectedError);
@@ -490,7 +490,7 @@ describe('v1.BackupForGKEClient', () => {
   describe('getBackupChannel', () => {
     it('invokes getBackupChannel without error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -521,7 +521,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes getBackupChannel without error using callback', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -568,7 +568,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes getBackupChannel with error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -599,7 +599,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes getBackupChannel with closed client', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -612,7 +612,7 @@ describe('v1.BackupForGKEClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getBackupChannel(request), expectedError);
@@ -622,7 +622,7 @@ describe('v1.BackupForGKEClient', () => {
   describe('getBackupPlanBinding', () => {
     it('invokes getBackupPlanBinding without error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -654,7 +654,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes getBackupPlanBinding without error using callback', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -701,7 +701,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes getBackupPlanBinding with error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -732,7 +732,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes getBackupPlanBinding with closed client', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -745,7 +745,7 @@ describe('v1.BackupForGKEClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getBackupPlanBinding(request), expectedError);
@@ -755,7 +755,7 @@ describe('v1.BackupForGKEClient', () => {
   describe('getBackup', () => {
     it('invokes getBackup without error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -786,7 +786,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes getBackup without error using callback', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -833,7 +833,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes getBackup with error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -861,7 +861,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes getBackup with closed client', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -874,7 +874,7 @@ describe('v1.BackupForGKEClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getBackup(request), expectedError);
@@ -884,7 +884,7 @@ describe('v1.BackupForGKEClient', () => {
   describe('getVolumeBackup', () => {
     it('invokes getVolumeBackup without error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -915,7 +915,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes getVolumeBackup without error using callback', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -962,7 +962,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes getVolumeBackup with error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -993,7 +993,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes getVolumeBackup with closed client', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1006,7 +1006,7 @@ describe('v1.BackupForGKEClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getVolumeBackup(request), expectedError);
@@ -1016,7 +1016,7 @@ describe('v1.BackupForGKEClient', () => {
   describe('getRestorePlan', () => {
     it('invokes getRestorePlan without error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1047,7 +1047,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes getRestorePlan without error using callback', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1094,7 +1094,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes getRestorePlan with error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1125,7 +1125,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes getRestorePlan with closed client', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1138,7 +1138,7 @@ describe('v1.BackupForGKEClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getRestorePlan(request), expectedError);
@@ -1148,7 +1148,7 @@ describe('v1.BackupForGKEClient', () => {
   describe('getRestoreChannel', () => {
     it('invokes getRestoreChannel without error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1179,7 +1179,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes getRestoreChannel without error using callback', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1226,7 +1226,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes getRestoreChannel with error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1257,7 +1257,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes getRestoreChannel with closed client', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1270,7 +1270,7 @@ describe('v1.BackupForGKEClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getRestoreChannel(request), expectedError);
@@ -1280,7 +1280,7 @@ describe('v1.BackupForGKEClient', () => {
   describe('getRestorePlanBinding', () => {
     it('invokes getRestorePlanBinding without error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1312,7 +1312,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes getRestorePlanBinding without error using callback', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1359,7 +1359,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes getRestorePlanBinding with error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1393,7 +1393,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes getRestorePlanBinding with closed client', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1406,7 +1406,7 @@ describe('v1.BackupForGKEClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1419,7 +1419,7 @@ describe('v1.BackupForGKEClient', () => {
   describe('getRestore', () => {
     it('invokes getRestore without error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1450,7 +1450,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes getRestore without error using callback', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1497,7 +1497,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes getRestore with error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1528,7 +1528,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes getRestore with closed client', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1541,7 +1541,7 @@ describe('v1.BackupForGKEClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getRestore(request), expectedError);
@@ -1551,7 +1551,7 @@ describe('v1.BackupForGKEClient', () => {
   describe('getVolumeRestore', () => {
     it('invokes getVolumeRestore without error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1582,7 +1582,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes getVolumeRestore without error using callback', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1629,7 +1629,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes getVolumeRestore with error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1660,7 +1660,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes getVolumeRestore with closed client', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1673,7 +1673,7 @@ describe('v1.BackupForGKEClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getVolumeRestore(request), expectedError);
@@ -1683,7 +1683,7 @@ describe('v1.BackupForGKEClient', () => {
   describe('getBackupIndexDownloadUrl', () => {
     it('invokes getBackupIndexDownloadUrl without error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1715,7 +1715,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes getBackupIndexDownloadUrl without error using callback', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1762,7 +1762,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes getBackupIndexDownloadUrl with error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1796,7 +1796,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes getBackupIndexDownloadUrl with closed client', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1809,7 +1809,7 @@ describe('v1.BackupForGKEClient', () => {
       );
       request.backup = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1822,7 +1822,7 @@ describe('v1.BackupForGKEClient', () => {
   describe('createBackupPlan', () => {
     it('invokes createBackupPlan without error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1855,7 +1855,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes createBackupPlan without error using callback', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1909,7 +1909,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes createBackupPlan with call error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1940,7 +1940,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes createBackupPlan with LRO error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1973,7 +1973,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes checkCreateBackupPlanProgress without error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1981,8 +1981,8 @@ describe('v1.BackupForGKEClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateBackupPlanProgress(
@@ -1995,7 +1995,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes checkCreateBackupPlanProgress with error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2016,7 +2016,7 @@ describe('v1.BackupForGKEClient', () => {
   describe('updateBackupPlan', () => {
     it('invokes updateBackupPlan without error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2050,7 +2050,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes updateBackupPlan without error using callback', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2105,7 +2105,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes updateBackupPlan with call error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2137,7 +2137,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes updateBackupPlan with LRO error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2171,7 +2171,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes checkUpdateBackupPlanProgress without error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2179,8 +2179,8 @@ describe('v1.BackupForGKEClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateBackupPlanProgress(
@@ -2193,7 +2193,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes checkUpdateBackupPlanProgress with error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2214,7 +2214,7 @@ describe('v1.BackupForGKEClient', () => {
   describe('deleteBackupPlan', () => {
     it('invokes deleteBackupPlan without error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2247,7 +2247,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes deleteBackupPlan without error using callback', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2301,7 +2301,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes deleteBackupPlan with call error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2332,7 +2332,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes deleteBackupPlan with LRO error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2365,7 +2365,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes checkDeleteBackupPlanProgress without error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2373,8 +2373,8 @@ describe('v1.BackupForGKEClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteBackupPlanProgress(
@@ -2387,7 +2387,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes checkDeleteBackupPlanProgress with error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2408,7 +2408,7 @@ describe('v1.BackupForGKEClient', () => {
   describe('createBackupChannel', () => {
     it('invokes createBackupChannel without error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2441,7 +2441,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes createBackupChannel without error using callback', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2495,7 +2495,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes createBackupChannel with call error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2526,7 +2526,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes createBackupChannel with LRO error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2559,7 +2559,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes checkCreateBackupChannelProgress without error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2567,8 +2567,8 @@ describe('v1.BackupForGKEClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateBackupChannelProgress(
@@ -2581,7 +2581,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes checkCreateBackupChannelProgress with error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2602,7 +2602,7 @@ describe('v1.BackupForGKEClient', () => {
   describe('updateBackupChannel', () => {
     it('invokes updateBackupChannel without error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2636,7 +2636,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes updateBackupChannel without error using callback', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2691,7 +2691,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes updateBackupChannel with call error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2723,7 +2723,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes updateBackupChannel with LRO error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2757,7 +2757,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes checkUpdateBackupChannelProgress without error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2765,8 +2765,8 @@ describe('v1.BackupForGKEClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateBackupChannelProgress(
@@ -2779,7 +2779,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes checkUpdateBackupChannelProgress with error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2800,7 +2800,7 @@ describe('v1.BackupForGKEClient', () => {
   describe('deleteBackupChannel', () => {
     it('invokes deleteBackupChannel without error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2833,7 +2833,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes deleteBackupChannel without error using callback', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2887,7 +2887,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes deleteBackupChannel with call error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2918,7 +2918,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes deleteBackupChannel with LRO error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2951,7 +2951,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes checkDeleteBackupChannelProgress without error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2959,8 +2959,8 @@ describe('v1.BackupForGKEClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteBackupChannelProgress(
@@ -2973,7 +2973,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes checkDeleteBackupChannelProgress with error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2994,7 +2994,7 @@ describe('v1.BackupForGKEClient', () => {
   describe('createBackup', () => {
     it('invokes createBackup without error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3026,7 +3026,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes createBackup without error using callback', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3080,7 +3080,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes createBackup with call error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3111,7 +3111,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes createBackup with LRO error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3144,7 +3144,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes checkCreateBackupProgress without error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3152,8 +3152,8 @@ describe('v1.BackupForGKEClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateBackupProgress(
@@ -3166,7 +3166,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes checkCreateBackupProgress with error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3184,7 +3184,7 @@ describe('v1.BackupForGKEClient', () => {
   describe('updateBackup', () => {
     it('invokes updateBackup without error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3217,7 +3217,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes updateBackup without error using callback', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3272,7 +3272,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes updateBackup with call error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3304,7 +3304,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes updateBackup with LRO error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3338,7 +3338,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes checkUpdateBackupProgress without error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3346,8 +3346,8 @@ describe('v1.BackupForGKEClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateBackupProgress(
@@ -3360,7 +3360,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes checkUpdateBackupProgress with error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3378,7 +3378,7 @@ describe('v1.BackupForGKEClient', () => {
   describe('deleteBackup', () => {
     it('invokes deleteBackup without error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3410,7 +3410,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes deleteBackup without error using callback', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3464,7 +3464,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes deleteBackup with call error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3495,7 +3495,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes deleteBackup with LRO error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3528,7 +3528,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes checkDeleteBackupProgress without error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3536,8 +3536,8 @@ describe('v1.BackupForGKEClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteBackupProgress(
@@ -3550,7 +3550,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes checkDeleteBackupProgress with error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3568,7 +3568,7 @@ describe('v1.BackupForGKEClient', () => {
   describe('createRestorePlan', () => {
     it('invokes createRestorePlan without error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3601,7 +3601,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes createRestorePlan without error using callback', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3655,7 +3655,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes createRestorePlan with call error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3686,7 +3686,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes createRestorePlan with LRO error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3719,7 +3719,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes checkCreateRestorePlanProgress without error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3727,8 +3727,8 @@ describe('v1.BackupForGKEClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateRestorePlanProgress(
@@ -3741,7 +3741,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes checkCreateRestorePlanProgress with error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3762,7 +3762,7 @@ describe('v1.BackupForGKEClient', () => {
   describe('updateRestorePlan', () => {
     it('invokes updateRestorePlan without error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3796,7 +3796,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes updateRestorePlan without error using callback', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3851,7 +3851,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes updateRestorePlan with call error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3883,7 +3883,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes updateRestorePlan with LRO error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3917,7 +3917,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes checkUpdateRestorePlanProgress without error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3925,8 +3925,8 @@ describe('v1.BackupForGKEClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateRestorePlanProgress(
@@ -3939,7 +3939,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes checkUpdateRestorePlanProgress with error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3960,7 +3960,7 @@ describe('v1.BackupForGKEClient', () => {
   describe('deleteRestorePlan', () => {
     it('invokes deleteRestorePlan without error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3993,7 +3993,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes deleteRestorePlan without error using callback', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4047,7 +4047,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes deleteRestorePlan with call error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4078,7 +4078,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes deleteRestorePlan with LRO error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4111,7 +4111,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes checkDeleteRestorePlanProgress without error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4119,8 +4119,8 @@ describe('v1.BackupForGKEClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteRestorePlanProgress(
@@ -4133,7 +4133,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes checkDeleteRestorePlanProgress with error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4154,7 +4154,7 @@ describe('v1.BackupForGKEClient', () => {
   describe('createRestoreChannel', () => {
     it('invokes createRestoreChannel without error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4187,7 +4187,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes createRestoreChannel without error using callback', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4241,7 +4241,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes createRestoreChannel with call error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4272,7 +4272,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes createRestoreChannel with LRO error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4305,7 +4305,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes checkCreateRestoreChannelProgress without error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4313,8 +4313,8 @@ describe('v1.BackupForGKEClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateRestoreChannelProgress(
@@ -4327,7 +4327,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes checkCreateRestoreChannelProgress with error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4348,7 +4348,7 @@ describe('v1.BackupForGKEClient', () => {
   describe('updateRestoreChannel', () => {
     it('invokes updateRestoreChannel without error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4382,7 +4382,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes updateRestoreChannel without error using callback', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4437,7 +4437,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes updateRestoreChannel with call error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4469,7 +4469,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes updateRestoreChannel with LRO error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4503,7 +4503,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes checkUpdateRestoreChannelProgress without error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4511,8 +4511,8 @@ describe('v1.BackupForGKEClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateRestoreChannelProgress(
@@ -4525,7 +4525,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes checkUpdateRestoreChannelProgress with error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4546,7 +4546,7 @@ describe('v1.BackupForGKEClient', () => {
   describe('deleteRestoreChannel', () => {
     it('invokes deleteRestoreChannel without error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4579,7 +4579,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes deleteRestoreChannel without error using callback', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4633,7 +4633,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes deleteRestoreChannel with call error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4664,7 +4664,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes deleteRestoreChannel with LRO error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4697,7 +4697,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes checkDeleteRestoreChannelProgress without error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4705,8 +4705,8 @@ describe('v1.BackupForGKEClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteRestoreChannelProgress(
@@ -4719,7 +4719,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes checkDeleteRestoreChannelProgress with error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4740,7 +4740,7 @@ describe('v1.BackupForGKEClient', () => {
   describe('createRestore', () => {
     it('invokes createRestore without error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4773,7 +4773,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes createRestore without error using callback', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4827,7 +4827,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes createRestore with call error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4858,7 +4858,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes createRestore with LRO error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4891,7 +4891,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes checkCreateRestoreProgress without error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4899,8 +4899,8 @@ describe('v1.BackupForGKEClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateRestoreProgress(
@@ -4913,7 +4913,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes checkCreateRestoreProgress with error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4934,7 +4934,7 @@ describe('v1.BackupForGKEClient', () => {
   describe('updateRestore', () => {
     it('invokes updateRestore without error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4968,7 +4968,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes updateRestore without error using callback', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5023,7 +5023,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes updateRestore with call error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5055,7 +5055,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes updateRestore with LRO error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5089,7 +5089,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes checkUpdateRestoreProgress without error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5097,8 +5097,8 @@ describe('v1.BackupForGKEClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateRestoreProgress(
@@ -5111,7 +5111,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes checkUpdateRestoreProgress with error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5132,7 +5132,7 @@ describe('v1.BackupForGKEClient', () => {
   describe('deleteRestore', () => {
     it('invokes deleteRestore without error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5165,7 +5165,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes deleteRestore without error using callback', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5219,7 +5219,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes deleteRestore with call error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5250,7 +5250,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes deleteRestore with LRO error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5283,7 +5283,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes checkDeleteRestoreProgress without error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5291,8 +5291,8 @@ describe('v1.BackupForGKEClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteRestoreProgress(
@@ -5305,7 +5305,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes checkDeleteRestoreProgress with error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5326,7 +5326,7 @@ describe('v1.BackupForGKEClient', () => {
   describe('listBackupPlans', () => {
     it('invokes listBackupPlans without error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5365,7 +5365,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes listBackupPlans without error using callback', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5420,7 +5420,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes listBackupPlans with error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5451,7 +5451,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes listBackupPlansStream without error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5503,15 +5503,15 @@ describe('v1.BackupForGKEClient', () => {
       assert(
         (client.descriptors.page.listBackupPlans.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listBackupPlansStream with error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5552,15 +5552,15 @@ describe('v1.BackupForGKEClient', () => {
       assert(
         (client.descriptors.page.listBackupPlans.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listBackupPlans without error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5601,15 +5601,15 @@ describe('v1.BackupForGKEClient', () => {
       assert(
         (client.descriptors.page.listBackupPlans.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listBackupPlans with error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5641,9 +5641,9 @@ describe('v1.BackupForGKEClient', () => {
       assert(
         (client.descriptors.page.listBackupPlans.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -5651,7 +5651,7 @@ describe('v1.BackupForGKEClient', () => {
   describe('listBackupChannels', () => {
     it('invokes listBackupChannels without error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5691,7 +5691,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes listBackupChannels without error using callback', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5746,7 +5746,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes listBackupChannels with error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5777,7 +5777,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes listBackupChannelsStream without error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5829,15 +5829,15 @@ describe('v1.BackupForGKEClient', () => {
       assert(
         (client.descriptors.page.listBackupChannels.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listBackupChannelsStream with error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5878,15 +5878,15 @@ describe('v1.BackupForGKEClient', () => {
       assert(
         (client.descriptors.page.listBackupChannels.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listBackupChannels without error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5927,15 +5927,15 @@ describe('v1.BackupForGKEClient', () => {
       assert(
         (client.descriptors.page.listBackupChannels.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listBackupChannels with error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5967,9 +5967,9 @@ describe('v1.BackupForGKEClient', () => {
       assert(
         (client.descriptors.page.listBackupChannels.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -5977,7 +5977,7 @@ describe('v1.BackupForGKEClient', () => {
   describe('listBackupPlanBindings', () => {
     it('invokes listBackupPlanBindings without error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6017,7 +6017,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes listBackupPlanBindings without error using callback', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6049,8 +6049,7 @@ describe('v1.BackupForGKEClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.gkebackup.v1.IBackupPlanBinding[]
-              | null,
+              protos.google.cloud.gkebackup.v1.IBackupPlanBinding[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -6074,7 +6073,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes listBackupPlanBindings with error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6108,7 +6107,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes listBackupPlanBindingsStream without error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6175,7 +6174,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes listBackupPlanBindingsStream with error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6231,7 +6230,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('uses async iteration with listBackupPlanBindings without error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6285,7 +6284,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('uses async iteration with listBackupPlanBindings with error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6332,7 +6331,7 @@ describe('v1.BackupForGKEClient', () => {
   describe('listBackups', () => {
     it('invokes listBackups without error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6365,7 +6364,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes listBackups without error using callback', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6414,7 +6413,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes listBackups with error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6445,7 +6444,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes listBackupsStream without error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6491,15 +6490,15 @@ describe('v1.BackupForGKEClient', () => {
       assert(
         (client.descriptors.page.listBackups.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listBackupsStream with error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6542,15 +6541,15 @@ describe('v1.BackupForGKEClient', () => {
       assert(
         (client.descriptors.page.listBackups.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listBackups without error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6585,15 +6584,15 @@ describe('v1.BackupForGKEClient', () => {
       assert(
         (client.descriptors.page.listBackups.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listBackups with error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6627,9 +6626,9 @@ describe('v1.BackupForGKEClient', () => {
       assert(
         (client.descriptors.page.listBackups.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -6637,7 +6636,7 @@ describe('v1.BackupForGKEClient', () => {
   describe('listVolumeBackups', () => {
     it('invokes listVolumeBackups without error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6676,7 +6675,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes listVolumeBackups without error using callback', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6731,7 +6730,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes listVolumeBackups with error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6762,7 +6761,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes listVolumeBackupsStream without error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6814,15 +6813,15 @@ describe('v1.BackupForGKEClient', () => {
       assert(
         (client.descriptors.page.listVolumeBackups.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listVolumeBackupsStream with error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6863,15 +6862,15 @@ describe('v1.BackupForGKEClient', () => {
       assert(
         (client.descriptors.page.listVolumeBackups.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listVolumeBackups without error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6912,15 +6911,15 @@ describe('v1.BackupForGKEClient', () => {
       assert(
         (client.descriptors.page.listVolumeBackups.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listVolumeBackups with error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6952,9 +6951,9 @@ describe('v1.BackupForGKEClient', () => {
       assert(
         (client.descriptors.page.listVolumeBackups.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -6962,7 +6961,7 @@ describe('v1.BackupForGKEClient', () => {
   describe('listRestorePlans', () => {
     it('invokes listRestorePlans without error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7001,7 +7000,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes listRestorePlans without error using callback', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7056,7 +7055,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes listRestorePlans with error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7087,7 +7086,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes listRestorePlansStream without error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7139,15 +7138,15 @@ describe('v1.BackupForGKEClient', () => {
       assert(
         (client.descriptors.page.listRestorePlans.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listRestorePlansStream with error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7188,15 +7187,15 @@ describe('v1.BackupForGKEClient', () => {
       assert(
         (client.descriptors.page.listRestorePlans.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listRestorePlans without error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7237,15 +7236,15 @@ describe('v1.BackupForGKEClient', () => {
       assert(
         (client.descriptors.page.listRestorePlans.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listRestorePlans with error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7277,9 +7276,9 @@ describe('v1.BackupForGKEClient', () => {
       assert(
         (client.descriptors.page.listRestorePlans.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -7287,7 +7286,7 @@ describe('v1.BackupForGKEClient', () => {
   describe('listRestoreChannels', () => {
     it('invokes listRestoreChannels without error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7327,7 +7326,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes listRestoreChannels without error using callback', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7382,7 +7381,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes listRestoreChannels with error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7413,7 +7412,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes listRestoreChannelsStream without error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7465,15 +7464,15 @@ describe('v1.BackupForGKEClient', () => {
       assert(
         (client.descriptors.page.listRestoreChannels.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listRestoreChannelsStream with error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7514,15 +7513,15 @@ describe('v1.BackupForGKEClient', () => {
       assert(
         (client.descriptors.page.listRestoreChannels.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listRestoreChannels without error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7563,15 +7562,15 @@ describe('v1.BackupForGKEClient', () => {
       assert(
         (client.descriptors.page.listRestoreChannels.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listRestoreChannels with error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7604,9 +7603,9 @@ describe('v1.BackupForGKEClient', () => {
       assert(
         (client.descriptors.page.listRestoreChannels.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -7614,7 +7613,7 @@ describe('v1.BackupForGKEClient', () => {
   describe('listRestorePlanBindings', () => {
     it('invokes listRestorePlanBindings without error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7654,7 +7653,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes listRestorePlanBindings without error using callback', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7686,8 +7685,7 @@ describe('v1.BackupForGKEClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.gkebackup.v1.IRestorePlanBinding[]
-              | null,
+              protos.google.cloud.gkebackup.v1.IRestorePlanBinding[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -7711,7 +7709,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes listRestorePlanBindings with error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7745,7 +7743,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes listRestorePlanBindingsStream without error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7812,7 +7810,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes listRestorePlanBindingsStream with error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7868,7 +7866,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('uses async iteration with listRestorePlanBindings without error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7922,7 +7920,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('uses async iteration with listRestorePlanBindings with error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7969,7 +7967,7 @@ describe('v1.BackupForGKEClient', () => {
   describe('listRestores', () => {
     it('invokes listRestores without error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8002,7 +8000,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes listRestores without error using callback', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8051,7 +8049,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes listRestores with error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8082,7 +8080,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes listRestoresStream without error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8128,15 +8126,15 @@ describe('v1.BackupForGKEClient', () => {
       assert(
         (client.descriptors.page.listRestores.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listRestoresStream with error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8179,15 +8177,15 @@ describe('v1.BackupForGKEClient', () => {
       assert(
         (client.descriptors.page.listRestores.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listRestores without error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8222,15 +8220,15 @@ describe('v1.BackupForGKEClient', () => {
       assert(
         (client.descriptors.page.listRestores.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listRestores with error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8262,9 +8260,9 @@ describe('v1.BackupForGKEClient', () => {
       assert(
         (client.descriptors.page.listRestores.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -8272,7 +8270,7 @@ describe('v1.BackupForGKEClient', () => {
   describe('listVolumeRestores', () => {
     it('invokes listVolumeRestores without error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8312,7 +8310,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes listVolumeRestores without error using callback', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8367,7 +8365,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes listVolumeRestores with error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8398,7 +8396,7 @@ describe('v1.BackupForGKEClient', () => {
 
     it('invokes listVolumeRestoresStream without error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8450,15 +8448,15 @@ describe('v1.BackupForGKEClient', () => {
       assert(
         (client.descriptors.page.listVolumeRestores.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listVolumeRestoresStream with error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8499,15 +8497,15 @@ describe('v1.BackupForGKEClient', () => {
       assert(
         (client.descriptors.page.listVolumeRestores.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listVolumeRestores without error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8548,15 +8546,15 @@ describe('v1.BackupForGKEClient', () => {
       assert(
         (client.descriptors.page.listVolumeRestores.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listVolumeRestores with error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8588,16 +8586,16 @@ describe('v1.BackupForGKEClient', () => {
       assert(
         (client.descriptors.page.listVolumeRestores.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8627,7 +8625,7 @@ describe('v1.BackupForGKEClient', () => {
     });
     it('invokes getIamPolicy without error using callback', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8665,7 +8663,7 @@ describe('v1.BackupForGKEClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -8675,7 +8673,7 @@ describe('v1.BackupForGKEClient', () => {
     });
     it('invokes getIamPolicy with error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8707,7 +8705,7 @@ describe('v1.BackupForGKEClient', () => {
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8737,7 +8735,7 @@ describe('v1.BackupForGKEClient', () => {
     });
     it('invokes setIamPolicy without error using callback', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8775,7 +8773,7 @@ describe('v1.BackupForGKEClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -8785,7 +8783,7 @@ describe('v1.BackupForGKEClient', () => {
     });
     it('invokes setIamPolicy with error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8817,7 +8815,7 @@ describe('v1.BackupForGKEClient', () => {
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8850,7 +8848,7 @@ describe('v1.BackupForGKEClient', () => {
     });
     it('invokes testIamPermissions without error using callback', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8888,7 +8886,7 @@ describe('v1.BackupForGKEClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -8898,7 +8896,7 @@ describe('v1.BackupForGKEClient', () => {
     });
     it('invokes testIamPermissions with error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8933,7 +8931,7 @@ describe('v1.BackupForGKEClient', () => {
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8963,7 +8961,7 @@ describe('v1.BackupForGKEClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9007,7 +9005,7 @@ describe('v1.BackupForGKEClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9042,7 +9040,7 @@ describe('v1.BackupForGKEClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9090,7 +9088,7 @@ describe('v1.BackupForGKEClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9131,7 +9129,7 @@ describe('v1.BackupForGKEClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9152,7 +9150,7 @@ describe('v1.BackupForGKEClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -9180,7 +9178,7 @@ describe('v1.BackupForGKEClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -9190,7 +9188,7 @@ describe('v1.BackupForGKEClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -9214,7 +9212,7 @@ describe('v1.BackupForGKEClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9236,7 +9234,7 @@ describe('v1.BackupForGKEClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -9264,7 +9262,7 @@ describe('v1.BackupForGKEClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -9274,7 +9272,7 @@ describe('v1.BackupForGKEClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -9298,7 +9296,7 @@ describe('v1.BackupForGKEClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9320,7 +9318,7 @@ describe('v1.BackupForGKEClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -9348,7 +9346,7 @@ describe('v1.BackupForGKEClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -9358,7 +9356,7 @@ describe('v1.BackupForGKEClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -9382,7 +9380,7 @@ describe('v1.BackupForGKEClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -9417,7 +9415,7 @@ describe('v1.BackupForGKEClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9454,7 +9452,7 @@ describe('v1.BackupForGKEClient', () => {
         backup: 'backupValue',
       };
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9529,7 +9527,7 @@ describe('v1.BackupForGKEClient', () => {
         backup_channel: 'backupChannelValue',
       };
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9593,7 +9591,7 @@ describe('v1.BackupForGKEClient', () => {
         backup_plan: 'backupPlanValue',
       };
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9658,7 +9656,7 @@ describe('v1.BackupForGKEClient', () => {
         backup_plan_binding: 'backupPlanBindingValue',
       };
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9749,7 +9747,7 @@ describe('v1.BackupForGKEClient', () => {
         location: 'locationValue',
       };
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9800,7 +9798,7 @@ describe('v1.BackupForGKEClient', () => {
         restore: 'restoreValue',
       };
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9875,7 +9873,7 @@ describe('v1.BackupForGKEClient', () => {
         restore_channel: 'restoreChannelValue',
       };
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9940,7 +9938,7 @@ describe('v1.BackupForGKEClient', () => {
         restore_plan: 'restorePlanValue',
       };
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10005,7 +10003,7 @@ describe('v1.BackupForGKEClient', () => {
         restore_plan_binding: 'restorePlanBindingValue',
       };
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10099,7 +10097,7 @@ describe('v1.BackupForGKEClient', () => {
         volume_backup: 'volumeBackupValue',
       };
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10187,7 +10185,7 @@ describe('v1.BackupForGKEClient', () => {
         volume_restore: 'volumeRestoreValue',
       };
       const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

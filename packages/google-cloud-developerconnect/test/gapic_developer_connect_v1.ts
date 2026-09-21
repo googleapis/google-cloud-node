@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as developerconnectModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -50,7 +50,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -154,9 +154,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -279,7 +279,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.developerConnectStub, undefined);
@@ -287,12 +287,12 @@ describe('v1.DeveloperConnectClient', () => {
       assert(client.developerConnectStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.developerConnectStub);
@@ -301,14 +301,14 @@ describe('v1.DeveloperConnectClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.developerConnectStub, undefined);
@@ -317,7 +317,7 @@ describe('v1.DeveloperConnectClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -325,7 +325,7 @@ describe('v1.DeveloperConnectClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -337,7 +337,7 @@ describe('v1.DeveloperConnectClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -360,7 +360,7 @@ describe('v1.DeveloperConnectClient', () => {
   describe('getConnection', () => {
     it('invokes getConnection without error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -391,7 +391,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes getConnection without error using callback', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -438,7 +438,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes getConnection with error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -469,7 +469,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes getConnection with closed client', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -482,7 +482,7 @@ describe('v1.DeveloperConnectClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getConnection(request), expectedError);
@@ -492,7 +492,7 @@ describe('v1.DeveloperConnectClient', () => {
   describe('getGitRepositoryLink', () => {
     it('invokes getGitRepositoryLink without error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -524,7 +524,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes getGitRepositoryLink without error using callback', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -571,7 +571,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes getGitRepositoryLink with error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -602,7 +602,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes getGitRepositoryLink with closed client', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -615,7 +615,7 @@ describe('v1.DeveloperConnectClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getGitRepositoryLink(request), expectedError);
@@ -625,7 +625,7 @@ describe('v1.DeveloperConnectClient', () => {
   describe('fetchReadWriteToken', () => {
     it('invokes fetchReadWriteToken without error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -657,7 +657,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes fetchReadWriteToken without error using callback', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -704,7 +704,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes fetchReadWriteToken with error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -735,7 +735,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes fetchReadWriteToken with closed client', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -748,7 +748,7 @@ describe('v1.DeveloperConnectClient', () => {
       );
       request.gitRepositoryLink = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.fetchReadWriteToken(request), expectedError);
@@ -758,7 +758,7 @@ describe('v1.DeveloperConnectClient', () => {
   describe('fetchReadToken', () => {
     it('invokes fetchReadToken without error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -789,7 +789,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes fetchReadToken without error using callback', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -836,7 +836,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes fetchReadToken with error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -867,7 +867,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes fetchReadToken with closed client', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -880,7 +880,7 @@ describe('v1.DeveloperConnectClient', () => {
       );
       request.gitRepositoryLink = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.fetchReadToken(request), expectedError);
@@ -890,7 +890,7 @@ describe('v1.DeveloperConnectClient', () => {
   describe('fetchGitHubInstallations', () => {
     it('invokes fetchGitHubInstallations without error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -922,7 +922,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes fetchGitHubInstallations without error using callback', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -969,7 +969,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes fetchGitHubInstallations with error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1003,7 +1003,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes fetchGitHubInstallations with closed client', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1016,7 +1016,7 @@ describe('v1.DeveloperConnectClient', () => {
       );
       request.connection = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1029,7 +1029,7 @@ describe('v1.DeveloperConnectClient', () => {
   describe('getAccountConnector', () => {
     it('invokes getAccountConnector without error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1061,7 +1061,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes getAccountConnector without error using callback', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1108,7 +1108,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes getAccountConnector with error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1139,7 +1139,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes getAccountConnector with closed client', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1152,7 +1152,7 @@ describe('v1.DeveloperConnectClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getAccountConnector(request), expectedError);
@@ -1162,7 +1162,7 @@ describe('v1.DeveloperConnectClient', () => {
   describe('fetchAccessToken', () => {
     it('invokes fetchAccessToken without error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1193,7 +1193,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes fetchAccessToken without error using callback', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1240,7 +1240,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes fetchAccessToken with error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1271,7 +1271,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes fetchAccessToken with closed client', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1284,7 +1284,7 @@ describe('v1.DeveloperConnectClient', () => {
       );
       request.accountConnector = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.fetchAccessToken(request), expectedError);
@@ -1294,7 +1294,7 @@ describe('v1.DeveloperConnectClient', () => {
   describe('fetchSelf', () => {
     it('invokes fetchSelf without error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1325,7 +1325,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes fetchSelf without error using callback', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1372,7 +1372,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes fetchSelf with error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1400,7 +1400,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes fetchSelf with closed client', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1413,7 +1413,7 @@ describe('v1.DeveloperConnectClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.fetchSelf(request), expectedError);
@@ -1423,7 +1423,7 @@ describe('v1.DeveloperConnectClient', () => {
   describe('startOAuth', () => {
     it('invokes startOAuth without error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1454,7 +1454,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes startOAuth without error using callback', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1501,7 +1501,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes startOAuth with error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1532,7 +1532,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes startOAuth with closed client', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1545,7 +1545,7 @@ describe('v1.DeveloperConnectClient', () => {
       );
       request.accountConnector = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.startOAuth(request), expectedError);
@@ -1555,7 +1555,7 @@ describe('v1.DeveloperConnectClient', () => {
   describe('finishOAuth', () => {
     it('invokes finishOAuth without error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1586,7 +1586,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes finishOAuth without error using callback', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1633,7 +1633,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes finishOAuth with error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1664,7 +1664,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes finishOAuth with closed client', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1677,7 +1677,7 @@ describe('v1.DeveloperConnectClient', () => {
       );
       request.accountConnector = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.finishOAuth(request), expectedError);
@@ -1687,7 +1687,7 @@ describe('v1.DeveloperConnectClient', () => {
   describe('createConnection', () => {
     it('invokes createConnection without error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1720,7 +1720,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes createConnection without error using callback', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1774,7 +1774,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes createConnection with call error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1805,7 +1805,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes createConnection with LRO error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1838,7 +1838,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes checkCreateConnectionProgress without error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1846,8 +1846,8 @@ describe('v1.DeveloperConnectClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateConnectionProgress(
@@ -1860,7 +1860,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes checkCreateConnectionProgress with error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1881,7 +1881,7 @@ describe('v1.DeveloperConnectClient', () => {
   describe('updateConnection', () => {
     it('invokes updateConnection without error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1915,7 +1915,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes updateConnection without error using callback', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1970,7 +1970,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes updateConnection with call error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2002,7 +2002,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes updateConnection with LRO error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2036,7 +2036,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes checkUpdateConnectionProgress without error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2044,8 +2044,8 @@ describe('v1.DeveloperConnectClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateConnectionProgress(
@@ -2058,7 +2058,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes checkUpdateConnectionProgress with error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2079,7 +2079,7 @@ describe('v1.DeveloperConnectClient', () => {
   describe('deleteConnection', () => {
     it('invokes deleteConnection without error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2112,7 +2112,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes deleteConnection without error using callback', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2166,7 +2166,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes deleteConnection with call error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2197,7 +2197,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes deleteConnection with LRO error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2230,7 +2230,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes checkDeleteConnectionProgress without error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2238,8 +2238,8 @@ describe('v1.DeveloperConnectClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteConnectionProgress(
@@ -2252,7 +2252,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes checkDeleteConnectionProgress with error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2273,7 +2273,7 @@ describe('v1.DeveloperConnectClient', () => {
   describe('createGitRepositoryLink', () => {
     it('invokes createGitRepositoryLink without error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2306,7 +2306,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes createGitRepositoryLink without error using callback', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2360,7 +2360,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes createGitRepositoryLink with call error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2394,7 +2394,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes createGitRepositoryLink with LRO error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2427,7 +2427,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes checkCreateGitRepositoryLinkProgress without error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2435,8 +2435,8 @@ describe('v1.DeveloperConnectClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -2450,7 +2450,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes checkCreateGitRepositoryLinkProgress with error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2471,7 +2471,7 @@ describe('v1.DeveloperConnectClient', () => {
   describe('deleteGitRepositoryLink', () => {
     it('invokes deleteGitRepositoryLink without error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2504,7 +2504,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes deleteGitRepositoryLink without error using callback', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2558,7 +2558,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes deleteGitRepositoryLink with call error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2592,7 +2592,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes deleteGitRepositoryLink with LRO error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2625,7 +2625,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes checkDeleteGitRepositoryLinkProgress without error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2633,8 +2633,8 @@ describe('v1.DeveloperConnectClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -2648,7 +2648,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes checkDeleteGitRepositoryLinkProgress with error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2669,7 +2669,7 @@ describe('v1.DeveloperConnectClient', () => {
   describe('createAccountConnector', () => {
     it('invokes createAccountConnector without error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2702,7 +2702,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes createAccountConnector without error using callback', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2756,7 +2756,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes createAccountConnector with call error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2790,7 +2790,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes createAccountConnector with LRO error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2823,7 +2823,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes checkCreateAccountConnectorProgress without error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2831,8 +2831,8 @@ describe('v1.DeveloperConnectClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateAccountConnectorProgress(
@@ -2845,7 +2845,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes checkCreateAccountConnectorProgress with error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2866,7 +2866,7 @@ describe('v1.DeveloperConnectClient', () => {
   describe('updateAccountConnector', () => {
     it('invokes updateAccountConnector without error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2900,7 +2900,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes updateAccountConnector without error using callback', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2955,7 +2955,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes updateAccountConnector with call error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2990,7 +2990,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes updateAccountConnector with LRO error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3024,7 +3024,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes checkUpdateAccountConnectorProgress without error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3032,8 +3032,8 @@ describe('v1.DeveloperConnectClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateAccountConnectorProgress(
@@ -3046,7 +3046,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes checkUpdateAccountConnectorProgress with error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3067,7 +3067,7 @@ describe('v1.DeveloperConnectClient', () => {
   describe('deleteAccountConnector', () => {
     it('invokes deleteAccountConnector without error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3100,7 +3100,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes deleteAccountConnector without error using callback', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3154,7 +3154,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes deleteAccountConnector with call error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3188,7 +3188,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes deleteAccountConnector with LRO error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3221,7 +3221,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes checkDeleteAccountConnectorProgress without error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3229,8 +3229,8 @@ describe('v1.DeveloperConnectClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteAccountConnectorProgress(
@@ -3243,7 +3243,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes checkDeleteAccountConnectorProgress with error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3264,7 +3264,7 @@ describe('v1.DeveloperConnectClient', () => {
   describe('deleteUser', () => {
     it('invokes deleteUser without error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3296,7 +3296,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes deleteUser without error using callback', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3350,7 +3350,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes deleteUser with call error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3381,7 +3381,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes deleteUser with LRO error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3414,7 +3414,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes checkDeleteUserProgress without error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3422,8 +3422,8 @@ describe('v1.DeveloperConnectClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteUserProgress(
@@ -3436,7 +3436,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes checkDeleteUserProgress with error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3454,7 +3454,7 @@ describe('v1.DeveloperConnectClient', () => {
   describe('deleteSelf', () => {
     it('invokes deleteSelf without error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3486,7 +3486,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes deleteSelf without error using callback', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3540,7 +3540,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes deleteSelf with call error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3571,7 +3571,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes deleteSelf with LRO error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3604,7 +3604,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes checkDeleteSelfProgress without error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3612,8 +3612,8 @@ describe('v1.DeveloperConnectClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteSelfProgress(
@@ -3626,7 +3626,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes checkDeleteSelfProgress with error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3644,7 +3644,7 @@ describe('v1.DeveloperConnectClient', () => {
   describe('listConnections', () => {
     it('invokes listConnections without error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3683,7 +3683,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes listConnections without error using callback', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3715,8 +3715,7 @@ describe('v1.DeveloperConnectClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.developerconnect.v1.IConnection[]
-              | null,
+              protos.google.cloud.developerconnect.v1.IConnection[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -3740,7 +3739,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes listConnections with error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3771,7 +3770,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes listConnectionsStream without error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3824,15 +3823,15 @@ describe('v1.DeveloperConnectClient', () => {
       assert(
         (client.descriptors.page.listConnections.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listConnectionsStream with error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3874,15 +3873,15 @@ describe('v1.DeveloperConnectClient', () => {
       assert(
         (client.descriptors.page.listConnections.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listConnections without error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3924,15 +3923,15 @@ describe('v1.DeveloperConnectClient', () => {
       assert(
         (client.descriptors.page.listConnections.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listConnections with error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3965,9 +3964,9 @@ describe('v1.DeveloperConnectClient', () => {
       assert(
         (client.descriptors.page.listConnections.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -3975,7 +3974,7 @@ describe('v1.DeveloperConnectClient', () => {
   describe('listGitRepositoryLinks', () => {
     it('invokes listGitRepositoryLinks without error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4015,7 +4014,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes listGitRepositoryLinks without error using callback', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4072,7 +4071,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes listGitRepositoryLinks with error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4106,7 +4105,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes listGitRepositoryLinksStream without error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4175,7 +4174,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes listGitRepositoryLinksStream with error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4233,7 +4232,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('uses async iteration with listGitRepositoryLinks without error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4287,7 +4286,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('uses async iteration with listGitRepositoryLinks with error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4334,7 +4333,7 @@ describe('v1.DeveloperConnectClient', () => {
   describe('fetchLinkableGitRepositories', () => {
     it('invokes fetchLinkableGitRepositories without error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4374,7 +4373,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes fetchLinkableGitRepositories without error using callback', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4431,7 +4430,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes fetchLinkableGitRepositories with error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4465,7 +4464,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes fetchLinkableGitRepositoriesStream without error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4537,7 +4536,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes fetchLinkableGitRepositoriesStream with error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4598,7 +4597,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('uses async iteration with fetchLinkableGitRepositories without error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4652,7 +4651,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('uses async iteration with fetchLinkableGitRepositories with error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4699,7 +4698,7 @@ describe('v1.DeveloperConnectClient', () => {
   describe('fetchGitRefs', () => {
     it('invokes fetchGitRefs without error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4728,7 +4727,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes fetchGitRefs without error using callback', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4770,7 +4769,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes fetchGitRefs with error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4801,7 +4800,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes fetchGitRefsStream without error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4840,15 +4839,15 @@ describe('v1.DeveloperConnectClient', () => {
       assert(
         (client.descriptors.page.fetchGitRefs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes fetchGitRefsStream with error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4888,15 +4887,15 @@ describe('v1.DeveloperConnectClient', () => {
       assert(
         (client.descriptors.page.fetchGitRefs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with fetchGitRefs without error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4927,15 +4926,15 @@ describe('v1.DeveloperConnectClient', () => {
       assert(
         (client.descriptors.page.fetchGitRefs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with fetchGitRefs with error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4967,9 +4966,9 @@ describe('v1.DeveloperConnectClient', () => {
       assert(
         (client.descriptors.page.fetchGitRefs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4977,7 +4976,7 @@ describe('v1.DeveloperConnectClient', () => {
   describe('listAccountConnectors', () => {
     it('invokes listAccountConnectors without error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5017,7 +5016,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes listAccountConnectors without error using callback', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5074,7 +5073,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes listAccountConnectors with error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5108,7 +5107,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes listAccountConnectorsStream without error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5177,7 +5176,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes listAccountConnectorsStream with error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5235,7 +5234,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('uses async iteration with listAccountConnectors without error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5289,7 +5288,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('uses async iteration with listAccountConnectors with error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5336,7 +5335,7 @@ describe('v1.DeveloperConnectClient', () => {
   describe('listUsers', () => {
     it('invokes listUsers without error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5375,7 +5374,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes listUsers without error using callback', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5430,7 +5429,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes listUsers with error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5458,7 +5457,7 @@ describe('v1.DeveloperConnectClient', () => {
 
     it('invokes listUsersStream without error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5510,15 +5509,15 @@ describe('v1.DeveloperConnectClient', () => {
       assert(
         (client.descriptors.page.listUsers.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listUsersStream with error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5561,15 +5560,15 @@ describe('v1.DeveloperConnectClient', () => {
       assert(
         (client.descriptors.page.listUsers.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listUsers without error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5609,15 +5608,15 @@ describe('v1.DeveloperConnectClient', () => {
       assert(
         (client.descriptors.page.listUsers.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listUsers with error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5650,16 +5649,16 @@ describe('v1.DeveloperConnectClient', () => {
       assert(
         (client.descriptors.page.listUsers.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5689,7 +5688,7 @@ describe('v1.DeveloperConnectClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5733,7 +5732,7 @@ describe('v1.DeveloperConnectClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5768,7 +5767,7 @@ describe('v1.DeveloperConnectClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5816,7 +5815,7 @@ describe('v1.DeveloperConnectClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5857,7 +5856,7 @@ describe('v1.DeveloperConnectClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5878,7 +5877,7 @@ describe('v1.DeveloperConnectClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5906,7 +5905,7 @@ describe('v1.DeveloperConnectClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -5916,7 +5915,7 @@ describe('v1.DeveloperConnectClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5940,7 +5939,7 @@ describe('v1.DeveloperConnectClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5962,7 +5961,7 @@ describe('v1.DeveloperConnectClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5990,7 +5989,7 @@ describe('v1.DeveloperConnectClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -6000,7 +5999,7 @@ describe('v1.DeveloperConnectClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -6024,7 +6023,7 @@ describe('v1.DeveloperConnectClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6046,7 +6045,7 @@ describe('v1.DeveloperConnectClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -6074,7 +6073,7 @@ describe('v1.DeveloperConnectClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -6084,7 +6083,7 @@ describe('v1.DeveloperConnectClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -6108,7 +6107,7 @@ describe('v1.DeveloperConnectClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -6143,7 +6142,7 @@ describe('v1.DeveloperConnectClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6179,7 +6178,7 @@ describe('v1.DeveloperConnectClient', () => {
         account_connector: 'accountConnectorValue',
       };
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6247,7 +6246,7 @@ describe('v1.DeveloperConnectClient', () => {
         connection: 'connectionValue',
       };
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6312,7 +6311,7 @@ describe('v1.DeveloperConnectClient', () => {
         crypto_key: 'cryptoKeyValue',
       };
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6388,7 +6387,7 @@ describe('v1.DeveloperConnectClient', () => {
         deployment_event: 'deploymentEventValue',
       };
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6466,7 +6465,7 @@ describe('v1.DeveloperConnectClient', () => {
         git_repository_link: 'gitRepositoryLinkValue',
       };
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6558,7 +6557,7 @@ describe('v1.DeveloperConnectClient', () => {
         insights_config: 'insightsConfigValue',
       };
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6623,7 +6622,7 @@ describe('v1.DeveloperConnectClient', () => {
         instance: 'instanceValue',
       };
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6686,7 +6685,7 @@ describe('v1.DeveloperConnectClient', () => {
         location: 'locationValue',
       };
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6734,7 +6733,7 @@ describe('v1.DeveloperConnectClient', () => {
         project: 'projectValue',
       };
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6775,7 +6774,7 @@ describe('v1.DeveloperConnectClient', () => {
         secret_version: 'secretVersionValue',
       };
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6875,7 +6874,7 @@ describe('v1.DeveloperConnectClient', () => {
         secret_version: 'secretVersionValue',
       };
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6955,7 +6954,7 @@ describe('v1.DeveloperConnectClient', () => {
         service: 'serviceValue',
       };
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7031,7 +7030,7 @@ describe('v1.DeveloperConnectClient', () => {
         user: 'userValue',
       };
       const client = new developerconnectModule.v1.DeveloperConnectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

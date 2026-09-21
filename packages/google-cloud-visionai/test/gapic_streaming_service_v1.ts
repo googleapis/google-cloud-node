@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as streamingserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, IamProtos, LocationProtos } from 'google-gax';
+import {protobuf, IamProtos, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -93,9 +93,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -218,7 +218,7 @@ describe('v1.StreamingServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new streamingserviceModule.v1.StreamingServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.streamingServiceStub, undefined);
@@ -226,12 +226,12 @@ describe('v1.StreamingServiceClient', () => {
       assert(client.streamingServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new streamingserviceModule.v1.StreamingServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.streamingServiceStub);
@@ -240,14 +240,14 @@ describe('v1.StreamingServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new streamingserviceModule.v1.StreamingServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.streamingServiceStub, undefined);
@@ -256,7 +256,7 @@ describe('v1.StreamingServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -264,7 +264,7 @@ describe('v1.StreamingServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new streamingserviceModule.v1.StreamingServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -276,7 +276,7 @@ describe('v1.StreamingServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new streamingserviceModule.v1.StreamingServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -299,7 +299,7 @@ describe('v1.StreamingServiceClient', () => {
   describe('acquireLease', () => {
     it('invokes acquireLease without error', async () => {
       const client = new streamingserviceModule.v1.StreamingServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -330,7 +330,7 @@ describe('v1.StreamingServiceClient', () => {
 
     it('invokes acquireLease without error using callback', async () => {
       const client = new streamingserviceModule.v1.StreamingServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -377,7 +377,7 @@ describe('v1.StreamingServiceClient', () => {
 
     it('invokes acquireLease with error', async () => {
       const client = new streamingserviceModule.v1.StreamingServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -408,7 +408,7 @@ describe('v1.StreamingServiceClient', () => {
 
     it('invokes acquireLease with closed client', async () => {
       const client = new streamingserviceModule.v1.StreamingServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -421,7 +421,7 @@ describe('v1.StreamingServiceClient', () => {
       );
       request.series = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.acquireLease(request), expectedError);
@@ -431,7 +431,7 @@ describe('v1.StreamingServiceClient', () => {
   describe('renewLease', () => {
     it('invokes renewLease without error', async () => {
       const client = new streamingserviceModule.v1.StreamingServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -462,7 +462,7 @@ describe('v1.StreamingServiceClient', () => {
 
     it('invokes renewLease without error using callback', async () => {
       const client = new streamingserviceModule.v1.StreamingServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -509,7 +509,7 @@ describe('v1.StreamingServiceClient', () => {
 
     it('invokes renewLease with error', async () => {
       const client = new streamingserviceModule.v1.StreamingServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -540,7 +540,7 @@ describe('v1.StreamingServiceClient', () => {
 
     it('invokes renewLease with closed client', async () => {
       const client = new streamingserviceModule.v1.StreamingServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -553,7 +553,7 @@ describe('v1.StreamingServiceClient', () => {
       );
       request.series = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.renewLease(request), expectedError);
@@ -563,7 +563,7 @@ describe('v1.StreamingServiceClient', () => {
   describe('releaseLease', () => {
     it('invokes releaseLease without error', async () => {
       const client = new streamingserviceModule.v1.StreamingServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -594,7 +594,7 @@ describe('v1.StreamingServiceClient', () => {
 
     it('invokes releaseLease without error using callback', async () => {
       const client = new streamingserviceModule.v1.StreamingServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -641,7 +641,7 @@ describe('v1.StreamingServiceClient', () => {
 
     it('invokes releaseLease with error', async () => {
       const client = new streamingserviceModule.v1.StreamingServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -672,7 +672,7 @@ describe('v1.StreamingServiceClient', () => {
 
     it('invokes releaseLease with closed client', async () => {
       const client = new streamingserviceModule.v1.StreamingServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -685,7 +685,7 @@ describe('v1.StreamingServiceClient', () => {
       );
       request.series = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.releaseLease(request), expectedError);
@@ -695,7 +695,7 @@ describe('v1.StreamingServiceClient', () => {
   describe('sendPackets', () => {
     it('invokes sendPackets without error', async () => {
       const client = new streamingserviceModule.v1.StreamingServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -738,7 +738,7 @@ describe('v1.StreamingServiceClient', () => {
 
     it('invokes sendPackets with error', async () => {
       const client = new streamingserviceModule.v1.StreamingServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -781,7 +781,7 @@ describe('v1.StreamingServiceClient', () => {
   describe('receivePackets', () => {
     it('invokes receivePackets without error', async () => {
       const client = new streamingserviceModule.v1.StreamingServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -826,7 +826,7 @@ describe('v1.StreamingServiceClient', () => {
 
     it('invokes receivePackets with error', async () => {
       const client = new streamingserviceModule.v1.StreamingServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -871,7 +871,7 @@ describe('v1.StreamingServiceClient', () => {
   describe('receiveEvents', () => {
     it('invokes receiveEvents without error', async () => {
       const client = new streamingserviceModule.v1.StreamingServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -914,7 +914,7 @@ describe('v1.StreamingServiceClient', () => {
 
     it('invokes receiveEvents with error', async () => {
       const client = new streamingserviceModule.v1.StreamingServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -956,7 +956,7 @@ describe('v1.StreamingServiceClient', () => {
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', async () => {
       const client = new streamingserviceModule.v1.StreamingServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -986,7 +986,7 @@ describe('v1.StreamingServiceClient', () => {
     });
     it('invokes getIamPolicy without error using callback', async () => {
       const client = new streamingserviceModule.v1.StreamingServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1024,7 +1024,7 @@ describe('v1.StreamingServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1034,7 +1034,7 @@ describe('v1.StreamingServiceClient', () => {
     });
     it('invokes getIamPolicy with error', async () => {
       const client = new streamingserviceModule.v1.StreamingServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1066,7 +1066,7 @@ describe('v1.StreamingServiceClient', () => {
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', async () => {
       const client = new streamingserviceModule.v1.StreamingServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1096,7 +1096,7 @@ describe('v1.StreamingServiceClient', () => {
     });
     it('invokes setIamPolicy without error using callback', async () => {
       const client = new streamingserviceModule.v1.StreamingServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1134,7 +1134,7 @@ describe('v1.StreamingServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1144,7 +1144,7 @@ describe('v1.StreamingServiceClient', () => {
     });
     it('invokes setIamPolicy with error', async () => {
       const client = new streamingserviceModule.v1.StreamingServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1176,7 +1176,7 @@ describe('v1.StreamingServiceClient', () => {
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', async () => {
       const client = new streamingserviceModule.v1.StreamingServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1209,7 +1209,7 @@ describe('v1.StreamingServiceClient', () => {
     });
     it('invokes testIamPermissions without error using callback', async () => {
       const client = new streamingserviceModule.v1.StreamingServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1247,7 +1247,7 @@ describe('v1.StreamingServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1257,7 +1257,7 @@ describe('v1.StreamingServiceClient', () => {
     });
     it('invokes testIamPermissions with error', async () => {
       const client = new streamingserviceModule.v1.StreamingServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1292,7 +1292,7 @@ describe('v1.StreamingServiceClient', () => {
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new streamingserviceModule.v1.StreamingServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1322,7 +1322,7 @@ describe('v1.StreamingServiceClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new streamingserviceModule.v1.StreamingServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1366,7 +1366,7 @@ describe('v1.StreamingServiceClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new streamingserviceModule.v1.StreamingServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1401,7 +1401,7 @@ describe('v1.StreamingServiceClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new streamingserviceModule.v1.StreamingServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1449,7 +1449,7 @@ describe('v1.StreamingServiceClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new streamingserviceModule.v1.StreamingServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1498,7 +1498,7 @@ describe('v1.StreamingServiceClient', () => {
         analysis: 'analysisValue',
       };
       const client = new streamingserviceModule.v1.StreamingServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1575,7 +1575,7 @@ describe('v1.StreamingServiceClient', () => {
         annotation: 'annotationValue',
       };
       const client = new streamingserviceModule.v1.StreamingServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1661,7 +1661,7 @@ describe('v1.StreamingServiceClient', () => {
         application: 'applicationValue',
       };
       const client = new streamingserviceModule.v1.StreamingServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1726,7 +1726,7 @@ describe('v1.StreamingServiceClient', () => {
         asset: 'assetValue',
       };
       const client = new streamingserviceModule.v1.StreamingServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1802,7 +1802,7 @@ describe('v1.StreamingServiceClient', () => {
         channel: 'channelValue',
       };
       const client = new streamingserviceModule.v1.StreamingServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1877,7 +1877,7 @@ describe('v1.StreamingServiceClient', () => {
         cluster: 'clusterValue',
       };
       const client = new streamingserviceModule.v1.StreamingServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1942,7 +1942,7 @@ describe('v1.StreamingServiceClient', () => {
         collection: 'collectionValue',
       };
       const client = new streamingserviceModule.v1.StreamingServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2017,7 +2017,7 @@ describe('v1.StreamingServiceClient', () => {
         corpus: 'corpusValue',
       };
       const client = new streamingserviceModule.v1.StreamingServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2082,7 +2082,7 @@ describe('v1.StreamingServiceClient', () => {
         data_schema: 'dataSchemaValue',
       };
       const client = new streamingserviceModule.v1.StreamingServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2158,7 +2158,7 @@ describe('v1.StreamingServiceClient', () => {
         draft: 'draftValue',
       };
       const client = new streamingserviceModule.v1.StreamingServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2234,7 +2234,7 @@ describe('v1.StreamingServiceClient', () => {
         event: 'eventValue',
       };
       const client = new streamingserviceModule.v1.StreamingServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2310,7 +2310,7 @@ describe('v1.StreamingServiceClient', () => {
         index: 'indexValue',
       };
       const client = new streamingserviceModule.v1.StreamingServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2385,7 +2385,7 @@ describe('v1.StreamingServiceClient', () => {
         index_endpoint: 'indexEndpointValue',
       };
       const client = new streamingserviceModule.v1.StreamingServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2450,7 +2450,7 @@ describe('v1.StreamingServiceClient', () => {
         instance: 'instanceValue',
       };
       const client = new streamingserviceModule.v1.StreamingServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2525,7 +2525,7 @@ describe('v1.StreamingServiceClient', () => {
         operator: 'operatorValue',
       };
       const client = new streamingserviceModule.v1.StreamingServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2590,7 +2590,7 @@ describe('v1.StreamingServiceClient', () => {
         process: 'processValue',
       };
       const client = new streamingserviceModule.v1.StreamingServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2665,7 +2665,7 @@ describe('v1.StreamingServiceClient', () => {
         processor: 'processorValue',
       };
       const client = new streamingserviceModule.v1.StreamingServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2730,7 +2730,7 @@ describe('v1.StreamingServiceClient', () => {
         search_config: 'searchConfigValue',
       };
       const client = new streamingserviceModule.v1.StreamingServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2806,7 +2806,7 @@ describe('v1.StreamingServiceClient', () => {
         search_hypernym: 'searchHypernymValue',
       };
       const client = new streamingserviceModule.v1.StreamingServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2884,7 +2884,7 @@ describe('v1.StreamingServiceClient', () => {
         series: 'seriesValue',
       };
       const client = new streamingserviceModule.v1.StreamingServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2960,7 +2960,7 @@ describe('v1.StreamingServiceClient', () => {
         stream: 'streamValue',
       };
       const client = new streamingserviceModule.v1.StreamingServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

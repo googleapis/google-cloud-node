@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as storageinsightsModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -50,7 +50,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -154,9 +154,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -279,7 +279,7 @@ describe('v1.StorageInsightsClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.storageInsightsStub, undefined);
@@ -287,12 +287,12 @@ describe('v1.StorageInsightsClient', () => {
       assert(client.storageInsightsStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.storageInsightsStub);
@@ -301,14 +301,14 @@ describe('v1.StorageInsightsClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.storageInsightsStub, undefined);
@@ -317,7 +317,7 @@ describe('v1.StorageInsightsClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -325,7 +325,7 @@ describe('v1.StorageInsightsClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -337,7 +337,7 @@ describe('v1.StorageInsightsClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -360,7 +360,7 @@ describe('v1.StorageInsightsClient', () => {
   describe('getReportConfig', () => {
     it('invokes getReportConfig without error', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -391,7 +391,7 @@ describe('v1.StorageInsightsClient', () => {
 
     it('invokes getReportConfig without error using callback', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -438,7 +438,7 @@ describe('v1.StorageInsightsClient', () => {
 
     it('invokes getReportConfig with error', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -469,7 +469,7 @@ describe('v1.StorageInsightsClient', () => {
 
     it('invokes getReportConfig with closed client', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -482,7 +482,7 @@ describe('v1.StorageInsightsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getReportConfig(request), expectedError);
@@ -492,7 +492,7 @@ describe('v1.StorageInsightsClient', () => {
   describe('createReportConfig', () => {
     it('invokes createReportConfig without error', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -524,7 +524,7 @@ describe('v1.StorageInsightsClient', () => {
 
     it('invokes createReportConfig without error using callback', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -571,7 +571,7 @@ describe('v1.StorageInsightsClient', () => {
 
     it('invokes createReportConfig with error', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -602,7 +602,7 @@ describe('v1.StorageInsightsClient', () => {
 
     it('invokes createReportConfig with closed client', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -615,7 +615,7 @@ describe('v1.StorageInsightsClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createReportConfig(request), expectedError);
@@ -625,7 +625,7 @@ describe('v1.StorageInsightsClient', () => {
   describe('updateReportConfig', () => {
     it('invokes updateReportConfig without error', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -658,7 +658,7 @@ describe('v1.StorageInsightsClient', () => {
 
     it('invokes updateReportConfig without error using callback', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -706,7 +706,7 @@ describe('v1.StorageInsightsClient', () => {
 
     it('invokes updateReportConfig with error', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -738,7 +738,7 @@ describe('v1.StorageInsightsClient', () => {
 
     it('invokes updateReportConfig with closed client', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -752,7 +752,7 @@ describe('v1.StorageInsightsClient', () => {
       );
       request.reportConfig.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateReportConfig(request), expectedError);
@@ -762,7 +762,7 @@ describe('v1.StorageInsightsClient', () => {
   describe('deleteReportConfig', () => {
     it('invokes deleteReportConfig without error', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -794,7 +794,7 @@ describe('v1.StorageInsightsClient', () => {
 
     it('invokes deleteReportConfig without error using callback', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -841,7 +841,7 @@ describe('v1.StorageInsightsClient', () => {
 
     it('invokes deleteReportConfig with error', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -872,7 +872,7 @@ describe('v1.StorageInsightsClient', () => {
 
     it('invokes deleteReportConfig with closed client', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -885,7 +885,7 @@ describe('v1.StorageInsightsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteReportConfig(request), expectedError);
@@ -895,7 +895,7 @@ describe('v1.StorageInsightsClient', () => {
   describe('getReportDetail', () => {
     it('invokes getReportDetail without error', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -926,7 +926,7 @@ describe('v1.StorageInsightsClient', () => {
 
     it('invokes getReportDetail without error using callback', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -973,7 +973,7 @@ describe('v1.StorageInsightsClient', () => {
 
     it('invokes getReportDetail with error', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1004,7 +1004,7 @@ describe('v1.StorageInsightsClient', () => {
 
     it('invokes getReportDetail with closed client', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1017,7 +1017,7 @@ describe('v1.StorageInsightsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getReportDetail(request), expectedError);
@@ -1027,7 +1027,7 @@ describe('v1.StorageInsightsClient', () => {
   describe('getDatasetConfig', () => {
     it('invokes getDatasetConfig without error', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1058,7 +1058,7 @@ describe('v1.StorageInsightsClient', () => {
 
     it('invokes getDatasetConfig without error using callback', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1105,7 +1105,7 @@ describe('v1.StorageInsightsClient', () => {
 
     it('invokes getDatasetConfig with error', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1136,7 +1136,7 @@ describe('v1.StorageInsightsClient', () => {
 
     it('invokes getDatasetConfig with closed client', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1149,7 +1149,7 @@ describe('v1.StorageInsightsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getDatasetConfig(request), expectedError);
@@ -1159,7 +1159,7 @@ describe('v1.StorageInsightsClient', () => {
   describe('createDatasetConfig', () => {
     it('invokes createDatasetConfig without error', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1192,7 +1192,7 @@ describe('v1.StorageInsightsClient', () => {
 
     it('invokes createDatasetConfig without error using callback', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1246,7 +1246,7 @@ describe('v1.StorageInsightsClient', () => {
 
     it('invokes createDatasetConfig with call error', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1277,7 +1277,7 @@ describe('v1.StorageInsightsClient', () => {
 
     it('invokes createDatasetConfig with LRO error', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1310,7 +1310,7 @@ describe('v1.StorageInsightsClient', () => {
 
     it('invokes checkCreateDatasetConfigProgress without error', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1318,8 +1318,8 @@ describe('v1.StorageInsightsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateDatasetConfigProgress(
@@ -1332,7 +1332,7 @@ describe('v1.StorageInsightsClient', () => {
 
     it('invokes checkCreateDatasetConfigProgress with error', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1353,7 +1353,7 @@ describe('v1.StorageInsightsClient', () => {
   describe('updateDatasetConfig', () => {
     it('invokes updateDatasetConfig without error', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1387,7 +1387,7 @@ describe('v1.StorageInsightsClient', () => {
 
     it('invokes updateDatasetConfig without error using callback', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1442,7 +1442,7 @@ describe('v1.StorageInsightsClient', () => {
 
     it('invokes updateDatasetConfig with call error', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1474,7 +1474,7 @@ describe('v1.StorageInsightsClient', () => {
 
     it('invokes updateDatasetConfig with LRO error', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1508,7 +1508,7 @@ describe('v1.StorageInsightsClient', () => {
 
     it('invokes checkUpdateDatasetConfigProgress without error', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1516,8 +1516,8 @@ describe('v1.StorageInsightsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateDatasetConfigProgress(
@@ -1530,7 +1530,7 @@ describe('v1.StorageInsightsClient', () => {
 
     it('invokes checkUpdateDatasetConfigProgress with error', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1551,7 +1551,7 @@ describe('v1.StorageInsightsClient', () => {
   describe('deleteDatasetConfig', () => {
     it('invokes deleteDatasetConfig without error', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1584,7 +1584,7 @@ describe('v1.StorageInsightsClient', () => {
 
     it('invokes deleteDatasetConfig without error using callback', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1638,7 +1638,7 @@ describe('v1.StorageInsightsClient', () => {
 
     it('invokes deleteDatasetConfig with call error', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1669,7 +1669,7 @@ describe('v1.StorageInsightsClient', () => {
 
     it('invokes deleteDatasetConfig with LRO error', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1702,7 +1702,7 @@ describe('v1.StorageInsightsClient', () => {
 
     it('invokes checkDeleteDatasetConfigProgress without error', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1710,8 +1710,8 @@ describe('v1.StorageInsightsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteDatasetConfigProgress(
@@ -1724,7 +1724,7 @@ describe('v1.StorageInsightsClient', () => {
 
     it('invokes checkDeleteDatasetConfigProgress with error', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1745,7 +1745,7 @@ describe('v1.StorageInsightsClient', () => {
   describe('linkDataset', () => {
     it('invokes linkDataset without error', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1777,7 +1777,7 @@ describe('v1.StorageInsightsClient', () => {
 
     it('invokes linkDataset without error using callback', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1831,7 +1831,7 @@ describe('v1.StorageInsightsClient', () => {
 
     it('invokes linkDataset with call error', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1862,7 +1862,7 @@ describe('v1.StorageInsightsClient', () => {
 
     it('invokes linkDataset with LRO error', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1895,7 +1895,7 @@ describe('v1.StorageInsightsClient', () => {
 
     it('invokes checkLinkDatasetProgress without error', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1903,8 +1903,8 @@ describe('v1.StorageInsightsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkLinkDatasetProgress(
@@ -1917,7 +1917,7 @@ describe('v1.StorageInsightsClient', () => {
 
     it('invokes checkLinkDatasetProgress with error', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1935,7 +1935,7 @@ describe('v1.StorageInsightsClient', () => {
   describe('unlinkDataset', () => {
     it('invokes unlinkDataset without error', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1968,7 +1968,7 @@ describe('v1.StorageInsightsClient', () => {
 
     it('invokes unlinkDataset without error using callback', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2022,7 +2022,7 @@ describe('v1.StorageInsightsClient', () => {
 
     it('invokes unlinkDataset with call error', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2053,7 +2053,7 @@ describe('v1.StorageInsightsClient', () => {
 
     it('invokes unlinkDataset with LRO error', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2086,7 +2086,7 @@ describe('v1.StorageInsightsClient', () => {
 
     it('invokes checkUnlinkDatasetProgress without error', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2094,8 +2094,8 @@ describe('v1.StorageInsightsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUnlinkDatasetProgress(
@@ -2108,7 +2108,7 @@ describe('v1.StorageInsightsClient', () => {
 
     it('invokes checkUnlinkDatasetProgress with error', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2129,7 +2129,7 @@ describe('v1.StorageInsightsClient', () => {
   describe('listReportConfigs', () => {
     it('invokes listReportConfigs without error', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2168,7 +2168,7 @@ describe('v1.StorageInsightsClient', () => {
 
     it('invokes listReportConfigs without error using callback', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2200,8 +2200,7 @@ describe('v1.StorageInsightsClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.storageinsights.v1.IReportConfig[]
-              | null,
+              protos.google.cloud.storageinsights.v1.IReportConfig[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -2225,7 +2224,7 @@ describe('v1.StorageInsightsClient', () => {
 
     it('invokes listReportConfigs with error', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2256,7 +2255,7 @@ describe('v1.StorageInsightsClient', () => {
 
     it('invokes listReportConfigsStream without error', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2309,15 +2308,15 @@ describe('v1.StorageInsightsClient', () => {
       assert(
         (client.descriptors.page.listReportConfigs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listReportConfigsStream with error', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2359,15 +2358,15 @@ describe('v1.StorageInsightsClient', () => {
       assert(
         (client.descriptors.page.listReportConfigs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listReportConfigs without error', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2409,15 +2408,15 @@ describe('v1.StorageInsightsClient', () => {
       assert(
         (client.descriptors.page.listReportConfigs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listReportConfigs with error', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2450,9 +2449,9 @@ describe('v1.StorageInsightsClient', () => {
       assert(
         (client.descriptors.page.listReportConfigs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2460,7 +2459,7 @@ describe('v1.StorageInsightsClient', () => {
   describe('listReportDetails', () => {
     it('invokes listReportDetails without error', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2499,7 +2498,7 @@ describe('v1.StorageInsightsClient', () => {
 
     it('invokes listReportDetails without error using callback', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2531,8 +2530,7 @@ describe('v1.StorageInsightsClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.storageinsights.v1.IReportDetail[]
-              | null,
+              protos.google.cloud.storageinsights.v1.IReportDetail[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -2556,7 +2554,7 @@ describe('v1.StorageInsightsClient', () => {
 
     it('invokes listReportDetails with error', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2587,7 +2585,7 @@ describe('v1.StorageInsightsClient', () => {
 
     it('invokes listReportDetailsStream without error', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2640,15 +2638,15 @@ describe('v1.StorageInsightsClient', () => {
       assert(
         (client.descriptors.page.listReportDetails.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listReportDetailsStream with error', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2690,15 +2688,15 @@ describe('v1.StorageInsightsClient', () => {
       assert(
         (client.descriptors.page.listReportDetails.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listReportDetails without error', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2740,15 +2738,15 @@ describe('v1.StorageInsightsClient', () => {
       assert(
         (client.descriptors.page.listReportDetails.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listReportDetails with error', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2781,9 +2779,9 @@ describe('v1.StorageInsightsClient', () => {
       assert(
         (client.descriptors.page.listReportDetails.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2791,7 +2789,7 @@ describe('v1.StorageInsightsClient', () => {
   describe('listDatasetConfigs', () => {
     it('invokes listDatasetConfigs without error', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2831,7 +2829,7 @@ describe('v1.StorageInsightsClient', () => {
 
     it('invokes listDatasetConfigs without error using callback', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2863,8 +2861,7 @@ describe('v1.StorageInsightsClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.storageinsights.v1.IDatasetConfig[]
-              | null,
+              protos.google.cloud.storageinsights.v1.IDatasetConfig[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -2888,7 +2885,7 @@ describe('v1.StorageInsightsClient', () => {
 
     it('invokes listDatasetConfigs with error', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2919,7 +2916,7 @@ describe('v1.StorageInsightsClient', () => {
 
     it('invokes listDatasetConfigsStream without error', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2972,15 +2969,15 @@ describe('v1.StorageInsightsClient', () => {
       assert(
         (client.descriptors.page.listDatasetConfigs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listDatasetConfigsStream with error', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3022,15 +3019,15 @@ describe('v1.StorageInsightsClient', () => {
       assert(
         (client.descriptors.page.listDatasetConfigs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDatasetConfigs without error', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3072,15 +3069,15 @@ describe('v1.StorageInsightsClient', () => {
       assert(
         (client.descriptors.page.listDatasetConfigs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDatasetConfigs with error', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3113,16 +3110,16 @@ describe('v1.StorageInsightsClient', () => {
       assert(
         (client.descriptors.page.listDatasetConfigs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3152,7 +3149,7 @@ describe('v1.StorageInsightsClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3196,7 +3193,7 @@ describe('v1.StorageInsightsClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3231,7 +3228,7 @@ describe('v1.StorageInsightsClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3279,7 +3276,7 @@ describe('v1.StorageInsightsClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3320,7 +3317,7 @@ describe('v1.StorageInsightsClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3341,7 +3338,7 @@ describe('v1.StorageInsightsClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -3369,7 +3366,7 @@ describe('v1.StorageInsightsClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3379,7 +3376,7 @@ describe('v1.StorageInsightsClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -3403,7 +3400,7 @@ describe('v1.StorageInsightsClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3425,7 +3422,7 @@ describe('v1.StorageInsightsClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -3453,7 +3450,7 @@ describe('v1.StorageInsightsClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3463,7 +3460,7 @@ describe('v1.StorageInsightsClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -3487,7 +3484,7 @@ describe('v1.StorageInsightsClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3509,7 +3506,7 @@ describe('v1.StorageInsightsClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -3537,7 +3534,7 @@ describe('v1.StorageInsightsClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3547,7 +3544,7 @@ describe('v1.StorageInsightsClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -3571,7 +3568,7 @@ describe('v1.StorageInsightsClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -3606,7 +3603,7 @@ describe('v1.StorageInsightsClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3642,7 +3639,7 @@ describe('v1.StorageInsightsClient', () => {
         dataset_config: 'datasetConfigValue',
       };
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3705,7 +3702,7 @@ describe('v1.StorageInsightsClient', () => {
         location: 'locationValue',
       };
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3753,7 +3750,7 @@ describe('v1.StorageInsightsClient', () => {
         project: 'projectValue',
       };
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3793,7 +3790,7 @@ describe('v1.StorageInsightsClient', () => {
         report_config: 'reportConfigValue',
       };
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3858,7 +3855,7 @@ describe('v1.StorageInsightsClient', () => {
         report_detail: 'reportDetailValue',
       };
       const client = new storageinsightsModule.v1.StorageInsightsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

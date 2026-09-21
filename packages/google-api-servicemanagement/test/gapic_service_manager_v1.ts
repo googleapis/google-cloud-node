@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as servicemanagerModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, LROperation, operationsProtos, IamProtos } from 'google-gax';
+import {protobuf, LROperation, operationsProtos, IamProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -149,9 +149,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -274,7 +274,7 @@ describe('v1.ServiceManagerClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.serviceManagerStub, undefined);
@@ -282,12 +282,12 @@ describe('v1.ServiceManagerClient', () => {
       assert(client.serviceManagerStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.serviceManagerStub);
@@ -296,14 +296,14 @@ describe('v1.ServiceManagerClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.serviceManagerStub, undefined);
@@ -312,7 +312,7 @@ describe('v1.ServiceManagerClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -320,7 +320,7 @@ describe('v1.ServiceManagerClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -332,7 +332,7 @@ describe('v1.ServiceManagerClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -355,7 +355,7 @@ describe('v1.ServiceManagerClient', () => {
   describe('getService', () => {
     it('invokes getService without error', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -386,7 +386,7 @@ describe('v1.ServiceManagerClient', () => {
 
     it('invokes getService without error using callback', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -433,7 +433,7 @@ describe('v1.ServiceManagerClient', () => {
 
     it('invokes getService with error', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -464,7 +464,7 @@ describe('v1.ServiceManagerClient', () => {
 
     it('invokes getService with closed client', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -477,7 +477,7 @@ describe('v1.ServiceManagerClient', () => {
       );
       request.serviceName = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getService(request), expectedError);
@@ -487,7 +487,7 @@ describe('v1.ServiceManagerClient', () => {
   describe('getServiceConfig', () => {
     it('invokes getServiceConfig without error', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -523,7 +523,7 @@ describe('v1.ServiceManagerClient', () => {
 
     it('invokes getServiceConfig without error using callback', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -572,7 +572,7 @@ describe('v1.ServiceManagerClient', () => {
 
     it('invokes getServiceConfig with error', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -608,7 +608,7 @@ describe('v1.ServiceManagerClient', () => {
 
     it('invokes getServiceConfig with closed client', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -626,7 +626,7 @@ describe('v1.ServiceManagerClient', () => {
       );
       request.configId = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getServiceConfig(request), expectedError);
@@ -636,7 +636,7 @@ describe('v1.ServiceManagerClient', () => {
   describe('createServiceConfig', () => {
     it('invokes createServiceConfig without error', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -668,7 +668,7 @@ describe('v1.ServiceManagerClient', () => {
 
     it('invokes createServiceConfig without error using callback', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -712,7 +712,7 @@ describe('v1.ServiceManagerClient', () => {
 
     it('invokes createServiceConfig with error', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -743,7 +743,7 @@ describe('v1.ServiceManagerClient', () => {
 
     it('invokes createServiceConfig with closed client', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -756,7 +756,7 @@ describe('v1.ServiceManagerClient', () => {
       );
       request.serviceName = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createServiceConfig(request), expectedError);
@@ -766,7 +766,7 @@ describe('v1.ServiceManagerClient', () => {
   describe('getServiceRollout', () => {
     it('invokes getServiceRollout without error', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -802,7 +802,7 @@ describe('v1.ServiceManagerClient', () => {
 
     it('invokes getServiceRollout without error using callback', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -854,7 +854,7 @@ describe('v1.ServiceManagerClient', () => {
 
     it('invokes getServiceRollout with error', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -890,7 +890,7 @@ describe('v1.ServiceManagerClient', () => {
 
     it('invokes getServiceRollout with closed client', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -908,7 +908,7 @@ describe('v1.ServiceManagerClient', () => {
       );
       request.rolloutId = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getServiceRollout(request), expectedError);
@@ -918,7 +918,7 @@ describe('v1.ServiceManagerClient', () => {
   describe('generateConfigReport', () => {
     it('invokes generateConfigReport without error', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -936,7 +936,7 @@ describe('v1.ServiceManagerClient', () => {
 
     it('invokes generateConfigReport without error using callback', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -969,7 +969,7 @@ describe('v1.ServiceManagerClient', () => {
 
     it('invokes generateConfigReport with error', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -986,7 +986,7 @@ describe('v1.ServiceManagerClient', () => {
 
     it('invokes generateConfigReport with closed client', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -994,7 +994,7 @@ describe('v1.ServiceManagerClient', () => {
         new protos.google.api.servicemanagement.v1.GenerateConfigReportRequest(),
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.generateConfigReport(request), expectedError);
@@ -1004,7 +1004,7 @@ describe('v1.ServiceManagerClient', () => {
   describe('createService', () => {
     it('invokes createService without error', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1023,7 +1023,7 @@ describe('v1.ServiceManagerClient', () => {
 
     it('invokes createService without error using callback', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1063,7 +1063,7 @@ describe('v1.ServiceManagerClient', () => {
 
     it('invokes createService with call error', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1080,7 +1080,7 @@ describe('v1.ServiceManagerClient', () => {
 
     it('invokes createService with LRO error', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1099,7 +1099,7 @@ describe('v1.ServiceManagerClient', () => {
 
     it('invokes checkCreateServiceProgress without error', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1107,8 +1107,8 @@ describe('v1.ServiceManagerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateServiceProgress(
@@ -1121,7 +1121,7 @@ describe('v1.ServiceManagerClient', () => {
 
     it('invokes checkCreateServiceProgress with error', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1142,7 +1142,7 @@ describe('v1.ServiceManagerClient', () => {
   describe('deleteService', () => {
     it('invokes deleteService without error', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1175,7 +1175,7 @@ describe('v1.ServiceManagerClient', () => {
 
     it('invokes deleteService without error using callback', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1229,7 +1229,7 @@ describe('v1.ServiceManagerClient', () => {
 
     it('invokes deleteService with call error', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1260,7 +1260,7 @@ describe('v1.ServiceManagerClient', () => {
 
     it('invokes deleteService with LRO error', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1293,7 +1293,7 @@ describe('v1.ServiceManagerClient', () => {
 
     it('invokes checkDeleteServiceProgress without error', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1301,8 +1301,8 @@ describe('v1.ServiceManagerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteServiceProgress(
@@ -1315,7 +1315,7 @@ describe('v1.ServiceManagerClient', () => {
 
     it('invokes checkDeleteServiceProgress with error', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1336,7 +1336,7 @@ describe('v1.ServiceManagerClient', () => {
   describe('undeleteService', () => {
     it('invokes undeleteService without error', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1369,7 +1369,7 @@ describe('v1.ServiceManagerClient', () => {
 
     it('invokes undeleteService without error using callback', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1423,7 +1423,7 @@ describe('v1.ServiceManagerClient', () => {
 
     it('invokes undeleteService with call error', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1454,7 +1454,7 @@ describe('v1.ServiceManagerClient', () => {
 
     it('invokes undeleteService with LRO error', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1487,7 +1487,7 @@ describe('v1.ServiceManagerClient', () => {
 
     it('invokes checkUndeleteServiceProgress without error', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1495,8 +1495,8 @@ describe('v1.ServiceManagerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUndeleteServiceProgress(
@@ -1509,7 +1509,7 @@ describe('v1.ServiceManagerClient', () => {
 
     it('invokes checkUndeleteServiceProgress with error', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1530,7 +1530,7 @@ describe('v1.ServiceManagerClient', () => {
   describe('submitConfigSource', () => {
     it('invokes submitConfigSource without error', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1563,7 +1563,7 @@ describe('v1.ServiceManagerClient', () => {
 
     it('invokes submitConfigSource without error using callback', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1617,7 +1617,7 @@ describe('v1.ServiceManagerClient', () => {
 
     it('invokes submitConfigSource with call error', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1648,7 +1648,7 @@ describe('v1.ServiceManagerClient', () => {
 
     it('invokes submitConfigSource with LRO error', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1681,7 +1681,7 @@ describe('v1.ServiceManagerClient', () => {
 
     it('invokes checkSubmitConfigSourceProgress without error', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1689,8 +1689,8 @@ describe('v1.ServiceManagerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkSubmitConfigSourceProgress(
@@ -1703,7 +1703,7 @@ describe('v1.ServiceManagerClient', () => {
 
     it('invokes checkSubmitConfigSourceProgress with error', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1724,7 +1724,7 @@ describe('v1.ServiceManagerClient', () => {
   describe('createServiceRollout', () => {
     it('invokes createServiceRollout without error', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1757,7 +1757,7 @@ describe('v1.ServiceManagerClient', () => {
 
     it('invokes createServiceRollout without error using callback', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1811,7 +1811,7 @@ describe('v1.ServiceManagerClient', () => {
 
     it('invokes createServiceRollout with call error', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1842,7 +1842,7 @@ describe('v1.ServiceManagerClient', () => {
 
     it('invokes createServiceRollout with LRO error', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1875,7 +1875,7 @@ describe('v1.ServiceManagerClient', () => {
 
     it('invokes checkCreateServiceRolloutProgress without error', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1883,8 +1883,8 @@ describe('v1.ServiceManagerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateServiceRolloutProgress(
@@ -1897,7 +1897,7 @@ describe('v1.ServiceManagerClient', () => {
 
     it('invokes checkCreateServiceRolloutProgress with error', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1918,7 +1918,7 @@ describe('v1.ServiceManagerClient', () => {
   describe('listServices', () => {
     it('invokes listServices without error', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1943,7 +1943,7 @@ describe('v1.ServiceManagerClient', () => {
 
     it('invokes listServices without error using callback', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1969,8 +1969,7 @@ describe('v1.ServiceManagerClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.api.servicemanagement.v1.IManagedService[]
-              | null,
+              protos.google.api.servicemanagement.v1.IManagedService[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -1986,7 +1985,7 @@ describe('v1.ServiceManagerClient', () => {
 
     it('invokes listServices with error', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2003,7 +2002,7 @@ describe('v1.ServiceManagerClient', () => {
 
     it('invokes listServicesStream without error', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2051,7 +2050,7 @@ describe('v1.ServiceManagerClient', () => {
 
     it('invokes listServicesStream with error', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2090,7 +2089,7 @@ describe('v1.ServiceManagerClient', () => {
 
     it('uses async iteration with listServices without error', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2127,7 +2126,7 @@ describe('v1.ServiceManagerClient', () => {
 
     it('uses async iteration with listServices with error', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2157,7 +2156,7 @@ describe('v1.ServiceManagerClient', () => {
   describe('listServiceConfigs', () => {
     it('invokes listServiceConfigs without error', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2191,7 +2190,7 @@ describe('v1.ServiceManagerClient', () => {
 
     it('invokes listServiceConfigs without error using callback', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2240,7 +2239,7 @@ describe('v1.ServiceManagerClient', () => {
 
     it('invokes listServiceConfigs with error', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2271,7 +2270,7 @@ describe('v1.ServiceManagerClient', () => {
 
     it('invokes listServiceConfigsStream without error', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2314,15 +2313,15 @@ describe('v1.ServiceManagerClient', () => {
       assert(
         (client.descriptors.page.listServiceConfigs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listServiceConfigsStream with error', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2360,15 +2359,15 @@ describe('v1.ServiceManagerClient', () => {
       assert(
         (client.descriptors.page.listServiceConfigs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listServiceConfigs without error', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2403,15 +2402,15 @@ describe('v1.ServiceManagerClient', () => {
       assert(
         (client.descriptors.page.listServiceConfigs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listServiceConfigs with error', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2443,9 +2442,9 @@ describe('v1.ServiceManagerClient', () => {
       assert(
         (client.descriptors.page.listServiceConfigs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2453,7 +2452,7 @@ describe('v1.ServiceManagerClient', () => {
   describe('listServiceRollouts', () => {
     it('invokes listServiceRollouts without error', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2493,7 +2492,7 @@ describe('v1.ServiceManagerClient', () => {
 
     it('invokes listServiceRollouts without error using callback', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2548,7 +2547,7 @@ describe('v1.ServiceManagerClient', () => {
 
     it('invokes listServiceRollouts with error', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2579,7 +2578,7 @@ describe('v1.ServiceManagerClient', () => {
 
     it('invokes listServiceRolloutsStream without error', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2631,15 +2630,15 @@ describe('v1.ServiceManagerClient', () => {
       assert(
         (client.descriptors.page.listServiceRollouts.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listServiceRolloutsStream with error', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2680,15 +2679,15 @@ describe('v1.ServiceManagerClient', () => {
       assert(
         (client.descriptors.page.listServiceRollouts.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listServiceRollouts without error', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2729,15 +2728,15 @@ describe('v1.ServiceManagerClient', () => {
       assert(
         (client.descriptors.page.listServiceRollouts.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listServiceRollouts with error', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2769,16 +2768,16 @@ describe('v1.ServiceManagerClient', () => {
       assert(
         (client.descriptors.page.listServiceRollouts.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2808,7 +2807,7 @@ describe('v1.ServiceManagerClient', () => {
     });
     it('invokes getIamPolicy without error using callback', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2846,7 +2845,7 @@ describe('v1.ServiceManagerClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2856,7 +2855,7 @@ describe('v1.ServiceManagerClient', () => {
     });
     it('invokes getIamPolicy with error', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2888,7 +2887,7 @@ describe('v1.ServiceManagerClient', () => {
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2918,7 +2917,7 @@ describe('v1.ServiceManagerClient', () => {
     });
     it('invokes setIamPolicy without error using callback', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2956,7 +2955,7 @@ describe('v1.ServiceManagerClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2966,7 +2965,7 @@ describe('v1.ServiceManagerClient', () => {
     });
     it('invokes setIamPolicy with error', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2998,7 +2997,7 @@ describe('v1.ServiceManagerClient', () => {
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3031,7 +3030,7 @@ describe('v1.ServiceManagerClient', () => {
     });
     it('invokes testIamPermissions without error using callback', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3069,7 +3068,7 @@ describe('v1.ServiceManagerClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3079,7 +3078,7 @@ describe('v1.ServiceManagerClient', () => {
     });
     it('invokes testIamPermissions with error', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3114,7 +3113,7 @@ describe('v1.ServiceManagerClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3135,7 +3134,7 @@ describe('v1.ServiceManagerClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -3163,7 +3162,7 @@ describe('v1.ServiceManagerClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3173,7 +3172,7 @@ describe('v1.ServiceManagerClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -3197,7 +3196,7 @@ describe('v1.ServiceManagerClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3219,7 +3218,7 @@ describe('v1.ServiceManagerClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -3247,7 +3246,7 @@ describe('v1.ServiceManagerClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3257,7 +3256,7 @@ describe('v1.ServiceManagerClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -3281,7 +3280,7 @@ describe('v1.ServiceManagerClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3303,7 +3302,7 @@ describe('v1.ServiceManagerClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -3331,7 +3330,7 @@ describe('v1.ServiceManagerClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3341,7 +3340,7 @@ describe('v1.ServiceManagerClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -3365,7 +3364,7 @@ describe('v1.ServiceManagerClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -3400,7 +3399,7 @@ describe('v1.ServiceManagerClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new servicemanagerModule.v1.ServiceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

@@ -716,7 +716,8 @@ export namespace google {
                         KINESIS_PERMISSION_DENIED = 2,
                         PUBLISH_PERMISSION_DENIED = 3,
                         STREAM_NOT_FOUND = 4,
-                        CONSUMER_NOT_FOUND = 5
+                        CONSUMER_NOT_FOUND = 5,
+                        CONFLICTING_REGION_CONSTRAINTS = 6
                     }
                 }
 
@@ -865,7 +866,8 @@ export namespace google {
                         CLOUD_STORAGE_PERMISSION_DENIED = 2,
                         PUBLISH_PERMISSION_DENIED = 3,
                         BUCKET_NOT_FOUND = 4,
-                        TOO_MANY_OBJECTS = 5
+                        TOO_MANY_OBJECTS = 5,
+                        CONFLICTING_REGION_CONSTRAINTS = 8
                     }
 
                     /** Properties of a TextFormat. */
@@ -1298,7 +1300,8 @@ export namespace google {
                         NAMESPACE_NOT_FOUND = 4,
                         EVENT_HUB_NOT_FOUND = 5,
                         SUBSCRIPTION_NOT_FOUND = 6,
-                        RESOURCE_GROUP_NOT_FOUND = 7
+                        RESOURCE_GROUP_NOT_FOUND = 7,
+                        CONFLICTING_REGION_CONSTRAINTS = 8
                     }
                 }
 
@@ -1432,7 +1435,8 @@ export namespace google {
                         MSK_PERMISSION_DENIED = 2,
                         PUBLISH_PERMISSION_DENIED = 3,
                         CLUSTER_NOT_FOUND = 4,
-                        TOPIC_NOT_FOUND = 5
+                        TOPIC_NOT_FOUND = 5,
+                        CONFLICTING_REGION_CONSTRAINTS = 6
                     }
                 }
 
@@ -1573,7 +1577,8 @@ export namespace google {
                         PUBLISH_PERMISSION_DENIED = 3,
                         UNREACHABLE_BOOTSTRAP_SERVER = 4,
                         CLUSTER_NOT_FOUND = 5,
-                        TOPIC_NOT_FOUND = 6
+                        TOPIC_NOT_FOUND = 6,
+                        CONFLICTING_REGION_CONSTRAINTS = 7
                     }
                 }
             }
@@ -2968,6 +2973,125 @@ export namespace google {
                 public static getTypeUrl(typeUrlPrefix?: string): string;
             }
 
+            /** Properties of a Compression. */
+            interface ICompression {
+
+                /** Compression compressionAlgorithm */
+                compressionAlgorithm?: (google.pubsub.v1.Compression.CompressionAlgorithm|keyof typeof google.pubsub.v1.Compression.CompressionAlgorithm|null);
+
+                /** Compression compressionMode */
+                compressionMode?: (google.pubsub.v1.Compression.CompressionMode|keyof typeof google.pubsub.v1.Compression.CompressionMode|null);
+            }
+
+            /** Represents a Compression. */
+            class Compression implements ICompression {
+
+                /**
+                 * Constructs a new Compression.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.pubsub.v1.ICompression);
+
+                /** Compression compressionAlgorithm. */
+                public compressionAlgorithm: (google.pubsub.v1.Compression.CompressionAlgorithm|keyof typeof google.pubsub.v1.Compression.CompressionAlgorithm);
+
+                /** Compression compressionMode. */
+                public compressionMode: (google.pubsub.v1.Compression.CompressionMode|keyof typeof google.pubsub.v1.Compression.CompressionMode);
+
+                /**
+                 * Creates a new Compression instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns Compression instance
+                 */
+                public static create(properties?: google.pubsub.v1.ICompression): google.pubsub.v1.Compression;
+
+                /**
+                 * Encodes the specified Compression message. Does not implicitly {@link google.pubsub.v1.Compression.verify|verify} messages.
+                 * @param message Compression message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.pubsub.v1.ICompression, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified Compression message, length delimited. Does not implicitly {@link google.pubsub.v1.Compression.verify|verify} messages.
+                 * @param message Compression message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.pubsub.v1.ICompression, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a Compression message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns Compression
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.pubsub.v1.Compression;
+
+                /**
+                 * Decodes a Compression message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns Compression
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.pubsub.v1.Compression;
+
+                /**
+                 * Verifies a Compression message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a Compression message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns Compression
+                 */
+                public static fromObject(object: { [k: string]: any }): google.pubsub.v1.Compression;
+
+                /**
+                 * Creates a plain object from a Compression message. Also converts values to other types if specified.
+                 * @param message Compression
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.pubsub.v1.Compression, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this Compression to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for Compression
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace Compression {
+
+                /** CompressionAlgorithm enum. */
+                enum CompressionAlgorithm {
+                    COMPRESSION_ALGORITHM_UNSPECIFIED = 0,
+                    ZLIB = 1
+                }
+
+                /** CompressionMode enum. */
+                enum CompressionMode {
+                    COMPRESSION_MODE_UNSPECIFIED = 0,
+                    COMPRESS = 1,
+                    DECOMPRESS = 2
+                }
+            }
+
             /** Properties of a AIInference. */
             interface IAIInference {
 
@@ -3186,6 +3310,9 @@ export namespace google {
                 /** MessageTransform javascriptUdf */
                 javascriptUdf?: (google.pubsub.v1.IJavaScriptUDF|null);
 
+                /** MessageTransform compression */
+                compression?: (google.pubsub.v1.ICompression|null);
+
                 /** MessageTransform aiInference */
                 aiInference?: (google.pubsub.v1.IAIInference|null);
 
@@ -3208,6 +3335,9 @@ export namespace google {
                 /** MessageTransform javascriptUdf. */
                 public javascriptUdf?: (google.pubsub.v1.IJavaScriptUDF|null);
 
+                /** MessageTransform compression. */
+                public compression?: (google.pubsub.v1.ICompression|null);
+
                 /** MessageTransform aiInference. */
                 public aiInference?: (google.pubsub.v1.IAIInference|null);
 
@@ -3218,7 +3348,7 @@ export namespace google {
                 public disabled: boolean;
 
                 /** MessageTransform transform. */
-                public transform?: ("javascriptUdf"|"aiInference");
+                public transform?: ("javascriptUdf"|"compression"|"aiInference");
 
                 /**
                  * Creates a new MessageTransform instance using the specified properties.
@@ -9649,6 +9779,212 @@ export namespace google {
                 public static getTypeUrl(typeUrlPrefix?: string): string;
             }
 
+            /** Properties of a PubsubClientTelemetry. */
+            interface IPubsubClientTelemetry {
+
+                /** PubsubClientTelemetry publishOperation */
+                publishOperation?: (google.pubsub.v1.PubsubClientTelemetry.IPublishOperation|null);
+            }
+
+            /** Represents a PubsubClientTelemetry. */
+            class PubsubClientTelemetry implements IPubsubClientTelemetry {
+
+                /**
+                 * Constructs a new PubsubClientTelemetry.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.pubsub.v1.IPubsubClientTelemetry);
+
+                /** PubsubClientTelemetry publishOperation. */
+                public publishOperation?: (google.pubsub.v1.PubsubClientTelemetry.IPublishOperation|null);
+
+                /** PubsubClientTelemetry operation. */
+                public operation?: "publishOperation";
+
+                /**
+                 * Creates a new PubsubClientTelemetry instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns PubsubClientTelemetry instance
+                 */
+                public static create(properties?: google.pubsub.v1.IPubsubClientTelemetry): google.pubsub.v1.PubsubClientTelemetry;
+
+                /**
+                 * Encodes the specified PubsubClientTelemetry message. Does not implicitly {@link google.pubsub.v1.PubsubClientTelemetry.verify|verify} messages.
+                 * @param message PubsubClientTelemetry message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.pubsub.v1.IPubsubClientTelemetry, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified PubsubClientTelemetry message, length delimited. Does not implicitly {@link google.pubsub.v1.PubsubClientTelemetry.verify|verify} messages.
+                 * @param message PubsubClientTelemetry message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.pubsub.v1.IPubsubClientTelemetry, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a PubsubClientTelemetry message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns PubsubClientTelemetry
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.pubsub.v1.PubsubClientTelemetry;
+
+                /**
+                 * Decodes a PubsubClientTelemetry message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns PubsubClientTelemetry
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.pubsub.v1.PubsubClientTelemetry;
+
+                /**
+                 * Verifies a PubsubClientTelemetry message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a PubsubClientTelemetry message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns PubsubClientTelemetry
+                 */
+                public static fromObject(object: { [k: string]: any }): google.pubsub.v1.PubsubClientTelemetry;
+
+                /**
+                 * Creates a plain object from a PubsubClientTelemetry message. Also converts values to other types if specified.
+                 * @param message PubsubClientTelemetry
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.pubsub.v1.PubsubClientTelemetry, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this PubsubClientTelemetry to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for PubsubClientTelemetry
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace PubsubClientTelemetry {
+
+                /** Properties of a PublishOperation. */
+                interface IPublishOperation {
+
+                    /** PublishOperation hedgedAttemptCount */
+                    hedgedAttemptCount?: (number|null);
+
+                    /** PublishOperation publishStartTime */
+                    publishStartTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a PublishOperation. */
+                class PublishOperation implements IPublishOperation {
+
+                    /**
+                     * Constructs a new PublishOperation.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.pubsub.v1.PubsubClientTelemetry.IPublishOperation);
+
+                    /** PublishOperation hedgedAttemptCount. */
+                    public hedgedAttemptCount: number;
+
+                    /** PublishOperation publishStartTime. */
+                    public publishStartTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new PublishOperation instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PublishOperation instance
+                     */
+                    public static create(properties?: google.pubsub.v1.PubsubClientTelemetry.IPublishOperation): google.pubsub.v1.PubsubClientTelemetry.PublishOperation;
+
+                    /**
+                     * Encodes the specified PublishOperation message. Does not implicitly {@link google.pubsub.v1.PubsubClientTelemetry.PublishOperation.verify|verify} messages.
+                     * @param message PublishOperation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.pubsub.v1.PubsubClientTelemetry.IPublishOperation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PublishOperation message, length delimited. Does not implicitly {@link google.pubsub.v1.PubsubClientTelemetry.PublishOperation.verify|verify} messages.
+                     * @param message PublishOperation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.pubsub.v1.PubsubClientTelemetry.IPublishOperation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PublishOperation message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PublishOperation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.pubsub.v1.PubsubClientTelemetry.PublishOperation;
+
+                    /**
+                     * Decodes a PublishOperation message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PublishOperation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.pubsub.v1.PubsubClientTelemetry.PublishOperation;
+
+                    /**
+                     * Verifies a PublishOperation message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PublishOperation message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PublishOperation
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.pubsub.v1.PubsubClientTelemetry.PublishOperation;
+
+                    /**
+                     * Creates a plain object from a PublishOperation message. Also converts values to other types if specified.
+                     * @param message PublishOperation
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.pubsub.v1.PubsubClientTelemetry.PublishOperation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PublishOperation to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PublishOperation
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+            }
+
             /** Represents a SchemaService */
             class SchemaService extends $protobuf.rpc.Service {
 
@@ -9895,6 +10231,9 @@ export namespace google {
                 /** Schema definition */
                 definition?: (string|null);
 
+                /** Schema compiledProtoSchema */
+                compiledProtoSchema?: (google.pubsub.v1.ICompiledProtoSchema|null);
+
                 /** Schema revisionId */
                 revisionId?: (string|null);
 
@@ -9920,11 +10259,17 @@ export namespace google {
                 /** Schema definition. */
                 public definition: string;
 
+                /** Schema compiledProtoSchema. */
+                public compiledProtoSchema?: (google.pubsub.v1.ICompiledProtoSchema|null);
+
                 /** Schema revisionId. */
                 public revisionId: string;
 
                 /** Schema revisionCreateTime. */
                 public revisionCreateTime?: (google.protobuf.ITimestamp|null);
+
+                /** Schema configuration. */
+                public configuration?: "compiledProtoSchema";
 
                 /**
                  * Creates a new Schema instance using the specified properties.
@@ -11478,6 +11823,109 @@ export namespace google {
 
                 /**
                  * Gets the default type url for ValidateMessageResponse
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a CompiledProtoSchema. */
+            interface ICompiledProtoSchema {
+
+                /** CompiledProtoSchema rootMessage */
+                rootMessage?: (string|null);
+
+                /** CompiledProtoSchema compiledBytes */
+                compiledBytes?: (Uint8Array|Buffer|string|null);
+            }
+
+            /** Represents a CompiledProtoSchema. */
+            class CompiledProtoSchema implements ICompiledProtoSchema {
+
+                /**
+                 * Constructs a new CompiledProtoSchema.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.pubsub.v1.ICompiledProtoSchema);
+
+                /** CompiledProtoSchema rootMessage. */
+                public rootMessage: string;
+
+                /** CompiledProtoSchema compiledBytes. */
+                public compiledBytes: (Uint8Array|Buffer|string);
+
+                /**
+                 * Creates a new CompiledProtoSchema instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns CompiledProtoSchema instance
+                 */
+                public static create(properties?: google.pubsub.v1.ICompiledProtoSchema): google.pubsub.v1.CompiledProtoSchema;
+
+                /**
+                 * Encodes the specified CompiledProtoSchema message. Does not implicitly {@link google.pubsub.v1.CompiledProtoSchema.verify|verify} messages.
+                 * @param message CompiledProtoSchema message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.pubsub.v1.ICompiledProtoSchema, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified CompiledProtoSchema message, length delimited. Does not implicitly {@link google.pubsub.v1.CompiledProtoSchema.verify|verify} messages.
+                 * @param message CompiledProtoSchema message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.pubsub.v1.ICompiledProtoSchema, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a CompiledProtoSchema message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns CompiledProtoSchema
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.pubsub.v1.CompiledProtoSchema;
+
+                /**
+                 * Decodes a CompiledProtoSchema message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns CompiledProtoSchema
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.pubsub.v1.CompiledProtoSchema;
+
+                /**
+                 * Verifies a CompiledProtoSchema message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a CompiledProtoSchema message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns CompiledProtoSchema
+                 */
+                public static fromObject(object: { [k: string]: any }): google.pubsub.v1.CompiledProtoSchema;
+
+                /**
+                 * Creates a plain object from a CompiledProtoSchema message. Also converts values to other types if specified.
+                 * @param message CompiledProtoSchema
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.pubsub.v1.CompiledProtoSchema, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this CompiledProtoSchema to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for CompiledProtoSchema
                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                  * @returns The default type url
                  */

@@ -30,10 +30,10 @@ import type {
   LocationsClient,
   LocationProtos,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -55,7 +55,7 @@ export class AuthProviderServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('agentidentity');
@@ -68,11 +68,11 @@ export class AuthProviderServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
+  innerApiCalls: {[name: string]: Function};
   iamClient: IamClient;
   locationsClient: LocationsClient;
-  pathTemplates: { [name: string]: gax.PathTemplate };
-  authProviderServiceStub?: Promise<{ [name: string]: Function }>;
+  pathTemplates: {[name: string]: gax.PathTemplate};
+  authProviderServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of AuthProviderServiceClient.
@@ -148,7 +148,7 @@ export class AuthProviderServiceClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -267,7 +267,7 @@ export class AuthProviderServiceClient {
       'google.cloud.agentidentity.v1.AuthProviderService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -308,7 +308,7 @@ export class AuthProviderServiceClient {
             .AuthProviderService,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -332,7 +332,7 @@ export class AuthProviderServiceClient {
     ];
     for (const methodName of authProviderServiceStubMethods) {
       const callPromise = this.authProviderServiceStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -530,7 +530,7 @@ export class AuthProviderServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getAuthProvider request %j', request);
@@ -696,7 +696,7 @@ export class AuthProviderServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createAuthProvider request %j', request);
@@ -861,7 +861,7 @@ export class AuthProviderServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'auth_provider.name': request.authProvider!.name?.toString() ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateAuthProvider request %j', request);
@@ -1018,7 +1018,7 @@ export class AuthProviderServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteAuthProvider request %j', request);
@@ -1171,7 +1171,7 @@ export class AuthProviderServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('undeleteAuthProvider request %j', request);
@@ -1308,7 +1308,7 @@ export class AuthProviderServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getAuthorization request %j', request);
@@ -1467,7 +1467,7 @@ export class AuthProviderServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteAuthorization request %j', request);
@@ -1604,7 +1604,7 @@ export class AuthProviderServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getAccessSummary request %j', request);
@@ -1753,7 +1753,7 @@ export class AuthProviderServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('revokeAuthorization request %j', request);
@@ -1906,7 +1906,7 @@ export class AuthProviderServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('enableAuthProvider request %j', request);
@@ -2059,7 +2059,7 @@ export class AuthProviderServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('disableAuthProvider request %j', request);
@@ -2217,7 +2217,7 @@ export class AuthProviderServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2297,7 +2297,7 @@ export class AuthProviderServiceClient {
       });
     const defaultCallSettings = this._defaults['listAuthProviders'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listAuthProviders stream %j', request);
@@ -2359,7 +2359,7 @@ export class AuthProviderServiceClient {
       });
     const defaultCallSettings = this._defaults['listAuthProviders'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listAuthProviders iterate %j', request);
@@ -2474,7 +2474,7 @@ export class AuthProviderServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2552,7 +2552,7 @@ export class AuthProviderServiceClient {
       });
     const defaultCallSettings = this._defaults['queryAuthProviders'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('queryAuthProviders stream %j', request);
@@ -2612,7 +2612,7 @@ export class AuthProviderServiceClient {
       });
     const defaultCallSettings = this._defaults['queryAuthProviders'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('queryAuthProviders iterate %j', request);
@@ -2722,7 +2722,7 @@ export class AuthProviderServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2795,7 +2795,7 @@ export class AuthProviderServiceClient {
       });
     const defaultCallSettings = this._defaults['queryWorkloads'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('queryWorkloads stream %j', request);
@@ -2850,7 +2850,7 @@ export class AuthProviderServiceClient {
       });
     const defaultCallSettings = this._defaults['queryWorkloads'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('queryWorkloads iterate %j', request);
@@ -2967,7 +2967,7 @@ export class AuthProviderServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3047,7 +3047,7 @@ export class AuthProviderServiceClient {
       });
     const defaultCallSettings = this._defaults['listAuthorizations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listAuthorizations stream %j', request);
@@ -3109,7 +3109,7 @@ export class AuthProviderServiceClient {
       });
     const defaultCallSettings = this._defaults['listAuthorizations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listAuthorizations iterate %j', request);
@@ -3228,7 +3228,7 @@ export class AuthProviderServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3307,7 +3307,7 @@ export class AuthProviderServiceClient {
       });
     const defaultCallSettings = this._defaults['listAccessSummaries'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listAccessSummaries stream %j', request);
@@ -3368,7 +3368,7 @@ export class AuthProviderServiceClient {
       });
     const defaultCallSettings = this._defaults['listAccessSummaries'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listAccessSummaries iterate %j', request);
@@ -3839,14 +3839,14 @@ export class AuthProviderServiceClient {
    */
   close(): Promise<void> {
     if (this.authProviderServiceStub && !this._terminated) {
-      return this.authProviderServiceStub.then((stub) => {
+      return this.authProviderServiceStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.iamClient.close().catch((err) => {
+        this.iamClient.close().catch(err => {
           throw err;
         });
-        this.locationsClient.close().catch((err) => {
+        this.locationsClient.close().catch(err => {
           throw err;
         });
       });

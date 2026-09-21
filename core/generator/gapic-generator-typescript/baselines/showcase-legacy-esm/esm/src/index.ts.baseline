@@ -19,8 +19,8 @@
 import * as v1beta1 from './v1beta1/index.js';
 const EchoClient = v1beta1.EchoClient;
 type EchoClient = v1beta1.EchoClient;
-export { v1beta1, EchoClient };
-export default { v1beta1, EchoClient };
+export {v1beta1, EchoClient};
+export default {v1beta1, EchoClient};
 // @ts-ignore
 import * as protos from '../../protos/protos.js';
-export { protos };
+export {protos};

@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import { FirestoreClient } from '@google-cloud/firestore-api';
+import {FirestoreClient} from '@google-cloud/firestore-api';
 
 // check that the client class type name can be used
 function doStuffWithFirestoreClient(client: FirestoreClient) {
