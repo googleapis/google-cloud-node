@@ -21,8 +21,8 @@ import {
   SimpleCallbackFunction,
   UnaryCall,
   RequestType,
+  APICallback,
 } from '../apitypes';
-import {APICallback} from '../apitypes';
 import {OngoingCall, OngoingCallPromise} from '../call';
 import {CallOptions} from '../gax';
 import {GoogleError} from '../googleError';
@@ -164,10 +164,13 @@ export class PagedApiCaller implements APICaller {
     const maxResults = settings.maxResults || -1;
 
     const resourceCollector = new ResourceCollector(apiCall, maxResults);
-    resourceCollector.processAllPages(request).then(
-      resources => ongoingCall.callback(null, resources),
-      err => ongoingCall.callback(err),
-    );
+    resourceCollector
+      .processAllPages(request)
+      .then(resources => {
+        ongoingCall.callback(null, resources);
+        return null;
+      })
+      .catch(err => ongoingCall.callback(err));
   }
 
   fail(ongoingCall: OngoingCallPromise, err: GoogleError): void {

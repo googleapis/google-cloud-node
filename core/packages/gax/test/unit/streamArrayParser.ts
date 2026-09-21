@@ -17,10 +17,9 @@
 import assert from 'assert';
 import {StreamArrayParser} from '../../src/streamArrayParser';
 import {before, describe, it} from 'mocha';
-import {pipeline} from 'stream';
+import {pipeline, PassThrough} from 'stream';
 import path = require('path');
 import protobuf = require('protobufjs');
-import {PassThrough} from 'stream';
 import {toProtobufJSON} from './utils';
 
 interface User {

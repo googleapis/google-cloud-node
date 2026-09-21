@@ -103,6 +103,7 @@ describe('REGAPIC', () => {
           done(err);
         }
       });
+      return null;
     });
   });
 
@@ -139,6 +140,7 @@ describe('REGAPIC', () => {
           done(err);
         }
       });
+      return null;
     });
   });
 
@@ -160,6 +162,7 @@ describe('REGAPIC', () => {
           done(err);
         }
       });
+      return null;
     });
   });
 
@@ -182,6 +185,7 @@ describe('REGAPIC', () => {
           done(err);
         }
       });
+      return null;
     });
   });
 
@@ -214,6 +218,7 @@ describe('REGAPIC', () => {
           done(err);
         }
       });
+      return null;
     });
   });
 
@@ -232,21 +237,25 @@ describe('REGAPIC', () => {
         new Response(Buffer.from(JSON.stringify(responseObject))),
       );
 
-      gaxGrpc.createStub(libraryService, stubOptions).then(libStub => {
-        libStub.getShelf(requestObject, {}, {}, (err?: {}, result?: {}) => {
-          assert.strictEqual(spy.getCall(0).returnValue?.queryString, '');
-          assert.strictEqual(err, null);
-          assert.strictEqual(
-            'shelf-name',
-            (result as {name: {}; theme: {}; type: {}}).name,
-          );
-          assert.strictEqual(
-            'TYPEONE',
-            (result as {name: {}; theme: {}; type: {}}).type,
-          );
-          done();
-        });
-      }, /* catch: */ done);
+      gaxGrpc
+        .createStub(libraryService, stubOptions)
+        .then(libStub => {
+          libStub.getShelf(requestObject, {}, {}, (err?: {}, result?: {}) => {
+            assert.strictEqual(spy.getCall(0).returnValue?.queryString, '');
+            assert.strictEqual(err, null);
+            assert.strictEqual(
+              'shelf-name',
+              (result as {name: {}; theme: {}; type: {}}).name,
+            );
+            assert.strictEqual(
+              'TYPEONE',
+              (result as {name: {}; theme: {}; type: {}}).type,
+            );
+            done();
+          });
+          return null;
+        })
+        .catch(done);
     });
 
     it('should support enum conversion in proto message request using symbolic name', done => {
@@ -263,13 +272,17 @@ describe('REGAPIC', () => {
         new Response(Buffer.from(JSON.stringify(shelf))),
       );
 
-      gaxGrpc.createStub(libraryService, stubOptions).then(libStub => {
-        libStub.createShelf(requestObject, {}, {}, (err?: {}) => {
-          assert.strictEqual(spy.getCall(0).returnValue?.queryString, '');
-          assert.strictEqual(err, null);
-          done();
-        });
-      }, /* catch: */ done);
+      gaxGrpc
+        .createStub(libraryService, stubOptions)
+        .then(libStub => {
+          libStub.createShelf(requestObject, {}, {}, (err?: {}) => {
+            assert.strictEqual(spy.getCall(0).returnValue?.queryString, '');
+            assert.strictEqual(err, null);
+            done();
+          });
+          return null;
+        })
+        .catch(done);
     });
 
     it('should support enum conversion in proto message request using type value', done => {
@@ -286,13 +299,17 @@ describe('REGAPIC', () => {
         new Response(Buffer.from(JSON.stringify(shelf))),
       );
 
-      gaxGrpc.createStub(libraryService, stubOptions).then(libStub => {
-        libStub.createShelf(requestObject, {}, {}, (err?: {}) => {
-          assert.strictEqual(spy.getCall(0).returnValue?.queryString, '');
-          assert.strictEqual(err, null);
-          done();
-        });
-      }, /* catch: */ done);
+      gaxGrpc
+        .createStub(libraryService, stubOptions)
+        .then(libStub => {
+          libStub.createShelf(requestObject, {}, {}, (err?: {}) => {
+            assert.strictEqual(spy.getCall(0).returnValue?.queryString, '');
+            assert.strictEqual(err, null);
+            done();
+          });
+          return null;
+        })
+        .catch(done);
     });
   });
 
@@ -330,7 +347,9 @@ describe('REGAPIC', () => {
             );
             done();
           });
-        }, done);
+          return null;
+        })
+        .catch(done);
     });
 
     it('should request numeric enums if passed as symbolic name', done => {
@@ -362,7 +381,9 @@ describe('REGAPIC', () => {
             assert.strictEqual(err, null);
             done();
           });
-        }, /* catch: */ done);
+          return null;
+        })
+        .catch(done);
     });
 
     it('should preserve query string when appending numeric enums parameter', done => {
@@ -393,7 +414,9 @@ describe('REGAPIC', () => {
             assert.strictEqual(err, null);
             done();
           });
-        }, done);
+          return null;
+        })
+        .catch(done);
     });
 
     it('should request numeric enums if passed as an unknown number', done => {
@@ -421,7 +444,9 @@ describe('REGAPIC', () => {
             assert.strictEqual(err, null);
             done();
           });
-        }, done);
+          return null;
+        })
+        .catch(done);
     });
   });
 
@@ -441,36 +466,40 @@ describe('REGAPIC', () => {
         new Response(Buffer.from(JSON.stringify(responseObject))),
       );
 
-      gaxGrpc.createStub(libraryService, stubOptions).then(libStub => {
-        libStub.getBook(requestObject, {}, {}, (err?: {}, result?: {}) => {
-          assert.strictEqual(err, null);
-          assert.strictEqual(
-            'book-name',
-            (
-              result as {
-                name: {};
-                author: {};
-                title: {};
-                read: false;
-                bookId: {};
-              }
-            ).name,
-          );
-          assert.strictEqual(
-            '9007199254740992',
-            (
-              result as {
-                name: {};
-                author: {};
-                title: {};
-                read: false;
-                bookId: {};
-              }
-            ).bookId,
-          );
-          done();
-        });
-      }, /* catch: */ done);
+      gaxGrpc
+        .createStub(libraryService, stubOptions)
+        .then(libStub => {
+          libStub.getBook(requestObject, {}, {}, (err?: {}, result?: {}) => {
+            assert.strictEqual(err, null);
+            assert.strictEqual(
+              'book-name',
+              (
+                result as {
+                  name: {};
+                  author: {};
+                  title: {};
+                  read: false;
+                  bookId: {};
+                }
+              ).name,
+            );
+            assert.strictEqual(
+              '9007199254740992',
+              (
+                result as {
+                  name: {};
+                  author: {};
+                  title: {};
+                  read: false;
+                  bookId: {};
+                }
+              ).bookId,
+            );
+            done();
+          });
+          return null;
+        })
+        .catch(done);
     });
 
     it('small number long data type conversion in proto message response', done => {
@@ -488,36 +517,40 @@ describe('REGAPIC', () => {
         new Response(Buffer.from(JSON.stringify(responseObject))),
       );
 
-      gaxGrpc.createStub(libraryService, stubOptions).then(libStub => {
-        libStub.getBook(requestObject, {}, {}, (err?: {}, result?: {}) => {
-          assert.strictEqual(err, null);
-          assert.strictEqual(
-            'book-name',
-            (
-              result as {
-                name: {};
-                author: {};
-                title: {};
-                read: false;
-                bookId: {};
-              }
-            ).name,
-          );
-          assert.strictEqual(
-            '42',
-            (
-              result as {
-                name: {};
-                author: {};
-                title: {};
-                read: false;
-                bookId: {};
-              }
-            ).bookId,
-          );
-          done();
-        });
-      }, done);
+      gaxGrpc
+        .createStub(libraryService, stubOptions)
+        .then(libStub => {
+          libStub.getBook(requestObject, {}, {}, (err?: {}, result?: {}) => {
+            assert.strictEqual(err, null);
+            assert.strictEqual(
+              'book-name',
+              (
+                result as {
+                  name: {};
+                  author: {};
+                  title: {};
+                  read: false;
+                  bookId: {};
+                }
+              ).name,
+            );
+            assert.strictEqual(
+              '42',
+              (
+                result as {
+                  name: {};
+                  author: {};
+                  title: {};
+                  read: false;
+                  bookId: {};
+                }
+              ).bookId,
+            );
+            done();
+          });
+          return null;
+        })
+        .catch(done);
     });
 
     it('long data type conversion in proto message request', done => {
@@ -536,36 +569,40 @@ describe('REGAPIC', () => {
         new Response(Buffer.from(JSON.stringify(responseObject))),
       );
 
-      gaxGrpc.createStub(libraryService, stubOptions).then(libStub => {
-        libStub.getBook(requestObject, {}, {}, (err?: {}, result?: {}) => {
-          assert.strictEqual(err, null);
-          assert.strictEqual(
-            'book-name',
-            (
-              result as {
-                name: {};
-                author: {};
-                title: {};
-                read: false;
-                bookId: {};
-              }
-            ).name,
-          );
-          assert.strictEqual(
-            bookId.toString(),
-            (
-              result as {
-                name: {};
-                author: {};
-                title: {};
-                read: false;
-                bookId: {};
-              }
-            ).bookId,
-          );
-          done();
-        });
-      }, done);
+      gaxGrpc
+        .createStub(libraryService, stubOptions)
+        .then(libStub => {
+          libStub.getBook(requestObject, {}, {}, (err?: {}, result?: {}) => {
+            assert.strictEqual(err, null);
+            assert.strictEqual(
+              'book-name',
+              (
+                result as {
+                  name: {};
+                  author: {};
+                  title: {};
+                  read: false;
+                  bookId: {};
+                }
+              ).name,
+            );
+            assert.strictEqual(
+              bookId.toString(),
+              (
+                result as {
+                  name: {};
+                  author: {};
+                  title: {};
+                  read: false;
+                  bookId: {};
+                }
+              ).bookId,
+            );
+            done();
+          });
+          return null;
+        })
+        .catch(done);
     });
   });
   describe('should support json minification', () => {
@@ -606,7 +643,9 @@ describe('REGAPIC', () => {
             );
             done();
           });
-        }, /* catch: */ done);
+          return null;
+        })
+        .catch(done);
     });
     it('should not send prettyPrint setting when json minification is not requested', done => {
       const requestObject = {name: 'shelves/shelf-name'};
@@ -622,28 +661,32 @@ describe('REGAPIC', () => {
         new Response(Buffer.from(JSON.stringify(responseObject))),
       );
 
-      gaxGrpc.createStub(libraryService, stubOptions).then(libStub => {
-        libStub.getShelf(requestObject, {}, {}, (err?: {}, result?: {}) => {
-          assert.strictEqual(
-            'string',
-            typeof spy.getCall(0).returnValue?.queryString,
-          );
-          assert.doesNotMatch(
-            <string>spy.getCall(0).returnValue?.queryString,
-            /prettyPrint/,
-          );
-          assert.strictEqual(err, null);
-          assert.strictEqual(
-            'shelf-name',
-            (result as {name: {}; theme: {}; type: {}}).name,
-          );
-          assert.strictEqual(
-            100,
-            (result as {name: {}; theme: {}; type: {}}).type,
-          );
-          done();
-        });
-      }, /* catch: */ done);
+      gaxGrpc
+        .createStub(libraryService, stubOptions)
+        .then(libStub => {
+          libStub.getShelf(requestObject, {}, {}, (err?: {}, result?: {}) => {
+            assert.strictEqual(
+              'string',
+              typeof spy.getCall(0).returnValue?.queryString,
+            );
+            assert.doesNotMatch(
+              <string>spy.getCall(0).returnValue?.queryString,
+              /prettyPrint/,
+            );
+            assert.strictEqual(err, null);
+            assert.strictEqual(
+              'shelf-name',
+              (result as {name: {}; theme: {}; type: {}}).name,
+            );
+            assert.strictEqual(
+              100,
+              (result as {name: {}; theme: {}; type: {}}).type,
+            );
+            done();
+          });
+          return null;
+        })
+        .catch(done);
     });
   });
 });
