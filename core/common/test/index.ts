@@ -17,6 +17,7 @@ import {describe, it} from 'mocha';
 import {Operation, Service, ServiceObject, util} from '../src';
 
 describe('common', () => {
+  console.log(`[Runtime] ${(process.versions as any).bun ? `Bun ${(process.versions as any).bun}` : `Node.js ${process.version}`}`);
   it('should correctly export the common modules', () => {
     assert(Operation);
     assert(Service);
