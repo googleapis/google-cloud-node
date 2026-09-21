@@ -19,6 +19,7 @@ import {
   CLOUD_RESOURCE_HEADER,
   END_TO_END_TRACING_HEADER,
   getCommonHeaders,
+  resetAFEServerTimingForTest,
 } from '../src/common';
 
 describe('getCommonHeaders', () => {
@@ -27,11 +28,13 @@ describe('getCommonHeaders', () => {
   const originalEnableE2E = process.env.SPANNER_ENABLE_END_TO_END_TRACING;
 
   beforeEach(() => {
+    resetAFEServerTimingForTest();
     delete process.env.SPANNER_DISABLE_AFE_SERVER_TIMING;
     delete process.env.SPANNER_ENABLE_END_TO_END_TRACING;
   });
 
   afterEach(() => {
+    resetAFEServerTimingForTest();
     if (originalDisableAfe !== undefined) {
       process.env.SPANNER_DISABLE_AFE_SERVER_TIMING = originalDisableAfe;
     } else {
