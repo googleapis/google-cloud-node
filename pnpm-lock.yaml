@@ -2925,20 +2925,20 @@ importers:
         specifier: 7.27.7
         version: 7.27.7
       '@google-cloud/common':
+        specifier: ^8.0.0
+        version: 8.0.1
+      '@google-cloud/monitoring':
+        specifier: ^6.0.0
+        version: 6.0.0
+      '@google-cloud/precise-date':
+        specifier: ^6.0.0
+        version: 6.0.0
+      '@google-cloud/promisify':
         specifier: ^6.0.0
         version: 6.0.1
-      '@google-cloud/monitoring':
-        specifier: ^5.0.0
-        version: 5.4.0
-      '@google-cloud/precise-date':
-        specifier: ^5.0.0
-        version: 5.1.0
-      '@google-cloud/promisify':
-        specifier: ^5.0.0
-        version: 5.1.0
       '@google-cloud/spanner-api':
-        specifier: ^0.2.0
-        version: 0.2.0
+        specifier: ^0.4.0
+        version: 0.4.0
       '@grpc/grpc-js':
         specifier: ^1.13.2
         version: 1.14.4
@@ -2982,11 +2982,11 @@ importers:
         specifier: ^3.0.2
         version: 3.0.2
       google-auth-library:
-        specifier: ^10.0.0-rc.1
-        version: 10.9.1
+        specifier: ^11.0.0
+        version: 11.0.2
       google-gax:
-        specifier: 5.0.6
-        version: 5.0.6
+        specifier: ^6.0.0
+        version: 6.1.0
       grpc-gcp:
         specifier: ^1.0.1
         version: 1.1.1
@@ -3000,8 +3000,8 @@ importers:
         specifier: ^7.4.0
         version: 7.5.9
       retry-request:
-        specifier: ^8.0.0
-        version: 8.0.3
+        specifier: ^9.0.0
+        version: 9.0.1
       stack-trace:
         specifier: 0.0.10
         version: 0.0.10
@@ -3009,8 +3009,8 @@ importers:
         specifier: ^1.0.5
         version: 1.0.5
       teeny-request:
-        specifier: ^10.0.0
-        version: 10.1.3
+        specifier: ^11.0.0
+        version: 11.0.1
       through2:
         specifier: ^4.0.2
         version: 4.0.2
@@ -3049,8 +3049,8 @@ importers:
         specifier: ^2.0.8
         version: 2.0.8
       '@types/node':
-        specifier: ^25.5.0
-        version: 25.9.5
+        specifier: ^22.18.12
+        version: 22.20.1
       '@types/proxyquire':
         specifier: ^1.3.31
         version: 1.3.31
@@ -3085,8 +3085,8 @@ importers:
         specifier: ^5.0.0
         version: 5.1.1
       gapic-tools:
-        specifier: ^1.0.1
-        version: 1.1.0(protobufjs@7.5.9)
+        specifier: ^2.0.0
+        version: 2.0.1(protobufjs@7.5.9)
       grpc-health-check:
         specifier: ^2.1.0
         version: 2.1.0
@@ -3097,11 +3097,11 @@ importers:
         specifier: ^4.0.4
         version: 4.0.5
       jsdoc-fresh:
-        specifier: ^5.0.0
-        version: 5.0.4
+        specifier: ^6.0.0
+        version: 6.0.0
       jsdoc-region-tag:
-        specifier: ^4.0.0
-        version: 4.0.1
+        specifier: ^5.0.0
+        version: 5.0.0
       lodash.random:
         specifier: ^3.2.0
         version: 3.2.0
@@ -16457,12 +16457,12 @@ packages:
     resolution: {integrity: sha512-Ms/cE5wyxWoHHj6IUWZO67j7nDhAKa7eAUkUYBJjRie0Yr1V82NclaaIntdqAmmpOgXbIzdDlrIyWXLVMeGSDg==}
     engines: {node: '>=22'}
 
-  '@google-cloud/spanner-api@0.2.0':
-    resolution: {integrity: sha512-aWvKaAUtc2qWyfZ0bARWEe9YYDraZPAjbvcjerw4d5DiMMkDoybOyPHai1hVP5JL/7oPjtjAUvmHuMn/STdXtA==}
-    engines: {node: '>=18'}
-
   '@google-cloud/spanner-api@0.3.0':
     resolution: {integrity: sha512-miN9QZhNFHZ31FBHsq+Y0dds4e3EX3dS1uzXN7N9Xt/4klyDw7JCZ42ft2VrEaTkr67560xNTDo4bINApd/jEw==}
+    engines: {node: '>=22'}
+
+  '@google-cloud/spanner-api@0.4.0':
+    resolution: {integrity: sha512-W4i/M9+rg/CqeH3fWd9mJfrA+QuYkyMZfJTDYVmQ/6B5lfQhvhK7DkOkz1/yp9+lh+wDJCL+S6J515R+ciNSaQ==}
     engines: {node: '>=22'}
 
   '@google-cloud/spanner@8.10.0':
@@ -20322,11 +20322,6 @@ packages:
   functions-have-names@1.2.3:
     resolution: {integrity: sha512-xckBUXyTIqT97tq2x2AMb+g163b5JFysYk0x4qxNFwbfQkmNZoiRHb6sPzI9/QV33WeuvVYBUIiD4NzNIyqaRQ==}
 
-  gapic-tools@1.1.0:
-    resolution: {integrity: sha512-5OGHGWtBlduL5tglrZSmJGBdgguwd2CkpAvjfycZZ7CIeJT5ru/Zm4mUftrYluSveN5FmB0m9EBB9g54Dmj7hQ==}
-    engines: {node: '>=18'}
-    hasBin: true
-
   gapic-tools@2.0.1:
     resolution: {integrity: sha512-fiKAsIYjq6d7ujvqcycSeQSKkH9iLAdGKStdz7T2s6hkXf0bDJBh9h5SSdVaAL+2Defk0vz68In7/oXnmnPdTA==}
     engines: {node: '>=22'}
@@ -20554,10 +20549,6 @@ packages:
     engines: {node: '>=10'}
     deprecated: Package is no longer maintained
     hasBin: true
-
-  google-proto-files@5.0.1:
-    resolution: {integrity: sha512-DM5x0D1QM/kTQ12p57lG14+aL3PMPtbzYf+oekPMkUweUjrrT4crzV7O9LakZF5/rdl+SVBeSiA/sfTu/dAWvw==}
-    engines: {node: '>=18'}
 
   google-proto-files@6.0.1:
     resolution: {integrity: sha512-fbvUWVNh3rKGlVFWwlUNF7Sk1Tah0a89q02rLTXsWjbKKHGeuURAa8tl9rvu5TyWny1YiSIo5eDqF260Tai6vQ==}
@@ -21466,17 +21457,9 @@ packages:
   jsbn@0.1.1:
     resolution: {integrity: sha512-UVU9dibq2JcFWxQPA6KCqj5O42VOmAY3zQUfEKxU0KpTGXwNoCjkX1e13eHNvw/xPynt6pU0rZ1htjWTNTSXsg==}
 
-  jsdoc-fresh@5.0.4:
-    resolution: {integrity: sha512-iqZF0fY2RNo/E6x0Lngq01fcRLAEkHb/3pf8xNHgDI42Q6JT1S8qtb+f9Xm3tm99SqCW3BnCDAttd9y5i+Se2g==}
-    engines: {node: '>=14.0.0'}
-
   jsdoc-fresh@6.0.0:
     resolution: {integrity: sha512-P1/v6xVvQXeQW69XfmDQpxQ9KLJshYxLR0yruiTRxLaZdltDiNmEU7YboZGULOroOJ3PL2vbCP7pfrAWkCeixw==}
     engines: {node: '>=22'}
-
-  jsdoc-region-tag@4.0.1:
-    resolution: {integrity: sha512-4q+GX2h4R7hwdR4RlaCSLcWzDCrHGif7stBm92Pz0qg4NtC1iFU/Qt/rsU2LAgGfaVIEoMV2i2r7nSqgGBzCtw==}
-    engines: {node: '>=14.0.0'}
 
   jsdoc-region-tag@5.0.0:
     resolution: {integrity: sha512-vU8O8CkL1B0JPdjy9zJyX5+vYkmMcI0fICGBubtJAt/5rJUpi6dBMehx1OflczAKY8QZy4zZygSPPJuzvjYIog==}
@@ -22999,10 +22982,6 @@ packages:
     hasBin: true
     peerDependencies:
       protobufjs: ^7.6.2
-
-  protobufjs@7.5.4:
-    resolution: {integrity: sha512-CvexbZtbov6jW2eXAvLukXjXUW1TzFaivC46BpWc/3BpcCysb5Vffu+B3XHMm8lVEuy2Mm4XGex8hBSg1yapPg==}
-    engines: {node: '>=12.0.0'}
 
   protobufjs@7.5.9:
     resolution: {integrity: sha512-Od4muIm3HW1AouyHF5lONOf1FWo3hY1NbFDoy191X9GzhpgW1clCoaFjfVs2rKJNFYpTNJbje4cbAIDBZJ63ZA==}
@@ -26143,13 +26122,13 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@google-cloud/spanner-api@0.2.0':
+  '@google-cloud/spanner-api@0.3.0':
     dependencies:
-      google-gax: 5.0.6
+      google-gax: 6.1.0
     transitivePeerDependencies:
       - supports-color
 
-  '@google-cloud/spanner-api@0.3.0':
+  '@google-cloud/spanner-api@0.4.0':
     dependencies:
       google-gax: 6.1.0
     transitivePeerDependencies:
@@ -31196,20 +31175,6 @@ snapshots:
 
   functions-have-names@1.2.3: {}
 
-  gapic-tools@1.1.0(protobufjs@7.5.9):
-    dependencies:
-      '@babel/core': 7.27.7
-      '@babel/traverse': 7.27.7
-      google-gax: 5.0.6
-      google-proto-files: 5.0.1
-      protobufjs-cli: 1.3.3(protobufjs@7.5.9)
-      uglify-js: 3.19.3
-      walk-up-path: 3.0.1
-      walkdir: 0.4.1
-    transitivePeerDependencies:
-      - protobufjs
-      - supports-color
-
   gapic-tools@2.0.1(protobufjs@7.5.9):
     dependencies:
       '@babel/core': 7.27.7
@@ -31626,11 +31591,6 @@ snapshots:
   google-p12-pem@3.1.4:
     dependencies:
       node-forge: 1.4.0
-
-  google-proto-files@5.0.1:
-    dependencies:
-      protobufjs: 7.5.4
-      walkdir: 0.4.1
 
   google-proto-files@6.0.1:
     dependencies:
@@ -32874,17 +32834,9 @@ snapshots:
 
   jsbn@0.1.1: {}
 
-  jsdoc-fresh@5.0.4:
-    dependencies:
-      '@jsdoc/salty': 0.2.12
-
   jsdoc-fresh@6.0.0:
     dependencies:
       '@jsdoc/salty': 0.2.12
-
-  jsdoc-region-tag@4.0.1:
-    dependencies:
-      glob: 7.2.3
 
   jsdoc-region-tag@5.0.0:
     dependencies:
@@ -34609,21 +34561,6 @@ snapshots:
       semver: 7.8.5
       tmp: 0.2.7
       uglify-js: 3.19.3
-
-  protobufjs@7.5.4:
-    dependencies:
-      '@protobufjs/aspromise': 1.1.2
-      '@protobufjs/base64': 1.1.2
-      '@protobufjs/codegen': 2.0.5
-      '@protobufjs/eventemitter': 1.1.1
-      '@protobufjs/fetch': 1.1.1
-      '@protobufjs/float': 1.0.2
-      '@protobufjs/inquire': 1.1.2
-      '@protobufjs/path': 1.1.2
-      '@protobufjs/pool': 1.1.0
-      '@protobufjs/utf8': 1.1.2
-      '@types/node': 22.20.1
-      long: 5.3.2
 
   protobufjs@7.5.9:
     dependencies:
