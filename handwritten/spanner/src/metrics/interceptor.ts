@@ -14,6 +14,7 @@
 
 import {grpc} from 'google-gax';
 import {InterceptingListener, Metadata, StatusObject} from '@grpc/grpc-js';
+import {isAFEServerTimingEnabled} from '../common';
 
 /**
  * Interceptor for recording metrics on gRPC calls.
@@ -33,6 +34,7 @@ export const MetricInterceptor = (options, nextCall) => {
       // The tracer is carried directly on the call options.
       const metricsTracer = options?.metricsTracer ?? null;
       metricsTracer?.recordAttemptStart();
+      const afeServerTimingEnabled = isAFEServerTimingEnabled();
 
       const interceptingListener: InterceptingListener = {
         onReceiveMetadata: function (metadata: Metadata) {
@@ -46,11 +48,13 @@ export const MetricInterceptor = (options, nextCall) => {
                 ? String(serverTimingEntries[0])
                 : undefined;
             const gfeTiming =
-              metricsTracer?.extractGfeLatency(serverTimingHeader);
+              metricsTracer.extractGfeLatency(serverTimingHeader);
             metricsTracer.gfeLatency = gfeTiming ?? null;
-            const afeTiming =
-              metricsTracer?.extractAfeLatency(serverTimingHeader);
-            metricsTracer.afeLatency = afeTiming ?? null;
+            if (afeServerTimingEnabled) {
+              const afeTiming =
+                metricsTracer.extractAfeLatency(serverTimingHeader);
+              metricsTracer.afeLatency = afeTiming ?? null;
+            }
           }
 
           listener.onReceiveMetadata(metadata);
@@ -71,14 +75,16 @@ export const MetricInterceptor = (options, nextCall) => {
             } else {
               metricsTracer.recordGfeConnectivityErrorCount(status?.code);
             }
-            if (
-              typeof metricsTracer.afeLatency === 'number' &&
-              Number.isFinite(metricsTracer.afeLatency) &&
-              metricsTracer.afeLatency >= 0
-            ) {
-              metricsTracer.recordAfeLatency(status?.code);
-            } else {
-              metricsTracer.recordAfeConnectivityErrorCount(status?.code);
+            if (afeServerTimingEnabled) {
+              if (
+                typeof metricsTracer.afeLatency === 'number' &&
+                Number.isFinite(metricsTracer.afeLatency) &&
+                metricsTracer.afeLatency >= 0
+              ) {
+                metricsTracer.recordAfeLatency(status?.code);
+              } else {
+                metricsTracer.recordAfeConnectivityErrorCount(status?.code);
+              }
             }
           }
 

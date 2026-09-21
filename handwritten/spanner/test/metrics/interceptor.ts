@@ -18,6 +18,7 @@ import {grpc} from 'google-gax';
 import {status as Status} from '@grpc/grpc-js';
 import {MetricsTracer} from '../../src/metrics/metrics-tracer';
 import {MetricInterceptor} from '../../src/metrics/interceptor';
+import {Spanner} from '../../src/index';
 
 describe('MetricInterceptor', () => {
   let sandbox: sinon.SinonSandbox;
@@ -59,10 +60,18 @@ describe('MetricInterceptor', () => {
         return null;
       }) as sinon.SinonStub<[string], number | null>;
     mockMetricsTracer.recordGfeLatency = sandbox.stub<
-      [latency: number],
+      [statusCode: number],
       void
     >();
     mockMetricsTracer.recordGfeConnectivityErrorCount = sandbox.stub<
+      [statusCode: number],
+      void
+    >();
+    mockMetricsTracer.recordAfeLatency = sandbox.stub<
+      [statusCode: number],
+      void
+    >();
+    mockMetricsTracer.recordAfeConnectivityErrorCount = sandbox.stub<
       [statusCode: number],
       void
     >();
@@ -119,6 +128,8 @@ describe('MetricInterceptor', () => {
 
   afterEach(() => {
     sandbox.restore();
+    Spanner._resetAFEServerTimingForTest();
+    delete process.env['SPANNER_DISABLE_AFE_SERVER_TIMING'];
   });
 
   describe('Metrics recorded from interceptor', () => {
@@ -338,6 +349,87 @@ describe('MetricInterceptor', () => {
       assert.strictEqual(getMapSpy.callCount, 0);
       assert.strictEqual(getSpy.calledWith('server-timing'), true);
       assert.strictEqual(mockMetricsTracer.extractGfeLatency.calledOnce, true);
+    });
+
+    it('AFE Metrics - Disabled when AFE server timing is disabled', () => {
+      Spanner._resetAFEServerTimingForTest();
+      process.env['SPANNER_DISABLE_AFE_SERVER_TIMING'] = 'true';
+      const interceptingCall = MetricInterceptor(mockOptions, mockNextCall);
+      interceptingCall.start(testMetadata, mockListener);
+
+      capturedListener.onReceiveMetadata(serverTimingMetadata);
+      capturedListener.onReceiveStatus(mockStatus);
+
+      assert.strictEqual(mockMetricsTracer.extractGfeLatency.callCount, 1);
+      assert.strictEqual(mockMetricsTracer.extractAfeLatency.callCount, 0);
+      assert.strictEqual(mockMetricsTracer.recordGfeLatency.callCount, 1);
+      assert.strictEqual(mockMetricsTracer.recordAfeLatency.callCount, 0);
+      assert.strictEqual(
+        mockMetricsTracer.recordAfeConnectivityErrorCount.callCount,
+        0,
+      );
+    });
+
+    it('AFE Metrics - Case-insensitive disabled when set to TRUE', () => {
+      Spanner._resetAFEServerTimingForTest();
+      process.env['SPANNER_DISABLE_AFE_SERVER_TIMING'] = 'TRUE';
+      const interceptingCall = MetricInterceptor(mockOptions, mockNextCall);
+      interceptingCall.start(testMetadata, mockListener);
+
+      capturedListener.onReceiveMetadata(serverTimingMetadata);
+      capturedListener.onReceiveStatus(mockStatus);
+
+      assert.strictEqual(mockMetricsTracer.extractGfeLatency.callCount, 1);
+      assert.strictEqual(mockMetricsTracer.extractAfeLatency.callCount, 0);
+      assert.strictEqual(mockMetricsTracer.recordGfeLatency.callCount, 1);
+      assert.strictEqual(mockMetricsTracer.recordAfeLatency.callCount, 0);
+      assert.strictEqual(
+        mockMetricsTracer.recordAfeConnectivityErrorCount.callCount,
+        0,
+      );
+    });
+
+    it('GFE and AFE Metrics - Records 0ms latency without incrementing error count', () => {
+      mockMetricsTracer.extractGfeLatency = sandbox
+        .stub<[string], number | null>()
+        .returns(0);
+      mockMetricsTracer.extractAfeLatency = sandbox
+        .stub<[string], number | null>()
+        .returns(0);
+
+      const interceptingCall = MetricInterceptor(mockOptions, mockNextCall);
+      interceptingCall.start(testMetadata, mockListener);
+
+      capturedListener.onReceiveMetadata(emptyMetadata);
+      capturedListener.onReceiveStatus(mockStatus);
+
+      assert.strictEqual(mockMetricsTracer.recordGfeLatency.callCount, 1);
+      assert.strictEqual(
+        mockMetricsTracer.recordGfeConnectivityErrorCount.callCount,
+        0,
+      );
+      assert.strictEqual(mockMetricsTracer.recordAfeLatency.callCount, 1);
+      assert.strictEqual(
+        mockMetricsTracer.recordAfeConnectivityErrorCount.callCount,
+        0,
+      );
+    });
+
+    it('does not throw or record when metricsTracer is null', () => {
+      const optionsWithoutTracer = {
+        ...mockOptions,
+        metricsTracer: null,
+      };
+      const interceptingCall = MetricInterceptor(
+        optionsWithoutTracer,
+        mockNextCall,
+      );
+      interceptingCall.start(testMetadata, mockListener);
+
+      assert.doesNotThrow(() => {
+        capturedListener.onReceiveMetadata(serverTimingMetadata);
+        capturedListener.onReceiveStatus(mockStatus);
+      });
     });
   });
 

@@ -57,6 +57,8 @@ export class MetricsTracerFactory {
   private _locationPromise: Promise<string> | null = null;
   private _metricReaders: MetricReader[] = [];
   private _projectId: string;
+  private _attributesCache: Map<string, Map<string, Record<string, string>>> =
+    new Map();
   public static enabled = true;
 
   /**
@@ -182,6 +184,7 @@ export class MetricsTracerFactory {
     }
     this._meterProvider = null;
     this._metricReaders = [];
+    this._attributesCache = new Map();
   }
 
   /**
@@ -271,6 +274,12 @@ export class MetricsTracerFactory {
     }
 
     const {instance, database} = this.getInstanceAttributes(formattedName);
+    const cacheKey = `${instance}/${database}/${method}`;
+    let attributesCache = this._attributesCache.get(cacheKey);
+    if (!attributesCache) {
+      attributesCache = new Map<string, Record<string, string>>();
+      this._attributesCache.set(cacheKey, attributesCache);
+    }
     return new MetricsTracer(
       this._instrumentAttemptCounter,
       this._instrumentAttemptLatency,
@@ -286,6 +295,7 @@ export class MetricsTracerFactory {
       this._projectId,
       method,
       requestId,
+      attributesCache,
     );
   }
 
