@@ -118,15 +118,23 @@ fi
 # Now we have a fixed list, but we can change it to autodetect if
 # necessary.
 
-subdirs=(
-    core
-    containers
-    packages
-    handwritten
-    .github/scripts
-    core/packages
-    core/dev-packages
-)
+if [[ "${JS_RUNTIME}" == "bun" || "${TEST_CMD}" == *bun* ]]; then
+    subdirs=(
+        packages
+        core/packages
+        handwritten
+    )
+else
+    subdirs=(
+        core
+        containers
+        packages
+        handwritten
+        .github/scripts
+        core/packages
+        core/dev-packages
+    )
+fi
 
 RETVAL=0
 # These following APIs need an explicit credential file to run properly (or oAuth2, which we don't support in this repo).
@@ -198,6 +206,14 @@ for subdir in ${subdirs[@]}; do
             fi
         fi
 
+        # Skip cloud-profiler on Bun runtime as native node-gyp C++ addons (pprof) are not supported.
+        if [[ "${JS_RUNTIME}" == "bun" || "${TEST_CMD}" == *bun* ]]; then
+            if [[ "${d}" == "handwritten/cloud-profiler/" ]]; then
+                echo "Skipping native addon library ${d} on Bun runtime"
+                continue
+            fi
+        fi
+
         should_test=false
         if [ -n "${GIT_DIFF_ARG}" ]; then
             echo "checking changes with 'git diff --quiet ${GIT_DIFF_ARG} ${d}'"
@@ -220,6 +236,9 @@ for subdir in ${subdirs[@]}; do
                         echo "run samples tests for core/packages in ${d}"
                         should_test=true
                     fi
+                elif ([[ "${d}" == core/packages/* ]] || [[ "${d}" == handwritten/* ]]) && [[ "${JS_RUNTIME}" == "bun" || "${TEST_CMD}" == *bun* ]] && [[ "${TEST_TYPE}" == "units" ]]; then
+                    echo "change detected in package ${d} for Bun ${TEST_TYPE} test"
+                    should_test=true
                 elif [[ "${d}" == core/packages/* ]] || [[ "${d}" == core/dev-packages/* ]]; then
                     echo "skipping core package ${d} in non-core trigger"
                 elif [[ "${TEST_TYPE}" == "system" ]] || [[ "${TEST_TYPE}" == "lint" ]] || [[ "${TEST_TYPE}" == "units" ]]; then
