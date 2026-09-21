@@ -69,7 +69,7 @@
     "!build/src/**/*.map"
   ],
   "scripts": {
-    "test": "c8 mocha build/test",
+    "test": "node ../../../bin/run-test.cjs build/test",
     "clean": "gts clean",
     "prepare": "npm run compile",
     "lint": "gts check --no-inline-config",
