@@ -147,11 +147,6 @@ export function retryable(
       }
 
       retries++;
-      // `retries` counts attempts, so it is already 1 on the initial send.
-      // Only the repeats past that one are resends.
-      if (retries > 1) {
-        recordResend?.();
-      }
       let lastError = err;
       const toCall = addTimeoutArg(func, timeout!, otherArgs);
       canceller = toCall(argument, (err, response, next, rawResponse) => {
@@ -181,6 +176,9 @@ export function retryable(
             const rpcTimeout = maxTimeout ? maxTimeout : 0;
             const newDeadline = deadline ? deadline - now.getTime() : Infinity;
             timeout = Math.min(timeoutCal, rpcTimeout, newDeadline);
+            // Every repeat scheduled here is a resend of the request, so the
+            // tracer is told about each one as it happens.
+            recordResend?.();
             repeat(lastError);
           }, toSleep);
         }
