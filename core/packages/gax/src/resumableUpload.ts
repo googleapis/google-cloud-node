@@ -684,7 +684,7 @@ export class ResumableUploadSession {
   private getEndpointBase(): string {
     let servicePath = this.context.servicePath;
     let servicePort = this.context.servicePort;
-    const match = servicePath.match(/^(.*):(\d+)$/);
+    const match = servicePath.match(/^(\[[^\]]+\]|[^:]+):(\d+)$/);
     if (match) {
       servicePath = match[1];
       servicePort = parseInt(match[2], 10);
