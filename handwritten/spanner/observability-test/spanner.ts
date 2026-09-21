@@ -1838,6 +1838,7 @@ describe('Traces for ExecuteStream broken stream retries', () => {
                 );
 
                 done();
+                return null;
               })
               .catch(err => done(err));
           });
@@ -1998,9 +1999,7 @@ describe('Traces for ExecuteStream broken stream retries', () => {
         assert.strictEqual(attempts, 1);
         tx!
           .commit()
-          .then(() => {
-            database.close().catch(assert.ifError);
-          })
+          .then(() => database.close())
           .catch(assert.ifError);
       });
     });
