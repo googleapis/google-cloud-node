@@ -888,6 +888,96 @@ describe('TracerHelper', () => {
       });
     });
 
+    describe('resend count', () => {
+      const resendCount = (): unknown =>
+        harness.requireSingleSpan('google-gax').attributes['resend_count'];
+
+      it('reports 0 when the call is never resent', async () => {
+        await traceCall(dynamicArgs, staticArgs, async () => 'ok');
+
+        // Present on every span, not just retried ones: an absent attribute
+        // would be indistinguishable from an uninstrumented call.
+        assert.strictEqual(resendCount(), 0);
+      });
+
+      it('reports 1 for the first resend', async () => {
+        await traceCall(dynamicArgs, staticArgs, async (_cb, recordResend) => {
+          recordResend!();
+          return 'ok';
+        });
+
+        assert.strictEqual(resendCount(), 1);
+      });
+
+      it('counts resends rather than attempts', async () => {
+        await traceCall(dynamicArgs, staticArgs, async (_cb, recordResend) => {
+          // Four attempts: the initial send plus three resends.
+          recordResend!();
+          recordResend!();
+          recordResend!();
+          return 'ok';
+        });
+
+        assert.strictEqual(resendCount(), 3);
+      });
+
+      it('reports the resends of a call that ultimately failed', async () => {
+        const error = new GoogleError('still unavailable');
+        error.code = Status.UNAVAILABLE;
+
+        await assert.rejects(async () => {
+          await traceCall(
+            dynamicArgs,
+            staticArgs,
+            async (_cb, recordResend) => {
+              recordResend!();
+              recordResend!();
+              throw error;
+            },
+          );
+        });
+
+        // The count is the reason the call is interesting, so it has to
+        // survive the failure path and not just the success one.
+        assert.strictEqual(resendCount(), 2);
+        harness.assertResponseStatus({rpcStatus: 'UNAVAILABLE'});
+      });
+
+      it('counts resends reported after the traced function returns', () => {
+        // Stream retries happen while the span is open but long after the
+        // call to `fn` has returned, so the recorder has to keep working.
+        const emitter = new EventEmitter();
+        let recorder: (() => void) | undefined;
+
+        traceCall(
+          dynamicArgs,
+          staticArgs,
+          (_cb, recordResend) => {
+            recorder = recordResend;
+            return emitter;
+          },
+          true,
+        );
+
+        recorder!();
+        recorder!();
+        emitter.emit('end');
+
+        assert.strictEqual(resendCount(), 2);
+      });
+
+      it('reports resends on a fallback span', async () => {
+        const httpArgs: DynamicTraceContext = {...dynamicArgs, rpcType: 'http'};
+
+        await traceCall(httpArgs, staticArgs, async (_cb, recordResend) => {
+          recordResend!();
+          return 'ok';
+        });
+
+        assert.strictEqual(resendCount(), 1);
+      });
+    });
+
     it('manages span lifetime for resolved promises', async () => {
       const result = await traceCall(dynamicArgs, staticArgs, () =>
         Promise.resolve('async-result'),

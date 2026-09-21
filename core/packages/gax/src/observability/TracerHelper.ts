@@ -68,6 +68,16 @@ export interface DynamicTraceContext {
 }
 
 /**
+ * Reports that the request was sent again after a retryable failure.
+ *
+ * Handed to the traced operation, which calls it once per resend. gax retries
+ * in more than one place — the unary retry loop and the server-streaming one —
+ * and counting the calls rather than reading a counter keeps the tracer
+ * independent of how each of them tracks its own attempts.
+ */
+export type ResendRecorder = () => void;
+
+/**
  * Returns the OpenTelemetry Tracer instance for google-gax.
  *
  * @returns {Tracer} The OpenTelemetry Tracer.
@@ -308,7 +318,8 @@ export function handleStream(
  * @param {DynamicTraceContext} dynamicArgs - Dynamic trace context for the RPC call.
  * @param {StaticTraceContext} staticArgs - Static trace context for the client library.
  * @param {function} fn - The operation to trace. Receives the traced callback
- *   when `callback` is supplied, otherwise `undefined`.
+ *   when `callback` is supplied, otherwise `undefined`, and a
+ *   {@link ResendRecorder} to call once for every retryable resend it makes.
  * @param {boolean} [isStreamCall=false] - Whether the operation is a stream call (true) or promise call (false).
  * @param {APICallback} [callback] - The user callback for callback-style invocations.
  * @returns {T} The result of the traced operation.
@@ -316,28 +327,34 @@ export function handleStream(
 export function traceCall(
   dynamicArgs: DynamicTraceContext,
   staticArgs: StaticTraceContext,
-  fn: (tracedCallback?: APICallback) => GaxCallResult,
+  fn: (
+    tracedCallback?: APICallback,
+    recordResend?: ResendRecorder,
+  ) => GaxCallResult,
   isStreamCall?: boolean,
   callback?: APICallback,
 ): GaxCallResult;
 export function traceCall<T extends EventEmitter>(
   dynamicArgs: DynamicTraceContext,
   staticArgs: StaticTraceContext,
-  fn: (tracedCallback?: APICallback) => T,
+  fn: (tracedCallback?: APICallback, recordResend?: ResendRecorder) => T,
   isStreamCall: true,
   callback?: APICallback,
 ): T;
 export function traceCall<T>(
   dynamicArgs: DynamicTraceContext,
   staticArgs: StaticTraceContext,
-  fn: (tracedCallback?: APICallback) => T,
+  fn: (tracedCallback?: APICallback, recordResend?: ResendRecorder) => T,
   isStreamCall?: false,
   callback?: APICallback,
 ): T;
 export function traceCall(
   dynamicArgs: DynamicTraceContext,
   staticArgs: StaticTraceContext,
-  fn: (tracedCallback?: APICallback) => GaxCallResult,
+  fn: (
+    tracedCallback?: APICallback,
+    recordResend?: ResendRecorder,
+  ) => GaxCallResult,
   isStreamCall = false,
   callback?: APICallback,
 ): GaxCallResult {
@@ -357,6 +374,24 @@ export function traceCall(
     let rpcStatusName: string | undefined;
     let httpStatusCode: number | undefined;
 
+    // Counts resends, not attempts. The initial send is not a resend, so a
+    // call that succeeded first time is 0 and the first retry is 1.
+    //
+    // Reported on every span, including the 0 case, so that the attribute is
+    // always there to group and aggregate on. Omitting it would make "never
+    // retried" and "not instrumented" the same observation at query time.
+    //
+    // Reported on the call span rather than per attempt because gax opens one
+    // span for the whole call, retries included, so the final count is what
+    // that span can describe.
+    let resendCount = 0;
+    const recordResend: ResendRecorder = () => {
+      resendCount++;
+    };
+
+    // Marks the span failed. Kept separate from recordError so paths that are
+    // failures but not exceptions can set the status without emitting a
+    // misleading exception event.
     const setErrorStatus = (message: string) => {
       errorRecorded = true;
       span.setStatus({code: SpanStatusCode.ERROR, message});
@@ -383,6 +418,7 @@ export function traceCall(
           httpStatusCode = 200;
         }
         setStatusAttributes();
+        span.setAttribute('resend_count', resendCount);
         span.end();
       }
     };
@@ -424,7 +460,7 @@ export function traceCall(
       : undefined;
 
     try {
-      const result = fn(tracedCallback);
+      const result = fn(tracedCallback, recordResend);
       const promiseTarget = !isStreamCall ? getPromiseTarget(result) : null;
       if (isStreamCall && result instanceof EventEmitter) {
         handleStream(result, recordError, endSpan, !!callback);

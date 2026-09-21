@@ -26,6 +26,7 @@ import {
 } from '../apitypes';
 import {RetryOptions} from '../gax';
 import {GoogleError} from '../googleError';
+import {ResendRecorder} from '../observability/TracerHelper';
 
 import {addTimeoutArg} from './timeout';
 
@@ -40,6 +41,10 @@ import {addTimeoutArg} from './timeout';
  *   function eshould retry, and the parameters to the exponential backoff retry
  *   algorithm.
  * @param {GRPCCallOtherArgs} otherArgs - the additional arguments to be passed to func.
+ * @param {string} [apiName] - the name of the API being called, used in error messages.
+ * @param {ResendRecorder} [recordResend] - called once for each resend of the
+ *   request, so a traced call can report how many were needed. Absent when the
+ *   call is not traced.
  * @return {SimpleCallbackFunction} A function that will retry.
  */
 export function retryable(
@@ -47,6 +52,7 @@ export function retryable(
   retry: RetryOptions,
   otherArgs: GRPCCallOtherArgs,
   apiName?: string,
+  recordResend?: ResendRecorder,
 ): SimpleCallbackFunction {
   const delayMult = retry.backoffSettings.retryDelayMultiplier;
   const maxDelay = retry.backoffSettings.maxRetryDelayMillis;
@@ -141,6 +147,11 @@ export function retryable(
       }
 
       retries++;
+      // `retries` counts attempts, so it is already 1 on the initial send.
+      // Only the repeats past that one are resends.
+      if (retries > 1) {
+        recordResend?.();
+      }
       let lastError = err;
       const toCall = addTimeoutArg(func, timeout!, otherArgs);
       canceller = toCall(argument, (err, response, next, rawResponse) => {

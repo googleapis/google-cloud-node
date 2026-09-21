@@ -34,6 +34,7 @@ import {GoogleError} from '../googleError';
 import {Status} from '../status';
 import {PassThrough} from 'stream';
 import {ResponseType} from '../apitypes';
+import {ResendRecorder} from '../observability/TracerHelper';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const duplexify: DuplexifyConstructor = require('duplexify');
 // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -105,6 +106,12 @@ export class StreamProxy extends duplexify implements GRPCCallResult {
   gaxServerStreamingRetries?: boolean;
   apiCall?: SimpleCallbackFunction;
   argument?: {};
+  /**
+   * Set by the tracer when the call is traced, so that the retry loop below
+   * can report each resend it makes. Left undefined otherwise, which is why
+   * every call site invokes it optionally.
+   */
+  recordResend?: ResendRecorder;
   /**
    * StreamProxy is a proxy to gRPC-streaming method.
    *
@@ -547,6 +554,11 @@ export class StreamProxy extends duplexify implements GRPCCallResult {
                   }
 
                   retries++;
+                  // Reported separately from `retries`, which is the retry
+                  // budget and is reset to 0 every time data arrives. The
+                  // tracer wants the total for the call, so it counts the
+                  // calls it receives instead of reading that counter.
+                  this.recordResend?.();
                   let retryArgument = this.argument! as RequestType;
                   // if resumption logic is passed, use it to determined the
                   // new argument for the new request made to the server
