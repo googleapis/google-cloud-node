@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/commerceproducer-v0.4.0...commerceproducer-v0.5.0) (2026-09-08)
+
+
+### Features
+
+* Upgrade librarian gapic-generator-typescript to v5.2.0 ([c249594](https://github.com/googleapis/google-cloud-node/commit/c249594c6ef41e4b36f1ef8869341a4c98c092b0))
+
+## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/commerceproducer-v0.3.0...commerceproducer-v0.4.0) (2026-08-10)
+
+
+### Features
+
+* Update API sources and regenerate ([#9104](https://github.com/googleapis/google-cloud-node/issues/9104)) ([61ea9c8](https://github.com/googleapis/google-cloud-node/commit/61ea9c807dfb3eda4ddd377da9a496d17ba48389))
+
 ## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/commerceproducer-v0.2.0...commerceproducer-v0.3.0) (2026-08-04)
 
 

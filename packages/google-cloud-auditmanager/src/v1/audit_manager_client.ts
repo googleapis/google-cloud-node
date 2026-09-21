@@ -30,10 +30,10 @@ import type {
   LocationsClient,
   LocationProtos,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -55,7 +55,7 @@ export class AuditManagerClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('auditmanager');
@@ -68,11 +68,11 @@ export class AuditManagerClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
+  innerApiCalls: {[name: string]: Function};
   locationsClient: LocationsClient;
-  pathTemplates: { [name: string]: gax.PathTemplate };
+  pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
-  auditManagerStub?: Promise<{ [name: string]: Function }>;
+  auditManagerStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of AuditManagerClient.
@@ -148,7 +148,7 @@ export class AuditManagerClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -218,6 +218,10 @@ export class AuditManagerClient {
       folderLocationAuditReportsPathTemplate: new this._gaxModule.PathTemplate(
         'folders/{folder}/locations/{location}/auditReports/{audit_report}',
       ),
+      folderLocationAuditSchedulesPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'folders/{folder}/locations/{location}/auditSchedules/{audit_schedule}',
+        ),
       folderLocationAuditScopeReportsPathTemplate:
         new this._gaxModule.PathTemplate(
           'folders/{folder}/locations/{location}/auditScopeReports/{audit_scope_report}',
@@ -238,6 +242,18 @@ export class AuditManagerClient {
       organizationLocationPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/locations/{location}',
       ),
+      organizationLocationAuditReportsPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/locations/{location}/auditReports/{audit_report}',
+        ),
+      organizationLocationAuditSchedulesPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/locations/{location}/auditSchedules/{audit_schedule}',
+        ),
+      organizationLocationAuditScopeReportsPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/locations/{location}/auditScopeReports/{audit_scope_report}',
+        ),
       organizationLocationEnrollmentsPathTemplate:
         new this._gaxModule.PathTemplate(
           'organizations/{organization}/locations/{location}/enrollments/{enrollment}',
@@ -256,6 +272,10 @@ export class AuditManagerClient {
       projectLocationAuditReportsPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/auditReports/{audit_report}',
       ),
+      projectLocationAuditSchedulesPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/auditSchedules/{audit_schedule}',
+        ),
       projectLocationAuditScopeReportsPathTemplate:
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/auditScopeReports/{audit_scope_report}',
@@ -276,6 +296,11 @@ export class AuditManagerClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
+      listAuditSchedules: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'auditSchedules',
+      ),
       listAuditReports: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
@@ -327,21 +352,21 @@ export class AuditManagerClient {
           selector: 'google.longrunning.Operations.DeleteOperation',
           delete: '/v1/{name=projects/*/locations/*/operations/*}',
           additional_bindings: [
-            { delete: '/v1/{name=organizations/*/locations/*/operations/*}' },
+            {delete: '/v1/{name=organizations/*/locations/*/operations/*}'},
           ],
         },
         {
           selector: 'google.longrunning.Operations.GetOperation',
           get: '/v1/{name=projects/*/locations/*/operations/*}',
           additional_bindings: [
-            { get: '/v1/{name=organizations/*/locations/*/operations/*}' },
+            {get: '/v1/{name=organizations/*/locations/*/operations/*}'},
           ],
         },
         {
           selector: 'google.longrunning.Operations.ListOperations',
           get: '/v1/{name=projects/*/locations/*}/operations',
           additional_bindings: [
-            { get: '/v1/{name=organizations/*/locations/*}/operations' },
+            {get: '/v1/{name=organizations/*/locations/*}/operations'},
           ],
         },
       ];
@@ -369,7 +394,7 @@ export class AuditManagerClient {
       'google.cloud.auditmanager.v1.AuditManager',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -409,11 +434,15 @@ export class AuditManagerClient {
           (this._protos as any).google.cloud.auditmanager.v1.AuditManager,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const auditManagerStubMethods = [
+      'createAuditSchedule',
+      'updateAuditSchedule',
+      'getAuditSchedule',
+      'listAuditSchedules',
       'enrollResource',
       'generateAuditScopeReport',
       'generateAuditReport',
@@ -425,7 +454,7 @@ export class AuditManagerClient {
     ];
     for (const methodName of auditManagerStubMethods) {
       const callPromise = this.auditManagerStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -517,7 +546,10 @@ export class AuditManagerClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-auditmanager',
+      'https://www.googleapis.com/auth/cloud-platform',
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -540,28 +572,509 @@ export class AuditManagerClient {
   // -- Service calls --
   // -------------------
   /**
-   * Enrolls the customer resource(folder/project/organization) to the audit
-   * manager service by creating the audit managers Service Agent in customers
-   * workload and granting required permissions to the Service Agent. Please
-   * note that if enrollment request is made on the already enrolled workload
-   * then enrollment is executed overriding the existing set of destinations.
+   * Creates a new audit schedule in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Project or folder that this audit schedule is for, in one of the
+   *   following formats:
+   *
+   *   * `projects/{project}/locations/{location}`
+   *   * `folders/{folder}/locations/{location}`
+   * @param {google.cloud.auditmanager.v1.AuditSchedule} request.auditSchedule
+   *   Required. Audit schedule to create.
+   * @param {string} request.auditScheduleId
+   *   Required. ID to use for the audit schedule, which becomes the final
+   *   component of the audit schedule's resource name.
+   * @param {boolean} [request.validateOnly]
+   *   Optional. If `true`, only validates the request and does not create the
+   *   audit schedule. This executes standard request validation (such as schema,
+   *   framework existence, scope, and IAM checks) and skips the apply phase.
+   *
+   *   Use this field for the following purposes:
+   *   * **Infrastructure as Code (IaC)**: Allow tools like Terraform to run
+   *     dry-run mutations (e.g., `terraform plan`) without creating real
+   *     resources or incurring costs.
+   *   * **User Interface Validation**: Enable real-time form and permission
+   *     validation in custom UIs before submitting requests.
+   *   * **CI/CD & Automation**: Test your scripts, permissions, and parameters
+   *     safely without consuming resource quotas.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.auditmanager.v1.AuditSchedule|AuditSchedule}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/audit_manager.create_audit_schedule.js</caption>
+   * region_tag:auditmanager_v1_generated_AuditManager_CreateAuditSchedule_async
+   */
+  createAuditSchedule(
+    request?: protos.google.cloud.auditmanager.v1.ICreateAuditScheduleRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.auditmanager.v1.IAuditSchedule,
+      (
+        | protos.google.cloud.auditmanager.v1.ICreateAuditScheduleRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  createAuditSchedule(
+    request: protos.google.cloud.auditmanager.v1.ICreateAuditScheduleRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.auditmanager.v1.IAuditSchedule,
+      | protos.google.cloud.auditmanager.v1.ICreateAuditScheduleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  createAuditSchedule(
+    request: protos.google.cloud.auditmanager.v1.ICreateAuditScheduleRequest,
+    callback: Callback<
+      protos.google.cloud.auditmanager.v1.IAuditSchedule,
+      | protos.google.cloud.auditmanager.v1.ICreateAuditScheduleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  createAuditSchedule(
+    request?: protos.google.cloud.auditmanager.v1.ICreateAuditScheduleRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.auditmanager.v1.IAuditSchedule,
+          | protos.google.cloud.auditmanager.v1.ICreateAuditScheduleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.auditmanager.v1.IAuditSchedule,
+      | protos.google.cloud.auditmanager.v1.ICreateAuditScheduleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.auditmanager.v1.IAuditSchedule,
+      (
+        | protos.google.cloud.auditmanager.v1.ICreateAuditScheduleRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createAuditSchedule request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.auditmanager.v1.IAuditSchedule,
+          | protos.google.cloud.auditmanager.v1.ICreateAuditScheduleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createAuditSchedule response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createAuditSchedule(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.auditmanager.v1.IAuditSchedule,
+          (
+            | protos.google.cloud.auditmanager.v1.ICreateAuditScheduleRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createAuditSchedule response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Updates an existing audit schedule.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.auditmanager.v1.AuditSchedule} request.auditSchedule
+   *   Required. Audit schedule to update.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. List of fields to update.
+   * @param {boolean} [request.validateOnly]
+   *   Optional. If `true`, only validates the request and does not update the
+   *   audit schedule. This executes standard request validation (such as
+   *   schema, framework existence, scope, and IAM checks) and skips the apply
+   *   phase.
+   *
+   *   Use this field for the following purposes:
+   *   * **Infrastructure as Code (IaC)**: Allow tools like Terraform to run
+   *     dry-run mutations (e.g., `terraform plan`) without creating real
+   *     resources or incurring costs.
+   *   * **User Interface Validation**: Enable real-time form and permission
+   *     validation in custom UIs before submitting requests.
+   *   * **CI/CD & Automation**: Test your scripts, permissions, and parameters
+   *     safely without consuming resource quotas.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.auditmanager.v1.AuditSchedule|AuditSchedule}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/audit_manager.update_audit_schedule.js</caption>
+   * region_tag:auditmanager_v1_generated_AuditManager_UpdateAuditSchedule_async
+   */
+  updateAuditSchedule(
+    request?: protos.google.cloud.auditmanager.v1.IUpdateAuditScheduleRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.auditmanager.v1.IAuditSchedule,
+      (
+        | protos.google.cloud.auditmanager.v1.IUpdateAuditScheduleRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  updateAuditSchedule(
+    request: protos.google.cloud.auditmanager.v1.IUpdateAuditScheduleRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.auditmanager.v1.IAuditSchedule,
+      | protos.google.cloud.auditmanager.v1.IUpdateAuditScheduleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  updateAuditSchedule(
+    request: protos.google.cloud.auditmanager.v1.IUpdateAuditScheduleRequest,
+    callback: Callback<
+      protos.google.cloud.auditmanager.v1.IAuditSchedule,
+      | protos.google.cloud.auditmanager.v1.IUpdateAuditScheduleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  updateAuditSchedule(
+    request?: protos.google.cloud.auditmanager.v1.IUpdateAuditScheduleRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.auditmanager.v1.IAuditSchedule,
+          | protos.google.cloud.auditmanager.v1.IUpdateAuditScheduleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.auditmanager.v1.IAuditSchedule,
+      | protos.google.cloud.auditmanager.v1.IUpdateAuditScheduleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.auditmanager.v1.IAuditSchedule,
+      (
+        | protos.google.cloud.auditmanager.v1.IUpdateAuditScheduleRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'audit_schedule.name': request.auditSchedule!.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateAuditSchedule request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.auditmanager.v1.IAuditSchedule,
+          | protos.google.cloud.auditmanager.v1.IUpdateAuditScheduleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateAuditSchedule response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateAuditSchedule(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.auditmanager.v1.IAuditSchedule,
+          (
+            | protos.google.cloud.auditmanager.v1.IUpdateAuditScheduleRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateAuditSchedule response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Gets details of a single audit schedule.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the audit schedule to retrieve, in one of the following
+   *   formats:
+   *
+   *   * `projects/{project}/locations/{location}/auditSchedules/{audit_schedule}`
+   *   * `folders/{folder}/locations/{location}/auditSchedules/{audit_schedule}`
+   *   * `organizations/{organization}/locations/{location}/auditSchedules/{audit_schedule}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.auditmanager.v1.AuditSchedule|AuditSchedule}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/audit_manager.get_audit_schedule.js</caption>
+   * region_tag:auditmanager_v1_generated_AuditManager_GetAuditSchedule_async
+   */
+  getAuditSchedule(
+    request?: protos.google.cloud.auditmanager.v1.IGetAuditScheduleRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.auditmanager.v1.IAuditSchedule,
+      protos.google.cloud.auditmanager.v1.IGetAuditScheduleRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  getAuditSchedule(
+    request: protos.google.cloud.auditmanager.v1.IGetAuditScheduleRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.auditmanager.v1.IAuditSchedule,
+      | protos.google.cloud.auditmanager.v1.IGetAuditScheduleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getAuditSchedule(
+    request: protos.google.cloud.auditmanager.v1.IGetAuditScheduleRequest,
+    callback: Callback<
+      protos.google.cloud.auditmanager.v1.IAuditSchedule,
+      | protos.google.cloud.auditmanager.v1.IGetAuditScheduleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getAuditSchedule(
+    request?: protos.google.cloud.auditmanager.v1.IGetAuditScheduleRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.auditmanager.v1.IAuditSchedule,
+          | protos.google.cloud.auditmanager.v1.IGetAuditScheduleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.auditmanager.v1.IAuditSchedule,
+      | protos.google.cloud.auditmanager.v1.IGetAuditScheduleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.auditmanager.v1.IAuditSchedule,
+      protos.google.cloud.auditmanager.v1.IGetAuditScheduleRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getAuditSchedule request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.auditmanager.v1.IAuditSchedule,
+          | protos.google.cloud.auditmanager.v1.IGetAuditScheduleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getAuditSchedule response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getAuditSchedule(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.auditmanager.v1.IAuditSchedule,
+          (
+            | protos.google.cloud.auditmanager.v1.IGetAuditScheduleRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getAuditSchedule response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Adds your project, folder, or organization to Audit
+   * Manager. This method creates the Audit Manager service agent in your
+   * workload and grants required permissions to the service agent.
+   * If you make this request on a workload that's already enrolled,
+   * then this method overrides the existing set of destinations.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.scope
-   *   Required. The resource to be enrolled to the audit manager. Scope format
-   *   should be resource_type/resource_identifier Eg:
-   *   projects/{project}/locations/{location},
-   *   folders/{folder}/locations/{location}
-   *   organizations/{organization}/locations/{location}
+   *   Required. Organization, folder, or project to enroll in Audit Manager, in
+   *   one of the following formats:
+   *
+   *   * `projects/{project}/locations/{location}`
+   *   * `folders/{folder}/locations/{location}`
+   *   * `organizations/{organization}/locations/{location}`
    * @param {number[]} request.destinations
-   *   Required. List of destination among which customer can choose to upload
-   *   their reports during the audit process. While enrolling at a
-   *   organization/folder level, customer can choose Cloud storage bucket in any
-   *   project. If the audit is triggered at project level using the service agent
-   *   at organization/folder level, all the destination options associated with
-   *   respective organization/folder level service agent will be available to
-   *   auditing projects.
+   *   Required. Cloud Storage buckets that you can upload your audit reports to
+   *   during the audit process.
+   *
+   *   When you enroll an organization or folder, you can choose a Cloud Storage
+   *   bucket from any project in the organization or folder. If you run an audit
+   *   at the project level using the service agent at the organization or folder
+   *   level, all the buckets that are associated with the service agent are
+   *   available.
+   * @param {boolean} [request.validateOnly]
+   *   Optional. If `true`, only validates the request and does not enroll the
+   *   resource. This executes standard request validation (such as schema, IAM,
+   *   and destination checks) and skips the apply phase.
+   *
+   *   Use this field for the following purposes:
+   *   * **Infrastructure as Code (IaC)**: Allow tools like Terraform to run
+   *     dry-run mutations (e.g., `terraform plan`) without creating real
+   *     resources or incurring costs.
+   *   * **User Interface Validation**: Enable real-time form and permission
+   *     validation in custom UIs before submitting requests.
+   *   * **CI/CD & Automation**: Test your scripts, permissions, and parameters
+   *     safely without consuming resource quotas.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -642,7 +1155,7 @@ export class AuditManagerClient {
       this._gaxModule.routingHeader.fromParams({
         scope: request.scope ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('enrollResource request %j', request);
@@ -693,25 +1206,48 @@ export class AuditManagerClient {
       });
   }
   /**
-   * Generates a demo report highlighting different responsibilities
-   * (Google/Customer/ shared) required to be fulfilled for the customer's
-   * workload to be compliant with the given standard.
+   * Generates an audit scope report for the given standard.
+   *
+   * The report includes the following:
+   *
+   * * The technical attributes and constraints that Audit Manager uses to
+   *   verify your compliance with a framework.
+   * * A list of Google Cloud services and resources that are within the
+   *   scope of the framework.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.scope
-   *   Required. Scope for which the AuditScopeReport is required. Must be of
-   *   format resource_type/resource_identifier Eg:
-   *   projects/{project}/locations/{location},
-   *   folders/{folder}/locations/{location}
-   * @param {string} request.complianceStandard
-   *   Required. Compliance Standard against which the Scope Report must be
-   *   generated. Eg: FEDRAMP_MODERATE
+   *   Required. Project or folder that the audit scope report is generated for,
+   *   in one of the following formats:
+   *
+   *   * `projects/{project}/locations/{location}`
+   *   * `folders/{folder}/locations/{location}`
+   *   * `organizations/{organization}/locations/{location}`
+   * @param {string} [request.complianceStandard]
+   *   Optional. Deprecated. The standard (industry or regulatory requirements)
+   *   that the audit scope report is run against.
+   *
+   *   Use the `compliance_framework` field instead.
    * @param {google.cloud.auditmanager.v1.GenerateAuditScopeReportRequest.AuditScopeReportFormat} request.reportFormat
-   *   Required. The format in which the Scope report bytes should be returned.
+   *   Required. Format for the audit scope report.
    * @param {string} request.complianceFramework
-   *   Required. Compliance framework against which the Scope Report must be
-   *   generated.
+   *   Required. Framework (set of controls) that the audit scope report is
+   *   generated against. For example, `NIST_800_53`.
+   * @param {boolean} [request.validateOnly]
+   *   Optional. If `true`, only validates the request and does not generate the
+   *   audit scope report. This executes standard request validation (such as
+   *   schema, framework existence, scope, and IAM checks) and skips the apply
+   *   phase.
+   *
+   *   Use this field for the following purposes:
+   *   * **Infrastructure as Code (IaC)**: Allow tools like Terraform to run
+   *     dry-run mutations (e.g., `terraform plan`) without creating real
+   *     resources or incurring costs.
+   *   * **User Interface Validation**: Enable real-time form and permission
+   *     validation in custom UIs before submitting requests.
+   *   * **CI/CD & Automation**: Test your scripts, permissions, and parameters
+   *     safely without consuming resource quotas.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -798,7 +1334,7 @@ export class AuditManagerClient {
       this._gaxModule.routingHeader.fromParams({
         scope: request.scope ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('generateAuditScopeReport request %j', request);
@@ -849,14 +1385,16 @@ export class AuditManagerClient {
       });
   }
   /**
-   * Get the overall audit report
+   * Gets the full metadata and findings for an audit report.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. Format
-   *   projects/{project}/locations/{location}/auditReports/{audit_report},
-   *   folders/{folder}/locations/{location}/auditReports/{audit_report}
+   *   Required. Name of the audit report, in one of the following formats:
+   *
+   *   * `projects/{project}/locations/{location}/auditReports/{audit_report}`
+   *   * `folders/{folder}/locations/{location}/auditReports/{audit_report}`
+   *   * `organizations/{organization}/locations/{location}/auditReports/{audit_report}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -937,7 +1475,7 @@ export class AuditManagerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getAuditReport request %j', request);
@@ -988,15 +1526,17 @@ export class AuditManagerClient {
       });
   }
   /**
-   * Get a resource along with its enrollment status.
+   * Gets a resource and its enrollment status.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. Format
-   *   folders/{folder}/locations/{location}/resourceEnrollmentStatuses/{resource_enrollment_status},
-   *   projects/{project}/locations/{location}/resourceEnrollmentStatuses/{resource_enrollment_status},
-   *   organizations/{organization}/locations/{location}/resourceEnrollmentStatuses/{resource_enrollment_status}
+   *   Required. Name of the resource enrollment status, in one of the following
+   *   formats:
+   *
+   *   * `folders/{folder}/locations/{location}/resourceEnrollmentStatuses/{resource_enrollment_status}`
+   *   * `projects/{project}/locations/{location}/resourceEnrollmentStatuses/{resource_enrollment_status}`
+   *   * `organizations/{organization}/locations/{location}/resourceEnrollmentStatuses/{resource_enrollment_status}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1083,7 +1623,7 @@ export class AuditManagerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getResourceEnrollmentStatus request %j', request);
@@ -1135,27 +1675,46 @@ export class AuditManagerClient {
   }
 
   /**
-   * Register the Audit Report generation requests and returns the OperationId
-   * using which the customer can track the report generation progress.
+   * Registers audit report generation requests. This method returns the
+   * operation identifier that you can use to track the report generation
+   * progress.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.gcsUri
-   *   Destination Cloud storage bucket where report and evidence must be
-   *   uploaded. The Cloud storage bucket provided here must be selected among
-   *   the buckets entered during the enrollment process.
+   *   URL for the Cloud Storage bucket where the report and evidence is
+   *   uploaded. You must select a bucket that was provided during the
+   *   enrollment process.
    * @param {string} request.scope
-   *   Required. Scope for which the AuditScopeReport is required. Must be of
-   *   format resource_type/resource_identifier Eg:
-   *   projects/{project}/locations/{location},
-   *   folders/{folder}/locations/{location}
-   * @param {string} request.complianceStandard
-   *   Required. Compliance Standard against which the Scope Report must be
-   *   generated. Eg: FEDRAMP_MODERATE
+   *   Required. Organization, folder, or project that the audit applies to, in
+   *   one of the following formats:
+   *
+   *   * `projects/{project}/locations/{location}`
+   *   * `folders/{folder}/locations/{location}`
+   *   * `organizations/{organization}/locations/{location}`
+   * @param {string} [request.complianceStandard]
+   *   Optional. Deprecated. Compliance standard for the audit report.
+   *
+   *   Use the `compliance_framework` field instead.
    * @param {google.cloud.auditmanager.v1.GenerateAuditReportRequest.AuditReportFormat} request.reportFormat
-   *   Required. The format in which the audit report should be created.
+   *   Required. Format for the audit report.
    * @param {string} request.complianceFramework
-   *   Required. Compliance framework against which the Report must be generated.
+   *   Required. The framework that's used for the audit report. For example,
+   *   `NIST_800_53`.
+   * @param {boolean} [request.validateOnly]
+   *   Optional. If `true`, only validates the request and does not generate the
+   *   audit report. This executes standard request validation (such as schema,
+   *   framework existence, scope, and IAM checks) and skips the apply phase.
+   *
+   *   Use this field for the following purposes:
+   *   * **Infrastructure as Code (IaC)**: Allow tools like Terraform to run
+   *     dry-run mutations (e.g., `terraform plan`) without creating real
+   *     resources or incurring costs.
+   *   * **User Interface Validation**: Enable real-time form and permission
+   *     validation in custom UIs before submitting requests.
+   *   * **CI/CD & Automation**: Test your scripts, permissions, and parameters
+   *     safely without triggering expensive Long-Running Operations (LROs) or
+   *     consuming resource quotas.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1248,7 +1807,7 @@ export class AuditManagerClient {
       this._gaxModule.routingHeader.fromParams({
         scope: request.scope ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1305,7 +1864,7 @@ export class AuditManagerClient {
     this._log.info('generateAuditReport long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -1319,17 +1878,270 @@ export class AuditManagerClient {
     >;
   }
   /**
-   * Lists audit reports in the selected parent scope
+   * Lists audit schedules in a given project and location.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent scope for which to list the reports.
+   *   Required. Parent for the audit schedule, in one of the following formats:
+   *
+   *   * `projects/{project}/locations/{location}`
+   *   * `folders/{folder}/locations/{location}`
+   *   * `organizations/{organization}/locations/{location}`
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of resources to return.
+   *   Optional. Maximum number of items to return in a single page. The service
+   *   might return fewer items than this value. If unspecified, the service picks
+   *   an appropriate default. The maximum value is 100; values above 100 are
+   *   reduced to 100.
    * @param {string} [request.pageToken]
-   *   Optional. The next_page_token value returned from a previous List request,
-   *   if any.
+   *   Optional. A page token, received from a previous call, to retrieve the next
+   *   page of results.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.auditmanager.v1.AuditSchedule|AuditSchedule}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listAuditSchedulesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listAuditSchedules(
+    request?: protos.google.cloud.auditmanager.v1.IListAuditSchedulesRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.auditmanager.v1.IAuditSchedule[],
+      protos.google.cloud.auditmanager.v1.IListAuditSchedulesRequest | null,
+      protos.google.cloud.auditmanager.v1.IListAuditSchedulesResponse,
+    ]
+  >;
+  listAuditSchedules(
+    request: protos.google.cloud.auditmanager.v1.IListAuditSchedulesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.auditmanager.v1.IListAuditSchedulesRequest,
+      | protos.google.cloud.auditmanager.v1.IListAuditSchedulesResponse
+      | null
+      | undefined,
+      protos.google.cloud.auditmanager.v1.IAuditSchedule
+    >,
+  ): void;
+  listAuditSchedules(
+    request: protos.google.cloud.auditmanager.v1.IListAuditSchedulesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.auditmanager.v1.IListAuditSchedulesRequest,
+      | protos.google.cloud.auditmanager.v1.IListAuditSchedulesResponse
+      | null
+      | undefined,
+      protos.google.cloud.auditmanager.v1.IAuditSchedule
+    >,
+  ): void;
+  listAuditSchedules(
+    request?: protos.google.cloud.auditmanager.v1.IListAuditSchedulesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.auditmanager.v1.IListAuditSchedulesRequest,
+          | protos.google.cloud.auditmanager.v1.IListAuditSchedulesResponse
+          | null
+          | undefined,
+          protos.google.cloud.auditmanager.v1.IAuditSchedule
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.auditmanager.v1.IListAuditSchedulesRequest,
+      | protos.google.cloud.auditmanager.v1.IListAuditSchedulesResponse
+      | null
+      | undefined,
+      protos.google.cloud.auditmanager.v1.IAuditSchedule
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.auditmanager.v1.IAuditSchedule[],
+      protos.google.cloud.auditmanager.v1.IListAuditSchedulesRequest | null,
+      protos.google.cloud.auditmanager.v1.IListAuditSchedulesResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.auditmanager.v1.IListAuditSchedulesRequest,
+          | protos.google.cloud.auditmanager.v1.IListAuditSchedulesResponse
+          | null
+          | undefined,
+          protos.google.cloud.auditmanager.v1.IAuditSchedule
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listAuditSchedules values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listAuditSchedules request %j', request);
+    return this.innerApiCalls
+      .listAuditSchedules(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.auditmanager.v1.IAuditSchedule[],
+          protos.google.cloud.auditmanager.v1.IListAuditSchedulesRequest | null,
+          protos.google.cloud.auditmanager.v1.IListAuditSchedulesResponse,
+        ]) => {
+          this._log.info('listAuditSchedules values %j', response);
+          return [response, input, output];
+        },
+      );
+  }
+
+  /**
+   * Equivalent to `listAuditSchedules`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent for the audit schedule, in one of the following formats:
+   *
+   *   * `projects/{project}/locations/{location}`
+   *   * `folders/{folder}/locations/{location}`
+   *   * `organizations/{organization}/locations/{location}`
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of items to return in a single page. The service
+   *   might return fewer items than this value. If unspecified, the service picks
+   *   an appropriate default. The maximum value is 100; values above 100 are
+   *   reduced to 100.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous call, to retrieve the next
+   *   page of results.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.auditmanager.v1.AuditSchedule|AuditSchedule} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listAuditSchedulesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listAuditSchedulesStream(
+    request?: protos.google.cloud.auditmanager.v1.IListAuditSchedulesRequest,
+    options?: CallOptions,
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listAuditSchedules'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listAuditSchedules stream %j', request);
+    return this.descriptors.page.listAuditSchedules.createStream(
+      this.innerApiCalls.listAuditSchedules as GaxCall,
+      request,
+      callSettings,
+    );
+  }
+
+  /**
+   * Equivalent to `listAuditSchedules`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent for the audit schedule, in one of the following formats:
+   *
+   *   * `projects/{project}/locations/{location}`
+   *   * `folders/{folder}/locations/{location}`
+   *   * `organizations/{organization}/locations/{location}`
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of items to return in a single page. The service
+   *   might return fewer items than this value. If unspecified, the service picks
+   *   an appropriate default. The maximum value is 100; values above 100 are
+   *   reduced to 100.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous call, to retrieve the next
+   *   page of results.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.auditmanager.v1.AuditSchedule|AuditSchedule}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/audit_manager.list_audit_schedules.js</caption>
+   * region_tag:auditmanager_v1_generated_AuditManager_ListAuditSchedules_async
+   */
+  listAuditSchedulesAsync(
+    request?: protos.google.cloud.auditmanager.v1.IListAuditSchedulesRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.auditmanager.v1.IAuditSchedule> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listAuditSchedules'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listAuditSchedules iterate %j', request);
+    return this.descriptors.page.listAuditSchedules.asyncIterate(
+      this.innerApiCalls['listAuditSchedules'] as GaxCall,
+      request as {},
+      callSettings,
+    ) as AsyncIterable<protos.google.cloud.auditmanager.v1.IAuditSchedule>;
+  }
+  /**
+   * Lists the audit reports for the organization, folder, or project that you
+   * specify as the parent scope.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent organization, folder, or project to list reports for,
+   *   in one of the following formats:
+   *
+   *   * `projects/{project}/locations/{location}`
+   *   * `folders/{folder}/locations/{location}`
+   *   * `organizations/{organization}/locations/{location}`
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of items to return in a single page. The service
+   *   might return fewer items than this value. If unspecified, the service picks
+   *   an appropriate default. The maximum value is 100; values above 100 are
+   *   reduced to 100.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous call, to retrieve the next
+   *   page of results.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1413,7 +2225,7 @@ export class AuditManagerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1450,12 +2262,20 @@ export class AuditManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent scope for which to list the reports.
+   *   Required. Parent organization, folder, or project to list reports for,
+   *   in one of the following formats:
+   *
+   *   * `projects/{project}/locations/{location}`
+   *   * `folders/{folder}/locations/{location}`
+   *   * `organizations/{organization}/locations/{location}`
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of resources to return.
+   *   Optional. Maximum number of items to return in a single page. The service
+   *   might return fewer items than this value. If unspecified, the service picks
+   *   an appropriate default. The maximum value is 100; values above 100 are
+   *   reduced to 100.
    * @param {string} [request.pageToken]
-   *   Optional. The next_page_token value returned from a previous List request,
-   *   if any.
+   *   Optional. A page token, received from a previous call, to retrieve the next
+   *   page of results.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -1481,7 +2301,7 @@ export class AuditManagerClient {
       });
     const defaultCallSettings = this._defaults['listAuditReports'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listAuditReports stream %j', request);
@@ -1499,12 +2319,20 @@ export class AuditManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent scope for which to list the reports.
+   *   Required. Parent organization, folder, or project to list reports for,
+   *   in one of the following formats:
+   *
+   *   * `projects/{project}/locations/{location}`
+   *   * `folders/{folder}/locations/{location}`
+   *   * `organizations/{organization}/locations/{location}`
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of resources to return.
+   *   Optional. Maximum number of items to return in a single page. The service
+   *   might return fewer items than this value. If unspecified, the service picks
+   *   an appropriate default. The maximum value is 100; values above 100 are
+   *   reduced to 100.
    * @param {string} [request.pageToken]
-   *   Optional. The next_page_token value returned from a previous List request,
-   *   if any.
+   *   Optional. A page token, received from a previous call, to retrieve the next
+   *   page of results.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -1531,7 +2359,7 @@ export class AuditManagerClient {
       });
     const defaultCallSettings = this._defaults['listAuditReports'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listAuditReports iterate %j', request);
@@ -1542,18 +2370,25 @@ export class AuditManagerClient {
     ) as AsyncIterable<protos.google.cloud.auditmanager.v1.IAuditReport>;
   }
   /**
-   * Fetches all resources under the parent along with their enrollment.
+   * Lists all the folders and projects in an organization or folder, along with
+   * their enrollments.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent scope for which the list of resources with enrollments
-   *   are required.
+   *   Required. Parent organization or folder to list enrollment statuses for,
+   *   in one of the following formats:
+   *
+   *   * `folders/{folder}/locations/{location}`
+   *   * `organizations/{organization}/locations/{location}`
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of resources to return.
+   *   Optional. Maximum number of items to return in a single page. The service
+   *   might return fewer items than this value. If unspecified, the service picks
+   *   an appropriate default. The maximum value is 100; values above 100 are
+   *   reduced to 100.
    * @param {string} [request.pageToken]
-   *   Optional. The next_page_token value returned from a previous List request,
-   *   if any.
+   *   Optional. A page token, received from a previous call, to retrieve the next
+   *   page of results.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1637,7 +2472,7 @@ export class AuditManagerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1674,13 +2509,19 @@ export class AuditManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent scope for which the list of resources with enrollments
-   *   are required.
+   *   Required. Parent organization or folder to list enrollment statuses for,
+   *   in one of the following formats:
+   *
+   *   * `folders/{folder}/locations/{location}`
+   *   * `organizations/{organization}/locations/{location}`
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of resources to return.
+   *   Optional. Maximum number of items to return in a single page. The service
+   *   might return fewer items than this value. If unspecified, the service picks
+   *   an appropriate default. The maximum value is 100; values above 100 are
+   *   reduced to 100.
    * @param {string} [request.pageToken]
-   *   Optional. The next_page_token value returned from a previous List request,
-   *   if any.
+   *   Optional. A page token, received from a previous call, to retrieve the next
+   *   page of results.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -1707,7 +2548,7 @@ export class AuditManagerClient {
     const defaultCallSettings =
       this._defaults['listResourceEnrollmentStatuses'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listResourceEnrollmentStatuses stream %j', request);
@@ -1725,13 +2566,19 @@ export class AuditManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent scope for which the list of resources with enrollments
-   *   are required.
+   *   Required. Parent organization or folder to list enrollment statuses for,
+   *   in one of the following formats:
+   *
+   *   * `folders/{folder}/locations/{location}`
+   *   * `organizations/{organization}/locations/{location}`
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of resources to return.
+   *   Optional. Maximum number of items to return in a single page. The service
+   *   might return fewer items than this value. If unspecified, the service picks
+   *   an appropriate default. The maximum value is 100; values above 100 are
+   *   reduced to 100.
    * @param {string} [request.pageToken]
-   *   Optional. The next_page_token value returned from a previous List request,
-   *   if any.
+   *   Optional. A page token, received from a previous call, to retrieve the next
+   *   page of results.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -1759,7 +2606,7 @@ export class AuditManagerClient {
     const defaultCallSettings =
       this._defaults['listResourceEnrollmentStatuses'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listResourceEnrollmentStatuses iterate %j', request);
@@ -1770,19 +2617,25 @@ export class AuditManagerClient {
     ) as AsyncIterable<protos.google.cloud.auditmanager.v1.IResourceEnrollmentStatus>;
   }
   /**
-   * Gets controls needed to be implemented to be compliant to a standard.
+   * Lists the controls that you must implement to become compliant to a
+   * regulatory standard.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Format
-   *   projects/{project}/locations/{location}/standards/{standard},
-   *   folders/{folder}/locations/{location}/standards/{standard}
+   *   Required. Standard to list controls for, in one of the following formats:
+   *
+   *   * `projects/{project}/locations/{location}/standards/{standard}`
+   *   * `folders/{folder}/locations/{location}/standards/{standard}`
+   *   * `organizations/{organization}/locations/{location}/standards/{standard}`
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of resources to return.
+   *   Optional. Maximum number of items to return in a single page. The service
+   *   might return fewer items than this value. If unspecified, the service picks
+   *   an appropriate default. The maximum value is 100; values above 100 are
+   *   reduced to 100.
    * @param {string} [request.pageToken]
-   *   Optional. The next_page_token value returned from a previous List request,
-   *   if any.
+   *   Optional. A page token, received from a previous call, to retrieve the next
+   *   page of results.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1866,7 +2719,7 @@ export class AuditManagerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1903,14 +2756,19 @@ export class AuditManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Format
-   *   projects/{project}/locations/{location}/standards/{standard},
-   *   folders/{folder}/locations/{location}/standards/{standard}
+   *   Required. Standard to list controls for, in one of the following formats:
+   *
+   *   * `projects/{project}/locations/{location}/standards/{standard}`
+   *   * `folders/{folder}/locations/{location}/standards/{standard}`
+   *   * `organizations/{organization}/locations/{location}/standards/{standard}`
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of resources to return.
+   *   Optional. Maximum number of items to return in a single page. The service
+   *   might return fewer items than this value. If unspecified, the service picks
+   *   an appropriate default. The maximum value is 100; values above 100 are
+   *   reduced to 100.
    * @param {string} [request.pageToken]
-   *   Optional. The next_page_token value returned from a previous List request,
-   *   if any.
+   *   Optional. A page token, received from a previous call, to retrieve the next
+   *   page of results.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -1936,7 +2794,7 @@ export class AuditManagerClient {
       });
     const defaultCallSettings = this._defaults['listControls'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listControls stream %j', request);
@@ -1954,14 +2812,19 @@ export class AuditManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Format
-   *   projects/{project}/locations/{location}/standards/{standard},
-   *   folders/{folder}/locations/{location}/standards/{standard}
+   *   Required. Standard to list controls for, in one of the following formats:
+   *
+   *   * `projects/{project}/locations/{location}/standards/{standard}`
+   *   * `folders/{folder}/locations/{location}/standards/{standard}`
+   *   * `organizations/{organization}/locations/{location}/standards/{standard}`
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of resources to return.
+   *   Optional. Maximum number of items to return in a single page. The service
+   *   might return fewer items than this value. If unspecified, the service picks
+   *   an appropriate default. The maximum value is 100; values above 100 are
+   *   reduced to 100.
    * @param {string} [request.pageToken]
-   *   Optional. The next_page_token value returned from a previous List request,
-   *   if any.
+   *   Optional. A page token, received from a previous call, to retrieve the next
+   *   page of results.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -1988,7 +2851,7 @@ export class AuditManagerClient {
       });
     const defaultCallSettings = this._defaults['listControls'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listControls iterate %j', request);
@@ -2409,6 +3272,71 @@ export class AuditManagerClient {
   }
 
   /**
+   * Return a fully-qualified folderLocationAuditSchedules resource name string.
+   *
+   * @param {string} folder
+   * @param {string} location
+   * @param {string} audit_schedule
+   * @returns {string} Resource name string.
+   */
+  folderLocationAuditSchedulesPath(
+    folder: string,
+    location: string,
+    auditSchedule: string,
+  ) {
+    return this.pathTemplates.folderLocationAuditSchedulesPathTemplate.render({
+      folder: folder,
+      location: location,
+      audit_schedule: auditSchedule,
+    });
+  }
+
+  /**
+   * Parse the folder from FolderLocationAuditSchedules resource.
+   *
+   * @param {string} folderLocationAuditSchedulesName
+   *   A fully-qualified path representing folder_location_auditSchedules resource.
+   * @returns {string} A string representing the folder.
+   */
+  matchFolderFromFolderLocationAuditSchedulesName(
+    folderLocationAuditSchedulesName: string,
+  ) {
+    return this.pathTemplates.folderLocationAuditSchedulesPathTemplate.match(
+      folderLocationAuditSchedulesName,
+    ).folder;
+  }
+
+  /**
+   * Parse the location from FolderLocationAuditSchedules resource.
+   *
+   * @param {string} folderLocationAuditSchedulesName
+   *   A fully-qualified path representing folder_location_auditSchedules resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromFolderLocationAuditSchedulesName(
+    folderLocationAuditSchedulesName: string,
+  ) {
+    return this.pathTemplates.folderLocationAuditSchedulesPathTemplate.match(
+      folderLocationAuditSchedulesName,
+    ).location;
+  }
+
+  /**
+   * Parse the audit_schedule from FolderLocationAuditSchedules resource.
+   *
+   * @param {string} folderLocationAuditSchedulesName
+   *   A fully-qualified path representing folder_location_auditSchedules resource.
+   * @returns {string} A string representing the audit_schedule.
+   */
+  matchAuditScheduleFromFolderLocationAuditSchedulesName(
+    folderLocationAuditSchedulesName: string,
+  ) {
+    return this.pathTemplates.folderLocationAuditSchedulesPathTemplate.match(
+      folderLocationAuditSchedulesName,
+    ).audit_schedule;
+  }
+
+  /**
    * Return a fully-qualified folderLocationAuditScopeReports resource name string.
    *
    * @param {string} folder
@@ -2751,6 +3679,207 @@ export class AuditManagerClient {
   }
 
   /**
+   * Return a fully-qualified organizationLocationAuditReports resource name string.
+   *
+   * @param {string} organization
+   * @param {string} location
+   * @param {string} audit_report
+   * @returns {string} Resource name string.
+   */
+  organizationLocationAuditReportsPath(
+    organization: string,
+    location: string,
+    auditReport: string,
+  ) {
+    return this.pathTemplates.organizationLocationAuditReportsPathTemplate.render(
+      {
+        organization: organization,
+        location: location,
+        audit_report: auditReport,
+      },
+    );
+  }
+
+  /**
+   * Parse the organization from OrganizationLocationAuditReports resource.
+   *
+   * @param {string} organizationLocationAuditReportsName
+   *   A fully-qualified path representing organization_location_auditReports resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationLocationAuditReportsName(
+    organizationLocationAuditReportsName: string,
+  ) {
+    return this.pathTemplates.organizationLocationAuditReportsPathTemplate.match(
+      organizationLocationAuditReportsName,
+    ).organization;
+  }
+
+  /**
+   * Parse the location from OrganizationLocationAuditReports resource.
+   *
+   * @param {string} organizationLocationAuditReportsName
+   *   A fully-qualified path representing organization_location_auditReports resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromOrganizationLocationAuditReportsName(
+    organizationLocationAuditReportsName: string,
+  ) {
+    return this.pathTemplates.organizationLocationAuditReportsPathTemplate.match(
+      organizationLocationAuditReportsName,
+    ).location;
+  }
+
+  /**
+   * Parse the audit_report from OrganizationLocationAuditReports resource.
+   *
+   * @param {string} organizationLocationAuditReportsName
+   *   A fully-qualified path representing organization_location_auditReports resource.
+   * @returns {string} A string representing the audit_report.
+   */
+  matchAuditReportFromOrganizationLocationAuditReportsName(
+    organizationLocationAuditReportsName: string,
+  ) {
+    return this.pathTemplates.organizationLocationAuditReportsPathTemplate.match(
+      organizationLocationAuditReportsName,
+    ).audit_report;
+  }
+
+  /**
+   * Return a fully-qualified organizationLocationAuditSchedules resource name string.
+   *
+   * @param {string} organization
+   * @param {string} location
+   * @param {string} audit_schedule
+   * @returns {string} Resource name string.
+   */
+  organizationLocationAuditSchedulesPath(
+    organization: string,
+    location: string,
+    auditSchedule: string,
+  ) {
+    return this.pathTemplates.organizationLocationAuditSchedulesPathTemplate.render(
+      {
+        organization: organization,
+        location: location,
+        audit_schedule: auditSchedule,
+      },
+    );
+  }
+
+  /**
+   * Parse the organization from OrganizationLocationAuditSchedules resource.
+   *
+   * @param {string} organizationLocationAuditSchedulesName
+   *   A fully-qualified path representing organization_location_auditSchedules resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationLocationAuditSchedulesName(
+    organizationLocationAuditSchedulesName: string,
+  ) {
+    return this.pathTemplates.organizationLocationAuditSchedulesPathTemplate.match(
+      organizationLocationAuditSchedulesName,
+    ).organization;
+  }
+
+  /**
+   * Parse the location from OrganizationLocationAuditSchedules resource.
+   *
+   * @param {string} organizationLocationAuditSchedulesName
+   *   A fully-qualified path representing organization_location_auditSchedules resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromOrganizationLocationAuditSchedulesName(
+    organizationLocationAuditSchedulesName: string,
+  ) {
+    return this.pathTemplates.organizationLocationAuditSchedulesPathTemplate.match(
+      organizationLocationAuditSchedulesName,
+    ).location;
+  }
+
+  /**
+   * Parse the audit_schedule from OrganizationLocationAuditSchedules resource.
+   *
+   * @param {string} organizationLocationAuditSchedulesName
+   *   A fully-qualified path representing organization_location_auditSchedules resource.
+   * @returns {string} A string representing the audit_schedule.
+   */
+  matchAuditScheduleFromOrganizationLocationAuditSchedulesName(
+    organizationLocationAuditSchedulesName: string,
+  ) {
+    return this.pathTemplates.organizationLocationAuditSchedulesPathTemplate.match(
+      organizationLocationAuditSchedulesName,
+    ).audit_schedule;
+  }
+
+  /**
+   * Return a fully-qualified organizationLocationAuditScopeReports resource name string.
+   *
+   * @param {string} organization
+   * @param {string} location
+   * @param {string} audit_scope_report
+   * @returns {string} Resource name string.
+   */
+  organizationLocationAuditScopeReportsPath(
+    organization: string,
+    location: string,
+    auditScopeReport: string,
+  ) {
+    return this.pathTemplates.organizationLocationAuditScopeReportsPathTemplate.render(
+      {
+        organization: organization,
+        location: location,
+        audit_scope_report: auditScopeReport,
+      },
+    );
+  }
+
+  /**
+   * Parse the organization from OrganizationLocationAuditScopeReports resource.
+   *
+   * @param {string} organizationLocationAuditScopeReportsName
+   *   A fully-qualified path representing organization_location_auditScopeReports resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationLocationAuditScopeReportsName(
+    organizationLocationAuditScopeReportsName: string,
+  ) {
+    return this.pathTemplates.organizationLocationAuditScopeReportsPathTemplate.match(
+      organizationLocationAuditScopeReportsName,
+    ).organization;
+  }
+
+  /**
+   * Parse the location from OrganizationLocationAuditScopeReports resource.
+   *
+   * @param {string} organizationLocationAuditScopeReportsName
+   *   A fully-qualified path representing organization_location_auditScopeReports resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromOrganizationLocationAuditScopeReportsName(
+    organizationLocationAuditScopeReportsName: string,
+  ) {
+    return this.pathTemplates.organizationLocationAuditScopeReportsPathTemplate.match(
+      organizationLocationAuditScopeReportsName,
+    ).location;
+  }
+
+  /**
+   * Parse the audit_scope_report from OrganizationLocationAuditScopeReports resource.
+   *
+   * @param {string} organizationLocationAuditScopeReportsName
+   *   A fully-qualified path representing organization_location_auditScopeReports resource.
+   * @returns {string} A string representing the audit_scope_report.
+   */
+  matchAuditScopeReportFromOrganizationLocationAuditScopeReportsName(
+    organizationLocationAuditScopeReportsName: string,
+  ) {
+    return this.pathTemplates.organizationLocationAuditScopeReportsPathTemplate.match(
+      organizationLocationAuditScopeReportsName,
+    ).audit_scope_report;
+  }
+
+  /**
    * Return a fully-qualified organizationLocationEnrollments resource name string.
    *
    * @param {string} organization
@@ -3038,6 +4167,71 @@ export class AuditManagerClient {
   }
 
   /**
+   * Return a fully-qualified projectLocationAuditSchedules resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} audit_schedule
+   * @returns {string} Resource name string.
+   */
+  projectLocationAuditSchedulesPath(
+    project: string,
+    location: string,
+    auditSchedule: string,
+  ) {
+    return this.pathTemplates.projectLocationAuditSchedulesPathTemplate.render({
+      project: project,
+      location: location,
+      audit_schedule: auditSchedule,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationAuditSchedules resource.
+   *
+   * @param {string} projectLocationAuditSchedulesName
+   *   A fully-qualified path representing project_location_auditSchedules resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationAuditSchedulesName(
+    projectLocationAuditSchedulesName: string,
+  ) {
+    return this.pathTemplates.projectLocationAuditSchedulesPathTemplate.match(
+      projectLocationAuditSchedulesName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationAuditSchedules resource.
+   *
+   * @param {string} projectLocationAuditSchedulesName
+   *   A fully-qualified path representing project_location_auditSchedules resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationAuditSchedulesName(
+    projectLocationAuditSchedulesName: string,
+  ) {
+    return this.pathTemplates.projectLocationAuditSchedulesPathTemplate.match(
+      projectLocationAuditSchedulesName,
+    ).location;
+  }
+
+  /**
+   * Parse the audit_schedule from ProjectLocationAuditSchedules resource.
+   *
+   * @param {string} projectLocationAuditSchedulesName
+   *   A fully-qualified path representing project_location_auditSchedules resource.
+   * @returns {string} A string representing the audit_schedule.
+   */
+  matchAuditScheduleFromProjectLocationAuditSchedulesName(
+    projectLocationAuditSchedulesName: string,
+  ) {
+    return this.pathTemplates.projectLocationAuditSchedulesPathTemplate.match(
+      projectLocationAuditSchedulesName,
+    ).audit_schedule;
+  }
+
+  /**
    * Return a fully-qualified projectLocationAuditScopeReports resource name string.
    *
    * @param {string} project
@@ -3309,11 +4503,11 @@ export class AuditManagerClient {
    */
   close(): Promise<void> {
     if (this.auditManagerStub && !this._terminated) {
-      return this.auditManagerStub.then((stub) => {
+      return this.auditManagerStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch((err) => {
+        this.locationsClient.close().catch(err => {
           throw err;
         });
         void this.operationsClient.close();

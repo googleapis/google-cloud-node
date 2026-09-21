@@ -1,7 +1,7 @@
 {
   "name": "@google-cloud/logging-winston",
   "description": "Cloud Logging transport for Winston",
-  "version": "7.0.0",
+  "version": "7.1.0",
   "license": "Apache-2.0",
   "author": "Google Inc.",
   "engines": {
@@ -38,27 +38,27 @@
   "scripts": {
     "docs": "jsdoc -c .jsdoc.js",
     "lint": "gts check",
-    "presamples-test": "npm run compile",
+    "presamples-test": "pnpm run compile",
     "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
-    "presystem-test": "npm run pretest",
+    "presystem-test": "pnpm run pretest",
     "system-test": "mocha build/system-test --timeout 600000",
     "test": "cross-env NODE_OPTIONS='--no-deprecation' c8 mocha --recursive build/test",
     "clean": "gts clean",
     "compile": "tsc -p .",
     "fix": "gts fix",
     "prepare": "npm run compile",
-    "pretest": "npm run compile",
+    "pretest": "pnpm run compile",
     "prelint": "cd samples; npm link ../; npm install",
     "precompile": "gts clean"
   },
   "dependencies": {
-    "@google-cloud/logging": "^11.2.1",
-    "google-auth-library": "^10.5.0",
+    "@google-cloud/logging": "^12.0.0",
+    "google-auth-library": "^11.0.0",
     "lodash.mapvalues": "^4.6.0",
     "winston-transport": "^4.9.0"
   },
   "devDependencies": {
-    "@google-cloud/common": "^6.0.0",
+    "@google-cloud/common": "^8.0.0",
     "@types/lodash.mapvalues": "^4.6.9",
     "@types/mocha": "^10.0.10",
     "@types/node": "^24.10.1",
@@ -69,8 +69,8 @@
     "cross-env": "^7.0.3",
     "gts": "^6.0.2",
     "jsdoc": "^4.0.5",
-    "jsdoc-fresh": "^5.0.2",
-    "jsdoc-region-tag": "^4.0.1",
+    "jsdoc-fresh": "^6.0.0",
+    "jsdoc-region-tag": "^5.0.0",
     "mocha": "^11.7.5",
     "pack-n-play": "4.2.1",
     "post-install-check": "^0.0.1",

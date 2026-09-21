@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as backupdrprotectionsummaryModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, IamProtos, LocationProtos } from 'google-gax';
+import {protobuf, IamProtos, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -206,7 +206,7 @@ describe('v1.BackupDrProtectionSummaryClient', () => {
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client =
             new backupdrprotectionsummaryModule.v1.BackupDrProtectionSummaryClient(
-              { universeDomain: 'configured.example.com' },
+              {universeDomain: 'configured.example.com'},
             );
           const servicePath = client.apiEndpoint;
           assert.strictEqual(servicePath, 'backupdr.configured.example.com');
@@ -251,7 +251,7 @@ describe('v1.BackupDrProtectionSummaryClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client =
         new backupdrprotectionsummaryModule.v1.BackupDrProtectionSummaryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.backupDrProtectionSummaryStub, undefined);
@@ -259,13 +259,13 @@ describe('v1.BackupDrProtectionSummaryClient', () => {
       assert(client.backupDrProtectionSummaryStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new backupdrprotectionsummaryModule.v1.BackupDrProtectionSummaryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.backupDrProtectionSummaryStub);
@@ -274,15 +274,15 @@ describe('v1.BackupDrProtectionSummaryClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new backupdrprotectionsummaryModule.v1.BackupDrProtectionSummaryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.backupDrProtectionSummaryStub, undefined);
@@ -291,7 +291,7 @@ describe('v1.BackupDrProtectionSummaryClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -300,7 +300,7 @@ describe('v1.BackupDrProtectionSummaryClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new backupdrprotectionsummaryModule.v1.BackupDrProtectionSummaryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -313,7 +313,7 @@ describe('v1.BackupDrProtectionSummaryClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new backupdrprotectionsummaryModule.v1.BackupDrProtectionSummaryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon
@@ -337,7 +337,7 @@ describe('v1.BackupDrProtectionSummaryClient', () => {
     it('invokes listResourceBackupConfigs without error', async () => {
       const client =
         new backupdrprotectionsummaryModule.v1.BackupDrProtectionSummaryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -378,7 +378,7 @@ describe('v1.BackupDrProtectionSummaryClient', () => {
     it('invokes listResourceBackupConfigs without error using callback', async () => {
       const client =
         new backupdrprotectionsummaryModule.v1.BackupDrProtectionSummaryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -410,8 +410,7 @@ describe('v1.BackupDrProtectionSummaryClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.backupdr.v1.IResourceBackupConfig[]
-              | null,
+              protos.google.cloud.backupdr.v1.IResourceBackupConfig[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -436,7 +435,7 @@ describe('v1.BackupDrProtectionSummaryClient', () => {
     it('invokes listResourceBackupConfigs with error', async () => {
       const client =
         new backupdrprotectionsummaryModule.v1.BackupDrProtectionSummaryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -471,7 +470,7 @@ describe('v1.BackupDrProtectionSummaryClient', () => {
     it('invokes listResourceBackupConfigsStream without error', async () => {
       const client =
         new backupdrprotectionsummaryModule.v1.BackupDrProtectionSummaryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -539,7 +538,7 @@ describe('v1.BackupDrProtectionSummaryClient', () => {
     it('invokes listResourceBackupConfigsStream with error', async () => {
       const client =
         new backupdrprotectionsummaryModule.v1.BackupDrProtectionSummaryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -596,7 +595,7 @@ describe('v1.BackupDrProtectionSummaryClient', () => {
     it('uses async iteration with listResourceBackupConfigs without error', async () => {
       const client =
         new backupdrprotectionsummaryModule.v1.BackupDrProtectionSummaryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -651,7 +650,7 @@ describe('v1.BackupDrProtectionSummaryClient', () => {
     it('uses async iteration with listResourceBackupConfigs with error', async () => {
       const client =
         new backupdrprotectionsummaryModule.v1.BackupDrProtectionSummaryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -698,7 +697,7 @@ describe('v1.BackupDrProtectionSummaryClient', () => {
     it('invokes getIamPolicy without error', async () => {
       const client =
         new backupdrprotectionsummaryModule.v1.BackupDrProtectionSummaryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -729,7 +728,7 @@ describe('v1.BackupDrProtectionSummaryClient', () => {
     it('invokes getIamPolicy without error using callback', async () => {
       const client =
         new backupdrprotectionsummaryModule.v1.BackupDrProtectionSummaryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -767,7 +766,7 @@ describe('v1.BackupDrProtectionSummaryClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -778,7 +777,7 @@ describe('v1.BackupDrProtectionSummaryClient', () => {
     it('invokes getIamPolicy with error', async () => {
       const client =
         new backupdrprotectionsummaryModule.v1.BackupDrProtectionSummaryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -811,7 +810,7 @@ describe('v1.BackupDrProtectionSummaryClient', () => {
     it('invokes setIamPolicy without error', async () => {
       const client =
         new backupdrprotectionsummaryModule.v1.BackupDrProtectionSummaryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -842,7 +841,7 @@ describe('v1.BackupDrProtectionSummaryClient', () => {
     it('invokes setIamPolicy without error using callback', async () => {
       const client =
         new backupdrprotectionsummaryModule.v1.BackupDrProtectionSummaryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -880,7 +879,7 @@ describe('v1.BackupDrProtectionSummaryClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -891,7 +890,7 @@ describe('v1.BackupDrProtectionSummaryClient', () => {
     it('invokes setIamPolicy with error', async () => {
       const client =
         new backupdrprotectionsummaryModule.v1.BackupDrProtectionSummaryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -924,7 +923,7 @@ describe('v1.BackupDrProtectionSummaryClient', () => {
     it('invokes testIamPermissions without error', async () => {
       const client =
         new backupdrprotectionsummaryModule.v1.BackupDrProtectionSummaryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -958,7 +957,7 @@ describe('v1.BackupDrProtectionSummaryClient', () => {
     it('invokes testIamPermissions without error using callback', async () => {
       const client =
         new backupdrprotectionsummaryModule.v1.BackupDrProtectionSummaryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -996,7 +995,7 @@ describe('v1.BackupDrProtectionSummaryClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1007,7 +1006,7 @@ describe('v1.BackupDrProtectionSummaryClient', () => {
     it('invokes testIamPermissions with error', async () => {
       const client =
         new backupdrprotectionsummaryModule.v1.BackupDrProtectionSummaryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1043,7 +1042,7 @@ describe('v1.BackupDrProtectionSummaryClient', () => {
     it('invokes getLocation without error', async () => {
       const client =
         new backupdrprotectionsummaryModule.v1.BackupDrProtectionSummaryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1074,7 +1073,7 @@ describe('v1.BackupDrProtectionSummaryClient', () => {
     it('invokes getLocation without error using callback', async () => {
       const client =
         new backupdrprotectionsummaryModule.v1.BackupDrProtectionSummaryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1119,7 +1118,7 @@ describe('v1.BackupDrProtectionSummaryClient', () => {
     it('invokes getLocation with error', async () => {
       const client =
         new backupdrprotectionsummaryModule.v1.BackupDrProtectionSummaryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1155,7 +1154,7 @@ describe('v1.BackupDrProtectionSummaryClient', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client =
         new backupdrprotectionsummaryModule.v1.BackupDrProtectionSummaryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1204,7 +1203,7 @@ describe('v1.BackupDrProtectionSummaryClient', () => {
     it('uses async iteration with listLocations with error', async () => {
       const client =
         new backupdrprotectionsummaryModule.v1.BackupDrProtectionSummaryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1255,7 +1254,7 @@ describe('v1.BackupDrProtectionSummaryClient', () => {
       };
       const client =
         new backupdrprotectionsummaryModule.v1.BackupDrProtectionSummaryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1342,7 +1341,7 @@ describe('v1.BackupDrProtectionSummaryClient', () => {
       };
       const client =
         new backupdrprotectionsummaryModule.v1.BackupDrProtectionSummaryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1407,7 +1406,7 @@ describe('v1.BackupDrProtectionSummaryClient', () => {
       };
       const client =
         new backupdrprotectionsummaryModule.v1.BackupDrProtectionSummaryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1490,7 +1489,7 @@ describe('v1.BackupDrProtectionSummaryClient', () => {
       };
       const client =
         new backupdrprotectionsummaryModule.v1.BackupDrProtectionSummaryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1582,7 +1581,7 @@ describe('v1.BackupDrProtectionSummaryClient', () => {
       };
       const client =
         new backupdrprotectionsummaryModule.v1.BackupDrProtectionSummaryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1648,7 +1647,7 @@ describe('v1.BackupDrProtectionSummaryClient', () => {
       };
       const client =
         new backupdrprotectionsummaryModule.v1.BackupDrProtectionSummaryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1724,7 +1723,7 @@ describe('v1.BackupDrProtectionSummaryClient', () => {
       };
       const client =
         new backupdrprotectionsummaryModule.v1.BackupDrProtectionSummaryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1802,7 +1801,7 @@ describe('v1.BackupDrProtectionSummaryClient', () => {
       };
       const client =
         new backupdrprotectionsummaryModule.v1.BackupDrProtectionSummaryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1853,7 +1852,7 @@ describe('v1.BackupDrProtectionSummaryClient', () => {
       };
       const client =
         new backupdrprotectionsummaryModule.v1.BackupDrProtectionSummaryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1922,7 +1921,7 @@ describe('v1.BackupDrProtectionSummaryClient', () => {
       };
       const client =
         new backupdrprotectionsummaryModule.v1.BackupDrProtectionSummaryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();

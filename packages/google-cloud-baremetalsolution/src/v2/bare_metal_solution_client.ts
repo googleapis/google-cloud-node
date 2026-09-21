@@ -32,10 +32,10 @@ import type {
   LocationsClient,
   LocationProtos,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -64,7 +64,7 @@ export class BareMetalSolutionClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('bare-metal-solution');
@@ -77,12 +77,12 @@ export class BareMetalSolutionClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
+  innerApiCalls: {[name: string]: Function};
   iamClient: IamClient;
   locationsClient: LocationsClient;
-  pathTemplates: { [name: string]: gax.PathTemplate };
+  pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
-  bareMetalSolutionStub?: Promise<{ [name: string]: Function }>;
+  bareMetalSolutionStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of BareMetalSolutionClient.
@@ -158,7 +158,7 @@ export class BareMetalSolutionClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -544,7 +544,7 @@ export class BareMetalSolutionClient {
       'google.cloud.baremetalsolution.v2.BareMetalSolution',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -585,7 +585,7 @@ export class BareMetalSolutionClient {
             .BareMetalSolution,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -637,7 +637,7 @@ export class BareMetalSolutionClient {
     ];
     for (const methodName of bareMetalSolutionStubMethods) {
       const callPromise = this.bareMetalSolutionStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -838,7 +838,7 @@ export class BareMetalSolutionClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getInstance request %j', request);
@@ -985,7 +985,7 @@ export class BareMetalSolutionClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('renameInstance request %j', request);
@@ -1131,7 +1131,7 @@ export class BareMetalSolutionClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createSSHKey request %j', request);
@@ -1269,7 +1269,7 @@ export class BareMetalSolutionClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteSSHKey request %j', request);
@@ -1406,7 +1406,7 @@ export class BareMetalSolutionClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getVolume request %j', request);
@@ -1547,7 +1547,7 @@ export class BareMetalSolutionClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('renameVolume request %j', request);
@@ -1691,7 +1691,7 @@ export class BareMetalSolutionClient {
       this._gaxModule.routingHeader.fromParams({
         location: request.location ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listNetworkUsage request %j', request);
@@ -1828,7 +1828,7 @@ export class BareMetalSolutionClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getNetwork request %j', request);
@@ -1974,7 +1974,7 @@ export class BareMetalSolutionClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createVolumeSnapshot request %j', request);
@@ -2118,7 +2118,7 @@ export class BareMetalSolutionClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteVolumeSnapshot request %j', request);
@@ -2262,7 +2262,7 @@ export class BareMetalSolutionClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getVolumeSnapshot request %j', request);
@@ -2399,7 +2399,7 @@ export class BareMetalSolutionClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getLun request %j', request);
@@ -2533,7 +2533,7 @@ export class BareMetalSolutionClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getNfsShare request %j', request);
@@ -2680,7 +2680,7 @@ export class BareMetalSolutionClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('renameNfsShare request %j', request);
@@ -2829,7 +2829,7 @@ export class BareMetalSolutionClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('submitProvisioningConfig request %j', request);
@@ -2972,7 +2972,7 @@ export class BareMetalSolutionClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getProvisioningConfig request %j', request);
@@ -3121,7 +3121,7 @@ export class BareMetalSolutionClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createProvisioningConfig request %j', request);
@@ -3269,7 +3269,7 @@ export class BareMetalSolutionClient {
       this._gaxModule.routingHeader.fromParams({
         'provisioning_config.name': request.provisioningConfig!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateProvisioningConfig request %j', request);
@@ -3416,7 +3416,7 @@ export class BareMetalSolutionClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('renameNetwork request %j', request);
@@ -3575,7 +3575,7 @@ export class BareMetalSolutionClient {
       this._gaxModule.routingHeader.fromParams({
         'instance.name': request.instance!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3632,7 +3632,7 @@ export class BareMetalSolutionClient {
     this._log.info('updateInstance long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3745,7 +3745,7 @@ export class BareMetalSolutionClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3802,7 +3802,7 @@ export class BareMetalSolutionClient {
     this._log.info('resetInstance long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3914,7 +3914,7 @@ export class BareMetalSolutionClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3971,7 +3971,7 @@ export class BareMetalSolutionClient {
     this._log.info('startInstance long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4083,7 +4083,7 @@ export class BareMetalSolutionClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4140,7 +4140,7 @@ export class BareMetalSolutionClient {
     this._log.info('stopInstance long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4252,7 +4252,7 @@ export class BareMetalSolutionClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4315,7 +4315,7 @@ export class BareMetalSolutionClient {
     this._log.info('enableInteractiveSerialConsole long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4427,7 +4427,7 @@ export class BareMetalSolutionClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4490,7 +4490,7 @@ export class BareMetalSolutionClient {
     this._log.info('disableInteractiveSerialConsole long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4606,7 +4606,7 @@ export class BareMetalSolutionClient {
       this._gaxModule.routingHeader.fromParams({
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4663,7 +4663,7 @@ export class BareMetalSolutionClient {
     this._log.info('detachLun long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4782,7 +4782,7 @@ export class BareMetalSolutionClient {
       this._gaxModule.routingHeader.fromParams({
         'volume.name': request.volume!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4839,7 +4839,7 @@ export class BareMetalSolutionClient {
     this._log.info('updateVolume long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4952,7 +4952,7 @@ export class BareMetalSolutionClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5009,7 +5009,7 @@ export class BareMetalSolutionClient {
     this._log.info('evictVolume long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -5123,7 +5123,7 @@ export class BareMetalSolutionClient {
       this._gaxModule.routingHeader.fromParams({
         volume: request.volume ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5180,7 +5180,7 @@ export class BareMetalSolutionClient {
     this._log.info('resizeVolume long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -5299,7 +5299,7 @@ export class BareMetalSolutionClient {
       this._gaxModule.routingHeader.fromParams({
         'network.name': request.network!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5356,7 +5356,7 @@ export class BareMetalSolutionClient {
     this._log.info('updateNetwork long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -5470,7 +5470,7 @@ export class BareMetalSolutionClient {
       this._gaxModule.routingHeader.fromParams({
         volume_snapshot: request.volumeSnapshot ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5527,7 +5527,7 @@ export class BareMetalSolutionClient {
     this._log.info('restoreVolumeSnapshot long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -5640,7 +5640,7 @@ export class BareMetalSolutionClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5697,7 +5697,7 @@ export class BareMetalSolutionClient {
     this._log.info('evictLun long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -5817,7 +5817,7 @@ export class BareMetalSolutionClient {
       this._gaxModule.routingHeader.fromParams({
         'nfs_share.name': request.nfsShare!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5874,7 +5874,7 @@ export class BareMetalSolutionClient {
     this._log.info('updateNfsShare long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -5988,7 +5988,7 @@ export class BareMetalSolutionClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6045,7 +6045,7 @@ export class BareMetalSolutionClient {
     this._log.info('createNfsShare long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -6157,7 +6157,7 @@ export class BareMetalSolutionClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6214,7 +6214,7 @@ export class BareMetalSolutionClient {
     this._log.info('deleteNfsShare long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -6324,7 +6324,7 @@ export class BareMetalSolutionClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6394,7 +6394,7 @@ export class BareMetalSolutionClient {
       });
     const defaultCallSettings = this._defaults['listInstances'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listInstances stream %j', request);
@@ -6446,7 +6446,7 @@ export class BareMetalSolutionClient {
       });
     const defaultCallSettings = this._defaults['listInstances'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listInstances iterate %j', request);
@@ -6552,7 +6552,7 @@ export class BareMetalSolutionClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6620,7 +6620,7 @@ export class BareMetalSolutionClient {
       });
     const defaultCallSettings = this._defaults['listSshKeys'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listSSHKeys stream %j', request);
@@ -6670,7 +6670,7 @@ export class BareMetalSolutionClient {
       });
     const defaultCallSettings = this._defaults['listSshKeys'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listSSHKeys iterate %j', request);
@@ -6777,7 +6777,7 @@ export class BareMetalSolutionClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6847,7 +6847,7 @@ export class BareMetalSolutionClient {
       });
     const defaultCallSettings = this._defaults['listVolumes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listVolumes stream %j', request);
@@ -6899,7 +6899,7 @@ export class BareMetalSolutionClient {
       });
     const defaultCallSettings = this._defaults['listVolumes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listVolumes iterate %j', request);
@@ -7006,7 +7006,7 @@ export class BareMetalSolutionClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -7076,7 +7076,7 @@ export class BareMetalSolutionClient {
       });
     const defaultCallSettings = this._defaults['listNetworks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listNetworks stream %j', request);
@@ -7128,7 +7128,7 @@ export class BareMetalSolutionClient {
       });
     const defaultCallSettings = this._defaults['listNetworks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listNetworks iterate %j', request);
@@ -7235,7 +7235,7 @@ export class BareMetalSolutionClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -7303,7 +7303,7 @@ export class BareMetalSolutionClient {
       });
     const defaultCallSettings = this._defaults['listVolumeSnapshots'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listVolumeSnapshots stream %j', request);
@@ -7353,7 +7353,7 @@ export class BareMetalSolutionClient {
       });
     const defaultCallSettings = this._defaults['listVolumeSnapshots'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listVolumeSnapshots iterate %j', request);
@@ -7458,7 +7458,7 @@ export class BareMetalSolutionClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -7526,7 +7526,7 @@ export class BareMetalSolutionClient {
       });
     const defaultCallSettings = this._defaults['listLuns'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listLuns stream %j', request);
@@ -7576,7 +7576,7 @@ export class BareMetalSolutionClient {
       });
     const defaultCallSettings = this._defaults['listLuns'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listLuns iterate %j', request);
@@ -7683,7 +7683,7 @@ export class BareMetalSolutionClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -7753,7 +7753,7 @@ export class BareMetalSolutionClient {
       });
     const defaultCallSettings = this._defaults['listNfsShares'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listNfsShares stream %j', request);
@@ -7805,7 +7805,7 @@ export class BareMetalSolutionClient {
       });
     const defaultCallSettings = this._defaults['listNfsShares'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listNfsShares iterate %j', request);
@@ -7912,7 +7912,7 @@ export class BareMetalSolutionClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -7982,7 +7982,7 @@ export class BareMetalSolutionClient {
       });
     const defaultCallSettings = this._defaults['listProvisioningQuotas'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listProvisioningQuotas stream %j', request);
@@ -8034,7 +8034,7 @@ export class BareMetalSolutionClient {
       });
     const defaultCallSettings = this._defaults['listProvisioningQuotas'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listProvisioningQuotas iterate %j', request);
@@ -8141,7 +8141,7 @@ export class BareMetalSolutionClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -8211,7 +8211,7 @@ export class BareMetalSolutionClient {
       });
     const defaultCallSettings = this._defaults['listOsImages'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listOSImages stream %j', request);
@@ -8263,7 +8263,7 @@ export class BareMetalSolutionClient {
       });
     const defaultCallSettings = this._defaults['listOsImages'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listOSImages iterate %j', request);
@@ -9555,14 +9555,14 @@ export class BareMetalSolutionClient {
    */
   close(): Promise<void> {
     if (this.bareMetalSolutionStub && !this._terminated) {
-      return this.bareMetalSolutionStub.then((stub) => {
+      return this.bareMetalSolutionStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.iamClient.close().catch((err) => {
+        this.iamClient.close().catch(err => {
           throw err;
         });
-        this.locationsClient.close().catch((err) => {
+        this.locationsClient.close().catch(err => {
           throw err;
         });
         void this.operationsClient.close();

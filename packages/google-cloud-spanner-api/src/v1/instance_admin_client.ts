@@ -28,10 +28,10 @@ import type {
   PaginationCallback,
   GaxCall,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -73,7 +73,7 @@ export class InstanceAdminClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('spanner-api');
@@ -86,10 +86,10 @@ export class InstanceAdminClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
-  pathTemplates: { [name: string]: gax.PathTemplate };
+  innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
-  instanceAdminStub?: Promise<{ [name: string]: Function }>;
+  instanceAdminStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of InstanceAdminClient.
@@ -165,7 +165,7 @@ export class InstanceAdminClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -285,7 +285,7 @@ export class InstanceAdminClient {
           selector: 'google.longrunning.Operations.CancelOperation',
           post: '/v1/{name=projects/*/instances/*/databases/*/operations/*}:cancel',
           additional_bindings: [
-            { post: '/v1/{name=projects/*/instances/*/operations/*}:cancel' },
+            {post: '/v1/{name=projects/*/instances/*/operations/*}:cancel'},
             {
               post: '/v1/{name=projects/*/instances/*/backups/*/operations/*}:cancel',
             },
@@ -304,7 +304,7 @@ export class InstanceAdminClient {
           selector: 'google.longrunning.Operations.DeleteOperation',
           delete: '/v1/{name=projects/*/instances/*/databases/*/operations/*}',
           additional_bindings: [
-            { delete: '/v1/{name=projects/*/instances/*/operations/*}' },
+            {delete: '/v1/{name=projects/*/instances/*/operations/*}'},
             {
               delete:
                 '/v1/{name=projects/*/instances/*/backups/*/operations/*}',
@@ -313,7 +313,7 @@ export class InstanceAdminClient {
               delete:
                 '/v1/{name=projects/*/instances/*/instancePartitions/*/operations/*}',
             },
-            { delete: '/v1/{name=projects/*/instanceConfigs/*/operations/*}' },
+            {delete: '/v1/{name=projects/*/instanceConfigs/*/operations/*}'},
             {
               delete:
                 '/v1/{name=projects/*/instanceConfigs/*/ssdCaches/*/operations/*}',
@@ -324,12 +324,12 @@ export class InstanceAdminClient {
           selector: 'google.longrunning.Operations.GetOperation',
           get: '/v1/{name=projects/*/instances/*/databases/*/operations/*}',
           additional_bindings: [
-            { get: '/v1/{name=projects/*/instances/*/operations/*}' },
-            { get: '/v1/{name=projects/*/instances/*/backups/*/operations/*}' },
+            {get: '/v1/{name=projects/*/instances/*/operations/*}'},
+            {get: '/v1/{name=projects/*/instances/*/backups/*/operations/*}'},
             {
               get: '/v1/{name=projects/*/instances/*/instancePartitions/*/operations/*}',
             },
-            { get: '/v1/{name=projects/*/instanceConfigs/*/operations/*}' },
+            {get: '/v1/{name=projects/*/instanceConfigs/*/operations/*}'},
             {
               get: '/v1/{name=projects/*/instanceConfigs/*/ssdCaches/*/operations/*}',
             },
@@ -339,12 +339,12 @@ export class InstanceAdminClient {
           selector: 'google.longrunning.Operations.ListOperations',
           get: '/v1/{name=projects/*/instances/*/databases/*/operations}',
           additional_bindings: [
-            { get: '/v1/{name=projects/*/instances/*/operations}' },
-            { get: '/v1/{name=projects/*/instances/*/backups/*/operations}' },
+            {get: '/v1/{name=projects/*/instances/*/operations}'},
+            {get: '/v1/{name=projects/*/instances/*/backups/*/operations}'},
             {
               get: '/v1/{name=projects/*/instances/*/instancePartitions/*/operations}',
             },
-            { get: '/v1/{name=projects/*/instanceConfigs/*/operations}' },
+            {get: '/v1/{name=projects/*/instanceConfigs/*/operations}'},
             {
               get: '/v1/{name=projects/*/instanceConfigs/*/ssdCaches/*/operations}',
             },
@@ -449,7 +449,7 @@ export class InstanceAdminClient {
       'google.spanner.admin.instance.v1.InstanceAdmin',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -489,7 +489,7 @@ export class InstanceAdminClient {
           (this._protos as any).google.spanner.admin.instance.v1.InstanceAdmin,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -518,7 +518,7 @@ export class InstanceAdminClient {
     ];
     for (const methodName of instanceAdminStubMethods) {
       const callPromise = this.instanceAdminStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -729,7 +729,7 @@ export class InstanceAdminClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getInstanceConfig request %j', request);
@@ -892,7 +892,7 @@ export class InstanceAdminClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteInstanceConfig request %j', request);
@@ -1035,7 +1035,7 @@ export class InstanceAdminClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getInstance request %j', request);
@@ -1189,7 +1189,7 @@ export class InstanceAdminClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteInstance request %j', request);
@@ -1334,7 +1334,7 @@ export class InstanceAdminClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('setIamPolicy request %j', request);
@@ -1466,7 +1466,7 @@ export class InstanceAdminClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getIamPolicy request %j', request);
@@ -1601,7 +1601,7 @@ export class InstanceAdminClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('testIamPermissions request %j', request);
@@ -1741,7 +1741,7 @@ export class InstanceAdminClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getInstancePartition request %j', request);
@@ -1897,7 +1897,7 @@ export class InstanceAdminClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteInstancePartition request %j', request);
@@ -2102,7 +2102,7 @@ export class InstanceAdminClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2159,7 +2159,7 @@ export class InstanceAdminClient {
     this._log.info('createInstanceConfig long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -2330,7 +2330,7 @@ export class InstanceAdminClient {
       this._gaxModule.routingHeader.fromParams({
         'instance_config.name': request.instanceConfig!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2387,7 +2387,7 @@ export class InstanceAdminClient {
     this._log.info('updateInstanceConfig long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -2540,7 +2540,7 @@ export class InstanceAdminClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2597,7 +2597,7 @@ export class InstanceAdminClient {
     this._log.info('createInstance long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -2756,7 +2756,7 @@ export class InstanceAdminClient {
       this._gaxModule.routingHeader.fromParams({
         'instance.name': request.instance!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2813,7 +2813,7 @@ export class InstanceAdminClient {
     this._log.info('updateInstance long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -2971,7 +2971,7 @@ export class InstanceAdminClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3028,7 +3028,7 @@ export class InstanceAdminClient {
     this._log.info('createInstancePartition long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3192,7 +3192,7 @@ export class InstanceAdminClient {
       this._gaxModule.routingHeader.fromParams({
         'instance_partition.name': request.instancePartition!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3249,7 +3249,7 @@ export class InstanceAdminClient {
     this._log.info('updateInstancePartition long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3425,7 +3425,7 @@ export class InstanceAdminClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3482,7 +3482,7 @@ export class InstanceAdminClient {
     this._log.info('moveInstance long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3598,7 +3598,7 @@ export class InstanceAdminClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3671,7 +3671,7 @@ export class InstanceAdminClient {
       });
     const defaultCallSettings = this._defaults['listInstanceConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listInstanceConfigs stream %j', request);
@@ -3726,7 +3726,7 @@ export class InstanceAdminClient {
       });
     const defaultCallSettings = this._defaults['listInstanceConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listInstanceConfigs iterate %j', request);
@@ -3889,7 +3889,7 @@ export class InstanceAdminClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4005,7 +4005,7 @@ export class InstanceAdminClient {
       });
     const defaultCallSettings = this._defaults['listInstanceConfigOperations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listInstanceConfigOperations stream %j', request);
@@ -4103,7 +4103,7 @@ export class InstanceAdminClient {
       });
     const defaultCallSettings = this._defaults['listInstanceConfigOperations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listInstanceConfigOperations iterate %j', request);
@@ -4239,7 +4239,7 @@ export class InstanceAdminClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4338,7 +4338,7 @@ export class InstanceAdminClient {
       });
     const defaultCallSettings = this._defaults['listInstances'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listInstances stream %j', request);
@@ -4419,7 +4419,7 @@ export class InstanceAdminClient {
       });
     const defaultCallSettings = this._defaults['listInstances'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listInstances iterate %j', request);
@@ -4537,7 +4537,7 @@ export class InstanceAdminClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4618,7 +4618,7 @@ export class InstanceAdminClient {
       });
     const defaultCallSettings = this._defaults['listInstancePartitions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listInstancePartitions stream %j', request);
@@ -4681,7 +4681,7 @@ export class InstanceAdminClient {
       });
     const defaultCallSettings = this._defaults['listInstancePartitions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listInstancePartitions iterate %j', request);
@@ -4854,7 +4854,7 @@ export class InstanceAdminClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4978,7 +4978,7 @@ export class InstanceAdminClient {
     const defaultCallSettings =
       this._defaults['listInstancePartitionOperations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listInstancePartitionOperations stream %j', request);
@@ -5084,7 +5084,7 @@ export class InstanceAdminClient {
     const defaultCallSettings =
       this._defaults['listInstancePartitionOperations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listInstancePartitionOperations iterate %j', request);
@@ -5489,7 +5489,7 @@ export class InstanceAdminClient {
    */
   close(): Promise<void> {
     if (this.instanceAdminStub && !this._terminated) {
-      return this.instanceAdminStub.then((stub) => {
+      return this.instanceAdminStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

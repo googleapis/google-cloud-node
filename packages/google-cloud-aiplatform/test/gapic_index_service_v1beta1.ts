@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as indexserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -51,7 +51,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -155,9 +155,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -277,7 +277,7 @@ describe('v1beta1.IndexServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.indexServiceStub, undefined);
@@ -285,12 +285,12 @@ describe('v1beta1.IndexServiceClient', () => {
       assert(client.indexServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.indexServiceStub);
@@ -299,14 +299,14 @@ describe('v1beta1.IndexServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.indexServiceStub, undefined);
@@ -315,7 +315,7 @@ describe('v1beta1.IndexServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -323,7 +323,7 @@ describe('v1beta1.IndexServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -335,7 +335,7 @@ describe('v1beta1.IndexServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -358,7 +358,7 @@ describe('v1beta1.IndexServiceClient', () => {
   describe('getIndex', () => {
     it('invokes getIndex without error', async () => {
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -389,7 +389,7 @@ describe('v1beta1.IndexServiceClient', () => {
 
     it('invokes getIndex without error using callback', async () => {
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -436,7 +436,7 @@ describe('v1beta1.IndexServiceClient', () => {
 
     it('invokes getIndex with error', async () => {
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -464,7 +464,7 @@ describe('v1beta1.IndexServiceClient', () => {
 
     it('invokes getIndex with closed client', async () => {
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -477,7 +477,7 @@ describe('v1beta1.IndexServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getIndex(request), expectedError);
@@ -487,7 +487,7 @@ describe('v1beta1.IndexServiceClient', () => {
   describe('upsertDatapoints', () => {
     it('invokes upsertDatapoints without error', async () => {
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -518,7 +518,7 @@ describe('v1beta1.IndexServiceClient', () => {
 
     it('invokes upsertDatapoints without error using callback', async () => {
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -565,7 +565,7 @@ describe('v1beta1.IndexServiceClient', () => {
 
     it('invokes upsertDatapoints with error', async () => {
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -596,7 +596,7 @@ describe('v1beta1.IndexServiceClient', () => {
 
     it('invokes upsertDatapoints with closed client', async () => {
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -609,7 +609,7 @@ describe('v1beta1.IndexServiceClient', () => {
       );
       request.index = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.upsertDatapoints(request), expectedError);
@@ -619,7 +619,7 @@ describe('v1beta1.IndexServiceClient', () => {
   describe('removeDatapoints', () => {
     it('invokes removeDatapoints without error', async () => {
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -650,7 +650,7 @@ describe('v1beta1.IndexServiceClient', () => {
 
     it('invokes removeDatapoints without error using callback', async () => {
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -697,7 +697,7 @@ describe('v1beta1.IndexServiceClient', () => {
 
     it('invokes removeDatapoints with error', async () => {
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -728,7 +728,7 @@ describe('v1beta1.IndexServiceClient', () => {
 
     it('invokes removeDatapoints with closed client', async () => {
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -741,7 +741,7 @@ describe('v1beta1.IndexServiceClient', () => {
       );
       request.index = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.removeDatapoints(request), expectedError);
@@ -751,7 +751,7 @@ describe('v1beta1.IndexServiceClient', () => {
   describe('createIndex', () => {
     it('invokes createIndex without error', async () => {
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -783,7 +783,7 @@ describe('v1beta1.IndexServiceClient', () => {
 
     it('invokes createIndex without error using callback', async () => {
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -837,7 +837,7 @@ describe('v1beta1.IndexServiceClient', () => {
 
     it('invokes createIndex with call error', async () => {
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -868,7 +868,7 @@ describe('v1beta1.IndexServiceClient', () => {
 
     it('invokes createIndex with LRO error', async () => {
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -901,7 +901,7 @@ describe('v1beta1.IndexServiceClient', () => {
 
     it('invokes checkCreateIndexProgress without error', async () => {
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -909,8 +909,8 @@ describe('v1beta1.IndexServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateIndexProgress(
@@ -923,7 +923,7 @@ describe('v1beta1.IndexServiceClient', () => {
 
     it('invokes checkCreateIndexProgress with error', async () => {
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -941,7 +941,7 @@ describe('v1beta1.IndexServiceClient', () => {
   describe('importIndex', () => {
     it('invokes importIndex without error', async () => {
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -973,7 +973,7 @@ describe('v1beta1.IndexServiceClient', () => {
 
     it('invokes importIndex without error using callback', async () => {
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1027,7 +1027,7 @@ describe('v1beta1.IndexServiceClient', () => {
 
     it('invokes importIndex with call error', async () => {
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1058,7 +1058,7 @@ describe('v1beta1.IndexServiceClient', () => {
 
     it('invokes importIndex with LRO error', async () => {
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1091,7 +1091,7 @@ describe('v1beta1.IndexServiceClient', () => {
 
     it('invokes checkImportIndexProgress without error', async () => {
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1099,8 +1099,8 @@ describe('v1beta1.IndexServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkImportIndexProgress(
@@ -1113,7 +1113,7 @@ describe('v1beta1.IndexServiceClient', () => {
 
     it('invokes checkImportIndexProgress with error', async () => {
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1131,7 +1131,7 @@ describe('v1beta1.IndexServiceClient', () => {
   describe('updateIndex', () => {
     it('invokes updateIndex without error', async () => {
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1164,7 +1164,7 @@ describe('v1beta1.IndexServiceClient', () => {
 
     it('invokes updateIndex without error using callback', async () => {
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1219,7 +1219,7 @@ describe('v1beta1.IndexServiceClient', () => {
 
     it('invokes updateIndex with call error', async () => {
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1251,7 +1251,7 @@ describe('v1beta1.IndexServiceClient', () => {
 
     it('invokes updateIndex with LRO error', async () => {
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1285,7 +1285,7 @@ describe('v1beta1.IndexServiceClient', () => {
 
     it('invokes checkUpdateIndexProgress without error', async () => {
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1293,8 +1293,8 @@ describe('v1beta1.IndexServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateIndexProgress(
@@ -1307,7 +1307,7 @@ describe('v1beta1.IndexServiceClient', () => {
 
     it('invokes checkUpdateIndexProgress with error', async () => {
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1325,7 +1325,7 @@ describe('v1beta1.IndexServiceClient', () => {
   describe('deleteIndex', () => {
     it('invokes deleteIndex without error', async () => {
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1357,7 +1357,7 @@ describe('v1beta1.IndexServiceClient', () => {
 
     it('invokes deleteIndex without error using callback', async () => {
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1411,7 +1411,7 @@ describe('v1beta1.IndexServiceClient', () => {
 
     it('invokes deleteIndex with call error', async () => {
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1442,7 +1442,7 @@ describe('v1beta1.IndexServiceClient', () => {
 
     it('invokes deleteIndex with LRO error', async () => {
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1475,7 +1475,7 @@ describe('v1beta1.IndexServiceClient', () => {
 
     it('invokes checkDeleteIndexProgress without error', async () => {
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1483,8 +1483,8 @@ describe('v1beta1.IndexServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteIndexProgress(
@@ -1497,7 +1497,7 @@ describe('v1beta1.IndexServiceClient', () => {
 
     it('invokes checkDeleteIndexProgress with error', async () => {
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1515,7 +1515,7 @@ describe('v1beta1.IndexServiceClient', () => {
   describe('listIndexes', () => {
     it('invokes listIndexes without error', async () => {
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1554,7 +1554,7 @@ describe('v1beta1.IndexServiceClient', () => {
 
     it('invokes listIndexes without error using callback', async () => {
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1609,7 +1609,7 @@ describe('v1beta1.IndexServiceClient', () => {
 
     it('invokes listIndexes with error', async () => {
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1640,7 +1640,7 @@ describe('v1beta1.IndexServiceClient', () => {
 
     it('invokes listIndexesStream without error', async () => {
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1692,15 +1692,15 @@ describe('v1beta1.IndexServiceClient', () => {
       assert(
         (client.descriptors.page.listIndexes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listIndexesStream with error', async () => {
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1743,15 +1743,15 @@ describe('v1beta1.IndexServiceClient', () => {
       assert(
         (client.descriptors.page.listIndexes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listIndexes without error', async () => {
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1792,15 +1792,15 @@ describe('v1beta1.IndexServiceClient', () => {
       assert(
         (client.descriptors.page.listIndexes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listIndexes with error', async () => {
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1834,16 +1834,16 @@ describe('v1beta1.IndexServiceClient', () => {
       assert(
         (client.descriptors.page.listIndexes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', async () => {
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1873,7 +1873,7 @@ describe('v1beta1.IndexServiceClient', () => {
     });
     it('invokes getIamPolicy without error using callback', async () => {
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1911,7 +1911,7 @@ describe('v1beta1.IndexServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1921,7 +1921,7 @@ describe('v1beta1.IndexServiceClient', () => {
     });
     it('invokes getIamPolicy with error', async () => {
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1953,7 +1953,7 @@ describe('v1beta1.IndexServiceClient', () => {
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', async () => {
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1983,7 +1983,7 @@ describe('v1beta1.IndexServiceClient', () => {
     });
     it('invokes setIamPolicy without error using callback', async () => {
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2021,7 +2021,7 @@ describe('v1beta1.IndexServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2031,7 +2031,7 @@ describe('v1beta1.IndexServiceClient', () => {
     });
     it('invokes setIamPolicy with error', async () => {
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2063,7 +2063,7 @@ describe('v1beta1.IndexServiceClient', () => {
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', async () => {
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2096,7 +2096,7 @@ describe('v1beta1.IndexServiceClient', () => {
     });
     it('invokes testIamPermissions without error using callback', async () => {
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2134,7 +2134,7 @@ describe('v1beta1.IndexServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2144,7 +2144,7 @@ describe('v1beta1.IndexServiceClient', () => {
     });
     it('invokes testIamPermissions with error', async () => {
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2179,7 +2179,7 @@ describe('v1beta1.IndexServiceClient', () => {
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2209,7 +2209,7 @@ describe('v1beta1.IndexServiceClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2253,7 +2253,7 @@ describe('v1beta1.IndexServiceClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2288,7 +2288,7 @@ describe('v1beta1.IndexServiceClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2336,7 +2336,7 @@ describe('v1beta1.IndexServiceClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2377,7 +2377,7 @@ describe('v1beta1.IndexServiceClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2398,7 +2398,7 @@ describe('v1beta1.IndexServiceClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2426,7 +2426,7 @@ describe('v1beta1.IndexServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2436,7 +2436,7 @@ describe('v1beta1.IndexServiceClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2460,7 +2460,7 @@ describe('v1beta1.IndexServiceClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2482,7 +2482,7 @@ describe('v1beta1.IndexServiceClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2510,7 +2510,7 @@ describe('v1beta1.IndexServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2520,7 +2520,7 @@ describe('v1beta1.IndexServiceClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2544,7 +2544,7 @@ describe('v1beta1.IndexServiceClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2566,7 +2566,7 @@ describe('v1beta1.IndexServiceClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2594,7 +2594,7 @@ describe('v1beta1.IndexServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2604,7 +2604,7 @@ describe('v1beta1.IndexServiceClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2628,7 +2628,7 @@ describe('v1beta1.IndexServiceClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2663,7 +2663,7 @@ describe('v1beta1.IndexServiceClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2701,7 +2701,7 @@ describe('v1beta1.IndexServiceClient', () => {
         annotation: 'annotationValue',
       };
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2788,7 +2788,7 @@ describe('v1beta1.IndexServiceClient', () => {
         annotation_spec: 'annotationSpecValue',
       };
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2865,7 +2865,7 @@ describe('v1beta1.IndexServiceClient', () => {
         artifact: 'artifactValue',
       };
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2940,7 +2940,7 @@ describe('v1beta1.IndexServiceClient', () => {
         batch_prediction_job: 'batchPredictionJobValue',
       };
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3017,7 +3017,7 @@ describe('v1beta1.IndexServiceClient', () => {
         cached_content: 'cachedContentValue',
       };
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3082,7 +3082,7 @@ describe('v1beta1.IndexServiceClient', () => {
         context: 'contextValue',
       };
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3157,7 +3157,7 @@ describe('v1beta1.IndexServiceClient', () => {
         custom_job: 'customJobValue',
       };
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3222,7 +3222,7 @@ describe('v1beta1.IndexServiceClient', () => {
         data_item: 'dataItemValue',
       };
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3297,7 +3297,7 @@ describe('v1beta1.IndexServiceClient', () => {
         data_labeling_job: 'dataLabelingJobValue',
       };
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3362,7 +3362,7 @@ describe('v1beta1.IndexServiceClient', () => {
         dataset: 'datasetValue',
       };
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3427,7 +3427,7 @@ describe('v1beta1.IndexServiceClient', () => {
         dataset_version: 'datasetVersionValue',
       };
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3503,7 +3503,7 @@ describe('v1beta1.IndexServiceClient', () => {
         deployment_resource_pool: 'deploymentResourcePoolValue',
       };
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3585,7 +3585,7 @@ describe('v1beta1.IndexServiceClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3660,7 +3660,7 @@ describe('v1beta1.IndexServiceClient', () => {
         example_store: 'exampleStoreValue',
       };
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3725,7 +3725,7 @@ describe('v1beta1.IndexServiceClient', () => {
         execution: 'executionValue',
       };
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3800,7 +3800,7 @@ describe('v1beta1.IndexServiceClient', () => {
         extension: 'extensionValue',
       };
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3864,7 +3864,7 @@ describe('v1beta1.IndexServiceClient', () => {
         feature_group: 'featureGroupValue',
       };
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3929,7 +3929,7 @@ describe('v1beta1.IndexServiceClient', () => {
         feature_monitor: 'featureMonitorValue',
       };
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4007,7 +4007,7 @@ describe('v1beta1.IndexServiceClient', () => {
         feature_monitor_job: 'featureMonitorJobValue',
       };
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4114,7 +4114,7 @@ describe('v1beta1.IndexServiceClient', () => {
         feature_online_store: 'featureOnlineStoreValue',
       };
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4192,7 +4192,7 @@ describe('v1beta1.IndexServiceClient', () => {
         feature_view: 'featureViewValue',
       };
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4269,7 +4269,7 @@ describe('v1beta1.IndexServiceClient', () => {
         feature_view: 'featureViewValue',
       };
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4345,7 +4345,7 @@ describe('v1beta1.IndexServiceClient', () => {
         featurestore: 'featurestoreValue',
       };
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4409,7 +4409,7 @@ describe('v1beta1.IndexServiceClient', () => {
         hyperparameter_tuning_job: 'hyperparameterTuningJobValue',
       };
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4490,7 +4490,7 @@ describe('v1beta1.IndexServiceClient', () => {
         index: 'indexValue',
       };
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4554,7 +4554,7 @@ describe('v1beta1.IndexServiceClient', () => {
         index_endpoint: 'indexEndpointValue',
       };
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4617,7 +4617,7 @@ describe('v1beta1.IndexServiceClient', () => {
         location: 'locationValue',
       };
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4668,7 +4668,7 @@ describe('v1beta1.IndexServiceClient', () => {
         memory: 'memoryValue',
       };
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4744,7 +4744,7 @@ describe('v1beta1.IndexServiceClient', () => {
         metadata_schema: 'metadataSchemaValue',
       };
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4821,7 +4821,7 @@ describe('v1beta1.IndexServiceClient', () => {
         metadata_store: 'metadataStoreValue',
       };
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4885,7 +4885,7 @@ describe('v1beta1.IndexServiceClient', () => {
         model: 'modelValue',
       };
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4949,7 +4949,7 @@ describe('v1beta1.IndexServiceClient', () => {
         model_deployment_monitoring_job: 'modelDeploymentMonitoringJobValue',
       };
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5029,7 +5029,7 @@ describe('v1beta1.IndexServiceClient', () => {
         evaluation: 'evaluationValue',
       };
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5106,7 +5106,7 @@ describe('v1beta1.IndexServiceClient', () => {
         slice: 'sliceValue',
       };
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5213,7 +5213,7 @@ describe('v1beta1.IndexServiceClient', () => {
         model_monitor: 'modelMonitorValue',
       };
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5278,7 +5278,7 @@ describe('v1beta1.IndexServiceClient', () => {
         model_monitoring_job: 'modelMonitoringJobValue',
       };
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5370,7 +5370,7 @@ describe('v1beta1.IndexServiceClient', () => {
         nas_job: 'nasJobValue',
       };
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5435,7 +5435,7 @@ describe('v1beta1.IndexServiceClient', () => {
         nas_trial_detail: 'nasTrialDetailValue',
       };
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5511,7 +5511,7 @@ describe('v1beta1.IndexServiceClient', () => {
         notebook_execution_job: 'notebookExecutionJobValue',
       };
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5592,7 +5592,7 @@ describe('v1beta1.IndexServiceClient', () => {
         notebook_runtime: 'notebookRuntimeValue',
       };
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5657,7 +5657,7 @@ describe('v1beta1.IndexServiceClient', () => {
         notebook_runtime_template: 'notebookRuntimeTemplateValue',
       };
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5738,7 +5738,7 @@ describe('v1beta1.IndexServiceClient', () => {
         online_evaluator: 'onlineEvaluatorValue',
       };
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5803,7 +5803,7 @@ describe('v1beta1.IndexServiceClient', () => {
         persistent_resource: 'persistentResourceValue',
       };
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5880,7 +5880,7 @@ describe('v1beta1.IndexServiceClient', () => {
         pipeline_job: 'pipelineJobValue',
       };
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5944,7 +5944,7 @@ describe('v1beta1.IndexServiceClient', () => {
         endpoint: 'endpointValue',
       };
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6024,7 +6024,7 @@ describe('v1beta1.IndexServiceClient', () => {
         feature: 'featureValue',
       };
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6127,7 +6127,7 @@ describe('v1beta1.IndexServiceClient', () => {
         feature: 'featureValue',
       };
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6251,7 +6251,7 @@ describe('v1beta1.IndexServiceClient', () => {
         model: 'modelValue',
       };
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6342,7 +6342,7 @@ describe('v1beta1.IndexServiceClient', () => {
         model: 'modelValue',
       };
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6395,7 +6395,7 @@ describe('v1beta1.IndexServiceClient', () => {
         rag_corpus: 'ragCorpusValue',
       };
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6460,7 +6460,7 @@ describe('v1beta1.IndexServiceClient', () => {
         rag_data_schema: 'ragDataSchemaValue',
       };
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6534,7 +6534,7 @@ describe('v1beta1.IndexServiceClient', () => {
         location: 'locationValue',
       };
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6588,7 +6588,7 @@ describe('v1beta1.IndexServiceClient', () => {
         rag_file: 'ragFileValue',
       };
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6665,7 +6665,7 @@ describe('v1beta1.IndexServiceClient', () => {
         rag_metadata: 'ragMetadataValue',
       };
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6751,7 +6751,7 @@ describe('v1beta1.IndexServiceClient', () => {
         reasoning_engine: 'reasoningEngineValue',
       };
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6817,7 +6817,7 @@ describe('v1beta1.IndexServiceClient', () => {
         runtime_revision: 'runtimeRevisionValue',
       };
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6914,7 +6914,7 @@ describe('v1beta1.IndexServiceClient', () => {
         saved_query: 'savedQueryValue',
       };
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6989,7 +6989,7 @@ describe('v1beta1.IndexServiceClient', () => {
         schedule: 'scheduleValue',
       };
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7054,7 +7054,7 @@ describe('v1beta1.IndexServiceClient', () => {
         session: 'sessionValue',
       };
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7131,7 +7131,7 @@ describe('v1beta1.IndexServiceClient', () => {
         event: 'eventValue',
       };
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7218,7 +7218,7 @@ describe('v1beta1.IndexServiceClient', () => {
         specialist_pool: 'specialistPoolValue',
       };
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7283,7 +7283,7 @@ describe('v1beta1.IndexServiceClient', () => {
         study: 'studyValue',
       };
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7347,7 +7347,7 @@ describe('v1beta1.IndexServiceClient', () => {
         tensorboard: 'tensorboardValue',
       };
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7412,7 +7412,7 @@ describe('v1beta1.IndexServiceClient', () => {
         experiment: 'experimentValue',
       };
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7508,7 +7508,7 @@ describe('v1beta1.IndexServiceClient', () => {
         run: 'runValue',
       };
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7597,7 +7597,7 @@ describe('v1beta1.IndexServiceClient', () => {
         time_series: 'timeSeriesValue',
       };
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7720,7 +7720,7 @@ describe('v1beta1.IndexServiceClient', () => {
         training_pipeline: 'trainingPipelineValue',
       };
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7789,7 +7789,7 @@ describe('v1beta1.IndexServiceClient', () => {
         trial: 'trialValue',
       };
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7864,7 +7864,7 @@ describe('v1beta1.IndexServiceClient', () => {
         tuning_job: 'tuningJobValue',
       };
       const client = new indexserviceModule.v1beta1.IndexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

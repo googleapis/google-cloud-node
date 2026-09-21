@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as programsserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -239,7 +239,7 @@ describe('v1.ProgramsServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new programsserviceModule.v1.ProgramsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.programsServiceStub, undefined);
@@ -247,12 +247,12 @@ describe('v1.ProgramsServiceClient', () => {
       assert(client.programsServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new programsserviceModule.v1.ProgramsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.programsServiceStub);
@@ -261,14 +261,14 @@ describe('v1.ProgramsServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new programsserviceModule.v1.ProgramsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.programsServiceStub, undefined);
@@ -277,7 +277,7 @@ describe('v1.ProgramsServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -285,7 +285,7 @@ describe('v1.ProgramsServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new programsserviceModule.v1.ProgramsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -297,7 +297,7 @@ describe('v1.ProgramsServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new programsserviceModule.v1.ProgramsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -320,7 +320,7 @@ describe('v1.ProgramsServiceClient', () => {
   describe('getProgram', () => {
     it('invokes getProgram without error', async () => {
       const client = new programsserviceModule.v1.ProgramsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -351,7 +351,7 @@ describe('v1.ProgramsServiceClient', () => {
 
     it('invokes getProgram without error using callback', async () => {
       const client = new programsserviceModule.v1.ProgramsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -398,7 +398,7 @@ describe('v1.ProgramsServiceClient', () => {
 
     it('invokes getProgram with error', async () => {
       const client = new programsserviceModule.v1.ProgramsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -429,7 +429,7 @@ describe('v1.ProgramsServiceClient', () => {
 
     it('invokes getProgram with closed client', async () => {
       const client = new programsserviceModule.v1.ProgramsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -442,7 +442,7 @@ describe('v1.ProgramsServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getProgram(request), expectedError);
@@ -452,7 +452,7 @@ describe('v1.ProgramsServiceClient', () => {
   describe('enableProgram', () => {
     it('invokes enableProgram without error', async () => {
       const client = new programsserviceModule.v1.ProgramsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -483,7 +483,7 @@ describe('v1.ProgramsServiceClient', () => {
 
     it('invokes enableProgram without error using callback', async () => {
       const client = new programsserviceModule.v1.ProgramsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -530,7 +530,7 @@ describe('v1.ProgramsServiceClient', () => {
 
     it('invokes enableProgram with error', async () => {
       const client = new programsserviceModule.v1.ProgramsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -561,7 +561,7 @@ describe('v1.ProgramsServiceClient', () => {
 
     it('invokes enableProgram with closed client', async () => {
       const client = new programsserviceModule.v1.ProgramsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -574,7 +574,7 @@ describe('v1.ProgramsServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.enableProgram(request), expectedError);
@@ -584,7 +584,7 @@ describe('v1.ProgramsServiceClient', () => {
   describe('disableProgram', () => {
     it('invokes disableProgram without error', async () => {
       const client = new programsserviceModule.v1.ProgramsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -615,7 +615,7 @@ describe('v1.ProgramsServiceClient', () => {
 
     it('invokes disableProgram without error using callback', async () => {
       const client = new programsserviceModule.v1.ProgramsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -662,7 +662,7 @@ describe('v1.ProgramsServiceClient', () => {
 
     it('invokes disableProgram with error', async () => {
       const client = new programsserviceModule.v1.ProgramsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -693,7 +693,7 @@ describe('v1.ProgramsServiceClient', () => {
 
     it('invokes disableProgram with closed client', async () => {
       const client = new programsserviceModule.v1.ProgramsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -706,7 +706,7 @@ describe('v1.ProgramsServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.disableProgram(request), expectedError);
@@ -716,7 +716,7 @@ describe('v1.ProgramsServiceClient', () => {
   describe('listPrograms', () => {
     it('invokes listPrograms without error', async () => {
       const client = new programsserviceModule.v1.ProgramsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -755,7 +755,7 @@ describe('v1.ProgramsServiceClient', () => {
 
     it('invokes listPrograms without error using callback', async () => {
       const client = new programsserviceModule.v1.ProgramsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -787,8 +787,7 @@ describe('v1.ProgramsServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.shopping.merchant.accounts.v1.IProgram[]
-              | null,
+              protos.google.shopping.merchant.accounts.v1.IProgram[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -812,7 +811,7 @@ describe('v1.ProgramsServiceClient', () => {
 
     it('invokes listPrograms with error', async () => {
       const client = new programsserviceModule.v1.ProgramsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -843,7 +842,7 @@ describe('v1.ProgramsServiceClient', () => {
 
     it('invokes listProgramsStream without error', async () => {
       const client = new programsserviceModule.v1.ProgramsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -896,15 +895,15 @@ describe('v1.ProgramsServiceClient', () => {
       assert(
         (client.descriptors.page.listPrograms.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listProgramsStream with error', async () => {
       const client = new programsserviceModule.v1.ProgramsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -948,15 +947,15 @@ describe('v1.ProgramsServiceClient', () => {
       assert(
         (client.descriptors.page.listPrograms.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listPrograms without error', async () => {
       const client = new programsserviceModule.v1.ProgramsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -998,15 +997,15 @@ describe('v1.ProgramsServiceClient', () => {
       assert(
         (client.descriptors.page.listPrograms.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listPrograms with error', async () => {
       const client = new programsserviceModule.v1.ProgramsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1039,9 +1038,9 @@ describe('v1.ProgramsServiceClient', () => {
       assert(
         (client.descriptors.page.listPrograms.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1053,7 +1052,7 @@ describe('v1.ProgramsServiceClient', () => {
         account: 'accountValue',
       };
       const client = new programsserviceModule.v1.ProgramsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1092,7 +1091,7 @@ describe('v1.ProgramsServiceClient', () => {
         issue: 'issueValue',
       };
       const client = new programsserviceModule.v1.ProgramsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1141,7 +1140,7 @@ describe('v1.ProgramsServiceClient', () => {
         relationship: 'relationshipValue',
       };
       const client = new programsserviceModule.v1.ProgramsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1203,7 +1202,7 @@ describe('v1.ProgramsServiceClient', () => {
         service: 'serviceValue',
       };
       const client = new programsserviceModule.v1.ProgramsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1254,7 +1253,7 @@ describe('v1.ProgramsServiceClient', () => {
         account: 'accountValue',
       };
       const client = new programsserviceModule.v1.ProgramsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1295,7 +1294,7 @@ describe('v1.ProgramsServiceClient', () => {
         account: 'accountValue',
       };
       const client = new programsserviceModule.v1.ProgramsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1340,7 +1339,7 @@ describe('v1.ProgramsServiceClient', () => {
         account: 'accountValue',
       };
       const client = new programsserviceModule.v1.ProgramsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1381,7 +1380,7 @@ describe('v1.ProgramsServiceClient', () => {
         account: 'accountValue',
       };
       const client = new programsserviceModule.v1.ProgramsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1420,7 +1419,7 @@ describe('v1.ProgramsServiceClient', () => {
         program: 'programValue',
       };
       const client = new programsserviceModule.v1.ProgramsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1474,7 +1473,7 @@ describe('v1.ProgramsServiceClient', () => {
         account: 'accountValue',
       };
       const client = new programsserviceModule.v1.ProgramsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1520,7 +1519,7 @@ describe('v1.ProgramsServiceClient', () => {
         email: 'emailValue',
       };
       const client = new programsserviceModule.v1.ProgramsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1575,7 +1574,7 @@ describe('v1.ProgramsServiceClient', () => {
         gbp_account: 'gbpAccountValue',
       };
       const client = new programsserviceModule.v1.ProgramsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1623,7 +1622,7 @@ describe('v1.ProgramsServiceClient', () => {
         account: 'accountValue',
       };
       const client = new programsserviceModule.v1.ProgramsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1663,7 +1662,7 @@ describe('v1.ProgramsServiceClient', () => {
         lfp_provider: 'lfpProviderValue',
       };
       const client = new programsserviceModule.v1.ProgramsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1727,7 +1726,7 @@ describe('v1.ProgramsServiceClient', () => {
         omnichannel_setting: 'omnichannelSettingValue',
       };
       const client = new programsserviceModule.v1.ProgramsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1789,7 +1788,7 @@ describe('v1.ProgramsServiceClient', () => {
         return_policy: 'returnPolicyValue',
       };
       const client = new programsserviceModule.v1.ProgramsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1851,7 +1850,7 @@ describe('v1.ProgramsServiceClient', () => {
         program: 'programValue',
       };
       const client = new programsserviceModule.v1.ProgramsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1900,7 +1899,7 @@ describe('v1.ProgramsServiceClient', () => {
         region: 'regionValue',
       };
       const client = new programsserviceModule.v1.ProgramsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1948,7 +1947,7 @@ describe('v1.ProgramsServiceClient', () => {
         account: 'accountValue',
       };
       const client = new programsserviceModule.v1.ProgramsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1989,7 +1988,7 @@ describe('v1.ProgramsServiceClient', () => {
         version: 'versionValue',
       };
       const client = new programsserviceModule.v1.ProgramsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2028,7 +2027,7 @@ describe('v1.ProgramsServiceClient', () => {
         identifier: 'identifierValue',
       };
       const client = new programsserviceModule.v1.ProgramsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2089,7 +2088,7 @@ describe('v1.ProgramsServiceClient', () => {
         email: 'emailValue',
       };
       const client = new programsserviceModule.v1.ProgramsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

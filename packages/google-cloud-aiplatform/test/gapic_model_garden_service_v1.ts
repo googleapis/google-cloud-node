@@ -19,8 +19,8 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as modelgardenserviceModule from '../src';
 
 import {
@@ -49,7 +49,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -115,9 +115,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -239,7 +239,7 @@ describe('v1.ModelGardenServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.modelGardenServiceStub, undefined);
@@ -247,12 +247,12 @@ describe('v1.ModelGardenServiceClient', () => {
       assert(client.modelGardenServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.modelGardenServiceStub);
@@ -261,14 +261,14 @@ describe('v1.ModelGardenServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.modelGardenServiceStub, undefined);
@@ -277,7 +277,7 @@ describe('v1.ModelGardenServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -285,7 +285,7 @@ describe('v1.ModelGardenServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -297,7 +297,7 @@ describe('v1.ModelGardenServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -320,7 +320,7 @@ describe('v1.ModelGardenServiceClient', () => {
   describe('getPublisherModel', () => {
     it('invokes getPublisherModel without error', async () => {
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -351,7 +351,7 @@ describe('v1.ModelGardenServiceClient', () => {
 
     it('invokes getPublisherModel without error using callback', async () => {
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -398,7 +398,7 @@ describe('v1.ModelGardenServiceClient', () => {
 
     it('invokes getPublisherModel with error', async () => {
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -429,7 +429,7 @@ describe('v1.ModelGardenServiceClient', () => {
 
     it('invokes getPublisherModel with closed client', async () => {
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -442,7 +442,7 @@ describe('v1.ModelGardenServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getPublisherModel(request), expectedError);
@@ -452,7 +452,7 @@ describe('v1.ModelGardenServiceClient', () => {
   describe('deploy', () => {
     it('invokes deploy without error', async () => {
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -484,7 +484,7 @@ describe('v1.ModelGardenServiceClient', () => {
 
     it('invokes deploy without error using callback', async () => {
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -538,7 +538,7 @@ describe('v1.ModelGardenServiceClient', () => {
 
     it('invokes deploy with call error', async () => {
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -569,7 +569,7 @@ describe('v1.ModelGardenServiceClient', () => {
 
     it('invokes deploy with LRO error', async () => {
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -602,7 +602,7 @@ describe('v1.ModelGardenServiceClient', () => {
 
     it('invokes checkDeployProgress without error', async () => {
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -610,8 +610,8 @@ describe('v1.ModelGardenServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeployProgress(
@@ -624,7 +624,7 @@ describe('v1.ModelGardenServiceClient', () => {
 
     it('invokes checkDeployProgress with error', async () => {
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -641,7 +641,7 @@ describe('v1.ModelGardenServiceClient', () => {
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', async () => {
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -671,7 +671,7 @@ describe('v1.ModelGardenServiceClient', () => {
     });
     it('invokes getIamPolicy without error using callback', async () => {
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -709,7 +709,7 @@ describe('v1.ModelGardenServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -719,7 +719,7 @@ describe('v1.ModelGardenServiceClient', () => {
     });
     it('invokes getIamPolicy with error', async () => {
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -751,7 +751,7 @@ describe('v1.ModelGardenServiceClient', () => {
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', async () => {
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -781,7 +781,7 @@ describe('v1.ModelGardenServiceClient', () => {
     });
     it('invokes setIamPolicy without error using callback', async () => {
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -819,7 +819,7 @@ describe('v1.ModelGardenServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -829,7 +829,7 @@ describe('v1.ModelGardenServiceClient', () => {
     });
     it('invokes setIamPolicy with error', async () => {
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -861,7 +861,7 @@ describe('v1.ModelGardenServiceClient', () => {
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', async () => {
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -894,7 +894,7 @@ describe('v1.ModelGardenServiceClient', () => {
     });
     it('invokes testIamPermissions without error using callback', async () => {
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -932,7 +932,7 @@ describe('v1.ModelGardenServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -942,7 +942,7 @@ describe('v1.ModelGardenServiceClient', () => {
     });
     it('invokes testIamPermissions with error', async () => {
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -977,7 +977,7 @@ describe('v1.ModelGardenServiceClient', () => {
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1007,7 +1007,7 @@ describe('v1.ModelGardenServiceClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1051,7 +1051,7 @@ describe('v1.ModelGardenServiceClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1086,7 +1086,7 @@ describe('v1.ModelGardenServiceClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1134,7 +1134,7 @@ describe('v1.ModelGardenServiceClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1175,7 +1175,7 @@ describe('v1.ModelGardenServiceClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1196,7 +1196,7 @@ describe('v1.ModelGardenServiceClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1224,7 +1224,7 @@ describe('v1.ModelGardenServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1234,7 +1234,7 @@ describe('v1.ModelGardenServiceClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1258,7 +1258,7 @@ describe('v1.ModelGardenServiceClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1280,7 +1280,7 @@ describe('v1.ModelGardenServiceClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1308,7 +1308,7 @@ describe('v1.ModelGardenServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1318,7 +1318,7 @@ describe('v1.ModelGardenServiceClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1342,7 +1342,7 @@ describe('v1.ModelGardenServiceClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1364,7 +1364,7 @@ describe('v1.ModelGardenServiceClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1392,7 +1392,7 @@ describe('v1.ModelGardenServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1402,7 +1402,7 @@ describe('v1.ModelGardenServiceClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1426,7 +1426,7 @@ describe('v1.ModelGardenServiceClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1461,7 +1461,7 @@ describe('v1.ModelGardenServiceClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1499,7 +1499,7 @@ describe('v1.ModelGardenServiceClient', () => {
         annotation: 'annotationValue',
       };
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1586,7 +1586,7 @@ describe('v1.ModelGardenServiceClient', () => {
         annotation_spec: 'annotationSpecValue',
       };
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1663,7 +1663,7 @@ describe('v1.ModelGardenServiceClient', () => {
         artifact: 'artifactValue',
       };
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1738,7 +1738,7 @@ describe('v1.ModelGardenServiceClient', () => {
         batch_prediction_job: 'batchPredictionJobValue',
       };
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1815,7 +1815,7 @@ describe('v1.ModelGardenServiceClient', () => {
         cached_content: 'cachedContentValue',
       };
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1880,7 +1880,7 @@ describe('v1.ModelGardenServiceClient', () => {
         context: 'contextValue',
       };
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1955,7 +1955,7 @@ describe('v1.ModelGardenServiceClient', () => {
         custom_job: 'customJobValue',
       };
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2020,7 +2020,7 @@ describe('v1.ModelGardenServiceClient', () => {
         data_item: 'dataItemValue',
       };
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2095,7 +2095,7 @@ describe('v1.ModelGardenServiceClient', () => {
         data_labeling_job: 'dataLabelingJobValue',
       };
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2160,7 +2160,7 @@ describe('v1.ModelGardenServiceClient', () => {
         dataset: 'datasetValue',
       };
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2225,7 +2225,7 @@ describe('v1.ModelGardenServiceClient', () => {
         dataset_version: 'datasetVersionValue',
       };
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2301,7 +2301,7 @@ describe('v1.ModelGardenServiceClient', () => {
         deployment_resource_pool: 'deploymentResourcePoolValue',
       };
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2383,7 +2383,7 @@ describe('v1.ModelGardenServiceClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2459,7 +2459,7 @@ describe('v1.ModelGardenServiceClient', () => {
         execution: 'executionValue',
       };
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2534,7 +2534,7 @@ describe('v1.ModelGardenServiceClient', () => {
         feature_group: 'featureGroupValue',
       };
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2598,7 +2598,7 @@ describe('v1.ModelGardenServiceClient', () => {
         feature_online_store: 'featureOnlineStoreValue',
       };
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2676,7 +2676,7 @@ describe('v1.ModelGardenServiceClient', () => {
         feature_view: 'featureViewValue',
       };
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2753,7 +2753,7 @@ describe('v1.ModelGardenServiceClient', () => {
         feature_view: 'featureViewValue',
       };
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2829,7 +2829,7 @@ describe('v1.ModelGardenServiceClient', () => {
         featurestore: 'featurestoreValue',
       };
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2893,7 +2893,7 @@ describe('v1.ModelGardenServiceClient', () => {
         hyperparameter_tuning_job: 'hyperparameterTuningJobValue',
       };
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2974,7 +2974,7 @@ describe('v1.ModelGardenServiceClient', () => {
         index: 'indexValue',
       };
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3038,7 +3038,7 @@ describe('v1.ModelGardenServiceClient', () => {
         index_endpoint: 'indexEndpointValue',
       };
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3101,7 +3101,7 @@ describe('v1.ModelGardenServiceClient', () => {
         location: 'locationValue',
       };
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3152,7 +3152,7 @@ describe('v1.ModelGardenServiceClient', () => {
         metadata_schema: 'metadataSchemaValue',
       };
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3229,7 +3229,7 @@ describe('v1.ModelGardenServiceClient', () => {
         metadata_store: 'metadataStoreValue',
       };
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3293,7 +3293,7 @@ describe('v1.ModelGardenServiceClient', () => {
         model: 'modelValue',
       };
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3357,7 +3357,7 @@ describe('v1.ModelGardenServiceClient', () => {
         model_deployment_monitoring_job: 'modelDeploymentMonitoringJobValue',
       };
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3437,7 +3437,7 @@ describe('v1.ModelGardenServiceClient', () => {
         evaluation: 'evaluationValue',
       };
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3514,7 +3514,7 @@ describe('v1.ModelGardenServiceClient', () => {
         slice: 'sliceValue',
       };
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3621,7 +3621,7 @@ describe('v1.ModelGardenServiceClient', () => {
         nas_job: 'nasJobValue',
       };
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3686,7 +3686,7 @@ describe('v1.ModelGardenServiceClient', () => {
         nas_trial_detail: 'nasTrialDetailValue',
       };
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3762,7 +3762,7 @@ describe('v1.ModelGardenServiceClient', () => {
         notebook_execution_job: 'notebookExecutionJobValue',
       };
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3843,7 +3843,7 @@ describe('v1.ModelGardenServiceClient', () => {
         notebook_runtime: 'notebookRuntimeValue',
       };
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3908,7 +3908,7 @@ describe('v1.ModelGardenServiceClient', () => {
         notebook_runtime_template: 'notebookRuntimeTemplateValue',
       };
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3989,7 +3989,7 @@ describe('v1.ModelGardenServiceClient', () => {
         persistent_resource: 'persistentResourceValue',
       };
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4066,7 +4066,7 @@ describe('v1.ModelGardenServiceClient', () => {
         pipeline_job: 'pipelineJobValue',
       };
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4130,7 +4130,7 @@ describe('v1.ModelGardenServiceClient', () => {
         endpoint: 'endpointValue',
       };
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4210,7 +4210,7 @@ describe('v1.ModelGardenServiceClient', () => {
         feature: 'featureValue',
       };
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4313,7 +4313,7 @@ describe('v1.ModelGardenServiceClient', () => {
         feature: 'featureValue',
       };
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4437,7 +4437,7 @@ describe('v1.ModelGardenServiceClient', () => {
         model: 'modelValue',
       };
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4528,7 +4528,7 @@ describe('v1.ModelGardenServiceClient', () => {
         model: 'modelValue',
       };
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4581,7 +4581,7 @@ describe('v1.ModelGardenServiceClient', () => {
         rag_corpus: 'ragCorpusValue',
       };
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4644,7 +4644,7 @@ describe('v1.ModelGardenServiceClient', () => {
         location: 'locationValue',
       };
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4698,7 +4698,7 @@ describe('v1.ModelGardenServiceClient', () => {
         rag_file: 'ragFileValue',
       };
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4773,7 +4773,7 @@ describe('v1.ModelGardenServiceClient', () => {
         reasoning_engine: 'reasoningEngineValue',
       };
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4839,7 +4839,7 @@ describe('v1.ModelGardenServiceClient', () => {
         saved_query: 'savedQueryValue',
       };
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4914,7 +4914,7 @@ describe('v1.ModelGardenServiceClient', () => {
         schedule: 'scheduleValue',
       };
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4979,7 +4979,7 @@ describe('v1.ModelGardenServiceClient', () => {
         session: 'sessionValue',
       };
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5056,7 +5056,7 @@ describe('v1.ModelGardenServiceClient', () => {
         event: 'eventValue',
       };
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5143,7 +5143,7 @@ describe('v1.ModelGardenServiceClient', () => {
         specialist_pool: 'specialistPoolValue',
       };
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5208,7 +5208,7 @@ describe('v1.ModelGardenServiceClient', () => {
         study: 'studyValue',
       };
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5272,7 +5272,7 @@ describe('v1.ModelGardenServiceClient', () => {
         tensorboard: 'tensorboardValue',
       };
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5337,7 +5337,7 @@ describe('v1.ModelGardenServiceClient', () => {
         experiment: 'experimentValue',
       };
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5433,7 +5433,7 @@ describe('v1.ModelGardenServiceClient', () => {
         run: 'runValue',
       };
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5522,7 +5522,7 @@ describe('v1.ModelGardenServiceClient', () => {
         time_series: 'timeSeriesValue',
       };
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5645,7 +5645,7 @@ describe('v1.ModelGardenServiceClient', () => {
         training_pipeline: 'trainingPipelineValue',
       };
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5714,7 +5714,7 @@ describe('v1.ModelGardenServiceClient', () => {
         trial: 'trialValue',
       };
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5789,7 +5789,7 @@ describe('v1.ModelGardenServiceClient', () => {
         tuning_job: 'tuningJobValue',
       };
       const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

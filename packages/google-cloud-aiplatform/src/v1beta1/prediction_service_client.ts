@@ -28,10 +28,10 @@ import type {
   LocationsClient,
   LocationProtos,
 } from 'google-gax';
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -53,7 +53,7 @@ export class PredictionServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('aiplatform');
@@ -66,11 +66,11 @@ export class PredictionServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
+  innerApiCalls: {[name: string]: Function};
   iamClient: IamClient;
   locationsClient: LocationsClient;
-  pathTemplates: { [name: string]: gax.PathTemplate };
-  predictionServiceStub?: Promise<{ [name: string]: Function }>;
+  pathTemplates: {[name: string]: gax.PathTemplate};
+  predictionServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of PredictionServiceClient.
@@ -146,7 +146,7 @@ export class PredictionServiceClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -473,7 +473,7 @@ export class PredictionServiceClient {
       'google.cloud.aiplatform.v1beta1.PredictionService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -514,7 +514,7 @@ export class PredictionServiceClient {
             .PredictionService,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -538,11 +538,11 @@ export class PredictionServiceClient {
     ];
     for (const methodName of predictionServiceStubMethods) {
       const callPromise = this.predictionServiceStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               if (methodName in this.descriptors.stream) {
-                const stream = new PassThrough({ objectMode: true });
+                const stream = new PassThrough({objectMode: true});
                 setImmediate(() => {
                   stream.emit(
                     'error',
@@ -767,7 +767,7 @@ export class PredictionServiceClient {
       this._gaxModule.routingHeader.fromParams({
         endpoint: request.endpoint ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('predict request %j', request);
@@ -929,7 +929,7 @@ export class PredictionServiceClient {
       this._gaxModule.routingHeader.fromParams({
         endpoint: request.endpoint ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('rawPredict request %j', request);
@@ -1070,7 +1070,7 @@ export class PredictionServiceClient {
       this._gaxModule.routingHeader.fromParams({
         endpoint: request.endpoint ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('directPredict request %j', request);
@@ -1226,7 +1226,7 @@ export class PredictionServiceClient {
       this._gaxModule.routingHeader.fromParams({
         endpoint: request.endpoint ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('directRawPredict request %j', request);
@@ -1407,7 +1407,7 @@ export class PredictionServiceClient {
       this._gaxModule.routingHeader.fromParams({
         endpoint: request.endpoint ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('explain request %j', request);
@@ -1566,7 +1566,7 @@ export class PredictionServiceClient {
       this._gaxModule.routingHeader.fromParams({
         endpoint: request.endpoint ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('countTokens request %j', request);
@@ -1758,7 +1758,7 @@ export class PredictionServiceClient {
       this._gaxModule.routingHeader.fromParams({
         model: request.model ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('generateContent request %j', request);
@@ -1915,7 +1915,7 @@ export class PredictionServiceClient {
       this._gaxModule.routingHeader.fromParams({
         model: request.model ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('embedContent request %j', request);
@@ -1998,7 +1998,7 @@ export class PredictionServiceClient {
       this._gaxModule.routingHeader.fromParams({
         endpoint: request.endpoint ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('streamRawPredict stream %j', options);
@@ -2021,7 +2021,7 @@ export class PredictionServiceClient {
    * region_tag:aiplatform_v1beta1_generated_PredictionService_StreamDirectPredict_async
    */
   streamDirectPredict(options?: CallOptions): gax.CancellableStream {
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('streamDirectPredict stream %j', options);
@@ -2044,7 +2044,7 @@ export class PredictionServiceClient {
    * region_tag:aiplatform_v1beta1_generated_PredictionService_StreamDirectRawPredict_async
    */
   streamDirectRawPredict(options?: CallOptions): gax.CancellableStream {
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('streamDirectRawPredict stream %j', options);
@@ -2067,7 +2067,7 @@ export class PredictionServiceClient {
    * region_tag:aiplatform_v1beta1_generated_PredictionService_StreamingPredict_async
    */
   streamingPredict(options?: CallOptions): gax.CancellableStream {
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('streamingPredict stream %j', options);
@@ -2109,7 +2109,7 @@ export class PredictionServiceClient {
       this._gaxModule.routingHeader.fromParams({
         endpoint: request.endpoint ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('serverStreamingPredict stream %j', options);
@@ -2131,7 +2131,7 @@ export class PredictionServiceClient {
    * region_tag:aiplatform_v1beta1_generated_PredictionService_StreamingRawPredict_async
    */
   streamingRawPredict(options?: CallOptions): gax.CancellableStream {
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('streamingRawPredict stream %j', options);
@@ -2215,7 +2215,7 @@ export class PredictionServiceClient {
       this._gaxModule.routingHeader.fromParams({
         model: request.model ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('streamGenerateContent stream %j', options);
@@ -2255,7 +2255,7 @@ export class PredictionServiceClient {
       this._gaxModule.routingHeader.fromParams({
         endpoint: request.endpoint ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('chatCompletions stream %j', options);
@@ -6975,14 +6975,14 @@ export class PredictionServiceClient {
    */
   close(): Promise<void> {
     if (this.predictionServiceStub && !this._terminated) {
-      return this.predictionServiceStub.then((stub) => {
+      return this.predictionServiceStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.iamClient.close().catch((err) => {
+        this.iamClient.close().catch(err => {
           throw err;
         });
-        this.locationsClient.close().catch((err) => {
+        this.locationsClient.close().catch(err => {
           throw err;
         });
       });

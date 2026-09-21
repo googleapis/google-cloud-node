@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as managedkafkaconnectModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -50,7 +50,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -154,9 +154,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -204,7 +204,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
     }
     it('sets apiEndpoint according to universe domain camelCase', () => {
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
-        { universeDomain: 'example.com' },
+        {universeDomain: 'example.com'},
       );
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'managedkafka.example.com');
@@ -212,7 +212,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
 
     it('sets apiEndpoint according to universe domain snakeCase', () => {
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
-        { universe_domain: 'example.com' },
+        {universe_domain: 'example.com'},
       );
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'managedkafka.example.com');
@@ -287,7 +287,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -296,14 +296,14 @@ describe('v1.ManagedKafkaConnectClient', () => {
       assert(client.managedKafkaConnectStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.managedKafkaConnectStub);
@@ -312,15 +312,15 @@ describe('v1.ManagedKafkaConnectClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -330,7 +330,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -339,7 +339,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -353,7 +353,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -378,7 +378,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
     it('invokes getConnectCluster without error', async () => {
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -411,7 +411,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
     it('invokes getConnectCluster without error using callback', async () => {
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -460,7 +460,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
     it('invokes getConnectCluster with error', async () => {
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -493,7 +493,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
     it('invokes getConnectCluster with closed client', async () => {
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -507,7 +507,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getConnectCluster(request), expectedError);
@@ -518,7 +518,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
     it('invokes getConnector without error', async () => {
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -551,7 +551,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
     it('invokes getConnector without error using callback', async () => {
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -600,7 +600,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
     it('invokes getConnector with error', async () => {
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -633,7 +633,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
     it('invokes getConnector with closed client', async () => {
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -647,7 +647,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getConnector(request), expectedError);
@@ -658,7 +658,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
     it('invokes createConnector without error', async () => {
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -691,7 +691,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
     it('invokes createConnector without error using callback', async () => {
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -740,7 +740,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
     it('invokes createConnector with error', async () => {
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -773,7 +773,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
     it('invokes createConnector with closed client', async () => {
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -787,7 +787,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createConnector(request), expectedError);
@@ -798,7 +798,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
     it('invokes updateConnector without error', async () => {
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -832,7 +832,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
     it('invokes updateConnector without error using callback', async () => {
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -882,7 +882,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
     it('invokes updateConnector with error', async () => {
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -916,7 +916,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
     it('invokes updateConnector with closed client', async () => {
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -931,7 +931,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
       );
       request.connector.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateConnector(request), expectedError);
@@ -942,7 +942,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
     it('invokes deleteConnector without error', async () => {
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -975,7 +975,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
     it('invokes deleteConnector without error using callback', async () => {
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1024,7 +1024,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
     it('invokes deleteConnector with error', async () => {
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1057,7 +1057,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
     it('invokes deleteConnector with closed client', async () => {
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1071,7 +1071,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteConnector(request), expectedError);
@@ -1082,7 +1082,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
     it('invokes pauseConnector without error', async () => {
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1115,7 +1115,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
     it('invokes pauseConnector without error using callback', async () => {
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1164,7 +1164,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
     it('invokes pauseConnector with error', async () => {
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1197,7 +1197,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
     it('invokes pauseConnector with closed client', async () => {
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1211,7 +1211,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.pauseConnector(request), expectedError);
@@ -1222,7 +1222,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
     it('invokes resumeConnector without error', async () => {
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1255,7 +1255,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
     it('invokes resumeConnector without error using callback', async () => {
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1304,7 +1304,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
     it('invokes resumeConnector with error', async () => {
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1337,7 +1337,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
     it('invokes resumeConnector with closed client', async () => {
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1351,7 +1351,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.resumeConnector(request), expectedError);
@@ -1362,7 +1362,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
     it('invokes restartConnector without error', async () => {
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1395,7 +1395,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
     it('invokes restartConnector without error using callback', async () => {
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1444,7 +1444,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
     it('invokes restartConnector with error', async () => {
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1477,7 +1477,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
     it('invokes restartConnector with closed client', async () => {
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1491,7 +1491,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.restartConnector(request), expectedError);
@@ -1502,7 +1502,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
     it('invokes stopConnector without error', async () => {
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1535,7 +1535,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
     it('invokes stopConnector without error using callback', async () => {
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1584,7 +1584,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
     it('invokes stopConnector with error', async () => {
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1617,7 +1617,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
     it('invokes stopConnector with closed client', async () => {
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1631,7 +1631,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.stopConnector(request), expectedError);
@@ -1642,7 +1642,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
     it('invokes createConnectCluster without error', async () => {
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1677,7 +1677,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
     it('invokes createConnectCluster without error using callback', async () => {
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1733,7 +1733,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
     it('invokes createConnectCluster with call error', async () => {
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1766,7 +1766,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
     it('invokes createConnectCluster with LRO error', async () => {
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1801,7 +1801,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
     it('invokes checkCreateConnectClusterProgress without error', async () => {
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1810,8 +1810,8 @@ describe('v1.ManagedKafkaConnectClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateConnectClusterProgress(
@@ -1825,7 +1825,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
     it('invokes checkCreateConnectClusterProgress with error', async () => {
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1848,7 +1848,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
     it('invokes updateConnectCluster without error', async () => {
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1884,7 +1884,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
     it('invokes updateConnectCluster without error using callback', async () => {
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1941,7 +1941,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
     it('invokes updateConnectCluster with call error', async () => {
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1975,7 +1975,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
     it('invokes updateConnectCluster with LRO error', async () => {
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2011,7 +2011,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
     it('invokes checkUpdateConnectClusterProgress without error', async () => {
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2020,8 +2020,8 @@ describe('v1.ManagedKafkaConnectClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateConnectClusterProgress(
@@ -2035,7 +2035,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
     it('invokes checkUpdateConnectClusterProgress with error', async () => {
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2058,7 +2058,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
     it('invokes deleteConnectCluster without error', async () => {
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2093,7 +2093,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
     it('invokes deleteConnectCluster without error using callback', async () => {
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2149,7 +2149,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
     it('invokes deleteConnectCluster with call error', async () => {
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2182,7 +2182,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
     it('invokes deleteConnectCluster with LRO error', async () => {
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2217,7 +2217,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
     it('invokes checkDeleteConnectClusterProgress without error', async () => {
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2226,8 +2226,8 @@ describe('v1.ManagedKafkaConnectClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteConnectClusterProgress(
@@ -2241,7 +2241,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
     it('invokes checkDeleteConnectClusterProgress with error', async () => {
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2264,7 +2264,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
     it('invokes listConnectClusters without error', async () => {
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2306,7 +2306,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
     it('invokes listConnectClusters without error using callback', async () => {
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2339,8 +2339,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.managedkafka.v1.IConnectCluster[]
-              | null,
+              protos.google.cloud.managedkafka.v1.IConnectCluster[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -2365,7 +2364,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
     it('invokes listConnectClusters with error', async () => {
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2398,7 +2397,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
     it('invokes listConnectClustersStream without error', async () => {
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2452,16 +2451,16 @@ describe('v1.ManagedKafkaConnectClient', () => {
       assert(
         (client.descriptors.page.listConnectClusters.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listConnectClustersStream with error', async () => {
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2504,16 +2503,16 @@ describe('v1.ManagedKafkaConnectClient', () => {
       assert(
         (client.descriptors.page.listConnectClusters.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listConnectClusters without error', async () => {
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2556,16 +2555,16 @@ describe('v1.ManagedKafkaConnectClient', () => {
       assert(
         (client.descriptors.page.listConnectClusters.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listConnectClusters with error', async () => {
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2599,9 +2598,9 @@ describe('v1.ManagedKafkaConnectClient', () => {
       assert(
         (client.descriptors.page.listConnectClusters.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2610,7 +2609,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
     it('invokes listConnectors without error', async () => {
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2651,7 +2650,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
     it('invokes listConnectors without error using callback', async () => {
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2708,7 +2707,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
     it('invokes listConnectors with error', async () => {
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2741,7 +2740,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
     it('invokes listConnectorsStream without error', async () => {
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2794,16 +2793,16 @@ describe('v1.ManagedKafkaConnectClient', () => {
       assert(
         (client.descriptors.page.listConnectors.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listConnectorsStream with error', async () => {
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2845,16 +2844,16 @@ describe('v1.ManagedKafkaConnectClient', () => {
       assert(
         (client.descriptors.page.listConnectors.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listConnectors without error', async () => {
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2896,16 +2895,16 @@ describe('v1.ManagedKafkaConnectClient', () => {
       assert(
         (client.descriptors.page.listConnectors.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listConnectors with error', async () => {
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2938,9 +2937,9 @@ describe('v1.ManagedKafkaConnectClient', () => {
       assert(
         (client.descriptors.page.listConnectors.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2948,7 +2947,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
     it('invokes getLocation without error', async () => {
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2980,7 +2979,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
     it('invokes getLocation without error using callback', async () => {
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3026,7 +3025,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
     it('invokes getLocation with error', async () => {
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3063,7 +3062,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3113,7 +3112,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
     it('uses async iteration with listLocations with error', async () => {
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3156,7 +3155,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
     it('invokes getOperation without error', async () => {
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3179,7 +3178,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
     it('invokes getOperation without error using callback', async () => {
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3208,7 +3207,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3219,7 +3218,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
     it('invokes getOperation with error', async () => {
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3245,7 +3244,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3269,7 +3268,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
     it('invokes cancelOperation without error using callback', async () => {
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3298,7 +3297,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3309,7 +3308,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
     it('invokes cancelOperation with error', async () => {
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3335,7 +3334,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3359,7 +3358,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
     it('invokes deleteOperation without error using callback', async () => {
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3388,7 +3387,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3399,7 +3398,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
     it('invokes deleteOperation with error', async () => {
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3425,7 +3424,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3462,7 +3461,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
     it('uses async iteration with listOperations with error', async () => {
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3501,7 +3500,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
       };
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3578,7 +3577,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
       };
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3644,7 +3643,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
       };
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3712,7 +3711,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
       };
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3790,7 +3789,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
       };
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3866,7 +3865,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
       };
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3916,7 +3915,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
       };
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3959,7 +3958,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
       };
       const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );

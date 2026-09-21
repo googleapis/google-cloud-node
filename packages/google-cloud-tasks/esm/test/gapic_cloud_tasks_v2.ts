@@ -20,16 +20,16 @@
 import * as protos from '../../protos/protos.js';
 import assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as cloudtasksModule from '../src/index.js';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, LocationProtos } from 'google-gax';
+import {protobuf, LocationProtos} from 'google-gax';
 import fs from 'fs';
 import path from 'path';
-import { fileURLToPath } from 'url';
+import {fileURLToPath} from 'url';
 
 // @ts-ignore
 const dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -56,7 +56,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -128,9 +128,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -248,7 +248,7 @@ describe('v2.CloudTasksClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new cloudtasksModule.v2.CloudTasksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.cloudTasksStub, undefined);
@@ -256,12 +256,12 @@ describe('v2.CloudTasksClient', () => {
       assert(client.cloudTasksStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new cloudtasksModule.v2.CloudTasksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.cloudTasksStub);
@@ -270,14 +270,14 @@ describe('v2.CloudTasksClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new cloudtasksModule.v2.CloudTasksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.cloudTasksStub, undefined);
@@ -286,7 +286,7 @@ describe('v2.CloudTasksClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -294,7 +294,7 @@ describe('v2.CloudTasksClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new cloudtasksModule.v2.CloudTasksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -306,7 +306,7 @@ describe('v2.CloudTasksClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new cloudtasksModule.v2.CloudTasksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -329,7 +329,7 @@ describe('v2.CloudTasksClient', () => {
   describe('getQueue', () => {
     it('invokes getQueue without error', async () => {
       const client = new cloudtasksModule.v2.CloudTasksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -360,7 +360,7 @@ describe('v2.CloudTasksClient', () => {
 
     it('invokes getQueue without error using callback', async () => {
       const client = new cloudtasksModule.v2.CloudTasksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -407,7 +407,7 @@ describe('v2.CloudTasksClient', () => {
 
     it('invokes getQueue with error', async () => {
       const client = new cloudtasksModule.v2.CloudTasksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -435,7 +435,7 @@ describe('v2.CloudTasksClient', () => {
 
     it('invokes getQueue with closed client', async () => {
       const client = new cloudtasksModule.v2.CloudTasksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -448,7 +448,7 @@ describe('v2.CloudTasksClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getQueue(request), expectedError);
@@ -458,7 +458,7 @@ describe('v2.CloudTasksClient', () => {
   describe('createQueue', () => {
     it('invokes createQueue without error', async () => {
       const client = new cloudtasksModule.v2.CloudTasksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -489,7 +489,7 @@ describe('v2.CloudTasksClient', () => {
 
     it('invokes createQueue without error using callback', async () => {
       const client = new cloudtasksModule.v2.CloudTasksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -536,7 +536,7 @@ describe('v2.CloudTasksClient', () => {
 
     it('invokes createQueue with error', async () => {
       const client = new cloudtasksModule.v2.CloudTasksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -567,7 +567,7 @@ describe('v2.CloudTasksClient', () => {
 
     it('invokes createQueue with closed client', async () => {
       const client = new cloudtasksModule.v2.CloudTasksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -580,7 +580,7 @@ describe('v2.CloudTasksClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createQueue(request), expectedError);
@@ -590,7 +590,7 @@ describe('v2.CloudTasksClient', () => {
   describe('updateQueue', () => {
     it('invokes updateQueue without error', async () => {
       const client = new cloudtasksModule.v2.CloudTasksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -622,7 +622,7 @@ describe('v2.CloudTasksClient', () => {
 
     it('invokes updateQueue without error using callback', async () => {
       const client = new cloudtasksModule.v2.CloudTasksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -670,7 +670,7 @@ describe('v2.CloudTasksClient', () => {
 
     it('invokes updateQueue with error', async () => {
       const client = new cloudtasksModule.v2.CloudTasksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -702,7 +702,7 @@ describe('v2.CloudTasksClient', () => {
 
     it('invokes updateQueue with closed client', async () => {
       const client = new cloudtasksModule.v2.CloudTasksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -716,7 +716,7 @@ describe('v2.CloudTasksClient', () => {
       );
       request.queue.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateQueue(request), expectedError);
@@ -726,7 +726,7 @@ describe('v2.CloudTasksClient', () => {
   describe('deleteQueue', () => {
     it('invokes deleteQueue without error', async () => {
       const client = new cloudtasksModule.v2.CloudTasksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -757,7 +757,7 @@ describe('v2.CloudTasksClient', () => {
 
     it('invokes deleteQueue without error using callback', async () => {
       const client = new cloudtasksModule.v2.CloudTasksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -804,7 +804,7 @@ describe('v2.CloudTasksClient', () => {
 
     it('invokes deleteQueue with error', async () => {
       const client = new cloudtasksModule.v2.CloudTasksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -835,7 +835,7 @@ describe('v2.CloudTasksClient', () => {
 
     it('invokes deleteQueue with closed client', async () => {
       const client = new cloudtasksModule.v2.CloudTasksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -848,7 +848,7 @@ describe('v2.CloudTasksClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteQueue(request), expectedError);
@@ -858,7 +858,7 @@ describe('v2.CloudTasksClient', () => {
   describe('purgeQueue', () => {
     it('invokes purgeQueue without error', async () => {
       const client = new cloudtasksModule.v2.CloudTasksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -889,7 +889,7 @@ describe('v2.CloudTasksClient', () => {
 
     it('invokes purgeQueue without error using callback', async () => {
       const client = new cloudtasksModule.v2.CloudTasksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -936,7 +936,7 @@ describe('v2.CloudTasksClient', () => {
 
     it('invokes purgeQueue with error', async () => {
       const client = new cloudtasksModule.v2.CloudTasksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -967,7 +967,7 @@ describe('v2.CloudTasksClient', () => {
 
     it('invokes purgeQueue with closed client', async () => {
       const client = new cloudtasksModule.v2.CloudTasksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -980,7 +980,7 @@ describe('v2.CloudTasksClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.purgeQueue(request), expectedError);
@@ -990,7 +990,7 @@ describe('v2.CloudTasksClient', () => {
   describe('pauseQueue', () => {
     it('invokes pauseQueue without error', async () => {
       const client = new cloudtasksModule.v2.CloudTasksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1021,7 +1021,7 @@ describe('v2.CloudTasksClient', () => {
 
     it('invokes pauseQueue without error using callback', async () => {
       const client = new cloudtasksModule.v2.CloudTasksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1068,7 +1068,7 @@ describe('v2.CloudTasksClient', () => {
 
     it('invokes pauseQueue with error', async () => {
       const client = new cloudtasksModule.v2.CloudTasksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1099,7 +1099,7 @@ describe('v2.CloudTasksClient', () => {
 
     it('invokes pauseQueue with closed client', async () => {
       const client = new cloudtasksModule.v2.CloudTasksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1112,7 +1112,7 @@ describe('v2.CloudTasksClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.pauseQueue(request), expectedError);
@@ -1122,7 +1122,7 @@ describe('v2.CloudTasksClient', () => {
   describe('resumeQueue', () => {
     it('invokes resumeQueue without error', async () => {
       const client = new cloudtasksModule.v2.CloudTasksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1153,7 +1153,7 @@ describe('v2.CloudTasksClient', () => {
 
     it('invokes resumeQueue without error using callback', async () => {
       const client = new cloudtasksModule.v2.CloudTasksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1200,7 +1200,7 @@ describe('v2.CloudTasksClient', () => {
 
     it('invokes resumeQueue with error', async () => {
       const client = new cloudtasksModule.v2.CloudTasksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1231,7 +1231,7 @@ describe('v2.CloudTasksClient', () => {
 
     it('invokes resumeQueue with closed client', async () => {
       const client = new cloudtasksModule.v2.CloudTasksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1244,7 +1244,7 @@ describe('v2.CloudTasksClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.resumeQueue(request), expectedError);
@@ -1254,7 +1254,7 @@ describe('v2.CloudTasksClient', () => {
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', async () => {
       const client = new cloudtasksModule.v2.CloudTasksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1285,7 +1285,7 @@ describe('v2.CloudTasksClient', () => {
 
     it('invokes getIamPolicy without error using callback', async () => {
       const client = new cloudtasksModule.v2.CloudTasksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1332,7 +1332,7 @@ describe('v2.CloudTasksClient', () => {
 
     it('invokes getIamPolicy with error', async () => {
       const client = new cloudtasksModule.v2.CloudTasksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1363,7 +1363,7 @@ describe('v2.CloudTasksClient', () => {
 
     it('invokes getIamPolicy with closed client', async () => {
       const client = new cloudtasksModule.v2.CloudTasksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1376,7 +1376,7 @@ describe('v2.CloudTasksClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getIamPolicy(request), expectedError);
@@ -1386,7 +1386,7 @@ describe('v2.CloudTasksClient', () => {
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', async () => {
       const client = new cloudtasksModule.v2.CloudTasksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1417,7 +1417,7 @@ describe('v2.CloudTasksClient', () => {
 
     it('invokes setIamPolicy without error using callback', async () => {
       const client = new cloudtasksModule.v2.CloudTasksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1464,7 +1464,7 @@ describe('v2.CloudTasksClient', () => {
 
     it('invokes setIamPolicy with error', async () => {
       const client = new cloudtasksModule.v2.CloudTasksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1495,7 +1495,7 @@ describe('v2.CloudTasksClient', () => {
 
     it('invokes setIamPolicy with closed client', async () => {
       const client = new cloudtasksModule.v2.CloudTasksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1508,7 +1508,7 @@ describe('v2.CloudTasksClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.setIamPolicy(request), expectedError);
@@ -1518,7 +1518,7 @@ describe('v2.CloudTasksClient', () => {
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', async () => {
       const client = new cloudtasksModule.v2.CloudTasksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1550,7 +1550,7 @@ describe('v2.CloudTasksClient', () => {
 
     it('invokes testIamPermissions without error using callback', async () => {
       const client = new cloudtasksModule.v2.CloudTasksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1597,7 +1597,7 @@ describe('v2.CloudTasksClient', () => {
 
     it('invokes testIamPermissions with error', async () => {
       const client = new cloudtasksModule.v2.CloudTasksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1628,7 +1628,7 @@ describe('v2.CloudTasksClient', () => {
 
     it('invokes testIamPermissions with closed client', async () => {
       const client = new cloudtasksModule.v2.CloudTasksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1641,7 +1641,7 @@ describe('v2.CloudTasksClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.testIamPermissions(request), expectedError);
@@ -1651,7 +1651,7 @@ describe('v2.CloudTasksClient', () => {
   describe('getTask', () => {
     it('invokes getTask without error', async () => {
       const client = new cloudtasksModule.v2.CloudTasksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1682,7 +1682,7 @@ describe('v2.CloudTasksClient', () => {
 
     it('invokes getTask without error using callback', async () => {
       const client = new cloudtasksModule.v2.CloudTasksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1729,7 +1729,7 @@ describe('v2.CloudTasksClient', () => {
 
     it('invokes getTask with error', async () => {
       const client = new cloudtasksModule.v2.CloudTasksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1757,7 +1757,7 @@ describe('v2.CloudTasksClient', () => {
 
     it('invokes getTask with closed client', async () => {
       const client = new cloudtasksModule.v2.CloudTasksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1770,7 +1770,7 @@ describe('v2.CloudTasksClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getTask(request), expectedError);
@@ -1780,7 +1780,7 @@ describe('v2.CloudTasksClient', () => {
   describe('createTask', () => {
     it('invokes createTask without error', async () => {
       const client = new cloudtasksModule.v2.CloudTasksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1811,7 +1811,7 @@ describe('v2.CloudTasksClient', () => {
 
     it('invokes createTask without error using callback', async () => {
       const client = new cloudtasksModule.v2.CloudTasksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1858,7 +1858,7 @@ describe('v2.CloudTasksClient', () => {
 
     it('invokes createTask with error', async () => {
       const client = new cloudtasksModule.v2.CloudTasksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1889,7 +1889,7 @@ describe('v2.CloudTasksClient', () => {
 
     it('invokes createTask with closed client', async () => {
       const client = new cloudtasksModule.v2.CloudTasksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1902,7 +1902,7 @@ describe('v2.CloudTasksClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createTask(request), expectedError);
@@ -1912,7 +1912,7 @@ describe('v2.CloudTasksClient', () => {
   describe('deleteTask', () => {
     it('invokes deleteTask without error', async () => {
       const client = new cloudtasksModule.v2.CloudTasksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1943,7 +1943,7 @@ describe('v2.CloudTasksClient', () => {
 
     it('invokes deleteTask without error using callback', async () => {
       const client = new cloudtasksModule.v2.CloudTasksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1990,7 +1990,7 @@ describe('v2.CloudTasksClient', () => {
 
     it('invokes deleteTask with error', async () => {
       const client = new cloudtasksModule.v2.CloudTasksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2021,7 +2021,7 @@ describe('v2.CloudTasksClient', () => {
 
     it('invokes deleteTask with closed client', async () => {
       const client = new cloudtasksModule.v2.CloudTasksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2034,7 +2034,7 @@ describe('v2.CloudTasksClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteTask(request), expectedError);
@@ -2044,7 +2044,7 @@ describe('v2.CloudTasksClient', () => {
   describe('runTask', () => {
     it('invokes runTask without error', async () => {
       const client = new cloudtasksModule.v2.CloudTasksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2075,7 +2075,7 @@ describe('v2.CloudTasksClient', () => {
 
     it('invokes runTask without error using callback', async () => {
       const client = new cloudtasksModule.v2.CloudTasksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2122,7 +2122,7 @@ describe('v2.CloudTasksClient', () => {
 
     it('invokes runTask with error', async () => {
       const client = new cloudtasksModule.v2.CloudTasksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2150,7 +2150,7 @@ describe('v2.CloudTasksClient', () => {
 
     it('invokes runTask with closed client', async () => {
       const client = new cloudtasksModule.v2.CloudTasksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2163,7 +2163,7 @@ describe('v2.CloudTasksClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.runTask(request), expectedError);
@@ -2173,7 +2173,7 @@ describe('v2.CloudTasksClient', () => {
   describe('listQueues', () => {
     it('invokes listQueues without error', async () => {
       const client = new cloudtasksModule.v2.CloudTasksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2206,7 +2206,7 @@ describe('v2.CloudTasksClient', () => {
 
     it('invokes listQueues without error using callback', async () => {
       const client = new cloudtasksModule.v2.CloudTasksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2255,7 +2255,7 @@ describe('v2.CloudTasksClient', () => {
 
     it('invokes listQueues with error', async () => {
       const client = new cloudtasksModule.v2.CloudTasksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2286,7 +2286,7 @@ describe('v2.CloudTasksClient', () => {
 
     it('invokes listQueuesStream without error', async () => {
       const client = new cloudtasksModule.v2.CloudTasksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2329,15 +2329,15 @@ describe('v2.CloudTasksClient', () => {
       assert(
         (client.descriptors.page.listQueues.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listQueuesStream with error', async () => {
       const client = new cloudtasksModule.v2.CloudTasksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2377,15 +2377,15 @@ describe('v2.CloudTasksClient', () => {
       assert(
         (client.descriptors.page.listQueues.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listQueues without error', async () => {
       const client = new cloudtasksModule.v2.CloudTasksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2420,15 +2420,15 @@ describe('v2.CloudTasksClient', () => {
       assert(
         (client.descriptors.page.listQueues.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listQueues with error', async () => {
       const client = new cloudtasksModule.v2.CloudTasksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2462,9 +2462,9 @@ describe('v2.CloudTasksClient', () => {
       assert(
         (client.descriptors.page.listQueues.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2472,7 +2472,7 @@ describe('v2.CloudTasksClient', () => {
   describe('listTasks', () => {
     it('invokes listTasks without error', async () => {
       const client = new cloudtasksModule.v2.CloudTasksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2505,7 +2505,7 @@ describe('v2.CloudTasksClient', () => {
 
     it('invokes listTasks without error using callback', async () => {
       const client = new cloudtasksModule.v2.CloudTasksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2554,7 +2554,7 @@ describe('v2.CloudTasksClient', () => {
 
     it('invokes listTasks with error', async () => {
       const client = new cloudtasksModule.v2.CloudTasksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2582,7 +2582,7 @@ describe('v2.CloudTasksClient', () => {
 
     it('invokes listTasksStream without error', async () => {
       const client = new cloudtasksModule.v2.CloudTasksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2625,15 +2625,15 @@ describe('v2.CloudTasksClient', () => {
       assert(
         (client.descriptors.page.listTasks.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listTasksStream with error', async () => {
       const client = new cloudtasksModule.v2.CloudTasksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2673,15 +2673,15 @@ describe('v2.CloudTasksClient', () => {
       assert(
         (client.descriptors.page.listTasks.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listTasks without error', async () => {
       const client = new cloudtasksModule.v2.CloudTasksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2715,15 +2715,15 @@ describe('v2.CloudTasksClient', () => {
       assert(
         (client.descriptors.page.listTasks.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listTasks with error', async () => {
       const client = new cloudtasksModule.v2.CloudTasksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2756,16 +2756,16 @@ describe('v2.CloudTasksClient', () => {
       assert(
         (client.descriptors.page.listTasks.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new cloudtasksModule.v2.CloudTasksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2795,7 +2795,7 @@ describe('v2.CloudTasksClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new cloudtasksModule.v2.CloudTasksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2839,7 +2839,7 @@ describe('v2.CloudTasksClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new cloudtasksModule.v2.CloudTasksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2874,7 +2874,7 @@ describe('v2.CloudTasksClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new cloudtasksModule.v2.CloudTasksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2922,7 +2922,7 @@ describe('v2.CloudTasksClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new cloudtasksModule.v2.CloudTasksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2969,10 +2969,10 @@ describe('v2.CloudTasksClient', () => {
         location: 'locationValue',
       };
       const client = new cloudtasksModule.v2.CloudTasksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       client.pathTemplates.locationPathTemplate.render = sinon
@@ -3019,10 +3019,10 @@ describe('v2.CloudTasksClient', () => {
         project: 'projectValue',
       };
       const client = new cloudtasksModule.v2.CloudTasksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       client.pathTemplates.projectPathTemplate.render = sinon
@@ -3061,10 +3061,10 @@ describe('v2.CloudTasksClient', () => {
         queue: 'queueValue',
       };
       const client = new cloudtasksModule.v2.CloudTasksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       client.pathTemplates.queuePathTemplate.render = sinon
@@ -3128,10 +3128,10 @@ describe('v2.CloudTasksClient', () => {
         task: 'taskValue',
       };
       const client = new cloudtasksModule.v2.CloudTasksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       client.pathTemplates.taskPathTemplate.render = sinon

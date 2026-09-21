@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as accounttaxserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -167,7 +167,7 @@ describe('v1beta.AccountTaxServiceClient', () => {
     }
     it('sets apiEndpoint according to universe domain camelCase', () => {
       const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
-        { universeDomain: 'example.com' },
+        {universeDomain: 'example.com'},
       );
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'merchantapi.example.com');
@@ -175,7 +175,7 @@ describe('v1beta.AccountTaxServiceClient', () => {
 
     it('sets apiEndpoint according to universe domain snakeCase', () => {
       const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
-        { universe_domain: 'example.com' },
+        {universe_domain: 'example.com'},
       );
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'merchantapi.example.com');
@@ -247,7 +247,7 @@ describe('v1beta.AccountTaxServiceClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -256,14 +256,14 @@ describe('v1beta.AccountTaxServiceClient', () => {
       assert(client.accountTaxServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.accountTaxServiceStub);
@@ -272,15 +272,15 @@ describe('v1beta.AccountTaxServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -290,7 +290,7 @@ describe('v1beta.AccountTaxServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -299,7 +299,7 @@ describe('v1beta.AccountTaxServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -313,7 +313,7 @@ describe('v1beta.AccountTaxServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -338,7 +338,7 @@ describe('v1beta.AccountTaxServiceClient', () => {
     it('invokes getAccountTax without error', async () => {
       const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -371,7 +371,7 @@ describe('v1beta.AccountTaxServiceClient', () => {
     it('invokes getAccountTax without error using callback', async () => {
       const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -420,7 +420,7 @@ describe('v1beta.AccountTaxServiceClient', () => {
     it('invokes getAccountTax with error', async () => {
       const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -453,7 +453,7 @@ describe('v1beta.AccountTaxServiceClient', () => {
     it('invokes getAccountTax with closed client', async () => {
       const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -467,7 +467,7 @@ describe('v1beta.AccountTaxServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getAccountTax(request), expectedError);
@@ -478,7 +478,7 @@ describe('v1beta.AccountTaxServiceClient', () => {
     it('invokes updateAccountTax without error', async () => {
       const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -512,7 +512,7 @@ describe('v1beta.AccountTaxServiceClient', () => {
     it('invokes updateAccountTax without error using callback', async () => {
       const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -562,7 +562,7 @@ describe('v1beta.AccountTaxServiceClient', () => {
     it('invokes updateAccountTax with error', async () => {
       const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -596,7 +596,7 @@ describe('v1beta.AccountTaxServiceClient', () => {
     it('invokes updateAccountTax with closed client', async () => {
       const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -611,7 +611,7 @@ describe('v1beta.AccountTaxServiceClient', () => {
       );
       request.accountTax.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateAccountTax(request), expectedError);
@@ -622,7 +622,7 @@ describe('v1beta.AccountTaxServiceClient', () => {
     it('invokes listAccountTax without error', async () => {
       const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -663,7 +663,7 @@ describe('v1beta.AccountTaxServiceClient', () => {
     it('invokes listAccountTax without error using callback', async () => {
       const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -722,7 +722,7 @@ describe('v1beta.AccountTaxServiceClient', () => {
     it('invokes listAccountTax with error', async () => {
       const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -755,7 +755,7 @@ describe('v1beta.AccountTaxServiceClient', () => {
     it('invokes listAccountTaxStream without error', async () => {
       const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -811,16 +811,16 @@ describe('v1beta.AccountTaxServiceClient', () => {
       assert(
         (client.descriptors.page.listAccountTax.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listAccountTaxStream with error', async () => {
       const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -865,16 +865,16 @@ describe('v1beta.AccountTaxServiceClient', () => {
       assert(
         (client.descriptors.page.listAccountTax.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listAccountTax without error', async () => {
       const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -917,16 +917,16 @@ describe('v1beta.AccountTaxServiceClient', () => {
       assert(
         (client.descriptors.page.listAccountTax.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listAccountTax with error', async () => {
       const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -960,9 +960,9 @@ describe('v1beta.AccountTaxServiceClient', () => {
       assert(
         (client.descriptors.page.listAccountTax.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -975,7 +975,7 @@ describe('v1beta.AccountTaxServiceClient', () => {
       };
       const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1016,7 +1016,7 @@ describe('v1beta.AccountTaxServiceClient', () => {
       };
       const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1067,7 +1067,7 @@ describe('v1beta.AccountTaxServiceClient', () => {
       };
       const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1117,7 +1117,7 @@ describe('v1beta.AccountTaxServiceClient', () => {
       };
       const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1160,7 +1160,7 @@ describe('v1beta.AccountTaxServiceClient', () => {
       };
       const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1207,7 +1207,7 @@ describe('v1beta.AccountTaxServiceClient', () => {
       };
       const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1250,7 +1250,7 @@ describe('v1beta.AccountTaxServiceClient', () => {
       };
       const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1291,7 +1291,7 @@ describe('v1beta.AccountTaxServiceClient', () => {
       };
       const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1348,7 +1348,7 @@ describe('v1beta.AccountTaxServiceClient', () => {
       };
       const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1405,7 +1405,7 @@ describe('v1beta.AccountTaxServiceClient', () => {
       };
       const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1455,7 +1455,7 @@ describe('v1beta.AccountTaxServiceClient', () => {
       };
       const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1497,7 +1497,7 @@ describe('v1beta.AccountTaxServiceClient', () => {
       };
       const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1563,7 +1563,7 @@ describe('v1beta.AccountTaxServiceClient', () => {
       };
       const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1627,7 +1627,7 @@ describe('v1beta.AccountTaxServiceClient', () => {
       };
       const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1691,7 +1691,7 @@ describe('v1beta.AccountTaxServiceClient', () => {
       };
       const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1742,7 +1742,7 @@ describe('v1beta.AccountTaxServiceClient', () => {
       };
       const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1792,7 +1792,7 @@ describe('v1beta.AccountTaxServiceClient', () => {
       };
       const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1835,7 +1835,7 @@ describe('v1beta.AccountTaxServiceClient', () => {
       };
       const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1876,7 +1876,7 @@ describe('v1beta.AccountTaxServiceClient', () => {
       };
       const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1939,7 +1939,7 @@ describe('v1beta.AccountTaxServiceClient', () => {
       };
       const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );

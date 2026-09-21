@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/mapmanagement-v0.2.0...mapmanagement-v0.3.0) (2026-08-21)
+
+
+### Features
+
+* **google/maps/mapmanagement/v2:** Onboard a new library ([#9171](https://github.com/googleapis/google-cloud-node/issues/9171)) ([461fbe3](https://github.com/googleapis/google-cloud-node/commit/461fbe38c9b67ab78b3a6244ddec2d8194fd53b9))
+
 ## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/mapmanagement-v0.1.1...mapmanagement-v0.2.0) (2026-08-04)
 
 

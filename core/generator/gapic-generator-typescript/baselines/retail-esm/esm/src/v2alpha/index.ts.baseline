@@ -16,18 +16,18 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export { AnalyticsServiceClient } from './analytics_service_client.js';
-export { BranchServiceClient } from './branch_service_client.js';
-export { CatalogServiceClient } from './catalog_service_client.js';
-export { CompletionServiceClient } from './completion_service_client.js';
-export { ControlServiceClient } from './control_service_client.js';
-export { ConversationalSearchServiceClient } from './conversational_search_service_client.js';
-export { GenerativeQuestionServiceClient } from './generative_question_service_client.js';
-export { MerchantCenterAccountLinkServiceClient } from './merchant_center_account_link_service_client.js';
-export { ModelServiceClient } from './model_service_client.js';
-export { PredictionServiceClient } from './prediction_service_client.js';
-export { ProductServiceClient } from './product_service_client.js';
-export { ProjectServiceClient } from './project_service_client.js';
-export { SearchServiceClient } from './search_service_client.js';
-export { ServingConfigServiceClient } from './serving_config_service_client.js';
-export { UserEventServiceClient } from './user_event_service_client.js';
+export {AnalyticsServiceClient} from './analytics_service_client.js';
+export {BranchServiceClient} from './branch_service_client.js';
+export {CatalogServiceClient} from './catalog_service_client.js';
+export {CompletionServiceClient} from './completion_service_client.js';
+export {ControlServiceClient} from './control_service_client.js';
+export {ConversationalSearchServiceClient} from './conversational_search_service_client.js';
+export {GenerativeQuestionServiceClient} from './generative_question_service_client.js';
+export {MerchantCenterAccountLinkServiceClient} from './merchant_center_account_link_service_client.js';
+export {ModelServiceClient} from './model_service_client.js';
+export {PredictionServiceClient} from './prediction_service_client.js';
+export {ProductServiceClient} from './product_service_client.js';
+export {ProjectServiceClient} from './project_service_client.js';
+export {SearchServiceClient} from './search_service_client.js';
+export {ServingConfigServiceClient} from './serving_config_service_client.js';
+export {UserEventServiceClient} from './user_event_service_client.js';

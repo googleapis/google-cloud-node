@@ -30,10 +30,10 @@ import type {
   LocationsClient,
   LocationProtos,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -55,7 +55,7 @@ export class OracleDatabaseClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('oracledatabase');
@@ -68,11 +68,11 @@ export class OracleDatabaseClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
+  innerApiCalls: {[name: string]: Function};
   locationsClient: LocationsClient;
-  pathTemplates: { [name: string]: gax.PathTemplate };
+  pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
-  oracleDatabaseStub?: Promise<{ [name: string]: Function }>;
+  oracleDatabaseStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of OracleDatabaseClient.
@@ -148,7 +148,7 @@ export class OracleDatabaseClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -593,6 +593,12 @@ export class OracleDatabaseClient {
     const failoverAutonomousDatabaseMetadata = protoFilesRoot.lookup(
       '.google.cloud.oracledatabase.v1.OperationMetadata',
     ) as gax.protobuf.Type;
+    const refreshAutonomousDatabaseResponse = protoFilesRoot.lookup(
+      '.google.cloud.oracledatabase.v1.AutonomousDatabase',
+    ) as gax.protobuf.Type;
+    const refreshAutonomousDatabaseMetadata = protoFilesRoot.lookup(
+      '.google.cloud.oracledatabase.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const createOdbNetworkResponse = protoFilesRoot.lookup(
       '.google.cloud.oracledatabase.v1.OdbNetwork',
     ) as gax.protobuf.Type;
@@ -836,6 +842,15 @@ export class OracleDatabaseClient {
           failoverAutonomousDatabaseMetadata,
         ),
       ),
+      refreshAutonomousDatabase: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        refreshAutonomousDatabaseResponse.decode.bind(
+          refreshAutonomousDatabaseResponse,
+        ),
+        refreshAutonomousDatabaseMetadata.decode.bind(
+          refreshAutonomousDatabaseMetadata,
+        ),
+      ),
       createOdbNetwork: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createOdbNetworkResponse.decode.bind(createOdbNetworkResponse),
@@ -990,7 +1005,7 @@ export class OracleDatabaseClient {
       'google.cloud.oracledatabase.v1.OracleDatabase',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -1030,7 +1045,7 @@ export class OracleDatabaseClient {
           (this._protos as any).google.cloud.oracledatabase.v1.OracleDatabase,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -1065,6 +1080,8 @@ export class OracleDatabaseClient {
       'restartAutonomousDatabase',
       'switchoverAutonomousDatabase',
       'failoverAutonomousDatabase',
+      'refreshAutonomousDatabase',
+      'getAutonomousDatabaseRefreshableClones',
       'listOdbNetworks',
       'getOdbNetwork',
       'createOdbNetwork',
@@ -1116,7 +1133,7 @@ export class OracleDatabaseClient {
     ];
     for (const methodName of oracleDatabaseStubMethods) {
       const callPromise = this.oracleDatabaseStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -1325,7 +1342,7 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getCloudExadataInfrastructure request %j', request);
@@ -1469,7 +1486,7 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getCloudVmCluster request %j', request);
@@ -1613,7 +1630,7 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getAutonomousDatabase request %j', request);
@@ -1766,7 +1783,7 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('generateAutonomousDatabaseWallet request %j', request);
@@ -1800,6 +1817,160 @@ export class OracleDatabaseClient {
         ]) => {
           this._log.info(
             'generateAutonomousDatabaseWallet response %j',
+            response,
+          );
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Gets the refreshable clones for a given Autonomous Database.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The Autonomous Database resource whose refreshable clones are to
+   *   be listed. Format:
+   *   projects/{project}/locations/{location}/autonomousDatabases/{autonomous_database}
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.oracledatabase.v1.AutonomousDatabaseRefreshableClones|AutonomousDatabaseRefreshableClones}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/oracle_database.get_autonomous_database_refreshable_clones.js</caption>
+   * region_tag:oracledatabase_v1_generated_OracleDatabase_GetAutonomousDatabaseRefreshableClones_async
+   */
+  getAutonomousDatabaseRefreshableClones(
+    request?: protos.google.cloud.oracledatabase.v1.IGetAutonomousDatabaseRefreshableClonesRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.oracledatabase.v1.IAutonomousDatabaseRefreshableClones,
+      (
+        | protos.google.cloud.oracledatabase.v1.IGetAutonomousDatabaseRefreshableClonesRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  getAutonomousDatabaseRefreshableClones(
+    request: protos.google.cloud.oracledatabase.v1.IGetAutonomousDatabaseRefreshableClonesRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.oracledatabase.v1.IAutonomousDatabaseRefreshableClones,
+      | protos.google.cloud.oracledatabase.v1.IGetAutonomousDatabaseRefreshableClonesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getAutonomousDatabaseRefreshableClones(
+    request: protos.google.cloud.oracledatabase.v1.IGetAutonomousDatabaseRefreshableClonesRequest,
+    callback: Callback<
+      protos.google.cloud.oracledatabase.v1.IAutonomousDatabaseRefreshableClones,
+      | protos.google.cloud.oracledatabase.v1.IGetAutonomousDatabaseRefreshableClonesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getAutonomousDatabaseRefreshableClones(
+    request?: protos.google.cloud.oracledatabase.v1.IGetAutonomousDatabaseRefreshableClonesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.oracledatabase.v1.IAutonomousDatabaseRefreshableClones,
+          | protos.google.cloud.oracledatabase.v1.IGetAutonomousDatabaseRefreshableClonesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.oracledatabase.v1.IAutonomousDatabaseRefreshableClones,
+      | protos.google.cloud.oracledatabase.v1.IGetAutonomousDatabaseRefreshableClonesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.oracledatabase.v1.IAutonomousDatabaseRefreshableClones,
+      (
+        | protos.google.cloud.oracledatabase.v1.IGetAutonomousDatabaseRefreshableClonesRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info(
+      'getAutonomousDatabaseRefreshableClones request %j',
+      request,
+    );
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.oracledatabase.v1.IAutonomousDatabaseRefreshableClones,
+          | protos.google.cloud.oracledatabase.v1.IGetAutonomousDatabaseRefreshableClonesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'getAutonomousDatabaseRefreshableClones response %j',
+            response,
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getAutonomousDatabaseRefreshableClones(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.oracledatabase.v1.IAutonomousDatabaseRefreshableClones,
+          (
+            | protos.google.cloud.oracledatabase.v1.IGetAutonomousDatabaseRefreshableClonesRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'getAutonomousDatabaseRefreshableClones response %j',
             response,
           );
           return [response, options, rawResponse];
@@ -1910,7 +2081,7 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getOdbNetwork request %j', request);
@@ -2048,7 +2219,7 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getOdbSubnet request %j', request);
@@ -2192,7 +2363,7 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getExadbVmCluster request %j', request);
@@ -2336,7 +2507,7 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getExascaleDbStorageVault request %j', request);
@@ -2474,7 +2645,7 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getDatabase request %j', request);
@@ -2616,7 +2787,7 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getPluggableDatabase request %j', request);
@@ -2754,7 +2925,7 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getDbSystem request %j', request);
@@ -2895,7 +3066,7 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getGoldengateDeployment request %j', request);
@@ -3039,7 +3210,7 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getGoldengateConnection request %j', request);
@@ -3184,7 +3355,7 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getGoldengateConnectionAssignment request %j', request);
@@ -3337,7 +3508,7 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('testGoldengateConnectionAssignment request %j', request);
@@ -3510,7 +3681,7 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3573,7 +3744,7 @@ export class OracleDatabaseClient {
     this._log.info('createCloudExadataInfrastructure long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3700,7 +3871,7 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3763,7 +3934,7 @@ export class OracleDatabaseClient {
     this._log.info('deleteCloudExadataInfrastructure long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3787,6 +3958,8 @@ export class OracleDatabaseClient {
    *   projects/{project}/locations/{location}/cloudExadataInfrastructures/{cloud_exadata_infrastructure}.
    * @param {number} request.totalStorageSizeGb
    *   Required. The total storage to be allocated to Exascale in GBs.
+   * @param {number} [request.totalVmStorageSizeGb]
+   *   Optional. Storage size needed for VM storage on Exascale in GBs.
    * @param {string} [request.requestId]
    *   Optional. An optional ID to identify the request.
    * @param {object} [options]
@@ -3881,7 +4054,7 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3951,7 +4124,7 @@ export class OracleDatabaseClient {
     this._log.info('configureExascaleCloudExadataInfrastructure long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4080,7 +4253,7 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4137,7 +4310,7 @@ export class OracleDatabaseClient {
     this._log.info('createCloudVmCluster long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4263,7 +4436,7 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4320,7 +4493,7 @@ export class OracleDatabaseClient {
     this._log.info('deleteCloudVmCluster long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4449,7 +4622,7 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4506,7 +4679,7 @@ export class OracleDatabaseClient {
     this._log.info('createAutonomousDatabase long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4633,7 +4806,7 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         'autonomous_database.name': request.autonomousDatabase!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4690,7 +4863,7 @@ export class OracleDatabaseClient {
     this._log.info('updateAutonomousDatabase long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4812,7 +4985,7 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4869,7 +5042,7 @@ export class OracleDatabaseClient {
     this._log.info('deleteAutonomousDatabase long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4984,7 +5157,7 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5041,7 +5214,7 @@ export class OracleDatabaseClient {
     this._log.info('restoreAutonomousDatabase long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -5154,7 +5327,7 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5211,7 +5384,7 @@ export class OracleDatabaseClient {
     this._log.info('stopAutonomousDatabase long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -5324,7 +5497,7 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5381,7 +5554,7 @@ export class OracleDatabaseClient {
     this._log.info('startAutonomousDatabase long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -5494,7 +5667,7 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5551,7 +5724,7 @@ export class OracleDatabaseClient {
     this._log.info('restartAutonomousDatabase long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -5668,7 +5841,7 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5731,7 +5904,7 @@ export class OracleDatabaseClient {
     this._log.info('switchoverAutonomousDatabase long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -5848,7 +6021,7 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5905,12 +6078,187 @@ export class OracleDatabaseClient {
     this._log.info('failoverAutonomousDatabase long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
       operation,
       this.descriptors.longrunning.failoverAutonomousDatabase,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.oracledatabase.v1.AutonomousDatabase,
+      protos.google.cloud.oracledatabase.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Refreshes the refreshable clone of an Autonomous Database.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the AutonomousDatabase resource.
+   *   Format:
+   *   projects/{project}/location/{location}/autonomousDatabases/{autonomous_database}
+   * @param {google.protobuf.Timestamp} request.refreshCutoffTime
+   *   Required. The timestamp to which the Autonomous Database refreshable clone
+   *   will be refreshed. Changes made in the primary database after this
+   *   timestamp are not part of the data refresh.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/oracle_database.refresh_autonomous_database.js</caption>
+   * region_tag:oracledatabase_v1_generated_OracleDatabase_RefreshAutonomousDatabase_async
+   */
+  refreshAutonomousDatabase(
+    request?: protos.google.cloud.oracledatabase.v1.IRefreshAutonomousDatabaseRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  refreshAutonomousDatabase(
+    request: protos.google.cloud.oracledatabase.v1.IRefreshAutonomousDatabaseRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  refreshAutonomousDatabase(
+    request: protos.google.cloud.oracledatabase.v1.IRefreshAutonomousDatabaseRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  refreshAutonomousDatabase(
+    request?: protos.google.cloud.oracledatabase.v1.IRefreshAutonomousDatabaseRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
+            protos.google.cloud.oracledatabase.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
+            protos.google.cloud.oracledatabase.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('refreshAutonomousDatabase response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('refreshAutonomousDatabase request %j', request);
+    return this.innerApiCalls
+      .refreshAutonomousDatabase(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
+            protos.google.cloud.oracledatabase.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('refreshAutonomousDatabase response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
+  }
+  /**
+   * Check the status of the long running operation returned by `refreshAutonomousDatabase()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/oracle_database.refresh_autonomous_database.js</caption>
+   * region_tag:oracledatabase_v1_generated_OracleDatabase_RefreshAutonomousDatabase_async
+   */
+  async checkRefreshAutonomousDatabaseProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.oracledatabase.v1.AutonomousDatabase,
+      protos.google.cloud.oracledatabase.v1.OperationMetadata
+    >
+  > {
+    this._log.info('refreshAutonomousDatabase long-running');
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name},
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.refreshAutonomousDatabase,
       this._gaxModule.createDefaultBackoffSettings(),
     );
     return decodeOperation as LROperation<
@@ -6034,7 +6382,7 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6091,7 +6439,7 @@ export class OracleDatabaseClient {
     this._log.info('createOdbNetwork long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -6213,7 +6561,7 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6270,7 +6618,7 @@ export class OracleDatabaseClient {
     this._log.info('deleteOdbNetwork long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -6399,7 +6747,7 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6456,7 +6804,7 @@ export class OracleDatabaseClient {
     this._log.info('createOdbSubnet long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -6578,7 +6926,7 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6635,7 +6983,7 @@ export class OracleDatabaseClient {
     this._log.info('deleteOdbSubnet long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -6769,7 +7117,7 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6826,7 +7174,7 @@ export class OracleDatabaseClient {
     this._log.info('createExadbVmCluster long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -6948,7 +7296,7 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -7005,7 +7353,7 @@ export class OracleDatabaseClient {
     this._log.info('deleteExadbVmCluster long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -7131,7 +7479,7 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         'exadb_vm_cluster.name': request.exadbVmCluster!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -7188,7 +7536,7 @@ export class OracleDatabaseClient {
     this._log.info('updateExadbVmCluster long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -7313,7 +7661,7 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -7376,7 +7724,7 @@ export class OracleDatabaseClient {
     this._log.info('removeVirtualMachineExadbVmCluster long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -7510,7 +7858,7 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -7573,7 +7921,7 @@ export class OracleDatabaseClient {
     this._log.info('createExascaleDbStorageVault long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -7695,7 +8043,7 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -7758,7 +8106,7 @@ export class OracleDatabaseClient {
     this._log.info('deleteExascaleDbStorageVault long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -7892,7 +8240,7 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -7949,7 +8297,7 @@ export class OracleDatabaseClient {
     this._log.info('createDbSystem long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -8071,7 +8419,7 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -8128,7 +8476,7 @@ export class OracleDatabaseClient {
     this._log.info('deleteDbSystem long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -8262,7 +8610,7 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -8319,7 +8667,7 @@ export class OracleDatabaseClient {
     this._log.info('createGoldengateDeployment long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -8441,7 +8789,7 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -8498,7 +8846,7 @@ export class OracleDatabaseClient {
     this._log.info('deleteGoldengateDeployment long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -8611,7 +8959,7 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -8668,7 +9016,7 @@ export class OracleDatabaseClient {
     this._log.info('stopGoldengateDeployment long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -8781,7 +9129,7 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -8838,7 +9186,7 @@ export class OracleDatabaseClient {
     this._log.info('startGoldengateDeployment long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -8972,7 +9320,7 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -9029,7 +9377,7 @@ export class OracleDatabaseClient {
     this._log.info('createGoldengateConnection long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -9151,7 +9499,7 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -9208,7 +9556,7 @@ export class OracleDatabaseClient {
     this._log.info('deleteGoldengateConnection long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -9340,7 +9688,7 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -9403,7 +9751,7 @@ export class OracleDatabaseClient {
     this._log.info('createGoldengateConnectionAssignment long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -9531,7 +9879,7 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -9594,7 +9942,7 @@ export class OracleDatabaseClient {
     this._log.info('deleteGoldengateConnectionAssignment long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -9708,7 +10056,7 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -9783,7 +10131,7 @@ export class OracleDatabaseClient {
     const defaultCallSettings =
       this._defaults['listCloudExadataInfrastructures'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listCloudExadataInfrastructures stream %j', request);
@@ -9840,7 +10188,7 @@ export class OracleDatabaseClient {
     const defaultCallSettings =
       this._defaults['listCloudExadataInfrastructures'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listCloudExadataInfrastructures iterate %j', request);
@@ -9949,7 +10297,7 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -10021,7 +10369,7 @@ export class OracleDatabaseClient {
       });
     const defaultCallSettings = this._defaults['listCloudVmClusters'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listCloudVmClusters stream %j', request);
@@ -10075,7 +10423,7 @@ export class OracleDatabaseClient {
       });
     const defaultCallSettings = this._defaults['listCloudVmClusters'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listCloudVmClusters iterate %j', request);
@@ -10182,7 +10530,7 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -10252,7 +10600,7 @@ export class OracleDatabaseClient {
       });
     const defaultCallSettings = this._defaults['listEntitlements'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listEntitlements stream %j', request);
@@ -10304,7 +10652,7 @@ export class OracleDatabaseClient {
       });
     const defaultCallSettings = this._defaults['listEntitlements'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listEntitlements iterate %j', request);
@@ -10411,7 +10759,7 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -10481,7 +10829,7 @@ export class OracleDatabaseClient {
       });
     const defaultCallSettings = this._defaults['listDbServers'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listDbServers stream %j', request);
@@ -10533,7 +10881,7 @@ export class OracleDatabaseClient {
       });
     const defaultCallSettings = this._defaults['listDbServers'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listDbServers iterate %j', request);
@@ -10641,7 +10989,7 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -10712,7 +11060,7 @@ export class OracleDatabaseClient {
       });
     const defaultCallSettings = this._defaults['listDbNodes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listDbNodes stream %j', request);
@@ -10765,7 +11113,7 @@ export class OracleDatabaseClient {
       });
     const defaultCallSettings = this._defaults['listDbNodes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listDbNodes iterate %j', request);
@@ -10793,8 +11141,8 @@ export class OracleDatabaseClient {
    *   Optional. A token identifying a page of results the server should return.
    * @param {string} [request.filter]
    *   Optional. An expression for filtering the results of the request. Only the
-   *   shape, gcp_oracle_zone and gi_version fields are supported in this format:
-   *   `shape="{shape}"`.
+   *   `shape` and `gcp_oracle_zone_id` fields are supported in the following
+   *   format: `shape="{shape}" AND gcp_oracle_zone_id="{gcp_oracle_zone_id}"`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -10878,7 +11226,7 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -10926,8 +11274,8 @@ export class OracleDatabaseClient {
    *   Optional. A token identifying a page of results the server should return.
    * @param {string} [request.filter]
    *   Optional. An expression for filtering the results of the request. Only the
-   *   shape, gcp_oracle_zone and gi_version fields are supported in this format:
-   *   `shape="{shape}"`.
+   *   `shape` and `gcp_oracle_zone_id` fields are supported in the following
+   *   format: `shape="{shape}" AND gcp_oracle_zone_id="{gcp_oracle_zone_id}"`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -10953,7 +11301,7 @@ export class OracleDatabaseClient {
       });
     const defaultCallSettings = this._defaults['listGiVersions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listGiVersions stream %j', request);
@@ -10982,8 +11330,8 @@ export class OracleDatabaseClient {
    *   Optional. A token identifying a page of results the server should return.
    * @param {string} [request.filter]
    *   Optional. An expression for filtering the results of the request. Only the
-   *   shape, gcp_oracle_zone and gi_version fields are supported in this format:
-   *   `shape="{shape}"`.
+   *   `shape` and `gcp_oracle_zone_id` fields are supported in the following
+   *   format: `shape="{shape}" AND gcp_oracle_zone_id="{gcp_oracle_zone_id}"`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -11010,7 +11358,7 @@ export class OracleDatabaseClient {
       });
     const defaultCallSettings = this._defaults['listGiVersions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listGiVersions iterate %j', request);
@@ -11038,9 +11386,9 @@ export class OracleDatabaseClient {
    *   fields except the filter should remain the same as in the request that
    *   provided this page token.
    * @param {string} [request.filter]
-   *   Optional. An expression for filtering the results of the request.
-   *   Only shapeFamily and gcp_oracle_zone_id are supported in this format:
-   *   `shape_family="{shapeFamily}" AND
+   *   Optional. An expression for filtering the results of the request. Only the
+   *   `shape_family` and `gcp_oracle_zone_id` fields are supported in the
+   *   following format: `shape_family="{shape_family}" AND
    *   gcp_oracle_zone_id="{gcp_oracle_zone_id}"`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -11125,7 +11473,7 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -11173,9 +11521,9 @@ export class OracleDatabaseClient {
    *   fields except the filter should remain the same as in the request that
    *   provided this page token.
    * @param {string} [request.filter]
-   *   Optional. An expression for filtering the results of the request.
-   *   Only shapeFamily and gcp_oracle_zone_id are supported in this format:
-   *   `shape_family="{shapeFamily}" AND
+   *   Optional. An expression for filtering the results of the request. Only the
+   *   `shape_family` and `gcp_oracle_zone_id` fields are supported in the
+   *   following format: `shape_family="{shape_family}" AND
    *   gcp_oracle_zone_id="{gcp_oracle_zone_id}"`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -11202,7 +11550,7 @@ export class OracleDatabaseClient {
       });
     const defaultCallSettings = this._defaults['listMinorVersions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listMinorVersions stream %j', request);
@@ -11231,9 +11579,9 @@ export class OracleDatabaseClient {
    *   fields except the filter should remain the same as in the request that
    *   provided this page token.
    * @param {string} [request.filter]
-   *   Optional. An expression for filtering the results of the request.
-   *   Only shapeFamily and gcp_oracle_zone_id are supported in this format:
-   *   `shape_family="{shapeFamily}" AND
+   *   Optional. An expression for filtering the results of the request. Only the
+   *   `shape_family` and `gcp_oracle_zone_id` fields are supported in the
+   *   following format: `shape_family="{shape_family}" AND
    *   gcp_oracle_zone_id="{gcp_oracle_zone_id}"`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -11261,7 +11609,7 @@ export class OracleDatabaseClient {
       });
     const defaultCallSettings = this._defaults['listMinorVersions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listMinorVersions iterate %j', request);
@@ -11286,9 +11634,11 @@ export class OracleDatabaseClient {
    * @param {string} [request.pageToken]
    *   Optional. A token identifying a page of results the server should return.
    * @param {string} [request.filter]
-   *   Optional. An expression for filtering the results of the request. Only the
-   *   gcp_oracle_zone_id field is supported in this format:
-   *   `gcp_oracle_zone_id="{gcp_oracle_zone_id}"`.
+   *   Optional. An expression for filtering the results of the request. The
+   *   `gcp_oracle_zone_id`, `shape_family`, and `database_edition` fields
+   *   are supported in the following format:
+   *   `gcp_oracle_zone_id="{gcp_oracle_zone_id}" AND
+   *   shape_family="{shape_family}" AND database_edition="{database_edition}"`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -11372,7 +11722,7 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -11418,9 +11768,11 @@ export class OracleDatabaseClient {
    * @param {string} [request.pageToken]
    *   Optional. A token identifying a page of results the server should return.
    * @param {string} [request.filter]
-   *   Optional. An expression for filtering the results of the request. Only the
-   *   gcp_oracle_zone_id field is supported in this format:
-   *   `gcp_oracle_zone_id="{gcp_oracle_zone_id}"`.
+   *   Optional. An expression for filtering the results of the request. The
+   *   `gcp_oracle_zone_id`, `shape_family`, and `database_edition` fields
+   *   are supported in the following format:
+   *   `gcp_oracle_zone_id="{gcp_oracle_zone_id}" AND
+   *   shape_family="{shape_family}" AND database_edition="{database_edition}"`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -11446,7 +11798,7 @@ export class OracleDatabaseClient {
       });
     const defaultCallSettings = this._defaults['listDbSystemShapes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listDbSystemShapes stream %j', request);
@@ -11473,9 +11825,11 @@ export class OracleDatabaseClient {
    * @param {string} [request.pageToken]
    *   Optional. A token identifying a page of results the server should return.
    * @param {string} [request.filter]
-   *   Optional. An expression for filtering the results of the request. Only the
-   *   gcp_oracle_zone_id field is supported in this format:
-   *   `gcp_oracle_zone_id="{gcp_oracle_zone_id}"`.
+   *   Optional. An expression for filtering the results of the request. The
+   *   `gcp_oracle_zone_id`, `shape_family`, and `database_edition` fields
+   *   are supported in the following format:
+   *   `gcp_oracle_zone_id="{gcp_oracle_zone_id}" AND
+   *   shape_family="{shape_family}" AND database_edition="{database_edition}"`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -11502,7 +11856,7 @@ export class OracleDatabaseClient {
       });
     const defaultCallSettings = this._defaults['listDbSystemShapes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listDbSystemShapes iterate %j', request);
@@ -11613,7 +11967,7 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -11687,7 +12041,7 @@ export class OracleDatabaseClient {
       });
     const defaultCallSettings = this._defaults['listAutonomousDatabases'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listAutonomousDatabases stream %j', request);
@@ -11743,7 +12097,7 @@ export class OracleDatabaseClient {
       });
     const defaultCallSettings = this._defaults['listAutonomousDatabases'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listAutonomousDatabases iterate %j', request);
@@ -11851,7 +12205,7 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -11921,7 +12275,7 @@ export class OracleDatabaseClient {
       });
     const defaultCallSettings = this._defaults['listAutonomousDbVersions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listAutonomousDbVersions stream %j', request);
@@ -11973,7 +12327,7 @@ export class OracleDatabaseClient {
       });
     const defaultCallSettings = this._defaults['listAutonomousDbVersions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listAutonomousDbVersions iterate %j', request);
@@ -12085,7 +12439,7 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -12167,7 +12521,7 @@ export class OracleDatabaseClient {
     const defaultCallSettings =
       this._defaults['listAutonomousDatabaseCharacterSets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listAutonomousDatabaseCharacterSets stream %j', request);
@@ -12225,7 +12579,7 @@ export class OracleDatabaseClient {
     const defaultCallSettings =
       this._defaults['listAutonomousDatabaseCharacterSets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listAutonomousDatabaseCharacterSets iterate %j', request);
@@ -12340,7 +12694,7 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -12418,7 +12772,7 @@ export class OracleDatabaseClient {
       });
     const defaultCallSettings = this._defaults['listAutonomousDatabaseBackups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listAutonomousDatabaseBackups stream %j', request);
@@ -12478,7 +12832,7 @@ export class OracleDatabaseClient {
       });
     const defaultCallSettings = this._defaults['listAutonomousDatabaseBackups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listAutonomousDatabaseBackups iterate %j', request);
@@ -12589,7 +12943,7 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -12663,7 +13017,7 @@ export class OracleDatabaseClient {
       });
     const defaultCallSettings = this._defaults['listOdbNetworks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listOdbNetworks stream %j', request);
@@ -12719,7 +13073,7 @@ export class OracleDatabaseClient {
       });
     const defaultCallSettings = this._defaults['listOdbNetworks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listOdbNetworks iterate %j', request);
@@ -12830,7 +13184,7 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -12904,7 +13258,7 @@ export class OracleDatabaseClient {
       });
     const defaultCallSettings = this._defaults['listOdbSubnets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listOdbSubnets stream %j', request);
@@ -12960,7 +13314,7 @@ export class OracleDatabaseClient {
       });
     const defaultCallSettings = this._defaults['listOdbSubnets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listOdbSubnets iterate %j', request);
@@ -13072,7 +13426,7 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -13146,7 +13500,7 @@ export class OracleDatabaseClient {
       });
     const defaultCallSettings = this._defaults['listExadbVmClusters'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listExadbVmClusters stream %j', request);
@@ -13202,7 +13556,7 @@ export class OracleDatabaseClient {
       });
     const defaultCallSettings = this._defaults['listExadbVmClusters'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listExadbVmClusters iterate %j', request);
@@ -13316,7 +13670,7 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -13392,7 +13746,7 @@ export class OracleDatabaseClient {
       });
     const defaultCallSettings = this._defaults['listExascaleDbStorageVaults'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listExascaleDbStorageVaults stream %j', request);
@@ -13450,7 +13804,7 @@ export class OracleDatabaseClient {
       });
     const defaultCallSettings = this._defaults['listExascaleDbStorageVaults'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listExascaleDbStorageVaults iterate %j', request);
@@ -13561,7 +13915,7 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -13635,7 +13989,7 @@ export class OracleDatabaseClient {
     const defaultCallSettings =
       this._defaults['listDbSystemInitialStorageSizes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listDbSystemInitialStorageSizes stream %j', request);
@@ -13691,7 +14045,7 @@ export class OracleDatabaseClient {
     const defaultCallSettings =
       this._defaults['listDbSystemInitialStorageSizes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listDbSystemInitialStorageSizes iterate %j', request);
@@ -13805,7 +14159,7 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -13882,7 +14236,7 @@ export class OracleDatabaseClient {
       });
     const defaultCallSettings = this._defaults['listDatabases'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listDatabases stream %j', request);
@@ -13941,7 +14295,7 @@ export class OracleDatabaseClient {
       });
     const defaultCallSettings = this._defaults['listDatabases'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listDatabases iterate %j', request);
@@ -14057,7 +14411,7 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -14135,7 +14489,7 @@ export class OracleDatabaseClient {
       });
     const defaultCallSettings = this._defaults['listPluggableDatabases'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listPluggableDatabases stream %j', request);
@@ -14195,7 +14549,7 @@ export class OracleDatabaseClient {
       });
     const defaultCallSettings = this._defaults['listPluggableDatabases'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listPluggableDatabases iterate %j', request);
@@ -14306,7 +14660,7 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -14380,7 +14734,7 @@ export class OracleDatabaseClient {
       });
     const defaultCallSettings = this._defaults['listDbSystems'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listDbSystems stream %j', request);
@@ -14436,7 +14790,7 @@ export class OracleDatabaseClient {
       });
     const defaultCallSettings = this._defaults['listDbSystems'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listDbSystems iterate %j', request);
@@ -14548,7 +14902,7 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -14623,7 +14977,7 @@ export class OracleDatabaseClient {
       });
     const defaultCallSettings = this._defaults['listGoldengateDeployments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listGoldengateDeployments stream %j', request);
@@ -14680,7 +15034,7 @@ export class OracleDatabaseClient {
       });
     const defaultCallSettings = this._defaults['listGoldengateDeployments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listGoldengateDeployments iterate %j', request);
@@ -14792,7 +15146,7 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -14867,7 +15221,7 @@ export class OracleDatabaseClient {
       });
     const defaultCallSettings = this._defaults['listGoldengateConnections'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listGoldengateConnections stream %j', request);
@@ -14924,7 +15278,7 @@ export class OracleDatabaseClient {
       });
     const defaultCallSettings = this._defaults['listGoldengateConnections'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listGoldengateConnections iterate %j', request);
@@ -15035,7 +15389,7 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -15113,7 +15467,7 @@ export class OracleDatabaseClient {
     const defaultCallSettings =
       this._defaults['listGoldengateDeploymentVersions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listGoldengateDeploymentVersions stream %j', request);
@@ -15170,7 +15524,7 @@ export class OracleDatabaseClient {
     const defaultCallSettings =
       this._defaults['listGoldengateDeploymentVersions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listGoldengateDeploymentVersions iterate %j', request);
@@ -15285,7 +15639,7 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -15363,7 +15717,7 @@ export class OracleDatabaseClient {
       });
     const defaultCallSettings = this._defaults['listGoldengateDeploymentTypes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listGoldengateDeploymentTypes stream %j', request);
@@ -15423,7 +15777,7 @@ export class OracleDatabaseClient {
       });
     const defaultCallSettings = this._defaults['listGoldengateDeploymentTypes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listGoldengateDeploymentTypes iterate %j', request);
@@ -15531,7 +15885,7 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -15609,7 +15963,7 @@ export class OracleDatabaseClient {
     const defaultCallSettings =
       this._defaults['listGoldengateDeploymentEnvironments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listGoldengateDeploymentEnvironments stream %j', request);
@@ -15663,7 +16017,7 @@ export class OracleDatabaseClient {
     const defaultCallSettings =
       this._defaults['listGoldengateDeploymentEnvironments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listGoldengateDeploymentEnvironments iterate %j', request);
@@ -15773,7 +16127,7 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -15846,7 +16200,7 @@ export class OracleDatabaseClient {
       });
     const defaultCallSettings = this._defaults['listGoldengateConnectionTypes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listGoldengateConnectionTypes stream %j', request);
@@ -15901,7 +16255,7 @@ export class OracleDatabaseClient {
       });
     const defaultCallSettings = this._defaults['listGoldengateConnectionTypes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listGoldengateConnectionTypes iterate %j', request);
@@ -16015,7 +16369,7 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -16092,7 +16446,7 @@ export class OracleDatabaseClient {
       });
     const defaultCallSettings = this._defaults['listDbVersions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listDbVersions stream %j', request);
@@ -16151,7 +16505,7 @@ export class OracleDatabaseClient {
       });
     const defaultCallSettings = this._defaults['listDbVersions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listDbVersions iterate %j', request);
@@ -16270,7 +16624,7 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -16352,7 +16706,7 @@ export class OracleDatabaseClient {
       });
     const defaultCallSettings = this._defaults['listDatabaseCharacterSets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listDatabaseCharacterSets stream %j', request);
@@ -16416,7 +16770,7 @@ export class OracleDatabaseClient {
       });
     const defaultCallSettings = this._defaults['listDatabaseCharacterSets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listDatabaseCharacterSets iterate %j', request);
@@ -16536,7 +16890,7 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -16626,7 +16980,7 @@ export class OracleDatabaseClient {
     const defaultCallSettings =
       this._defaults['listGoldengateConnectionAssignments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listGoldengateConnectionAssignments stream %j', request);
@@ -16692,7 +17046,7 @@ export class OracleDatabaseClient {
     const defaultCallSettings =
       this._defaults['listGoldengateConnectionAssignments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listGoldengateConnectionAssignments iterate %j', request);
@@ -18954,11 +19308,11 @@ export class OracleDatabaseClient {
    */
   close(): Promise<void> {
     if (this.oracleDatabaseStub && !this._terminated) {
-      return this.oracleDatabaseStub.then((stub) => {
+      return this.oracleDatabaseStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch((err) => {
+        this.locationsClient.close().catch(err => {
           throw err;
         });
         void this.operationsClient.close();

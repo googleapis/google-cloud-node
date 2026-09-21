@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as ekmserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, IamProtos, LocationProtos } from 'google-gax';
+import {protobuf, IamProtos, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -237,7 +237,7 @@ describe('v1.EkmServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new ekmserviceModule.v1.EkmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.ekmServiceStub, undefined);
@@ -245,12 +245,12 @@ describe('v1.EkmServiceClient', () => {
       assert(client.ekmServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new ekmserviceModule.v1.EkmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.ekmServiceStub);
@@ -259,14 +259,14 @@ describe('v1.EkmServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new ekmserviceModule.v1.EkmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.ekmServiceStub, undefined);
@@ -275,7 +275,7 @@ describe('v1.EkmServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -283,7 +283,7 @@ describe('v1.EkmServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new ekmserviceModule.v1.EkmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -295,7 +295,7 @@ describe('v1.EkmServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new ekmserviceModule.v1.EkmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -318,7 +318,7 @@ describe('v1.EkmServiceClient', () => {
   describe('getEkmConnection', () => {
     it('invokes getEkmConnection without error', async () => {
       const client = new ekmserviceModule.v1.EkmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -349,7 +349,7 @@ describe('v1.EkmServiceClient', () => {
 
     it('invokes getEkmConnection without error using callback', async () => {
       const client = new ekmserviceModule.v1.EkmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -396,7 +396,7 @@ describe('v1.EkmServiceClient', () => {
 
     it('invokes getEkmConnection with error', async () => {
       const client = new ekmserviceModule.v1.EkmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -427,7 +427,7 @@ describe('v1.EkmServiceClient', () => {
 
     it('invokes getEkmConnection with closed client', async () => {
       const client = new ekmserviceModule.v1.EkmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -440,7 +440,7 @@ describe('v1.EkmServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getEkmConnection(request), expectedError);
@@ -450,7 +450,7 @@ describe('v1.EkmServiceClient', () => {
   describe('createEkmConnection', () => {
     it('invokes createEkmConnection without error', async () => {
       const client = new ekmserviceModule.v1.EkmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -482,7 +482,7 @@ describe('v1.EkmServiceClient', () => {
 
     it('invokes createEkmConnection without error using callback', async () => {
       const client = new ekmserviceModule.v1.EkmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -529,7 +529,7 @@ describe('v1.EkmServiceClient', () => {
 
     it('invokes createEkmConnection with error', async () => {
       const client = new ekmserviceModule.v1.EkmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -560,7 +560,7 @@ describe('v1.EkmServiceClient', () => {
 
     it('invokes createEkmConnection with closed client', async () => {
       const client = new ekmserviceModule.v1.EkmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -573,7 +573,7 @@ describe('v1.EkmServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createEkmConnection(request), expectedError);
@@ -583,7 +583,7 @@ describe('v1.EkmServiceClient', () => {
   describe('updateEkmConnection', () => {
     it('invokes updateEkmConnection without error', async () => {
       const client = new ekmserviceModule.v1.EkmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -616,7 +616,7 @@ describe('v1.EkmServiceClient', () => {
 
     it('invokes updateEkmConnection without error using callback', async () => {
       const client = new ekmserviceModule.v1.EkmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -664,7 +664,7 @@ describe('v1.EkmServiceClient', () => {
 
     it('invokes updateEkmConnection with error', async () => {
       const client = new ekmserviceModule.v1.EkmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -696,7 +696,7 @@ describe('v1.EkmServiceClient', () => {
 
     it('invokes updateEkmConnection with closed client', async () => {
       const client = new ekmserviceModule.v1.EkmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -710,7 +710,7 @@ describe('v1.EkmServiceClient', () => {
       );
       request.ekmConnection.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateEkmConnection(request), expectedError);
@@ -720,7 +720,7 @@ describe('v1.EkmServiceClient', () => {
   describe('getEkmConfig', () => {
     it('invokes getEkmConfig without error', async () => {
       const client = new ekmserviceModule.v1.EkmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -751,7 +751,7 @@ describe('v1.EkmServiceClient', () => {
 
     it('invokes getEkmConfig without error using callback', async () => {
       const client = new ekmserviceModule.v1.EkmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -798,7 +798,7 @@ describe('v1.EkmServiceClient', () => {
 
     it('invokes getEkmConfig with error', async () => {
       const client = new ekmserviceModule.v1.EkmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -829,7 +829,7 @@ describe('v1.EkmServiceClient', () => {
 
     it('invokes getEkmConfig with closed client', async () => {
       const client = new ekmserviceModule.v1.EkmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -842,7 +842,7 @@ describe('v1.EkmServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getEkmConfig(request), expectedError);
@@ -852,7 +852,7 @@ describe('v1.EkmServiceClient', () => {
   describe('updateEkmConfig', () => {
     it('invokes updateEkmConfig without error', async () => {
       const client = new ekmserviceModule.v1.EkmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -884,7 +884,7 @@ describe('v1.EkmServiceClient', () => {
 
     it('invokes updateEkmConfig without error using callback', async () => {
       const client = new ekmserviceModule.v1.EkmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -932,7 +932,7 @@ describe('v1.EkmServiceClient', () => {
 
     it('invokes updateEkmConfig with error', async () => {
       const client = new ekmserviceModule.v1.EkmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -964,7 +964,7 @@ describe('v1.EkmServiceClient', () => {
 
     it('invokes updateEkmConfig with closed client', async () => {
       const client = new ekmserviceModule.v1.EkmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -978,7 +978,7 @@ describe('v1.EkmServiceClient', () => {
       );
       request.ekmConfig.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateEkmConfig(request), expectedError);
@@ -988,7 +988,7 @@ describe('v1.EkmServiceClient', () => {
   describe('verifyConnectivity', () => {
     it('invokes verifyConnectivity without error', async () => {
       const client = new ekmserviceModule.v1.EkmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1020,7 +1020,7 @@ describe('v1.EkmServiceClient', () => {
 
     it('invokes verifyConnectivity without error using callback', async () => {
       const client = new ekmserviceModule.v1.EkmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1067,7 +1067,7 @@ describe('v1.EkmServiceClient', () => {
 
     it('invokes verifyConnectivity with error', async () => {
       const client = new ekmserviceModule.v1.EkmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1098,7 +1098,7 @@ describe('v1.EkmServiceClient', () => {
 
     it('invokes verifyConnectivity with closed client', async () => {
       const client = new ekmserviceModule.v1.EkmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1111,7 +1111,7 @@ describe('v1.EkmServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.verifyConnectivity(request), expectedError);
@@ -1121,7 +1121,7 @@ describe('v1.EkmServiceClient', () => {
   describe('listEkmConnections', () => {
     it('invokes listEkmConnections without error', async () => {
       const client = new ekmserviceModule.v1.EkmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1155,7 +1155,7 @@ describe('v1.EkmServiceClient', () => {
 
     it('invokes listEkmConnections without error using callback', async () => {
       const client = new ekmserviceModule.v1.EkmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1204,7 +1204,7 @@ describe('v1.EkmServiceClient', () => {
 
     it('invokes listEkmConnections with error', async () => {
       const client = new ekmserviceModule.v1.EkmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1235,7 +1235,7 @@ describe('v1.EkmServiceClient', () => {
 
     it('invokes listEkmConnectionsStream without error', async () => {
       const client = new ekmserviceModule.v1.EkmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1281,15 +1281,15 @@ describe('v1.EkmServiceClient', () => {
       assert(
         (client.descriptors.page.listEkmConnections.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listEkmConnectionsStream with error', async () => {
       const client = new ekmserviceModule.v1.EkmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1330,15 +1330,15 @@ describe('v1.EkmServiceClient', () => {
       assert(
         (client.descriptors.page.listEkmConnections.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listEkmConnections without error', async () => {
       const client = new ekmserviceModule.v1.EkmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1373,15 +1373,15 @@ describe('v1.EkmServiceClient', () => {
       assert(
         (client.descriptors.page.listEkmConnections.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listEkmConnections with error', async () => {
       const client = new ekmserviceModule.v1.EkmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1413,16 +1413,16 @@ describe('v1.EkmServiceClient', () => {
       assert(
         (client.descriptors.page.listEkmConnections.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', async () => {
       const client = new ekmserviceModule.v1.EkmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1452,7 +1452,7 @@ describe('v1.EkmServiceClient', () => {
     });
     it('invokes getIamPolicy without error using callback', async () => {
       const client = new ekmserviceModule.v1.EkmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1490,7 +1490,7 @@ describe('v1.EkmServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1500,7 +1500,7 @@ describe('v1.EkmServiceClient', () => {
     });
     it('invokes getIamPolicy with error', async () => {
       const client = new ekmserviceModule.v1.EkmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1532,7 +1532,7 @@ describe('v1.EkmServiceClient', () => {
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', async () => {
       const client = new ekmserviceModule.v1.EkmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1562,7 +1562,7 @@ describe('v1.EkmServiceClient', () => {
     });
     it('invokes setIamPolicy without error using callback', async () => {
       const client = new ekmserviceModule.v1.EkmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1600,7 +1600,7 @@ describe('v1.EkmServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1610,7 +1610,7 @@ describe('v1.EkmServiceClient', () => {
     });
     it('invokes setIamPolicy with error', async () => {
       const client = new ekmserviceModule.v1.EkmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1642,7 +1642,7 @@ describe('v1.EkmServiceClient', () => {
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', async () => {
       const client = new ekmserviceModule.v1.EkmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1675,7 +1675,7 @@ describe('v1.EkmServiceClient', () => {
     });
     it('invokes testIamPermissions without error using callback', async () => {
       const client = new ekmserviceModule.v1.EkmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1713,7 +1713,7 @@ describe('v1.EkmServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1723,7 +1723,7 @@ describe('v1.EkmServiceClient', () => {
     });
     it('invokes testIamPermissions with error', async () => {
       const client = new ekmserviceModule.v1.EkmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1758,7 +1758,7 @@ describe('v1.EkmServiceClient', () => {
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new ekmserviceModule.v1.EkmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1788,7 +1788,7 @@ describe('v1.EkmServiceClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new ekmserviceModule.v1.EkmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1832,7 +1832,7 @@ describe('v1.EkmServiceClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new ekmserviceModule.v1.EkmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1867,7 +1867,7 @@ describe('v1.EkmServiceClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new ekmserviceModule.v1.EkmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1915,7 +1915,7 @@ describe('v1.EkmServiceClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new ekmserviceModule.v1.EkmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1964,7 +1964,7 @@ describe('v1.EkmServiceClient', () => {
         crypto_key: 'cryptoKeyValue',
       };
       const client = new ekmserviceModule.v1.EkmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2041,7 +2041,7 @@ describe('v1.EkmServiceClient', () => {
         crypto_key_version: 'cryptoKeyVersionValue',
       };
       const client = new ekmserviceModule.v1.EkmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2130,7 +2130,7 @@ describe('v1.EkmServiceClient', () => {
         location: 'locationValue',
       };
       const client = new ekmserviceModule.v1.EkmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2180,7 +2180,7 @@ describe('v1.EkmServiceClient', () => {
         ekm_connection: 'ekmConnectionValue',
       };
       const client = new ekmserviceModule.v1.EkmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2242,7 +2242,7 @@ describe('v1.EkmServiceClient', () => {
         folder: 'folderValue',
       };
       const client = new ekmserviceModule.v1.EkmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2289,7 +2289,7 @@ describe('v1.EkmServiceClient', () => {
         import_job: 'importJobValue',
       };
       const client = new ekmserviceModule.v1.EkmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2364,7 +2364,7 @@ describe('v1.EkmServiceClient', () => {
         key_handle: 'keyHandleValue',
       };
       const client = new ekmserviceModule.v1.EkmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2428,7 +2428,7 @@ describe('v1.EkmServiceClient', () => {
         key_ring: 'keyRingValue',
       };
       const client = new ekmserviceModule.v1.EkmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2491,7 +2491,7 @@ describe('v1.EkmServiceClient', () => {
         location: 'locationValue',
       };
       const client = new ekmserviceModule.v1.EkmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2539,7 +2539,7 @@ describe('v1.EkmServiceClient', () => {
         project: 'projectValue',
       };
       const client = new ekmserviceModule.v1.EkmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2588,7 +2588,7 @@ describe('v1.EkmServiceClient', () => {
         crypto_key_version: 'cryptoKeyVersionValue',
       };
       const client = new ekmserviceModule.v1.EkmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2674,7 +2674,7 @@ describe('v1.EkmServiceClient', () => {
         retired_resource: 'retiredResourceValue',
       };
       const client = new ekmserviceModule.v1.EkmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2739,7 +2739,7 @@ describe('v1.EkmServiceClient', () => {
         single_tenant_hsm_instance: 'singleTenantHsmInstanceValue',
       };
       const client = new ekmserviceModule.v1.EkmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2821,7 +2821,7 @@ describe('v1.EkmServiceClient', () => {
         proposal: 'proposalValue',
       };
       const client = new ekmserviceModule.v1.EkmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

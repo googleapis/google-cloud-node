@@ -5,6 +5,49 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/firestore?activeTab=versions
 
+## [9.2.0](https://github.com/googleapis/google-cloud-node/compare/firestore-v9.1.0...firestore-v9.2.0) (2026-09-16)
+
+
+### Features
+
+* PNPM workspace ([#8973](https://github.com/googleapis/google-cloud-node/issues/8973)) ([1ea27c9](https://github.com/googleapis/google-cloud-node/commit/1ea27c9c9bf4e4cbf79381321dcb9bce7951a76f))
+
+
+### Bug Fixes
+
+* **firestore:** Allow uninitialized client references in pipeline sources ([#9318](https://github.com/googleapis/google-cloud-node/issues/9318)) ([435bcae](https://github.com/googleapis/google-cloud-node/commit/435bcae6aa20c9fd50da0c8b67fe443c946e44cc))
+
+## [9.1.0](https://github.com/googleapis/google-cloud-node/compare/firestore-v9.0.1...firestore-v9.1.0) (2026-09-09)
+
+
+### Features
+
+* **firestore:** Support conversion and serialization for Temporal.Instant ([084318e](https://github.com/googleapis/google-cloud-node/commit/084318e4922f48b5de9e135b292986ab26ccde85))
+
+
+### Bug Fixes
+
+* **firestore:** Configure grpc.use_local_subchannel_pool to prevent stream queuing ([6540d48](https://github.com/googleapis/google-cloud-node/commit/6540d48099f44cbdfc75d170bf8cd16e1ef5e7b5))
+
+## [9.0.1](https://github.com/googleapis/google-cloud-node/compare/firestore-v9.0.0...firestore-v9.0.1) (2026-09-01)
+
+
+### Bug Fixes
+
+* Ensure node 22 dependencies are up to date so they get the latest patches for core and handwritten libraries ([#9116](https://github.com/googleapis/google-cloud-node/issues/9116)) ([fad57ff](https://github.com/googleapis/google-cloud-node/commit/fad57ff4b9164712426a041fc61db035859f9043))
+
+## [9.0.0](https://github.com/googleapis/google-cloud-node/compare/firestore-v8.7.1...firestore-v9.0.0) (2026-08-11)
+
+
+### ⚠ BREAKING CHANGES
+
+* **firestore:** update minimum Node version to 22 ([#9103](https://github.com/googleapis/google-cloud-node/issues/9103))
+
+### Features
+
+* **firestore:** Decouple handwritten sdk wrapper from embedded gapic clients ([#8928](https://github.com/googleapis/google-cloud-node/issues/8928)) ([9067c54](https://github.com/googleapis/google-cloud-node/commit/9067c54b9373750acf976a4ba5f30ab3d41f6196))
+* **firestore:** Update minimum Node version to 22 ([#9103](https://github.com/googleapis/google-cloud-node/issues/9103)) ([c244311](https://github.com/googleapis/google-cloud-node/commit/c244311061dc88451ebd9dba868db9e9d0fab2d0))
+
 ## [8.7.1](https://github.com/googleapis/google-cloud-node/compare/firestore-v8.7.0...firestore-v8.7.1) (2026-08-04)
 
 

@@ -30,7 +30,9 @@ function main(query) {
    */
   /**
    *  Required. Provides the raw query string provided by the user, such as "How
-   *  to create a Cloud Storage bucket?".
+   *  to create a Cloud Storage bucket?". The query must not exceed 500
+   *  characters; values longer than 500 characters will result in an
+   *  `INVALID_ARGUMENT` error.
    */
   // const query = 'abc123'
   /**
@@ -52,6 +54,8 @@ function main(query) {
    *  DocumentChunk google.developers.knowledge.v1.DocumentChunk s, the filter
    *  is applied to `DocumentChunk.document` fields.
    *  Supported fields for filtering:
+   *  * `content_length_bytes` (INTEGER): The length of the `Document.content`
+   *    field in bytes.
    *  * `data_source` (STRING): The source of the document, e.g.
    *    `docs.cloud.google.com`. See
    *    https://developers.google.com/knowledge/reference/corpus-reference for
@@ -61,6 +65,7 @@ function main(query) {
    *    markdown content or metadata.
    *  * `uri` (STRING): The document URI, e.g.
    *    `https://docs.cloud.google.com/bigquery/docs/tables`.
+   *  INTEGER fields support `=`, `<`, `<=`, `>`, and `>=` operators.
    *  STRING fields support `=` (equals) and `!=` (not equals) operators for
    *  **exact match** on the whole string. Partial match, prefix match, and
    *  regexp match are not supported.
@@ -73,6 +78,8 @@ function main(query) {
    *  operators. `OR` has higher precedence than `AND`. Use parentheses for
    *  explicit precedence grouping.
    *  Examples:
+   *  * Filter by `Document.content_length_bytes`:
+   *    `content_length_bytes < 50000`
    *  * `data_source = "docs.cloud.google.com" OR data_source =
    *    "firebase.google.com"`
    *  * `data_source != "firebase.google.com"`

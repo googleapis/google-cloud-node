@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as accessapprovalModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -242,7 +242,7 @@ describe('v1.AccessApprovalClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new accessapprovalModule.v1.AccessApprovalClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.accessApprovalStub, undefined);
@@ -250,12 +250,12 @@ describe('v1.AccessApprovalClient', () => {
       assert(client.accessApprovalStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new accessapprovalModule.v1.AccessApprovalClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.accessApprovalStub);
@@ -264,14 +264,14 @@ describe('v1.AccessApprovalClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new accessapprovalModule.v1.AccessApprovalClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.accessApprovalStub, undefined);
@@ -280,7 +280,7 @@ describe('v1.AccessApprovalClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -288,7 +288,7 @@ describe('v1.AccessApprovalClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new accessapprovalModule.v1.AccessApprovalClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -300,7 +300,7 @@ describe('v1.AccessApprovalClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new accessapprovalModule.v1.AccessApprovalClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -323,7 +323,7 @@ describe('v1.AccessApprovalClient', () => {
   describe('getApprovalRequest', () => {
     it('invokes getApprovalRequest without error', async () => {
       const client = new accessapprovalModule.v1.AccessApprovalClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -355,7 +355,7 @@ describe('v1.AccessApprovalClient', () => {
 
     it('invokes getApprovalRequest without error using callback', async () => {
       const client = new accessapprovalModule.v1.AccessApprovalClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -402,7 +402,7 @@ describe('v1.AccessApprovalClient', () => {
 
     it('invokes getApprovalRequest with error', async () => {
       const client = new accessapprovalModule.v1.AccessApprovalClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -433,7 +433,7 @@ describe('v1.AccessApprovalClient', () => {
 
     it('invokes getApprovalRequest with closed client', async () => {
       const client = new accessapprovalModule.v1.AccessApprovalClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -446,7 +446,7 @@ describe('v1.AccessApprovalClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getApprovalRequest(request), expectedError);
@@ -456,7 +456,7 @@ describe('v1.AccessApprovalClient', () => {
   describe('approveApprovalRequest', () => {
     it('invokes approveApprovalRequest without error', async () => {
       const client = new accessapprovalModule.v1.AccessApprovalClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -488,7 +488,7 @@ describe('v1.AccessApprovalClient', () => {
 
     it('invokes approveApprovalRequest without error using callback', async () => {
       const client = new accessapprovalModule.v1.AccessApprovalClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -535,7 +535,7 @@ describe('v1.AccessApprovalClient', () => {
 
     it('invokes approveApprovalRequest with error', async () => {
       const client = new accessapprovalModule.v1.AccessApprovalClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -569,7 +569,7 @@ describe('v1.AccessApprovalClient', () => {
 
     it('invokes approveApprovalRequest with closed client', async () => {
       const client = new accessapprovalModule.v1.AccessApprovalClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -582,7 +582,7 @@ describe('v1.AccessApprovalClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -595,7 +595,7 @@ describe('v1.AccessApprovalClient', () => {
   describe('dismissApprovalRequest', () => {
     it('invokes dismissApprovalRequest without error', async () => {
       const client = new accessapprovalModule.v1.AccessApprovalClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -627,7 +627,7 @@ describe('v1.AccessApprovalClient', () => {
 
     it('invokes dismissApprovalRequest without error using callback', async () => {
       const client = new accessapprovalModule.v1.AccessApprovalClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -674,7 +674,7 @@ describe('v1.AccessApprovalClient', () => {
 
     it('invokes dismissApprovalRequest with error', async () => {
       const client = new accessapprovalModule.v1.AccessApprovalClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -708,7 +708,7 @@ describe('v1.AccessApprovalClient', () => {
 
     it('invokes dismissApprovalRequest with closed client', async () => {
       const client = new accessapprovalModule.v1.AccessApprovalClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -721,7 +721,7 @@ describe('v1.AccessApprovalClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -734,7 +734,7 @@ describe('v1.AccessApprovalClient', () => {
   describe('invalidateApprovalRequest', () => {
     it('invokes invalidateApprovalRequest without error', async () => {
       const client = new accessapprovalModule.v1.AccessApprovalClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -766,7 +766,7 @@ describe('v1.AccessApprovalClient', () => {
 
     it('invokes invalidateApprovalRequest without error using callback', async () => {
       const client = new accessapprovalModule.v1.AccessApprovalClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -813,7 +813,7 @@ describe('v1.AccessApprovalClient', () => {
 
     it('invokes invalidateApprovalRequest with error', async () => {
       const client = new accessapprovalModule.v1.AccessApprovalClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -847,7 +847,7 @@ describe('v1.AccessApprovalClient', () => {
 
     it('invokes invalidateApprovalRequest with closed client', async () => {
       const client = new accessapprovalModule.v1.AccessApprovalClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -860,7 +860,7 @@ describe('v1.AccessApprovalClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -873,7 +873,7 @@ describe('v1.AccessApprovalClient', () => {
   describe('getAccessApprovalSettings', () => {
     it('invokes getAccessApprovalSettings without error', async () => {
       const client = new accessapprovalModule.v1.AccessApprovalClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -905,7 +905,7 @@ describe('v1.AccessApprovalClient', () => {
 
     it('invokes getAccessApprovalSettings without error using callback', async () => {
       const client = new accessapprovalModule.v1.AccessApprovalClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -952,7 +952,7 @@ describe('v1.AccessApprovalClient', () => {
 
     it('invokes getAccessApprovalSettings with error', async () => {
       const client = new accessapprovalModule.v1.AccessApprovalClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -986,7 +986,7 @@ describe('v1.AccessApprovalClient', () => {
 
     it('invokes getAccessApprovalSettings with closed client', async () => {
       const client = new accessapprovalModule.v1.AccessApprovalClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -999,7 +999,7 @@ describe('v1.AccessApprovalClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1012,7 +1012,7 @@ describe('v1.AccessApprovalClient', () => {
   describe('updateAccessApprovalSettings', () => {
     it('invokes updateAccessApprovalSettings without error', async () => {
       const client = new accessapprovalModule.v1.AccessApprovalClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1045,7 +1045,7 @@ describe('v1.AccessApprovalClient', () => {
 
     it('invokes updateAccessApprovalSettings without error using callback', async () => {
       const client = new accessapprovalModule.v1.AccessApprovalClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1093,7 +1093,7 @@ describe('v1.AccessApprovalClient', () => {
 
     it('invokes updateAccessApprovalSettings with error', async () => {
       const client = new accessapprovalModule.v1.AccessApprovalClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1128,7 +1128,7 @@ describe('v1.AccessApprovalClient', () => {
 
     it('invokes updateAccessApprovalSettings with closed client', async () => {
       const client = new accessapprovalModule.v1.AccessApprovalClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1142,7 +1142,7 @@ describe('v1.AccessApprovalClient', () => {
       );
       request.settings.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1155,7 +1155,7 @@ describe('v1.AccessApprovalClient', () => {
   describe('deleteAccessApprovalSettings', () => {
     it('invokes deleteAccessApprovalSettings without error', async () => {
       const client = new accessapprovalModule.v1.AccessApprovalClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1187,7 +1187,7 @@ describe('v1.AccessApprovalClient', () => {
 
     it('invokes deleteAccessApprovalSettings without error using callback', async () => {
       const client = new accessapprovalModule.v1.AccessApprovalClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1234,7 +1234,7 @@ describe('v1.AccessApprovalClient', () => {
 
     it('invokes deleteAccessApprovalSettings with error', async () => {
       const client = new accessapprovalModule.v1.AccessApprovalClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1268,7 +1268,7 @@ describe('v1.AccessApprovalClient', () => {
 
     it('invokes deleteAccessApprovalSettings with closed client', async () => {
       const client = new accessapprovalModule.v1.AccessApprovalClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1281,7 +1281,7 @@ describe('v1.AccessApprovalClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1294,7 +1294,7 @@ describe('v1.AccessApprovalClient', () => {
   describe('getAccessApprovalServiceAccount', () => {
     it('invokes getAccessApprovalServiceAccount without error', async () => {
       const client = new accessapprovalModule.v1.AccessApprovalClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1326,7 +1326,7 @@ describe('v1.AccessApprovalClient', () => {
 
     it('invokes getAccessApprovalServiceAccount without error using callback', async () => {
       const client = new accessapprovalModule.v1.AccessApprovalClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1373,7 +1373,7 @@ describe('v1.AccessApprovalClient', () => {
 
     it('invokes getAccessApprovalServiceAccount with error', async () => {
       const client = new accessapprovalModule.v1.AccessApprovalClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1407,7 +1407,7 @@ describe('v1.AccessApprovalClient', () => {
 
     it('invokes getAccessApprovalServiceAccount with closed client', async () => {
       const client = new accessapprovalModule.v1.AccessApprovalClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1420,7 +1420,7 @@ describe('v1.AccessApprovalClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1433,7 +1433,7 @@ describe('v1.AccessApprovalClient', () => {
   describe('listApprovalRequests', () => {
     it('invokes listApprovalRequests without error', async () => {
       const client = new accessapprovalModule.v1.AccessApprovalClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1473,7 +1473,7 @@ describe('v1.AccessApprovalClient', () => {
 
     it('invokes listApprovalRequests without error using callback', async () => {
       const client = new accessapprovalModule.v1.AccessApprovalClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1505,8 +1505,7 @@ describe('v1.AccessApprovalClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.accessapproval.v1.IApprovalRequest[]
-              | null,
+              protos.google.cloud.accessapproval.v1.IApprovalRequest[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -1530,7 +1529,7 @@ describe('v1.AccessApprovalClient', () => {
 
     it('invokes listApprovalRequests with error', async () => {
       const client = new accessapprovalModule.v1.AccessApprovalClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1561,7 +1560,7 @@ describe('v1.AccessApprovalClient', () => {
 
     it('invokes listApprovalRequestsStream without error', async () => {
       const client = new accessapprovalModule.v1.AccessApprovalClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1614,15 +1613,15 @@ describe('v1.AccessApprovalClient', () => {
       assert(
         (client.descriptors.page.listApprovalRequests.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listApprovalRequestsStream with error', async () => {
       const client = new accessapprovalModule.v1.AccessApprovalClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1664,15 +1663,15 @@ describe('v1.AccessApprovalClient', () => {
       assert(
         (client.descriptors.page.listApprovalRequests.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listApprovalRequests without error', async () => {
       const client = new accessapprovalModule.v1.AccessApprovalClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1714,15 +1713,15 @@ describe('v1.AccessApprovalClient', () => {
       assert(
         (client.descriptors.page.listApprovalRequests.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listApprovalRequests with error', async () => {
       const client = new accessapprovalModule.v1.AccessApprovalClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1755,9 +1754,9 @@ describe('v1.AccessApprovalClient', () => {
       assert(
         (client.descriptors.page.listApprovalRequests.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1769,7 +1768,7 @@ describe('v1.AccessApprovalClient', () => {
         folder: 'folderValue',
       };
       const client = new accessapprovalModule.v1.AccessApprovalClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1813,7 +1812,7 @@ describe('v1.AccessApprovalClient', () => {
         approval_request: 'approvalRequestValue',
       };
       const client = new accessapprovalModule.v1.AccessApprovalClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1875,7 +1874,7 @@ describe('v1.AccessApprovalClient', () => {
         folder: 'folderValue',
       };
       const client = new accessapprovalModule.v1.AccessApprovalClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1919,7 +1918,7 @@ describe('v1.AccessApprovalClient', () => {
         organization: 'organizationValue',
       };
       const client = new accessapprovalModule.v1.AccessApprovalClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1966,7 +1965,7 @@ describe('v1.AccessApprovalClient', () => {
         approval_request: 'approvalRequestValue',
       };
       const client = new accessapprovalModule.v1.AccessApprovalClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2029,7 +2028,7 @@ describe('v1.AccessApprovalClient', () => {
         organization: 'organizationValue',
       };
       const client = new accessapprovalModule.v1.AccessApprovalClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2075,7 +2074,7 @@ describe('v1.AccessApprovalClient', () => {
         project: 'projectValue',
       };
       const client = new accessapprovalModule.v1.AccessApprovalClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2113,7 +2112,7 @@ describe('v1.AccessApprovalClient', () => {
         project: 'projectValue',
       };
       const client = new accessapprovalModule.v1.AccessApprovalClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2157,7 +2156,7 @@ describe('v1.AccessApprovalClient', () => {
         approval_request: 'approvalRequestValue',
       };
       const client = new accessapprovalModule.v1.AccessApprovalClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2219,7 +2218,7 @@ describe('v1.AccessApprovalClient', () => {
         project: 'projectValue',
       };
       const client = new accessapprovalModule.v1.AccessApprovalClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

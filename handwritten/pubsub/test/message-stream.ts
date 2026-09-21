@@ -20,9 +20,9 @@ import {grpc} from 'google-gax';
 import * as proxyquire from 'proxyquire';
 import * as sinon from 'sinon';
 import {Duplex, PassThrough} from 'stream';
-import * as crypto from 'crypto';
 import * as defer from 'p-defer';
 import {promisify} from 'util';
+import * as crypto from 'node:crypto';
 
 import * as messageTypes from '../src/message-stream';
 import {Subscriber} from '../src/subscriber';
@@ -534,7 +534,7 @@ describe('MessageStream', () => {
 
         assert.strictEqual(spy.callCount, 5);
         const {args} = spy.firstCall;
-        const request = args[0] as any;
+        const request = args[0] as {protocolVersion?: string | number};
 
         assert.strictEqual(String(request.protocolVersion), '1');
 

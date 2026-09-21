@@ -25,7 +25,9 @@ import {HealthImplementation} from 'grpc-health-check';
 import {ReflectionService} from '@grpc/reflection';
 import {getProtoPath} from '../../src/protos';
 
-const PROTO_PATH = getProtoPath('google/spanner/executor/v1/cloud_executor.proto');
+const PROTO_PATH = getProtoPath(
+  'google/spanner/executor/v1/cloud_executor.proto',
+);
 
 const OPTION_SPANNER_PORT = 'spanner_port';
 const OPTION_PROXY_PORT = 'proxy_port';
@@ -158,7 +160,10 @@ export class WorkerProxy {
       defaults: true,
       oneofs: true,
       includeDirs: [
-        path.join(__dirname, '../../../node_modules/@google-cloud/spanner-api/build/protos'),
+        path.join(
+          __dirname,
+          '../../../node_modules/@google-cloud/spanner-api/build/protos',
+        ),
         path.join(__dirname, '../../../node_modules/google-proto-files'),
         path.join(__dirname, '../../../node_modules/google-gax/build/protos'),
       ],

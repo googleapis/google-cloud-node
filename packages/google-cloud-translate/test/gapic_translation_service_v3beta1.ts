@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as translationserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -51,7 +51,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -155,9 +155,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -287,7 +287,7 @@ describe('v3beta1.TranslationServiceClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client =
         new translationserviceModule.v3beta1.TranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.translationServiceStub, undefined);
@@ -295,13 +295,13 @@ describe('v3beta1.TranslationServiceClient', () => {
       assert(client.translationServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new translationserviceModule.v3beta1.TranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.translationServiceStub);
@@ -310,15 +310,15 @@ describe('v3beta1.TranslationServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new translationserviceModule.v3beta1.TranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.translationServiceStub, undefined);
@@ -327,7 +327,7 @@ describe('v3beta1.TranslationServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -336,7 +336,7 @@ describe('v3beta1.TranslationServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new translationserviceModule.v3beta1.TranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -349,7 +349,7 @@ describe('v3beta1.TranslationServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new translationserviceModule.v3beta1.TranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon
@@ -373,7 +373,7 @@ describe('v3beta1.TranslationServiceClient', () => {
     it('invokes translateText without error', async () => {
       const client =
         new translationserviceModule.v3beta1.TranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -405,7 +405,7 @@ describe('v3beta1.TranslationServiceClient', () => {
     it('invokes translateText without error using callback', async () => {
       const client =
         new translationserviceModule.v3beta1.TranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -453,7 +453,7 @@ describe('v3beta1.TranslationServiceClient', () => {
     it('invokes translateText with error', async () => {
       const client =
         new translationserviceModule.v3beta1.TranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -485,7 +485,7 @@ describe('v3beta1.TranslationServiceClient', () => {
     it('invokes translateText with closed client', async () => {
       const client =
         new translationserviceModule.v3beta1.TranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -498,7 +498,7 @@ describe('v3beta1.TranslationServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.translateText(request), expectedError);
@@ -509,7 +509,7 @@ describe('v3beta1.TranslationServiceClient', () => {
     it('invokes detectLanguage without error', async () => {
       const client =
         new translationserviceModule.v3beta1.TranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -541,7 +541,7 @@ describe('v3beta1.TranslationServiceClient', () => {
     it('invokes detectLanguage without error using callback', async () => {
       const client =
         new translationserviceModule.v3beta1.TranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -589,7 +589,7 @@ describe('v3beta1.TranslationServiceClient', () => {
     it('invokes detectLanguage with error', async () => {
       const client =
         new translationserviceModule.v3beta1.TranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -621,7 +621,7 @@ describe('v3beta1.TranslationServiceClient', () => {
     it('invokes detectLanguage with closed client', async () => {
       const client =
         new translationserviceModule.v3beta1.TranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -634,7 +634,7 @@ describe('v3beta1.TranslationServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.detectLanguage(request), expectedError);
@@ -645,7 +645,7 @@ describe('v3beta1.TranslationServiceClient', () => {
     it('invokes getSupportedLanguages without error', async () => {
       const client =
         new translationserviceModule.v3beta1.TranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -678,7 +678,7 @@ describe('v3beta1.TranslationServiceClient', () => {
     it('invokes getSupportedLanguages without error using callback', async () => {
       const client =
         new translationserviceModule.v3beta1.TranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -726,7 +726,7 @@ describe('v3beta1.TranslationServiceClient', () => {
     it('invokes getSupportedLanguages with error', async () => {
       const client =
         new translationserviceModule.v3beta1.TranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -761,7 +761,7 @@ describe('v3beta1.TranslationServiceClient', () => {
     it('invokes getSupportedLanguages with closed client', async () => {
       const client =
         new translationserviceModule.v3beta1.TranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -774,7 +774,7 @@ describe('v3beta1.TranslationServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -788,7 +788,7 @@ describe('v3beta1.TranslationServiceClient', () => {
     it('invokes translateDocument without error', async () => {
       const client =
         new translationserviceModule.v3beta1.TranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -820,7 +820,7 @@ describe('v3beta1.TranslationServiceClient', () => {
     it('invokes translateDocument without error using callback', async () => {
       const client =
         new translationserviceModule.v3beta1.TranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -868,7 +868,7 @@ describe('v3beta1.TranslationServiceClient', () => {
     it('invokes translateDocument with error', async () => {
       const client =
         new translationserviceModule.v3beta1.TranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -900,7 +900,7 @@ describe('v3beta1.TranslationServiceClient', () => {
     it('invokes translateDocument with closed client', async () => {
       const client =
         new translationserviceModule.v3beta1.TranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -913,7 +913,7 @@ describe('v3beta1.TranslationServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.translateDocument(request), expectedError);
@@ -924,7 +924,7 @@ describe('v3beta1.TranslationServiceClient', () => {
     it('invokes getGlossary without error', async () => {
       const client =
         new translationserviceModule.v3beta1.TranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -956,7 +956,7 @@ describe('v3beta1.TranslationServiceClient', () => {
     it('invokes getGlossary without error using callback', async () => {
       const client =
         new translationserviceModule.v3beta1.TranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1004,7 +1004,7 @@ describe('v3beta1.TranslationServiceClient', () => {
     it('invokes getGlossary with error', async () => {
       const client =
         new translationserviceModule.v3beta1.TranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1036,7 +1036,7 @@ describe('v3beta1.TranslationServiceClient', () => {
     it('invokes getGlossary with closed client', async () => {
       const client =
         new translationserviceModule.v3beta1.TranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1049,7 +1049,7 @@ describe('v3beta1.TranslationServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getGlossary(request), expectedError);
@@ -1060,7 +1060,7 @@ describe('v3beta1.TranslationServiceClient', () => {
     it('invokes refineText without error', async () => {
       const client =
         new translationserviceModule.v3beta1.TranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1092,7 +1092,7 @@ describe('v3beta1.TranslationServiceClient', () => {
     it('invokes refineText without error using callback', async () => {
       const client =
         new translationserviceModule.v3beta1.TranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1140,7 +1140,7 @@ describe('v3beta1.TranslationServiceClient', () => {
     it('invokes refineText with error', async () => {
       const client =
         new translationserviceModule.v3beta1.TranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1172,7 +1172,7 @@ describe('v3beta1.TranslationServiceClient', () => {
     it('invokes refineText with closed client', async () => {
       const client =
         new translationserviceModule.v3beta1.TranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1185,7 +1185,7 @@ describe('v3beta1.TranslationServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.refineText(request), expectedError);
@@ -1196,7 +1196,7 @@ describe('v3beta1.TranslationServiceClient', () => {
     it('invokes batchTranslateText without error', async () => {
       const client =
         new translationserviceModule.v3beta1.TranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1230,7 +1230,7 @@ describe('v3beta1.TranslationServiceClient', () => {
     it('invokes batchTranslateText without error using callback', async () => {
       const client =
         new translationserviceModule.v3beta1.TranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1285,7 +1285,7 @@ describe('v3beta1.TranslationServiceClient', () => {
     it('invokes batchTranslateText with call error', async () => {
       const client =
         new translationserviceModule.v3beta1.TranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1317,7 +1317,7 @@ describe('v3beta1.TranslationServiceClient', () => {
     it('invokes batchTranslateText with LRO error', async () => {
       const client =
         new translationserviceModule.v3beta1.TranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1351,7 +1351,7 @@ describe('v3beta1.TranslationServiceClient', () => {
     it('invokes checkBatchTranslateTextProgress without error', async () => {
       const client =
         new translationserviceModule.v3beta1.TranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1359,8 +1359,8 @@ describe('v3beta1.TranslationServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkBatchTranslateTextProgress(
@@ -1374,7 +1374,7 @@ describe('v3beta1.TranslationServiceClient', () => {
     it('invokes checkBatchTranslateTextProgress with error', async () => {
       const client =
         new translationserviceModule.v3beta1.TranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1396,7 +1396,7 @@ describe('v3beta1.TranslationServiceClient', () => {
     it('invokes batchTranslateDocument without error', async () => {
       const client =
         new translationserviceModule.v3beta1.TranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1430,7 +1430,7 @@ describe('v3beta1.TranslationServiceClient', () => {
     it('invokes batchTranslateDocument without error using callback', async () => {
       const client =
         new translationserviceModule.v3beta1.TranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1485,7 +1485,7 @@ describe('v3beta1.TranslationServiceClient', () => {
     it('invokes batchTranslateDocument with call error', async () => {
       const client =
         new translationserviceModule.v3beta1.TranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1520,7 +1520,7 @@ describe('v3beta1.TranslationServiceClient', () => {
     it('invokes batchTranslateDocument with LRO error', async () => {
       const client =
         new translationserviceModule.v3beta1.TranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1554,7 +1554,7 @@ describe('v3beta1.TranslationServiceClient', () => {
     it('invokes checkBatchTranslateDocumentProgress without error', async () => {
       const client =
         new translationserviceModule.v3beta1.TranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1562,8 +1562,8 @@ describe('v3beta1.TranslationServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkBatchTranslateDocumentProgress(
@@ -1577,7 +1577,7 @@ describe('v3beta1.TranslationServiceClient', () => {
     it('invokes checkBatchTranslateDocumentProgress with error', async () => {
       const client =
         new translationserviceModule.v3beta1.TranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1599,7 +1599,7 @@ describe('v3beta1.TranslationServiceClient', () => {
     it('invokes createGlossary without error', async () => {
       const client =
         new translationserviceModule.v3beta1.TranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1633,7 +1633,7 @@ describe('v3beta1.TranslationServiceClient', () => {
     it('invokes createGlossary without error using callback', async () => {
       const client =
         new translationserviceModule.v3beta1.TranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1688,7 +1688,7 @@ describe('v3beta1.TranslationServiceClient', () => {
     it('invokes createGlossary with call error', async () => {
       const client =
         new translationserviceModule.v3beta1.TranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1720,7 +1720,7 @@ describe('v3beta1.TranslationServiceClient', () => {
     it('invokes createGlossary with LRO error', async () => {
       const client =
         new translationserviceModule.v3beta1.TranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1754,7 +1754,7 @@ describe('v3beta1.TranslationServiceClient', () => {
     it('invokes checkCreateGlossaryProgress without error', async () => {
       const client =
         new translationserviceModule.v3beta1.TranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1762,8 +1762,8 @@ describe('v3beta1.TranslationServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateGlossaryProgress(
@@ -1777,7 +1777,7 @@ describe('v3beta1.TranslationServiceClient', () => {
     it('invokes checkCreateGlossaryProgress with error', async () => {
       const client =
         new translationserviceModule.v3beta1.TranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1799,7 +1799,7 @@ describe('v3beta1.TranslationServiceClient', () => {
     it('invokes deleteGlossary without error', async () => {
       const client =
         new translationserviceModule.v3beta1.TranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1833,7 +1833,7 @@ describe('v3beta1.TranslationServiceClient', () => {
     it('invokes deleteGlossary without error using callback', async () => {
       const client =
         new translationserviceModule.v3beta1.TranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1888,7 +1888,7 @@ describe('v3beta1.TranslationServiceClient', () => {
     it('invokes deleteGlossary with call error', async () => {
       const client =
         new translationserviceModule.v3beta1.TranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1920,7 +1920,7 @@ describe('v3beta1.TranslationServiceClient', () => {
     it('invokes deleteGlossary with LRO error', async () => {
       const client =
         new translationserviceModule.v3beta1.TranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1954,7 +1954,7 @@ describe('v3beta1.TranslationServiceClient', () => {
     it('invokes checkDeleteGlossaryProgress without error', async () => {
       const client =
         new translationserviceModule.v3beta1.TranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1962,8 +1962,8 @@ describe('v3beta1.TranslationServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteGlossaryProgress(
@@ -1977,7 +1977,7 @@ describe('v3beta1.TranslationServiceClient', () => {
     it('invokes checkDeleteGlossaryProgress with error', async () => {
       const client =
         new translationserviceModule.v3beta1.TranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1999,7 +1999,7 @@ describe('v3beta1.TranslationServiceClient', () => {
     it('invokes listGlossaries without error', async () => {
       const client =
         new translationserviceModule.v3beta1.TranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2039,7 +2039,7 @@ describe('v3beta1.TranslationServiceClient', () => {
     it('invokes listGlossaries without error using callback', async () => {
       const client =
         new translationserviceModule.v3beta1.TranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2095,7 +2095,7 @@ describe('v3beta1.TranslationServiceClient', () => {
     it('invokes listGlossaries with error', async () => {
       const client =
         new translationserviceModule.v3beta1.TranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2127,7 +2127,7 @@ describe('v3beta1.TranslationServiceClient', () => {
     it('invokes listGlossariesStream without error', async () => {
       const client =
         new translationserviceModule.v3beta1.TranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2180,16 +2180,16 @@ describe('v3beta1.TranslationServiceClient', () => {
       assert(
         (client.descriptors.page.listGlossaries.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listGlossariesStream with error', async () => {
       const client =
         new translationserviceModule.v3beta1.TranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2231,16 +2231,16 @@ describe('v3beta1.TranslationServiceClient', () => {
       assert(
         (client.descriptors.page.listGlossaries.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listGlossaries without error', async () => {
       const client =
         new translationserviceModule.v3beta1.TranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2281,16 +2281,16 @@ describe('v3beta1.TranslationServiceClient', () => {
       assert(
         (client.descriptors.page.listGlossaries.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listGlossaries with error', async () => {
       const client =
         new translationserviceModule.v3beta1.TranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2323,9 +2323,9 @@ describe('v3beta1.TranslationServiceClient', () => {
       assert(
         (client.descriptors.page.listGlossaries.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2333,7 +2333,7 @@ describe('v3beta1.TranslationServiceClient', () => {
     it('invokes getIamPolicy without error', async () => {
       const client =
         new translationserviceModule.v3beta1.TranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2364,7 +2364,7 @@ describe('v3beta1.TranslationServiceClient', () => {
     it('invokes getIamPolicy without error using callback', async () => {
       const client =
         new translationserviceModule.v3beta1.TranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2402,7 +2402,7 @@ describe('v3beta1.TranslationServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2413,7 +2413,7 @@ describe('v3beta1.TranslationServiceClient', () => {
     it('invokes getIamPolicy with error', async () => {
       const client =
         new translationserviceModule.v3beta1.TranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2446,7 +2446,7 @@ describe('v3beta1.TranslationServiceClient', () => {
     it('invokes setIamPolicy without error', async () => {
       const client =
         new translationserviceModule.v3beta1.TranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2477,7 +2477,7 @@ describe('v3beta1.TranslationServiceClient', () => {
     it('invokes setIamPolicy without error using callback', async () => {
       const client =
         new translationserviceModule.v3beta1.TranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2515,7 +2515,7 @@ describe('v3beta1.TranslationServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2526,7 +2526,7 @@ describe('v3beta1.TranslationServiceClient', () => {
     it('invokes setIamPolicy with error', async () => {
       const client =
         new translationserviceModule.v3beta1.TranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2559,7 +2559,7 @@ describe('v3beta1.TranslationServiceClient', () => {
     it('invokes testIamPermissions without error', async () => {
       const client =
         new translationserviceModule.v3beta1.TranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2593,7 +2593,7 @@ describe('v3beta1.TranslationServiceClient', () => {
     it('invokes testIamPermissions without error using callback', async () => {
       const client =
         new translationserviceModule.v3beta1.TranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2631,7 +2631,7 @@ describe('v3beta1.TranslationServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2642,7 +2642,7 @@ describe('v3beta1.TranslationServiceClient', () => {
     it('invokes testIamPermissions with error', async () => {
       const client =
         new translationserviceModule.v3beta1.TranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2678,7 +2678,7 @@ describe('v3beta1.TranslationServiceClient', () => {
     it('invokes getLocation without error', async () => {
       const client =
         new translationserviceModule.v3beta1.TranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2709,7 +2709,7 @@ describe('v3beta1.TranslationServiceClient', () => {
     it('invokes getLocation without error using callback', async () => {
       const client =
         new translationserviceModule.v3beta1.TranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2754,7 +2754,7 @@ describe('v3beta1.TranslationServiceClient', () => {
     it('invokes getLocation with error', async () => {
       const client =
         new translationserviceModule.v3beta1.TranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2790,7 +2790,7 @@ describe('v3beta1.TranslationServiceClient', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client =
         new translationserviceModule.v3beta1.TranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2839,7 +2839,7 @@ describe('v3beta1.TranslationServiceClient', () => {
     it('uses async iteration with listLocations with error', async () => {
       const client =
         new translationserviceModule.v3beta1.TranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2881,7 +2881,7 @@ describe('v3beta1.TranslationServiceClient', () => {
     it('invokes getOperation without error', async () => {
       const client =
         new translationserviceModule.v3beta1.TranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2903,7 +2903,7 @@ describe('v3beta1.TranslationServiceClient', () => {
     it('invokes getOperation without error using callback', async () => {
       const client =
         new translationserviceModule.v3beta1.TranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -2931,7 +2931,7 @@ describe('v3beta1.TranslationServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2942,7 +2942,7 @@ describe('v3beta1.TranslationServiceClient', () => {
     it('invokes getOperation with error', async () => {
       const client =
         new translationserviceModule.v3beta1.TranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -2967,7 +2967,7 @@ describe('v3beta1.TranslationServiceClient', () => {
     it('invokes cancelOperation without error', async () => {
       const client =
         new translationserviceModule.v3beta1.TranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2990,7 +2990,7 @@ describe('v3beta1.TranslationServiceClient', () => {
     it('invokes cancelOperation without error using callback', async () => {
       const client =
         new translationserviceModule.v3beta1.TranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -3018,7 +3018,7 @@ describe('v3beta1.TranslationServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3029,7 +3029,7 @@ describe('v3beta1.TranslationServiceClient', () => {
     it('invokes cancelOperation with error', async () => {
       const client =
         new translationserviceModule.v3beta1.TranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -3054,7 +3054,7 @@ describe('v3beta1.TranslationServiceClient', () => {
     it('invokes deleteOperation without error', async () => {
       const client =
         new translationserviceModule.v3beta1.TranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3077,7 +3077,7 @@ describe('v3beta1.TranslationServiceClient', () => {
     it('invokes deleteOperation without error using callback', async () => {
       const client =
         new translationserviceModule.v3beta1.TranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -3105,7 +3105,7 @@ describe('v3beta1.TranslationServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3116,7 +3116,7 @@ describe('v3beta1.TranslationServiceClient', () => {
     it('invokes deleteOperation with error', async () => {
       const client =
         new translationserviceModule.v3beta1.TranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -3141,7 +3141,7 @@ describe('v3beta1.TranslationServiceClient', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client =
         new translationserviceModule.v3beta1.TranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -3177,7 +3177,7 @@ describe('v3beta1.TranslationServiceClient', () => {
     it('uses async iteration with listOperations with error', async () => {
       const client =
         new translationserviceModule.v3beta1.TranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3214,7 +3214,7 @@ describe('v3beta1.TranslationServiceClient', () => {
       };
       const client =
         new translationserviceModule.v3beta1.TranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3278,7 +3278,7 @@ describe('v3beta1.TranslationServiceClient', () => {
       };
       const client =
         new translationserviceModule.v3beta1.TranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();

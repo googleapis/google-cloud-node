@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/dialogflow-cx",
-  "version": "6.0.0",
+  "version": "6.2.0",
   "description": "Cx client for Node.js",
   "repository": {
     "type": "git",
@@ -54,7 +54,7 @@
     "test": "c8 mocha --config ../../.mocharc.cjs build/test"
   },
   "dependencies": {
-    "google-gax": "^6.0.0"
+    "google-gax": "^6.1.0"
   },
   "devDependencies": {
     "@types/mocha": "^10.0.10",

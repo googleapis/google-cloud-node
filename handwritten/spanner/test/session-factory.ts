@@ -177,6 +177,48 @@ describe('SessionFactory', () => {
     });
   });
 
+  describe('getSessionSync', () => {
+    describe('when multiplexed session is disabled', () => {
+      before(() => {
+        process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS = 'false';
+      });
+
+      after(() => {
+        delete process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS;
+      });
+
+      it('should return null even if multiplexedSession_ has a session', () => {
+        const factory = new SessionFactory(DATABASE, NAME, POOL_OPTIONS);
+        sandbox
+          .stub(factory.multiplexedSession_, 'getSessionSync')
+          .returns(fakeMuxSession);
+        assert.strictEqual(factory.getSessionSync(), null);
+      });
+    });
+
+    describe('when multiplexed session is default', () => {
+      it('should return the cached multiplexed session when available', () => {
+        sandbox
+          .stub(sessionFactory.multiplexedSession_, 'getSessionSync')
+          .returns(fakeMuxSession);
+        assert.strictEqual(sessionFactory.getSessionSync(), fakeMuxSession);
+      });
+
+      it('should return null when no multiplexed session is cached', () => {
+        sandbox
+          .stub(sessionFactory.multiplexedSession_, 'getSessionSync')
+          .returns(null);
+        assert.strictEqual(sessionFactory.getSessionSync(), null);
+      });
+
+      it('should safely return null if multiplexedSession_ does not implement getSessionSync', () => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        sessionFactory.multiplexedSession_ = {} as any;
+        assert.strictEqual(sessionFactory.getSessionSync(), null);
+      });
+    });
+  });
+
   describe('getSession', () => {
     describe('when multiplexed session is disabled', () => {
       before(() => {
@@ -289,9 +331,10 @@ describe('SessionFactory', () => {
             'getSession',
           ) as sinon.SinonStub
         ).callsFake(callback => callback(null, fakeMuxSession));
-        sessionFactory.getSessionForReadWrite((err, resp) => {
+        sessionFactory.getSessionForReadWrite((err, resp, txn) => {
           assert.strictEqual(err, null);
           assert.strictEqual(resp, fakeMuxSession);
+          assert(txn instanceof FakeTransaction);
           assert.strictEqual(resp?.metadata.multiplexed, true);
           assert.strictEqual(fakeMuxSession.metadata.multiplexed, true);
           done();
@@ -309,6 +352,22 @@ describe('SessionFactory', () => {
         sessionFactory.getSessionForReadWrite((err, resp) => {
           assert.strictEqual(err, fakeError);
           assert.strictEqual(resp, null);
+          done();
+        });
+      });
+
+      it('should return a fallback error when session is null and no error was provided', done => {
+        (
+          sandbox.stub(
+            sessionFactory.multiplexedSession_,
+            'getSession',
+          ) as sinon.SinonStub
+        ).callsFake(callback => callback(null, null));
+        sessionFactory.getSessionForReadWrite((err, session, transaction) => {
+          assert(err instanceof Error);
+          assert.strictEqual(err.message, 'No session found');
+          assert.strictEqual(session, null);
+          assert.strictEqual(transaction, undefined);
           done();
         });
       });

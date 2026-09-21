@@ -30,10 +30,10 @@ import type {
   LocationsClient,
   LocationProtos,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -55,7 +55,7 @@ export class SchemaServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('discoveryengine');
@@ -68,11 +68,11 @@ export class SchemaServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
+  innerApiCalls: {[name: string]: Function};
   locationsClient: LocationsClient;
-  pathTemplates: { [name: string]: gax.PathTemplate };
+  pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
-  schemaServiceStub?: Promise<{ [name: string]: Function }>;
+  schemaServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of SchemaServiceClient.
@@ -148,7 +148,7 @@ export class SchemaServiceClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -450,8 +450,8 @@ export class SchemaServiceClient {
             {
               get: '/v1/{name=projects/*/locations/*/identityMappingStores/*/operations/*}',
             },
-            { get: '/v1/{name=projects/*/locations/*/operations/*}' },
-            { get: '/v1/{name=projects/*/operations/*}' },
+            {get: '/v1/{name=projects/*/locations/*/operations/*}'},
+            {get: '/v1/{name=projects/*/operations/*}'},
           ],
         },
         {
@@ -482,23 +482,19 @@ export class SchemaServiceClient {
             {
               get: '/v1/{name=projects/*/locations/*/collections/*/engines/*}/operations',
             },
-            {
-              get: '/v1/{name=projects/*/locations/*/collections/*}/operations',
-            },
+            {get: '/v1/{name=projects/*/locations/*/collections/*}/operations'},
             {
               get: '/v1/{name=projects/*/locations/*/dataStores/*/branches/*}/operations',
             },
             {
               get: '/v1/{name=projects/*/locations/*/dataStores/*/models/*}/operations',
             },
-            {
-              get: '/v1/{name=projects/*/locations/*/dataStores/*}/operations',
-            },
+            {get: '/v1/{name=projects/*/locations/*/dataStores/*}/operations'},
             {
               get: '/v1/{name=projects/*/locations/*/identityMappingStores/*}/operations',
             },
-            { get: '/v1/{name=projects/*/locations/*}/operations' },
-            { get: '/v1/{name=projects/*}/operations' },
+            {get: '/v1/{name=projects/*/locations/*}/operations'},
+            {get: '/v1/{name=projects/*}/operations'},
           ],
         },
       ];
@@ -548,7 +544,7 @@ export class SchemaServiceClient {
       'google.cloud.discoveryengine.v1.SchemaService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -588,7 +584,7 @@ export class SchemaServiceClient {
           (this._protos as any).google.cloud.discoveryengine.v1.SchemaService,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -601,7 +597,7 @@ export class SchemaServiceClient {
     ];
     for (const methodName of schemaServiceStubMethods) {
       const callPromise = this.schemaServiceStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -803,7 +799,7 @@ export class SchemaServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getSchema request %j', request);
@@ -962,7 +958,7 @@ export class SchemaServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1019,7 +1015,7 @@ export class SchemaServiceClient {
     this._log.info('createSchema long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -1135,7 +1131,7 @@ export class SchemaServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'schema.name': request.schema!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1192,7 +1188,7 @@ export class SchemaServiceClient {
     this._log.info('updateSchema long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -1305,7 +1301,7 @@ export class SchemaServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1362,7 +1358,7 @@ export class SchemaServiceClient {
     this._log.info('deleteSchema long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -1482,7 +1478,7 @@ export class SchemaServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1562,7 +1558,7 @@ export class SchemaServiceClient {
       });
     const defaultCallSettings = this._defaults['listSchemas'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listSchemas stream %j', request);
@@ -1624,7 +1620,7 @@ export class SchemaServiceClient {
       });
     const defaultCallSettings = this._defaults['listSchemas'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listSchemas iterate %j', request);
@@ -5592,11 +5588,11 @@ export class SchemaServiceClient {
    */
   close(): Promise<void> {
     if (this.schemaServiceStub && !this._terminated) {
-      return this.schemaServiceStub.then((stub) => {
+      return this.schemaServiceStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch((err) => {
+        this.locationsClient.close().catch(err => {
           throw err;
         });
         void this.operationsClient.close();

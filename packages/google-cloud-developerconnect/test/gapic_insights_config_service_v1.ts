@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as insightsconfigserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -50,7 +50,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -154,9 +154,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -291,7 +291,7 @@ describe('v1.InsightsConfigServiceClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client =
         new insightsconfigserviceModule.v1.InsightsConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.insightsConfigServiceStub, undefined);
@@ -299,13 +299,13 @@ describe('v1.InsightsConfigServiceClient', () => {
       assert(client.insightsConfigServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new insightsconfigserviceModule.v1.InsightsConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.insightsConfigServiceStub);
@@ -314,15 +314,15 @@ describe('v1.InsightsConfigServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new insightsconfigserviceModule.v1.InsightsConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.insightsConfigServiceStub, undefined);
@@ -331,7 +331,7 @@ describe('v1.InsightsConfigServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -340,7 +340,7 @@ describe('v1.InsightsConfigServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new insightsconfigserviceModule.v1.InsightsConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -353,7 +353,7 @@ describe('v1.InsightsConfigServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new insightsconfigserviceModule.v1.InsightsConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon
@@ -377,7 +377,7 @@ describe('v1.InsightsConfigServiceClient', () => {
     it('invokes getInsightsConfig without error', async () => {
       const client =
         new insightsconfigserviceModule.v1.InsightsConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -409,7 +409,7 @@ describe('v1.InsightsConfigServiceClient', () => {
     it('invokes getInsightsConfig without error using callback', async () => {
       const client =
         new insightsconfigserviceModule.v1.InsightsConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -457,7 +457,7 @@ describe('v1.InsightsConfigServiceClient', () => {
     it('invokes getInsightsConfig with error', async () => {
       const client =
         new insightsconfigserviceModule.v1.InsightsConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -489,7 +489,7 @@ describe('v1.InsightsConfigServiceClient', () => {
     it('invokes getInsightsConfig with closed client', async () => {
       const client =
         new insightsconfigserviceModule.v1.InsightsConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -502,7 +502,7 @@ describe('v1.InsightsConfigServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getInsightsConfig(request), expectedError);
@@ -513,7 +513,7 @@ describe('v1.InsightsConfigServiceClient', () => {
     it('invokes getDeploymentEvent without error', async () => {
       const client =
         new insightsconfigserviceModule.v1.InsightsConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -546,7 +546,7 @@ describe('v1.InsightsConfigServiceClient', () => {
     it('invokes getDeploymentEvent without error using callback', async () => {
       const client =
         new insightsconfigserviceModule.v1.InsightsConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -594,7 +594,7 @@ describe('v1.InsightsConfigServiceClient', () => {
     it('invokes getDeploymentEvent with error', async () => {
       const client =
         new insightsconfigserviceModule.v1.InsightsConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -626,7 +626,7 @@ describe('v1.InsightsConfigServiceClient', () => {
     it('invokes getDeploymentEvent with closed client', async () => {
       const client =
         new insightsconfigserviceModule.v1.InsightsConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -639,7 +639,7 @@ describe('v1.InsightsConfigServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getDeploymentEvent(request), expectedError);
@@ -650,7 +650,7 @@ describe('v1.InsightsConfigServiceClient', () => {
     it('invokes createInsightsConfig without error', async () => {
       const client =
         new insightsconfigserviceModule.v1.InsightsConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -684,7 +684,7 @@ describe('v1.InsightsConfigServiceClient', () => {
     it('invokes createInsightsConfig without error using callback', async () => {
       const client =
         new insightsconfigserviceModule.v1.InsightsConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -739,7 +739,7 @@ describe('v1.InsightsConfigServiceClient', () => {
     it('invokes createInsightsConfig with call error', async () => {
       const client =
         new insightsconfigserviceModule.v1.InsightsConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -771,7 +771,7 @@ describe('v1.InsightsConfigServiceClient', () => {
     it('invokes createInsightsConfig with LRO error', async () => {
       const client =
         new insightsconfigserviceModule.v1.InsightsConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -805,7 +805,7 @@ describe('v1.InsightsConfigServiceClient', () => {
     it('invokes checkCreateInsightsConfigProgress without error', async () => {
       const client =
         new insightsconfigserviceModule.v1.InsightsConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -813,8 +813,8 @@ describe('v1.InsightsConfigServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateInsightsConfigProgress(
@@ -828,7 +828,7 @@ describe('v1.InsightsConfigServiceClient', () => {
     it('invokes checkCreateInsightsConfigProgress with error', async () => {
       const client =
         new insightsconfigserviceModule.v1.InsightsConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -850,7 +850,7 @@ describe('v1.InsightsConfigServiceClient', () => {
     it('invokes updateInsightsConfig without error', async () => {
       const client =
         new insightsconfigserviceModule.v1.InsightsConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -885,7 +885,7 @@ describe('v1.InsightsConfigServiceClient', () => {
     it('invokes updateInsightsConfig without error using callback', async () => {
       const client =
         new insightsconfigserviceModule.v1.InsightsConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -941,7 +941,7 @@ describe('v1.InsightsConfigServiceClient', () => {
     it('invokes updateInsightsConfig with call error', async () => {
       const client =
         new insightsconfigserviceModule.v1.InsightsConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -974,7 +974,7 @@ describe('v1.InsightsConfigServiceClient', () => {
     it('invokes updateInsightsConfig with LRO error', async () => {
       const client =
         new insightsconfigserviceModule.v1.InsightsConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1009,7 +1009,7 @@ describe('v1.InsightsConfigServiceClient', () => {
     it('invokes checkUpdateInsightsConfigProgress without error', async () => {
       const client =
         new insightsconfigserviceModule.v1.InsightsConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1017,8 +1017,8 @@ describe('v1.InsightsConfigServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateInsightsConfigProgress(
@@ -1032,7 +1032,7 @@ describe('v1.InsightsConfigServiceClient', () => {
     it('invokes checkUpdateInsightsConfigProgress with error', async () => {
       const client =
         new insightsconfigserviceModule.v1.InsightsConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1054,7 +1054,7 @@ describe('v1.InsightsConfigServiceClient', () => {
     it('invokes deleteInsightsConfig without error', async () => {
       const client =
         new insightsconfigserviceModule.v1.InsightsConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1088,7 +1088,7 @@ describe('v1.InsightsConfigServiceClient', () => {
     it('invokes deleteInsightsConfig without error using callback', async () => {
       const client =
         new insightsconfigserviceModule.v1.InsightsConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1143,7 +1143,7 @@ describe('v1.InsightsConfigServiceClient', () => {
     it('invokes deleteInsightsConfig with call error', async () => {
       const client =
         new insightsconfigserviceModule.v1.InsightsConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1175,7 +1175,7 @@ describe('v1.InsightsConfigServiceClient', () => {
     it('invokes deleteInsightsConfig with LRO error', async () => {
       const client =
         new insightsconfigserviceModule.v1.InsightsConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1209,7 +1209,7 @@ describe('v1.InsightsConfigServiceClient', () => {
     it('invokes checkDeleteInsightsConfigProgress without error', async () => {
       const client =
         new insightsconfigserviceModule.v1.InsightsConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1217,8 +1217,8 @@ describe('v1.InsightsConfigServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteInsightsConfigProgress(
@@ -1232,7 +1232,7 @@ describe('v1.InsightsConfigServiceClient', () => {
     it('invokes checkDeleteInsightsConfigProgress with error', async () => {
       const client =
         new insightsconfigserviceModule.v1.InsightsConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1254,7 +1254,7 @@ describe('v1.InsightsConfigServiceClient', () => {
     it('invokes listInsightsConfigs without error', async () => {
       const client =
         new insightsconfigserviceModule.v1.InsightsConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1295,7 +1295,7 @@ describe('v1.InsightsConfigServiceClient', () => {
     it('invokes listInsightsConfigs without error using callback', async () => {
       const client =
         new insightsconfigserviceModule.v1.InsightsConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1327,8 +1327,7 @@ describe('v1.InsightsConfigServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.developerconnect.v1.IInsightsConfig[]
-              | null,
+              protos.google.cloud.developerconnect.v1.IInsightsConfig[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -1353,7 +1352,7 @@ describe('v1.InsightsConfigServiceClient', () => {
     it('invokes listInsightsConfigs with error', async () => {
       const client =
         new insightsconfigserviceModule.v1.InsightsConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1385,7 +1384,7 @@ describe('v1.InsightsConfigServiceClient', () => {
     it('invokes listInsightsConfigsStream without error', async () => {
       const client =
         new insightsconfigserviceModule.v1.InsightsConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1440,16 +1439,16 @@ describe('v1.InsightsConfigServiceClient', () => {
       assert(
         (client.descriptors.page.listInsightsConfigs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listInsightsConfigsStream with error', async () => {
       const client =
         new insightsconfigserviceModule.v1.InsightsConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1493,16 +1492,16 @@ describe('v1.InsightsConfigServiceClient', () => {
       assert(
         (client.descriptors.page.listInsightsConfigs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listInsightsConfigs without error', async () => {
       const client =
         new insightsconfigserviceModule.v1.InsightsConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1544,16 +1543,16 @@ describe('v1.InsightsConfigServiceClient', () => {
       assert(
         (client.descriptors.page.listInsightsConfigs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listInsightsConfigs with error', async () => {
       const client =
         new insightsconfigserviceModule.v1.InsightsConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1586,9 +1585,9 @@ describe('v1.InsightsConfigServiceClient', () => {
       assert(
         (client.descriptors.page.listInsightsConfigs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1597,7 +1596,7 @@ describe('v1.InsightsConfigServiceClient', () => {
     it('invokes listDeploymentEvents without error', async () => {
       const client =
         new insightsconfigserviceModule.v1.InsightsConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1638,7 +1637,7 @@ describe('v1.InsightsConfigServiceClient', () => {
     it('invokes listDeploymentEvents without error using callback', async () => {
       const client =
         new insightsconfigserviceModule.v1.InsightsConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1670,8 +1669,7 @@ describe('v1.InsightsConfigServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.developerconnect.v1.IDeploymentEvent[]
-              | null,
+              protos.google.cloud.developerconnect.v1.IDeploymentEvent[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -1696,7 +1694,7 @@ describe('v1.InsightsConfigServiceClient', () => {
     it('invokes listDeploymentEvents with error', async () => {
       const client =
         new insightsconfigserviceModule.v1.InsightsConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1728,7 +1726,7 @@ describe('v1.InsightsConfigServiceClient', () => {
     it('invokes listDeploymentEventsStream without error', async () => {
       const client =
         new insightsconfigserviceModule.v1.InsightsConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1783,16 +1781,16 @@ describe('v1.InsightsConfigServiceClient', () => {
       assert(
         (client.descriptors.page.listDeploymentEvents.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listDeploymentEventsStream with error', async () => {
       const client =
         new insightsconfigserviceModule.v1.InsightsConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1836,16 +1834,16 @@ describe('v1.InsightsConfigServiceClient', () => {
       assert(
         (client.descriptors.page.listDeploymentEvents.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDeploymentEvents without error', async () => {
       const client =
         new insightsconfigserviceModule.v1.InsightsConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1887,16 +1885,16 @@ describe('v1.InsightsConfigServiceClient', () => {
       assert(
         (client.descriptors.page.listDeploymentEvents.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDeploymentEvents with error', async () => {
       const client =
         new insightsconfigserviceModule.v1.InsightsConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1929,9 +1927,9 @@ describe('v1.InsightsConfigServiceClient', () => {
       assert(
         (client.descriptors.page.listDeploymentEvents.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1939,7 +1937,7 @@ describe('v1.InsightsConfigServiceClient', () => {
     it('invokes getLocation without error', async () => {
       const client =
         new insightsconfigserviceModule.v1.InsightsConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1970,7 +1968,7 @@ describe('v1.InsightsConfigServiceClient', () => {
     it('invokes getLocation without error using callback', async () => {
       const client =
         new insightsconfigserviceModule.v1.InsightsConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2015,7 +2013,7 @@ describe('v1.InsightsConfigServiceClient', () => {
     it('invokes getLocation with error', async () => {
       const client =
         new insightsconfigserviceModule.v1.InsightsConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2051,7 +2049,7 @@ describe('v1.InsightsConfigServiceClient', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client =
         new insightsconfigserviceModule.v1.InsightsConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2100,7 +2098,7 @@ describe('v1.InsightsConfigServiceClient', () => {
     it('uses async iteration with listLocations with error', async () => {
       const client =
         new insightsconfigserviceModule.v1.InsightsConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2142,7 +2140,7 @@ describe('v1.InsightsConfigServiceClient', () => {
     it('invokes getOperation without error', async () => {
       const client =
         new insightsconfigserviceModule.v1.InsightsConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2164,7 +2162,7 @@ describe('v1.InsightsConfigServiceClient', () => {
     it('invokes getOperation without error using callback', async () => {
       const client =
         new insightsconfigserviceModule.v1.InsightsConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -2192,7 +2190,7 @@ describe('v1.InsightsConfigServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2203,7 +2201,7 @@ describe('v1.InsightsConfigServiceClient', () => {
     it('invokes getOperation with error', async () => {
       const client =
         new insightsconfigserviceModule.v1.InsightsConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -2228,7 +2226,7 @@ describe('v1.InsightsConfigServiceClient', () => {
     it('invokes cancelOperation without error', async () => {
       const client =
         new insightsconfigserviceModule.v1.InsightsConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2251,7 +2249,7 @@ describe('v1.InsightsConfigServiceClient', () => {
     it('invokes cancelOperation without error using callback', async () => {
       const client =
         new insightsconfigserviceModule.v1.InsightsConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -2279,7 +2277,7 @@ describe('v1.InsightsConfigServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2290,7 +2288,7 @@ describe('v1.InsightsConfigServiceClient', () => {
     it('invokes cancelOperation with error', async () => {
       const client =
         new insightsconfigserviceModule.v1.InsightsConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -2315,7 +2313,7 @@ describe('v1.InsightsConfigServiceClient', () => {
     it('invokes deleteOperation without error', async () => {
       const client =
         new insightsconfigserviceModule.v1.InsightsConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2338,7 +2336,7 @@ describe('v1.InsightsConfigServiceClient', () => {
     it('invokes deleteOperation without error using callback', async () => {
       const client =
         new insightsconfigserviceModule.v1.InsightsConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -2366,7 +2364,7 @@ describe('v1.InsightsConfigServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2377,7 +2375,7 @@ describe('v1.InsightsConfigServiceClient', () => {
     it('invokes deleteOperation with error', async () => {
       const client =
         new insightsconfigserviceModule.v1.InsightsConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -2402,7 +2400,7 @@ describe('v1.InsightsConfigServiceClient', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client =
         new insightsconfigserviceModule.v1.InsightsConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -2438,7 +2436,7 @@ describe('v1.InsightsConfigServiceClient', () => {
     it('uses async iteration with listOperations with error', async () => {
       const client =
         new insightsconfigserviceModule.v1.InsightsConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2475,7 +2473,7 @@ describe('v1.InsightsConfigServiceClient', () => {
       };
       const client =
         new insightsconfigserviceModule.v1.InsightsConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2544,7 +2542,7 @@ describe('v1.InsightsConfigServiceClient', () => {
       };
       const client =
         new insightsconfigserviceModule.v1.InsightsConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2610,7 +2608,7 @@ describe('v1.InsightsConfigServiceClient', () => {
       };
       const client =
         new insightsconfigserviceModule.v1.InsightsConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2689,7 +2687,7 @@ describe('v1.InsightsConfigServiceClient', () => {
       };
       const client =
         new insightsconfigserviceModule.v1.InsightsConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2782,7 +2780,7 @@ describe('v1.InsightsConfigServiceClient', () => {
       };
       const client =
         new insightsconfigserviceModule.v1.InsightsConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2847,7 +2845,7 @@ describe('v1.InsightsConfigServiceClient', () => {
       };
       const client =
         new insightsconfigserviceModule.v1.InsightsConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2896,7 +2894,7 @@ describe('v1.InsightsConfigServiceClient', () => {
       };
       const client =
         new insightsconfigserviceModule.v1.InsightsConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2938,7 +2936,7 @@ describe('v1.InsightsConfigServiceClient', () => {
       };
       const client =
         new insightsconfigserviceModule.v1.InsightsConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();

@@ -52,4 +52,4 @@ export default {
   TableServiceClient,
 };
 import * as protos from '../protos/protos';
-export { protos };
+export {protos};

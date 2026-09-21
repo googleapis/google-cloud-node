@@ -4,6 +4,20 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/kms?activeTab=versions
 
+## [6.2.0](https://github.com/googleapis/google-cloud-node/compare/kms-v6.1.0...kms-v6.2.0) (2026-09-15)
+
+
+### Features
+
+* Update API sources and regenerate ([#9293](https://github.com/googleapis/google-cloud-node/issues/9293)) ([07ae774](https://github.com/googleapis/google-cloud-node/commit/07ae774a8e52185a3598c878513377e7a019f127))
+
+## [6.1.0](https://github.com/googleapis/google-cloud-node/compare/kms-v6.0.0...kms-v6.1.0) (2026-09-08)
+
+
+### Features
+
+* Upgrade librarian gapic-generator-typescript to v5.2.0 ([c249594](https://github.com/googleapis/google-cloud-node/commit/c249594c6ef41e4b36f1ef8869341a4c98c092b0))
+
 ## [6.0.0](https://github.com/googleapis/google-cloud-node/compare/kms-v5.7.0...kms-v6.0.0) (2026-08-04)
 
 

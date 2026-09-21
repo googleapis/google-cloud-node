@@ -1,5 +1,26 @@
 # Changelog
 
+## [0.7.0](https://github.com/googleapis/google-cloud-node/compare/health-v0.6.1...health-v0.7.0) (2026-09-08)
+
+
+### Features
+
+* Upgrade librarian gapic-generator-typescript to v5.2.0 ([c249594](https://github.com/googleapis/google-cloud-node/commit/c249594c6ef41e4b36f1ef8869341a4c98c092b0))
+
+## [0.6.1](https://github.com/googleapis/google-cloud-node/compare/health-v0.6.0...health-v0.6.1) (2026-08-26)
+
+
+### Bug Fixes
+
+* Upgrade sinon types for health package ([#9202](https://github.com/googleapis/google-cloud-node/issues/9202)) ([b312515](https://github.com/googleapis/google-cloud-node/commit/b312515bcd60c767532ebd0dabf23d95014e0a86))
+
+## [0.6.0](https://github.com/googleapis/google-cloud-node/compare/health-v0.5.0...health-v0.6.0) (2026-08-21)
+
+
+### Features
+
+* Update sources and regenerate ([#9170](https://github.com/googleapis/google-cloud-node/issues/9170)) ([827fab0](https://github.com/googleapis/google-cloud-node/commit/827fab0ba7fc2067c800ae2cdd92fd21527380bf))
+
 ## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/health-v0.4.0...health-v0.5.0) (2026-08-04)
 
 

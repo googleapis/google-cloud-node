@@ -3755,6 +3755,9 @@ export namespace google {
 
                     /** DeploymentOperationMetadata logs */
                     logs?: (string|null);
+
+                    /** DeploymentOperationMetadata applyResultsAvailable */
+                    applyResultsAvailable?: (boolean|null);
                 }
 
                 /** Represents a DeploymentOperationMetadata. */
@@ -3777,6 +3780,9 @@ export namespace google {
 
                     /** DeploymentOperationMetadata logs. */
                     public logs: string;
+
+                    /** DeploymentOperationMetadata applyResultsAvailable. */
+                    public applyResultsAvailable: boolean;
 
                     /**
                      * Creates a new DeploymentOperationMetadata instance using the specified properties.

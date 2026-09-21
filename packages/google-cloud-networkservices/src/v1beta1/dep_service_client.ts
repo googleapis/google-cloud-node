@@ -27,11 +27,15 @@ import type {
   LROperation,
   PaginationCallback,
   GaxCall,
+  IamClient,
+  IamProtos,
+  LocationsClient,
+  LocationProtos,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -53,7 +57,7 @@ export class DepServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('networkservices');
@@ -66,10 +70,12 @@ export class DepServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
-  pathTemplates: { [name: string]: gax.PathTemplate };
+  innerApiCalls: {[name: string]: Function};
+  iamClient: IamClient;
+  locationsClient: LocationsClient;
+  pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
-  depServiceStub?: Promise<{ [name: string]: Function }>;
+  depServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of DepServiceClient.
@@ -145,7 +151,7 @@ export class DepServiceClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -182,6 +188,12 @@ export class DepServiceClient {
     if (servicePath === this._servicePath) {
       this.auth.defaultScopes = staticMembers.scopes;
     }
+    this.iamClient = new this._gaxModule.IamClient(this._gaxGrpc, opts);
+
+    this.locationsClient = new this._gaxModule.LocationsClient(
+      this._gaxGrpc,
+      opts,
+    );
 
     // Determine the client header string.
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
@@ -207,6 +219,9 @@ export class DepServiceClient {
     this.pathTemplates = {
       endpointPolicyPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/endpointPolicies/{endpoint_policy}',
+      ),
+      extensionBindingPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/extensionBindings/{extension_binding}',
       ),
       lbRouteExtensionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/lbRouteExtensions/{lb_route_extension}',
@@ -235,6 +250,11 @@ export class DepServiceClient {
         'pageToken',
         'nextPageToken',
         'lbRouteExtensions',
+      ),
+      listExtensionBindings: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'extensionBindings',
       ),
     };
 
@@ -329,6 +349,24 @@ export class DepServiceClient {
     const deleteLbRouteExtensionMetadata = protoFilesRoot.lookup(
       '.google.cloud.networkservices.v1beta1.OperationMetadata',
     ) as gax.protobuf.Type;
+    const createExtensionBindingResponse = protoFilesRoot.lookup(
+      '.google.cloud.networkservices.v1beta1.ExtensionBinding',
+    ) as gax.protobuf.Type;
+    const createExtensionBindingMetadata = protoFilesRoot.lookup(
+      '.google.cloud.networkservices.v1beta1.OperationMetadata',
+    ) as gax.protobuf.Type;
+    const updateExtensionBindingResponse = protoFilesRoot.lookup(
+      '.google.cloud.networkservices.v1beta1.ExtensionBinding',
+    ) as gax.protobuf.Type;
+    const updateExtensionBindingMetadata = protoFilesRoot.lookup(
+      '.google.cloud.networkservices.v1beta1.OperationMetadata',
+    ) as gax.protobuf.Type;
+    const deleteExtensionBindingResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty',
+    ) as gax.protobuf.Type;
+    const deleteExtensionBindingMetadata = protoFilesRoot.lookup(
+      '.google.cloud.networkservices.v1beta1.OperationMetadata',
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createLbTrafficExtension: new this._gaxModule.LongrunningDescriptor(
@@ -385,6 +423,33 @@ export class DepServiceClient {
           deleteLbRouteExtensionMetadata,
         ),
       ),
+      createExtensionBinding: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        createExtensionBindingResponse.decode.bind(
+          createExtensionBindingResponse,
+        ),
+        createExtensionBindingMetadata.decode.bind(
+          createExtensionBindingMetadata,
+        ),
+      ),
+      updateExtensionBinding: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        updateExtensionBindingResponse.decode.bind(
+          updateExtensionBindingResponse,
+        ),
+        updateExtensionBindingMetadata.decode.bind(
+          updateExtensionBindingMetadata,
+        ),
+      ),
+      deleteExtensionBinding: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deleteExtensionBindingResponse.decode.bind(
+          deleteExtensionBindingResponse,
+        ),
+        deleteExtensionBindingMetadata.decode.bind(
+          deleteExtensionBindingMetadata,
+        ),
+      ),
     };
 
     // Put together the default options sent with requests.
@@ -392,7 +457,7 @@ export class DepServiceClient {
       'google.cloud.networkservices.v1beta1.DepService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -432,7 +497,7 @@ export class DepServiceClient {
           (this._protos as any).google.cloud.networkservices.v1beta1.DepService,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -447,10 +512,15 @@ export class DepServiceClient {
       'createLbRouteExtension',
       'updateLbRouteExtension',
       'deleteLbRouteExtension',
+      'listExtensionBindings',
+      'getExtensionBinding',
+      'createExtensionBinding',
+      'updateExtensionBinding',
+      'deleteExtensionBinding',
     ];
     for (const methodName of depServiceStubMethods) {
       const callPromise = this.depServiceStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -659,7 +729,7 @@ export class DepServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getLbTrafficExtension request %j', request);
@@ -804,7 +874,7 @@ export class DepServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getLbRouteExtension request %j', request);
@@ -834,6 +904,151 @@ export class DepServiceClient {
           {} | undefined,
         ]) => {
           this._log.info('getLbRouteExtension response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Gets details of the specified `ExtensionBinding` resource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. A name of the `ExtensionBinding` resource to get. Must be in the
+   *   format
+   *   `projects/{project}/locations/{location}/extensionBindings/{extension_binding}`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.networkservices.v1beta1.ExtensionBinding|ExtensionBinding}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/dep_service.get_extension_binding.js</caption>
+   * region_tag:networkservices_v1beta1_generated_DepService_GetExtensionBinding_async
+   */
+  getExtensionBinding(
+    request?: protos.google.cloud.networkservices.v1beta1.IGetExtensionBindingRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.networkservices.v1beta1.IExtensionBinding,
+      (
+        | protos.google.cloud.networkservices.v1beta1.IGetExtensionBindingRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  getExtensionBinding(
+    request: protos.google.cloud.networkservices.v1beta1.IGetExtensionBindingRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.networkservices.v1beta1.IExtensionBinding,
+      | protos.google.cloud.networkservices.v1beta1.IGetExtensionBindingRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getExtensionBinding(
+    request: protos.google.cloud.networkservices.v1beta1.IGetExtensionBindingRequest,
+    callback: Callback<
+      protos.google.cloud.networkservices.v1beta1.IExtensionBinding,
+      | protos.google.cloud.networkservices.v1beta1.IGetExtensionBindingRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getExtensionBinding(
+    request?: protos.google.cloud.networkservices.v1beta1.IGetExtensionBindingRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.networkservices.v1beta1.IExtensionBinding,
+          | protos.google.cloud.networkservices.v1beta1.IGetExtensionBindingRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.networkservices.v1beta1.IExtensionBinding,
+      | protos.google.cloud.networkservices.v1beta1.IGetExtensionBindingRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.networkservices.v1beta1.IExtensionBinding,
+      (
+        | protos.google.cloud.networkservices.v1beta1.IGetExtensionBindingRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getExtensionBinding request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.networkservices.v1beta1.IExtensionBinding,
+          | protos.google.cloud.networkservices.v1beta1.IGetExtensionBindingRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getExtensionBinding response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getExtensionBinding(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.networkservices.v1beta1.IExtensionBinding,
+          (
+            | protos.google.cloud.networkservices.v1beta1.IGetExtensionBindingRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getExtensionBinding response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -975,7 +1190,7 @@ export class DepServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1032,7 +1247,7 @@ export class DepServiceClient {
     this._log.info('createLbTrafficExtension long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -1164,7 +1379,7 @@ export class DepServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'lb_traffic_extension.name': request.lbTrafficExtension!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1221,7 +1436,7 @@ export class DepServiceClient {
     this._log.info('updateLbTrafficExtension long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -1349,7 +1564,7 @@ export class DepServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1406,7 +1621,7 @@ export class DepServiceClient {
     this._log.info('deleteLbTrafficExtension long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -1538,7 +1753,7 @@ export class DepServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1595,7 +1810,7 @@ export class DepServiceClient {
     this._log.info('createLbRouteExtension long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -1727,7 +1942,7 @@ export class DepServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'lb_route_extension.name': request.lbRouteExtension!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1784,7 +1999,7 @@ export class DepServiceClient {
     this._log.info('updateLbRouteExtension long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -1912,7 +2127,7 @@ export class DepServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1969,12 +2184,534 @@ export class DepServiceClient {
     this._log.info('deleteLbRouteExtension long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
       operation,
       this.descriptors.longrunning.deleteLbRouteExtension,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.networkservices.v1beta1.OperationMetadata
+    >;
+  }
+  /**
+   * Creates a new `ExtensionBinding` resource in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource of the `ExtensionBinding` resource. Must be
+   *   in the format `projects/{project}/locations/{location}`.
+   * @param {string} request.extensionBindingId
+   *   Required. Short name of the `ExtensionBinding` resource to be created.
+   * @param {google.cloud.networkservices.v1beta1.ExtensionBinding} request.extensionBinding
+   *   Required. `ExtensionBinding` resource to be created.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/dep_service.create_extension_binding.js</caption>
+   * region_tag:networkservices_v1beta1_generated_DepService_CreateExtensionBinding_async
+   */
+  createExtensionBinding(
+    request?: protos.google.cloud.networkservices.v1beta1.ICreateExtensionBindingRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.networkservices.v1beta1.IExtensionBinding,
+        protos.google.cloud.networkservices.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  createExtensionBinding(
+    request: protos.google.cloud.networkservices.v1beta1.ICreateExtensionBindingRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.networkservices.v1beta1.IExtensionBinding,
+        protos.google.cloud.networkservices.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  createExtensionBinding(
+    request: protos.google.cloud.networkservices.v1beta1.ICreateExtensionBindingRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.networkservices.v1beta1.IExtensionBinding,
+        protos.google.cloud.networkservices.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  createExtensionBinding(
+    request?: protos.google.cloud.networkservices.v1beta1.ICreateExtensionBindingRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.networkservices.v1beta1.IExtensionBinding,
+            protos.google.cloud.networkservices.v1beta1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.networkservices.v1beta1.IExtensionBinding,
+        protos.google.cloud.networkservices.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.networkservices.v1beta1.IExtensionBinding,
+        protos.google.cloud.networkservices.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.networkservices.v1beta1.IExtensionBinding,
+            protos.google.cloud.networkservices.v1beta1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createExtensionBinding response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createExtensionBinding request %j', request);
+    return this.innerApiCalls
+      .createExtensionBinding(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.networkservices.v1beta1.IExtensionBinding,
+            protos.google.cloud.networkservices.v1beta1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createExtensionBinding response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
+  }
+  /**
+   * Check the status of the long running operation returned by `createExtensionBinding()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/dep_service.create_extension_binding.js</caption>
+   * region_tag:networkservices_v1beta1_generated_DepService_CreateExtensionBinding_async
+   */
+  async checkCreateExtensionBindingProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.networkservices.v1beta1.ExtensionBinding,
+      protos.google.cloud.networkservices.v1beta1.OperationMetadata
+    >
+  > {
+    this._log.info('createExtensionBinding long-running');
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name},
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createExtensionBinding,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.networkservices.v1beta1.ExtensionBinding,
+      protos.google.cloud.networkservices.v1beta1.OperationMetadata
+    >;
+  }
+  /**
+   * Updates the parameters of the specified `ExtensionBinding` resource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. Field mask is used to specify the fields to be overwritten in the
+   *   `ExtensionBinding` resource by the update.
+   *   The fields specified in the update_mask are relative to the resource, not
+   *   the full request. A field will be overwritten if it is in the mask. If the
+   *   user does not provide a mask then all fields will be overwritten.
+   * @param {google.cloud.networkservices.v1beta1.ExtensionBinding} request.extensionBinding
+   *   Required. Updated `ExtensionBinding` resource.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/dep_service.update_extension_binding.js</caption>
+   * region_tag:networkservices_v1beta1_generated_DepService_UpdateExtensionBinding_async
+   */
+  updateExtensionBinding(
+    request?: protos.google.cloud.networkservices.v1beta1.IUpdateExtensionBindingRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.networkservices.v1beta1.IExtensionBinding,
+        protos.google.cloud.networkservices.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  updateExtensionBinding(
+    request: protos.google.cloud.networkservices.v1beta1.IUpdateExtensionBindingRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.networkservices.v1beta1.IExtensionBinding,
+        protos.google.cloud.networkservices.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  updateExtensionBinding(
+    request: protos.google.cloud.networkservices.v1beta1.IUpdateExtensionBindingRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.networkservices.v1beta1.IExtensionBinding,
+        protos.google.cloud.networkservices.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  updateExtensionBinding(
+    request?: protos.google.cloud.networkservices.v1beta1.IUpdateExtensionBindingRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.networkservices.v1beta1.IExtensionBinding,
+            protos.google.cloud.networkservices.v1beta1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.networkservices.v1beta1.IExtensionBinding,
+        protos.google.cloud.networkservices.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.networkservices.v1beta1.IExtensionBinding,
+        protos.google.cloud.networkservices.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'extension_binding.name': request.extensionBinding!.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.networkservices.v1beta1.IExtensionBinding,
+            protos.google.cloud.networkservices.v1beta1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateExtensionBinding response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateExtensionBinding request %j', request);
+    return this.innerApiCalls
+      .updateExtensionBinding(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.networkservices.v1beta1.IExtensionBinding,
+            protos.google.cloud.networkservices.v1beta1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateExtensionBinding response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
+  }
+  /**
+   * Check the status of the long running operation returned by `updateExtensionBinding()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/dep_service.update_extension_binding.js</caption>
+   * region_tag:networkservices_v1beta1_generated_DepService_UpdateExtensionBinding_async
+   */
+  async checkUpdateExtensionBindingProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.networkservices.v1beta1.ExtensionBinding,
+      protos.google.cloud.networkservices.v1beta1.OperationMetadata
+    >
+  > {
+    this._log.info('updateExtensionBinding long-running');
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name},
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateExtensionBinding,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.networkservices.v1beta1.ExtensionBinding,
+      protos.google.cloud.networkservices.v1beta1.OperationMetadata
+    >;
+  }
+  /**
+   * Deletes the specified `ExtensionBinding` resource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. A name of the `ExtensionBinding` resource to delete. Must be in
+   *   the format
+   *   `projects/{project}/locations/{location}/extensionBindings/{extension_binding}`.
+   * @param {string} [request.etag]
+   *   Optional. The etag of the ExtensionBinding to delete.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/dep_service.delete_extension_binding.js</caption>
+   * region_tag:networkservices_v1beta1_generated_DepService_DeleteExtensionBinding_async
+   */
+  deleteExtensionBinding(
+    request?: protos.google.cloud.networkservices.v1beta1.IDeleteExtensionBindingRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networkservices.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  deleteExtensionBinding(
+    request: protos.google.cloud.networkservices.v1beta1.IDeleteExtensionBindingRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networkservices.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  deleteExtensionBinding(
+    request: protos.google.cloud.networkservices.v1beta1.IDeleteExtensionBindingRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networkservices.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  deleteExtensionBinding(
+    request?: protos.google.cloud.networkservices.v1beta1.IDeleteExtensionBindingRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.networkservices.v1beta1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networkservices.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networkservices.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.networkservices.v1beta1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteExtensionBinding response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteExtensionBinding request %j', request);
+    return this.innerApiCalls
+      .deleteExtensionBinding(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.networkservices.v1beta1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteExtensionBinding response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
+  }
+  /**
+   * Check the status of the long running operation returned by `deleteExtensionBinding()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/dep_service.delete_extension_binding.js</caption>
+   * region_tag:networkservices_v1beta1_generated_DepService_DeleteExtensionBinding_async
+   */
+  async checkDeleteExtensionBindingProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.networkservices.v1beta1.OperationMetadata
+    >
+  > {
+    this._log.info('deleteExtensionBinding long-running');
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name},
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteExtensionBinding,
       this._gaxModule.createDefaultBackoffSettings(),
     );
     return decodeOperation as LROperation<
@@ -2083,7 +2820,7 @@ export class DepServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2157,7 +2894,7 @@ export class DepServiceClient {
       });
     const defaultCallSettings = this._defaults['listLbTrafficExtensions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listLbTrafficExtensions stream %j', request);
@@ -2213,7 +2950,7 @@ export class DepServiceClient {
       });
     const defaultCallSettings = this._defaults['listLbTrafficExtensions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listLbTrafficExtensions iterate %j', request);
@@ -2324,7 +3061,7 @@ export class DepServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2398,7 +3135,7 @@ export class DepServiceClient {
       });
     const defaultCallSettings = this._defaults['listLbRouteExtensions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listLbRouteExtensions stream %j', request);
@@ -2454,7 +3191,7 @@ export class DepServiceClient {
       });
     const defaultCallSettings = this._defaults['listLbRouteExtensions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listLbRouteExtensions iterate %j', request);
@@ -2464,6 +3201,679 @@ export class DepServiceClient {
       callSettings,
     ) as AsyncIterable<protos.google.cloud.networkservices.v1beta1.ILbRouteExtension>;
   }
+  /**
+   * Lists `ExtensionBinding` resources in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The project and location from which the `ExtensionBinding`
+   *   resources should be listed, specified in the format
+   *   `projects/{project}/locations/{location}`.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of `ExtensionBinding` resources to return per
+   *   call.
+   * @param {string} [request.pageToken]
+   *   Optional. The value returned by the last `ListExtensionBindingsResponse`
+   *   Indicates that this is a continuation of a prior `ListExtensionBindings`
+   *   call, and that the system should return the next page of data.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.networkservices.v1beta1.ExtensionBinding|ExtensionBinding}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listExtensionBindingsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listExtensionBindings(
+    request?: protos.google.cloud.networkservices.v1beta1.IListExtensionBindingsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.networkservices.v1beta1.IExtensionBinding[],
+      protos.google.cloud.networkservices.v1beta1.IListExtensionBindingsRequest | null,
+      protos.google.cloud.networkservices.v1beta1.IListExtensionBindingsResponse,
+    ]
+  >;
+  listExtensionBindings(
+    request: protos.google.cloud.networkservices.v1beta1.IListExtensionBindingsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.networkservices.v1beta1.IListExtensionBindingsRequest,
+      | protos.google.cloud.networkservices.v1beta1.IListExtensionBindingsResponse
+      | null
+      | undefined,
+      protos.google.cloud.networkservices.v1beta1.IExtensionBinding
+    >,
+  ): void;
+  listExtensionBindings(
+    request: protos.google.cloud.networkservices.v1beta1.IListExtensionBindingsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.networkservices.v1beta1.IListExtensionBindingsRequest,
+      | protos.google.cloud.networkservices.v1beta1.IListExtensionBindingsResponse
+      | null
+      | undefined,
+      protos.google.cloud.networkservices.v1beta1.IExtensionBinding
+    >,
+  ): void;
+  listExtensionBindings(
+    request?: protos.google.cloud.networkservices.v1beta1.IListExtensionBindingsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.networkservices.v1beta1.IListExtensionBindingsRequest,
+          | protos.google.cloud.networkservices.v1beta1.IListExtensionBindingsResponse
+          | null
+          | undefined,
+          protos.google.cloud.networkservices.v1beta1.IExtensionBinding
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.networkservices.v1beta1.IListExtensionBindingsRequest,
+      | protos.google.cloud.networkservices.v1beta1.IListExtensionBindingsResponse
+      | null
+      | undefined,
+      protos.google.cloud.networkservices.v1beta1.IExtensionBinding
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.networkservices.v1beta1.IExtensionBinding[],
+      protos.google.cloud.networkservices.v1beta1.IListExtensionBindingsRequest | null,
+      protos.google.cloud.networkservices.v1beta1.IListExtensionBindingsResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.networkservices.v1beta1.IListExtensionBindingsRequest,
+          | protos.google.cloud.networkservices.v1beta1.IListExtensionBindingsResponse
+          | null
+          | undefined,
+          protos.google.cloud.networkservices.v1beta1.IExtensionBinding
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listExtensionBindings values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listExtensionBindings request %j', request);
+    return this.innerApiCalls
+      .listExtensionBindings(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.networkservices.v1beta1.IExtensionBinding[],
+          protos.google.cloud.networkservices.v1beta1.IListExtensionBindingsRequest | null,
+          protos.google.cloud.networkservices.v1beta1.IListExtensionBindingsResponse,
+        ]) => {
+          this._log.info('listExtensionBindings values %j', response);
+          return [response, input, output];
+        },
+      );
+  }
+
+  /**
+   * Equivalent to `listExtensionBindings`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The project and location from which the `ExtensionBinding`
+   *   resources should be listed, specified in the format
+   *   `projects/{project}/locations/{location}`.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of `ExtensionBinding` resources to return per
+   *   call.
+   * @param {string} [request.pageToken]
+   *   Optional. The value returned by the last `ListExtensionBindingsResponse`
+   *   Indicates that this is a continuation of a prior `ListExtensionBindings`
+   *   call, and that the system should return the next page of data.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.networkservices.v1beta1.ExtensionBinding|ExtensionBinding} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listExtensionBindingsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listExtensionBindingsStream(
+    request?: protos.google.cloud.networkservices.v1beta1.IListExtensionBindingsRequest,
+    options?: CallOptions,
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listExtensionBindings'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listExtensionBindings stream %j', request);
+    return this.descriptors.page.listExtensionBindings.createStream(
+      this.innerApiCalls.listExtensionBindings as GaxCall,
+      request,
+      callSettings,
+    );
+  }
+
+  /**
+   * Equivalent to `listExtensionBindings`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The project and location from which the `ExtensionBinding`
+   *   resources should be listed, specified in the format
+   *   `projects/{project}/locations/{location}`.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of `ExtensionBinding` resources to return per
+   *   call.
+   * @param {string} [request.pageToken]
+   *   Optional. The value returned by the last `ListExtensionBindingsResponse`
+   *   Indicates that this is a continuation of a prior `ListExtensionBindings`
+   *   call, and that the system should return the next page of data.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.networkservices.v1beta1.ExtensionBinding|ExtensionBinding}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/dep_service.list_extension_bindings.js</caption>
+   * region_tag:networkservices_v1beta1_generated_DepService_ListExtensionBindings_async
+   */
+  listExtensionBindingsAsync(
+    request?: protos.google.cloud.networkservices.v1beta1.IListExtensionBindingsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.networkservices.v1beta1.IExtensionBinding> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listExtensionBindings'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listExtensionBindings iterate %j', request);
+    return this.descriptors.page.listExtensionBindings.asyncIterate(
+      this.innerApiCalls['listExtensionBindings'] as GaxCall,
+      request as {},
+      callSettings,
+    ) as AsyncIterable<protos.google.cloud.networkservices.v1beta1.IExtensionBinding>;
+  }
+  /**
+   * Gets the access control policy for a resource. Returns an empty policy
+   * if the resource exists and does not have a policy set.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {Object} [request.options]
+   *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
+   *   `GetIamPolicy`. This field is only used by Cloud IAM.
+   *
+   *   This object should have the same structure as {@link google.iam.v1.GetPolicyOptions | GetPolicyOptions}.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing {@link google.iam.v1.Policy | Policy}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.iam.v1.Policy | Policy}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
+  getIamPolicy(
+    request: IamProtos.google.iam.v1.GetIamPolicyRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          IamProtos.google.iam.v1.Policy,
+          IamProtos.google.iam.v1.GetIamPolicyRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      IamProtos.google.iam.v1.Policy,
+      IamProtos.google.iam.v1.GetIamPolicyRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<[IamProtos.google.iam.v1.Policy]> {
+    return this.iamClient.getIamPolicy(request, options, callback);
+  }
+
+  /**
+   * Returns permissions that a caller has on the specified resource. If the
+   * resource does not exist, this will return an empty set of
+   * permissions, not a NOT_FOUND error.
+   *
+   * Note: This operation is designed to be used for building
+   * permission-aware UIs and command-line tools, not for authorization
+   * checking. This operation may "fail open" without warning.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy detail is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {string[]} request.permissions
+   *   The set of permissions to check for the `resource`. Permissions with
+   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
+  setIamPolicy(
+    request: IamProtos.google.iam.v1.SetIamPolicyRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          IamProtos.google.iam.v1.Policy,
+          IamProtos.google.iam.v1.SetIamPolicyRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      IamProtos.google.iam.v1.Policy,
+      IamProtos.google.iam.v1.SetIamPolicyRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<[IamProtos.google.iam.v1.Policy]> {
+    return this.iamClient.setIamPolicy(request, options, callback);
+  }
+
+  /**
+   * Returns permissions that a caller has on the specified resource. If the
+   * resource does not exist, this will return an empty set of
+   * permissions, not a NOT_FOUND error.
+   *
+   * Note: This operation is designed to be used for building
+   * permission-aware UIs and command-line tools, not for authorization
+   * checking. This operation may "fail open" without warning.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy detail is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {string[]} request.permissions
+   *   The set of permissions to check for the `resource`. Permissions with
+   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   */
+  testIamPermissions(
+    request: IamProtos.google.iam.v1.TestIamPermissionsRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          IamProtos.google.iam.v1.TestIamPermissionsResponse,
+          IamProtos.google.iam.v1.TestIamPermissionsRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      IamProtos.google.iam.v1.TestIamPermissionsResponse,
+      IamProtos.google.iam.v1.TestIamPermissionsRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<[IamProtos.google.iam.v1.TestIamPermissionsResponse]> {
+    return this.iamClient.testIamPermissions(request, options, callback);
+  }
+
+  /**
+   * Gets information about a location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Resource name for the location.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html | CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.cloud.location.Location | Location}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example
+   * ```
+   * const [response] = await client.getLocation(request);
+   * ```
+   */
+  getLocation(
+    request: LocationProtos.google.cloud.location.IGetLocationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          LocationProtos.google.cloud.location.ILocation,
+          | LocationProtos.google.cloud.location.IGetLocationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LocationProtos.google.cloud.location.ILocation,
+      | LocationProtos.google.cloud.location.IGetLocationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<LocationProtos.google.cloud.location.ILocation> {
+    return this.locationsClient.getLocation(request, options, callback);
+  }
+  /**
+   * Lists information about the supported locations for this service. Returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   The resource that owns the locations collection, if applicable.
+   * @param {string} request.filter
+   *   The standard list filter.
+   * @param {number} request.pageSize
+   *   The standard list page size.
+   * @param {string} request.pageToken
+   *   The standard list page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link google.cloud.location.Location | Location}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example
+   * ```
+   * const iterable = client.listLocationsAsync(request);
+   * for await (const response of iterable) {
+   *   // process response
+   * }
+   * ```
+   */
+  listLocationsAsync(
+    request: LocationProtos.google.cloud.location.IListLocationsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<LocationProtos.google.cloud.location.ILocation> {
+    return this.locationsClient.listLocationsAsync(request, options);
+  }
+
+  /**
+   * Gets the latest state of a long-running operation.  Clients can use this
+   * method to poll the operation result at intervals as recommended by the API
+   * service.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   *   e.g, timeout, retries, paginations, etc. See {@link
+   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions}
+   *   for the details.
+   * @param {function(?Error, ?Object)=} callback
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing
+   *   {@link google.longrunning.Operation | google.longrunning.Operation}.
+   * @return {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   * {@link google.longrunning.Operation | google.longrunning.Operation}.
+   * The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * const name = '';
+   * const [response] = await client.getOperation({name});
+   * // doThingsWith(response)
+   * ```
+   */
+  getOperation(
+    request: protos.google.longrunning.GetOperationRequest,
+    optionsOrCallback?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.longrunning.Operation,
+          protos.google.longrunning.GetOperationRequest,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.longrunning.Operation,
+      protos.google.longrunning.GetOperationRequest,
+      {} | null | undefined
+    >,
+  ): Promise<[protos.google.longrunning.Operation]> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    return this.operationsClient.getOperation(request, options, callback);
+  }
+  /**
+   * Lists operations that match the specified filter in the request. If the
+   * server doesn't support this method, it returns `UNIMPLEMENTED`. Returns an iterable object.
+   *
+   * For-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation collection.
+   * @param {string} request.filter - The standard list filter.
+   * @param {number=} request.pageSize -
+   *   The maximum number of resources contained in the underlying API
+   *   response. If page streaming is performed per-resource, this
+   *   parameter does not affect the return value. If page streaming is
+   *   performed per-page, this determines the maximum number of
+   *   resources in a page.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   *   e.g, timeout, retries, paginations, etc. See {@link
+   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions} for the
+   *   details.
+   * @returns {Object}
+   *   An iterable Object that conforms to {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | iteration protocols}.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * for await (const response of client.listOperationsAsync(request));
+   * // doThingsWith(response)
+   * ```
+   */
+  listOperationsAsync(
+    request: protos.google.longrunning.ListOperationsRequest,
+    options?: gax.CallOptions,
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    return this.operationsClient.listOperationsAsync(request, options);
+  }
+  /**
+   * Starts asynchronous cancellation on a long-running operation.  The server
+   * makes a best effort to cancel the operation, but success is not
+   * guaranteed.  If the server doesn't support this method, it returns
+   * `google.rpc.Code.UNIMPLEMENTED`.  Clients can use
+   * {@link Operations.GetOperation} or
+   * other methods to check whether the cancellation succeeded or whether the
+   * operation completed despite cancellation. On successful cancellation,
+   * the operation is not deleted; instead, it becomes an operation with
+   * an {@link Operation.error} value with a {@link google.rpc.Status.code} of
+   * 1, corresponding to `Code.CANCELLED`.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource to be cancelled.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   * e.g, timeout, retries, paginations, etc. See {@link
+   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions} for the
+   * details.
+   * @param {function(?Error)=} callback
+   *   The function which will be called with the result of the API call.
+   * @return {Promise} - The promise which resolves when API call finishes.
+   *   The promise has a method named "cancel" which cancels the ongoing API
+   * call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * await client.cancelOperation({name: ''});
+   * ```
+   */
+  cancelOperation(
+    request: protos.google.longrunning.CancelOperationRequest,
+    optionsOrCallback?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.longrunning.CancelOperationRequest,
+          protos.google.protobuf.Empty,
+          {} | undefined | null
+        >,
+    callback?: Callback<
+      protos.google.longrunning.CancelOperationRequest,
+      protos.google.protobuf.Empty,
+      {} | undefined | null
+    >,
+  ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    return this.operationsClient.cancelOperation(request, options, callback);
+  }
+  /**
+   * Deletes a long-running operation. This method indicates that the client is
+   * no longer interested in the operation result. It does not cancel the
+   * operation. If the server doesn't support this method, it returns
+   * `google.rpc.Code.UNIMPLEMENTED`.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource to be deleted.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   * e.g, timeout, retries, paginations, etc. See {@link
+   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions}
+   * for the details.
+   * @param {function(?Error)=} callback
+   *   The function which will be called with the result of the API call.
+   * @return {Promise} - The promise which resolves when API call finishes.
+   *   The promise has a method named "cancel" which cancels the ongoing API
+   * call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * await client.deleteOperation({name: ''});
+   * ```
+   */
+  deleteOperation(
+    request: protos.google.longrunning.DeleteOperationRequest,
+    optionsOrCallback?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.protobuf.Empty,
+          protos.google.longrunning.DeleteOperationRequest,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.Empty,
+      protos.google.longrunning.DeleteOperationRequest,
+      {} | null | undefined
+    >,
+  ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    return this.operationsClient.deleteOperation(request, options, callback);
+  }
+
   // --------------------
   // -- Path templates --
   // --------------------
@@ -2525,6 +3935,65 @@ export class DepServiceClient {
     return this.pathTemplates.endpointPolicyPathTemplate.match(
       endpointPolicyName,
     ).endpoint_policy;
+  }
+
+  /**
+   * Return a fully-qualified extensionBinding resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} extension_binding
+   * @returns {string} Resource name string.
+   */
+  extensionBindingPath(
+    project: string,
+    location: string,
+    extensionBinding: string,
+  ) {
+    return this.pathTemplates.extensionBindingPathTemplate.render({
+      project: project,
+      location: location,
+      extension_binding: extensionBinding,
+    });
+  }
+
+  /**
+   * Parse the project from ExtensionBinding resource.
+   *
+   * @param {string} extensionBindingName
+   *   A fully-qualified path representing ExtensionBinding resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromExtensionBindingName(extensionBindingName: string) {
+    return this.pathTemplates.extensionBindingPathTemplate.match(
+      extensionBindingName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from ExtensionBinding resource.
+   *
+   * @param {string} extensionBindingName
+   *   A fully-qualified path representing ExtensionBinding resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromExtensionBindingName(extensionBindingName: string) {
+    return this.pathTemplates.extensionBindingPathTemplate.match(
+      extensionBindingName,
+    ).location;
+  }
+
+  /**
+   * Parse the extension_binding from ExtensionBinding resource.
+   *
+   * @param {string} extensionBindingName
+   *   A fully-qualified path representing ExtensionBinding resource.
+   * @returns {string} A string representing the extension_binding.
+   */
+  matchExtensionBindingFromExtensionBindingName(extensionBindingName: string) {
+    return this.pathTemplates.extensionBindingPathTemplate.match(
+      extensionBindingName,
+    ).extension_binding;
   }
 
   /**
@@ -2714,10 +4183,16 @@ export class DepServiceClient {
    */
   close(): Promise<void> {
     if (this.depServiceStub && !this._terminated) {
-      return this.depServiceStub.then((stub) => {
+      return this.depServiceStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
+        this.iamClient.close().catch(err => {
+          throw err;
+        });
+        this.locationsClient.close().catch(err => {
+          throw err;
+        });
         void this.operationsClient.close();
       });
     }

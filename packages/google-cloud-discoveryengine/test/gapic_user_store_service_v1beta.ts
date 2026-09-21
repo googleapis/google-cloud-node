@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as userstoreserviceModule from '../src';
 
-import { protobuf, LocationProtos } from 'google-gax';
+import {protobuf, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -43,7 +43,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -77,9 +77,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -204,7 +204,7 @@ describe('v1beta.UserStoreServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new userstoreserviceModule.v1beta.UserStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.userStoreServiceStub, undefined);
@@ -212,12 +212,12 @@ describe('v1beta.UserStoreServiceClient', () => {
       assert(client.userStoreServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new userstoreserviceModule.v1beta.UserStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.userStoreServiceStub);
@@ -226,14 +226,14 @@ describe('v1beta.UserStoreServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new userstoreserviceModule.v1beta.UserStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.userStoreServiceStub, undefined);
@@ -242,7 +242,7 @@ describe('v1beta.UserStoreServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -250,7 +250,7 @@ describe('v1beta.UserStoreServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new userstoreserviceModule.v1beta.UserStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -262,7 +262,7 @@ describe('v1beta.UserStoreServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new userstoreserviceModule.v1beta.UserStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -285,7 +285,7 @@ describe('v1beta.UserStoreServiceClient', () => {
   describe('getUserStore', () => {
     it('invokes getUserStore without error', async () => {
       const client = new userstoreserviceModule.v1beta.UserStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -316,7 +316,7 @@ describe('v1beta.UserStoreServiceClient', () => {
 
     it('invokes getUserStore without error using callback', async () => {
       const client = new userstoreserviceModule.v1beta.UserStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -363,7 +363,7 @@ describe('v1beta.UserStoreServiceClient', () => {
 
     it('invokes getUserStore with error', async () => {
       const client = new userstoreserviceModule.v1beta.UserStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -394,7 +394,7 @@ describe('v1beta.UserStoreServiceClient', () => {
 
     it('invokes getUserStore with closed client', async () => {
       const client = new userstoreserviceModule.v1beta.UserStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -407,7 +407,7 @@ describe('v1beta.UserStoreServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getUserStore(request), expectedError);
@@ -417,7 +417,7 @@ describe('v1beta.UserStoreServiceClient', () => {
   describe('updateUserStore', () => {
     it('invokes updateUserStore without error', async () => {
       const client = new userstoreserviceModule.v1beta.UserStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -449,7 +449,7 @@ describe('v1beta.UserStoreServiceClient', () => {
 
     it('invokes updateUserStore without error using callback', async () => {
       const client = new userstoreserviceModule.v1beta.UserStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -497,7 +497,7 @@ describe('v1beta.UserStoreServiceClient', () => {
 
     it('invokes updateUserStore with error', async () => {
       const client = new userstoreserviceModule.v1beta.UserStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -529,7 +529,7 @@ describe('v1beta.UserStoreServiceClient', () => {
 
     it('invokes updateUserStore with closed client', async () => {
       const client = new userstoreserviceModule.v1beta.UserStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -543,7 +543,7 @@ describe('v1beta.UserStoreServiceClient', () => {
       );
       request.userStore.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateUserStore(request), expectedError);
@@ -552,7 +552,7 @@ describe('v1beta.UserStoreServiceClient', () => {
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new userstoreserviceModule.v1beta.UserStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -582,7 +582,7 @@ describe('v1beta.UserStoreServiceClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new userstoreserviceModule.v1beta.UserStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -626,7 +626,7 @@ describe('v1beta.UserStoreServiceClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new userstoreserviceModule.v1beta.UserStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -661,7 +661,7 @@ describe('v1beta.UserStoreServiceClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new userstoreserviceModule.v1beta.UserStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -709,7 +709,7 @@ describe('v1beta.UserStoreServiceClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new userstoreserviceModule.v1beta.UserStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -756,7 +756,7 @@ describe('v1beta.UserStoreServiceClient', () => {
         location: 'locationValue',
       };
       const client = new userstoreserviceModule.v1beta.UserStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -809,7 +809,7 @@ describe('v1beta.UserStoreServiceClient', () => {
         assist_answer: 'assistAnswerValue',
       };
       const client = new userstoreserviceModule.v1beta.UserStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -908,7 +908,7 @@ describe('v1beta.UserStoreServiceClient', () => {
         assistant: 'assistantValue',
       };
       const client = new userstoreserviceModule.v1beta.UserStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -995,7 +995,7 @@ describe('v1beta.UserStoreServiceClient', () => {
         engine: 'engineValue',
       };
       const client = new userstoreserviceModule.v1beta.UserStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1070,7 +1070,7 @@ describe('v1beta.UserStoreServiceClient', () => {
         evaluation: 'evaluationValue',
       };
       const client = new userstoreserviceModule.v1beta.UserStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1134,7 +1134,7 @@ describe('v1beta.UserStoreServiceClient', () => {
         grounding_config: 'groundingConfigValue',
       };
       const client = new userstoreserviceModule.v1beta.UserStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1199,7 +1199,7 @@ describe('v1beta.UserStoreServiceClient', () => {
         identity_mapping_store: 'identityMappingStoreValue',
       };
       const client = new userstoreserviceModule.v1beta.UserStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1280,7 +1280,7 @@ describe('v1beta.UserStoreServiceClient', () => {
         license_config: 'licenseConfigValue',
       };
       const client = new userstoreserviceModule.v1beta.UserStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1342,7 +1342,7 @@ describe('v1beta.UserStoreServiceClient', () => {
         project: 'projectValue',
       };
       const client = new userstoreserviceModule.v1beta.UserStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1381,7 +1381,7 @@ describe('v1beta.UserStoreServiceClient', () => {
         location: 'locationValue',
       };
       const client = new userstoreserviceModule.v1beta.UserStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1445,7 +1445,7 @@ describe('v1beta.UserStoreServiceClient', () => {
         cmek_config: 'cmekConfigValue',
       };
       const client = new userstoreserviceModule.v1beta.UserStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1525,7 +1525,7 @@ describe('v1beta.UserStoreServiceClient', () => {
         data_store: 'dataStoreValue',
       };
       const client = new userstoreserviceModule.v1beta.UserStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1629,7 +1629,7 @@ describe('v1beta.UserStoreServiceClient', () => {
         document: 'documentValue',
       };
       const client = new userstoreserviceModule.v1beta.UserStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1776,7 +1776,7 @@ describe('v1beta.UserStoreServiceClient', () => {
         chunk: 'chunkValue',
       };
       const client = new userstoreserviceModule.v1beta.UserStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1939,7 +1939,7 @@ describe('v1beta.UserStoreServiceClient', () => {
         control: 'controlValue',
       };
       const client = new userstoreserviceModule.v1beta.UserStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2065,7 +2065,7 @@ describe('v1beta.UserStoreServiceClient', () => {
         conversation: 'conversationValue',
       };
       const client = new userstoreserviceModule.v1beta.UserStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2192,7 +2192,7 @@ describe('v1beta.UserStoreServiceClient', () => {
         custom_tuning_model: 'customTuningModelValue',
       };
       const client = new userstoreserviceModule.v1beta.UserStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2318,7 +2318,7 @@ describe('v1beta.UserStoreServiceClient', () => {
         data_store: 'dataStoreValue',
       };
       const client = new userstoreserviceModule.v1beta.UserStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2427,7 +2427,7 @@ describe('v1beta.UserStoreServiceClient', () => {
         schema: 'schemaValue',
       };
       const client = new userstoreserviceModule.v1beta.UserStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2553,7 +2553,7 @@ describe('v1beta.UserStoreServiceClient', () => {
         serving_config: 'servingConfigValue',
       };
       const client = new userstoreserviceModule.v1beta.UserStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2681,7 +2681,7 @@ describe('v1beta.UserStoreServiceClient', () => {
         answer: 'answerValue',
       };
       const client = new userstoreserviceModule.v1beta.UserStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2826,7 +2826,7 @@ describe('v1beta.UserStoreServiceClient', () => {
         session: 'sessionValue',
       };
       const client = new userstoreserviceModule.v1beta.UserStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2951,7 +2951,7 @@ describe('v1beta.UserStoreServiceClient', () => {
         data_store: 'dataStoreValue',
       };
       const client = new userstoreserviceModule.v1beta.UserStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3060,7 +3060,7 @@ describe('v1beta.UserStoreServiceClient', () => {
         sitemap: 'sitemapValue',
       };
       const client = new userstoreserviceModule.v1beta.UserStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3187,7 +3187,7 @@ describe('v1beta.UserStoreServiceClient', () => {
         target_site: 'targetSiteValue',
       };
       const client = new userstoreserviceModule.v1beta.UserStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3315,7 +3315,7 @@ describe('v1beta.UserStoreServiceClient', () => {
         session: 'sessionValue',
       };
       const client = new userstoreserviceModule.v1beta.UserStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3459,7 +3459,7 @@ describe('v1beta.UserStoreServiceClient', () => {
         control: 'controlValue',
       };
       const client = new userstoreserviceModule.v1beta.UserStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3585,7 +3585,7 @@ describe('v1beta.UserStoreServiceClient', () => {
         conversation: 'conversationValue',
       };
       const client = new userstoreserviceModule.v1beta.UserStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3711,7 +3711,7 @@ describe('v1beta.UserStoreServiceClient', () => {
         serving_config: 'servingConfigValue',
       };
       const client = new userstoreserviceModule.v1beta.UserStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3838,7 +3838,7 @@ describe('v1beta.UserStoreServiceClient', () => {
         answer: 'answerValue',
       };
       const client = new userstoreserviceModule.v1beta.UserStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3981,7 +3981,7 @@ describe('v1beta.UserStoreServiceClient', () => {
         session: 'sessionValue',
       };
       const client = new userstoreserviceModule.v1beta.UserStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4104,7 +4104,7 @@ describe('v1beta.UserStoreServiceClient', () => {
         data_store: 'dataStoreValue',
       };
       const client = new userstoreserviceModule.v1beta.UserStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4185,7 +4185,7 @@ describe('v1beta.UserStoreServiceClient', () => {
         document: 'documentValue',
       };
       const client = new userstoreserviceModule.v1beta.UserStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4312,7 +4312,7 @@ describe('v1beta.UserStoreServiceClient', () => {
         chunk: 'chunkValue',
       };
       const client = new userstoreserviceModule.v1beta.UserStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4454,7 +4454,7 @@ describe('v1beta.UserStoreServiceClient', () => {
         control: 'controlValue',
       };
       const client = new userstoreserviceModule.v1beta.UserStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4549,7 +4549,7 @@ describe('v1beta.UserStoreServiceClient', () => {
         conversation: 'conversationValue',
       };
       const client = new userstoreserviceModule.v1beta.UserStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4656,7 +4656,7 @@ describe('v1beta.UserStoreServiceClient', () => {
         custom_tuning_model: 'customTuningModelValue',
       };
       const client = new userstoreserviceModule.v1beta.UserStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4762,7 +4762,7 @@ describe('v1beta.UserStoreServiceClient', () => {
         data_store: 'dataStoreValue',
       };
       const client = new userstoreserviceModule.v1beta.UserStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4851,7 +4851,7 @@ describe('v1beta.UserStoreServiceClient', () => {
         schema: 'schemaValue',
       };
       const client = new userstoreserviceModule.v1beta.UserStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4944,7 +4944,7 @@ describe('v1beta.UserStoreServiceClient', () => {
         serving_config: 'servingConfigValue',
       };
       const client = new userstoreserviceModule.v1beta.UserStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5051,7 +5051,7 @@ describe('v1beta.UserStoreServiceClient', () => {
         answer: 'answerValue',
       };
       const client = new userstoreserviceModule.v1beta.UserStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5175,7 +5175,7 @@ describe('v1beta.UserStoreServiceClient', () => {
         session: 'sessionValue',
       };
       const client = new userstoreserviceModule.v1beta.UserStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5272,7 +5272,7 @@ describe('v1beta.UserStoreServiceClient', () => {
         data_store: 'dataStoreValue',
       };
       const client = new userstoreserviceModule.v1beta.UserStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5361,7 +5361,7 @@ describe('v1beta.UserStoreServiceClient', () => {
         sitemap: 'sitemapValue',
       };
       const client = new userstoreserviceModule.v1beta.UserStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5469,7 +5469,7 @@ describe('v1beta.UserStoreServiceClient', () => {
         target_site: 'targetSiteValue',
       };
       const client = new userstoreserviceModule.v1beta.UserStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5576,7 +5576,7 @@ describe('v1beta.UserStoreServiceClient', () => {
         sample_query: 'sampleQueryValue',
       };
       const client = new userstoreserviceModule.v1beta.UserStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5651,7 +5651,7 @@ describe('v1beta.UserStoreServiceClient', () => {
         sample_query_set: 'sampleQuerySetValue',
       };
       const client = new userstoreserviceModule.v1beta.UserStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5716,7 +5716,7 @@ describe('v1beta.UserStoreServiceClient', () => {
         user_store: 'userStoreValue',
       };
       const client = new userstoreserviceModule.v1beta.UserStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

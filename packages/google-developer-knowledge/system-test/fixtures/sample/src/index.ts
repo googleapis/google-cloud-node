@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import { DeveloperKnowledgeClient } from '@google/developer-knowledge';
+import {DeveloperKnowledgeClient} from '@google/developer-knowledge';
 
 // check that the client class type name can be used
 function doStuffWithDeveloperKnowledgeClient(client: DeveloperKnowledgeClient) {

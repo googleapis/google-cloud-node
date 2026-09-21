@@ -8,4 +8,9 @@
 **/system-test
 **/samples/generated
 bazel-gapic-generator-typescript/
+bazel-*
 test-fixtures/
+baselines/
+baselines-esm/
+.test-out*
+library/

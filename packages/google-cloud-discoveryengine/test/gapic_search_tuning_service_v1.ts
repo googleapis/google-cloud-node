@@ -19,8 +19,8 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as searchtuningserviceModule from '../src';
 
 import {
@@ -48,7 +48,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -114,9 +114,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -164,7 +164,7 @@ describe('v1.SearchTuningServiceClient', () => {
     }
     it('sets apiEndpoint according to universe domain camelCase', () => {
       const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
-        { universeDomain: 'example.com' },
+        {universeDomain: 'example.com'},
       );
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'discoveryengine.example.com');
@@ -172,7 +172,7 @@ describe('v1.SearchTuningServiceClient', () => {
 
     it('sets apiEndpoint according to universe domain snakeCase', () => {
       const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
-        { universe_domain: 'example.com' },
+        {universe_domain: 'example.com'},
       );
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'discoveryengine.example.com');
@@ -247,7 +247,7 @@ describe('v1.SearchTuningServiceClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -256,14 +256,14 @@ describe('v1.SearchTuningServiceClient', () => {
       assert(client.searchTuningServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.searchTuningServiceStub);
@@ -272,15 +272,15 @@ describe('v1.SearchTuningServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -290,7 +290,7 @@ describe('v1.SearchTuningServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -299,7 +299,7 @@ describe('v1.SearchTuningServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -313,7 +313,7 @@ describe('v1.SearchTuningServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -338,7 +338,7 @@ describe('v1.SearchTuningServiceClient', () => {
     it('invokes listCustomModels without error', async () => {
       const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -371,7 +371,7 @@ describe('v1.SearchTuningServiceClient', () => {
     it('invokes listCustomModels without error using callback', async () => {
       const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -420,7 +420,7 @@ describe('v1.SearchTuningServiceClient', () => {
     it('invokes listCustomModels with error', async () => {
       const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -453,7 +453,7 @@ describe('v1.SearchTuningServiceClient', () => {
     it('invokes listCustomModels with closed client', async () => {
       const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -467,7 +467,7 @@ describe('v1.SearchTuningServiceClient', () => {
       );
       request.dataStore = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.listCustomModels(request), expectedError);
@@ -478,7 +478,7 @@ describe('v1.SearchTuningServiceClient', () => {
     it('invokes trainCustomModel without error', async () => {
       const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -513,7 +513,7 @@ describe('v1.SearchTuningServiceClient', () => {
     it('invokes trainCustomModel without error using callback', async () => {
       const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -569,7 +569,7 @@ describe('v1.SearchTuningServiceClient', () => {
     it('invokes trainCustomModel with call error', async () => {
       const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -602,7 +602,7 @@ describe('v1.SearchTuningServiceClient', () => {
     it('invokes trainCustomModel with LRO error', async () => {
       const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -637,7 +637,7 @@ describe('v1.SearchTuningServiceClient', () => {
     it('invokes checkTrainCustomModelProgress without error', async () => {
       const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -646,8 +646,8 @@ describe('v1.SearchTuningServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkTrainCustomModelProgress(
@@ -661,7 +661,7 @@ describe('v1.SearchTuningServiceClient', () => {
     it('invokes checkTrainCustomModelProgress with error', async () => {
       const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -683,7 +683,7 @@ describe('v1.SearchTuningServiceClient', () => {
     it('invokes getLocation without error', async () => {
       const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -715,7 +715,7 @@ describe('v1.SearchTuningServiceClient', () => {
     it('invokes getLocation without error using callback', async () => {
       const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -761,7 +761,7 @@ describe('v1.SearchTuningServiceClient', () => {
     it('invokes getLocation with error', async () => {
       const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -798,7 +798,7 @@ describe('v1.SearchTuningServiceClient', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -848,7 +848,7 @@ describe('v1.SearchTuningServiceClient', () => {
     it('uses async iteration with listLocations with error', async () => {
       const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -891,7 +891,7 @@ describe('v1.SearchTuningServiceClient', () => {
     it('invokes getOperation without error', async () => {
       const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -914,7 +914,7 @@ describe('v1.SearchTuningServiceClient', () => {
     it('invokes getOperation without error using callback', async () => {
       const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -943,7 +943,7 @@ describe('v1.SearchTuningServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -954,7 +954,7 @@ describe('v1.SearchTuningServiceClient', () => {
     it('invokes getOperation with error', async () => {
       const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -980,7 +980,7 @@ describe('v1.SearchTuningServiceClient', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1004,7 +1004,7 @@ describe('v1.SearchTuningServiceClient', () => {
     it('invokes cancelOperation without error using callback', async () => {
       const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1033,7 +1033,7 @@ describe('v1.SearchTuningServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1044,7 +1044,7 @@ describe('v1.SearchTuningServiceClient', () => {
     it('invokes cancelOperation with error', async () => {
       const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1070,7 +1070,7 @@ describe('v1.SearchTuningServiceClient', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1094,7 +1094,7 @@ describe('v1.SearchTuningServiceClient', () => {
     it('invokes deleteOperation without error using callback', async () => {
       const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1123,7 +1123,7 @@ describe('v1.SearchTuningServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1134,7 +1134,7 @@ describe('v1.SearchTuningServiceClient', () => {
     it('invokes deleteOperation with error', async () => {
       const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1160,7 +1160,7 @@ describe('v1.SearchTuningServiceClient', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1197,7 +1197,7 @@ describe('v1.SearchTuningServiceClient', () => {
     it('uses async iteration with listOperations with error', async () => {
       const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1238,7 +1238,7 @@ describe('v1.SearchTuningServiceClient', () => {
       };
       const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1339,7 +1339,7 @@ describe('v1.SearchTuningServiceClient', () => {
       };
       const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1428,7 +1428,7 @@ describe('v1.SearchTuningServiceClient', () => {
       };
       const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1505,7 +1505,7 @@ describe('v1.SearchTuningServiceClient', () => {
       };
       const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1586,7 +1586,7 @@ describe('v1.SearchTuningServiceClient', () => {
       };
       const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1627,7 +1627,7 @@ describe('v1.SearchTuningServiceClient', () => {
       };
       const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1693,7 +1693,7 @@ describe('v1.SearchTuningServiceClient', () => {
       };
       const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1775,7 +1775,7 @@ describe('v1.SearchTuningServiceClient', () => {
       };
       const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1881,7 +1881,7 @@ describe('v1.SearchTuningServiceClient', () => {
       };
       const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2030,7 +2030,7 @@ describe('v1.SearchTuningServiceClient', () => {
       };
       const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2195,7 +2195,7 @@ describe('v1.SearchTuningServiceClient', () => {
       };
       const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2323,7 +2323,7 @@ describe('v1.SearchTuningServiceClient', () => {
       };
       const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2452,7 +2452,7 @@ describe('v1.SearchTuningServiceClient', () => {
       };
       const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2580,7 +2580,7 @@ describe('v1.SearchTuningServiceClient', () => {
       };
       const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2691,7 +2691,7 @@ describe('v1.SearchTuningServiceClient', () => {
       };
       const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2819,7 +2819,7 @@ describe('v1.SearchTuningServiceClient', () => {
       };
       const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2949,7 +2949,7 @@ describe('v1.SearchTuningServiceClient', () => {
       };
       const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3096,7 +3096,7 @@ describe('v1.SearchTuningServiceClient', () => {
       };
       const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3223,7 +3223,7 @@ describe('v1.SearchTuningServiceClient', () => {
       };
       const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3334,7 +3334,7 @@ describe('v1.SearchTuningServiceClient', () => {
       };
       const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3463,7 +3463,7 @@ describe('v1.SearchTuningServiceClient', () => {
       };
       const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3591,7 +3591,7 @@ describe('v1.SearchTuningServiceClient', () => {
       };
       const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3719,7 +3719,7 @@ describe('v1.SearchTuningServiceClient', () => {
       };
       const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3847,7 +3847,7 @@ describe('v1.SearchTuningServiceClient', () => {
       };
       const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3976,7 +3976,7 @@ describe('v1.SearchTuningServiceClient', () => {
       };
       const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4121,7 +4121,7 @@ describe('v1.SearchTuningServiceClient', () => {
       };
       const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4246,7 +4246,7 @@ describe('v1.SearchTuningServiceClient', () => {
       };
       const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4329,7 +4329,7 @@ describe('v1.SearchTuningServiceClient', () => {
       };
       const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4458,7 +4458,7 @@ describe('v1.SearchTuningServiceClient', () => {
       };
       const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4602,7 +4602,7 @@ describe('v1.SearchTuningServiceClient', () => {
       };
       const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4699,7 +4699,7 @@ describe('v1.SearchTuningServiceClient', () => {
       };
       const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4808,7 +4808,7 @@ describe('v1.SearchTuningServiceClient', () => {
       };
       const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4916,7 +4916,7 @@ describe('v1.SearchTuningServiceClient', () => {
       };
       const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5007,7 +5007,7 @@ describe('v1.SearchTuningServiceClient', () => {
       };
       const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5102,7 +5102,7 @@ describe('v1.SearchTuningServiceClient', () => {
       };
       const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5211,7 +5211,7 @@ describe('v1.SearchTuningServiceClient', () => {
       };
       const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5337,7 +5337,7 @@ describe('v1.SearchTuningServiceClient', () => {
       };
       const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5436,7 +5436,7 @@ describe('v1.SearchTuningServiceClient', () => {
       };
       const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5527,7 +5527,7 @@ describe('v1.SearchTuningServiceClient', () => {
       };
       const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5637,7 +5637,7 @@ describe('v1.SearchTuningServiceClient', () => {
       };
       const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );

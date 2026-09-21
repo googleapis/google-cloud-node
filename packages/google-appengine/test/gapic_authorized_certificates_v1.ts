@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as authorizedcertificatesModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -251,7 +251,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client =
         new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.authorizedCertificatesStub, undefined);
@@ -259,13 +259,13 @@ describe('v1.AuthorizedCertificatesClient', () => {
       assert(client.authorizedCertificatesStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.authorizedCertificatesStub);
@@ -274,15 +274,15 @@ describe('v1.AuthorizedCertificatesClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.authorizedCertificatesStub, undefined);
@@ -291,7 +291,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -300,7 +300,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -313,7 +313,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon
@@ -337,7 +337,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
     it('invokes getAuthorizedCertificate without error', async () => {
       const client =
         new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -370,7 +370,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
     it('invokes getAuthorizedCertificate without error using callback', async () => {
       const client =
         new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -418,7 +418,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
     it('invokes getAuthorizedCertificate with error', async () => {
       const client =
         new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -453,7 +453,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
     it('invokes getAuthorizedCertificate with closed client', async () => {
       const client =
         new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -466,7 +466,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -480,7 +480,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
     it('invokes createAuthorizedCertificate without error', async () => {
       const client =
         new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -513,7 +513,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
     it('invokes createAuthorizedCertificate without error using callback', async () => {
       const client =
         new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -561,7 +561,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
     it('invokes createAuthorizedCertificate with error', async () => {
       const client =
         new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -596,7 +596,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
     it('invokes createAuthorizedCertificate with closed client', async () => {
       const client =
         new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -609,7 +609,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -623,7 +623,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
     it('invokes updateAuthorizedCertificate without error', async () => {
       const client =
         new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -656,7 +656,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
     it('invokes updateAuthorizedCertificate without error using callback', async () => {
       const client =
         new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -704,7 +704,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
     it('invokes updateAuthorizedCertificate with error', async () => {
       const client =
         new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -739,7 +739,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
     it('invokes updateAuthorizedCertificate with closed client', async () => {
       const client =
         new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -752,7 +752,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -766,7 +766,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
     it('invokes deleteAuthorizedCertificate without error', async () => {
       const client =
         new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -799,7 +799,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
     it('invokes deleteAuthorizedCertificate without error using callback', async () => {
       const client =
         new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -847,7 +847,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
     it('invokes deleteAuthorizedCertificate with error', async () => {
       const client =
         new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -882,7 +882,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
     it('invokes deleteAuthorizedCertificate with closed client', async () => {
       const client =
         new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -895,7 +895,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -909,7 +909,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
     it('invokes listAuthorizedCertificates without error', async () => {
       const client =
         new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -950,7 +950,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
     it('invokes listAuthorizedCertificates without error using callback', async () => {
       const client =
         new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1006,7 +1006,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
     it('invokes listAuthorizedCertificates with error', async () => {
       const client =
         new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1041,7 +1041,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
     it('invokes listAuthorizedCertificatesStream without error', async () => {
       const client =
         new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1109,7 +1109,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
     it('invokes listAuthorizedCertificatesStream with error', async () => {
       const client =
         new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1166,7 +1166,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
     it('uses async iteration with listAuthorizedCertificates without error', async () => {
       const client =
         new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1220,7 +1220,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
     it('uses async iteration with listAuthorizedCertificates with error', async () => {
       const client =
         new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1275,7 +1275,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
       };
       const client =
         new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();

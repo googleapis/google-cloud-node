@@ -30,10 +30,10 @@ import type {
   LocationsClient,
   LocationProtos,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -60,7 +60,7 @@ export class BusinessGlossaryServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('dataplex');
@@ -73,11 +73,11 @@ export class BusinessGlossaryServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
+  innerApiCalls: {[name: string]: Function};
   locationsClient: LocationsClient;
-  pathTemplates: { [name: string]: gax.PathTemplate };
+  pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
-  businessGlossaryServiceStub?: Promise<{ [name: string]: Function }>;
+  businessGlossaryServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of BusinessGlossaryServiceClient.
@@ -154,7 +154,7 @@ export class BusinessGlossaryServiceClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -605,21 +605,21 @@ export class BusinessGlossaryServiceClient {
           selector: 'google.longrunning.Operations.DeleteOperation',
           delete: '/v1/{name=projects/*/locations/*/operations/*}',
           additional_bindings: [
-            { delete: '/v1/{name=organizations/*/locations/*/operations/*}' },
+            {delete: '/v1/{name=organizations/*/locations/*/operations/*}'},
           ],
         },
         {
           selector: 'google.longrunning.Operations.GetOperation',
           get: '/v1/{name=projects/*/locations/*/operations/*}',
           additional_bindings: [
-            { get: '/v1/{name=organizations/*/locations/*/operations/*}' },
+            {get: '/v1/{name=organizations/*/locations/*/operations/*}'},
           ],
         },
         {
           selector: 'google.longrunning.Operations.ListOperations',
           get: '/v1/{name=projects/*/locations/*}/operations',
           additional_bindings: [
-            { get: '/v1/{name=organizations/*/locations/*}/operations' },
+            {get: '/v1/{name=organizations/*/locations/*}/operations'},
           ],
         },
       ];
@@ -669,7 +669,7 @@ export class BusinessGlossaryServiceClient {
       'google.cloud.dataplex.v1.BusinessGlossaryService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -710,7 +710,7 @@ export class BusinessGlossaryServiceClient {
             .BusinessGlossaryService,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -733,7 +733,7 @@ export class BusinessGlossaryServiceClient {
     ];
     for (const methodName of businessGlossaryServiceStubMethods) {
       const callPromise = this.businessGlossaryServiceStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -935,7 +935,7 @@ export class BusinessGlossaryServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getGlossary request %j', request);
@@ -1082,7 +1082,7 @@ export class BusinessGlossaryServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createGlossaryCategory request %j', request);
@@ -1230,7 +1230,7 @@ export class BusinessGlossaryServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'category.name': request.category!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateGlossaryCategory request %j', request);
@@ -1377,7 +1377,7 @@ export class BusinessGlossaryServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteGlossaryCategory request %j', request);
@@ -1516,7 +1516,7 @@ export class BusinessGlossaryServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getGlossaryCategory request %j', request);
@@ -1660,7 +1660,7 @@ export class BusinessGlossaryServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createGlossaryTerm request %j', request);
@@ -1802,7 +1802,7 @@ export class BusinessGlossaryServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'term.name': request.term!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateGlossaryTerm request %j', request);
@@ -1941,7 +1941,7 @@ export class BusinessGlossaryServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteGlossaryTerm request %j', request);
@@ -2080,7 +2080,7 @@ export class BusinessGlossaryServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getGlossaryTerm request %j', request);
@@ -2236,7 +2236,7 @@ export class BusinessGlossaryServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2293,7 +2293,7 @@ export class BusinessGlossaryServiceClient {
     this._log.info('createGlossary long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -2413,7 +2413,7 @@ export class BusinessGlossaryServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'glossary.name': request.glossary!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2470,7 +2470,7 @@ export class BusinessGlossaryServiceClient {
     this._log.info('updateGlossary long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -2590,7 +2590,7 @@ export class BusinessGlossaryServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2647,7 +2647,7 @@ export class BusinessGlossaryServiceClient {
     this._log.info('deleteGlossary long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -2773,7 +2773,7 @@ export class BusinessGlossaryServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2859,7 +2859,7 @@ export class BusinessGlossaryServiceClient {
       });
     const defaultCallSettings = this._defaults['listGlossaries'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listGlossaries stream %j', request);
@@ -2927,7 +2927,7 @@ export class BusinessGlossaryServiceClient {
       });
     const defaultCallSettings = this._defaults['listGlossaries'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listGlossaries iterate %j', request);
@@ -3057,7 +3057,7 @@ export class BusinessGlossaryServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3150,7 +3150,7 @@ export class BusinessGlossaryServiceClient {
       });
     const defaultCallSettings = this._defaults['listGlossaryCategories'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listGlossaryCategories stream %j', request);
@@ -3225,7 +3225,7 @@ export class BusinessGlossaryServiceClient {
       });
     const defaultCallSettings = this._defaults['listGlossaryCategories'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listGlossaryCategories iterate %j', request);
@@ -3355,7 +3355,7 @@ export class BusinessGlossaryServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3448,7 +3448,7 @@ export class BusinessGlossaryServiceClient {
       });
     const defaultCallSettings = this._defaults['listGlossaryTerms'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listGlossaryTerms stream %j', request);
@@ -3523,7 +3523,7 @@ export class BusinessGlossaryServiceClient {
       });
     const defaultCallSettings = this._defaults['listGlossaryTerms'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listGlossaryTerms iterate %j', request);
@@ -6052,11 +6052,11 @@ export class BusinessGlossaryServiceClient {
    */
   close(): Promise<void> {
     if (this.businessGlossaryServiceStub && !this._terminated) {
-      return this.businessGlossaryServiceStub.then((stub) => {
+      return this.businessGlossaryServiceStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch((err) => {
+        this.locationsClient.close().catch(err => {
           throw err;
         });
         void this.operationsClient.close();

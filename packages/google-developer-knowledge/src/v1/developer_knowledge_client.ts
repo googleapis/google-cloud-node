@@ -26,10 +26,10 @@ import type {
   PaginationCallback,
   GaxCall,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -66,7 +66,7 @@ export class DeveloperKnowledgeClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('developer-knowledge');
@@ -79,9 +79,9 @@ export class DeveloperKnowledgeClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
-  pathTemplates: { [name: string]: gax.PathTemplate };
-  developerKnowledgeStub?: Promise<{ [name: string]: Function }>;
+  innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
+  developerKnowledgeStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of DeveloperKnowledgeClient.
@@ -157,7 +157,7 @@ export class DeveloperKnowledgeClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -238,7 +238,7 @@ export class DeveloperKnowledgeClient {
       'google.developers.knowledge.v1.DeveloperKnowledge',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -279,7 +279,7 @@ export class DeveloperKnowledgeClient {
             .DeveloperKnowledge,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -291,7 +291,7 @@ export class DeveloperKnowledgeClient {
     ];
     for (const methodName of developerKnowledgeStubMethods) {
       const callPromise = this.developerKnowledgeStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -411,6 +411,9 @@ export class DeveloperKnowledgeClient {
    *   Required. Specifies the name of the document to retrieve.
    *   Format: `documents/{uri_without_scheme}`
    *   Example: `documents/docs.cloud.google.com/storage/docs/creating-buckets`
+   *
+   *   The name must not exceed 500 characters; values longer than 500 characters
+   *   will result in an `INVALID_ARGUMENT` error.
    * @param {google.developers.knowledge.v1.DocumentView} [request.view]
    *   Optional. Specifies the
    *   {@link protos.google.developers.knowledge.v1.DocumentView|DocumentView} of the
@@ -497,7 +500,7 @@ export class DeveloperKnowledgeClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getDocument request %j', request);
@@ -556,6 +559,9 @@ export class DeveloperKnowledgeClient {
    *
    *   Format: `documents/{uri_without_scheme}`
    *   Example: `documents/docs.cloud.google.com/storage/docs/creating-buckets`
+   *
+   *   Each name must not exceed 500 characters; values longer than 500 characters
+   *   will result in an `INVALID_ARGUMENT` error.
    *
    * @param {google.developers.knowledge.v1.DocumentView} [request.view]
    *   Optional. Specifies the
@@ -645,7 +651,7 @@ export class DeveloperKnowledgeClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('batchGetDocuments request %j', request);
@@ -702,6 +708,52 @@ export class DeveloperKnowledgeClient {
    *   The request object that will be sent.
    * @param {string} request.query
    *   Required. The query to answer.
+   * @param {string} [request.filter]
+   *   Optional. Applies a strict filter to the search results used to ground the
+   *   answer. The expression supports a subset of the syntax described at
+   *   https://google.aip.dev/160.
+   *
+   *   Supported fields for filtering:
+   *
+   *   * `content_length_bytes` (INTEGER): The length of the `Document.content`
+   *     field in bytes.
+   *   * `data_source` (STRING): The source of the document, e.g.
+   *     `docs.cloud.google.com`. See
+   *     https://developers.google.com/knowledge/reference/corpus-reference for
+   *     the complete list of data sources in the corpus.
+   *   * `update_time` (TIMESTAMP): The timestamp of when the document was last
+   *     meaningfully updated. A meaningful update is one that changes document's
+   *     markdown content or metadata.
+   *   * `uri` (STRING): The document URI, e.g.
+   *     `https://docs.cloud.google.com/bigquery/docs/tables`.
+   *
+   *   INTEGER fields support `=`, `<`, `<=`, `>`, and `>=` operators.
+   *
+   *   STRING fields support `=` (equals) and `!=` (not equals) operators for
+   *   **exact match** on the whole string. Partial match, prefix match, and
+   *   regexp match are not supported.
+   *
+   *   TIMESTAMP fields support `=`, `<`, `<=`, `>`, and `>=` operators.
+   *   Timestamps must be in RFC-3339 format, e.g., `"2025-01-01T00:00:00Z"`.
+   *
+   *   You can combine expressions using `AND`, `OR`, and `NOT` (or `-`) logical
+   *   operators. `OR` has higher precedence than `AND`. Use parentheses for
+   *   explicit precedence grouping.
+   *
+   *   Examples:
+   *
+   *   * Filter by `Document.content_length_bytes`:
+   *     `content_length_bytes < 50000`
+   *   * `data_source = "docs.cloud.google.com" OR data_source =
+   *     "firebase.google.com"`
+   *   * `data_source != "firebase.google.com"`
+   *   * `update_time < "2024-01-01T00:00:00Z"`
+   *   * `update_time >= "2025-01-22T00:00:00Z" AND (data_source =
+   *     "developer.chrome.com" OR data_source = "web.dev")`
+   *   * `uri = "https://docs.cloud.google.com/release-notes"`
+   *
+   *   The `filter` string must not exceed 500 characters; values longer than 500
+   *   characters will result in an `INVALID_ARGUMENT` error.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -778,7 +830,7 @@ export class DeveloperKnowledgeClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('answerQuery request %j', request);
@@ -830,7 +882,7 @@ export class DeveloperKnowledgeClient {
    * Searches for developer knowledge across Google's developer documentation.
    * Returns {@link protos.google.developers.knowledge.v1.DocumentChunk|DocumentChunk}s
    * based on the user's query. There may be many chunks from the same
-   * {@link protos.google.developers.knowledge.v1.Document|Document}.  To retrieve full
+   * {@link protos.google.developers.knowledge.v1.Document|Document}. To retrieve full
    * documents, use
    * {@link protos.google.developers.knowledge.v1.DeveloperKnowledge.GetDocument|DeveloperKnowledge.GetDocument}
    * or
@@ -844,7 +896,9 @@ export class DeveloperKnowledgeClient {
    *   The request object that will be sent.
    * @param {string} request.query
    *   Required. Provides the raw query string provided by the user, such as "How
-   *   to create a Cloud Storage bucket?".
+   *   to create a Cloud Storage bucket?". The query must not exceed 500
+   *   characters; values longer than 500 characters will result in an
+   *   `INVALID_ARGUMENT` error.
    * @param {number} [request.pageSize]
    *   Optional. Specifies the maximum number of results to return. The service
    *   may return fewer than this value.
@@ -865,6 +919,8 @@ export class DeveloperKnowledgeClient {
    *
    *   Supported fields for filtering:
    *
+   *   * `content_length_bytes` (INTEGER): The length of the `Document.content`
+   *     field in bytes.
    *   * `data_source` (STRING): The source of the document, e.g.
    *     `docs.cloud.google.com`. See
    *     https://developers.google.com/knowledge/reference/corpus-reference for
@@ -874,6 +930,8 @@ export class DeveloperKnowledgeClient {
    *     markdown content or metadata.
    *   * `uri` (STRING): The document URI, e.g.
    *     `https://docs.cloud.google.com/bigquery/docs/tables`.
+   *
+   *   INTEGER fields support `=`, `<`, `<=`, `>`, and `>=` operators.
    *
    *   STRING fields support `=` (equals) and `!=` (not equals) operators for
    *   **exact match** on the whole string. Partial match, prefix match, and
@@ -892,6 +950,8 @@ export class DeveloperKnowledgeClient {
    *
    *   Examples:
    *
+   *   * Filter by `Document.content_length_bytes`:
+   *     `content_length_bytes < 50000`
    *   * `data_source = "docs.cloud.google.com" OR data_source =
    *     "firebase.google.com"`
    *   * `data_source != "firebase.google.com"`
@@ -981,7 +1041,7 @@ export class DeveloperKnowledgeClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1019,7 +1079,9 @@ export class DeveloperKnowledgeClient {
    *   The request object that will be sent.
    * @param {string} request.query
    *   Required. Provides the raw query string provided by the user, such as "How
-   *   to create a Cloud Storage bucket?".
+   *   to create a Cloud Storage bucket?". The query must not exceed 500
+   *   characters; values longer than 500 characters will result in an
+   *   `INVALID_ARGUMENT` error.
    * @param {number} [request.pageSize]
    *   Optional. Specifies the maximum number of results to return. The service
    *   may return fewer than this value.
@@ -1040,6 +1102,8 @@ export class DeveloperKnowledgeClient {
    *
    *   Supported fields for filtering:
    *
+   *   * `content_length_bytes` (INTEGER): The length of the `Document.content`
+   *     field in bytes.
    *   * `data_source` (STRING): The source of the document, e.g.
    *     `docs.cloud.google.com`. See
    *     https://developers.google.com/knowledge/reference/corpus-reference for
@@ -1049,6 +1113,8 @@ export class DeveloperKnowledgeClient {
    *     markdown content or metadata.
    *   * `uri` (STRING): The document URI, e.g.
    *     `https://docs.cloud.google.com/bigquery/docs/tables`.
+   *
+   *   INTEGER fields support `=`, `<`, `<=`, `>`, and `>=` operators.
    *
    *   STRING fields support `=` (equals) and `!=` (not equals) operators for
    *   **exact match** on the whole string. Partial match, prefix match, and
@@ -1067,6 +1133,8 @@ export class DeveloperKnowledgeClient {
    *
    *   Examples:
    *
+   *   * Filter by `Document.content_length_bytes`:
+   *     `content_length_bytes < 50000`
    *   * `data_source = "docs.cloud.google.com" OR data_source =
    *     "firebase.google.com"`
    *   * `data_source != "firebase.google.com"`
@@ -1098,7 +1166,7 @@ export class DeveloperKnowledgeClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['searchDocumentChunks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('searchDocumentChunks stream %j', request);
@@ -1117,7 +1185,9 @@ export class DeveloperKnowledgeClient {
    *   The request object that will be sent.
    * @param {string} request.query
    *   Required. Provides the raw query string provided by the user, such as "How
-   *   to create a Cloud Storage bucket?".
+   *   to create a Cloud Storage bucket?". The query must not exceed 500
+   *   characters; values longer than 500 characters will result in an
+   *   `INVALID_ARGUMENT` error.
    * @param {number} [request.pageSize]
    *   Optional. Specifies the maximum number of results to return. The service
    *   may return fewer than this value.
@@ -1138,6 +1208,8 @@ export class DeveloperKnowledgeClient {
    *
    *   Supported fields for filtering:
    *
+   *   * `content_length_bytes` (INTEGER): The length of the `Document.content`
+   *     field in bytes.
    *   * `data_source` (STRING): The source of the document, e.g.
    *     `docs.cloud.google.com`. See
    *     https://developers.google.com/knowledge/reference/corpus-reference for
@@ -1147,6 +1219,8 @@ export class DeveloperKnowledgeClient {
    *     markdown content or metadata.
    *   * `uri` (STRING): The document URI, e.g.
    *     `https://docs.cloud.google.com/bigquery/docs/tables`.
+   *
+   *   INTEGER fields support `=`, `<`, `<=`, `>`, and `>=` operators.
    *
    *   STRING fields support `=` (equals) and `!=` (not equals) operators for
    *   **exact match** on the whole string. Partial match, prefix match, and
@@ -1165,6 +1239,8 @@ export class DeveloperKnowledgeClient {
    *
    *   Examples:
    *
+   *   * Filter by `Document.content_length_bytes`:
+   *     `content_length_bytes < 50000`
    *   * `data_source = "docs.cloud.google.com" OR data_source =
    *     "firebase.google.com"`
    *   * `data_source != "firebase.google.com"`
@@ -1197,7 +1273,7 @@ export class DeveloperKnowledgeClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['searchDocumentChunks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('searchDocumentChunks iterate %j', request);
@@ -1242,7 +1318,7 @@ export class DeveloperKnowledgeClient {
    */
   close(): Promise<void> {
     if (this.developerKnowledgeStub && !this._terminated) {
-      return this.developerKnowledgeStub.then((stub) => {
+      return this.developerKnowledgeStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

@@ -23,6 +23,2764 @@ export namespace google {
         /** Namespace mapmanagement. */
         namespace mapmanagement {
 
+            /** Namespace v2. */
+            namespace v2 {
+
+                /** Represents a MapManagement */
+                class MapManagement extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new MapManagement service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new MapManagement service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): MapManagement;
+
+                    /**
+                     * Calls CreateMapConfig.
+                     * @param request CreateMapConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and MapConfig
+                     */
+                    public createMapConfig(request: google.maps.mapmanagement.v2.ICreateMapConfigRequest, callback: google.maps.mapmanagement.v2.MapManagement.CreateMapConfigCallback): void;
+
+                    /**
+                     * Calls CreateMapConfig.
+                     * @param request CreateMapConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createMapConfig(request: google.maps.mapmanagement.v2.ICreateMapConfigRequest): Promise<google.maps.mapmanagement.v2.MapConfig>;
+
+                    /**
+                     * Calls GetMapConfig.
+                     * @param request GetMapConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and MapConfig
+                     */
+                    public getMapConfig(request: google.maps.mapmanagement.v2.IGetMapConfigRequest, callback: google.maps.mapmanagement.v2.MapManagement.GetMapConfigCallback): void;
+
+                    /**
+                     * Calls GetMapConfig.
+                     * @param request GetMapConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getMapConfig(request: google.maps.mapmanagement.v2.IGetMapConfigRequest): Promise<google.maps.mapmanagement.v2.MapConfig>;
+
+                    /**
+                     * Calls ListMapConfigs.
+                     * @param request ListMapConfigsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListMapConfigsResponse
+                     */
+                    public listMapConfigs(request: google.maps.mapmanagement.v2.IListMapConfigsRequest, callback: google.maps.mapmanagement.v2.MapManagement.ListMapConfigsCallback): void;
+
+                    /**
+                     * Calls ListMapConfigs.
+                     * @param request ListMapConfigsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listMapConfigs(request: google.maps.mapmanagement.v2.IListMapConfigsRequest): Promise<google.maps.mapmanagement.v2.ListMapConfigsResponse>;
+
+                    /**
+                     * Calls UpdateMapConfig.
+                     * @param request UpdateMapConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and MapConfig
+                     */
+                    public updateMapConfig(request: google.maps.mapmanagement.v2.IUpdateMapConfigRequest, callback: google.maps.mapmanagement.v2.MapManagement.UpdateMapConfigCallback): void;
+
+                    /**
+                     * Calls UpdateMapConfig.
+                     * @param request UpdateMapConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateMapConfig(request: google.maps.mapmanagement.v2.IUpdateMapConfigRequest): Promise<google.maps.mapmanagement.v2.MapConfig>;
+
+                    /**
+                     * Calls DeleteMapConfig.
+                     * @param request DeleteMapConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteMapConfig(request: google.maps.mapmanagement.v2.IDeleteMapConfigRequest, callback: google.maps.mapmanagement.v2.MapManagement.DeleteMapConfigCallback): void;
+
+                    /**
+                     * Calls DeleteMapConfig.
+                     * @param request DeleteMapConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteMapConfig(request: google.maps.mapmanagement.v2.IDeleteMapConfigRequest): Promise<google.protobuf.Empty>;
+
+                    /**
+                     * Calls CreateStyleConfig.
+                     * @param request CreateStyleConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and StyleConfig
+                     */
+                    public createStyleConfig(request: google.maps.mapmanagement.v2.ICreateStyleConfigRequest, callback: google.maps.mapmanagement.v2.MapManagement.CreateStyleConfigCallback): void;
+
+                    /**
+                     * Calls CreateStyleConfig.
+                     * @param request CreateStyleConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createStyleConfig(request: google.maps.mapmanagement.v2.ICreateStyleConfigRequest): Promise<google.maps.mapmanagement.v2.StyleConfig>;
+
+                    /**
+                     * Calls GetStyleConfig.
+                     * @param request GetStyleConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and StyleConfig
+                     */
+                    public getStyleConfig(request: google.maps.mapmanagement.v2.IGetStyleConfigRequest, callback: google.maps.mapmanagement.v2.MapManagement.GetStyleConfigCallback): void;
+
+                    /**
+                     * Calls GetStyleConfig.
+                     * @param request GetStyleConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getStyleConfig(request: google.maps.mapmanagement.v2.IGetStyleConfigRequest): Promise<google.maps.mapmanagement.v2.StyleConfig>;
+
+                    /**
+                     * Calls ListStyleConfigs.
+                     * @param request ListStyleConfigsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListStyleConfigsResponse
+                     */
+                    public listStyleConfigs(request: google.maps.mapmanagement.v2.IListStyleConfigsRequest, callback: google.maps.mapmanagement.v2.MapManagement.ListStyleConfigsCallback): void;
+
+                    /**
+                     * Calls ListStyleConfigs.
+                     * @param request ListStyleConfigsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listStyleConfigs(request: google.maps.mapmanagement.v2.IListStyleConfigsRequest): Promise<google.maps.mapmanagement.v2.ListStyleConfigsResponse>;
+
+                    /**
+                     * Calls UpdateStyleConfig.
+                     * @param request UpdateStyleConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and StyleConfig
+                     */
+                    public updateStyleConfig(request: google.maps.mapmanagement.v2.IUpdateStyleConfigRequest, callback: google.maps.mapmanagement.v2.MapManagement.UpdateStyleConfigCallback): void;
+
+                    /**
+                     * Calls UpdateStyleConfig.
+                     * @param request UpdateStyleConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateStyleConfig(request: google.maps.mapmanagement.v2.IUpdateStyleConfigRequest): Promise<google.maps.mapmanagement.v2.StyleConfig>;
+
+                    /**
+                     * Calls DeleteStyleConfig.
+                     * @param request DeleteStyleConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteStyleConfig(request: google.maps.mapmanagement.v2.IDeleteStyleConfigRequest, callback: google.maps.mapmanagement.v2.MapManagement.DeleteStyleConfigCallback): void;
+
+                    /**
+                     * Calls DeleteStyleConfig.
+                     * @param request DeleteStyleConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteStyleConfig(request: google.maps.mapmanagement.v2.IDeleteStyleConfigRequest): Promise<google.protobuf.Empty>;
+
+                    /**
+                     * Calls CreateMapContextConfig.
+                     * @param request CreateMapContextConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and MapContextConfig
+                     */
+                    public createMapContextConfig(request: google.maps.mapmanagement.v2.ICreateMapContextConfigRequest, callback: google.maps.mapmanagement.v2.MapManagement.CreateMapContextConfigCallback): void;
+
+                    /**
+                     * Calls CreateMapContextConfig.
+                     * @param request CreateMapContextConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createMapContextConfig(request: google.maps.mapmanagement.v2.ICreateMapContextConfigRequest): Promise<google.maps.mapmanagement.v2.MapContextConfig>;
+
+                    /**
+                     * Calls GetMapContextConfig.
+                     * @param request GetMapContextConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and MapContextConfig
+                     */
+                    public getMapContextConfig(request: google.maps.mapmanagement.v2.IGetMapContextConfigRequest, callback: google.maps.mapmanagement.v2.MapManagement.GetMapContextConfigCallback): void;
+
+                    /**
+                     * Calls GetMapContextConfig.
+                     * @param request GetMapContextConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getMapContextConfig(request: google.maps.mapmanagement.v2.IGetMapContextConfigRequest): Promise<google.maps.mapmanagement.v2.MapContextConfig>;
+
+                    /**
+                     * Calls ListMapContextConfigs.
+                     * @param request ListMapContextConfigsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListMapContextConfigsResponse
+                     */
+                    public listMapContextConfigs(request: google.maps.mapmanagement.v2.IListMapContextConfigsRequest, callback: google.maps.mapmanagement.v2.MapManagement.ListMapContextConfigsCallback): void;
+
+                    /**
+                     * Calls ListMapContextConfigs.
+                     * @param request ListMapContextConfigsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listMapContextConfigs(request: google.maps.mapmanagement.v2.IListMapContextConfigsRequest): Promise<google.maps.mapmanagement.v2.ListMapContextConfigsResponse>;
+
+                    /**
+                     * Calls UpdateMapContextConfig.
+                     * @param request UpdateMapContextConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and MapContextConfig
+                     */
+                    public updateMapContextConfig(request: google.maps.mapmanagement.v2.IUpdateMapContextConfigRequest, callback: google.maps.mapmanagement.v2.MapManagement.UpdateMapContextConfigCallback): void;
+
+                    /**
+                     * Calls UpdateMapContextConfig.
+                     * @param request UpdateMapContextConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateMapContextConfig(request: google.maps.mapmanagement.v2.IUpdateMapContextConfigRequest): Promise<google.maps.mapmanagement.v2.MapContextConfig>;
+
+                    /**
+                     * Calls DeleteMapContextConfig.
+                     * @param request DeleteMapContextConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteMapContextConfig(request: google.maps.mapmanagement.v2.IDeleteMapContextConfigRequest, callback: google.maps.mapmanagement.v2.MapManagement.DeleteMapContextConfigCallback): void;
+
+                    /**
+                     * Calls DeleteMapContextConfig.
+                     * @param request DeleteMapContextConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteMapContextConfig(request: google.maps.mapmanagement.v2.IDeleteMapContextConfigRequest): Promise<google.protobuf.Empty>;
+                }
+
+                namespace MapManagement {
+
+                    /**
+                     * Callback as used by {@link google.maps.mapmanagement.v2.MapManagement|createMapConfig}.
+                     * @param error Error, if any
+                     * @param [response] MapConfig
+                     */
+                    type CreateMapConfigCallback = (error: (Error|null), response?: google.maps.mapmanagement.v2.MapConfig) => void;
+
+                    /**
+                     * Callback as used by {@link google.maps.mapmanagement.v2.MapManagement|getMapConfig}.
+                     * @param error Error, if any
+                     * @param [response] MapConfig
+                     */
+                    type GetMapConfigCallback = (error: (Error|null), response?: google.maps.mapmanagement.v2.MapConfig) => void;
+
+                    /**
+                     * Callback as used by {@link google.maps.mapmanagement.v2.MapManagement|listMapConfigs}.
+                     * @param error Error, if any
+                     * @param [response] ListMapConfigsResponse
+                     */
+                    type ListMapConfigsCallback = (error: (Error|null), response?: google.maps.mapmanagement.v2.ListMapConfigsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.maps.mapmanagement.v2.MapManagement|updateMapConfig}.
+                     * @param error Error, if any
+                     * @param [response] MapConfig
+                     */
+                    type UpdateMapConfigCallback = (error: (Error|null), response?: google.maps.mapmanagement.v2.MapConfig) => void;
+
+                    /**
+                     * Callback as used by {@link google.maps.mapmanagement.v2.MapManagement|deleteMapConfig}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteMapConfigCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
+                     * Callback as used by {@link google.maps.mapmanagement.v2.MapManagement|createStyleConfig}.
+                     * @param error Error, if any
+                     * @param [response] StyleConfig
+                     */
+                    type CreateStyleConfigCallback = (error: (Error|null), response?: google.maps.mapmanagement.v2.StyleConfig) => void;
+
+                    /**
+                     * Callback as used by {@link google.maps.mapmanagement.v2.MapManagement|getStyleConfig}.
+                     * @param error Error, if any
+                     * @param [response] StyleConfig
+                     */
+                    type GetStyleConfigCallback = (error: (Error|null), response?: google.maps.mapmanagement.v2.StyleConfig) => void;
+
+                    /**
+                     * Callback as used by {@link google.maps.mapmanagement.v2.MapManagement|listStyleConfigs}.
+                     * @param error Error, if any
+                     * @param [response] ListStyleConfigsResponse
+                     */
+                    type ListStyleConfigsCallback = (error: (Error|null), response?: google.maps.mapmanagement.v2.ListStyleConfigsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.maps.mapmanagement.v2.MapManagement|updateStyleConfig}.
+                     * @param error Error, if any
+                     * @param [response] StyleConfig
+                     */
+                    type UpdateStyleConfigCallback = (error: (Error|null), response?: google.maps.mapmanagement.v2.StyleConfig) => void;
+
+                    /**
+                     * Callback as used by {@link google.maps.mapmanagement.v2.MapManagement|deleteStyleConfig}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteStyleConfigCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
+                     * Callback as used by {@link google.maps.mapmanagement.v2.MapManagement|createMapContextConfig}.
+                     * @param error Error, if any
+                     * @param [response] MapContextConfig
+                     */
+                    type CreateMapContextConfigCallback = (error: (Error|null), response?: google.maps.mapmanagement.v2.MapContextConfig) => void;
+
+                    /**
+                     * Callback as used by {@link google.maps.mapmanagement.v2.MapManagement|getMapContextConfig}.
+                     * @param error Error, if any
+                     * @param [response] MapContextConfig
+                     */
+                    type GetMapContextConfigCallback = (error: (Error|null), response?: google.maps.mapmanagement.v2.MapContextConfig) => void;
+
+                    /**
+                     * Callback as used by {@link google.maps.mapmanagement.v2.MapManagement|listMapContextConfigs}.
+                     * @param error Error, if any
+                     * @param [response] ListMapContextConfigsResponse
+                     */
+                    type ListMapContextConfigsCallback = (error: (Error|null), response?: google.maps.mapmanagement.v2.ListMapContextConfigsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.maps.mapmanagement.v2.MapManagement|updateMapContextConfig}.
+                     * @param error Error, if any
+                     * @param [response] MapContextConfig
+                     */
+                    type UpdateMapContextConfigCallback = (error: (Error|null), response?: google.maps.mapmanagement.v2.MapContextConfig) => void;
+
+                    /**
+                     * Callback as used by {@link google.maps.mapmanagement.v2.MapManagement|deleteMapContextConfig}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteMapContextConfigCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+                }
+
+                /** MapRenderingType enum. */
+                enum MapRenderingType {
+                    RASTER = 0,
+                    VECTOR = 1
+                }
+
+                /** StyleConfigView enum. */
+                enum StyleConfigView {
+                    STYLE_CONFIG_VIEW_UNSPECIFIED = 0,
+                    FULL = 1,
+                    METADATA_ONLY = 2
+                }
+
+                /** Properties of a CreateMapConfigRequest. */
+                interface ICreateMapConfigRequest {
+
+                    /** CreateMapConfigRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateMapConfigRequest mapConfig */
+                    mapConfig?: (google.maps.mapmanagement.v2.IMapConfig|null);
+                }
+
+                /** Represents a CreateMapConfigRequest. */
+                class CreateMapConfigRequest implements ICreateMapConfigRequest {
+
+                    /**
+                     * Constructs a new CreateMapConfigRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.maps.mapmanagement.v2.ICreateMapConfigRequest);
+
+                    /** CreateMapConfigRequest parent. */
+                    public parent: string;
+
+                    /** CreateMapConfigRequest mapConfig. */
+                    public mapConfig?: (google.maps.mapmanagement.v2.IMapConfig|null);
+
+                    /**
+                     * Creates a new CreateMapConfigRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateMapConfigRequest instance
+                     */
+                    public static create(properties?: google.maps.mapmanagement.v2.ICreateMapConfigRequest): google.maps.mapmanagement.v2.CreateMapConfigRequest;
+
+                    /**
+                     * Encodes the specified CreateMapConfigRequest message. Does not implicitly {@link google.maps.mapmanagement.v2.CreateMapConfigRequest.verify|verify} messages.
+                     * @param message CreateMapConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.maps.mapmanagement.v2.ICreateMapConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateMapConfigRequest message, length delimited. Does not implicitly {@link google.maps.mapmanagement.v2.CreateMapConfigRequest.verify|verify} messages.
+                     * @param message CreateMapConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.maps.mapmanagement.v2.ICreateMapConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateMapConfigRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateMapConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.mapmanagement.v2.CreateMapConfigRequest;
+
+                    /**
+                     * Decodes a CreateMapConfigRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateMapConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.mapmanagement.v2.CreateMapConfigRequest;
+
+                    /**
+                     * Verifies a CreateMapConfigRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateMapConfigRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateMapConfigRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.maps.mapmanagement.v2.CreateMapConfigRequest;
+
+                    /**
+                     * Creates a plain object from a CreateMapConfigRequest message. Also converts values to other types if specified.
+                     * @param message CreateMapConfigRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.maps.mapmanagement.v2.CreateMapConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateMapConfigRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateMapConfigRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetMapConfigRequest. */
+                interface IGetMapConfigRequest {
+
+                    /** GetMapConfigRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetMapConfigRequest. */
+                class GetMapConfigRequest implements IGetMapConfigRequest {
+
+                    /**
+                     * Constructs a new GetMapConfigRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.maps.mapmanagement.v2.IGetMapConfigRequest);
+
+                    /** GetMapConfigRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetMapConfigRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetMapConfigRequest instance
+                     */
+                    public static create(properties?: google.maps.mapmanagement.v2.IGetMapConfigRequest): google.maps.mapmanagement.v2.GetMapConfigRequest;
+
+                    /**
+                     * Encodes the specified GetMapConfigRequest message. Does not implicitly {@link google.maps.mapmanagement.v2.GetMapConfigRequest.verify|verify} messages.
+                     * @param message GetMapConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.maps.mapmanagement.v2.IGetMapConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetMapConfigRequest message, length delimited. Does not implicitly {@link google.maps.mapmanagement.v2.GetMapConfigRequest.verify|verify} messages.
+                     * @param message GetMapConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.maps.mapmanagement.v2.IGetMapConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetMapConfigRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetMapConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.mapmanagement.v2.GetMapConfigRequest;
+
+                    /**
+                     * Decodes a GetMapConfigRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetMapConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.mapmanagement.v2.GetMapConfigRequest;
+
+                    /**
+                     * Verifies a GetMapConfigRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetMapConfigRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetMapConfigRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.maps.mapmanagement.v2.GetMapConfigRequest;
+
+                    /**
+                     * Creates a plain object from a GetMapConfigRequest message. Also converts values to other types if specified.
+                     * @param message GetMapConfigRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.maps.mapmanagement.v2.GetMapConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetMapConfigRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetMapConfigRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListMapConfigsRequest. */
+                interface IListMapConfigsRequest {
+
+                    /** ListMapConfigsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListMapConfigsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListMapConfigsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListMapConfigsRequest. */
+                class ListMapConfigsRequest implements IListMapConfigsRequest {
+
+                    /**
+                     * Constructs a new ListMapConfigsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.maps.mapmanagement.v2.IListMapConfigsRequest);
+
+                    /** ListMapConfigsRequest parent. */
+                    public parent: string;
+
+                    /** ListMapConfigsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListMapConfigsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListMapConfigsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListMapConfigsRequest instance
+                     */
+                    public static create(properties?: google.maps.mapmanagement.v2.IListMapConfigsRequest): google.maps.mapmanagement.v2.ListMapConfigsRequest;
+
+                    /**
+                     * Encodes the specified ListMapConfigsRequest message. Does not implicitly {@link google.maps.mapmanagement.v2.ListMapConfigsRequest.verify|verify} messages.
+                     * @param message ListMapConfigsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.maps.mapmanagement.v2.IListMapConfigsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListMapConfigsRequest message, length delimited. Does not implicitly {@link google.maps.mapmanagement.v2.ListMapConfigsRequest.verify|verify} messages.
+                     * @param message ListMapConfigsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.maps.mapmanagement.v2.IListMapConfigsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListMapConfigsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListMapConfigsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.mapmanagement.v2.ListMapConfigsRequest;
+
+                    /**
+                     * Decodes a ListMapConfigsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListMapConfigsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.mapmanagement.v2.ListMapConfigsRequest;
+
+                    /**
+                     * Verifies a ListMapConfigsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListMapConfigsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListMapConfigsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.maps.mapmanagement.v2.ListMapConfigsRequest;
+
+                    /**
+                     * Creates a plain object from a ListMapConfigsRequest message. Also converts values to other types if specified.
+                     * @param message ListMapConfigsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.maps.mapmanagement.v2.ListMapConfigsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListMapConfigsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListMapConfigsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListMapConfigsResponse. */
+                interface IListMapConfigsResponse {
+
+                    /** ListMapConfigsResponse mapConfigs */
+                    mapConfigs?: (google.maps.mapmanagement.v2.IMapConfig[]|null);
+
+                    /** ListMapConfigsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListMapConfigsResponse. */
+                class ListMapConfigsResponse implements IListMapConfigsResponse {
+
+                    /**
+                     * Constructs a new ListMapConfigsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.maps.mapmanagement.v2.IListMapConfigsResponse);
+
+                    /** ListMapConfigsResponse mapConfigs. */
+                    public mapConfigs: google.maps.mapmanagement.v2.IMapConfig[];
+
+                    /** ListMapConfigsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListMapConfigsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListMapConfigsResponse instance
+                     */
+                    public static create(properties?: google.maps.mapmanagement.v2.IListMapConfigsResponse): google.maps.mapmanagement.v2.ListMapConfigsResponse;
+
+                    /**
+                     * Encodes the specified ListMapConfigsResponse message. Does not implicitly {@link google.maps.mapmanagement.v2.ListMapConfigsResponse.verify|verify} messages.
+                     * @param message ListMapConfigsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.maps.mapmanagement.v2.IListMapConfigsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListMapConfigsResponse message, length delimited. Does not implicitly {@link google.maps.mapmanagement.v2.ListMapConfigsResponse.verify|verify} messages.
+                     * @param message ListMapConfigsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.maps.mapmanagement.v2.IListMapConfigsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListMapConfigsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListMapConfigsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.mapmanagement.v2.ListMapConfigsResponse;
+
+                    /**
+                     * Decodes a ListMapConfigsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListMapConfigsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.mapmanagement.v2.ListMapConfigsResponse;
+
+                    /**
+                     * Verifies a ListMapConfigsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListMapConfigsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListMapConfigsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.maps.mapmanagement.v2.ListMapConfigsResponse;
+
+                    /**
+                     * Creates a plain object from a ListMapConfigsResponse message. Also converts values to other types if specified.
+                     * @param message ListMapConfigsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.maps.mapmanagement.v2.ListMapConfigsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListMapConfigsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListMapConfigsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateMapConfigRequest. */
+                interface IUpdateMapConfigRequest {
+
+                    /** UpdateMapConfigRequest mapConfig */
+                    mapConfig?: (google.maps.mapmanagement.v2.IMapConfig|null);
+
+                    /** UpdateMapConfigRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateMapConfigRequest. */
+                class UpdateMapConfigRequest implements IUpdateMapConfigRequest {
+
+                    /**
+                     * Constructs a new UpdateMapConfigRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.maps.mapmanagement.v2.IUpdateMapConfigRequest);
+
+                    /** UpdateMapConfigRequest mapConfig. */
+                    public mapConfig?: (google.maps.mapmanagement.v2.IMapConfig|null);
+
+                    /** UpdateMapConfigRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateMapConfigRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateMapConfigRequest instance
+                     */
+                    public static create(properties?: google.maps.mapmanagement.v2.IUpdateMapConfigRequest): google.maps.mapmanagement.v2.UpdateMapConfigRequest;
+
+                    /**
+                     * Encodes the specified UpdateMapConfigRequest message. Does not implicitly {@link google.maps.mapmanagement.v2.UpdateMapConfigRequest.verify|verify} messages.
+                     * @param message UpdateMapConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.maps.mapmanagement.v2.IUpdateMapConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateMapConfigRequest message, length delimited. Does not implicitly {@link google.maps.mapmanagement.v2.UpdateMapConfigRequest.verify|verify} messages.
+                     * @param message UpdateMapConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.maps.mapmanagement.v2.IUpdateMapConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateMapConfigRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateMapConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.mapmanagement.v2.UpdateMapConfigRequest;
+
+                    /**
+                     * Decodes an UpdateMapConfigRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateMapConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.mapmanagement.v2.UpdateMapConfigRequest;
+
+                    /**
+                     * Verifies an UpdateMapConfigRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateMapConfigRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateMapConfigRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.maps.mapmanagement.v2.UpdateMapConfigRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateMapConfigRequest message. Also converts values to other types if specified.
+                     * @param message UpdateMapConfigRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.maps.mapmanagement.v2.UpdateMapConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateMapConfigRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateMapConfigRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteMapConfigRequest. */
+                interface IDeleteMapConfigRequest {
+
+                    /** DeleteMapConfigRequest name */
+                    name?: (string|null);
+
+                    /** DeleteMapConfigRequest force */
+                    force?: (boolean|null);
+                }
+
+                /** Represents a DeleteMapConfigRequest. */
+                class DeleteMapConfigRequest implements IDeleteMapConfigRequest {
+
+                    /**
+                     * Constructs a new DeleteMapConfigRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.maps.mapmanagement.v2.IDeleteMapConfigRequest);
+
+                    /** DeleteMapConfigRequest name. */
+                    public name: string;
+
+                    /** DeleteMapConfigRequest force. */
+                    public force: boolean;
+
+                    /**
+                     * Creates a new DeleteMapConfigRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteMapConfigRequest instance
+                     */
+                    public static create(properties?: google.maps.mapmanagement.v2.IDeleteMapConfigRequest): google.maps.mapmanagement.v2.DeleteMapConfigRequest;
+
+                    /**
+                     * Encodes the specified DeleteMapConfigRequest message. Does not implicitly {@link google.maps.mapmanagement.v2.DeleteMapConfigRequest.verify|verify} messages.
+                     * @param message DeleteMapConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.maps.mapmanagement.v2.IDeleteMapConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteMapConfigRequest message, length delimited. Does not implicitly {@link google.maps.mapmanagement.v2.DeleteMapConfigRequest.verify|verify} messages.
+                     * @param message DeleteMapConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.maps.mapmanagement.v2.IDeleteMapConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteMapConfigRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteMapConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.mapmanagement.v2.DeleteMapConfigRequest;
+
+                    /**
+                     * Decodes a DeleteMapConfigRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteMapConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.mapmanagement.v2.DeleteMapConfigRequest;
+
+                    /**
+                     * Verifies a DeleteMapConfigRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteMapConfigRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteMapConfigRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.maps.mapmanagement.v2.DeleteMapConfigRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteMapConfigRequest message. Also converts values to other types if specified.
+                     * @param message DeleteMapConfigRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.maps.mapmanagement.v2.DeleteMapConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteMapConfigRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteMapConfigRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a MapFeatures. */
+                interface IMapFeatures {
+
+                    /** MapFeatures simpleFeatures */
+                    simpleFeatures?: (google.maps.mapmanagement.v2.MapFeatures.SimpleFeature[]|null);
+
+                    /** MapFeatures poiBoostLevel */
+                    poiBoostLevel?: (number|null);
+                }
+
+                /** Represents a MapFeatures. */
+                class MapFeatures implements IMapFeatures {
+
+                    /**
+                     * Constructs a new MapFeatures.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.maps.mapmanagement.v2.IMapFeatures);
+
+                    /** MapFeatures simpleFeatures. */
+                    public simpleFeatures: google.maps.mapmanagement.v2.MapFeatures.SimpleFeature[];
+
+                    /** MapFeatures poiBoostLevel. */
+                    public poiBoostLevel?: (number|null);
+
+                    /**
+                     * Creates a new MapFeatures instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MapFeatures instance
+                     */
+                    public static create(properties?: google.maps.mapmanagement.v2.IMapFeatures): google.maps.mapmanagement.v2.MapFeatures;
+
+                    /**
+                     * Encodes the specified MapFeatures message. Does not implicitly {@link google.maps.mapmanagement.v2.MapFeatures.verify|verify} messages.
+                     * @param message MapFeatures message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.maps.mapmanagement.v2.IMapFeatures, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MapFeatures message, length delimited. Does not implicitly {@link google.maps.mapmanagement.v2.MapFeatures.verify|verify} messages.
+                     * @param message MapFeatures message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.maps.mapmanagement.v2.IMapFeatures, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MapFeatures message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MapFeatures
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.mapmanagement.v2.MapFeatures;
+
+                    /**
+                     * Decodes a MapFeatures message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MapFeatures
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.mapmanagement.v2.MapFeatures;
+
+                    /**
+                     * Verifies a MapFeatures message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MapFeatures message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MapFeatures
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.maps.mapmanagement.v2.MapFeatures;
+
+                    /**
+                     * Creates a plain object from a MapFeatures message. Also converts values to other types if specified.
+                     * @param message MapFeatures
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.maps.mapmanagement.v2.MapFeatures, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MapFeatures to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for MapFeatures
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace MapFeatures {
+
+                    /** SimpleFeature enum. */
+                    enum SimpleFeature {
+                        SIMPLE_FEATURE_UNSPECIFIED = 0,
+                        FLATTEN_BUILDINGS = 1,
+                        ICONIC_ICONS = 2
+                    }
+                }
+
+                /** Properties of a MapConfig. */
+                interface IMapConfig {
+
+                    /** MapConfig name */
+                    name?: (string|null);
+
+                    /** MapConfig displayName */
+                    displayName?: (string|null);
+
+                    /** MapConfig description */
+                    description?: (string|null);
+
+                    /** MapConfig mapId */
+                    mapId?: (string|null);
+
+                    /** MapConfig mapFeatures */
+                    mapFeatures?: (google.maps.mapmanagement.v2.IMapFeatures|null);
+
+                    /** MapConfig createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** MapConfig updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** MapConfig mapType */
+                    mapType?: (google.maps.mapmanagement.v2.MapRenderingType|keyof typeof google.maps.mapmanagement.v2.MapRenderingType|null);
+                }
+
+                /** Represents a MapConfig. */
+                class MapConfig implements IMapConfig {
+
+                    /**
+                     * Constructs a new MapConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.maps.mapmanagement.v2.IMapConfig);
+
+                    /** MapConfig name. */
+                    public name: string;
+
+                    /** MapConfig displayName. */
+                    public displayName: string;
+
+                    /** MapConfig description. */
+                    public description: string;
+
+                    /** MapConfig mapId. */
+                    public mapId: string;
+
+                    /** MapConfig mapFeatures. */
+                    public mapFeatures?: (google.maps.mapmanagement.v2.IMapFeatures|null);
+
+                    /** MapConfig createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** MapConfig updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** MapConfig mapType. */
+                    public mapType: (google.maps.mapmanagement.v2.MapRenderingType|keyof typeof google.maps.mapmanagement.v2.MapRenderingType);
+
+                    /**
+                     * Creates a new MapConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MapConfig instance
+                     */
+                    public static create(properties?: google.maps.mapmanagement.v2.IMapConfig): google.maps.mapmanagement.v2.MapConfig;
+
+                    /**
+                     * Encodes the specified MapConfig message. Does not implicitly {@link google.maps.mapmanagement.v2.MapConfig.verify|verify} messages.
+                     * @param message MapConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.maps.mapmanagement.v2.IMapConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MapConfig message, length delimited. Does not implicitly {@link google.maps.mapmanagement.v2.MapConfig.verify|verify} messages.
+                     * @param message MapConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.maps.mapmanagement.v2.IMapConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MapConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MapConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.mapmanagement.v2.MapConfig;
+
+                    /**
+                     * Decodes a MapConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MapConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.mapmanagement.v2.MapConfig;
+
+                    /**
+                     * Verifies a MapConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MapConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MapConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.maps.mapmanagement.v2.MapConfig;
+
+                    /**
+                     * Creates a plain object from a MapConfig message. Also converts values to other types if specified.
+                     * @param message MapConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.maps.mapmanagement.v2.MapConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MapConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for MapConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a StyleConfig. */
+                interface IStyleConfig {
+
+                    /** StyleConfig name */
+                    name?: (string|null);
+
+                    /** StyleConfig displayName */
+                    displayName?: (string|null);
+
+                    /** StyleConfig description */
+                    description?: (string|null);
+
+                    /** StyleConfig styleId */
+                    styleId?: (string|null);
+
+                    /** StyleConfig jsonStyleSheet */
+                    jsonStyleSheet?: (string|null);
+
+                    /** StyleConfig styleSheet */
+                    styleSheet?: (google.protobuf.IStruct|null);
+
+                    /** StyleConfig createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** StyleConfig updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a StyleConfig. */
+                class StyleConfig implements IStyleConfig {
+
+                    /**
+                     * Constructs a new StyleConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.maps.mapmanagement.v2.IStyleConfig);
+
+                    /** StyleConfig name. */
+                    public name: string;
+
+                    /** StyleConfig displayName. */
+                    public displayName: string;
+
+                    /** StyleConfig description. */
+                    public description: string;
+
+                    /** StyleConfig styleId. */
+                    public styleId: string;
+
+                    /** StyleConfig jsonStyleSheet. */
+                    public jsonStyleSheet: string;
+
+                    /** StyleConfig styleSheet. */
+                    public styleSheet?: (google.protobuf.IStruct|null);
+
+                    /** StyleConfig createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** StyleConfig updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new StyleConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns StyleConfig instance
+                     */
+                    public static create(properties?: google.maps.mapmanagement.v2.IStyleConfig): google.maps.mapmanagement.v2.StyleConfig;
+
+                    /**
+                     * Encodes the specified StyleConfig message. Does not implicitly {@link google.maps.mapmanagement.v2.StyleConfig.verify|verify} messages.
+                     * @param message StyleConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.maps.mapmanagement.v2.IStyleConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified StyleConfig message, length delimited. Does not implicitly {@link google.maps.mapmanagement.v2.StyleConfig.verify|verify} messages.
+                     * @param message StyleConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.maps.mapmanagement.v2.IStyleConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a StyleConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns StyleConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.mapmanagement.v2.StyleConfig;
+
+                    /**
+                     * Decodes a StyleConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns StyleConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.mapmanagement.v2.StyleConfig;
+
+                    /**
+                     * Verifies a StyleConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a StyleConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns StyleConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.maps.mapmanagement.v2.StyleConfig;
+
+                    /**
+                     * Creates a plain object from a StyleConfig message. Also converts values to other types if specified.
+                     * @param message StyleConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.maps.mapmanagement.v2.StyleConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this StyleConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for StyleConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateStyleConfigRequest. */
+                interface ICreateStyleConfigRequest {
+
+                    /** CreateStyleConfigRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateStyleConfigRequest styleConfig */
+                    styleConfig?: (google.maps.mapmanagement.v2.IStyleConfig|null);
+                }
+
+                /** Represents a CreateStyleConfigRequest. */
+                class CreateStyleConfigRequest implements ICreateStyleConfigRequest {
+
+                    /**
+                     * Constructs a new CreateStyleConfigRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.maps.mapmanagement.v2.ICreateStyleConfigRequest);
+
+                    /** CreateStyleConfigRequest parent. */
+                    public parent: string;
+
+                    /** CreateStyleConfigRequest styleConfig. */
+                    public styleConfig?: (google.maps.mapmanagement.v2.IStyleConfig|null);
+
+                    /**
+                     * Creates a new CreateStyleConfigRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateStyleConfigRequest instance
+                     */
+                    public static create(properties?: google.maps.mapmanagement.v2.ICreateStyleConfigRequest): google.maps.mapmanagement.v2.CreateStyleConfigRequest;
+
+                    /**
+                     * Encodes the specified CreateStyleConfigRequest message. Does not implicitly {@link google.maps.mapmanagement.v2.CreateStyleConfigRequest.verify|verify} messages.
+                     * @param message CreateStyleConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.maps.mapmanagement.v2.ICreateStyleConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateStyleConfigRequest message, length delimited. Does not implicitly {@link google.maps.mapmanagement.v2.CreateStyleConfigRequest.verify|verify} messages.
+                     * @param message CreateStyleConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.maps.mapmanagement.v2.ICreateStyleConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateStyleConfigRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateStyleConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.mapmanagement.v2.CreateStyleConfigRequest;
+
+                    /**
+                     * Decodes a CreateStyleConfigRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateStyleConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.mapmanagement.v2.CreateStyleConfigRequest;
+
+                    /**
+                     * Verifies a CreateStyleConfigRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateStyleConfigRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateStyleConfigRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.maps.mapmanagement.v2.CreateStyleConfigRequest;
+
+                    /**
+                     * Creates a plain object from a CreateStyleConfigRequest message. Also converts values to other types if specified.
+                     * @param message CreateStyleConfigRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.maps.mapmanagement.v2.CreateStyleConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateStyleConfigRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateStyleConfigRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetStyleConfigRequest. */
+                interface IGetStyleConfigRequest {
+
+                    /** GetStyleConfigRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetStyleConfigRequest. */
+                class GetStyleConfigRequest implements IGetStyleConfigRequest {
+
+                    /**
+                     * Constructs a new GetStyleConfigRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.maps.mapmanagement.v2.IGetStyleConfigRequest);
+
+                    /** GetStyleConfigRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetStyleConfigRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetStyleConfigRequest instance
+                     */
+                    public static create(properties?: google.maps.mapmanagement.v2.IGetStyleConfigRequest): google.maps.mapmanagement.v2.GetStyleConfigRequest;
+
+                    /**
+                     * Encodes the specified GetStyleConfigRequest message. Does not implicitly {@link google.maps.mapmanagement.v2.GetStyleConfigRequest.verify|verify} messages.
+                     * @param message GetStyleConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.maps.mapmanagement.v2.IGetStyleConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetStyleConfigRequest message, length delimited. Does not implicitly {@link google.maps.mapmanagement.v2.GetStyleConfigRequest.verify|verify} messages.
+                     * @param message GetStyleConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.maps.mapmanagement.v2.IGetStyleConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetStyleConfigRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetStyleConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.mapmanagement.v2.GetStyleConfigRequest;
+
+                    /**
+                     * Decodes a GetStyleConfigRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetStyleConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.mapmanagement.v2.GetStyleConfigRequest;
+
+                    /**
+                     * Verifies a GetStyleConfigRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetStyleConfigRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetStyleConfigRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.maps.mapmanagement.v2.GetStyleConfigRequest;
+
+                    /**
+                     * Creates a plain object from a GetStyleConfigRequest message. Also converts values to other types if specified.
+                     * @param message GetStyleConfigRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.maps.mapmanagement.v2.GetStyleConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetStyleConfigRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetStyleConfigRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListStyleConfigsRequest. */
+                interface IListStyleConfigsRequest {
+
+                    /** ListStyleConfigsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListStyleConfigsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListStyleConfigsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListStyleConfigsRequest filter */
+                    filter?: (string|null);
+
+                    /** ListStyleConfigsRequest view */
+                    view?: (google.maps.mapmanagement.v2.StyleConfigView|keyof typeof google.maps.mapmanagement.v2.StyleConfigView|null);
+                }
+
+                /** Represents a ListStyleConfigsRequest. */
+                class ListStyleConfigsRequest implements IListStyleConfigsRequest {
+
+                    /**
+                     * Constructs a new ListStyleConfigsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.maps.mapmanagement.v2.IListStyleConfigsRequest);
+
+                    /** ListStyleConfigsRequest parent. */
+                    public parent: string;
+
+                    /** ListStyleConfigsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListStyleConfigsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListStyleConfigsRequest filter. */
+                    public filter: string;
+
+                    /** ListStyleConfigsRequest view. */
+                    public view: (google.maps.mapmanagement.v2.StyleConfigView|keyof typeof google.maps.mapmanagement.v2.StyleConfigView);
+
+                    /**
+                     * Creates a new ListStyleConfigsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListStyleConfigsRequest instance
+                     */
+                    public static create(properties?: google.maps.mapmanagement.v2.IListStyleConfigsRequest): google.maps.mapmanagement.v2.ListStyleConfigsRequest;
+
+                    /**
+                     * Encodes the specified ListStyleConfigsRequest message. Does not implicitly {@link google.maps.mapmanagement.v2.ListStyleConfigsRequest.verify|verify} messages.
+                     * @param message ListStyleConfigsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.maps.mapmanagement.v2.IListStyleConfigsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListStyleConfigsRequest message, length delimited. Does not implicitly {@link google.maps.mapmanagement.v2.ListStyleConfigsRequest.verify|verify} messages.
+                     * @param message ListStyleConfigsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.maps.mapmanagement.v2.IListStyleConfigsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListStyleConfigsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListStyleConfigsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.mapmanagement.v2.ListStyleConfigsRequest;
+
+                    /**
+                     * Decodes a ListStyleConfigsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListStyleConfigsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.mapmanagement.v2.ListStyleConfigsRequest;
+
+                    /**
+                     * Verifies a ListStyleConfigsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListStyleConfigsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListStyleConfigsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.maps.mapmanagement.v2.ListStyleConfigsRequest;
+
+                    /**
+                     * Creates a plain object from a ListStyleConfigsRequest message. Also converts values to other types if specified.
+                     * @param message ListStyleConfigsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.maps.mapmanagement.v2.ListStyleConfigsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListStyleConfigsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListStyleConfigsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListStyleConfigsResponse. */
+                interface IListStyleConfigsResponse {
+
+                    /** ListStyleConfigsResponse styleConfigs */
+                    styleConfigs?: (google.maps.mapmanagement.v2.IStyleConfig[]|null);
+
+                    /** ListStyleConfigsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListStyleConfigsResponse. */
+                class ListStyleConfigsResponse implements IListStyleConfigsResponse {
+
+                    /**
+                     * Constructs a new ListStyleConfigsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.maps.mapmanagement.v2.IListStyleConfigsResponse);
+
+                    /** ListStyleConfigsResponse styleConfigs. */
+                    public styleConfigs: google.maps.mapmanagement.v2.IStyleConfig[];
+
+                    /** ListStyleConfigsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListStyleConfigsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListStyleConfigsResponse instance
+                     */
+                    public static create(properties?: google.maps.mapmanagement.v2.IListStyleConfigsResponse): google.maps.mapmanagement.v2.ListStyleConfigsResponse;
+
+                    /**
+                     * Encodes the specified ListStyleConfigsResponse message. Does not implicitly {@link google.maps.mapmanagement.v2.ListStyleConfigsResponse.verify|verify} messages.
+                     * @param message ListStyleConfigsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.maps.mapmanagement.v2.IListStyleConfigsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListStyleConfigsResponse message, length delimited. Does not implicitly {@link google.maps.mapmanagement.v2.ListStyleConfigsResponse.verify|verify} messages.
+                     * @param message ListStyleConfigsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.maps.mapmanagement.v2.IListStyleConfigsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListStyleConfigsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListStyleConfigsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.mapmanagement.v2.ListStyleConfigsResponse;
+
+                    /**
+                     * Decodes a ListStyleConfigsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListStyleConfigsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.mapmanagement.v2.ListStyleConfigsResponse;
+
+                    /**
+                     * Verifies a ListStyleConfigsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListStyleConfigsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListStyleConfigsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.maps.mapmanagement.v2.ListStyleConfigsResponse;
+
+                    /**
+                     * Creates a plain object from a ListStyleConfigsResponse message. Also converts values to other types if specified.
+                     * @param message ListStyleConfigsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.maps.mapmanagement.v2.ListStyleConfigsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListStyleConfigsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListStyleConfigsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateStyleConfigRequest. */
+                interface IUpdateStyleConfigRequest {
+
+                    /** UpdateStyleConfigRequest styleConfig */
+                    styleConfig?: (google.maps.mapmanagement.v2.IStyleConfig|null);
+
+                    /** UpdateStyleConfigRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateStyleConfigRequest. */
+                class UpdateStyleConfigRequest implements IUpdateStyleConfigRequest {
+
+                    /**
+                     * Constructs a new UpdateStyleConfigRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.maps.mapmanagement.v2.IUpdateStyleConfigRequest);
+
+                    /** UpdateStyleConfigRequest styleConfig. */
+                    public styleConfig?: (google.maps.mapmanagement.v2.IStyleConfig|null);
+
+                    /** UpdateStyleConfigRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateStyleConfigRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateStyleConfigRequest instance
+                     */
+                    public static create(properties?: google.maps.mapmanagement.v2.IUpdateStyleConfigRequest): google.maps.mapmanagement.v2.UpdateStyleConfigRequest;
+
+                    /**
+                     * Encodes the specified UpdateStyleConfigRequest message. Does not implicitly {@link google.maps.mapmanagement.v2.UpdateStyleConfigRequest.verify|verify} messages.
+                     * @param message UpdateStyleConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.maps.mapmanagement.v2.IUpdateStyleConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateStyleConfigRequest message, length delimited. Does not implicitly {@link google.maps.mapmanagement.v2.UpdateStyleConfigRequest.verify|verify} messages.
+                     * @param message UpdateStyleConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.maps.mapmanagement.v2.IUpdateStyleConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateStyleConfigRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateStyleConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.mapmanagement.v2.UpdateStyleConfigRequest;
+
+                    /**
+                     * Decodes an UpdateStyleConfigRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateStyleConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.mapmanagement.v2.UpdateStyleConfigRequest;
+
+                    /**
+                     * Verifies an UpdateStyleConfigRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateStyleConfigRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateStyleConfigRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.maps.mapmanagement.v2.UpdateStyleConfigRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateStyleConfigRequest message. Also converts values to other types if specified.
+                     * @param message UpdateStyleConfigRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.maps.mapmanagement.v2.UpdateStyleConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateStyleConfigRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateStyleConfigRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteStyleConfigRequest. */
+                interface IDeleteStyleConfigRequest {
+
+                    /** DeleteStyleConfigRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteStyleConfigRequest. */
+                class DeleteStyleConfigRequest implements IDeleteStyleConfigRequest {
+
+                    /**
+                     * Constructs a new DeleteStyleConfigRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.maps.mapmanagement.v2.IDeleteStyleConfigRequest);
+
+                    /** DeleteStyleConfigRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteStyleConfigRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteStyleConfigRequest instance
+                     */
+                    public static create(properties?: google.maps.mapmanagement.v2.IDeleteStyleConfigRequest): google.maps.mapmanagement.v2.DeleteStyleConfigRequest;
+
+                    /**
+                     * Encodes the specified DeleteStyleConfigRequest message. Does not implicitly {@link google.maps.mapmanagement.v2.DeleteStyleConfigRequest.verify|verify} messages.
+                     * @param message DeleteStyleConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.maps.mapmanagement.v2.IDeleteStyleConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteStyleConfigRequest message, length delimited. Does not implicitly {@link google.maps.mapmanagement.v2.DeleteStyleConfigRequest.verify|verify} messages.
+                     * @param message DeleteStyleConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.maps.mapmanagement.v2.IDeleteStyleConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteStyleConfigRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteStyleConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.mapmanagement.v2.DeleteStyleConfigRequest;
+
+                    /**
+                     * Decodes a DeleteStyleConfigRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteStyleConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.mapmanagement.v2.DeleteStyleConfigRequest;
+
+                    /**
+                     * Verifies a DeleteStyleConfigRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteStyleConfigRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteStyleConfigRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.maps.mapmanagement.v2.DeleteStyleConfigRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteStyleConfigRequest message. Also converts values to other types if specified.
+                     * @param message DeleteStyleConfigRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.maps.mapmanagement.v2.DeleteStyleConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteStyleConfigRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteStyleConfigRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a MapContextConfig. */
+                interface IMapContextConfig {
+
+                    /** MapContextConfig name */
+                    name?: (string|null);
+
+                    /** MapContextConfig mapConfig */
+                    mapConfig?: (string|null);
+
+                    /** MapContextConfig styleConfig */
+                    styleConfig?: (string|null);
+
+                    /** MapContextConfig dataset */
+                    dataset?: (string[]|null);
+
+                    /** MapContextConfig alias */
+                    alias?: (string|null);
+
+                    /** MapContextConfig mapVariants */
+                    mapVariants?: (google.maps.mapmanagement.v2.MapContextConfig.MapVariant[]|null);
+
+                    /** MapContextConfig createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** MapContextConfig updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a MapContextConfig. */
+                class MapContextConfig implements IMapContextConfig {
+
+                    /**
+                     * Constructs a new MapContextConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.maps.mapmanagement.v2.IMapContextConfig);
+
+                    /** MapContextConfig name. */
+                    public name: string;
+
+                    /** MapContextConfig mapConfig. */
+                    public mapConfig: string;
+
+                    /** MapContextConfig styleConfig. */
+                    public styleConfig: string;
+
+                    /** MapContextConfig dataset. */
+                    public dataset: string[];
+
+                    /** MapContextConfig alias. */
+                    public alias: string;
+
+                    /** MapContextConfig mapVariants. */
+                    public mapVariants: google.maps.mapmanagement.v2.MapContextConfig.MapVariant[];
+
+                    /** MapContextConfig createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** MapContextConfig updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new MapContextConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MapContextConfig instance
+                     */
+                    public static create(properties?: google.maps.mapmanagement.v2.IMapContextConfig): google.maps.mapmanagement.v2.MapContextConfig;
+
+                    /**
+                     * Encodes the specified MapContextConfig message. Does not implicitly {@link google.maps.mapmanagement.v2.MapContextConfig.verify|verify} messages.
+                     * @param message MapContextConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.maps.mapmanagement.v2.IMapContextConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MapContextConfig message, length delimited. Does not implicitly {@link google.maps.mapmanagement.v2.MapContextConfig.verify|verify} messages.
+                     * @param message MapContextConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.maps.mapmanagement.v2.IMapContextConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MapContextConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MapContextConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.mapmanagement.v2.MapContextConfig;
+
+                    /**
+                     * Decodes a MapContextConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MapContextConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.mapmanagement.v2.MapContextConfig;
+
+                    /**
+                     * Verifies a MapContextConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MapContextConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MapContextConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.maps.mapmanagement.v2.MapContextConfig;
+
+                    /**
+                     * Creates a plain object from a MapContextConfig message. Also converts values to other types if specified.
+                     * @param message MapContextConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.maps.mapmanagement.v2.MapContextConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MapContextConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for MapContextConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace MapContextConfig {
+
+                    /** MapVariant enum. */
+                    enum MapVariant {
+                        ROADMAP = 0,
+                        ROADMAP_DARK = 1,
+                        SATELLITE = 2,
+                        TERRAIN = 3,
+                        TERRAIN_DARK = 4,
+                        NAVIGATION = 5,
+                        NAVIGATION_LOW_LIGHT = 6,
+                        TRANSIT = 7,
+                        TRANSIT_DARK = 8,
+                        ABSTRACT3D = 9,
+                        PHOTOREALISTIC3D = 10
+                    }
+                }
+
+                /** Properties of a CreateMapContextConfigRequest. */
+                interface ICreateMapContextConfigRequest {
+
+                    /** CreateMapContextConfigRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateMapContextConfigRequest mapContextConfig */
+                    mapContextConfig?: (google.maps.mapmanagement.v2.IMapContextConfig|null);
+                }
+
+                /** Represents a CreateMapContextConfigRequest. */
+                class CreateMapContextConfigRequest implements ICreateMapContextConfigRequest {
+
+                    /**
+                     * Constructs a new CreateMapContextConfigRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.maps.mapmanagement.v2.ICreateMapContextConfigRequest);
+
+                    /** CreateMapContextConfigRequest parent. */
+                    public parent: string;
+
+                    /** CreateMapContextConfigRequest mapContextConfig. */
+                    public mapContextConfig?: (google.maps.mapmanagement.v2.IMapContextConfig|null);
+
+                    /**
+                     * Creates a new CreateMapContextConfigRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateMapContextConfigRequest instance
+                     */
+                    public static create(properties?: google.maps.mapmanagement.v2.ICreateMapContextConfigRequest): google.maps.mapmanagement.v2.CreateMapContextConfigRequest;
+
+                    /**
+                     * Encodes the specified CreateMapContextConfigRequest message. Does not implicitly {@link google.maps.mapmanagement.v2.CreateMapContextConfigRequest.verify|verify} messages.
+                     * @param message CreateMapContextConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.maps.mapmanagement.v2.ICreateMapContextConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateMapContextConfigRequest message, length delimited. Does not implicitly {@link google.maps.mapmanagement.v2.CreateMapContextConfigRequest.verify|verify} messages.
+                     * @param message CreateMapContextConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.maps.mapmanagement.v2.ICreateMapContextConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateMapContextConfigRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateMapContextConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.mapmanagement.v2.CreateMapContextConfigRequest;
+
+                    /**
+                     * Decodes a CreateMapContextConfigRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateMapContextConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.mapmanagement.v2.CreateMapContextConfigRequest;
+
+                    /**
+                     * Verifies a CreateMapContextConfigRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateMapContextConfigRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateMapContextConfigRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.maps.mapmanagement.v2.CreateMapContextConfigRequest;
+
+                    /**
+                     * Creates a plain object from a CreateMapContextConfigRequest message. Also converts values to other types if specified.
+                     * @param message CreateMapContextConfigRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.maps.mapmanagement.v2.CreateMapContextConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateMapContextConfigRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateMapContextConfigRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetMapContextConfigRequest. */
+                interface IGetMapContextConfigRequest {
+
+                    /** GetMapContextConfigRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetMapContextConfigRequest. */
+                class GetMapContextConfigRequest implements IGetMapContextConfigRequest {
+
+                    /**
+                     * Constructs a new GetMapContextConfigRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.maps.mapmanagement.v2.IGetMapContextConfigRequest);
+
+                    /** GetMapContextConfigRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetMapContextConfigRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetMapContextConfigRequest instance
+                     */
+                    public static create(properties?: google.maps.mapmanagement.v2.IGetMapContextConfigRequest): google.maps.mapmanagement.v2.GetMapContextConfigRequest;
+
+                    /**
+                     * Encodes the specified GetMapContextConfigRequest message. Does not implicitly {@link google.maps.mapmanagement.v2.GetMapContextConfigRequest.verify|verify} messages.
+                     * @param message GetMapContextConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.maps.mapmanagement.v2.IGetMapContextConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetMapContextConfigRequest message, length delimited. Does not implicitly {@link google.maps.mapmanagement.v2.GetMapContextConfigRequest.verify|verify} messages.
+                     * @param message GetMapContextConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.maps.mapmanagement.v2.IGetMapContextConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetMapContextConfigRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetMapContextConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.mapmanagement.v2.GetMapContextConfigRequest;
+
+                    /**
+                     * Decodes a GetMapContextConfigRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetMapContextConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.mapmanagement.v2.GetMapContextConfigRequest;
+
+                    /**
+                     * Verifies a GetMapContextConfigRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetMapContextConfigRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetMapContextConfigRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.maps.mapmanagement.v2.GetMapContextConfigRequest;
+
+                    /**
+                     * Creates a plain object from a GetMapContextConfigRequest message. Also converts values to other types if specified.
+                     * @param message GetMapContextConfigRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.maps.mapmanagement.v2.GetMapContextConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetMapContextConfigRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetMapContextConfigRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListMapContextConfigsRequest. */
+                interface IListMapContextConfigsRequest {
+
+                    /** ListMapContextConfigsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListMapContextConfigsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListMapContextConfigsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListMapContextConfigsRequest. */
+                class ListMapContextConfigsRequest implements IListMapContextConfigsRequest {
+
+                    /**
+                     * Constructs a new ListMapContextConfigsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.maps.mapmanagement.v2.IListMapContextConfigsRequest);
+
+                    /** ListMapContextConfigsRequest parent. */
+                    public parent: string;
+
+                    /** ListMapContextConfigsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListMapContextConfigsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListMapContextConfigsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListMapContextConfigsRequest instance
+                     */
+                    public static create(properties?: google.maps.mapmanagement.v2.IListMapContextConfigsRequest): google.maps.mapmanagement.v2.ListMapContextConfigsRequest;
+
+                    /**
+                     * Encodes the specified ListMapContextConfigsRequest message. Does not implicitly {@link google.maps.mapmanagement.v2.ListMapContextConfigsRequest.verify|verify} messages.
+                     * @param message ListMapContextConfigsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.maps.mapmanagement.v2.IListMapContextConfigsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListMapContextConfigsRequest message, length delimited. Does not implicitly {@link google.maps.mapmanagement.v2.ListMapContextConfigsRequest.verify|verify} messages.
+                     * @param message ListMapContextConfigsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.maps.mapmanagement.v2.IListMapContextConfigsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListMapContextConfigsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListMapContextConfigsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.mapmanagement.v2.ListMapContextConfigsRequest;
+
+                    /**
+                     * Decodes a ListMapContextConfigsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListMapContextConfigsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.mapmanagement.v2.ListMapContextConfigsRequest;
+
+                    /**
+                     * Verifies a ListMapContextConfigsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListMapContextConfigsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListMapContextConfigsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.maps.mapmanagement.v2.ListMapContextConfigsRequest;
+
+                    /**
+                     * Creates a plain object from a ListMapContextConfigsRequest message. Also converts values to other types if specified.
+                     * @param message ListMapContextConfigsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.maps.mapmanagement.v2.ListMapContextConfigsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListMapContextConfigsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListMapContextConfigsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListMapContextConfigsResponse. */
+                interface IListMapContextConfigsResponse {
+
+                    /** ListMapContextConfigsResponse mapContextConfigs */
+                    mapContextConfigs?: (google.maps.mapmanagement.v2.IMapContextConfig[]|null);
+
+                    /** ListMapContextConfigsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListMapContextConfigsResponse. */
+                class ListMapContextConfigsResponse implements IListMapContextConfigsResponse {
+
+                    /**
+                     * Constructs a new ListMapContextConfigsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.maps.mapmanagement.v2.IListMapContextConfigsResponse);
+
+                    /** ListMapContextConfigsResponse mapContextConfigs. */
+                    public mapContextConfigs: google.maps.mapmanagement.v2.IMapContextConfig[];
+
+                    /** ListMapContextConfigsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListMapContextConfigsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListMapContextConfigsResponse instance
+                     */
+                    public static create(properties?: google.maps.mapmanagement.v2.IListMapContextConfigsResponse): google.maps.mapmanagement.v2.ListMapContextConfigsResponse;
+
+                    /**
+                     * Encodes the specified ListMapContextConfigsResponse message. Does not implicitly {@link google.maps.mapmanagement.v2.ListMapContextConfigsResponse.verify|verify} messages.
+                     * @param message ListMapContextConfigsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.maps.mapmanagement.v2.IListMapContextConfigsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListMapContextConfigsResponse message, length delimited. Does not implicitly {@link google.maps.mapmanagement.v2.ListMapContextConfigsResponse.verify|verify} messages.
+                     * @param message ListMapContextConfigsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.maps.mapmanagement.v2.IListMapContextConfigsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListMapContextConfigsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListMapContextConfigsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.mapmanagement.v2.ListMapContextConfigsResponse;
+
+                    /**
+                     * Decodes a ListMapContextConfigsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListMapContextConfigsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.mapmanagement.v2.ListMapContextConfigsResponse;
+
+                    /**
+                     * Verifies a ListMapContextConfigsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListMapContextConfigsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListMapContextConfigsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.maps.mapmanagement.v2.ListMapContextConfigsResponse;
+
+                    /**
+                     * Creates a plain object from a ListMapContextConfigsResponse message. Also converts values to other types if specified.
+                     * @param message ListMapContextConfigsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.maps.mapmanagement.v2.ListMapContextConfigsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListMapContextConfigsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListMapContextConfigsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateMapContextConfigRequest. */
+                interface IUpdateMapContextConfigRequest {
+
+                    /** UpdateMapContextConfigRequest mapContextConfig */
+                    mapContextConfig?: (google.maps.mapmanagement.v2.IMapContextConfig|null);
+
+                    /** UpdateMapContextConfigRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateMapContextConfigRequest. */
+                class UpdateMapContextConfigRequest implements IUpdateMapContextConfigRequest {
+
+                    /**
+                     * Constructs a new UpdateMapContextConfigRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.maps.mapmanagement.v2.IUpdateMapContextConfigRequest);
+
+                    /** UpdateMapContextConfigRequest mapContextConfig. */
+                    public mapContextConfig?: (google.maps.mapmanagement.v2.IMapContextConfig|null);
+
+                    /** UpdateMapContextConfigRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateMapContextConfigRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateMapContextConfigRequest instance
+                     */
+                    public static create(properties?: google.maps.mapmanagement.v2.IUpdateMapContextConfigRequest): google.maps.mapmanagement.v2.UpdateMapContextConfigRequest;
+
+                    /**
+                     * Encodes the specified UpdateMapContextConfigRequest message. Does not implicitly {@link google.maps.mapmanagement.v2.UpdateMapContextConfigRequest.verify|verify} messages.
+                     * @param message UpdateMapContextConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.maps.mapmanagement.v2.IUpdateMapContextConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateMapContextConfigRequest message, length delimited. Does not implicitly {@link google.maps.mapmanagement.v2.UpdateMapContextConfigRequest.verify|verify} messages.
+                     * @param message UpdateMapContextConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.maps.mapmanagement.v2.IUpdateMapContextConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateMapContextConfigRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateMapContextConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.mapmanagement.v2.UpdateMapContextConfigRequest;
+
+                    /**
+                     * Decodes an UpdateMapContextConfigRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateMapContextConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.mapmanagement.v2.UpdateMapContextConfigRequest;
+
+                    /**
+                     * Verifies an UpdateMapContextConfigRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateMapContextConfigRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateMapContextConfigRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.maps.mapmanagement.v2.UpdateMapContextConfigRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateMapContextConfigRequest message. Also converts values to other types if specified.
+                     * @param message UpdateMapContextConfigRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.maps.mapmanagement.v2.UpdateMapContextConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateMapContextConfigRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateMapContextConfigRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteMapContextConfigRequest. */
+                interface IDeleteMapContextConfigRequest {
+
+                    /** DeleteMapContextConfigRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteMapContextConfigRequest. */
+                class DeleteMapContextConfigRequest implements IDeleteMapContextConfigRequest {
+
+                    /**
+                     * Constructs a new DeleteMapContextConfigRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.maps.mapmanagement.v2.IDeleteMapContextConfigRequest);
+
+                    /** DeleteMapContextConfigRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteMapContextConfigRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteMapContextConfigRequest instance
+                     */
+                    public static create(properties?: google.maps.mapmanagement.v2.IDeleteMapContextConfigRequest): google.maps.mapmanagement.v2.DeleteMapContextConfigRequest;
+
+                    /**
+                     * Encodes the specified DeleteMapContextConfigRequest message. Does not implicitly {@link google.maps.mapmanagement.v2.DeleteMapContextConfigRequest.verify|verify} messages.
+                     * @param message DeleteMapContextConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.maps.mapmanagement.v2.IDeleteMapContextConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteMapContextConfigRequest message, length delimited. Does not implicitly {@link google.maps.mapmanagement.v2.DeleteMapContextConfigRequest.verify|verify} messages.
+                     * @param message DeleteMapContextConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.maps.mapmanagement.v2.IDeleteMapContextConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteMapContextConfigRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteMapContextConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.mapmanagement.v2.DeleteMapContextConfigRequest;
+
+                    /**
+                     * Decodes a DeleteMapContextConfigRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteMapContextConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.mapmanagement.v2.DeleteMapContextConfigRequest;
+
+                    /**
+                     * Verifies a DeleteMapContextConfigRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteMapContextConfigRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteMapContextConfigRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.maps.mapmanagement.v2.DeleteMapContextConfigRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteMapContextConfigRequest message. Also converts values to other types if specified.
+                     * @param message DeleteMapContextConfigRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.maps.mapmanagement.v2.DeleteMapContextConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteMapContextConfigRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteMapContextConfigRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+            }
+
             /** Namespace v2beta. */
             namespace v2beta {
 
@@ -10293,6 +13051,335 @@ export namespace google {
 
             /**
              * Gets the default type url for FieldMask
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a Struct. */
+        interface IStruct {
+
+            /** Struct fields */
+            fields?: ({ [k: string]: google.protobuf.IValue }|null);
+        }
+
+        /** Represents a Struct. */
+        class Struct implements IStruct {
+
+            /**
+             * Constructs a new Struct.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IStruct);
+
+            /** Struct fields. */
+            public fields: { [k: string]: google.protobuf.IValue };
+
+            /**
+             * Creates a new Struct instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Struct instance
+             */
+            public static create(properties?: google.protobuf.IStruct): google.protobuf.Struct;
+
+            /**
+             * Encodes the specified Struct message. Does not implicitly {@link google.protobuf.Struct.verify|verify} messages.
+             * @param message Struct message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IStruct, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Struct message, length delimited. Does not implicitly {@link google.protobuf.Struct.verify|verify} messages.
+             * @param message Struct message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IStruct, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Struct message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Struct
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Struct;
+
+            /**
+             * Decodes a Struct message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Struct
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Struct;
+
+            /**
+             * Verifies a Struct message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Struct message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Struct
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.Struct;
+
+            /**
+             * Creates a plain object from a Struct message. Also converts values to other types if specified.
+             * @param message Struct
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.Struct, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Struct to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Struct
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a Value. */
+        interface IValue {
+
+            /** Value nullValue */
+            nullValue?: (google.protobuf.NullValue|keyof typeof google.protobuf.NullValue|null);
+
+            /** Value numberValue */
+            numberValue?: (number|null);
+
+            /** Value stringValue */
+            stringValue?: (string|null);
+
+            /** Value boolValue */
+            boolValue?: (boolean|null);
+
+            /** Value structValue */
+            structValue?: (google.protobuf.IStruct|null);
+
+            /** Value listValue */
+            listValue?: (google.protobuf.IListValue|null);
+        }
+
+        /** Represents a Value. */
+        class Value implements IValue {
+
+            /**
+             * Constructs a new Value.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IValue);
+
+            /** Value nullValue. */
+            public nullValue?: (google.protobuf.NullValue|keyof typeof google.protobuf.NullValue|null);
+
+            /** Value numberValue. */
+            public numberValue?: (number|null);
+
+            /** Value stringValue. */
+            public stringValue?: (string|null);
+
+            /** Value boolValue. */
+            public boolValue?: (boolean|null);
+
+            /** Value structValue. */
+            public structValue?: (google.protobuf.IStruct|null);
+
+            /** Value listValue. */
+            public listValue?: (google.protobuf.IListValue|null);
+
+            /** Value kind. */
+            public kind?: ("nullValue"|"numberValue"|"stringValue"|"boolValue"|"structValue"|"listValue");
+
+            /**
+             * Creates a new Value instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Value instance
+             */
+            public static create(properties?: google.protobuf.IValue): google.protobuf.Value;
+
+            /**
+             * Encodes the specified Value message. Does not implicitly {@link google.protobuf.Value.verify|verify} messages.
+             * @param message Value message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Value message, length delimited. Does not implicitly {@link google.protobuf.Value.verify|verify} messages.
+             * @param message Value message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Value message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Value
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Value;
+
+            /**
+             * Decodes a Value message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Value
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Value;
+
+            /**
+             * Verifies a Value message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Value message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Value
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.Value;
+
+            /**
+             * Creates a plain object from a Value message. Also converts values to other types if specified.
+             * @param message Value
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.Value, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Value to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Value
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** NullValue enum. */
+        enum NullValue {
+            NULL_VALUE = 0
+        }
+
+        /** Properties of a ListValue. */
+        interface IListValue {
+
+            /** ListValue values */
+            values?: (google.protobuf.IValue[]|null);
+        }
+
+        /** Represents a ListValue. */
+        class ListValue implements IListValue {
+
+            /**
+             * Constructs a new ListValue.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IListValue);
+
+            /** ListValue values. */
+            public values: google.protobuf.IValue[];
+
+            /**
+             * Creates a new ListValue instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ListValue instance
+             */
+            public static create(properties?: google.protobuf.IListValue): google.protobuf.ListValue;
+
+            /**
+             * Encodes the specified ListValue message. Does not implicitly {@link google.protobuf.ListValue.verify|verify} messages.
+             * @param message ListValue message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IListValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ListValue message, length delimited. Does not implicitly {@link google.protobuf.ListValue.verify|verify} messages.
+             * @param message ListValue message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IListValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a ListValue message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ListValue
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.ListValue;
+
+            /**
+             * Decodes a ListValue message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ListValue
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.ListValue;
+
+            /**
+             * Verifies a ListValue message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ListValue message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ListValue
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.ListValue;
+
+            /**
+             * Creates a plain object from a ListValue message. Also converts values to other types if specified.
+             * @param message ListValue
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.ListValue, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ListValue to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for ListValue
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */

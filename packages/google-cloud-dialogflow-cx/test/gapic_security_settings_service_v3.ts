@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as securitysettingsserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, operationsProtos, LocationProtos } from 'google-gax';
+import {protobuf, operationsProtos, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -251,7 +251,7 @@ describe('v3.SecuritySettingsServiceClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client =
         new securitysettingsserviceModule.v3.SecuritySettingsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.securitySettingsServiceStub, undefined);
@@ -259,13 +259,13 @@ describe('v3.SecuritySettingsServiceClient', () => {
       assert(client.securitySettingsServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new securitysettingsserviceModule.v3.SecuritySettingsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.securitySettingsServiceStub);
@@ -274,15 +274,15 @@ describe('v3.SecuritySettingsServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new securitysettingsserviceModule.v3.SecuritySettingsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.securitySettingsServiceStub, undefined);
@@ -291,7 +291,7 @@ describe('v3.SecuritySettingsServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -300,7 +300,7 @@ describe('v3.SecuritySettingsServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new securitysettingsserviceModule.v3.SecuritySettingsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -313,7 +313,7 @@ describe('v3.SecuritySettingsServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new securitysettingsserviceModule.v3.SecuritySettingsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon
@@ -337,7 +337,7 @@ describe('v3.SecuritySettingsServiceClient', () => {
     it('invokes createSecuritySettings without error', async () => {
       const client =
         new securitysettingsserviceModule.v3.SecuritySettingsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -370,7 +370,7 @@ describe('v3.SecuritySettingsServiceClient', () => {
     it('invokes createSecuritySettings without error using callback', async () => {
       const client =
         new securitysettingsserviceModule.v3.SecuritySettingsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -418,7 +418,7 @@ describe('v3.SecuritySettingsServiceClient', () => {
     it('invokes createSecuritySettings with error', async () => {
       const client =
         new securitysettingsserviceModule.v3.SecuritySettingsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -453,7 +453,7 @@ describe('v3.SecuritySettingsServiceClient', () => {
     it('invokes createSecuritySettings with closed client', async () => {
       const client =
         new securitysettingsserviceModule.v3.SecuritySettingsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -466,7 +466,7 @@ describe('v3.SecuritySettingsServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -480,7 +480,7 @@ describe('v3.SecuritySettingsServiceClient', () => {
     it('invokes getSecuritySettings without error', async () => {
       const client =
         new securitysettingsserviceModule.v3.SecuritySettingsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -513,7 +513,7 @@ describe('v3.SecuritySettingsServiceClient', () => {
     it('invokes getSecuritySettings without error using callback', async () => {
       const client =
         new securitysettingsserviceModule.v3.SecuritySettingsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -561,7 +561,7 @@ describe('v3.SecuritySettingsServiceClient', () => {
     it('invokes getSecuritySettings with error', async () => {
       const client =
         new securitysettingsserviceModule.v3.SecuritySettingsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -593,7 +593,7 @@ describe('v3.SecuritySettingsServiceClient', () => {
     it('invokes getSecuritySettings with closed client', async () => {
       const client =
         new securitysettingsserviceModule.v3.SecuritySettingsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -606,7 +606,7 @@ describe('v3.SecuritySettingsServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getSecuritySettings(request), expectedError);
@@ -617,7 +617,7 @@ describe('v3.SecuritySettingsServiceClient', () => {
     it('invokes updateSecuritySettings without error', async () => {
       const client =
         new securitysettingsserviceModule.v3.SecuritySettingsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -651,7 +651,7 @@ describe('v3.SecuritySettingsServiceClient', () => {
     it('invokes updateSecuritySettings without error using callback', async () => {
       const client =
         new securitysettingsserviceModule.v3.SecuritySettingsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -700,7 +700,7 @@ describe('v3.SecuritySettingsServiceClient', () => {
     it('invokes updateSecuritySettings with error', async () => {
       const client =
         new securitysettingsserviceModule.v3.SecuritySettingsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -736,7 +736,7 @@ describe('v3.SecuritySettingsServiceClient', () => {
     it('invokes updateSecuritySettings with closed client', async () => {
       const client =
         new securitysettingsserviceModule.v3.SecuritySettingsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -750,7 +750,7 @@ describe('v3.SecuritySettingsServiceClient', () => {
       );
       request.securitySettings.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -764,7 +764,7 @@ describe('v3.SecuritySettingsServiceClient', () => {
     it('invokes deleteSecuritySettings without error', async () => {
       const client =
         new securitysettingsserviceModule.v3.SecuritySettingsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -797,7 +797,7 @@ describe('v3.SecuritySettingsServiceClient', () => {
     it('invokes deleteSecuritySettings without error using callback', async () => {
       const client =
         new securitysettingsserviceModule.v3.SecuritySettingsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -845,7 +845,7 @@ describe('v3.SecuritySettingsServiceClient', () => {
     it('invokes deleteSecuritySettings with error', async () => {
       const client =
         new securitysettingsserviceModule.v3.SecuritySettingsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -880,7 +880,7 @@ describe('v3.SecuritySettingsServiceClient', () => {
     it('invokes deleteSecuritySettings with closed client', async () => {
       const client =
         new securitysettingsserviceModule.v3.SecuritySettingsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -893,7 +893,7 @@ describe('v3.SecuritySettingsServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -907,7 +907,7 @@ describe('v3.SecuritySettingsServiceClient', () => {
     it('invokes listSecuritySettings without error', async () => {
       const client =
         new securitysettingsserviceModule.v3.SecuritySettingsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -948,7 +948,7 @@ describe('v3.SecuritySettingsServiceClient', () => {
     it('invokes listSecuritySettings without error using callback', async () => {
       const client =
         new securitysettingsserviceModule.v3.SecuritySettingsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -980,8 +980,7 @@ describe('v3.SecuritySettingsServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.dialogflow.cx.v3.ISecuritySettings[]
-              | null,
+              protos.google.cloud.dialogflow.cx.v3.ISecuritySettings[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -1006,7 +1005,7 @@ describe('v3.SecuritySettingsServiceClient', () => {
     it('invokes listSecuritySettings with error', async () => {
       const client =
         new securitysettingsserviceModule.v3.SecuritySettingsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1038,7 +1037,7 @@ describe('v3.SecuritySettingsServiceClient', () => {
     it('invokes listSecuritySettingsStream without error', async () => {
       const client =
         new securitysettingsserviceModule.v3.SecuritySettingsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1091,16 +1090,16 @@ describe('v3.SecuritySettingsServiceClient', () => {
       assert(
         (client.descriptors.page.listSecuritySettings.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listSecuritySettingsStream with error', async () => {
       const client =
         new securitysettingsserviceModule.v3.SecuritySettingsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1142,16 +1141,16 @@ describe('v3.SecuritySettingsServiceClient', () => {
       assert(
         (client.descriptors.page.listSecuritySettings.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listSecuritySettings without error', async () => {
       const client =
         new securitysettingsserviceModule.v3.SecuritySettingsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1193,16 +1192,16 @@ describe('v3.SecuritySettingsServiceClient', () => {
       assert(
         (client.descriptors.page.listSecuritySettings.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listSecuritySettings with error', async () => {
       const client =
         new securitysettingsserviceModule.v3.SecuritySettingsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1235,9 +1234,9 @@ describe('v3.SecuritySettingsServiceClient', () => {
       assert(
         (client.descriptors.page.listSecuritySettings.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1245,7 +1244,7 @@ describe('v3.SecuritySettingsServiceClient', () => {
     it('invokes getLocation without error', async () => {
       const client =
         new securitysettingsserviceModule.v3.SecuritySettingsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1276,7 +1275,7 @@ describe('v3.SecuritySettingsServiceClient', () => {
     it('invokes getLocation without error using callback', async () => {
       const client =
         new securitysettingsserviceModule.v3.SecuritySettingsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1321,7 +1320,7 @@ describe('v3.SecuritySettingsServiceClient', () => {
     it('invokes getLocation with error', async () => {
       const client =
         new securitysettingsserviceModule.v3.SecuritySettingsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1357,7 +1356,7 @@ describe('v3.SecuritySettingsServiceClient', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client =
         new securitysettingsserviceModule.v3.SecuritySettingsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1406,7 +1405,7 @@ describe('v3.SecuritySettingsServiceClient', () => {
     it('uses async iteration with listLocations with error', async () => {
       const client =
         new securitysettingsserviceModule.v3.SecuritySettingsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1448,7 +1447,7 @@ describe('v3.SecuritySettingsServiceClient', () => {
     it('invokes getOperation without error', async () => {
       const client =
         new securitysettingsserviceModule.v3.SecuritySettingsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1470,7 +1469,7 @@ describe('v3.SecuritySettingsServiceClient', () => {
     it('invokes getOperation without error using callback', async () => {
       const client =
         new securitysettingsserviceModule.v3.SecuritySettingsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -1498,7 +1497,7 @@ describe('v3.SecuritySettingsServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1509,7 +1508,7 @@ describe('v3.SecuritySettingsServiceClient', () => {
     it('invokes getOperation with error', async () => {
       const client =
         new securitysettingsserviceModule.v3.SecuritySettingsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -1534,7 +1533,7 @@ describe('v3.SecuritySettingsServiceClient', () => {
     it('invokes cancelOperation without error', async () => {
       const client =
         new securitysettingsserviceModule.v3.SecuritySettingsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1557,7 +1556,7 @@ describe('v3.SecuritySettingsServiceClient', () => {
     it('invokes cancelOperation without error using callback', async () => {
       const client =
         new securitysettingsserviceModule.v3.SecuritySettingsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -1585,7 +1584,7 @@ describe('v3.SecuritySettingsServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1596,7 +1595,7 @@ describe('v3.SecuritySettingsServiceClient', () => {
     it('invokes cancelOperation with error', async () => {
       const client =
         new securitysettingsserviceModule.v3.SecuritySettingsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -1621,7 +1620,7 @@ describe('v3.SecuritySettingsServiceClient', () => {
     it('invokes deleteOperation without error', async () => {
       const client =
         new securitysettingsserviceModule.v3.SecuritySettingsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1644,7 +1643,7 @@ describe('v3.SecuritySettingsServiceClient', () => {
     it('invokes deleteOperation without error using callback', async () => {
       const client =
         new securitysettingsserviceModule.v3.SecuritySettingsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -1672,7 +1671,7 @@ describe('v3.SecuritySettingsServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1683,7 +1682,7 @@ describe('v3.SecuritySettingsServiceClient', () => {
     it('invokes deleteOperation with error', async () => {
       const client =
         new securitysettingsserviceModule.v3.SecuritySettingsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -1708,7 +1707,7 @@ describe('v3.SecuritySettingsServiceClient', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client =
         new securitysettingsserviceModule.v3.SecuritySettingsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -1744,7 +1743,7 @@ describe('v3.SecuritySettingsServiceClient', () => {
     it('uses async iteration with listOperations with error', async () => {
       const client =
         new securitysettingsserviceModule.v3.SecuritySettingsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1781,7 +1780,7 @@ describe('v3.SecuritySettingsServiceClient', () => {
       };
       const client =
         new securitysettingsserviceModule.v3.SecuritySettingsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1846,7 +1845,7 @@ describe('v3.SecuritySettingsServiceClient', () => {
       };
       const client =
         new securitysettingsserviceModule.v3.SecuritySettingsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1926,7 +1925,7 @@ describe('v3.SecuritySettingsServiceClient', () => {
       };
       const client =
         new securitysettingsserviceModule.v3.SecuritySettingsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2006,7 +2005,7 @@ describe('v3.SecuritySettingsServiceClient', () => {
       };
       const client =
         new securitysettingsserviceModule.v3.SecuritySettingsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2084,7 +2083,7 @@ describe('v3.SecuritySettingsServiceClient', () => {
       };
       const client =
         new securitysettingsserviceModule.v3.SecuritySettingsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2197,7 +2196,7 @@ describe('v3.SecuritySettingsServiceClient', () => {
       };
       const client =
         new securitysettingsserviceModule.v3.SecuritySettingsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2285,7 +2284,7 @@ describe('v3.SecuritySettingsServiceClient', () => {
       };
       const client =
         new securitysettingsserviceModule.v3.SecuritySettingsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2362,7 +2361,7 @@ describe('v3.SecuritySettingsServiceClient', () => {
       };
       const client =
         new securitysettingsserviceModule.v3.SecuritySettingsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2440,7 +2439,7 @@ describe('v3.SecuritySettingsServiceClient', () => {
       };
       const client =
         new securitysettingsserviceModule.v3.SecuritySettingsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2529,7 +2528,7 @@ describe('v3.SecuritySettingsServiceClient', () => {
       };
       const client =
         new securitysettingsserviceModule.v3.SecuritySettingsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2617,7 +2616,7 @@ describe('v3.SecuritySettingsServiceClient', () => {
       };
       const client =
         new securitysettingsserviceModule.v3.SecuritySettingsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2694,7 +2693,7 @@ describe('v3.SecuritySettingsServiceClient', () => {
       };
       const client =
         new securitysettingsserviceModule.v3.SecuritySettingsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2788,7 +2787,7 @@ describe('v3.SecuritySettingsServiceClient', () => {
       };
       const client =
         new securitysettingsserviceModule.v3.SecuritySettingsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2865,7 +2864,7 @@ describe('v3.SecuritySettingsServiceClient', () => {
       };
       const client =
         new securitysettingsserviceModule.v3.SecuritySettingsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2940,7 +2939,7 @@ describe('v3.SecuritySettingsServiceClient', () => {
       };
       const client =
         new securitysettingsserviceModule.v3.SecuritySettingsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2991,7 +2990,7 @@ describe('v3.SecuritySettingsServiceClient', () => {
       };
       const client =
         new securitysettingsserviceModule.v3.SecuritySettingsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3079,7 +3078,7 @@ describe('v3.SecuritySettingsServiceClient', () => {
       };
       const client =
         new securitysettingsserviceModule.v3.SecuritySettingsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3165,7 +3164,7 @@ describe('v3.SecuritySettingsServiceClient', () => {
       };
       const client =
         new securitysettingsserviceModule.v3.SecuritySettingsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3253,7 +3252,7 @@ describe('v3.SecuritySettingsServiceClient', () => {
       };
       const client =
         new securitysettingsserviceModule.v3.SecuritySettingsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3331,7 +3330,7 @@ describe('v3.SecuritySettingsServiceClient', () => {
       };
       const client =
         new securitysettingsserviceModule.v3.SecuritySettingsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3416,7 +3415,7 @@ describe('v3.SecuritySettingsServiceClient', () => {
       };
       const client =
         new securitysettingsserviceModule.v3.SecuritySettingsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3461,7 +3460,7 @@ describe('v3.SecuritySettingsServiceClient', () => {
       };
       const client =
         new securitysettingsserviceModule.v3.SecuritySettingsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3607,7 +3606,7 @@ describe('v3.SecuritySettingsServiceClient', () => {
       };
       const client =
         new securitysettingsserviceModule.v3.SecuritySettingsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3733,7 +3732,7 @@ describe('v3.SecuritySettingsServiceClient', () => {
       };
       const client =
         new securitysettingsserviceModule.v3.SecuritySettingsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3859,7 +3858,7 @@ describe('v3.SecuritySettingsServiceClient', () => {
       };
       const client =
         new securitysettingsserviceModule.v3.SecuritySettingsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3965,7 +3964,7 @@ describe('v3.SecuritySettingsServiceClient', () => {
       };
       const client =
         new securitysettingsserviceModule.v3.SecuritySettingsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4049,7 +4048,7 @@ describe('v3.SecuritySettingsServiceClient', () => {
       };
       const client =
         new securitysettingsserviceModule.v3.SecuritySettingsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4129,7 +4128,7 @@ describe('v3.SecuritySettingsServiceClient', () => {
       };
       const client =
         new securitysettingsserviceModule.v3.SecuritySettingsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4199,7 +4198,7 @@ describe('v3.SecuritySettingsServiceClient', () => {
       };
       const client =
         new securitysettingsserviceModule.v3.SecuritySettingsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4277,7 +4276,7 @@ describe('v3.SecuritySettingsServiceClient', () => {
       };
       const client =
         new securitysettingsserviceModule.v3.SecuritySettingsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4365,7 +4364,7 @@ describe('v3.SecuritySettingsServiceClient', () => {
       };
       const client =
         new securitysettingsserviceModule.v3.SecuritySettingsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4443,7 +4442,7 @@ describe('v3.SecuritySettingsServiceClient', () => {
       };
       const client =
         new securitysettingsserviceModule.v3.SecuritySettingsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4532,7 +4531,7 @@ describe('v3.SecuritySettingsServiceClient', () => {
       };
       const client =
         new securitysettingsserviceModule.v3.SecuritySettingsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4620,7 +4619,7 @@ describe('v3.SecuritySettingsServiceClient', () => {
       };
       const client =
         new securitysettingsserviceModule.v3.SecuritySettingsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();

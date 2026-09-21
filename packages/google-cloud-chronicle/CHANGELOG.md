@@ -1,5 +1,26 @@
 # Changelog
 
+## [0.10.0](https://github.com/googleapis/google-cloud-node/compare/chronicle-v0.9.0...chronicle-v0.10.0) (2026-09-15)
+
+
+### Features
+
+* Update API sources and regenerate ([#9293](https://github.com/googleapis/google-cloud-node/issues/9293)) ([07ae774](https://github.com/googleapis/google-cloud-node/commit/07ae774a8e52185a3598c878513377e7a019f127))
+
+## [0.9.0](https://github.com/googleapis/google-cloud-node/compare/chronicle-v0.8.0...chronicle-v0.9.0) (2026-09-08)
+
+
+### Features
+
+* Upgrade librarian gapic-generator-typescript to v5.2.0 ([c249594](https://github.com/googleapis/google-cloud-node/commit/c249594c6ef41e4b36f1ef8869341a4c98c092b0))
+
+## [0.8.0](https://github.com/googleapis/google-cloud-node/compare/chronicle-v0.7.0...chronicle-v0.8.0) (2026-08-28)
+
+
+### Features
+
+* **chronicle:** Bundle backstory UDM protos into @google-cloud/chronicle ([#9189](https://github.com/googleapis/google-cloud-node/issues/9189)) ([a0cbc51](https://github.com/googleapis/google-cloud-node/commit/a0cbc510dd45db2232a909a0b8c225771cfbcf18))
+
 ## [0.7.0](https://github.com/googleapis/google-cloud-node/compare/chronicle-v0.6.0...chronicle-v0.7.0) (2026-08-04)
 
 

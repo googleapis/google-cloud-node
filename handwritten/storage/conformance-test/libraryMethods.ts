@@ -797,7 +797,7 @@ export async function createBucket(options: ConformanceTestOptions) {
   const bucket = options.storage!.bucket('test-creating-bucket');
   const [exists] = await bucket.exists();
   if (exists) {
-    bucket.delete();
+    await bucket.delete();
   }
   await options.storage!.createBucket('test-creating-bucket');
 }

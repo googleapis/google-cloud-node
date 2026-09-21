@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as tripserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -237,7 +237,7 @@ describe('v1.TripServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new tripserviceModule.v1.TripServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.tripServiceStub, undefined);
@@ -245,12 +245,12 @@ describe('v1.TripServiceClient', () => {
       assert(client.tripServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new tripserviceModule.v1.TripServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.tripServiceStub);
@@ -259,14 +259,14 @@ describe('v1.TripServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new tripserviceModule.v1.TripServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.tripServiceStub, undefined);
@@ -275,7 +275,7 @@ describe('v1.TripServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -283,7 +283,7 @@ describe('v1.TripServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new tripserviceModule.v1.TripServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -295,7 +295,7 @@ describe('v1.TripServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new tripserviceModule.v1.TripServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -318,7 +318,7 @@ describe('v1.TripServiceClient', () => {
   describe('createTrip', () => {
     it('invokes createTrip without error', async () => {
       const client = new tripserviceModule.v1.TripServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -346,7 +346,7 @@ describe('v1.TripServiceClient', () => {
 
     it('invokes createTrip without error using callback', async () => {
       const client = new tripserviceModule.v1.TripServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -390,7 +390,7 @@ describe('v1.TripServiceClient', () => {
 
     it('invokes createTrip with error', async () => {
       const client = new tripserviceModule.v1.TripServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -418,7 +418,7 @@ describe('v1.TripServiceClient', () => {
 
     it('invokes createTrip with closed client', async () => {
       const client = new tripserviceModule.v1.TripServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -428,7 +428,7 @@ describe('v1.TripServiceClient', () => {
       // path template: {provider_id=providers/*}
       request.parent = 'providers/value';
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createTrip(request), expectedError);
@@ -438,7 +438,7 @@ describe('v1.TripServiceClient', () => {
   describe('getTrip', () => {
     it('invokes getTrip without error', async () => {
       const client = new tripserviceModule.v1.TripServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -466,7 +466,7 @@ describe('v1.TripServiceClient', () => {
 
     it('invokes getTrip without error using callback', async () => {
       const client = new tripserviceModule.v1.TripServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -510,7 +510,7 @@ describe('v1.TripServiceClient', () => {
 
     it('invokes getTrip with error', async () => {
       const client = new tripserviceModule.v1.TripServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -535,7 +535,7 @@ describe('v1.TripServiceClient', () => {
 
     it('invokes getTrip with closed client', async () => {
       const client = new tripserviceModule.v1.TripServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -545,7 +545,7 @@ describe('v1.TripServiceClient', () => {
       // path template: {provider_id=providers/*}
       request.name = 'providers/value';
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getTrip(request), expectedError);
@@ -555,7 +555,7 @@ describe('v1.TripServiceClient', () => {
   describe('deleteTrip', () => {
     it('invokes deleteTrip without error', async () => {
       const client = new tripserviceModule.v1.TripServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -583,7 +583,7 @@ describe('v1.TripServiceClient', () => {
 
     it('invokes deleteTrip without error using callback', async () => {
       const client = new tripserviceModule.v1.TripServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -627,7 +627,7 @@ describe('v1.TripServiceClient', () => {
 
     it('invokes deleteTrip with error', async () => {
       const client = new tripserviceModule.v1.TripServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -655,7 +655,7 @@ describe('v1.TripServiceClient', () => {
 
     it('invokes deleteTrip with closed client', async () => {
       const client = new tripserviceModule.v1.TripServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -665,7 +665,7 @@ describe('v1.TripServiceClient', () => {
       // path template: {provider_id=providers/*}
       request.name = 'providers/value';
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteTrip(request), expectedError);
@@ -675,7 +675,7 @@ describe('v1.TripServiceClient', () => {
   describe('reportBillableTrip', () => {
     it('invokes reportBillableTrip without error', async () => {
       const client = new tripserviceModule.v1.TripServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -704,7 +704,7 @@ describe('v1.TripServiceClient', () => {
 
     it('invokes reportBillableTrip without error using callback', async () => {
       const client = new tripserviceModule.v1.TripServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -748,7 +748,7 @@ describe('v1.TripServiceClient', () => {
 
     it('invokes reportBillableTrip with error', async () => {
       const client = new tripserviceModule.v1.TripServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -776,7 +776,7 @@ describe('v1.TripServiceClient', () => {
 
     it('invokes reportBillableTrip with closed client', async () => {
       const client = new tripserviceModule.v1.TripServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -786,7 +786,7 @@ describe('v1.TripServiceClient', () => {
       // path template: {provider_id=providers/*}
       request.name = 'providers/value';
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.reportBillableTrip(request), expectedError);
@@ -796,7 +796,7 @@ describe('v1.TripServiceClient', () => {
   describe('updateTrip', () => {
     it('invokes updateTrip without error', async () => {
       const client = new tripserviceModule.v1.TripServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -824,7 +824,7 @@ describe('v1.TripServiceClient', () => {
 
     it('invokes updateTrip without error using callback', async () => {
       const client = new tripserviceModule.v1.TripServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -868,7 +868,7 @@ describe('v1.TripServiceClient', () => {
 
     it('invokes updateTrip with error', async () => {
       const client = new tripserviceModule.v1.TripServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -896,7 +896,7 @@ describe('v1.TripServiceClient', () => {
 
     it('invokes updateTrip with closed client', async () => {
       const client = new tripserviceModule.v1.TripServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -906,7 +906,7 @@ describe('v1.TripServiceClient', () => {
       // path template: {provider_id=providers/*}
       request.name = 'providers/value';
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateTrip(request), expectedError);
@@ -916,7 +916,7 @@ describe('v1.TripServiceClient', () => {
   describe('searchTrips', () => {
     it('invokes searchTrips without error', async () => {
       const client = new tripserviceModule.v1.TripServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -946,7 +946,7 @@ describe('v1.TripServiceClient', () => {
 
     it('invokes searchTrips without error using callback', async () => {
       const client = new tripserviceModule.v1.TripServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -992,7 +992,7 @@ describe('v1.TripServiceClient', () => {
 
     it('invokes searchTrips with error', async () => {
       const client = new tripserviceModule.v1.TripServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1020,7 +1020,7 @@ describe('v1.TripServiceClient', () => {
 
     it('invokes searchTripsStream without error', async () => {
       const client = new tripserviceModule.v1.TripServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1060,15 +1060,15 @@ describe('v1.TripServiceClient', () => {
       assert(
         (client.descriptors.page.searchTrips.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes searchTripsStream with error', async () => {
       const client = new tripserviceModule.v1.TripServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1105,15 +1105,15 @@ describe('v1.TripServiceClient', () => {
       assert(
         (client.descriptors.page.searchTrips.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with searchTrips without error', async () => {
       const client = new tripserviceModule.v1.TripServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1145,15 +1145,15 @@ describe('v1.TripServiceClient', () => {
       assert(
         (client.descriptors.page.searchTrips.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with searchTrips with error', async () => {
       const client = new tripserviceModule.v1.TripServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1184,9 +1184,9 @@ describe('v1.TripServiceClient', () => {
       assert(
         (client.descriptors.page.searchTrips.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1199,7 +1199,7 @@ describe('v1.TripServiceClient', () => {
         trip: 'tripValue',
       };
       const client = new tripserviceModule.v1.TripServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1248,7 +1248,7 @@ describe('v1.TripServiceClient', () => {
         vehicle: 'vehicleValue',
       };
       const client = new tripserviceModule.v1.TripServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

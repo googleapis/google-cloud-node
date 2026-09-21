@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as parametermanagerModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, LocationProtos } from 'google-gax';
+import {protobuf, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -242,7 +242,7 @@ describe('v1.ParameterManagerClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.parameterManagerStub, undefined);
@@ -250,12 +250,12 @@ describe('v1.ParameterManagerClient', () => {
       assert(client.parameterManagerStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.parameterManagerStub);
@@ -264,14 +264,14 @@ describe('v1.ParameterManagerClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.parameterManagerStub, undefined);
@@ -280,7 +280,7 @@ describe('v1.ParameterManagerClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -288,7 +288,7 @@ describe('v1.ParameterManagerClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -300,7 +300,7 @@ describe('v1.ParameterManagerClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -323,7 +323,7 @@ describe('v1.ParameterManagerClient', () => {
   describe('getParameter', () => {
     it('invokes getParameter without error', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -354,7 +354,7 @@ describe('v1.ParameterManagerClient', () => {
 
     it('invokes getParameter without error using callback', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -401,7 +401,7 @@ describe('v1.ParameterManagerClient', () => {
 
     it('invokes getParameter with error', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -432,7 +432,7 @@ describe('v1.ParameterManagerClient', () => {
 
     it('invokes getParameter with closed client', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -445,7 +445,7 @@ describe('v1.ParameterManagerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getParameter(request), expectedError);
@@ -455,7 +455,7 @@ describe('v1.ParameterManagerClient', () => {
   describe('createParameter', () => {
     it('invokes createParameter without error', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -486,7 +486,7 @@ describe('v1.ParameterManagerClient', () => {
 
     it('invokes createParameter without error using callback', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -533,7 +533,7 @@ describe('v1.ParameterManagerClient', () => {
 
     it('invokes createParameter with error', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -564,7 +564,7 @@ describe('v1.ParameterManagerClient', () => {
 
     it('invokes createParameter with closed client', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -577,7 +577,7 @@ describe('v1.ParameterManagerClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createParameter(request), expectedError);
@@ -587,7 +587,7 @@ describe('v1.ParameterManagerClient', () => {
   describe('updateParameter', () => {
     it('invokes updateParameter without error', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -619,7 +619,7 @@ describe('v1.ParameterManagerClient', () => {
 
     it('invokes updateParameter without error using callback', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -667,7 +667,7 @@ describe('v1.ParameterManagerClient', () => {
 
     it('invokes updateParameter with error', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -699,7 +699,7 @@ describe('v1.ParameterManagerClient', () => {
 
     it('invokes updateParameter with closed client', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -713,7 +713,7 @@ describe('v1.ParameterManagerClient', () => {
       );
       request.parameter.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateParameter(request), expectedError);
@@ -723,7 +723,7 @@ describe('v1.ParameterManagerClient', () => {
   describe('deleteParameter', () => {
     it('invokes deleteParameter without error', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -754,7 +754,7 @@ describe('v1.ParameterManagerClient', () => {
 
     it('invokes deleteParameter without error using callback', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -801,7 +801,7 @@ describe('v1.ParameterManagerClient', () => {
 
     it('invokes deleteParameter with error', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -832,7 +832,7 @@ describe('v1.ParameterManagerClient', () => {
 
     it('invokes deleteParameter with closed client', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -845,7 +845,7 @@ describe('v1.ParameterManagerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteParameter(request), expectedError);
@@ -855,7 +855,7 @@ describe('v1.ParameterManagerClient', () => {
   describe('getParameterVersion', () => {
     it('invokes getParameterVersion without error', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -887,7 +887,7 @@ describe('v1.ParameterManagerClient', () => {
 
     it('invokes getParameterVersion without error using callback', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -934,7 +934,7 @@ describe('v1.ParameterManagerClient', () => {
 
     it('invokes getParameterVersion with error', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -965,7 +965,7 @@ describe('v1.ParameterManagerClient', () => {
 
     it('invokes getParameterVersion with closed client', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -978,7 +978,7 @@ describe('v1.ParameterManagerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getParameterVersion(request), expectedError);
@@ -988,7 +988,7 @@ describe('v1.ParameterManagerClient', () => {
   describe('renderParameterVersion', () => {
     it('invokes renderParameterVersion without error', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1020,7 +1020,7 @@ describe('v1.ParameterManagerClient', () => {
 
     it('invokes renderParameterVersion without error using callback', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1067,7 +1067,7 @@ describe('v1.ParameterManagerClient', () => {
 
     it('invokes renderParameterVersion with error', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1101,7 +1101,7 @@ describe('v1.ParameterManagerClient', () => {
 
     it('invokes renderParameterVersion with closed client', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1114,7 +1114,7 @@ describe('v1.ParameterManagerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1127,7 +1127,7 @@ describe('v1.ParameterManagerClient', () => {
   describe('createParameterVersion', () => {
     it('invokes createParameterVersion without error', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1159,7 +1159,7 @@ describe('v1.ParameterManagerClient', () => {
 
     it('invokes createParameterVersion without error using callback', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1206,7 +1206,7 @@ describe('v1.ParameterManagerClient', () => {
 
     it('invokes createParameterVersion with error', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1240,7 +1240,7 @@ describe('v1.ParameterManagerClient', () => {
 
     it('invokes createParameterVersion with closed client', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1253,7 +1253,7 @@ describe('v1.ParameterManagerClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1266,7 +1266,7 @@ describe('v1.ParameterManagerClient', () => {
   describe('updateParameterVersion', () => {
     it('invokes updateParameterVersion without error', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1299,7 +1299,7 @@ describe('v1.ParameterManagerClient', () => {
 
     it('invokes updateParameterVersion without error using callback', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1347,7 +1347,7 @@ describe('v1.ParameterManagerClient', () => {
 
     it('invokes updateParameterVersion with error', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1382,7 +1382,7 @@ describe('v1.ParameterManagerClient', () => {
 
     it('invokes updateParameterVersion with closed client', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1396,7 +1396,7 @@ describe('v1.ParameterManagerClient', () => {
       );
       request.parameterVersion.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1409,7 +1409,7 @@ describe('v1.ParameterManagerClient', () => {
   describe('deleteParameterVersion', () => {
     it('invokes deleteParameterVersion without error', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1441,7 +1441,7 @@ describe('v1.ParameterManagerClient', () => {
 
     it('invokes deleteParameterVersion without error using callback', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1488,7 +1488,7 @@ describe('v1.ParameterManagerClient', () => {
 
     it('invokes deleteParameterVersion with error', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1522,7 +1522,7 @@ describe('v1.ParameterManagerClient', () => {
 
     it('invokes deleteParameterVersion with closed client', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1535,7 +1535,7 @@ describe('v1.ParameterManagerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1545,10 +1545,1235 @@ describe('v1.ParameterManagerClient', () => {
     });
   });
 
+  describe('getTemplate', () => {
+    it('invokes getTemplate without error', async () => {
+      const client = new parametermanagerModule.v1.ParameterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.parametermanager.v1.GetTemplateRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.parametermanager.v1.GetTemplateRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.parametermanager.v1.Template(),
+      );
+      client.innerApiCalls.getTemplate = stubSimpleCall(expectedResponse);
+      const [response] = await client.getTemplate(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getTemplate without error using callback', async () => {
+      const client = new parametermanagerModule.v1.ParameterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.parametermanager.v1.GetTemplateRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.parametermanager.v1.GetTemplateRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.parametermanager.v1.Template(),
+      );
+      client.innerApiCalls.getTemplate =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getTemplate(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.parametermanager.v1.ITemplate | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getTemplate with error', async () => {
+      const client = new parametermanagerModule.v1.ParameterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.parametermanager.v1.GetTemplateRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.parametermanager.v1.GetTemplateRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getTemplate = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.getTemplate(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getTemplate with closed client', async () => {
+      const client = new parametermanagerModule.v1.ParameterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.parametermanager.v1.GetTemplateRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.parametermanager.v1.GetTemplateRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(client.getTemplate(request), expectedError);
+    });
+  });
+
+  describe('createTemplate', () => {
+    it('invokes createTemplate without error', async () => {
+      const client = new parametermanagerModule.v1.ParameterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.parametermanager.v1.CreateTemplateRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.parametermanager.v1.CreateTemplateRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.parametermanager.v1.Template(),
+      );
+      client.innerApiCalls.createTemplate = stubSimpleCall(expectedResponse);
+      const [response] = await client.createTemplate(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createTemplate without error using callback', async () => {
+      const client = new parametermanagerModule.v1.ParameterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.parametermanager.v1.CreateTemplateRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.parametermanager.v1.CreateTemplateRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.parametermanager.v1.Template(),
+      );
+      client.innerApiCalls.createTemplate =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createTemplate(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.parametermanager.v1.ITemplate | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createTemplate with error', async () => {
+      const client = new parametermanagerModule.v1.ParameterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.parametermanager.v1.CreateTemplateRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.parametermanager.v1.CreateTemplateRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createTemplate = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.createTemplate(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createTemplate with closed client', async () => {
+      const client = new parametermanagerModule.v1.ParameterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.parametermanager.v1.CreateTemplateRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.parametermanager.v1.CreateTemplateRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(client.createTemplate(request), expectedError);
+    });
+  });
+
+  describe('updateTemplate', () => {
+    it('invokes updateTemplate without error', async () => {
+      const client = new parametermanagerModule.v1.ParameterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.parametermanager.v1.UpdateTemplateRequest(),
+      );
+      request.template ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.parametermanager.v1.UpdateTemplateRequest',
+        ['template', 'name'],
+      );
+      request.template.name = defaultValue1;
+      const expectedHeaderRequestParams = `template.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.parametermanager.v1.Template(),
+      );
+      client.innerApiCalls.updateTemplate = stubSimpleCall(expectedResponse);
+      const [response] = await client.updateTemplate(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateTemplate without error using callback', async () => {
+      const client = new parametermanagerModule.v1.ParameterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.parametermanager.v1.UpdateTemplateRequest(),
+      );
+      request.template ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.parametermanager.v1.UpdateTemplateRequest',
+        ['template', 'name'],
+      );
+      request.template.name = defaultValue1;
+      const expectedHeaderRequestParams = `template.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.parametermanager.v1.Template(),
+      );
+      client.innerApiCalls.updateTemplate =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateTemplate(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.parametermanager.v1.ITemplate | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateTemplate with error', async () => {
+      const client = new parametermanagerModule.v1.ParameterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.parametermanager.v1.UpdateTemplateRequest(),
+      );
+      request.template ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.parametermanager.v1.UpdateTemplateRequest',
+        ['template', 'name'],
+      );
+      request.template.name = defaultValue1;
+      const expectedHeaderRequestParams = `template.name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateTemplate = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.updateTemplate(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateTemplate with closed client', async () => {
+      const client = new parametermanagerModule.v1.ParameterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.parametermanager.v1.UpdateTemplateRequest(),
+      );
+      request.template ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.parametermanager.v1.UpdateTemplateRequest',
+        ['template', 'name'],
+      );
+      request.template.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(client.updateTemplate(request), expectedError);
+    });
+  });
+
+  describe('deleteTemplate', () => {
+    it('invokes deleteTemplate without error', async () => {
+      const client = new parametermanagerModule.v1.ParameterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.parametermanager.v1.DeleteTemplateRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.parametermanager.v1.DeleteTemplateRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty(),
+      );
+      client.innerApiCalls.deleteTemplate = stubSimpleCall(expectedResponse);
+      const [response] = await client.deleteTemplate(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteTemplate without error using callback', async () => {
+      const client = new parametermanagerModule.v1.ParameterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.parametermanager.v1.DeleteTemplateRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.parametermanager.v1.DeleteTemplateRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty(),
+      );
+      client.innerApiCalls.deleteTemplate =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteTemplate(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.protobuf.IEmpty | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteTemplate with error', async () => {
+      const client = new parametermanagerModule.v1.ParameterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.parametermanager.v1.DeleteTemplateRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.parametermanager.v1.DeleteTemplateRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteTemplate = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.deleteTemplate(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteTemplate with closed client', async () => {
+      const client = new parametermanagerModule.v1.ParameterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.parametermanager.v1.DeleteTemplateRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.parametermanager.v1.DeleteTemplateRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(client.deleteTemplate(request), expectedError);
+    });
+  });
+
+  describe('getTemplateVersion', () => {
+    it('invokes getTemplateVersion without error', async () => {
+      const client = new parametermanagerModule.v1.ParameterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.parametermanager.v1.GetTemplateVersionRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.parametermanager.v1.GetTemplateVersionRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.parametermanager.v1.TemplateVersion(),
+      );
+      client.innerApiCalls.getTemplateVersion =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.getTemplateVersion(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getTemplateVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getTemplateVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getTemplateVersion without error using callback', async () => {
+      const client = new parametermanagerModule.v1.ParameterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.parametermanager.v1.GetTemplateVersionRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.parametermanager.v1.GetTemplateVersionRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.parametermanager.v1.TemplateVersion(),
+      );
+      client.innerApiCalls.getTemplateVersion =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getTemplateVersion(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.parametermanager.v1.ITemplateVersion | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getTemplateVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getTemplateVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getTemplateVersion with error', async () => {
+      const client = new parametermanagerModule.v1.ParameterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.parametermanager.v1.GetTemplateVersionRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.parametermanager.v1.GetTemplateVersionRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getTemplateVersion = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.getTemplateVersion(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getTemplateVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getTemplateVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getTemplateVersion with closed client', async () => {
+      const client = new parametermanagerModule.v1.ParameterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.parametermanager.v1.GetTemplateVersionRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.parametermanager.v1.GetTemplateVersionRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(client.getTemplateVersion(request), expectedError);
+    });
+  });
+
+  describe('createTemplateVersion', () => {
+    it('invokes createTemplateVersion without error', async () => {
+      const client = new parametermanagerModule.v1.ParameterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.parametermanager.v1.CreateTemplateVersionRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.parametermanager.v1.CreateTemplateVersionRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.parametermanager.v1.TemplateVersion(),
+      );
+      client.innerApiCalls.createTemplateVersion =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.createTemplateVersion(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createTemplateVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createTemplateVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createTemplateVersion without error using callback', async () => {
+      const client = new parametermanagerModule.v1.ParameterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.parametermanager.v1.CreateTemplateVersionRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.parametermanager.v1.CreateTemplateVersionRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.parametermanager.v1.TemplateVersion(),
+      );
+      client.innerApiCalls.createTemplateVersion =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createTemplateVersion(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.parametermanager.v1.ITemplateVersion | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createTemplateVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createTemplateVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createTemplateVersion with error', async () => {
+      const client = new parametermanagerModule.v1.ParameterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.parametermanager.v1.CreateTemplateVersionRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.parametermanager.v1.CreateTemplateVersionRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createTemplateVersion = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.createTemplateVersion(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.createTemplateVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createTemplateVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createTemplateVersion with closed client', async () => {
+      const client = new parametermanagerModule.v1.ParameterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.parametermanager.v1.CreateTemplateVersionRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.parametermanager.v1.CreateTemplateVersionRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(
+        client.createTemplateVersion(request),
+        expectedError,
+      );
+    });
+  });
+
+  describe('updateTemplateVersion', () => {
+    it('invokes updateTemplateVersion without error', async () => {
+      const client = new parametermanagerModule.v1.ParameterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.parametermanager.v1.UpdateTemplateVersionRequest(),
+      );
+      request.templateVersion ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.parametermanager.v1.UpdateTemplateVersionRequest',
+        ['templateVersion', 'name'],
+      );
+      request.templateVersion.name = defaultValue1;
+      const expectedHeaderRequestParams = `template_version.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.parametermanager.v1.TemplateVersion(),
+      );
+      client.innerApiCalls.updateTemplateVersion =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.updateTemplateVersion(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateTemplateVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateTemplateVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateTemplateVersion without error using callback', async () => {
+      const client = new parametermanagerModule.v1.ParameterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.parametermanager.v1.UpdateTemplateVersionRequest(),
+      );
+      request.templateVersion ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.parametermanager.v1.UpdateTemplateVersionRequest',
+        ['templateVersion', 'name'],
+      );
+      request.templateVersion.name = defaultValue1;
+      const expectedHeaderRequestParams = `template_version.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.parametermanager.v1.TemplateVersion(),
+      );
+      client.innerApiCalls.updateTemplateVersion =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateTemplateVersion(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.parametermanager.v1.ITemplateVersion | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateTemplateVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateTemplateVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateTemplateVersion with error', async () => {
+      const client = new parametermanagerModule.v1.ParameterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.parametermanager.v1.UpdateTemplateVersionRequest(),
+      );
+      request.templateVersion ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.parametermanager.v1.UpdateTemplateVersionRequest',
+        ['templateVersion', 'name'],
+      );
+      request.templateVersion.name = defaultValue1;
+      const expectedHeaderRequestParams = `template_version.name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateTemplateVersion = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.updateTemplateVersion(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.updateTemplateVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateTemplateVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateTemplateVersion with closed client', async () => {
+      const client = new parametermanagerModule.v1.ParameterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.parametermanager.v1.UpdateTemplateVersionRequest(),
+      );
+      request.templateVersion ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.parametermanager.v1.UpdateTemplateVersionRequest',
+        ['templateVersion', 'name'],
+      );
+      request.templateVersion.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(
+        client.updateTemplateVersion(request),
+        expectedError,
+      );
+    });
+  });
+
+  describe('deleteTemplateVersion', () => {
+    it('invokes deleteTemplateVersion without error', async () => {
+      const client = new parametermanagerModule.v1.ParameterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.parametermanager.v1.DeleteTemplateVersionRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.parametermanager.v1.DeleteTemplateVersionRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty(),
+      );
+      client.innerApiCalls.deleteTemplateVersion =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.deleteTemplateVersion(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteTemplateVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteTemplateVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteTemplateVersion without error using callback', async () => {
+      const client = new parametermanagerModule.v1.ParameterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.parametermanager.v1.DeleteTemplateVersionRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.parametermanager.v1.DeleteTemplateVersionRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty(),
+      );
+      client.innerApiCalls.deleteTemplateVersion =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteTemplateVersion(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.protobuf.IEmpty | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteTemplateVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteTemplateVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteTemplateVersion with error', async () => {
+      const client = new parametermanagerModule.v1.ParameterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.parametermanager.v1.DeleteTemplateVersionRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.parametermanager.v1.DeleteTemplateVersionRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteTemplateVersion = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.deleteTemplateVersion(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.deleteTemplateVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteTemplateVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteTemplateVersion with closed client', async () => {
+      const client = new parametermanagerModule.v1.ParameterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.parametermanager.v1.DeleteTemplateVersionRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.parametermanager.v1.DeleteTemplateVersionRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(
+        client.deleteTemplateVersion(request),
+        expectedError,
+      );
+    });
+  });
+
+  describe('renderTemplateVersion', () => {
+    it('invokes renderTemplateVersion without error', async () => {
+      const client = new parametermanagerModule.v1.ParameterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.parametermanager.v1.RenderTemplateVersionRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.parametermanager.v1.RenderTemplateVersionRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.parametermanager.v1.RenderTemplateVersionResponse(),
+      );
+      client.innerApiCalls.renderTemplateVersion =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.renderTemplateVersion(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.renderTemplateVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.renderTemplateVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes renderTemplateVersion without error using callback', async () => {
+      const client = new parametermanagerModule.v1.ParameterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.parametermanager.v1.RenderTemplateVersionRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.parametermanager.v1.RenderTemplateVersionRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.parametermanager.v1.RenderTemplateVersionResponse(),
+      );
+      client.innerApiCalls.renderTemplateVersion =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.renderTemplateVersion(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.parametermanager.v1.IRenderTemplateVersionResponse | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.renderTemplateVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.renderTemplateVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes renderTemplateVersion with error', async () => {
+      const client = new parametermanagerModule.v1.ParameterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.parametermanager.v1.RenderTemplateVersionRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.parametermanager.v1.RenderTemplateVersionRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.renderTemplateVersion = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.renderTemplateVersion(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.renderTemplateVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.renderTemplateVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes renderTemplateVersion with closed client', async () => {
+      const client = new parametermanagerModule.v1.ParameterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.parametermanager.v1.RenderTemplateVersionRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.parametermanager.v1.RenderTemplateVersionRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(
+        client.renderTemplateVersion(request),
+        expectedError,
+      );
+    });
+  });
+
   describe('listParameters', () => {
     it('invokes listParameters without error', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1587,7 +2812,7 @@ describe('v1.ParameterManagerClient', () => {
 
     it('invokes listParameters without error using callback', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1619,8 +2844,7 @@ describe('v1.ParameterManagerClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.parametermanager.v1.IParameter[]
-              | null,
+              protos.google.cloud.parametermanager.v1.IParameter[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -1644,7 +2868,7 @@ describe('v1.ParameterManagerClient', () => {
 
     it('invokes listParameters with error', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1675,7 +2899,7 @@ describe('v1.ParameterManagerClient', () => {
 
     it('invokes listParametersStream without error', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1728,15 +2952,15 @@ describe('v1.ParameterManagerClient', () => {
       assert(
         (client.descriptors.page.listParameters.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listParametersStream with error', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1778,15 +3002,15 @@ describe('v1.ParameterManagerClient', () => {
       assert(
         (client.descriptors.page.listParameters.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listParameters without error', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1828,15 +3052,15 @@ describe('v1.ParameterManagerClient', () => {
       assert(
         (client.descriptors.page.listParameters.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listParameters with error', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1869,9 +3093,9 @@ describe('v1.ParameterManagerClient', () => {
       assert(
         (client.descriptors.page.listParameters.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1879,7 +3103,7 @@ describe('v1.ParameterManagerClient', () => {
   describe('listParameterVersions', () => {
     it('invokes listParameterVersions without error', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1919,7 +3143,7 @@ describe('v1.ParameterManagerClient', () => {
 
     it('invokes listParameterVersions without error using callback', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1976,7 +3200,7 @@ describe('v1.ParameterManagerClient', () => {
 
     it('invokes listParameterVersions with error', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2010,7 +3234,7 @@ describe('v1.ParameterManagerClient', () => {
 
     it('invokes listParameterVersionsStream without error', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2079,7 +3303,7 @@ describe('v1.ParameterManagerClient', () => {
 
     it('invokes listParameterVersionsStream with error', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2137,7 +3361,7 @@ describe('v1.ParameterManagerClient', () => {
 
     it('uses async iteration with listParameterVersions without error', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2191,7 +3415,7 @@ describe('v1.ParameterManagerClient', () => {
 
     it('uses async iteration with listParameterVersions with error', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2234,10 +3458,673 @@ describe('v1.ParameterManagerClient', () => {
       );
     });
   });
+
+  describe('listTemplates', () => {
+    it('invokes listTemplates without error', async () => {
+      const client = new parametermanagerModule.v1.ParameterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.parametermanager.v1.ListTemplatesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.parametermanager.v1.ListTemplatesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.parametermanager.v1.Template(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.parametermanager.v1.Template(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.parametermanager.v1.Template(),
+        ),
+      ];
+      client.innerApiCalls.listTemplates = stubSimpleCall(expectedResponse);
+      const [response] = await client.listTemplates(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listTemplates as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listTemplates as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listTemplates without error using callback', async () => {
+      const client = new parametermanagerModule.v1.ParameterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.parametermanager.v1.ListTemplatesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.parametermanager.v1.ListTemplatesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.parametermanager.v1.Template(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.parametermanager.v1.Template(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.parametermanager.v1.Template(),
+        ),
+      ];
+      client.innerApiCalls.listTemplates =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listTemplates(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.parametermanager.v1.ITemplate[] | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listTemplates as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listTemplates as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listTemplates with error', async () => {
+      const client = new parametermanagerModule.v1.ParameterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.parametermanager.v1.ListTemplatesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.parametermanager.v1.ListTemplatesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listTemplates = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.listTemplates(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listTemplates as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listTemplates as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listTemplatesStream without error', async () => {
+      const client = new parametermanagerModule.v1.ParameterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.parametermanager.v1.ListTemplatesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.parametermanager.v1.ListTemplatesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.parametermanager.v1.Template(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.parametermanager.v1.Template(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.parametermanager.v1.Template(),
+        ),
+      ];
+      client.descriptors.page.listTemplates.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listTemplatesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.parametermanager.v1.Template[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.parametermanager.v1.Template) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listTemplates.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listTemplates, request),
+      );
+      assert(
+        (client.descriptors.page.listTemplates.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('invokes listTemplatesStream with error', async () => {
+      const client = new parametermanagerModule.v1.ParameterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.parametermanager.v1.ListTemplatesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.parametermanager.v1.ListTemplatesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listTemplates.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listTemplatesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.parametermanager.v1.Template[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.parametermanager.v1.Template) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listTemplates.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listTemplates, request),
+      );
+      assert(
+        (client.descriptors.page.listTemplates.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with listTemplates without error', async () => {
+      const client = new parametermanagerModule.v1.ParameterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.parametermanager.v1.ListTemplatesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.parametermanager.v1.ListTemplatesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.parametermanager.v1.Template(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.parametermanager.v1.Template(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.parametermanager.v1.Template(),
+        ),
+      ];
+      client.descriptors.page.listTemplates.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.parametermanager.v1.ITemplate[] = [];
+      const iterable = client.listTemplatesAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listTemplates.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (client.descriptors.page.listTemplates.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with listTemplates with error', async () => {
+      const client = new parametermanagerModule.v1.ParameterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.parametermanager.v1.ListTemplatesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.parametermanager.v1.ListTemplatesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listTemplates.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listTemplatesAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.parametermanager.v1.ITemplate[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listTemplates.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (client.descriptors.page.listTemplates.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+  });
+
+  describe('listTemplateVersions', () => {
+    it('invokes listTemplateVersions without error', async () => {
+      const client = new parametermanagerModule.v1.ParameterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.parametermanager.v1.ListTemplateVersionsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.parametermanager.v1.ListTemplateVersionsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.parametermanager.v1.TemplateVersion(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.parametermanager.v1.TemplateVersion(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.parametermanager.v1.TemplateVersion(),
+        ),
+      ];
+      client.innerApiCalls.listTemplateVersions =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listTemplateVersions(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listTemplateVersions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listTemplateVersions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listTemplateVersions without error using callback', async () => {
+      const client = new parametermanagerModule.v1.ParameterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.parametermanager.v1.ListTemplateVersionsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.parametermanager.v1.ListTemplateVersionsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.parametermanager.v1.TemplateVersion(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.parametermanager.v1.TemplateVersion(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.parametermanager.v1.TemplateVersion(),
+        ),
+      ];
+      client.innerApiCalls.listTemplateVersions =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listTemplateVersions(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              protos.google.cloud.parametermanager.v1.ITemplateVersion[] | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listTemplateVersions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listTemplateVersions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listTemplateVersions with error', async () => {
+      const client = new parametermanagerModule.v1.ParameterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.parametermanager.v1.ListTemplateVersionsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.parametermanager.v1.ListTemplateVersionsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listTemplateVersions = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.listTemplateVersions(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listTemplateVersions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listTemplateVersions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listTemplateVersionsStream without error', async () => {
+      const client = new parametermanagerModule.v1.ParameterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.parametermanager.v1.ListTemplateVersionsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.parametermanager.v1.ListTemplateVersionsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.parametermanager.v1.TemplateVersion(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.parametermanager.v1.TemplateVersion(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.parametermanager.v1.TemplateVersion(),
+        ),
+      ];
+      client.descriptors.page.listTemplateVersions.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listTemplateVersionsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.parametermanager.v1.TemplateVersion[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.parametermanager.v1.TemplateVersion,
+          ) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listTemplateVersions.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listTemplateVersions, request),
+      );
+      assert(
+        (client.descriptors.page.listTemplateVersions.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('invokes listTemplateVersionsStream with error', async () => {
+      const client = new parametermanagerModule.v1.ParameterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.parametermanager.v1.ListTemplateVersionsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.parametermanager.v1.ListTemplateVersionsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listTemplateVersions.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listTemplateVersionsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.parametermanager.v1.TemplateVersion[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.parametermanager.v1.TemplateVersion,
+          ) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listTemplateVersions.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listTemplateVersions, request),
+      );
+      assert(
+        (client.descriptors.page.listTemplateVersions.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with listTemplateVersions without error', async () => {
+      const client = new parametermanagerModule.v1.ParameterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.parametermanager.v1.ListTemplateVersionsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.parametermanager.v1.ListTemplateVersionsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.parametermanager.v1.TemplateVersion(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.parametermanager.v1.TemplateVersion(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.parametermanager.v1.TemplateVersion(),
+        ),
+      ];
+      client.descriptors.page.listTemplateVersions.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.parametermanager.v1.ITemplateVersion[] =
+        [];
+      const iterable = client.listTemplateVersionsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listTemplateVersions.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (client.descriptors.page.listTemplateVersions.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with listTemplateVersions with error', async () => {
+      const client = new parametermanagerModule.v1.ParameterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.parametermanager.v1.ListTemplateVersionsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.parametermanager.v1.ListTemplateVersionsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listTemplateVersions.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listTemplateVersionsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.parametermanager.v1.ITemplateVersion[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listTemplateVersions.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (client.descriptors.page.listTemplateVersions.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+  });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2267,7 +4154,7 @@ describe('v1.ParameterManagerClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2311,7 +4198,7 @@ describe('v1.ParameterManagerClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2346,7 +4233,7 @@ describe('v1.ParameterManagerClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2394,7 +4281,7 @@ describe('v1.ParameterManagerClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2443,7 +4330,7 @@ describe('v1.ParameterManagerClient', () => {
         crypto_key: 'cryptoKeyValue',
       };
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2517,7 +4404,7 @@ describe('v1.ParameterManagerClient', () => {
         location: 'locationValue',
       };
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2567,7 +4454,7 @@ describe('v1.ParameterManagerClient', () => {
         parameter: 'parameterValue',
       };
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2632,7 +4519,7 @@ describe('v1.ParameterManagerClient', () => {
         parameter_version: 'parameterVersionValue',
       };
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2709,7 +4596,7 @@ describe('v1.ParameterManagerClient', () => {
         project: 'projectValue',
       };
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2735,6 +4622,147 @@ describe('v1.ParameterManagerClient', () => {
         assert.strictEqual(result, 'projectValue');
         assert(
           (client.pathTemplates.projectPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('template', async () => {
+      const fakePath = '/rendered/path/template';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        template: 'templateValue',
+      };
+      const client = new parametermanagerModule.v1.ParameterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.templatePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.templatePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('templatePath', () => {
+        const result = client.templatePath(
+          'projectValue',
+          'locationValue',
+          'templateValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.templatePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromTemplateName', () => {
+        const result = client.matchProjectFromTemplateName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.templatePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromTemplateName', () => {
+        const result = client.matchLocationFromTemplateName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.templatePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchTemplateFromTemplateName', () => {
+        const result = client.matchTemplateFromTemplateName(fakePath);
+        assert.strictEqual(result, 'templateValue');
+        assert(
+          (client.pathTemplates.templatePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('templateVersion', async () => {
+      const fakePath = '/rendered/path/templateVersion';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        template: 'templateValue',
+        template_version: 'templateVersionValue',
+      };
+      const client = new parametermanagerModule.v1.ParameterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.templateVersionPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.templateVersionPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('templateVersionPath', () => {
+        const result = client.templateVersionPath(
+          'projectValue',
+          'locationValue',
+          'templateValue',
+          'templateVersionValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.templateVersionPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromTemplateVersionName', () => {
+        const result = client.matchProjectFromTemplateVersionName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.templateVersionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromTemplateVersionName', () => {
+        const result = client.matchLocationFromTemplateVersionName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.templateVersionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchTemplateFromTemplateVersionName', () => {
+        const result = client.matchTemplateFromTemplateVersionName(fakePath);
+        assert.strictEqual(result, 'templateValue');
+        assert(
+          (client.pathTemplates.templateVersionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchTemplateVersionFromTemplateVersionName', () => {
+        const result =
+          client.matchTemplateVersionFromTemplateVersionName(fakePath);
+        assert.strictEqual(result, 'templateVersionValue');
+        assert(
+          (client.pathTemplates.templateVersionPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath),
         );

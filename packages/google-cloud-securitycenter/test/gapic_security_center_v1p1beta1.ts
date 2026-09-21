@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as securitycenterModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, LROperation, operationsProtos } from 'google-gax';
+import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -149,9 +149,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -276,7 +276,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.securityCenterStub, undefined);
@@ -284,12 +284,12 @@ describe('v1p1beta1.SecurityCenterClient', () => {
       assert(client.securityCenterStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.securityCenterStub);
@@ -298,14 +298,14 @@ describe('v1p1beta1.SecurityCenterClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.securityCenterStub, undefined);
@@ -314,7 +314,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -322,7 +322,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -334,7 +334,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -357,7 +357,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
   describe('createSource', () => {
     it('invokes createSource without error', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -388,7 +388,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
 
     it('invokes createSource without error using callback', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -435,7 +435,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
 
     it('invokes createSource with error', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -466,7 +466,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
 
     it('invokes createSource with closed client', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -479,7 +479,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createSource(request), expectedError);
@@ -489,7 +489,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
   describe('createFinding', () => {
     it('invokes createFinding without error', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -520,7 +520,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
 
     it('invokes createFinding without error using callback', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -567,7 +567,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
 
     it('invokes createFinding with error', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -598,7 +598,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
 
     it('invokes createFinding with closed client', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -611,7 +611,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createFinding(request), expectedError);
@@ -621,7 +621,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
   describe('createNotificationConfig', () => {
     it('invokes createNotificationConfig without error', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -653,7 +653,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
 
     it('invokes createNotificationConfig without error using callback', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -700,7 +700,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
 
     it('invokes createNotificationConfig with error', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -734,7 +734,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
 
     it('invokes createNotificationConfig with closed client', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -747,7 +747,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -760,7 +760,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
   describe('deleteNotificationConfig', () => {
     it('invokes deleteNotificationConfig without error', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -792,7 +792,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
 
     it('invokes deleteNotificationConfig without error using callback', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -839,7 +839,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
 
     it('invokes deleteNotificationConfig with error', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -873,7 +873,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
 
     it('invokes deleteNotificationConfig with closed client', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -886,7 +886,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -899,7 +899,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -930,7 +930,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
 
     it('invokes getIamPolicy without error using callback', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -977,7 +977,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
 
     it('invokes getIamPolicy with error', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1008,7 +1008,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
 
     it('invokes getIamPolicy with closed client', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1021,7 +1021,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getIamPolicy(request), expectedError);
@@ -1031,7 +1031,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
   describe('getNotificationConfig', () => {
     it('invokes getNotificationConfig without error', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1063,7 +1063,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
 
     it('invokes getNotificationConfig without error using callback', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1110,7 +1110,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
 
     it('invokes getNotificationConfig with error', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1144,7 +1144,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
 
     it('invokes getNotificationConfig with closed client', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1157,7 +1157,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1170,7 +1170,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
   describe('getOrganizationSettings', () => {
     it('invokes getOrganizationSettings without error', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1202,7 +1202,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
 
     it('invokes getOrganizationSettings without error using callback', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1249,7 +1249,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
 
     it('invokes getOrganizationSettings with error', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1283,7 +1283,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
 
     it('invokes getOrganizationSettings with closed client', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1296,7 +1296,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1309,7 +1309,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
   describe('getSource', () => {
     it('invokes getSource without error', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1340,7 +1340,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
 
     it('invokes getSource without error using callback', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1387,7 +1387,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
 
     it('invokes getSource with error', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1415,7 +1415,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
 
     it('invokes getSource with closed client', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1428,7 +1428,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getSource(request), expectedError);
@@ -1438,7 +1438,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
   describe('setFindingState', () => {
     it('invokes setFindingState without error', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1469,7 +1469,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
 
     it('invokes setFindingState without error using callback', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1516,7 +1516,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
 
     it('invokes setFindingState with error', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1547,7 +1547,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
 
     it('invokes setFindingState with closed client', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1560,7 +1560,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.setFindingState(request), expectedError);
@@ -1570,7 +1570,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1601,7 +1601,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
 
     it('invokes setIamPolicy without error using callback', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1648,7 +1648,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
 
     it('invokes setIamPolicy with error', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1679,7 +1679,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
 
     it('invokes setIamPolicy with closed client', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1692,7 +1692,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.setIamPolicy(request), expectedError);
@@ -1702,7 +1702,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1734,7 +1734,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
 
     it('invokes testIamPermissions without error using callback', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1781,7 +1781,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
 
     it('invokes testIamPermissions with error', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1812,7 +1812,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
 
     it('invokes testIamPermissions with closed client', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1825,7 +1825,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.testIamPermissions(request), expectedError);
@@ -1835,7 +1835,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
   describe('updateFinding', () => {
     it('invokes updateFinding without error', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1867,7 +1867,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
 
     it('invokes updateFinding without error using callback', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1915,7 +1915,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
 
     it('invokes updateFinding with error', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1947,7 +1947,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
 
     it('invokes updateFinding with closed client', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1961,7 +1961,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
       );
       request.finding.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateFinding(request), expectedError);
@@ -1971,7 +1971,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
   describe('updateNotificationConfig', () => {
     it('invokes updateNotificationConfig without error', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2004,7 +2004,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
 
     it('invokes updateNotificationConfig without error using callback', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2052,7 +2052,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
 
     it('invokes updateNotificationConfig with error', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2087,7 +2087,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
 
     it('invokes updateNotificationConfig with closed client', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2101,7 +2101,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
       );
       request.notificationConfig.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -2114,7 +2114,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
   describe('updateOrganizationSettings', () => {
     it('invokes updateOrganizationSettings without error', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2147,7 +2147,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
 
     it('invokes updateOrganizationSettings without error using callback', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2195,7 +2195,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
 
     it('invokes updateOrganizationSettings with error', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2230,7 +2230,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
 
     it('invokes updateOrganizationSettings with closed client', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2244,7 +2244,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
       );
       request.organizationSettings.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -2257,7 +2257,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
   describe('updateSource', () => {
     it('invokes updateSource without error', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2289,7 +2289,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
 
     it('invokes updateSource without error using callback', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2337,7 +2337,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
 
     it('invokes updateSource with error', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2369,7 +2369,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
 
     it('invokes updateSource with closed client', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2383,7 +2383,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
       );
       request.source.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateSource(request), expectedError);
@@ -2393,7 +2393,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
   describe('updateSecurityMarks', () => {
     it('invokes updateSecurityMarks without error', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2426,7 +2426,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
 
     it('invokes updateSecurityMarks without error using callback', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2474,7 +2474,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
 
     it('invokes updateSecurityMarks with error', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2506,7 +2506,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
 
     it('invokes updateSecurityMarks with closed client', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2520,7 +2520,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
       );
       request.securityMarks.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateSecurityMarks(request), expectedError);
@@ -2530,7 +2530,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
   describe('runAssetDiscovery', () => {
     it('invokes runAssetDiscovery without error', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2563,7 +2563,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
 
     it('invokes runAssetDiscovery without error using callback', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2617,7 +2617,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
 
     it('invokes runAssetDiscovery with call error', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2648,7 +2648,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
 
     it('invokes runAssetDiscovery with LRO error', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2681,7 +2681,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
 
     it('invokes checkRunAssetDiscoveryProgress without error', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2689,8 +2689,8 @@ describe('v1p1beta1.SecurityCenterClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkRunAssetDiscoveryProgress(
@@ -2703,7 +2703,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
 
     it('invokes checkRunAssetDiscoveryProgress with error', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2724,7 +2724,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
   describe('groupAssets', () => {
     it('invokes groupAssets without error', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2763,7 +2763,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
 
     it('invokes groupAssets without error using callback', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2820,7 +2820,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
 
     it('invokes groupAssets with error', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2851,7 +2851,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
 
     it('invokes groupAssetsStream without error', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2906,15 +2906,15 @@ describe('v1p1beta1.SecurityCenterClient', () => {
       assert(
         (client.descriptors.page.groupAssets.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes groupAssetsStream with error', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2960,15 +2960,15 @@ describe('v1p1beta1.SecurityCenterClient', () => {
       assert(
         (client.descriptors.page.groupAssets.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with groupAssets without error', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3010,15 +3010,15 @@ describe('v1p1beta1.SecurityCenterClient', () => {
       assert(
         (client.descriptors.page.groupAssets.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with groupAssets with error', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3053,9 +3053,9 @@ describe('v1p1beta1.SecurityCenterClient', () => {
       assert(
         (client.descriptors.page.groupAssets.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -3063,7 +3063,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
   describe('groupFindings', () => {
     it('invokes groupFindings without error', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3102,7 +3102,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
 
     it('invokes groupFindings without error using callback', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3159,7 +3159,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
 
     it('invokes groupFindings with error', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3190,7 +3190,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
 
     it('invokes groupFindingsStream without error', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3245,15 +3245,15 @@ describe('v1p1beta1.SecurityCenterClient', () => {
       assert(
         (client.descriptors.page.groupFindings.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes groupFindingsStream with error', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3297,15 +3297,15 @@ describe('v1p1beta1.SecurityCenterClient', () => {
       assert(
         (client.descriptors.page.groupFindings.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with groupFindings without error', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3347,15 +3347,15 @@ describe('v1p1beta1.SecurityCenterClient', () => {
       assert(
         (client.descriptors.page.groupFindings.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with groupFindings with error', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3388,9 +3388,9 @@ describe('v1p1beta1.SecurityCenterClient', () => {
       assert(
         (client.descriptors.page.groupFindings.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -3398,7 +3398,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
   describe('listAssets', () => {
     it('invokes listAssets without error', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3437,7 +3437,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
 
     it('invokes listAssets without error using callback', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3494,7 +3494,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
 
     it('invokes listAssets with error', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3525,7 +3525,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
 
     it('invokes listAssetsStream without error', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3580,15 +3580,15 @@ describe('v1p1beta1.SecurityCenterClient', () => {
       assert(
         (client.descriptors.page.listAssets.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listAssetsStream with error', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3634,15 +3634,15 @@ describe('v1p1beta1.SecurityCenterClient', () => {
       assert(
         (client.descriptors.page.listAssets.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listAssets without error', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3684,15 +3684,15 @@ describe('v1p1beta1.SecurityCenterClient', () => {
       assert(
         (client.descriptors.page.listAssets.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listAssets with error', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3727,9 +3727,9 @@ describe('v1p1beta1.SecurityCenterClient', () => {
       assert(
         (client.descriptors.page.listAssets.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -3737,7 +3737,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
   describe('listFindings', () => {
     it('invokes listFindings without error', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3776,7 +3776,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
 
     it('invokes listFindings without error using callback', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3833,7 +3833,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
 
     it('invokes listFindings with error', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3864,7 +3864,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
 
     it('invokes listFindingsStream without error', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3919,15 +3919,15 @@ describe('v1p1beta1.SecurityCenterClient', () => {
       assert(
         (client.descriptors.page.listFindings.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listFindingsStream with error', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3973,15 +3973,15 @@ describe('v1p1beta1.SecurityCenterClient', () => {
       assert(
         (client.descriptors.page.listFindings.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listFindings without error', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4023,15 +4023,15 @@ describe('v1p1beta1.SecurityCenterClient', () => {
       assert(
         (client.descriptors.page.listFindings.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listFindings with error', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4064,9 +4064,9 @@ describe('v1p1beta1.SecurityCenterClient', () => {
       assert(
         (client.descriptors.page.listFindings.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4074,7 +4074,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
   describe('listNotificationConfigs', () => {
     it('invokes listNotificationConfigs without error', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4114,7 +4114,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
 
     it('invokes listNotificationConfigs without error using callback', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4171,7 +4171,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
 
     it('invokes listNotificationConfigs with error', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4205,7 +4205,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
 
     it('invokes listNotificationConfigsStream without error', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4274,7 +4274,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
 
     it('invokes listNotificationConfigsStream with error', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4332,7 +4332,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
 
     it('uses async iteration with listNotificationConfigs without error', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4386,7 +4386,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
 
     it('uses async iteration with listNotificationConfigs with error', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4433,7 +4433,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
   describe('listSources', () => {
     it('invokes listSources without error', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4472,7 +4472,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
 
     it('invokes listSources without error using callback', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4504,8 +4504,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.securitycenter.v1p1beta1.ISource[]
-              | null,
+              protos.google.cloud.securitycenter.v1p1beta1.ISource[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -4529,7 +4528,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
 
     it('invokes listSources with error', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4560,7 +4559,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
 
     it('invokes listSourcesStream without error', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4613,15 +4612,15 @@ describe('v1p1beta1.SecurityCenterClient', () => {
       assert(
         (client.descriptors.page.listSources.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listSourcesStream with error', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4665,15 +4664,15 @@ describe('v1p1beta1.SecurityCenterClient', () => {
       assert(
         (client.descriptors.page.listSources.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listSources without error', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4715,15 +4714,15 @@ describe('v1p1beta1.SecurityCenterClient', () => {
       assert(
         (client.descriptors.page.listSources.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listSources with error', async () => {
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4758,9 +4757,9 @@ describe('v1p1beta1.SecurityCenterClient', () => {
       assert(
         (client.descriptors.page.listSources.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4773,7 +4772,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
         asset: 'assetValue',
       };
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4822,7 +4821,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
         asset: 'assetValue',
       };
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4885,7 +4884,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
         source: 'sourceValue',
       };
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4935,7 +4934,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
         finding: 'findingValue',
       };
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5011,7 +5010,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
         finding: 'findingValue',
       };
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5087,7 +5086,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
         notification_config: 'notificationConfigValue',
       };
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5149,7 +5148,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
         organization: 'organizationValue',
       };
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5188,7 +5187,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
         asset: 'assetValue',
       };
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5250,7 +5249,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
         asset: 'assetValue',
       };
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5312,7 +5311,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
         organization: 'organizationValue',
       };
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5358,7 +5357,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
         source: 'sourceValue',
       };
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5421,7 +5420,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
         finding: 'findingValue',
       };
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5500,7 +5499,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
         finding: 'findingValue',
       };
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5586,7 +5585,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
         asset: 'assetValue',
       };
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5635,7 +5634,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
         asset: 'assetValue',
       };
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5698,7 +5697,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
         source: 'sourceValue',
       };
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5748,7 +5747,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
         finding: 'findingValue',
       };
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5826,7 +5825,7 @@ describe('v1p1beta1.SecurityCenterClient', () => {
         finding: 'findingValue',
       };
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

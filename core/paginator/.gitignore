@@ -1,8 +1,7 @@
 node_modules
 .nyc_output
 build
-package-lock.json
 docs/
-.coverage
+coverage/
 __pycache__
 .DS_Store

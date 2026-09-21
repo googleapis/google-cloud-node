@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as vmwareengineModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -51,7 +51,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -155,9 +155,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -280,7 +280,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.vmwareEngineStub, undefined);
@@ -288,12 +288,12 @@ describe('v1.VmwareEngineClient', () => {
       assert(client.vmwareEngineStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.vmwareEngineStub);
@@ -302,14 +302,14 @@ describe('v1.VmwareEngineClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.vmwareEngineStub, undefined);
@@ -318,7 +318,7 @@ describe('v1.VmwareEngineClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -326,7 +326,7 @@ describe('v1.VmwareEngineClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -338,7 +338,7 @@ describe('v1.VmwareEngineClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -361,7 +361,7 @@ describe('v1.VmwareEngineClient', () => {
   describe('getPrivateCloud', () => {
     it('invokes getPrivateCloud without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -392,7 +392,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes getPrivateCloud without error using callback', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -439,7 +439,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes getPrivateCloud with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -470,7 +470,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes getPrivateCloud with closed client', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -483,7 +483,7 @@ describe('v1.VmwareEngineClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getPrivateCloud(request), expectedError);
@@ -493,7 +493,7 @@ describe('v1.VmwareEngineClient', () => {
   describe('getCluster', () => {
     it('invokes getCluster without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -524,7 +524,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes getCluster without error using callback', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -571,7 +571,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes getCluster with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -602,7 +602,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes getCluster with closed client', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -615,7 +615,7 @@ describe('v1.VmwareEngineClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getCluster(request), expectedError);
@@ -625,7 +625,7 @@ describe('v1.VmwareEngineClient', () => {
   describe('getNode', () => {
     it('invokes getNode without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -656,7 +656,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes getNode without error using callback', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -703,7 +703,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes getNode with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -731,7 +731,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes getNode with closed client', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -744,7 +744,7 @@ describe('v1.VmwareEngineClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getNode(request), expectedError);
@@ -754,7 +754,7 @@ describe('v1.VmwareEngineClient', () => {
   describe('getExternalAddress', () => {
     it('invokes getExternalAddress without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -786,7 +786,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes getExternalAddress without error using callback', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -833,7 +833,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes getExternalAddress with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -864,7 +864,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes getExternalAddress with closed client', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -877,7 +877,7 @@ describe('v1.VmwareEngineClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getExternalAddress(request), expectedError);
@@ -887,7 +887,7 @@ describe('v1.VmwareEngineClient', () => {
   describe('getSubnet', () => {
     it('invokes getSubnet without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -918,7 +918,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes getSubnet without error using callback', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -965,7 +965,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes getSubnet with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -993,7 +993,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes getSubnet with closed client', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1006,7 +1006,7 @@ describe('v1.VmwareEngineClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getSubnet(request), expectedError);
@@ -1016,7 +1016,7 @@ describe('v1.VmwareEngineClient', () => {
   describe('getExternalAccessRule', () => {
     it('invokes getExternalAccessRule without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1048,7 +1048,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes getExternalAccessRule without error using callback', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1095,7 +1095,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes getExternalAccessRule with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1129,7 +1129,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes getExternalAccessRule with closed client', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1142,7 +1142,7 @@ describe('v1.VmwareEngineClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1155,7 +1155,7 @@ describe('v1.VmwareEngineClient', () => {
   describe('getLoggingServer', () => {
     it('invokes getLoggingServer without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1186,7 +1186,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes getLoggingServer without error using callback', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1233,7 +1233,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes getLoggingServer with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1264,7 +1264,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes getLoggingServer with closed client', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1277,7 +1277,7 @@ describe('v1.VmwareEngineClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getLoggingServer(request), expectedError);
@@ -1287,7 +1287,7 @@ describe('v1.VmwareEngineClient', () => {
   describe('getNodeType', () => {
     it('invokes getNodeType without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1318,7 +1318,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes getNodeType without error using callback', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1365,7 +1365,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes getNodeType with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1396,7 +1396,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes getNodeType with closed client', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1409,7 +1409,7 @@ describe('v1.VmwareEngineClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getNodeType(request), expectedError);
@@ -1419,7 +1419,7 @@ describe('v1.VmwareEngineClient', () => {
   describe('showNsxCredentials', () => {
     it('invokes showNsxCredentials without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1451,7 +1451,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes showNsxCredentials without error using callback', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1498,7 +1498,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes showNsxCredentials with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1529,7 +1529,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes showNsxCredentials with closed client', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1542,7 +1542,7 @@ describe('v1.VmwareEngineClient', () => {
       );
       request.privateCloud = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.showNsxCredentials(request), expectedError);
@@ -1552,7 +1552,7 @@ describe('v1.VmwareEngineClient', () => {
   describe('showVcenterCredentials', () => {
     it('invokes showVcenterCredentials without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1584,7 +1584,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes showVcenterCredentials without error using callback', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1631,7 +1631,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes showVcenterCredentials with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1665,7 +1665,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes showVcenterCredentials with closed client', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1678,7 +1678,7 @@ describe('v1.VmwareEngineClient', () => {
       );
       request.privateCloud = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1691,7 +1691,7 @@ describe('v1.VmwareEngineClient', () => {
   describe('getDnsForwarding', () => {
     it('invokes getDnsForwarding without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1722,7 +1722,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes getDnsForwarding without error using callback', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1769,7 +1769,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes getDnsForwarding with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1800,7 +1800,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes getDnsForwarding with closed client', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1813,7 +1813,7 @@ describe('v1.VmwareEngineClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getDnsForwarding(request), expectedError);
@@ -1823,7 +1823,7 @@ describe('v1.VmwareEngineClient', () => {
   describe('getNetworkPeering', () => {
     it('invokes getNetworkPeering without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1854,7 +1854,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes getNetworkPeering without error using callback', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1901,7 +1901,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes getNetworkPeering with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1932,7 +1932,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes getNetworkPeering with closed client', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1945,7 +1945,7 @@ describe('v1.VmwareEngineClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getNetworkPeering(request), expectedError);
@@ -1955,7 +1955,7 @@ describe('v1.VmwareEngineClient', () => {
   describe('getHcxActivationKey', () => {
     it('invokes getHcxActivationKey without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1987,7 +1987,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes getHcxActivationKey without error using callback', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2034,7 +2034,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes getHcxActivationKey with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2065,7 +2065,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes getHcxActivationKey with closed client', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2078,7 +2078,7 @@ describe('v1.VmwareEngineClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getHcxActivationKey(request), expectedError);
@@ -2088,7 +2088,7 @@ describe('v1.VmwareEngineClient', () => {
   describe('getNetworkPolicy', () => {
     it('invokes getNetworkPolicy without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2119,7 +2119,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes getNetworkPolicy without error using callback', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2166,7 +2166,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes getNetworkPolicy with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2197,7 +2197,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes getNetworkPolicy with closed client', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2210,7 +2210,7 @@ describe('v1.VmwareEngineClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getNetworkPolicy(request), expectedError);
@@ -2220,7 +2220,7 @@ describe('v1.VmwareEngineClient', () => {
   describe('getManagementDnsZoneBinding', () => {
     it('invokes getManagementDnsZoneBinding without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2252,7 +2252,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes getManagementDnsZoneBinding without error using callback', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2299,7 +2299,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes getManagementDnsZoneBinding with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2333,7 +2333,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes getManagementDnsZoneBinding with closed client', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2346,7 +2346,7 @@ describe('v1.VmwareEngineClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -2359,7 +2359,7 @@ describe('v1.VmwareEngineClient', () => {
   describe('getVmwareEngineNetwork', () => {
     it('invokes getVmwareEngineNetwork without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2391,7 +2391,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes getVmwareEngineNetwork without error using callback', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2438,7 +2438,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes getVmwareEngineNetwork with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2472,7 +2472,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes getVmwareEngineNetwork with closed client', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2485,7 +2485,7 @@ describe('v1.VmwareEngineClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -2498,7 +2498,7 @@ describe('v1.VmwareEngineClient', () => {
   describe('getPrivateConnection', () => {
     it('invokes getPrivateConnection without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2530,7 +2530,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes getPrivateConnection without error using callback', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2577,7 +2577,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes getPrivateConnection with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2608,7 +2608,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes getPrivateConnection with closed client', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2621,7 +2621,7 @@ describe('v1.VmwareEngineClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getPrivateConnection(request), expectedError);
@@ -2631,7 +2631,7 @@ describe('v1.VmwareEngineClient', () => {
   describe('getDnsBindPermission', () => {
     it('invokes getDnsBindPermission without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2663,7 +2663,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes getDnsBindPermission without error using callback', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2710,7 +2710,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes getDnsBindPermission with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2741,7 +2741,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes getDnsBindPermission with closed client', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2754,7 +2754,7 @@ describe('v1.VmwareEngineClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getDnsBindPermission(request), expectedError);
@@ -2764,7 +2764,7 @@ describe('v1.VmwareEngineClient', () => {
   describe('createPrivateCloud', () => {
     it('invokes createPrivateCloud without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2797,7 +2797,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes createPrivateCloud without error using callback', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2851,7 +2851,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes createPrivateCloud with call error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2882,7 +2882,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes createPrivateCloud with LRO error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2915,7 +2915,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes checkCreatePrivateCloudProgress without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2923,8 +2923,8 @@ describe('v1.VmwareEngineClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreatePrivateCloudProgress(
@@ -2937,7 +2937,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes checkCreatePrivateCloudProgress with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2958,7 +2958,7 @@ describe('v1.VmwareEngineClient', () => {
   describe('updatePrivateCloud', () => {
     it('invokes updatePrivateCloud without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2992,7 +2992,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes updatePrivateCloud without error using callback', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3047,7 +3047,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes updatePrivateCloud with call error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3079,7 +3079,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes updatePrivateCloud with LRO error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3113,7 +3113,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes checkUpdatePrivateCloudProgress without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3121,8 +3121,8 @@ describe('v1.VmwareEngineClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdatePrivateCloudProgress(
@@ -3135,7 +3135,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes checkUpdatePrivateCloudProgress with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3156,7 +3156,7 @@ describe('v1.VmwareEngineClient', () => {
   describe('deletePrivateCloud', () => {
     it('invokes deletePrivateCloud without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3189,7 +3189,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes deletePrivateCloud without error using callback', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3243,7 +3243,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes deletePrivateCloud with call error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3274,7 +3274,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes deletePrivateCloud with LRO error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3307,7 +3307,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes checkDeletePrivateCloudProgress without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3315,8 +3315,8 @@ describe('v1.VmwareEngineClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeletePrivateCloudProgress(
@@ -3329,7 +3329,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes checkDeletePrivateCloudProgress with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3350,7 +3350,7 @@ describe('v1.VmwareEngineClient', () => {
   describe('undeletePrivateCloud', () => {
     it('invokes undeletePrivateCloud without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3383,7 +3383,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes undeletePrivateCloud without error using callback', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3437,7 +3437,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes undeletePrivateCloud with call error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3468,7 +3468,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes undeletePrivateCloud with LRO error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3501,7 +3501,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes checkUndeletePrivateCloudProgress without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3509,8 +3509,8 @@ describe('v1.VmwareEngineClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUndeletePrivateCloudProgress(
@@ -3523,7 +3523,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes checkUndeletePrivateCloudProgress with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3544,7 +3544,7 @@ describe('v1.VmwareEngineClient', () => {
   describe('createCluster', () => {
     it('invokes createCluster without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3577,7 +3577,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes createCluster without error using callback', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3631,7 +3631,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes createCluster with call error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3662,7 +3662,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes createCluster with LRO error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3695,7 +3695,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes checkCreateClusterProgress without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3703,8 +3703,8 @@ describe('v1.VmwareEngineClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateClusterProgress(
@@ -3717,7 +3717,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes checkCreateClusterProgress with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3738,7 +3738,7 @@ describe('v1.VmwareEngineClient', () => {
   describe('updateCluster', () => {
     it('invokes updateCluster without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3772,7 +3772,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes updateCluster without error using callback', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3827,7 +3827,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes updateCluster with call error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3859,7 +3859,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes updateCluster with LRO error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3893,7 +3893,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes checkUpdateClusterProgress without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3901,8 +3901,8 @@ describe('v1.VmwareEngineClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateClusterProgress(
@@ -3915,7 +3915,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes checkUpdateClusterProgress with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3936,7 +3936,7 @@ describe('v1.VmwareEngineClient', () => {
   describe('deleteCluster', () => {
     it('invokes deleteCluster without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3969,7 +3969,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes deleteCluster without error using callback', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4023,7 +4023,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes deleteCluster with call error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4054,7 +4054,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes deleteCluster with LRO error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4087,7 +4087,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes checkDeleteClusterProgress without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4095,8 +4095,8 @@ describe('v1.VmwareEngineClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteClusterProgress(
@@ -4109,7 +4109,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes checkDeleteClusterProgress with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4130,7 +4130,7 @@ describe('v1.VmwareEngineClient', () => {
   describe('createExternalAddress', () => {
     it('invokes createExternalAddress without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4163,7 +4163,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes createExternalAddress without error using callback', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4217,7 +4217,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes createExternalAddress with call error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4251,7 +4251,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes createExternalAddress with LRO error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4284,7 +4284,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes checkCreateExternalAddressProgress without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4292,8 +4292,8 @@ describe('v1.VmwareEngineClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateExternalAddressProgress(
@@ -4306,7 +4306,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes checkCreateExternalAddressProgress with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4327,7 +4327,7 @@ describe('v1.VmwareEngineClient', () => {
   describe('updateExternalAddress', () => {
     it('invokes updateExternalAddress without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4361,7 +4361,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes updateExternalAddress without error using callback', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4416,7 +4416,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes updateExternalAddress with call error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4451,7 +4451,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes updateExternalAddress with LRO error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4485,7 +4485,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes checkUpdateExternalAddressProgress without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4493,8 +4493,8 @@ describe('v1.VmwareEngineClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateExternalAddressProgress(
@@ -4507,7 +4507,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes checkUpdateExternalAddressProgress with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4528,7 +4528,7 @@ describe('v1.VmwareEngineClient', () => {
   describe('deleteExternalAddress', () => {
     it('invokes deleteExternalAddress without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4561,7 +4561,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes deleteExternalAddress without error using callback', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4615,7 +4615,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes deleteExternalAddress with call error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4649,7 +4649,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes deleteExternalAddress with LRO error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4682,7 +4682,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes checkDeleteExternalAddressProgress without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4690,8 +4690,8 @@ describe('v1.VmwareEngineClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteExternalAddressProgress(
@@ -4704,7 +4704,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes checkDeleteExternalAddressProgress with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4725,7 +4725,7 @@ describe('v1.VmwareEngineClient', () => {
   describe('updateSubnet', () => {
     it('invokes updateSubnet without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4758,7 +4758,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes updateSubnet without error using callback', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4813,7 +4813,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes updateSubnet with call error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4845,7 +4845,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes updateSubnet with LRO error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4879,7 +4879,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes checkUpdateSubnetProgress without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4887,8 +4887,8 @@ describe('v1.VmwareEngineClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateSubnetProgress(
@@ -4901,7 +4901,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes checkUpdateSubnetProgress with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4919,7 +4919,7 @@ describe('v1.VmwareEngineClient', () => {
   describe('createExternalAccessRule', () => {
     it('invokes createExternalAccessRule without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4952,7 +4952,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes createExternalAccessRule without error using callback', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5006,7 +5006,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes createExternalAccessRule with call error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5040,7 +5040,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes createExternalAccessRule with LRO error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5073,7 +5073,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes checkCreateExternalAccessRuleProgress without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5081,8 +5081,8 @@ describe('v1.VmwareEngineClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -5096,7 +5096,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes checkCreateExternalAccessRuleProgress with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5117,7 +5117,7 @@ describe('v1.VmwareEngineClient', () => {
   describe('updateExternalAccessRule', () => {
     it('invokes updateExternalAccessRule without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5151,7 +5151,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes updateExternalAccessRule without error using callback', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5206,7 +5206,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes updateExternalAccessRule with call error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5241,7 +5241,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes updateExternalAccessRule with LRO error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5275,7 +5275,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes checkUpdateExternalAccessRuleProgress without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5283,8 +5283,8 @@ describe('v1.VmwareEngineClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -5298,7 +5298,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes checkUpdateExternalAccessRuleProgress with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5319,7 +5319,7 @@ describe('v1.VmwareEngineClient', () => {
   describe('deleteExternalAccessRule', () => {
     it('invokes deleteExternalAccessRule without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5352,7 +5352,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes deleteExternalAccessRule without error using callback', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5406,7 +5406,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes deleteExternalAccessRule with call error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5440,7 +5440,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes deleteExternalAccessRule with LRO error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5473,7 +5473,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes checkDeleteExternalAccessRuleProgress without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5481,8 +5481,8 @@ describe('v1.VmwareEngineClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -5496,7 +5496,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes checkDeleteExternalAccessRuleProgress with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5517,7 +5517,7 @@ describe('v1.VmwareEngineClient', () => {
   describe('createLoggingServer', () => {
     it('invokes createLoggingServer without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5550,7 +5550,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes createLoggingServer without error using callback', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5604,7 +5604,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes createLoggingServer with call error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5635,7 +5635,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes createLoggingServer with LRO error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5668,7 +5668,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes checkCreateLoggingServerProgress without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5676,8 +5676,8 @@ describe('v1.VmwareEngineClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateLoggingServerProgress(
@@ -5690,7 +5690,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes checkCreateLoggingServerProgress with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5711,7 +5711,7 @@ describe('v1.VmwareEngineClient', () => {
   describe('updateLoggingServer', () => {
     it('invokes updateLoggingServer without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5745,7 +5745,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes updateLoggingServer without error using callback', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5800,7 +5800,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes updateLoggingServer with call error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5832,7 +5832,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes updateLoggingServer with LRO error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5866,7 +5866,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes checkUpdateLoggingServerProgress without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5874,8 +5874,8 @@ describe('v1.VmwareEngineClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateLoggingServerProgress(
@@ -5888,7 +5888,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes checkUpdateLoggingServerProgress with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5909,7 +5909,7 @@ describe('v1.VmwareEngineClient', () => {
   describe('deleteLoggingServer', () => {
     it('invokes deleteLoggingServer without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5942,7 +5942,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes deleteLoggingServer without error using callback', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5996,7 +5996,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes deleteLoggingServer with call error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6027,7 +6027,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes deleteLoggingServer with LRO error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6060,7 +6060,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes checkDeleteLoggingServerProgress without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6068,8 +6068,8 @@ describe('v1.VmwareEngineClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteLoggingServerProgress(
@@ -6082,7 +6082,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes checkDeleteLoggingServerProgress with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6103,7 +6103,7 @@ describe('v1.VmwareEngineClient', () => {
   describe('resetNsxCredentials', () => {
     it('invokes resetNsxCredentials without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6136,7 +6136,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes resetNsxCredentials without error using callback', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6190,7 +6190,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes resetNsxCredentials with call error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6221,7 +6221,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes resetNsxCredentials with LRO error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6254,7 +6254,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes checkResetNsxCredentialsProgress without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6262,8 +6262,8 @@ describe('v1.VmwareEngineClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkResetNsxCredentialsProgress(
@@ -6276,7 +6276,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes checkResetNsxCredentialsProgress with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6297,7 +6297,7 @@ describe('v1.VmwareEngineClient', () => {
   describe('resetVcenterCredentials', () => {
     it('invokes resetVcenterCredentials without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6330,7 +6330,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes resetVcenterCredentials without error using callback', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6384,7 +6384,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes resetVcenterCredentials with call error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6418,7 +6418,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes resetVcenterCredentials with LRO error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6451,7 +6451,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes checkResetVcenterCredentialsProgress without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6459,8 +6459,8 @@ describe('v1.VmwareEngineClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -6474,7 +6474,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes checkResetVcenterCredentialsProgress with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6495,7 +6495,7 @@ describe('v1.VmwareEngineClient', () => {
   describe('updateDnsForwarding', () => {
     it('invokes updateDnsForwarding without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6529,7 +6529,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes updateDnsForwarding without error using callback', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6584,7 +6584,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes updateDnsForwarding with call error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6616,7 +6616,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes updateDnsForwarding with LRO error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6650,7 +6650,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes checkUpdateDnsForwardingProgress without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6658,8 +6658,8 @@ describe('v1.VmwareEngineClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateDnsForwardingProgress(
@@ -6672,7 +6672,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes checkUpdateDnsForwardingProgress with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6693,7 +6693,7 @@ describe('v1.VmwareEngineClient', () => {
   describe('createNetworkPeering', () => {
     it('invokes createNetworkPeering without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6726,7 +6726,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes createNetworkPeering without error using callback', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6780,7 +6780,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes createNetworkPeering with call error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6811,7 +6811,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes createNetworkPeering with LRO error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6844,7 +6844,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes checkCreateNetworkPeeringProgress without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6852,8 +6852,8 @@ describe('v1.VmwareEngineClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateNetworkPeeringProgress(
@@ -6866,7 +6866,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes checkCreateNetworkPeeringProgress with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6887,7 +6887,7 @@ describe('v1.VmwareEngineClient', () => {
   describe('deleteNetworkPeering', () => {
     it('invokes deleteNetworkPeering without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6920,7 +6920,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes deleteNetworkPeering without error using callback', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6974,7 +6974,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes deleteNetworkPeering with call error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7005,7 +7005,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes deleteNetworkPeering with LRO error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7038,7 +7038,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes checkDeleteNetworkPeeringProgress without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7046,8 +7046,8 @@ describe('v1.VmwareEngineClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteNetworkPeeringProgress(
@@ -7060,7 +7060,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes checkDeleteNetworkPeeringProgress with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7081,7 +7081,7 @@ describe('v1.VmwareEngineClient', () => {
   describe('updateNetworkPeering', () => {
     it('invokes updateNetworkPeering without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7115,7 +7115,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes updateNetworkPeering without error using callback', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7170,7 +7170,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes updateNetworkPeering with call error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7202,7 +7202,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes updateNetworkPeering with LRO error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7236,7 +7236,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes checkUpdateNetworkPeeringProgress without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7244,8 +7244,8 @@ describe('v1.VmwareEngineClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateNetworkPeeringProgress(
@@ -7258,7 +7258,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes checkUpdateNetworkPeeringProgress with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7279,7 +7279,7 @@ describe('v1.VmwareEngineClient', () => {
   describe('createHcxActivationKey', () => {
     it('invokes createHcxActivationKey without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7312,7 +7312,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes createHcxActivationKey without error using callback', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7366,7 +7366,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes createHcxActivationKey with call error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7400,7 +7400,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes createHcxActivationKey with LRO error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7433,7 +7433,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes checkCreateHcxActivationKeyProgress without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7441,8 +7441,8 @@ describe('v1.VmwareEngineClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateHcxActivationKeyProgress(
@@ -7455,7 +7455,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes checkCreateHcxActivationKeyProgress with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7476,7 +7476,7 @@ describe('v1.VmwareEngineClient', () => {
   describe('createNetworkPolicy', () => {
     it('invokes createNetworkPolicy without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7509,7 +7509,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes createNetworkPolicy without error using callback', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7563,7 +7563,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes createNetworkPolicy with call error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7594,7 +7594,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes createNetworkPolicy with LRO error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7627,7 +7627,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes checkCreateNetworkPolicyProgress without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7635,8 +7635,8 @@ describe('v1.VmwareEngineClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateNetworkPolicyProgress(
@@ -7649,7 +7649,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes checkCreateNetworkPolicyProgress with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7670,7 +7670,7 @@ describe('v1.VmwareEngineClient', () => {
   describe('updateNetworkPolicy', () => {
     it('invokes updateNetworkPolicy without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7704,7 +7704,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes updateNetworkPolicy without error using callback', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7759,7 +7759,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes updateNetworkPolicy with call error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7791,7 +7791,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes updateNetworkPolicy with LRO error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7825,7 +7825,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes checkUpdateNetworkPolicyProgress without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7833,8 +7833,8 @@ describe('v1.VmwareEngineClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateNetworkPolicyProgress(
@@ -7847,7 +7847,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes checkUpdateNetworkPolicyProgress with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7868,7 +7868,7 @@ describe('v1.VmwareEngineClient', () => {
   describe('deleteNetworkPolicy', () => {
     it('invokes deleteNetworkPolicy without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7901,7 +7901,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes deleteNetworkPolicy without error using callback', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7955,7 +7955,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes deleteNetworkPolicy with call error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7986,7 +7986,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes deleteNetworkPolicy with LRO error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8019,7 +8019,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes checkDeleteNetworkPolicyProgress without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8027,8 +8027,8 @@ describe('v1.VmwareEngineClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteNetworkPolicyProgress(
@@ -8041,7 +8041,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes checkDeleteNetworkPolicyProgress with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8062,7 +8062,7 @@ describe('v1.VmwareEngineClient', () => {
   describe('createManagementDnsZoneBinding', () => {
     it('invokes createManagementDnsZoneBinding without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8095,7 +8095,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes createManagementDnsZoneBinding without error using callback', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8149,7 +8149,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes createManagementDnsZoneBinding with call error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8183,7 +8183,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes createManagementDnsZoneBinding with LRO error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8216,7 +8216,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes checkCreateManagementDnsZoneBindingProgress without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8224,8 +8224,8 @@ describe('v1.VmwareEngineClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -8239,7 +8239,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes checkCreateManagementDnsZoneBindingProgress with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8260,7 +8260,7 @@ describe('v1.VmwareEngineClient', () => {
   describe('updateManagementDnsZoneBinding', () => {
     it('invokes updateManagementDnsZoneBinding without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8294,7 +8294,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes updateManagementDnsZoneBinding without error using callback', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8349,7 +8349,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes updateManagementDnsZoneBinding with call error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8384,7 +8384,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes updateManagementDnsZoneBinding with LRO error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8418,7 +8418,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes checkUpdateManagementDnsZoneBindingProgress without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8426,8 +8426,8 @@ describe('v1.VmwareEngineClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -8441,7 +8441,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes checkUpdateManagementDnsZoneBindingProgress with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8462,7 +8462,7 @@ describe('v1.VmwareEngineClient', () => {
   describe('deleteManagementDnsZoneBinding', () => {
     it('invokes deleteManagementDnsZoneBinding without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8495,7 +8495,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes deleteManagementDnsZoneBinding without error using callback', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8549,7 +8549,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes deleteManagementDnsZoneBinding with call error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8583,7 +8583,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes deleteManagementDnsZoneBinding with LRO error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8616,7 +8616,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes checkDeleteManagementDnsZoneBindingProgress without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8624,8 +8624,8 @@ describe('v1.VmwareEngineClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -8639,7 +8639,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes checkDeleteManagementDnsZoneBindingProgress with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8660,7 +8660,7 @@ describe('v1.VmwareEngineClient', () => {
   describe('repairManagementDnsZoneBinding', () => {
     it('invokes repairManagementDnsZoneBinding without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8693,7 +8693,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes repairManagementDnsZoneBinding without error using callback', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8747,7 +8747,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes repairManagementDnsZoneBinding with call error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8781,7 +8781,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes repairManagementDnsZoneBinding with LRO error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8814,7 +8814,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes checkRepairManagementDnsZoneBindingProgress without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8822,8 +8822,8 @@ describe('v1.VmwareEngineClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -8837,7 +8837,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes checkRepairManagementDnsZoneBindingProgress with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8858,7 +8858,7 @@ describe('v1.VmwareEngineClient', () => {
   describe('createVmwareEngineNetwork', () => {
     it('invokes createVmwareEngineNetwork without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8891,7 +8891,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes createVmwareEngineNetwork without error using callback', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8945,7 +8945,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes createVmwareEngineNetwork with call error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8979,7 +8979,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes createVmwareEngineNetwork with LRO error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9012,7 +9012,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes checkCreateVmwareEngineNetworkProgress without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9020,8 +9020,8 @@ describe('v1.VmwareEngineClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -9035,7 +9035,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes checkCreateVmwareEngineNetworkProgress with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9056,7 +9056,7 @@ describe('v1.VmwareEngineClient', () => {
   describe('updateVmwareEngineNetwork', () => {
     it('invokes updateVmwareEngineNetwork without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9090,7 +9090,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes updateVmwareEngineNetwork without error using callback', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9145,7 +9145,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes updateVmwareEngineNetwork with call error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9180,7 +9180,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes updateVmwareEngineNetwork with LRO error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9214,7 +9214,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes checkUpdateVmwareEngineNetworkProgress without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9222,8 +9222,8 @@ describe('v1.VmwareEngineClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -9237,7 +9237,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes checkUpdateVmwareEngineNetworkProgress with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9258,7 +9258,7 @@ describe('v1.VmwareEngineClient', () => {
   describe('deleteVmwareEngineNetwork', () => {
     it('invokes deleteVmwareEngineNetwork without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9291,7 +9291,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes deleteVmwareEngineNetwork without error using callback', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9345,7 +9345,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes deleteVmwareEngineNetwork with call error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9379,7 +9379,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes deleteVmwareEngineNetwork with LRO error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9412,7 +9412,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes checkDeleteVmwareEngineNetworkProgress without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9420,8 +9420,8 @@ describe('v1.VmwareEngineClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -9435,7 +9435,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes checkDeleteVmwareEngineNetworkProgress with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9456,7 +9456,7 @@ describe('v1.VmwareEngineClient', () => {
   describe('createPrivateConnection', () => {
     it('invokes createPrivateConnection without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9489,7 +9489,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes createPrivateConnection without error using callback', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9543,7 +9543,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes createPrivateConnection with call error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9577,7 +9577,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes createPrivateConnection with LRO error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9610,7 +9610,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes checkCreatePrivateConnectionProgress without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9618,8 +9618,8 @@ describe('v1.VmwareEngineClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -9633,7 +9633,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes checkCreatePrivateConnectionProgress with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9654,7 +9654,7 @@ describe('v1.VmwareEngineClient', () => {
   describe('updatePrivateConnection', () => {
     it('invokes updatePrivateConnection without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9688,7 +9688,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes updatePrivateConnection without error using callback', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9743,7 +9743,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes updatePrivateConnection with call error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9778,7 +9778,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes updatePrivateConnection with LRO error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9812,7 +9812,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes checkUpdatePrivateConnectionProgress without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9820,8 +9820,8 @@ describe('v1.VmwareEngineClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -9835,7 +9835,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes checkUpdatePrivateConnectionProgress with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9856,7 +9856,7 @@ describe('v1.VmwareEngineClient', () => {
   describe('deletePrivateConnection', () => {
     it('invokes deletePrivateConnection without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9889,7 +9889,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes deletePrivateConnection without error using callback', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9943,7 +9943,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes deletePrivateConnection with call error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9977,7 +9977,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes deletePrivateConnection with LRO error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10010,7 +10010,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes checkDeletePrivateConnectionProgress without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10018,8 +10018,8 @@ describe('v1.VmwareEngineClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -10033,7 +10033,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes checkDeletePrivateConnectionProgress with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10054,7 +10054,7 @@ describe('v1.VmwareEngineClient', () => {
   describe('grantDnsBindPermission', () => {
     it('invokes grantDnsBindPermission without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10087,7 +10087,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes grantDnsBindPermission without error using callback', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10141,7 +10141,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes grantDnsBindPermission with call error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10175,7 +10175,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes grantDnsBindPermission with LRO error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10208,7 +10208,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes checkGrantDnsBindPermissionProgress without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10216,8 +10216,8 @@ describe('v1.VmwareEngineClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkGrantDnsBindPermissionProgress(
@@ -10230,7 +10230,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes checkGrantDnsBindPermissionProgress with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10251,7 +10251,7 @@ describe('v1.VmwareEngineClient', () => {
   describe('revokeDnsBindPermission', () => {
     it('invokes revokeDnsBindPermission without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10284,7 +10284,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes revokeDnsBindPermission without error using callback', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10338,7 +10338,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes revokeDnsBindPermission with call error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10372,7 +10372,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes revokeDnsBindPermission with LRO error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10405,7 +10405,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes checkRevokeDnsBindPermissionProgress without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10413,8 +10413,8 @@ describe('v1.VmwareEngineClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -10428,7 +10428,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes checkRevokeDnsBindPermissionProgress with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10449,7 +10449,7 @@ describe('v1.VmwareEngineClient', () => {
   describe('listPrivateClouds', () => {
     it('invokes listPrivateClouds without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10488,7 +10488,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes listPrivateClouds without error using callback', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10543,7 +10543,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes listPrivateClouds with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10574,7 +10574,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes listPrivateCloudsStream without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10627,15 +10627,15 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listPrivateClouds.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listPrivateCloudsStream with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10677,15 +10677,15 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listPrivateClouds.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listPrivateClouds without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10726,15 +10726,15 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listPrivateClouds.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listPrivateClouds with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10767,9 +10767,9 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listPrivateClouds.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -10777,7 +10777,7 @@ describe('v1.VmwareEngineClient', () => {
   describe('listClusters', () => {
     it('invokes listClusters without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10816,7 +10816,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes listClusters without error using callback', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10871,7 +10871,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes listClusters with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10902,7 +10902,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes listClustersStream without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10954,15 +10954,15 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listClusters.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listClustersStream with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11005,15 +11005,15 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listClusters.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listClusters without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11054,15 +11054,15 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listClusters.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listClusters with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11094,9 +11094,9 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listClusters.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -11104,7 +11104,7 @@ describe('v1.VmwareEngineClient', () => {
   describe('listNodes', () => {
     it('invokes listNodes without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11137,7 +11137,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes listNodes without error using callback', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11186,7 +11186,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes listNodes with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11214,7 +11214,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes listNodesStream without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11260,15 +11260,15 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listNodes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listNodesStream with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11311,15 +11311,15 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listNodes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listNodes without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11353,15 +11353,15 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listNodes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listNodes with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11394,9 +11394,9 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listNodes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -11404,7 +11404,7 @@ describe('v1.VmwareEngineClient', () => {
   describe('listExternalAddresses', () => {
     it('invokes listExternalAddresses without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11444,7 +11444,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes listExternalAddresses without error using callback', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11476,8 +11476,7 @@ describe('v1.VmwareEngineClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.vmwareengine.v1.IExternalAddress[]
-              | null,
+              protos.google.cloud.vmwareengine.v1.IExternalAddress[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -11501,7 +11500,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes listExternalAddresses with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11535,7 +11534,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes listExternalAddressesStream without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11602,7 +11601,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes listExternalAddressesStream with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11658,7 +11657,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('uses async iteration with listExternalAddresses without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11712,7 +11711,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('uses async iteration with listExternalAddresses with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11759,7 +11758,7 @@ describe('v1.VmwareEngineClient', () => {
   describe('fetchNetworkPolicyExternalAddresses', () => {
     it('invokes fetchNetworkPolicyExternalAddresses without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11800,7 +11799,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes fetchNetworkPolicyExternalAddresses without error using callback', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11832,8 +11831,7 @@ describe('v1.VmwareEngineClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.vmwareengine.v1.IExternalAddress[]
-              | null,
+              protos.google.cloud.vmwareengine.v1.IExternalAddress[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -11857,7 +11855,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes fetchNetworkPolicyExternalAddresses with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11891,7 +11889,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes fetchNetworkPolicyExternalAddressesStream without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11961,7 +11959,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes fetchNetworkPolicyExternalAddressesStream with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12020,7 +12018,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('uses async iteration with fetchNetworkPolicyExternalAddresses without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12074,7 +12072,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('uses async iteration with fetchNetworkPolicyExternalAddresses with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12121,7 +12119,7 @@ describe('v1.VmwareEngineClient', () => {
   describe('listSubnets', () => {
     it('invokes listSubnets without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12154,7 +12152,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes listSubnets without error using callback', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12203,7 +12201,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes listSubnets with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12234,7 +12232,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes listSubnetsStream without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12280,15 +12278,15 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listSubnets.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listSubnetsStream with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12331,15 +12329,15 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listSubnets.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listSubnets without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12374,15 +12372,15 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listSubnets.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listSubnets with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12416,9 +12414,9 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listSubnets.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -12426,7 +12424,7 @@ describe('v1.VmwareEngineClient', () => {
   describe('listExternalAccessRules', () => {
     it('invokes listExternalAccessRules without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12466,7 +12464,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes listExternalAccessRules without error using callback', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12498,8 +12496,7 @@ describe('v1.VmwareEngineClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.vmwareengine.v1.IExternalAccessRule[]
-              | null,
+              protos.google.cloud.vmwareengine.v1.IExternalAccessRule[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -12523,7 +12520,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes listExternalAccessRules with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12557,7 +12554,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes listExternalAccessRulesStream without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12626,7 +12623,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes listExternalAccessRulesStream with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12684,7 +12681,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('uses async iteration with listExternalAccessRules without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12738,7 +12735,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('uses async iteration with listExternalAccessRules with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12785,7 +12782,7 @@ describe('v1.VmwareEngineClient', () => {
   describe('listLoggingServers', () => {
     it('invokes listLoggingServers without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12825,7 +12822,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes listLoggingServers without error using callback', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12857,8 +12854,7 @@ describe('v1.VmwareEngineClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.vmwareengine.v1.ILoggingServer[]
-              | null,
+              protos.google.cloud.vmwareengine.v1.ILoggingServer[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -12882,7 +12878,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes listLoggingServers with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12913,7 +12909,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes listLoggingServersStream without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12966,15 +12962,15 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listLoggingServers.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listLoggingServersStream with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13016,15 +13012,15 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listLoggingServers.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listLoggingServers without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13066,15 +13062,15 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listLoggingServers.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listLoggingServers with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13107,9 +13103,9 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listLoggingServers.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -13117,7 +13113,7 @@ describe('v1.VmwareEngineClient', () => {
   describe('listNodeTypes', () => {
     it('invokes listNodeTypes without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13156,7 +13152,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes listNodeTypes without error using callback', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13211,7 +13207,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes listNodeTypes with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13242,7 +13238,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes listNodeTypesStream without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13294,15 +13290,15 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listNodeTypes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listNodeTypesStream with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13343,15 +13339,15 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listNodeTypes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listNodeTypes without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13392,15 +13388,15 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listNodeTypes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listNodeTypes with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13432,9 +13428,9 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listNodeTypes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -13442,7 +13438,7 @@ describe('v1.VmwareEngineClient', () => {
   describe('listNetworkPeerings', () => {
     it('invokes listNetworkPeerings without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13482,7 +13478,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes listNetworkPeerings without error using callback', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13514,8 +13510,7 @@ describe('v1.VmwareEngineClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.vmwareengine.v1.INetworkPeering[]
-              | null,
+              protos.google.cloud.vmwareengine.v1.INetworkPeering[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -13539,7 +13534,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes listNetworkPeerings with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13570,7 +13565,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes listNetworkPeeringsStream without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13623,15 +13618,15 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listNetworkPeerings.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listNetworkPeeringsStream with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13673,15 +13668,15 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listNetworkPeerings.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listNetworkPeerings without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13723,15 +13718,15 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listNetworkPeerings.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listNetworkPeerings with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13764,9 +13759,9 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listNetworkPeerings.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -13774,7 +13769,7 @@ describe('v1.VmwareEngineClient', () => {
   describe('listPeeringRoutes', () => {
     it('invokes listPeeringRoutes without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13813,7 +13808,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes listPeeringRoutes without error using callback', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13868,7 +13863,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes listPeeringRoutes with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13899,7 +13894,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes listPeeringRoutesStream without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13952,15 +13947,15 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listPeeringRoutes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listPeeringRoutesStream with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -14002,15 +13997,15 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listPeeringRoutes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listPeeringRoutes without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -14051,15 +14046,15 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listPeeringRoutes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listPeeringRoutes with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -14092,9 +14087,9 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listPeeringRoutes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -14102,7 +14097,7 @@ describe('v1.VmwareEngineClient', () => {
   describe('listHcxActivationKeys', () => {
     it('invokes listHcxActivationKeys without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -14142,7 +14137,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes listHcxActivationKeys without error using callback', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -14174,8 +14169,7 @@ describe('v1.VmwareEngineClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.vmwareengine.v1.IHcxActivationKey[]
-              | null,
+              protos.google.cloud.vmwareengine.v1.IHcxActivationKey[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -14199,7 +14193,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes listHcxActivationKeys with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -14233,7 +14227,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes listHcxActivationKeysStream without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -14300,7 +14294,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes listHcxActivationKeysStream with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -14356,7 +14350,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('uses async iteration with listHcxActivationKeys without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -14410,7 +14404,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('uses async iteration with listHcxActivationKeys with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -14457,7 +14451,7 @@ describe('v1.VmwareEngineClient', () => {
   describe('listNetworkPolicies', () => {
     it('invokes listNetworkPolicies without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -14497,7 +14491,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes listNetworkPolicies without error using callback', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -14529,8 +14523,7 @@ describe('v1.VmwareEngineClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.vmwareengine.v1.INetworkPolicy[]
-              | null,
+              protos.google.cloud.vmwareengine.v1.INetworkPolicy[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -14554,7 +14547,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes listNetworkPolicies with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -14585,7 +14578,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes listNetworkPoliciesStream without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -14638,15 +14631,15 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listNetworkPolicies.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listNetworkPoliciesStream with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -14688,15 +14681,15 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listNetworkPolicies.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listNetworkPolicies without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -14738,15 +14731,15 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listNetworkPolicies.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listNetworkPolicies with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -14779,9 +14772,9 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listNetworkPolicies.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -14789,7 +14782,7 @@ describe('v1.VmwareEngineClient', () => {
   describe('listManagementDnsZoneBindings', () => {
     it('invokes listManagementDnsZoneBindings without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -14829,7 +14822,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes listManagementDnsZoneBindings without error using callback', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -14886,7 +14879,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes listManagementDnsZoneBindings with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -14920,7 +14913,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes listManagementDnsZoneBindingsStream without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -14992,7 +14985,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes listManagementDnsZoneBindingsStream with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -15053,7 +15046,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('uses async iteration with listManagementDnsZoneBindings without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -15107,7 +15100,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('uses async iteration with listManagementDnsZoneBindings with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -15154,7 +15147,7 @@ describe('v1.VmwareEngineClient', () => {
   describe('listVmwareEngineNetworks', () => {
     it('invokes listVmwareEngineNetworks without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -15194,7 +15187,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes listVmwareEngineNetworks without error using callback', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -15226,8 +15219,7 @@ describe('v1.VmwareEngineClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.vmwareengine.v1.IVmwareEngineNetwork[]
-              | null,
+              protos.google.cloud.vmwareengine.v1.IVmwareEngineNetwork[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -15251,7 +15243,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes listVmwareEngineNetworks with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -15285,7 +15277,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes listVmwareEngineNetworksStream without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -15354,7 +15346,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes listVmwareEngineNetworksStream with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -15412,7 +15404,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('uses async iteration with listVmwareEngineNetworks without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -15466,7 +15458,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('uses async iteration with listVmwareEngineNetworks with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -15513,7 +15505,7 @@ describe('v1.VmwareEngineClient', () => {
   describe('listPrivateConnections', () => {
     it('invokes listPrivateConnections without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -15553,7 +15545,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes listPrivateConnections without error using callback', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -15585,8 +15577,7 @@ describe('v1.VmwareEngineClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.vmwareengine.v1.IPrivateConnection[]
-              | null,
+              protos.google.cloud.vmwareengine.v1.IPrivateConnection[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -15610,7 +15601,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes listPrivateConnections with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -15644,7 +15635,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes listPrivateConnectionsStream without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -15711,7 +15702,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes listPrivateConnectionsStream with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -15767,7 +15758,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('uses async iteration with listPrivateConnections without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -15821,7 +15812,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('uses async iteration with listPrivateConnections with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -15868,7 +15859,7 @@ describe('v1.VmwareEngineClient', () => {
   describe('listPrivateConnectionPeeringRoutes', () => {
     it('invokes listPrivateConnectionPeeringRoutes without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -15909,7 +15900,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes listPrivateConnectionPeeringRoutes without error using callback', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -15964,7 +15955,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes listPrivateConnectionPeeringRoutes with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -15998,7 +15989,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes listPrivateConnectionPeeringRoutesStream without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -16068,7 +16059,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('invokes listPrivateConnectionPeeringRoutesStream with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -16127,7 +16118,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('uses async iteration with listPrivateConnectionPeeringRoutes without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -16180,7 +16171,7 @@ describe('v1.VmwareEngineClient', () => {
 
     it('uses async iteration with listPrivateConnectionPeeringRoutes with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -16226,7 +16217,7 @@ describe('v1.VmwareEngineClient', () => {
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -16256,7 +16247,7 @@ describe('v1.VmwareEngineClient', () => {
     });
     it('invokes getIamPolicy without error using callback', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -16294,7 +16285,7 @@ describe('v1.VmwareEngineClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -16304,7 +16295,7 @@ describe('v1.VmwareEngineClient', () => {
     });
     it('invokes getIamPolicy with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -16336,7 +16327,7 @@ describe('v1.VmwareEngineClient', () => {
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -16366,7 +16357,7 @@ describe('v1.VmwareEngineClient', () => {
     });
     it('invokes setIamPolicy without error using callback', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -16404,7 +16395,7 @@ describe('v1.VmwareEngineClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -16414,7 +16405,7 @@ describe('v1.VmwareEngineClient', () => {
     });
     it('invokes setIamPolicy with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -16446,7 +16437,7 @@ describe('v1.VmwareEngineClient', () => {
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -16479,7 +16470,7 @@ describe('v1.VmwareEngineClient', () => {
     });
     it('invokes testIamPermissions without error using callback', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -16517,7 +16508,7 @@ describe('v1.VmwareEngineClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -16527,7 +16518,7 @@ describe('v1.VmwareEngineClient', () => {
     });
     it('invokes testIamPermissions with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -16562,7 +16553,7 @@ describe('v1.VmwareEngineClient', () => {
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -16592,7 +16583,7 @@ describe('v1.VmwareEngineClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -16636,7 +16627,7 @@ describe('v1.VmwareEngineClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -16671,7 +16662,7 @@ describe('v1.VmwareEngineClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -16719,7 +16710,7 @@ describe('v1.VmwareEngineClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -16760,7 +16751,7 @@ describe('v1.VmwareEngineClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -16781,7 +16772,7 @@ describe('v1.VmwareEngineClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -16809,7 +16800,7 @@ describe('v1.VmwareEngineClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -16819,7 +16810,7 @@ describe('v1.VmwareEngineClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -16843,7 +16834,7 @@ describe('v1.VmwareEngineClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -16865,7 +16856,7 @@ describe('v1.VmwareEngineClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -16893,7 +16884,7 @@ describe('v1.VmwareEngineClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -16903,7 +16894,7 @@ describe('v1.VmwareEngineClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -16927,7 +16918,7 @@ describe('v1.VmwareEngineClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -16949,7 +16940,7 @@ describe('v1.VmwareEngineClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -16977,7 +16968,7 @@ describe('v1.VmwareEngineClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -16987,7 +16978,7 @@ describe('v1.VmwareEngineClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -17011,7 +17002,7 @@ describe('v1.VmwareEngineClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -17046,7 +17037,7 @@ describe('v1.VmwareEngineClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -17083,7 +17074,7 @@ describe('v1.VmwareEngineClient', () => {
         cluster: 'clusterValue',
       };
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -17157,7 +17148,7 @@ describe('v1.VmwareEngineClient', () => {
         location: 'locationValue',
       };
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -17219,7 +17210,7 @@ describe('v1.VmwareEngineClient', () => {
         private_cloud: 'privateCloudValue',
       };
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -17284,7 +17275,7 @@ describe('v1.VmwareEngineClient', () => {
         external_access_rule: 'externalAccessRuleValue',
       };
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -17377,7 +17368,7 @@ describe('v1.VmwareEngineClient', () => {
         external_address: 'externalAddressValue',
       };
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -17455,7 +17446,7 @@ describe('v1.VmwareEngineClient', () => {
         hcx_activation_key: 'hcxActivationKeyValue',
       };
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -17534,7 +17525,7 @@ describe('v1.VmwareEngineClient', () => {
         location: 'locationValue',
       };
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -17585,7 +17576,7 @@ describe('v1.VmwareEngineClient', () => {
         logging_server: 'loggingServerValue',
       };
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -17661,7 +17652,7 @@ describe('v1.VmwareEngineClient', () => {
         management_dns_zone_binding: 'managementDnsZoneBindingValue',
       };
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -17757,7 +17748,7 @@ describe('v1.VmwareEngineClient', () => {
         network_peering: 'networkPeeringValue',
       };
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -17822,7 +17813,7 @@ describe('v1.VmwareEngineClient', () => {
         network_policy: 'networkPolicyValue',
       };
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -17888,7 +17879,7 @@ describe('v1.VmwareEngineClient', () => {
         node: 'nodeValue',
       };
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -17974,7 +17965,7 @@ describe('v1.VmwareEngineClient', () => {
         node_type: 'nodeTypeValue',
       };
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -18038,7 +18029,7 @@ describe('v1.VmwareEngineClient', () => {
         private_cloud: 'privateCloudValue',
       };
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -18102,7 +18093,7 @@ describe('v1.VmwareEngineClient', () => {
         private_connection: 'privateConnectionValue',
       };
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -18177,7 +18168,7 @@ describe('v1.VmwareEngineClient', () => {
         project: 'projectValue',
       };
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -18218,7 +18209,7 @@ describe('v1.VmwareEngineClient', () => {
         subnet: 'subnetValue',
       };
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -18293,7 +18284,7 @@ describe('v1.VmwareEngineClient', () => {
         vmware_engine_network: 'vmwareEngineNetworkValue',
       };
       const client = new vmwareengineModule.v1.VmwareEngineClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

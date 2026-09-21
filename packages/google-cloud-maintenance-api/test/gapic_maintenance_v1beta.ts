@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as maintenanceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, LocationProtos } from 'google-gax';
+import {protobuf, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -239,7 +239,7 @@ describe('v1beta.MaintenanceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new maintenanceModule.v1beta.MaintenanceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.maintenanceStub, undefined);
@@ -247,12 +247,12 @@ describe('v1beta.MaintenanceClient', () => {
       assert(client.maintenanceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new maintenanceModule.v1beta.MaintenanceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.maintenanceStub);
@@ -261,14 +261,14 @@ describe('v1beta.MaintenanceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new maintenanceModule.v1beta.MaintenanceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.maintenanceStub, undefined);
@@ -277,7 +277,7 @@ describe('v1beta.MaintenanceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -285,7 +285,7 @@ describe('v1beta.MaintenanceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new maintenanceModule.v1beta.MaintenanceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -297,7 +297,7 @@ describe('v1beta.MaintenanceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new maintenanceModule.v1beta.MaintenanceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -320,7 +320,7 @@ describe('v1beta.MaintenanceClient', () => {
   describe('getResourceMaintenance', () => {
     it('invokes getResourceMaintenance without error', async () => {
       const client = new maintenanceModule.v1beta.MaintenanceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -352,7 +352,7 @@ describe('v1beta.MaintenanceClient', () => {
 
     it('invokes getResourceMaintenance without error using callback', async () => {
       const client = new maintenanceModule.v1beta.MaintenanceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -399,7 +399,7 @@ describe('v1beta.MaintenanceClient', () => {
 
     it('invokes getResourceMaintenance with error', async () => {
       const client = new maintenanceModule.v1beta.MaintenanceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -433,7 +433,7 @@ describe('v1beta.MaintenanceClient', () => {
 
     it('invokes getResourceMaintenance with closed client', async () => {
       const client = new maintenanceModule.v1beta.MaintenanceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -446,7 +446,7 @@ describe('v1beta.MaintenanceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -459,7 +459,7 @@ describe('v1beta.MaintenanceClient', () => {
   describe('summarizeMaintenances', () => {
     it('invokes summarizeMaintenances without error', async () => {
       const client = new maintenanceModule.v1beta.MaintenanceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -499,7 +499,7 @@ describe('v1beta.MaintenanceClient', () => {
 
     it('invokes summarizeMaintenances without error using callback', async () => {
       const client = new maintenanceModule.v1beta.MaintenanceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -556,7 +556,7 @@ describe('v1beta.MaintenanceClient', () => {
 
     it('invokes summarizeMaintenances with error', async () => {
       const client = new maintenanceModule.v1beta.MaintenanceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -590,7 +590,7 @@ describe('v1beta.MaintenanceClient', () => {
 
     it('invokes summarizeMaintenancesStream without error', async () => {
       const client = new maintenanceModule.v1beta.MaintenanceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -659,7 +659,7 @@ describe('v1beta.MaintenanceClient', () => {
 
     it('invokes summarizeMaintenancesStream with error', async () => {
       const client = new maintenanceModule.v1beta.MaintenanceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -717,7 +717,7 @@ describe('v1beta.MaintenanceClient', () => {
 
     it('uses async iteration with summarizeMaintenances without error', async () => {
       const client = new maintenanceModule.v1beta.MaintenanceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -771,7 +771,7 @@ describe('v1beta.MaintenanceClient', () => {
 
     it('uses async iteration with summarizeMaintenances with error', async () => {
       const client = new maintenanceModule.v1beta.MaintenanceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -818,7 +818,7 @@ describe('v1beta.MaintenanceClient', () => {
   describe('listResourceMaintenances', () => {
     it('invokes listResourceMaintenances without error', async () => {
       const client = new maintenanceModule.v1beta.MaintenanceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -858,7 +858,7 @@ describe('v1beta.MaintenanceClient', () => {
 
     it('invokes listResourceMaintenances without error using callback', async () => {
       const client = new maintenanceModule.v1beta.MaintenanceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -915,7 +915,7 @@ describe('v1beta.MaintenanceClient', () => {
 
     it('invokes listResourceMaintenances with error', async () => {
       const client = new maintenanceModule.v1beta.MaintenanceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -949,7 +949,7 @@ describe('v1beta.MaintenanceClient', () => {
 
     it('invokes listResourceMaintenancesStream without error', async () => {
       const client = new maintenanceModule.v1beta.MaintenanceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1018,7 +1018,7 @@ describe('v1beta.MaintenanceClient', () => {
 
     it('invokes listResourceMaintenancesStream with error', async () => {
       const client = new maintenanceModule.v1beta.MaintenanceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1076,7 +1076,7 @@ describe('v1beta.MaintenanceClient', () => {
 
     it('uses async iteration with listResourceMaintenances without error', async () => {
       const client = new maintenanceModule.v1beta.MaintenanceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1130,7 +1130,7 @@ describe('v1beta.MaintenanceClient', () => {
 
     it('uses async iteration with listResourceMaintenances with error', async () => {
       const client = new maintenanceModule.v1beta.MaintenanceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1176,7 +1176,7 @@ describe('v1beta.MaintenanceClient', () => {
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new maintenanceModule.v1beta.MaintenanceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1206,7 +1206,7 @@ describe('v1beta.MaintenanceClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new maintenanceModule.v1beta.MaintenanceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1250,7 +1250,7 @@ describe('v1beta.MaintenanceClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new maintenanceModule.v1beta.MaintenanceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1285,7 +1285,7 @@ describe('v1beta.MaintenanceClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new maintenanceModule.v1beta.MaintenanceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1333,7 +1333,7 @@ describe('v1beta.MaintenanceClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new maintenanceModule.v1beta.MaintenanceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1380,7 +1380,7 @@ describe('v1beta.MaintenanceClient', () => {
         location: 'locationValue',
       };
       const client = new maintenanceModule.v1beta.MaintenanceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1428,7 +1428,7 @@ describe('v1beta.MaintenanceClient', () => {
         project: 'projectValue',
       };
       const client = new maintenanceModule.v1beta.MaintenanceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1468,7 +1468,7 @@ describe('v1beta.MaintenanceClient', () => {
         resource_maintenance: 'resourceMaintenanceValue',
       };
       const client = new maintenanceModule.v1beta.MaintenanceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

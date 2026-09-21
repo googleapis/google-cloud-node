@@ -168,6 +168,16 @@
               "methods": [
                 "calendarMode"
               ]
+            },
+            "Capacity": {
+              "methods": [
+                "capacity"
+              ]
+            },
+            "CapacityHistory": {
+              "methods": [
+                "capacityHistory"
+              ]
             }
           }
         },
@@ -177,6 +187,16 @@
             "CalendarMode": {
               "methods": [
                 "calendarMode"
+              ]
+            },
+            "Capacity": {
+              "methods": [
+                "capacity"
+              ]
+            },
+            "CapacityHistory": {
+              "methods": [
+                "capacityHistory"
               ]
             }
           }
@@ -6049,6 +6069,30 @@
         }
       }
     },
+    "ProjectViews": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ProjectViewsClient",
+          "rpcs": {
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ProjectViewsClient",
+          "rpcs": {
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            }
+          }
+        }
+      }
+    },
     "PublicAdvertisedPrefixes": {
       "clients": {
         "grpc": {
@@ -9475,6 +9519,11 @@
                 "get"
               ]
             },
+            "GetHealth": {
+              "methods": [
+                "getHealth"
+              ]
+            },
             "GetVersion": {
               "methods": [
                 "getVersion"
@@ -9500,6 +9549,11 @@
             "Get": {
               "methods": [
                 "get"
+              ]
+            },
+            "GetHealth": {
+              "methods": [
+                "getHealth"
               ]
             },
             "GetVersion": {

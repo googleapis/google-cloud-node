@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as bigtableModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -197,7 +197,7 @@ describe('v2.BigtableClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new bigtableModule.v2.BigtableClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.bigtableStub, undefined);
@@ -205,12 +205,12 @@ describe('v2.BigtableClient', () => {
       assert(client.bigtableStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new bigtableModule.v2.BigtableClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.bigtableStub);
@@ -219,14 +219,14 @@ describe('v2.BigtableClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new bigtableModule.v2.BigtableClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.bigtableStub, undefined);
@@ -235,7 +235,7 @@ describe('v2.BigtableClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -243,7 +243,7 @@ describe('v2.BigtableClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new bigtableModule.v2.BigtableClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -255,7 +255,7 @@ describe('v2.BigtableClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new bigtableModule.v2.BigtableClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -278,7 +278,7 @@ describe('v2.BigtableClient', () => {
   describe('mutateRow', () => {
     it('invokes mutateRow without error', async () => {
       const client = new bigtableModule.v2.BigtableClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -308,7 +308,7 @@ describe('v2.BigtableClient', () => {
 
     it('invokes mutateRow without error using callback', async () => {
       const client = new bigtableModule.v2.BigtableClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -354,7 +354,7 @@ describe('v2.BigtableClient', () => {
 
     it('invokes mutateRow with error', async () => {
       const client = new bigtableModule.v2.BigtableClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -381,7 +381,7 @@ describe('v2.BigtableClient', () => {
 
     it('invokes mutateRow with closed client', async () => {
       const client = new bigtableModule.v2.BigtableClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -392,7 +392,7 @@ describe('v2.BigtableClient', () => {
       request.authorizedViewName =
         'projects/value/instances/value/tables/value/value';
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.mutateRow(request), expectedError);
@@ -402,7 +402,7 @@ describe('v2.BigtableClient', () => {
   describe('checkAndMutateRow', () => {
     it('invokes checkAndMutateRow without error', async () => {
       const client = new bigtableModule.v2.BigtableClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -432,7 +432,7 @@ describe('v2.BigtableClient', () => {
 
     it('invokes checkAndMutateRow without error using callback', async () => {
       const client = new bigtableModule.v2.BigtableClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -478,7 +478,7 @@ describe('v2.BigtableClient', () => {
 
     it('invokes checkAndMutateRow with error', async () => {
       const client = new bigtableModule.v2.BigtableClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -508,7 +508,7 @@ describe('v2.BigtableClient', () => {
 
     it('invokes checkAndMutateRow with closed client', async () => {
       const client = new bigtableModule.v2.BigtableClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -519,7 +519,7 @@ describe('v2.BigtableClient', () => {
       request.authorizedViewName =
         'projects/value/instances/value/tables/value/value';
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.checkAndMutateRow(request), expectedError);
@@ -529,7 +529,7 @@ describe('v2.BigtableClient', () => {
   describe('pingAndWarm', () => {
     it('invokes pingAndWarm without error', async () => {
       const client = new bigtableModule.v2.BigtableClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -557,7 +557,7 @@ describe('v2.BigtableClient', () => {
 
     it('invokes pingAndWarm without error using callback', async () => {
       const client = new bigtableModule.v2.BigtableClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -601,7 +601,7 @@ describe('v2.BigtableClient', () => {
 
     it('invokes pingAndWarm with error', async () => {
       const client = new bigtableModule.v2.BigtableClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -629,7 +629,7 @@ describe('v2.BigtableClient', () => {
 
     it('invokes pingAndWarm with closed client', async () => {
       const client = new bigtableModule.v2.BigtableClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -639,7 +639,7 @@ describe('v2.BigtableClient', () => {
       // path template is empty
       request.appProfileId = 'value';
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.pingAndWarm(request), expectedError);
@@ -649,7 +649,7 @@ describe('v2.BigtableClient', () => {
   describe('readModifyWriteRow', () => {
     it('invokes readModifyWriteRow without error', async () => {
       const client = new bigtableModule.v2.BigtableClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -680,7 +680,7 @@ describe('v2.BigtableClient', () => {
 
     it('invokes readModifyWriteRow without error using callback', async () => {
       const client = new bigtableModule.v2.BigtableClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -726,7 +726,7 @@ describe('v2.BigtableClient', () => {
 
     it('invokes readModifyWriteRow with error', async () => {
       const client = new bigtableModule.v2.BigtableClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -756,7 +756,7 @@ describe('v2.BigtableClient', () => {
 
     it('invokes readModifyWriteRow with closed client', async () => {
       const client = new bigtableModule.v2.BigtableClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -767,7 +767,7 @@ describe('v2.BigtableClient', () => {
       request.authorizedViewName =
         'projects/value/instances/value/tables/value/value';
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.readModifyWriteRow(request), expectedError);
@@ -777,7 +777,7 @@ describe('v2.BigtableClient', () => {
   describe('prepareQuery', () => {
     it('invokes prepareQuery without error', async () => {
       const client = new bigtableModule.v2.BigtableClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -805,7 +805,7 @@ describe('v2.BigtableClient', () => {
 
     it('invokes prepareQuery without error using callback', async () => {
       const client = new bigtableModule.v2.BigtableClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -849,7 +849,7 @@ describe('v2.BigtableClient', () => {
 
     it('invokes prepareQuery with error', async () => {
       const client = new bigtableModule.v2.BigtableClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -877,7 +877,7 @@ describe('v2.BigtableClient', () => {
 
     it('invokes prepareQuery with closed client', async () => {
       const client = new bigtableModule.v2.BigtableClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -887,7 +887,7 @@ describe('v2.BigtableClient', () => {
       // path template is empty
       request.appProfileId = 'value';
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.prepareQuery(request), expectedError);
@@ -897,7 +897,7 @@ describe('v2.BigtableClient', () => {
   describe('readRows', () => {
     it('invokes readRows without error', async () => {
       const client = new bigtableModule.v2.BigtableClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -938,7 +938,7 @@ describe('v2.BigtableClient', () => {
 
     it('invokes readRows without error and gaxServerStreamingRetries enabled', async () => {
       const client = new bigtableModule.v2.BigtableClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
         gaxServerStreamingRetries: true,
       });
@@ -980,7 +980,7 @@ describe('v2.BigtableClient', () => {
 
     it('invokes readRows with error', async () => {
       const client = new bigtableModule.v2.BigtableClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1021,7 +1021,7 @@ describe('v2.BigtableClient', () => {
 
     it('invokes readRows with closed client', async () => {
       const client = new bigtableModule.v2.BigtableClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1031,11 +1031,11 @@ describe('v2.BigtableClient', () => {
       // path template: {name=projects/*/instances/*}/**
       request.materializedViewName = 'projects/value/instances/value/value';
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       const stream = client.readRows(request, {
-        retryRequestOptions: { noResponseRetries: 0 },
+        retryRequestOptions: {noResponseRetries: 0},
       });
       const promise = new Promise((resolve, reject) => {
         stream.on(
@@ -1061,7 +1061,7 @@ describe('v2.BigtableClient', () => {
   describe('sampleRowKeys', () => {
     it('invokes sampleRowKeys without error', async () => {
       const client = new bigtableModule.v2.BigtableClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1103,7 +1103,7 @@ describe('v2.BigtableClient', () => {
 
     it('invokes sampleRowKeys without error and gaxServerStreamingRetries enabled', async () => {
       const client = new bigtableModule.v2.BigtableClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
         gaxServerStreamingRetries: true,
       });
@@ -1146,7 +1146,7 @@ describe('v2.BigtableClient', () => {
 
     it('invokes sampleRowKeys with error', async () => {
       const client = new bigtableModule.v2.BigtableClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1187,7 +1187,7 @@ describe('v2.BigtableClient', () => {
 
     it('invokes sampleRowKeys with closed client', async () => {
       const client = new bigtableModule.v2.BigtableClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1197,11 +1197,11 @@ describe('v2.BigtableClient', () => {
       // path template: {name=projects/*/instances/*}/**
       request.materializedViewName = 'projects/value/instances/value/value';
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       const stream = client.sampleRowKeys(request, {
-        retryRequestOptions: { noResponseRetries: 0 },
+        retryRequestOptions: {noResponseRetries: 0},
       });
       const promise = new Promise((resolve, reject) => {
         stream.on(
@@ -1227,7 +1227,7 @@ describe('v2.BigtableClient', () => {
   describe('mutateRows', () => {
     it('invokes mutateRows without error', async () => {
       const client = new bigtableModule.v2.BigtableClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1270,7 +1270,7 @@ describe('v2.BigtableClient', () => {
 
     it('invokes mutateRows without error and gaxServerStreamingRetries enabled', async () => {
       const client = new bigtableModule.v2.BigtableClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
         gaxServerStreamingRetries: true,
       });
@@ -1314,7 +1314,7 @@ describe('v2.BigtableClient', () => {
 
     it('invokes mutateRows with error', async () => {
       const client = new bigtableModule.v2.BigtableClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1356,7 +1356,7 @@ describe('v2.BigtableClient', () => {
 
     it('invokes mutateRows with closed client', async () => {
       const client = new bigtableModule.v2.BigtableClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1367,11 +1367,11 @@ describe('v2.BigtableClient', () => {
       request.authorizedViewName =
         'projects/value/instances/value/tables/value/value';
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       const stream = client.mutateRows(request, {
-        retryRequestOptions: { noResponseRetries: 0 },
+        retryRequestOptions: {noResponseRetries: 0},
       });
       const promise = new Promise((resolve, reject) => {
         stream.on(
@@ -1397,7 +1397,7 @@ describe('v2.BigtableClient', () => {
   describe('generateInitialChangeStreamPartitions', () => {
     it('invokes generateInitialChangeStreamPartitions without error', async () => {
       const client = new bigtableModule.v2.BigtableClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1443,7 +1443,7 @@ describe('v2.BigtableClient', () => {
 
     it('invokes generateInitialChangeStreamPartitions without error and gaxServerStreamingRetries enabled', async () => {
       const client = new bigtableModule.v2.BigtableClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
         gaxServerStreamingRetries: true,
       });
@@ -1490,7 +1490,7 @@ describe('v2.BigtableClient', () => {
 
     it('invokes generateInitialChangeStreamPartitions with error', async () => {
       const client = new bigtableModule.v2.BigtableClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1533,7 +1533,7 @@ describe('v2.BigtableClient', () => {
 
     it('invokes generateInitialChangeStreamPartitions with closed client', async () => {
       const client = new bigtableModule.v2.BigtableClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1546,11 +1546,11 @@ describe('v2.BigtableClient', () => {
       );
       request.tableName = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       const stream = client.generateInitialChangeStreamPartitions(request, {
-        retryRequestOptions: { noResponseRetries: 0 },
+        retryRequestOptions: {noResponseRetries: 0},
       });
       const promise = new Promise((resolve, reject) => {
         stream.on(
@@ -1578,7 +1578,7 @@ describe('v2.BigtableClient', () => {
   describe('readChangeStream', () => {
     it('invokes readChangeStream without error', async () => {
       const client = new bigtableModule.v2.BigtableClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1622,7 +1622,7 @@ describe('v2.BigtableClient', () => {
 
     it('invokes readChangeStream without error and gaxServerStreamingRetries enabled', async () => {
       const client = new bigtableModule.v2.BigtableClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
         gaxServerStreamingRetries: true,
       });
@@ -1667,7 +1667,7 @@ describe('v2.BigtableClient', () => {
 
     it('invokes readChangeStream with error', async () => {
       const client = new bigtableModule.v2.BigtableClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1710,7 +1710,7 @@ describe('v2.BigtableClient', () => {
 
     it('invokes readChangeStream with closed client', async () => {
       const client = new bigtableModule.v2.BigtableClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1723,11 +1723,11 @@ describe('v2.BigtableClient', () => {
       );
       request.tableName = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       const stream = client.readChangeStream(request, {
-        retryRequestOptions: { noResponseRetries: 0 },
+        retryRequestOptions: {noResponseRetries: 0},
       });
       const promise = new Promise((resolve, reject) => {
         stream.on(
@@ -1753,7 +1753,7 @@ describe('v2.BigtableClient', () => {
   describe('executeQuery', () => {
     it('invokes executeQuery without error', async () => {
       const client = new bigtableModule.v2.BigtableClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1794,7 +1794,7 @@ describe('v2.BigtableClient', () => {
 
     it('invokes executeQuery without error and gaxServerStreamingRetries enabled', async () => {
       const client = new bigtableModule.v2.BigtableClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
         gaxServerStreamingRetries: true,
       });
@@ -1836,7 +1836,7 @@ describe('v2.BigtableClient', () => {
 
     it('invokes executeQuery with error', async () => {
       const client = new bigtableModule.v2.BigtableClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1876,7 +1876,7 @@ describe('v2.BigtableClient', () => {
 
     it('invokes executeQuery with closed client', async () => {
       const client = new bigtableModule.v2.BigtableClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1886,11 +1886,11 @@ describe('v2.BigtableClient', () => {
       // path template is empty
       request.appProfileId = 'value';
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       const stream = client.executeQuery(request, {
-        retryRequestOptions: { noResponseRetries: 0 },
+        retryRequestOptions: {noResponseRetries: 0},
       });
       const promise = new Promise((resolve, reject) => {
         stream.on(
@@ -1923,7 +1923,7 @@ describe('v2.BigtableClient', () => {
         authorized_view: 'authorizedViewValue',
       };
       const client = new bigtableModule.v2.BigtableClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1998,7 +1998,7 @@ describe('v2.BigtableClient', () => {
         instance: 'instanceValue',
       };
       const client = new bigtableModule.v2.BigtableClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2048,7 +2048,7 @@ describe('v2.BigtableClient', () => {
         materialized_view: 'materializedViewValue',
       };
       const client = new bigtableModule.v2.BigtableClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2116,7 +2116,7 @@ describe('v2.BigtableClient', () => {
         table: 'tableValue',
       };
       const client = new bigtableModule.v2.BigtableClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

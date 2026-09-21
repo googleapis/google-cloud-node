@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as websecurityscannerModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -252,7 +252,7 @@ describe('v1beta.WebSecurityScannerClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client =
         new websecurityscannerModule.v1beta.WebSecurityScannerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.webSecurityScannerStub, undefined);
@@ -260,13 +260,13 @@ describe('v1beta.WebSecurityScannerClient', () => {
       assert(client.webSecurityScannerStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new websecurityscannerModule.v1beta.WebSecurityScannerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.webSecurityScannerStub);
@@ -275,15 +275,15 @@ describe('v1beta.WebSecurityScannerClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new websecurityscannerModule.v1beta.WebSecurityScannerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.webSecurityScannerStub, undefined);
@@ -292,7 +292,7 @@ describe('v1beta.WebSecurityScannerClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -301,7 +301,7 @@ describe('v1beta.WebSecurityScannerClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new websecurityscannerModule.v1beta.WebSecurityScannerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -314,7 +314,7 @@ describe('v1beta.WebSecurityScannerClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new websecurityscannerModule.v1beta.WebSecurityScannerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon
@@ -338,7 +338,7 @@ describe('v1beta.WebSecurityScannerClient', () => {
     it('invokes createScanConfig without error', async () => {
       const client =
         new websecurityscannerModule.v1beta.WebSecurityScannerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -370,7 +370,7 @@ describe('v1beta.WebSecurityScannerClient', () => {
     it('invokes createScanConfig without error using callback', async () => {
       const client =
         new websecurityscannerModule.v1beta.WebSecurityScannerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -418,7 +418,7 @@ describe('v1beta.WebSecurityScannerClient', () => {
     it('invokes createScanConfig with error', async () => {
       const client =
         new websecurityscannerModule.v1beta.WebSecurityScannerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -450,7 +450,7 @@ describe('v1beta.WebSecurityScannerClient', () => {
     it('invokes createScanConfig with closed client', async () => {
       const client =
         new websecurityscannerModule.v1beta.WebSecurityScannerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -463,7 +463,7 @@ describe('v1beta.WebSecurityScannerClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createScanConfig(request), expectedError);
@@ -474,7 +474,7 @@ describe('v1beta.WebSecurityScannerClient', () => {
     it('invokes deleteScanConfig without error', async () => {
       const client =
         new websecurityscannerModule.v1beta.WebSecurityScannerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -506,7 +506,7 @@ describe('v1beta.WebSecurityScannerClient', () => {
     it('invokes deleteScanConfig without error using callback', async () => {
       const client =
         new websecurityscannerModule.v1beta.WebSecurityScannerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -554,7 +554,7 @@ describe('v1beta.WebSecurityScannerClient', () => {
     it('invokes deleteScanConfig with error', async () => {
       const client =
         new websecurityscannerModule.v1beta.WebSecurityScannerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -586,7 +586,7 @@ describe('v1beta.WebSecurityScannerClient', () => {
     it('invokes deleteScanConfig with closed client', async () => {
       const client =
         new websecurityscannerModule.v1beta.WebSecurityScannerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -599,7 +599,7 @@ describe('v1beta.WebSecurityScannerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteScanConfig(request), expectedError);
@@ -610,7 +610,7 @@ describe('v1beta.WebSecurityScannerClient', () => {
     it('invokes getScanConfig without error', async () => {
       const client =
         new websecurityscannerModule.v1beta.WebSecurityScannerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -642,7 +642,7 @@ describe('v1beta.WebSecurityScannerClient', () => {
     it('invokes getScanConfig without error using callback', async () => {
       const client =
         new websecurityscannerModule.v1beta.WebSecurityScannerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -690,7 +690,7 @@ describe('v1beta.WebSecurityScannerClient', () => {
     it('invokes getScanConfig with error', async () => {
       const client =
         new websecurityscannerModule.v1beta.WebSecurityScannerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -722,7 +722,7 @@ describe('v1beta.WebSecurityScannerClient', () => {
     it('invokes getScanConfig with closed client', async () => {
       const client =
         new websecurityscannerModule.v1beta.WebSecurityScannerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -735,7 +735,7 @@ describe('v1beta.WebSecurityScannerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getScanConfig(request), expectedError);
@@ -746,7 +746,7 @@ describe('v1beta.WebSecurityScannerClient', () => {
     it('invokes updateScanConfig without error', async () => {
       const client =
         new websecurityscannerModule.v1beta.WebSecurityScannerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -779,7 +779,7 @@ describe('v1beta.WebSecurityScannerClient', () => {
     it('invokes updateScanConfig without error using callback', async () => {
       const client =
         new websecurityscannerModule.v1beta.WebSecurityScannerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -828,7 +828,7 @@ describe('v1beta.WebSecurityScannerClient', () => {
     it('invokes updateScanConfig with error', async () => {
       const client =
         new websecurityscannerModule.v1beta.WebSecurityScannerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -861,7 +861,7 @@ describe('v1beta.WebSecurityScannerClient', () => {
     it('invokes updateScanConfig with closed client', async () => {
       const client =
         new websecurityscannerModule.v1beta.WebSecurityScannerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -875,7 +875,7 @@ describe('v1beta.WebSecurityScannerClient', () => {
       );
       request.scanConfig.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateScanConfig(request), expectedError);
@@ -886,7 +886,7 @@ describe('v1beta.WebSecurityScannerClient', () => {
     it('invokes startScanRun without error', async () => {
       const client =
         new websecurityscannerModule.v1beta.WebSecurityScannerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -918,7 +918,7 @@ describe('v1beta.WebSecurityScannerClient', () => {
     it('invokes startScanRun without error using callback', async () => {
       const client =
         new websecurityscannerModule.v1beta.WebSecurityScannerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -966,7 +966,7 @@ describe('v1beta.WebSecurityScannerClient', () => {
     it('invokes startScanRun with error', async () => {
       const client =
         new websecurityscannerModule.v1beta.WebSecurityScannerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -998,7 +998,7 @@ describe('v1beta.WebSecurityScannerClient', () => {
     it('invokes startScanRun with closed client', async () => {
       const client =
         new websecurityscannerModule.v1beta.WebSecurityScannerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1011,7 +1011,7 @@ describe('v1beta.WebSecurityScannerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.startScanRun(request), expectedError);
@@ -1022,7 +1022,7 @@ describe('v1beta.WebSecurityScannerClient', () => {
     it('invokes getScanRun without error', async () => {
       const client =
         new websecurityscannerModule.v1beta.WebSecurityScannerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1054,7 +1054,7 @@ describe('v1beta.WebSecurityScannerClient', () => {
     it('invokes getScanRun without error using callback', async () => {
       const client =
         new websecurityscannerModule.v1beta.WebSecurityScannerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1102,7 +1102,7 @@ describe('v1beta.WebSecurityScannerClient', () => {
     it('invokes getScanRun with error', async () => {
       const client =
         new websecurityscannerModule.v1beta.WebSecurityScannerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1134,7 +1134,7 @@ describe('v1beta.WebSecurityScannerClient', () => {
     it('invokes getScanRun with closed client', async () => {
       const client =
         new websecurityscannerModule.v1beta.WebSecurityScannerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1147,7 +1147,7 @@ describe('v1beta.WebSecurityScannerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getScanRun(request), expectedError);
@@ -1158,7 +1158,7 @@ describe('v1beta.WebSecurityScannerClient', () => {
     it('invokes stopScanRun without error', async () => {
       const client =
         new websecurityscannerModule.v1beta.WebSecurityScannerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1190,7 +1190,7 @@ describe('v1beta.WebSecurityScannerClient', () => {
     it('invokes stopScanRun without error using callback', async () => {
       const client =
         new websecurityscannerModule.v1beta.WebSecurityScannerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1238,7 +1238,7 @@ describe('v1beta.WebSecurityScannerClient', () => {
     it('invokes stopScanRun with error', async () => {
       const client =
         new websecurityscannerModule.v1beta.WebSecurityScannerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1270,7 +1270,7 @@ describe('v1beta.WebSecurityScannerClient', () => {
     it('invokes stopScanRun with closed client', async () => {
       const client =
         new websecurityscannerModule.v1beta.WebSecurityScannerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1283,7 +1283,7 @@ describe('v1beta.WebSecurityScannerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.stopScanRun(request), expectedError);
@@ -1294,7 +1294,7 @@ describe('v1beta.WebSecurityScannerClient', () => {
     it('invokes getFinding without error', async () => {
       const client =
         new websecurityscannerModule.v1beta.WebSecurityScannerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1326,7 +1326,7 @@ describe('v1beta.WebSecurityScannerClient', () => {
     it('invokes getFinding without error using callback', async () => {
       const client =
         new websecurityscannerModule.v1beta.WebSecurityScannerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1374,7 +1374,7 @@ describe('v1beta.WebSecurityScannerClient', () => {
     it('invokes getFinding with error', async () => {
       const client =
         new websecurityscannerModule.v1beta.WebSecurityScannerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1406,7 +1406,7 @@ describe('v1beta.WebSecurityScannerClient', () => {
     it('invokes getFinding with closed client', async () => {
       const client =
         new websecurityscannerModule.v1beta.WebSecurityScannerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1419,7 +1419,7 @@ describe('v1beta.WebSecurityScannerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getFinding(request), expectedError);
@@ -1430,7 +1430,7 @@ describe('v1beta.WebSecurityScannerClient', () => {
     it('invokes listFindingTypeStats without error', async () => {
       const client =
         new websecurityscannerModule.v1beta.WebSecurityScannerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1463,7 +1463,7 @@ describe('v1beta.WebSecurityScannerClient', () => {
     it('invokes listFindingTypeStats without error using callback', async () => {
       const client =
         new websecurityscannerModule.v1beta.WebSecurityScannerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1511,7 +1511,7 @@ describe('v1beta.WebSecurityScannerClient', () => {
     it('invokes listFindingTypeStats with error', async () => {
       const client =
         new websecurityscannerModule.v1beta.WebSecurityScannerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1543,7 +1543,7 @@ describe('v1beta.WebSecurityScannerClient', () => {
     it('invokes listFindingTypeStats with closed client', async () => {
       const client =
         new websecurityscannerModule.v1beta.WebSecurityScannerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1556,7 +1556,7 @@ describe('v1beta.WebSecurityScannerClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.listFindingTypeStats(request), expectedError);
@@ -1567,7 +1567,7 @@ describe('v1beta.WebSecurityScannerClient', () => {
     it('invokes listScanConfigs without error', async () => {
       const client =
         new websecurityscannerModule.v1beta.WebSecurityScannerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1607,7 +1607,7 @@ describe('v1beta.WebSecurityScannerClient', () => {
     it('invokes listScanConfigs without error using callback', async () => {
       const client =
         new websecurityscannerModule.v1beta.WebSecurityScannerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1665,7 +1665,7 @@ describe('v1beta.WebSecurityScannerClient', () => {
     it('invokes listScanConfigs with error', async () => {
       const client =
         new websecurityscannerModule.v1beta.WebSecurityScannerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1697,7 +1697,7 @@ describe('v1beta.WebSecurityScannerClient', () => {
     it('invokes listScanConfigsStream without error', async () => {
       const client =
         new websecurityscannerModule.v1beta.WebSecurityScannerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1752,16 +1752,16 @@ describe('v1beta.WebSecurityScannerClient', () => {
       assert(
         (client.descriptors.page.listScanConfigs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listScanConfigsStream with error', async () => {
       const client =
         new websecurityscannerModule.v1beta.WebSecurityScannerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1805,16 +1805,16 @@ describe('v1beta.WebSecurityScannerClient', () => {
       assert(
         (client.descriptors.page.listScanConfigs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listScanConfigs without error', async () => {
       const client =
         new websecurityscannerModule.v1beta.WebSecurityScannerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1856,16 +1856,16 @@ describe('v1beta.WebSecurityScannerClient', () => {
       assert(
         (client.descriptors.page.listScanConfigs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listScanConfigs with error', async () => {
       const client =
         new websecurityscannerModule.v1beta.WebSecurityScannerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1898,9 +1898,9 @@ describe('v1beta.WebSecurityScannerClient', () => {
       assert(
         (client.descriptors.page.listScanConfigs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1909,7 +1909,7 @@ describe('v1beta.WebSecurityScannerClient', () => {
     it('invokes listScanRuns without error', async () => {
       const client =
         new websecurityscannerModule.v1beta.WebSecurityScannerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1949,7 +1949,7 @@ describe('v1beta.WebSecurityScannerClient', () => {
     it('invokes listScanRuns without error using callback', async () => {
       const client =
         new websecurityscannerModule.v1beta.WebSecurityScannerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1981,8 +1981,7 @@ describe('v1beta.WebSecurityScannerClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.websecurityscanner.v1beta.IScanRun[]
-              | null,
+              protos.google.cloud.websecurityscanner.v1beta.IScanRun[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -2007,7 +2006,7 @@ describe('v1beta.WebSecurityScannerClient', () => {
     it('invokes listScanRuns with error', async () => {
       const client =
         new websecurityscannerModule.v1beta.WebSecurityScannerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2039,7 +2038,7 @@ describe('v1beta.WebSecurityScannerClient', () => {
     it('invokes listScanRunsStream without error', async () => {
       const client =
         new websecurityscannerModule.v1beta.WebSecurityScannerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2092,16 +2091,16 @@ describe('v1beta.WebSecurityScannerClient', () => {
       assert(
         (client.descriptors.page.listScanRuns.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listScanRunsStream with error', async () => {
       const client =
         new websecurityscannerModule.v1beta.WebSecurityScannerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2145,16 +2144,16 @@ describe('v1beta.WebSecurityScannerClient', () => {
       assert(
         (client.descriptors.page.listScanRuns.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listScanRuns without error', async () => {
       const client =
         new websecurityscannerModule.v1beta.WebSecurityScannerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2196,16 +2195,16 @@ describe('v1beta.WebSecurityScannerClient', () => {
       assert(
         (client.descriptors.page.listScanRuns.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listScanRuns with error', async () => {
       const client =
         new websecurityscannerModule.v1beta.WebSecurityScannerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2238,9 +2237,9 @@ describe('v1beta.WebSecurityScannerClient', () => {
       assert(
         (client.descriptors.page.listScanRuns.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2249,7 +2248,7 @@ describe('v1beta.WebSecurityScannerClient', () => {
     it('invokes listCrawledUrls without error', async () => {
       const client =
         new websecurityscannerModule.v1beta.WebSecurityScannerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2289,7 +2288,7 @@ describe('v1beta.WebSecurityScannerClient', () => {
     it('invokes listCrawledUrls without error using callback', async () => {
       const client =
         new websecurityscannerModule.v1beta.WebSecurityScannerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2347,7 +2346,7 @@ describe('v1beta.WebSecurityScannerClient', () => {
     it('invokes listCrawledUrls with error', async () => {
       const client =
         new websecurityscannerModule.v1beta.WebSecurityScannerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2379,7 +2378,7 @@ describe('v1beta.WebSecurityScannerClient', () => {
     it('invokes listCrawledUrlsStream without error', async () => {
       const client =
         new websecurityscannerModule.v1beta.WebSecurityScannerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2434,16 +2433,16 @@ describe('v1beta.WebSecurityScannerClient', () => {
       assert(
         (client.descriptors.page.listCrawledUrls.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listCrawledUrlsStream with error', async () => {
       const client =
         new websecurityscannerModule.v1beta.WebSecurityScannerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2487,16 +2486,16 @@ describe('v1beta.WebSecurityScannerClient', () => {
       assert(
         (client.descriptors.page.listCrawledUrls.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listCrawledUrls without error', async () => {
       const client =
         new websecurityscannerModule.v1beta.WebSecurityScannerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2538,16 +2537,16 @@ describe('v1beta.WebSecurityScannerClient', () => {
       assert(
         (client.descriptors.page.listCrawledUrls.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listCrawledUrls with error', async () => {
       const client =
         new websecurityscannerModule.v1beta.WebSecurityScannerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2580,9 +2579,9 @@ describe('v1beta.WebSecurityScannerClient', () => {
       assert(
         (client.descriptors.page.listCrawledUrls.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2591,7 +2590,7 @@ describe('v1beta.WebSecurityScannerClient', () => {
     it('invokes listFindings without error', async () => {
       const client =
         new websecurityscannerModule.v1beta.WebSecurityScannerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2631,7 +2630,7 @@ describe('v1beta.WebSecurityScannerClient', () => {
     it('invokes listFindings without error using callback', async () => {
       const client =
         new websecurityscannerModule.v1beta.WebSecurityScannerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2663,8 +2662,7 @@ describe('v1beta.WebSecurityScannerClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.websecurityscanner.v1beta.IFinding[]
-              | null,
+              protos.google.cloud.websecurityscanner.v1beta.IFinding[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -2689,7 +2687,7 @@ describe('v1beta.WebSecurityScannerClient', () => {
     it('invokes listFindings with error', async () => {
       const client =
         new websecurityscannerModule.v1beta.WebSecurityScannerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2721,7 +2719,7 @@ describe('v1beta.WebSecurityScannerClient', () => {
     it('invokes listFindingsStream without error', async () => {
       const client =
         new websecurityscannerModule.v1beta.WebSecurityScannerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2774,16 +2772,16 @@ describe('v1beta.WebSecurityScannerClient', () => {
       assert(
         (client.descriptors.page.listFindings.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listFindingsStream with error', async () => {
       const client =
         new websecurityscannerModule.v1beta.WebSecurityScannerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2827,16 +2825,16 @@ describe('v1beta.WebSecurityScannerClient', () => {
       assert(
         (client.descriptors.page.listFindings.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listFindings without error', async () => {
       const client =
         new websecurityscannerModule.v1beta.WebSecurityScannerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2878,16 +2876,16 @@ describe('v1beta.WebSecurityScannerClient', () => {
       assert(
         (client.descriptors.page.listFindings.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listFindings with error', async () => {
       const client =
         new websecurityscannerModule.v1beta.WebSecurityScannerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2920,9 +2918,9 @@ describe('v1beta.WebSecurityScannerClient', () => {
       assert(
         (client.descriptors.page.listFindings.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2938,7 +2936,7 @@ describe('v1beta.WebSecurityScannerClient', () => {
       };
       const client =
         new websecurityscannerModule.v1beta.WebSecurityScannerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3012,7 +3010,7 @@ describe('v1beta.WebSecurityScannerClient', () => {
       };
       const client =
         new websecurityscannerModule.v1beta.WebSecurityScannerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3052,7 +3050,7 @@ describe('v1beta.WebSecurityScannerClient', () => {
       };
       const client =
         new websecurityscannerModule.v1beta.WebSecurityScannerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3103,7 +3101,7 @@ describe('v1beta.WebSecurityScannerClient', () => {
       };
       const client =
         new websecurityscannerModule.v1beta.WebSecurityScannerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();

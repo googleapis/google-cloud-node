@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as monitoringModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, LocationProtos } from 'google-gax';
+import {protobuf, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -249,7 +249,7 @@ describe('v1.MonitoringClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new monitoringModule.v1.MonitoringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.monitoringStub, undefined);
@@ -257,12 +257,12 @@ describe('v1.MonitoringClient', () => {
       assert(client.monitoringStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new monitoringModule.v1.MonitoringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.monitoringStub);
@@ -271,14 +271,14 @@ describe('v1.MonitoringClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new monitoringModule.v1.MonitoringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.monitoringStub, undefined);
@@ -287,7 +287,7 @@ describe('v1.MonitoringClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -295,7 +295,7 @@ describe('v1.MonitoringClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new monitoringModule.v1.MonitoringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -307,7 +307,7 @@ describe('v1.MonitoringClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new monitoringModule.v1.MonitoringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -330,7 +330,7 @@ describe('v1.MonitoringClient', () => {
   describe('fetchFrameworkComplianceReport', () => {
     it('invokes fetchFrameworkComplianceReport without error', async () => {
       const client = new monitoringModule.v1.MonitoringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -362,7 +362,7 @@ describe('v1.MonitoringClient', () => {
 
     it('invokes fetchFrameworkComplianceReport without error using callback', async () => {
       const client = new monitoringModule.v1.MonitoringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -409,7 +409,7 @@ describe('v1.MonitoringClient', () => {
 
     it('invokes fetchFrameworkComplianceReport with error', async () => {
       const client = new monitoringModule.v1.MonitoringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -443,7 +443,7 @@ describe('v1.MonitoringClient', () => {
 
     it('invokes fetchFrameworkComplianceReport with closed client', async () => {
       const client = new monitoringModule.v1.MonitoringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -456,7 +456,7 @@ describe('v1.MonitoringClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -469,7 +469,7 @@ describe('v1.MonitoringClient', () => {
   describe('aggregateFrameworkComplianceReport', () => {
     it('invokes aggregateFrameworkComplianceReport without error', async () => {
       const client = new monitoringModule.v1.MonitoringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -502,7 +502,7 @@ describe('v1.MonitoringClient', () => {
 
     it('invokes aggregateFrameworkComplianceReport without error using callback', async () => {
       const client = new monitoringModule.v1.MonitoringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -549,7 +549,7 @@ describe('v1.MonitoringClient', () => {
 
     it('invokes aggregateFrameworkComplianceReport with error', async () => {
       const client = new monitoringModule.v1.MonitoringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -583,7 +583,7 @@ describe('v1.MonitoringClient', () => {
 
     it('invokes aggregateFrameworkComplianceReport with closed client', async () => {
       const client = new monitoringModule.v1.MonitoringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -596,7 +596,7 @@ describe('v1.MonitoringClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -609,7 +609,7 @@ describe('v1.MonitoringClient', () => {
   describe('listFrameworkComplianceSummaries', () => {
     it('invokes listFrameworkComplianceSummaries without error', async () => {
       const client = new monitoringModule.v1.MonitoringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -649,7 +649,7 @@ describe('v1.MonitoringClient', () => {
 
     it('invokes listFrameworkComplianceSummaries without error using callback', async () => {
       const client = new monitoringModule.v1.MonitoringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -706,7 +706,7 @@ describe('v1.MonitoringClient', () => {
 
     it('invokes listFrameworkComplianceSummaries with error', async () => {
       const client = new monitoringModule.v1.MonitoringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -740,7 +740,7 @@ describe('v1.MonitoringClient', () => {
 
     it('invokes listFrameworkComplianceSummariesStream without error', async () => {
       const client = new monitoringModule.v1.MonitoringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -812,7 +812,7 @@ describe('v1.MonitoringClient', () => {
 
     it('invokes listFrameworkComplianceSummariesStream with error', async () => {
       const client = new monitoringModule.v1.MonitoringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -873,7 +873,7 @@ describe('v1.MonitoringClient', () => {
 
     it('uses async iteration with listFrameworkComplianceSummaries without error', async () => {
       const client = new monitoringModule.v1.MonitoringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -927,7 +927,7 @@ describe('v1.MonitoringClient', () => {
 
     it('uses async iteration with listFrameworkComplianceSummaries with error', async () => {
       const client = new monitoringModule.v1.MonitoringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -974,7 +974,7 @@ describe('v1.MonitoringClient', () => {
   describe('listFindingSummaries', () => {
     it('invokes listFindingSummaries without error', async () => {
       const client = new monitoringModule.v1.MonitoringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1014,7 +1014,7 @@ describe('v1.MonitoringClient', () => {
 
     it('invokes listFindingSummaries without error using callback', async () => {
       const client = new monitoringModule.v1.MonitoringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1071,7 +1071,7 @@ describe('v1.MonitoringClient', () => {
 
     it('invokes listFindingSummaries with error', async () => {
       const client = new monitoringModule.v1.MonitoringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1102,7 +1102,7 @@ describe('v1.MonitoringClient', () => {
 
     it('invokes listFindingSummariesStream without error', async () => {
       const client = new monitoringModule.v1.MonitoringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1157,15 +1157,15 @@ describe('v1.MonitoringClient', () => {
       assert(
         (client.descriptors.page.listFindingSummaries.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listFindingSummariesStream with error', async () => {
       const client = new monitoringModule.v1.MonitoringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1209,15 +1209,15 @@ describe('v1.MonitoringClient', () => {
       assert(
         (client.descriptors.page.listFindingSummaries.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listFindingSummaries without error', async () => {
       const client = new monitoringModule.v1.MonitoringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1259,15 +1259,15 @@ describe('v1.MonitoringClient', () => {
       assert(
         (client.descriptors.page.listFindingSummaries.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listFindingSummaries with error', async () => {
       const client = new monitoringModule.v1.MonitoringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1300,9 +1300,9 @@ describe('v1.MonitoringClient', () => {
       assert(
         (client.descriptors.page.listFindingSummaries.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1310,7 +1310,7 @@ describe('v1.MonitoringClient', () => {
   describe('listControlComplianceSummaries', () => {
     it('invokes listControlComplianceSummaries without error', async () => {
       const client = new monitoringModule.v1.MonitoringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1350,7 +1350,7 @@ describe('v1.MonitoringClient', () => {
 
     it('invokes listControlComplianceSummaries without error using callback', async () => {
       const client = new monitoringModule.v1.MonitoringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1407,7 +1407,7 @@ describe('v1.MonitoringClient', () => {
 
     it('invokes listControlComplianceSummaries with error', async () => {
       const client = new monitoringModule.v1.MonitoringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1441,7 +1441,7 @@ describe('v1.MonitoringClient', () => {
 
     it('invokes listControlComplianceSummariesStream without error', async () => {
       const client = new monitoringModule.v1.MonitoringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1513,7 +1513,7 @@ describe('v1.MonitoringClient', () => {
 
     it('invokes listControlComplianceSummariesStream with error', async () => {
       const client = new monitoringModule.v1.MonitoringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1574,7 +1574,7 @@ describe('v1.MonitoringClient', () => {
 
     it('uses async iteration with listControlComplianceSummaries without error', async () => {
       const client = new monitoringModule.v1.MonitoringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1628,7 +1628,7 @@ describe('v1.MonitoringClient', () => {
 
     it('uses async iteration with listControlComplianceSummaries with error', async () => {
       const client = new monitoringModule.v1.MonitoringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1674,7 +1674,7 @@ describe('v1.MonitoringClient', () => {
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new monitoringModule.v1.MonitoringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1704,7 +1704,7 @@ describe('v1.MonitoringClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new monitoringModule.v1.MonitoringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1748,7 +1748,7 @@ describe('v1.MonitoringClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new monitoringModule.v1.MonitoringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1783,7 +1783,7 @@ describe('v1.MonitoringClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new monitoringModule.v1.MonitoringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1831,7 +1831,7 @@ describe('v1.MonitoringClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new monitoringModule.v1.MonitoringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1879,7 +1879,7 @@ describe('v1.MonitoringClient', () => {
         finding_summary: 'findingSummaryValue',
       };
       const client = new monitoringModule.v1.MonitoringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1960,7 +1960,7 @@ describe('v1.MonitoringClient', () => {
         control_compliance_summary: 'controlComplianceSummaryValue',
       };
       const client = new monitoringModule.v1.MonitoringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2067,7 +2067,7 @@ describe('v1.MonitoringClient', () => {
         framework_compliance_report: 'frameworkComplianceReportValue',
       };
       const client = new monitoringModule.v1.MonitoringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2155,7 +2155,7 @@ describe('v1.MonitoringClient', () => {
         framework_compliance_summary: 'frameworkComplianceSummaryValue',
       };
       const client = new monitoringModule.v1.MonitoringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2241,7 +2241,7 @@ describe('v1.MonitoringClient', () => {
         location: 'locationValue',
       };
       const client = new monitoringModule.v1.MonitoringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2292,7 +2292,7 @@ describe('v1.MonitoringClient', () => {
         cloud_control_deployment: 'cloudControlDeploymentValue',
       };
       const client = new monitoringModule.v1.MonitoringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2379,7 +2379,7 @@ describe('v1.MonitoringClient', () => {
         cloud_control: 'cloudControlValue',
       };
       const client = new monitoringModule.v1.MonitoringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2461,7 +2461,7 @@ describe('v1.MonitoringClient', () => {
         location: 'locationValue',
       };
       const client = new monitoringModule.v1.MonitoringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2527,7 +2527,7 @@ describe('v1.MonitoringClient', () => {
         control: 'controlValue',
       };
       const client = new monitoringModule.v1.MonitoringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2606,7 +2606,7 @@ describe('v1.MonitoringClient', () => {
         finding_summary: 'findingSummaryValue',
       };
       const client = new monitoringModule.v1.MonitoringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2695,7 +2695,7 @@ describe('v1.MonitoringClient', () => {
           'generateFrameworkAuditScopeReportResponseValue',
       };
       const client = new monitoringModule.v1.MonitoringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2786,7 +2786,7 @@ describe('v1.MonitoringClient', () => {
         framework_audit: 'frameworkAuditValue',
       };
       const client = new monitoringModule.v1.MonitoringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2871,7 +2871,7 @@ describe('v1.MonitoringClient', () => {
         control_compliance_summary: 'controlComplianceSummaryValue',
       };
       const client = new monitoringModule.v1.MonitoringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2978,7 +2978,7 @@ describe('v1.MonitoringClient', () => {
         framework_compliance_report: 'frameworkComplianceReportValue',
       };
       const client = new monitoringModule.v1.MonitoringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3067,7 +3067,7 @@ describe('v1.MonitoringClient', () => {
         framework_compliance_summary: 'frameworkComplianceSummaryValue',
       };
       const client = new monitoringModule.v1.MonitoringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3156,7 +3156,7 @@ describe('v1.MonitoringClient', () => {
         framework_deployment: 'frameworkDeploymentValue',
       };
       const client = new monitoringModule.v1.MonitoringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3243,7 +3243,7 @@ describe('v1.MonitoringClient', () => {
         framework: 'frameworkValue',
       };
       const client = new monitoringModule.v1.MonitoringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3320,7 +3320,7 @@ describe('v1.MonitoringClient', () => {
         project: 'projectValue',
       };
       const client = new monitoringModule.v1.MonitoringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3360,7 +3360,7 @@ describe('v1.MonitoringClient', () => {
         cloud_control_deployment: 'cloudControlDeploymentValue',
       };
       const client = new monitoringModule.v1.MonitoringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3447,7 +3447,7 @@ describe('v1.MonitoringClient', () => {
         cloud_control: 'cloudControlValue',
       };
       const client = new monitoringModule.v1.MonitoringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3525,7 +3525,7 @@ describe('v1.MonitoringClient', () => {
         location: 'locationValue',
       };
       const client = new monitoringModule.v1.MonitoringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3588,7 +3588,7 @@ describe('v1.MonitoringClient', () => {
         control: 'controlValue',
       };
       const client = new monitoringModule.v1.MonitoringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3667,7 +3667,7 @@ describe('v1.MonitoringClient', () => {
         finding_summary: 'findingSummaryValue',
       };
       const client = new monitoringModule.v1.MonitoringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3748,7 +3748,7 @@ describe('v1.MonitoringClient', () => {
           'generateFrameworkAuditScopeReportResponseValue',
       };
       const client = new monitoringModule.v1.MonitoringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3838,7 +3838,7 @@ describe('v1.MonitoringClient', () => {
         framework_audit: 'frameworkAuditValue',
       };
       const client = new monitoringModule.v1.MonitoringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3919,7 +3919,7 @@ describe('v1.MonitoringClient', () => {
         control_compliance_summary: 'controlComplianceSummaryValue',
       };
       const client = new monitoringModule.v1.MonitoringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4026,7 +4026,7 @@ describe('v1.MonitoringClient', () => {
         framework_compliance_report: 'frameworkComplianceReportValue',
       };
       const client = new monitoringModule.v1.MonitoringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4114,7 +4114,7 @@ describe('v1.MonitoringClient', () => {
         framework_compliance_summary: 'frameworkComplianceSummaryValue',
       };
       const client = new monitoringModule.v1.MonitoringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4201,7 +4201,7 @@ describe('v1.MonitoringClient', () => {
         framework_deployment: 'frameworkDeploymentValue',
       };
       const client = new monitoringModule.v1.MonitoringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4284,7 +4284,7 @@ describe('v1.MonitoringClient', () => {
         framework: 'frameworkValue',
       };
       const client = new monitoringModule.v1.MonitoringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

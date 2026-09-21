@@ -113,7 +113,14 @@ export {
   PaginationResponse,
 } from './clientInterface';
 
-export {makeUUID, decodeAnyProtosInArray, decodeProtobufAny} from './util';
+export {
+  makeUUID,
+  decodeAnyProtosInArray,
+  decodeProtobufAny,
+  checkTelemetryEnabled,
+} from './util';
+
+export {StaticTraceContext, traceCall} from './observability/TracerHelper';
 
 export {ServiceError, ChannelCredentials} from '@grpc/grpc-js';
 export {warn} from './warnings';

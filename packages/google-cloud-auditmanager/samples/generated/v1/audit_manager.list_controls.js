@@ -29,18 +29,22 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Format
-   *  projects/{project}/locations/{location}/standards/{standard},
-   *  folders/{folder}/locations/{location}/standards/{standard}
+   *  Required. Standard to list controls for, in one of the following formats:
+   *  * `projects/{project}/locations/{location}/standards/{standard}`
+   *  * `folders/{folder}/locations/{location}/standards/{standard}`
+   *  * `organizations/{organization}/locations/{location}/standards/{standard}`
    */
   // const parent = 'abc123'
   /**
-   *  Optional. The maximum number of resources to return.
+   *  Optional. Maximum number of items to return in a single page. The service
+   *  might return fewer items than this value. If unspecified, the service picks
+   *  an appropriate default. The maximum value is 100; values above 100 are
+   *  reduced to 100.
    */
   // const pageSize = 1234
   /**
-   *  Optional. The next_page_token value returned from a previous List request,
-   *  if any.
+   *  Optional. A page token, received from a previous call, to retrieve the next
+   *  page of results.
    */
   // const pageToken = 'abc123'
 

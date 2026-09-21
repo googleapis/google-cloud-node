@@ -13,7 +13,7 @@
 // limitations under the License.
 
 import {EventEmitter} from 'events';
-import {QueryConfig} from './types.js';
+import {ITypeOverrides, QueryConfig} from './types.js';
 
 /**
  * Node callback function signature receiving `(err, result)`.
@@ -44,7 +44,7 @@ export class Query<T = unknown> extends EventEmitter {
   public rowMode?: 'array' | 'object';
 
   /** Optional custom type parser override registry. */
-  public types?: unknown;
+  public types?: ITypeOverrides;
 
   /** Internal promise backing Thenable async/await integration. */
   private promise!: Promise<T>;
@@ -144,6 +144,32 @@ export class Query<T = unknown> extends EventEmitter {
    */
   public finally(onFinally?: (() => void) | undefined | null): Promise<T> {
     return this.promise.finally(onFinally);
+  }
+
+  /**
+   * Resolves the internal query promise with a result value.
+   *
+   * @param value - Result value resolving the query promise.
+   */
+  public resolve(value: T): void {
+    if (this.promiseResolver) {
+      const resolver = this.promiseResolver;
+      this.promiseResolver = undefined;
+      resolver.resolve(value);
+    }
+  }
+
+  /**
+   * Rejects the internal query promise with an error.
+   *
+   * @param reason - Error or rejection reason.
+   */
+  public reject(reason: unknown): void {
+    if (this.promiseResolver) {
+      const resolver = this.promiseResolver;
+      this.promiseResolver = undefined;
+      resolver.reject(reason);
+    }
   }
 
   /**

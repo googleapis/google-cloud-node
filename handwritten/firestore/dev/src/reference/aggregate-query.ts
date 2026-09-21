@@ -139,7 +139,7 @@ export class AggregateQuery<
     >
   > {
     // Capture the error stack to preserve stack tracing across async calls.
-    const stack = Error().stack!;
+    const callsiteError = Error();
 
     return new Promise((resolve, reject) => {
       const output: QueryResponse<
@@ -148,7 +148,7 @@ export class AggregateQuery<
 
       const stream = this._stream(transactionOrReadTime, explainOptions);
       stream.on('error', err => {
-        reject(wrapError(err, stack));
+        reject(wrapError(err, callsiteError.stack!));
       });
       stream.on(
         'data',

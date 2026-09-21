@@ -218,4 +218,17 @@ describe('src/schema/naming.ts', () => {
       assert(naming);
     });
   });
+
+  it('supports enableTelemetryTracing option', () => {
+    const descriptor = {} as protos.google.protobuf.FileDescriptorProto;
+    descriptor.package = 'google.namespace.service.v1beta1';
+    descriptor.service = [{} as protos.google.protobuf.ServiceDescriptorProto];
+    const options: Options = {
+      grpcServiceConfig: {} as protos.grpc.service_config.ServiceConfig,
+      enableTelemetryTracing: true,
+    };
+    const naming = new Naming([descriptor], options);
+    assert(naming);
+    assert.strictEqual(naming.name, 'Service');
+  });
 });

@@ -55,6 +55,10 @@ function main(name) {
    */
   // const userMetadata = {}
   /**
+   *  Optional. Specification of agents that are used to serve the request.
+   */
+  // const agentsSpec = {}
+  /**
    *  Optional. Specification of tools that are used to serve the request.
    */
   // const toolsSpec = {}

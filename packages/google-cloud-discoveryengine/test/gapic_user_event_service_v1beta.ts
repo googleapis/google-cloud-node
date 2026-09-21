@@ -19,8 +19,8 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as usereventserviceModule from '../src';
 
 import {
@@ -48,7 +48,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -114,9 +114,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -241,7 +241,7 @@ describe('v1beta.UserEventServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.userEventServiceStub, undefined);
@@ -249,12 +249,12 @@ describe('v1beta.UserEventServiceClient', () => {
       assert(client.userEventServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.userEventServiceStub);
@@ -263,14 +263,14 @@ describe('v1beta.UserEventServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.userEventServiceStub, undefined);
@@ -279,7 +279,7 @@ describe('v1beta.UserEventServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -287,7 +287,7 @@ describe('v1beta.UserEventServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -299,7 +299,7 @@ describe('v1beta.UserEventServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -322,7 +322,7 @@ describe('v1beta.UserEventServiceClient', () => {
   describe('writeUserEvent', () => {
     it('invokes writeUserEvent without error', async () => {
       const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -353,7 +353,7 @@ describe('v1beta.UserEventServiceClient', () => {
 
     it('invokes writeUserEvent without error using callback', async () => {
       const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -400,7 +400,7 @@ describe('v1beta.UserEventServiceClient', () => {
 
     it('invokes writeUserEvent with error', async () => {
       const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -431,7 +431,7 @@ describe('v1beta.UserEventServiceClient', () => {
 
     it('invokes writeUserEvent with closed client', async () => {
       const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -444,7 +444,7 @@ describe('v1beta.UserEventServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.writeUserEvent(request), expectedError);
@@ -454,7 +454,7 @@ describe('v1beta.UserEventServiceClient', () => {
   describe('collectUserEvent', () => {
     it('invokes collectUserEvent without error', async () => {
       const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -485,7 +485,7 @@ describe('v1beta.UserEventServiceClient', () => {
 
     it('invokes collectUserEvent without error using callback', async () => {
       const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -529,7 +529,7 @@ describe('v1beta.UserEventServiceClient', () => {
 
     it('invokes collectUserEvent with error', async () => {
       const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -560,7 +560,7 @@ describe('v1beta.UserEventServiceClient', () => {
 
     it('invokes collectUserEvent with closed client', async () => {
       const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -573,7 +573,7 @@ describe('v1beta.UserEventServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.collectUserEvent(request), expectedError);
@@ -583,7 +583,7 @@ describe('v1beta.UserEventServiceClient', () => {
   describe('purgeUserEvents', () => {
     it('invokes purgeUserEvents without error', async () => {
       const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -616,7 +616,7 @@ describe('v1beta.UserEventServiceClient', () => {
 
     it('invokes purgeUserEvents without error using callback', async () => {
       const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -670,7 +670,7 @@ describe('v1beta.UserEventServiceClient', () => {
 
     it('invokes purgeUserEvents with call error', async () => {
       const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -701,7 +701,7 @@ describe('v1beta.UserEventServiceClient', () => {
 
     it('invokes purgeUserEvents with LRO error', async () => {
       const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -734,7 +734,7 @@ describe('v1beta.UserEventServiceClient', () => {
 
     it('invokes checkPurgeUserEventsProgress without error', async () => {
       const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -742,8 +742,8 @@ describe('v1beta.UserEventServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkPurgeUserEventsProgress(
@@ -756,7 +756,7 @@ describe('v1beta.UserEventServiceClient', () => {
 
     it('invokes checkPurgeUserEventsProgress with error', async () => {
       const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -777,7 +777,7 @@ describe('v1beta.UserEventServiceClient', () => {
   describe('importUserEvents', () => {
     it('invokes importUserEvents without error', async () => {
       const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -810,7 +810,7 @@ describe('v1beta.UserEventServiceClient', () => {
 
     it('invokes importUserEvents without error using callback', async () => {
       const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -864,7 +864,7 @@ describe('v1beta.UserEventServiceClient', () => {
 
     it('invokes importUserEvents with call error', async () => {
       const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -895,7 +895,7 @@ describe('v1beta.UserEventServiceClient', () => {
 
     it('invokes importUserEvents with LRO error', async () => {
       const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -928,7 +928,7 @@ describe('v1beta.UserEventServiceClient', () => {
 
     it('invokes checkImportUserEventsProgress without error', async () => {
       const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -936,8 +936,8 @@ describe('v1beta.UserEventServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkImportUserEventsProgress(
@@ -950,7 +950,7 @@ describe('v1beta.UserEventServiceClient', () => {
 
     it('invokes checkImportUserEventsProgress with error', async () => {
       const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -970,7 +970,7 @@ describe('v1beta.UserEventServiceClient', () => {
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1000,7 +1000,7 @@ describe('v1beta.UserEventServiceClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1044,7 +1044,7 @@ describe('v1beta.UserEventServiceClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1079,7 +1079,7 @@ describe('v1beta.UserEventServiceClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1127,7 +1127,7 @@ describe('v1beta.UserEventServiceClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1168,7 +1168,7 @@ describe('v1beta.UserEventServiceClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1189,7 +1189,7 @@ describe('v1beta.UserEventServiceClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1217,7 +1217,7 @@ describe('v1beta.UserEventServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1227,7 +1227,7 @@ describe('v1beta.UserEventServiceClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1251,7 +1251,7 @@ describe('v1beta.UserEventServiceClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1273,7 +1273,7 @@ describe('v1beta.UserEventServiceClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1301,7 +1301,7 @@ describe('v1beta.UserEventServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1311,7 +1311,7 @@ describe('v1beta.UserEventServiceClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1335,7 +1335,7 @@ describe('v1beta.UserEventServiceClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1357,7 +1357,7 @@ describe('v1beta.UserEventServiceClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1385,7 +1385,7 @@ describe('v1beta.UserEventServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1395,7 +1395,7 @@ describe('v1beta.UserEventServiceClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1419,7 +1419,7 @@ describe('v1beta.UserEventServiceClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1454,7 +1454,7 @@ describe('v1beta.UserEventServiceClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1489,7 +1489,7 @@ describe('v1beta.UserEventServiceClient', () => {
         location: 'locationValue',
       };
       const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1542,7 +1542,7 @@ describe('v1beta.UserEventServiceClient', () => {
         assist_answer: 'assistAnswerValue',
       };
       const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1641,7 +1641,7 @@ describe('v1beta.UserEventServiceClient', () => {
         assistant: 'assistantValue',
       };
       const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1728,7 +1728,7 @@ describe('v1beta.UserEventServiceClient', () => {
         engine: 'engineValue',
       };
       const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1803,7 +1803,7 @@ describe('v1beta.UserEventServiceClient', () => {
         evaluation: 'evaluationValue',
       };
       const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1867,7 +1867,7 @@ describe('v1beta.UserEventServiceClient', () => {
         grounding_config: 'groundingConfigValue',
       };
       const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1932,7 +1932,7 @@ describe('v1beta.UserEventServiceClient', () => {
         identity_mapping_store: 'identityMappingStoreValue',
       };
       const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2013,7 +2013,7 @@ describe('v1beta.UserEventServiceClient', () => {
         license_config: 'licenseConfigValue',
       };
       const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2075,7 +2075,7 @@ describe('v1beta.UserEventServiceClient', () => {
         project: 'projectValue',
       };
       const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2114,7 +2114,7 @@ describe('v1beta.UserEventServiceClient', () => {
         location: 'locationValue',
       };
       const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2178,7 +2178,7 @@ describe('v1beta.UserEventServiceClient', () => {
         cmek_config: 'cmekConfigValue',
       };
       const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2258,7 +2258,7 @@ describe('v1beta.UserEventServiceClient', () => {
         data_store: 'dataStoreValue',
       };
       const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2362,7 +2362,7 @@ describe('v1beta.UserEventServiceClient', () => {
         document: 'documentValue',
       };
       const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2509,7 +2509,7 @@ describe('v1beta.UserEventServiceClient', () => {
         chunk: 'chunkValue',
       };
       const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2672,7 +2672,7 @@ describe('v1beta.UserEventServiceClient', () => {
         control: 'controlValue',
       };
       const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2798,7 +2798,7 @@ describe('v1beta.UserEventServiceClient', () => {
         conversation: 'conversationValue',
       };
       const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2925,7 +2925,7 @@ describe('v1beta.UserEventServiceClient', () => {
         custom_tuning_model: 'customTuningModelValue',
       };
       const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3051,7 +3051,7 @@ describe('v1beta.UserEventServiceClient', () => {
         data_store: 'dataStoreValue',
       };
       const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3160,7 +3160,7 @@ describe('v1beta.UserEventServiceClient', () => {
         schema: 'schemaValue',
       };
       const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3286,7 +3286,7 @@ describe('v1beta.UserEventServiceClient', () => {
         serving_config: 'servingConfigValue',
       };
       const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3414,7 +3414,7 @@ describe('v1beta.UserEventServiceClient', () => {
         answer: 'answerValue',
       };
       const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3559,7 +3559,7 @@ describe('v1beta.UserEventServiceClient', () => {
         session: 'sessionValue',
       };
       const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3684,7 +3684,7 @@ describe('v1beta.UserEventServiceClient', () => {
         data_store: 'dataStoreValue',
       };
       const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3793,7 +3793,7 @@ describe('v1beta.UserEventServiceClient', () => {
         sitemap: 'sitemapValue',
       };
       const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3920,7 +3920,7 @@ describe('v1beta.UserEventServiceClient', () => {
         target_site: 'targetSiteValue',
       };
       const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4048,7 +4048,7 @@ describe('v1beta.UserEventServiceClient', () => {
         session: 'sessionValue',
       };
       const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4192,7 +4192,7 @@ describe('v1beta.UserEventServiceClient', () => {
         control: 'controlValue',
       };
       const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4318,7 +4318,7 @@ describe('v1beta.UserEventServiceClient', () => {
         conversation: 'conversationValue',
       };
       const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4444,7 +4444,7 @@ describe('v1beta.UserEventServiceClient', () => {
         serving_config: 'servingConfigValue',
       };
       const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4571,7 +4571,7 @@ describe('v1beta.UserEventServiceClient', () => {
         answer: 'answerValue',
       };
       const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4714,7 +4714,7 @@ describe('v1beta.UserEventServiceClient', () => {
         session: 'sessionValue',
       };
       const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4837,7 +4837,7 @@ describe('v1beta.UserEventServiceClient', () => {
         data_store: 'dataStoreValue',
       };
       const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4918,7 +4918,7 @@ describe('v1beta.UserEventServiceClient', () => {
         document: 'documentValue',
       };
       const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5045,7 +5045,7 @@ describe('v1beta.UserEventServiceClient', () => {
         chunk: 'chunkValue',
       };
       const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5187,7 +5187,7 @@ describe('v1beta.UserEventServiceClient', () => {
         control: 'controlValue',
       };
       const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5282,7 +5282,7 @@ describe('v1beta.UserEventServiceClient', () => {
         conversation: 'conversationValue',
       };
       const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5389,7 +5389,7 @@ describe('v1beta.UserEventServiceClient', () => {
         custom_tuning_model: 'customTuningModelValue',
       };
       const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5495,7 +5495,7 @@ describe('v1beta.UserEventServiceClient', () => {
         data_store: 'dataStoreValue',
       };
       const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5584,7 +5584,7 @@ describe('v1beta.UserEventServiceClient', () => {
         schema: 'schemaValue',
       };
       const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5677,7 +5677,7 @@ describe('v1beta.UserEventServiceClient', () => {
         serving_config: 'servingConfigValue',
       };
       const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5784,7 +5784,7 @@ describe('v1beta.UserEventServiceClient', () => {
         answer: 'answerValue',
       };
       const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5908,7 +5908,7 @@ describe('v1beta.UserEventServiceClient', () => {
         session: 'sessionValue',
       };
       const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6005,7 +6005,7 @@ describe('v1beta.UserEventServiceClient', () => {
         data_store: 'dataStoreValue',
       };
       const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6094,7 +6094,7 @@ describe('v1beta.UserEventServiceClient', () => {
         sitemap: 'sitemapValue',
       };
       const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6202,7 +6202,7 @@ describe('v1beta.UserEventServiceClient', () => {
         target_site: 'targetSiteValue',
       };
       const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6309,7 +6309,7 @@ describe('v1beta.UserEventServiceClient', () => {
         sample_query: 'sampleQueryValue',
       };
       const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6384,7 +6384,7 @@ describe('v1beta.UserEventServiceClient', () => {
         sample_query_set: 'sampleQuerySetValue',
       };
       const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6449,7 +6449,7 @@ describe('v1beta.UserEventServiceClient', () => {
         user_store: 'userStoreValue',
       };
       const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

@@ -16,6 +16,6 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export { PublisherClient } from './publisher_client';
-export { SchemaServiceClient } from './schema_service_client';
-export { SubscriberClient } from './subscriber_client';
+export {PublisherClient} from './publisher_client';
+export {SchemaServiceClient} from './schema_service_client';
+export {SubscriberClient} from './subscriber_client';

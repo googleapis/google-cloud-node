@@ -99,6 +99,10 @@ function main(writeStream) {
    *  time, set `missing_value_interpretations` to `NULL_VALUE` on those columns.
    */
   // const defaultMissingValueInterpretation = {}
+  /**
+   *  Optional. Stats and telemetry data gathered on the client side.
+   */
+  // const clientStats = {}
 
   // Imports the Storage library
   const {BigQueryWriteClient} = require('@google-cloud/bigquery-storage-api').v1;

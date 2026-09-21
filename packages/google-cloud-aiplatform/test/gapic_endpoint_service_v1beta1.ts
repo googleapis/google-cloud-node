@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as endpointserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -51,7 +51,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -155,9 +155,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -279,7 +279,7 @@ describe('v1beta1.EndpointServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.endpointServiceStub, undefined);
@@ -287,12 +287,12 @@ describe('v1beta1.EndpointServiceClient', () => {
       assert(client.endpointServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.endpointServiceStub);
@@ -301,14 +301,14 @@ describe('v1beta1.EndpointServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.endpointServiceStub, undefined);
@@ -317,7 +317,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -325,7 +325,7 @@ describe('v1beta1.EndpointServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -337,7 +337,7 @@ describe('v1beta1.EndpointServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -360,7 +360,7 @@ describe('v1beta1.EndpointServiceClient', () => {
   describe('getEndpoint', () => {
     it('invokes getEndpoint without error', async () => {
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -391,7 +391,7 @@ describe('v1beta1.EndpointServiceClient', () => {
 
     it('invokes getEndpoint without error using callback', async () => {
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -438,7 +438,7 @@ describe('v1beta1.EndpointServiceClient', () => {
 
     it('invokes getEndpoint with error', async () => {
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -469,7 +469,7 @@ describe('v1beta1.EndpointServiceClient', () => {
 
     it('invokes getEndpoint with closed client', async () => {
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -482,7 +482,7 @@ describe('v1beta1.EndpointServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getEndpoint(request), expectedError);
@@ -492,7 +492,7 @@ describe('v1beta1.EndpointServiceClient', () => {
   describe('updateEndpoint', () => {
     it('invokes updateEndpoint without error', async () => {
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -524,7 +524,7 @@ describe('v1beta1.EndpointServiceClient', () => {
 
     it('invokes updateEndpoint without error using callback', async () => {
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -572,7 +572,7 @@ describe('v1beta1.EndpointServiceClient', () => {
 
     it('invokes updateEndpoint with error', async () => {
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -604,7 +604,7 @@ describe('v1beta1.EndpointServiceClient', () => {
 
     it('invokes updateEndpoint with closed client', async () => {
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -618,7 +618,7 @@ describe('v1beta1.EndpointServiceClient', () => {
       );
       request.endpoint.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateEndpoint(request), expectedError);
@@ -628,7 +628,7 @@ describe('v1beta1.EndpointServiceClient', () => {
   describe('fetchPublisherModelConfig', () => {
     it('invokes fetchPublisherModelConfig without error', async () => {
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -660,7 +660,7 @@ describe('v1beta1.EndpointServiceClient', () => {
 
     it('invokes fetchPublisherModelConfig without error using callback', async () => {
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -707,7 +707,7 @@ describe('v1beta1.EndpointServiceClient', () => {
 
     it('invokes fetchPublisherModelConfig with error', async () => {
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -741,7 +741,7 @@ describe('v1beta1.EndpointServiceClient', () => {
 
     it('invokes fetchPublisherModelConfig with closed client', async () => {
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -754,7 +754,7 @@ describe('v1beta1.EndpointServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -767,7 +767,7 @@ describe('v1beta1.EndpointServiceClient', () => {
   describe('createEndpoint', () => {
     it('invokes createEndpoint without error', async () => {
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -800,7 +800,7 @@ describe('v1beta1.EndpointServiceClient', () => {
 
     it('invokes createEndpoint without error using callback', async () => {
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -854,7 +854,7 @@ describe('v1beta1.EndpointServiceClient', () => {
 
     it('invokes createEndpoint with call error', async () => {
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -885,7 +885,7 @@ describe('v1beta1.EndpointServiceClient', () => {
 
     it('invokes createEndpoint with LRO error', async () => {
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -918,7 +918,7 @@ describe('v1beta1.EndpointServiceClient', () => {
 
     it('invokes checkCreateEndpointProgress without error', async () => {
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -926,8 +926,8 @@ describe('v1beta1.EndpointServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateEndpointProgress(
@@ -940,7 +940,7 @@ describe('v1beta1.EndpointServiceClient', () => {
 
     it('invokes checkCreateEndpointProgress with error', async () => {
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -961,7 +961,7 @@ describe('v1beta1.EndpointServiceClient', () => {
   describe('updateEndpointLongRunning', () => {
     it('invokes updateEndpointLongRunning without error', async () => {
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -995,7 +995,7 @@ describe('v1beta1.EndpointServiceClient', () => {
 
     it('invokes updateEndpointLongRunning without error using callback', async () => {
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1050,7 +1050,7 @@ describe('v1beta1.EndpointServiceClient', () => {
 
     it('invokes updateEndpointLongRunning with call error', async () => {
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1085,7 +1085,7 @@ describe('v1beta1.EndpointServiceClient', () => {
 
     it('invokes updateEndpointLongRunning with LRO error', async () => {
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1119,7 +1119,7 @@ describe('v1beta1.EndpointServiceClient', () => {
 
     it('invokes checkUpdateEndpointLongRunningProgress without error', async () => {
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1127,8 +1127,8 @@ describe('v1beta1.EndpointServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -1142,7 +1142,7 @@ describe('v1beta1.EndpointServiceClient', () => {
 
     it('invokes checkUpdateEndpointLongRunningProgress with error', async () => {
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1163,7 +1163,7 @@ describe('v1beta1.EndpointServiceClient', () => {
   describe('deleteEndpoint', () => {
     it('invokes deleteEndpoint without error', async () => {
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1196,7 +1196,7 @@ describe('v1beta1.EndpointServiceClient', () => {
 
     it('invokes deleteEndpoint without error using callback', async () => {
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1250,7 +1250,7 @@ describe('v1beta1.EndpointServiceClient', () => {
 
     it('invokes deleteEndpoint with call error', async () => {
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1281,7 +1281,7 @@ describe('v1beta1.EndpointServiceClient', () => {
 
     it('invokes deleteEndpoint with LRO error', async () => {
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1314,7 +1314,7 @@ describe('v1beta1.EndpointServiceClient', () => {
 
     it('invokes checkDeleteEndpointProgress without error', async () => {
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1322,8 +1322,8 @@ describe('v1beta1.EndpointServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteEndpointProgress(
@@ -1336,7 +1336,7 @@ describe('v1beta1.EndpointServiceClient', () => {
 
     it('invokes checkDeleteEndpointProgress with error', async () => {
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1357,7 +1357,7 @@ describe('v1beta1.EndpointServiceClient', () => {
   describe('deployModel', () => {
     it('invokes deployModel without error', async () => {
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1389,7 +1389,7 @@ describe('v1beta1.EndpointServiceClient', () => {
 
     it('invokes deployModel without error using callback', async () => {
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1443,7 +1443,7 @@ describe('v1beta1.EndpointServiceClient', () => {
 
     it('invokes deployModel with call error', async () => {
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1474,7 +1474,7 @@ describe('v1beta1.EndpointServiceClient', () => {
 
     it('invokes deployModel with LRO error', async () => {
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1507,7 +1507,7 @@ describe('v1beta1.EndpointServiceClient', () => {
 
     it('invokes checkDeployModelProgress without error', async () => {
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1515,8 +1515,8 @@ describe('v1beta1.EndpointServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeployModelProgress(
@@ -1529,7 +1529,7 @@ describe('v1beta1.EndpointServiceClient', () => {
 
     it('invokes checkDeployModelProgress with error', async () => {
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1547,7 +1547,7 @@ describe('v1beta1.EndpointServiceClient', () => {
   describe('undeployModel', () => {
     it('invokes undeployModel without error', async () => {
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1580,7 +1580,7 @@ describe('v1beta1.EndpointServiceClient', () => {
 
     it('invokes undeployModel without error using callback', async () => {
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1634,7 +1634,7 @@ describe('v1beta1.EndpointServiceClient', () => {
 
     it('invokes undeployModel with call error', async () => {
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1665,7 +1665,7 @@ describe('v1beta1.EndpointServiceClient', () => {
 
     it('invokes undeployModel with LRO error', async () => {
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1698,7 +1698,7 @@ describe('v1beta1.EndpointServiceClient', () => {
 
     it('invokes checkUndeployModelProgress without error', async () => {
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1706,8 +1706,8 @@ describe('v1beta1.EndpointServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUndeployModelProgress(
@@ -1720,7 +1720,7 @@ describe('v1beta1.EndpointServiceClient', () => {
 
     it('invokes checkUndeployModelProgress with error', async () => {
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1741,7 +1741,7 @@ describe('v1beta1.EndpointServiceClient', () => {
   describe('mutateDeployedModel', () => {
     it('invokes mutateDeployedModel without error', async () => {
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1774,7 +1774,7 @@ describe('v1beta1.EndpointServiceClient', () => {
 
     it('invokes mutateDeployedModel without error using callback', async () => {
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1828,7 +1828,7 @@ describe('v1beta1.EndpointServiceClient', () => {
 
     it('invokes mutateDeployedModel with call error', async () => {
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1859,7 +1859,7 @@ describe('v1beta1.EndpointServiceClient', () => {
 
     it('invokes mutateDeployedModel with LRO error', async () => {
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1892,7 +1892,7 @@ describe('v1beta1.EndpointServiceClient', () => {
 
     it('invokes checkMutateDeployedModelProgress without error', async () => {
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1900,8 +1900,8 @@ describe('v1beta1.EndpointServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkMutateDeployedModelProgress(
@@ -1914,7 +1914,7 @@ describe('v1beta1.EndpointServiceClient', () => {
 
     it('invokes checkMutateDeployedModelProgress with error', async () => {
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1935,7 +1935,7 @@ describe('v1beta1.EndpointServiceClient', () => {
   describe('setPublisherModelConfig', () => {
     it('invokes setPublisherModelConfig without error', async () => {
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1968,7 +1968,7 @@ describe('v1beta1.EndpointServiceClient', () => {
 
     it('invokes setPublisherModelConfig without error using callback', async () => {
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2022,7 +2022,7 @@ describe('v1beta1.EndpointServiceClient', () => {
 
     it('invokes setPublisherModelConfig with call error', async () => {
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2056,7 +2056,7 @@ describe('v1beta1.EndpointServiceClient', () => {
 
     it('invokes setPublisherModelConfig with LRO error', async () => {
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2089,7 +2089,7 @@ describe('v1beta1.EndpointServiceClient', () => {
 
     it('invokes checkSetPublisherModelConfigProgress without error', async () => {
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2097,8 +2097,8 @@ describe('v1beta1.EndpointServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -2112,7 +2112,7 @@ describe('v1beta1.EndpointServiceClient', () => {
 
     it('invokes checkSetPublisherModelConfigProgress with error', async () => {
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2133,7 +2133,7 @@ describe('v1beta1.EndpointServiceClient', () => {
   describe('listEndpoints', () => {
     it('invokes listEndpoints without error', async () => {
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2172,7 +2172,7 @@ describe('v1beta1.EndpointServiceClient', () => {
 
     it('invokes listEndpoints without error using callback', async () => {
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2227,7 +2227,7 @@ describe('v1beta1.EndpointServiceClient', () => {
 
     it('invokes listEndpoints with error', async () => {
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2258,7 +2258,7 @@ describe('v1beta1.EndpointServiceClient', () => {
 
     it('invokes listEndpointsStream without error', async () => {
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2310,15 +2310,15 @@ describe('v1beta1.EndpointServiceClient', () => {
       assert(
         (client.descriptors.page.listEndpoints.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listEndpointsStream with error', async () => {
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2359,15 +2359,15 @@ describe('v1beta1.EndpointServiceClient', () => {
       assert(
         (client.descriptors.page.listEndpoints.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listEndpoints without error', async () => {
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2408,15 +2408,15 @@ describe('v1beta1.EndpointServiceClient', () => {
       assert(
         (client.descriptors.page.listEndpoints.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listEndpoints with error', async () => {
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2449,16 +2449,16 @@ describe('v1beta1.EndpointServiceClient', () => {
       assert(
         (client.descriptors.page.listEndpoints.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', async () => {
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2488,7 +2488,7 @@ describe('v1beta1.EndpointServiceClient', () => {
     });
     it('invokes getIamPolicy without error using callback', async () => {
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2526,7 +2526,7 @@ describe('v1beta1.EndpointServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2536,7 +2536,7 @@ describe('v1beta1.EndpointServiceClient', () => {
     });
     it('invokes getIamPolicy with error', async () => {
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2568,7 +2568,7 @@ describe('v1beta1.EndpointServiceClient', () => {
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', async () => {
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2598,7 +2598,7 @@ describe('v1beta1.EndpointServiceClient', () => {
     });
     it('invokes setIamPolicy without error using callback', async () => {
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2636,7 +2636,7 @@ describe('v1beta1.EndpointServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2646,7 +2646,7 @@ describe('v1beta1.EndpointServiceClient', () => {
     });
     it('invokes setIamPolicy with error', async () => {
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2678,7 +2678,7 @@ describe('v1beta1.EndpointServiceClient', () => {
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', async () => {
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2711,7 +2711,7 @@ describe('v1beta1.EndpointServiceClient', () => {
     });
     it('invokes testIamPermissions without error using callback', async () => {
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2749,7 +2749,7 @@ describe('v1beta1.EndpointServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2759,7 +2759,7 @@ describe('v1beta1.EndpointServiceClient', () => {
     });
     it('invokes testIamPermissions with error', async () => {
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2794,7 +2794,7 @@ describe('v1beta1.EndpointServiceClient', () => {
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2824,7 +2824,7 @@ describe('v1beta1.EndpointServiceClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2868,7 +2868,7 @@ describe('v1beta1.EndpointServiceClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2903,7 +2903,7 @@ describe('v1beta1.EndpointServiceClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2951,7 +2951,7 @@ describe('v1beta1.EndpointServiceClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2992,7 +2992,7 @@ describe('v1beta1.EndpointServiceClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3013,7 +3013,7 @@ describe('v1beta1.EndpointServiceClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -3041,7 +3041,7 @@ describe('v1beta1.EndpointServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3051,7 +3051,7 @@ describe('v1beta1.EndpointServiceClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -3075,7 +3075,7 @@ describe('v1beta1.EndpointServiceClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3097,7 +3097,7 @@ describe('v1beta1.EndpointServiceClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -3125,7 +3125,7 @@ describe('v1beta1.EndpointServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3135,7 +3135,7 @@ describe('v1beta1.EndpointServiceClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -3159,7 +3159,7 @@ describe('v1beta1.EndpointServiceClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3181,7 +3181,7 @@ describe('v1beta1.EndpointServiceClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -3209,7 +3209,7 @@ describe('v1beta1.EndpointServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3219,7 +3219,7 @@ describe('v1beta1.EndpointServiceClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -3243,7 +3243,7 @@ describe('v1beta1.EndpointServiceClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -3278,7 +3278,7 @@ describe('v1beta1.EndpointServiceClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3316,7 +3316,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         annotation: 'annotationValue',
       };
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3403,7 +3403,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         annotation_spec: 'annotationSpecValue',
       };
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3480,7 +3480,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         artifact: 'artifactValue',
       };
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3555,7 +3555,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         batch_prediction_job: 'batchPredictionJobValue',
       };
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3632,7 +3632,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         cached_content: 'cachedContentValue',
       };
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3697,7 +3697,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         context: 'contextValue',
       };
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3772,7 +3772,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         custom_job: 'customJobValue',
       };
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3837,7 +3837,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         data_item: 'dataItemValue',
       };
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3912,7 +3912,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         data_labeling_job: 'dataLabelingJobValue',
       };
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3977,7 +3977,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         dataset: 'datasetValue',
       };
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4042,7 +4042,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         dataset_version: 'datasetVersionValue',
       };
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4118,7 +4118,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         deployment_resource_pool: 'deploymentResourcePoolValue',
       };
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4200,7 +4200,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4275,7 +4275,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         example_store: 'exampleStoreValue',
       };
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4340,7 +4340,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         execution: 'executionValue',
       };
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4415,7 +4415,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         extension: 'extensionValue',
       };
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4479,7 +4479,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         feature_group: 'featureGroupValue',
       };
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4544,7 +4544,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         feature_monitor: 'featureMonitorValue',
       };
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4622,7 +4622,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         feature_monitor_job: 'featureMonitorJobValue',
       };
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4729,7 +4729,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         feature_online_store: 'featureOnlineStoreValue',
       };
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4807,7 +4807,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         feature_view: 'featureViewValue',
       };
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4884,7 +4884,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         feature_view: 'featureViewValue',
       };
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4960,7 +4960,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         featurestore: 'featurestoreValue',
       };
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5024,7 +5024,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         hyperparameter_tuning_job: 'hyperparameterTuningJobValue',
       };
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5105,7 +5105,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         index: 'indexValue',
       };
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5169,7 +5169,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         index_endpoint: 'indexEndpointValue',
       };
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5232,7 +5232,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         location: 'locationValue',
       };
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5283,7 +5283,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         memory: 'memoryValue',
       };
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5359,7 +5359,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         metadata_schema: 'metadataSchemaValue',
       };
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5436,7 +5436,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         metadata_store: 'metadataStoreValue',
       };
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5500,7 +5500,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         model: 'modelValue',
       };
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5564,7 +5564,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         model_deployment_monitoring_job: 'modelDeploymentMonitoringJobValue',
       };
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5644,7 +5644,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         evaluation: 'evaluationValue',
       };
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5721,7 +5721,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         slice: 'sliceValue',
       };
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5828,7 +5828,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         model_monitor: 'modelMonitorValue',
       };
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5893,7 +5893,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         model_monitoring_job: 'modelMonitoringJobValue',
       };
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5985,7 +5985,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         nas_job: 'nasJobValue',
       };
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6050,7 +6050,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         nas_trial_detail: 'nasTrialDetailValue',
       };
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6126,7 +6126,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         notebook_execution_job: 'notebookExecutionJobValue',
       };
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6207,7 +6207,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         notebook_runtime: 'notebookRuntimeValue',
       };
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6272,7 +6272,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         notebook_runtime_template: 'notebookRuntimeTemplateValue',
       };
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6353,7 +6353,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         online_evaluator: 'onlineEvaluatorValue',
       };
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6418,7 +6418,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         persistent_resource: 'persistentResourceValue',
       };
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6495,7 +6495,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         pipeline_job: 'pipelineJobValue',
       };
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6559,7 +6559,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         endpoint: 'endpointValue',
       };
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6639,7 +6639,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         feature: 'featureValue',
       };
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6742,7 +6742,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         feature: 'featureValue',
       };
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6866,7 +6866,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         model: 'modelValue',
       };
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6957,7 +6957,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         model: 'modelValue',
       };
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7010,7 +7010,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         rag_corpus: 'ragCorpusValue',
       };
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7075,7 +7075,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         rag_data_schema: 'ragDataSchemaValue',
       };
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7149,7 +7149,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         location: 'locationValue',
       };
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7203,7 +7203,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         rag_file: 'ragFileValue',
       };
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7280,7 +7280,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         rag_metadata: 'ragMetadataValue',
       };
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7366,7 +7366,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         reasoning_engine: 'reasoningEngineValue',
       };
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7432,7 +7432,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         runtime_revision: 'runtimeRevisionValue',
       };
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7529,7 +7529,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         saved_query: 'savedQueryValue',
       };
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7604,7 +7604,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         schedule: 'scheduleValue',
       };
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7669,7 +7669,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         session: 'sessionValue',
       };
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7746,7 +7746,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         event: 'eventValue',
       };
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7833,7 +7833,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         specialist_pool: 'specialistPoolValue',
       };
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7898,7 +7898,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         study: 'studyValue',
       };
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7962,7 +7962,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         tensorboard: 'tensorboardValue',
       };
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8027,7 +8027,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         experiment: 'experimentValue',
       };
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8123,7 +8123,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         run: 'runValue',
       };
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8212,7 +8212,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         time_series: 'timeSeriesValue',
       };
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8335,7 +8335,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         training_pipeline: 'trainingPipelineValue',
       };
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8404,7 +8404,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         trial: 'trialValue',
       };
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8479,7 +8479,7 @@ describe('v1beta1.EndpointServiceClient', () => {
         tuning_job: 'tuningJobValue',
       };
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

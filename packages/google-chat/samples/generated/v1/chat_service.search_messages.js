@@ -166,6 +166,11 @@ function main(parent, filter) {
    */
   // const orderBy = 'abc123'
   /**
+   *  Optional. Specifies the desired output syntax for the Chat message
+   *  `formatted_text` field.
+   */
+  // const markupSyntax = {}
+  /**
    *  Optional. Specifies what kind of search results view to return. The default
    *  is `SEARCH_MESSAGES_VIEW_BASIC`.
    */

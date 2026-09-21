@@ -28,10 +28,10 @@ import type {
   IamClient,
   IamProtos,
 } from 'google-gax';
-import { Transform, PassThrough } from 'stream';
+import {Transform, PassThrough} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -55,7 +55,7 @@ export class SubscriberClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('pubsub-api');
@@ -68,10 +68,10 @@ export class SubscriberClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
+  innerApiCalls: {[name: string]: Function};
   iamClient: IamClient;
-  pathTemplates: { [name: string]: gax.PathTemplate };
-  subscriberStub?: Promise<{ [name: string]: Function }>;
+  pathTemplates: {[name: string]: gax.PathTemplate};
+  subscriberStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of SubscriberClient.
@@ -147,7 +147,7 @@ export class SubscriberClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -259,7 +259,7 @@ export class SubscriberClient {
       'google.pubsub.v1.Subscriber',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -299,7 +299,7 @@ export class SubscriberClient {
           (this._protos as any).google.pubsub.v1.Subscriber,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -323,11 +323,11 @@ export class SubscriberClient {
     ];
     for (const methodName of subscriberStubMethods) {
       const callPromise = this.subscriberStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               if (methodName in this.descriptors.stream) {
-                const stream = new PassThrough({ objectMode: true });
+                const stream = new PassThrough({objectMode: true});
                 setImmediate(() => {
                   stream.emit(
                     'error',
@@ -603,8 +603,9 @@ export class SubscriberClient {
    *   resource. For example:
    *     "123/environment": "production",
    *     "123/costCenter": "marketing"
-   *   See https://docs.cloud.google.com/pubsub/docs/tags for more information on
-   *   using tags with Pub/Sub resources.
+   *   See
+   *   https://{$universe.dns_names.final_documentation_domain}/pubsub/docs/tags
+   *   for more information on using tags with Pub/Sub resources.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -677,7 +678,7 @@ export class SubscriberClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createSubscription request %j', request);
@@ -802,7 +803,7 @@ export class SubscriberClient {
       this._gaxModule.routingHeader.fromParams({
         subscription: request.subscription ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getSubscription request %j', request);
@@ -931,7 +932,7 @@ export class SubscriberClient {
       this._gaxModule.routingHeader.fromParams({
         'subscription.name': request.subscription!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateSubscription request %j', request);
@@ -1060,7 +1061,7 @@ export class SubscriberClient {
       this._gaxModule.routingHeader.fromParams({
         subscription: request.subscription ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteSubscription request %j', request);
@@ -1201,7 +1202,7 @@ export class SubscriberClient {
       this._gaxModule.routingHeader.fromParams({
         subscription: request.subscription ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('modifyAckDeadline request %j', request);
@@ -1336,7 +1337,7 @@ export class SubscriberClient {
       this._gaxModule.routingHeader.fromParams({
         subscription: request.subscription ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('acknowledge request %j', request);
@@ -1473,7 +1474,7 @@ export class SubscriberClient {
       this._gaxModule.routingHeader.fromParams({
         subscription: request.subscription ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('pull request %j', request);
@@ -1610,7 +1611,7 @@ export class SubscriberClient {
       this._gaxModule.routingHeader.fromParams({
         subscription: request.subscription ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('modifyPushConfig request %j', request);
@@ -1739,7 +1740,7 @@ export class SubscriberClient {
       this._gaxModule.routingHeader.fromParams({
         snapshot: request.snapshot ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getSnapshot request %j', request);
@@ -1829,8 +1830,9 @@ export class SubscriberClient {
    *   resource. For example:
    *     "123/environment": "production",
    *     "123/costCenter": "marketing"
-   *   See https://docs.cloud.google.com/pubsub/docs/tags for more information on
-   *   using tags with Pub/Sub resources.
+   *   See
+   *   https://{$universe.dns_names.final_documentation_domain}/pubsub/docs/tags
+   *   for more information on using tags with Pub/Sub resources.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1903,7 +1905,7 @@ export class SubscriberClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createSnapshot request %j', request);
@@ -2035,7 +2037,7 @@ export class SubscriberClient {
       this._gaxModule.routingHeader.fromParams({
         'snapshot.name': request.snapshot!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateSnapshot request %j', request);
@@ -2168,7 +2170,7 @@ export class SubscriberClient {
       this._gaxModule.routingHeader.fromParams({
         snapshot: request.snapshot ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteSnapshot request %j', request);
@@ -2314,7 +2316,7 @@ export class SubscriberClient {
       this._gaxModule.routingHeader.fromParams({
         subscription: request.subscription ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('seek request %j', request);
@@ -2381,7 +2383,7 @@ export class SubscriberClient {
    * region_tag:pubsub_v1_generated_Subscriber_StreamingPull_async
    */
   streamingPull(options?: CallOptions): gax.CancellableStream {
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('streamingPull stream %j', options);
@@ -2477,7 +2479,7 @@ export class SubscriberClient {
       this._gaxModule.routingHeader.fromParams({
         project: request.project ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2545,7 +2547,7 @@ export class SubscriberClient {
       });
     const defaultCallSettings = this._defaults['listSubscriptions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listSubscriptions stream %j', request);
@@ -2597,7 +2599,7 @@ export class SubscriberClient {
       });
     const defaultCallSettings = this._defaults['listSubscriptions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listSubscriptions iterate %j', request);
@@ -2700,7 +2702,7 @@ export class SubscriberClient {
       this._gaxModule.routingHeader.fromParams({
         project: request.project ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2768,7 +2770,7 @@ export class SubscriberClient {
       });
     const defaultCallSettings = this._defaults['listSnapshots'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listSnapshots stream %j', request);
@@ -2820,7 +2822,7 @@ export class SubscriberClient {
       });
     const defaultCallSettings = this._defaults['listSnapshots'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listSnapshots iterate %j', request);
@@ -3222,11 +3224,11 @@ export class SubscriberClient {
    */
   close(): Promise<void> {
     if (this.subscriberStub && !this._terminated) {
-      return this.subscriberStub.then((stub) => {
+      return this.subscriberStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.iamClient.close().catch((err) => {
+        this.iamClient.close().catch(err => {
           throw err;
         });
       });

@@ -31,6 +31,7 @@ export interface Options {
   legacyProtoLoad?: boolean;
   restNumericEnums?: boolean;
   mixinsOverridden?: boolean;
+  enableTelemetryTracing?: boolean;
 }
 
 export class Naming {

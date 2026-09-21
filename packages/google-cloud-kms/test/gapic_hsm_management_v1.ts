@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as hsmmanagementModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -51,7 +51,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -155,9 +155,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -277,7 +277,7 @@ describe('v1.HsmManagementClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.hsmManagementStub, undefined);
@@ -285,12 +285,12 @@ describe('v1.HsmManagementClient', () => {
       assert(client.hsmManagementStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.hsmManagementStub);
@@ -299,14 +299,14 @@ describe('v1.HsmManagementClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.hsmManagementStub, undefined);
@@ -315,7 +315,7 @@ describe('v1.HsmManagementClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -323,7 +323,7 @@ describe('v1.HsmManagementClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -335,7 +335,7 @@ describe('v1.HsmManagementClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -358,7 +358,7 @@ describe('v1.HsmManagementClient', () => {
   describe('getSingleTenantHsmInstance', () => {
     it('invokes getSingleTenantHsmInstance without error', async () => {
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -390,7 +390,7 @@ describe('v1.HsmManagementClient', () => {
 
     it('invokes getSingleTenantHsmInstance without error using callback', async () => {
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -437,7 +437,7 @@ describe('v1.HsmManagementClient', () => {
 
     it('invokes getSingleTenantHsmInstance with error', async () => {
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -471,7 +471,7 @@ describe('v1.HsmManagementClient', () => {
 
     it('invokes getSingleTenantHsmInstance with closed client', async () => {
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -484,7 +484,7 @@ describe('v1.HsmManagementClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -497,7 +497,7 @@ describe('v1.HsmManagementClient', () => {
   describe('approveSingleTenantHsmInstanceProposal', () => {
     it('invokes approveSingleTenantHsmInstanceProposal without error', async () => {
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -530,7 +530,7 @@ describe('v1.HsmManagementClient', () => {
 
     it('invokes approveSingleTenantHsmInstanceProposal without error using callback', async () => {
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -577,7 +577,7 @@ describe('v1.HsmManagementClient', () => {
 
     it('invokes approveSingleTenantHsmInstanceProposal with error', async () => {
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -609,7 +609,7 @@ describe('v1.HsmManagementClient', () => {
 
     it('invokes approveSingleTenantHsmInstanceProposal with closed client', async () => {
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -622,7 +622,7 @@ describe('v1.HsmManagementClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -635,7 +635,7 @@ describe('v1.HsmManagementClient', () => {
   describe('getSingleTenantHsmInstanceProposal', () => {
     it('invokes getSingleTenantHsmInstanceProposal without error', async () => {
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -668,7 +668,7 @@ describe('v1.HsmManagementClient', () => {
 
     it('invokes getSingleTenantHsmInstanceProposal without error using callback', async () => {
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -715,7 +715,7 @@ describe('v1.HsmManagementClient', () => {
 
     it('invokes getSingleTenantHsmInstanceProposal with error', async () => {
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -749,7 +749,7 @@ describe('v1.HsmManagementClient', () => {
 
     it('invokes getSingleTenantHsmInstanceProposal with closed client', async () => {
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -762,7 +762,7 @@ describe('v1.HsmManagementClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -775,7 +775,7 @@ describe('v1.HsmManagementClient', () => {
   describe('deleteSingleTenantHsmInstanceProposal', () => {
     it('invokes deleteSingleTenantHsmInstanceProposal without error', async () => {
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -808,7 +808,7 @@ describe('v1.HsmManagementClient', () => {
 
     it('invokes deleteSingleTenantHsmInstanceProposal without error using callback', async () => {
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -855,7 +855,7 @@ describe('v1.HsmManagementClient', () => {
 
     it('invokes deleteSingleTenantHsmInstanceProposal with error', async () => {
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -887,7 +887,7 @@ describe('v1.HsmManagementClient', () => {
 
     it('invokes deleteSingleTenantHsmInstanceProposal with closed client', async () => {
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -900,7 +900,7 @@ describe('v1.HsmManagementClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -913,7 +913,7 @@ describe('v1.HsmManagementClient', () => {
   describe('createSingleTenantHsmInstance', () => {
     it('invokes createSingleTenantHsmInstance without error', async () => {
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -946,7 +946,7 @@ describe('v1.HsmManagementClient', () => {
 
     it('invokes createSingleTenantHsmInstance without error using callback', async () => {
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1000,7 +1000,7 @@ describe('v1.HsmManagementClient', () => {
 
     it('invokes createSingleTenantHsmInstance with call error', async () => {
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1034,7 +1034,7 @@ describe('v1.HsmManagementClient', () => {
 
     it('invokes createSingleTenantHsmInstance with LRO error', async () => {
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1067,7 +1067,7 @@ describe('v1.HsmManagementClient', () => {
 
     it('invokes checkCreateSingleTenantHsmInstanceProgress without error', async () => {
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1075,8 +1075,8 @@ describe('v1.HsmManagementClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -1090,7 +1090,7 @@ describe('v1.HsmManagementClient', () => {
 
     it('invokes checkCreateSingleTenantHsmInstanceProgress with error', async () => {
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1111,7 +1111,7 @@ describe('v1.HsmManagementClient', () => {
   describe('createSingleTenantHsmInstanceProposal', () => {
     it('invokes createSingleTenantHsmInstanceProposal without error', async () => {
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1145,7 +1145,7 @@ describe('v1.HsmManagementClient', () => {
 
     it('invokes createSingleTenantHsmInstanceProposal without error using callback', async () => {
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1199,7 +1199,7 @@ describe('v1.HsmManagementClient', () => {
 
     it('invokes createSingleTenantHsmInstanceProposal with call error', async () => {
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1231,7 +1231,7 @@ describe('v1.HsmManagementClient', () => {
 
     it('invokes createSingleTenantHsmInstanceProposal with LRO error', async () => {
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1262,7 +1262,7 @@ describe('v1.HsmManagementClient', () => {
 
     it('invokes checkCreateSingleTenantHsmInstanceProposalProgress without error', async () => {
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1270,8 +1270,8 @@ describe('v1.HsmManagementClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -1285,7 +1285,7 @@ describe('v1.HsmManagementClient', () => {
 
     it('invokes checkCreateSingleTenantHsmInstanceProposalProgress with error', async () => {
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1306,7 +1306,7 @@ describe('v1.HsmManagementClient', () => {
   describe('executeSingleTenantHsmInstanceProposal', () => {
     it('invokes executeSingleTenantHsmInstanceProposal without error', async () => {
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1340,7 +1340,7 @@ describe('v1.HsmManagementClient', () => {
 
     it('invokes executeSingleTenantHsmInstanceProposal without error using callback', async () => {
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1394,7 +1394,7 @@ describe('v1.HsmManagementClient', () => {
 
     it('invokes executeSingleTenantHsmInstanceProposal with call error', async () => {
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1426,7 +1426,7 @@ describe('v1.HsmManagementClient', () => {
 
     it('invokes executeSingleTenantHsmInstanceProposal with LRO error', async () => {
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1457,7 +1457,7 @@ describe('v1.HsmManagementClient', () => {
 
     it('invokes checkExecuteSingleTenantHsmInstanceProposalProgress without error', async () => {
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1465,8 +1465,8 @@ describe('v1.HsmManagementClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -1480,7 +1480,7 @@ describe('v1.HsmManagementClient', () => {
 
     it('invokes checkExecuteSingleTenantHsmInstanceProposalProgress with error', async () => {
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1501,7 +1501,7 @@ describe('v1.HsmManagementClient', () => {
   describe('listSingleTenantHsmInstances', () => {
     it('invokes listSingleTenantHsmInstances without error', async () => {
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1541,7 +1541,7 @@ describe('v1.HsmManagementClient', () => {
 
     it('invokes listSingleTenantHsmInstances without error using callback', async () => {
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1573,8 +1573,7 @@ describe('v1.HsmManagementClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.kms.v1.ISingleTenantHsmInstance[]
-              | null,
+              protos.google.cloud.kms.v1.ISingleTenantHsmInstance[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -1598,7 +1597,7 @@ describe('v1.HsmManagementClient', () => {
 
     it('invokes listSingleTenantHsmInstances with error', async () => {
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1632,7 +1631,7 @@ describe('v1.HsmManagementClient', () => {
 
     it('invokes listSingleTenantHsmInstancesStream without error', async () => {
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1702,7 +1701,7 @@ describe('v1.HsmManagementClient', () => {
 
     it('invokes listSingleTenantHsmInstancesStream with error', async () => {
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1761,7 +1760,7 @@ describe('v1.HsmManagementClient', () => {
 
     it('uses async iteration with listSingleTenantHsmInstances without error', async () => {
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1815,7 +1814,7 @@ describe('v1.HsmManagementClient', () => {
 
     it('uses async iteration with listSingleTenantHsmInstances with error', async () => {
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1862,7 +1861,7 @@ describe('v1.HsmManagementClient', () => {
   describe('listSingleTenantHsmInstanceProposals', () => {
     it('invokes listSingleTenantHsmInstanceProposals without error', async () => {
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1903,7 +1902,7 @@ describe('v1.HsmManagementClient', () => {
 
     it('invokes listSingleTenantHsmInstanceProposals without error using callback', async () => {
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1960,7 +1959,7 @@ describe('v1.HsmManagementClient', () => {
 
     it('invokes listSingleTenantHsmInstanceProposals with error', async () => {
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1992,7 +1991,7 @@ describe('v1.HsmManagementClient', () => {
 
     it('invokes listSingleTenantHsmInstanceProposalsStream without error', async () => {
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2064,7 +2063,7 @@ describe('v1.HsmManagementClient', () => {
 
     it('invokes listSingleTenantHsmInstanceProposalsStream with error', async () => {
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2125,7 +2124,7 @@ describe('v1.HsmManagementClient', () => {
 
     it('uses async iteration with listSingleTenantHsmInstanceProposals without error', async () => {
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2180,7 +2179,7 @@ describe('v1.HsmManagementClient', () => {
 
     it('uses async iteration with listSingleTenantHsmInstanceProposals with error', async () => {
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2227,7 +2226,7 @@ describe('v1.HsmManagementClient', () => {
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', async () => {
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2257,7 +2256,7 @@ describe('v1.HsmManagementClient', () => {
     });
     it('invokes getIamPolicy without error using callback', async () => {
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2295,7 +2294,7 @@ describe('v1.HsmManagementClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2305,7 +2304,7 @@ describe('v1.HsmManagementClient', () => {
     });
     it('invokes getIamPolicy with error', async () => {
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2337,7 +2336,7 @@ describe('v1.HsmManagementClient', () => {
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', async () => {
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2367,7 +2366,7 @@ describe('v1.HsmManagementClient', () => {
     });
     it('invokes setIamPolicy without error using callback', async () => {
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2405,7 +2404,7 @@ describe('v1.HsmManagementClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2415,7 +2414,7 @@ describe('v1.HsmManagementClient', () => {
     });
     it('invokes setIamPolicy with error', async () => {
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2447,7 +2446,7 @@ describe('v1.HsmManagementClient', () => {
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', async () => {
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2480,7 +2479,7 @@ describe('v1.HsmManagementClient', () => {
     });
     it('invokes testIamPermissions without error using callback', async () => {
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2518,7 +2517,7 @@ describe('v1.HsmManagementClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2528,7 +2527,7 @@ describe('v1.HsmManagementClient', () => {
     });
     it('invokes testIamPermissions with error', async () => {
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2563,7 +2562,7 @@ describe('v1.HsmManagementClient', () => {
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2593,7 +2592,7 @@ describe('v1.HsmManagementClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2637,7 +2636,7 @@ describe('v1.HsmManagementClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2672,7 +2671,7 @@ describe('v1.HsmManagementClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2720,7 +2719,7 @@ describe('v1.HsmManagementClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2761,7 +2760,7 @@ describe('v1.HsmManagementClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2782,7 +2781,7 @@ describe('v1.HsmManagementClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2810,7 +2809,7 @@ describe('v1.HsmManagementClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2820,7 +2819,7 @@ describe('v1.HsmManagementClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2844,7 +2843,7 @@ describe('v1.HsmManagementClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2866,7 +2865,7 @@ describe('v1.HsmManagementClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2894,7 +2893,7 @@ describe('v1.HsmManagementClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2904,7 +2903,7 @@ describe('v1.HsmManagementClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2928,7 +2927,7 @@ describe('v1.HsmManagementClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2950,7 +2949,7 @@ describe('v1.HsmManagementClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2978,7 +2977,7 @@ describe('v1.HsmManagementClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2988,7 +2987,7 @@ describe('v1.HsmManagementClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -3012,7 +3011,7 @@ describe('v1.HsmManagementClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -3047,7 +3046,7 @@ describe('v1.HsmManagementClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3084,7 +3083,7 @@ describe('v1.HsmManagementClient', () => {
         crypto_key: 'cryptoKeyValue',
       };
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3161,7 +3160,7 @@ describe('v1.HsmManagementClient', () => {
         crypto_key_version: 'cryptoKeyVersionValue',
       };
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3250,7 +3249,7 @@ describe('v1.HsmManagementClient', () => {
         location: 'locationValue',
       };
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3300,7 +3299,7 @@ describe('v1.HsmManagementClient', () => {
         ekm_connection: 'ekmConnectionValue',
       };
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3362,7 +3361,7 @@ describe('v1.HsmManagementClient', () => {
         folder: 'folderValue',
       };
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3409,7 +3408,7 @@ describe('v1.HsmManagementClient', () => {
         import_job: 'importJobValue',
       };
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3484,7 +3483,7 @@ describe('v1.HsmManagementClient', () => {
         key_handle: 'keyHandleValue',
       };
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3548,7 +3547,7 @@ describe('v1.HsmManagementClient', () => {
         key_ring: 'keyRingValue',
       };
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3611,7 +3610,7 @@ describe('v1.HsmManagementClient', () => {
         location: 'locationValue',
       };
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3659,7 +3658,7 @@ describe('v1.HsmManagementClient', () => {
         project: 'projectValue',
       };
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3708,7 +3707,7 @@ describe('v1.HsmManagementClient', () => {
         crypto_key_version: 'cryptoKeyVersionValue',
       };
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3794,7 +3793,7 @@ describe('v1.HsmManagementClient', () => {
         retired_resource: 'retiredResourceValue',
       };
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3859,7 +3858,7 @@ describe('v1.HsmManagementClient', () => {
         single_tenant_hsm_instance: 'singleTenantHsmInstanceValue',
       };
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3941,7 +3940,7 @@ describe('v1.HsmManagementClient', () => {
         proposal: 'proposalValue',
       };
       const client = new hsmmanagementModule.v1.HsmManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

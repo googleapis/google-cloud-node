@@ -1,5 +1,26 @@
 # Changelog
 
+## [0.12.0](https://github.com/googleapis/google-cloud-node/compare/geminidataanalytics-v0.11.0...geminidataanalytics-v0.12.0) (2026-09-15)
+
+
+### Features
+
+* Update API sources and regenerate ([#9293](https://github.com/googleapis/google-cloud-node/issues/9293)) ([07ae774](https://github.com/googleapis/google-cloud-node/commit/07ae774a8e52185a3598c878513377e7a019f127))
+
+## [0.11.0](https://github.com/googleapis/google-cloud-node/compare/geminidataanalytics-v0.10.0...geminidataanalytics-v0.11.0) (2026-09-08)
+
+
+### Features
+
+* Upgrade librarian gapic-generator-typescript to v5.2.0 ([c249594](https://github.com/googleapis/google-cloud-node/commit/c249594c6ef41e4b36f1ef8869341a4c98c092b0))
+
+## [0.10.0](https://github.com/googleapis/google-cloud-node/compare/geminidataanalytics-v0.9.0...geminidataanalytics-v0.10.0) (2026-09-03)
+
+
+### Features
+
+* Update API sources and regenerate ([#9238](https://github.com/googleapis/google-cloud-node/issues/9238)) ([4c2bc95](https://github.com/googleapis/google-cloud-node/commit/4c2bc9510562e753340276ff5b21e1f18c71e7b2))
+
 ## [0.9.0](https://github.com/googleapis/google-cloud-node/compare/geminidataanalytics-v0.8.0...geminidataanalytics-v0.9.0) (2026-08-04)
 
 

@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as discussserviceModule from '../src';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -43,7 +43,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -179,7 +179,7 @@ describe('v1beta.DiscussServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new discussserviceModule.v1beta.DiscussServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.discussServiceStub, undefined);
@@ -187,12 +187,12 @@ describe('v1beta.DiscussServiceClient', () => {
       assert(client.discussServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new discussserviceModule.v1beta.DiscussServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.discussServiceStub);
@@ -201,14 +201,14 @@ describe('v1beta.DiscussServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new discussserviceModule.v1beta.DiscussServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.discussServiceStub, undefined);
@@ -217,7 +217,7 @@ describe('v1beta.DiscussServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -225,7 +225,7 @@ describe('v1beta.DiscussServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new discussserviceModule.v1beta.DiscussServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -237,7 +237,7 @@ describe('v1beta.DiscussServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new discussserviceModule.v1beta.DiscussServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -260,7 +260,7 @@ describe('v1beta.DiscussServiceClient', () => {
   describe('generateMessage', () => {
     it('invokes generateMessage without error', async () => {
       const client = new discussserviceModule.v1beta.DiscussServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -291,7 +291,7 @@ describe('v1beta.DiscussServiceClient', () => {
 
     it('invokes generateMessage without error using callback', async () => {
       const client = new discussserviceModule.v1beta.DiscussServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -338,7 +338,7 @@ describe('v1beta.DiscussServiceClient', () => {
 
     it('invokes generateMessage with error', async () => {
       const client = new discussserviceModule.v1beta.DiscussServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -369,7 +369,7 @@ describe('v1beta.DiscussServiceClient', () => {
 
     it('invokes generateMessage with closed client', async () => {
       const client = new discussserviceModule.v1beta.DiscussServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -382,7 +382,7 @@ describe('v1beta.DiscussServiceClient', () => {
       );
       request.model = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.generateMessage(request), expectedError);
@@ -392,7 +392,7 @@ describe('v1beta.DiscussServiceClient', () => {
   describe('countMessageTokens', () => {
     it('invokes countMessageTokens without error', async () => {
       const client = new discussserviceModule.v1beta.DiscussServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -424,7 +424,7 @@ describe('v1beta.DiscussServiceClient', () => {
 
     it('invokes countMessageTokens without error using callback', async () => {
       const client = new discussserviceModule.v1beta.DiscussServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -471,7 +471,7 @@ describe('v1beta.DiscussServiceClient', () => {
 
     it('invokes countMessageTokens with error', async () => {
       const client = new discussserviceModule.v1beta.DiscussServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -502,7 +502,7 @@ describe('v1beta.DiscussServiceClient', () => {
 
     it('invokes countMessageTokens with closed client', async () => {
       const client = new discussserviceModule.v1beta.DiscussServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -515,7 +515,7 @@ describe('v1beta.DiscussServiceClient', () => {
       );
       request.model = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.countMessageTokens(request), expectedError);
@@ -529,7 +529,7 @@ describe('v1beta.DiscussServiceClient', () => {
         id: 'idValue',
       };
       const client = new discussserviceModule.v1beta.DiscussServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -569,7 +569,7 @@ describe('v1beta.DiscussServiceClient', () => {
         chunk: 'chunkValue',
       };
       const client = new discussserviceModule.v1beta.DiscussServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -631,7 +631,7 @@ describe('v1beta.DiscussServiceClient', () => {
         corpus: 'corpusValue',
       };
       const client = new discussserviceModule.v1beta.DiscussServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -670,7 +670,7 @@ describe('v1beta.DiscussServiceClient', () => {
         permission: 'permissionValue',
       };
       const client = new discussserviceModule.v1beta.DiscussServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -732,7 +732,7 @@ describe('v1beta.DiscussServiceClient', () => {
         document: 'documentValue',
       };
       const client = new discussserviceModule.v1beta.DiscussServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -780,7 +780,7 @@ describe('v1beta.DiscussServiceClient', () => {
         file: 'fileValue',
       };
       const client = new discussserviceModule.v1beta.DiscussServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -818,7 +818,7 @@ describe('v1beta.DiscussServiceClient', () => {
         model: 'modelValue',
       };
       const client = new discussserviceModule.v1beta.DiscussServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -856,7 +856,7 @@ describe('v1beta.DiscussServiceClient', () => {
         tuned_model: 'tunedModelValue',
       };
       const client = new discussserviceModule.v1beta.DiscussServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -895,7 +895,7 @@ describe('v1beta.DiscussServiceClient', () => {
         permission: 'permissionValue',
       };
       const client = new discussserviceModule.v1beta.DiscussServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

@@ -10864,6 +10864,9 @@ export namespace google {
 
                     /** CodeCompilationConfig pipelineConfig */
                     pipelineConfig?: (google.cloud.dataform.v1.IPipelineConfig|null);
+
+                    /** CodeCompilationConfig lineageEnabled */
+                    lineageEnabled?: (boolean|null);
                 }
 
                 /** Represents a CodeCompilationConfig. */
@@ -10907,6 +10910,9 @@ export namespace google {
 
                     /** CodeCompilationConfig pipelineConfig. */
                     public pipelineConfig?: (google.cloud.dataform.v1.IPipelineConfig|null);
+
+                    /** CodeCompilationConfig lineageEnabled. */
+                    public lineageEnabled?: (boolean|null);
 
                     /**
                      * Creates a new CodeCompilationConfig instance using the specified properties.
@@ -21073,6 +21079,76 @@ export namespace google {
                     public pullGitCommits(request: google.cloud.dataform.v1beta1.IPullGitCommitsRequest): Promise<google.cloud.dataform.v1beta1.PullGitCommitsResponse>;
 
                     /**
+                     * Calls SyncWorkspaceRefs.
+                     * @param request SyncWorkspaceRefsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and SyncWorkspaceRefsResponse
+                     */
+                    public syncWorkspaceRefs(request: google.cloud.dataform.v1beta1.ISyncWorkspaceRefsRequest, callback: google.cloud.dataform.v1beta1.Dataform.SyncWorkspaceRefsCallback): void;
+
+                    /**
+                     * Calls SyncWorkspaceRefs.
+                     * @param request SyncWorkspaceRefsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public syncWorkspaceRefs(request: google.cloud.dataform.v1beta1.ISyncWorkspaceRefsRequest): Promise<google.cloud.dataform.v1beta1.SyncWorkspaceRefsResponse>;
+
+                    /**
+                     * Calls FetchWorkspaceBranches.
+                     * @param request FetchWorkspaceBranchesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and FetchWorkspaceBranchesResponse
+                     */
+                    public fetchWorkspaceBranches(request: google.cloud.dataform.v1beta1.IFetchWorkspaceBranchesRequest, callback: google.cloud.dataform.v1beta1.Dataform.FetchWorkspaceBranchesCallback): void;
+
+                    /**
+                     * Calls FetchWorkspaceBranches.
+                     * @param request FetchWorkspaceBranchesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public fetchWorkspaceBranches(request: google.cloud.dataform.v1beta1.IFetchWorkspaceBranchesRequest): Promise<google.cloud.dataform.v1beta1.FetchWorkspaceBranchesResponse>;
+
+                    /**
+                     * Calls DeleteBranch.
+                     * @param request DeleteBranchRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and DeleteBranchResponse
+                     */
+                    public deleteBranch(request: google.cloud.dataform.v1beta1.IDeleteBranchRequest, callback: google.cloud.dataform.v1beta1.Dataform.DeleteBranchCallback): void;
+
+                    /**
+                     * Calls DeleteBranch.
+                     * @param request DeleteBranchRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteBranch(request: google.cloud.dataform.v1beta1.IDeleteBranchRequest): Promise<google.cloud.dataform.v1beta1.DeleteBranchResponse>;
+
+                    /**
+                     * Calls CheckoutWorkspaceBranch.
+                     * @param request CheckoutWorkspaceBranchRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public checkoutWorkspaceBranch(request: google.cloud.dataform.v1beta1.ICheckoutWorkspaceBranchRequest, callback: google.cloud.dataform.v1beta1.Dataform.CheckoutWorkspaceBranchCallback): void;
+
+                    /**
+                     * Calls CheckoutWorkspaceBranch.
+                     * @param request CheckoutWorkspaceBranchRequest message or plain object
+                     * @returns Promise
+                     */
+                    public checkoutWorkspaceBranch(request: google.cloud.dataform.v1beta1.ICheckoutWorkspaceBranchRequest): Promise<google.protobuf.Empty>;
+
+                    /**
+                     * Calls FetchCurrentWorkspaceBranch.
+                     * @param request FetchCurrentWorkspaceBranchRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and FetchCurrentWorkspaceBranchResponse
+                     */
+                    public fetchCurrentWorkspaceBranch(request: google.cloud.dataform.v1beta1.IFetchCurrentWorkspaceBranchRequest, callback: google.cloud.dataform.v1beta1.Dataform.FetchCurrentWorkspaceBranchCallback): void;
+
+                    /**
+                     * Calls FetchCurrentWorkspaceBranch.
+                     * @param request FetchCurrentWorkspaceBranchRequest message or plain object
+                     * @returns Promise
+                     */
+                    public fetchCurrentWorkspaceBranch(request: google.cloud.dataform.v1beta1.IFetchCurrentWorkspaceBranchRequest): Promise<google.cloud.dataform.v1beta1.FetchCurrentWorkspaceBranchResponse>;
+
+                    /**
                      * Calls PushGitCommits.
                      * @param request PushGitCommitsRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and PushGitCommitsResponse
@@ -21872,6 +21948,41 @@ export namespace google {
                      * @param [response] PullGitCommitsResponse
                      */
                     type PullGitCommitsCallback = (error: (Error|null), response?: google.cloud.dataform.v1beta1.PullGitCommitsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.dataform.v1beta1.Dataform|syncWorkspaceRefs}.
+                     * @param error Error, if any
+                     * @param [response] SyncWorkspaceRefsResponse
+                     */
+                    type SyncWorkspaceRefsCallback = (error: (Error|null), response?: google.cloud.dataform.v1beta1.SyncWorkspaceRefsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.dataform.v1beta1.Dataform|fetchWorkspaceBranches}.
+                     * @param error Error, if any
+                     * @param [response] FetchWorkspaceBranchesResponse
+                     */
+                    type FetchWorkspaceBranchesCallback = (error: (Error|null), response?: google.cloud.dataform.v1beta1.FetchWorkspaceBranchesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.dataform.v1beta1.Dataform|deleteBranch}.
+                     * @param error Error, if any
+                     * @param [response] DeleteBranchResponse
+                     */
+                    type DeleteBranchCallback = (error: (Error|null), response?: google.cloud.dataform.v1beta1.DeleteBranchResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.dataform.v1beta1.Dataform|checkoutWorkspaceBranch}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type CheckoutWorkspaceBranchCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.dataform.v1beta1.Dataform|fetchCurrentWorkspaceBranch}.
+                     * @param error Error, if any
+                     * @param [response] FetchCurrentWorkspaceBranchResponse
+                     */
+                    type FetchCurrentWorkspaceBranchCallback = (error: (Error|null), response?: google.cloud.dataform.v1beta1.FetchCurrentWorkspaceBranchResponse) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.dataform.v1beta1.Dataform|pushGitCommits}.
@@ -25618,8 +25729,20 @@ export namespace google {
                     /** Workspace disableMoves */
                     disableMoves?: (boolean|null);
 
+                    /** Workspace originalBranch */
+                    originalBranch?: (string|null);
+
                     /** Workspace privateResourceMetadata */
                     privateResourceMetadata?: (google.cloud.dataform.v1beta1.IPrivateResourceMetadata|null);
+
+                    /** Workspace enableBranchManagement */
+                    enableBranchManagement?: (boolean|null);
+
+                    /** Workspace depth */
+                    depth?: (number|null);
+
+                    /** Workspace shallow */
+                    shallow?: (boolean|null);
                 }
 
                 /** Represents a Workspace. */
@@ -25646,8 +25769,20 @@ export namespace google {
                     /** Workspace disableMoves. */
                     public disableMoves?: (boolean|null);
 
+                    /** Workspace originalBranch. */
+                    public originalBranch?: (string|null);
+
                     /** Workspace privateResourceMetadata. */
                     public privateResourceMetadata?: (google.cloud.dataform.v1beta1.IPrivateResourceMetadata|null);
+
+                    /** Workspace enableBranchManagement. */
+                    public enableBranchManagement?: (boolean|null);
+
+                    /** Workspace depth. */
+                    public depth: number;
+
+                    /** Workspace shallow. */
+                    public shallow?: (boolean|null);
 
                     /**
                      * Creates a new Workspace instance using the specified properties.
@@ -26557,6 +26692,521 @@ export namespace google {
 
                     /**
                      * Gets the default type url for PullGitCommitsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CheckoutWorkspaceBranchRequest. */
+                interface ICheckoutWorkspaceBranchRequest {
+
+                    /** CheckoutWorkspaceBranchRequest name */
+                    name?: (string|null);
+
+                    /** CheckoutWorkspaceBranchRequest branch */
+                    branch?: (string|null);
+
+                    /** CheckoutWorkspaceBranchRequest createIfNotExists */
+                    createIfNotExists?: (boolean|null);
+
+                    /** CheckoutWorkspaceBranchRequest sourceBranch */
+                    sourceBranch?: (string|null);
+                }
+
+                /** Represents a CheckoutWorkspaceBranchRequest. */
+                class CheckoutWorkspaceBranchRequest implements ICheckoutWorkspaceBranchRequest {
+
+                    /**
+                     * Constructs a new CheckoutWorkspaceBranchRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataform.v1beta1.ICheckoutWorkspaceBranchRequest);
+
+                    /** CheckoutWorkspaceBranchRequest name. */
+                    public name: string;
+
+                    /** CheckoutWorkspaceBranchRequest branch. */
+                    public branch: string;
+
+                    /** CheckoutWorkspaceBranchRequest createIfNotExists. */
+                    public createIfNotExists: boolean;
+
+                    /** CheckoutWorkspaceBranchRequest sourceBranch. */
+                    public sourceBranch: string;
+
+                    /**
+                     * Creates a new CheckoutWorkspaceBranchRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CheckoutWorkspaceBranchRequest instance
+                     */
+                    public static create(properties?: google.cloud.dataform.v1beta1.ICheckoutWorkspaceBranchRequest): google.cloud.dataform.v1beta1.CheckoutWorkspaceBranchRequest;
+
+                    /**
+                     * Encodes the specified CheckoutWorkspaceBranchRequest message. Does not implicitly {@link google.cloud.dataform.v1beta1.CheckoutWorkspaceBranchRequest.verify|verify} messages.
+                     * @param message CheckoutWorkspaceBranchRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataform.v1beta1.ICheckoutWorkspaceBranchRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CheckoutWorkspaceBranchRequest message, length delimited. Does not implicitly {@link google.cloud.dataform.v1beta1.CheckoutWorkspaceBranchRequest.verify|verify} messages.
+                     * @param message CheckoutWorkspaceBranchRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataform.v1beta1.ICheckoutWorkspaceBranchRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CheckoutWorkspaceBranchRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CheckoutWorkspaceBranchRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataform.v1beta1.CheckoutWorkspaceBranchRequest;
+
+                    /**
+                     * Decodes a CheckoutWorkspaceBranchRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CheckoutWorkspaceBranchRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataform.v1beta1.CheckoutWorkspaceBranchRequest;
+
+                    /**
+                     * Verifies a CheckoutWorkspaceBranchRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CheckoutWorkspaceBranchRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CheckoutWorkspaceBranchRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataform.v1beta1.CheckoutWorkspaceBranchRequest;
+
+                    /**
+                     * Creates a plain object from a CheckoutWorkspaceBranchRequest message. Also converts values to other types if specified.
+                     * @param message CheckoutWorkspaceBranchRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataform.v1beta1.CheckoutWorkspaceBranchRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CheckoutWorkspaceBranchRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CheckoutWorkspaceBranchRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SyncWorkspaceRefsRequest. */
+                interface ISyncWorkspaceRefsRequest {
+
+                    /** SyncWorkspaceRefsRequest name */
+                    name?: (string|null);
+
+                    /** SyncWorkspaceRefsRequest remoteBranchName */
+                    remoteBranchName?: (string|null);
+
+                    /** SyncWorkspaceRefsRequest deepen */
+                    deepen?: (number|null);
+                }
+
+                /** Represents a SyncWorkspaceRefsRequest. */
+                class SyncWorkspaceRefsRequest implements ISyncWorkspaceRefsRequest {
+
+                    /**
+                     * Constructs a new SyncWorkspaceRefsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataform.v1beta1.ISyncWorkspaceRefsRequest);
+
+                    /** SyncWorkspaceRefsRequest name. */
+                    public name: string;
+
+                    /** SyncWorkspaceRefsRequest remoteBranchName. */
+                    public remoteBranchName: string;
+
+                    /** SyncWorkspaceRefsRequest deepen. */
+                    public deepen: number;
+
+                    /**
+                     * Creates a new SyncWorkspaceRefsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SyncWorkspaceRefsRequest instance
+                     */
+                    public static create(properties?: google.cloud.dataform.v1beta1.ISyncWorkspaceRefsRequest): google.cloud.dataform.v1beta1.SyncWorkspaceRefsRequest;
+
+                    /**
+                     * Encodes the specified SyncWorkspaceRefsRequest message. Does not implicitly {@link google.cloud.dataform.v1beta1.SyncWorkspaceRefsRequest.verify|verify} messages.
+                     * @param message SyncWorkspaceRefsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataform.v1beta1.ISyncWorkspaceRefsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SyncWorkspaceRefsRequest message, length delimited. Does not implicitly {@link google.cloud.dataform.v1beta1.SyncWorkspaceRefsRequest.verify|verify} messages.
+                     * @param message SyncWorkspaceRefsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataform.v1beta1.ISyncWorkspaceRefsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SyncWorkspaceRefsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SyncWorkspaceRefsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataform.v1beta1.SyncWorkspaceRefsRequest;
+
+                    /**
+                     * Decodes a SyncWorkspaceRefsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SyncWorkspaceRefsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataform.v1beta1.SyncWorkspaceRefsRequest;
+
+                    /**
+                     * Verifies a SyncWorkspaceRefsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SyncWorkspaceRefsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SyncWorkspaceRefsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataform.v1beta1.SyncWorkspaceRefsRequest;
+
+                    /**
+                     * Creates a plain object from a SyncWorkspaceRefsRequest message. Also converts values to other types if specified.
+                     * @param message SyncWorkspaceRefsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataform.v1beta1.SyncWorkspaceRefsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SyncWorkspaceRefsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SyncWorkspaceRefsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SyncWorkspaceRefsResponse. */
+                interface ISyncWorkspaceRefsResponse {
+                }
+
+                /** Represents a SyncWorkspaceRefsResponse. */
+                class SyncWorkspaceRefsResponse implements ISyncWorkspaceRefsResponse {
+
+                    /**
+                     * Constructs a new SyncWorkspaceRefsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataform.v1beta1.ISyncWorkspaceRefsResponse);
+
+                    /**
+                     * Creates a new SyncWorkspaceRefsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SyncWorkspaceRefsResponse instance
+                     */
+                    public static create(properties?: google.cloud.dataform.v1beta1.ISyncWorkspaceRefsResponse): google.cloud.dataform.v1beta1.SyncWorkspaceRefsResponse;
+
+                    /**
+                     * Encodes the specified SyncWorkspaceRefsResponse message. Does not implicitly {@link google.cloud.dataform.v1beta1.SyncWorkspaceRefsResponse.verify|verify} messages.
+                     * @param message SyncWorkspaceRefsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataform.v1beta1.ISyncWorkspaceRefsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SyncWorkspaceRefsResponse message, length delimited. Does not implicitly {@link google.cloud.dataform.v1beta1.SyncWorkspaceRefsResponse.verify|verify} messages.
+                     * @param message SyncWorkspaceRefsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataform.v1beta1.ISyncWorkspaceRefsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SyncWorkspaceRefsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SyncWorkspaceRefsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataform.v1beta1.SyncWorkspaceRefsResponse;
+
+                    /**
+                     * Decodes a SyncWorkspaceRefsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SyncWorkspaceRefsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataform.v1beta1.SyncWorkspaceRefsResponse;
+
+                    /**
+                     * Verifies a SyncWorkspaceRefsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SyncWorkspaceRefsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SyncWorkspaceRefsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataform.v1beta1.SyncWorkspaceRefsResponse;
+
+                    /**
+                     * Creates a plain object from a SyncWorkspaceRefsResponse message. Also converts values to other types if specified.
+                     * @param message SyncWorkspaceRefsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataform.v1beta1.SyncWorkspaceRefsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SyncWorkspaceRefsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SyncWorkspaceRefsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteBranchRequest. */
+                interface IDeleteBranchRequest {
+
+                    /** DeleteBranchRequest name */
+                    name?: (string|null);
+
+                    /** DeleteBranchRequest branch */
+                    branch?: (string|null);
+
+                    /** DeleteBranchRequest force */
+                    force?: (boolean|null);
+                }
+
+                /** Represents a DeleteBranchRequest. */
+                class DeleteBranchRequest implements IDeleteBranchRequest {
+
+                    /**
+                     * Constructs a new DeleteBranchRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataform.v1beta1.IDeleteBranchRequest);
+
+                    /** DeleteBranchRequest name. */
+                    public name: string;
+
+                    /** DeleteBranchRequest branch. */
+                    public branch: string;
+
+                    /** DeleteBranchRequest force. */
+                    public force: boolean;
+
+                    /**
+                     * Creates a new DeleteBranchRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteBranchRequest instance
+                     */
+                    public static create(properties?: google.cloud.dataform.v1beta1.IDeleteBranchRequest): google.cloud.dataform.v1beta1.DeleteBranchRequest;
+
+                    /**
+                     * Encodes the specified DeleteBranchRequest message. Does not implicitly {@link google.cloud.dataform.v1beta1.DeleteBranchRequest.verify|verify} messages.
+                     * @param message DeleteBranchRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataform.v1beta1.IDeleteBranchRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteBranchRequest message, length delimited. Does not implicitly {@link google.cloud.dataform.v1beta1.DeleteBranchRequest.verify|verify} messages.
+                     * @param message DeleteBranchRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataform.v1beta1.IDeleteBranchRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteBranchRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteBranchRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataform.v1beta1.DeleteBranchRequest;
+
+                    /**
+                     * Decodes a DeleteBranchRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteBranchRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataform.v1beta1.DeleteBranchRequest;
+
+                    /**
+                     * Verifies a DeleteBranchRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteBranchRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteBranchRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataform.v1beta1.DeleteBranchRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteBranchRequest message. Also converts values to other types if specified.
+                     * @param message DeleteBranchRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataform.v1beta1.DeleteBranchRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteBranchRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteBranchRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteBranchResponse. */
+                interface IDeleteBranchResponse {
+                }
+
+                /** Represents a DeleteBranchResponse. */
+                class DeleteBranchResponse implements IDeleteBranchResponse {
+
+                    /**
+                     * Constructs a new DeleteBranchResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataform.v1beta1.IDeleteBranchResponse);
+
+                    /**
+                     * Creates a new DeleteBranchResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteBranchResponse instance
+                     */
+                    public static create(properties?: google.cloud.dataform.v1beta1.IDeleteBranchResponse): google.cloud.dataform.v1beta1.DeleteBranchResponse;
+
+                    /**
+                     * Encodes the specified DeleteBranchResponse message. Does not implicitly {@link google.cloud.dataform.v1beta1.DeleteBranchResponse.verify|verify} messages.
+                     * @param message DeleteBranchResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataform.v1beta1.IDeleteBranchResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteBranchResponse message, length delimited. Does not implicitly {@link google.cloud.dataform.v1beta1.DeleteBranchResponse.verify|verify} messages.
+                     * @param message DeleteBranchResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataform.v1beta1.IDeleteBranchResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteBranchResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteBranchResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataform.v1beta1.DeleteBranchResponse;
+
+                    /**
+                     * Decodes a DeleteBranchResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteBranchResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataform.v1beta1.DeleteBranchResponse;
+
+                    /**
+                     * Verifies a DeleteBranchResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteBranchResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteBranchResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataform.v1beta1.DeleteBranchResponse;
+
+                    /**
+                     * Creates a plain object from a DeleteBranchResponse message. Also converts values to other types if specified.
+                     * @param message DeleteBranchResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataform.v1beta1.DeleteBranchResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteBranchResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteBranchResponse
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -32072,6 +32722,9 @@ export namespace google {
 
                     /** CodeCompilationConfig pipelineConfig */
                     pipelineConfig?: (google.cloud.dataform.v1beta1.IPipelineConfig|null);
+
+                    /** CodeCompilationConfig lineageEnabled */
+                    lineageEnabled?: (boolean|null);
                 }
 
                 /** Represents a CodeCompilationConfig. */
@@ -32115,6 +32768,9 @@ export namespace google {
 
                     /** CodeCompilationConfig pipelineConfig. */
                     public pipelineConfig?: (google.cloud.dataform.v1beta1.IPipelineConfig|null);
+
+                    /** CodeCompilationConfig lineageEnabled. */
+                    public lineageEnabled?: (boolean|null);
 
                     /**
                      * Creates a new CodeCompilationConfig instance using the specified properties.
@@ -41940,6 +42596,532 @@ export namespace google {
                         SUCCEEDED = 2,
                         FAILED = 3
                     }
+                }
+
+                /** Properties of a FetchWorkspaceBranchesRequest. */
+                interface IFetchWorkspaceBranchesRequest {
+
+                    /** FetchWorkspaceBranchesRequest name */
+                    name?: (string|null);
+
+                    /** FetchWorkspaceBranchesRequest filter */
+                    filter?: (google.cloud.dataform.v1beta1.FetchWorkspaceBranchesRequest.BranchFilter|keyof typeof google.cloud.dataform.v1beta1.FetchWorkspaceBranchesRequest.BranchFilter|null);
+
+                    /** FetchWorkspaceBranchesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** FetchWorkspaceBranchesRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a FetchWorkspaceBranchesRequest. */
+                class FetchWorkspaceBranchesRequest implements IFetchWorkspaceBranchesRequest {
+
+                    /**
+                     * Constructs a new FetchWorkspaceBranchesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataform.v1beta1.IFetchWorkspaceBranchesRequest);
+
+                    /** FetchWorkspaceBranchesRequest name. */
+                    public name: string;
+
+                    /** FetchWorkspaceBranchesRequest filter. */
+                    public filter: (google.cloud.dataform.v1beta1.FetchWorkspaceBranchesRequest.BranchFilter|keyof typeof google.cloud.dataform.v1beta1.FetchWorkspaceBranchesRequest.BranchFilter);
+
+                    /** FetchWorkspaceBranchesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** FetchWorkspaceBranchesRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new FetchWorkspaceBranchesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FetchWorkspaceBranchesRequest instance
+                     */
+                    public static create(properties?: google.cloud.dataform.v1beta1.IFetchWorkspaceBranchesRequest): google.cloud.dataform.v1beta1.FetchWorkspaceBranchesRequest;
+
+                    /**
+                     * Encodes the specified FetchWorkspaceBranchesRequest message. Does not implicitly {@link google.cloud.dataform.v1beta1.FetchWorkspaceBranchesRequest.verify|verify} messages.
+                     * @param message FetchWorkspaceBranchesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataform.v1beta1.IFetchWorkspaceBranchesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FetchWorkspaceBranchesRequest message, length delimited. Does not implicitly {@link google.cloud.dataform.v1beta1.FetchWorkspaceBranchesRequest.verify|verify} messages.
+                     * @param message FetchWorkspaceBranchesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataform.v1beta1.IFetchWorkspaceBranchesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FetchWorkspaceBranchesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FetchWorkspaceBranchesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataform.v1beta1.FetchWorkspaceBranchesRequest;
+
+                    /**
+                     * Decodes a FetchWorkspaceBranchesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FetchWorkspaceBranchesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataform.v1beta1.FetchWorkspaceBranchesRequest;
+
+                    /**
+                     * Verifies a FetchWorkspaceBranchesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FetchWorkspaceBranchesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FetchWorkspaceBranchesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataform.v1beta1.FetchWorkspaceBranchesRequest;
+
+                    /**
+                     * Creates a plain object from a FetchWorkspaceBranchesRequest message. Also converts values to other types if specified.
+                     * @param message FetchWorkspaceBranchesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataform.v1beta1.FetchWorkspaceBranchesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FetchWorkspaceBranchesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FetchWorkspaceBranchesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace FetchWorkspaceBranchesRequest {
+
+                    /** BranchFilter enum. */
+                    enum BranchFilter {
+                        BRANCH_FILTER_UNSPECIFIED = 0,
+                        LOCAL_ONLY = 1,
+                        REMOTE_ONLY = 2,
+                        ALL = 3
+                    }
+                }
+
+                /** Properties of a BranchMetadata. */
+                interface IBranchMetadata {
+
+                    /** BranchMetadata branchName */
+                    branchName?: (string|null);
+
+                    /** BranchMetadata lastCommit */
+                    lastCommit?: (google.cloud.dataform.v1beta1.ICommitLogEntry|null);
+                }
+
+                /** Represents a BranchMetadata. */
+                class BranchMetadata implements IBranchMetadata {
+
+                    /**
+                     * Constructs a new BranchMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataform.v1beta1.IBranchMetadata);
+
+                    /** BranchMetadata branchName. */
+                    public branchName: string;
+
+                    /** BranchMetadata lastCommit. */
+                    public lastCommit?: (google.cloud.dataform.v1beta1.ICommitLogEntry|null);
+
+                    /**
+                     * Creates a new BranchMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BranchMetadata instance
+                     */
+                    public static create(properties?: google.cloud.dataform.v1beta1.IBranchMetadata): google.cloud.dataform.v1beta1.BranchMetadata;
+
+                    /**
+                     * Encodes the specified BranchMetadata message. Does not implicitly {@link google.cloud.dataform.v1beta1.BranchMetadata.verify|verify} messages.
+                     * @param message BranchMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataform.v1beta1.IBranchMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BranchMetadata message, length delimited. Does not implicitly {@link google.cloud.dataform.v1beta1.BranchMetadata.verify|verify} messages.
+                     * @param message BranchMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataform.v1beta1.IBranchMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BranchMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BranchMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataform.v1beta1.BranchMetadata;
+
+                    /**
+                     * Decodes a BranchMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BranchMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataform.v1beta1.BranchMetadata;
+
+                    /**
+                     * Verifies a BranchMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BranchMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BranchMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataform.v1beta1.BranchMetadata;
+
+                    /**
+                     * Creates a plain object from a BranchMetadata message. Also converts values to other types if specified.
+                     * @param message BranchMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataform.v1beta1.BranchMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BranchMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BranchMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a FetchWorkspaceBranchesResponse. */
+                interface IFetchWorkspaceBranchesResponse {
+
+                    /** FetchWorkspaceBranchesResponse branches */
+                    branches?: (google.cloud.dataform.v1beta1.IBranchMetadata[]|null);
+
+                    /** FetchWorkspaceBranchesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a FetchWorkspaceBranchesResponse. */
+                class FetchWorkspaceBranchesResponse implements IFetchWorkspaceBranchesResponse {
+
+                    /**
+                     * Constructs a new FetchWorkspaceBranchesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataform.v1beta1.IFetchWorkspaceBranchesResponse);
+
+                    /** FetchWorkspaceBranchesResponse branches. */
+                    public branches: google.cloud.dataform.v1beta1.IBranchMetadata[];
+
+                    /** FetchWorkspaceBranchesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new FetchWorkspaceBranchesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FetchWorkspaceBranchesResponse instance
+                     */
+                    public static create(properties?: google.cloud.dataform.v1beta1.IFetchWorkspaceBranchesResponse): google.cloud.dataform.v1beta1.FetchWorkspaceBranchesResponse;
+
+                    /**
+                     * Encodes the specified FetchWorkspaceBranchesResponse message. Does not implicitly {@link google.cloud.dataform.v1beta1.FetchWorkspaceBranchesResponse.verify|verify} messages.
+                     * @param message FetchWorkspaceBranchesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataform.v1beta1.IFetchWorkspaceBranchesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FetchWorkspaceBranchesResponse message, length delimited. Does not implicitly {@link google.cloud.dataform.v1beta1.FetchWorkspaceBranchesResponse.verify|verify} messages.
+                     * @param message FetchWorkspaceBranchesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataform.v1beta1.IFetchWorkspaceBranchesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FetchWorkspaceBranchesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FetchWorkspaceBranchesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataform.v1beta1.FetchWorkspaceBranchesResponse;
+
+                    /**
+                     * Decodes a FetchWorkspaceBranchesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FetchWorkspaceBranchesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataform.v1beta1.FetchWorkspaceBranchesResponse;
+
+                    /**
+                     * Verifies a FetchWorkspaceBranchesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FetchWorkspaceBranchesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FetchWorkspaceBranchesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataform.v1beta1.FetchWorkspaceBranchesResponse;
+
+                    /**
+                     * Creates a plain object from a FetchWorkspaceBranchesResponse message. Also converts values to other types if specified.
+                     * @param message FetchWorkspaceBranchesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataform.v1beta1.FetchWorkspaceBranchesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FetchWorkspaceBranchesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FetchWorkspaceBranchesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a FetchCurrentWorkspaceBranchRequest. */
+                interface IFetchCurrentWorkspaceBranchRequest {
+
+                    /** FetchCurrentWorkspaceBranchRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a FetchCurrentWorkspaceBranchRequest. */
+                class FetchCurrentWorkspaceBranchRequest implements IFetchCurrentWorkspaceBranchRequest {
+
+                    /**
+                     * Constructs a new FetchCurrentWorkspaceBranchRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataform.v1beta1.IFetchCurrentWorkspaceBranchRequest);
+
+                    /** FetchCurrentWorkspaceBranchRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new FetchCurrentWorkspaceBranchRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FetchCurrentWorkspaceBranchRequest instance
+                     */
+                    public static create(properties?: google.cloud.dataform.v1beta1.IFetchCurrentWorkspaceBranchRequest): google.cloud.dataform.v1beta1.FetchCurrentWorkspaceBranchRequest;
+
+                    /**
+                     * Encodes the specified FetchCurrentWorkspaceBranchRequest message. Does not implicitly {@link google.cloud.dataform.v1beta1.FetchCurrentWorkspaceBranchRequest.verify|verify} messages.
+                     * @param message FetchCurrentWorkspaceBranchRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataform.v1beta1.IFetchCurrentWorkspaceBranchRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FetchCurrentWorkspaceBranchRequest message, length delimited. Does not implicitly {@link google.cloud.dataform.v1beta1.FetchCurrentWorkspaceBranchRequest.verify|verify} messages.
+                     * @param message FetchCurrentWorkspaceBranchRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataform.v1beta1.IFetchCurrentWorkspaceBranchRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FetchCurrentWorkspaceBranchRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FetchCurrentWorkspaceBranchRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataform.v1beta1.FetchCurrentWorkspaceBranchRequest;
+
+                    /**
+                     * Decodes a FetchCurrentWorkspaceBranchRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FetchCurrentWorkspaceBranchRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataform.v1beta1.FetchCurrentWorkspaceBranchRequest;
+
+                    /**
+                     * Verifies a FetchCurrentWorkspaceBranchRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FetchCurrentWorkspaceBranchRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FetchCurrentWorkspaceBranchRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataform.v1beta1.FetchCurrentWorkspaceBranchRequest;
+
+                    /**
+                     * Creates a plain object from a FetchCurrentWorkspaceBranchRequest message. Also converts values to other types if specified.
+                     * @param message FetchCurrentWorkspaceBranchRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataform.v1beta1.FetchCurrentWorkspaceBranchRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FetchCurrentWorkspaceBranchRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FetchCurrentWorkspaceBranchRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a FetchCurrentWorkspaceBranchResponse. */
+                interface IFetchCurrentWorkspaceBranchResponse {
+
+                    /** FetchCurrentWorkspaceBranchResponse branchName */
+                    branchName?: (string|null);
+                }
+
+                /** Represents a FetchCurrentWorkspaceBranchResponse. */
+                class FetchCurrentWorkspaceBranchResponse implements IFetchCurrentWorkspaceBranchResponse {
+
+                    /**
+                     * Constructs a new FetchCurrentWorkspaceBranchResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataform.v1beta1.IFetchCurrentWorkspaceBranchResponse);
+
+                    /** FetchCurrentWorkspaceBranchResponse branchName. */
+                    public branchName: string;
+
+                    /**
+                     * Creates a new FetchCurrentWorkspaceBranchResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FetchCurrentWorkspaceBranchResponse instance
+                     */
+                    public static create(properties?: google.cloud.dataform.v1beta1.IFetchCurrentWorkspaceBranchResponse): google.cloud.dataform.v1beta1.FetchCurrentWorkspaceBranchResponse;
+
+                    /**
+                     * Encodes the specified FetchCurrentWorkspaceBranchResponse message. Does not implicitly {@link google.cloud.dataform.v1beta1.FetchCurrentWorkspaceBranchResponse.verify|verify} messages.
+                     * @param message FetchCurrentWorkspaceBranchResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataform.v1beta1.IFetchCurrentWorkspaceBranchResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FetchCurrentWorkspaceBranchResponse message, length delimited. Does not implicitly {@link google.cloud.dataform.v1beta1.FetchCurrentWorkspaceBranchResponse.verify|verify} messages.
+                     * @param message FetchCurrentWorkspaceBranchResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataform.v1beta1.IFetchCurrentWorkspaceBranchResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FetchCurrentWorkspaceBranchResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FetchCurrentWorkspaceBranchResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataform.v1beta1.FetchCurrentWorkspaceBranchResponse;
+
+                    /**
+                     * Decodes a FetchCurrentWorkspaceBranchResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FetchCurrentWorkspaceBranchResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataform.v1beta1.FetchCurrentWorkspaceBranchResponse;
+
+                    /**
+                     * Verifies a FetchCurrentWorkspaceBranchResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FetchCurrentWorkspaceBranchResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FetchCurrentWorkspaceBranchResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataform.v1beta1.FetchCurrentWorkspaceBranchResponse;
+
+                    /**
+                     * Creates a plain object from a FetchCurrentWorkspaceBranchResponse message. Also converts values to other types if specified.
+                     * @param message FetchCurrentWorkspaceBranchResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataform.v1beta1.FetchCurrentWorkspaceBranchResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FetchCurrentWorkspaceBranchResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FetchCurrentWorkspaceBranchResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
             }
         }

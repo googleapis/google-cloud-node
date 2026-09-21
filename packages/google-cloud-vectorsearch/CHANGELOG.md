@@ -1,5 +1,26 @@
 # Changelog
 
+## [0.12.0](https://github.com/googleapis/google-cloud-node/compare/vectorsearch-v0.11.0...vectorsearch-v0.12.0) (2026-09-15)
+
+
+### Features
+
+* Update API sources and regenerate ([#9293](https://github.com/googleapis/google-cloud-node/issues/9293)) ([07ae774](https://github.com/googleapis/google-cloud-node/commit/07ae774a8e52185a3598c878513377e7a019f127))
+
+## [0.11.0](https://github.com/googleapis/google-cloud-node/compare/vectorsearch-v0.10.0...vectorsearch-v0.11.0) (2026-09-08)
+
+
+### Features
+
+* Upgrade librarian gapic-generator-typescript to v5.2.0 ([c249594](https://github.com/googleapis/google-cloud-node/commit/c249594c6ef41e4b36f1ef8869341a4c98c092b0))
+
+## [0.10.0](https://github.com/googleapis/google-cloud-node/compare/vectorsearch-v0.9.0...vectorsearch-v0.10.0) (2026-08-21)
+
+
+### Features
+
+* Update API sources and regenerate ([#9140](https://github.com/googleapis/google-cloud-node/issues/9140)) ([863bc96](https://github.com/googleapis/google-cloud-node/commit/863bc964abda34bc82b58409af164ff9c7346c55))
+
 ## [0.9.0](https://github.com/googleapis/google-cloud-node/compare/vectorsearch-v0.8.0...vectorsearch-v0.9.0) (2026-08-04)
 
 

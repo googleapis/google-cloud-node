@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as alphaanalyticsdataModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, LROperation, operationsProtos } from 'google-gax';
+import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -149,9 +149,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -284,7 +284,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.alphaAnalyticsDataStub, undefined);
@@ -292,13 +292,13 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
       assert(client.alphaAnalyticsDataStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.alphaAnalyticsDataStub);
@@ -307,15 +307,15 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.alphaAnalyticsDataStub, undefined);
@@ -324,7 +324,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -333,7 +333,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -346,7 +346,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon
@@ -370,7 +370,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     it('invokes runFunnelReport without error', async () => {
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -402,7 +402,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     it('invokes runFunnelReport without error using callback', async () => {
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -450,7 +450,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     it('invokes runFunnelReport with error', async () => {
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -482,7 +482,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     it('invokes runFunnelReport with closed client', async () => {
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -495,7 +495,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
       );
       request.property = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.runFunnelReport(request), expectedError);
@@ -506,7 +506,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     it('invokes queryAudienceList without error', async () => {
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -538,7 +538,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     it('invokes queryAudienceList without error using callback', async () => {
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -586,7 +586,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     it('invokes queryAudienceList with error', async () => {
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -618,7 +618,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     it('invokes queryAudienceList with closed client', async () => {
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -631,7 +631,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.queryAudienceList(request), expectedError);
@@ -642,7 +642,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     it('invokes getAudienceList without error', async () => {
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -674,7 +674,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     it('invokes getAudienceList without error using callback', async () => {
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -722,7 +722,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     it('invokes getAudienceList with error', async () => {
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -754,7 +754,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     it('invokes getAudienceList with closed client', async () => {
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -767,7 +767,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getAudienceList(request), expectedError);
@@ -778,7 +778,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     it('invokes createRecurringAudienceList without error', async () => {
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -811,7 +811,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     it('invokes createRecurringAudienceList without error using callback', async () => {
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -859,7 +859,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     it('invokes createRecurringAudienceList with error', async () => {
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -894,7 +894,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     it('invokes createRecurringAudienceList with closed client', async () => {
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -907,7 +907,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -921,7 +921,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     it('invokes getRecurringAudienceList without error', async () => {
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -954,7 +954,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     it('invokes getRecurringAudienceList without error using callback', async () => {
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1002,7 +1002,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     it('invokes getRecurringAudienceList with error', async () => {
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1037,7 +1037,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     it('invokes getRecurringAudienceList with closed client', async () => {
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1050,7 +1050,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1064,7 +1064,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     it('invokes getPropertyQuotasSnapshot without error', async () => {
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1097,7 +1097,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     it('invokes getPropertyQuotasSnapshot without error using callback', async () => {
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1145,7 +1145,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     it('invokes getPropertyQuotasSnapshot with error', async () => {
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1180,7 +1180,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     it('invokes getPropertyQuotasSnapshot with closed client', async () => {
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1193,7 +1193,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1207,7 +1207,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     it('invokes queryReportTask without error', async () => {
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1239,7 +1239,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     it('invokes queryReportTask without error using callback', async () => {
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1287,7 +1287,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     it('invokes queryReportTask with error', async () => {
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1319,7 +1319,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     it('invokes queryReportTask with closed client', async () => {
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1332,7 +1332,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.queryReportTask(request), expectedError);
@@ -1343,7 +1343,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     it('invokes getReportTask without error', async () => {
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1375,7 +1375,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     it('invokes getReportTask without error using callback', async () => {
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1423,7 +1423,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     it('invokes getReportTask with error', async () => {
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1455,7 +1455,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     it('invokes getReportTask with closed client', async () => {
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1468,10 +1468,139 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getReportTask(request), expectedError);
+    });
+  });
+
+  describe('chat', () => {
+    it('invokes chat without error', async () => {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.ChatRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1alpha.ChatRequest',
+        ['property'],
+      );
+      request.property = defaultValue1;
+      const expectedHeaderRequestParams = `property=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.ChatResponse(),
+      );
+      client.innerApiCalls.chat = stubSimpleCall(expectedResponse);
+      const [response] = await client.chat(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (client.innerApiCalls.chat as SinonStub).getCall(0)
+        .args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.chat as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes chat without error using callback', async () => {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.ChatRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1alpha.ChatRequest',
+        ['property'],
+      );
+      request.property = defaultValue1;
+      const expectedHeaderRequestParams = `property=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.ChatResponse(),
+      );
+      client.innerApiCalls.chat = stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.chat(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.analytics.data.v1alpha.IChatResponse | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (client.innerApiCalls.chat as SinonStub).getCall(0)
+        .args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.chat as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes chat with error', async () => {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.ChatRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1alpha.ChatRequest',
+        ['property'],
+      );
+      request.property = defaultValue1;
+      const expectedHeaderRequestParams = `property=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.chat = stubSimpleCall(undefined, expectedError);
+      await assert.rejects(client.chat(request), expectedError);
+      const actualRequest = (client.innerApiCalls.chat as SinonStub).getCall(0)
+        .args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.chat as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes chat with closed client', async () => {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.ChatRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1alpha.ChatRequest',
+        ['property'],
+      );
+      request.property = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(client.chat(request), expectedError);
     });
   });
 
@@ -1479,7 +1608,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     it('invokes runReport without error', async () => {
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1511,7 +1640,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     it('invokes runReport without error using callback', async () => {
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1559,7 +1688,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     it('invokes runReport with error', async () => {
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1588,7 +1717,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     it('invokes runReport with closed client', async () => {
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1601,7 +1730,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
       );
       request.property = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.runReport(request), expectedError);
@@ -1612,7 +1741,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     it('invokes getMetadata without error', async () => {
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1644,7 +1773,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     it('invokes getMetadata without error using callback', async () => {
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1692,7 +1821,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     it('invokes getMetadata with error', async () => {
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1724,7 +1853,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     it('invokes getMetadata with closed client', async () => {
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1737,7 +1866,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getMetadata(request), expectedError);
@@ -1748,7 +1877,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     it('invokes createAudienceList without error', async () => {
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1782,7 +1911,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     it('invokes createAudienceList without error using callback', async () => {
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1837,7 +1966,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     it('invokes createAudienceList with call error', async () => {
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1869,7 +1998,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     it('invokes createAudienceList with LRO error', async () => {
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1903,7 +2032,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     it('invokes checkCreateAudienceListProgress without error', async () => {
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1911,8 +2040,8 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateAudienceListProgress(
@@ -1926,7 +2055,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     it('invokes checkCreateAudienceListProgress with error', async () => {
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1948,7 +2077,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     it('invokes createReportTask without error', async () => {
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1982,7 +2111,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     it('invokes createReportTask without error using callback', async () => {
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2037,7 +2166,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     it('invokes createReportTask with call error', async () => {
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2069,7 +2198,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     it('invokes createReportTask with LRO error', async () => {
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2103,7 +2232,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     it('invokes checkCreateReportTaskProgress without error', async () => {
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2111,8 +2240,8 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateReportTaskProgress(
@@ -2126,7 +2255,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     it('invokes checkCreateReportTaskProgress with error', async () => {
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2148,7 +2277,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     it('invokes listAudienceLists without error', async () => {
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2188,7 +2317,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     it('invokes listAudienceLists without error using callback', async () => {
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2220,8 +2349,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.analytics.data.v1alpha.IAudienceList[]
-              | null,
+              protos.google.analytics.data.v1alpha.IAudienceList[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -2246,7 +2374,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     it('invokes listAudienceLists with error', async () => {
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2278,7 +2406,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     it('invokes listAudienceListsStream without error', async () => {
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2331,16 +2459,16 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
       assert(
         (client.descriptors.page.listAudienceLists.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listAudienceListsStream with error', async () => {
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2382,16 +2510,16 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
       assert(
         (client.descriptors.page.listAudienceLists.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listAudienceLists without error', async () => {
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2433,16 +2561,16 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
       assert(
         (client.descriptors.page.listAudienceLists.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listAudienceLists with error', async () => {
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2475,9 +2603,9 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
       assert(
         (client.descriptors.page.listAudienceLists.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2486,7 +2614,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     it('invokes listRecurringAudienceLists without error', async () => {
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2527,7 +2655,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     it('invokes listRecurringAudienceLists without error using callback', async () => {
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2585,7 +2713,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     it('invokes listRecurringAudienceLists with error', async () => {
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2620,7 +2748,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     it('invokes listRecurringAudienceListsStream without error', async () => {
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2690,7 +2818,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     it('invokes listRecurringAudienceListsStream with error', async () => {
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2749,7 +2877,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     it('uses async iteration with listRecurringAudienceLists without error', async () => {
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2804,7 +2932,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     it('uses async iteration with listRecurringAudienceLists with error', async () => {
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2852,7 +2980,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     it('invokes listReportTasks without error', async () => {
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2892,7 +3020,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     it('invokes listReportTasks without error using callback', async () => {
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2948,7 +3076,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     it('invokes listReportTasks with error', async () => {
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2980,7 +3108,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     it('invokes listReportTasksStream without error', async () => {
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3032,16 +3160,16 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
       assert(
         (client.descriptors.page.listReportTasks.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listReportTasksStream with error', async () => {
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3082,16 +3210,16 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
       assert(
         (client.descriptors.page.listReportTasks.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listReportTasks without error', async () => {
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3132,16 +3260,16 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
       assert(
         (client.descriptors.page.listReportTasks.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listReportTasks with error', async () => {
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3174,9 +3302,9 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
       assert(
         (client.descriptors.page.listReportTasks.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -3184,7 +3312,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     it('invokes getOperation without error', async () => {
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3206,7 +3334,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     it('invokes getOperation without error using callback', async () => {
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -3234,7 +3362,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3245,7 +3373,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     it('invokes getOperation with error', async () => {
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -3270,7 +3398,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     it('invokes cancelOperation without error', async () => {
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3293,7 +3421,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     it('invokes cancelOperation without error using callback', async () => {
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -3321,7 +3449,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3332,7 +3460,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     it('invokes cancelOperation with error', async () => {
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -3357,7 +3485,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     it('invokes deleteOperation without error', async () => {
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3380,7 +3508,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     it('invokes deleteOperation without error using callback', async () => {
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -3408,7 +3536,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3419,7 +3547,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     it('invokes deleteOperation with error', async () => {
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -3444,7 +3572,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -3480,7 +3608,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     it('uses async iteration with listOperations with error', async () => {
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3516,7 +3644,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
       };
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3568,7 +3696,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
       };
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3607,7 +3735,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
       };
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3646,7 +3774,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
       };
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3693,7 +3821,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
       };
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3759,7 +3887,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
       };
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();

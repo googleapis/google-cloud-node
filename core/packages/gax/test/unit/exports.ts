@@ -62,6 +62,9 @@ describe('exports', () => {
     it('exports protobufMinimal', () => {
       assert(typeof index.protobufMinimal === 'object');
     });
+    it('exports checkTelemetryEnabled', () => {
+      assert(typeof index.checkTelemetryEnabled === 'function');
+    });
   });
 
   describe('fallback', () => {

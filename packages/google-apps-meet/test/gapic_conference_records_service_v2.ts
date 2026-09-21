@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as conferencerecordsserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -206,7 +206,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client =
             new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient(
-              { universeDomain: 'configured.example.com' },
+              {universeDomain: 'configured.example.com'},
             );
           const servicePath = client.apiEndpoint;
           assert.strictEqual(servicePath, 'meet.configured.example.com');
@@ -251,7 +251,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client =
         new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.conferenceRecordsServiceStub, undefined);
@@ -259,13 +259,13 @@ describe('v2.ConferenceRecordsServiceClient', () => {
       assert(client.conferenceRecordsServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.conferenceRecordsServiceStub);
@@ -274,15 +274,15 @@ describe('v2.ConferenceRecordsServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.conferenceRecordsServiceStub, undefined);
@@ -291,7 +291,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -300,7 +300,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -313,7 +313,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon
@@ -337,7 +337,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
     it('invokes getConferenceRecord without error', async () => {
       const client =
         new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -370,7 +370,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
     it('invokes getConferenceRecord without error using callback', async () => {
       const client =
         new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -418,7 +418,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
     it('invokes getConferenceRecord with error', async () => {
       const client =
         new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -450,7 +450,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
     it('invokes getConferenceRecord with closed client', async () => {
       const client =
         new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -463,7 +463,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getConferenceRecord(request), expectedError);
@@ -474,7 +474,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
     it('invokes getParticipant without error', async () => {
       const client =
         new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -506,7 +506,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
     it('invokes getParticipant without error using callback', async () => {
       const client =
         new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -554,7 +554,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
     it('invokes getParticipant with error', async () => {
       const client =
         new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -586,7 +586,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
     it('invokes getParticipant with closed client', async () => {
       const client =
         new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -599,7 +599,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getParticipant(request), expectedError);
@@ -610,7 +610,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
     it('invokes getParticipantSession without error', async () => {
       const client =
         new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -643,7 +643,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
     it('invokes getParticipantSession without error using callback', async () => {
       const client =
         new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -691,7 +691,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
     it('invokes getParticipantSession with error', async () => {
       const client =
         new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -726,7 +726,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
     it('invokes getParticipantSession with closed client', async () => {
       const client =
         new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -739,7 +739,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -753,7 +753,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
     it('invokes getRecording without error', async () => {
       const client =
         new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -785,7 +785,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
     it('invokes getRecording without error using callback', async () => {
       const client =
         new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -833,7 +833,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
     it('invokes getRecording with error', async () => {
       const client =
         new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -865,7 +865,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
     it('invokes getRecording with closed client', async () => {
       const client =
         new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -878,7 +878,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getRecording(request), expectedError);
@@ -889,7 +889,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
     it('invokes getTranscript without error', async () => {
       const client =
         new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -921,7 +921,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
     it('invokes getTranscript without error using callback', async () => {
       const client =
         new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -969,7 +969,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
     it('invokes getTranscript with error', async () => {
       const client =
         new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1001,7 +1001,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
     it('invokes getTranscript with closed client', async () => {
       const client =
         new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1014,7 +1014,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getTranscript(request), expectedError);
@@ -1025,7 +1025,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
     it('invokes getTranscriptEntry without error', async () => {
       const client =
         new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1058,7 +1058,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
     it('invokes getTranscriptEntry without error using callback', async () => {
       const client =
         new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1106,7 +1106,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
     it('invokes getTranscriptEntry with error', async () => {
       const client =
         new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1138,7 +1138,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
     it('invokes getTranscriptEntry with closed client', async () => {
       const client =
         new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1151,10 +1151,146 @@ describe('v2.ConferenceRecordsServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getTranscriptEntry(request), expectedError);
+    });
+  });
+
+  describe('getSmartNote', () => {
+    it('invokes getSmartNote without error', async () => {
+      const client =
+        new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.apps.meet.v2.GetSmartNoteRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.apps.meet.v2.GetSmartNoteRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.apps.meet.v2.SmartNote(),
+      );
+      client.innerApiCalls.getSmartNote = stubSimpleCall(expectedResponse);
+      const [response] = await client.getSmartNote(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getSmartNote as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getSmartNote as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getSmartNote without error using callback', async () => {
+      const client =
+        new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.apps.meet.v2.GetSmartNoteRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.apps.meet.v2.GetSmartNoteRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.apps.meet.v2.SmartNote(),
+      );
+      client.innerApiCalls.getSmartNote =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getSmartNote(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.apps.meet.v2.ISmartNote | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getSmartNote as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getSmartNote as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getSmartNote with error', async () => {
+      const client =
+        new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.apps.meet.v2.GetSmartNoteRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.apps.meet.v2.GetSmartNoteRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getSmartNote = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.getSmartNote(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getSmartNote as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getSmartNote as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getSmartNote with closed client', async () => {
+      const client =
+        new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.apps.meet.v2.GetSmartNoteRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.apps.meet.v2.GetSmartNoteRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(client.getSmartNote(request), expectedError);
     });
   });
 
@@ -1162,7 +1298,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
     it('invokes listConferenceRecords without error', async () => {
       const client =
         new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1189,7 +1325,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
     it('invokes listConferenceRecords without error using callback', async () => {
       const client =
         new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1231,7 +1367,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
     it('invokes listConferenceRecords with error', async () => {
       const client =
         new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1252,7 +1388,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
     it('invokes listConferenceRecordsStream without error', async () => {
       const client =
         new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1303,7 +1439,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
     it('invokes listConferenceRecordsStream with error', async () => {
       const client =
         new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1343,7 +1479,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
     it('uses async iteration with listConferenceRecords without error', async () => {
       const client =
         new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1381,7 +1517,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
     it('uses async iteration with listConferenceRecords with error', async () => {
       const client =
         new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1412,7 +1548,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
     it('invokes listParticipants without error', async () => {
       const client =
         new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1446,7 +1582,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
     it('invokes listParticipants without error using callback', async () => {
       const client =
         new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1496,7 +1632,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
     it('invokes listParticipants with error', async () => {
       const client =
         new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1528,7 +1664,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
     it('invokes listParticipantsStream without error', async () => {
       const client =
         new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1574,16 +1710,16 @@ describe('v2.ConferenceRecordsServiceClient', () => {
       assert(
         (client.descriptors.page.listParticipants.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listParticipantsStream with error', async () => {
       const client =
         new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1624,16 +1760,16 @@ describe('v2.ConferenceRecordsServiceClient', () => {
       assert(
         (client.descriptors.page.listParticipants.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listParticipants without error', async () => {
       const client =
         new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1668,16 +1804,16 @@ describe('v2.ConferenceRecordsServiceClient', () => {
       assert(
         (client.descriptors.page.listParticipants.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listParticipants with error', async () => {
       const client =
         new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1709,9 +1845,9 @@ describe('v2.ConferenceRecordsServiceClient', () => {
       assert(
         (client.descriptors.page.listParticipants.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1720,7 +1856,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
     it('invokes listParticipantSessions without error', async () => {
       const client =
         new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1761,7 +1897,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
     it('invokes listParticipantSessions without error using callback', async () => {
       const client =
         new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1817,7 +1953,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
     it('invokes listParticipantSessions with error', async () => {
       const client =
         new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1852,7 +1988,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
     it('invokes listParticipantSessionsStream without error', async () => {
       const client =
         new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1919,7 +2055,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
     it('invokes listParticipantSessionsStream with error', async () => {
       const client =
         new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1975,7 +2111,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
     it('uses async iteration with listParticipantSessions without error', async () => {
       const client =
         new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2029,7 +2165,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
     it('uses async iteration with listParticipantSessions with error', async () => {
       const client =
         new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2076,7 +2212,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
     it('invokes listRecordings without error', async () => {
       const client =
         new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2110,7 +2246,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
     it('invokes listRecordings without error using callback', async () => {
       const client =
         new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2160,7 +2296,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
     it('invokes listRecordings with error', async () => {
       const client =
         new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2192,7 +2328,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
     it('invokes listRecordingsStream without error', async () => {
       const client =
         new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2235,16 +2371,16 @@ describe('v2.ConferenceRecordsServiceClient', () => {
       assert(
         (client.descriptors.page.listRecordings.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listRecordingsStream with error', async () => {
       const client =
         new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2282,16 +2418,16 @@ describe('v2.ConferenceRecordsServiceClient', () => {
       assert(
         (client.descriptors.page.listRecordings.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listRecordings without error', async () => {
       const client =
         new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2326,16 +2462,16 @@ describe('v2.ConferenceRecordsServiceClient', () => {
       assert(
         (client.descriptors.page.listRecordings.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listRecordings with error', async () => {
       const client =
         new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2367,9 +2503,9 @@ describe('v2.ConferenceRecordsServiceClient', () => {
       assert(
         (client.descriptors.page.listRecordings.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2378,7 +2514,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
     it('invokes listTranscripts without error', async () => {
       const client =
         new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2412,7 +2548,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
     it('invokes listTranscripts without error using callback', async () => {
       const client =
         new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2462,7 +2598,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
     it('invokes listTranscripts with error', async () => {
       const client =
         new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2494,7 +2630,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
     it('invokes listTranscriptsStream without error', async () => {
       const client =
         new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2537,16 +2673,16 @@ describe('v2.ConferenceRecordsServiceClient', () => {
       assert(
         (client.descriptors.page.listTranscripts.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listTranscriptsStream with error', async () => {
       const client =
         new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2584,16 +2720,16 @@ describe('v2.ConferenceRecordsServiceClient', () => {
       assert(
         (client.descriptors.page.listTranscripts.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listTranscripts without error', async () => {
       const client =
         new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2628,16 +2764,16 @@ describe('v2.ConferenceRecordsServiceClient', () => {
       assert(
         (client.descriptors.page.listTranscripts.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listTranscripts with error', async () => {
       const client =
         new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2669,9 +2805,9 @@ describe('v2.ConferenceRecordsServiceClient', () => {
       assert(
         (client.descriptors.page.listTranscripts.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2680,7 +2816,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
     it('invokes listTranscriptEntries without error', async () => {
       const client =
         new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2715,7 +2851,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
     it('invokes listTranscriptEntries without error using callback', async () => {
       const client =
         new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2765,7 +2901,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
     it('invokes listTranscriptEntries with error', async () => {
       const client =
         new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2800,7 +2936,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
     it('invokes listTranscriptEntriesStream without error', async () => {
       const client =
         new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2861,7 +2997,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
     it('invokes listTranscriptEntriesStream with error', async () => {
       const client =
         new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2917,7 +3053,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
     it('uses async iteration with listTranscriptEntries without error', async () => {
       const client =
         new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2965,7 +3101,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
     it('uses async iteration with listTranscriptEntries with error', async () => {
       const client =
         new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3008,6 +3144,308 @@ describe('v2.ConferenceRecordsServiceClient', () => {
     });
   });
 
+  describe('listSmartNotes', () => {
+    it('invokes listSmartNotes without error', async () => {
+      const client =
+        new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.apps.meet.v2.ListSmartNotesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.apps.meet.v2.ListSmartNotesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.apps.meet.v2.SmartNote()),
+        generateSampleMessage(new protos.google.apps.meet.v2.SmartNote()),
+        generateSampleMessage(new protos.google.apps.meet.v2.SmartNote()),
+      ];
+      client.innerApiCalls.listSmartNotes = stubSimpleCall(expectedResponse);
+      const [response] = await client.listSmartNotes(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listSmartNotes as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listSmartNotes as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listSmartNotes without error using callback', async () => {
+      const client =
+        new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.apps.meet.v2.ListSmartNotesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.apps.meet.v2.ListSmartNotesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.apps.meet.v2.SmartNote()),
+        generateSampleMessage(new protos.google.apps.meet.v2.SmartNote()),
+        generateSampleMessage(new protos.google.apps.meet.v2.SmartNote()),
+      ];
+      client.innerApiCalls.listSmartNotes =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listSmartNotes(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.apps.meet.v2.ISmartNote[] | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listSmartNotes as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listSmartNotes as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listSmartNotes with error', async () => {
+      const client =
+        new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.apps.meet.v2.ListSmartNotesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.apps.meet.v2.ListSmartNotesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listSmartNotes = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.listSmartNotes(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listSmartNotes as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listSmartNotes as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listSmartNotesStream without error', async () => {
+      const client =
+        new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.apps.meet.v2.ListSmartNotesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.apps.meet.v2.ListSmartNotesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.apps.meet.v2.SmartNote()),
+        generateSampleMessage(new protos.google.apps.meet.v2.SmartNote()),
+        generateSampleMessage(new protos.google.apps.meet.v2.SmartNote()),
+      ];
+      client.descriptors.page.listSmartNotes.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listSmartNotesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.apps.meet.v2.SmartNote[] = [];
+        stream.on('data', (response: protos.google.apps.meet.v2.SmartNote) => {
+          responses.push(response);
+        });
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listSmartNotes.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listSmartNotes, request),
+      );
+      assert(
+        (client.descriptors.page.listSmartNotes.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('invokes listSmartNotesStream with error', async () => {
+      const client =
+        new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.apps.meet.v2.ListSmartNotesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.apps.meet.v2.ListSmartNotesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listSmartNotes.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listSmartNotesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.apps.meet.v2.SmartNote[] = [];
+        stream.on('data', (response: protos.google.apps.meet.v2.SmartNote) => {
+          responses.push(response);
+        });
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listSmartNotes.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listSmartNotes, request),
+      );
+      assert(
+        (client.descriptors.page.listSmartNotes.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with listSmartNotes without error', async () => {
+      const client =
+        new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.apps.meet.v2.ListSmartNotesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.apps.meet.v2.ListSmartNotesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.apps.meet.v2.SmartNote()),
+        generateSampleMessage(new protos.google.apps.meet.v2.SmartNote()),
+        generateSampleMessage(new protos.google.apps.meet.v2.SmartNote()),
+      ];
+      client.descriptors.page.listSmartNotes.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.apps.meet.v2.ISmartNote[] = [];
+      const iterable = client.listSmartNotesAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listSmartNotes.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (client.descriptors.page.listSmartNotes.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with listSmartNotes with error', async () => {
+      const client =
+        new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.apps.meet.v2.ListSmartNotesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.apps.meet.v2.ListSmartNotesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listSmartNotes.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listSmartNotesAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.apps.meet.v2.ISmartNote[] = [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listSmartNotes.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (client.descriptors.page.listSmartNotes.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+  });
+
   describe('Path templates', () => {
     describe('conferenceRecord', async () => {
       const fakePath = '/rendered/path/conferenceRecord';
@@ -3016,7 +3454,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
       };
       const client =
         new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3052,6 +3490,56 @@ describe('v2.ConferenceRecordsServiceClient', () => {
       });
     });
 
+    describe('member', async () => {
+      const fakePath = '/rendered/path/member';
+      const expectedParameters = {
+        space: 'spaceValue',
+        member: 'memberValue',
+      };
+      const client =
+        new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.memberPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.memberPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('memberPath', () => {
+        const result = client.memberPath('spaceValue', 'memberValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.memberPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchSpaceFromMemberName', () => {
+        const result = client.matchSpaceFromMemberName(fakePath);
+        assert.strictEqual(result, 'spaceValue');
+        assert(
+          (client.pathTemplates.memberPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchMemberFromMemberName', () => {
+        const result = client.matchMemberFromMemberName(fakePath);
+        assert.strictEqual(result, 'memberValue');
+        assert(
+          (client.pathTemplates.memberPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('participant', async () => {
       const fakePath = '/rendered/path/participant';
       const expectedParameters = {
@@ -3060,7 +3548,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
       };
       const client =
         new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3115,7 +3603,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
       };
       const client =
         new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3194,7 +3682,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
       };
       const client =
         new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3239,6 +3727,59 @@ describe('v2.ConferenceRecordsServiceClient', () => {
       });
     });
 
+    describe('smartNote', async () => {
+      const fakePath = '/rendered/path/smartNote';
+      const expectedParameters = {
+        conference_record: 'conferenceRecordValue',
+        smart_note: 'smartNoteValue',
+      };
+      const client =
+        new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.smartNotePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.smartNotePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('smartNotePath', () => {
+        const result = client.smartNotePath(
+          'conferenceRecordValue',
+          'smartNoteValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.smartNotePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchConferenceRecordFromSmartNoteName', () => {
+        const result = client.matchConferenceRecordFromSmartNoteName(fakePath);
+        assert.strictEqual(result, 'conferenceRecordValue');
+        assert(
+          (client.pathTemplates.smartNotePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchSmartNoteFromSmartNoteName', () => {
+        const result = client.matchSmartNoteFromSmartNoteName(fakePath);
+        assert.strictEqual(result, 'smartNoteValue');
+        assert(
+          (client.pathTemplates.smartNotePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('space', async () => {
       const fakePath = '/rendered/path/space';
       const expectedParameters = {
@@ -3246,7 +3787,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
       };
       const client =
         new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3286,7 +3827,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
       };
       const client =
         new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3340,7 +3881,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
       };
       const client =
         new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();

@@ -19,7 +19,7 @@
 import * as v3beta1 from './v3beta1';
 const TranslationServiceClient = v3beta1.TranslationServiceClient;
 type TranslationServiceClient = v3beta1.TranslationServiceClient;
-export { v3beta1, TranslationServiceClient };
-export default { v3beta1, TranslationServiceClient };
+export {v3beta1, TranslationServiceClient};
+export default {v3beta1, TranslationServiceClient};
 import * as protos from '../protos/protos';
-export { protos };
+export {protos};

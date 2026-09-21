@@ -361,7 +361,7 @@ describe('OpenTelemetryTracer', () => {
         'receive',
       );
       assert.strictEqual(childReadSpan.kind, SpanKind.CONSUMER);
-      assert.ok(childReadSpan.parentSpanId);
+      assert.ok(childReadSpan.parentSpanContext?.spanId);
     });
 
     it('creates publish RPC spans', () => {
@@ -373,7 +373,6 @@ describe('OpenTelemetryTracer', () => {
         'test',
       ) as trace.Span;
       message.parentSpan = span;
-      span.end();
 
       const publishSpan = otel.PubsubSpans.createPublishRpcSpan(
         [message],
@@ -381,6 +380,7 @@ describe('OpenTelemetryTracer', () => {
         'test',
       );
 
+      span.end();
       publishSpan?.end();
       const spans = exporter.getFinishedSpans();
       const publishReadSpan = spans.pop();

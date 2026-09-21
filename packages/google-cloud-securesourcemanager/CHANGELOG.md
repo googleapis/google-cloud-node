@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.14.0](https://github.com/googleapis/google-cloud-node/compare/securesourcemanager-v0.13.0...securesourcemanager-v0.14.0) (2026-09-15)
+
+
+### Features
+
+* Update API sources and regenerate ([#9293](https://github.com/googleapis/google-cloud-node/issues/9293)) ([07ae774](https://github.com/googleapis/google-cloud-node/commit/07ae774a8e52185a3598c878513377e7a019f127))
+
+## [0.13.0](https://github.com/googleapis/google-cloud-node/compare/securesourcemanager-v0.12.0...securesourcemanager-v0.13.0) (2026-09-08)
+
+
+### Features
+
+* Upgrade librarian gapic-generator-typescript to v5.2.0 ([c249594](https://github.com/googleapis/google-cloud-node/commit/c249594c6ef41e4b36f1ef8869341a4c98c092b0))
+
 ## [0.12.0](https://github.com/googleapis/google-cloud-node/compare/securesourcemanager-v0.11.0...securesourcemanager-v0.12.0) (2026-08-04)
 
 

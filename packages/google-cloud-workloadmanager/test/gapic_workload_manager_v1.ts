@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as workloadmanagerModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -50,7 +50,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -154,9 +154,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -279,7 +279,7 @@ describe('v1.WorkloadManagerClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.workloadManagerStub, undefined);
@@ -287,12 +287,12 @@ describe('v1.WorkloadManagerClient', () => {
       assert(client.workloadManagerStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.workloadManagerStub);
@@ -301,14 +301,14 @@ describe('v1.WorkloadManagerClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.workloadManagerStub, undefined);
@@ -317,7 +317,7 @@ describe('v1.WorkloadManagerClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -325,7 +325,7 @@ describe('v1.WorkloadManagerClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -337,7 +337,7 @@ describe('v1.WorkloadManagerClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -360,7 +360,7 @@ describe('v1.WorkloadManagerClient', () => {
   describe('getEvaluation', () => {
     it('invokes getEvaluation without error', async () => {
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -391,7 +391,7 @@ describe('v1.WorkloadManagerClient', () => {
 
     it('invokes getEvaluation without error using callback', async () => {
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -438,7 +438,7 @@ describe('v1.WorkloadManagerClient', () => {
 
     it('invokes getEvaluation with error', async () => {
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -469,7 +469,7 @@ describe('v1.WorkloadManagerClient', () => {
 
     it('invokes getEvaluation with closed client', async () => {
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -482,7 +482,7 @@ describe('v1.WorkloadManagerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getEvaluation(request), expectedError);
@@ -492,7 +492,7 @@ describe('v1.WorkloadManagerClient', () => {
   describe('getExecution', () => {
     it('invokes getExecution without error', async () => {
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -523,7 +523,7 @@ describe('v1.WorkloadManagerClient', () => {
 
     it('invokes getExecution without error using callback', async () => {
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -570,7 +570,7 @@ describe('v1.WorkloadManagerClient', () => {
 
     it('invokes getExecution with error', async () => {
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -601,7 +601,7 @@ describe('v1.WorkloadManagerClient', () => {
 
     it('invokes getExecution with closed client', async () => {
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -614,7 +614,7 @@ describe('v1.WorkloadManagerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getExecution(request), expectedError);
@@ -624,7 +624,7 @@ describe('v1.WorkloadManagerClient', () => {
   describe('listRules', () => {
     it('invokes listRules without error', async () => {
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -655,7 +655,7 @@ describe('v1.WorkloadManagerClient', () => {
 
     it('invokes listRules without error using callback', async () => {
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -702,7 +702,7 @@ describe('v1.WorkloadManagerClient', () => {
 
     it('invokes listRules with error', async () => {
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -730,7 +730,7 @@ describe('v1.WorkloadManagerClient', () => {
 
     it('invokes listRules with closed client', async () => {
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -743,7 +743,7 @@ describe('v1.WorkloadManagerClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.listRules(request), expectedError);
@@ -753,7 +753,7 @@ describe('v1.WorkloadManagerClient', () => {
   describe('createEvaluation', () => {
     it('invokes createEvaluation without error', async () => {
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -786,7 +786,7 @@ describe('v1.WorkloadManagerClient', () => {
 
     it('invokes createEvaluation without error using callback', async () => {
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -840,7 +840,7 @@ describe('v1.WorkloadManagerClient', () => {
 
     it('invokes createEvaluation with call error', async () => {
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -871,7 +871,7 @@ describe('v1.WorkloadManagerClient', () => {
 
     it('invokes createEvaluation with LRO error', async () => {
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -904,7 +904,7 @@ describe('v1.WorkloadManagerClient', () => {
 
     it('invokes checkCreateEvaluationProgress without error', async () => {
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -912,8 +912,8 @@ describe('v1.WorkloadManagerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateEvaluationProgress(
@@ -926,7 +926,7 @@ describe('v1.WorkloadManagerClient', () => {
 
     it('invokes checkCreateEvaluationProgress with error', async () => {
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -947,7 +947,7 @@ describe('v1.WorkloadManagerClient', () => {
   describe('updateEvaluation', () => {
     it('invokes updateEvaluation without error', async () => {
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -981,7 +981,7 @@ describe('v1.WorkloadManagerClient', () => {
 
     it('invokes updateEvaluation without error using callback', async () => {
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1036,7 +1036,7 @@ describe('v1.WorkloadManagerClient', () => {
 
     it('invokes updateEvaluation with call error', async () => {
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1068,7 +1068,7 @@ describe('v1.WorkloadManagerClient', () => {
 
     it('invokes updateEvaluation with LRO error', async () => {
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1102,7 +1102,7 @@ describe('v1.WorkloadManagerClient', () => {
 
     it('invokes checkUpdateEvaluationProgress without error', async () => {
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1110,8 +1110,8 @@ describe('v1.WorkloadManagerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateEvaluationProgress(
@@ -1124,7 +1124,7 @@ describe('v1.WorkloadManagerClient', () => {
 
     it('invokes checkUpdateEvaluationProgress with error', async () => {
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1145,7 +1145,7 @@ describe('v1.WorkloadManagerClient', () => {
   describe('deleteEvaluation', () => {
     it('invokes deleteEvaluation without error', async () => {
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1178,7 +1178,7 @@ describe('v1.WorkloadManagerClient', () => {
 
     it('invokes deleteEvaluation without error using callback', async () => {
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1232,7 +1232,7 @@ describe('v1.WorkloadManagerClient', () => {
 
     it('invokes deleteEvaluation with call error', async () => {
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1263,7 +1263,7 @@ describe('v1.WorkloadManagerClient', () => {
 
     it('invokes deleteEvaluation with LRO error', async () => {
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1296,7 +1296,7 @@ describe('v1.WorkloadManagerClient', () => {
 
     it('invokes checkDeleteEvaluationProgress without error', async () => {
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1304,8 +1304,8 @@ describe('v1.WorkloadManagerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteEvaluationProgress(
@@ -1318,7 +1318,7 @@ describe('v1.WorkloadManagerClient', () => {
 
     it('invokes checkDeleteEvaluationProgress with error', async () => {
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1339,7 +1339,7 @@ describe('v1.WorkloadManagerClient', () => {
   describe('runEvaluation', () => {
     it('invokes runEvaluation without error', async () => {
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1372,7 +1372,7 @@ describe('v1.WorkloadManagerClient', () => {
 
     it('invokes runEvaluation without error using callback', async () => {
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1426,7 +1426,7 @@ describe('v1.WorkloadManagerClient', () => {
 
     it('invokes runEvaluation with call error', async () => {
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1457,7 +1457,7 @@ describe('v1.WorkloadManagerClient', () => {
 
     it('invokes runEvaluation with LRO error', async () => {
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1490,7 +1490,7 @@ describe('v1.WorkloadManagerClient', () => {
 
     it('invokes checkRunEvaluationProgress without error', async () => {
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1498,8 +1498,8 @@ describe('v1.WorkloadManagerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkRunEvaluationProgress(
@@ -1512,7 +1512,7 @@ describe('v1.WorkloadManagerClient', () => {
 
     it('invokes checkRunEvaluationProgress with error', async () => {
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1533,7 +1533,7 @@ describe('v1.WorkloadManagerClient', () => {
   describe('deleteExecution', () => {
     it('invokes deleteExecution without error', async () => {
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1566,7 +1566,7 @@ describe('v1.WorkloadManagerClient', () => {
 
     it('invokes deleteExecution without error using callback', async () => {
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1620,7 +1620,7 @@ describe('v1.WorkloadManagerClient', () => {
 
     it('invokes deleteExecution with call error', async () => {
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1651,7 +1651,7 @@ describe('v1.WorkloadManagerClient', () => {
 
     it('invokes deleteExecution with LRO error', async () => {
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1684,7 +1684,7 @@ describe('v1.WorkloadManagerClient', () => {
 
     it('invokes checkDeleteExecutionProgress without error', async () => {
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1692,8 +1692,8 @@ describe('v1.WorkloadManagerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteExecutionProgress(
@@ -1706,7 +1706,7 @@ describe('v1.WorkloadManagerClient', () => {
 
     it('invokes checkDeleteExecutionProgress with error', async () => {
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1727,7 +1727,7 @@ describe('v1.WorkloadManagerClient', () => {
   describe('listEvaluations', () => {
     it('invokes listEvaluations without error', async () => {
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1766,7 +1766,7 @@ describe('v1.WorkloadManagerClient', () => {
 
     it('invokes listEvaluations without error using callback', async () => {
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1798,8 +1798,7 @@ describe('v1.WorkloadManagerClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.workloadmanager.v1.IEvaluation[]
-              | null,
+              protos.google.cloud.workloadmanager.v1.IEvaluation[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -1823,7 +1822,7 @@ describe('v1.WorkloadManagerClient', () => {
 
     it('invokes listEvaluations with error', async () => {
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1854,7 +1853,7 @@ describe('v1.WorkloadManagerClient', () => {
 
     it('invokes listEvaluationsStream without error', async () => {
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1907,15 +1906,15 @@ describe('v1.WorkloadManagerClient', () => {
       assert(
         (client.descriptors.page.listEvaluations.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listEvaluationsStream with error', async () => {
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1957,15 +1956,15 @@ describe('v1.WorkloadManagerClient', () => {
       assert(
         (client.descriptors.page.listEvaluations.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listEvaluations without error', async () => {
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2007,15 +2006,15 @@ describe('v1.WorkloadManagerClient', () => {
       assert(
         (client.descriptors.page.listEvaluations.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listEvaluations with error', async () => {
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2048,9 +2047,9 @@ describe('v1.WorkloadManagerClient', () => {
       assert(
         (client.descriptors.page.listEvaluations.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2058,7 +2057,7 @@ describe('v1.WorkloadManagerClient', () => {
   describe('listExecutions', () => {
     it('invokes listExecutions without error', async () => {
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2097,7 +2096,7 @@ describe('v1.WorkloadManagerClient', () => {
 
     it('invokes listExecutions without error using callback', async () => {
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2152,7 +2151,7 @@ describe('v1.WorkloadManagerClient', () => {
 
     it('invokes listExecutions with error', async () => {
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2183,7 +2182,7 @@ describe('v1.WorkloadManagerClient', () => {
 
     it('invokes listExecutionsStream without error', async () => {
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2236,15 +2235,15 @@ describe('v1.WorkloadManagerClient', () => {
       assert(
         (client.descriptors.page.listExecutions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listExecutionsStream with error', async () => {
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2286,15 +2285,15 @@ describe('v1.WorkloadManagerClient', () => {
       assert(
         (client.descriptors.page.listExecutions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listExecutions without error', async () => {
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2335,15 +2334,15 @@ describe('v1.WorkloadManagerClient', () => {
       assert(
         (client.descriptors.page.listExecutions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listExecutions with error', async () => {
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2376,9 +2375,9 @@ describe('v1.WorkloadManagerClient', () => {
       assert(
         (client.descriptors.page.listExecutions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2386,7 +2385,7 @@ describe('v1.WorkloadManagerClient', () => {
   describe('listExecutionResults', () => {
     it('invokes listExecutionResults without error', async () => {
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2426,7 +2425,7 @@ describe('v1.WorkloadManagerClient', () => {
 
     it('invokes listExecutionResults without error using callback', async () => {
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2458,8 +2457,7 @@ describe('v1.WorkloadManagerClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.workloadmanager.v1.IExecutionResult[]
-              | null,
+              protos.google.cloud.workloadmanager.v1.IExecutionResult[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -2483,7 +2481,7 @@ describe('v1.WorkloadManagerClient', () => {
 
     it('invokes listExecutionResults with error', async () => {
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2514,7 +2512,7 @@ describe('v1.WorkloadManagerClient', () => {
 
     it('invokes listExecutionResultsStream without error', async () => {
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2569,15 +2567,15 @@ describe('v1.WorkloadManagerClient', () => {
       assert(
         (client.descriptors.page.listExecutionResults.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listExecutionResultsStream with error', async () => {
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2621,15 +2619,15 @@ describe('v1.WorkloadManagerClient', () => {
       assert(
         (client.descriptors.page.listExecutionResults.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listExecutionResults without error', async () => {
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2671,15 +2669,15 @@ describe('v1.WorkloadManagerClient', () => {
       assert(
         (client.descriptors.page.listExecutionResults.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listExecutionResults with error', async () => {
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2712,9 +2710,9 @@ describe('v1.WorkloadManagerClient', () => {
       assert(
         (client.descriptors.page.listExecutionResults.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2722,7 +2720,7 @@ describe('v1.WorkloadManagerClient', () => {
   describe('listScannedResources', () => {
     it('invokes listScannedResources without error', async () => {
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2762,7 +2760,7 @@ describe('v1.WorkloadManagerClient', () => {
 
     it('invokes listScannedResources without error using callback', async () => {
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2794,8 +2792,7 @@ describe('v1.WorkloadManagerClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.workloadmanager.v1.IScannedResource[]
-              | null,
+              protos.google.cloud.workloadmanager.v1.IScannedResource[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -2819,7 +2816,7 @@ describe('v1.WorkloadManagerClient', () => {
 
     it('invokes listScannedResources with error', async () => {
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2850,7 +2847,7 @@ describe('v1.WorkloadManagerClient', () => {
 
     it('invokes listScannedResourcesStream without error', async () => {
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2905,15 +2902,15 @@ describe('v1.WorkloadManagerClient', () => {
       assert(
         (client.descriptors.page.listScannedResources.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listScannedResourcesStream with error', async () => {
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2957,15 +2954,15 @@ describe('v1.WorkloadManagerClient', () => {
       assert(
         (client.descriptors.page.listScannedResources.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listScannedResources without error', async () => {
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3007,15 +3004,15 @@ describe('v1.WorkloadManagerClient', () => {
       assert(
         (client.descriptors.page.listScannedResources.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listScannedResources with error', async () => {
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3048,16 +3045,16 @@ describe('v1.WorkloadManagerClient', () => {
       assert(
         (client.descriptors.page.listScannedResources.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3087,7 +3084,7 @@ describe('v1.WorkloadManagerClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3131,7 +3128,7 @@ describe('v1.WorkloadManagerClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3166,7 +3163,7 @@ describe('v1.WorkloadManagerClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3214,7 +3211,7 @@ describe('v1.WorkloadManagerClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3255,7 +3252,7 @@ describe('v1.WorkloadManagerClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3276,7 +3273,7 @@ describe('v1.WorkloadManagerClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -3304,7 +3301,7 @@ describe('v1.WorkloadManagerClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3314,7 +3311,7 @@ describe('v1.WorkloadManagerClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -3338,7 +3335,7 @@ describe('v1.WorkloadManagerClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3360,7 +3357,7 @@ describe('v1.WorkloadManagerClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -3388,7 +3385,7 @@ describe('v1.WorkloadManagerClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3398,7 +3395,7 @@ describe('v1.WorkloadManagerClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -3422,7 +3419,7 @@ describe('v1.WorkloadManagerClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3444,7 +3441,7 @@ describe('v1.WorkloadManagerClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -3472,7 +3469,7 @@ describe('v1.WorkloadManagerClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3482,7 +3479,7 @@ describe('v1.WorkloadManagerClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -3506,7 +3503,7 @@ describe('v1.WorkloadManagerClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -3541,7 +3538,7 @@ describe('v1.WorkloadManagerClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3578,7 +3575,7 @@ describe('v1.WorkloadManagerClient', () => {
         crypto_key: 'cryptoKeyValue',
       };
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3653,7 +3650,7 @@ describe('v1.WorkloadManagerClient', () => {
         evaluation: 'evaluationValue',
       };
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3718,7 +3715,7 @@ describe('v1.WorkloadManagerClient', () => {
         execution: 'executionValue',
       };
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3792,7 +3789,7 @@ describe('v1.WorkloadManagerClient', () => {
         location: 'locationValue',
       };
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3840,7 +3837,7 @@ describe('v1.WorkloadManagerClient', () => {
         project: 'projectValue',
       };
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3880,7 +3877,7 @@ describe('v1.WorkloadManagerClient', () => {
         rule: 'ruleValue',
       };
       const client = new workloadmanagerModule.v1.WorkloadManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

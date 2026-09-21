@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as domainsModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, LROperation, operationsProtos } from 'google-gax';
+import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -149,9 +149,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -269,7 +269,7 @@ describe('v1alpha2.DomainsClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new domainsModule.v1alpha2.DomainsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.domainsStub, undefined);
@@ -277,12 +277,12 @@ describe('v1alpha2.DomainsClient', () => {
       assert(client.domainsStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new domainsModule.v1alpha2.DomainsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.domainsStub);
@@ -291,14 +291,14 @@ describe('v1alpha2.DomainsClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new domainsModule.v1alpha2.DomainsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.domainsStub, undefined);
@@ -307,7 +307,7 @@ describe('v1alpha2.DomainsClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -315,7 +315,7 @@ describe('v1alpha2.DomainsClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new domainsModule.v1alpha2.DomainsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -327,7 +327,7 @@ describe('v1alpha2.DomainsClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new domainsModule.v1alpha2.DomainsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -350,7 +350,7 @@ describe('v1alpha2.DomainsClient', () => {
   describe('searchDomains', () => {
     it('invokes searchDomains without error', async () => {
       const client = new domainsModule.v1alpha2.DomainsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -381,7 +381,7 @@ describe('v1alpha2.DomainsClient', () => {
 
     it('invokes searchDomains without error using callback', async () => {
       const client = new domainsModule.v1alpha2.DomainsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -428,7 +428,7 @@ describe('v1alpha2.DomainsClient', () => {
 
     it('invokes searchDomains with error', async () => {
       const client = new domainsModule.v1alpha2.DomainsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -459,7 +459,7 @@ describe('v1alpha2.DomainsClient', () => {
 
     it('invokes searchDomains with closed client', async () => {
       const client = new domainsModule.v1alpha2.DomainsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -472,7 +472,7 @@ describe('v1alpha2.DomainsClient', () => {
       );
       request.location = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.searchDomains(request), expectedError);
@@ -482,7 +482,7 @@ describe('v1alpha2.DomainsClient', () => {
   describe('retrieveRegisterParameters', () => {
     it('invokes retrieveRegisterParameters without error', async () => {
       const client = new domainsModule.v1alpha2.DomainsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -514,7 +514,7 @@ describe('v1alpha2.DomainsClient', () => {
 
     it('invokes retrieveRegisterParameters without error using callback', async () => {
       const client = new domainsModule.v1alpha2.DomainsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -561,7 +561,7 @@ describe('v1alpha2.DomainsClient', () => {
 
     it('invokes retrieveRegisterParameters with error', async () => {
       const client = new domainsModule.v1alpha2.DomainsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -595,7 +595,7 @@ describe('v1alpha2.DomainsClient', () => {
 
     it('invokes retrieveRegisterParameters with closed client', async () => {
       const client = new domainsModule.v1alpha2.DomainsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -608,7 +608,7 @@ describe('v1alpha2.DomainsClient', () => {
       );
       request.location = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -621,7 +621,7 @@ describe('v1alpha2.DomainsClient', () => {
   describe('retrieveTransferParameters', () => {
     it('invokes retrieveTransferParameters without error', async () => {
       const client = new domainsModule.v1alpha2.DomainsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -653,7 +653,7 @@ describe('v1alpha2.DomainsClient', () => {
 
     it('invokes retrieveTransferParameters without error using callback', async () => {
       const client = new domainsModule.v1alpha2.DomainsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -700,7 +700,7 @@ describe('v1alpha2.DomainsClient', () => {
 
     it('invokes retrieveTransferParameters with error', async () => {
       const client = new domainsModule.v1alpha2.DomainsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -734,7 +734,7 @@ describe('v1alpha2.DomainsClient', () => {
 
     it('invokes retrieveTransferParameters with closed client', async () => {
       const client = new domainsModule.v1alpha2.DomainsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -747,7 +747,7 @@ describe('v1alpha2.DomainsClient', () => {
       );
       request.location = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -760,7 +760,7 @@ describe('v1alpha2.DomainsClient', () => {
   describe('getRegistration', () => {
     it('invokes getRegistration without error', async () => {
       const client = new domainsModule.v1alpha2.DomainsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -791,7 +791,7 @@ describe('v1alpha2.DomainsClient', () => {
 
     it('invokes getRegistration without error using callback', async () => {
       const client = new domainsModule.v1alpha2.DomainsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -838,7 +838,7 @@ describe('v1alpha2.DomainsClient', () => {
 
     it('invokes getRegistration with error', async () => {
       const client = new domainsModule.v1alpha2.DomainsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -869,7 +869,7 @@ describe('v1alpha2.DomainsClient', () => {
 
     it('invokes getRegistration with closed client', async () => {
       const client = new domainsModule.v1alpha2.DomainsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -882,7 +882,7 @@ describe('v1alpha2.DomainsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getRegistration(request), expectedError);
@@ -892,7 +892,7 @@ describe('v1alpha2.DomainsClient', () => {
   describe('retrieveAuthorizationCode', () => {
     it('invokes retrieveAuthorizationCode without error', async () => {
       const client = new domainsModule.v1alpha2.DomainsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -924,7 +924,7 @@ describe('v1alpha2.DomainsClient', () => {
 
     it('invokes retrieveAuthorizationCode without error using callback', async () => {
       const client = new domainsModule.v1alpha2.DomainsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -971,7 +971,7 @@ describe('v1alpha2.DomainsClient', () => {
 
     it('invokes retrieveAuthorizationCode with error', async () => {
       const client = new domainsModule.v1alpha2.DomainsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1005,7 +1005,7 @@ describe('v1alpha2.DomainsClient', () => {
 
     it('invokes retrieveAuthorizationCode with closed client', async () => {
       const client = new domainsModule.v1alpha2.DomainsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1018,7 +1018,7 @@ describe('v1alpha2.DomainsClient', () => {
       );
       request.registration = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1031,7 +1031,7 @@ describe('v1alpha2.DomainsClient', () => {
   describe('resetAuthorizationCode', () => {
     it('invokes resetAuthorizationCode without error', async () => {
       const client = new domainsModule.v1alpha2.DomainsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1063,7 +1063,7 @@ describe('v1alpha2.DomainsClient', () => {
 
     it('invokes resetAuthorizationCode without error using callback', async () => {
       const client = new domainsModule.v1alpha2.DomainsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1110,7 +1110,7 @@ describe('v1alpha2.DomainsClient', () => {
 
     it('invokes resetAuthorizationCode with error', async () => {
       const client = new domainsModule.v1alpha2.DomainsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1144,7 +1144,7 @@ describe('v1alpha2.DomainsClient', () => {
 
     it('invokes resetAuthorizationCode with closed client', async () => {
       const client = new domainsModule.v1alpha2.DomainsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1157,7 +1157,7 @@ describe('v1alpha2.DomainsClient', () => {
       );
       request.registration = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1170,7 +1170,7 @@ describe('v1alpha2.DomainsClient', () => {
   describe('registerDomain', () => {
     it('invokes registerDomain without error', async () => {
       const client = new domainsModule.v1alpha2.DomainsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1203,7 +1203,7 @@ describe('v1alpha2.DomainsClient', () => {
 
     it('invokes registerDomain without error using callback', async () => {
       const client = new domainsModule.v1alpha2.DomainsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1257,7 +1257,7 @@ describe('v1alpha2.DomainsClient', () => {
 
     it('invokes registerDomain with call error', async () => {
       const client = new domainsModule.v1alpha2.DomainsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1288,7 +1288,7 @@ describe('v1alpha2.DomainsClient', () => {
 
     it('invokes registerDomain with LRO error', async () => {
       const client = new domainsModule.v1alpha2.DomainsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1321,7 +1321,7 @@ describe('v1alpha2.DomainsClient', () => {
 
     it('invokes checkRegisterDomainProgress without error', async () => {
       const client = new domainsModule.v1alpha2.DomainsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1329,8 +1329,8 @@ describe('v1alpha2.DomainsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkRegisterDomainProgress(
@@ -1343,7 +1343,7 @@ describe('v1alpha2.DomainsClient', () => {
 
     it('invokes checkRegisterDomainProgress with error', async () => {
       const client = new domainsModule.v1alpha2.DomainsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1364,7 +1364,7 @@ describe('v1alpha2.DomainsClient', () => {
   describe('transferDomain', () => {
     it('invokes transferDomain without error', async () => {
       const client = new domainsModule.v1alpha2.DomainsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1397,7 +1397,7 @@ describe('v1alpha2.DomainsClient', () => {
 
     it('invokes transferDomain without error using callback', async () => {
       const client = new domainsModule.v1alpha2.DomainsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1451,7 +1451,7 @@ describe('v1alpha2.DomainsClient', () => {
 
     it('invokes transferDomain with call error', async () => {
       const client = new domainsModule.v1alpha2.DomainsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1482,7 +1482,7 @@ describe('v1alpha2.DomainsClient', () => {
 
     it('invokes transferDomain with LRO error', async () => {
       const client = new domainsModule.v1alpha2.DomainsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1515,7 +1515,7 @@ describe('v1alpha2.DomainsClient', () => {
 
     it('invokes checkTransferDomainProgress without error', async () => {
       const client = new domainsModule.v1alpha2.DomainsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1523,8 +1523,8 @@ describe('v1alpha2.DomainsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkTransferDomainProgress(
@@ -1537,7 +1537,7 @@ describe('v1alpha2.DomainsClient', () => {
 
     it('invokes checkTransferDomainProgress with error', async () => {
       const client = new domainsModule.v1alpha2.DomainsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1558,7 +1558,7 @@ describe('v1alpha2.DomainsClient', () => {
   describe('updateRegistration', () => {
     it('invokes updateRegistration without error', async () => {
       const client = new domainsModule.v1alpha2.DomainsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1592,7 +1592,7 @@ describe('v1alpha2.DomainsClient', () => {
 
     it('invokes updateRegistration without error using callback', async () => {
       const client = new domainsModule.v1alpha2.DomainsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1647,7 +1647,7 @@ describe('v1alpha2.DomainsClient', () => {
 
     it('invokes updateRegistration with call error', async () => {
       const client = new domainsModule.v1alpha2.DomainsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1679,7 +1679,7 @@ describe('v1alpha2.DomainsClient', () => {
 
     it('invokes updateRegistration with LRO error', async () => {
       const client = new domainsModule.v1alpha2.DomainsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1713,7 +1713,7 @@ describe('v1alpha2.DomainsClient', () => {
 
     it('invokes checkUpdateRegistrationProgress without error', async () => {
       const client = new domainsModule.v1alpha2.DomainsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1721,8 +1721,8 @@ describe('v1alpha2.DomainsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateRegistrationProgress(
@@ -1735,7 +1735,7 @@ describe('v1alpha2.DomainsClient', () => {
 
     it('invokes checkUpdateRegistrationProgress with error', async () => {
       const client = new domainsModule.v1alpha2.DomainsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1756,7 +1756,7 @@ describe('v1alpha2.DomainsClient', () => {
   describe('configureManagementSettings', () => {
     it('invokes configureManagementSettings without error', async () => {
       const client = new domainsModule.v1alpha2.DomainsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1789,7 +1789,7 @@ describe('v1alpha2.DomainsClient', () => {
 
     it('invokes configureManagementSettings without error using callback', async () => {
       const client = new domainsModule.v1alpha2.DomainsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1843,7 +1843,7 @@ describe('v1alpha2.DomainsClient', () => {
 
     it('invokes configureManagementSettings with call error', async () => {
       const client = new domainsModule.v1alpha2.DomainsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1877,7 +1877,7 @@ describe('v1alpha2.DomainsClient', () => {
 
     it('invokes configureManagementSettings with LRO error', async () => {
       const client = new domainsModule.v1alpha2.DomainsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1910,7 +1910,7 @@ describe('v1alpha2.DomainsClient', () => {
 
     it('invokes checkConfigureManagementSettingsProgress without error', async () => {
       const client = new domainsModule.v1alpha2.DomainsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1918,8 +1918,8 @@ describe('v1alpha2.DomainsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -1933,7 +1933,7 @@ describe('v1alpha2.DomainsClient', () => {
 
     it('invokes checkConfigureManagementSettingsProgress with error', async () => {
       const client = new domainsModule.v1alpha2.DomainsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1954,7 +1954,7 @@ describe('v1alpha2.DomainsClient', () => {
   describe('configureDnsSettings', () => {
     it('invokes configureDnsSettings without error', async () => {
       const client = new domainsModule.v1alpha2.DomainsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1987,7 +1987,7 @@ describe('v1alpha2.DomainsClient', () => {
 
     it('invokes configureDnsSettings without error using callback', async () => {
       const client = new domainsModule.v1alpha2.DomainsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2041,7 +2041,7 @@ describe('v1alpha2.DomainsClient', () => {
 
     it('invokes configureDnsSettings with call error', async () => {
       const client = new domainsModule.v1alpha2.DomainsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2072,7 +2072,7 @@ describe('v1alpha2.DomainsClient', () => {
 
     it('invokes configureDnsSettings with LRO error', async () => {
       const client = new domainsModule.v1alpha2.DomainsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2105,7 +2105,7 @@ describe('v1alpha2.DomainsClient', () => {
 
     it('invokes checkConfigureDnsSettingsProgress without error', async () => {
       const client = new domainsModule.v1alpha2.DomainsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2113,8 +2113,8 @@ describe('v1alpha2.DomainsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkConfigureDnsSettingsProgress(
@@ -2127,7 +2127,7 @@ describe('v1alpha2.DomainsClient', () => {
 
     it('invokes checkConfigureDnsSettingsProgress with error', async () => {
       const client = new domainsModule.v1alpha2.DomainsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2148,7 +2148,7 @@ describe('v1alpha2.DomainsClient', () => {
   describe('configureContactSettings', () => {
     it('invokes configureContactSettings without error', async () => {
       const client = new domainsModule.v1alpha2.DomainsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2181,7 +2181,7 @@ describe('v1alpha2.DomainsClient', () => {
 
     it('invokes configureContactSettings without error using callback', async () => {
       const client = new domainsModule.v1alpha2.DomainsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2235,7 +2235,7 @@ describe('v1alpha2.DomainsClient', () => {
 
     it('invokes configureContactSettings with call error', async () => {
       const client = new domainsModule.v1alpha2.DomainsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2269,7 +2269,7 @@ describe('v1alpha2.DomainsClient', () => {
 
     it('invokes configureContactSettings with LRO error', async () => {
       const client = new domainsModule.v1alpha2.DomainsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2302,7 +2302,7 @@ describe('v1alpha2.DomainsClient', () => {
 
     it('invokes checkConfigureContactSettingsProgress without error', async () => {
       const client = new domainsModule.v1alpha2.DomainsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2310,8 +2310,8 @@ describe('v1alpha2.DomainsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -2325,7 +2325,7 @@ describe('v1alpha2.DomainsClient', () => {
 
     it('invokes checkConfigureContactSettingsProgress with error', async () => {
       const client = new domainsModule.v1alpha2.DomainsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2346,7 +2346,7 @@ describe('v1alpha2.DomainsClient', () => {
   describe('exportRegistration', () => {
     it('invokes exportRegistration without error', async () => {
       const client = new domainsModule.v1alpha2.DomainsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2379,7 +2379,7 @@ describe('v1alpha2.DomainsClient', () => {
 
     it('invokes exportRegistration without error using callback', async () => {
       const client = new domainsModule.v1alpha2.DomainsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2433,7 +2433,7 @@ describe('v1alpha2.DomainsClient', () => {
 
     it('invokes exportRegistration with call error', async () => {
       const client = new domainsModule.v1alpha2.DomainsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2464,7 +2464,7 @@ describe('v1alpha2.DomainsClient', () => {
 
     it('invokes exportRegistration with LRO error', async () => {
       const client = new domainsModule.v1alpha2.DomainsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2497,7 +2497,7 @@ describe('v1alpha2.DomainsClient', () => {
 
     it('invokes checkExportRegistrationProgress without error', async () => {
       const client = new domainsModule.v1alpha2.DomainsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2505,8 +2505,8 @@ describe('v1alpha2.DomainsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkExportRegistrationProgress(
@@ -2519,7 +2519,7 @@ describe('v1alpha2.DomainsClient', () => {
 
     it('invokes checkExportRegistrationProgress with error', async () => {
       const client = new domainsModule.v1alpha2.DomainsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2540,7 +2540,7 @@ describe('v1alpha2.DomainsClient', () => {
   describe('deleteRegistration', () => {
     it('invokes deleteRegistration without error', async () => {
       const client = new domainsModule.v1alpha2.DomainsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2573,7 +2573,7 @@ describe('v1alpha2.DomainsClient', () => {
 
     it('invokes deleteRegistration without error using callback', async () => {
       const client = new domainsModule.v1alpha2.DomainsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2627,7 +2627,7 @@ describe('v1alpha2.DomainsClient', () => {
 
     it('invokes deleteRegistration with call error', async () => {
       const client = new domainsModule.v1alpha2.DomainsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2658,7 +2658,7 @@ describe('v1alpha2.DomainsClient', () => {
 
     it('invokes deleteRegistration with LRO error', async () => {
       const client = new domainsModule.v1alpha2.DomainsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2691,7 +2691,7 @@ describe('v1alpha2.DomainsClient', () => {
 
     it('invokes checkDeleteRegistrationProgress without error', async () => {
       const client = new domainsModule.v1alpha2.DomainsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2699,8 +2699,8 @@ describe('v1alpha2.DomainsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteRegistrationProgress(
@@ -2713,7 +2713,7 @@ describe('v1alpha2.DomainsClient', () => {
 
     it('invokes checkDeleteRegistrationProgress with error', async () => {
       const client = new domainsModule.v1alpha2.DomainsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2734,7 +2734,7 @@ describe('v1alpha2.DomainsClient', () => {
   describe('listRegistrations', () => {
     it('invokes listRegistrations without error', async () => {
       const client = new domainsModule.v1alpha2.DomainsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2773,7 +2773,7 @@ describe('v1alpha2.DomainsClient', () => {
 
     it('invokes listRegistrations without error using callback', async () => {
       const client = new domainsModule.v1alpha2.DomainsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2805,8 +2805,7 @@ describe('v1alpha2.DomainsClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.domains.v1alpha2.IRegistration[]
-              | null,
+              protos.google.cloud.domains.v1alpha2.IRegistration[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -2830,7 +2829,7 @@ describe('v1alpha2.DomainsClient', () => {
 
     it('invokes listRegistrations with error', async () => {
       const client = new domainsModule.v1alpha2.DomainsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2861,7 +2860,7 @@ describe('v1alpha2.DomainsClient', () => {
 
     it('invokes listRegistrationsStream without error', async () => {
       const client = new domainsModule.v1alpha2.DomainsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2914,15 +2913,15 @@ describe('v1alpha2.DomainsClient', () => {
       assert(
         (client.descriptors.page.listRegistrations.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listRegistrationsStream with error', async () => {
       const client = new domainsModule.v1alpha2.DomainsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2964,15 +2963,15 @@ describe('v1alpha2.DomainsClient', () => {
       assert(
         (client.descriptors.page.listRegistrations.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listRegistrations without error', async () => {
       const client = new domainsModule.v1alpha2.DomainsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3014,15 +3013,15 @@ describe('v1alpha2.DomainsClient', () => {
       assert(
         (client.descriptors.page.listRegistrations.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listRegistrations with error', async () => {
       const client = new domainsModule.v1alpha2.DomainsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3055,9 +3054,9 @@ describe('v1alpha2.DomainsClient', () => {
       assert(
         (client.descriptors.page.listRegistrations.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -3070,7 +3069,7 @@ describe('v1alpha2.DomainsClient', () => {
         location: 'locationValue',
       };
       const client = new domainsModule.v1alpha2.DomainsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3120,7 +3119,7 @@ describe('v1alpha2.DomainsClient', () => {
         registration: 'registrationValue',
       };
       const client = new domainsModule.v1alpha2.DomainsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
