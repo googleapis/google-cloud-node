@@ -26,6 +26,7 @@ jobs:
     steps:
       - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
         with:
+          fetch-depth: 2
           persist-credentials: false
       - uses: dorny/paths-filter@fbd0ab8f3e69293af611ebaee6363fc25e6d187d # v4.0.1
         id: changes
@@ -34,6 +35,7 @@ jobs:
             librarian:
               - 'librarian.yaml'
               - '.github/workflows/generation_check.yaml'
+              - 'packages/**'
       # Version of librarian is pulled from librarian.yaml,
       # action is pinned to commit SHA to satisfy blanket security policy.
       - uses: googleapis/librarian@35997441eafc2b02716804f9baba1e3f04f8a44f # v0.31.1
@@ -51,14 +53,237 @@ jobs:
         run: librarian install
       - name: Regenerate
         if: steps.changes.outputs.librarian == 'true' || github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && github.ref == 'refs/heads/main')
+        env:
+          EVENT_NAME: ${{ github.event_name }}
         run: |
-          librarian generate --all
+          if [ "$EVENT_NAME" = "pull_request" ]; then
+            PACKAGES_TO_GENERATE=$(node -e '
+              const { execSync } = require("child_process");
+              const fs = require("fs");
+              const path = require("path");
+
+              class MinPriorityQueue {
+                constructor() {
+                  this.heap = [];
+                }
+                push(item) {
+                  this.heap.push(item);
+                  this._bubbleUp(this.heap.length - 1);
+                }
+                pop() {
+                  if (this.heap.length === 0) return undefined;
+                  const top = this.heap[0];
+                  const bottom = this.heap.pop();
+                  if (this.heap.length > 0) {
+                    this.heap[0] = bottom;
+                    this._sinkDown(0);
+                  }
+                  return top;
+                }
+                get size() {
+                  return this.heap.length;
+                }
+                _bubbleUp(index) {
+                  while (index > 0) {
+                    const parentIdx = (index - 1) >> 1;
+                    if (this.heap[index].score >= this.heap[parentIdx].score) break;
+                    [this.heap[index], this.heap[parentIdx]] = [this.heap[parentIdx], this.heap[index]];
+                    index = parentIdx;
+                  }
+                }
+                _sinkDown(index) {
+                  const length = this.heap.length;
+                  while (true) {
+                    let left = (index << 1) + 1;
+                    let right = left + 1;
+                    let smallest = index;
+                    if (left < length && this.heap[left].score < this.heap[smallest].score) {
+                      smallest = left;
+                    }
+                    if (right < length && this.heap[right].score < this.heap[smallest].score) {
+                      smallest = right;
+                    }
+                    if (smallest === index) break;
+                    [this.heap[index], this.heap[smallest]] = [this.heap[smallest], this.heap[index]];
+                    index = smallest;
+                  }
+                }
+              }
+
+              function getDirSize(dirPath) {
+                let size = 0;
+                if (!fs.existsSync(dirPath)) return 0;
+                for (const entry of fs.readdirSync(dirPath, { withFileTypes: true })) {
+                  if (entry.name === "node_modules" || entry.name === "build") continue;
+                  const fullPath = path.join(dirPath, entry.name);
+                  if (entry.isDirectory()) {
+                    size += getDirSize(fullPath);
+                  } else if (entry.isFile()) {
+                    size += fs.statSync(fullPath).size;
+                  }
+                }
+                return size;
+              }
+
+              let diffOutput = "";
+              try {
+                diffOutput = execSync("git diff --name-only HEAD^1 HEAD", { encoding: "utf8" });
+              } catch {
+                diffOutput = execSync("git diff --name-only HEAD~1 HEAD", { encoding: "utf8" });
+              }
+
+              const changedFiles = diffOutput.split("\n").map(s => s.trim()).filter(Boolean);
+              const touchedPackages = new Set();
+              const topLevelPackagesFiles = [];
+              let globalConfigChanged = false;
+
+              for (const file of changedFiles) {
+                const match = file.match(/^packages\/([^/]+)\//);
+                if (match) {
+                  touchedPackages.add(match[1]);
+                } else if (file.startsWith("packages/")) {
+                  topLevelPackagesFiles.push(file);
+                } else if (file === "librarian.yaml" || file === ".github/workflows/generation_check.yaml") {
+                  globalConfigChanged = true;
+                }
+              }
+
+              const yamlContent = fs.readFileSync("librarian.yaml", "utf8");
+              const libs = new Map();
+              const lines = yamlContent.split("\n");
+              let currentLib = null;
+              for (let i = 0; i < lines.length; i++) {
+                const nameMatch = lines[i].match(/^  - name:\s+(\S+)/);
+                if (nameMatch) {
+                  if (currentLib) libs.set(currentLib.name, currentLib);
+                  currentLib = {
+                    name: nameMatch[1],
+                    startLine: i + 1,
+                    endLine: lines.length,
+                    skip: false,
+                    apiCount: 0,
+                  };
+                } else if (currentLib) {
+                  if (/^\s+skip_generate:\s*true/.test(lines[i])) {
+                    currentLib.skip = true;
+                  } else if (/^\s+-\s+path:/.test(lines[i])) {
+                    currentLib.apiCount++;
+                  }
+                }
+              }
+              if (currentLib) {
+                libs.set(currentLib.name, currentLib);
+              }
+
+              if (topLevelPackagesFiles.length > 0) {
+                console.error(
+                  `Error: Found modified file(s) directly under packages/ not belonging to any library in librarian.yaml: ${topLevelPackagesFiles.join(", ")}`
+                );
+                process.exit(1);
+              }
+
+              const allPackageDirs = fs.existsSync("packages")
+                ? fs.readdirSync("packages", { withFileTypes: true })
+                    .filter(d => d.isDirectory())
+                    .map(d => d.name)
+                : [];
+              const unknownPackages = Array.from(
+                new Set([
+                  ...Array.from(touchedPackages).filter(
+                    pkg => !libs.has(pkg) && fs.existsSync(path.join("packages", pkg))
+                  ),
+                  ...allPackageDirs.filter(pkg => !libs.has(pkg)),
+                ])
+              );
+              if (unknownPackages.length > 0) {
+                console.error(
+                  `Error: Package directory(s) under packages/ not configured in librarian.yaml: ${unknownPackages.join(", ")}`
+                );
+                process.exit(1);
+              }
+
+              for (const lib of libs.values()) {
+                if (!lib.skip && !fs.existsSync(path.join("packages", lib.name))) {
+                  touchedPackages.add(lib.name);
+                }
+              }
+
+              const libArray = Array.from(libs.values());
+              for (let i = 0; i < libArray.length - 1; i++) {
+                libArray[i].endLine = libArray[i + 1].startLine - 1;
+              }
+
+              if (changedFiles.includes("librarian.yaml")) {
+                try {
+                  let yamlDiff = "";
+                  try {
+                    yamlDiff = execSync("git diff -U0 HEAD^1 HEAD -- librarian.yaml", { encoding: "utf8" });
+                  } catch {
+                    yamlDiff = execSync("git diff -U0 HEAD~1 HEAD -- librarian.yaml", { encoding: "utf8" });
+                  }
+                  const hunkRegex = /^@@ -\d+(?:,\d+)? \+(\d+)(?:,(\d+))? @@/gm;
+                  let m;
+                  while ((m = hunkRegex.exec(yamlDiff)) !== null) {
+                    const start = parseInt(m[1], 10);
+                    const count = m[2] !== undefined ? parseInt(m[2], 10) : 1;
+                    const end = start + Math.max(0, count - 1);
+                    for (const lib of libArray) {
+                      if (end >= lib.startLine && start <= lib.endLine) {
+                        touchedPackages.add(lib.name);
+                      }
+                    }
+                  }
+                } catch {}
+              }
+
+              let candidates = Array.from(touchedPackages).filter(pkg => {
+                const meta = libs.get(pkg);
+                return Boolean(meta && !meta.skip);
+              });
+
+              if (candidates.length === 0 && globalConfigChanged && touchedPackages.size === 0) {
+                candidates = libArray
+                  .filter(lib => !lib.skip)
+                  .map(lib => lib.name);
+              }
+
+              const pq = new MinPriorityQueue();
+              for (const pkg of candidates) {
+                const meta = libs.get(pkg);
+                const totalBytes = getDirSize(path.join("packages", pkg));
+                const apiCount = Math.max(1, meta.apiCount);
+                const score = totalBytes + apiCount * 500000;
+                pq.push({ pkg, totalBytes, apiCount, score });
+              }
+
+              const selected = [];
+              const maxPackages = 3;
+              while (selected.length < maxPackages && pq.size > 0) {
+                const next = pq.pop();
+                console.error(
+                  `Selected #${selected.length + 1}: ${next.pkg} (size=${next.totalBytes}B, apis=${next.apiCount}, score=${next.score})`
+                );
+                selected.push(next.pkg);
+              }
+              process.stdout.write(selected.join(" "));
+            ')
+            if [ -z "$PACKAGES_TO_GENERATE" ]; then
+              echo "No generatable packages found for this pull request; skipping librarian generate."
+            else
+              for pkg in $PACKAGES_TO_GENERATE; do
+                echo "Running: librarian generate $pkg"
+                librarian generate "$pkg"
+              done
+            fi
+          else
+            librarian generate --all
+          fi
           if [ -n "$(git status --porcelain)" ]; then
             git status
             echo "==================== GIT DIFF ===================="
             git diff
             echo "=================================================="
-            echo "Regeneration failed. Please run 'librarian generate --all' to update the generated files."
+            echo "Regeneration failed. Please run 'librarian generate <package>' (or 'librarian generate --all') to update the generated files, or revert unauthorized edits under packages/."
             exit 1
           fi
       - name: Create issue if previous step fails
