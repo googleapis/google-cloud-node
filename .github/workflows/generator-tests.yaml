@@ -34,6 +34,12 @@ jobs:
       with:
         node-version: 24.x
 
+    - name: Install protoc
+      run: |
+        curl -sSL https://github.com/protocolbuffers/protobuf/releases/download/v33.2/protoc-33.2-linux-x86_64.zip -o protoc.zip
+        unzip -q -o protoc.zip -d /usr/local
+        rm protoc.zip
+
     - name: Install and build generator
       working-directory: core/generator/gapic-generator-typescript
       run: |
