@@ -38,9 +38,8 @@ jobs:
       working-directory: core/generator/gapic-generator-typescript
       run: |
         corepack enable pnpm
-        pnpm install --frozen-lockfile --config.auto-install-peers=true
+        pnpm install --frozen-lockfile --ignore-scripts --config.auto-install-peers=true
         pnpm run compile
-        pnpm add -g "$PWD"
 
     - name: Run test
       working-directory: core/generator/gapic-generator-typescript

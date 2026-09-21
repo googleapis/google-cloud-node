@@ -20,7 +20,7 @@ jobs:
         with:
           node-version: 22
       - uses: pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1 # v4
-      - run: pnpm install
+      - run: pnpm install --frozen-lockfile --ignore-scripts
       - run: pnpm run generate
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

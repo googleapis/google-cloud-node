@@ -21,11 +21,11 @@ sources:
 tools:
   pnpm:
     - name: gapic-generator-typescript
-      version: gapic-generator-v5.2.0
-      package: https://github.com/googleapis/google-cloud-node/archive/gapic-generator-v5.2.0.tar.gz
-      checksum: a2afaa498c7938837e65a1eecb2041bda5b0bda232e6bdbd5117e012cdc7e75b
+      version: gapic-generator-v5.3.0
+      package: https://github.com/googleapis/google-cloud-node/archive/gapic-generator-v5.3.0.tar.gz
+      checksum: 4bc54d399b22c845fd4555f9435b7971153a2e3fafca32402658390711828f63
       build:
-        - pnpm install --no-frozen-lockfile --force --config.auto-install-peers=true
+        - pnpm install --ignore-workspace --no-frozen-lockfile --config.auto-install-peers=true
         - pnpm run compile
         - pnpm add -g "$PWD"
       src_dir: core/generator/gapic-generator-typescript
@@ -39,7 +39,9 @@ tools:
       version: 1.2.0
   protoc:
     version: "33.2"
-    sha256: b24b53f87c151bfd48b112fe4c3a6e6574e5198874f38036aff41df3456b8caf
+    sha256_by_platform:
+      linux-x86_64: b24b53f87c151bfd48b112fe4c3a6e6574e5198874f38036aff41df3456b8caf
+      osx-aarch_64: 5be1427127788c9f7dd7d606c3e69843dd3587327dea993917ffcb77e7234b44
 default:
   keep:
     - librarian.js
