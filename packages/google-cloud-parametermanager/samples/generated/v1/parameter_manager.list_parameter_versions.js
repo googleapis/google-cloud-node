@@ -39,7 +39,10 @@ function main(parent) {
    */
   // const pageSize = 1234
   /**
-   *  Optional. A token identifying a page of results the server should return.
+   *  Optional. A page token, received from a previous `ListParameterVersions`
+   *  call. Provide this to retrieve the subsequent page.
+   *  When paginating, all other parameters provided to `ListParameterVersions`
+   *  must match the call that provided the page token.
    */
   // const pageToken = 'abc123'
   /**

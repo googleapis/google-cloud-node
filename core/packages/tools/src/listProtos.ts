@@ -22,7 +22,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as walk from 'walkdir';
 
-async function main(directory: string) {
+export async function main(directory: string) {
   const googleProtoFilesDir = path.join(directory, 'protos');
   const outputFile = path.join(directory, 'src', 'protosList.json');
   const commonProtoFiles = walk
