@@ -5,6 +5,80 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "ecd5bfd0e8ad8d2cf3b9fe003f7e35f2bbd592f5",
+          "message": "Update cloud-spanner to minimum Node version of 22",
+          "issues": [
+            "9291"
+          ],
+          "scope": "Spanner",
+          "breakingChangeNote": "Update cloud-spanner to minimum Node version of 22 ([#9291](https://github.com/googleapis/google-cloud-node/issues/9291))"
+        },
+        {
+          "type": "perf",
+          "sha": "7085e03eb009a93b4368f5649472c0ac330d5a51",
+          "message": "Remove rest-parameter allocations in wrappedRequestFn",
+          "issues": [
+            "9365"
+          ],
+          "scope": "spanner"
+        },
+        {
+          "type": "perf",
+          "sha": "1b1b411769fc0847e23a52cadaf3c6225ae281ea",
+          "message": "Optimize codec.getType and reuse type singletons",
+          "issues": [
+            "9366"
+          ],
+          "scope": "spanner"
+        },
+        {
+          "type": "perf",
+          "sha": "dbbc55c508cf886863dff00e12ce362026515661",
+          "message": "Synchronous multiplexed session hand-off for non-stream callers",
+          "issues": [
+            "9362"
+          ],
+          "scope": "spanner"
+        },
+        {
+          "type": "perf",
+          "sha": "11c257b5a64b0d360f2c9d47c412e59e9fd5a756",
+          "message": "Disable gRPC channelz by default",
+          "issues": [
+            "9320"
+          ],
+          "scope": "spanner"
+        },
+        {
+          "type": "perf",
+          "sha": "a44180d659ff8734fcacd8e294fc9c8c0a181071",
+          "message": "Bypass gRPC message interception in metrics interceptor",
+          "issues": [
+            "9306"
+          ],
+          "scope": "spanner"
+        },
+        {
+          "type": "feat",
+          "sha": "ed3a44e7f396b1f71aa29c8291a740aaab4fef0b",
+          "message": "Upgrade OpenTelemetry to v2",
+          "issues": [
+            "9329"
+          ],
+          "scope": "Spanner",
+          "breakingChangeNote": "upgrade OpenTelemetry to v2 ([#9329](https://github.com/googleapis/google-cloud-node/issues/9329))"
+        }
+      ],
+      "version": "9.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/spanner",
+      "id": "e205caa0-2f3d-4787-a0d1-e65c87dc6727",
+      "createTime": "2026-09-18T13:12:38.821Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "1ea27c9c9bf4e4cbf79381321dcb9bce7951a76f",
           "message": "PNPM workspace",
           "issues": [
@@ -95057,5 +95131,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-09-17T14:33:17.947Z"
+  "updateTime": "2026-09-18T13:12:38.821Z"
 }
