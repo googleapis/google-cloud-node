@@ -360,10 +360,10 @@ class Spanner extends GrpcService {
    * Returns whether AFE (Application Frontend Extension) server timing is enabled.
    *
    * This method checks the value of the environment variable
-   * `SPANNER_DISABLE_AFE_SERVER_TIMING`. If the variable is explicitly set to the
-   * string `'true'`, then AFE server timing is considered disabled, and this method
-   * returns `false`. For all other values (including if the variable is unset),
-   * the method returns `true`.
+   * `SPANNER_DISABLE_AFE_SERVER_TIMING`. If the variable is explicitly set to
+   * the string `'true'` (case-insensitive), then AFE server timing is
+   * considered disabled, and this method returns `false`. For all other
+   * values (including if the variable is unset), the method returns `true`.
    *
    * @returns {boolean} `true` if AFE server timing is enabled; otherwise, `false`.
    */
