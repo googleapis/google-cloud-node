@@ -142,7 +142,9 @@ describe('TracerHelper', () => {
       assert.strictEqual(span.status.message, 'RPC Failed');
       assert.strictEqual(span.attributes['error.message'], undefined);
       // No status code on this error, so error.type falls back to the class.
-      assert.strictEqual(span.attributes['error.type'], 'Error');
+      // The class is the bare `Error`, which says nothing, so the name the
+      // caller assigned is what gets reported.
+      assert.strictEqual(span.attributes['error.type'], 'CustomRpcError');
       // exception.* belongs on the exception event, not on the span.
       assert.strictEqual(span.attributes['exception.type'], undefined);
       assert.strictEqual(span.events.length, 1);
@@ -180,21 +182,96 @@ describe('TracerHelper', () => {
       assert.strictEqual(span.attributes['exception.type'], undefined);
     });
 
-    it('derives the same error.type from an equivalent REST GoogleError', async () => {
-      // The REST path builds a real GoogleError, so the class name differs
-      // from the gRPC case above even though the failure is identical.
-      const error = new GoogleError('object does not exist');
-      error.code = Status.NOT_FOUND;
+    // error.type reports the identifier belonging to the transport that
+    // failed: the gRPC status name on a gRPC call, the received HTTP status on
+    // a fallback one. The same logical failure therefore reads differently on
+    // the two, which is deliberate — each names the status its own protocol
+    // actually returned.
+    describe('error.type by transport', () => {
+      const httpDynamicArgs: DynamicTraceContext = {
+        clientName: 'ComputeClient',
+        methodName: 'InsertInstance',
+        rpcType: 'http',
+      };
 
-      await assert.rejects(async () => {
-        await traceCall(dynamicArgs, staticArgs, async () => {
-          throw error;
+      const errorTypeOf = async (
+        thrown: unknown,
+        args: DynamicTraceContext = dynamicArgs,
+      ) => {
+        await assert.rejects(async () => {
+          await traceCall(args, staticArgs, async () => {
+            throw thrown;
+          });
         });
+        return harness.requireSingleSpan('google-gax').attributes['error.type'];
+      };
+
+      it('reports the gRPC status name on a grpc call', async () => {
+        const error = new GoogleError('object does not exist');
+        error.code = Status.NOT_FOUND;
+
+        assert.strictEqual(await errorTypeOf(error), 'NOT_FOUND');
       });
 
-      const span = harness.requireSingleSpan('google-gax');
-      assert.strictEqual(error.constructor.name, 'GoogleError');
-      assert.strictEqual(span.attributes['error.type'], 'NOT_FOUND');
+      it('reports the received status as a string on a fallback call', async () => {
+        const error = new GoogleError('service unavailable');
+        error.code = Status.UNAVAILABLE;
+        error.httpStatusCode = 503;
+
+        assert.strictEqual(await errorTypeOf(error, httpDynamicArgs), '503');
+      });
+
+      it('reports the received status, not the status it was mapped to', async () => {
+        // 418 is unmapped, so rpcCodeFromHttpStatusCode collapses it onto
+        // FAILED_PRECONDITION. Reporting the mapped code would lose the only
+        // record of what the server actually answered.
+        const error = new GoogleError('teapot');
+        error.code = Status.FAILED_PRECONDITION;
+        error.httpStatusCode = 418;
+
+        assert.strictEqual(await errorTypeOf(error, httpDynamicArgs), '418');
+      });
+
+      it('never reports an HTTP status on a grpc call', async () => {
+        // A gRPC call has no HTTP status. Even if one is somehow attached, the
+        // gRPC status is the identifier that belongs to this transport.
+        const error = new GoogleError('object does not exist');
+        error.code = Status.NOT_FOUND;
+        error.httpStatusCode = 404;
+
+        assert.strictEqual(await errorTypeOf(error), 'NOT_FOUND');
+      });
+
+      it('falls through to the exception type when no response arrived', async () => {
+        // An expired deadline on the fallback transport: a real gRPC status,
+        // but no response and so no HTTP status. The gRPC code is not this
+        // transport's identifier, so the class is reported instead. The status
+        // itself stays on rpc.response.status_code.
+        const error = new GoogleError('Deadline exceeded');
+        error.code = Status.DEADLINE_EXCEEDED;
+
+        assert.strictEqual(
+          await errorTypeOf(error, httpDynamicArgs),
+          'GoogleError',
+        );
+        harness.assertResponseStatus({rpcStatus: 'DEADLINE_EXCEEDED'});
+      });
+
+      it('prefers a system error code to the class on either transport', async () => {
+        // A refused connection never reaches a server, so neither transport
+        // has a status to report. 'ECONNREFUSED' is the only description of
+        // the failure available: the class is the bare Error.
+        const error = Object.assign(new Error('connect ECONNREFUSED'), {
+          code: 'ECONNREFUSED',
+        });
+
+        assert.strictEqual(
+          await errorTypeOf(error, httpDynamicArgs),
+          'ECONNREFUSED',
+        );
+        harness.reset();
+        assert.strictEqual(await errorTypeOf(error), 'ECONNREFUSED');
+      });
     });
 
     it('uses the string code for Node system errors', async () => {
@@ -320,11 +397,11 @@ describe('TracerHelper', () => {
         assert.strictEqual(span.events.length, 1);
         const event = span.events[0];
         assert.strictEqual(event.name, 'exception');
-        // OTel derives exception.type from `code` when the error carries one,
-        // falling back to `name` otherwise, so a coded gax error reports the
-        // bare number '5' here. That is precisely why error.type is resolved
-        // separately: 'NOT_FOUND' above is the value worth querying on.
-        assert.strictEqual(event.attributes?.['exception.type'], '5');
+        // The class that was raised, not the stringified status code. The SDK
+        // would have derived '5' from the error's `code`, which names no type
+        // at all; error.type above is where the status belongs, and it says
+        // 'NOT_FOUND' rather than a bare number.
+        assert.strictEqual(event.attributes?.['exception.type'], 'GoogleError');
         assert.strictEqual(
           event.attributes?.['exception.message'],
           'object does not exist',
@@ -366,6 +443,89 @@ describe('TracerHelper', () => {
             stacktrace,
           )}`,
         );
+      });
+
+      // exception.type names the class that was raised. semconv asks for the
+      // fully-qualified class name "if applicable", and it is not applicable
+      // in JavaScript: there is no namespace to qualify with, so the
+      // constructor name is the whole identity. It also asks for the dynamic
+      // type over the static one, which is why the constructor is preferred
+      // over `name` — a mutable property, not a type.
+      describe('exception.type', () => {
+        const exceptionTypeOf = async (thrown: unknown) => {
+          const span = await failWith(thrown);
+          return span.events[0]?.attributes?.['exception.type'];
+        };
+
+        it('names the class rather than the status code it carries', async () => {
+          // The regression this guards: the SDK reads `code` before `name`, so
+          // handing it a status-bearing error reports the stringified number.
+          const error = new GoogleError('object does not exist');
+          error.code = Status.NOT_FOUND;
+
+          assert.strictEqual(await exceptionTypeOf(error), 'GoogleError');
+        });
+
+        it('names the class of a subclass that never assigns name', async () => {
+          // The shape every gax error has: `GoogleError` and its subclasses
+          // inherit the literal 'Error' from Error.prototype, so `name` would
+          // report 'Error' for all of them and collapse the dimension.
+          class RetryError extends GoogleError {}
+          const error = new RetryError('retries exhausted');
+
+          assert.strictEqual(error.name, 'Error');
+          assert.strictEqual(await exceptionTypeOf(error), 'RetryError');
+        });
+
+        it('falls back to name when the class is the bare Error', async () => {
+          // grpc-js builds failures as Object.assign(new Error(msg), status),
+          // so the class is 'Error' and carries nothing. A name the caller
+          // assigned is the only description of the failure left.
+          const error = new Error('RPC Failed');
+          error.name = 'CustomRpcError';
+
+          assert.strictEqual(await exceptionTypeOf(error), 'CustomRpcError');
+        });
+
+        it('prefers the class over a name assigned on top of it', async () => {
+          // `name` is a mutable data property and may say anything; the class
+          // is the dynamic type semconv asks to be preferred.
+          const error = new GoogleError('object does not exist');
+          error.name = 'CustomRpcError';
+
+          assert.strictEqual(await exceptionTypeOf(error), 'GoogleError');
+        });
+
+        it('reports a built-in error class as itself', async () => {
+          assert.strictEqual(
+            await exceptionTypeOf(new TypeError('not a function')),
+            'TypeError',
+          );
+        });
+
+        it('reports Error for a bare Error with nothing else to go on', async () => {
+          assert.strictEqual(await exceptionTypeOf(new Error('boom')), 'Error');
+        });
+
+        it('keeps the message and stacktrace the SDK would have recorded', async () => {
+          // The error is no longer handed to recordException as-is, so the two
+          // attributes that are forwarded by hand have to be checked.
+          const error = new GoogleError('object does not exist');
+          error.code = Status.NOT_FOUND;
+
+          const span = await failWith(error);
+          const attributes = span.events[0].attributes;
+
+          assert.strictEqual(
+            attributes?.['exception.message'],
+            'object does not exist',
+          );
+          assert.strictEqual(
+            attributes?.['exception.stacktrace'],
+            error.stack,
+            'the stack must be forwarded verbatim from the original error',
+          );
+        });
       });
 
       it('reports error.type consistently with the RPC status', async () => {
@@ -777,15 +937,18 @@ describe('TracerHelper', () => {
         cancel(): void {}
         then<TResult1 = string, TResult2 = never>(
           onfulfilled?:
-            ((value: string) => TResult1 | PromiseLike<TResult1>) | null,
+            | ((value: string) => TResult1 | PromiseLike<TResult1>)
+            | null,
           onrejected?:
-            ((reason: unknown) => TResult2 | PromiseLike<TResult2>) | null,
+            | ((reason: unknown) => TResult2 | PromiseLike<TResult2>)
+            | null,
         ): Promise<TResult1 | TResult2> {
           return this.promise.then(onfulfilled, onrejected);
         }
         catch<TResult = never>(
           onrejected?:
-            ((reason: unknown) => TResult | PromiseLike<TResult>) | null,
+            | ((reason: unknown) => TResult | PromiseLike<TResult>)
+            | null,
         ): Promise<string | TResult> {
           return this.promise.catch(onrejected);
         }
@@ -1142,9 +1305,12 @@ describe('TracerHelper', () => {
             );
             assert.strictEqual(spans[0].events.length, 1);
             assert.strictEqual(spans[0].events[0].name, 'exception');
+            // The class wins over the assigned name here, unlike the bare
+            // Error above: `GoogleError` is the type that was raised, and
+            // `name` is only consulted when the class is uninformative.
             assert.strictEqual(
               spans[0].events[0].attributes?.['exception.type'],
-              'CustomRpcError',
+              'GoogleError',
             );
             done();
           },

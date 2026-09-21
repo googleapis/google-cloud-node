@@ -712,11 +712,15 @@ describe('createApiCall', () => {
       const span = spans[0];
       assert.strictEqual(span.ended, true);
       assert.strictEqual(span.attributes['gcp.method.type'], 'http');
-      // `resolveErrorType` maps the numeric code through the Status enum, so a
-      // deadline is reported by name rather than as the transport's own error
-      // class. Before the REST transport enforced the deadline this attribute
-      // would have read 'GaxiosError', and only if the call completed at all.
-      assert.strictEqual(span.attributes['error.type'], 'DEADLINE_EXCEEDED');
+      // On the fallback transport error.type reports the HTTP status the
+      // server sent. A deadline expires before any response arrives, so there
+      // is none, and the attribute falls through to the exception type. The
+      // deadline is not lost: it is reported as the gRPC status below.
+      assert.strictEqual(span.attributes['error.type'], 'GoogleError');
+      assert.strictEqual(
+        span.attributes['rpc.response.status_code'],
+        'DEADLINE_EXCEEDED',
+      );
       assert.strictEqual(span.events.length, 1);
       assert.strictEqual(span.events[0].name, 'exception');
     });

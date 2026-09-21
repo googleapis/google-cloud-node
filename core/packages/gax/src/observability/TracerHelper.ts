@@ -79,46 +79,91 @@ export function getGaxTracer(): Tracer {
 /**
  * Resolves the OpenTelemetry `error.type` attribute for a failed call.
  *
- * The error's class name is not usable on its own here, because the same
- * logical failure arrives as a different class depending on the transport:
- * grpc-js builds failures with a plain `Object.assign(new Error(msg), status)`,
- * so it reports `Error`, while the REST path builds a real `GoogleError` via
- * `GoogleError.parseHttpError`. `GoogleError` also never assigns `this.name`,
- * so `name` is the inherited literal `'Error'` on both paths.
+ * The identifier is chosen by transport, because semconv asks that error.type
+ * be the identifier a reader of *that* protocol would recognise: the gRPC
+ * status name on a gRPC call, and the response status on an HTTP one. A gRPC
+ * span therefore never reports an HTTP status, and a fallback span reports the
+ * status the server actually sent rather than the gRPC code gax mapped it to.
+ * The mapping is lossy in both directions — `rpcCodeFromHttpStatusCode`
+ * collapses every unmapped 4xx onto `FAILED_PRECONDITION` — so the two are
+ * genuinely different facts, and both remain on the span as
+ * `rpc.response.status_code` and `http.response.status_code`.
  *
- * The gRPC status code is the stable, low-cardinality identifier that is
- * consistent across both transports, so it is preferred. Node system errors
- * (`ECONNREFUSED`, `ETIMEDOUT`, ...) already carry a suitable string code and
- * are used as-is. The class name remains a last-resort fallback.
+ * Behind the status sit two fallbacks, in order:
+ *
+ * Node system errors (`ECONNREFUSED`, `ETIMEDOUT`, ...) carry a string `code`
+ * that is already the low-cardinality identifier semconv is asking for, and is
+ * the only description of such a failure: the class is the bare `Error`.
+ *
+ * The exception type is the last resort. On the fallback transport this is
+ * what a failure that never received a response resolves to — an expired
+ * deadline, a refused connection, an aborted request — because there is no
+ * HTTP status to report and the mapped gRPC code is not this transport's
+ * identifier. The gRPC status stays available as `rpc.response.status_code`.
  *
  * A zero code is treated as absent rather than as `OK`, matching
  * `GoogleError.parseHttpError`, which deletes the field because zero is the
  * proto3 default for an unset value. Without this a failed call could be
  * labelled `error.type: 'OK'`.
  */
-function resolveErrorType(e: Error): string {
-  const code = (e as {code?: unknown}).code;
-  if (
-    typeof code === 'number' &&
-    code !== Status.OK &&
-    Status[code] !== undefined
-  ) {
-    return Status[code];
+function resolveErrorType(e: Error, rpcType: 'grpc' | 'http'): string {
+  if (rpcType === 'grpc') {
+    const statusName = grpcStatusName(e);
+    if (statusName !== undefined) {
+      return statusName;
+    }
+  } else {
+    const httpStatusCode = resolveHttpStatusCode(e);
+    if (httpStatusCode !== undefined) {
+      return String(httpStatusCode);
+    }
   }
+  const code = (e as {code?: unknown}).code;
   if (typeof code === 'string' && code.length > 0) {
     return code;
   }
-  return e.constructor?.name ?? e.name;
+  return resolveExceptionType(e);
 }
 
 /**
- * Resolves the gRPC status reported for a failed call, as its name.
+ * Resolves the OpenTelemetry `exception.type` for a failed call: the class of
+ * the error that was raised, e.g. `GoogleError` or `TypeError`.
  *
- * Zero is treated as absent rather than as `OK`, for the same reason as in
- * `resolveErrorType`: it is the proto3 default for an unset field, so a failed
- * call must not be labelled `OK`.
+ * semconv asks for the fully-qualified class name "if applicable". It is not
+ * applicable here: JavaScript has no namespaces and attaches no module path to
+ * a class, so the constructor name is the whole of a class's runtime identity.
+ * A qualified name could only be synthesized from a hardcoded prefix, which
+ * would be wrong for any error class gax did not define. semconv's own second
+ * example, `OSError`, is likewise unqualified.
+ *
+ * The class is read from the constructor rather than from `name`, because
+ * semconv asks for the dynamic type in preference to the static one, and
+ * `name` is not a type at all: it is a mutable data property that any caller
+ * may assign. `GoogleError` never assigns it, so it inherits the literal
+ * `'Error'` and would otherwise hide the class that was actually raised.
+ *
+ * `name` is still consulted when the constructor yields the bare `'Error'`,
+ * which carries no information: that is the shape grpc-js produces with
+ * `Object.assign(new Error(msg), status)`, and it is the one case where a
+ * caller-assigned `name` is the only description of the failure available.
  */
-function resolveRpcStatusName(e: unknown): string {
+function resolveExceptionType(e: Error): string {
+  const className = e.constructor?.name;
+  if (className && className !== 'Error') {
+    return className;
+  }
+  return e.name || 'Error';
+}
+
+/**
+ * Maps a failure's numeric gRPC status code to its canonical name, or
+ * `undefined` when it carries no usable one.
+ *
+ * Zero is treated as absent rather than as `OK`: it is the proto3 default for
+ * an unset field, so a failed call must not be labelled `OK`. A code outside
+ * the `Status` enum is treated as absent too, since there is no name to report.
+ */
+function grpcStatusName(e: unknown): string | undefined {
   const code = (e as {code?: unknown} | null)?.code;
   if (
     typeof code === 'number' &&
@@ -127,7 +172,18 @@ function resolveRpcStatusName(e: unknown): string {
   ) {
     return Status[code];
   }
-  return Status[Status.UNKNOWN];
+  return undefined;
+}
+
+/**
+ * Resolves the gRPC status reported for a failed call, as its name.
+ *
+ * Unlike `error.type` this is reported on both transports and for every
+ * failure, so a call with no usable status is reported as `UNKNOWN` rather
+ * than left out.
+ */
+function resolveRpcStatusName(e: unknown): string {
+  return grpcStatusName(e) ?? Status[Status.UNKNOWN];
 }
 
 /**
@@ -455,13 +511,26 @@ export function traceCall(
       httpStatusCode = resolveHttpStatusCode(e);
       if (e instanceof Error) {
         span.setAttributes({
-          'error.type': resolveErrorType(e),
+          'error.type': resolveErrorType(e, dynamicArgs.rpcType),
         });
         // recordException emits the `exception` event, which carries
         // exception.type, exception.message and exception.stacktrace. Per OTel
         // semconv those belong on that event and not on the span, so they are
         // deliberately not copied up here.
-        span.recordException(e);
+        //
+        // The error is not handed over as-is, because the SDK derives
+        // exception.type from `code` before `name`, and every status-bearing
+        // gax error carries a numeric `code`. That reports the stringified
+        // number — '5' for NOT_FOUND — as the exception's type, which names no
+        // type at all. Passing the resolved class under `name`, with no `code`
+        // for it to prefer, is what puts the class on the event. The message
+        // and the stack are forwarded unchanged, so the event is otherwise
+        // exactly what the SDK would have built.
+        span.recordException({
+          name: resolveExceptionType(e),
+          message: e.message,
+          stack: e.stack,
+        });
         setErrorStatus(e.message);
       } else {
         // A non-Error throw has no class worth reporting, so error.type falls
