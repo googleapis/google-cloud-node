@@ -108,6 +108,23 @@ function resolveErrorType(e: Error): string {
   if (typeof code === 'string' && code.length > 0) {
     return code;
   }
+  return resolveExceptionType(e);
+}
+
+/**
+ * Resolves the OpenTelemetry `exception.type` attribute for a failed call:
+ * the class name of the thrown error, e.g. `GoogleError` or `TypeError`.
+ *
+ * The class is read from the constructor rather than from `name`, because
+ * `name` is unreliable for the errors gax sees. `GoogleError` never assigns
+ * `this.name`, so it inherits the literal `'Error'`, and any caller is free to
+ * overwrite `name` with a value that does not correspond to a class at all.
+ * The constructor always reflects the class that was actually instantiated.
+ *
+ * `name` stays as the fallback for the rare error whose prototype chain has
+ * been severed, where there is no constructor to read.
+ */
+function resolveExceptionType(e: Error): string {
   return e.constructor?.name ?? e.name;
 }
 
@@ -428,11 +445,18 @@ export function traceCall(
         span.setAttributes({
           'error.message': e.message,
           'error.type': resolveErrorType(e),
+          // The class of the error that was raised. error.type prefers the
+          // status code because that is what stays consistent across the two
+          // transports, but it therefore says nothing about which class was
+          // actually thrown. exception.type keeps that queryable on the span
+          // rather than only inside the exception event.
+          'exception.type': resolveExceptionType(e),
         });
-        // recordException emits the `exception` event, which carries
-        // exception.type, exception.message and exception.stacktrace. Per OTel
-        // semconv those belong on that event and not on the span, so they are
-        // deliberately not copied up here.
+        // recordException also emits the `exception` event, which carries
+        // exception.type, exception.message and exception.stacktrace. The
+        // message and the stacktrace stay on that event alone: per OTel
+        // semconv that is where they belong, and the stacktrace in particular
+        // is far too large to duplicate onto the span.
         span.recordException(e);
         setErrorStatus(e.message);
       } else {

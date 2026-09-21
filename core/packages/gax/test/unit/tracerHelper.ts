@@ -135,8 +135,13 @@ describe('TracerHelper', () => {
       assert.strictEqual(span.attributes['error.message'], 'RPC Failed');
       // No status code on this error, so error.type falls back to the class.
       assert.strictEqual(span.attributes['error.type'], 'Error');
-      // exception.* belongs on the exception event, not on the span.
-      assert.strictEqual(span.attributes['exception.type'], undefined);
+      // exception.type on the span is the class name, so it stays 'Error'
+      // even though `name` was overwritten. The event's copy is derived from
+      // `name` by the SDK, so the two legitimately differ here.
+      assert.strictEqual(span.attributes['exception.type'], 'Error');
+      // The message and the stacktrace stay on the event only.
+      assert.strictEqual(span.attributes['exception.message'], undefined);
+      assert.strictEqual(span.attributes['exception.stacktrace'], undefined);
       assert.strictEqual(span.events.length, 1);
       assert.strictEqual(span.events[0].name, 'exception');
       assert.strictEqual(
@@ -169,7 +174,7 @@ describe('TracerHelper', () => {
       const span = harness.requireSingleSpan('google-gax');
       assert.strictEqual(error.constructor.name, 'Error');
       assert.strictEqual(span.attributes['error.type'], 'NOT_FOUND');
-      assert.strictEqual(span.attributes['exception.type'], undefined);
+      assert.strictEqual(span.attributes['exception.type'], 'Error');
     });
 
     it('derives the same error.type from an equivalent REST GoogleError', async () => {
@@ -187,6 +192,9 @@ describe('TracerHelper', () => {
       const span = harness.requireSingleSpan('google-gax');
       assert.strictEqual(error.constructor.name, 'GoogleError');
       assert.strictEqual(span.attributes['error.type'], 'NOT_FOUND');
+      // error.type matches the gRPC case above because the failure is the
+      // same; exception.type is what distinguishes the two transports.
+      assert.strictEqual(span.attributes['exception.type'], 'GoogleError');
     });
 
     it('uses the string code for Node system errors', async () => {
@@ -260,7 +268,7 @@ describe('TracerHelper', () => {
       assert.strictEqual(span.attributes['error.type'], 'GoogleError');
     });
 
-    it('omits error.type entirely when a non-Error is thrown', async () => {
+    it('omits error.type and exception.type when a non-Error is thrown', async () => {
       await assert.rejects(async () => {
         await traceCall(dynamicArgs, staticArgs, async () => {
           throw 'plain string failure';
@@ -273,6 +281,8 @@ describe('TracerHelper', () => {
         'plain string failure',
       );
       assert.strictEqual(span.attributes['error.type'], undefined);
+      // A thrown string is not an exception class, and reporting 'String'
+      // would describe the throw site rather than the failure.
       assert.strictEqual(span.attributes['exception.type'], undefined);
       assert.strictEqual(span.status.code, SpanStatusCode.ERROR);
     });
@@ -918,7 +928,7 @@ describe('TracerHelper', () => {
             );
             assert.strictEqual(
               spans[0].attributes['exception.type'],
-              undefined,
+              'GoogleError',
             );
             assert.strictEqual(spans[0].events.length, 1);
             assert.strictEqual(spans[0].events[0].name, 'exception');
