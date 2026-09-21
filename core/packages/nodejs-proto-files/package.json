@@ -30,7 +30,7 @@
   "scripts": {
     "prepare": "npm run compile && node ./build/tools/prepublish.js",
     "lint": "gts check",
-    "test": "c8 mocha build/test",
+    "test": "node ../../../bin/run-test.cjs build/test",
     "fix": "gts fix",
     "system-test": "echo no system tests 😱",
     "samples-test": "cd samples && npm link ../ && npm test && cd ../",
