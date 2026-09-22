@@ -1,6 +1,13 @@
 # Changelog
 
 
+## [5.4.0](https://github.com/googleapis/google-cloud-node/compare/gapic-generator-v5.3.0...gapic-generator-v5.4.0) (2026-09-22)
+
+
+### Features
+
+* **o11y:** Wire enable_telemetry_tracing through the generator CLI ([#9373](https://github.com/googleapis/google-cloud-node/issues/9373)) ([3533155](https://github.com/googleapis/google-cloud-node/commit/353315572a16fb6bf34bfec4b96acea5917e1bf8))
+
 ## [5.3.0](https://github.com/googleapis/google-cloud-node/compare/gapic-generator-v5.2.0...gapic-generator-v5.3.0) (2026-09-15)
 
 
