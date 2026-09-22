@@ -68,6 +68,16 @@ export interface DynamicTraceContext {
 }
 
 /**
+ * Reports that the request was sent again after a retryable failure.
+ *
+ * Handed to the traced operation, which calls it once per resend. gax retries
+ * in more than one place — the unary retry loop and the server-streaming one —
+ * and counting the calls rather than reading a counter keeps the tracer
+ * independent of how each of them tracks its own attempts.
+ */
+export type ResendRecorder = () => void;
+
+/**
  * Returns the OpenTelemetry Tracer instance for google-gax.
  *
  * @returns {Tracer} The OpenTelemetry Tracer.
@@ -308,7 +318,8 @@ export function handleStream(
  * @param {DynamicTraceContext} dynamicArgs - Dynamic trace context for the RPC call.
  * @param {StaticTraceContext} staticArgs - Static trace context for the client library.
  * @param {function} fn - The operation to trace. Receives the traced callback
- *   when `callback` is supplied, otherwise `undefined`.
+ *   when `callback` is supplied, otherwise `undefined`, and a
+ *   {@link ResendRecorder} to call once for every retryable resend it makes.
  * @param {boolean} [isStreamCall=false] - Whether the operation is a stream call (true) or promise call (false).
  * @param {APICallback} [callback] - The user callback for callback-style invocations.
  * @returns {T} The result of the traced operation.
@@ -316,28 +327,34 @@ export function handleStream(
 export function traceCall(
   dynamicArgs: DynamicTraceContext,
   staticArgs: StaticTraceContext,
-  fn: (tracedCallback?: APICallback) => GaxCallResult,
+  fn: (
+    tracedCallback?: APICallback,
+    recordResend?: ResendRecorder,
+  ) => GaxCallResult,
   isStreamCall?: boolean,
   callback?: APICallback,
 ): GaxCallResult;
 export function traceCall<T extends EventEmitter>(
   dynamicArgs: DynamicTraceContext,
   staticArgs: StaticTraceContext,
-  fn: (tracedCallback?: APICallback) => T,
+  fn: (tracedCallback?: APICallback, recordResend?: ResendRecorder) => T,
   isStreamCall: true,
   callback?: APICallback,
 ): T;
 export function traceCall<T>(
   dynamicArgs: DynamicTraceContext,
   staticArgs: StaticTraceContext,
-  fn: (tracedCallback?: APICallback) => T,
+  fn: (tracedCallback?: APICallback, recordResend?: ResendRecorder) => T,
   isStreamCall?: false,
   callback?: APICallback,
 ): T;
 export function traceCall(
   dynamicArgs: DynamicTraceContext,
   staticArgs: StaticTraceContext,
-  fn: (tracedCallback?: APICallback) => GaxCallResult,
+  fn: (
+    tracedCallback?: APICallback,
+    recordResend?: ResendRecorder,
+  ) => GaxCallResult,
   isStreamCall = false,
   callback?: APICallback,
 ): GaxCallResult {
@@ -357,6 +374,37 @@ export function traceCall(
     let rpcStatusName: string | undefined;
     let httpStatusCode: number | undefined;
 
+    // Counts resends, not attempts. The initial send is not a resend, so a
+    // call that succeeded first time is 0 and the first retry is 1.
+    //
+    // Omitted when the call was never resent (resendCount is 0), per
+    // OpenTelemetry semantic conventions.
+    //
+    // Reported on the call span rather than per attempt because gax opens one
+    // span for the whole call, retries included. OpenTelemetry's HTTP
+    // convention instead expects one span per attempt, each carrying the
+    // ordinal of that attempt. The two agree on the value that matters: the
+    // ordinal on the last attempt's span equals the total number of resends,
+    // and gax's single span is the one that ends the call.
+    let resendCount = 0;
+    const recordResend: ResendRecorder = () => {
+      resendCount++;
+    };
+
+    // Named per transport, the same way the status attributes below are.
+    // `http.request.resend_count` is the stable OpenTelemetry attribute for
+    // exactly this quantity, so the fallback uses it rather than inventing a
+    // parallel name. gRPC has no standard equivalent, so it takes the gcp.*
+    // name instead of borrowing the http.* one, which would claim a protocol
+    // the call never spoke.
+    const resendCountAttribute =
+      dynamicArgs.rpcType === 'grpc'
+        ? 'gcp.grpc.resend_count'
+        : 'http.request.resend_count';
+
+    // Marks the span failed. Kept separate from recordError so paths that are
+    // failures but not exceptions can set the status without emitting a
+    // misleading exception event.
     const setErrorStatus = (message: string) => {
       errorRecorded = true;
       span.setStatus({code: SpanStatusCode.ERROR, message});
@@ -383,6 +431,9 @@ export function traceCall(
           httpStatusCode = 200;
         }
         setStatusAttributes();
+        if (resendCount > 0) {
+          span.setAttribute(resendCountAttribute, resendCount);
+        }
         span.end();
       }
     };
@@ -424,7 +475,7 @@ export function traceCall(
       : undefined;
 
     try {
-      const result = fn(tracedCallback);
+      const result = fn(tracedCallback, recordResend);
       const promiseTarget = !isStreamCall ? getPromiseTarget(result) : null;
       if (isStreamCall && result instanceof EventEmitter) {
         handleStream(result, recordError, endSpan, !!callback);

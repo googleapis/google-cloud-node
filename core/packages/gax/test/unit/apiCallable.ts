@@ -1237,6 +1237,337 @@ describe('createApiCall', () => {
         }
       });
     });
+
+    describe('resend count', () => {
+      // The unary retry loop is shared by both transports, and the only thing
+      // that distinguishes them on the span is `gcp.method.type` and the name
+      // the count is reported under. Running the same cases through both entry
+      // points is what stops the count from being reported on one transport
+      // only, or from being reported under the other transport's name.
+      const transports = [
+        {
+          name: 'gRPC',
+          rpcType: 'grpc',
+          createApiCall: gaxCreateApiCall,
+        },
+        {
+          name: 'HTTP fallback',
+          rpcType: 'http',
+          createApiCall: fallbackCreateApiCall,
+        },
+      ] as const;
+
+      const retryingSettings = () =>
+        new gax.CallSettings({
+          apiName: 'google.example.v1.Echo',
+          enableTelemetryTracing: true,
+          timeout: 0,
+          retry: utils.createRetryOptions(0, 0, 0, 0, 0, 0, 100),
+          otherArgs: {
+            internalTelemetryInfo: telemetryInfo,
+            internalMethodName: 'Echo',
+          },
+        });
+
+      for (const transport of transports) {
+        describe(`over ${transport.name}`, () => {
+          it('omits resend count when the call succeeds on the first attempt', async () => {
+            process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
+
+            let attempts = 0;
+            function func(
+              argument: {},
+              metadata: {},
+              options: {},
+              callback: (err: GoogleError | null, resp?: unknown) => void,
+            ) {
+              attempts++;
+              callback(null, {data: 'hello'});
+              return {cancel: () => {}};
+            }
+
+            const apiCall = transport.createApiCall(func, retryingSettings());
+            await apiCall({}, undefined);
+
+            assert.strictEqual(attempts, 1);
+            const span = harness.requireSingleSpan('google-gax');
+            // Asserting the transport too, so that a span accidentally
+            // produced by the other one cannot satisfy this test.
+            assert.strictEqual(
+              span.attributes['gcp.method.type'],
+              transport.rpcType,
+            );
+            harness.assertResendCount(0, {span});
+          });
+
+          it('reports one resend per retry', async () => {
+            process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
+
+            let attempts = 0;
+            function func(
+              argument: {},
+              metadata: {},
+              options: {},
+              callback: (err: GoogleError | null, resp?: unknown) => void,
+            ) {
+              attempts++;
+              if (attempts < 3) {
+                const error = new GoogleError();
+                error.code = FAKE_STATUS_CODE_1;
+                callback(error);
+              } else {
+                callback(null, {data: 'hello'});
+              }
+              return {cancel: () => {}};
+            }
+
+            const apiCall = transport.createApiCall(func, retryingSettings());
+            await apiCall({}, undefined);
+
+            assert.strictEqual(attempts, 3);
+            const span = harness.requireSingleSpan('google-gax');
+            assert.strictEqual(
+              span.attributes['gcp.method.type'],
+              transport.rpcType,
+            );
+            // Three attempts, of which two were resends. Asserted against the
+            // observed attempt count rather than a bare literal, because the
+            // off-by-one between the two is exactly what the attribute
+            // defines.
+            harness.assertResendCount(attempts - 1, {span});
+            harness.assertResponseStatus({
+              rpcStatus: 'OK',
+              ...(transport.rpcType === 'http' ? {httpStatus: 200} : {}),
+            });
+          });
+
+          it('reports resends correctly when retries are exhausted by maxRetries', async () => {
+            process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
+
+            let attempts = 0;
+            function func(
+              argument: {},
+              metadata: {},
+              options: {},
+              callback: (err: GoogleError | null, resp?: unknown) => void,
+            ) {
+              attempts++;
+              const error = new GoogleError('retryable');
+              error.code = FAKE_STATUS_CODE_1;
+              callback(error);
+              return {cancel: () => {}};
+            }
+
+            const settings = new gax.CallSettings({
+              apiName: 'google.example.v1.Echo',
+              enableTelemetryTracing: true,
+              timeout: 0,
+              maxRetries: 2,
+              retry: gax.createRetryOptions([FAKE_STATUS_CODE_1], {
+                initialRetryDelayMillis: 1,
+                retryDelayMultiplier: 1,
+                maxRetryDelayMillis: 1,
+                initialRpcTimeoutMillis: 0,
+                rpcTimeoutMultiplier: 1,
+                maxRpcTimeoutMillis: 0,
+                maxRetries: 2,
+              }),
+              otherArgs: {
+                internalTelemetryInfo: telemetryInfo,
+                internalMethodName: 'Echo',
+              },
+            });
+
+            const apiCall = transport.createApiCall(func, settings);
+            await assert.rejects(async () => {
+              await apiCall({}, undefined);
+            });
+
+            assert.strictEqual(attempts, 2);
+            const span = harness.requireSingleSpan('google-gax');
+            assert.strictEqual(
+              span.attributes['gcp.method.type'],
+              transport.rpcType,
+            );
+            // 2 attempts made: initial send + 1 resend. The 2nd retry was not sent because maxRetries was reached.
+            harness.assertResendCount(1, {span});
+          });
+
+          it('reports resends correctly when retries are exhausted by totalTimeoutMillis', async () => {
+            process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
+
+            let attempts = 0;
+            function func(
+              argument: {},
+              metadata: {},
+              options: {},
+              callback: (err: GoogleError | null, resp?: unknown) => void,
+            ) {
+              attempts++;
+              const error = new GoogleError('retryable');
+              error.code = FAKE_STATUS_CODE_1;
+              callback(error);
+              return {cancel: () => {}};
+            }
+
+            const settings = new gax.CallSettings({
+              apiName: 'google.example.v1.Echo',
+              enableTelemetryTracing: true,
+              timeout: 0,
+              retry: gax.createRetryOptions([FAKE_STATUS_CODE_1], {
+                initialRetryDelayMillis: 20,
+                retryDelayMultiplier: 1,
+                maxRetryDelayMillis: 20,
+                initialRpcTimeoutMillis: 0,
+                rpcTimeoutMultiplier: 1,
+                maxRpcTimeoutMillis: 0,
+                totalTimeoutMillis: 10,
+              }),
+              otherArgs: {
+                internalTelemetryInfo: telemetryInfo,
+                internalMethodName: 'Echo',
+              },
+            });
+
+            const apiCall = transport.createApiCall(func, settings);
+            await assert.rejects(async () => {
+              await apiCall({}, undefined);
+            });
+
+            const span = harness.requireSingleSpan('google-gax');
+            assert.strictEqual(
+              span.attributes['gcp.method.type'],
+              transport.rpcType,
+            );
+            // The call ultimately failed due to deadline exceeded, so the
+            // resend count should match the number of retries actually made
+            // (attempts - 1), without counting the attempt aborted by the deadline.
+            harness.assertResendCount(attempts - 1, {span});
+          });
+        });
+      }
+
+      // Server-streaming is gRPC-only here by construction: the fallback
+      // serves server-streaming through the `rest` branch of `setStream`,
+      // which has no retry loop at all, so there is no resend to count.
+      it('reports resends for a retried server-streaming gRPC call', done => {
+        process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
+        const settings = new gax.CallSettings({
+          apiName: 'google.example.v1.Echo',
+          enableTelemetryTracing: true,
+          otherArgs: {
+            internalTelemetryInfo: telemetryInfo,
+            internalMethodName: 'Echo',
+          },
+        });
+
+        const retryableError = Object.assign(new GoogleError('UNAVAILABLE'), {
+          code: status.UNAVAILABLE,
+        });
+
+        let attempts = 0;
+        const spy = sinon.spy(() => {
+          attempts++;
+          const s = new PassThrough({objectMode: true});
+          setImmediate(() => {
+            s.emit('error', retryableError);
+          });
+          return Object.assign(s, {cancel: () => {}});
+        });
+
+        const apiCall = gaxCreateApiCall(
+          spy as unknown as GRPCCall,
+          settings,
+          new StreamDescriptor(StreamType.SERVER_STREAMING, false, true),
+        );
+
+        // Server-streaming calls retry inside the stream rather than through
+        // `retryable`, so this covers the other half of the wiring. The budget
+        // is capped with maxRetries so the call terminates deterministically
+        // instead of racing a wall-clock timeout.
+        const stream = apiCall(
+          {},
+          {
+            retry: gax.createRetryOptions([status.UNAVAILABLE], {
+              initialRetryDelayMillis: 1,
+              retryDelayMultiplier: 1,
+              maxRetryDelayMillis: 1,
+              initialRpcTimeoutMillis: 0,
+              rpcTimeoutMultiplier: 1,
+              maxRpcTimeoutMillis: 0,
+              maxRetries: 2,
+            }),
+          },
+        ) as CancellableStream;
+
+        stream.on('error', () => {
+          try {
+            // Three attempts: the initial send plus the two allowed resends.
+            assert.strictEqual(attempts, 3);
+            const span = harness.requireSingleSpan('google-gax');
+            assert.strictEqual(span.attributes['gcp.method.type'], 'grpc');
+            harness.assertResendCount(2, {span});
+            done();
+          } catch (e) {
+            done(e);
+          }
+        });
+      });
+
+      it('reports resends for a default retry-request server-streaming gRPC call', done => {
+        process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
+        const settings = new gax.CallSettings({
+          apiName: 'google.example.v1.Echo',
+          enableTelemetryTracing: true,
+          otherArgs: {
+            internalTelemetryInfo: telemetryInfo,
+            internalMethodName: 'Echo',
+          },
+        });
+
+        const retryableError = Object.assign(new GoogleError('UNAVAILABLE'), {
+          code: status.UNAVAILABLE,
+        });
+
+        let attempts = 0;
+        const spy = sinon.spy(() => {
+          attempts++;
+          const s = new PassThrough({objectMode: true});
+          setImmediate(() => {
+            s.emit('error', retryableError);
+          });
+          return Object.assign(s, {cancel: () => {}});
+        });
+
+        const apiCall = gaxCreateApiCall(
+          spy as unknown as GRPCCall,
+          settings,
+          new StreamDescriptor(StreamType.SERVER_STREAMING),
+        );
+
+        const stream = apiCall(
+          {},
+          {
+            retryRequestOptions: {
+              retries: 2,
+              shouldRetryFn: () => true,
+            },
+          },
+        ) as CancellableStream;
+
+        stream.on('error', () => {
+          try {
+            assert.strictEqual(attempts, 3);
+            const span = harness.requireSingleSpan('google-gax');
+            assert.strictEqual(span.attributes['gcp.method.type'], 'grpc');
+            harness.assertResendCount(2, {span});
+            done();
+          } catch (e) {
+            done(e);
+          }
+        });
+      });
+    });
   });
 });
 
