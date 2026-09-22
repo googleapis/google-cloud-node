@@ -3048,7 +3048,7 @@ class Database extends common.GrpcServiceObject {
 
       streamSpan.addEvent('Using Session', {'session.id': session?.id});
       try {
-        snapshot = session!.snapshot(options, this.queryOptions_);
+        snapshot = session!.snapshot(options, this.queryOptions_, true);
         this._runOnSnapshot(snapshot, session!, query, complete);
       } catch (syncError) {
         // Defer error delivery via nextTick so callback callers never experience
@@ -3350,7 +3350,7 @@ class Database extends common.GrpcServiceObject {
 
           span.addEvent('Using Session', {'session.id': session?.id});
 
-          const snapshot = session!.snapshot(options, this.queryOptions_);
+          const snapshot = session!.snapshot(options, this.queryOptions_, true);
 
           this._releaseOnEnd(session!, snapshot, span);
 

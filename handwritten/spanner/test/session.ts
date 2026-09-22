@@ -30,6 +30,7 @@ import {
   X_GOOG_SPANNER_REQUEST_ID_HEADER,
   craftRequestId,
 } from '../src/request_id_header';
+import {AffinityKind} from '../src/channel-pool';
 
 let promisified = false;
 const fakePfy = Object.assign({}, pfy, {
@@ -453,6 +454,17 @@ describe('Session', () => {
       assert(snapshot instanceof FakeSnapshot);
       assert.strictEqual(snapshot.calledWith_[0], session);
       assert.strictEqual(snapshot.calledWith_[1], OPTIONS);
+      assert.strictEqual(snapshot.calledWith_[2], undefined);
+      assert.strictEqual(snapshot.calledWith_[3], AffinityKind.ReadOnly);
+    });
+
+    it('should pass null affinityKind when isSingleUse is true', () => {
+      const snapshot = session.snapshot(OPTIONS, undefined, true);
+      assert(snapshot instanceof FakeSnapshot);
+      assert.strictEqual(snapshot.calledWith_[0], session);
+      assert.strictEqual(snapshot.calledWith_[1], OPTIONS);
+      assert.strictEqual(snapshot.calledWith_[2], undefined);
+      assert.strictEqual(snapshot.calledWith_[3], null);
     });
   });
 

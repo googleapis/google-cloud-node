@@ -246,6 +246,9 @@ export abstract class Runner<T> {
       } catch (e) {
         this.session.lastError = e as grpc.ServiceError;
         lastError = e as grpc.ServiceError;
+        if ((transaction as any).affinity) {
+          (transaction as any).affinity.reset();
+        }
       } finally {
         this.multiplexedSessionPreviousTransactionId = transaction.id;
       }
