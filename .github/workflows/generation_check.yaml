@@ -56,12 +56,30 @@ jobs:
         env:
           EVENT_NAME: ${{ github.event_name }}
         run: |
-          if [ "$EVENT_NAME" = "pull_request" ]; then
+          # ------------------------------------------------------------------------------
+          # Execution Strategy:
+          #   1. Post-submit (`push` to `main`) & manual (`workflow_dispatch`):
+          #      Run `librarian generate --all` to regenerate every library in the
+          #      monorepo and guarantee 100% coverage.
+          #   2. Presubmit (`pull_request`):
+          #      Full monorepo generation takes ~1h15m. To keep presubmit checks under
+          #      ~5 minutes, identify the libraries affected by the PR, rank them in a
+          #      MinPriorityQueue by on-disk package size + API surface weight, and
+          #      generate up to the 3 fastest libraries.
+          # ------------------------------------------------------------------------------
+          if [ "$EVENT_NAME" != "pull_request" ]; then
+            echo "Running full monorepo generation (event: $EVENT_NAME)..."
+            librarian generate --all
+          else
             PACKAGES_TO_GENERATE=$(node -e '
               const { execSync } = require("child_process");
               const fs = require("fs");
               const path = require("path");
 
+              const MAX_PACKAGES_TO_GENERATE = 3;
+              const BYTES_PER_API_WEIGHT = 500000;
+
+              // Min-heap priority queue ordered by `item.score` (lowest score popped first).
               class MinPriorityQueue {
                 constructor() {
                   this.heap = [];
@@ -94,15 +112,11 @@ jobs:
                 _sinkDown(index) {
                   const length = this.heap.length;
                   while (true) {
-                    let left = (index << 1) + 1;
-                    let right = left + 1;
+                    const left = (index << 1) + 1;
+                    const right = left + 1;
                     let smallest = index;
-                    if (left < length && this.heap[left].score < this.heap[smallest].score) {
-                      smallest = left;
-                    }
-                    if (right < length && this.heap[right].score < this.heap[smallest].score) {
-                      smallest = right;
-                    }
+                    if (left < length && this.heap[left].score < this.heap[smallest].score) smallest = left;
+                    if (right < length && this.heap[right].score < this.heap[smallest].score) smallest = right;
                     if (smallest === index) break;
                     [this.heap[index], this.heap[smallest]] = [this.heap[smallest], this.heap[index]];
                     index = smallest;
@@ -110,9 +124,19 @@ jobs:
                 }
               }
 
+              // Run `git diff` against the base parent commit (with fallback for single-parent history).
+              function gitDiff(args) {
+                try {
+                  return execSync(`git diff ${args} HEAD^1 HEAD`, { encoding: "utf8" });
+                } catch {
+                  return execSync(`git diff ${args} HEAD~1 HEAD`, { encoding: "utf8" });
+                }
+              }
+
+              // Recursively sum file sizes in `dirPath`, excluding build artifacts and dependencies.
               function getDirSize(dirPath) {
-                let size = 0;
                 if (!fs.existsSync(dirPath)) return 0;
+                let size = 0;
                 for (const entry of fs.readdirSync(dirPath, { withFileTypes: true })) {
                   if (entry.name === "node_modules" || entry.name === "build") continue;
                   const fullPath = path.join(dirPath, entry.name);
@@ -125,22 +149,49 @@ jobs:
                 return size;
               }
 
-              let diffOutput = "";
-              try {
-                diffOutput = execSync("git diff --name-only HEAD^1 HEAD", { encoding: "utf8" });
-              } catch {
-                diffOutput = execSync("git diff --name-only HEAD~1 HEAD", { encoding: "utf8" });
+              // Parse `librarian.yaml` into a Map of library name -> { name, startLine, endLine, skip, apiCount }.
+              function parseLibrarianYaml(filePath) {
+                const lines = fs.readFileSync(filePath, "utf8").split("\n");
+                const libs = new Map();
+                let current = null;
+
+                for (let i = 0; i < lines.length; i++) {
+                  const nameMatch = lines[i].match(/^  - name:\s+(\S+)/);
+                  if (nameMatch) {
+                    if (current) {
+                      current.endLine = i;
+                      libs.set(current.name, current);
+                    }
+                    current = {
+                      name: nameMatch[1],
+                      startLine: i + 1,
+                      endLine: lines.length,
+                      skip: false,
+                      apiCount: 0,
+                    };
+                  } else if (current) {
+                    if (/^\s+skip_generate:\s*true/.test(lines[i])) current.skip = true;
+                    if (/^\s+-\s+path:/.test(lines[i])) current.apiCount++;
+                  }
+                }
+                if (current) libs.set(current.name, current);
+                return libs;
               }
 
-              const changedFiles = diffOutput.split("\n").map(s => s.trim()).filter(Boolean);
+              // 1. Load library definitions from librarian.yaml.
+              const libs = parseLibrarianYaml("librarian.yaml");
+              const libList = Array.from(libs.values());
+
+              // 2. Classify changed files in the pull request.
+              const changedFiles = gitDiff("--name-only").split("\n").map(s => s.trim()).filter(Boolean);
               const touchedPackages = new Set();
               const topLevelPackagesFiles = [];
               let globalConfigChanged = false;
 
               for (const file of changedFiles) {
-                const match = file.match(/^packages\/([^/]+)\//);
-                if (match) {
-                  touchedPackages.add(match[1]);
+                const pkgMatch = file.match(/^packages\/([^/]+)\//);
+                if (pkgMatch) {
+                  touchedPackages.add(pkgMatch[1]);
                 } else if (file.startsWith("packages/")) {
                   topLevelPackagesFiles.push(file);
                 } else if (file === "librarian.yaml" || file === ".github/workflows/generation_check.yaml") {
@@ -148,33 +199,7 @@ jobs:
                 }
               }
 
-              const yamlContent = fs.readFileSync("librarian.yaml", "utf8");
-              const libs = new Map();
-              const lines = yamlContent.split("\n");
-              let currentLib = null;
-              for (let i = 0; i < lines.length; i++) {
-                const nameMatch = lines[i].match(/^  - name:\s+(\S+)/);
-                if (nameMatch) {
-                  if (currentLib) libs.set(currentLib.name, currentLib);
-                  currentLib = {
-                    name: nameMatch[1],
-                    startLine: i + 1,
-                    endLine: lines.length,
-                    skip: false,
-                    apiCount: 0,
-                  };
-                } else if (currentLib) {
-                  if (/^\s+skip_generate:\s*true/.test(lines[i])) {
-                    currentLib.skip = true;
-                  } else if (/^\s+-\s+path:/.test(lines[i])) {
-                    currentLib.apiCount++;
-                  }
-                }
-              }
-              if (currentLib) {
-                libs.set(currentLib.name, currentLib);
-              }
-
+              // 3. Validate `packages/` structure against `librarian.yaml`.
               if (topLevelPackagesFiles.length > 0) {
                 console.error(
                   `Error: Found modified file(s) directly under packages/ not belonging to any library in librarian.yaml: ${topLevelPackagesFiles.join(", ")}`
@@ -183,15 +208,11 @@ jobs:
               }
 
               const allPackageDirs = fs.existsSync("packages")
-                ? fs.readdirSync("packages", { withFileTypes: true })
-                    .filter(d => d.isDirectory())
-                    .map(d => d.name)
+                ? fs.readdirSync("packages", { withFileTypes: true }).filter(d => d.isDirectory()).map(d => d.name)
                 : [];
               const unknownPackages = Array.from(
                 new Set([
-                  ...Array.from(touchedPackages).filter(
-                    pkg => !libs.has(pkg) && fs.existsSync(path.join("packages", pkg))
-                  ),
+                  ...Array.from(touchedPackages).filter(pkg => !libs.has(pkg) && fs.existsSync(path.join("packages", pkg))),
                   ...allPackageDirs.filter(pkg => !libs.has(pkg)),
                 ])
               );
@@ -202,32 +223,24 @@ jobs:
                 process.exit(1);
               }
 
-              for (const lib of libs.values()) {
+              // Include any configured library whose `packages/<name>` directory is missing on disk.
+              for (const lib of libList) {
                 if (!lib.skip && !fs.existsSync(path.join("packages", lib.name))) {
                   touchedPackages.add(lib.name);
                 }
               }
 
-              const libArray = Array.from(libs.values());
-              for (let i = 0; i < libArray.length - 1; i++) {
-                libArray[i].endLine = libArray[i + 1].startLine - 1;
-              }
-
+              // 4. If `librarian.yaml` changed, map modified diff hunks to their corresponding library blocks.
               if (changedFiles.includes("librarian.yaml")) {
                 try {
-                  let yamlDiff = "";
-                  try {
-                    yamlDiff = execSync("git diff -U0 HEAD^1 HEAD -- librarian.yaml", { encoding: "utf8" });
-                  } catch {
-                    yamlDiff = execSync("git diff -U0 HEAD~1 HEAD -- librarian.yaml", { encoding: "utf8" });
-                  }
+                  const yamlDiff = gitDiff("-U0 -- librarian.yaml");
                   const hunkRegex = /^@@ -\d+(?:,\d+)? \+(\d+)(?:,(\d+))? @@/gm;
-                  let m;
-                  while ((m = hunkRegex.exec(yamlDiff)) !== null) {
-                    const start = parseInt(m[1], 10);
-                    const count = m[2] !== undefined ? parseInt(m[2], 10) : 1;
+                  let match;
+                  while ((match = hunkRegex.exec(yamlDiff)) !== null) {
+                    const start = parseInt(match[1], 10);
+                    const count = match[2] !== undefined ? parseInt(match[2], 10) : 1;
                     const end = start + Math.max(0, count - 1);
-                    for (const lib of libArray) {
+                    for (const lib of libList) {
                       if (end >= lib.startLine && start <= lib.endLine) {
                         touchedPackages.add(lib.name);
                       }
@@ -236,29 +249,29 @@ jobs:
                 } catch {}
               }
 
+              // 5. Filter to generatable candidate libraries (`skip_generate != true`).
+              //    If only global config changed (e.g., workflow file or top-level librarian.yaml),
+              //    fall back to all generatable libraries so the fastest 3 in the repo are tested.
               let candidates = Array.from(touchedPackages).filter(pkg => {
                 const meta = libs.get(pkg);
                 return Boolean(meta && !meta.skip);
               });
-
               if (candidates.length === 0 && globalConfigChanged && touchedPackages.size === 0) {
-                candidates = libArray
-                  .filter(lib => !lib.skip)
-                  .map(lib => lib.name);
+                candidates = libList.filter(lib => !lib.skip).map(lib => lib.name);
               }
 
+              // 6. Rank candidates in a MinPriorityQueue by estimated generation cost and select the fastest 3.
               const pq = new MinPriorityQueue();
               for (const pkg of candidates) {
                 const meta = libs.get(pkg);
                 const totalBytes = getDirSize(path.join("packages", pkg));
                 const apiCount = Math.max(1, meta.apiCount);
-                const score = totalBytes + apiCount * 500000;
+                const score = totalBytes + apiCount * BYTES_PER_API_WEIGHT;
                 pq.push({ pkg, totalBytes, apiCount, score });
               }
 
               const selected = [];
-              const maxPackages = 3;
-              while (selected.length < maxPackages && pq.size > 0) {
+              while (selected.length < MAX_PACKAGES_TO_GENERATE && pq.size > 0) {
                 const next = pq.pop();
                 console.error(
                   `Selected #${selected.length + 1}: ${next.pkg} (size=${next.totalBytes}B, apis=${next.apiCount}, score=${next.score})`
@@ -275,9 +288,8 @@ jobs:
                 librarian generate "$pkg"
               done
             fi
-          else
-            librarian generate --all
           fi
+
           if [ -n "$(git status --porcelain)" ]; then
             git status
             echo "==================== GIT DIFF ===================="
