@@ -49,6 +49,9 @@ describe('MetricInterceptor', () => {
         if (header === 'gfet4t7; dur=90, afe; dur=30') {
           return 90;
         }
+        if (header === 'gfet4t7; dur=0, afe; dur=0') {
+          return 0;
+        }
         return null;
       }) as sinon.SinonStub<[string], number | null>;
     mockMetricsTracer.extractAfeLatency = sandbox
@@ -56,6 +59,9 @@ describe('MetricInterceptor', () => {
       .callsFake((header: string) => {
         if (header === 'gfet4t7; dur=90, afe; dur=30') {
           return 30;
+        }
+        if (header === 'gfet4t7; dur=0, afe; dur=0') {
+          return 0;
         }
         return null;
       }) as sinon.SinonStub<[string], number | null>;
@@ -335,6 +341,63 @@ describe('MetricInterceptor', () => {
       assert.equal(
         mockMetricsTracer.recordAfeConnectivityErrorCount.getCall(0).args,
         Status.OK,
+      );
+    });
+
+    it('handles missing or non-matching resource prefix gracefully', () => {
+      const metadataWithoutPrefix = new grpc.Metadata();
+      metadataWithoutPrefix.set(
+        'x-goog-spanner-request-id',
+        '1.1a2b3c.1.1.1.1',
+      );
+
+      const interceptingCall1 = MetricInterceptor(mockOptions, mockNextCall);
+      interceptingCall1.start(metadataWithoutPrefix, mockListener);
+      assert.equal(mockMetricsTracer.recordAttemptStart.callCount, 1);
+
+      const metadataWithNonMatchingPrefix = new grpc.Metadata();
+      metadataWithNonMatchingPrefix.set(
+        'google-cloud-resource-prefix',
+        'invalid/prefix',
+      );
+      metadataWithNonMatchingPrefix.set(
+        'x-goog-spanner-request-id',
+        '1.1a2b3c.1.1.1.1',
+      );
+
+      const interceptingCall2 = MetricInterceptor(mockOptions, mockNextCall);
+      interceptingCall2.start(metadataWithNonMatchingPrefix, mockListener);
+      assert.equal(mockMetricsTracer.recordAttemptStart.callCount, 2);
+    });
+
+    it('GFE and AFE Metrics - zero latency', () => {
+      const zeroTimingMetadata = new grpc.Metadata();
+      zeroTimingMetadata.set('server-timing', 'gfet4t7; dur=0, afe; dur=0');
+
+      const interceptingCall = MetricInterceptor(mockOptions, mockNextCall);
+      interceptingCall.start(testMetadata, mockListener);
+
+      capturedListener.onReceiveMetadata(zeroTimingMetadata);
+      capturedListener.onReceiveStatus(mockStatus);
+
+      assert.equal(mockMetricsTracer.recordGfeLatency.callCount, 1);
+      assert.equal(
+        mockMetricsTracer.recordGfeLatency.getCall(0).args[0],
+        Status.OK,
+      );
+      assert.equal(
+        mockMetricsTracer.recordGfeConnectivityErrorCount.callCount,
+        0,
+      );
+
+      assert.equal(mockMetricsTracer.recordAfeLatency.callCount, 1);
+      assert.equal(
+        mockMetricsTracer.recordAfeLatency.getCall(0).args[0],
+        Status.OK,
+      );
+      assert.equal(
+        mockMetricsTracer.recordAfeConnectivityErrorCount.callCount,
+        0,
       );
     });
 
