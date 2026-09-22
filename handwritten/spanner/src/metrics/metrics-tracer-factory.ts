@@ -59,6 +59,8 @@ export class MetricsTracerFactory {
   private _projectId: string;
   private _currentOperationTracers = new Map();
   private _currentOperationLastUpdatedMs = new Map();
+  private _attributesCache: Map<string, Map<string, Record<string, string>>> =
+    new Map();
   private _intervalTracerCleanup: NodeJS.Timeout;
   public static enabled = true;
 
@@ -122,7 +124,7 @@ export class MetricsTracerFactory {
       MetricsTracerFactory._instance = new MetricsTracerFactory(projectId);
     }
 
-    return MetricsTracerFactory!._instance;
+    return MetricsTracerFactory._instance;
   }
 
   /**
@@ -189,12 +191,13 @@ export class MetricsTracerFactory {
    */
   public async resetMeterProvider() {
     if (this._meterProvider !== null) {
-      await this._meterProvider!.shutdown();
+      await this._meterProvider.shutdown();
     }
     this._meterProvider = null;
     this._metricReaders = [];
     this._currentOperationTracers = new Map();
     this._currentOperationLastUpdatedMs = new Map();
+    this._attributesCache = new Map();
   }
 
   /**
@@ -289,6 +292,12 @@ export class MetricsTracerFactory {
     }
 
     const {instance, database} = this.getInstanceAttributes(formattedName);
+    const cacheKey = `${instance}/${database}/${method}`;
+    let attributesCache = this._attributesCache.get(cacheKey);
+    if (!attributesCache) {
+      attributesCache = new Map<string, Record<string, string>>();
+      this._attributesCache.set(cacheKey, attributesCache);
+    }
     const tracer = new MetricsTracer(
       this._instrumentAttemptCounter,
       this._instrumentAttemptLatency,
@@ -304,6 +313,7 @@ export class MetricsTracerFactory {
       this._projectId,
       method,
       operationRequest,
+      attributesCache,
     );
     this._currentOperationTracers.set(operationRequest, tracer);
     this._currentOperationLastUpdatedMs.set(operationRequest, Date.now());
