@@ -24,22 +24,6 @@ tools:
       version: gapic-generator-v5.3.0
       package: https://github.com/googleapis/google-cloud-node/archive/gapic-generator-v5.3.0.tar.gz
       checksum: 4bc54d399b22c845fd4555f9435b7971153a2e3fafca32402658390711828f63
-      # TODO: restore a frozen, reproducible install.
-      #
-      # `--no-frozen-lockfile` is forced by the pnpm 7 -> 10 upgrade in
-      # generation_check.yaml. The pinned v5.3.0 tarball ships a nested
-      # pnpm-lock.yaml at lockfileVersion 6.0, which pnpm 10 refuses to read at
-      # all (ERR_PNPM_LOCKFILE_BREAKING_CHANGE), so no frozen install can
-      # succeed against it. Until a newer generator tag is pinned here, this
-      # build resolves dependencies fresh from the registry on every run and is
-      # NOT reproducible.
-      #
-      # Once the generator moves into the root pnpm workspace and a new tag is
-      # cut, install from the root lockfile instead of the nested one:
-      #
-      #   - pnpm install --frozen-lockfile --filter gapic-generator-typescript...
-      #   - pnpm run compile
-      #   - pnpm add -g "$PWD"
       build:
         - pnpm install --ignore-workspace --no-frozen-lockfile --config.auto-install-peers=true
         - pnpm run compile
