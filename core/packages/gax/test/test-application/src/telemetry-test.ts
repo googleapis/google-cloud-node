@@ -76,9 +76,6 @@ export class ShowcaseOtelHarness {
         spanProcessors: [processor],
       });
     }
-    if (typeof (this.provider as any).addSpanProcessor === 'function') {
-      (this.provider as any).addSpanProcessor(processor);
-    }
   }
 
   setup(): void {
