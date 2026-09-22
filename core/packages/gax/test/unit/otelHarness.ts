@@ -351,9 +351,9 @@ export class OtelHarness {
       expectedValue,
       expected === 0
         ? `expected ${where} to omit ${expectedKey} when resend count is 0, got ` +
-          `${JSON.stringify(target.attributes[expectedKey])}.`
+            `${JSON.stringify(target.attributes[expectedKey])}.`
         : `expected ${where} to report ${expectedKey} ${expected}, got ` +
-          `${JSON.stringify(target.attributes[expectedKey])}.`,
+            `${JSON.stringify(target.attributes[expectedKey])}.`,
     );
     assert.strictEqual(
       target.attributes[otherKey],
