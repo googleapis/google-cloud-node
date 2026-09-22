@@ -14,7 +14,9 @@
  * limitations under the License.
  */
 
-import type {Response as NodeFetchResponse} from 'node-fetch' with {'resolution-mode': 'import'};
+import type {Response as NodeFetchResponse} from 'node-fetch' with {
+  'resolution-mode': 'import',
+};
 
 import {AuthClient, GoogleAuth, gaxios} from 'google-auth-library';
 import * as serializer from 'proto3-json-serializer';
@@ -35,8 +37,7 @@ import type {Agent as HttpsAgent} from 'https';
 // - https://github.com/node-fetch/node-fetch#custom-agent
 // - https://github.com/googleapis/gax-nodejs/pull/1534
 let agentOption:
-  | ((parsedUrl: {protocol: string}) => HttpAgent | HttpsAgent)
-  | null = null;
+  ((parsedUrl: {protocol: string}) => HttpAgent | HttpsAgent) | null = null;
 if (isNodeJS()) {
   const http = require('http');
   const https = require('https');
@@ -149,13 +150,17 @@ function _toGoogleError(err: unknown, outcome: CallOutcome): unknown {
 
   // Errors that carry an HTTP status map through the standard HTTP-to-gRPC
   // table. Checked first: a response arrived, so it outranks the abort
-  // bookkeeping below.
+  // bookkeeping below. The received status is also kept as-is, because the
+  // table is lossy — it collapses whole ranges — and this is the only place it
+  // can be recorded for a 401 or a 403, which `validateStatus` rejects on
+  // purpose (see below) and which therefore never reach the decoder.
   const httpStatus =
     typeof fetchError.status === 'number'
       ? fetchError.status
       : fetchError.response?.status;
   if (typeof httpStatus === 'number') {
     error.code = rpcCodeFromHttpStatusCode(httpStatus);
+    error.httpStatusCode = httpStatus;
     return error;
   }
 
@@ -221,6 +226,7 @@ export function generateServiceStub(
     rpc: protobuf.Method,
     ok: boolean,
     response: Buffer | ArrayBuffer,
+    httpStatusCode?: number,
   ) => {},
   numericEnums: boolean,
   minifyJson: boolean,
@@ -426,12 +432,20 @@ export function generateServiceStub(
             );
             return;
           } else {
+            // Captured here because the decoded value below is also named
+            // `response` and shadows the fetch response.
+            const httpStatusCode = response.status;
             return Promise.all([
               Promise.resolve(response.ok),
               response.arrayBuffer(),
             ])
               .then(([ok, buffer]: [boolean, Buffer | ArrayBuffer]) => {
-                const response = responseDecoder(rpc, ok, buffer);
+                const response = responseDecoder(
+                  rpc,
+                  ok,
+                  buffer,
+                  httpStatusCode,
+                );
                 callback!(null, response);
                 return;
               })
