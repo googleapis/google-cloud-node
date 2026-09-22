@@ -272,6 +272,24 @@ describe('TracerHelper', () => {
         harness.reset();
         assert.strictEqual(await errorTypeOf(error), 'ECONNREFUSED');
       });
+
+      it('preserves a system error code wrapped on cause by fallback _toGoogleError', async () => {
+        // On the REST fallback path, _toGoogleError wraps the fetch error in
+        // a GoogleError with a numeric e.code and puts the raw error on
+        // e.cause.
+        const fetchError = Object.assign(new Error('connect ECONNREFUSED'), {
+          code: 'ECONNREFUSED',
+        });
+        const error = new GoogleError(fetchError.message);
+        error.code = Status.UNAVAILABLE;
+        error.cause = fetchError;
+
+        assert.strictEqual(
+          await errorTypeOf(error, httpDynamicArgs),
+          'ECONNREFUSED',
+        );
+        harness.assertResponseStatus({rpcStatus: 'UNAVAILABLE'});
+      });
     });
 
     it('uses the string code for Node system errors', async () => {

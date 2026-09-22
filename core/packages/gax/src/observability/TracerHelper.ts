@@ -85,22 +85,11 @@ export function getGaxTracer(): Tracer {
  * exception class name.
  */
 function resolveErrorType(e: Error, rpcType: 'grpc' | 'http'): string {
-  if (rpcType === 'grpc') {
-    const statusName = resolveRpcStatusName(e);
-    if (statusName !== undefined) {
-      return statusName;
-    }
-  } else {
-    const httpStatusCode = resolveHttpStatusCode(e);
-    if (httpStatusCode !== undefined) {
-      return String(httpStatusCode);
-    }
-  }
-  const code = (e as {code?: unknown}).code;
-  if (typeof code === 'string' && code.length > 0) {
-    return code;
-  }
-  return resolveExceptionType(e);
+  const protocolStatus =
+    rpcType === 'grpc'
+      ? resolveRpcStatusName(e)
+      : resolveHttpStatusCode(e)?.toString();
+  return protocolStatus ?? resolveSystemErrorCode(e) ?? resolveExceptionType(e);
 }
 
 /**
@@ -114,6 +103,24 @@ function resolveExceptionType(e: Error): string {
     return className;
   }
   return e.name || 'Error';
+}
+
+/**
+ * Resolves a Node system error code (e.g. `ECONNREFUSED`), checking the error
+ * itself and any underlying cause attached by fallback wrapping.
+ */
+function resolveSystemErrorCode(e: unknown): string | undefined {
+  let current: unknown = e;
+  let depth = 0;
+  while (current && typeof current === 'object' && depth < 10) {
+    const code = (current as {code?: unknown}).code;
+    if (typeof code === 'string' && code.length > 0) {
+      return code;
+    }
+    current = (current as {cause?: unknown}).cause;
+    depth++;
+  }
+  return undefined;
 }
 
 /**
