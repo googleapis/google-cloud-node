@@ -577,65 +577,174 @@ export async function runTelemetryTests(
     }
 
     // =========================================================================
-    // 4. TRACE CONTEXT PROPAGATION
     // =========================================================================
-    console.log('Testing Trace Context Propagation: gRPC...');
+    // 4. TRACE CONTEXT PROPAGATION & TRACE HIERARCHY (T4 -> T3)
+    // =========================================================================
+    console.log('Testing Trace Context Propagation & Hierarchy (T4 -> T3): gRPC Unary...');
     {
       harness.reset();
-      const parentTracer = trace.getTracer('test-parent-tracer');
-      let parentSpanId: string | undefined;
-      let parentTraceId: string | undefined;
+      // Instrumentation tracer (T4) represents the outer tracing layer (e.g. higher-level SDK / instrumentation library)
+      const instrumentationTracer = trace.getTracer('@google-cloud/instrumentation-echo', '1.0.0');
+      let t4SpanId: string | undefined;
+      let t4TraceId: string | undefined;
 
-      await parentTracer.startActiveSpan('parent-operation-grpc', async (parentSpan) => {
+      await instrumentationTracer.startActiveSpan('EchoOperation.Execute', async (t4Span) => {
         try {
-          const parentContext = parentSpan.spanContext();
-          parentSpanId = parentContext.spanId;
-          parentTraceId = parentContext.traceId;
+          const t4Context = t4Span.spanContext();
+          t4SpanId = t4Context.spanId;
+          t4TraceId = t4Context.traceId;
 
-          const [response] = await grpcEchoClient.echo({content: 'propagation-grpc'});
-          assert.strictEqual(response.content, 'propagation-grpc');
+          const [response] = await grpcEchoClient.echo({content: 'hierarchy-grpc'});
+          assert.strictEqual(response.content, 'hierarchy-grpc');
         } finally {
-          parentSpan.end();
+          t4Span.end();
         }
       });
 
-      // We expect 2 spans finished in harness: parent span and child client span (T3)
+      // Verify trace hierarchy: 2 spans finished (T4 instrumentation span and T3 client request span)
       const allSpans = harness.exporter.getFinishedSpans();
-      assert.strictEqual(allSpans.length, 2, `Expected 2 spans (parent + child), got ${allSpans.length}`);
+      assert.strictEqual(allSpans.length, 2, `Expected 2 spans (T4 + T3), got ${allSpans.length}`);
 
-      const childSpan = harness.requireSingleSpan('google-gax');
-      assert.strictEqual(childSpan.name, 'EchoClient.Echo');
-      assert.strictEqual(childSpan.spanContext().traceId, parentTraceId, 'T3 span should inherit traceId from parent context');
-      assert.strictEqual(childSpan.parentSpanContext?.spanId, parentSpanId, 'T3 span should have parentSpanContext pointing to active parent span');
+      const t3Span = harness.requireSingleSpan('google-gax');
+      const t4Span = allSpans.find(s => s.name === 'EchoOperation.Execute');
+      assert.ok(t4Span, 'T4 instrumentation span should exist in finished spans');
+
+      // Assert T4 is the parent of T3
+      assert.strictEqual(t3Span.name, 'EchoClient.Echo');
+      assert.strictEqual(t3Span.spanContext().traceId, t4TraceId, 'T3 span should share traceId with T4 parent span');
+      assert.strictEqual(t3Span.parentSpanContext?.spanId, t4SpanId, 'T4 span must be the direct parent of T3 span');
+      assert.strictEqual(t4Span?.parentSpanContext, undefined, 'Root T4 span has no parent');
     }
 
-    console.log('Testing Trace Context Propagation: HTTP/REST Fallback...');
+    console.log('Testing Trace Context Propagation & Hierarchy (T4 -> T3): HTTP/REST Fallback Unary...');
     {
       harness.reset();
-      const parentTracer = trace.getTracer('test-parent-tracer');
-      let parentSpanId: string | undefined;
-      let parentTraceId: string | undefined;
+      const instrumentationTracer = trace.getTracer('@google-cloud/instrumentation-echo', '1.0.0');
+      let t4SpanId: string | undefined;
+      let t4TraceId: string | undefined;
 
-      await parentTracer.startActiveSpan('parent-operation-rest', async (parentSpan) => {
+      await instrumentationTracer.startActiveSpan('EchoOperation.ExecuteRest', async (t4Span) => {
         try {
-          const parentContext = parentSpan.spanContext();
-          parentSpanId = parentContext.spanId;
-          parentTraceId = parentContext.traceId;
+          const t4Context = t4Span.spanContext();
+          t4SpanId = t4Context.spanId;
+          t4TraceId = t4Context.traceId;
 
-          const [response] = await restEchoClient.echo({content: 'propagation-rest'});
-          assert.strictEqual(response.content, 'propagation-rest');
+          const [response] = await restEchoClient.echo({content: 'hierarchy-rest'});
+          assert.strictEqual(response.content, 'hierarchy-rest');
         } finally {
-          parentSpan.end();
+          t4Span.end();
         }
       });
 
       const allSpans = harness.exporter.getFinishedSpans();
-      assert.strictEqual(allSpans.length, 2, `Expected 2 spans (parent + child), got ${allSpans.length}`);
+      assert.strictEqual(allSpans.length, 2, `Expected 2 spans (T4 + T3), got ${allSpans.length}`);
 
-      const childSpan = harness.requireSingleSpan('google-gax');
-      assert.strictEqual(childSpan.name, 'EchoClient.Echo');
-      assert.strictEqual(childSpan.spanContext().traceId, parentTraceId, 'T3 span should inherit traceId from parent context');
-      assert.strictEqual(childSpan.parentSpanContext?.spanId, parentSpanId, 'T3 span should have parentSpanContext pointing to active parent span');
+      const t3Span = harness.requireSingleSpan('google-gax');
+      const t4Span = allSpans.find(s => s.name === 'EchoOperation.ExecuteRest');
+      assert.ok(t4Span, 'T4 instrumentation span should exist in finished spans');
+
+      assert.strictEqual(t3Span.name, 'EchoClient.Echo');
+      assert.strictEqual(t3Span.spanContext().traceId, t4TraceId, 'T3 span should share traceId with T4 parent span');
+      assert.strictEqual(t3Span.parentSpanContext?.spanId, t4SpanId, 'T4 span must be the direct parent of T3 span');
+    }
+
+    console.log('Testing Trace Hierarchy: Multiple T3 Child Spans under Single T4 Parent...');
+    {
+      harness.reset();
+      const instrumentationTracer = trace.getTracer('@google-cloud/instrumentation-workflow', '1.0.0');
+      let t4SpanId: string | undefined;
+      let t4TraceId: string | undefined;
+
+      await instrumentationTracer.startActiveSpan('Workflow.ExecuteSteps', async (t4Span) => {
+        try {
+          const t4Context = t4Span.spanContext();
+          t4SpanId = t4Context.spanId;
+          t4TraceId = t4Context.traceId;
+
+          // Step 1: gRPC Unary call
+          const [res1] = await grpcEchoClient.echo({content: 'step-1'});
+          assert.strictEqual(res1.content, 'step-1');
+
+          // Step 2: HTTP/REST Fallback Unary call
+          const [res2] = await restEchoClient.echo({content: 'step-2'});
+          assert.strictEqual(res2.content, 'step-2');
+        } finally {
+          t4Span.end();
+        }
+      });
+
+      // We expect 3 spans: 1 T4 parent span + 2 T3 children spans
+      const allSpans = harness.exporter.getFinishedSpans();
+      assert.strictEqual(allSpans.length, 3, `Expected 3 spans (1 T4 + 2 T3 children), got ${allSpans.length}`);
+
+      const t3Spans = harness.getSpans('google-gax');
+      assert.strictEqual(t3Spans.length, 2, `Expected 2 T3 spans, got ${t3Spans.length}`);
+
+      for (const t3Child of t3Spans) {
+        assert.strictEqual(
+          t3Child.spanContext().traceId,
+          t4TraceId,
+          `Child span ${t3Child.name} should share traceId with T4 parent`,
+        );
+        assert.strictEqual(
+          t3Child.parentSpanContext?.spanId,
+          t4SpanId,
+          `Child span ${t3Child.name} should have T4 parentSpanId`,
+        );
+      }
+    }
+
+    console.log('Testing Trace Hierarchy: T4 Parent with Streaming and Retry T3 Children...');
+    {
+      harness.reset();
+      const instrumentationTracer = trace.getTracer('@google-cloud/instrumentation-sequence', '1.0.0');
+      let t4SpanId: string | undefined;
+      let t4TraceId: string | undefined;
+
+      await instrumentationTracer.startActiveSpan('Sequence.ExecuteWithRetry', async (t4Span) => {
+        try {
+          const t4Context = t4Span.spanContext();
+          t4SpanId = t4Context.spanId;
+          t4TraceId = t4Context.traceId;
+
+          // Configure sequence: 1 transient UNAVAILABLE, then OK
+          const seqRequest = createSequenceRequestFactory(
+            [Status.UNAVAILABLE],
+            [0.05],
+          );
+          const [sequence] = await grpcSequenceClient.createSequence(seqRequest);
+
+          const backoffSettings = createBackoffSettings(50, 1.5, 500, null, 1.5, 3000, null);
+          backoffSettings.maxRetries = 2;
+          const retryOptions = new RetryOptions([Status.UNAVAILABLE], backoffSettings);
+
+          const attemptRequest = new protos.google.showcase.v1beta1.AttemptSequenceRequest();
+          attemptRequest.name = sequence.name!;
+
+          await grpcSequenceClient.attemptSequence(attemptRequest, {retry: retryOptions});
+        } finally {
+          t4Span.end();
+        }
+      });
+
+      // Finished spans: 1 T4 parent + 1 CreateSequence T3 child + 1 AttemptSequence T3 child
+      const allSpans = harness.exporter.getFinishedSpans();
+      assert.strictEqual(allSpans.length, 3, `Expected 3 spans (1 T4 + 2 T3 children), got ${allSpans.length}`);
+
+      const t3Spans = harness.getSpans('google-gax');
+      assert.strictEqual(t3Spans.length, 2);
+
+      const createSeqSpan = t3Spans.find(s => s.name === 'SequenceServiceClient.CreateSequence');
+      const attemptSeqSpan = t3Spans.find(s => s.name === 'SequenceServiceClient.AttemptSequence');
+
+      assert.ok(createSeqSpan, 'CreateSequence span must exist');
+      assert.ok(attemptSeqSpan, 'AttemptSequence span must exist');
+
+      assert.strictEqual(createSeqSpan?.spanContext().traceId, t4TraceId);
+      assert.strictEqual(createSeqSpan?.parentSpanContext?.spanId, t4SpanId);
+
+      assert.strictEqual(attemptSeqSpan?.spanContext().traceId, t4TraceId);
+      assert.strictEqual(attemptSeqSpan?.parentSpanContext?.spanId, t4SpanId);
     }
 
     console.log(`\n✔ All T3 Telemetry Tracing Tests passed successfully with ${providerKind} provider!`);
