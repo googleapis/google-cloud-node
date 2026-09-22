@@ -57,12 +57,18 @@ if (!('SPANNER_DISABLE_BUILTIN_METRICS' in process.env)) {
 }
 
 async function disableMetrics(sandbox: sinon.SinonSandbox) {
+  if (!('SPANNER_DISABLE_BUILTIN_METRICS' in process.env)) {
+    process.env.SPANNER_DISABLE_BUILTIN_METRICS = '';
+  }
   sandbox.stub(process.env, 'SPANNER_DISABLE_BUILTIN_METRICS').value('true');
   await MetricsTracerFactory.resetInstance();
   MetricsTracerFactory.enabled = false;
 }
 
 async function enableMetrics(sandbox: sinon.SinonSandbox) {
+  if (!('SPANNER_DISABLE_BUILTIN_METRICS' in process.env)) {
+    process.env.SPANNER_DISABLE_BUILTIN_METRICS = '';
+  }
   sandbox.stub(process.env, 'SPANNER_DISABLE_BUILTIN_METRICS').value('false');
   await MetricsTracerFactory.resetInstance();
 }
@@ -188,6 +194,7 @@ describe('Spanner', () => {
 
   const OPTIONS = {
     projectId: 'project-id',
+    channelPool: 'legacy' as const,
   };
 
   before(() => {

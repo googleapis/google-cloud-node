@@ -21,6 +21,7 @@ import {EventEmitter} from 'events';
 import {common as p} from 'protobufjs';
 import * as proxyquire from 'proxyquire';
 import * as sinon from 'sinon';
+import * as extend from 'extend';
 
 import {codec} from '../src/codec';
 import {protos} from '@google-cloud/spanner-api';
@@ -250,7 +251,11 @@ describe('Transaction', () => {
         assert.deepStrictEqual(arg.gaxOpts, {
           timeout: 1000,
           otherArgs: {
-            options: {unbind: true, affinityKey: txn._affinityKey},
+            options: {
+              unbind: true,
+              affinityKey: txn._affinityKey,
+              affinity: txn.affinity,
+            },
           },
         });
         // The caller supplied gax options must not be modified.
@@ -2268,6 +2273,76 @@ describe('Transaction', () => {
       it('should inherit from Dml', () => {
         assert(transaction instanceof Dml);
       });
+
+      it('should preserve this context, clone gaxOpts with affinity, and preserve non-plain objects in reqOpts', () => {
+        let capturedConfig: any;
+        const fakeSession = Object.assign({}, SESSION, {
+          metadata: undefined,
+          request: sinon.spy((config: any, callback: Function) => {
+            capturedConfig = config;
+            callback();
+          }),
+          requestStream: sinon.spy((config: any) => {
+            capturedConfig = config;
+            return {} as any;
+          }),
+        });
+        const txn = new Transaction(fakeSession);
+        assert.ok((txn as any)._affinity);
+        assert.strictEqual((txn as any)._affinityKey, undefined);
+
+        class CustomParameter {
+          constructor(public value: string) {}
+        }
+        const customInstance = new CustomParameter('test');
+        const originalConfig = {
+          reqOpts: {
+            parameter: customInstance,
+          },
+          gaxOpts: {
+            otherArgs: {
+              options: {
+                custom: 'value',
+              },
+            },
+          },
+        };
+        const configToPass = {
+          reqOpts: {
+            parameter: customInstance,
+          },
+          gaxOpts: {
+            otherArgs: {
+              options: {
+                custom: 'value',
+              },
+            },
+          },
+        };
+
+        txn.request(configToPass, () => {});
+        assert.strictEqual(fakeSession.request.calledOnce, true);
+        // Original config object must not be mutated
+        assert.deepStrictEqual(configToPass, originalConfig);
+        // Non-plain object instance in reqOpts is preserved
+        assert.strictEqual(capturedConfig.reqOpts.parameter, customInstance);
+        // The spy received a cloned gaxOpts with affinity injected
+        assert.notStrictEqual(capturedConfig.gaxOpts, originalConfig.gaxOpts);
+        assert.strictEqual(
+          capturedConfig.gaxOpts.otherArgs.options.affinity,
+          (txn as any)._affinity,
+        );
+
+        txn.requestStream(configToPass);
+        assert.strictEqual(fakeSession.requestStream.calledOnce, true);
+        assert.deepStrictEqual(configToPass, originalConfig);
+        assert.strictEqual(capturedConfig.reqOpts.parameter, customInstance);
+        assert.notStrictEqual(capturedConfig.gaxOpts, originalConfig.gaxOpts);
+        assert.strictEqual(
+          capturedConfig.gaxOpts.otherArgs.options.affinity,
+          (txn as any)._affinity,
+        );
+      });
     });
 
     describe('batchUpdate', () => {
@@ -3407,8 +3482,10 @@ describe('Transaction', () => {
 
       it('should not return an error if the `id` is not set', done => {
         delete transaction.id;
+        const endStub = sandbox.stub(transaction, 'end');
         transaction.rollback(err => {
           assert.deepStrictEqual(err, null);
+          assert.strictEqual(endStub.callCount, 1);
           done();
         });
       });

@@ -93,6 +93,14 @@ import grpcGcpModule = require('grpc-gcp');
 const grpcGcp = grpcGcpModule(grpc);
 import * as v1 from './v1';
 import {
+  ChannelPool,
+  ChannelPoolChannelAdapter,
+  ChannelPoolConfig,
+  createCallInvocationTransformer,
+  createChannelPool,
+  isChannelPool,
+} from './channel-pool';
+import {
   ObservabilityOptions,
   ensureInitialContextManagerSet,
   isTracingEnabled,
@@ -188,6 +196,7 @@ export interface SpannerOptions extends GrpcClientOptions {
    */
   universe_domain?: string;
   universeDomain?: string;
+  channelPool?: boolean | string | ChannelPoolConfig | ChannelPool;
   /**
    * Whether to enable gRPC Channelz service tracking.
    * Defaults to `0` (disabled) to eliminate per-RPC allocation and tracking overhead.
@@ -342,6 +351,8 @@ class Spanner extends GrpcService {
   private _isInSecureCredentials: boolean;
   private _metricsEnabled = false;
   readonly _nthClientId: number;
+  private channelPool_?: ChannelPool;
+  private _ownsChannelPool = false;
   private _pendingProjectIdCallbacks?: Array<
     (error: Error | null, projectId?: string) => void
   >;
@@ -424,23 +435,149 @@ class Spanner extends GrpcService {
       }
     }
 
-    options = Object.assign(
-      {
-        libName: 'gccl',
-        libVersion: require('../../package.json').version,
-        scopes,
-        // Add grpc keep alive setting
-        'grpc.keepalive_time_ms': 120000,
-        // Disable Channelz by default to reduce per-RPC tracking and allocation overhead
-        'grpc.enable_channelz': 0,
-        // Enable grpc-gcp support
-        'grpc.callInvocationTransformer': grpcGcp.gcpCallInvocationTransformer,
-        'grpc.channelFactoryOverride': grpcGcp.gcpChannelFactoryOverride,
-        'grpc.gcpApiConfig': grpcGcp.createGcpApiConfig(gcpApiConfig),
-        grpc,
-      },
-      options || {},
-    ) as {} as SpannerOptions;
+    const rawPool = options?.channelPool;
+    const envChannelPool = process.env.SPANNER_CHANNEL_POOL?.toLowerCase();
+    const isLegacyPool =
+      rawPool === 'grpc-gcp' ||
+      rawPool === 'legacy' ||
+      (rawPool as any) === false ||
+      (rawPool === undefined &&
+        (envChannelPool === 'grpc-gcp' || envChannelPool === 'legacy'));
+
+    let initialChannelPool: ChannelPool | undefined;
+
+    if (!isLegacyPool) {
+      let channelPoolInstance: ChannelPool | undefined;
+      let poolConfig: ChannelPoolConfig;
+
+      if (isChannelPool(rawPool)) {
+        channelPoolInstance = rawPool;
+        initialChannelPool = channelPoolInstance;
+        poolConfig = {type: 'dynamic'};
+      } else if (typeof rawPool === 'object' && rawPool !== null) {
+        poolConfig = rawPool as ChannelPoolConfig;
+      } else {
+        let poolType: 'dynamic' | 'static' = 'static';
+        if (rawPool === 'dynamic' || rawPool === 'static') {
+          poolType = rawPool;
+        } else if (
+          envChannelPool === 'dynamic' ||
+          envChannelPool === 'static'
+        ) {
+          poolType = envChannelPool;
+        }
+        poolConfig =
+          poolType === 'dynamic'
+            ? {
+                type: 'dynamic',
+                minChannels: process.env.SPANNER_NUM_CHANNELS
+                  ? parseInt(process.env.SPANNER_NUM_CHANNELS, 10)
+                  : undefined,
+              }
+            : {
+                type: 'static',
+                numChannels: process.env.SPANNER_NUM_CHANNELS
+                  ? parseInt(process.env.SPANNER_NUM_CHANNELS, 10)
+                  : 4,
+              };
+      }
+
+      const primeFn = async (channel: grpc.Channel, sessionName: string) => {
+        const unclosableChannel = new Proxy(channel, {
+          get(target, property) {
+            if (property === 'close') {
+              return () => {};
+            }
+            const value = Reflect.get(target, property);
+            return typeof value === 'function' ? value.bind(target) : value;
+          },
+        });
+        const primeClient = new v1.SpannerClient({
+          ...options,
+          'grpc.channelFactoryOverride': () => unclosableChannel,
+          'grpc.callInvocationTransformer': undefined,
+          'grpc.gcpApiConfig': undefined,
+        } as any);
+        const timeoutMs =
+          poolConfig.type === 'dynamic'
+            ? (poolConfig.primeTimeoutMs ?? 5000)
+            : 5000;
+        try {
+          await primeClient.executeSql(
+            {
+              session: sessionName,
+              sql: 'SELECT 1',
+            },
+            {
+              timeout: timeoutMs,
+            },
+          );
+        } finally {
+          await primeClient.close();
+        }
+      };
+
+      if (poolConfig.type === 'dynamic' && !poolConfig.primeFn) {
+        poolConfig.primeFn = primeFn;
+      }
+
+      const channelFactoryOverride = (
+        address: string,
+        credentials: grpc.ChannelCredentials,
+        channelOptions: any,
+      ) => {
+        if (!channelPoolInstance) {
+          channelPoolInstance = createChannelPool(
+            address,
+            credentials,
+            channelOptions,
+            poolConfig,
+          );
+          this.channelPool_ = channelPoolInstance;
+          this._ownsChannelPool = true;
+        }
+        return new ChannelPoolChannelAdapter(channelPoolInstance);
+      };
+
+      const callInvocationTransformer = createCallInvocationTransformer(
+        () => this.channelPool_ || channelPoolInstance,
+      );
+
+      options = Object.assign(
+        {
+          libName: 'gccl',
+          libVersion: require('../../package.json').version,
+          scopes,
+          'grpc.keepalive_time_ms': 120000,
+          // Disable Channelz by default to reduce per-RPC tracking and allocation overhead
+          'grpc.enable_channelz': 0,
+          'grpc.callInvocationTransformer': callInvocationTransformer,
+          'grpc.channelFactoryOverride': channelFactoryOverride,
+          grpc,
+        },
+        options || {},
+      ) as {} as SpannerOptions;
+      delete (options as any)['grpc.gcpApiConfig'];
+    } else {
+      options = Object.assign(
+        {
+          libName: 'gccl',
+          libVersion: require('../../package.json').version,
+          scopes,
+          // Add grpc keep alive setting
+          'grpc.keepalive_time_ms': 120000,
+          // Disable Channelz by default to reduce per-RPC tracking and allocation overhead
+          'grpc.enable_channelz': 0,
+          // Enable grpc-gcp support
+          'grpc.callInvocationTransformer':
+            grpcGcp.gcpCallInvocationTransformer,
+          'grpc.channelFactoryOverride': grpcGcp.gcpChannelFactoryOverride,
+          'grpc.gcpApiConfig': grpcGcp.createGcpApiConfig(gcpApiConfig),
+          grpc,
+        },
+        options || {},
+      ) as {} as SpannerOptions;
+    }
 
     const directedReadOptions = options.directedReadOptions
       ? options.directedReadOptions
@@ -492,6 +629,9 @@ class Spanner extends GrpcService {
       packageJson: require('../../package.json'),
     } as {} as GrpcServiceConfig;
     super(config, options);
+    if (initialChannelPool) {
+      this.channelPool_ = initialChannelPool;
+    }
 
     if (options.routeToLeaderEnabled === false) {
       this.routeToLeaderEnabled = false;
@@ -524,6 +664,16 @@ class Spanner extends GrpcService {
 
   get universeDomain() {
     return this._universeDomain;
+  }
+
+  get channelPool(): ChannelPool | undefined {
+    return this.channelPool_;
+  }
+
+  setPrimeSession(sessionName: string): void {
+    if (this.channelPool_ && 'setPrimeSession' in this.channelPool_) {
+      (this.channelPool_ as any).setPrimeSession(sessionName);
+    }
   }
 
   /**
@@ -595,6 +745,10 @@ class Spanner extends GrpcService {
           promises.push(Promise.resolve().then(() => client.close()));
         }
       });
+
+      if (this.channelPool_ && this._ownsChannelPool) {
+        promises.push(Promise.resolve().then(() => this.channelPool_!.close()));
+      }
 
       // Wait for all close attempts to settle.
       // Map success to undefined, and failure to the error.
@@ -2093,7 +2247,26 @@ class Spanner extends GrpcService {
           stream.destroy(err);
           return;
         }
-        requestFn()
+        if (stream.destroyed) {
+          return;
+        }
+        const req = requestFn();
+        const cancelUpstream = () => {
+          if (typeof (req as any)?.cancel === 'function') {
+            (req as any).cancel();
+          } else if (typeof (req as any)?.destroy === 'function') {
+            (req as any).destroy();
+          }
+        };
+        if (stream.destroyed) {
+          cancelUpstream();
+          return;
+        }
+        stream.once('close', cancelUpstream);
+        req.once('close', () => {
+          stream.removeListener('close', cancelUpstream);
+        });
+        req
           .on('error', err => {
             stream.destroy(err);
           })
@@ -2607,3 +2780,4 @@ export {v1, protos};
 export default {Spanner};
 export {Float32, Float, Int, Struct, Numeric, PGNumeric, SpannerDate, Interval};
 export {ObservabilityOptions};
+export * from './channel-pool';

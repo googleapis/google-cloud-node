@@ -376,13 +376,39 @@ export class MetricsTracerFactory {
    */
   public getCurrentTracer(requestId: string): MetricsTracer | null {
     const operationRequest: string = this._extractOperationRequest(requestId);
-    if (!this._currentOperationTracers.has(operationRequest)) {
+    let tracer = this._currentOperationTracers.get(operationRequest);
+    let key = operationRequest;
+    if (!tracer && operationRequest) {
+      // Channel pool can rewrite the channelId component (parts[3]) of requestId.
+      // Since the original channel ID is always '1', we can reconstruct the original key in O(1).
+      const parts = operationRequest.split('.');
+      if (parts.length === 5) {
+        parts[3] = '1';
+        const originalKey = parts.join('.');
+        const originalTracer = this._currentOperationTracers.get(originalKey);
+        if (originalTracer) {
+          tracer = originalTracer;
+          key = originalKey;
+        } else {
+          const prefix = `${parts[0]}.${parts[1]}.${parts[2]}.`;
+          const suffix = `.${parts[4]}`;
+          for (const [k, t] of this._currentOperationTracers.entries()) {
+            if (k.startsWith(prefix) && k.endsWith(suffix)) {
+              tracer = t;
+              key = k;
+              break;
+            }
+          }
+        }
+      }
+    }
+    if (!tracer) {
       // Attempting to retrieve tracer that doesn't exist.
       return null;
     }
-    this._currentOperationLastUpdatedMs.set(operationRequest, Date.now());
+    this._currentOperationLastUpdatedMs.set(key, Date.now());
 
-    return this._currentOperationTracers.get(operationRequest) ?? null;
+    return tracer;
   }
 
   /**
@@ -390,8 +416,30 @@ export class MetricsTracerFactory {
    * @param requestId The request id of the gRPC call set under 'x-goog-spanner-request-id'.
    */
   public clearCurrentTracer(requestId: string) {
-    const operationRequest =
+    let operationRequest =
       this._extractOperationRequest(requestId) || requestId;
+    if (
+      !this._currentOperationTracers.has(operationRequest) &&
+      operationRequest
+    ) {
+      const parts = operationRequest.split('.');
+      if (parts.length === 5) {
+        parts[3] = '1';
+        const originalKey = parts.join('.');
+        if (this._currentOperationTracers.has(originalKey)) {
+          operationRequest = originalKey;
+        } else {
+          const prefix = `${parts[0]}.${parts[1]}.${parts[2]}.`;
+          const suffix = `.${parts[4]}`;
+          for (const k of this._currentOperationTracers.keys()) {
+            if (k.startsWith(prefix) && k.endsWith(suffix)) {
+              operationRequest = k;
+              break;
+            }
+          }
+        }
+      }
+    }
     if (!this._currentOperationTracers.has(operationRequest)) {
       return;
     }

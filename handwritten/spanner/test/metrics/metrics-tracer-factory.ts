@@ -181,6 +181,25 @@ describe('MetricsTracerFactory', () => {
     assert.strictEqual((factory as any)._currentOperationLastUpdatedMs.size, 0);
   });
 
+  it('should retrieve and clear a MetricsTracer when channel id was rewritten by channel pool', () => {
+    const factory = MetricsTracerFactory.getInstance('project-id');
+    const createdTracer = factory!.createMetricsTracer(
+      'some-method',
+      'method-name',
+      '1.1a2bc3d4.1.1.1.1',
+    );
+
+    assert.strictEqual((factory as any)._currentOperationTracers.size, 1);
+
+    // Channel pool assigned channel 5: requestId becomes 1.1a2bc3d4.1.5.1.1
+    const retrievedTracer = factory!.getCurrentTracer('1.1a2bc3d4.1.5.1.1');
+    assert.strictEqual(retrievedTracer, createdTracer);
+
+    factory!.clearCurrentTracer('1.1a2bc3d4.1.5.1.1');
+    assert.strictEqual((factory as any)._currentOperationTracers.size, 0);
+    assert.strictEqual((factory as any)._currentOperationLastUpdatedMs.size, 0);
+  });
+
   it('should correctly set default attributes', () => {
     const factory = MetricsTracerFactory.getInstance('project-id');
     const tracer = factory!.createMetricsTracer(

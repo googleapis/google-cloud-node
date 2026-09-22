@@ -20,6 +20,7 @@ import {isEmpty, toArray} from './helper';
 import Long = require('long');
 import {EventEmitter} from 'events';
 import {grpc, CallOptions, ServiceError, Status, GoogleError} from 'google-gax';
+import * as extend from 'extend';
 import {common as p} from 'protobufjs';
 import {finished, Readable, PassThrough, Stream} from 'stream';
 
@@ -66,6 +67,7 @@ import {
   X_GOOG_SPANNER_REQUEST_ID_HEADER,
   X_GOOG_SPANNER_REQUEST_ID_SPAN_ATTR,
 } from './request_id_header';
+import {AffinityKind, TransactionAffinity} from './channel-pool';
 
 export type Rows = Array<Row | Json>;
 type ResultStats = ResultSetStats | IResultSetStats;
@@ -343,6 +345,7 @@ export class Snapshot extends EventEmitter {
     | null;
   id?: Uint8Array | string;
   protected _affinityKey?: string;
+  protected _affinity?: TransactionAffinity;
   protected _bindGaxOpts?: CallOptions;
   protected _unbindGaxOpts?: CallOptions;
   multiplexedSessionPreviousTransactionId?: Uint8Array | string;
@@ -408,12 +411,14 @@ export class Snapshot extends EventEmitter {
     session: Session,
     options?: TimestampBounds,
     queryOptions?: IQueryOptions,
+    affinityKind: AffinityKind = AffinityKind.ReadOnly,
   ) {
     super();
 
     this.ended = false;
     this.session = session;
     this.queryOptions = Object.assign({}, queryOptions);
+    this._affinity = new TransactionAffinity(affinityKind);
     // If the session is multiplexed, generate a unique affinity key for this
     // specific transaction/snapshot. This allows requests using the same shared
     // multiplexed session to be distributed across different gRPC channels.
@@ -425,6 +430,7 @@ export class Snapshot extends EventEmitter {
         otherArgs: {
           options: {
             affinityKey: this._affinityKey,
+            affinity: this._affinity,
           },
         },
       };
@@ -435,6 +441,7 @@ export class Snapshot extends EventEmitter {
           options: {
             affinityKey: this._affinityKey,
             unbind: true,
+            affinity: this._affinity,
           },
         },
       };
@@ -464,10 +471,14 @@ export class Snapshot extends EventEmitter {
     this._mutationKey = null;
   }
 
+  get affinity(): TransactionAffinity | undefined {
+    return this._affinity;
+  }
+
   /**
-   * Binds the multiplexed session affinity key to the gax options of an
-   * outgoing request, so that all requests of this transaction are routed to
-   * the same gRPC channel.
+   * Binds the multiplexed session affinity key and transaction affinity to the
+   * gax options of an outgoing request, so that all requests of this
+   * transaction are routed to the same gRPC channel.
    *
    * `config` is always a request descriptor that was freshly constructed by the
    * caller for this one RPC (and {@link Spanner#prepareGapicRequest_} already
@@ -492,6 +503,7 @@ export class Snapshot extends EventEmitter {
         'affinityKey',
         this._affinityKey,
       );
+      config.gaxOpts = injectGaxOpt(config.gaxOpts, 'affinity', this._affinity);
     }
     return config;
   }
@@ -1140,6 +1152,7 @@ export class Snapshot extends EventEmitter {
     }
 
     this.ended = true;
+    this._affinity?.reset();
     this._releaseWaitingRequests(new Error('Transaction has ended.'));
     process.nextTick(() => this.emit('end'));
 
@@ -2560,13 +2573,48 @@ export class Transaction extends Dml {
     queryOptions?: IQueryOptions,
     requestOptions?: Pick<IRequestOptions, 'transactionTag'>,
   ) {
-    super(session, undefined, queryOptions);
+    super(session, undefined, queryOptions, AffinityKind.ReadWrite);
 
     this._queuedMutations = [];
     this._options = {readWrite: options};
     this._options.isolationLevel = IsolationLevel.ISOLATION_LEVEL_UNSPECIFIED;
     this.requestOptions = requestOptions;
     this._retryCommit = false;
+
+    if (!this._affinityKey && this._affinity) {
+      const originalRequest = this.request;
+      this.request = (config: any, callback?: Function) => {
+        if (!config) {
+          return originalRequest.call(this, config, callback!);
+        }
+        const gaxOptions = injectGaxOpt(
+          extend(true, {}, config.gaxOpts),
+          'affinity',
+          this._affinity,
+        );
+        return originalRequest.call(
+          this,
+          Object.assign({}, config, {gaxOpts: gaxOptions}),
+          callback!,
+        );
+      };
+
+      const originalRequestStream = this.requestStream;
+      this.requestStream = (config: any) => {
+        if (!config) {
+          return originalRequestStream.call(this, config);
+        }
+        const gaxOptions = injectGaxOpt(
+          extend(true, {}, config.gaxOpts),
+          'affinity',
+          this._affinity,
+        );
+        return originalRequestStream.call(
+          this,
+          Object.assign({}, config, {gaxOpts: gaxOptions}),
+        );
+      };
+    }
   }
 
   /**
@@ -3344,6 +3392,7 @@ export class Transaction extends Dml {
       if (!this.id) {
         span.addEvent('Transaction ID is unknown, nothing to rollback.');
         span.end();
+        this.end();
         callback(null);
         return;
       }
