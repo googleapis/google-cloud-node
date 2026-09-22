@@ -1340,6 +1340,110 @@ describe('createApiCall', () => {
               ...(transport.rpcType === 'http' ? {httpStatus: 200} : {}),
             });
           });
+
+          it('reports resends correctly when retries are exhausted by maxRetries', async () => {
+            process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
+
+            let attempts = 0;
+            function func(
+              argument: {},
+              metadata: {},
+              options: {},
+              callback: (err: GoogleError | null, resp?: unknown) => void,
+            ) {
+              attempts++;
+              const error = new GoogleError('retryable');
+              error.code = FAKE_STATUS_CODE_1;
+              callback(error);
+              return {cancel: () => {}};
+            }
+
+            const settings = new gax.CallSettings({
+              apiName: 'google.example.v1.Echo',
+              enableTelemetryTracing: true,
+              timeout: 0,
+              maxRetries: 2,
+              retry: gax.createRetryOptions([FAKE_STATUS_CODE_1], {
+                initialRetryDelayMillis: 1,
+                retryDelayMultiplier: 1,
+                maxRetryDelayMillis: 1,
+                initialRpcTimeoutMillis: 0,
+                rpcTimeoutMultiplier: 1,
+                maxRpcTimeoutMillis: 0,
+                maxRetries: 2,
+              }),
+              otherArgs: {
+                internalTelemetryInfo: telemetryInfo,
+                internalMethodName: 'Echo',
+              },
+            });
+
+            const apiCall = transport.createApiCall(func, settings);
+            await assert.rejects(async () => {
+              await apiCall({}, undefined);
+            });
+
+            assert.strictEqual(attempts, 2);
+            const span = harness.requireSingleSpan('google-gax');
+            assert.strictEqual(
+              span.attributes['gcp.method.type'],
+              transport.rpcType,
+            );
+            // 2 attempts made: initial send + 1 resend. The 2nd retry was not sent because maxRetries was reached.
+            harness.assertResendCount(1, {span});
+          });
+
+          it('reports resends correctly when retries are exhausted by totalTimeoutMillis', async () => {
+            process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
+
+            let attempts = 0;
+            function func(
+              argument: {},
+              metadata: {},
+              options: {},
+              callback: (err: GoogleError | null, resp?: unknown) => void,
+            ) {
+              attempts++;
+              const error = new GoogleError('retryable');
+              error.code = FAKE_STATUS_CODE_1;
+              callback(error);
+              return {cancel: () => {}};
+            }
+
+            const settings = new gax.CallSettings({
+              apiName: 'google.example.v1.Echo',
+              enableTelemetryTracing: true,
+              timeout: 0,
+              retry: gax.createRetryOptions([FAKE_STATUS_CODE_1], {
+                initialRetryDelayMillis: 20,
+                retryDelayMultiplier: 1,
+                maxRetryDelayMillis: 20,
+                initialRpcTimeoutMillis: 0,
+                rpcTimeoutMultiplier: 1,
+                maxRpcTimeoutMillis: 0,
+                totalTimeoutMillis: 10,
+              }),
+              otherArgs: {
+                internalTelemetryInfo: telemetryInfo,
+                internalMethodName: 'Echo',
+              },
+            });
+
+            const apiCall = transport.createApiCall(func, settings);
+            await assert.rejects(async () => {
+              await apiCall({}, undefined);
+            });
+
+            const span = harness.requireSingleSpan('google-gax');
+            assert.strictEqual(
+              span.attributes['gcp.method.type'],
+              transport.rpcType,
+            );
+            // The call ultimately failed due to deadline exceeded, so the
+            // resend count should match the number of retries actually made
+            // (attempts - 1), without counting the attempt aborted by the deadline.
+            harness.assertResendCount(attempts - 1, {span});
+          });
         });
       }
 
