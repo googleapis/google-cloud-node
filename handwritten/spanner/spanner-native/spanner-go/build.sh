@@ -9,6 +9,15 @@ echo "=== Building Go Spanner Shared Core ==="
 
 # 1. Check Go compiler
 if ! command -v go &> /dev/null; then
+    for cand in /tmp/spanner-go-toolchain/go/bin/go /tmp/spanner-go-toolchain-*/go/bin/go /usr/local/go/bin/go /snap/bin/go "$HOME/go/bin/go"; do
+        if [ -x "$cand" ]; then
+            export PATH="$(dirname "$cand"):$PATH"
+            break
+        fi
+    done
+fi
+
+if ! command -v go &> /dev/null; then
     echo "ERROR: Go is not installed. Please ensure Go 1.21+ is in PATH."
     exit 1
 fi

@@ -412,7 +412,38 @@ async function runNodeWorkerProcess() {
 // ---------------------------------------------------------------------------
 // Build & Environment Preparation
 // ---------------------------------------------------------------------------
+function ensureGoInPath() {
+  const {spawnSync} = require('child_process');
+  const probe = spawnSync('go', ['version'], {encoding: 'utf8'});
+  if (probe.status === 0) return;
+
+  const candidates = [
+    '/tmp/spanner-go-toolchain/go/bin',
+    '/usr/local/go/bin',
+    '/snap/bin',
+    path.join(os.homedir(), 'go', 'bin'),
+  ];
+  try {
+    for (const f of fs.readdirSync('/tmp')) {
+      if (f.startsWith('spanner-go-toolchain')) {
+        candidates.push(path.join('/tmp', f, 'go', 'bin'));
+      }
+    }
+  } catch (e) {
+    // ignore
+  }
+
+  for (const c of candidates) {
+    if (fs.existsSync(path.join(c, 'go'))) {
+      process.env.PATH = `${c}:${process.env.PATH}`;
+      return;
+    }
+  }
+}
+
 function ensureArtifactsBuilt() {
+  ensureGoInPath();
+
   // 1. Check compiled TypeScript in handwritten/spanner/build
   const buildIndex = path.join(SPANNER_ROOT, 'build', 'src', 'index.js');
   if (!fs.existsSync(buildIndex)) {
