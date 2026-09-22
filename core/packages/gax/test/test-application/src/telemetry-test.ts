@@ -29,13 +29,13 @@ import {
 } from '@opentelemetry/sdk-trace-base';
 import {NodeTracerProvider} from '@opentelemetry/sdk-trace-node';
 import {AsyncLocalStorageContextManager} from '@opentelemetry/context-async-hooks';
+import {status as Status} from '@grpc/grpc-js';
 import {EchoClient, SequenceServiceClient, protos} from 'showcase-echo-client';
 import {ShowcaseServer} from 'showcase-server';
 import {
   grpc,
   GoogleAuth,
   googleAuthLibrary,
-  Status,
   createBackoffSettings,
   RetryOptions,
 } from 'google-gax';
@@ -75,6 +75,9 @@ export class ShowcaseOtelHarness {
       this.provider = new BasicTracerProvider({
         spanProcessors: [processor],
       });
+    }
+    if (typeof (this.provider as any).addSpanProcessor === 'function') {
+      (this.provider as any).addSpanProcessor(processor);
     }
   }
 
@@ -264,7 +267,10 @@ export async function runTelemetryTests(
           error: {code: Status.INVALID_ARGUMENT, message: 'Invalid argument rest'},
         }),
       (err: Error) => {
-        assert.ok(err.message.includes('Invalid argument rest') || (err as any).code === 3);
+        assert.ok(
+          err.message.includes('Invalid argument rest') ||
+            (err as any).code === Status.INVALID_ARGUMENT,
+        );
         return true;
       },
     );
@@ -464,8 +470,8 @@ export async function runTelemetryTests(
         () => grpcSequenceClient.attemptSequence(attemptRequest, {retry: retryOptions}),
         (err: any) => {
           assert.ok(
-            String(err.code) === '4' || // DEADLINE_EXCEEDED after max retries
-              String(err.code) === '14' ||
+            err.code === Status.DEADLINE_EXCEEDED ||
+              err.code === Status.UNAVAILABLE ||
               err.message.includes('Exceeded maximum number of retries'),
           );
           return true;
@@ -556,8 +562,8 @@ export async function runTelemetryTests(
         () => restSequenceClient.attemptSequence(attemptRequest, {retry: retryOptions}),
         (err: any) => {
           assert.ok(
-            String(err.code) === '4' ||
-              String(err.code) === '14' ||
+            err.code === Status.DEADLINE_EXCEEDED ||
+              err.code === Status.UNAVAILABLE ||
               err.message.includes('Exceeded maximum number of retries'),
           );
           return true;
@@ -747,6 +753,96 @@ export async function runTelemetryTests(
       assert.strictEqual(attemptSeqSpan?.parentSpanContext?.spanId, t4SpanId);
     }
 
+    // =========================================================================
+    // 5. ENVIRONMENT VARIABLE GATING
+    // =========================================================================
+    console.log('Testing Environment Variable Gating...');
+    const originalO11y = process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED;
+    const originalTracing = process.env.GOOGLE_SDK_NODE_ENABLE_TRACING;
+
+    try {
+      // 5a. Tracing is disabled when GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED is not set,
+      // even if client options specify enableTelemetryTracing: true.
+      console.log('Testing Gating: Disabled when EXPERIMENTAL_O11Y_ENABLED is unset...');
+      delete process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED;
+      process.env.GOOGLE_SDK_NODE_ENABLE_TRACING = 'true';
+
+      const uninitGrpcClient = new EchoClient(grpcClientOpts);
+      harness.reset();
+      const [resp1] = await uninitGrpcClient.echo({content: 'gated-o11y-grpc'});
+      assert.strictEqual(resp1.content, 'gated-o11y-grpc');
+      assert.strictEqual(
+        harness.getSpans().length,
+        0,
+        'No spans should be exported when EXPERIMENTAL_O11Y_ENABLED is unset',
+      );
+
+      const uninitRestClient = new EchoClient(restClientOpts);
+      harness.reset();
+      const [resp2] = await uninitRestClient.echo({content: 'gated-o11y-rest'});
+      assert.strictEqual(resp2.content, 'gated-o11y-rest');
+      assert.strictEqual(
+        harness.getSpans().length,
+        0,
+        'No spans should be exported on REST when EXPERIMENTAL_O11Y_ENABLED is unset',
+      );
+
+      // 5b. Tracing is disabled when GOOGLE_SDK_NODE_ENABLE_TRACING is 'false',
+      // overriding client options enableTelemetryTracing: true.
+      console.log('Testing Gating: Disabled when ENABLE_TRACING is false...');
+      process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
+      process.env.GOOGLE_SDK_NODE_ENABLE_TRACING = 'false';
+
+      const envDisabledGrpcClient = new EchoClient(grpcClientOpts);
+      harness.reset();
+      const [resp3] = await envDisabledGrpcClient.echo({content: 'gated-disabled-grpc'});
+      assert.strictEqual(resp3.content, 'gated-disabled-grpc');
+      assert.strictEqual(
+        harness.getSpans().length,
+        0,
+        'No spans should be exported when ENABLE_TRACING is false',
+      );
+
+      const envDisabledRestClient = new EchoClient(restClientOpts);
+      harness.reset();
+      const [resp4] = await envDisabledRestClient.echo({content: 'gated-disabled-rest'});
+      assert.strictEqual(resp4.content, 'gated-disabled-rest');
+      assert.strictEqual(
+        harness.getSpans().length,
+        0,
+        'No spans should be exported on REST when ENABLE_TRACING is false',
+      );
+
+      // 5c. Tracing is enabled when both environment variables are set to 'true',
+      // even if client options omit enableTelemetryTracing.
+      console.log('Testing Gating: Enabled via environment variables without client options...');
+      process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
+      process.env.GOOGLE_SDK_NODE_ENABLE_TRACING = 'true';
+
+      const envOnlyGrpcClient = new EchoClient({
+        grpc,
+        sslCreds: grpc.credentials.createInsecure(),
+      });
+      harness.reset();
+      const [resp5] = await envOnlyGrpcClient.echo({content: 'gated-enabled-env'});
+      assert.strictEqual(resp5.content, 'gated-enabled-env');
+      const envSpan = harness.requireSingleSpan();
+      assert.strictEqual(envSpan.name, 'EchoClient.Echo');
+      assert.strictEqual(envSpan.status.code, SpanStatusCode.OK);
+      assert.strictEqual(envSpan.attributes['gcp.method.type'], 'grpc');
+    } finally {
+      if (originalO11y !== undefined) {
+        process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = originalO11y;
+      } else {
+        delete process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED;
+      }
+      if (originalTracing !== undefined) {
+        process.env.GOOGLE_SDK_NODE_ENABLE_TRACING = originalTracing;
+      } else {
+        delete process.env.GOOGLE_SDK_NODE_ENABLE_TRACING;
+      }
+    }
+
     console.log(`\n✔ All T3 Telemetry Tracing Tests passed successfully with ${providerKind} provider!`);
   } finally {
     harness.teardown();
@@ -765,6 +861,6 @@ if (require.main === module) {
     }
   })().catch(err => {
     console.error(err);
-    process.exit(1);
+    process.exitCode = 1;
   });
 }

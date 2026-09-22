@@ -15,6 +15,10 @@
  */
 
 'use strict';
+
+process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
+process.env.GOOGLE_SDK_NODE_ENABLE_TRACING = 'true';
+
 import {EchoClient, SequenceServiceClient, protos} from 'showcase-echo-client';
 import {ShowcaseServer} from 'showcase-server';
 import * as assert from 'assert';
