@@ -1409,6 +1409,60 @@ describe('createApiCall', () => {
           }
         });
       });
+
+      it('reports resends for a default retry-request server-streaming gRPC call', done => {
+        process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
+        const settings = new gax.CallSettings({
+          apiName: 'google.example.v1.Echo',
+          enableTelemetryTracing: true,
+          otherArgs: {
+            internalTelemetryInfo: telemetryInfo,
+            internalMethodName: 'Echo',
+          },
+        });
+
+        const retryableError = Object.assign(new GoogleError('UNAVAILABLE'), {
+          code: status.UNAVAILABLE,
+        });
+
+        let attempts = 0;
+        const spy = sinon.spy(() => {
+          attempts++;
+          const s = new PassThrough({objectMode: true});
+          setImmediate(() => {
+            s.emit('error', retryableError);
+          });
+          return Object.assign(s, {cancel: () => {}});
+        });
+
+        const apiCall = gaxCreateApiCall(
+          spy as unknown as GRPCCall,
+          settings,
+          new StreamDescriptor(StreamType.SERVER_STREAMING),
+        );
+
+        const stream = apiCall(
+          {},
+          {
+            retryRequestOptions: {
+              retries: 2,
+              shouldRetryFn: () => true,
+            },
+          },
+        ) as CancellableStream;
+
+        stream.on('error', () => {
+          try {
+            assert.strictEqual(attempts, 3);
+            const span = harness.requireSingleSpan('google-gax');
+            assert.strictEqual(span.attributes['gcp.method.type'], 'grpc');
+            harness.assertResendCount(2, {span});
+            done();
+          } catch (e) {
+            done(e);
+          }
+        });
+      });
     });
   });
 });

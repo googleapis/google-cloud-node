@@ -331,6 +331,7 @@ export class StreamProxy extends duplexify implements GRPCCallResult {
         this.eventForwardHelper(retryStream);
         this.setReadable(retryStream!);
       } else {
+        let requestCount = 0;
         const retryStream = retryRequest(null, {
           objectMode: true,
           request: () => {
@@ -340,6 +341,10 @@ export class StreamProxy extends duplexify implements GRPCCallResult {
               }
               return;
             }
+            if (requestCount > 0) {
+              this.recordResend?.();
+            }
+            requestCount++;
             const stream = apiCall(
               argument,
               this._callback,
@@ -554,11 +559,6 @@ export class StreamProxy extends duplexify implements GRPCCallResult {
                   }
 
                   retries++;
-                  // Reported separately from `retries`, which is the retry
-                  // budget and is reset to 0 every time data arrives. The
-                  // tracer wants the total for the call, so it counts the
-                  // calls it receives instead of reading that counter.
-                  this.recordResend?.();
                   let retryArgument = this.argument! as RequestType;
                   // if resumption logic is passed, use it to determined the
                   // new argument for the new request made to the server
@@ -573,6 +573,11 @@ export class StreamProxy extends duplexify implements GRPCCallResult {
                       }
                       return;
                     }
+                    // Reported separately from `retries`, which is the retry
+                    // budget and is reset to 0 every time data arrives. The
+                    // tracer wants the total for the call, so it counts the
+                    // calls it receives instead of reading that counter.
+                    this.recordResend?.();
                     const newStream = this.apiCall!(
                       retryArgument,
                       this._callback,
