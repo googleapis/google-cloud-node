@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/gapic-generator",
-  "version": "5.2.0",
+  "version": "5.3.0",
   "type": "module",
   "description": "Google API Client Library Generator for TypeScript, written in TypeScript.",
   "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/core/generator/gapic-generator-typescript",
@@ -79,6 +79,7 @@
     "protobufjs": "^8.6.6"
   },
   "pnpm": {
+    "onlyBuiltDependencies": [],
     "overrides": {
       "protobufjs": "^8.6.6"
     }

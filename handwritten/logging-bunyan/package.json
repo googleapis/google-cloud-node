@@ -1,7 +1,7 @@
 {
   "name": "@google-cloud/logging-bunyan",
   "description": "Cloud Logging stream for Bunyan",
-  "version": "6.0.1",
+  "version": "6.1.0",
   "license": "Apache-2.0",
   "author": "Google Inc.",
   "engines": {
@@ -35,11 +35,11 @@
     "winston"
   ],
   "scripts": {
-    "predocs": "npm run compile",
+    "predocs": "pnpm run compile",
     "docs": "jsdoc -c .jsdoc.js",
     "lint": "gts check",
-    "presamples-test": "npm run compile",
-    "presystem-test": "npm run compile",
+    "presamples-test": "pnpm run compile",
+    "presystem-test": "pnpm run compile",
     "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
     "system-test": "mocha build/system-test --timeout 600000",
     "test": "cross-env NODE_OPTIONS='--no-deprecation' c8 mocha --recursive build/test",
@@ -48,7 +48,7 @@
     "postcompile": "cpy \"src/types/*\" build/src/types",
     "fix": "gts fix",
     "prepare": "npm run compile",
-    "pretest": "npm run compile",
+    "pretest": "pnpm run compile",
     "prelint": "cd samples; npm link ../; npm install",
     "precompile": "gts clean"
   },

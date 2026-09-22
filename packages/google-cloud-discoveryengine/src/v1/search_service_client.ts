@@ -528,7 +528,12 @@ export class SearchServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform',
+      'https://www.googleapis.com/auth/discoveryengine.assist.readwrite',
+      'https://www.googleapis.com/auth/discoveryengine.readwrite',
+      'https://www.googleapis.com/auth/discoveryengine.serving.readwrite',
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -633,6 +638,11 @@ export class SearchServiceClient {
    *   stores. For engines with a single data store, the specs directly under
    *   {@link protos.google.cloud.discoveryengine.v1.SearchRequest|SearchRequest} should be
    *   used.
+   * @param {number} [request.numResultsPerDataStore]
+   *   Optional. The maximum number of results to retrieve from each data store.
+   *   If not specified, it will use the
+   *   {@link protos.google.cloud.discoveryengine.v1.SearchRequest.DataStoreSpec.num_results|SearchRequest.DataStoreSpec.num_results}
+   *   if provided, otherwise there is no limit.
    * @param {string} request.filter
    *   The filter syntax consists of an expression language for constructing a
    *   predicate from one or more fields of the documents being filtered. Filter
@@ -825,6 +835,15 @@ export class SearchServiceClient {
    *     Google model to determine the keyword-based overlap between the query and
    *     the document.
    *     * `base_rank`: the default rank of the result
+   *     * `media_actor_match`: whether the media actor matches the query
+   *     * `media_director_match`: whether the media director matches the query
+   *     * `media_genre_match`: whether the media genre matches the query
+   *     * `media_language_match`: whether the media language matches the query
+   *     * `media_title_match`: whether the media title matches the query
+   *     * `media_prefix_similarity_rank`: prefix similarity rank for media
+   *     results
+   *     * `media_semantic_similarity_rank`: semantic similarity rank for media
+   *     results
    * @param {google.cloud.discoveryengine.v1.SearchRequest.RankingExpressionBackend} [request.rankingExpressionBackend]
    *   Optional. The backend to use for the ranking expression evaluation.
    * @param {boolean} request.safeSearch
@@ -889,10 +908,6 @@ export class SearchServiceClient {
    *     Call /answer API with the session ID generated in the first call.
    *     Here, the answer generation happens in the context of the search
    *     results from the first search call.
-   *
-   *   Multi-turn Search feature is currently at private GA stage. Please use
-   *   v1alpha or v1beta version instead before we launch this feature to public
-   *   GA. Or ask for allowlisting through Google Support team.
    * @param {google.cloud.discoveryengine.v1.SearchRequest.SessionSpec} request.sessionSpec
    *   Session specification.
    *
@@ -918,6 +933,19 @@ export class SearchServiceClient {
    *   This feature is currently supported only for custom and site search.
    * @param {google.cloud.discoveryengine.v1.SearchRequest.RelevanceScoreSpec} [request.relevanceScoreSpec]
    *   Optional. The specification for returning the relevance score.
+   * @param {google.cloud.discoveryengine.v1.SearchRequest.SearchAddonSpec} [request.searchAddonSpec]
+   *   Optional. SearchAddonSpec is used to disable add-ons for search as per new
+   *   repricing model.
+   *   This field is only supported for search requests.
+   * @param {google.cloud.discoveryengine.v1.SearchRequest.CustomRankingParams} [request.customRankingParams]
+   *   Optional. Optional configuration for the Custom Ranking feature.
+   * @param {string} [request.entity]
+   *   Optional. The entity for customers that may run multiple different
+   *   entities, domains, sites or regions, for example, "Google US", "Google
+   *   Ads", "Waymo", "google.com", "youtube.com", etc. If this is set, it should
+   *   be exactly matched with
+   *   {@link protos.google.cloud.discoveryengine.v1.UserEvent.entity|UserEvent.entity} to get
+   *   search results boosted by entity.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1108,6 +1136,11 @@ export class SearchServiceClient {
    *   stores. For engines with a single data store, the specs directly under
    *   {@link protos.google.cloud.discoveryengine.v1.SearchRequest|SearchRequest} should be
    *   used.
+   * @param {number} [request.numResultsPerDataStore]
+   *   Optional. The maximum number of results to retrieve from each data store.
+   *   If not specified, it will use the
+   *   {@link protos.google.cloud.discoveryengine.v1.SearchRequest.DataStoreSpec.num_results|SearchRequest.DataStoreSpec.num_results}
+   *   if provided, otherwise there is no limit.
    * @param {string} request.filter
    *   The filter syntax consists of an expression language for constructing a
    *   predicate from one or more fields of the documents being filtered. Filter
@@ -1300,6 +1333,15 @@ export class SearchServiceClient {
    *     Google model to determine the keyword-based overlap between the query and
    *     the document.
    *     * `base_rank`: the default rank of the result
+   *     * `media_actor_match`: whether the media actor matches the query
+   *     * `media_director_match`: whether the media director matches the query
+   *     * `media_genre_match`: whether the media genre matches the query
+   *     * `media_language_match`: whether the media language matches the query
+   *     * `media_title_match`: whether the media title matches the query
+   *     * `media_prefix_similarity_rank`: prefix similarity rank for media
+   *     results
+   *     * `media_semantic_similarity_rank`: semantic similarity rank for media
+   *     results
    * @param {google.cloud.discoveryengine.v1.SearchRequest.RankingExpressionBackend} [request.rankingExpressionBackend]
    *   Optional. The backend to use for the ranking expression evaluation.
    * @param {boolean} request.safeSearch
@@ -1364,10 +1406,6 @@ export class SearchServiceClient {
    *     Call /answer API with the session ID generated in the first call.
    *     Here, the answer generation happens in the context of the search
    *     results from the first search call.
-   *
-   *   Multi-turn Search feature is currently at private GA stage. Please use
-   *   v1alpha or v1beta version instead before we launch this feature to public
-   *   GA. Or ask for allowlisting through Google Support team.
    * @param {google.cloud.discoveryengine.v1.SearchRequest.SessionSpec} request.sessionSpec
    *   Session specification.
    *
@@ -1393,6 +1431,19 @@ export class SearchServiceClient {
    *   This feature is currently supported only for custom and site search.
    * @param {google.cloud.discoveryengine.v1.SearchRequest.RelevanceScoreSpec} [request.relevanceScoreSpec]
    *   Optional. The specification for returning the relevance score.
+   * @param {google.cloud.discoveryengine.v1.SearchRequest.SearchAddonSpec} [request.searchAddonSpec]
+   *   Optional. SearchAddonSpec is used to disable add-ons for search as per new
+   *   repricing model.
+   *   This field is only supported for search requests.
+   * @param {google.cloud.discoveryengine.v1.SearchRequest.CustomRankingParams} [request.customRankingParams]
+   *   Optional. Optional configuration for the Custom Ranking feature.
+   * @param {string} [request.entity]
+   *   Optional. The entity for customers that may run multiple different
+   *   entities, domains, sites or regions, for example, "Google US", "Google
+   *   Ads", "Waymo", "google.com", "youtube.com", etc. If this is set, it should
+   *   be exactly matched with
+   *   {@link protos.google.cloud.discoveryengine.v1.UserEvent.entity|UserEvent.entity} to get
+   *   search results boosted by entity.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -1512,6 +1563,11 @@ export class SearchServiceClient {
    *   stores. For engines with a single data store, the specs directly under
    *   {@link protos.google.cloud.discoveryengine.v1.SearchRequest|SearchRequest} should be
    *   used.
+   * @param {number} [request.numResultsPerDataStore]
+   *   Optional. The maximum number of results to retrieve from each data store.
+   *   If not specified, it will use the
+   *   {@link protos.google.cloud.discoveryengine.v1.SearchRequest.DataStoreSpec.num_results|SearchRequest.DataStoreSpec.num_results}
+   *   if provided, otherwise there is no limit.
    * @param {string} request.filter
    *   The filter syntax consists of an expression language for constructing a
    *   predicate from one or more fields of the documents being filtered. Filter
@@ -1704,6 +1760,15 @@ export class SearchServiceClient {
    *     Google model to determine the keyword-based overlap between the query and
    *     the document.
    *     * `base_rank`: the default rank of the result
+   *     * `media_actor_match`: whether the media actor matches the query
+   *     * `media_director_match`: whether the media director matches the query
+   *     * `media_genre_match`: whether the media genre matches the query
+   *     * `media_language_match`: whether the media language matches the query
+   *     * `media_title_match`: whether the media title matches the query
+   *     * `media_prefix_similarity_rank`: prefix similarity rank for media
+   *     results
+   *     * `media_semantic_similarity_rank`: semantic similarity rank for media
+   *     results
    * @param {google.cloud.discoveryengine.v1.SearchRequest.RankingExpressionBackend} [request.rankingExpressionBackend]
    *   Optional. The backend to use for the ranking expression evaluation.
    * @param {boolean} request.safeSearch
@@ -1768,10 +1833,6 @@ export class SearchServiceClient {
    *     Call /answer API with the session ID generated in the first call.
    *     Here, the answer generation happens in the context of the search
    *     results from the first search call.
-   *
-   *   Multi-turn Search feature is currently at private GA stage. Please use
-   *   v1alpha or v1beta version instead before we launch this feature to public
-   *   GA. Or ask for allowlisting through Google Support team.
    * @param {google.cloud.discoveryengine.v1.SearchRequest.SessionSpec} request.sessionSpec
    *   Session specification.
    *
@@ -1797,6 +1858,19 @@ export class SearchServiceClient {
    *   This feature is currently supported only for custom and site search.
    * @param {google.cloud.discoveryengine.v1.SearchRequest.RelevanceScoreSpec} [request.relevanceScoreSpec]
    *   Optional. The specification for returning the relevance score.
+   * @param {google.cloud.discoveryengine.v1.SearchRequest.SearchAddonSpec} [request.searchAddonSpec]
+   *   Optional. SearchAddonSpec is used to disable add-ons for search as per new
+   *   repricing model.
+   *   This field is only supported for search requests.
+   * @param {google.cloud.discoveryengine.v1.SearchRequest.CustomRankingParams} [request.customRankingParams]
+   *   Optional. Optional configuration for the Custom Ranking feature.
+   * @param {string} [request.entity]
+   *   Optional. The entity for customers that may run multiple different
+   *   entities, domains, sites or regions, for example, "Google US", "Google
+   *   Ads", "Waymo", "google.com", "youtube.com", etc. If this is set, it should
+   *   be exactly matched with
+   *   {@link protos.google.cloud.discoveryengine.v1.UserEvent.entity|UserEvent.entity} to get
+   *   search results boosted by entity.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -1927,6 +2001,11 @@ export class SearchServiceClient {
    *   stores. For engines with a single data store, the specs directly under
    *   {@link protos.google.cloud.discoveryengine.v1.SearchRequest|SearchRequest} should be
    *   used.
+   * @param {number} [request.numResultsPerDataStore]
+   *   Optional. The maximum number of results to retrieve from each data store.
+   *   If not specified, it will use the
+   *   {@link protos.google.cloud.discoveryengine.v1.SearchRequest.DataStoreSpec.num_results|SearchRequest.DataStoreSpec.num_results}
+   *   if provided, otherwise there is no limit.
    * @param {string} request.filter
    *   The filter syntax consists of an expression language for constructing a
    *   predicate from one or more fields of the documents being filtered. Filter
@@ -2119,6 +2198,15 @@ export class SearchServiceClient {
    *     Google model to determine the keyword-based overlap between the query and
    *     the document.
    *     * `base_rank`: the default rank of the result
+   *     * `media_actor_match`: whether the media actor matches the query
+   *     * `media_director_match`: whether the media director matches the query
+   *     * `media_genre_match`: whether the media genre matches the query
+   *     * `media_language_match`: whether the media language matches the query
+   *     * `media_title_match`: whether the media title matches the query
+   *     * `media_prefix_similarity_rank`: prefix similarity rank for media
+   *     results
+   *     * `media_semantic_similarity_rank`: semantic similarity rank for media
+   *     results
    * @param {google.cloud.discoveryengine.v1.SearchRequest.RankingExpressionBackend} [request.rankingExpressionBackend]
    *   Optional. The backend to use for the ranking expression evaluation.
    * @param {boolean} request.safeSearch
@@ -2183,10 +2271,6 @@ export class SearchServiceClient {
    *     Call /answer API with the session ID generated in the first call.
    *     Here, the answer generation happens in the context of the search
    *     results from the first search call.
-   *
-   *   Multi-turn Search feature is currently at private GA stage. Please use
-   *   v1alpha or v1beta version instead before we launch this feature to public
-   *   GA. Or ask for allowlisting through Google Support team.
    * @param {google.cloud.discoveryengine.v1.SearchRequest.SessionSpec} request.sessionSpec
    *   Session specification.
    *
@@ -2212,6 +2296,19 @@ export class SearchServiceClient {
    *   This feature is currently supported only for custom and site search.
    * @param {google.cloud.discoveryengine.v1.SearchRequest.RelevanceScoreSpec} [request.relevanceScoreSpec]
    *   Optional. The specification for returning the relevance score.
+   * @param {google.cloud.discoveryengine.v1.SearchRequest.SearchAddonSpec} [request.searchAddonSpec]
+   *   Optional. SearchAddonSpec is used to disable add-ons for search as per new
+   *   repricing model.
+   *   This field is only supported for search requests.
+   * @param {google.cloud.discoveryengine.v1.SearchRequest.CustomRankingParams} [request.customRankingParams]
+   *   Optional. Optional configuration for the Custom Ranking feature.
+   * @param {string} [request.entity]
+   *   Optional. The entity for customers that may run multiple different
+   *   entities, domains, sites or regions, for example, "Google US", "Google
+   *   Ads", "Waymo", "google.com", "youtube.com", etc. If this is set, it should
+   *   be exactly matched with
+   *   {@link protos.google.cloud.discoveryengine.v1.UserEvent.entity|UserEvent.entity} to get
+   *   search results boosted by entity.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2402,6 +2499,11 @@ export class SearchServiceClient {
    *   stores. For engines with a single data store, the specs directly under
    *   {@link protos.google.cloud.discoveryengine.v1.SearchRequest|SearchRequest} should be
    *   used.
+   * @param {number} [request.numResultsPerDataStore]
+   *   Optional. The maximum number of results to retrieve from each data store.
+   *   If not specified, it will use the
+   *   {@link protos.google.cloud.discoveryengine.v1.SearchRequest.DataStoreSpec.num_results|SearchRequest.DataStoreSpec.num_results}
+   *   if provided, otherwise there is no limit.
    * @param {string} request.filter
    *   The filter syntax consists of an expression language for constructing a
    *   predicate from one or more fields of the documents being filtered. Filter
@@ -2594,6 +2696,15 @@ export class SearchServiceClient {
    *     Google model to determine the keyword-based overlap between the query and
    *     the document.
    *     * `base_rank`: the default rank of the result
+   *     * `media_actor_match`: whether the media actor matches the query
+   *     * `media_director_match`: whether the media director matches the query
+   *     * `media_genre_match`: whether the media genre matches the query
+   *     * `media_language_match`: whether the media language matches the query
+   *     * `media_title_match`: whether the media title matches the query
+   *     * `media_prefix_similarity_rank`: prefix similarity rank for media
+   *     results
+   *     * `media_semantic_similarity_rank`: semantic similarity rank for media
+   *     results
    * @param {google.cloud.discoveryengine.v1.SearchRequest.RankingExpressionBackend} [request.rankingExpressionBackend]
    *   Optional. The backend to use for the ranking expression evaluation.
    * @param {boolean} request.safeSearch
@@ -2658,10 +2769,6 @@ export class SearchServiceClient {
    *     Call /answer API with the session ID generated in the first call.
    *     Here, the answer generation happens in the context of the search
    *     results from the first search call.
-   *
-   *   Multi-turn Search feature is currently at private GA stage. Please use
-   *   v1alpha or v1beta version instead before we launch this feature to public
-   *   GA. Or ask for allowlisting through Google Support team.
    * @param {google.cloud.discoveryengine.v1.SearchRequest.SessionSpec} request.sessionSpec
    *   Session specification.
    *
@@ -2687,6 +2794,19 @@ export class SearchServiceClient {
    *   This feature is currently supported only for custom and site search.
    * @param {google.cloud.discoveryengine.v1.SearchRequest.RelevanceScoreSpec} [request.relevanceScoreSpec]
    *   Optional. The specification for returning the relevance score.
+   * @param {google.cloud.discoveryengine.v1.SearchRequest.SearchAddonSpec} [request.searchAddonSpec]
+   *   Optional. SearchAddonSpec is used to disable add-ons for search as per new
+   *   repricing model.
+   *   This field is only supported for search requests.
+   * @param {google.cloud.discoveryengine.v1.SearchRequest.CustomRankingParams} [request.customRankingParams]
+   *   Optional. Optional configuration for the Custom Ranking feature.
+   * @param {string} [request.entity]
+   *   Optional. The entity for customers that may run multiple different
+   *   entities, domains, sites or regions, for example, "Google US", "Google
+   *   Ads", "Waymo", "google.com", "youtube.com", etc. If this is set, it should
+   *   be exactly matched with
+   *   {@link protos.google.cloud.discoveryengine.v1.UserEvent.entity|UserEvent.entity} to get
+   *   search results boosted by entity.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -2806,6 +2926,11 @@ export class SearchServiceClient {
    *   stores. For engines with a single data store, the specs directly under
    *   {@link protos.google.cloud.discoveryengine.v1.SearchRequest|SearchRequest} should be
    *   used.
+   * @param {number} [request.numResultsPerDataStore]
+   *   Optional. The maximum number of results to retrieve from each data store.
+   *   If not specified, it will use the
+   *   {@link protos.google.cloud.discoveryengine.v1.SearchRequest.DataStoreSpec.num_results|SearchRequest.DataStoreSpec.num_results}
+   *   if provided, otherwise there is no limit.
    * @param {string} request.filter
    *   The filter syntax consists of an expression language for constructing a
    *   predicate from one or more fields of the documents being filtered. Filter
@@ -2998,6 +3123,15 @@ export class SearchServiceClient {
    *     Google model to determine the keyword-based overlap between the query and
    *     the document.
    *     * `base_rank`: the default rank of the result
+   *     * `media_actor_match`: whether the media actor matches the query
+   *     * `media_director_match`: whether the media director matches the query
+   *     * `media_genre_match`: whether the media genre matches the query
+   *     * `media_language_match`: whether the media language matches the query
+   *     * `media_title_match`: whether the media title matches the query
+   *     * `media_prefix_similarity_rank`: prefix similarity rank for media
+   *     results
+   *     * `media_semantic_similarity_rank`: semantic similarity rank for media
+   *     results
    * @param {google.cloud.discoveryengine.v1.SearchRequest.RankingExpressionBackend} [request.rankingExpressionBackend]
    *   Optional. The backend to use for the ranking expression evaluation.
    * @param {boolean} request.safeSearch
@@ -3062,10 +3196,6 @@ export class SearchServiceClient {
    *     Call /answer API with the session ID generated in the first call.
    *     Here, the answer generation happens in the context of the search
    *     results from the first search call.
-   *
-   *   Multi-turn Search feature is currently at private GA stage. Please use
-   *   v1alpha or v1beta version instead before we launch this feature to public
-   *   GA. Or ask for allowlisting through Google Support team.
    * @param {google.cloud.discoveryengine.v1.SearchRequest.SessionSpec} request.sessionSpec
    *   Session specification.
    *
@@ -3091,6 +3221,19 @@ export class SearchServiceClient {
    *   This feature is currently supported only for custom and site search.
    * @param {google.cloud.discoveryengine.v1.SearchRequest.RelevanceScoreSpec} [request.relevanceScoreSpec]
    *   Optional. The specification for returning the relevance score.
+   * @param {google.cloud.discoveryengine.v1.SearchRequest.SearchAddonSpec} [request.searchAddonSpec]
+   *   Optional. SearchAddonSpec is used to disable add-ons for search as per new
+   *   repricing model.
+   *   This field is only supported for search requests.
+   * @param {google.cloud.discoveryengine.v1.SearchRequest.CustomRankingParams} [request.customRankingParams]
+   *   Optional. Optional configuration for the Custom Ranking feature.
+   * @param {string} [request.entity]
+   *   Optional. The entity for customers that may run multiple different
+   *   entities, domains, sites or regions, for example, "Google US", "Google
+   *   Ads", "Waymo", "google.com", "youtube.com", etc. If this is set, it should
+   *   be exactly matched with
+   *   {@link protos.google.cloud.discoveryengine.v1.UserEvent.entity|UserEvent.entity} to get
+   *   search results boosted by entity.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}

@@ -35,6 +35,11 @@
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
+        "GetIamPolicy": {
+          "timeout_millis": 600000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "default"
+        },
         "Insert": {
           "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
@@ -51,6 +56,11 @@
           "retry_params_name": "default"
         },
         "Patch": {
+          "timeout_millis": 600000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "SetIamPolicy": {
           "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
