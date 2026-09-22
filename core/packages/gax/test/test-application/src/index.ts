@@ -20,6 +20,7 @@ import {ShowcaseServer} from 'showcase-server';
 import * as assert from 'assert';
 import {promises as fsp} from 'fs';
 import {runPqcComplianceTests} from './pqc-test';
+import {runTelemetryTests} from './telemetry-test';
 import * as path from 'path';
 import {
   protobuf,
@@ -2908,6 +2909,8 @@ async function main() {
   try {
     await showcaseServer.start();
     await testShowcase();
+    await runTelemetryTests('basic');
+    await runTelemetryTests('node');
   } finally {
     showcaseServer.stop();
   }

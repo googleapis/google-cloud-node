@@ -357,6 +357,13 @@ export class EchoClient {
       ),
     };
 
+    const internalTelemetryInfo = {
+      gcpClientService: 'showcase',
+      gcpVersion: 'v1beta1',
+      gcpRepo: 'googleapis/google-cloud-node',
+      gcpArtifact: 'showcase-echo-client',
+    };
+
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
       'google.showcase.v1beta1.Echo',
@@ -366,6 +373,8 @@ export class EchoClient {
         'x-goog-api-client': clientHeader.join(' '),
         'x-goog-api-version': 'v1_20240408',
       },
+      opts.enableTelemetryTracing,
+      internalTelemetryInfo,
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation

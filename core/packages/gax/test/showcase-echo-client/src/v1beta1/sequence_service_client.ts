@@ -232,12 +232,21 @@ export class SequenceServiceClient {
       ),
     };
 
+    const internalTelemetryInfo = {
+      gcpClientService: 'showcase',
+      gcpVersion: 'v1beta1',
+      gcpRepo: 'googleapis/google-cloud-node',
+      gcpArtifact: 'showcase-echo-client',
+    };
+
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
       'google.showcase.v1beta1.SequenceService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
       {'x-goog-api-client': clientHeader.join(' ')},
+      opts.enableTelemetryTracing,
+      internalTelemetryInfo,
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation

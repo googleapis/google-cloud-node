@@ -25,10 +25,13 @@
   },
   "dependencies": {
     "@grpc/grpc-js": "~1.6.0",
-    "google-gax": "file:./google-gax.tgz",
+    "@opentelemetry/api": "^1.9.0",
+    "@opentelemetry/sdk-trace-base": "^2.10.0",
+    "@opentelemetry/sdk-trace-node": "^2.10.0",
+    "google-gax": "file:google-gax.tgz",
     "protobufjs": "^7.0.0",
     "pumpify": "^2.0.1",
-    "showcase-echo-client": "./showcase-echo-client.tgz",
+    "showcase-echo-client": "file:showcase-echo-client.tgz",
     "showcase-server": "./showcase-server.tgz"
   },
   "engines": {
