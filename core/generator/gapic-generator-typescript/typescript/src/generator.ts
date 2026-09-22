@@ -257,7 +257,7 @@ export class Generator {
   }
 
   private readResumableUploadMethods() {
-    if (this.paramMap['resumable-upload-methods']) {
+    if (typeof this.paramMap['resumable-upload-methods'] === 'string') {
       this.resumableUploadMethods = this.paramMap['resumable-upload-methods']
         .split(';')
         .map(name => name.trim())

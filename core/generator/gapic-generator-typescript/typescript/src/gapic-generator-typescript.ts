@@ -142,6 +142,7 @@ async function main(processArgv: string[]) {
     )
     .string('resumable_upload_methods')
     .alias('resumable_upload_methods', 'resumable-upload-methods')
+    .describe(
       'enable_telemetry_tracing',
       'Set to true to generate a library instrumented with telemetry tracing.',
     )
@@ -170,11 +171,9 @@ async function main(processArgv: string[]) {
   const restNumericEnums = argv.restNumericEnums as boolean | undefined;
   const mixins = argv.mixins as string | undefined;
   const resumableUploadMethods = argv.resumableUploadMethods as
-    | string
-    | undefined;
+    string | undefined;
   const enableTelemetryTracing = argv.enableTelemetryTracing as
-    | boolean
-    | undefined;
+    boolean | undefined;
 
   // --protoc can be taken from environment or from the command line
   let protocParameter = argv.protoc as string | string[] | undefined;

@@ -48,10 +48,7 @@ export interface MethodDescriptorProto
   longRunningResponseType?: string;
   longRunningMetadataType?: string;
   streaming:
-    | 'CLIENT_STREAMING'
-    | 'SERVER_STREAMING'
-    | 'BIDI_STREAMING'
-    | undefined;
+    'CLIENT_STREAMING' | 'SERVER_STREAMING' | 'BIDI_STREAMING' | undefined;
   pagingFieldName: string | undefined;
   pagingResponseType?: string;
   pagingMapResponseType?: string;
