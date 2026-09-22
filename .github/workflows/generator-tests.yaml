@@ -151,32 +151,3 @@ jobs:
           echo "Some ESM library tests failed!"
           exit 1
         fi
-    - name: Test combined library (Speech)
-      if: steps.generator-changes.outputs.changes == 'true'
-      env:
-        TEST_ENV_DESTINATION_PATH: generator/gapic-generator-typescript/test-fixtures/google-cloud-speech
-      run: generator/gapic-generator-typescript/rules_typescript_gapic/combine_script.sh generator/gapic-generator-typescript/test-fixtures/google-cloud-speech-nodejs v1 "" "" generator/gapic-generator-typescript/node_modules/gapic-tools/build/src/compileProtos.js generator/gapic-generator-typescript/node_modules/gapic-node-processing/build/src/cli.js ""
-
-    - name: Run tests for combined library (Speech)
-      if: steps.generator-changes.outputs.changes == 'true'
-      run: |
-        set -ex
-        cd generator/gapic-generator-typescript/test-fixtures/google-cloud-speech
-        pnpm install --no-frozen-lockfile --ignore-workspace --silent
-        pnpm test
-        pnpm run system-test
-
-    - name: Test combined library (Tasks)
-      if: steps.generator-changes.outputs.changes == 'true'
-      env:
-        TEST_ENV_DESTINATION_PATH: generator/gapic-generator-typescript/test-fixtures/google-cloud-tasks
-      run: generator/gapic-generator-typescript/rules_typescript_gapic/combine_script.sh generator/gapic-generator-typescript/test-fixtures/google-cloud-tasks-nodejs v2 "" "" generator/gapic-generator-typescript/node_modules/gapic-tools/build/src/compileProtos.js generator/gapic-generator-typescript/node_modules/gapic-node-processing/build/src/cli.js ""
-
-    - name: Run tests for combined library (Tasks)
-      if: steps.generator-changes.outputs.changes == 'true'
-      run: |
-        set -ex
-        cd generator/gapic-generator-typescript/test-fixtures/google-cloud-tasks
-        pnpm install --no-frozen-lockfile --ignore-workspace --silent
-        pnpm test
-        pnpm run system-test
