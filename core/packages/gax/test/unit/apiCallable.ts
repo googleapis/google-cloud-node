@@ -712,13 +712,84 @@ describe('createApiCall', () => {
       const span = spans[0];
       assert.strictEqual(span.ended, true);
       assert.strictEqual(span.attributes['gcp.method.type'], 'http');
-      // `resolveErrorType` maps the numeric code through the Status enum, so a
-      // deadline is reported by name rather than as the transport's own error
-      // class. Before the REST transport enforced the deadline this attribute
-      // would have read 'GaxiosError', and only if the call completed at all.
-      assert.strictEqual(span.attributes['error.type'], 'DEADLINE_EXCEEDED');
+      // On the fallback transport error.type reports the HTTP status the
+      // server sent. A deadline expires before any response arrives, so there
+      // is none, and the attribute falls through to the exception type. The
+      // deadline is not lost: it is reported as the gRPC status below.
+      assert.strictEqual(span.attributes['error.type'], 'GoogleError');
+      assert.strictEqual(
+        span.attributes['rpc.response.status_code'],
+        'DEADLINE_EXCEEDED',
+      );
       assert.strictEqual(span.events.length, 1);
       assert.strictEqual(span.events[0].name, 'exception');
+    });
+
+    it('ends the span and preserves system error codes like ECONNREFUSED on a fallback call', async () => {
+      process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
+      const settings = new gax.CallSettings({
+        apiName: 'google.example.v1.Echo',
+        enableTelemetryTracing: true,
+        otherArgs: {
+          internalTelemetryInfo: telemetryInfo,
+          internalMethodName: 'Echo',
+        },
+      });
+
+      function connectionRefusedFunc(
+        argument: {},
+        metadata: {},
+        options: {},
+        callback: (err: GoogleError | null, resp?: unknown) => void,
+      ) {
+        const fetchError = Object.assign(
+          new Error('connect ECONNREFUSED 127.0.0.1:443'),
+          {
+            code: 'ECONNREFUSED',
+          },
+        );
+        const error = new GoogleError(fetchError.message);
+        error.code = status.UNAVAILABLE;
+        error.cause = fetchError;
+        setImmediate(() => callback(error));
+        return {
+          cancel: () => {},
+        };
+      }
+
+      const apiCall = fallbackCreateApiCall(connectionRefusedFunc, settings);
+      const promise = apiCall({}, undefined);
+
+      await assert.rejects(
+        async () => {
+          await promise;
+        },
+        (err: GoogleError) => {
+          assert.strictEqual(err.code, status.UNAVAILABLE);
+          return true;
+        },
+      );
+
+      const spans = harness.getSpans('google-gax');
+      assert.strictEqual(spans.length, 1);
+      const span = spans[0];
+      assert.strictEqual(span.ended, true);
+      assert.strictEqual(span.attributes['gcp.method.type'], 'http');
+      assert.strictEqual(span.attributes['error.type'], 'ECONNREFUSED');
+      assert.strictEqual(
+        span.attributes['rpc.response.status_code'],
+        'UNAVAILABLE',
+      );
+      assert.strictEqual(
+        span.attributes['http.response.status_code'],
+        undefined,
+      );
+      assert.strictEqual(span.events.length, 1);
+      assert.strictEqual(span.events[0].name, 'exception');
+      assert.strictEqual(
+        span.events[0].attributes?.['exception.type'],
+        'GoogleError',
+      );
     });
 
     it('passes fallback flag and isStreamingCall as true for server-streaming fallback calls', () => {
@@ -948,7 +1019,7 @@ describe('createApiCall', () => {
       assert.strictEqual(spans.length, 1);
       const span = spans[0];
       assert.strictEqual(span.ended, true);
-      assert.strictEqual(span.attributes['error.message'], 'RPC test failure');
+      assert.strictEqual(span.status.message, 'RPC test failure');
       assert.strictEqual(span.events.length, 1);
       assert.strictEqual(span.events[0].name, 'exception');
     });
@@ -1157,10 +1228,7 @@ describe('createApiCall', () => {
           assert.strictEqual(spans.length, 1);
           const span = spans[0];
           assert.strictEqual(span.ended, true);
-          assert.strictEqual(
-            span.attributes['error.message'],
-            'streaming test failure',
-          );
+          assert.strictEqual(span.status.message, 'streaming test failure');
           assert.strictEqual(span.events.length, 1);
           assert.strictEqual(span.events[0].name, 'exception');
           done();

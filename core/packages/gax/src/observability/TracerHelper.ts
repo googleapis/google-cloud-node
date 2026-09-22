@@ -79,46 +79,55 @@ export function getGaxTracer(): Tracer {
 /**
  * Resolves the OpenTelemetry `error.type` attribute for a failed call.
  *
- * The error's class name is not usable on its own here, because the same
- * logical failure arrives as a different class depending on the transport:
- * grpc-js builds failures with a plain `Object.assign(new Error(msg), status)`,
- * so it reports `Error`, while the REST path builds a real `GoogleError` via
- * `GoogleError.parseHttpError`. `GoogleError` also never assigns `this.name`,
- * so `name` is the inherited literal `'Error'` on both paths.
- *
- * The gRPC status code is the stable, low-cardinality identifier that is
- * consistent across both transports, so it is preferred. Node system errors
- * (`ECONNREFUSED`, `ETIMEDOUT`, ...) already carry a suitable string code and
- * are used as-is. The class name remains a last-resort fallback.
- *
- * A zero code is treated as absent rather than as `OK`, matching
- * `GoogleError.parseHttpError`, which deletes the field because zero is the
- * proto3 default for an unset value. Without this a failed call could be
- * labelled `error.type: 'OK'`.
+ * Per OpenTelemetry semantic conventions, uses the protocol-level status
+ * (canonical gRPC status name for gRPC, HTTP status code for HTTP/fallback),
+ * falling back to Node system error codes (e.g. `ECONNREFUSED`) or the
+ * exception class name.
  */
-function resolveErrorType(e: Error): string {
-  const code = (e as {code?: unknown}).code;
-  if (
-    typeof code === 'number' &&
-    code !== Status.OK &&
-    Status[code] !== undefined
-  ) {
-    return Status[code];
-  }
-  if (typeof code === 'string' && code.length > 0) {
-    return code;
-  }
-  return e.constructor?.name ?? e.name;
+function resolveErrorType(e: Error, rpcType: 'grpc' | 'http'): string {
+  const protocolStatus =
+    rpcType === 'grpc'
+      ? resolveRpcStatusName(e)
+      : resolveHttpStatusCode(e)?.toString();
+  return protocolStatus ?? resolveSystemErrorCode(e) ?? resolveExceptionType(e);
 }
 
 /**
- * Resolves the gRPC status reported for a failed call, as its name.
- *
- * Zero is treated as absent rather than as `OK`, for the same reason as in
- * `resolveErrorType`: it is the proto3 default for an unset field, so a failed
- * call must not be labelled `OK`.
+ * Resolves the exception type name for a failed call. Prefers the error's
+ * constructor name (e.g. `GoogleError`, `TypeError`) over `e.name`, falling
+ * back to `e.name` when the constructor is the generic `Error`.
  */
-function resolveRpcStatusName(e: unknown): string {
+function resolveExceptionType(e: Error): string {
+  const className = e.constructor?.name;
+  if (className && className !== 'Error') {
+    return className;
+  }
+  return e.name || 'Error';
+}
+
+/**
+ * Resolves a Node system error code (e.g. `ECONNREFUSED`), checking the error
+ * itself and any underlying cause attached by fallback wrapping.
+ */
+function resolveSystemErrorCode(e: unknown): string | undefined {
+  let current: unknown = e;
+  let depth = 0;
+  while (current && typeof current === 'object' && depth < 10) {
+    const code = (current as {code?: unknown}).code;
+    if (typeof code === 'string' && code.length > 0) {
+      return code;
+    }
+    current = (current as {cause?: unknown}).cause;
+    depth++;
+  }
+  return undefined;
+}
+
+/**
+ * Resolves the canonical gRPC status name for a failed call. Status 0 (OK)
+ * and codes outside the `Status` enum are treated as absent for failed calls.
+ */
+function resolveRpcStatusName(e: unknown): string | undefined {
   const code = (e as {code?: unknown} | null)?.code;
   if (
     typeof code === 'number' &&
@@ -127,7 +136,7 @@ function resolveRpcStatusName(e: unknown): string {
   ) {
     return Status[code];
   }
-  return Status[Status.UNKNOWN];
+  return undefined;
 }
 
 /**
@@ -136,6 +145,15 @@ function resolveRpcStatusName(e: unknown): string {
 function resolveHttpStatusCode(e: unknown): number | undefined {
   const code = (e as {httpStatusCode?: unknown} | null)?.httpStatusCode;
   return typeof code === 'number' ? code : undefined;
+}
+
+/**
+ * Resolves a human-readable description for non-Error throws, extracting
+ * `message` if present or falling back to `String(e)`.
+ */
+function resolveErrorMessage(e: unknown): string {
+  const message = (e as {message?: unknown} | null)?.message;
+  return typeof message === 'string' ? message : String(e);
 }
 
 /**
@@ -229,29 +247,12 @@ export function handleStream(
 ): void {
   let spanEnded = false;
 
-  // Client-streaming calls hand back a write-only stream: the readable side is
-  // never opened, so 'end' never fires, and when the transport also suppresses
-  // 'close' then 'finish' is the only signal left that the call completed.
-  //
-  // 'finish' must NOT be used for readable streams. On bidi streams it fires as
-  // soon as the caller stops writing, which is typically long before the server
-  // has finished streaming responses back, so ending the span there would
-  // truncate it and drop the entire response phase.
-  //
-  // Detect "has a write side but no read side". The readable check is
-  // `!== true` rather than `=== false`: duplexify-based streams report
-  // `readable === false`, but a plain Writable leaves it `undefined`.
+  // For client-streaming calls without a callback, 'finish' signals completion
+  // because readable events ('end') never fire on write-only streams.
   const isWriteOnly =
     'writable' in stream &&
     stream.writable === true &&
     (!('readable' in stream) || stream.readable !== true);
-
-  // A supplied callback is the authoritative completion signal: it fires when
-  // the server has responded, and traceCall wraps it so that it ends the span.
-  // 'finish' only means the client stopped writing, which on a callback-driven
-  // client-streaming call happens before the response arrives, so subscribing
-  // to it would end the span early and hide any error reported through the
-  // callback. 'end', 'close' and 'error' stay attached either way.
   const useFinish = isWriteOnly && !hasCallback;
 
   const cleanup = () => {
@@ -300,20 +301,8 @@ export function handleStream(
  * Executes a function within an active OpenTelemetry span, populating standard
  * GCP telemetry attributes and recording errors/exceptions if thrown.
  *
- * Callback-style invocations need special handling. The API callers
- * all return `new OngoingCall(callback)` when a callback is
- * supplied, and `OngoingCall` has no `promise` property.
- *
- * To avoid spans ending prematurely with callback functions, pass the user's
- * `callback` as the fifth argument. `fn` then receives a traced replacement
- * to hand to the RPC, and on a non-stream call the span stays open until that
- * callback fires.
- *
- * Stream calls are wrapped too. The stream's events and the callback then both
- * race to finish the span, and whichever fires first wins because `endSpan` is
- * idempotent. That is the point: a callback-driven client-streaming call
- * reports completion through the callback, while a plain stream reports it
- * through 'end'/'close', and neither has to know which one is in play.
+ * For callback-style invocations, pass the user's `callback` as the fifth
+ * argument so the span stays open until the callback or stream events finish.
  *
  * @template T
  * @param {DynamicTraceContext} dynamicArgs - Dynamic trace context for the RPC call.
@@ -365,29 +354,14 @@ export function traceCall(
 
     let spanEnded = false;
     let errorRecorded = false;
-
-    // Resolved from the error when one is reported, and defaulted to success
-    // in endSpan otherwise. Held here rather than written immediately so that
-    // every completion path — promise, stream, callback, synchronous throw —
-    // emits them from the same place.
     let rpcStatusName: string | undefined;
     let httpStatusCode: number | undefined;
 
-    // Marks the span failed. Kept separate from recordError so paths that are
-    // failures but not exceptions can set the status without emitting a
-    // misleading exception event.
     const setErrorStatus = (message: string) => {
       errorRecorded = true;
       span.setStatus({code: SpanStatusCode.ERROR, message});
     };
 
-    // The gRPC status is reported for both transports, because it is the one
-    // status gax resolves on every call and the only one a caller can compare
-    // across them. The transport-specific attribute is an alias of it on gRPC,
-    // and the received HTTP status on the fallback, which is a different value
-    // rather than a restatement of the same one.
-    //
-    // Written from one place so the two can never disagree.
     const setStatusAttributes = () => {
       const attributes: Attributes = {
         'rpc.response.status_code': rpcStatusName,
@@ -400,18 +374,13 @@ export function traceCall(
       span.setAttributes(attributes);
     };
 
-    // Every path ends here, so the status is resolved in one place: ERROR if
-    // anything reported a failure, OK otherwise.
+    // Span status is left unset on success per OpenTelemetry semantic conventions.
     const endSpan = () => {
       if (!spanEnded) {
         spanEnded = true;
         if (!errorRecorded) {
           rpcStatusName = Status[Status.OK];
-          // Nothing carries the response status back on a successful fallback
-          // call, and success means a 2xx, so 200 is the only value available.
-          // A legacy Apiary 204 is therefore also reported as 200.
           httpStatusCode = 200;
-          span.setStatus({code: SpanStatusCode.OK});
         }
         setStatusAttributes();
         span.end();
@@ -419,42 +388,30 @@ export function traceCall(
     };
 
     const recordError = (e: unknown) => {
-      // Resolved for every failure, including non-Error throws: those carry no
-      // status, and resolveRpcStatusName reports UNKNOWN for them, which is
-      // the right answer for a call that failed for an unmapped reason.
-      rpcStatusName = resolveRpcStatusName(e);
+      rpcStatusName = resolveRpcStatusName(e) ?? Status[Status.UNKNOWN];
       httpStatusCode = resolveHttpStatusCode(e);
       if (e instanceof Error) {
         span.setAttributes({
-          'error.message': e.message,
-          'error.type': resolveErrorType(e),
+          'error.type': resolveErrorType(e, dynamicArgs.rpcType),
         });
-        // recordException emits the `exception` event, which carries
-        // exception.type, exception.message and exception.stacktrace. Per OTel
-        // semconv those belong on that event and not on the span, so they are
-        // deliberately not copied up here.
-        span.recordException(e);
+        // Pass the resolved class name to avoid the OTel SDK deriving
+        // exception.type from numeric error codes.
+        span.recordException({
+          name: resolveExceptionType(e),
+          message: e.message,
+          stack: e.stack,
+        });
         setErrorStatus(e.message);
       } else {
-        const message = String(e);
         span.setAttributes({
-          'error.message': message,
+          'error.type': '_OTHER',
         });
-        span.recordException(message);
-        setErrorStatus(message);
+        setErrorStatus(resolveErrorMessage(e));
       }
     };
 
-    // For callback-style invocations the span's lifetime is bound to the
-    // callback rather than to a promise. Declared as a `function` and
-    // forwarding `arguments` via `apply` so the caller's `this` binding and the
-    // full argument list (err, response, next, rawResponse) are preserved.
-    //
-    // The span is ended *before* the user callback runs so the span measures the
-    // RPC itself, and so a throwing user callback cannot leak the span.
-    //
-    // Stream calls are wrapped as well. `handleStream` still watches the
-    // stream, so the two simply race and `endSpan` keeps the result idempotent.
+    // End the span before executing the user callback so user errors are not
+    // attributed to the RPC and cannot leak the span.
     const tracedCallback: APICallback | undefined = callback
       ? function (this: unknown, ...args: Parameters<APICallback>) {
           const err = args[0];
