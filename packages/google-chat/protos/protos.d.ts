@@ -14626,6 +14626,120 @@ export namespace google {
                 }
             }
 
+            /** Properties of an AppCommandMetadata. */
+            interface IAppCommandMetadata {
+
+                /** AppCommandMetadata appCommandId */
+                appCommandId?: (number|null);
+
+                /** AppCommandMetadata appCommandType */
+                appCommandType?: (google.chat.v1.AppCommandMetadata.AppCommandType|keyof typeof google.chat.v1.AppCommandMetadata.AppCommandType|null);
+            }
+
+            /** Represents an AppCommandMetadata. */
+            class AppCommandMetadata implements IAppCommandMetadata {
+
+                /**
+                 * Constructs a new AppCommandMetadata.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.chat.v1.IAppCommandMetadata);
+
+                /** AppCommandMetadata appCommandId. */
+                public appCommandId: number;
+
+                /** AppCommandMetadata appCommandType. */
+                public appCommandType: (google.chat.v1.AppCommandMetadata.AppCommandType|keyof typeof google.chat.v1.AppCommandMetadata.AppCommandType);
+
+                /**
+                 * Creates a new AppCommandMetadata instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns AppCommandMetadata instance
+                 */
+                public static create(properties?: google.chat.v1.IAppCommandMetadata): google.chat.v1.AppCommandMetadata;
+
+                /**
+                 * Encodes the specified AppCommandMetadata message. Does not implicitly {@link google.chat.v1.AppCommandMetadata.verify|verify} messages.
+                 * @param message AppCommandMetadata message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.chat.v1.IAppCommandMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified AppCommandMetadata message, length delimited. Does not implicitly {@link google.chat.v1.AppCommandMetadata.verify|verify} messages.
+                 * @param message AppCommandMetadata message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.chat.v1.IAppCommandMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an AppCommandMetadata message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns AppCommandMetadata
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.AppCommandMetadata;
+
+                /**
+                 * Decodes an AppCommandMetadata message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns AppCommandMetadata
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.AppCommandMetadata;
+
+                /**
+                 * Verifies an AppCommandMetadata message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an AppCommandMetadata message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns AppCommandMetadata
+                 */
+                public static fromObject(object: { [k: string]: any }): google.chat.v1.AppCommandMetadata;
+
+                /**
+                 * Creates a plain object from an AppCommandMetadata message. Also converts values to other types if specified.
+                 * @param message AppCommandMetadata
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.chat.v1.AppCommandMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this AppCommandMetadata to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for AppCommandMetadata
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace AppCommandMetadata {
+
+                /** AppCommandType enum. */
+                enum AppCommandType {
+                    APP_COMMAND_TYPE_UNSPECIFIED = 0,
+                    SLASH_COMMAND = 1,
+                    QUICK_COMMAND = 3,
+                    MESSAGE_ACTION = 4
+                }
+            }
+
             /** Properties of an Audience. */
             interface IAudience {
 
@@ -23019,6 +23133,9 @@ export namespace google {
 
                     /** AccessPermissionSettings joinSpaceSetting */
                     joinSpaceSetting?: (google.chat.v1.Space.IAccessPermissionSetting|null);
+
+                    /** AccessPermissionSettings viewSpaceMembershipSetting */
+                    viewSpaceMembershipSetting?: (google.chat.v1.Space.IAccessPermissionSetting|null);
                 }
 
                 /** Represents an AccessPermissionSettings. */
@@ -23035,6 +23152,9 @@ export namespace google {
 
                     /** AccessPermissionSettings joinSpaceSetting. */
                     public joinSpaceSetting?: (google.chat.v1.Space.IAccessPermissionSetting|null);
+
+                    /** AccessPermissionSettings viewSpaceMembershipSetting. */
+                    public viewSpaceMembershipSetting?: (google.chat.v1.Space.IAccessPermissionSetting|null);
 
                     /**
                      * Creates a new AccessPermissionSettings instance using the specified properties.
@@ -23344,6 +23464,9 @@ export namespace google {
 
                     /** PermissionSettings replyMessages */
                     replyMessages?: (google.chat.v1.Space.IPermissionSetting|null);
+
+                    /** PermissionSettings viewSpaceMembership */
+                    viewSpaceMembership?: (google.chat.v1.Space.IPermissionSetting|null);
                 }
 
                 /** Represents a PermissionSettings. */
@@ -23378,6 +23501,9 @@ export namespace google {
 
                     /** PermissionSettings replyMessages. */
                     public replyMessages?: (google.chat.v1.Space.IPermissionSetting|null);
+
+                    /** PermissionSettings viewSpaceMembership. */
+                    public viewSpaceMembership?: (google.chat.v1.Space.IPermissionSetting|null);
 
                     /**
                      * Creates a new PermissionSettings instance using the specified properties.

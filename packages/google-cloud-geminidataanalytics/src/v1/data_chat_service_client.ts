@@ -299,6 +299,7 @@ export class DataChatServiceClient {
       'chat',
       'createConversation',
       'deleteConversation',
+      'updateConversation',
       'getConversation',
       'listConversations',
       'listMessages',
@@ -713,6 +714,162 @@ export class DataChatServiceClient {
           {} | undefined,
         ]) => {
           this._log.info('deleteConversation response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Updates a conversation.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.geminidataanalytics.v1.Conversation} request.conversation
+   *   Required. The resource being updated.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. Field mask is used to specify the fields to be overwritten in the
+   *   Conversation resource by the update.
+   *   The fields specified in the update_mask are relative to the resource, not
+   *   the full request. A field will be overwritten if it is in the mask. If the
+   *   user does not provide a mask then all fields with non-default values
+   *   present in the request will be overwritten. If a wildcard mask is provided,
+   *   all fields will be overwritten.
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed. The server will
+   *   guarantee that for at least 60 minutes since the first request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.geminidataanalytics.v1.Conversation|Conversation}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/data_chat_service.update_conversation.js</caption>
+   * region_tag:geminidataanalytics_v1_generated_DataChatService_UpdateConversation_async
+   */
+  updateConversation(
+    request?: protos.google.cloud.geminidataanalytics.v1.IUpdateConversationRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.geminidataanalytics.v1.IConversation,
+      (
+        | protos.google.cloud.geminidataanalytics.v1.IUpdateConversationRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  updateConversation(
+    request: protos.google.cloud.geminidataanalytics.v1.IUpdateConversationRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.geminidataanalytics.v1.IConversation,
+      | protos.google.cloud.geminidataanalytics.v1.IUpdateConversationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  updateConversation(
+    request: protos.google.cloud.geminidataanalytics.v1.IUpdateConversationRequest,
+    callback: Callback<
+      protos.google.cloud.geminidataanalytics.v1.IConversation,
+      | protos.google.cloud.geminidataanalytics.v1.IUpdateConversationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  updateConversation(
+    request?: protos.google.cloud.geminidataanalytics.v1.IUpdateConversationRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.geminidataanalytics.v1.IConversation,
+          | protos.google.cloud.geminidataanalytics.v1.IUpdateConversationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.geminidataanalytics.v1.IConversation,
+      | protos.google.cloud.geminidataanalytics.v1.IUpdateConversationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.geminidataanalytics.v1.IConversation,
+      (
+        | protos.google.cloud.geminidataanalytics.v1.IUpdateConversationRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'conversation.name': request.conversation!.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateConversation request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.geminidataanalytics.v1.IConversation,
+          | protos.google.cloud.geminidataanalytics.v1.IUpdateConversationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateConversation response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateConversation(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.geminidataanalytics.v1.IConversation,
+          (
+            | protos.google.cloud.geminidataanalytics.v1.IUpdateConversationRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateConversation response %j', response);
           return [response, options, rawResponse];
         },
       )

@@ -44,6 +44,10 @@ function main() {
    *  Host of a user of the instance.
    */
   // const host = 'abc123'
+  /**
+   *  Optional. Region of the Cloud SQL instance.
+   */
+  // const location = 'abc123'
 
   // Imports the Sql library
   const {SqlUsersServiceClient} = require('@google-cloud/sql').v1;
