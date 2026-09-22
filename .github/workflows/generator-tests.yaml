@@ -37,15 +37,24 @@ jobs:
     - name: Install protoc
       run: |
         curl -sSL https://github.com/protocolbuffers/protobuf/releases/download/v33.2/protoc-33.2-linux-x86_64.zip -o protoc.zip
+        echo "b24b53f87c151bfd48b112fe4c3a6e6574e5198874f38036aff41df3456b8caf  protoc.zip" | sha256sum -c -
         unzip -q -o protoc.zip -d /usr/local
         rm protoc.zip
 
-    - name: Install and build generator
+    - name: Setup pnpm
+      uses: pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1 # v4
+
+    # The generator is a root workspace member now, so a bare `pnpm install`
+    # from its directory installs all ~280 workspace packages. --filter with a
+    # trailing `...` limits the install to the generator and its workspace
+    # dependencies. `--config.auto-install-peers=true` is intentionally omitted:
+    # the root pnpm-lock.yaml already records `settings.autoInstallPeers: true`.
+    - name: Install generator dependencies
+      run: pnpm install --frozen-lockfile --ignore-scripts --filter @google-cloud/gapic-generator...
+
+    - name: Build generator
       working-directory: core/generator/gapic-generator-typescript
-      run: |
-        corepack enable pnpm
-        pnpm install --frozen-lockfile --ignore-scripts --config.auto-install-peers=true
-        pnpm run compile
+      run: pnpm run compile
 
     - name: Run test
       working-directory: core/generator/gapic-generator-typescript
@@ -67,7 +76,10 @@ jobs:
       run: |
         mkdir -p ~/artifacts
         zip -r ~/artifacts/outputs.zip .test-out-*
-        tar cfz ~/artifacts/node_modules.tar.gz node_modules
+        # -h dereferences symlinks. In a pnpm workspace this directory is a
+        # symlink farm pointing into the root node_modules/.pnpm store, so
+        # without -h the uploaded artifact is a pile of dangling links.
+        tar czhf ~/artifacts/node_modules.tar.gz node_modules
 
     - name: Save artifacts
       uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4 # v5

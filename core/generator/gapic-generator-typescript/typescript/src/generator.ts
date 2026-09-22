@@ -30,6 +30,22 @@ import {commonPrefix} from './util.js';
 // https://blog.logrocket.com/alternatives-dirname-node-js-es-modules/#help-im-missing-dirname
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
+/**
+ * The generator depends on `protobufjs@^8`, but `proto3-json-serializer@4`
+ * still hard-depends on `protobufjs@^7`. pnpm therefore installs two copies of
+ * protobufjs, and TypeScript sees two structurally identical but nominally
+ * distinct `protobuf.Type` / `protobuf.Message` declarations. This alias names
+ * the serializer's copy so the `as unknown as` bridges below are explicit
+ * rather than mysterious.
+ *
+ * NOTE: do *not* "fix" this with a `protobufjs` entry in the root
+ * `pnpm.overrides` — the root override applies to every workspace package and
+ * forces protobufjs@8 onto google-gax (which requires v7), breaking the `units`
+ * jobs on every Node version. Remove this alias once `proto3-json-serializer`
+ * supports protobufjs v8.
+ */
+type Proto3JsonSerializerType = Parameters<typeof serializer.fromProto3JSON>[0];
+
 function getStdin() {
   return new Promise<Buffer>(resolve => {
     const buffers: Buffer[] = [];
@@ -130,9 +146,7 @@ export class Generator {
         );
       }
       const deserialized = serializer.fromProto3JSON(
-        ServiceConfig as unknown as Parameters<
-          typeof serializer.fromProto3JSON
-        >[0],
+        ServiceConfig as unknown as Proto3JsonSerializerType,
         json,
       );
       if (!deserialized) {
