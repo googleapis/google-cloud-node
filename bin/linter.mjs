@@ -327,7 +327,7 @@ function getPackageDirs(files) {
  * Ensures all changed packages have node_modules installed before running linting or type checking.
  */
 async function ensurePackageDependencies(packages) {
-  const installs = Array.from(packages).map(async pkg => {
+  for (const pkg of packages) {
     const packageJsonPath = path.join(pkg, 'package.json');
     const nodeModulesPath = path.join(pkg, 'node_modules');
     if (existsSync(packageJsonPath) && !existsSync(nodeModulesPath)) {
@@ -347,7 +347,7 @@ async function ensurePackageDependencies(packages) {
           console.log(
             `  Skipping dependency installation in ${pkg} (requires prefetch/local tarballs)`,
           );
-          return;
+          continue;
         }
       } catch {
         // proceed if package.json cannot be read/parsed
@@ -362,8 +362,7 @@ async function ensurePackageDependencies(packages) {
         },
       );
     }
-  });
-  await Promise.all(installs);
+  }
 }
 
 /**
