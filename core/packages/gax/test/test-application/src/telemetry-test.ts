@@ -753,6 +753,60 @@ export async function runTelemetryTests(
       assert.strictEqual(attemptSeqSpan?.parentSpanContext?.spanId, t4SpanId);
     }
 
+    console.log('Testing Trace Hierarchy: T4 Parent with HTTP/REST Fallback Retry T3 Children...');
+    {
+      harness.reset();
+      const instrumentationTracer = trace.getTracer('@google-cloud/instrumentation-sequence-rest', '1.0.0');
+      let t4SpanId: string | undefined;
+      let t4TraceId: string | undefined;
+
+      await instrumentationTracer.startActiveSpan('Sequence.ExecuteWithRetryRest', async (t4Span) => {
+        try {
+          const t4Context = t4Span.spanContext();
+          t4SpanId = t4Context.spanId;
+          t4TraceId = t4Context.traceId;
+
+          const seqRequest = createSequenceRequestFactory(
+            [Status.UNAVAILABLE],
+            [0.05],
+          );
+          const [sequence] = await restSequenceClient.createSequence(seqRequest);
+
+          const backoffSettings = createBackoffSettings(50, 1.5, 500, null, 1.5, 3000, null);
+          backoffSettings.maxRetries = 2;
+          const retryOptions = new RetryOptions([Status.UNAVAILABLE], backoffSettings);
+
+          const attemptRequest = new protos.google.showcase.v1beta1.AttemptSequenceRequest();
+          attemptRequest.name = sequence.name!;
+
+          await restSequenceClient.attemptSequence(attemptRequest, {retry: retryOptions});
+        } finally {
+          t4Span.end();
+        }
+      });
+
+      const allSpans = harness.exporter.getFinishedSpans();
+      assert.strictEqual(allSpans.length, 3, `Expected 3 spans (1 T4 + 2 T3 children), got ${allSpans.length}`);
+
+      const t3Spans = harness.getSpans('google-gax');
+      assert.strictEqual(t3Spans.length, 2);
+
+      const createSeqSpan = t3Spans.find(s => s.name === 'SequenceServiceClient.CreateSequence');
+      const attemptSeqSpan = t3Spans.find(s => s.name === 'SequenceServiceClient.AttemptSequence');
+
+      assert.ok(createSeqSpan, 'CreateSequence span must exist');
+      assert.ok(attemptSeqSpan, 'AttemptSequence span must exist');
+
+      assert.strictEqual(createSeqSpan?.attributes['gcp.method.type'], 'http');
+      assert.strictEqual(attemptSeqSpan?.attributes['gcp.method.type'], 'http');
+
+      assert.strictEqual(createSeqSpan?.spanContext().traceId, t4TraceId);
+      assert.strictEqual(createSeqSpan?.parentSpanContext?.spanId, t4SpanId);
+
+      assert.strictEqual(attemptSeqSpan?.spanContext().traceId, t4TraceId);
+      assert.strictEqual(attemptSeqSpan?.parentSpanContext?.spanId, t4SpanId);
+    }
+
     // =========================================================================
     // 5. ENVIRONMENT VARIABLE GATING
     // =========================================================================
@@ -763,7 +817,7 @@ export async function runTelemetryTests(
     try {
       // 5a. Tracing is disabled when GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED is not set,
       // even if client options specify enableTelemetryTracing: true.
-      console.log('Testing Gating: Disabled when EXPERIMENTAL_O11Y_ENABLED is unset...');
+      console.log('Testing Gating: Disabled when EXPERIMENTAL_O11Y_ENABLED is unset (gRPC & HTTP)...');
       delete process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED;
       process.env.GOOGLE_SDK_NODE_ENABLE_TRACING = 'true';
 
@@ -789,7 +843,7 @@ export async function runTelemetryTests(
 
       // 5b. Tracing is disabled when GOOGLE_SDK_NODE_ENABLE_TRACING is 'false',
       // overriding client options enableTelemetryTracing: true.
-      console.log('Testing Gating: Disabled when ENABLE_TRACING is false...');
+      console.log('Testing Gating: Disabled when ENABLE_TRACING is false (gRPC & HTTP)...');
       process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
       process.env.GOOGLE_SDK_NODE_ENABLE_TRACING = 'false';
 
@@ -814,8 +868,8 @@ export async function runTelemetryTests(
       );
 
       // 5c. Tracing is enabled when both environment variables are set to 'true',
-      // even if client options omit enableTelemetryTracing.
-      console.log('Testing Gating: Enabled via environment variables without client options...');
+      // even if client options omit enableTelemetryTracing (testing both gRPC and HTTP/REST).
+      console.log('Testing Gating: Enabled via environment variables without client options (gRPC)...');
       process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
       process.env.GOOGLE_SDK_NODE_ENABLE_TRACING = 'true';
 
@@ -824,12 +878,30 @@ export async function runTelemetryTests(
         sslCreds: grpc.credentials.createInsecure(),
       });
       harness.reset();
-      const [resp5] = await envOnlyGrpcClient.echo({content: 'gated-enabled-env'});
-      assert.strictEqual(resp5.content, 'gated-enabled-env');
-      const envSpan = harness.requireSingleSpan();
-      assert.strictEqual(envSpan.name, 'EchoClient.Echo');
-      assert.strictEqual(envSpan.status.code, SpanStatusCode.OK);
-      assert.strictEqual(envSpan.attributes['gcp.method.type'], 'grpc');
+      const [resp5] = await envOnlyGrpcClient.echo({content: 'gated-enabled-env-grpc'});
+      assert.strictEqual(resp5.content, 'gated-enabled-env-grpc');
+      const envGrpcSpan = harness.requireSingleSpan();
+      assert.strictEqual(envGrpcSpan.name, 'EchoClient.Echo');
+      assert.strictEqual(envGrpcSpan.status.code, SpanStatusCode.OK);
+      assert.strictEqual(envGrpcSpan.attributes['gcp.method.type'], 'grpc');
+
+      console.log('Testing Gating: Enabled via environment variables without client options (HTTP/REST)...');
+      const envOnlyRestClient = new EchoClient({
+        fallback: true,
+        protocol: 'http' as const,
+        port: 7469,
+        auth: new GoogleAuth({
+          authClient: new googleAuthLibrary.PassThroughClient(),
+        }),
+      });
+      harness.reset();
+      const [resp6] = await envOnlyRestClient.echo({content: 'gated-enabled-env-rest'});
+      assert.strictEqual(resp6.content, 'gated-enabled-env-rest');
+      const envRestSpan = harness.requireSingleSpan();
+      assert.strictEqual(envRestSpan.name, 'EchoClient.Echo');
+      assert.strictEqual(envRestSpan.status.code, SpanStatusCode.OK);
+      assert.strictEqual(envRestSpan.attributes['gcp.method.type'], 'http');
+      assert.strictEqual(envRestSpan.attributes['http.response.status_code'], 200);
     } finally {
       if (originalO11y !== undefined) {
         process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = originalO11y;
