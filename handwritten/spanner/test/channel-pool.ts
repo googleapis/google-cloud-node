@@ -1377,6 +1377,54 @@ describe('ChannelPool Module', () => {
 
       done();
     });
+
+    it('should append channel id if request id has fewer than 6 parts', done => {
+      const fakeChannel = new grpc.Channel(
+        'localhost:9010',
+        grpc.credentials.createInsecure(),
+        {},
+      );
+      const fakeEntry: ChannelEntry = {
+        id: 3,
+        channel: fakeChannel,
+        inFlightRpcs: 0,
+        activeRwTransactions: 0,
+        state: 'ACTIVE',
+        lastActivity: Date.now(),
+      };
+      const mockPool: ChannelPool = {
+        acquire: sinon.stub().returns({
+          entry: fakeEntry,
+          release: sinon.stub(),
+        }),
+        size: 1,
+        activeCount: 1,
+        close: async () => {},
+        getConnectivityState: () => grpc.connectivityState.READY,
+        watchConnectivityState: () => {},
+        getTarget: () => 'localhost:9010',
+        getChannels: () => [fakeChannel],
+      };
+
+      const transformer = createCallInvocationTransformer(mockPool);
+      const metadata = new grpc.Metadata();
+      metadata.set('x-goog-spanner-request-id', '1.abcd1234.1.1.5');
+
+      const callProperties: any = {
+        metadata,
+        callOptions: {},
+        argument: {},
+        methodDefinition: {path: '/google.spanner.v1.Spanner/ExecuteSql'},
+      };
+
+      transformer(callProperties);
+
+      assert.strictEqual(
+        metadata.get('x-goog-spanner-request-id')[0],
+        '1.abcd1234.1.1.5.3',
+      );
+      done();
+    });
   });
 
   describe('ChannelPoolChannelAdapter', () => {

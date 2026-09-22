@@ -90,8 +90,37 @@ interface traceConfig {
   opts?: ObservabilityOptions;
 }
 
+interface QueryWithRequestOptions {
+  sql?: string | SQLStatement;
+  requestOptions?: {
+    requestTag?: string | null;
+    transactionTag?: string | null;
+  } | null;
+}
+
+function getQueryTraceConfig(query?: string | QueryWithRequestOptions | null): {
+  sql?: string | SQLStatement;
+  requestTag?: string | null;
+} {
+  if (typeof query === 'string') {
+    return {sql: query};
+  }
+  if (query && typeof query === 'object') {
+    return {
+      sql: query.sql,
+      requestTag: query.requestOptions?.requestTag,
+    };
+  }
+  return {};
+}
+
 const SPAN_NAMESPACE_PREFIX = 'CloudSpanner'; // TODO: discuss & standardize this prefix.
-export {SPAN_NAMESPACE_PREFIX, traceConfig};
+export {
+  SPAN_NAMESPACE_PREFIX,
+  traceConfig,
+  QueryWithRequestOptions,
+  getQueryTraceConfig,
+};
 
 const {
   AsyncHooksContextManager,

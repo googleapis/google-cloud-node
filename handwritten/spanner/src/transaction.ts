@@ -37,10 +37,12 @@ import {Key} from './table';
 import {
   Span,
   ObservabilityOptions,
+  isTracingEnabled,
   startTrace,
   setSpanError,
   setSpanErrorAndException,
   traceConfig,
+  getQueryTraceConfig,
 } from './instrument';
 import {NormalCallback, addLeaderAwareRoutingHeader} from './common';
 import {protos} from '@google-cloud/spanner-api';
@@ -937,7 +939,13 @@ export class Snapshot extends EventEmitter {
       maxResumeRetries,
       requestOptions,
       columnsMetadata,
+      keys: _omittedKeys,
+      ranges: _omittedRanges,
+      directedReadOptions: rawDirectedReadOptions,
+      ...cleanRequest
     } = request;
+    void _omittedKeys;
+    void _omittedRanges;
     const keySet = Snapshot.encodeKeySet(request);
     const transaction: spannerClient.spanner.v1.ITransactionSelector = {};
 
@@ -958,23 +966,12 @@ export class Snapshot extends EventEmitter {
     }
 
     const directedReadOptions = this._getDirectedReadOptions(
-      request.directedReadOptions,
+      rawDirectedReadOptions,
     );
 
-    request = Object.assign({}, request);
-
-    delete request.gaxOptions;
-    delete request.json;
-    delete request.jsonOptions;
-    delete request.maxResumeRetries;
-    delete request.keys;
-    delete request.ranges;
-    delete request.requestOptions;
-    delete request.directedReadOptions;
-    delete request.columnsMetadata;
-
     const reqOpts: spannerClient.spanner.v1.IReadRequest = Object.assign(
-      request,
+      {},
+      cleanRequest,
       {
         session: this.session.formattedName_!,
         requestOptions: this.configureTagOptions(
@@ -1299,6 +1296,8 @@ export class Snapshot extends EventEmitter {
       {
         tableName: table,
         ...this._traceConfig,
+        transactionTag: this.requestOptions?.transactionTag,
+        requestTag: request?.requestOptions?.requestTag,
       },
       span => {
         this.createReadStream(table, request)
@@ -1424,8 +1423,9 @@ export class Snapshot extends EventEmitter {
     startTrace(
       'Snapshot.run',
       {
-        ...(query as ExecuteSqlRequest),
         ...this._traceConfig,
+        transactionTag: this.requestOptions?.transactionTag,
+        ...getQueryTraceConfig(query),
       },
       span => {
         this.runStream(query)
@@ -1532,16 +1532,18 @@ export class Snapshot extends EventEmitter {
       });
     };
 
-    const traceConfig = {
-      transactionTag: this.requestOptions?.transactionTag,
-      requestTag: requestOptions?.requestTag,
-      ...query,
-      ...this._traceConfig,
-    };
-
     const executeWithSpans = (
-      fn: (runSpan: Span | null, streamSpan: Span) => void,
+      fn: (runSpan: Span | null, streamSpan: Span | null) => void,
     ) => {
+      if (!isTracingEnabled(this._traceConfig?.opts)) {
+        fn(null, null);
+        return;
+      }
+      const traceConfig: traceConfig = {
+        ...this._traceConfig,
+        transactionTag: this.requestOptions?.transactionTag,
+        ...getQueryTraceConfig(queryInput),
+      };
       const startRunSpan = options?.startRunSpan !== false;
       if (startRunSpan) {
         return startTrace('Snapshot.run', traceConfig, runSpan => {
@@ -1572,10 +1574,10 @@ export class Snapshot extends EventEmitter {
           return;
         }
         completed = true;
-        if (err) {
+        if (err && streamSpan) {
           setSpanError(streamSpan, err);
         }
-        streamSpan.end();
+        streamSpan?.end();
         if (runSpan) {
           if (err) {
             setSpanError(runSpan, err);
@@ -1592,17 +1594,19 @@ export class Snapshot extends EventEmitter {
 
       const makeRequest = (resumeToken?: ResumeToken): Readable => {
         attempt++;
-        if (!resumeToken) {
-          if (attempt === 1) {
-            streamSpan.addEvent('Starting stream');
+        if (streamSpan) {
+          if (!resumeToken) {
+            if (attempt === 1) {
+              streamSpan.addEvent('Starting stream');
+            } else {
+              streamSpan.addEvent('Re-attempting start stream', {attempt});
+            }
           } else {
-            streamSpan.addEvent('Re-attempting start stream', {attempt});
+            streamSpan.addEvent('Resuming stream', {
+              resume_token: resumeToken!.toString(),
+              attempt,
+            });
           }
-        } else {
-          streamSpan.addEvent('Resuming stream', {
-            resume_token: resumeToken!.toString(),
-            attempt,
-          });
         }
 
         if (
@@ -1675,10 +1679,10 @@ export class Snapshot extends EventEmitter {
 
           const wasAborted = isErrorAborted(err);
           if (!this.id && this._useInRunner && !wasAborted) {
-            streamSpan.addEvent('Stream broken. Safe to retry');
+            streamSpan?.addEvent('Stream broken. Safe to retry');
             void this.begin();
           } else if (wasAborted) {
-            streamSpan.addEvent('Stream broken. Not safe to retry', {
+            streamSpan?.addEvent('Stream broken. Not safe to retry', {
               'transaction.id': this.id?.toString(),
             });
           }
@@ -1914,14 +1918,13 @@ export class Snapshot extends EventEmitter {
    * ```
    */
   runStream(query: string | ExecuteSqlRequest): PartialResultStream {
-    if (typeof query === 'string') {
-      query = {sql: query} as ExecuteSqlRequest;
-    }
+    const originalQuery: ExecuteSqlRequest =
+      typeof query === 'string' ? {sql: query} : query;
 
-    query = Object.assign({}, query) as ExecuteSqlRequest;
-    query.queryOptions = Object.assign(
-      Object.assign({}, this.queryOptions),
-      query.queryOptions,
+    const queryOptions = Object.assign(
+      {},
+      this.queryOptions,
+      originalQuery.queryOptions,
     );
 
     const {
@@ -1931,16 +1934,30 @@ export class Snapshot extends EventEmitter {
       maxResumeRetries,
       requestOptions,
       columnsMetadata,
-    } = query;
+      types: _omittedTypes,
+      directedReadOptions: rawDirectedReadOptions,
+      ...cleanQuery
+    } = originalQuery;
+    void _omittedTypes;
     let reqOpts;
 
     const directedReadOptions = this._getDirectedReadOptions(
-      query.directedReadOptions,
+      rawDirectedReadOptions,
     );
+    const statementSeqno = this._seqno++;
+
+    let encodedParams:
+      | {
+          params: p.IStruct;
+          paramTypes: {[field: string]: spannerClient.spanner.v1.Type};
+        }
+      | undefined;
 
     const sanitizeRequest = () => {
-      query = query as ExecuteSqlRequest;
-      const {params, paramTypes} = Snapshot.encodeParams(query);
+      if (!encodedParams) {
+        encodedParams = Snapshot.encodeParams(originalQuery);
+      }
+      const {params, paramTypes} = encodedParams;
       const transaction: spannerClient.spanner.v1.ITransactionSelector = {};
       if (this.id) {
         transaction.id = this.id as Uint8Array;
@@ -1957,18 +1974,10 @@ export class Snapshot extends EventEmitter {
       ) {
         this._setPreviousTransactionId(transaction);
       }
-      delete query.gaxOptions;
-      delete query.json;
-      delete query.jsonOptions;
-      delete query.maxResumeRetries;
-      delete query.requestOptions;
-      delete query.types;
-      delete query.directedReadOptions;
-      delete query.columnsMetadata;
-
-      reqOpts = Object.assign(query, {
+      reqOpts = Object.assign({}, cleanQuery, {
         session: this.session.formattedName_!,
-        seqno: this._seqno++,
+        seqno: statementSeqno,
+        queryOptions,
         requestOptions: this.configureTagOptions(
           typeof transaction.singleUse !== 'undefined',
           this.requestOptions?.transactionTag ?? undefined,
@@ -1982,10 +1991,9 @@ export class Snapshot extends EventEmitter {
     };
 
     const traceConfig: traceConfig = {
-      transactionTag: this.requestOptions?.transactionTag,
-      requestTag: requestOptions?.requestTag,
-      ...query,
       ...this._traceConfig,
+      transactionTag: this.requestOptions?.transactionTag,
+      ...getQueryTraceConfig(originalQuery),
     };
     return startTrace('Snapshot.runStream', traceConfig, span => {
       let attempt = 0;
@@ -2095,10 +2103,10 @@ export class Snapshot extends EventEmitter {
     requestOptions = {},
   ): IRequestOptions | null {
     if (!singleUse && transactionTag) {
-      (requestOptions as IRequestOptions).transactionTag = transactionTag;
+      return Object.assign({}, requestOptions, {transactionTag});
     }
 
-    return requestOptions!;
+    return Object.assign({}, requestOptions);
   }
 
   /**
@@ -2111,7 +2119,10 @@ export class Snapshot extends EventEmitter {
    * @returns {object}
    */
   static encodeKeySet(request: ReadRequest): spannerClient.spanner.v1.IKeySet {
-    const keySet: spannerClient.spanner.v1.IKeySet = request.keySet || {};
+    const keySet: spannerClient.spanner.v1.IKeySet = Object.assign(
+      {},
+      request.keySet,
+    );
 
     if (request.keys) {
       keySet.keys = toArray(request.keys as string[]).map(
@@ -2197,12 +2208,21 @@ export class Snapshot extends EventEmitter {
    * @returns {object}
    */
   static encodeParams(request: ExecuteSqlRequest) {
-    const isUuidUntyped = codec.isUuidUntypedEnv();
-    const typeMap = request.types || {};
+    if (!request.params && !request.types && !request.paramTypes) {
+      return {
+        params: {fields: {}},
+        paramTypes: {},
+      };
+    }
 
-    const params: p.IStruct = {fields: request.params?.fields || {}};
+    const isUuidUntyped = codec.isUuidUntypedEnv();
+    const typeMap = Object.assign({}, request.types);
+
+    const params: p.IStruct = {
+      fields: Object.assign({}, request.params?.fields),
+    };
     const paramTypes: {[field: string]: spannerClient.spanner.v1.Type} =
-      request.paramTypes || {};
+      Object.assign({}, request.paramTypes);
 
     if (request.params && !request.params.fields) {
       const fields = {};
@@ -2270,14 +2290,16 @@ export class Snapshot extends EventEmitter {
    */
   protected _update(
     resp: spannerClient.spanner.v1.ITransaction,
-    span: Span,
+    span?: Span | null,
   ): void {
     const {id, readTimestamp} = resp;
 
     this.id = id!;
     this.metadata = resp;
 
-    span.addEvent('Transaction Creation Done', {id: this.id.toString()});
+    if (span) {
+      span.addEvent('Transaction Creation Done', {id: this.id.toString()});
+    }
 
     if (readTimestamp) {
       this.readTimestampProto = readTimestamp;
@@ -2404,10 +2426,9 @@ export class Dml extends Snapshot {
     return startTrace(
       'Dml.runUpdate',
       {
-        ...query,
         ...this._traceConfig,
         transactionTag: this.requestOptions?.transactionTag,
-        requestTag: query.requestOptions?.requestTag,
+        ...getQueryTraceConfig(query),
       },
       span => {
         this.run(
@@ -3966,8 +3987,8 @@ export class PartitionedDml extends Dml {
     return startTrace(
       'PartitionedDml.runUpdate',
       {
-        ...(query as ExecuteSqlRequest),
         ...this._traceConfig,
+        ...getQueryTraceConfig(query),
       },
       span => {
         super.runUpdate(query, (err, count) => {

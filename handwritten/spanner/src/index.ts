@@ -499,7 +499,7 @@ class Spanner extends GrpcService {
           'grpc.callInvocationTransformer': undefined,
           'grpc.gcpApiConfig': undefined,
         } as any);
-        const timeoutMs =
+        const timeoutMilliseconds =
           poolConfig.type === 'dynamic'
             ? (poolConfig.primeTimeoutMs ?? 5000)
             : 5000;
@@ -510,7 +510,7 @@ class Spanner extends GrpcService {
               sql: 'SELECT 1',
             },
             {
-              timeout: timeoutMs,
+              timeout: timeoutMilliseconds,
             },
           );
         } finally {

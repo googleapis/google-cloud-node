@@ -60,7 +60,7 @@
     "@google-cloud/precise-date": "^6.0.0",
     "@google-cloud/promisify": "^6.0.0",
     "@google-cloud/spanner-api": "^0.4.0",
-    "@grpc/grpc-js": "^1.13.2",
+    "@grpc/grpc-js": "1.14.5",
     "@grpc/proto-loader": "^0.8.0",
     "@opentelemetry/api": "^1.9.0",
     "@opentelemetry/context-async-hooks": "^2.0.0",

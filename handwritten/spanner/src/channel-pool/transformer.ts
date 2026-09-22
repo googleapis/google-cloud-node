@@ -46,17 +46,37 @@ export function createCallInvocationTransformer(
     if (callProperties.metadata) {
       const existing = callProperties.metadata.get('x-goog-spanner-request-id');
       if (existing.length > 0 && typeof existing[0] === 'string') {
-        const parts = existing[0].split('.');
-        if (parts.length >= 6) {
-          parts[3] = String(lease.entry.id);
+        const requestId = existing[0];
+        let dotCount = 0;
+        let thirdDotIndex = -1;
+        let fourthDotIndex = -1;
+        let hasFifthDot = false;
+        for (let i = 0; i < requestId.length; i++) {
+          if (requestId.charCodeAt(i) === 46 /* '.' */) {
+            dotCount++;
+            if (dotCount === 3) {
+              thirdDotIndex = i;
+            } else if (dotCount === 4) {
+              fourthDotIndex = i;
+            } else if (dotCount === 5) {
+              hasFifthDot = true;
+              break;
+            }
+          }
+        }
+        if (hasFifthDot) {
+          const updatedRequestId =
+            requestId.slice(0, thirdDotIndex + 1) +
+            lease.entry.id +
+            requestId.slice(fourthDotIndex);
           callProperties.metadata.set(
             'x-goog-spanner-request-id',
-            parts.join('.'),
+            updatedRequestId,
           );
         } else {
           callProperties.metadata.set(
             'x-goog-spanner-request-id',
-            `${existing[0]}.${lease.entry.id}`,
+            `${requestId}.${lease.entry.id}`,
           );
         }
       }

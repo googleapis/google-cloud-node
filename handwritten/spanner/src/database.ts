@@ -114,10 +114,12 @@ import {
   ObservabilityOptions,
   Span,
   getActiveOrNoopSpan,
+  isTracingEnabled,
   startTrace,
   setSpanError,
   setSpanErrorAndException,
   traceConfig,
+  getQueryTraceConfig,
 } from './instrument';
 import {
   AtomicCounter,
@@ -2942,8 +2944,8 @@ class Database extends common.GrpcServiceObject {
     startTrace(
       'Database.run',
       {
-        ...(query as ExecuteSqlRequest),
         ...this._traceConfig,
+        ...getQueryTraceConfig(query),
       },
       span => {
         this.runStream(query, options)
@@ -2983,9 +2985,14 @@ class Database extends common.GrpcServiceObject {
     options: TimestampBounds,
     callback: RunCallback,
   ): void {
-    const traceConfig = {
-      ...(query as ExecuteSqlRequest),
+    if (!isTracingEnabled(this._traceConfig?.opts)) {
+      this._executeRunOnSession(query, options, null, null, callback);
+      return;
+    }
+
+    const traceConfig: traceConfig = {
       ...this._traceConfig,
+      ...getQueryTraceConfig(query),
     };
 
     startTrace('Database.run', traceConfig, runSpan => {
@@ -3010,8 +3017,8 @@ class Database extends common.GrpcServiceObject {
   private _executeRunOnSession(
     query: string | ExecuteSqlRequest,
     options: TimestampBounds,
-    runSpan: Span,
-    streamSpan: Span,
+    runSpan: Span | null,
+    streamSpan: Span | null,
     callback: RunCallback,
   ): void {
     let snapshot: Snapshot | undefined;
@@ -3028,12 +3035,16 @@ class Database extends common.GrpcServiceObject {
       }
       completed = true;
       if (error) {
-        setSpanError(streamSpan, error as Error);
-        setSpanError(runSpan, error as Error);
+        if (streamSpan) {
+          setSpanError(streamSpan, error as Error);
+        }
+        if (runSpan) {
+          setSpanError(runSpan, error as Error);
+        }
       }
       snapshot?.end();
-      streamSpan.end();
-      runSpan.end();
+      streamSpan?.end();
+      runSpan?.end();
       callback!(error, rows, stats!, metadata!);
     };
 
@@ -3043,7 +3054,9 @@ class Database extends common.GrpcServiceObject {
         return;
       }
 
-      streamSpan.addEvent('Using Session', {'session.id': session?.id});
+      if (streamSpan) {
+        streamSpan.addEvent('Using Session', {'session.id': session?.id});
+      }
       try {
         snapshot = session!.snapshot(options, this.queryOptions_);
         this._runOnSnapshot(snapshot, session!, query, complete);
@@ -3140,10 +3153,8 @@ class Database extends common.GrpcServiceObject {
     return startTrace(
       'Database.runPartitionedUpdate',
       {
-        ...(query as RunPartitionedUpdateOptions),
         ...this._traceConfig,
-        requestTag: (query as RunPartitionedUpdateOptions)?.requestOptions
-          ?.requestTag,
+        ...getQueryTraceConfig(query),
       },
       span => {
         this.sessionFactory_.getSessionForPartitionedOps((err, session) => {
@@ -3333,9 +3344,8 @@ class Database extends common.GrpcServiceObject {
     return startTrace(
       'Database.runStream',
       {
-        ...(query as ExecuteSqlRequest),
         ...this._traceConfig,
-        requestTag: (query as ExecuteSqlRequest)?.requestOptions?.requestTag,
+        ...getQueryTraceConfig(query),
       },
       span => {
         this.sessionFactory_.getSession((err, session) => {
