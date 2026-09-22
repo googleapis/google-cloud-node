@@ -47,6 +47,7 @@ load("@aspect_rules_js//npm:repositories.bzl", "npm_translate_lock", "pnpm_repos
 npm_translate_lock(
     name = "npm",
     pnpm_lock = "//:pnpm-lock.yaml",
+    pnpm_version = "9.15.2",
     update_pnpm_lock = True,
     data = ["//:package.json"],
 )

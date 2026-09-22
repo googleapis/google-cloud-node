@@ -23,16 +23,46 @@ const randomUUID = () =>
   globalThis.crypto?.randomUUID() || require('crypto').randomUUID();
 
 /**
- * Checks if telemetry tracing is enabled
+ * Checks if telemetry tracing is enabled.
+ *
+ * Tracing is opt-in, and a caller opts in either with the
+ * `enableTelemetryTracing` client option or with the
+ * `GOOGLE_SDK_NODE_ENABLE_TRACING` environment variable. The environment
+ * variable wins whenever it is set, so tracing can be switched on or off for a
+ * process without touching the code that constructs the client.
+ *
+ * Two further conditions apply while the feature is experimental:
+ * `GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED` must be `true`, and the client
+ * must have supplied `internalTelemetryInfo` — a client generated without
+ * tracing has no span metadata to report, so there is nothing to trace.
+ *
  * @param settings
  * @returns true if telemetry tracing is enabled, false otherwise
  */
 export function checkTelemetryEnabled(settings?: CallSettings): boolean {
-  const tracingEnabled =
-    Boolean(settings?.enableTelemetryTracing) &&
-    process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED === 'true' &&
-    settings?.otherArgs?.internalTelemetryInfo !== undefined;
-  return Boolean(tracingEnabled);
+  // `process` is undeclared in browsers and some edge runtimes, where reading
+  // it would throw a ReferenceError rather than yield undefined, so it is
+  // reached through a `typeof` guard and stands in as an empty environment.
+  // Tracing is then simply off there, since the environment cannot opt in.
+  const env: Record<string, string | undefined> =
+    typeof process === 'object' && typeof process.env === 'object'
+      ? process.env
+      : {};
+
+  // An absent or empty environment variable counts as unset, which is what
+  // separates it from an explicit `false`: only an explicit value overrides
+  // the opt-in the caller passed in `clientOptions`.
+  const envOptIn = env.GOOGLE_SDK_NODE_ENABLE_TRACING?.trim();
+  const tracingRequested = envOptIn
+    ? envOptIn.toLowerCase() === 'true'
+    : Boolean(settings?.enableTelemetryTracing);
+
+  return (
+    tracingRequested &&
+    env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED?.trim().toLowerCase() ===
+      'true' &&
+    settings?.otherArgs?.internalTelemetryInfo !== undefined
+  );
 }
 
 function words(str: string, normalize = false) {
