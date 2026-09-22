@@ -9,10 +9,11 @@
 # team_members: @bshaffer @feywind @danieljbruce @shivanee-p
 *     @googleapis/cloud-sdk-nodejs-team
 
-# Generated GAPIC packages and core libraries are strictly owned by the Node.js SDK team
+# Generated GAPIC packages, core libraries, and documentation are strictly owned by the Node.js SDK team
 # (except google-auth-library-nodejs which is co-owned with aion-team).
 /packages/                                @googleapis/cloud-sdk-nodejs-team
 /core/                                    @googleapis/cloud-sdk-nodejs-team
+/docs/                                    @googleapis/cloud-sdk-nodejs-team
 /core/packages/google-auth-library-nodejs @googleapis/cloud-sdk-nodejs-team @googleapis/aion-team
 
 /librarian.yaml                           @googleapis/cloud-sdk-nodejs-team @googleapis/cloud-sdk-librarian-team
