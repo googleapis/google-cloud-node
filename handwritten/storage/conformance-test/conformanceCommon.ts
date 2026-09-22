@@ -111,11 +111,6 @@ export function executeScenario(testCase: RetryTestCase) {
 
         describe(`${storageMethodString}`, async () => {
           beforeEach(async () => {
-            const defaultGaxios = gaxios as unknown as {
-              instance?: gaxios.Gaxios;
-            };
-            defaultGaxios.instance?.interceptors?.request?.clear();
-
             const rawTransport = new StorageTransport({
               apiEndpoint: TESTBENCH_HOST,
               authClient: authClient,
@@ -165,11 +160,11 @@ export function executeScenario(testCase: RetryTestCase) {
               storageMethodString,
               bucket,
             );
+            notification = bucket.notification(TESTS_PREFIX);
             if (
               storageMethodString !== 'createNotification' &&
               storageMethodString !== 'notificationCreate'
             ) {
-              notification = bucket.notification(TESTS_PREFIX);
               await notification.create();
             }
 
@@ -226,9 +221,6 @@ export function executeScenario(testCase: RetryTestCase) {
             };
 
             storage.interceptors = [interceptor];
-            storage.storageTransport.gaxiosInstance?.interceptors?.request?.clear();
-            defaultGaxios.instance?.interceptors?.request?.clear();
-
             storage.storageTransport.gaxiosInstance.interceptors.request.add(
               interceptor,
             );
@@ -246,11 +238,18 @@ export function executeScenario(testCase: RetryTestCase) {
                 await assert.rejects(async () => {
                   await storageMethodObject(methodParameters);
                 }, undefined);
+                const testBenchResult = await getTestBenchRetryTest(
+                  creationResult.id,
+                  storageTransport,
+                );
+                assert.strictEqual(testBenchResult.completed, true);
               }
             } finally {
               storage.interceptors = [];
-              storage.storageTransport.gaxiosInstance?.interceptors?.request?.clear();
-              defaultGaxios.instance?.interceptors?.request?.clear();
+              storage.storageTransport.gaxiosInstance.interceptors.request.delete(
+                interceptor,
+              );
+              defaultGaxios.instance.interceptors.request.delete(interceptor);
             }
           }).timeout(TIMEOUT_FOR_INDIVIDUAL_TEST);
         });

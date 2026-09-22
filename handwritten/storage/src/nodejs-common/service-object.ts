@@ -581,7 +581,7 @@ class ServiceObject<T, K extends BaseMetadata> extends EventEmitter {
       this.storageTransport
         .makeRequest<K>(req, (err, data, resp) => {
           if (err) {
-            callback(err);
+            callback(err, undefined, resp);
             return;
           }
           this.metadata = data!;
