@@ -52,7 +52,7 @@ export const DEFAULT_PER_REQUEST_TIMEOUT_MS = 60 * 1000;
 export const DEFAULT_STALL_TIMEOUT_MS = 15 * 1000;
 // Assumed sustained upload throughput, in bytes per millisecond, used to
 // scale the global deadline when `uploadSize` is provided (~5 MB/s).
-const DEFAULT_UPLOAD_RATE_BYTES_PER_MS = (5 * 1024 * 1024) / 1000;
+const DEFAULT_UPLOAD_RATE_BYTES_PER_MS = 5 * 1024;
 
 // Resumable upload protocol headers.
 const UPLOAD_PROTOCOL_HEADER = 'x-goog-upload-protocol';
@@ -211,6 +211,12 @@ export interface ResumableUploadContext {
   uploadPrefix?: string;
   numericEnums?: boolean;
   minifyJson?: boolean;
+  /** Default per-request timeout in milliseconds from CallSettings. */
+  defaultTimeout?: number;
+  /** Default retry options from CallSettings. */
+  defaultRetry?: Partial<RetryOptions> | null;
+  /** Default headers from CallSettings.otherArgs.headers for the start request. */
+  defaultStartHeaders?: {[name: string]: string};
 }
 
 interface ResumableUploadResponse {
@@ -279,6 +285,13 @@ interface TransmitResult {
   newOffset: number;
   /** Bytes the stream must skip when the server committed more than expected. */
   skipAhead: number;
+  /** True when the final response was recovered via a query request. */
+  recoveredFinal?: boolean;
+}
+
+interface QueryOffsetResult {
+  offset: number;
+  finalResponse?: {};
 }
 
 /**
@@ -310,7 +323,7 @@ function parseHeaderInt(value: string | null): number | null {
     return null;
   }
   const parsed = parseInt(value, 10);
-  return Number.isNaN(parsed) ? null : parsed;
+  return Number.isNaN(parsed) || parsed < 0 ? null : parsed;
 }
 
 /**
@@ -366,12 +379,32 @@ export class ResumableUploadApiCaller implements APICaller {
       );
       return;
     }
+    const settingsStartHeaders = settings.otherArgs?.headers
+      ? Object.fromEntries(
+          Object.entries(settings.otherArgs.headers).map(([k, v]) => [
+            k,
+            String(v),
+          ]),
+        )
+      : undefined;
     const session = new ResumableUploadSession({
       ...context,
       uploadPrefix:
         context.uploadPrefix ??
         this.descriptor.uploadPrefix ??
         '/resumable/upload',
+      defaultTimeout: context.defaultTimeout ?? settings.timeout,
+      defaultRetry:
+        context.defaultRetry !== undefined
+          ? context.defaultRetry
+          : settings.retry,
+      defaultStartHeaders:
+        settingsStartHeaders || context.defaultStartHeaders
+          ? {
+              ...(settingsStartHeaders ?? {}),
+              ...(context.defaultStartHeaders ?? {}),
+            }
+          : undefined,
     });
     canceller.completed = true;
     canceller.callback!(null, session);
@@ -401,7 +434,6 @@ export class ResumableUploadSession {
   private params: ResumableUploadStartParams | null = null;
   private state_: ResumableUploadState = ResumableUploadState.STARTING;
   private uploadUrl_: string | null = null;
-  private response_: {} | null = null;
   private committedBytes_ = 0;
   private startTimeMs = 0;
   private globalDeadlineMs = DEFAULT_GLOBAL_DEADLINE_MS;
@@ -471,7 +503,7 @@ export class ResumableUploadSession {
           },
           signal: controller.signal,
           responseType: 'text',
-          timeout: this.params?.timeout ?? DEFAULT_PER_REQUEST_TIMEOUT_MS,
+          timeout: this.getPerRequestTimeoutMs(),
           validateStatus: () => true,
         })
         .catch(() => {});
@@ -516,15 +548,17 @@ export class ResumableUploadSession {
 
     let sessionUrl: string;
     let granularity: number | null = null;
+    let finalResponse: {} | undefined;
 
     try {
       if (params.resumeUrl) {
         this.state_ = ResumableUploadState.RECOVERY;
-        const committedOffset = await this.queryOffset(params.resumeUrl);
+        const queried = await this.queryOffset(params.resumeUrl);
         this.uploadUrl_ = params.resumeUrl;
-        this.committedBytes_ = committedOffset;
+        this.committedBytes_ = queried.offset;
         this.reportProgress();
         sessionUrl = params.resumeUrl;
+        finalResponse = queried.finalResponse;
       } else {
         this.state_ = ResumableUploadState.STARTING;
         const started = await this.sendStart();
@@ -535,6 +569,7 @@ export class ResumableUploadSession {
           this.committedBytes_ = started.committedOffset;
           this.reportProgress();
         }
+        finalResponse = started.finalResponse;
       }
     } catch (err) {
       // Session setup failed before transmission began; make sure awaiting
@@ -549,6 +584,13 @@ export class ResumableUploadSession {
       params.chunkSize,
       granularity,
     );
+    if (finalResponse !== undefined) {
+      this.state_ = ResumableUploadState.FINALIZING;
+      this.done_ = true;
+      this.clearDeadlineTimer();
+      this.resolveFinished_(finalResponse);
+      return;
+    }
     this.state_ = ResumableUploadState.TRANSMISSION;
 
     // The transmission loop runs in the background; `start()` resolves once
@@ -604,6 +646,7 @@ export class ResumableUploadSession {
     uploadUrl: string;
     granularity: number | null;
     committedOffset?: number;
+    finalResponse?: {};
   }> {
     const rpc = this.context.rpc;
     if (!rpc.resolvedRequestType) {
@@ -623,9 +666,17 @@ export class ResumableUploadSession {
     }
 
     let queryString = '';
+    let transcodedPath = '';
+    let bodyPayload: {} = json;
     try {
       const transcoded = transcode(json, rpc.parsedOptions);
-      queryString = transcoded?.queryString ?? '';
+      if (transcoded) {
+        queryString = transcoded.queryString ?? '';
+        transcodedPath = transcoded.url
+          ? transcoded.url.replace(/^\/?/, '/')
+          : '';
+        bodyPayload = transcoded.data === '' ? {} : transcoded.data;
+      }
     } catch {
       // The method may not have a google.api.http rule; the request body is
       // still sent as proto JSON to the upload endpoint.
@@ -637,13 +688,20 @@ export class ResumableUploadSession {
       queryString = `${queryString ? `${queryString}&` : ''}$prettyPrint=0`;
     }
 
-    const uploadPrefix = this.context.uploadPrefix ?? '/resumable/upload';
-    const url = `${this.getEndpointBase()}${uploadPrefix}${
+    const uploadPrefix = (
+      this.context.uploadPrefix ?? '/resumable/upload'
+    ).replace(/\/$/, '');
+    const url = `${this.getEndpointBase()}${uploadPrefix}${transcodedPath}${
       queryString ? `?${queryString}` : ''
     }`;
-    const body = JSON.stringify(json);
+    const body = JSON.stringify(bodyPayload);
+    const knownSize = this.params ? this.uploadSizeForDeadline(this.params) : 0;
     const startHeaders: {[name: string]: string} = {
       'content-type': 'application/json',
+      ...(knownSize > 0
+        ? {'x-goog-upload-header-content-length': String(knownSize)}
+        : {}),
+      ...(this.context.defaultStartHeaders ?? {}),
       ...(this.params?.startHeaders ?? {}),
     };
 
@@ -669,9 +727,13 @@ export class ResumableUploadSession {
     // resume from the server-committed offset instead of failing.
     if (response.headers.get(UPLOAD_STATUS_HEADER) === null) {
       this.state_ = ResumableUploadState.RECOVERY;
-      const committedOffset = await this.queryOffset(uploadUrl);
-      this.state_ = ResumableUploadState.STARTING;
-      return {uploadUrl, granularity, committedOffset};
+      const queried = await this.queryOffset(uploadUrl);
+      return {
+        uploadUrl,
+        granularity,
+        committedOffset: queried.offset,
+        finalResponse: queried.finalResponse,
+      };
     }
     return {uploadUrl, granularity};
   }
@@ -692,35 +754,40 @@ export class ResumableUploadSession {
     return `${this.context.protocol}://${servicePath}:${servicePort}`;
   }
 
-  private async queryOffset(sessionUrl: string): Promise<number> {
+  private async queryOffset(sessionUrl: string): Promise<QueryOffsetResult> {
     this.state_ = ResumableUploadState.RECOVERY;
-    try {
-      const response = await this.sendCommandWithRetry(
-        sessionUrl,
-        COMMAND_QUERY,
-        null,
-        -1,
-        undefined,
+    const response = await this.sendCommandWithRetry(
+      sessionUrl,
+      COMMAND_QUERY,
+      null,
+      -1,
+      undefined,
+    );
+    if (response.status < 200 || response.status >= 300) {
+      throw new Category3Error(
+        `Resumable upload recovery query failed: HTTP ${response.status}.`,
+        response.status,
       );
-      if (response.status < 200 || response.status >= 300) {
-        throw new Category3Error(
-          `Resumable upload recovery query failed: HTTP ${response.status}.`,
-          response.status,
-        );
-      }
-      const size = parseHeaderInt(
-        response.headers.get(UPLOAD_SIZE_RECEIVED_HEADER),
-      );
-      if (size === null) {
-        throw new Category3Error(
-          'The resumable upload recovery query did not include a ' +
-            `${UPLOAD_SIZE_RECEIVED_HEADER} header.`,
-        );
-      }
-      return size;
-    } finally {
-      this.state_ = ResumableUploadState.TRANSMISSION;
     }
+    const uploadStatus = response.headers.get(UPLOAD_STATUS_HEADER);
+    const size = parseHeaderInt(
+      response.headers.get(UPLOAD_SIZE_RECEIVED_HEADER),
+    );
+    if (uploadStatus === 'final') {
+      const finalResponse = this.decodeFinalResponse(response);
+      const offset =
+        size ??
+        (this.params ? this.uploadSizeForDeadline(this.params) : 0) ??
+        this.committedBytes_;
+      return {offset, finalResponse};
+    }
+    if (size === null) {
+      throw new Category3Error(
+        'The resumable upload recovery query did not include a ' +
+          `${UPLOAD_SIZE_RECEIVED_HEADER} header.`,
+      );
+    }
+    return {offset: size};
   }
 
   private async runTransmission(sessionUrl: string): Promise<void> {
@@ -730,7 +797,6 @@ export class ResumableUploadSession {
       // and skipBytes() is the wider Buffer<ArrayBufferLike>.
       let buffer: Buffer = Buffer.alloc(0);
       let offset = this.committedBytes_;
-      let previousChunk: Buffer | null = null;
       let response: {} | null = null;
       await this.openSourceAt(offset);
 
@@ -746,7 +812,7 @@ export class ResumableUploadSession {
           // payload ended exactly on a chunk boundary. Send the finalize
           // command on its own.
           this.state_ = ResumableUploadState.FINALIZING;
-          response = await this.transmitFinalize(sessionUrl, null, offset);
+          response = await this.transmitFinalize(sessionUrl, offset);
           break;
         }
 
@@ -754,13 +820,13 @@ export class ResumableUploadSession {
           sessionUrl,
           read.chunk,
           offset,
-          previousChunk,
           read.eof,
         );
-        previousChunk = read.chunk;
         offset = transmit.newOffset;
-        this.committedBytes_ = offset;
-        this.reportProgress();
+        if (!transmit.recoveredFinal) {
+          this.committedBytes_ = offset;
+          this.reportProgress();
+        }
 
         if (transmit.skipAhead > 0) {
           if (buffer.length >= transmit.skipAhead) {
@@ -773,9 +839,6 @@ export class ResumableUploadSession {
           response = transmit.response;
           break;
         }
-        if (response !== null) {
-          break;
-        }
       }
 
       if (this.state_ !== ResumableUploadState.FINALIZING) {
@@ -786,7 +849,6 @@ export class ResumableUploadSession {
           'The resumable upload completed without a final response.',
         );
       }
-      this.response_ = response;
       this.done_ = true;
       this.clearDeadlineTimer();
       this.resolveFinished_(response);
@@ -797,7 +859,7 @@ export class ResumableUploadSession {
         try {
           this.committedBytes_ = err.offset;
           this.reportProgress();
-          await this.openSourceAt(err.offset);
+          this.state_ = ResumableUploadState.TRANSMISSION;
           // Restart the transmission loop from the new offset.
           await this.runTransmission(sessionUrl);
           return;
@@ -815,6 +877,8 @@ export class ResumableUploadSession {
         this.clearDeadlineTimer();
         this.rejectFinished_(err as Error);
       }
+    } finally {
+      this.releaseActiveStream();
     }
   }
 
@@ -960,12 +1024,13 @@ export class ResumableUploadSession {
     sessionUrl: string,
     chunk: Buffer,
     offset: number,
-    previousChunk: Buffer | null,
     isFinal: boolean,
   ): Promise<TransmitResult> {
     let currentChunk = chunk;
     let currentOffset = offset;
-    let currentPrevious = previousChunk;
+    const retry = this.getRetrySettings();
+    let sameOffsetAttempts = 0;
+    let sameOffsetDelay = retry.initialDelayMs;
 
     // eslint-disable-next-line no-constant-condition
     while (true) {
@@ -981,6 +1046,12 @@ export class ResumableUploadSession {
           undefined,
         );
         if (isFinal) {
+          if (response.headers.get(UPLOAD_STATUS_HEADER) !== 'final') {
+            throw new Category2Error(
+              'The resumable upload finalize response did not include ' +
+                `${UPLOAD_STATUS_HEADER}: final.`,
+            );
+          }
           return {
             finalized: true,
             response: this.decodeFinalResponse(response),
@@ -1004,9 +1075,21 @@ export class ResumableUploadSession {
         // Outer recovery: query the server for the exact committed offset,
         // align the local state, and re-enter the transmission phase.
         this.state_ = ResumableUploadState.RECOVERY;
-        const serverOffset = await this.queryOffset(sessionUrl);
-        this.state_ = ResumableUploadState.TRANSMISSION;
+        const queried = await this.queryOffset(sessionUrl);
+        const serverOffset = queried.offset;
+        this.committedBytes_ = serverOffset;
         this.reportProgress();
+        if (queried.finalResponse !== undefined) {
+          this.state_ = ResumableUploadState.FINALIZING;
+          return {
+            finalized: true,
+            response: queried.finalResponse,
+            newOffset: serverOffset,
+            skipAhead: 0,
+            recoveredFinal: true,
+          };
+        }
+        this.state_ = ResumableUploadState.TRANSMISSION;
 
         if (err instanceof StallError) {
           // A stalled request may have committed any number of bytes; the
@@ -1014,7 +1097,23 @@ export class ResumableUploadSession {
           throw new RestartUploadError(serverOffset);
         }
         if (serverOffset === currentOffset) {
-          // Nothing was committed; retry the same chunk.
+          // Nothing was committed; apply retry limit and backoff before
+          // retrying the same chunk so a persistent Category 2 error does not
+          // spin in a tight 0ms loop.
+          if (sameOffsetAttempts >= retry.maxRetries) {
+            throw createGoogleError(
+              `Exceeded the maximum number of recovery retries (${retry.maxRetries}) ` +
+                `without forward progress at byte offset ${currentOffset}.`,
+              Status.DEADLINE_EXCEEDED,
+            );
+          }
+          this.assertDeadline();
+          await sleep(sameOffsetDelay);
+          sameOffsetDelay = Math.min(
+            sameOffsetDelay * retry.delayMultiplier,
+            retry.maxDelayMs,
+          );
+          sameOffsetAttempts += 1;
           continue;
         }
         if (serverOffset > currentOffset) {
@@ -1023,7 +1122,6 @@ export class ResumableUploadSession {
             if (isFinal) {
               const finalResponse = await this.transmitFinalize(
                 sessionUrl,
-                null,
                 serverOffset,
               );
               return {
@@ -1048,7 +1146,6 @@ export class ResumableUploadSession {
               // by sending the finalize command on its own.
               const finalResponse = await this.transmitFinalize(
                 sessionUrl,
-                null,
                 serverOffset,
               );
               return {
@@ -1068,54 +1165,50 @@ export class ResumableUploadSession {
           // The server committed part of this chunk; retransmit the tail.
           currentChunk = currentChunk.subarray(serverOffset - currentOffset);
           currentOffset = serverOffset;
+          sameOffsetAttempts = 0;
+          sameOffsetDelay = retry.initialDelayMs;
           continue;
         }
 
-        // The server is behind the local state: data from the previous chunk
-        // must be re-transmitted from the in-memory buffer.
-        const bufferedStart = currentPrevious
-          ? currentOffset - currentPrevious.length
-          : currentOffset;
-        if (currentPrevious && serverOffset >= bufferedStart) {
-          const rebuilt = Buffer.concat([currentPrevious, currentChunk]);
-          currentChunk = rebuilt.subarray(serverOffset - bufferedStart);
-          currentOffset = serverOffset;
-          currentPrevious = null;
-          continue;
-        }
-        // The requested offset is not covered by the in-memory buffer. The
-        // source is seekable, so restart the stream at the server offset.
+        // The server is behind the local state: restart the stream from the
+        // server-committed offset so outgoing chunks respect chunkSize and
+        // granularity alignment.
         throw new RestartUploadError(serverOffset);
       }
     }
   }
 
   /**
-   * Sends the `finalize` command (optionally preceded by the final chunk),
-   * recovering from state mismatches by re-querying the committed offset and
-   * re-aligning the in-memory buffer.
+   * Sends the `finalize` command, recovering from state mismatches by
+   * re-querying the committed offset.
    */
   private async transmitFinalize(
     sessionUrl: string,
-    finalChunk: Buffer | null,
     offset: number,
   ): Promise<{}> {
-    let chunk = finalChunk;
     let currentOffset = offset;
+    const retry = this.getRetrySettings();
+    let sameOffsetAttempts = 0;
+    let sameOffsetDelay = retry.initialDelayMs;
 
     // eslint-disable-next-line no-constant-condition
     while (true) {
       this.assertActive();
       this.assertDeadline();
-      const command = chunk ? COMMAND_UPLOAD_FINALIZE : COMMAND_FINALIZE;
       try {
         const response = await this.sendCommandWithRetry(
           sessionUrl,
-          command,
-          chunk,
+          COMMAND_FINALIZE,
+          null,
           currentOffset,
           undefined,
         );
+        if (response.headers.get(UPLOAD_STATUS_HEADER) !== 'final') {
+          throw new Category2Error(
+            'The resumable upload finalize response did not include ' +
+              `${UPLOAD_STATUS_HEADER}: final.`,
+          );
+        }
         return this.decodeFinalResponse(response);
       } catch (err) {
         const recoverable =
@@ -1123,40 +1216,41 @@ export class ResumableUploadSession {
         if (!recoverable) {
           throw err;
         }
-        const serverOffset = await this.queryOffset(sessionUrl);
+        this.state_ = ResumableUploadState.RECOVERY;
+        const queried = await this.queryOffset(sessionUrl);
+        const serverOffset = queried.offset;
+        this.committedBytes_ = serverOffset;
         this.reportProgress();
+        if (queried.finalResponse !== undefined) {
+          this.state_ = ResumableUploadState.FINALIZING;
+          return queried.finalResponse;
+        }
+        this.state_ = ResumableUploadState.FINALIZING;
         if (err instanceof StallError) {
           throw new RestartUploadError(serverOffset);
         }
-        if (chunk) {
+        if (serverOffset >= currentOffset) {
           if (serverOffset === currentOffset) {
-            // Nothing was committed; retry the same final chunk.
-            continue;
+            if (sameOffsetAttempts >= retry.maxRetries) {
+              throw createGoogleError(
+                `Exceeded the maximum number of recovery retries (${retry.maxRetries}) ` +
+                  `while finalizing at byte offset ${currentOffset}.`,
+                Status.DEADLINE_EXCEEDED,
+              );
+            }
+            this.assertDeadline();
+            await sleep(sameOffsetDelay);
+            sameOffsetDelay = Math.min(
+              sameOffsetDelay * retry.delayMultiplier,
+              retry.maxDelayMs,
+            );
+            sameOffsetAttempts += 1;
+          } else {
+            sameOffsetAttempts = 0;
+            sameOffsetDelay = retry.initialDelayMs;
           }
-          if (serverOffset === currentOffset + chunk.length) {
-            // The final chunk was committed; finalize on its own.
-            chunk = null;
-            currentOffset = serverOffset;
-            continue;
-          }
-          if (
-            serverOffset > currentOffset &&
-            serverOffset < currentOffset + chunk.length
-          ) {
-            chunk = chunk.subarray(serverOffset - currentOffset);
-            currentOffset = serverOffset;
-            continue;
-          }
-          if (serverOffset > currentOffset + chunk.length) {
-            chunk = null;
-            currentOffset = serverOffset;
-            continue;
-          }
-        } else {
-          if (serverOffset >= currentOffset) {
-            currentOffset = serverOffset;
-            continue;
-          }
+          currentOffset = serverOffset;
+          continue;
         }
 
         throw new RestartUploadError(serverOffset);
@@ -1208,7 +1302,11 @@ export class ResumableUploadSession {
             Status.CANCELLED,
           );
         }
-        if (err instanceof Category2Error || err instanceof Category3Error) {
+        if (
+          err instanceof Category2Error ||
+          err instanceof Category3Error ||
+          err instanceof GoogleError
+        ) {
           throw err;
         }
         if (!(err instanceof TransientError)) {
@@ -1291,7 +1389,7 @@ export class ResumableUploadSession {
               : Buffer.from(body),
         signal: controller.signal,
         responseType: 'stream',
-        timeout: this.params?.timeout ?? DEFAULT_PER_REQUEST_TIMEOUT_MS,
+        timeout: this.getPerRequestTimeoutMs(),
         validateStatus: () => true,
       })) as unknown as Response;
       const responseBody = Buffer.from(await response.arrayBuffer());
@@ -1315,7 +1413,11 @@ export class ResumableUploadSession {
             `${this.params?.stallTimeoutMs ?? DEFAULT_STALL_TIMEOUT_MS} ms.`,
         );
       }
-      if (err instanceof Category2Error || err instanceof Category3Error) {
+      if (
+        err instanceof Category2Error ||
+        err instanceof Category3Error ||
+        err instanceof GoogleError
+      ) {
         throw err;
       }
       throw new TransientError(
@@ -1333,14 +1435,14 @@ export class ResumableUploadSession {
   /**
    * Classifies the HTTP response status. Transient errors are thrown as
    * {@link TransientError}, state mismatches as {@link Category2Error}, and
-   * everything else as {@link Category3Error}.
+   * everything else as {@link GoogleError} / {@link Category3Error}.
    */
   private throwOnNonTransientStatus(
     response: ResumableUploadResponse,
     command: string,
   ): void {
+    const uploadStatus = response.headers.get(UPLOAD_STATUS_HEADER);
     if (response.status >= 200 && response.status < 300) {
-      const uploadStatus = response.headers.get(UPLOAD_STATUS_HEADER);
       if (uploadStatus === null) {
         if (this.state_ === ResumableUploadState.RECOVERY) {
           // During a recovery query there is no offset to reconcile, so a
@@ -1373,20 +1475,51 @@ export class ResumableUploadSession {
       }
       return;
     }
+    // If the server returns X-Goog-Upload-Status: final on a non-2xx response,
+    // the upload session has been terminated by the server and cannot be
+    // retried or recovered via query.
+    if (uploadStatus === 'final') {
+      this.throwFatalHttpResponse(response);
+    }
     if (CATEGORY_2_RETRY_CODES.has(response.status)) {
-      throw new Category2Error(
-        `Resumable upload state mismatch: HTTP ${response.status}.`,
-        response.status,
-      );
+      if (
+        command === COMMAND_UPLOAD ||
+        command === COMMAND_UPLOAD_FINALIZE ||
+        command === COMMAND_FINALIZE
+      ) {
+        throw new Category2Error(
+          `Resumable upload state mismatch: HTTP ${response.status}.`,
+          response.status,
+        );
+      }
+      if (command === COMMAND_START && uploadStatus === null) {
+        throw new TransientError(
+          `Resumable upload transient error: HTTP ${response.status}.`,
+        );
+      }
     }
     if (CATEGORY_1_RETRY_CODES.has(response.status)) {
       throw new TransientError(
         `Resumable upload transient error: HTTP ${response.status}.`,
       );
     }
-    throw new Category3Error(
+    this.throwFatalHttpResponse(response);
+  }
+
+  private throwFatalHttpResponse(response: ResumableUploadResponse): never {
+    try {
+      decodeResponse(this.context.rpc, false, response.body, response.status);
+    } catch (err) {
+      if (err instanceof GoogleError) {
+        if (err.code === undefined) {
+          err.code = rpcCodeFromHttpStatusCode(response.status);
+        }
+        throw err;
+      }
+    }
+    throw createGoogleError(
       `Resumable upload failed: HTTP ${response.status}.`,
-      response.status,
+      rpcCodeFromHttpStatusCode(response.status),
     );
   }
 
@@ -1411,13 +1544,24 @@ export class ResumableUploadSession {
     };
   }
 
+  private getPerRequestTimeoutMs(): number {
+    return (
+      this.params?.timeout ??
+      this.context.defaultTimeout ??
+      DEFAULT_PER_REQUEST_TIMEOUT_MS
+    );
+  }
+
   private getRetrySettings(): {
     maxRetries: number;
     initialDelayMs: number;
     delayMultiplier: number;
     maxDelayMs: number;
   } {
-    const retry = this.params?.retry;
+    const retry =
+      this.params?.retry !== undefined
+        ? this.params.retry
+        : this.context.defaultRetry;
     if (retry === null) {
       return {
         maxRetries: 0,

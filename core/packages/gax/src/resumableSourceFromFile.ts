@@ -14,8 +14,7 @@
  * limitations under the License.
  */
 
-import {createReadStream, statSync} from 'fs';
-
+import {isNodeJS} from './featureDetection';
 import {ResumableSource} from './resumableUpload';
 
 /**
@@ -26,7 +25,13 @@ import {ResumableSource} from './resumableUpload';
  * delegate to this function rather than constructing file streams directly.
  */
 export function resumableSourceFromFile(filePath: string): ResumableSource {
-  const stat = statSync(filePath);
+  if (!isNodeJS()) {
+    throw new Error(
+      'resumableSourceFromFile is only supported in Node.js environments.',
+    );
+  }
+  const fs = require('fs') as typeof import('fs');
+  const stat = fs.statSync(filePath);
   return {
     size: stat.size,
     getStream: (offset?: number) => {
@@ -36,7 +41,7 @@ export function resumableSourceFromFile(filePath: string): ResumableSource {
           `Invalid start offset ${start} for file of size ${stat.size}.`,
         );
       }
-      return createReadStream(filePath, {start});
+      return fs.createReadStream(filePath, {start});
     },
   };
 }

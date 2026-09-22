@@ -67,6 +67,7 @@ export type {
   ResumableUploadStartParams,
   ResumableSource,
 } from './resumableUpload';
+export {resumableSourceFromFile} from './resumableSourceFromFile';
 
 export {StreamType} from './streamingCalls/streaming';
 

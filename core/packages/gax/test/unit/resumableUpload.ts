@@ -1242,4 +1242,346 @@ describe('resumable upload', () => {
     });
     await assert.rejects(helper.finished(), /source cannot seek/);
   });
+
+  it('re-exports resumableSourceFromFile on the fallback module', () => {
+    assert.strictEqual(typeof gax.fallback.resumableSourceFromFile, 'function');
+    assert.strictEqual(
+      gax.fallback.resumableSourceFromFile,
+      gax.resumableSourceFromFile,
+    );
+  });
+
+  it('uses transcoded URL path, transcoded body, and x-goog-upload-header-content-length on start', async () => {
+    const transcodingProto = `
+    syntax = "proto3";
+    package test.v1;
+    import "google/api/annotations.proto";
+    message TranscodedUploadRequest {
+      string parent = 1;
+      string display_name = 2;
+      string query_param = 3;
+    }
+    message TranscodedUploadResponse { string name = 1; }
+    service TranscodedUploadService {
+      rpc CreateItem(TranscodedUploadRequest) returns (TranscodedUploadResponse) {
+        option (google.api.http) = {
+          post: "/v1/{parent=projects/*}/items"
+          body: "display_name"
+        };
+      }
+    }
+    `;
+    const parsedRoot = protobuf.parse(transcodingProto).root;
+    const svc = parsedRoot.lookupService('test.v1.TranscodedUploadService');
+    svc.resolveAll();
+    const transcodedRpc = svc.methods.CreateItem;
+    transcodedRpc.parsedOptions = [
+      {
+        '(google.api.http)': {
+          post: '/v1/{parent=projects/*}/items',
+          body: 'display_name',
+        },
+      },
+    ];
+
+    const requests: MockRequestOptions[] = [];
+    const auth = mockAuth(async opts => {
+      requests.push(opts);
+      const command = commandOf(opts);
+      if (command === 'start') {
+        return resumableUploadResponse(200, {
+          'x-goog-upload-url': SESSION_URL,
+          'x-goog-upload-status': 'active',
+        });
+      }
+      if (command === 'upload, finalize') {
+        return resumableUploadResponse(
+          200,
+          {'x-goog-upload-status': 'final'},
+          JSON.stringify({name: 'complete'}),
+        );
+      }
+      throw new Error(`Unexpected command: ${command}`);
+    });
+
+    const payload = Buffer.alloc(128);
+    const helper = new gax.ResumableUploadSession(
+      buildContext(auth, {
+        rpc: transcodedRpc,
+        request: {
+          parent: 'projects/my-proj',
+          displayName: 'my-item',
+          queryParam: 'qval',
+        },
+        uploadPrefix: '/upload/',
+      }),
+    );
+    await helper.start({
+      uploadSource: bufferSource(payload).source,
+      chunkSize: GRANULARITY,
+    });
+    await helper.finished();
+
+    assert.strictEqual(
+      requests[0].url,
+      'https://example.com:443/upload/v1/projects/my-proj/items?queryParam=qval',
+    );
+    assert.strictEqual(requests[0].body, JSON.stringify('my-item'));
+    assert.strictEqual(
+      requests[0].headers!['x-goog-upload-header-content-length'],
+      '128',
+    );
+  });
+
+  it('treats non-2xx responses with X-Goog-Upload-Status: final as fatal and decodes GoogleError details', async () => {
+    let attempts = 0;
+    const auth = mockAuth(async opts => {
+      const command = commandOf(opts);
+      if (command === 'start') {
+        return resumableUploadResponse(200, {
+          'x-goog-upload-url': SESSION_URL,
+          'x-goog-upload-status': 'active',
+        });
+      }
+      if (command === 'upload') {
+        attempts += 1;
+        return resumableUploadResponse(
+          503,
+          {'x-goog-upload-status': 'final'},
+          JSON.stringify({
+            error: {
+              code: 503,
+              message: 'Session permanently terminated by server',
+              status: 'UNAVAILABLE',
+            },
+          }),
+        );
+      }
+      throw new Error(`Unexpected command: ${command}`);
+    });
+
+    const helper = new gax.ResumableUploadSession(buildContext(auth));
+    await helper.start({
+      uploadSource: bufferSource(Buffer.alloc(GRANULARITY)).source,
+      chunkSize: GRANULARITY,
+    });
+    await assert.rejects(helper.finished(), (err: gax.GoogleError) => {
+      assert.strictEqual(err.code, Status.UNAVAILABLE);
+      assert.match(err.message, /Session permanently terminated by server/);
+      return true;
+    });
+    assert.strictEqual(attempts, 1);
+  });
+
+  it('completes without sending duplicate finalize when query returns X-Goog-Upload-Status: final', async () => {
+    const requests: MockRequestOptions[] = [];
+    const observedStates: gax.ResumableUploadState[] = [];
+    const auth = mockAuth(async opts => {
+      requests.push(opts);
+      const command = commandOf(opts);
+      if (command === 'query') {
+        return resumableUploadResponse(
+          200,
+          {'x-goog-upload-status': 'final'},
+          JSON.stringify({name: 'already-complete'}),
+        );
+      }
+      throw new Error(`Unexpected command: ${command}`);
+    });
+
+    const payload = Buffer.alloc(GRANULARITY);
+    const helper = new gax.ResumableUploadSession(buildContext(auth));
+    await helper.start({
+      uploadSource: bufferSource(payload).source,
+      chunkSize: GRANULARITY,
+      resumeUrl: SESSION_URL,
+      onProgress: () => {
+        observedStates.push(helper.state);
+      },
+    });
+    const response = await helper.finished();
+    assert.deepStrictEqual(response, {name: 'already-complete'});
+    assert.deepStrictEqual(
+      requests.map(r => commandOf(r)),
+      ['query'],
+    );
+    assert.deepStrictEqual(observedStates, [gax.ResumableUploadState.RECOVERY]);
+  });
+
+  it('reopens the source and respects chunkSize when serverOffset < currentOffset', async () => {
+    const requests: MockRequestOptions[] = [];
+    let rewound = false;
+    const auth = mockAuth(async opts => {
+      requests.push(opts);
+      const command = commandOf(opts);
+      if (command === 'start') {
+        return resumableUploadResponse(200, {
+          'x-goog-upload-url': SESSION_URL,
+          'x-goog-upload-status': 'active',
+        });
+      }
+      if (command === 'upload') {
+        if (offsetOf(opts) === GRANULARITY && !rewound) {
+          rewound = true;
+          return resumableUploadResponse(412, {
+            'x-goog-upload-status': 'active',
+          });
+        }
+        return resumableUploadResponse(200, {'x-goog-upload-status': 'active'});
+      }
+      if (command === 'query') {
+        return resumableUploadResponse(200, {
+          'x-goog-upload-status': 'active',
+          'x-goog-upload-size-received': String(GRANULARITY / 2),
+        });
+      }
+      if (command === 'upload, finalize') {
+        return resumableUploadResponse(
+          200,
+          {'x-goog-upload-status': 'final'},
+          JSON.stringify({name: 'complete'}),
+        );
+      }
+      throw new Error(`Unexpected command: ${command}`);
+    });
+
+    const payload = Buffer.alloc(2 * GRANULARITY);
+    const fixture = bufferSource(payload);
+    const helper = new gax.ResumableUploadSession(buildContext(auth));
+    await helper.start({
+      uploadSource: fixture.source,
+      chunkSize: GRANULARITY,
+    });
+    await helper.finished();
+
+    const uploadLengths = requests
+      .filter(
+        r => commandOf(r) === 'upload' || commandOf(r) === 'upload, finalize',
+      )
+      .map(r => bodyLength(r));
+    for (const len of uploadLengths) {
+      assert.ok(len <= GRANULARITY, `chunk length ${len} exceeded chunkSize`);
+    }
+    assert.strictEqual(fixture.streams.length, 2);
+  });
+
+  it('applies retry limits when Category 2 recovery makes no forward progress', async () => {
+    let uploadAttempts = 0;
+    const auth = mockAuth(async opts => {
+      const command = commandOf(opts);
+      if (command === 'start') {
+        return resumableUploadResponse(200, {
+          'x-goog-upload-url': SESSION_URL,
+          'x-goog-upload-status': 'active',
+        });
+      }
+      if (command === 'upload') {
+        uploadAttempts += 1;
+        return resumableUploadResponse(412, {'x-goog-upload-status': 'active'});
+      }
+      if (command === 'query') {
+        return resumableUploadResponse(200, {
+          'x-goog-upload-status': 'active',
+          'x-goog-upload-size-received': '0',
+        });
+      }
+      throw new Error(`Unexpected command: ${command}`);
+    });
+
+    const helper = new gax.ResumableUploadSession(buildContext(auth));
+    await helper.start({
+      uploadSource: bufferSource(Buffer.alloc(GRANULARITY)).source,
+      chunkSize: GRANULARITY,
+      retry: {
+        backoffSettings: {
+          maxRetries: 2,
+          initialRetryDelayMillis: 1,
+          retryDelayMultiplier: 1.0,
+          maxRetryDelayMillis: 1,
+          initialRpcTimeoutMillis: 1000,
+          rpcTimeoutMultiplier: 1.0,
+          maxRpcTimeoutMillis: 1000,
+          totalTimeoutMillis: 10000,
+        },
+      },
+    });
+    await assert.rejects(
+      helper.finished(),
+      (err: gax.GoogleError) => err.code === Status.DEADLINE_EXCEEDED,
+    );
+    assert.strictEqual(uploadAttempts, 3);
+  });
+
+  it('forwards CallSettings timeout, retry, and headers into ResumableUploadSession', async () => {
+    const requests: MockRequestOptions[] = [];
+    const auth = mockAuth(async opts => {
+      requests.push(opts);
+      const command = commandOf(opts);
+      if (command === 'start') {
+        return resumableUploadResponse(200, {
+          'x-goog-upload-url': SESSION_URL,
+          'x-goog-upload-status': 'active',
+        });
+      }
+      if (command === 'upload, finalize') {
+        return resumableUploadResponse(
+          200,
+          {'x-goog-upload-status': 'final'},
+          JSON.stringify({name: 'complete'}),
+        );
+      }
+      throw new Error(`Unexpected command: ${command}`);
+    });
+
+    const descriptor = new gax.ResumableUploadDescriptor('/resumable/upload');
+    const settings = new gax.CallSettings({
+      timeout: 9876,
+      otherArgs: {headers: {'x-custom-call-header': 'from-call-settings'}},
+    });
+    const func = async () => ({cancel() {}});
+    const apiCall = createApiCall(
+      Promise.resolve(func as any),
+      settings,
+      descriptor,
+    );
+    const [session] = (await (apiCall(
+      {name: 'test'},
+      {resumableUpload: buildContext(auth)},
+    ) as Promise<any>)) as [gax.ResumableUploadSession];
+
+    await session.start({
+      uploadSource: bufferSource(Buffer.alloc(16)).source,
+      chunkSize: GRANULARITY,
+    });
+    await session.finished();
+
+    assert.strictEqual(
+      requests[0].headers!['x-custom-call-header'],
+      'from-call-settings',
+    );
+    assert.strictEqual(requests[0].timeout, 9876);
+  });
+
+  it('rejects negative x-goog-upload-size-received headers during recovery', async () => {
+    const auth = mockAuth(async opts => {
+      const command = commandOf(opts);
+      if (command === 'query') {
+        return resumableUploadResponse(200, {
+          'x-goog-upload-status': 'active',
+          'x-goog-upload-size-received': '-5',
+        });
+      }
+      throw new Error(`Unexpected command: ${command}`);
+    });
+
+    const helper = new gax.ResumableUploadSession(buildContext(auth));
+    await assert.rejects(
+      helper.start({
+        uploadSource: bufferSource(Buffer.alloc(GRANULARITY)).source,
+        chunkSize: GRANULARITY,
+        resumeUrl: SESSION_URL,
+      }),
+      /did not include a x-goog-upload-size-received header/i,
+    );
+  });
 });
