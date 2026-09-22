@@ -1,0 +1,605 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.backupdr.v1beta",
+  "libraryPackage": "@google-cloud/backupdr",
+  "services": {
+    "BackupDR": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "BackupDRClient",
+          "rpcs": {
+            "GetManagementServer": {
+              "methods": [
+                "getManagementServer"
+              ]
+            },
+            "GetBackupVault": {
+              "methods": [
+                "getBackupVault"
+              ]
+            },
+            "GetDataSource": {
+              "methods": [
+                "getDataSource"
+              ]
+            },
+            "GetBackup": {
+              "methods": [
+                "getBackup"
+              ]
+            },
+            "GetBackupPlan": {
+              "methods": [
+                "getBackupPlan"
+              ]
+            },
+            "GetBackupPlanRevision": {
+              "methods": [
+                "getBackupPlanRevision"
+              ]
+            },
+            "GetBackupPlanAssociation": {
+              "methods": [
+                "getBackupPlanAssociation"
+              ]
+            },
+            "GetDataSourceReference": {
+              "methods": [
+                "getDataSourceReference"
+              ]
+            },
+            "GetAutoProtectionPolicy": {
+              "methods": [
+                "getAutoProtectionPolicy"
+              ]
+            },
+            "GetAutoProtectionPolicyBinding": {
+              "methods": [
+                "getAutoProtectionPolicyBinding"
+              ]
+            },
+            "GetBindingMatchingResource": {
+              "methods": [
+                "getBindingMatchingResource"
+              ]
+            },
+            "CreateManagementServer": {
+              "methods": [
+                "createManagementServer"
+              ]
+            },
+            "DeleteManagementServer": {
+              "methods": [
+                "deleteManagementServer"
+              ]
+            },
+            "CreateBackupVault": {
+              "methods": [
+                "createBackupVault"
+              ]
+            },
+            "UpdateBackupVault": {
+              "methods": [
+                "updateBackupVault"
+              ]
+            },
+            "DeleteBackupVault": {
+              "methods": [
+                "deleteBackupVault"
+              ]
+            },
+            "UpdateDataSource": {
+              "methods": [
+                "updateDataSource"
+              ]
+            },
+            "UpdateBackup": {
+              "methods": [
+                "updateBackup"
+              ]
+            },
+            "DeleteBackup": {
+              "methods": [
+                "deleteBackup"
+              ]
+            },
+            "RestoreBackup": {
+              "methods": [
+                "restoreBackup"
+              ]
+            },
+            "CreateBackupPlan": {
+              "methods": [
+                "createBackupPlan"
+              ]
+            },
+            "UpdateBackupPlan": {
+              "methods": [
+                "updateBackupPlan"
+              ]
+            },
+            "DeleteBackupPlan": {
+              "methods": [
+                "deleteBackupPlan"
+              ]
+            },
+            "CreateBackupPlanAssociation": {
+              "methods": [
+                "createBackupPlanAssociation"
+              ]
+            },
+            "UpdateBackupPlanAssociation": {
+              "methods": [
+                "updateBackupPlanAssociation"
+              ]
+            },
+            "DeleteBackupPlanAssociation": {
+              "methods": [
+                "deleteBackupPlanAssociation"
+              ]
+            },
+            "TriggerBackup": {
+              "methods": [
+                "triggerBackup"
+              ]
+            },
+            "InitializeService": {
+              "methods": [
+                "initializeService"
+              ]
+            },
+            "CreateAutoProtectionPolicy": {
+              "methods": [
+                "createAutoProtectionPolicy"
+              ]
+            },
+            "UpdateAutoProtectionPolicy": {
+              "methods": [
+                "updateAutoProtectionPolicy"
+              ]
+            },
+            "DeleteAutoProtectionPolicy": {
+              "methods": [
+                "deleteAutoProtectionPolicy"
+              ]
+            },
+            "CreateAutoProtectionPolicyBinding": {
+              "methods": [
+                "createAutoProtectionPolicyBinding"
+              ]
+            },
+            "InitiateDeleteAutoProtectionPolicyBinding": {
+              "methods": [
+                "initiateDeleteAutoProtectionPolicyBinding"
+              ]
+            },
+            "ListManagementServers": {
+              "methods": [
+                "listManagementServers",
+                "listManagementServersStream",
+                "listManagementServersAsync"
+              ]
+            },
+            "ListBackupVaults": {
+              "methods": [
+                "listBackupVaults",
+                "listBackupVaultsStream",
+                "listBackupVaultsAsync"
+              ]
+            },
+            "FetchUsableBackupVaults": {
+              "methods": [
+                "fetchUsableBackupVaults",
+                "fetchUsableBackupVaultsStream",
+                "fetchUsableBackupVaultsAsync"
+              ]
+            },
+            "ListDataSources": {
+              "methods": [
+                "listDataSources",
+                "listDataSourcesStream",
+                "listDataSourcesAsync"
+              ]
+            },
+            "ListBackups": {
+              "methods": [
+                "listBackups",
+                "listBackupsStream",
+                "listBackupsAsync"
+              ]
+            },
+            "FetchBackupsForResourceType": {
+              "methods": [
+                "fetchBackupsForResourceType",
+                "fetchBackupsForResourceTypeStream",
+                "fetchBackupsForResourceTypeAsync"
+              ]
+            },
+            "ListBackupPlans": {
+              "methods": [
+                "listBackupPlans",
+                "listBackupPlansStream",
+                "listBackupPlansAsync"
+              ]
+            },
+            "ListBackupPlanRevisions": {
+              "methods": [
+                "listBackupPlanRevisions",
+                "listBackupPlanRevisionsStream",
+                "listBackupPlanRevisionsAsync"
+              ]
+            },
+            "ListBackupPlanAssociations": {
+              "methods": [
+                "listBackupPlanAssociations",
+                "listBackupPlanAssociationsStream",
+                "listBackupPlanAssociationsAsync"
+              ]
+            },
+            "FetchBackupPlanAssociationsForResourceType": {
+              "methods": [
+                "fetchBackupPlanAssociationsForResourceType",
+                "fetchBackupPlanAssociationsForResourceTypeStream",
+                "fetchBackupPlanAssociationsForResourceTypeAsync"
+              ]
+            },
+            "ListDataSourceReferences": {
+              "methods": [
+                "listDataSourceReferences",
+                "listDataSourceReferencesStream",
+                "listDataSourceReferencesAsync"
+              ]
+            },
+            "FetchDataSourceReferencesForResourceType": {
+              "methods": [
+                "fetchDataSourceReferencesForResourceType",
+                "fetchDataSourceReferencesForResourceTypeStream",
+                "fetchDataSourceReferencesForResourceTypeAsync"
+              ]
+            },
+            "ListAutoProtectionPolicies": {
+              "methods": [
+                "listAutoProtectionPolicies",
+                "listAutoProtectionPoliciesStream",
+                "listAutoProtectionPoliciesAsync"
+              ]
+            },
+            "ListAutoProtectionPolicyBindings": {
+              "methods": [
+                "listAutoProtectionPolicyBindings",
+                "listAutoProtectionPolicyBindingsStream",
+                "listAutoProtectionPolicyBindingsAsync"
+              ]
+            },
+            "ListAppliedAutoProtectionPolicies": {
+              "methods": [
+                "listAppliedAutoProtectionPolicies",
+                "listAppliedAutoProtectionPoliciesStream",
+                "listAppliedAutoProtectionPoliciesAsync"
+              ]
+            },
+            "ListBindingMatchingResources": {
+              "methods": [
+                "listBindingMatchingResources",
+                "listBindingMatchingResourcesStream",
+                "listBindingMatchingResourcesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "BackupDRClient",
+          "rpcs": {
+            "GetManagementServer": {
+              "methods": [
+                "getManagementServer"
+              ]
+            },
+            "GetBackupVault": {
+              "methods": [
+                "getBackupVault"
+              ]
+            },
+            "GetDataSource": {
+              "methods": [
+                "getDataSource"
+              ]
+            },
+            "GetBackup": {
+              "methods": [
+                "getBackup"
+              ]
+            },
+            "GetBackupPlan": {
+              "methods": [
+                "getBackupPlan"
+              ]
+            },
+            "GetBackupPlanRevision": {
+              "methods": [
+                "getBackupPlanRevision"
+              ]
+            },
+            "GetBackupPlanAssociation": {
+              "methods": [
+                "getBackupPlanAssociation"
+              ]
+            },
+            "GetDataSourceReference": {
+              "methods": [
+                "getDataSourceReference"
+              ]
+            },
+            "GetAutoProtectionPolicy": {
+              "methods": [
+                "getAutoProtectionPolicy"
+              ]
+            },
+            "GetAutoProtectionPolicyBinding": {
+              "methods": [
+                "getAutoProtectionPolicyBinding"
+              ]
+            },
+            "GetBindingMatchingResource": {
+              "methods": [
+                "getBindingMatchingResource"
+              ]
+            },
+            "CreateManagementServer": {
+              "methods": [
+                "createManagementServer"
+              ]
+            },
+            "DeleteManagementServer": {
+              "methods": [
+                "deleteManagementServer"
+              ]
+            },
+            "CreateBackupVault": {
+              "methods": [
+                "createBackupVault"
+              ]
+            },
+            "UpdateBackupVault": {
+              "methods": [
+                "updateBackupVault"
+              ]
+            },
+            "DeleteBackupVault": {
+              "methods": [
+                "deleteBackupVault"
+              ]
+            },
+            "UpdateDataSource": {
+              "methods": [
+                "updateDataSource"
+              ]
+            },
+            "UpdateBackup": {
+              "methods": [
+                "updateBackup"
+              ]
+            },
+            "DeleteBackup": {
+              "methods": [
+                "deleteBackup"
+              ]
+            },
+            "RestoreBackup": {
+              "methods": [
+                "restoreBackup"
+              ]
+            },
+            "CreateBackupPlan": {
+              "methods": [
+                "createBackupPlan"
+              ]
+            },
+            "UpdateBackupPlan": {
+              "methods": [
+                "updateBackupPlan"
+              ]
+            },
+            "DeleteBackupPlan": {
+              "methods": [
+                "deleteBackupPlan"
+              ]
+            },
+            "CreateBackupPlanAssociation": {
+              "methods": [
+                "createBackupPlanAssociation"
+              ]
+            },
+            "UpdateBackupPlanAssociation": {
+              "methods": [
+                "updateBackupPlanAssociation"
+              ]
+            },
+            "DeleteBackupPlanAssociation": {
+              "methods": [
+                "deleteBackupPlanAssociation"
+              ]
+            },
+            "TriggerBackup": {
+              "methods": [
+                "triggerBackup"
+              ]
+            },
+            "InitializeService": {
+              "methods": [
+                "initializeService"
+              ]
+            },
+            "CreateAutoProtectionPolicy": {
+              "methods": [
+                "createAutoProtectionPolicy"
+              ]
+            },
+            "UpdateAutoProtectionPolicy": {
+              "methods": [
+                "updateAutoProtectionPolicy"
+              ]
+            },
+            "DeleteAutoProtectionPolicy": {
+              "methods": [
+                "deleteAutoProtectionPolicy"
+              ]
+            },
+            "CreateAutoProtectionPolicyBinding": {
+              "methods": [
+                "createAutoProtectionPolicyBinding"
+              ]
+            },
+            "InitiateDeleteAutoProtectionPolicyBinding": {
+              "methods": [
+                "initiateDeleteAutoProtectionPolicyBinding"
+              ]
+            },
+            "ListManagementServers": {
+              "methods": [
+                "listManagementServers",
+                "listManagementServersStream",
+                "listManagementServersAsync"
+              ]
+            },
+            "ListBackupVaults": {
+              "methods": [
+                "listBackupVaults",
+                "listBackupVaultsStream",
+                "listBackupVaultsAsync"
+              ]
+            },
+            "FetchUsableBackupVaults": {
+              "methods": [
+                "fetchUsableBackupVaults",
+                "fetchUsableBackupVaultsStream",
+                "fetchUsableBackupVaultsAsync"
+              ]
+            },
+            "ListDataSources": {
+              "methods": [
+                "listDataSources",
+                "listDataSourcesStream",
+                "listDataSourcesAsync"
+              ]
+            },
+            "ListBackups": {
+              "methods": [
+                "listBackups",
+                "listBackupsStream",
+                "listBackupsAsync"
+              ]
+            },
+            "FetchBackupsForResourceType": {
+              "methods": [
+                "fetchBackupsForResourceType",
+                "fetchBackupsForResourceTypeStream",
+                "fetchBackupsForResourceTypeAsync"
+              ]
+            },
+            "ListBackupPlans": {
+              "methods": [
+                "listBackupPlans",
+                "listBackupPlansStream",
+                "listBackupPlansAsync"
+              ]
+            },
+            "ListBackupPlanRevisions": {
+              "methods": [
+                "listBackupPlanRevisions",
+                "listBackupPlanRevisionsStream",
+                "listBackupPlanRevisionsAsync"
+              ]
+            },
+            "ListBackupPlanAssociations": {
+              "methods": [
+                "listBackupPlanAssociations",
+                "listBackupPlanAssociationsStream",
+                "listBackupPlanAssociationsAsync"
+              ]
+            },
+            "FetchBackupPlanAssociationsForResourceType": {
+              "methods": [
+                "fetchBackupPlanAssociationsForResourceType",
+                "fetchBackupPlanAssociationsForResourceTypeStream",
+                "fetchBackupPlanAssociationsForResourceTypeAsync"
+              ]
+            },
+            "ListDataSourceReferences": {
+              "methods": [
+                "listDataSourceReferences",
+                "listDataSourceReferencesStream",
+                "listDataSourceReferencesAsync"
+              ]
+            },
+            "FetchDataSourceReferencesForResourceType": {
+              "methods": [
+                "fetchDataSourceReferencesForResourceType",
+                "fetchDataSourceReferencesForResourceTypeStream",
+                "fetchDataSourceReferencesForResourceTypeAsync"
+              ]
+            },
+            "ListAutoProtectionPolicies": {
+              "methods": [
+                "listAutoProtectionPolicies",
+                "listAutoProtectionPoliciesStream",
+                "listAutoProtectionPoliciesAsync"
+              ]
+            },
+            "ListAutoProtectionPolicyBindings": {
+              "methods": [
+                "listAutoProtectionPolicyBindings",
+                "listAutoProtectionPolicyBindingsStream",
+                "listAutoProtectionPolicyBindingsAsync"
+              ]
+            },
+            "ListAppliedAutoProtectionPolicies": {
+              "methods": [
+                "listAppliedAutoProtectionPolicies",
+                "listAppliedAutoProtectionPoliciesStream",
+                "listAppliedAutoProtectionPoliciesAsync"
+              ]
+            },
+            "ListBindingMatchingResources": {
+              "methods": [
+                "listBindingMatchingResources",
+                "listBindingMatchingResourcesStream",
+                "listBindingMatchingResourcesAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "BackupDrProtectionSummary": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "BackupDrProtectionSummaryClient",
+          "rpcs": {
+            "ListResourceBackupConfigs": {
+              "methods": [
+                "listResourceBackupConfigs",
+                "listResourceBackupConfigsStream",
+                "listResourceBackupConfigsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "BackupDrProtectionSummaryClient",
+          "rpcs": {
+            "ListResourceBackupConfigs": {
+              "methods": [
+                "listResourceBackupConfigs",
+                "listResourceBackupConfigsStream",
+                "listResourceBackupConfigsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
