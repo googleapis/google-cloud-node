@@ -654,6 +654,146 @@ describe('PartialResultStream', () => {
       done();
     });
 
+    it('should emit paused event exactly once when downstream backpressure is triggered during multi-chunk streaming', done => {
+      const stream = new PartialResultStream({});
+      let pausedCount = 0;
+      stream.on('paused', () => {
+        pausedCount++;
+      });
+
+      sandbox.stub(stream, 'push').callsFake(data => {
+        if (data === undefined || data === null) {
+          return true;
+        }
+        return false;
+      });
+
+      const fields = [
+        {name: 'col1', type: {code: 'STRING'}},
+        {name: 'col2', type: {code: 'STRING'}},
+      ];
+      // First chunk establishes stream and metadata, not last
+      stream.write({
+        metadata: {rowType: {fields}},
+        values: [convertToIValue('val1'), convertToIValue('val2')],
+      });
+      // Second chunk emits multiple rows while push() returns false
+      stream.write({
+        values: [
+          convertToIValue('val3'),
+          convertToIValue('val4'),
+          convertToIValue('val5'),
+          convertToIValue('val6'),
+        ],
+        last: true,
+      });
+
+      assert.strictEqual(pausedCount, 1);
+      done();
+    });
+
+    it('should handle multi-chunk streaming where an intermediate chunk has a single value that remains chunked', done => {
+      const stream = new PartialResultStream({});
+      const rows: prs.Row[] = [];
+      stream
+        .on('data', row => rows.push(row))
+        .on('end', () => {
+          try {
+            assert.strictEqual(rows.length, 2);
+            assert.deepStrictEqual(rows[0].toJSON(), {
+              id: 'id1',
+              text: 'hello-world-again',
+            });
+            assert.deepStrictEqual(rows[1].toJSON(), {
+              id: 'id2',
+              text: 'text2',
+            });
+            done();
+          } catch (err) {
+            done(err);
+          }
+        })
+        .on('error', done);
+
+      const fields = [
+        {name: 'id', type: {code: 'STRING'}},
+        {name: 'text', type: {code: 'STRING'}},
+      ];
+      // Chunk 1: starts row 1, ends with partial text 'hello-'
+      stream.write({
+        metadata: {rowType: {fields}},
+        values: [convertToIValue('id1'), convertToIValue('hello-')],
+        chunkedValue: true,
+      });
+      // Chunk 2: only has 1 value, and is still chunked ('world-')
+      stream.write({
+        values: [convertToIValue('world-')],
+        chunkedValue: true,
+      });
+      // Chunk 3: completes row 1 and provides complete row 2
+      stream.write({
+        values: [
+          convertToIValue('again'),
+          convertToIValue('id2'),
+          convertToIValue('text2'),
+        ],
+        last: true,
+      });
+      stream.end();
+    });
+
+    it('should reuse pre-allocated row buffer across multiple rows and chunks without cross-row contamination', done => {
+      const stream = new PartialResultStream({});
+      const rows: prs.Row[] = [];
+      stream
+        .on('data', row => rows.push(row))
+        .on('end', () => {
+          try {
+            assert.strictEqual(rows.length, 3);
+            assert.deepStrictEqual(
+              rows.map(row => row.toJSON()),
+              [
+                {a: '1', b: '2', c: '3'},
+                {a: '4', b: '5', c: '6'},
+                {a: '7', b: '8', c: '9'},
+              ],
+            );
+            done();
+          } catch (err) {
+            done(err);
+          }
+        })
+        .on('error', done);
+
+      const fields = [
+        {name: 'a', type: {code: 'STRING'}},
+        {name: 'b', type: {code: 'STRING'}},
+        {name: 'c', type: {code: 'STRING'}},
+      ];
+      // Chunk 1: completes row 1, starts row 2
+      stream.write({
+        metadata: {rowType: {fields}},
+        values: [
+          convertToIValue('1'),
+          convertToIValue('2'),
+          convertToIValue('3'),
+          convertToIValue('4'),
+        ],
+      });
+      // Chunk 2: completes row 2, completes row 3
+      stream.write({
+        values: [
+          convertToIValue('5'),
+          convertToIValue('6'),
+          convertToIValue('7'),
+          convertToIValue('8'),
+          convertToIValue('9'),
+        ],
+        last: true,
+      });
+      stream.end();
+    });
+
     it('should route first chunk with last=true to _addSingleChunk', done => {
       const stream = new PartialResultStream({});
       const addSingleChunkSpy = sandbox.spy(stream as any, '_addSingleChunk');
@@ -1129,6 +1269,80 @@ describe('PartialResultStream', () => {
         stream.end();
       });
     });
+
+    describe('_resetPendingValues', () => {
+      it('should reset pending values and row buffer to beginning if no resume token was received', () => {
+        const stream = new PartialResultStream({});
+        const internalStream = stream as unknown as {
+          _valueIndex: number;
+          _pendingValue?: unknown;
+          _rowValues: unknown[];
+        };
+        const fields = [
+          {name: 'col1', type: {code: 'STRING'}},
+          {name: 'col2', type: {code: 'STRING'}},
+          {name: 'col3', type: {code: 'STRING'}},
+        ];
+        stream.write({
+          metadata: {rowType: {fields}},
+          values: [convertToIValue('val1'), convertToIValue('part-')],
+          chunkedValue: true,
+        });
+
+        assert.strictEqual(internalStream._valueIndex, 1);
+        assert.strictEqual(internalStream._pendingValue, 'part-');
+        assert.strictEqual(internalStream._rowValues[0], 'val1');
+
+        stream._resetPendingValues();
+
+        assert.strictEqual(internalStream._valueIndex, 0);
+        assert.strictEqual(internalStream._pendingValue, undefined);
+        assert.strictEqual(internalStream._rowValues[0], undefined);
+        assert.strictEqual(internalStream._rowValues[1], undefined);
+        assert.strictEqual(internalStream._rowValues[2], undefined);
+      });
+
+      it('should restore pending values and row buffer to saved checkpoint when a resume token was received', () => {
+        const stream = new PartialResultStream({});
+        const internalStream = stream as unknown as {
+          _valueIndex: number;
+          _pendingValue?: unknown;
+          _rowValues: unknown[];
+        };
+        const fields = [
+          {name: 'col1', type: {code: 'STRING'}},
+          {name: 'col2', type: {code: 'STRING'}},
+          {name: 'col3', type: {code: 'STRING'}},
+        ];
+        // Chunk 1 has resume token and partial row (col1 only)
+        stream.write({
+          metadata: {rowType: {fields}},
+          values: [convertToIValue('checkpointVal')],
+          resumeToken: 'token-1',
+        });
+
+        assert.strictEqual(internalStream._valueIndex, 1);
+        assert.strictEqual(internalStream._rowValues[0], 'checkpointVal');
+
+        // Chunk 2 continues without resume token and has chunkedValue
+        stream.write({
+          values: [convertToIValue('val2-part-')],
+          chunkedValue: true,
+        });
+
+        assert.strictEqual(internalStream._valueIndex, 1);
+        assert.strictEqual(internalStream._pendingValue, 'val2-part-');
+
+        // Reset should roll back to Chunk 1 checkpoint
+        stream._resetPendingValues();
+
+        assert.strictEqual(internalStream._valueIndex, 1);
+        assert.strictEqual(internalStream._pendingValue, undefined);
+        assert.strictEqual(internalStream._rowValues[0], 'checkpointVal');
+        assert.strictEqual(internalStream._rowValues[1], undefined);
+        assert.strictEqual(internalStream._rowValues[2], undefined);
+      });
+    });
   });
 
   describe('partialResultStream', () => {
@@ -1308,6 +1522,72 @@ describe('PartialResultStream', () => {
             done();
           }),
         );
+    });
+
+    it('should correctly resume and preserve incomplete row state when resumed stream first chunk contains metadata', done => {
+      const firstStream = through.obj();
+      const secondStream = through.obj();
+      const requestFnStub = sandbox.stub();
+
+      const metadata = {
+        rowType: {
+          fields: [
+            {name: 'col1', type: {code: 'STRING'}},
+            {name: 'col2', type: {code: 'STRING'}},
+          ],
+        },
+      };
+
+      requestFnStub.onCall(0).callsFake(() => {
+        setImmediate(() => {
+          firstStream.push({
+            metadata,
+            values: [convertToIValue('val1')],
+            resumeToken: 'checkpoint-token',
+          });
+
+          setImmediate(() => {
+            firstStream.emit('error', {
+              code: grpc.status.UNAVAILABLE,
+              message: 'Unavailable',
+            } as grpc.ServiceError);
+          });
+        });
+
+        return firstStream;
+      });
+
+      requestFnStub.onCall(1).callsFake(resumeToken => {
+        assert.strictEqual(resumeToken, 'checkpoint-token');
+
+        setImmediate(() => {
+          secondStream.push({
+            metadata,
+            values: [convertToIValue('val2')],
+            last: true,
+          });
+          secondStream.end();
+        });
+
+        return secondStream;
+      });
+
+      const rows: Row[] = [];
+      partialResultStream(requestFnStub)
+        .on('data', row => rows.push(row))
+        .on('end', () => {
+          try {
+            assert.strictEqual(rows.length, 1);
+            assert.deepStrictEqual(rows[0].toJSON(), {
+              col1: 'val1',
+              col2: 'val2',
+            });
+            done();
+          } catch (err) {
+            done(err);
+          }
+        })
+        .on('error', done);
     });
 
     it('should emit non-retryable error', done => {
