@@ -21,6 +21,7 @@ import {VectorValue} from '../field-value';
 import {FieldPath} from '../path';
 import {
   fieldOrExpression,
+  isExpr,
   isFirestoreValue,
   isString,
   toField,
@@ -3372,6 +3373,42 @@ export class AggregateFunction implements AggregateFunction, HasUserData {
    */
   as(name: string): AliasedAggregate {
     return new AliasedAggregate(this, name);
+  }
+
+  /**
+   * Evaluates this aggregate function over a specific window frame, rather than
+   * over the window frame defined by the enclosing
+   * `Pipeline.addWindowFields()` stage.
+   *
+   * Today the backend only accepts a frame (`documents` or `range`) here, and
+   * rejects `partition` and `sort`, which must be specified on the enclosing
+   * `addWindowFields()` stage.
+   *
+   * @example
+   * ```typescript
+   * firestore.pipeline().collection("sales")
+   *   .addWindowFields(
+   *     { sort: ascending('date') },
+   *     // Uses the stage's default frame.
+   *     sum('amount').as('runningTotal'),
+   *     // Overrides the stage frame with a 3 document moving window.
+   *     average('amount')
+   *       .over({ documents: { preceding: 1, following: 1 } })
+   *       .as('movingAverage')
+   *   );
+   * ```
+   *
+   * @param window - A `WindowSpec` containing the
+   *     `documents` or `range` frame to evaluate this aggregate over. If omitted, the
+   *     enclosing stage's frame is used.
+   * @returns A new `WindowFunction`.
+   */
+  over(window?: firestore.Pipelines.WindowSpec): WindowFunction {
+    return WindowFunction._create(
+      this.name,
+      this.params,
+      window === undefined ? undefined : new WindowSpecInternal(window),
+    );
   }
 
   /**
@@ -11222,4 +11259,403 @@ export class Ordering implements HasUserData {
   _validateUserData(ignoreUndefinedProperties: boolean): void {
     (this.expr as Expression)._validateUserData(ignoreUndefinedProperties);
   }
+}
+
+/**
+ * A bound of a window frame. Either a numeric offset, one of the sentinel
+ * strings `'current'` or `'unbounded'`, or an {@link Expression} that evaluates
+ * to one of those values.
+ *
+ * @internal
+ * @private
+ */
+export type WindowFrameBound =
+  number | 'current' | 'unbounded' | firestore.Pipelines.Expression;
+
+/**
+ * The normalized internal representation of a `WindowSpec`.
+ *
+ * This mirrors the wire format one-to-one: `partition` and `sort` are
+ * normalized to expressions and orderings, while `documents` and `range` are
+ * carried through verbatim. Combinations that the backend rejects (such as
+ * specifying both `documents` and `range`) are deliberately representable
+ * here so that the backend, rather than the SDK, owns validation.
+ *
+ * The same serialization is used for the first argument of the
+ * `add_window_fields` stage and for the second argument of an accumulator
+ * level `over()` clause.
+ *
+ * @internal
+ * @private
+ */
+export class WindowSpecInternal implements HasUserData {
+  readonly partition: Expression[];
+  readonly sort: Ordering[];
+  readonly documents?: firestore.Pipelines.DocumentWindowFrame;
+  readonly range?: firestore.Pipelines.RangeWindowFrame;
+
+  constructor(window: firestore.Pipelines.WindowSpec) {
+    const sort = window.sort;
+    this.partition = (window.partition ?? []).map(value =>
+      isString(value) ? field(value) : (value as Expression),
+    );
+    this.sort =
+      sort === undefined
+        ? []
+        : Array.isArray(sort)
+          ? (sort as Ordering[])
+          : [sort as Ordering];
+    this.documents = window.documents;
+    this.range = window.range;
+  }
+
+  /**
+   * @private
+   * @internal
+   */
+  _toProto(serializer: Serializer): api.IValue {
+    const fields: Record<string, api.IValue> = {};
+
+    // Empty `partition` and `sort` keys are omitted rather than sent as empty
+    // arrays, matching what the backend emits.
+    if (this.partition.length > 0) {
+      fields.partition = {
+        arrayValue: {values: this.partition.map(p => p._toProto(serializer))},
+      };
+    }
+    if (this.sort.length > 0) {
+      fields.sort = {
+        arrayValue: {values: this.sort.map(o => o._toProto(serializer))},
+      };
+    }
+    if (this.documents !== undefined) {
+      fields.documents = this.frameToProto(serializer, this.documents);
+    }
+    if (this.range !== undefined) {
+      fields.range = this.frameToProto(serializer, this.range);
+    }
+
+    return {mapValue: {fields}};
+  }
+
+  /**
+   * @private
+   * @internal
+   */
+  _validateUserData(ignoreUndefinedProperties: boolean): void {
+    this.partition.forEach(p => p._validateUserData(ignoreUndefinedProperties));
+    this.sort.forEach(o => o._validateUserData(ignoreUndefinedProperties));
+
+    for (const frame of [this.documents, this.range]) {
+      if (frame === undefined) {
+        continue;
+      }
+      if (isExpr(frame.preceding)) {
+        (frame.preceding as Expression)._validateUserData(
+          ignoreUndefinedProperties,
+        );
+      }
+      if (isExpr(frame.following)) {
+        (frame.following as Expression)._validateUserData(
+          ignoreUndefinedProperties,
+        );
+      }
+      const unit = (frame as firestore.Pipelines.RangeWindowFrame).unit;
+      if (unit !== undefined && isExpr(unit)) {
+        (unit as Expression)._validateUserData(ignoreUndefinedProperties);
+      }
+    }
+  }
+
+  /**
+   * Serializes a window frame, i.e. the value keyed by `documents` or `range`
+   * in a window specification.
+   */
+  private frameToProto(
+    serializer: Serializer,
+    frame:
+      | firestore.Pipelines.DocumentWindowFrame
+      | firestore.Pipelines.RangeWindowFrame,
+  ): api.IValue {
+    const fields: Record<string, api.IValue> = {};
+
+    // Bounds are only sent when supplied. The backend defaults an absent bound
+    // to the current document.
+    if (frame.preceding !== undefined) {
+      fields.preceding = this.frameBoundToProto(
+        serializer,
+        frame.preceding,
+        'preceding',
+      );
+    }
+    if (frame.following !== undefined) {
+      fields.following = this.frameBoundToProto(
+        serializer,
+        frame.following,
+        'following',
+      );
+    }
+
+    // `unit` is only meaningful on a `range` frame, but it is encoded wherever
+    // it is supplied so that the backend reports the error.
+    const unit = (frame as firestore.Pipelines.RangeWindowFrame).unit;
+    if (unit !== undefined) {
+      fields.unit = isString(unit)
+        ? serializer.encodeValue(unit)!
+        : (unit as Expression)._toProto(serializer);
+    }
+
+    return {mapValue: {fields}};
+  }
+
+  /**
+   * Serializes a single window frame bound.
+   */
+  private frameBoundToProto(
+    serializer: Serializer,
+    bound: WindowFrameBound,
+    boundName: 'preceding' | 'following',
+  ): api.IValue {
+    if (typeof bound === 'number') {
+      return serializer.encodeValue(bound)!;
+    }
+    // Sentinel strings are passed through as-is rather than being checked
+    // against a known set, so that the backend can add new sentinels without an
+    // SDK update. Unknown values are rejected by the backend.
+    if (isString(bound)) {
+      return serializer.encodeValue(bound)!;
+    }
+    if (isExpr(bound)) {
+      return (bound as Expression)._toProto(serializer);
+    }
+    // Validated client side only because there is no way to encode a value of
+    // an unknown type into a proto `Value`.
+    throw new Error(
+      `Invalid window frame '${boundName}' bound. Expected a number, ` +
+        `'current', 'unbounded', or an Expression.`,
+    );
+  }
+
+  _protoValueType = 'ProtoValue' as const;
+}
+
+/**
+ * A function that is evaluated over a window frame of documents, as part of an
+ * `Pipeline.addWindowFields()` stage.
+ *
+ * A `WindowFunction` is created either by one of the dedicated window function
+ * factories (such as {@link rank}), or by calling
+ * `over()` on an {@link AggregateFunction}.
+ */
+export class WindowFunction
+  implements firestore.Pipelines.WindowFunction, HasUserData
+{
+  expressionType: firestore.Pipelines.ExpressionType = 'WindowFunction';
+
+  /**
+   * @internal
+   * @private
+   * Indicates if this expression was created from a literal value passed
+   * by the caller.
+   */
+  _createdFromLiteral = false;
+
+  /**
+   * The accumulator level window this function is evaluated over. When
+   * `undefined`, the window of the enclosing stage is used.
+   */
+  private window?: WindowSpecInternal;
+
+  constructor(
+    private name: string,
+    private params: Expression[] = [],
+  ) {}
+
+  /**
+   * @internal
+   * @private
+   */
+  static _create(
+    name: string,
+    params: Expression[],
+    window?: WindowSpecInternal,
+  ): WindowFunction {
+    const wf = new WindowFunction(name, params);
+    wf.window = window;
+
+    return wf;
+  }
+
+  /**
+   * Evaluates this window function over a specific window frame, rather than
+   * over the window frame defined by the enclosing
+   * `Pipeline.addWindowFields()` stage.
+   *
+   * Today the backend only accepts a frame (`documents` or `range`) here, and
+   * rejects `partition` and `sort`, which must be specified on the enclosing
+   * `addWindowFields()` stage.
+   *
+   * @param window - A `WindowSpec` containing
+   *     the `documents` or `range` frame to evaluate this function over. If
+   *     omitted, the enclosing stage's frame is used.
+   * @returns A new `WindowFunction`.
+   */
+  over(window?: firestore.Pipelines.WindowSpec): WindowFunction {
+    return WindowFunction._create(
+      this.name,
+      this.params,
+      window === undefined ? undefined : new WindowSpecInternal(window),
+    );
+  }
+
+  /**
+   * Assigns an alias to this `WindowFunction`. The alias specifies the name that
+   * the computed value will have in the output document.
+   *
+   * @param name - The alias to assign to this `WindowFunction`.
+   * @returns A new `AliasedWindowFunction`.
+   */
+  as(name: string): AliasedWindowFunction {
+    return new AliasedWindowFunction(this, name);
+  }
+
+  /**
+   * @private
+   * @internal
+   */
+  _toProto(serializer: Serializer): api.IValue {
+    const functionValue: api.IValue = {
+      functionValue: {
+        name: this.name,
+        args: this.params.map(p => p._toProto(serializer)),
+      },
+    };
+
+    if (this.window === undefined) {
+      return functionValue;
+    }
+
+    return {
+      functionValue: {
+        name: 'over',
+        args: [functionValue, this.window._toProto(serializer)],
+      },
+    };
+  }
+
+  _protoValueType = 'ProtoValue' as const;
+
+  /**
+   * @private
+   * @internal
+   */
+  _validateUserData(ignoreUndefinedProperties: boolean): void {
+    this.params.forEach(expr => {
+      return expr._validateUserData(ignoreUndefinedProperties);
+    });
+    this.window?._validateUserData(ignoreUndefinedProperties);
+  }
+}
+
+/**
+ * A `WindowFunction` with an alias.
+ */
+export class AliasedWindowFunction
+  implements firestore.Pipelines.AliasedWindowFunction, HasUserData
+{
+  /**
+   * @internal
+   */
+  readonly _windowFunction: WindowFunction;
+
+  /**
+   * @internal
+   */
+  readonly _alias: string;
+
+  constructor(
+    readonly windowFunction: WindowFunction,
+    readonly alias: string,
+  ) {
+    this._windowFunction = windowFunction;
+    this._alias = alias;
+  }
+
+  /**
+   * @internal
+   * @private
+   * Indicates if this expression was created from a literal value passed
+   * by the caller.
+   */
+  _createdFromLiteral = false;
+
+  /**
+   * @private
+   * @internal
+   */
+  _validateUserData(ignoreUndefinedProperties: boolean): void {
+    this.windowFunction._validateUserData(ignoreUndefinedProperties);
+  }
+}
+
+/**
+ * Creates a window function that computes the rank of the current document
+ * within its window frame. Documents that compare equal in the window sort
+ * order receive the same rank, and the next rank is offset by the number of
+ * tied documents.
+ *
+ * @example
+ * ```typescript
+ * firestore.pipeline().collection("employees")
+ *   .addWindowFields(
+ *     { partition: ['department'], sort: descending('salary') },
+ *     rank().as('salaryRank')
+ *   );
+ * ```
+ *
+ * @returns A new `WindowFunction`.
+ */
+export function rank(): WindowFunction {
+  return WindowFunction._create('rank', []);
+}
+
+/**
+ * Creates a window function that computes the rank of the current document
+ * within its window frame, without gaps in the ranking sequence. Documents that
+ * compare equal in the window sort order receive the same rank, and the next
+ * rank is always incremented by one.
+ *
+ * @example
+ * ```typescript
+ * firestore.pipeline().collection("employees")
+ *   .addWindowFields(
+ *     { partition: ['department'], sort: descending('salary') },
+ *     denseRank().as('salaryRank')
+ *   );
+ * ```
+ *
+ * @returns A new `WindowFunction`.
+ */
+export function denseRank(): WindowFunction {
+  return WindowFunction._create('dense_rank', []);
+}
+
+/**
+ * Creates a window function that computes the sequential position of the
+ * current document within its window frame, starting at 1. Documents that
+ * compare equal in the window sort order receive distinct row numbers.
+ *
+ * @example
+ * ```typescript
+ * firestore.pipeline().collection("employees")
+ *   .addWindowFields(
+ *     { partition: ['department'], sort: descending('salary') },
+ *     rowNumber().as('salaryRowNumber')
+ *   );
+ * ```
+ *
+ * @returns A new `WindowFunction`.
+ */
+export function rowNumber(): WindowFunction {
+  return WindowFunction._create('row_number', []);
 }
