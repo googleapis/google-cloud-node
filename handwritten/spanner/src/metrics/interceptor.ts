@@ -17,6 +17,8 @@ import {InterceptingListener, Metadata, StatusObject} from '@grpc/grpc-js';
 import {MetricsTracerFactory} from './metrics-tracer-factory';
 import {isAFEServerTimingEnabled} from '../common';
 
+const PROJECT_ID_REGEX = /^projects\/([^/]+)\//;
+
 /**
  * Interceptor for recording metrics on gRPC calls.
  *
@@ -35,7 +37,10 @@ export const MetricInterceptor = (options, nextCall) => {
       const resourcePrefix = metadata.get(
         'google-cloud-resource-prefix',
       )[0] as string;
-      const match = resourcePrefix?.match(/^projects\/([^/]+)\//);
+      const match =
+        typeof resourcePrefix === 'string'
+          ? PROJECT_ID_REGEX.exec(resourcePrefix)
+          : null;
       const projectId = match ? match[1] : undefined;
       let factory;
       if (projectId) {
