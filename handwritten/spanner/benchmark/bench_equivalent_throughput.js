@@ -442,8 +442,9 @@ function ensureArtifactsBuilt() {
 
   // 3. Check Pure Go QPS Benchmark binary
   if (!fs.existsSync(GO_QPS_BIN)) {
-    console.log('Compiling Pure Go QPS benchmark binary...');
-    execSync('go build -o spanner_go_qps_bench qps_bench.go', {
+    console.log('Compiling Pure Go QPS benchmark binary via build.sh...');
+    const buildSh = path.join(GO_BENCH_DIR, 'build.sh');
+    execSync(`bash "${buildSh}"`, {
       cwd: GO_BENCH_DIR,
       stdio: 'inherit',
     });
