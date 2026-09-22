@@ -28,6 +28,7 @@ import {
   ReadableSpan,
 } from '@opentelemetry/sdk-trace-base';
 import {NodeTracerProvider} from '@opentelemetry/sdk-trace-node';
+import {AsyncLocalStorageContextManager} from '@opentelemetry/context-async-hooks';
 import {EchoClient, SequenceServiceClient, protos} from 'showcase-echo-client';
 import {ShowcaseServer} from 'showcase-server';
 import {
@@ -56,10 +57,15 @@ export class ShowcaseOtelHarness {
   readonly exporter: InMemorySpanExporter;
   readonly provider: BasicTracerProvider | NodeTracerProvider;
   readonly providerKind: TracerProviderKind;
+  readonly contextManager: AsyncLocalStorageContextManager;
 
   constructor(kind: TracerProviderKind = 'basic') {
     this.providerKind = kind;
     this.exporter = new InMemorySpanExporter();
+    this.contextManager = new AsyncLocalStorageContextManager();
+    this.contextManager.enable();
+    context.setGlobalContextManager(this.contextManager);
+
     const processor = new SimpleSpanProcessor(this.exporter);
     if (kind === 'node') {
       this.provider = new NodeTracerProvider({
@@ -78,6 +84,7 @@ export class ShowcaseOtelHarness {
 
   teardown(): void {
     trace.disable();
+    this.contextManager.disable();
     context.disable();
     this.reset();
   }
@@ -268,6 +275,10 @@ export async function runTelemetryTests(
     assert.strictEqual(restErrorSpan.attributes['rpc.response.status_code'], 'INVALID_ARGUMENT');
     assert.strictEqual(restErrorSpan.attributes['http.response.status_code'], 400);
     assert.strictEqual(restErrorSpan.attributes['grpc.response.status_code'], undefined);
+    assert.strictEqual(restErrorSpan.attributes['error.type'], 'INVALID_ARGUMENT');
+    assert.ok(
+      String(restErrorSpan.attributes['error.message']).includes('Invalid argument rest'),
+    );
     assert.ok(restErrorSpan.events.some(e => e.name === 'exception'));
 
     // =========================================================================
@@ -467,6 +478,10 @@ export async function runTelemetryTests(
       assert.strictEqual(failedRetrySpan.status.code, SpanStatusCode.ERROR);
       assert.strictEqual(failedRetrySpan.attributes['gcp.method.type'], 'grpc');
       assert.strictEqual(failedRetrySpan.attributes['gcp.method.name'], 'AttemptSequence');
+      assert.strictEqual(failedRetrySpan.attributes['rpc.response.status_code'], 'DEADLINE_EXCEEDED');
+      assert.strictEqual(failedRetrySpan.attributes['grpc.response.status_code'], 'DEADLINE_EXCEEDED');
+      assert.strictEqual(failedRetrySpan.attributes['error.type'], 'DEADLINE_EXCEEDED');
+      assert.ok(failedRetrySpan.attributes['error.message'] !== undefined);
       assert.ok(failedRetrySpan.events.some(e => e.name === 'exception'));
       harness.assertMinDurationMs(1, failedRetrySpan);
     }
@@ -485,10 +500,10 @@ export async function runTelemetryTests(
       const backoffSettings = createBackoffSettings(
         50,
         1.5,
-        1000,
+        500,
         null,
         1.5,
-        5000,
+        3000,
         null,
       );
       backoffSettings.maxRetries = 3;
@@ -554,8 +569,73 @@ export async function runTelemetryTests(
       assert.strictEqual(failedRestRetrySpan.status.code, SpanStatusCode.ERROR);
       assert.strictEqual(failedRestRetrySpan.attributes['gcp.method.type'], 'http');
       assert.strictEqual(failedRestRetrySpan.attributes['gcp.method.name'], 'AttemptSequence');
+      assert.strictEqual(failedRestRetrySpan.attributes['rpc.response.status_code'], 'DEADLINE_EXCEEDED');
+      assert.strictEqual(failedRestRetrySpan.attributes['error.type'], 'DEADLINE_EXCEEDED');
+      assert.ok(failedRestRetrySpan.attributes['error.message'] !== undefined);
       assert.ok(failedRestRetrySpan.events.some(e => e.name === 'exception'));
       harness.assertMinDurationMs(1, failedRestRetrySpan);
+    }
+
+    // =========================================================================
+    // 4. TRACE CONTEXT PROPAGATION
+    // =========================================================================
+    console.log('Testing Trace Context Propagation: gRPC...');
+    {
+      harness.reset();
+      const parentTracer = trace.getTracer('test-parent-tracer');
+      let parentSpanId: string | undefined;
+      let parentTraceId: string | undefined;
+
+      await parentTracer.startActiveSpan('parent-operation-grpc', async (parentSpan) => {
+        try {
+          const parentContext = parentSpan.spanContext();
+          parentSpanId = parentContext.spanId;
+          parentTraceId = parentContext.traceId;
+
+          const [response] = await grpcEchoClient.echo({content: 'propagation-grpc'});
+          assert.strictEqual(response.content, 'propagation-grpc');
+        } finally {
+          parentSpan.end();
+        }
+      });
+
+      // We expect 2 spans finished in harness: parent span and child client span (T3)
+      const allSpans = harness.exporter.getFinishedSpans();
+      assert.strictEqual(allSpans.length, 2, `Expected 2 spans (parent + child), got ${allSpans.length}`);
+
+      const childSpan = harness.requireSingleSpan('google-gax');
+      assert.strictEqual(childSpan.name, 'EchoClient.Echo');
+      assert.strictEqual(childSpan.spanContext().traceId, parentTraceId, 'T3 span should inherit traceId from parent context');
+      assert.strictEqual(childSpan.parentSpanContext?.spanId, parentSpanId, 'T3 span should have parentSpanContext pointing to active parent span');
+    }
+
+    console.log('Testing Trace Context Propagation: HTTP/REST Fallback...');
+    {
+      harness.reset();
+      const parentTracer = trace.getTracer('test-parent-tracer');
+      let parentSpanId: string | undefined;
+      let parentTraceId: string | undefined;
+
+      await parentTracer.startActiveSpan('parent-operation-rest', async (parentSpan) => {
+        try {
+          const parentContext = parentSpan.spanContext();
+          parentSpanId = parentContext.spanId;
+          parentTraceId = parentContext.traceId;
+
+          const [response] = await restEchoClient.echo({content: 'propagation-rest'});
+          assert.strictEqual(response.content, 'propagation-rest');
+        } finally {
+          parentSpan.end();
+        }
+      });
+
+      const allSpans = harness.exporter.getFinishedSpans();
+      assert.strictEqual(allSpans.length, 2, `Expected 2 spans (parent + child), got ${allSpans.length}`);
+
+      const childSpan = harness.requireSingleSpan('google-gax');
+      assert.strictEqual(childSpan.name, 'EchoClient.Echo');
+      assert.strictEqual(childSpan.spanContext().traceId, parentTraceId, 'T3 span should inherit traceId from parent context');
+      assert.strictEqual(childSpan.parentSpanContext?.spanId, parentSpanId, 'T3 span should have parentSpanContext pointing to active parent span');
     }
 
     console.log(`\n✔ All T3 Telemetry Tracing Tests passed successfully with ${providerKind} provider!`);
