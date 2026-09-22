@@ -44,14 +44,10 @@ jobs:
         unzip -q -o protoc.zip -d /usr/local
         rm protoc.zip
 
-    # --ignore-workspace keeps the generator standalone: it resolves its own
-    # nested pnpm-lock.yaml and its own pnpm.overrides (which pin protobufjs to
-    # v8). This matches how librarian builds the released generator tarball.
     - name: Install and build generator
-      working-directory: core/generator/gapic-generator-typescript
       run: |
-        pnpm install --ignore-workspace --frozen-lockfile --config.auto-install-peers=true
-        pnpm run compile
+        pnpm install --frozen-lockfile --filter @google-cloud/gapic-generator
+        pnpm --filter @google-cloud/gapic-generator run compile
 
     - name: Run test
       working-directory: core/generator/gapic-generator-typescript
