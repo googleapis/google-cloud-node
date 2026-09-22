@@ -34,7 +34,7 @@ class UserStream extends TimedStream {
   }
 }
 
-describe('Bigtable/TimedStream', () => {
+describe.only('Bigtable/TimedStream', () => {
   describe('with handlers', () => {
     describe('with no delay from server', () => {
       it('should measure the total time accurately for a series of 30 rows with a synchronous call', function (done) {

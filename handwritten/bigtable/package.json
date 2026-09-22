@@ -42,7 +42,7 @@
     "presystem-test": "pnpm run compile",
     "system-test": "mocha build/system-test --timeout 600000 --retries 3",
     "pretest": "pnpm run compile",
-    "test": "c8 mocha build/test",
+    "test": "node ../../bin/run-test.cjs --config ../../.mocharc.cjs build/test",
     "test:snap": "SNAPSHOT_UPDATE=1 pnpm test",
     "testproxy": "pnpm run compile && node build/testproxy/index.js",
     "clean": "gts clean",
