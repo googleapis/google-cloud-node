@@ -203,6 +203,7 @@ describe('util.ts', () => {
   describe('checkTelemetryEnabled', () => {
     afterEach(() => {
       delete process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED;
+      delete process.env.GOOGLE_SDK_NODE_ENABLE_TRACING;
     });
 
     const mockTelemetryInfo: StaticTraceContext = {
@@ -256,6 +257,76 @@ describe('util.ts', () => {
     it('returns false when settings is undefined', () => {
       process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
       assert.strictEqual(checkTelemetryEnabled(undefined), false);
+    });
+
+    it('returns true when GOOGLE_SDK_NODE_ENABLE_TRACING=true and the client option is not set', () => {
+      process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
+      process.env.GOOGLE_SDK_NODE_ENABLE_TRACING = 'true';
+      const noOptInSettings = new CallSettings({
+        otherArgs: {
+          internalTelemetryInfo: mockTelemetryInfo,
+        },
+      });
+      assert.strictEqual(checkTelemetryEnabled(noOptInSettings), true);
+    });
+
+    it('accepts GOOGLE_SDK_NODE_ENABLE_TRACING case-insensitively', () => {
+      process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
+      process.env.GOOGLE_SDK_NODE_ENABLE_TRACING = 'TRUE';
+      const noOptInSettings = new CallSettings({
+        otherArgs: {
+          internalTelemetryInfo: mockTelemetryInfo,
+        },
+      });
+      assert.strictEqual(checkTelemetryEnabled(noOptInSettings), true);
+    });
+
+    it('returns false when GOOGLE_SDK_NODE_ENABLE_TRACING=false overrides the client option', () => {
+      process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
+      process.env.GOOGLE_SDK_NODE_ENABLE_TRACING = 'false';
+      assert.strictEqual(checkTelemetryEnabled(mockSettings), false);
+    });
+
+    it('falls back to the client option when GOOGLE_SDK_NODE_ENABLE_TRACING is empty', () => {
+      process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
+      process.env.GOOGLE_SDK_NODE_ENABLE_TRACING = '';
+      assert.strictEqual(checkTelemetryEnabled(mockSettings), true);
+    });
+
+    it('treats an unrecognized GOOGLE_SDK_NODE_ENABLE_TRACING value as disabled', () => {
+      process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
+      process.env.GOOGLE_SDK_NODE_ENABLE_TRACING = 'yes';
+      assert.strictEqual(checkTelemetryEnabled(mockSettings), false);
+    });
+
+    it('returns false when GOOGLE_SDK_NODE_ENABLE_TRACING=true but the experimental flag is unset', () => {
+      process.env.GOOGLE_SDK_NODE_ENABLE_TRACING = 'true';
+      assert.strictEqual(checkTelemetryEnabled(mockSettings), false);
+    });
+
+    it('returns false when GOOGLE_SDK_NODE_ENABLE_TRACING=true but internalTelemetryInfo is not set', () => {
+      process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
+      process.env.GOOGLE_SDK_NODE_ENABLE_TRACING = 'true';
+      assert.strictEqual(checkTelemetryEnabled(new CallSettings({})), false);
+    });
+
+    it('does not throw when process is undefined, as in a browser', () => {
+      const globals = globalThis as {process?: NodeJS.Process};
+      const originalProcess = globals.process;
+      // The result is captured and `process` restored before asserting,
+      // because mocha and assert need `process` themselves.
+      let result: boolean | undefined;
+      let thrown: unknown;
+      delete globals.process;
+      try {
+        result = checkTelemetryEnabled(mockSettings);
+      } catch (e) {
+        thrown = e;
+      } finally {
+        globals.process = originalProcess;
+      }
+      assert.strictEqual(thrown, undefined);
+      assert.strictEqual(result, false);
     });
   });
 });
