@@ -174,6 +174,34 @@ func executeGoQuery(ctx context.Context, client *spanner.Client, workload string
 	return nil
 }
 
+func runWarmupLoad(
+	ctx context.Context,
+	client *spanner.Client,
+	workload string,
+	customSQL string,
+	table string,
+	duration time.Duration,
+) {
+	warmupCtx, cancel := context.WithTimeout(ctx, duration)
+	defer cancel()
+	var wg sync.WaitGroup
+	for w := 0; w < 4; w++ {
+		wg.Add(1)
+		go func() {
+			defer wg.Done()
+			for {
+				select {
+				case <-warmupCtx.Done():
+					return
+				default:
+					_ = executeGoQuery(ctx, client, workload, customSQL, table)
+				}
+			}
+		}()
+	}
+	wg.Wait()
+}
+
 func runPacedLoad(
 	ctx context.Context,
 	client *spanner.Client,
@@ -183,13 +211,14 @@ func runPacedLoad(
 	targetQPS int,
 	duration time.Duration,
 ) (latencies []float64, errCount uint64, elapsed time.Duration, vmCPUPercent float64, procCPUPercent float64, procCPUMs float64, workers int) {
-	// Size worker pool to comfortably sustain targetQPS even at ~50ms tail latencies
-	workers = int(math.Ceil(float64(targetQPS) * 0.05))
-	if workers < 4 {
-		workers = 4
+	// Size worker pool via Little's Law (assume ~7ms RTT * 1.75x headroom)
+	// so 50 QPS uses 1 worker and 100 QPS uses 2 workers without burst collisions on 1 vCPU.
+	workers = int(math.Ceil(float64(targetQPS) * 0.007 * 1.75))
+	if workers < 1 {
+		workers = 1
 	}
-	if workers > 256 {
-		workers = 256
+	if workers > 128 {
+		workers = 128
 	}
 
 	intervalNs := int64(1e9 / float64(targetQPS))
@@ -241,7 +270,7 @@ func runPacedLoad(
 						return
 					case <-time.After(time.Duration(waitNs)):
 					}
-				} else if -waitNs > int64(100*time.Millisecond) {
+				} else if -waitNs > int64(50*time.Millisecond) {
 					// Client is saturated and falling behind schedule; catch up slot pointer
 					// so we measure steady saturation without unbounded backlog.
 					atomic.CompareAndSwapInt64(&nextSlotNs, slotNs+intervalNs, nowNs)
@@ -295,13 +324,6 @@ func main() {
 	jsonOut := flag.Bool("json", true, "Emit JSON output")
 	flag.Parse()
 
-	// Disable DirectPath unless explicitly enabled so network path matches Node & Shared Core
-	if os.Getenv("GOOGLE_SPANNER_ENABLE_DIRECT_ACCESS") != "true" &&
-		os.Getenv("GOOGLE_CLOUD_ENABLE_DIRECT_PATH") != "true" {
-		_ = os.Setenv("GOOGLE_CLOUD_DISABLE_DIRECT_PATH", "true")
-		_ = os.Setenv("DISABLE_DIRECT_PATH", "true")
-	}
-
 	ctx := context.Background()
 	dbPath := fmt.Sprintf("projects/%s/instances/%s/databases/%s", *project, *instance, *database)
 
@@ -322,17 +344,13 @@ func main() {
 	}
 	defer client.Close()
 
-	// 0. Initial connection & session handshake pre-warm
-	_ = executeGoQuery(ctx, client, *workload, *sql, *table)
-
-	// 1. Warmup
-	if *warmupSec > 0 {
-		warmupQPS := *targetQPS
-		if warmupQPS > 500 {
-			warmupQPS = 500
-		}
-		_, _, _, _, _, _, _ = runPacedLoad(ctx, client, *workload, *sql, *table, warmupQPS, time.Duration(*warmupSec)*time.Second)
+	// 1. Full Channel Pool Warmup
+	effectiveWarmup := *warmupSec
+	if effectiveWarmup < 2 {
+		effectiveWarmup = 2
 	}
+	runWarmupLoad(ctx, client, *workload, *sql, *table, time.Duration(effectiveWarmup)*time.Second)
+	time.Sleep(50 * time.Millisecond)
 
 	// 2. Measured Run
 	lats, errs, elapsed, vmCPU, procCPU, procCPUMs, workers := runPacedLoad(

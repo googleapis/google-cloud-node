@@ -174,15 +174,6 @@ async function runNodeWorkerProcess() {
   process.env.SPANNER_NATIVE_CORE = isGoSharedCore ? 'go' : 'off';
   process.env.SPANNER_NATIVE_QUIET = '1';
 
-  // Enforce standard GFE routing unless DirectPath is explicitly requested
-  if (
-    process.env.GOOGLE_SPANNER_ENABLE_DIRECT_ACCESS !== 'true' &&
-    process.env.GOOGLE_CLOUD_ENABLE_DIRECT_PATH !== 'true'
-  ) {
-    process.env.GOOGLE_CLOUD_DISABLE_DIRECT_PATH = 'true';
-    process.env.DISABLE_DIRECT_PATH = 'true';
-  }
-
   const channels = isGoSharedCore
     ? getGoSharedCoreChannelsForQps(WORKER_TARGET_QPS)
     : 0;
@@ -251,11 +242,44 @@ async function runNodeWorkerProcess() {
     }
   }
 
+  /**
+   * High-rate unpaced warmup to ensure V8 TurboFan JIT compiles all hot paths
+   * (~1,500+ invocations) and warms up all gRPC channels in the pool before
+   * starting the low-QPS paced measurement window.
+   */
+  async function runJitAndChannelWarmup(durationSec) {
+    const warmupEnd = performance.now() + durationSec * 1000.0;
+    const warmupConcurrency = Math.min(8, Math.max(4, channels || 4));
+    const workers = [];
+    for (let i = 0; i < warmupConcurrency; i++) {
+      workers.push(
+        (async () => {
+          while (performance.now() < warmupEnd) {
+            try {
+              await executeSingleQuery();
+            } catch (e) {
+              // ignore warmup error
+            }
+          }
+        })(),
+      );
+    }
+    await Promise.all(workers);
+  }
+
+  /**
+   * Computes optimal worker concurrency using Little's Law (L = lambda * W)
+   * with a 1.75x headroom factor so low-QPS tiers (e.g. 50, 100 QPS) use
+   * 1-2 staggered workers instead of 8+ workers colliding in micro-bursts on 1 vCPU.
+   */
+  function getWorkersForTargetQps(targetQps) {
+    // Assume ~7ms baseline RTT; add 1.75x headroom for tail variance
+    const littleLawWorkers = Math.ceil(targetQps * 0.007 * 1.75);
+    return Math.min(128, Math.max(1, littleLawWorkers));
+  }
+
   async function runPacedWindow(targetQps, durationSec) {
-    const workersCount = Math.min(
-      256,
-      Math.max(8, Math.ceil(targetQps * 0.1)),
-    );
+    const workersCount = getWorkersForTargetQps(targetQps);
     const intervalMs = 1000.0 / targetQps;
     const durationMs = durationSec * 1000.0;
 
@@ -280,12 +304,12 @@ async function runNodeWorkerProcess() {
         const waitMs = slotMs - nowMs;
 
         if (waitMs > 1.5) {
-          await new Promise(r => setTimeout(r, Math.floor(waitMs)));
-        } else if (waitMs > 0) {
+          await new Promise(r => setTimeout(r, Math.round(waitMs)));
+        } else if (waitMs > 0.1) {
           await new Promise(r => setImmediate(r));
-        } else if (-waitMs > 100) {
+        } else if (-waitMs > 50) {
           // Client is saturated and falling behind target schedule; advance slot pointer
-          // to current clock so we measure steady max saturation without infinite queue buildup.
+          // to current clock so we measure steady max saturation without queue buildup.
           nextSlotMs = nowMs + intervalMs;
         }
 
@@ -337,18 +361,11 @@ async function runNodeWorkerProcess() {
     };
   }
 
-  // 0. Initial connection & multiplexed session handshake pre-warm
-  try {
-    await executeSingleQuery();
-  } catch (e) {
-    // ignore initial warmup error
-  }
-
-  // 1. Warmup
-  if (WARMUP_SEC > 0) {
-    const warmupQps = Math.min(WORKER_TARGET_QPS, 500);
-    await runPacedWindow(warmupQps, WARMUP_SEC);
-  }
+  // 1. Full JIT & Channel Pool Warmup (ensures V8 TurboFan tier-up even at 50 QPS)
+  const effectiveWarmupSec = Math.max(WARMUP_SEC, 3);
+  await runJitAndChannelWarmup(effectiveWarmupSec);
+  // Brief 100ms settle pause so in-flight warmup events drain completely
+  await new Promise(r => setTimeout(r, 100));
 
   // 2. Measured Run
   const res = await runPacedWindow(WORKER_TARGET_QPS, DURATION_SEC);
