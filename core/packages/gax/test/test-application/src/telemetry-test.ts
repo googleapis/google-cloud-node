@@ -177,7 +177,6 @@ export async function runTelemetryTests(
   const grpcClientOpts = {
     grpc,
     sslCreds: grpc.credentials.createInsecure(),
-    enableTelemetryTracing: true,
   };
 
   const restClientOpts = {
@@ -187,7 +186,6 @@ export async function runTelemetryTests(
     auth: new GoogleAuth({
       authClient: new googleAuthLibrary.PassThroughClient(),
     }),
-    enableTelemetryTracing: true,
   };
 
   const grpcEchoClient = new EchoClient(grpcClientOpts);
@@ -815,88 +813,101 @@ export async function runTelemetryTests(
     const originalTracing = process.env.GOOGLE_SDK_NODE_ENABLE_TRACING;
 
     try {
-      // 5a. Tracing is disabled when GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED is not set,
-      // even if client options specify enableTelemetryTracing: true.
+      // 5a. Tracing is disabled when GOOGLE_SDK_NODE_ENABLE_TRACING is 'true'
+      // but GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED is 'false' (gRPC & HTTP/REST).
+      console.log('Testing Gating: Disabled when EXPERIMENTAL_O11Y_ENABLED is false (gRPC & HTTP)...');
+      process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'false';
+      process.env.GOOGLE_SDK_NODE_ENABLE_TRACING = 'true';
+
+      const disabledO11yGrpcClient = new EchoClient(grpcClientOpts);
+      harness.reset();
+      const [resp1] = await disabledO11yGrpcClient.echo({content: 'gated-o11y-disabled-grpc'});
+      assert.strictEqual(resp1.content, 'gated-o11y-disabled-grpc');
+      assert.strictEqual(
+        harness.getSpans().length,
+        0,
+        'No spans should be exported on gRPC when EXPERIMENTAL_O11Y_ENABLED is false',
+      );
+
+      const disabledO11yRestClient = new EchoClient(restClientOpts);
+      harness.reset();
+      const [resp2] = await disabledO11yRestClient.echo({content: 'gated-o11y-disabled-rest'});
+      assert.strictEqual(resp2.content, 'gated-o11y-disabled-rest');
+      assert.strictEqual(
+        harness.getSpans().length,
+        0,
+        'No spans should be exported on REST when EXPERIMENTAL_O11Y_ENABLED is false',
+      );
+
+      // 5b. Tracing is disabled when GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED is unset (gRPC & HTTP/REST).
       console.log('Testing Gating: Disabled when EXPERIMENTAL_O11Y_ENABLED is unset (gRPC & HTTP)...');
       delete process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED;
       process.env.GOOGLE_SDK_NODE_ENABLE_TRACING = 'true';
 
-      const uninitGrpcClient = new EchoClient(grpcClientOpts);
+      const unsetO11yGrpcClient = new EchoClient(grpcClientOpts);
       harness.reset();
-      const [resp1] = await uninitGrpcClient.echo({content: 'gated-o11y-grpc'});
-      assert.strictEqual(resp1.content, 'gated-o11y-grpc');
+      const [resp3] = await unsetO11yGrpcClient.echo({content: 'gated-o11y-unset-grpc'});
+      assert.strictEqual(resp3.content, 'gated-o11y-unset-grpc');
       assert.strictEqual(
         harness.getSpans().length,
         0,
-        'No spans should be exported when EXPERIMENTAL_O11Y_ENABLED is unset',
+        'No spans should be exported on gRPC when EXPERIMENTAL_O11Y_ENABLED is unset',
       );
 
-      const uninitRestClient = new EchoClient(restClientOpts);
+      const unsetO11yRestClient = new EchoClient(restClientOpts);
       harness.reset();
-      const [resp2] = await uninitRestClient.echo({content: 'gated-o11y-rest'});
-      assert.strictEqual(resp2.content, 'gated-o11y-rest');
+      const [resp4] = await unsetO11yRestClient.echo({content: 'gated-o11y-unset-rest'});
+      assert.strictEqual(resp4.content, 'gated-o11y-unset-rest');
       assert.strictEqual(
         harness.getSpans().length,
         0,
         'No spans should be exported on REST when EXPERIMENTAL_O11Y_ENABLED is unset',
       );
 
-      // 5b. Tracing is disabled when GOOGLE_SDK_NODE_ENABLE_TRACING is 'false',
-      // overriding client options enableTelemetryTracing: true.
+      // 5c. Tracing is disabled when GOOGLE_SDK_NODE_ENABLE_TRACING is 'false' (gRPC & HTTP/REST).
       console.log('Testing Gating: Disabled when ENABLE_TRACING is false (gRPC & HTTP)...');
       process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
       process.env.GOOGLE_SDK_NODE_ENABLE_TRACING = 'false';
 
       const envDisabledGrpcClient = new EchoClient(grpcClientOpts);
       harness.reset();
-      const [resp3] = await envDisabledGrpcClient.echo({content: 'gated-disabled-grpc'});
-      assert.strictEqual(resp3.content, 'gated-disabled-grpc');
+      const [resp5] = await envDisabledGrpcClient.echo({content: 'gated-tracing-disabled-grpc'});
+      assert.strictEqual(resp5.content, 'gated-tracing-disabled-grpc');
       assert.strictEqual(
         harness.getSpans().length,
         0,
-        'No spans should be exported when ENABLE_TRACING is false',
+        'No spans should be exported on gRPC when ENABLE_TRACING is false',
       );
 
       const envDisabledRestClient = new EchoClient(restClientOpts);
       harness.reset();
-      const [resp4] = await envDisabledRestClient.echo({content: 'gated-disabled-rest'});
-      assert.strictEqual(resp4.content, 'gated-disabled-rest');
+      const [resp6] = await envDisabledRestClient.echo({content: 'gated-tracing-disabled-rest'});
+      assert.strictEqual(resp6.content, 'gated-tracing-disabled-rest');
       assert.strictEqual(
         harness.getSpans().length,
         0,
         'No spans should be exported on REST when ENABLE_TRACING is false',
       );
 
-      // 5c. Tracing is enabled when both environment variables are set to 'true',
-      // even if client options omit enableTelemetryTracing (testing both gRPC and HTTP/REST).
-      console.log('Testing Gating: Enabled via environment variables without client options (gRPC)...');
+      // 5d. Tracing is enabled when both GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED
+      // and GOOGLE_SDK_NODE_ENABLE_TRACING are set to 'true' (gRPC & HTTP/REST).
+      console.log('Testing Gating: Enabled when both env vars are set to true (gRPC & HTTP)...');
       process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
       process.env.GOOGLE_SDK_NODE_ENABLE_TRACING = 'true';
 
-      const envOnlyGrpcClient = new EchoClient({
-        grpc,
-        sslCreds: grpc.credentials.createInsecure(),
-      });
+      const enabledGrpcClient = new EchoClient(grpcClientOpts);
       harness.reset();
-      const [resp5] = await envOnlyGrpcClient.echo({content: 'gated-enabled-env-grpc'});
-      assert.strictEqual(resp5.content, 'gated-enabled-env-grpc');
+      const [resp7] = await enabledGrpcClient.echo({content: 'gated-enabled-grpc'});
+      assert.strictEqual(resp7.content, 'gated-enabled-grpc');
       const envGrpcSpan = harness.requireSingleSpan();
       assert.strictEqual(envGrpcSpan.name, 'EchoClient.Echo');
       assert.strictEqual(envGrpcSpan.status.code, SpanStatusCode.OK);
       assert.strictEqual(envGrpcSpan.attributes['gcp.method.type'], 'grpc');
 
-      console.log('Testing Gating: Enabled via environment variables without client options (HTTP/REST)...');
-      const envOnlyRestClient = new EchoClient({
-        fallback: true,
-        protocol: 'http' as const,
-        port: 7469,
-        auth: new GoogleAuth({
-          authClient: new googleAuthLibrary.PassThroughClient(),
-        }),
-      });
+      const enabledRestClient = new EchoClient(restClientOpts);
       harness.reset();
-      const [resp6] = await envOnlyRestClient.echo({content: 'gated-enabled-env-rest'});
-      assert.strictEqual(resp6.content, 'gated-enabled-env-rest');
+      const [resp8] = await enabledRestClient.echo({content: 'gated-enabled-rest'});
+      assert.strictEqual(resp8.content, 'gated-enabled-rest');
       const envRestSpan = harness.requireSingleSpan();
       assert.strictEqual(envRestSpan.name, 'EchoClient.Echo');
       assert.strictEqual(envRestSpan.status.code, SpanStatusCode.OK);
