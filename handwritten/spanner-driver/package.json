@@ -39,10 +39,10 @@
     "lint": "gts check",
     "prepare": "npm run compile",
     "pretest": "pnpm run compile",
-    "test:esm": "c8 mocha build/esm/test/unit/**/*.js",
-    "test:cjs": "c8 mocha build/cjs/test/unit/**/*.js",
+    "test:esm": "node ../../bin/run-test.cjs --config ../../.mocharc.cjs build/esm/test/unit/**/*.js",
+    "test:cjs": "node ../../bin/run-test.cjs --config ../../.mocharc.cjs build/cjs/test/unit/**/*.js",
     "test": "pnpm run test:esm && pnpm run test:cjs",
-    "system-test": "mocha build/esm/system-test/**/*.js --timeout 60000",
+    "system-test": "node ../../bin/run-test.cjs --config ../../.mocharc.cjs --no-parallel build/esm/system-test/**/*.js --timeout 60000",
     "test:pg-suite": "node test/pg-suite/run_pg_suite.cjs"
   },
   "dependencies": {
