@@ -895,11 +895,10 @@ describe('TracerHelper', () => {
       const assertResendCount = (expected: number): void =>
         harness.assertResendCount(expected, {tracerName: 'google-gax'});
 
-      it('reports 0 when the call is never resent', async () => {
+      it('omits attribute when the call is never resent', async () => {
         await traceCall(dynamicArgs, staticArgs, async () => 'ok');
 
-        // Present on every span, not just retried ones: an absent attribute
-        // would be indistinguishable from an uninstrumented call.
+        // Omitted when the call was never resent.
         assertResendCount(0);
       });
 

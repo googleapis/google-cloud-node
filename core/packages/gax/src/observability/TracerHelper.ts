@@ -377,9 +377,8 @@ export function traceCall(
     // Counts resends, not attempts. The initial send is not a resend, so a
     // call that succeeded first time is 0 and the first retry is 1.
     //
-    // Reported on every span, including the 0 case, so that the attribute is
-    // always there to group and aggregate on. Omitting it would make "never
-    // retried" and "not instrumented" the same observation at query time.
+    // Omitted when the call was never resent (resendCount is 0), per
+    // OpenTelemetry semantic conventions.
     //
     // Reported on the call span rather than per attempt because gax opens one
     // span for the whole call, retries included. OpenTelemetry's HTTP
@@ -432,7 +431,9 @@ export function traceCall(
           httpStatusCode = 200;
         }
         setStatusAttributes();
-        span.setAttribute(resendCountAttribute, resendCount);
+        if (resendCount > 0) {
+          span.setAttribute(resendCountAttribute, resendCount);
+        }
         span.end();
       }
     };

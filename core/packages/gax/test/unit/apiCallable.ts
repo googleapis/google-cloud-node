@@ -1271,7 +1271,7 @@ describe('createApiCall', () => {
 
       for (const transport of transports) {
         describe(`over ${transport.name}`, () => {
-          it('reports 0 when the call succeeds on the first attempt', async () => {
+          it('omits resend count when the call succeeds on the first attempt', async () => {
             process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
 
             let attempts = 0;

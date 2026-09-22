@@ -316,11 +316,12 @@ export class OtelHarness {
    * transport should be using.
    *
    * The count is named per transport: `gcp.grpc.resend_count` on a gRPC span
-   * and `http.request.resend_count` on a fallback span. The name that does not
-   * apply is asserted absent, so a span that reports the count under the wrong
+   * and `http.request.resend_count` on a fallback span. When expected is 0,
+   * the attribute is asserted to be absent. The name that does not apply is
+   * asserted absent as well, so a span that reports the count under the wrong
    * one fails here instead of passing quietly.
    *
-   * @param {number} expected - Expected number of resends; 0 if never retried.
+   * @param {number} expected - Expected number of resends; 0 if never retried (attribute omitted).
    * @param {object} [options] - Span selection.
    * @param {string} [options.tracerName] - Restrict the lookup to one instrumentation scope.
    * @param {ReadableSpan} [options.span] - Span to check; defaults to the only exported span.
@@ -344,12 +345,15 @@ export class OtelHarness {
     const expectedKey = isGrpc ? GRPC_RESEND_COUNT : HTTP_RESEND_COUNT;
     const otherKey = isGrpc ? HTTP_RESEND_COUNT : GRPC_RESEND_COUNT;
 
+    const expectedValue = expected === 0 ? undefined : expected;
     assert.strictEqual(
       target.attributes[expectedKey],
-      expected,
-      `expected ${where} to report ${expectedKey} ${expected}, got ` +
-        `${JSON.stringify(target.attributes[expectedKey])}. The count is ` +
-        'reported on every call, including 0 when nothing was retried.',
+      expectedValue,
+      expected === 0
+        ? `expected ${where} to omit ${expectedKey} when resend count is 0, got ` +
+          `${JSON.stringify(target.attributes[expectedKey])}.`
+        : `expected ${where} to report ${expectedKey} ${expected}, got ` +
+          `${JSON.stringify(target.attributes[expectedKey])}.`,
     );
     assert.strictEqual(
       target.attributes[otherKey],
