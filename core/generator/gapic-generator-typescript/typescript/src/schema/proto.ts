@@ -309,11 +309,14 @@ function streaming(method: MethodDescriptorProto) {
 const DEFAULT_RESUMABLE_UPLOAD_PREFIX = '/resumable/upload';
 
 function resumableUploadMethodNames(
-  serviceName: string,
+  serviceName: string | null | undefined,
   resumableUploadMethods: string[] | undefined,
 ): Set<string> {
-  const servicePrefix = `${serviceName}.`;
   const methodNames = new Set<string>();
+  if (!serviceName) {
+    return methodNames;
+  }
+  const servicePrefix = `${serviceName}.`;
   for (const methodName of resumableUploadMethods ?? []) {
     if (methodName.startsWith(servicePrefix)) {
       methodNames.add(methodName.substring(servicePrefix.length));
@@ -1051,7 +1054,7 @@ export function augmentService(parameters: AugmentServiceParameters) {
     bc => bc.serviceName === parameters.service.name,
   );
   const resumableUploadMethods = resumableUploadMethodNames(
-    parameters.service.name!,
+    parameters.service.name,
     parameters.options.resumableUploadMethods,
   );
   augmentedService.method =
@@ -1065,7 +1068,10 @@ export function augmentService(parameters: AugmentServiceParameters) {
         },
         method,
       );
-      if (resumableUploadMethods.has(augmentedMethod.name!)) {
+      if (
+        augmentedMethod.name &&
+        resumableUploadMethods.has(augmentedMethod.name)
+      ) {
         augmentedMethod.resumableUpload = {
           uploadPrefix: DEFAULT_RESUMABLE_UPLOAD_PREFIX,
         };
