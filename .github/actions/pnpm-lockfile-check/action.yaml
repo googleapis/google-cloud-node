@@ -16,7 +16,7 @@ runs:
           echo "One or more package.json files have changed or were merged without updating pnpm-lock.yaml."
           echo ""
           echo "To resolve this failure, please update the lockfile locally and commit the result:"
-          echo "    pnpm install --no-frozen-lockfile --ignore-scripts"
+          echo "    pnpm install --lockfile-only"
           echo "    git add pnpm-lock.yaml"
           echo "    git commit -m \"chore: update pnpm-lock.yaml\""
           echo "    git push"
