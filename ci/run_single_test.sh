@@ -107,7 +107,9 @@ system)
     retval=$?
     ;;
 units)
-    [ -d "build" ] || ${TEST_CMD} compile
+    if [ ! -d "build" ]; then
+        ${TEST_CMD} compile || exit $?
+    fi
     ${TEST_CMD} test
     retval=$?
     ;;
