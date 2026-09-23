@@ -18,6 +18,7 @@ import (
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/google"
 	"google.golang.org/api/option"
+	"google.golang.org/api/option/internaloption"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/connectivity"
 	"google.golang.org/grpc/credentials"
@@ -119,15 +120,22 @@ func NewCoreClient(channelCount int, customEndpoint string) (*CoreClient, error)
 	}
 
 	if isDirectPathEnabled() && customEndpoint == "" {
-		// Enable gRPC DirectPath via GAPIC client with connection pooling matching channelCount
+		// Enable gRPC DirectPath via GAPIC client with connection pooling and xDS/ALTS options matching cloud.google.com/go/spanner
 		os.Unsetenv("GOOGLE_CLOUD_DISABLE_DIRECT_PATH")
 		os.Unsetenv("DISABLE_DIRECT_PATH")
 
-		gapicClient, err := gapic.NewClient(oauthCtx, option.WithGRPCConnectionPool(limit))
+		dpOpts := []option.ClientOption{
+			option.WithGRPCConnectionPool(limit),
+			internaloption.AllowNonDefaultServiceAccount(true),
+			internaloption.EnableDirectPath(true),
+			internaloption.EnableDirectPathXds(),
+		}
+		gapicClient, err := gapic.NewClient(oauthCtx, dpOpts...)
 		if err != nil {
 			cancel()
 			return nil, fmt.Errorf("failed to initialize Spanner GAPIC client for DirectPath: %w", err)
 		}
+		fmt.Println("[spanner-go] Configured Spanner Go Shared Core with DirectPath (DirectAccess + xDS + ALTS) enabled.")
 
 		if os.Getenv("SPANNER_NATIVE_DEBUG") != "" {
 			fmt.Fprintf(os.Stderr,
