@@ -16,7 +16,7 @@
 /docs/                                    @googleapis/cloud-sdk-nodejs-team
 /core/packages/google-auth-library-nodejs @googleapis/cloud-sdk-nodejs-team @googleapis/aion-team
 
-/librarian.yaml                           @googleapis/cloud-sdk-nodejs-team
+/librarian.yaml                           @googleapis/cloud-sdk-nodejs-team @googleapis/cloud-sdk-librarian-team
 
 # Partner-owned handwritten libraries
 /handwritten/bigquery                     @googleapis/cloud-sdk-nodejs-team @googleapis/bigquery-team
