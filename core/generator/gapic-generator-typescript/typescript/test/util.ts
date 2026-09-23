@@ -58,20 +58,13 @@ const commonProtoFilePath = path.join(
   'common_resources.proto',
 );
 const baselineRootDir = path.join(cwd, 'baselines');
-// Try to make it work both with and without bazel
-const entryPointPath =
-  process.env['RUNFILES_DIR'] && process.env['BAZEL_WORKSPACE']
-    ? path.join(
-        process.env['RUNFILES_DIR'],
-        process.env['BAZEL_WORKSPACE'],
-        'gapic_generator_typescript.sh',
-      )
-    : path.join(__dirname, '..', 'src', 'gapic-generator-typescript.js');
-// Try saving the generated baseline test outputs to the proper bazel location
-const outputDirPrefix =
-  process.env['TEST_UNDECLARED_OUTPUTS_DIR'] ??
-  process.env['TEST_TMPDIR'] ??
-  cwd;
+const entryPointPath = path.join(
+  __dirname,
+  '..',
+  'src',
+  'gapic-generator-typescript.js',
+);
+const outputDirPrefix = cwd;
 
 export function runBaselineTest(options: BaselineOptions) {
   const outputDir = path.join(outputDirPrefix, options.outputDir);

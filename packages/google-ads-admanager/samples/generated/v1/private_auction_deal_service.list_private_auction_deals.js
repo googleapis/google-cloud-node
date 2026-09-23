@@ -54,6 +54,7 @@ function main(parent) {
    *   See syntax details at
    *   https://developers.google.com/ad-manager/api/beta/filters
    *  **Filterable fields:**
+   *  * `archived`
    *  * `auctionPriorityEnabled`
    *  * `blockOverrideEnabled`
    *  * `buyerAccountId`
@@ -65,6 +66,7 @@ function main(parent) {
    *  * `privateAuctionDealId`
    *  * `privateAuctionDisplayName`
    *  * `privateAuctionId`
+   *  * `publisherFloorExempt`
    *  * `status`
    *  * `updateTime`
    */

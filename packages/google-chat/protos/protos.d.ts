@@ -15974,6 +15974,48 @@ export namespace google {
                 public deleteReaction(request: google.chat.v1.IDeleteReactionRequest): Promise<google.protobuf.Empty>;
 
                 /**
+                 * Calls ListMessagePins.
+                 * @param request ListMessagePinsRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and ListMessagePinsResponse
+                 */
+                public listMessagePins(request: google.chat.v1.IListMessagePinsRequest, callback: google.chat.v1.ChatService.ListMessagePinsCallback): void;
+
+                /**
+                 * Calls ListMessagePins.
+                 * @param request ListMessagePinsRequest message or plain object
+                 * @returns Promise
+                 */
+                public listMessagePins(request: google.chat.v1.IListMessagePinsRequest): Promise<google.chat.v1.ListMessagePinsResponse>;
+
+                /**
+                 * Calls CreateMessagePin.
+                 * @param request CreateMessagePinRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and MessagePin
+                 */
+                public createMessagePin(request: google.chat.v1.ICreateMessagePinRequest, callback: google.chat.v1.ChatService.CreateMessagePinCallback): void;
+
+                /**
+                 * Calls CreateMessagePin.
+                 * @param request CreateMessagePinRequest message or plain object
+                 * @returns Promise
+                 */
+                public createMessagePin(request: google.chat.v1.ICreateMessagePinRequest): Promise<google.chat.v1.MessagePin>;
+
+                /**
+                 * Calls DeleteMessagePin.
+                 * @param request DeleteMessagePinRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and Empty
+                 */
+                public deleteMessagePin(request: google.chat.v1.IDeleteMessagePinRequest, callback: google.chat.v1.ChatService.DeleteMessagePinCallback): void;
+
+                /**
+                 * Calls DeleteMessagePin.
+                 * @param request DeleteMessagePinRequest message or plain object
+                 * @returns Promise
+                 */
+                public deleteMessagePin(request: google.chat.v1.IDeleteMessagePinRequest): Promise<google.protobuf.Empty>;
+
+                /**
                  * Calls CreateCustomEmoji.
                  * @param request CreateCustomEmojiRequest message or plain object
                  * @param callback Node-style callback called with the error, if any, and CustomEmoji
@@ -16479,6 +16521,27 @@ export namespace google {
                  * @param [response] Empty
                  */
                 type DeleteReactionCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                /**
+                 * Callback as used by {@link google.chat.v1.ChatService|listMessagePins}.
+                 * @param error Error, if any
+                 * @param [response] ListMessagePinsResponse
+                 */
+                type ListMessagePinsCallback = (error: (Error|null), response?: google.chat.v1.ListMessagePinsResponse) => void;
+
+                /**
+                 * Callback as used by {@link google.chat.v1.ChatService|createMessagePin}.
+                 * @param error Error, if any
+                 * @param [response] MessagePin
+                 */
+                type CreateMessagePinCallback = (error: (Error|null), response?: google.chat.v1.MessagePin) => void;
+
+                /**
+                 * Callback as used by {@link google.chat.v1.ChatService|deleteMessagePin}.
+                 * @param error Error, if any
+                 * @param [response] Empty
+                 */
+                type DeleteMessagePinCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
 
                 /**
                  * Callback as used by {@link google.chat.v1.ChatService|createCustomEmoji}.
@@ -25315,6 +25378,521 @@ export namespace google {
 
                 /**
                  * Gets the default type url for UpdateSpaceNotificationSettingRequest
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a MessagePin. */
+            interface IMessagePin {
+
+                /** MessagePin name */
+                name?: (string|null);
+
+                /** MessagePin message */
+                message?: (string|null);
+            }
+
+            /** Represents a MessagePin. */
+            class MessagePin implements IMessagePin {
+
+                /**
+                 * Constructs a new MessagePin.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.chat.v1.IMessagePin);
+
+                /** MessagePin name. */
+                public name: string;
+
+                /** MessagePin message. */
+                public message: string;
+
+                /**
+                 * Creates a new MessagePin instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns MessagePin instance
+                 */
+                public static create(properties?: google.chat.v1.IMessagePin): google.chat.v1.MessagePin;
+
+                /**
+                 * Encodes the specified MessagePin message. Does not implicitly {@link google.chat.v1.MessagePin.verify|verify} messages.
+                 * @param message MessagePin message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.chat.v1.IMessagePin, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified MessagePin message, length delimited. Does not implicitly {@link google.chat.v1.MessagePin.verify|verify} messages.
+                 * @param message MessagePin message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.chat.v1.IMessagePin, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a MessagePin message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns MessagePin
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.MessagePin;
+
+                /**
+                 * Decodes a MessagePin message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns MessagePin
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.MessagePin;
+
+                /**
+                 * Verifies a MessagePin message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a MessagePin message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns MessagePin
+                 */
+                public static fromObject(object: { [k: string]: any }): google.chat.v1.MessagePin;
+
+                /**
+                 * Creates a plain object from a MessagePin message. Also converts values to other types if specified.
+                 * @param message MessagePin
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.chat.v1.MessagePin, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this MessagePin to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for MessagePin
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a ListMessagePinsRequest. */
+            interface IListMessagePinsRequest {
+
+                /** ListMessagePinsRequest parent */
+                parent?: (string|null);
+
+                /** ListMessagePinsRequest pageSize */
+                pageSize?: (number|null);
+
+                /** ListMessagePinsRequest pageToken */
+                pageToken?: (string|null);
+            }
+
+            /** Represents a ListMessagePinsRequest. */
+            class ListMessagePinsRequest implements IListMessagePinsRequest {
+
+                /**
+                 * Constructs a new ListMessagePinsRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.chat.v1.IListMessagePinsRequest);
+
+                /** ListMessagePinsRequest parent. */
+                public parent: string;
+
+                /** ListMessagePinsRequest pageSize. */
+                public pageSize: number;
+
+                /** ListMessagePinsRequest pageToken. */
+                public pageToken: string;
+
+                /**
+                 * Creates a new ListMessagePinsRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ListMessagePinsRequest instance
+                 */
+                public static create(properties?: google.chat.v1.IListMessagePinsRequest): google.chat.v1.ListMessagePinsRequest;
+
+                /**
+                 * Encodes the specified ListMessagePinsRequest message. Does not implicitly {@link google.chat.v1.ListMessagePinsRequest.verify|verify} messages.
+                 * @param message ListMessagePinsRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.chat.v1.IListMessagePinsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ListMessagePinsRequest message, length delimited. Does not implicitly {@link google.chat.v1.ListMessagePinsRequest.verify|verify} messages.
+                 * @param message ListMessagePinsRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.chat.v1.IListMessagePinsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a ListMessagePinsRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ListMessagePinsRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.ListMessagePinsRequest;
+
+                /**
+                 * Decodes a ListMessagePinsRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ListMessagePinsRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.ListMessagePinsRequest;
+
+                /**
+                 * Verifies a ListMessagePinsRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a ListMessagePinsRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ListMessagePinsRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): google.chat.v1.ListMessagePinsRequest;
+
+                /**
+                 * Creates a plain object from a ListMessagePinsRequest message. Also converts values to other types if specified.
+                 * @param message ListMessagePinsRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.chat.v1.ListMessagePinsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ListMessagePinsRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ListMessagePinsRequest
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a ListMessagePinsResponse. */
+            interface IListMessagePinsResponse {
+
+                /** ListMessagePinsResponse messagePins */
+                messagePins?: (google.chat.v1.IMessagePin[]|null);
+
+                /** ListMessagePinsResponse nextPageToken */
+                nextPageToken?: (string|null);
+            }
+
+            /** Represents a ListMessagePinsResponse. */
+            class ListMessagePinsResponse implements IListMessagePinsResponse {
+
+                /**
+                 * Constructs a new ListMessagePinsResponse.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.chat.v1.IListMessagePinsResponse);
+
+                /** ListMessagePinsResponse messagePins. */
+                public messagePins: google.chat.v1.IMessagePin[];
+
+                /** ListMessagePinsResponse nextPageToken. */
+                public nextPageToken: string;
+
+                /**
+                 * Creates a new ListMessagePinsResponse instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ListMessagePinsResponse instance
+                 */
+                public static create(properties?: google.chat.v1.IListMessagePinsResponse): google.chat.v1.ListMessagePinsResponse;
+
+                /**
+                 * Encodes the specified ListMessagePinsResponse message. Does not implicitly {@link google.chat.v1.ListMessagePinsResponse.verify|verify} messages.
+                 * @param message ListMessagePinsResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.chat.v1.IListMessagePinsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ListMessagePinsResponse message, length delimited. Does not implicitly {@link google.chat.v1.ListMessagePinsResponse.verify|verify} messages.
+                 * @param message ListMessagePinsResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.chat.v1.IListMessagePinsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a ListMessagePinsResponse message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ListMessagePinsResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.ListMessagePinsResponse;
+
+                /**
+                 * Decodes a ListMessagePinsResponse message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ListMessagePinsResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.ListMessagePinsResponse;
+
+                /**
+                 * Verifies a ListMessagePinsResponse message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a ListMessagePinsResponse message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ListMessagePinsResponse
+                 */
+                public static fromObject(object: { [k: string]: any }): google.chat.v1.ListMessagePinsResponse;
+
+                /**
+                 * Creates a plain object from a ListMessagePinsResponse message. Also converts values to other types if specified.
+                 * @param message ListMessagePinsResponse
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.chat.v1.ListMessagePinsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ListMessagePinsResponse to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ListMessagePinsResponse
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a CreateMessagePinRequest. */
+            interface ICreateMessagePinRequest {
+
+                /** CreateMessagePinRequest parent */
+                parent?: (string|null);
+
+                /** CreateMessagePinRequest messagePin */
+                messagePin?: (google.chat.v1.IMessagePin|null);
+            }
+
+            /** Represents a CreateMessagePinRequest. */
+            class CreateMessagePinRequest implements ICreateMessagePinRequest {
+
+                /**
+                 * Constructs a new CreateMessagePinRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.chat.v1.ICreateMessagePinRequest);
+
+                /** CreateMessagePinRequest parent. */
+                public parent: string;
+
+                /** CreateMessagePinRequest messagePin. */
+                public messagePin?: (google.chat.v1.IMessagePin|null);
+
+                /**
+                 * Creates a new CreateMessagePinRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns CreateMessagePinRequest instance
+                 */
+                public static create(properties?: google.chat.v1.ICreateMessagePinRequest): google.chat.v1.CreateMessagePinRequest;
+
+                /**
+                 * Encodes the specified CreateMessagePinRequest message. Does not implicitly {@link google.chat.v1.CreateMessagePinRequest.verify|verify} messages.
+                 * @param message CreateMessagePinRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.chat.v1.ICreateMessagePinRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified CreateMessagePinRequest message, length delimited. Does not implicitly {@link google.chat.v1.CreateMessagePinRequest.verify|verify} messages.
+                 * @param message CreateMessagePinRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.chat.v1.ICreateMessagePinRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a CreateMessagePinRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns CreateMessagePinRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.CreateMessagePinRequest;
+
+                /**
+                 * Decodes a CreateMessagePinRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns CreateMessagePinRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.CreateMessagePinRequest;
+
+                /**
+                 * Verifies a CreateMessagePinRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a CreateMessagePinRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns CreateMessagePinRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): google.chat.v1.CreateMessagePinRequest;
+
+                /**
+                 * Creates a plain object from a CreateMessagePinRequest message. Also converts values to other types if specified.
+                 * @param message CreateMessagePinRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.chat.v1.CreateMessagePinRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this CreateMessagePinRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for CreateMessagePinRequest
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a DeleteMessagePinRequest. */
+            interface IDeleteMessagePinRequest {
+
+                /** DeleteMessagePinRequest name */
+                name?: (string|null);
+            }
+
+            /** Represents a DeleteMessagePinRequest. */
+            class DeleteMessagePinRequest implements IDeleteMessagePinRequest {
+
+                /**
+                 * Constructs a new DeleteMessagePinRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.chat.v1.IDeleteMessagePinRequest);
+
+                /** DeleteMessagePinRequest name. */
+                public name: string;
+
+                /**
+                 * Creates a new DeleteMessagePinRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns DeleteMessagePinRequest instance
+                 */
+                public static create(properties?: google.chat.v1.IDeleteMessagePinRequest): google.chat.v1.DeleteMessagePinRequest;
+
+                /**
+                 * Encodes the specified DeleteMessagePinRequest message. Does not implicitly {@link google.chat.v1.DeleteMessagePinRequest.verify|verify} messages.
+                 * @param message DeleteMessagePinRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.chat.v1.IDeleteMessagePinRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified DeleteMessagePinRequest message, length delimited. Does not implicitly {@link google.chat.v1.DeleteMessagePinRequest.verify|verify} messages.
+                 * @param message DeleteMessagePinRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.chat.v1.IDeleteMessagePinRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a DeleteMessagePinRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns DeleteMessagePinRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.DeleteMessagePinRequest;
+
+                /**
+                 * Decodes a DeleteMessagePinRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns DeleteMessagePinRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.DeleteMessagePinRequest;
+
+                /**
+                 * Verifies a DeleteMessagePinRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a DeleteMessagePinRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns DeleteMessagePinRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): google.chat.v1.DeleteMessagePinRequest;
+
+                /**
+                 * Creates a plain object from a DeleteMessagePinRequest message. Also converts values to other types if specified.
+                 * @param message DeleteMessagePinRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.chat.v1.DeleteMessagePinRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this DeleteMessagePinRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for DeleteMessagePinRequest
                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                  * @returns The default type url
                  */
