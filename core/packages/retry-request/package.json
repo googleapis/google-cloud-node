@@ -12,7 +12,7 @@
     "docs": "jsdoc -c .jsdoc.js",
     "fix": "gts fix",
     "lint": "gts check",
-    "test": "mocha --timeout 30000",
+    "test": "node ../../../bin/run-test.cjs --no-c8 --timeout 30000",
     "system-test": "echo no system test",
     "samples-test": "echo no samples"
   },
