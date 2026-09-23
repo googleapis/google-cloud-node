@@ -1183,6 +1183,7 @@ export class {{ service.name }}Client {
         {%- if service.longRunning.length > 0 or service.LongRunningOperationsMixin > 0 %}
         void this.operationsClient.close();
         {%- endif %}
+        return;
       });
     }
     return Promise.resolve();

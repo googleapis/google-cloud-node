@@ -314,6 +314,7 @@ describe('v3beta1.TranslationServiceClient', () => {
         .close()
         .then(() => {
           done();
+          return;
         })
         .catch(err => {
           throw err;
@@ -331,6 +332,7 @@ describe('v3beta1.TranslationServiceClient', () => {
         .close()
         .then(() => {
           done();
+          return;
         })
         .catch(err => {
           throw err;

@@ -284,6 +284,7 @@ describe('v2alpha.ServingConfigServiceClient', () => {
         .close()
         .then(() => {
           done();
+          return;
         })
         .catch(err => {
           throw err;
@@ -301,6 +302,7 @@ describe('v2alpha.ServingConfigServiceClient', () => {
         .close()
         .then(() => {
           done();
+          return;
         })
         .catch(err => {
           throw err;

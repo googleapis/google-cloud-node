@@ -293,6 +293,7 @@ describe('v1.DuplicateMethodsTestServiceClient', () => {
         .close()
         .then(() => {
           done();
+          return;
         })
         .catch(err => {
           throw err;
@@ -312,6 +313,7 @@ describe('v1.DuplicateMethodsTestServiceClient', () => {
         .close()
         .then(() => {
           done();
+          return;
         })
         .catch(err => {
           throw err;
@@ -1217,20 +1219,24 @@ describe('v1.DuplicateMethodsTestServiceClient', () => {
         .stub()
         .callsArgWith(2, null, expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.getLocation(
-          request,
-          expectedOptions,
-          (
-            err?: Error | null,
-            result?: LocationProtos.google.cloud.location.ILocation | null,
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          },
-        );
+        client
+          .getLocation(
+            request,
+            expectedOptions,
+            (
+              err?: Error | null,
+              result?: LocationProtos.google.cloud.location.ILocation | null,
+            ) => {
+              if (err) {
+                reject(err);
+              } else {
+                resolve(result);
+              }
+            },
+          )
+          .catch(err => {
+            throw err;
+          });
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);

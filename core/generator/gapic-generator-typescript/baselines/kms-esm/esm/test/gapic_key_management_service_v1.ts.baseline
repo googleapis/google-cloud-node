@@ -282,6 +282,7 @@ describe('v1.KeyManagementServiceClient', () => {
         .close()
         .then(() => {
           done();
+          return;
         })
         .catch(err => {
           throw err;
@@ -299,6 +300,7 @@ describe('v1.KeyManagementServiceClient', () => {
         .close()
         .then(() => {
           done();
+          return;
         })
         .catch(err => {
           throw err;

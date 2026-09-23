@@ -271,6 +271,7 @@ describe('v1.AddressesClient', () => {
         .close()
         .then(() => {
           done();
+          return;
         })
         .catch(err => {
           throw err;
@@ -287,6 +288,7 @@ describe('v1.AddressesClient', () => {
         .close()
         .then(() => {
           done();
+          return;
         })
         .catch(err => {
           throw err;

@@ -260,6 +260,7 @@ describe('v2alpha.SearchServiceClient', () => {
         .close()
         .then(() => {
           done();
+          return;
         })
         .catch(err => {
           throw err;
@@ -276,6 +277,7 @@ describe('v2alpha.SearchServiceClient', () => {
         .close()
         .then(() => {
           done();
+          return;
         })
         .catch(err => {
           throw err;
