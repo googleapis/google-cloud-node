@@ -596,7 +596,6 @@ describe('createApiCall', () => {
       process.env.GOOGLE_SDK_NODE_ENABLE_TRACING = 'true';
       process.env.GOOGLE_SDK_NODE_CLIENT_SERVICE = 'env-service';
       process.env.GOOGLE_SDK_NODE_CLIENT_VERSION = '9.9.9';
-      process.env.GOOGLE_SDK_NODE_REPO = 'custom-org/custom-repo';
       process.env.GOOGLE_SDK_NODE_ARTIFACT = '@custom/env-pkg';
 
       const settings = new gax.CallSettings({
@@ -626,7 +625,10 @@ describe('createApiCall', () => {
       const span = spans[0];
       assert.strictEqual(span.attributes['gcp.client.service'], 'env-service');
       assert.strictEqual(span.attributes['gcp.client.version'], '9.9.9');
-      assert.strictEqual(span.attributes['gcp.repo'], 'custom-org/custom-repo');
+      assert.strictEqual(
+        span.attributes['gcp.repo'],
+        'googleapis/google-cloud-node',
+      );
       assert.strictEqual(span.attributes['gcp.artifact'], '@custom/env-pkg');
     });
 

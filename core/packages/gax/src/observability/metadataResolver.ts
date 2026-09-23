@@ -21,40 +21,6 @@ import {isTracingEnvExplicitlySet} from '../util';
 export const DEFAULT_GCP_REPO = 'googleapis/google-cloud-node';
 
 /**
- * Normalizes git repository information into an "owner/repo" slug.
- */
-export function extractRepo(repository: unknown): string | undefined {
-  if (!repository) {
-    return undefined;
-  }
-  const url =
-    typeof repository === 'string'
-      ? repository
-      : typeof repository === 'object' &&
-          repository !== null &&
-          'url' in repository
-        ? String((repository as {url: unknown}).url)
-        : undefined;
-
-  if (!url) {
-    return undefined;
-  }
-
-  const githubMatch = url.match(
-    /github\.com[:/]([^/]+)\/([^/.]+?)(?:\.git)?(?:[#?/]|$)/,
-  );
-  if (githubMatch) {
-    return `${githubMatch[1]}/${githubMatch[2]}`;
-  }
-
-  if (/^[a-zA-Z0-9_.-]+\/[a-zA-Z0-9_.-]+$/.test(url)) {
-    return url;
-  }
-
-  return undefined;
-}
-
-/**
  * Derives the GCP client service name from an NPM package name.
  */
 export function extractClientServiceFromPackageName(name: string): string {
@@ -178,11 +144,6 @@ export function extractFromEnvironment(): StaticTraceContext {
     result.gcpVersion = version.trim();
   }
 
-  const repo = env.GOOGLE_SDK_NODE_REPO || env.GCP_REPO;
-  if (repo?.trim()) {
-    result.gcpRepo = repo.trim();
-  }
-
   const artifact = env.GOOGLE_SDK_NODE_ARTIFACT || env.GCP_ARTIFACT;
   if (artifact?.trim()) {
     result.gcpArtifact = artifact.trim();
@@ -224,10 +185,12 @@ export function resolveStaticTraceContext(
     explicit &&
     explicit.gcpClientService &&
     explicit.gcpVersion &&
-    explicit.gcpRepo &&
     explicit.gcpArtifact
   ) {
-    return explicit;
+    return {
+      ...explicit,
+      gcpRepo: DEFAULT_GCP_REPO,
+    };
   }
 
   const envMeta = extractFromEnvironment();
@@ -245,7 +208,7 @@ export function resolveStaticTraceContext(
       envMeta.gcpClientService ??
       cached.gcpClientService,
     gcpVersion: explicit?.gcpVersion ?? envMeta.gcpVersion ?? cached.gcpVersion,
-    gcpRepo: explicit?.gcpRepo ?? envMeta.gcpRepo ?? DEFAULT_GCP_REPO,
+    gcpRepo: DEFAULT_GCP_REPO,
     gcpArtifact:
       explicit?.gcpArtifact ?? envMeta.gcpArtifact ?? cached.gcpArtifact,
   };

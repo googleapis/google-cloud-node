@@ -21,7 +21,6 @@ import {
   extractClientServiceFromPackageName,
   extractFromEnvironment,
   extractFromSettings,
-  extractRepo,
   extractServiceFromApiName,
   resolveStaticTraceContext,
   DEFAULT_GCP_REPO,
@@ -34,12 +33,10 @@ describe('metadataResolver', () => {
     clearMetadataCache();
     delete process.env.GOOGLE_SDK_NODE_CLIENT_SERVICE;
     delete process.env.GOOGLE_SDK_NODE_CLIENT_VERSION;
-    delete process.env.GOOGLE_SDK_NODE_REPO;
     delete process.env.GOOGLE_SDK_NODE_ARTIFACT;
     delete process.env.GOOGLE_SDK_NODE_ENABLE_TRACING;
     delete process.env.GCP_CLIENT_SERVICE;
     delete process.env.GCP_CLIENT_VERSION;
-    delete process.env.GCP_REPO;
     delete process.env.GCP_ARTIFACT;
   });
 
@@ -47,60 +44,11 @@ describe('metadataResolver', () => {
     clearMetadataCache();
     delete process.env.GOOGLE_SDK_NODE_CLIENT_SERVICE;
     delete process.env.GOOGLE_SDK_NODE_CLIENT_VERSION;
-    delete process.env.GOOGLE_SDK_NODE_REPO;
     delete process.env.GOOGLE_SDK_NODE_ARTIFACT;
     delete process.env.GOOGLE_SDK_NODE_ENABLE_TRACING;
     delete process.env.GCP_CLIENT_SERVICE;
     delete process.env.GCP_CLIENT_VERSION;
-    delete process.env.GCP_REPO;
     delete process.env.GCP_ARTIFACT;
-  });
-
-  describe('extractRepo', () => {
-    it('extracts repo slug from https github url', () => {
-      assert.strictEqual(
-        extractRepo('https://github.com/googleapis/google-cloud-node.git'),
-        'googleapis/google-cloud-node',
-      );
-    });
-
-    it('extracts repo slug from git+https url', () => {
-      assert.strictEqual(
-        extractRepo('git+https://github.com/googleapis/nodejs-storage.git'),
-        'googleapis/nodejs-storage',
-      );
-    });
-
-    it('extracts repo slug from git@ github url', () => {
-      assert.strictEqual(
-        extractRepo('git@github.com:googleapis/google-cloud-node.git'),
-        'googleapis/google-cloud-node',
-      );
-    });
-
-    it('extracts repo slug from object with url property', () => {
-      assert.strictEqual(
-        extractRepo({
-          type: 'git',
-          url: 'https://github.com/googleapis/google-cloud-node.git',
-          directory: 'packages/google-cloud-redis',
-        }),
-        'googleapis/google-cloud-node',
-      );
-    });
-
-    it('extracts repo slug from shorthand string', () => {
-      assert.strictEqual(
-        extractRepo('googleapis/google-cloud-node'),
-        'googleapis/google-cloud-node',
-      );
-    });
-
-    it('returns undefined for invalid repo inputs', () => {
-      assert.strictEqual(extractRepo(undefined), undefined);
-      assert.strictEqual(extractRepo(''), undefined);
-      assert.strictEqual(extractRepo({}), undefined);
-    });
   });
 
   describe('extractClientServiceFromPackageName', () => {
@@ -221,26 +169,22 @@ describe('metadataResolver', () => {
     it('extracts metadata from GOOGLE_SDK_NODE_* environment variables', () => {
       process.env.GOOGLE_SDK_NODE_CLIENT_SERVICE = 'my-service';
       process.env.GOOGLE_SDK_NODE_CLIENT_VERSION = '2.3.4';
-      process.env.GOOGLE_SDK_NODE_REPO = 'custom/repo';
       process.env.GOOGLE_SDK_NODE_ARTIFACT = '@custom/package';
 
       const metadata = extractFromEnvironment();
       assert.strictEqual(metadata.gcpClientService, 'my-service');
       assert.strictEqual(metadata.gcpVersion, '2.3.4');
-      assert.strictEqual(metadata.gcpRepo, 'custom/repo');
       assert.strictEqual(metadata.gcpArtifact, '@custom/package');
     });
 
     it('extracts metadata from GCP_* environment variables', () => {
       process.env.GCP_CLIENT_SERVICE = 'gcp-service';
       process.env.GCP_CLIENT_VERSION = '3.0.0';
-      process.env.GCP_REPO = 'gcp/repo';
       process.env.GCP_ARTIFACT = '@gcp/package';
 
       const metadata = extractFromEnvironment();
       assert.strictEqual(metadata.gcpClientService, 'gcp-service');
       assert.strictEqual(metadata.gcpVersion, '3.0.0');
-      assert.strictEqual(metadata.gcpRepo, 'gcp/repo');
       assert.strictEqual(metadata.gcpArtifact, '@gcp/package');
     });
   });
@@ -251,7 +195,6 @@ describe('metadataResolver', () => {
       const explicit: StaticTraceContext = {
         gcpClientService: 'custom-service',
         gcpVersion: '1.2.3',
-        gcpRepo: 'custom/repo',
         gcpArtifact: '@custom/client',
       };
       const settings = new CallSettings({
@@ -261,7 +204,10 @@ describe('metadataResolver', () => {
       });
 
       const resolved = resolveStaticTraceContext(settings);
-      assert.deepStrictEqual(resolved, explicit);
+      assert.strictEqual(resolved.gcpClientService, 'custom-service');
+      assert.strictEqual(resolved.gcpVersion, '1.2.3');
+      assert.strictEqual(resolved.gcpArtifact, '@custom/client');
+      assert.strictEqual(resolved.gcpRepo, DEFAULT_GCP_REPO);
     });
 
     it('ignores explicit internalTelemetryInfo when GOOGLE_SDK_NODE_ENABLE_TRACING is set', () => {
