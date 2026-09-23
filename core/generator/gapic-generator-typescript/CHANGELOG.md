@@ -1,6 +1,18 @@
 # Changelog
 
 
+## [5.5.0](https://github.com/googleapis/google-cloud-node/compare/gapic-generator-v5.4.0...gapic-generator-v5.5.0) (2026-09-23)
+
+
+### Features
+
+* **generator:** Use runtime-agnostic test runner in GAPIC package templates ([0722a34](https://github.com/googleapis/google-cloud-node/commit/0722a3415190ce725537091d67b49dbaccb5cd2a))
+
+
+### Bug Fixes
+
+* **gax:** Move gapic-generator-typescript into the root pnpm workspace ([#9418](https://github.com/googleapis/google-cloud-node/issues/9418)) ([d2c4b08](https://github.com/googleapis/google-cloud-node/commit/d2c4b08ae8f3a18c252a09a09e1ae1e49d4cd822))
+
 ## [5.4.0](https://github.com/googleapis/google-cloud-node/compare/gapic-generator-v5.3.0...gapic-generator-v5.4.0) (2026-09-22)
 
 
