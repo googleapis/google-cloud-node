@@ -56,7 +56,7 @@ export function checkTelemetryEnabled(settings?: CallSettings): boolean {
 
   const clientOptIn = Boolean(
     settings?.enableTelemetryTracing ||
-      settings?.otherArgs?.enableTelemetryTracing,
+    settings?.otherArgs?.enableTelemetryTracing,
   );
 
   return (
