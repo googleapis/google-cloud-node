@@ -18,6 +18,7 @@ import {EventEmitter} from 'events';
 import * as through from 'through2';
 import * as streamEvents from 'stream-events';
 import {CancellableStream, grpc} from 'google-gax';
+import {status as Status} from '@grpc/grpc-js';
 import * as mock from './mockserver/mockspanner';
 import {Database, Instance, Spanner} from '../src';
 import {RequestStreamCoordinator} from '../src/request-stream-coordinator';
@@ -123,7 +124,7 @@ describe('RequestStreamCoordinator', () => {
     coordinator.attachCallStream(callStream);
 
     // Status arrives from Spanner (OK)
-    callStream.emit('status', {code: 0, details: 'OK'});
+    callStream.emit('status', {code: Status.OK, details: 'OK'});
 
     // Subsequent stream destruction (e.g. GC or caller teardown)
     stream.destroy();
@@ -277,7 +278,7 @@ describe('RequestStreamCoordinator', () => {
     );
 
     // Once status arrives on callStream:
-    callStream.emit('status', {code: 1, details: 'Cancelled'});
+    callStream.emit('status', {code: Status.CANCELLED, details: 'Cancelled'});
 
     assert.strictEqual(
       (tracer.recordOperationCompletion as sinon.SinonSpy).calledOnce,
@@ -390,7 +391,7 @@ describe('RequestStreamCoordinator', () => {
     );
 
     // Status arrives on gRPC stream
-    callStream.emit('status', {code: 1, details: 'Cancelled'});
+    callStream.emit('status', {code: Status.CANCELLED, details: 'Cancelled'});
 
     setImmediate(() => {
       assert.strictEqual(
