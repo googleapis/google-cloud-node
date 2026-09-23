@@ -25,6 +25,10 @@ import (
 	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/protobuf/proto"
+
+	// Install google-c2p resolver and RLS load balancer policy, required for DirectPath xDS.
+	_ "google.golang.org/grpc/balancer/rls"
+	_ "google.golang.org/grpc/xds/googledirectpath"
 )
 
 const (
