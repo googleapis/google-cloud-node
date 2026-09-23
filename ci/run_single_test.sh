@@ -18,7 +18,12 @@ set -e
 
 export REGION_ID='uc'
 export PROJECT_ROOT=$(realpath $(dirname "${BASH_SOURCE[0]}")/..)
-export NODE_OPTIONS="${NODE_OPTIONS} --max_old_space_size=6144 --no-deprecation"
+if [[ "$OSTYPE" == "msys"* || "$OSTYPE" == "cygwin"* || "$OS" == "Windows_NT" ]]; then
+    MAX_OLD_SPACE_SIZE=2048
+else
+    MAX_OLD_SPACE_SIZE=6144
+fi
+export NODE_OPTIONS="${NODE_OPTIONS} --max_old_space_size=${MAX_OLD_SPACE_SIZE} --no-deprecation"
 
 if [ -z "${BUILD_TYPE}" ]; then
     echo "missing BUILD_TYPE env var"
@@ -43,31 +48,38 @@ else
     export MOCHA_REPORTER=dot
 fi
 
-# Install dependencies
-# Normalize POSIX paths to Windows-compatible mixed paths (forward slashes) on Windows Git Bash
-# so native Node.js and pnpm processes can resolve .pnpmfile.cjs without segmentation faults.
-PNPMFILE_PATH="${PROJECT_ROOT}/.pnpmfile.cjs"
-if command -v cygpath >/dev/null 2>&1; then
-    PNPMFILE_PATH=$(cygpath -m "${PNPMFILE_PATH}")
+# Install workspace dependencies only if not already installed at the monorepo root.
+if [ ! -d "${PROJECT_ROOT}/node_modules/.pnpm" ]; then
+    echo "pnpm --dir \"${PROJECT_ROOT}\" install --frozen-lockfile --ignore-scripts"
+    if ! pnpm --dir "${PROJECT_ROOT}" install --frozen-lockfile --ignore-scripts; then
+        echo "::error title=PNPM Install Failed::pnpm install failed in ${PROJECT_ROOT}."
+        echo ""
+        echo "===================================================================================================="
+        echo "❌ PNPM Install Failed"
+        echo ""
+        echo "If this failure is caused by an outdated lockfile or changed package.json dependencies, run:"
+        echo "    pnpm install --lockfile-only"
+        echo "    git add pnpm-lock.yaml"
+        echo "    git commit -m \"chore: update pnpm-lock.yaml\""
+        echo "    git push"
+        echo "===================================================================================================="
+        echo ""
+        exit 1
+    fi
 fi
 
-echo "pnpm install --engine-strict --pnpmfile \"${PNPMFILE_PATH}\""
-if ! pnpm install --engine-strict --pnpmfile "${PNPMFILE_PATH}"; then
-    echo "::error title=PNPM Install Failed::pnpm install failed in $(pwd)."
-    echo ""
-    echo "===================================================================================================="
-    echo "❌ PNPM Install Failed"
-    echo ""
-    echo "If this failure is caused by an outdated lockfile or changed package.json dependencies, run:"
-    echo "    pnpm install --no-frozen-lockfile"
-    echo "    git add pnpm-lock.yaml"
-    echo "    git commit -m \"chore: update pnpm-lock.yaml\""
-    echo "    git push"
-    echo "===================================================================================================="
-    echo ""
-    exit 1
+if [ "${SHARD_COMPILED}" != "true" ] && [ ! -d "build" ] && [ -f "package.json" ]; then
+    rel_dir=$(realpath --relative-to="${PROJECT_ROOT}" "${d}")
+    npm_config_enable_pre_post_scripts=true TURBO_DAEMON=false TURBO_NO_UPDATE_NOTIFIER=1 pnpm --dir "${PROJECT_ROOT}" exec turbo run compile --no-daemon --env-mode=loose --filter="...{./${rel_dir}}"
 fi
 
+if [ -d "node_modules/pprof" ] && [ ! -f "node_modules/pprof/build/Release/pprof.node" ]; then
+    pnpm exec node-gyp rebuild --directory node_modules/pprof
+fi
+
+if [ -f "build/tools/prepublish.js" ] && [ ! -d "google/api" ]; then
+    node ./build/tools/prepublish.js
+fi
 
 retval=0
 
