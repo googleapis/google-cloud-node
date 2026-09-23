@@ -66,6 +66,10 @@ function main() {
    *  databases proposed, an error will be returned.
    */
   // const replicaOverwriteEnabled = true
+  /**
+   *  Optional. Region of the Cloud SQL instance.
+   */
+  // const location = 'abc123'
 
   // Imports the Sql library
   const {SqlInstancesServiceClient} = require('@google-cloud/sql').v1beta4;

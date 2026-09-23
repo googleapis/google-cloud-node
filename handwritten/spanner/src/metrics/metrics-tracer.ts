@@ -14,7 +14,7 @@
 
 import {status as Status} from '@grpc/grpc-js';
 import {Counter, Histogram} from '@opentelemetry/api';
-import {MetricsTracerFactory} from './metrics-tracer-factory';
+
 import {
   METRIC_LABEL_KEY_DATABASE,
   METRIC_LABEL_KEY_METHOD,
@@ -107,6 +107,92 @@ class MetricOperationTracer {
   }
 }
 
+const GFE_METRIC_PREFIX = 'gfet4t7; dur=';
+const AFE_METRIC_PREFIX = 'afe; dur=';
+
+/**
+ * Checks whether a character code represents an entry delimiter or whitespace in a
+ * 'server-timing' header (start of string, space, comma, or tab).
+ *
+ * @param charCode The character code to check.
+ * @returns True if the character code is a valid entry separator or whitespace.
+ */
+function isEntryDelimiter(charCode: number): boolean {
+  return (
+    charCode === 32 /* ' ' */ ||
+    charCode === 44 /* ',' */ ||
+    charCode === 9 /* '\t' */
+  );
+}
+
+/**
+ * Parses consecutive ASCII digit characters into an integer starting from the given index.
+ * Returns null if the character at startIndex is not a digit (e.g. non-numeric, negative, or empty).
+ * Parsing stops at the first non-digit (e.g. ',', ';', or decimal point), matching the legacy
+ * regex `([0-9]+)` behavior without intermediate string slice allocations.
+ *
+ * @param header The 'server-timing' header string.
+ * @param startIndex The index where numeric digits are expected to begin.
+ * @returns The parsed non-negative integer, or null if no valid digits were found.
+ */
+function parseConsecutiveDigits(
+  header: string,
+  startIndex: number,
+): number | null {
+  if (startIndex >= header.length) {
+    return null;
+  }
+  const firstCharCode = header.charCodeAt(startIndex);
+  if (firstCharCode < 48 || firstCharCode > 57) {
+    return null;
+  }
+  let value = firstCharCode - 48;
+  for (let index = startIndex + 1; index < header.length; index++) {
+    const code = header.charCodeAt(index);
+    if (code >= 48 && code <= 57) {
+      value = value * 10 + (code - 48);
+    } else {
+      break;
+    }
+  }
+  return value;
+}
+
+/**
+ * Extracts a numeric latency value in milliseconds for a given metric prefix from a
+ * 'server-timing' header string without regex allocations or intermediate substring slices.
+ *
+ * @param header The 'server-timing' header string.
+ * @param prefix The metric prefix (e.g. 'gfet4t7; dur=').
+ * @returns The extracted latency in milliseconds, or null if not found.
+ */
+function extractServerTimingLatency(
+  header: string,
+  prefix: string,
+): number | null {
+  if (!header || typeof header !== 'string') {
+    return null;
+  }
+  let prefixIndex = header.indexOf(prefix);
+  while (prefixIndex !== -1) {
+    // Ensure prefix is not part of a longer metric name (e.g., 'safe; dur=' matching 'afe; dur=')
+    if (
+      prefixIndex === 0 ||
+      isEntryDelimiter(header.charCodeAt(prefixIndex - 1))
+    ) {
+      const latency = parseConsecutiveDigits(
+        header,
+        prefixIndex + prefix.length,
+      );
+      if (latency !== null) {
+        return latency;
+      }
+    }
+    prefixIndex = header.indexOf(prefix, prefixIndex + 1);
+  }
+  return null;
+}
+
 /**
  * MetricsTracer is responsible for recording and managing metrics related to
  * gRPC Spanner operations and attempts counters, and latencies,
@@ -171,7 +257,7 @@ export class MetricsTracer {
     private _instance: string,
     private _projectId: string,
     private _methodName: string,
-    private _request: string,
+    private _request?: string,
     attributesCache?: Map<string, Record<string, string>>,
   ) {
     this._clientAttributes[METRIC_LABEL_KEY_DATABASE] = _database;
@@ -287,9 +373,7 @@ export class MetricsTracer {
       operationLatencyMilliseconds,
       operationAttributes,
     );
-    MetricsTracerFactory.getInstance(this._projectId)?.clearCurrentTracer(
-      this._request,
-    );
+    this.currentOperation = null;
   }
 
   /**
@@ -300,11 +384,7 @@ export class MetricsTracer {
    * @returns The extracted GFE latency in milliseconds, or null if not found.
    */
   public extractGfeLatency(header: string): number | null {
-    const regex = /gfet4t7; dur=([0-9]+).*/;
-    if (header === undefined) return null;
-    const match = header.match(regex);
-    if (!match) return null;
-    return Number(match[1]);
+    return extractServerTimingLatency(header, GFE_METRIC_PREFIX);
   }
 
   /**
@@ -316,11 +396,7 @@ export class MetricsTracer {
    */
   public extractAfeLatency(header: string): number | null {
     if (!isAFEServerTimingEnabled()) return null;
-    const regex = /afe; dur=([0-9]+).*/;
-    if (header === undefined) return null;
-    const match = header.match(regex);
-    if (!match) return null;
-    return Number(match[1]);
+    return extractServerTimingLatency(header, AFE_METRIC_PREFIX);
   }
 
   /**
@@ -358,7 +434,11 @@ export class MetricsTracer {
    */
   public recordGfeLatency(statusCode: Status) {
     if (!this.enabled || !this._instrumentGfeLatency) return;
-    if (this.gfeLatency === null || this.gfeLatency === undefined) {
+    if (
+      typeof this.gfeLatency !== 'number' ||
+      !Number.isFinite(this.gfeLatency) ||
+      this.gfeLatency < 0
+    ) {
       console.error(
         'ERROR: Attempted to record GFE metric with no latency value.',
       );
@@ -407,7 +487,11 @@ export class MetricsTracer {
     ) {
       return;
     }
-    if (this.afeLatency === null || this.afeLatency === undefined) {
+    if (
+      typeof this.afeLatency !== 'number' ||
+      !Number.isFinite(this.afeLatency) ||
+      this.afeLatency < 0
+    ) {
       console.error(
         'ERROR: Attempted to record AFE metric with no latency value.',
       );

@@ -12,20 +12,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 language: nodejs
-version: v0.44.0
+version: v0.45.0
 repo: googleapis/google-cloud-node
 sources:
   googleapis:
-    commit: bba4c646b1f85a4cd499207926865205caad0384
-    sha256: a9b811170e891939d022f7463bb9ab03f56ef3ef40fbd6d93771eefa7ccf4750
+    commit: 9b719a5c153f3ec7a14d5d45d4da720410c7b943
+    sha256: fcceaa2004ccc51874effb9669303c042d21ff3e308f1710ce8280acbab8e2a5
 tools:
   pnpm:
     - name: gapic-generator-typescript
-      version: gapic-generator-v5.3.0
-      package: https://github.com/googleapis/google-cloud-node/archive/gapic-generator-v5.3.0.tar.gz
-      checksum: 4bc54d399b22c845fd4555f9435b7971153a2e3fafca32402658390711828f63
+      version: gapic-generator-v5.5.0
+      package: https://github.com/googleapis/google-cloud-node/archive/gapic-generator-v5.5.0.tar.gz
+      checksum: dec0756bf04ff1cb881cd7a8a51c538fd5d25daedd1b65d93800632d85baddea
       build:
-        - pnpm install --ignore-workspace --frozen-lockfile --config.auto-install-peers=true
+        - pnpm install --frozen-lockfile --filter @google-cloud/gapic-generator
         - pnpm run compile
         - pnpm add -g "$PWD"
       src_dir: core/generator/gapic-generator-typescript
@@ -70,7 +70,7 @@ default:
       google/shopping/merchant: '@google-shopping'
 libraries:
   - name: google-ads-admanager
-    version: 0.13.0
+    version: 0.14.0
     apis:
       - path: google/ads/admanager/v1
     copyright_year: "2026"
@@ -114,7 +114,7 @@ libraries:
       package_name: '@google-analytics/admin'
       client_documentation_override: https://googleapis.dev/nodejs/analytics-admin/latest/
   - name: google-analytics-data
-    version: 7.1.0
+    version: 7.2.0
     apis:
       - path: google/analytics/data/v1beta
       - path: google/analytics/data/v1alpha
@@ -209,7 +209,7 @@ libraries:
       package_name: '@google/area120-tables'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/area120-tables/latest
   - name: google-chat
-    version: 0.31.0
+    version: 0.33.0
     apis:
       - path: google/chat/v1
     copyright_year: "2026"
@@ -241,7 +241,7 @@ libraries:
       - path: google/cloud/agentidentity/v1beta
     copyright_year: "2026"
   - name: google-cloud-agentregistry
-    version: 0.4.0
+    version: 0.5.0
     apis:
       - path: google/cloud/agentregistry/v1
     copyright_year: "2026"
@@ -275,7 +275,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-apigateway
-    version: 5.2.0
+    version: 5.3.0
     apis:
       - path: google/cloud/apigateway/v1
     copyright_year: "2026"
@@ -370,7 +370,7 @@ libraries:
       default_version: v1
       main_service: automl
   - name: google-cloud-backupdr
-    version: 0.11.0
+    version: 0.12.0
     apis:
       - path: google/cloud/backupdr/v1
       - path: google/cloud/backupdr/v1beta
@@ -507,7 +507,7 @@ libraries:
       metadata_name_override: bigquerystorage-api
       name_pretty_override: BigQuery Storage API
   - name: google-cloud-bigtable-api
-    version: 0.7.0
+    version: 0.8.0
     apis:
       - path: google/bigtable/v2
       - path: google/bigtable/admin/v2
@@ -627,7 +627,7 @@ libraries:
       - path: google/cloud/commerceproducer/v1beta
     copyright_year: "2026"
   - name: google-cloud-compute
-    version: 7.4.0
+    version: 7.5.0
     apis:
       - path: google/cloud/compute/v1
         nodejs:
@@ -822,7 +822,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-devicestreaming
-    version: 0.4.0
+    version: 0.5.0
     apis:
       - path: google/cloud/devicestreaming/v1
     copyright_year: "2026"
@@ -850,7 +850,7 @@ libraries:
       metadata_name_override: dialogflow-cx
       name_pretty_override: Dialogflow CX API
   - name: google-cloud-discoveryengine
-    version: 3.2.0
+    version: 3.3.0
     apis:
       - path: google/cloud/discoveryengine/v1
       - path: google/cloud/discoveryengine/v1beta
@@ -970,7 +970,7 @@ libraries:
     nodejs:
       default_version: v1alpha
   - name: google-cloud-geminidataanalytics
-    version: 0.12.0
+    version: 0.13.0
     apis:
       - path: google/cloud/geminidataanalytics/v1
       - path: google/cloud/geminidataanalytics/v1beta
@@ -1117,7 +1117,7 @@ libraries:
       metadata_name_override: logging-api
       name_pretty_override: Logging API
   - name: google-cloud-lustre
-    version: 0.4.0
+    version: 0.5.0
     apis:
       - path: google/cloud/lustre/v1
     copyright_year: "2026"
@@ -1251,7 +1251,7 @@ libraries:
       default_version: v1beta1
       package_name: '@google-cloud/network-security'
   - name: google-cloud-networkservices
-    version: 0.16.0
+    version: 0.17.0
     apis:
       - path: google/cloud/networkservices/v1
       - path: google/cloud/networkservices/v1beta1
@@ -1320,7 +1320,7 @@ libraries:
     nodejs:
       default_version: v1beta
   - name: google-cloud-parametermanager
-    version: 0.7.0
+    version: 0.8.0
     apis:
       - path: google/cloud/parametermanager/v1
     copyright_year: "2026"
@@ -1484,6 +1484,8 @@ libraries:
     copyright_year: "2026"
     nodejs:
       default_version: v1
+      dependencies:
+        google-gax: ^6.5.0
       extra_protoc_parameters:
         - enable_telemetry_tracing=true
       package_name: '@google-cloud/secret-manager'
@@ -1595,7 +1597,7 @@ libraries:
         pumpify: ^2.0.1
         stream-events: ^1.0.5
   - name: google-cloud-sql
-    version: 0.28.0
+    version: 0.29.0
     apis:
       - path: google/cloud/sql/v1
       - path: google/cloud/sql/v1beta4
@@ -1634,7 +1636,7 @@ libraries:
       default_version: v4
       main_service: talent
   - name: google-cloud-tasks
-    version: 7.1.1
+    version: 7.2.0
     apis:
       - path: google/cloud/tasks/v2
       - path: google/cloud/tasks/v2beta3
@@ -1691,7 +1693,7 @@ libraries:
         extend: ^3.0.2
         is-html: ^2.0.0
   - name: google-cloud-vectorsearch
-    version: 0.12.0
+    version: 0.13.0
     apis:
       - path: google/cloud/vectorsearch/v1
       - path: google/cloud/vectorsearch/v1beta
@@ -2056,7 +2058,7 @@ libraries:
       package_name: '@googlemaps/routing'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/routing/latest
   - name: google-maps-solar
-    version: 0.6.0
+    version: 0.7.0
     apis:
       - path: google/maps/solar/v1
     copyright_year: "2026"
@@ -2065,7 +2067,7 @@ libraries:
       package_name: '@googlemaps/solar'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/solar/latest
   - name: google-marketingplatform-admin
-    version: 0.5.0
+    version: 0.6.0
     apis:
       - path: google/marketingplatform/admin/v1alpha
         nodejs:
@@ -2076,7 +2078,7 @@ libraries:
       package_name: '@google-ads/marketing-platform-admin'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/marketingplatformadminapi/latest
   - name: google-monitoring-dashboard
-    version: 5.0.0
+    version: 5.1.0
     apis:
       - path: google/monitoring/dashboard/v1
     copyright_year: "2026"

@@ -271,13 +271,48 @@
                       },
                       "nested": {
                         "IndexHint": {
+                          "oneofs": {
+                            "params": {
+                              "oneof": [
+                                "denseScannParams"
+                              ]
+                            }
+                          },
                           "fields": {
+                            "denseScannParams": {
+                              "type": "DenseScannParams",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
                             "name": {
                               "type": "string",
                               "id": 1,
                               "options": {
                                 "(google.api.field_behavior)": "REQUIRED",
                                 "(google.api.resource_reference).type": "vectorsearch.googleapis.com/Index"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "DenseScannParams": {
+                              "oneofs": {
+                                "_targetRecall": {
+                                  "oneof": [
+                                    "targetRecall"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "targetRecall": {
+                                  "type": "double",
+                                  "id": 3,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL",
+                                    "proto3_optional": true
+                                  }
+                                }
                               }
                             }
                           }
@@ -393,7 +428,7 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
                         "searchField": {
@@ -407,7 +442,7 @@
                           "type": "EmbeddingTaskType",
                           "id": 5,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
                         "outputFields": {
@@ -868,14 +903,14 @@
                           "type": "string",
                           "id": 2,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
                         "taskType": {
                           "type": "EmbeddingTaskType",
                           "id": 3,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -2655,6 +2690,13 @@
                           },
                           "nested": {
                             "DenseScannParams": {
+                              "oneofs": {
+                                "_targetRecall": {
+                                  "oneof": [
+                                    "targetRecall"
+                                  ]
+                                }
+                              },
                               "fields": {
                                 "searchLeavesPct": {
                                   "type": "int32",
@@ -2668,6 +2710,14 @@
                                   "id": 2,
                                   "options": {
                                     "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "targetRecall": {
+                                  "type": "double",
+                                  "id": 3,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL",
+                                    "proto3_optional": true
                                   }
                                 }
                               }
@@ -3116,6 +3166,104 @@
                             "(google.api.field_behavior)": "OUTPUT_ONLY",
                             "proto3_optional": true
                           }
+                        },
+                        "searchResultMetadata": {
+                          "type": "SearchResultMetadata",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "SearchResultMetadata": {
+                          "fields": {
+                            "searchDistances": {
+                              "rule": "repeated",
+                              "type": "SearchDistance",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "rrfRankerResult": {
+                              "type": "RrfRankerResult",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "vertexRankerResult": {
+                              "type": "VertexRankerResult",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "SearchDistance": {
+                              "fields": {
+                                "searchIndex": {
+                                  "type": "int32",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
+                                },
+                                "rank": {
+                                  "type": "int32",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
+                                },
+                                "distance": {
+                                  "type": "double",
+                                  "id": 3,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
+                                }
+                              }
+                            },
+                            "RrfRankerResult": {
+                              "fields": {
+                                "rank": {
+                                  "type": "int32",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
+                                },
+                                "score": {
+                                  "type": "double",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
+                                }
+                              }
+                            },
+                            "VertexRankerResult": {
+                              "fields": {
+                                "rank": {
+                                  "type": "int32",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
+                                },
+                                "score": {
+                                  "type": "double",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
+                                }
+                              }
+                            }
+                          }
                         }
                       }
                     },
@@ -3311,6 +3459,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "metadataOptions": {
+                          "type": "BatchSearchMetadataOptions",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -3333,6 +3488,17 @@
                             "topK": {
                               "type": "int32",
                               "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "BatchSearchMetadataOptions": {
+                          "fields": {
+                            "searchSignalsEnabled": {
+                              "type": "bool",
+                              "id": 1,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
