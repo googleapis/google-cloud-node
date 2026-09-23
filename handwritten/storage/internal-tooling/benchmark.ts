@@ -31,6 +31,7 @@ interface Args {
   baseline?: string;
   fileSize: number;
   resumable?: boolean;
+  scenario?: string;
 }
 
 const argv = yargs(process.argv.slice(2))
@@ -70,6 +71,11 @@ const argv = yargs(process.argv.slice(2))
   .option('resumable', {
     type: 'boolean',
     description: 'Force resumable upload for the upload scenario',
+  })
+  .option('scenario', {
+    type: 'string',
+    description:
+      'Run only specific scenario(s) (e.g., "Delete File", or comma-separated list)',
   })
   .parseSync() as unknown as Args;
 
@@ -882,6 +888,52 @@ async function runBucketIamScenario(bucket: Bucket): Promise<number[]> {
   );
 }
 
+const ALL_SCENARIOS = [
+  'Upload',
+  'Stream Upload',
+  'Local bucket.upload()',
+  'Local bucket.upload() Resumable',
+  'Local bucket.upload() Multipart',
+  'Get Metadata',
+  'File .get()',
+  'File .save({ resumable: false })',
+  'File .createResumableUpload()',
+  'Download',
+  'Stream Download',
+  'List Files',
+  'Exists',
+  'Set Metadata',
+  'Delete File',
+  'Bucket Lifecycle',
+  'Bucket Patch / Settings',
+  'Bucket Lock Retention Policy',
+  'Storage List & Service Account',
+  'File Patch, Get, and ACL',
+  'File Copy, Move, Compose & Storage Class',
+  'Notifications',
+  'HMAC Key Management',
+  'Bucket IAM',
+];
+
+function shouldRun(...labels: string[]): boolean {
+  if (!argv.scenario) {
+    return true;
+  }
+  const filters = argv.scenario
+    .split(',')
+    .map(s => s.trim().toLowerCase())
+    .filter(Boolean);
+  return filters.some(filter => {
+    const isExactKnownScenario = ALL_SCENARIOS.some(
+      s => s.toLowerCase() === filter,
+    );
+    if (isExactKnownScenario) {
+      return labels.some(l => l.toLowerCase() === filter);
+    }
+    return labels.some(l => l.toLowerCase().includes(filter));
+  });
+}
+
 async function runBenchmark(
   StorageClass: typeof Storage,
   name: string,
@@ -897,197 +949,278 @@ async function runBenchmark(
     .replace(/-+/g, '-')
     .replace(/^-|-$/g, '');
 
+  let mainFile: File | undefined;
+  const getMainFile = async (): Promise<File> => {
+    if (mainFile) {
+      return mainFile;
+    }
+    if (uploadedFiles.length > 0) {
+      mainFile = uploadedFiles[0];
+      return mainFile;
+    }
+    const seedFile = bucket.file(`bench-seed-${safeName}-${Date.now()}.bin`);
+    await seedFile.save(content);
+    uploadedFiles.push(seedFile);
+    mainFile = seedFile;
+    return mainFile;
+  };
+
   console.log(
     `\n=== Running benchmark for ${name} (Concurrency: ${argv.concurrency}) ===`,
   );
 
   try {
-    const uploadTimes = await runUploadScenario(
-      bucket,
-      content,
-      safeName,
-      uploadedFiles,
-    );
-    reportResults(`Upload (${argv.fileSize} bytes)`, uploadTimes, true);
-    logMemory('After Upload');
-
-    const streamUploadedFiles: File[] = [];
-    const streamUploadTimes = await runStreamUploadScenario(
-      bucket,
-      content,
-      safeName,
-      streamUploadedFiles,
-    );
-    reportResults(
-      `Stream Upload (${argv.fileSize} bytes)`,
-      streamUploadTimes,
-      true,
-    );
-    logMemory('After Stream Upload');
-    uploadedFiles.push(...streamUploadedFiles);
-
-    const localUploadResults = await runLocalFileUploadScenario(
-      bucket,
-      content,
-      safeName,
-      uploadedFiles,
-    );
-    reportResults(
-      'Local bucket.upload() Resumable',
-      localUploadResults.resumableTimes,
-      true,
-    );
-    reportResults(
-      'Local bucket.upload() Multipart',
-      localUploadResults.multipartTimes,
-      true,
-    );
-    logMemory('After Local Uploads');
-
-    const mainFile = uploadedFiles[0];
-
-    const metadataTimes = await runMetadataScenario(mainFile);
-    reportResults('Get Metadata', metadataTimes);
-    logMemory('After Metadata');
-
-    const fileGetSaveCreateResults =
-      await runFileGetSaveAndResumableCreateScenario(bucket, mainFile, content);
-    reportResults('File .get()', fileGetSaveCreateResults.getTimes);
-    reportResults(
-      'File .save({ resumable: false })',
-      fileGetSaveCreateResults.saveMultipartTimes,
-      true,
-    );
-    reportResults(
-      'File .createResumableUpload()',
-      fileGetSaveCreateResults.createResumableTimes,
-    );
-    logMemory('After File Get, Save, and Resumable Create');
-
-    const downloadTimes = await runDownloadScenario(mainFile);
-    reportResults(`Download (${argv.fileSize} bytes)`, downloadTimes, true);
-    logMemory('After Download');
-
-    const streamDownloadTimes = await runStreamDownloadScenario(mainFile);
-    reportResults(
-      `Stream Download (${argv.fileSize} bytes)`,
-      streamDownloadTimes,
-      true,
-    );
-    logMemory('After Stream Download');
-
-    const listTimes = await runListFilesScenario(bucket, `bench-${safeName}`);
-    reportResults('List Files', listTimes);
-    logMemory('After List Files');
-
-    const existsTimes = await runExistsScenario(mainFile);
-    reportResults('Exists', existsTimes);
-    logMemory('After Exists');
-
-    const setMetadataTimes = await runSetMetadataScenario(bucket, safeName);
-    reportResults('Set Metadata', setMetadataTimes);
-    logMemory('After Set Metadata');
-
-    const deleteTimes = await runDeleteScenario(bucket, safeName, content);
-    reportResults('Delete File', deleteTimes);
-    logMemory('After Delete File');
-
-    try {
-      const bucketLifecycleTimes = await runBucketLifecycleScenario(
-        storage,
-        safeName,
-      );
-      reportResults('Bucket Lifecycle', bucketLifecycleTimes);
-    } catch (err) {
-      console.warn(
-        '    [Warning] Bucket Lifecycle scenario failed (likely missing storage.buckets.create permissions). Skipping.',
-      );
-    }
-    logMemory('After Bucket Lifecycle');
-
-    try {
-      const bucketPatchTimes = await runBucketPatchScenario(storage, safeName);
-      reportResults('Bucket Patch / Settings', bucketPatchTimes);
-    } catch (err) {
-      console.warn(
-        '    [Warning] Bucket Patch scenario failed (likely missing storage.buckets.create permissions). Skipping.',
-      );
-    }
-    logMemory('After Bucket Patch');
-
-    try {
-      const bucketLockTimes = await runBucketLockScenario(storage, safeName);
-      reportResults('Bucket Lock Retention Policy', bucketLockTimes);
-    } catch (err) {
-      console.warn(
-        '    [Warning] Bucket Lock scenario failed (likely missing storage.buckets.create permissions). Skipping.',
-      );
-    }
-    logMemory('After Bucket Lock');
-
-    try {
-      const storageListTimes = await runStorageListAndAccountScenario(storage);
-      reportResults('Storage List & Service Account', storageListTimes);
-    } catch (err) {
-      console.warn(
-        '    [Warning] Storage List & Service Account scenario failed (likely missing storage.buckets.list permissions). Skipping.',
-        err,
-      );
-    }
-    logMemory('After Storage List/Account');
-
-    try {
-      const filePatchAclTimes = await runFilePatchAndAclScenario(
+    if (shouldRun('Upload')) {
+      const uploadTimes = await runUploadScenario(
         bucket,
-        mainFile,
-      );
-      if (filePatchAclTimes.length > 0) {
-        reportResults('File Patch, Get, and ACL', filePatchAclTimes);
-      }
-    } catch (err) {
-      console.warn(
-        '    [Warning] File Patch, Get, and ACL scenario failed. Skipping.',
-      );
-    }
-    logMemory('After File Patch/ACL');
-
-    try {
-      const fileCopyMoveComposeTimes = await runFileCopyMoveComposeScenario(
-        bucket,
-        mainFile,
+        content,
         safeName,
+        uploadedFiles,
+      );
+      reportResults(`Upload (${argv.fileSize} bytes)`, uploadTimes, true);
+      logMemory('After Upload');
+    }
+
+    if (shouldRun('Stream Upload')) {
+      const streamUploadedFiles: File[] = [];
+      const streamUploadTimes = await runStreamUploadScenario(
+        bucket,
+        content,
+        safeName,
+        streamUploadedFiles,
       );
       reportResults(
-        'File Copy, Move, Compose & Storage Class',
-        fileCopyMoveComposeTimes,
+        `Stream Upload (${argv.fileSize} bytes)`,
+        streamUploadTimes,
+        true,
       );
-    } catch (err) {
-      console.warn(
-        '    [Warning] File Copy, Move, Compose & Storage Class scenario failed. Skipping.',
-        err,
+      logMemory('After Stream Upload');
+      uploadedFiles.push(...streamUploadedFiles);
+    }
+
+    if (
+      shouldRun(
+        'Local bucket.upload()',
+        'Local bucket.upload() Resumable',
+        'Local bucket.upload() Multipart',
+      )
+    ) {
+      const localUploadResults = await runLocalFileUploadScenario(
+        bucket,
+        content,
+        safeName,
+        uploadedFiles,
       );
+      reportResults(
+        'Local bucket.upload() Resumable',
+        localUploadResults.resumableTimes,
+        true,
+      );
+      reportResults(
+        'Local bucket.upload() Multipart',
+        localUploadResults.multipartTimes,
+        true,
+      );
+      logMemory('After Local Uploads');
     }
-    logMemory('After File Copy/Move/Compose');
 
-    const notificationTimes = await runNotificationScenario(bucket);
-    reportResults('Notifications', notificationTimes);
-    logMemory('After Notifications');
-
-    const hmacTimes = await runHmacKeyScenario(storage);
-    reportResults('HMAC Key Management', hmacTimes);
-    logMemory('After HMAC Key Management');
-
-    try {
-      const iamTimes = await runBucketIamScenario(bucket);
-      reportResults('Bucket IAM', iamTimes);
-    } catch (err) {
-      console.warn('    [Warning] Bucket IAM scenario failed. Skipping.');
+    if (shouldRun('Get Metadata')) {
+      const metadataTimes = await runMetadataScenario(await getMainFile());
+      reportResults('Get Metadata', metadataTimes);
+      logMemory('After Metadata');
     }
-    logMemory('After Bucket IAM');
+
+    if (
+      shouldRun(
+        'File .get()',
+        'File .save({ resumable: false })',
+        'File .createResumableUpload()',
+      )
+    ) {
+      const fileGetSaveCreateResults =
+        await runFileGetSaveAndResumableCreateScenario(
+          bucket,
+          await getMainFile(),
+          content,
+        );
+      reportResults('File .get()', fileGetSaveCreateResults.getTimes);
+      reportResults(
+        'File .save({ resumable: false })',
+        fileGetSaveCreateResults.saveMultipartTimes,
+        true,
+      );
+      reportResults(
+        'File .createResumableUpload()',
+        fileGetSaveCreateResults.createResumableTimes,
+      );
+      logMemory('After File Get, Save, and Resumable Create');
+    }
+
+    if (shouldRun('Download')) {
+      const downloadTimes = await runDownloadScenario(await getMainFile());
+      reportResults(`Download (${argv.fileSize} bytes)`, downloadTimes, true);
+      logMemory('After Download');
+    }
+
+    if (shouldRun('Stream Download')) {
+      const streamDownloadTimes = await runStreamDownloadScenario(
+        await getMainFile(),
+      );
+      reportResults(
+        `Stream Download (${argv.fileSize} bytes)`,
+        streamDownloadTimes,
+        true,
+      );
+      logMemory('After Stream Download');
+    }
+
+    if (shouldRun('List Files')) {
+      const listTimes = await runListFilesScenario(
+        bucket,
+        `bench-${safeName}`,
+      );
+      reportResults('List Files', listTimes);
+      logMemory('After List Files');
+    }
+
+    if (shouldRun('Exists')) {
+      const existsTimes = await runExistsScenario(await getMainFile());
+      reportResults('Exists', existsTimes);
+      logMemory('After Exists');
+    }
+
+    if (shouldRun('Set Metadata')) {
+      const setMetadataTimes = await runSetMetadataScenario(bucket, safeName);
+      reportResults('Set Metadata', setMetadataTimes);
+      logMemory('After Set Metadata');
+    }
+
+    if (shouldRun('Delete File')) {
+      const deleteTimes = await runDeleteScenario(bucket, safeName, content);
+      reportResults('Delete File', deleteTimes);
+      logMemory('After Delete File');
+    }
+
+    if (shouldRun('Bucket Lifecycle')) {
+      try {
+        const bucketLifecycleTimes = await runBucketLifecycleScenario(
+          storage,
+          safeName,
+        );
+        reportResults('Bucket Lifecycle', bucketLifecycleTimes);
+      } catch (err) {
+        console.warn(
+          '    [Warning] Bucket Lifecycle scenario failed (likely missing storage.buckets.create permissions). Skipping.',
+        );
+      }
+      logMemory('After Bucket Lifecycle');
+    }
+
+    if (shouldRun('Bucket Patch / Settings')) {
+      try {
+        const bucketPatchTimes = await runBucketPatchScenario(
+          storage,
+          safeName,
+        );
+        reportResults('Bucket Patch / Settings', bucketPatchTimes);
+      } catch (err) {
+        console.warn(
+          '    [Warning] Bucket Patch scenario failed (likely missing storage.buckets.create permissions). Skipping.',
+        );
+      }
+      logMemory('After Bucket Patch');
+    }
+
+    if (shouldRun('Bucket Lock Retention Policy')) {
+      try {
+        const bucketLockTimes = await runBucketLockScenario(storage, safeName);
+        reportResults('Bucket Lock Retention Policy', bucketLockTimes);
+      } catch (err) {
+        console.warn(
+          '    [Warning] Bucket Lock scenario failed (likely missing storage.buckets.create permissions). Skipping.',
+        );
+      }
+      logMemory('After Bucket Lock');
+    }
+
+    if (shouldRun('Storage List & Service Account')) {
+      try {
+        const storageListTimes =
+          await runStorageListAndAccountScenario(storage);
+        reportResults('Storage List & Service Account', storageListTimes);
+      } catch (err) {
+        console.warn(
+          '    [Warning] Storage List & Service Account scenario failed (likely missing storage.buckets.list permissions). Skipping.',
+          err,
+        );
+      }
+      logMemory('After Storage List/Account');
+    }
+
+    if (shouldRun('File Patch, Get, and ACL')) {
+      try {
+        const filePatchAclTimes = await runFilePatchAndAclScenario(
+          bucket,
+          await getMainFile(),
+        );
+        if (filePatchAclTimes.length > 0) {
+          reportResults('File Patch, Get, and ACL', filePatchAclTimes);
+        }
+      } catch (err) {
+        console.warn(
+          '    [Warning] File Patch, Get, and ACL scenario failed. Skipping.',
+        );
+      }
+      logMemory('After File Patch/ACL');
+    }
+
+    if (shouldRun('File Copy, Move, Compose & Storage Class')) {
+      try {
+        const fileCopyMoveComposeTimes = await runFileCopyMoveComposeScenario(
+          bucket,
+          await getMainFile(),
+          safeName,
+        );
+        reportResults(
+          'File Copy, Move, Compose & Storage Class',
+          fileCopyMoveComposeTimes,
+        );
+      } catch (err) {
+        console.warn(
+          '    [Warning] File Copy, Move, Compose & Storage Class scenario failed. Skipping.',
+          err,
+        );
+      }
+      logMemory('After File Copy/Move/Compose');
+    }
+
+    if (shouldRun('Notifications')) {
+      const notificationTimes = await runNotificationScenario(bucket);
+      reportResults('Notifications', notificationTimes);
+      logMemory('After Notifications');
+    }
+
+    if (shouldRun('HMAC Key Management')) {
+      const hmacTimes = await runHmacKeyScenario(storage);
+      reportResults('HMAC Key Management', hmacTimes);
+      logMemory('After HMAC Key Management');
+    }
+
+    if (shouldRun('Bucket IAM')) {
+      try {
+        const iamTimes = await runBucketIamScenario(bucket);
+        reportResults('Bucket IAM', iamTimes);
+      } catch (err) {
+        console.warn('    [Warning] Bucket IAM scenario failed. Skipping.');
+      }
+      logMemory('After Bucket IAM');
+    }
   } finally {
-    console.log('Cleaning up cloud files...');
-    await cleanupResources(uploadedFiles);
-    logMemory('After Cleanup');
+    if (uploadedFiles.length > 0) {
+      console.log('Cleaning up cloud files...');
+      await cleanupResources(uploadedFiles);
+      logMemory('After Cleanup');
+    }
   }
 }
 
