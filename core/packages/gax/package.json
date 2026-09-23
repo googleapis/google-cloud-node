@@ -65,7 +65,7 @@
   "scripts": {
     "docs": "jsdoc -c .jsdoc.js",
     "pretest": "pnpm run compile",
-    "test": "c8 mocha build/test/unit",
+    "test": "node ../../../bin/run-test.cjs build/test/unit",
     "lint": "gts check src samples test",
     "clean": "gts clean",
     "compile": "node ./scripts/copy-protos.js && tsc -p . && cp src/*.json build/src && cp -r test/fixtures build/test && cp -r protos build/",
@@ -77,7 +77,7 @@
     "compile-http-protos": "pbjs -t static-module -r http_proto --keep-case google/api/http.proto -p ./protos > protos/http.js && pbts protos/http.js -o protos/http.d.ts",
     "fix": "gts fix",
     "prepare": "npm run compile",
-    "system-test": "c8 mocha build/test/system-test --timeout 600000 && pnpm run test-application",
+    "system-test": "node ../../../bin/run-test.cjs build/test/system-test --timeout 600000 && pnpm run test-application",
     "samples-test": "cd samples/ && pnpm link ../ && pnpm test && cd ../",
     "browser-test": "cd test/browser-test && pnpm run prefetch && pnpm install && pnpm test",
     "test-application": "cd test/test-application && pnpm run prefetch && pnpm install && pnpm start",
