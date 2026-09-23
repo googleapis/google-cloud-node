@@ -202,8 +202,8 @@ describe('util.ts', () => {
 
   describe('checkTelemetryEnabled', () => {
     afterEach(() => {
-      delete process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED;
       delete process.env.GOOGLE_SDK_NODE_ENABLE_TRACING;
+      delete process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED;
     });
 
     const mockTelemetryInfo: StaticTraceContext = {
@@ -250,11 +250,11 @@ describe('util.ts', () => {
       assert.strictEqual(checkTelemetryEnabled(noTracingSettings), false);
     });
 
-    it('returns true when enableTelemetryTracing is true even if internalTelemetryInfo is not set', () => {
+    it('returns false when internalTelemetryInfo is not set on settings', () => {
       const noInfoSettings = new CallSettings({
         enableTelemetryTracing: true,
       });
-      assert.strictEqual(checkTelemetryEnabled(noInfoSettings), true);
+      assert.strictEqual(checkTelemetryEnabled(noInfoSettings), false);
     });
 
     it('returns false when settings is undefined', () => {
