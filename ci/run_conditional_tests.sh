@@ -87,8 +87,8 @@ else
 fi
 
 if [[ -n "${RUN_TESTS_MODE}" ]]; then
-    if [[ "${RUN_TESTS_MODE}" != "CALCULATE_SHARD_MATRIX" && "${RUN_TESTS_MODE}" != "RUN_UNIT_TESTS" ]]; then
-        echo "Error: RUN_TESTS_MODE must be either CALCULATE_SHARD_MATRIX or RUN_UNIT_TESTS." >&2
+    if [[ "${RUN_TESTS_MODE}" != "CALCULATE_SHARD_MATRIX" && "${RUN_TESTS_MODE}" != "RUN_UNIT_TESTS" && "${RUN_TESTS_MODE}" != "LIST_TEST_DIRS" ]]; then
+        echo "Error: RUN_TESTS_MODE must be one of CALCULATE_SHARD_MATRIX, RUN_UNIT_TESTS or LIST_TEST_DIRS." >&2
         exit 1
     fi
 fi
@@ -101,6 +101,25 @@ if [[ "${RUN_TESTS_MODE}" == "RUN_UNIT_TESTS" ]]; then
 fi
 
 # Then detect changes in the test scripts.
+#
+# A change under ci/ can affect any package, but testing all ~283 packages on
+# every shard, Node version and OS is not affordable, and it silently desyncs
+# from the compile step: the root `compile` script only builds packages that
+# changed since HEAD^1, so a ci/-only diff compiles nothing and every package
+# then fails with a missing `build/` directory.
+#
+# Instead we test a bounded, deterministic smoke set: every handwritten/ and
+# core/ package, plus CI_SMOKE_PACKAGE_COUNT packages/ entries ordered by a
+# checksum of "<commit sha><dir>". Seeding on the commit SHA means the shard
+# matrix job, every compile step and every test shard independently compute the
+# same list, which is required for sharding and for the turbo --filter to agree.
+CI_SMOKE_PACKAGE_COUNT="${CI_SMOKE_PACKAGE_COUNT:-20}"
+CI_SMOKE_DIRS=""
+
+is_ci_smoke_dir() {
+    [ -n "${CI_SMOKE_DIRS}" ] || return 1
+    printf '%s\n' "${CI_SMOKE_DIRS}" | grep -qxF "$1"
+}
 
 set +e
 git diff --quiet ${GIT_DIFF_ARG} ci
@@ -109,10 +128,22 @@ set -e
 if [[ "${changed}" -eq 0 ]]; then
     echo "no change detected in ci"
 else
-    echo "change detected in ci, we should test everything"
-    echo "result of git diff ${GIT_DIFF_ARG} ci:"
-    git diff ${GIT_DIFF_ARG} ci
-    GIT_DIFF_ARG=""
+    echo "change detected in ci, adding the ci smoke set to the tested packages"
+    echo "result of git diff --stat ${GIT_DIFF_ARG} ci:"
+    git diff --stat ${GIT_DIFF_ARG} ci
+    ci_smoke_seed=$(git rev-parse HEAD)
+    # `sed -n 1,Np` rather than `head -n N`: `head` closes the pipe early, which
+    # trips `set -o pipefail` with SIGPIPE from `sort`.
+    CI_SMOKE_DIRS=$({
+        ls -d handwritten/*/ core/*/ core/packages/*/ core/dev-packages/*/ 2>/dev/null
+        ls -d packages/*/ 2>/dev/null | while read -r ci_smoke_candidate; do
+            printf '%s %s\n' \
+                "$(printf '%s%s' "${ci_smoke_seed}" "${ci_smoke_candidate}" | cksum | cut -d' ' -f1)" \
+                "${ci_smoke_candidate}"
+        done | sort -k1,1n -k2,2 | sed -n "1,${CI_SMOKE_PACKAGE_COUNT}p" | cut -d' ' -f2
+    })
+    echo "ci smoke set (${CI_SMOKE_PACKAGE_COUNT} random packages/ entries + all handwritten/ and core/):"
+    printf '%s\n' "${CI_SMOKE_DIRS}"
 fi
 
 # Now we have a fixed list, but we can change it to autodetect if
@@ -205,7 +236,7 @@ for subdir in ${subdirs[@]}; do
             git diff --quiet ${GIT_DIFF_ARG} ${d}
             changed=$?
             set -e
-            if [[ "${changed}" -eq 0 ]]; then
+            if [[ "${changed}" -eq 0 ]] && ! is_ci_smoke_dir "${d}"; then
                 echo "no change detected in ${d}, skipping"
             else
                 if ([[ "${d}" == core/packages/* ]] || [[ "${d}" == core/dev-packages/* ]]) && [[ "${IS_CORE}" == "true" ]] && [[ "${TEST_TYPE}" == "system" ]]; then
@@ -282,6 +313,27 @@ if [[ "${RUN_TESTS_MODE}" == "CALCULATE_SHARD_MATRIX" ]]; then
         echo "shard_matrix=${matrix}"
         echo "shard_total=${total}"
     fi
+    exit 0
+fi
+
+# If RUN_TESTS_MODE is LIST_TEST_DIRS, write the selection (after shard slicing)
+# to TEST_DIRS_OUTPUT and exit. The compile step turns this into a turbo
+# --filter so that exactly the packages this shard is about to test - no more,
+# no less - are built. Keeping both sides derived from this one function is what
+# stops the compile filter and the test selection from drifting apart.
+if [[ "${RUN_TESTS_MODE}" == "LIST_TEST_DIRS" ]]; then
+    output_file="${TEST_DIRS_OUTPUT:-test_dirs.txt}"
+    : > "${output_file}"
+    for i in "${!test_dirs[@]}"; do
+        if [[ -n "${SHARD_TOTAL}" && -n "${SHARD_INDEX}" ]]; then
+            if (( SHARD_TOTAL > 0 && i % SHARD_TOTAL != SHARD_INDEX )); then
+                continue
+            fi
+        fi
+        echo "${test_dirs[$i]}" >> "${output_file}"
+    done
+    echo "wrote ${output_file}:"
+    cat "${output_file}"
     exit 0
 fi
 

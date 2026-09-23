@@ -1,0 +1,81 @@
+name: "Compile Workspace"
+description: "Compiles exactly the packages that the current unit test selection will run"
+inputs:
+  shard-total:
+    required: false
+    default: ""
+    description: "Total number of shards"
+  shard-index:
+    required: false
+    default: ""
+    description: "0-based shard index"
+runs:
+  using: "composite"
+  steps:
+    # `ci/run_conditional_tests.sh` owns the answer to "which packages does this
+    # shard test?". Deriving the turbo filter from that same answer (rather than
+    # from an independent `...[HEAD^1]` diff in the root `compile` script) is
+    # what keeps compile output and test selection in sync - notably for changes
+    # under `ci/`, which select packages that `HEAD^1` would never build.
+    #
+    # Paths below are repo-relative on purpose: `runner.temp` is a backslashed
+    # Windows path on windows-latest, which Git Bash redirection handles poorly.
+    - name: List packages selected for this shard
+      shell: bash
+      env:
+        RUN_TESTS_MODE: LIST_TEST_DIRS
+        BUILD_TYPE: presubmit
+        TEST_TYPE: units
+        GIT_DIFF_ARG: HEAD^1
+        SHARD_TOTAL: ${{ inputs.shard-total }}
+        SHARD_INDEX: ${{ inputs.shard-index }}
+        TEST_DIRS_OUTPUT: .turbo/test_dirs.txt
+      run: |
+        mkdir -p .turbo
+        bash ci/run_conditional_tests.sh --strict
+
+    - name: Compile Workspace (Turborepo Caching)
+      shell: bash
+      env:
+        TEST_DIRS_OUTPUT: .turbo/test_dirs.txt
+        WORKSPACE_MEMBERS_OUTPUT: .turbo/workspace_members.json
+        TURBO_FILTERS_OUTPUT: .turbo/turbo_filters.txt
+      run: |
+        # Some selected directories have a package.json but are not pnpm
+        # workspace members (e.g. core/help), and turbo exits non-zero on a
+        # --filter that matches no package. Intersect against the real member
+        # list before building the filter.
+        pnpm list --recursive --depth -1 --json > "${WORKSPACE_MEMBERS_OUTPUT}"
+        node -e '
+          const fs = require("fs");
+          const path = require("path");
+          const root = process.cwd();
+          const members = new Set(
+            JSON.parse(fs.readFileSync(process.env.WORKSPACE_MEMBERS_OUTPUT, "utf8"))
+              .map((p) => path.relative(root, p.path).split(path.sep).join("/"))
+              .filter(Boolean)
+          );
+          const selected = fs.readFileSync(process.env.TEST_DIRS_OUTPUT, "utf8")
+            .split("\n")
+            .map((line) => line.trim().replace(/\/$/, ""))
+            .filter(Boolean);
+          const skipped = selected.filter((d) => !members.has(d));
+          if (skipped.length) {
+            console.log("not pnpm workspace members, skipping compile: " + skipped.join(", "));
+          }
+          fs.writeFileSync(
+            process.env.TURBO_FILTERS_OUTPUT,
+            selected.filter((d) => members.has(d)).map((d) => "--filter=./" + d).join("\n")
+          );
+        '
+        filters=()
+        while IFS= read -r filter; do
+          [ -n "${filter}" ] && filters+=("${filter}")
+        done < "${TURBO_FILTERS_OUTPUT}"
+        if [ "${#filters[@]}" -eq 0 ]; then
+          echo "no workspace packages selected, nothing to compile"
+          exit 0
+        fi
+        echo "compiling ${#filters[@]} package(s)"
+        pnpm exec turbo run compile --concurrency=4 "${filters[@]}" \
+          || pnpm exec turbo run compile --concurrency=4 "${filters[@]}"

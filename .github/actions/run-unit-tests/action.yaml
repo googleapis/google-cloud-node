@@ -45,9 +45,10 @@ runs:
         key: ${{ runner.os }}-turbo-${{ github.sha }}
         restore-keys: |
           ${{ runner.os }}-turbo-
-    - name: Compile Workspace (Turborepo Caching)
-      run: pnpm run compile || pnpm run compile
-      shell: bash
+    - uses: ./.github/actions/compile-workspace
+      with:
+        shard-total: ${{ inputs.shard-total }}
+        shard-index: ${{ inputs.shard-index }}
     - run: node --version
       shell: bash
     - name: Run unit tests
