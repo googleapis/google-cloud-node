@@ -819,9 +819,26 @@ export function constructSettings(
   enableTelemetryTracing?: boolean,
   internalTelemetryInfo?: StaticTraceContext,
 ) {
-  otherArgs = internalTelemetryInfo
-    ? {...otherArgs, internalTelemetryInfo}
-    : otherArgs || {};
+  const env: Record<string, string | undefined> =
+    typeof process === 'object' && typeof process.env === 'object'
+      ? process.env
+      : {};
+  const envTracing = env.GOOGLE_SDK_NODE_ENABLE_TRACING?.trim();
+  const isEnvSet = envTracing !== undefined && envTracing !== '';
+
+  const isEnvEnabled = checkTelemetryEnabled();
+
+  // If GOOGLE_SDK_NODE_ENABLE_TRACING is explicitly set, then the client option doesn't matter.
+  // The extra protoc param only matters if the environmental variable isn't set.
+  const tracingRequested = isEnvSet
+    ? isEnvEnabled
+    : Boolean(internalTelemetryInfo || enableTelemetryTracing);
+
+  if (!isEnvSet && internalTelemetryInfo) {
+    otherArgs = {...otherArgs, internalTelemetryInfo};
+  } else {
+    otherArgs = otherArgs || {};
+  }
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const defaults: any = {};
 
@@ -878,14 +895,11 @@ export function constructSettings(
       bundleOptions: bundlingConfig
         ? createBundleOptions(bundlingConfig)
         : null,
-      otherArgs:
-        internalTelemetryInfo ||
-        enableTelemetryTracing ||
-        checkTelemetryEnabled()
-          ? {...otherArgs, internalMethodName: methodName}
-          : otherArgs,
+      otherArgs: tracingRequested
+        ? {...otherArgs, internalMethodName: methodName}
+        : otherArgs,
       apiName,
-      enableTelemetryTracing,
+      enableTelemetryTracing: isEnvSet ? isEnvEnabled : enableTelemetryTracing,
     });
   }
 
