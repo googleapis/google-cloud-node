@@ -57,7 +57,12 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-turbo-
       - name: Compile Workspace (Turborepo Caching)
-        run: pnpm run compile
+        run: |
+          if [ -n "$(git diff --name-only --diff-filter=ACMRT HEAD^1...HEAD -- '*.ts')" ]; then
+            TURBO_DAEMON=false pnpm run compile
+          else
+            echo "No TypeScript files changed in HEAD^1...HEAD; skipping workspace compile for linter."
+          fi
       - run: node ./bin/linter.mjs --strict
         name: Run monorepo linter
         env:

@@ -15,6 +15,7 @@ runs:
             owner: context.repo.owner,
             repo: context.repo.repo,
             run_id: context.runId,
+            per_page: 100,
           });
           const nodeVersion = '${{ inputs.node-version }}';
           const shardJobs = jobs.filter(j => j.name.includes(`units (Node ${nodeVersion},`));
