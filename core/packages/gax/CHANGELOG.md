@@ -6,6 +6,13 @@
 [1]: https://www.npmjs.com/package/gax-nodejs?activeTab=versions
 
 
+## [6.6.0](https://github.com/googleapis/google-cloud-node/compare/google-gax-v6.5.0...google-gax-v6.6.0) (2026-09-23)
+
+
+### Features
+
+* **gax:** Support resumable uploads ([#9287](https://github.com/googleapis/google-cloud-node/issues/9287)) ([8116709](https://github.com/googleapis/google-cloud-node/commit/8116709bc39e5e0ea525cd6937ce079c25a0971b))
+
 ## [6.5.0](https://github.com/googleapis/google-cloud-node/compare/google-gax-v6.4.0...google-gax-v6.5.0) (2026-09-22)
 
 
