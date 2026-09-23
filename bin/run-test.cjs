@@ -81,6 +81,9 @@ if (wantsBunRuntime) {
   if (!mochaArgs.includes(shimPath)) {
     mochaArgs.unshift('--require', shimPath);
   }
+  if (!mochaArgs.includes('--exit')) {
+    mochaArgs.unshift('--exit');
+  }
 
   process.argv = [process.execPath, mochaBin, ...mochaArgs];
   require(mochaBin);
