@@ -127,6 +127,35 @@ export function extractFromSettings(
   return result;
 }
 
+/**
+ * Extracts static metadata from process environment variables.
+ */
+export function extractFromEnvironment(): StaticTraceContext {
+  const env: Record<string, string | undefined> =
+    typeof process === 'object' && typeof process.env === 'object'
+      ? process.env
+      : {};
+
+  const result: StaticTraceContext = {};
+
+  const service = env.GOOGLE_SDK_NODE_CLIENT_SERVICE || env.GCP_CLIENT_SERVICE;
+  if (service?.trim()) {
+    result.gcpClientService = service.trim();
+  }
+
+  const version = env.GOOGLE_SDK_NODE_CLIENT_VERSION || env.GCP_CLIENT_VERSION;
+  if (version?.trim()) {
+    result.gcpVersion = version.trim();
+  }
+
+  const artifact = env.GOOGLE_SDK_NODE_ARTIFACT || env.GCP_ARTIFACT;
+  if (artifact?.trim()) {
+    result.gcpArtifact = artifact.trim();
+  }
+
+  return result;
+}
+
 const metadataCache = new Map<string, StaticTraceContext>();
 
 /**
@@ -137,8 +166,10 @@ export function clearMetadataCache(): void {
 }
 
 /**
- * Resolves static trace context dynamically at runtime by inspecting CallSettings
- * and standard defaults.
+ * Resolves static trace context dynamically at runtime by inspecting CallSettings,
+ * environment variables, and standard defaults.
+ *
+ * Precedence: environment variables > compile-time internalTelemetryInfo > dynamic resolution from settings.
  *
  * @param {CallSettings} [settings] - Call settings for the RPC invocation.
  * @param {string} [_callerFilePath] - Optional explicit path to the caller source file (deprecated).
@@ -149,44 +180,31 @@ export function resolveStaticTraceContext(
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   _callerFilePath?: string,
 ): StaticTraceContext {
-  const env: Record<string, string | undefined> =
-    typeof process === 'object' && typeof process.env === 'object'
-      ? process.env
-      : {};
-  const envTracing = env.GOOGLE_SDK_NODE_ENABLE_TRACING?.trim();
-  const isEnvSet = envTracing !== undefined && envTracing !== '';
+  const envMeta = extractFromEnvironment();
+  const explicit = settings?.otherArgs?.internalTelemetryInfo as
+    | StaticTraceContext
+    | undefined;
 
-  // If GOOGLE_SDK_NODE_ENABLE_TRACING is explicitly set, the client option doesn't matter
-  // and the extra protoc param only matters if the environmental variable isn't set.
-  const explicit = !isEnvSet
-    ? (settings?.otherArgs?.internalTelemetryInfo as
-        StaticTraceContext | undefined)
-    : undefined;
-
-  if (
-    explicit &&
-    explicit.gcpClientService &&
-    explicit.gcpVersion &&
-    explicit.gcpArtifact
-  ) {
-    return {
-      ...explicit,
-      gcpRepo: DEFAULT_GCP_REPO,
-    };
-  }
-
-  const cacheKey = settings?.apiName || 'default';
-
-  let cached = metadataCache.get(cacheKey);
-  if (!cached) {
-    cached = extractFromSettings(settings);
-    metadataCache.set(cacheKey, cached);
+  let dynamic: StaticTraceContext;
+  if (settings?.apiName) {
+    let cached = metadataCache.get(settings.apiName);
+    if (!cached) {
+      cached = extractFromSettings(settings);
+      metadataCache.set(settings.apiName, cached);
+    }
+    dynamic = cached;
+  } else {
+    dynamic = extractFromSettings(settings);
   }
 
   return {
-    gcpClientService: explicit?.gcpClientService ?? cached.gcpClientService,
-    gcpVersion: explicit?.gcpVersion ?? cached.gcpVersion,
+    gcpClientService:
+      envMeta.gcpClientService ??
+      explicit?.gcpClientService ??
+      dynamic.gcpClientService,
+    gcpVersion: envMeta.gcpVersion ?? explicit?.gcpVersion ?? dynamic.gcpVersion,
     gcpRepo: DEFAULT_GCP_REPO,
-    gcpArtifact: explicit?.gcpArtifact ?? cached.gcpArtifact,
+    gcpArtifact:
+      envMeta.gcpArtifact ?? explicit?.gcpArtifact ?? dynamic.gcpArtifact,
   };
 }

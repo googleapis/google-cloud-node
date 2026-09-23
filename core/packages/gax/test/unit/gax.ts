@@ -308,7 +308,10 @@ describe('gax construct settings', () => {
     );
     const settings = defaults.bundlingMethod;
     assert.strictEqual(settings.enableTelemetryTracing, true);
-    assert.strictEqual(settings.otherArgs.internalTelemetryInfo, undefined);
+    assert.deepStrictEqual(
+      settings.otherArgs.internalTelemetryInfo,
+      telemetryInfo,
+    );
     assert.strictEqual(settings.otherArgs.internalMethodName, 'BundlingMethod');
   });
 
@@ -331,7 +334,10 @@ describe('gax construct settings', () => {
     );
     const settings = defaults.bundlingMethod;
     assert.strictEqual(settings.enableTelemetryTracing, false);
-    assert.strictEqual(settings.otherArgs.internalTelemetryInfo, undefined);
+    assert.deepStrictEqual(
+      settings.otherArgs.internalTelemetryInfo,
+      telemetryInfo,
+    );
     assert.strictEqual(settings.otherArgs.internalMethodName, undefined);
   });
 

@@ -19,6 +19,7 @@ import {describe, it, beforeEach, afterEach} from 'mocha';
 import {
   clearMetadataCache,
   extractClientServiceFromPackageName,
+  extractFromEnvironment,
   extractFromSettings,
   extractServiceFromApiName,
   resolveStaticTraceContext,
@@ -30,12 +31,24 @@ import {StaticTraceContext} from '../../src/observability/TracerHelper';
 describe('metadataResolver', () => {
   beforeEach(() => {
     clearMetadataCache();
+    delete process.env.GOOGLE_SDK_NODE_CLIENT_SERVICE;
+    delete process.env.GOOGLE_SDK_NODE_CLIENT_VERSION;
+    delete process.env.GOOGLE_SDK_NODE_ARTIFACT;
     delete process.env.GOOGLE_SDK_NODE_ENABLE_TRACING;
+    delete process.env.GCP_CLIENT_SERVICE;
+    delete process.env.GCP_CLIENT_VERSION;
+    delete process.env.GCP_ARTIFACT;
   });
 
   afterEach(() => {
     clearMetadataCache();
+    delete process.env.GOOGLE_SDK_NODE_CLIENT_SERVICE;
+    delete process.env.GOOGLE_SDK_NODE_CLIENT_VERSION;
+    delete process.env.GOOGLE_SDK_NODE_ARTIFACT;
     delete process.env.GOOGLE_SDK_NODE_ENABLE_TRACING;
+    delete process.env.GCP_CLIENT_SERVICE;
+    delete process.env.GCP_CLIENT_VERSION;
+    delete process.env.GCP_ARTIFACT;
   });
 
   describe('extractClientServiceFromPackageName', () => {
@@ -152,6 +165,30 @@ describe('metadataResolver', () => {
     });
   });
 
+  describe('extractFromEnvironment', () => {
+    it('extracts metadata from GOOGLE_SDK_NODE_* environment variables', () => {
+      process.env.GOOGLE_SDK_NODE_CLIENT_SERVICE = 'my-service';
+      process.env.GOOGLE_SDK_NODE_CLIENT_VERSION = '2.3.4';
+      process.env.GOOGLE_SDK_NODE_ARTIFACT = '@custom/package';
+
+      const metadata = extractFromEnvironment();
+      assert.strictEqual(metadata.gcpClientService, 'my-service');
+      assert.strictEqual(metadata.gcpVersion, '2.3.4');
+      assert.strictEqual(metadata.gcpArtifact, '@custom/package');
+    });
+
+    it('extracts metadata from GCP_* environment variables', () => {
+      process.env.GCP_CLIENT_SERVICE = 'gcp-service';
+      process.env.GCP_CLIENT_VERSION = '3.0.0';
+      process.env.GCP_ARTIFACT = '@gcp/package';
+
+      const metadata = extractFromEnvironment();
+      assert.strictEqual(metadata.gcpClientService, 'gcp-service');
+      assert.strictEqual(metadata.gcpVersion, '3.0.0');
+      assert.strictEqual(metadata.gcpArtifact, '@gcp/package');
+    });
+  });
+
   describe('resolveStaticTraceContext', () => {
     it('uses explicit internalTelemetryInfo when GOOGLE_SDK_NODE_ENABLE_TRACING is not set', () => {
       delete process.env.GOOGLE_SDK_NODE_ENABLE_TRACING;
@@ -173,7 +210,7 @@ describe('metadataResolver', () => {
       assert.strictEqual(resolved.gcpRepo, DEFAULT_GCP_REPO);
     });
 
-    it('ignores explicit internalTelemetryInfo when GOOGLE_SDK_NODE_ENABLE_TRACING is set', () => {
+    it('uses explicit internalTelemetryInfo even when GOOGLE_SDK_NODE_ENABLE_TRACING is set', () => {
       process.env.GOOGLE_SDK_NODE_ENABLE_TRACING = 'true';
       const explicit: StaticTraceContext = {
         gcpClientService: 'explicit-service',
@@ -185,16 +222,37 @@ describe('metadataResolver', () => {
         apiName: 'google.cloud.redis.v1.CloudRedis',
         otherArgs: {
           internalTelemetryInfo: explicit,
-          headers: {
-            'x-goog-api-client': 'gax/6.5.0 gapic/4.5.1',
-          },
         },
       });
 
       const resolved = resolveStaticTraceContext(settings);
-      assert.strictEqual(resolved.gcpClientService, 'redis');
-      assert.strictEqual(resolved.gcpArtifact, '@google-cloud/redis');
-      assert.strictEqual(resolved.gcpVersion, '4.5.1');
+      assert.strictEqual(resolved.gcpClientService, 'explicit-service');
+      assert.strictEqual(resolved.gcpArtifact, '@explicit/client');
+      assert.strictEqual(resolved.gcpVersion, '9.9.9');
+      assert.strictEqual(resolved.gcpRepo, DEFAULT_GCP_REPO);
+    });
+
+    it('prioritizes environment variables over explicit internalTelemetryInfo and dynamic settings', () => {
+      process.env.GOOGLE_SDK_NODE_CLIENT_SERVICE = 'env-service';
+      process.env.GOOGLE_SDK_NODE_CLIENT_VERSION = '5.0.0';
+      process.env.GOOGLE_SDK_NODE_ARTIFACT = '@custom/env-artifact';
+
+      const explicit: StaticTraceContext = {
+        gcpClientService: 'explicit-service',
+        gcpVersion: '1.0.0',
+        gcpArtifact: '@explicit/client',
+      };
+      const settings = new CallSettings({
+        apiName: 'google.cloud.redis.v1.CloudRedis',
+        otherArgs: {
+          internalTelemetryInfo: explicit,
+        },
+      });
+
+      const resolved = resolveStaticTraceContext(settings);
+      assert.strictEqual(resolved.gcpClientService, 'env-service');
+      assert.strictEqual(resolved.gcpVersion, '5.0.0');
+      assert.strictEqual(resolved.gcpArtifact, '@custom/env-artifact');
       assert.strictEqual(resolved.gcpRepo, DEFAULT_GCP_REPO);
     });
 
@@ -215,8 +273,28 @@ describe('metadataResolver', () => {
       assert.strictEqual(resolved.gcpRepo, 'googleapis/google-cloud-node');
     });
 
-    it('caches resolved metadata by apiName', () => {
-      const settings = new CallSettings({
+    it('only caches resolved metadata when apiName is present', () => {
+      const settingsNoApiName1 = new CallSettings({
+        otherArgs: {
+          headers: {
+            'x-goog-api-client': 'gapic/1.0.0',
+          },
+        },
+      });
+      const settingsNoApiName2 = new CallSettings({
+        otherArgs: {
+          headers: {
+            'x-goog-api-client': 'gapic/2.0.0',
+          },
+        },
+      });
+
+      const resolvedNoApi1 = resolveStaticTraceContext(settingsNoApiName1);
+      const resolvedNoApi2 = resolveStaticTraceContext(settingsNoApiName2);
+      assert.strictEqual(resolvedNoApi1.gcpVersion, '1.0.0');
+      assert.strictEqual(resolvedNoApi2.gcpVersion, '2.0.0');
+
+      const settingsWithApi = new CallSettings({
         apiName: 'google.cloud.redis.v1.CloudRedis',
         otherArgs: {
           headers: {
@@ -225,8 +303,8 @@ describe('metadataResolver', () => {
         },
       });
 
-      const resolvedFirst = resolveStaticTraceContext(settings);
-      const resolvedSecond = resolveStaticTraceContext(settings);
+      const resolvedFirst = resolveStaticTraceContext(settingsWithApi);
+      const resolvedSecond = resolveStaticTraceContext(settingsWithApi);
       assert.strictEqual(resolvedFirst.gcpArtifact, resolvedSecond.gcpArtifact);
       assert.strictEqual(
         resolvedFirst.gcpClientService,

@@ -360,6 +360,9 @@ describe('createApiCall', () => {
       harness.teardown();
       delete process.env.GOOGLE_SDK_NODE_ENABLE_TRACING;
       delete process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED;
+      delete process.env.GOOGLE_SDK_NODE_CLIENT_SERVICE;
+      delete process.env.GOOGLE_SDK_NODE_CLIENT_VERSION;
+      delete process.env.GOOGLE_SDK_NODE_ARTIFACT;
     });
 
     it('calls traceCall with dynamicArgs, staticArgs, and isStreamingCall when tracing is enabled', async () => {
@@ -638,6 +641,46 @@ describe('createApiCall', () => {
       assert.ok(span.attributes['gcp.artifact']);
       assert.strictEqual(span.attributes['gcp.method.name'], 'GetInstance');
       assert.strictEqual(span.attributes['gcp.method.type'], 'grpc');
+    });
+
+    it('resolves static metadata from environment variables when configured', async () => {
+      process.env.GOOGLE_SDK_NODE_ENABLE_TRACING = 'true';
+      process.env.GOOGLE_SDK_NODE_CLIENT_SERVICE = 'env-service';
+      process.env.GOOGLE_SDK_NODE_CLIENT_VERSION = '9.9.9';
+      process.env.GOOGLE_SDK_NODE_ARTIFACT = '@custom/env-pkg';
+
+      const settings = new gax.CallSettings({
+        apiName: 'google.example.v1.Echo',
+        otherArgs: {
+          internalMethodName: 'Echo',
+        },
+      });
+
+      function func(
+        argument: {},
+        metadata: {},
+        options: {},
+        callback: (err: GoogleError | null, resp?: unknown) => void,
+      ) {
+        callback(null, {data: 'hello'});
+        return {
+          cancel: () => {},
+        };
+      }
+
+      const apiCall = gaxCreateApiCall(func, settings);
+      await apiCall({}, undefined);
+
+      const spans = harness.getSpans('google-gax');
+      assert.strictEqual(spans.length, 1);
+      const span = spans[0];
+      assert.strictEqual(span.attributes['gcp.client.service'], 'env-service');
+      assert.strictEqual(span.attributes['gcp.client.version'], '9.9.9');
+      assert.strictEqual(
+        span.attributes['gcp.repo'],
+        'googleapis/google-cloud-node',
+      );
+      assert.strictEqual(span.attributes['gcp.artifact'], '@custom/env-pkg');
     });
 
     it('correctly pipes telemetry information for HTTP fallback calls', async () => {

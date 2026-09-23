@@ -834,11 +834,9 @@ export function constructSettings(
     ? isEnvEnabled
     : Boolean(internalTelemetryInfo || enableTelemetryTracing);
 
-  if (!isEnvSet && internalTelemetryInfo) {
-    otherArgs = {...otherArgs, internalTelemetryInfo};
-  } else {
-    otherArgs = otherArgs || {};
-  }
+  otherArgs = internalTelemetryInfo
+    ? {...otherArgs, internalTelemetryInfo}
+    : otherArgs || {};
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const defaults: any = {};
 
