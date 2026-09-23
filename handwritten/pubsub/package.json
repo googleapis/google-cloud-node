@@ -32,10 +32,10 @@
   ],
   "scripts": {
     "presystem-test": "pnpm run compile",
-    "system-test": "mocha build/system-test --timeout 600000",
+    "system-test": "node ../../bin/run-test.cjs build/system-test --timeout 600000",
     "samples-test": "pnpm run link-samples && pnpm test && cd ../",
     "link-samples": "cd samples/ && pnpm link ../ && pnpm install",
-    "test": "c8 mocha build/test --recursive",
+    "test": "node ../../bin/run-test.cjs build/test --recursive",
     "lint": "gts check",
     "predocs": "pnpm run compile",
     "docs": "jsdoc -c .jsdoc.js",
