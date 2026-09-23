@@ -260,8 +260,10 @@ async function main(processArgv: string[]) {
     const {stdout, stderr} = await execFileAsync(protoc, protocCommand);
     console.log(stdout);
     console.warn(stderr);
-  } catch (e: any) {
-    console.error(e.stderr);
+  } catch (e: unknown) {
+    if (e && typeof e === 'object' && 'stderr' in e) {
+      console.error(e.stderr);
+    }
     throw e;
   }
 
