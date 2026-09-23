@@ -45,6 +45,10 @@ function main() {
    *  instance becomes an independent Cloud SQL primary instance.
    */
   // const failover = true
+  /**
+   *  Optional. Region of the Cloud SQL instance.
+   */
+  // const location = 'abc123'
 
   // Imports the Sql library
   const {SqlInstancesServiceClient} = require('@google-cloud/sql').v1beta4;

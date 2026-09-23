@@ -4228,6 +4228,13 @@
                           "type": "AutomatedBackupPolicy",
                           "id": 13
                         },
+                        "effectiveAutomatedBackupPolicy": {
+                          "type": "AutomatedBackupPolicy",
+                          "id": 19,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
                         "tieredStorageConfig": {
                           "type": "TieredStorageConfig",
                           "id": 14
@@ -4306,6 +4313,20 @@
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL",
                                 "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                              }
+                            },
+                            "keepHotDuration": {
+                              "type": "google.protobuf.Duration",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "disabled": {
+                              "type": "bool",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
                               }
                             }
                           }

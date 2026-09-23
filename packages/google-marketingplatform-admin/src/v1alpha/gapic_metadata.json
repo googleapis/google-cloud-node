@@ -40,6 +40,61 @@
                 "reportPropertyUsage"
               ]
             },
+            "GetUserGroup": {
+              "methods": [
+                "getUserGroup"
+              ]
+            },
+            "CreateUserGroup": {
+              "methods": [
+                "createUserGroup"
+              ]
+            },
+            "UpdateUserGroup": {
+              "methods": [
+                "updateUserGroup"
+              ]
+            },
+            "DeleteUserGroup": {
+              "methods": [
+                "deleteUserGroup"
+              ]
+            },
+            "GetUserGroupMember": {
+              "methods": [
+                "getUserGroupMember"
+              ]
+            },
+            "CreateUserGroupMember": {
+              "methods": [
+                "createUserGroupMember"
+              ]
+            },
+            "UpdateUserGroupMember": {
+              "methods": [
+                "updateUserGroupMember"
+              ]
+            },
+            "DeleteUserGroupMember": {
+              "methods": [
+                "deleteUserGroupMember"
+              ]
+            },
+            "GetAdminAccessBinding": {
+              "methods": [
+                "getAdminAccessBinding"
+              ]
+            },
+            "CreateAdminAccessBinding": {
+              "methods": [
+                "createAdminAccessBinding"
+              ]
+            },
+            "UpdateAdminAccessBinding": {
+              "methods": [
+                "updateAdminAccessBinding"
+              ]
+            },
             "ListOrganizations": {
               "methods": [
                 "listOrganizations",
@@ -52,6 +107,27 @@
                 "listAnalyticsAccountLinks",
                 "listAnalyticsAccountLinksStream",
                 "listAnalyticsAccountLinksAsync"
+              ]
+            },
+            "ListUserGroups": {
+              "methods": [
+                "listUserGroups",
+                "listUserGroupsStream",
+                "listUserGroupsAsync"
+              ]
+            },
+            "ListUserGroupMembers": {
+              "methods": [
+                "listUserGroupMembers",
+                "listUserGroupMembersStream",
+                "listUserGroupMembersAsync"
+              ]
+            },
+            "ListAdminAccessBindings": {
+              "methods": [
+                "listAdminAccessBindings",
+                "listAdminAccessBindingsStream",
+                "listAdminAccessBindingsAsync"
               ]
             }
           }
@@ -89,6 +165,61 @@
                 "reportPropertyUsage"
               ]
             },
+            "GetUserGroup": {
+              "methods": [
+                "getUserGroup"
+              ]
+            },
+            "CreateUserGroup": {
+              "methods": [
+                "createUserGroup"
+              ]
+            },
+            "UpdateUserGroup": {
+              "methods": [
+                "updateUserGroup"
+              ]
+            },
+            "DeleteUserGroup": {
+              "methods": [
+                "deleteUserGroup"
+              ]
+            },
+            "GetUserGroupMember": {
+              "methods": [
+                "getUserGroupMember"
+              ]
+            },
+            "CreateUserGroupMember": {
+              "methods": [
+                "createUserGroupMember"
+              ]
+            },
+            "UpdateUserGroupMember": {
+              "methods": [
+                "updateUserGroupMember"
+              ]
+            },
+            "DeleteUserGroupMember": {
+              "methods": [
+                "deleteUserGroupMember"
+              ]
+            },
+            "GetAdminAccessBinding": {
+              "methods": [
+                "getAdminAccessBinding"
+              ]
+            },
+            "CreateAdminAccessBinding": {
+              "methods": [
+                "createAdminAccessBinding"
+              ]
+            },
+            "UpdateAdminAccessBinding": {
+              "methods": [
+                "updateAdminAccessBinding"
+              ]
+            },
             "ListOrganizations": {
               "methods": [
                 "listOrganizations",
@@ -101,6 +232,27 @@
                 "listAnalyticsAccountLinks",
                 "listAnalyticsAccountLinksStream",
                 "listAnalyticsAccountLinksAsync"
+              ]
+            },
+            "ListUserGroups": {
+              "methods": [
+                "listUserGroups",
+                "listUserGroupsStream",
+                "listUserGroupsAsync"
+              ]
+            },
+            "ListUserGroupMembers": {
+              "methods": [
+                "listUserGroupMembers",
+                "listUserGroupMembersStream",
+                "listUserGroupMembersAsync"
+              ]
+            },
+            "ListAdminAccessBindings": {
+              "methods": [
+                "listAdminAccessBindings",
+                "listAdminAccessBindingsStream",
+                "listAdminAccessBindingsAsync"
               ]
             }
           }
