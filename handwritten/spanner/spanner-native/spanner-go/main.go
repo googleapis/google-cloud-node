@@ -1,0 +1,517 @@
+package main
+
+/*
+#include <stdlib.h>
+#include <stdint.h>
+
+typedef enum {
+    CELL_KIND_NULL = 0,
+    CELL_KIND_BOOL = 1,
+    CELL_KIND_NUMBER = 2,
+    CELL_KIND_STRING = 3
+} CellKind;
+
+typedef struct {
+    uint8_t kind;
+    uint8_t bool_val;
+    uint16_t _pad;
+    uint32_t str_len;
+    double number_val;
+    const char* str_val;
+} CSpannerCell;
+
+typedef struct {
+    int format; // 0 = JSON string, 1 = Direct Native Cells
+    char* json_rows;
+    CSpannerCell* cells;
+    int row_count;
+    int col_count;
+    char* string_arena;
+    char* server_timing;
+    int attempt_count;
+    char* error_msg;
+    int error_code;
+    int is_last;
+    // Serialized google.spanner.v1.ResultSetMetadata. Emitted exactly once per
+    // stream (on the first batch) so the Node layer can build column decoders
+    // and produce stock-compatible Row objects. Zero per-row cost.
+    void* metadata_pb;
+    int metadata_len;
+} CSpannerBatch;
+
+typedef void (*StreamDataCallback)(void* user_data, CSpannerBatch* batch);
+
+static void bridge_callback(
+    StreamDataCallback cb,
+    void* user_data,
+    CSpannerBatch* batch
+) {
+    if (cb != NULL) {
+        cb(user_data, batch);
+    }
+}
+*/
+import "C"
+
+import (
+	"bytes"
+	"fmt"
+	"io"
+	"os"
+	"sync"
+	"unsafe"
+
+	spannerpb "cloud.google.com/go/spanner/apiv1/spannerpb"
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/metadata"
+	"google.golang.org/grpc/status"
+	"google.golang.org/protobuf/proto"
+	"google.golang.org/protobuf/types/known/structpb"
+)
+
+type goSchemaCacheEntry struct {
+	fieldCount int
+	bytes      []byte
+}
+
+var (
+	clientRegistryMutex sync.RWMutex
+	clientRegistry      = make(map[uintptr]*CoreClient)
+	nextClientId        uintptr = 1
+	logEncodingOnce     sync.Once
+	logFirstErrOnce     sync.Once
+	schemaBytesCache    sync.Map
+)
+
+func registerClient(client *CoreClient) uintptr {
+	clientRegistryMutex.Lock()
+	defer clientRegistryMutex.Unlock()
+	id := nextClientId
+	nextClientId++
+	clientRegistry[id] = client
+	return id
+}
+
+func getClient(id uintptr) *CoreClient {
+	clientRegistryMutex.RLock()
+	defer clientRegistryMutex.RUnlock()
+	return clientRegistry[id]
+}
+
+func unregisterClient(id uintptr) *CoreClient {
+	clientRegistryMutex.Lock()
+	defer clientRegistryMutex.Unlock()
+	client := clientRegistry[id]
+	delete(clientRegistry, id)
+	return client
+}
+
+//export InitGoCoreClient
+func InitGoCoreClient(channelCount C.int) C.uintptr_t {
+	client, err := NewCoreClient(int(channelCount))
+	if err != nil {
+		return 0
+	}
+	id := registerClient(client)
+	return C.uintptr_t(id)
+}
+
+//export CloseGoCoreClient
+func CloseGoCoreClient(handle C.uintptr_t) {
+	client := unregisterClient(uintptr(handle))
+	if client != nil {
+		client.Close()
+	}
+}
+
+func isDirectDeserializationEnabled() bool {
+	// Defaults to true unless explicitly disabled with SPANNER_GO_DIRECT_DESERIALIZATION=false or 0
+	val := os.Getenv("SPANNER_GO_DIRECT_DESERIALIZATION")
+	enabled := val != "false" && val != "0"
+	logEncodingOnce.Do(func() {
+		if enabled {
+			fmt.Println("[Spanner-Go] Direct native cells encoding is ACTIVE (bypassing JSON parsing)")
+		} else {
+			fmt.Println("[Spanner-Go] Legacy JSON parsing is ACTIVE")
+		}
+	})
+	return enabled
+}
+
+func writeBatchJson(batch [][]*structpb.Value, rowType []*spannerpb.StructType_Field) *C.char {
+	if len(batch) == 0 {
+		return nil
+	}
+	var buf bytes.Buffer
+	buf.WriteByte('[')
+	for i, row := range batch {
+		if i > 0 {
+			buf.WriteByte(',')
+		}
+		buf.WriteByte('[')
+		for j, cell := range row {
+			if j > 0 {
+				buf.WriteByte(',')
+			}
+			var fieldType *spannerpb.Type
+			if j < len(rowType) {
+				fieldType = rowType[j].Type
+			}
+			writeValueJson(&buf, cell, fieldType)
+		}
+		buf.WriteByte(']')
+	}
+	buf.WriteByte(']')
+	return C.CString(buf.String())
+}
+
+func sendBatch(
+	cb C.StreamDataCallback,
+	userData unsafe.Pointer,
+	batch [][]*structpb.Value,
+	rowType []*spannerpb.StructType_Field,
+	serverTiming string,
+	attemptCount int,
+	errMsg string,
+	errCode int,
+	isLast bool,
+	metadataBytes []byte,
+) {
+	cBatch := (*C.CSpannerBatch)(C.malloc(C.size_t(unsafe.Sizeof(C.CSpannerBatch{}))))
+	*cBatch = C.CSpannerBatch{}
+
+	if isLast {
+		cBatch.is_last = 1
+	}
+	cBatch.attempt_count = C.int(attemptCount)
+	cBatch.error_code = C.int(errCode)
+
+	if errMsg != "" {
+		cBatch.error_msg = C.CString(errMsg)
+		logFirstErrOnce.Do(func() {
+			fmt.Fprintf(os.Stderr, "[Spanner-Go] ERROR: first Spanner RPC failed in Go shared core (code=%d): %s\n", errCode, errMsg)
+		})
+	}
+	if serverTiming != "" {
+		cBatch.server_timing = C.CString(serverTiming)
+	}
+
+	// Attach the serialized ResultSetMetadata if this is the first batch of the
+	// stream. C.CBytes allocates with malloc; the N-API layer frees it.
+	if len(metadataBytes) > 0 {
+		cBatch.metadata_pb = C.CBytes(metadataBytes)
+		cBatch.metadata_len = C.int(len(metadataBytes))
+	}
+
+	rowCount := len(batch)
+	cBatch.row_count = C.int(rowCount)
+
+	if rowCount > 0 {
+		colCount := len(batch[0])
+		cBatch.col_count = C.int(colCount)
+
+		if isDirectDeserializationEnabled() {
+			cBatch.format = 1 // Native cells
+
+			totalCells := rowCount * colCount
+			totalStringBytes := 0
+
+			for _, row := range batch {
+				for _, cell := range row {
+					if cell != nil {
+						if strVal, ok := cell.Kind.(*structpb.Value_StringValue); ok {
+							totalStringBytes += len(strVal.StringValue)
+						}
+					}
+				}
+			}
+
+			if totalCells > 0 {
+				cBatch.cells = (*C.CSpannerCell)(C.malloc(C.size_t(totalCells) * C.size_t(unsafe.Sizeof(C.CSpannerCell{}))))
+				cellsSlice := (*[1 << 28]C.CSpannerCell)(unsafe.Pointer(cBatch.cells))[:totalCells:totalCells]
+
+				var arenaBytes []byte
+				if totalStringBytes > 0 {
+					cBatch.string_arena = (*C.char)(C.malloc(C.size_t(totalStringBytes)))
+					arenaBytes = (*[1 << 28]byte)(unsafe.Pointer(cBatch.string_arena))[:totalStringBytes:totalStringBytes]
+				}
+				arenaOffset := 0
+
+				for r, row := range batch {
+					for c, val := range row {
+						idx := r*colCount + c
+						cell := &cellsSlice[idx]
+						if val == nil {
+							cell.kind = C.CELL_KIND_NULL
+							continue
+						}
+
+						switch k := val.Kind.(type) {
+						case *structpb.Value_NullValue:
+							cell.kind = C.CELL_KIND_NULL
+						case *structpb.Value_BoolValue:
+							cell.kind = C.CELL_KIND_BOOL
+							if k.BoolValue {
+								cell.bool_val = 1
+							} else {
+								cell.bool_val = 0
+							}
+						case *structpb.Value_NumberValue:
+							cell.kind = C.CELL_KIND_NUMBER
+							cell.number_val = C.double(k.NumberValue)
+						case *structpb.Value_StringValue:
+							cell.kind = C.CELL_KIND_STRING
+							strLen := len(k.StringValue)
+							cell.str_len = C.uint32_t(strLen)
+							if strLen > 0 {
+								copy(arenaBytes[arenaOffset:arenaOffset+strLen], k.StringValue)
+								cell.str_val = (*C.char)(unsafe.Pointer(&arenaBytes[arenaOffset]))
+								arenaOffset += strLen
+							} else {
+								cell.str_val = nil
+							}
+						default:
+							cell.kind = C.CELL_KIND_NULL
+						}
+					}
+				}
+			}
+		} else {
+			// Legacy JSON serialization
+			cBatch.format = 0
+			cBatch.json_rows = writeBatchJson(batch, rowType)
+		}
+	}
+
+	C.bridge_callback(cb, userData, cBatch)
+}
+
+//export ExecuteStreamingSqlGo
+func ExecuteStreamingSqlGo(
+	handle C.uintptr_t,
+	routingKey *C.char,
+	metaKeys **C.char,
+	metaVals **C.char,
+	metaCount C.int,
+	reqBytesPtr *C.char,
+	reqLen C.int,
+	skipMetadata C.int,
+	cb C.StreamDataCallback,
+	userData unsafe.Pointer,
+) {
+	client := getClient(uintptr(handle))
+	if client == nil {
+		sendBatch(cb, userData, nil, nil, "", 1, "Invalid or closed CoreClient handle", int(codes.InvalidArgument), true, nil)
+		return
+	}
+
+	// Copy metadata headers
+	count := int(metaCount)
+	metaMap := make(map[string]string, count)
+	if count > 0 && metaKeys != nil && metaVals != nil {
+		keysSlice := (*[1 << 28]*C.char)(unsafe.Pointer(metaKeys))[:count:count]
+		valsSlice := (*[1 << 28]*C.char)(unsafe.Pointer(metaVals))[:count:count]
+		for i := 0; i < count; i++ {
+			if keysSlice[i] != nil && valsSlice[i] != nil {
+				k := C.GoString(keysSlice[i])
+				v := C.GoString(valsSlice[i])
+				metaMap[k] = v
+			}
+		}
+	}
+
+	// Copy request bytes
+	length := int(reqLen)
+	rawBytes := C.GoBytes(unsafe.Pointer(reqBytesPtr), C.int(length))
+
+	// Execute gRPC streaming in a separate goroutine
+	go func() {
+		var lastResumeToken []byte
+		attemptCount := 0
+
+		var rowType []*spannerpb.StructType_Field
+		var pendingValue *structpb.Value
+		var currentRow []*structpb.Value
+		batch := make([][]*structpb.Value, 0, 100)
+
+		// Serialized ResultSetMetadata, handed to Node on the first batch only.
+		// takeMetadata() returns it once and then always returns nil, so the
+		// per-row streaming path stays untouched.
+		var pendingMetadata []byte
+		takeMetadata := func() []byte {
+			if pendingMetadata == nil {
+				return nil
+			}
+			md := pendingMetadata
+			pendingMetadata = nil
+			return md
+		}
+
+		for {
+			attemptCount++
+
+			// 1. Decode ExecuteSqlRequest protobuf bytes
+			var req spannerpb.ExecuteSqlRequest
+			if err := proto.Unmarshal(rawBytes, &req); err != nil {
+				sendBatch(cb, userData, nil, nil, "", attemptCount, fmt.Sprintf("Failed to decode request bytes: %v", err), int(codes.InvalidArgument), true, nil)
+				return
+			}
+
+			// Attach resume token if retrying
+			if len(lastResumeToken) > 0 {
+				req.ResumeToken = lastResumeToken
+			}
+
+			// 2. Prepare outgoing gRPC context with metadata headers
+			md := metadata.New(metaMap)
+
+			// Fetch OAuth2 bearer token from memory cache
+			token, err := client.GetToken()
+			if err != nil {
+				sendBatch(cb, userData, nil, nil, "", attemptCount, fmt.Sprintf("Failed to get GCP auth token: %v", err), int(codes.Unauthenticated), true, nil)
+				return
+			}
+			if token != nil && token.AccessToken != "" {
+				md.Set("authorization", "Bearer "+token.AccessToken)
+			}
+
+			ctx := metadata.NewOutgoingContext(client.ctx, md)
+
+			// 3. Dispatch streaming SQL request
+			stream, err := client.ExecuteStreamingSql(ctx, &req)
+			if err != nil {
+				st, _ := status.FromError(err)
+				if (st.Code() == codes.Unavailable || st.Code() == codes.Internal) && len(lastResumeToken) > 0 {
+					continue // Retry loop
+				}
+				sendBatch(cb, userData, nil, nil, "", attemptCount, st.Message(), int(st.Code()), true, nil)
+				return
+			}
+
+			// Read server-timing from header if present
+			serverTiming := ""
+			if headerMD, err := stream.Header(); err == nil {
+				if vals := headerMD.Get("server-timing"); len(vals) > 0 {
+					serverTiming = vals[0]
+				}
+			}
+
+			shouldRetry := false
+
+			// 4. Stream consumption loop
+			for {
+				chunk, err := stream.Recv()
+				if err == io.EOF {
+					break
+				}
+				if err != nil {
+					st, _ := status.FromError(err)
+					if (st.Code() == codes.Unavailable || st.Code() == codes.Internal) && len(lastResumeToken) > 0 {
+						shouldRetry = true
+						break
+					}
+					sendBatch(cb, userData, nil, nil, serverTiming, attemptCount, st.Message(), int(st.Code()), true, nil)
+					return
+				}
+
+				if len(chunk.ResumeToken) > 0 {
+					lastResumeToken = chunk.ResumeToken
+				}
+
+				if rowType == nil && chunk.Metadata != nil && chunk.Metadata.RowType != nil {
+					rowType = chunk.Metadata.RowType.Fields
+					if skipMetadata == 0 {
+						fieldCount := len(rowType)
+						if cachedVal, ok := schemaBytesCache.Load(req.Sql); ok {
+							if cached, ok2 := cachedVal.(goSchemaCacheEntry); ok2 && cached.fieldCount == fieldCount {
+								pendingMetadata = cached.bytes
+							}
+						}
+						if pendingMetadata == nil {
+							schemaOnly := &spannerpb.ResultSetMetadata{
+								RowType: chunk.Metadata.RowType,
+							}
+							if mdBytes, mdErr := proto.Marshal(schemaOnly); mdErr == nil {
+								pendingMetadata = mdBytes
+								schemaBytesCache.Store(req.Sql, goSchemaCacheEntry{
+									fieldCount: fieldCount,
+									bytes:      mdBytes,
+								})
+							}
+						}
+					}
+				}
+
+				numFields := len(rowType)
+				vals := chunk.Values
+
+				// Merge pending chunked value from previous chunk if present
+				if pendingValue != nil {
+					if len(vals) > 0 {
+						first := vals[0]
+						vals = vals[1:]
+						merged := mergeProtoValues(pendingValue, first)
+						pendingValue = nil
+
+						currentRow = append(currentRow, merged)
+
+						if numFields > 0 && len(currentRow) == numFields {
+							batch = append(batch, currentRow)
+							currentRow = make([]*structpb.Value, 0, numFields)
+							if len(batch) >= 100 {
+								sendBatch(cb, userData, batch, rowType, serverTiming, attemptCount, "", 0, false, takeMetadata())
+								batch = make([][]*structpb.Value, 0, 100)
+							}
+						}
+					}
+				}
+
+				// If this chunk has a chunked value at the end, pop it
+				if chunk.ChunkedValue && len(vals) > 0 {
+					pendingValue = vals[len(vals)-1]
+					vals = vals[:len(vals)-1]
+				}
+
+				for _, val := range vals {
+					currentRow = append(currentRow, val)
+
+					if numFields > 0 && len(currentRow) == numFields {
+						batch = append(batch, currentRow)
+						currentRow = make([]*structpb.Value, 0, numFields)
+						if len(batch) >= 100 {
+							sendBatch(cb, userData, batch, rowType, serverTiming, attemptCount, "", 0, false, takeMetadata())
+							batch = make([][]*structpb.Value, 0, 100)
+						}
+					}
+				}
+			}
+
+			if shouldRetry {
+				continue
+			}
+
+			// Read server-timing from trailers if present
+			if trailerMD := stream.Trailer(); trailerMD != nil {
+				if vals := trailerMD.Get("server-timing"); len(vals) > 0 {
+					serverTiming = vals[0]
+				}
+			}
+
+			// Flush any pending value / row
+			if pendingValue != nil {
+				currentRow = append(currentRow, pendingValue)
+				pendingValue = nil
+			}
+			if len(currentRow) > 0 {
+				batch = append(batch, currentRow)
+				currentRow = nil
+			}
+
+			// Send final batch and EOF signal
+			sendBatch(cb, userData, batch, rowType, serverTiming, attemptCount, "", 0, true, takeMetadata())
+			break
+		}
+	}()
+}
+
+func main() {}
