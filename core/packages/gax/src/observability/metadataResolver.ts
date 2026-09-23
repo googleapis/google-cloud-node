@@ -14,149 +14,11 @@
  * limitations under the License.
  */
 
-import * as fs from 'fs';
-import * as path from 'path';
 import {StaticTraceContext} from './TracerHelper';
 import {CallSettings} from '../gax';
 import {isTracingEnvExplicitlySet} from '../util';
 
-/**
- * Checks whether a given file path belongs to internal Node.js runtime or google-gax implementation.
- */
-function isInternalOrGaxFile(fileName: string): boolean {
-  if (
-    fileName.startsWith('node:') ||
-    fileName.includes('internal/modules/') ||
-    fileName.includes('internal\\modules\\') ||
-    fileName.includes('node_modules/mocha/') ||
-    fileName.includes('node_modules\\mocha\\')
-  ) {
-    return true;
-  }
-
-  const normalized = path.normalize(fileName);
-  if (
-    normalized.includes('/gax/src/') ||
-    normalized.includes('\\gax\\src\\') ||
-    normalized.includes('/gax/build/src/') ||
-    normalized.includes('\\gax\\build\\src\\') ||
-    normalized.includes('/google-gax/src/') ||
-    normalized.includes('\\google-gax\\src\\') ||
-    normalized.includes('/google-gax/build/src/') ||
-    normalized.includes('\\google-gax\\build\\src\\')
-  ) {
-    return true;
-  }
-
-  return false;
-}
-
-/**
- * Inspects the call stack to identify the first file outside google-gax.
- */
-export function getCallerFile(): string | undefined {
-  const origPrepareStackTrace = Error.prepareStackTrace;
-  try {
-    Error.prepareStackTrace = (_, stack) => stack;
-    const err = new Error();
-    const stack = (err.stack as unknown as NodeJS.CallSite[]) || [];
-
-    for (const frame of stack) {
-      if (typeof frame?.getFileName !== 'function') {
-        continue;
-      }
-      let fileName = frame.getFileName();
-      if (!fileName) {
-        continue;
-      }
-      if (fileName.startsWith('file://')) {
-        try {
-          fileName = new URL(fileName).pathname;
-        } catch {
-          fileName = fileName.replace(/^file:\/\//, '');
-        }
-      }
-      if (isInternalOrGaxFile(fileName)) {
-        continue;
-      }
-      return fileName;
-    }
-  } catch {
-    // If prepareStackTrace fails, fallback to string stack parsing below
-  } finally {
-    Error.prepareStackTrace = origPrepareStackTrace;
-  }
-
-  try {
-    const stackString = new Error().stack;
-    if (typeof stackString === 'string') {
-      const lines = stackString.split('\n');
-      for (const line of lines) {
-        const match = line.match(/(?:at\s+(?:.*?\s+\()?|@)(.+?):\d+:\d+/);
-        if (match && match[1]) {
-          let file = match[1];
-          if (file.startsWith('file://')) {
-            try {
-              file = new URL(file).pathname;
-            } catch {
-              file = file.replace(/^file:\/\//, '');
-            }
-          }
-          if (!isInternalOrGaxFile(file)) {
-            return file;
-          }
-        }
-      }
-    }
-  } catch {
-    // Ignore fallback failure
-  }
-
-  return undefined;
-}
-
-/**
- * Searches upward from a starting directory or file to find the nearest package.json.
- */
-export function findPackageJson(
-  startFileOrDir: string,
-): {filePath: string; pkg: Record<string, unknown>} | undefined {
-  try {
-    let dir: string;
-    try {
-      dir = fs.statSync(startFileOrDir).isDirectory()
-        ? startFileOrDir
-        : path.dirname(startFileOrDir);
-    } catch {
-      dir = path.dirname(startFileOrDir);
-    }
-
-    const root = path.parse(dir).root;
-
-    while (dir && dir !== root) {
-      const packageJsonPath = path.join(dir, 'package.json');
-      if (fs.existsSync(packageJsonPath)) {
-        try {
-          const content = fs.readFileSync(packageJsonPath, 'utf8');
-          const parsed = JSON.parse(content);
-          if (parsed && typeof parsed === 'object') {
-            return {filePath: packageJsonPath, pkg: parsed};
-          }
-        } catch {
-          // If JSON parse fails, continue traversing upward
-        }
-      }
-      const parent = path.dirname(dir);
-      if (parent === dir) {
-        break;
-      }
-      dir = parent;
-    }
-  } catch {
-    return undefined;
-  }
-  return undefined;
-}
+export const DEFAULT_GCP_REPO = 'googleapis/google-cloud-node';
 
 /**
  * Normalizes git repository information into an "owner/repo" slug.
@@ -230,30 +92,12 @@ export function extractServiceFromApiName(apiName: string): string | undefined {
   return undefined;
 }
 
-/**
- * Extracts static metadata from a package.json object.
- */
-export function extractMetadataFromPackage(
-  pkg: Record<string, unknown>,
-): StaticTraceContext {
-  const metadata: StaticTraceContext = {};
-
-  if (typeof pkg.name === 'string' && pkg.name) {
-    metadata.gcpArtifact = pkg.name;
-    if (pkg.name !== 'google-gax') {
-      metadata.gcpClientService = extractClientServiceFromPackageName(pkg.name);
-    }
-  }
-
-  if (typeof pkg.version === 'string' && pkg.version) {
-    metadata.gcpVersion = pkg.version;
-  }
-
-  if (pkg.repository) {
-    metadata.gcpRepo = extractRepo(pkg.repository);
-  }
-
-  return metadata;
+let fallbackVersion: string | undefined;
+try {
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  fallbackVersion = require('../../../package.json').version;
+} catch {
+  // Ignore fallback failure
 }
 
 /**
@@ -272,9 +116,24 @@ export function extractFromSettings(
   )?.headers;
   const clientHeader = headers?.['x-goog-api-client'];
   if (typeof clientHeader === 'string') {
-    const gapicMatch = clientHeader.match(/gapic\/([^\s]+)/);
-    if (gapicMatch && gapicMatch[1]) {
-      result.gcpVersion = gapicMatch[1];
+    const tokens = clientHeader.trim().split(/\s+/);
+    for (const token of tokens) {
+      const match = token.match(/^([^/]+(?:\/[^/]+)?)\/([^\s]+)$/);
+      if (match) {
+        const [, name, ver] = match;
+        if (name === 'gapic') {
+          result.gcpVersion = ver;
+        } else if (name === 'gccl' && !result.gcpVersion) {
+          result.gcpVersion = ver;
+        } else if (
+          !['gl-node', 'gl-web', 'grpc', 'rest', 'gax', 'auth'].includes(name)
+        ) {
+          result.gcpArtifact = name;
+          if (!result.gcpVersion) {
+            result.gcpVersion = ver;
+          }
+        }
+      }
     }
   }
 
@@ -282,7 +141,17 @@ export function extractFromSettings(
     const serviceFromApi = extractServiceFromApiName(settings.apiName);
     if (serviceFromApi) {
       result.gcpClientService = serviceFromApi;
+      if (!result.gcpArtifact) {
+        result.gcpArtifact =
+          serviceFromApi === 'gax'
+            ? 'google-gax'
+            : `@google-cloud/${serviceFromApi}`;
+      }
     }
+  }
+
+  if (!result.gcpVersion && fallbackVersion) {
+    result.gcpVersion = fallbackVersion;
   }
 
   return result;
@@ -333,15 +202,16 @@ export function clearMetadataCache(): void {
 
 /**
  * Resolves static trace context dynamically at runtime by inspecting the executing
- * environment, caller package tree (package.json), and CallSettings.
+ * environment, CallSettings, and standard defaults.
  *
  * @param {CallSettings} [settings] - Call settings for the RPC invocation.
- * @param {string} [callerFilePath] - Optional explicit path to the caller source file.
+ * @param {string} [_callerFilePath] - Optional explicit path to the caller source file (deprecated).
  * @returns {StaticTraceContext} The resolved static trace context.
  */
 export function resolveStaticTraceContext(
   settings?: CallSettings,
-  callerFilePath?: string,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _callerFilePath?: string,
 ): StaticTraceContext {
   // If GOOGLE_SDK_NODE_ENABLE_TRACING is explicitly set, the client option doesn't matter
   // and the extra protoc param only matters if the environmental variable isn't set.
@@ -361,55 +231,21 @@ export function resolveStaticTraceContext(
   }
 
   const envMeta = extractFromEnvironment();
-  const caller = callerFilePath || getCallerFile();
-  const cacheKey = caller
-    ? path.dirname(caller)
-    : settings?.apiName || 'default';
+  const cacheKey = settings?.apiName || 'default';
 
   let cached = metadataCache.get(cacheKey);
   if (!cached) {
-    let pkgMeta: StaticTraceContext = {};
-    const pkgInfo = caller ? findPackageJson(caller) : undefined;
-    if (pkgInfo) {
-      pkgMeta = extractMetadataFromPackage(pkgInfo.pkg);
-    } else if (
-      typeof process === 'object' &&
-      typeof process.cwd === 'function'
-    ) {
-      const cwdPkg = findPackageJson(process.cwd());
-      if (cwdPkg) {
-        pkgMeta = extractMetadataFromPackage(cwdPkg.pkg);
-      }
-    }
-
-    cached = {
-      gcpClientService: pkgMeta.gcpClientService,
-      gcpVersion: pkgMeta.gcpVersion,
-      gcpRepo: pkgMeta.gcpRepo || 'googleapis/google-cloud-node',
-      gcpArtifact: pkgMeta.gcpArtifact,
-    };
-
+    cached = extractFromSettings(settings);
     metadataCache.set(cacheKey, cached);
   }
-
-  const settingsMeta = extractFromSettings(settings);
 
   return {
     gcpClientService:
       explicit?.gcpClientService ??
       envMeta.gcpClientService ??
-      cached.gcpClientService ??
-      settingsMeta.gcpClientService,
-    gcpVersion:
-      explicit?.gcpVersion ??
-      envMeta.gcpVersion ??
-      cached.gcpVersion ??
-      settingsMeta.gcpVersion,
-    gcpRepo:
-      explicit?.gcpRepo ??
-      envMeta.gcpRepo ??
-      cached.gcpRepo ??
-      'googleapis/google-cloud-node',
+      cached.gcpClientService,
+    gcpVersion: explicit?.gcpVersion ?? envMeta.gcpVersion ?? cached.gcpVersion,
+    gcpRepo: explicit?.gcpRepo ?? envMeta.gcpRepo ?? DEFAULT_GCP_REPO,
     gcpArtifact:
       explicit?.gcpArtifact ?? envMeta.gcpArtifact ?? cached.gcpArtifact,
   };

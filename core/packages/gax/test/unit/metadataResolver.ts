@@ -15,19 +15,16 @@
  */
 
 import * as assert from 'assert';
-import * as path from 'path';
 import {describe, it, beforeEach, afterEach} from 'mocha';
 import {
   clearMetadataCache,
   extractClientServiceFromPackageName,
   extractFromEnvironment,
   extractFromSettings,
-  extractMetadataFromPackage,
   extractRepo,
   extractServiceFromApiName,
-  findPackageJson,
-  getCallerFile,
   resolveStaticTraceContext,
+  DEFAULT_GCP_REPO,
 } from '../../src/observability/metadataResolver';
 import {CallSettings} from '../../src/gax';
 import {StaticTraceContext} from '../../src/observability/TracerHelper';
@@ -99,15 +96,15 @@ describe('metadataResolver', () => {
       );
     });
 
-    it('returns undefined for invalid or absent repo', () => {
+    it('returns undefined for invalid repo inputs', () => {
       assert.strictEqual(extractRepo(undefined), undefined);
-      assert.strictEqual(extractRepo(null), undefined);
-      assert.strictEqual(extractRepo('not-a-repo'), undefined);
+      assert.strictEqual(extractRepo(''), undefined);
+      assert.strictEqual(extractRepo({}), undefined);
     });
   });
 
   describe('extractClientServiceFromPackageName', () => {
-    it('extracts service from scoped @google-cloud packages', () => {
+    it('extracts service from @google-cloud scoped packages', () => {
       assert.strictEqual(
         extractClientServiceFromPackageName('@google-cloud/redis'),
         'redis',
@@ -133,14 +130,14 @@ describe('metadataResolver', () => {
       );
     });
 
-    it('extracts service from unscoped google-cloud-* packages', () => {
+    it('extracts service from unscoped google-cloud- packages', () => {
       assert.strictEqual(
         extractClientServiceFromPackageName('google-cloud-redis'),
         'redis',
       );
     });
 
-    it('returns the package name as fallback', () => {
+    it('falls back to unchanged name for standard packages', () => {
       assert.strictEqual(
         extractClientServiceFromPackageName('google-gax'),
         'google-gax',
@@ -176,25 +173,6 @@ describe('metadataResolver', () => {
     });
   });
 
-  describe('extractMetadataFromPackage', () => {
-    it('extracts all metadata fields from package.json object', () => {
-      const pkg = {
-        name: '@google-cloud/redis',
-        version: '6.1.0',
-        repository: {
-          type: 'git',
-          url: 'https://github.com/googleapis/google-cloud-node.git',
-          directory: 'packages/google-cloud-redis',
-        },
-      };
-      const metadata = extractMetadataFromPackage(pkg);
-      assert.strictEqual(metadata.gcpArtifact, '@google-cloud/redis');
-      assert.strictEqual(metadata.gcpClientService, 'redis');
-      assert.strictEqual(metadata.gcpVersion, '6.1.0');
-      assert.strictEqual(metadata.gcpRepo, 'googleapis/google-cloud-node');
-    });
-  });
-
   describe('extractFromSettings', () => {
     it('extracts version from x-goog-api-client header', () => {
       const settings = new CallSettings({
@@ -208,12 +186,29 @@ describe('metadataResolver', () => {
       assert.strictEqual(metadata.gcpVersion, '6.1.0');
     });
 
-    it('extracts service from apiName', () => {
+    it('extracts service and artifact from apiName', () => {
       const settings = new CallSettings({
         apiName: 'google.cloud.redis.v1.CloudRedis',
       });
       const metadata = extractFromSettings(settings);
       assert.strictEqual(metadata.gcpClientService, 'redis');
+      assert.strictEqual(metadata.gcpArtifact, '@google-cloud/redis');
+    });
+
+    it('extracts custom libName from x-goog-api-client header', () => {
+      const settings = new CallSettings({
+        apiName: 'google.cloud.storage.v1.Storage',
+        otherArgs: {
+          headers: {
+            'x-goog-api-client':
+              'gl-node/22.0.0 auth/11.0.0 gax/6.5.0 @google-cloud/storage/7.1.0',
+          },
+        },
+      });
+      const metadata = extractFromSettings(settings);
+      assert.strictEqual(metadata.gcpClientService, 'storage');
+      assert.strictEqual(metadata.gcpArtifact, '@google-cloud/storage');
+      assert.strictEqual(metadata.gcpVersion, '7.1.0');
     });
 
     it('handles undefined settings', () => {
@@ -250,23 +245,6 @@ describe('metadataResolver', () => {
     });
   });
 
-  describe('findPackageJson', () => {
-    it('finds package.json climbing up directories', () => {
-      const result = findPackageJson(__dirname);
-      assert.ok(result);
-      assert.strictEqual(result.pkg.name, 'google-gax');
-    });
-  });
-
-  describe('getCallerFile', () => {
-    it('returns a caller file outside gax src', () => {
-      const caller = getCallerFile();
-      // When called from mocha unit test, the caller is the test file
-      assert.ok(caller);
-      assert.ok(caller.includes('metadataResolver'));
-    });
-  });
-
   describe('resolveStaticTraceContext', () => {
     it('uses explicit internalTelemetryInfo when GOOGLE_SDK_NODE_ENABLE_TRACING is not set', () => {
       delete process.env.GOOGLE_SDK_NODE_ENABLE_TRACING;
@@ -298,76 +276,54 @@ describe('metadataResolver', () => {
         apiName: 'google.cloud.redis.v1.CloudRedis',
         otherArgs: {
           internalTelemetryInfo: explicit,
-        },
-      });
-
-      const resolved = resolveStaticTraceContext(settings, __filename);
-      // Because GOOGLE_SDK_NODE_ENABLE_TRACING is explicitly set, the extra protoc param
-      // does not matter and dynamic runtime resolution is used instead.
-      assert.notStrictEqual(resolved.gcpArtifact, '@explicit/client');
-      assert.notStrictEqual(resolved.gcpClientService, 'explicit-service');
-      assert.strictEqual(resolved.gcpArtifact, 'google-gax');
-      assert.strictEqual(resolved.gcpClientService, 'redis');
-    });
-
-    it('merges partial explicit internalTelemetryInfo with dynamically resolved values', () => {
-      const partial: StaticTraceContext = {
-        gcpClientService: 'custom-service',
-      };
-      const settings = new CallSettings({
-        apiName: 'google.example.v1.Echo',
-        otherArgs: {
-          internalTelemetryInfo: partial,
           headers: {
-            'x-goog-api-client': 'gapic/2.0.0',
+            'x-goog-api-client': 'gax/6.5.0 gapic/4.5.1',
           },
         },
       });
 
-      const resolved = resolveStaticTraceContext(settings, __filename);
-      assert.strictEqual(resolved.gcpClientService, 'custom-service');
-      assert.strictEqual(resolved.gcpArtifact, 'google-gax');
-      assert.ok(resolved.gcpRepo);
-    });
-
-    it('resolves metadata dynamically for simulated package directory', () => {
-      const redisClientPath = path.resolve(
-        __dirname,
-        '../../../../../../packages/google-cloud-redis/src/v1/cloud_redis_client.ts',
-      );
-      const settings = new CallSettings({
-        apiName: 'google.cloud.redis.v1.CloudRedis',
-      });
-
-      const resolved = resolveStaticTraceContext(settings, redisClientPath);
-      assert.strictEqual(resolved.gcpArtifact, '@google-cloud/redis');
+      const resolved = resolveStaticTraceContext(settings);
       assert.strictEqual(resolved.gcpClientService, 'redis');
-      assert.strictEqual(resolved.gcpRepo, 'googleapis/google-cloud-node');
-      assert.ok(resolved.gcpVersion);
+      assert.strictEqual(resolved.gcpArtifact, '@google-cloud/redis');
+      assert.strictEqual(resolved.gcpVersion, '4.5.1');
+      assert.strictEqual(resolved.gcpRepo, DEFAULT_GCP_REPO);
     });
 
-    it('caches resolved metadata by directory', () => {
-      const redisClientPath = path.resolve(
-        __dirname,
-        '../../../../../../packages/google-cloud-redis/src/v1/cloud_redis_client.ts',
-      );
+    it('resolves metadata dynamically from settings without filesystem access', () => {
       const settings = new CallSettings({
-        apiName: 'google.cloud.redis.v1.CloudRedis',
+        apiName: 'google.cloud.spanner.v1.Spanner',
+        otherArgs: {
+          headers: {
+            'x-goog-api-client': 'gapic/7.8.0',
+          },
+        },
       });
 
-      const resolvedFirst = resolveStaticTraceContext(
-        settings,
-        redisClientPath,
-      );
-      const resolvedSecond = resolveStaticTraceContext(
-        settings,
-        redisClientPath,
-      );
+      const resolved = resolveStaticTraceContext(settings);
+      assert.strictEqual(resolved.gcpClientService, 'spanner');
+      assert.strictEqual(resolved.gcpArtifact, '@google-cloud/spanner');
+      assert.strictEqual(resolved.gcpVersion, '7.8.0');
+      assert.strictEqual(resolved.gcpRepo, 'googleapis/google-cloud-node');
+    });
+
+    it('caches resolved metadata by apiName', () => {
+      const settings = new CallSettings({
+        apiName: 'google.cloud.redis.v1.CloudRedis',
+        otherArgs: {
+          headers: {
+            'x-goog-api-client': 'gapic/1.0.0',
+          },
+        },
+      });
+
+      const resolvedFirst = resolveStaticTraceContext(settings);
+      const resolvedSecond = resolveStaticTraceContext(settings);
       assert.strictEqual(resolvedFirst.gcpArtifact, resolvedSecond.gcpArtifact);
       assert.strictEqual(
         resolvedFirst.gcpClientService,
         resolvedSecond.gcpClientService,
       );
+      assert.strictEqual(resolvedFirst.gcpVersion, resolvedSecond.gcpVersion);
     });
   });
 });
