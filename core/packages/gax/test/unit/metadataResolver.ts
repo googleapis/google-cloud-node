@@ -166,6 +166,39 @@ describe('metadataResolver', () => {
       assert.strictEqual(metadata.gcpVersion, '7.1.0');
     });
 
+    it('does not treat gccl as artifact when preceding gapic token sets gcpVersion', () => {
+      const settings = new CallSettings({
+        apiName: 'google.cloud.redis.v1.CloudRedis',
+        otherArgs: {
+          headers: {
+            'x-goog-api-client':
+              'gl-node/22.0.0 auth/11.0.0 gax/6.5.0 gapic/6.1.0 gccl/6.1.0',
+          },
+        },
+      });
+      const metadata = extractFromSettings(settings);
+      assert.strictEqual(metadata.gcpVersion, '6.1.0');
+      assert.strictEqual(metadata.gcpClientService, 'redis');
+      assert.notStrictEqual(metadata.gcpArtifact, 'gccl');
+      assert.strictEqual(metadata.gcpArtifact, '@google-cloud/redis');
+    });
+
+    it('extracts version from gccl when gapic is absent and never treats gccl as artifact', () => {
+      const settings = new CallSettings({
+        apiName: 'google.cloud.redis.v1.CloudRedis',
+        otherArgs: {
+          headers: {
+            'x-goog-api-client':
+              'gl-node/22.0.0 auth/11.0.0 gax/6.5.0 gccl/6.2.0',
+          },
+        },
+      });
+      const metadata = extractFromSettings(settings);
+      assert.strictEqual(metadata.gcpVersion, '6.2.0');
+      assert.strictEqual(metadata.gcpClientService, 'redis');
+      assert.strictEqual(metadata.gcpArtifact, '@google-cloud/redis');
+    });
+
     it('handles undefined settings', () => {
       const metadata = extractFromSettings(undefined);
       assert.deepStrictEqual(metadata, {});

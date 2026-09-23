@@ -95,10 +95,21 @@ export function extractFromSettings(
         const [, name, ver] = match;
         if (name === 'gapic') {
           result.gcpVersion = ver;
-        } else if (name === 'gccl' && !result.gcpVersion) {
-          result.gcpVersion = ver;
+        } else if (name === 'gccl') {
+          if (!result.gcpVersion) {
+            result.gcpVersion = ver;
+          }
         } else if (
-          !['gl-node', 'gl-web', 'grpc', 'rest', 'gax', 'auth'].includes(name)
+          ![
+            'gl-node',
+            'gl-web',
+            'grpc',
+            'rest',
+            'gax',
+            'auth',
+            'gapic',
+            'gccl',
+          ].includes(name)
         ) {
           result.gcpArtifact = name;
           if (!result.gcpVersion) {
