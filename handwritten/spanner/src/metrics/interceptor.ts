@@ -13,7 +13,8 @@
 // limitations under the License.
 
 import {grpc} from 'google-gax';
-import {MetricsTracerFactory} from './metrics-tracer-factory';
+import {InterceptingListener, Metadata, StatusObject} from '@grpc/grpc-js';
+import {isAFEServerTimingEnabled} from '../common';
 
 /**
  * Interceptor for recording metrics on gRPC calls.
@@ -29,21 +30,14 @@ import {MetricsTracerFactory} from './metrics-tracer-factory';
 export const MetricInterceptor = (options, nextCall) => {
   return new grpc.InterceptingCall(nextCall(options), {
     start: function (metadata, listener, next) {
-      // Record attempt metric on request start
-      const resourcePrefix = metadata.get(
-        'google-cloud-resource-prefix',
-      )[0] as string;
-      const match = resourcePrefix?.match(/^projects\/([^/]+)\//);
-      const projectId = match ? match[1] : undefined;
-      let factory;
-      if (projectId) {
-        factory = MetricsTracerFactory.getInstance(projectId);
-      }
-      const requestId = metadata.get('x-goog-spanner-request-id')[0] as string;
-      const metricsTracer = factory?.getCurrentTracer(requestId);
+      // Record attempt metric on request start.
+      // The tracer is carried directly on the call options.
+      const metricsTracer = options?.metricsTracer ?? null;
       metricsTracer?.recordAttemptStart();
-      const newListener = {
-        onReceiveMetadata: function (metadata, next) {
+      const afeServerTimingEnabled = isAFEServerTimingEnabled();
+
+      const interceptingListener: InterceptingListener = {
+        onReceiveMetadata: function (metadata: Metadata) {
           // Record GFE/AFE Metrics
           // GFE/AFE latency if available,
           // or else increase the GFE/AFE connectivity error count
@@ -54,47 +48,51 @@ export const MetricInterceptor = (options, nextCall) => {
                 ? String(serverTimingEntries[0])
                 : undefined;
             const gfeTiming =
-              metricsTracer?.extractGfeLatency(serverTimingHeader);
+              metricsTracer.extractGfeLatency(serverTimingHeader);
             metricsTracer.gfeLatency = gfeTiming ?? null;
-            const afeTiming =
-              metricsTracer?.extractAfeLatency(serverTimingHeader);
-            metricsTracer.afeLatency = afeTiming ?? null;
+            if (afeServerTimingEnabled) {
+              const afeTiming =
+                metricsTracer.extractAfeLatency(serverTimingHeader);
+              metricsTracer.afeLatency = afeTiming ?? null;
+            }
           }
 
-          next(metadata);
+          listener.onReceiveMetadata(metadata);
         },
-        onReceiveMessage: function (message, next) {
-          next(message);
+        onReceiveMessage: function (message: unknown) {
+          listener.onReceiveMessage(message);
         },
-        onReceiveStatus: function (status, next) {
-          next(status);
+        onReceiveStatus: function (status: StatusObject) {
+          if (metricsTracer) {
+            // Record attempt metric completion before notifying downstream listener
+            metricsTracer.recordAttemptCompletion(status?.code);
+            if (
+              typeof metricsTracer.gfeLatency === 'number' &&
+              Number.isFinite(metricsTracer.gfeLatency) &&
+              metricsTracer.gfeLatency >= 0
+            ) {
+              metricsTracer.recordGfeLatency(status?.code);
+            } else {
+              metricsTracer.recordGfeConnectivityErrorCount(status?.code);
+            }
+            if (afeServerTimingEnabled) {
+              if (
+                typeof metricsTracer.afeLatency === 'number' &&
+                Number.isFinite(metricsTracer.afeLatency) &&
+                metricsTracer.afeLatency >= 0
+              ) {
+                metricsTracer.recordAfeLatency(status?.code);
+              } else {
+                metricsTracer.recordAfeConnectivityErrorCount(status?.code);
+              }
+            }
+          }
 
-          // Record attempt metric completion
-          metricsTracer?.recordAttemptCompletion(status.code);
-          if (metricsTracer?.gfeLatency) {
-            metricsTracer?.recordGfeLatency(status.code);
-          } else {
-            metricsTracer?.recordGfeConnectivityErrorCount(status.code);
-          }
-          if (metricsTracer?.afeLatency) {
-            metricsTracer?.recordAfeLatency(status.code);
-          } else {
-            metricsTracer?.recordAfeConnectivityErrorCount(status.code);
-          }
+          listener.onReceiveStatus(status);
         },
       };
-      next(metadata, newListener);
-    },
-    sendMessage: function (message, next) {
-      next(message);
-    },
 
-    halfClose: function (next) {
-      next();
-    },
-
-    cancel: function (next) {
-      next();
+      next(metadata, interceptingListener);
     },
   });
 };

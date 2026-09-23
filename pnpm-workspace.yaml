@@ -5,6 +5,7 @@ packages:
   - 'core/projectify'
   - 'core/promisify'
   - 'core/packages/*'
+  - 'core/generator/*'
   - 'core/dev-packages/*'
   - 'packages/*'
   - 'handwritten/*'

@@ -9,12 +9,25 @@
 # team_members: @bshaffer @feywind @danieljbruce @shivanee-p
 *     @googleapis/cloud-sdk-nodejs-team
 
-/librarian.yaml         @googleapis/cloud-sdk-librarian-team
-/handwritten/bigquery @googleapis/bigquery-team
-/handwritten/cloud-profiler @googleapis/cloud-profiler-team
-/handwritten/storage @googleapis/gcs-team
-/handwritten/firestore @googleapis/firestore-team
-/handwritten/spanner @googleapis/spanner-team
-/handwritten/spanner-driver @googleapis/spanner-team
-/handwritten/bigquery-storage @googleapis/bigquery-team
-/core/packages/google-auth-library-nodejs @googleapis/aion-team
+# Generated GAPIC packages, core libraries, and documentation are strictly owned by the Node.js SDK team
+# (except google-auth-library-nodejs which is co-owned with aion-team).
+/packages/                                @googleapis/cloud-sdk-nodejs-team
+/core/                                    @googleapis/cloud-sdk-nodejs-team
+/docs/                                    @googleapis/cloud-sdk-nodejs-team
+/core/packages/google-auth-library-nodejs @googleapis/cloud-sdk-nodejs-team @googleapis/aion-team
+
+/librarian.yaml                           @googleapis/cloud-sdk-nodejs-team @googleapis/cloud-sdk-librarian-team
+
+# Partner-owned handwritten libraries
+/handwritten/bigquery                     @googleapis/cloud-sdk-nodejs-team @googleapis/bigquery-team
+/handwritten/bigquery-storage             @googleapis/cloud-sdk-nodejs-team @googleapis/bigquery-team
+/handwritten/cloud-profiler               @googleapis/cloud-sdk-nodejs-team @googleapis/cloud-profiler-team
+/handwritten/firestore                    @googleapis/cloud-sdk-nodejs-team @googleapis/firestore-team
+/handwritten/spanner                      @googleapis/cloud-sdk-nodejs-team @googleapis/spanner-team
+/handwritten/spanner-driver               @googleapis/cloud-sdk-nodejs-team @googleapis/spanner-team
+/handwritten/storage                      @googleapis/cloud-sdk-nodejs-team @googleapis/gcs-team
+
+# Partner-exclusive CI workflows and conformance checks
+/.github/workflows/storage-conformance.yaml           @googleapis/cloud-sdk-nodejs-team @googleapis/gcs-team
+/.github/workflows/system-tests-against-emulator.yaml @googleapis/cloud-sdk-nodejs-team @googleapis/spanner-team
+/.github/workflows/discovery.yaml                     @googleapis/cloud-sdk-nodejs-team @googleapis/bigquery-team

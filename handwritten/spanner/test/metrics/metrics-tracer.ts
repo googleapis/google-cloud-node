@@ -17,8 +17,6 @@ import * as assert from 'assert';
 import * as sinon from 'sinon';
 import * as Constants from '../../src/metrics/constants';
 import {MetricsTracer} from '../../src/metrics/metrics-tracer';
-
-import {MetricsTracerFactory} from '../../src/metrics/metrics-tracer-factory';
 import {Spanner} from '../../src';
 
 const DATABASE = 'test-db';
@@ -133,16 +131,86 @@ describe('MetricsTracer', () => {
       tracer.recordAttemptStart();
       tracer.recordAttemptCompletion(Status.OK);
       assert.strictEqual(fakeAttemptLatency.record.called, false);
+      assert.strictEqual(fakeAttemptCounter.add.called, false);
+    });
+
+    it('should do nothing when currentOperation is null on recordAttemptStart', () => {
+      tracer.currentOperation = null;
+      assert.doesNotThrow(() => {
+        tracer.recordAttemptStart();
+      });
+      assert.strictEqual(tracer.currentOperation, null);
+    });
+
+    it('should do nothing when currentOperation is null on recordAttemptCompletion', () => {
+      tracer.currentOperation = null;
+      assert.doesNotThrow(() => {
+        tracer.recordAttemptCompletion(Status.OK);
+      });
+      assert.strictEqual(fakeAttemptLatency.record.called, false);
+      assert.strictEqual(fakeAttemptCounter.add.called, false);
+    });
+
+    it('should do nothing when currentAttempt is null on recordAttemptCompletion', () => {
+      tracer.recordOperationStart();
+      assert.strictEqual(tracer.currentOperation!.currentAttempt, null);
+      assert.doesNotThrow(() => {
+        tracer.recordAttemptCompletion(Status.OK);
+      });
+      assert.strictEqual(fakeAttemptLatency.record.called, false);
+      assert.strictEqual(fakeAttemptCounter.add.called, false);
+    });
+
+    it('should record attempt error status when status is not OK', () => {
+      tracer.recordOperationStart();
+      tracer.recordAttemptStart();
+      tracer.recordAttemptCompletion(Status.PERMISSION_DENIED);
+
+      assert.strictEqual(fakeAttemptLatency.record.calledOnce, true);
+      assert.strictEqual(fakeAttemptCounter.add.calledOnce, true);
+      const [[latency, latencyAttributes]] = fakeAttemptLatency.record.args;
+      const [[count, countAttributes]] = fakeAttemptCounter.add.args;
+      assert.strictEqual(typeof latency, 'number');
+      assert.strictEqual(count, 1);
+      assert.strictEqual(
+        latencyAttributes[Constants.METRIC_LABEL_KEY_STATUS],
+        'PERMISSION_DENIED',
+      );
+      assert.strictEqual(
+        countAttributes[Constants.METRIC_LABEL_KEY_STATUS],
+        'PERMISSION_DENIED',
+      );
+    });
+
+    it('should safely do nothing if recordAttemptStart is called without active operation', () => {
+      // currentOperation is null
+      assert.doesNotThrow(() => {
+        tracer.recordAttemptStart();
+      });
+      assert.strictEqual(tracer.currentOperation, null);
+    });
+
+    it('should safely do nothing if recordAttemptCompletion is called without active attempt', () => {
+      // No attempt started
+      assert.doesNotThrow(() => {
+        tracer.recordAttemptCompletion(Status.OK);
+      });
+      assert.strictEqual(fakeAttemptLatency.record.called, false);
+      assert.strictEqual(fakeAttemptCounter.add.called, false);
+    });
+
+    it('should safely do nothing if recordAttemptCompletion is called without active operation', () => {
+      tracer.currentOperation = null;
+      assert.doesNotThrow(() => {
+        tracer.recordAttemptCompletion(Status.OK);
+      });
+      assert.strictEqual(fakeAttemptLatency.record.called, false);
+      assert.strictEqual(fakeAttemptCounter.add.called, false);
     });
   });
 
   describe('recordOperationCompletion', () => {
     it('should record operation and attempt metrics when enabled', () => {
-      const factory = sandbox
-        .stub(MetricsTracerFactory, 'getInstance')
-        .returns({
-          clearCurrentTracer: sinon.spy(),
-        } as any);
       tracer.recordOperationStart();
       assert.ok(tracer.currentOperation!.startTime);
       tracer.recordAttemptStart();
@@ -153,8 +221,11 @@ describe('MetricsTracer', () => {
       assert.strictEqual(fakeAttemptCounter.add.calledOnce, true);
       assert.strictEqual(fakeOperationLatency.record.calledOnce, true);
 
-      const [[_, opAttrs]] = fakeOperationLatency.record.args;
-      assert.strictEqual(opAttrs[Constants.METRIC_LABEL_KEY_STATUS], 'OK');
+      const [[, operationAttributes]] = fakeOperationLatency.record.args;
+      assert.strictEqual(
+        operationAttributes[Constants.METRIC_LABEL_KEY_STATUS],
+        'OK',
+      );
     });
 
     it('should record fractional operation latency with sub-millisecond precision', () => {
@@ -163,10 +234,6 @@ describe('MetricsTracer', () => {
       nowStub.onCall(1).returns(105.0); // attempt start
       nowStub.onCall(2).returns(108.0); // attempt end
       nowStub.onCall(3).returns(110.25); // op end
-
-      sandbox.stub(MetricsTracerFactory, 'getInstance').returns({
-        clearCurrentTracer: sinon.spy(),
-      } as any);
 
       tracer.recordOperationStart();
       tracer.recordAttemptStart();
@@ -178,9 +245,116 @@ describe('MetricsTracer', () => {
       assert.strictEqual(latency, 9.75); // 110.25 - 100.5
     });
 
+    it('should record operation error status matching the failed attempt status', () => {
+      tracer.recordOperationStart();
+      tracer.recordAttemptStart();
+      tracer.recordAttemptCompletion(Status.UNAVAILABLE);
+      tracer.recordOperationCompletion();
+
+      assert.strictEqual(fakeOperationCounter.add.calledOnce, true);
+      assert.strictEqual(fakeOperationLatency.record.calledOnce, true);
+
+      const [[, operationCounterAttributes]] = fakeOperationCounter.add.args;
+      const [[, operationLatencyAttributes]] = fakeOperationLatency.record.args;
+      assert.strictEqual(
+        operationCounterAttributes[Constants.METRIC_LABEL_KEY_STATUS],
+        'UNAVAILABLE',
+      );
+      assert.strictEqual(
+        operationLatencyAttributes[Constants.METRIC_LABEL_KEY_STATUS],
+        'UNAVAILABLE',
+      );
+    });
+
+    it('should record UNKNOWN status when operation completes without any attempts', () => {
+      tracer.recordOperationStart();
+      // Operation completed before any attempt was started (e.g. client-side error before RPC)
+      tracer.recordOperationCompletion();
+
+      assert.strictEqual(fakeOperationCounter.add.calledOnce, true);
+      assert.strictEqual(fakeOperationLatency.record.calledOnce, true);
+
+      const [[, operationCounterAttributes]] = fakeOperationCounter.add.args;
+      assert.strictEqual(
+        operationCounterAttributes[Constants.METRIC_LABEL_KEY_STATUS],
+        'UNKNOWN',
+      );
+    });
+
+    it('should safely do nothing if recordOperationCompletion is called without active operation', () => {
+      tracer.currentOperation = null;
+      assert.doesNotThrow(() => {
+        tracer.recordOperationCompletion();
+      });
+      assert.strictEqual(fakeOperationLatency.record.called, false);
+      assert.strictEqual(fakeOperationCounter.add.called, false);
+    });
+
+    it('should handle missing currentOperation in _createOperationOtelAttributes', () => {
+      tracer.currentOperation = null;
+      const attributes = (tracer as any)._createOperationOtelAttributes();
+      assert.strictEqual(
+        attributes[Constants.METRIC_LABEL_KEY_STATUS],
+        'UNKNOWN',
+      );
+    });
+
+    it('should fallback to UNKNOWN status when attempt completes with unrecognized status code', () => {
+      tracer.recordOperationStart();
+      tracer.recordAttemptStart();
+      tracer.recordAttemptCompletion(999 as any);
+      tracer.recordOperationCompletion();
+
+      const [[, attemptAttributes]] = fakeAttemptLatency.record.args;
+      const [[, operationAttributes]] = fakeOperationLatency.record.args;
+
+      assert.strictEqual(
+        attemptAttributes[Constants.METRIC_LABEL_KEY_STATUS],
+        'UNKNOWN',
+      );
+      assert.strictEqual(
+        operationAttributes[Constants.METRIC_LABEL_KEY_STATUS],
+        'UNKNOWN',
+      );
+    });
+
+    it('should not overwrite existing operation when recordOperationStart is called repeatedly', () => {
+      tracer.recordOperationStart();
+      const initialOperation = tracer.currentOperation;
+      assert.ok(initialOperation);
+
+      tracer.recordOperationStart();
+      assert.strictEqual(tracer.currentOperation, initialOperation);
+    });
+
+    it('should be idempotent and not double-record if recordOperationCompletion is called multiple times', () => {
+      tracer.recordOperationStart();
+      tracer.recordAttemptStart();
+      tracer.recordAttemptCompletion(Status.OK);
+      tracer.recordOperationCompletion();
+
+      assert.strictEqual(fakeOperationCounter.add.callCount, 1);
+      assert.strictEqual(fakeOperationLatency.record.callCount, 1);
+      assert.strictEqual(tracer.currentOperation, null);
+
+      // Subsequent call should be a no-op
+      tracer.recordOperationCompletion();
+      assert.strictEqual(fakeOperationCounter.add.callCount, 1);
+      assert.strictEqual(fakeOperationLatency.record.callCount, 1);
+    });
+
     it('should do nothing if disabled', () => {
       tracer.enabled = false;
       tracer.recordOperationCompletion();
+      assert.strictEqual(fakeOperationCounter.add.called, false);
+      assert.strictEqual(fakeOperationLatency.record.called, false);
+    });
+
+    it('should do nothing when currentOperation is null', () => {
+      tracer.currentOperation = null;
+      assert.doesNotThrow(() => {
+        tracer.recordOperationCompletion();
+      });
       assert.strictEqual(fakeOperationCounter.add.called, false);
       assert.strictEqual(fakeOperationLatency.record.called, false);
     });
@@ -194,11 +368,63 @@ describe('MetricsTracer', () => {
       assert.strictEqual(fakeGfeLatency.record.calledOnce, true);
     });
 
+    it('should record GFE latency when latency is 0ms', () => {
+      tracer.enabled = true;
+      tracer.gfeLatency = 0;
+      tracer.recordGfeLatency(Status.OK);
+      assert.strictEqual(fakeGfeLatency.record.calledOnce, true);
+      assert.strictEqual(fakeGfeLatency.record.getCall(0).args[0], 0);
+      assert.strictEqual(tracer.gfeLatency, null);
+    });
+
+    it('should not record and log error when gfeLatency is null', () => {
+      tracer.enabled = true;
+      tracer.gfeLatency = null;
+      const errorStub = sandbox.stub(console, 'error');
+      tracer.recordGfeLatency(Status.OK);
+      assert.strictEqual(fakeGfeLatency.record.called, false);
+      assert.strictEqual(errorStub.calledOnce, true);
+    });
+
+    it('should not record and log error when gfeLatency is NaN or negative', () => {
+      tracer.enabled = true;
+      tracer.gfeLatency = NaN;
+      const errorStub = sandbox.stub(console, 'error');
+      tracer.recordGfeLatency(Status.OK);
+      assert.strictEqual(fakeGfeLatency.record.called, false);
+
+      tracer.gfeLatency = -1;
+      tracer.recordGfeLatency(Status.OK);
+      assert.strictEqual(fakeGfeLatency.record.called, false);
+      assert.strictEqual(errorStub.calledTwice, true);
+    });
+
+    it('should fallback to UNKNOWN status when called with unrecognized status code', () => {
+      tracer.enabled = true;
+      tracer.gfeLatency = 123;
+      tracer.recordGfeLatency(999 as any);
+      assert.strictEqual(fakeGfeLatency.record.calledOnce, true);
+      assert.strictEqual(
+        fakeGfeLatency.record.getCall(0).args[1][
+          Constants.METRIC_LABEL_KEY_STATUS
+        ],
+        'UNKNOWN',
+      );
+    });
     it('should not record if disabled', () => {
       tracer.enabled = false;
       tracer.gfeLatency = 123;
       tracer.recordGfeLatency(Status.OK);
       assert.strictEqual(fakeGfeLatency.record.called, false);
+    });
+
+    it('should record GFE latency when value is 0', () => {
+      tracer.enabled = true;
+      tracer.gfeLatency = 0;
+      tracer.recordGfeLatency(Status.OK);
+      assert.strictEqual(fakeGfeLatency.record.calledOnce, true);
+      assert.strictEqual(fakeGfeLatency.record.firstCall.args[0], 0);
+      assert.strictEqual(tracer.gfeLatency, null);
     });
   });
 
@@ -206,6 +432,18 @@ describe('MetricsTracer', () => {
     it('should increment GFE error counter if enabled', () => {
       tracer.recordGfeConnectivityErrorCount(Status.OK);
       assert.strictEqual(fakeGfeCounter.add.calledOnce, true);
+    });
+
+    it('should fallback to UNKNOWN status when called with unrecognized status code', () => {
+      tracer.enabled = true;
+      tracer.recordGfeConnectivityErrorCount(999 as any);
+      assert.strictEqual(fakeGfeCounter.add.calledOnce, true);
+      assert.strictEqual(
+        fakeGfeCounter.add.getCall(0).args[1][
+          Constants.METRIC_LABEL_KEY_STATUS
+        ],
+        'UNKNOWN',
+      );
     });
 
     it('should not increment if disabled', () => {
@@ -228,6 +466,49 @@ describe('MetricsTracer', () => {
       assert.strictEqual(fakeAfeLatency.record.calledOnce, true);
     });
 
+    it('should fallback to UNKNOWN status when called with unrecognized status code', () => {
+      tracer.enabled = true;
+      tracer.afeLatency = 123;
+      tracer.recordAfeLatency(999 as any);
+      assert.strictEqual(fakeAfeLatency.record.calledOnce, true);
+      assert.strictEqual(
+        fakeAfeLatency.record.getCall(0).args[1][
+          Constants.METRIC_LABEL_KEY_STATUS
+        ],
+        'UNKNOWN',
+      );
+    });
+
+    it('should record AFE latency when latency is 0ms', () => {
+      tracer.enabled = true;
+      tracer.afeLatency = 0;
+      tracer.recordAfeLatency(Status.OK);
+      assert.strictEqual(fakeAfeLatency.record.calledOnce, true);
+      assert.strictEqual(fakeAfeLatency.record.getCall(0).args[0], 0);
+      assert.strictEqual(tracer.afeLatency, null);
+    });
+
+    it('should not record and log error when afeLatency is null', () => {
+      tracer.enabled = true;
+      tracer.afeLatency = null;
+      const errorStub = sandbox.stub(console, 'error');
+      tracer.recordAfeLatency(Status.OK);
+      assert.strictEqual(fakeAfeLatency.record.called, false);
+      assert.strictEqual(errorStub.calledOnce, true);
+    });
+
+    it('should not record and log error when afeLatency is NaN or negative', () => {
+      tracer.enabled = true;
+      tracer.afeLatency = NaN;
+      const errorStub = sandbox.stub(console, 'error');
+      tracer.recordAfeLatency(Status.OK);
+      assert.strictEqual(fakeAfeLatency.record.called, false);
+
+      tracer.afeLatency = -1;
+      tracer.recordAfeLatency(Status.OK);
+      assert.strictEqual(fakeAfeLatency.record.called, false);
+      assert.strictEqual(errorStub.calledTwice, true);
+    });
     it('should not record if AFE server timing is disabled', () => {
       tracer.enabled = true;
       Spanner._resetAFEServerTimingForTest();
@@ -243,9 +524,18 @@ describe('MetricsTracer', () => {
       tracer.recordAfeLatency(Status.OK);
       assert.strictEqual(fakeAfeLatency.record.called, false);
     });
+
+    it('should record AFE latency when value is 0', () => {
+      tracer.enabled = true;
+      tracer.afeLatency = 0;
+      tracer.recordAfeLatency(Status.OK);
+      assert.strictEqual(fakeAfeLatency.record.calledOnce, true);
+      assert.strictEqual(fakeAfeLatency.record.firstCall.args[0], 0);
+      assert.strictEqual(tracer.afeLatency, null);
+    });
   });
 
-  describe('recordGfeConnectivityErrorCount', () => {
+  describe('recordAfeConnectivityErrorCount', () => {
     afterEach(() => {
       Spanner._resetAFEServerTimingForTest();
       process.env['SPANNER_DISABLE_AFE_SERVER_TIMING'] = 'false';
@@ -255,6 +545,18 @@ describe('MetricsTracer', () => {
       tracer.enabled = true;
       tracer.recordAfeConnectivityErrorCount(Status.OK);
       assert.strictEqual(fakeAfeCounter.add.calledOnce, true);
+    });
+
+    it('should fallback to UNKNOWN status when called with unrecognized status code', () => {
+      tracer.enabled = true;
+      tracer.recordAfeConnectivityErrorCount(999 as any);
+      assert.strictEqual(fakeAfeCounter.add.calledOnce, true);
+      assert.strictEqual(
+        fakeAfeCounter.add.getCall(0).args[1][
+          Constants.METRIC_LABEL_KEY_STATUS
+        ],
+        'UNKNOWN',
+      );
     });
 
     it('should not increment if metrics are disabled', () => {
@@ -301,6 +603,14 @@ describe('MetricsTracer', () => {
       assert.strictEqual(afeLatency, 30);
     });
 
+    it('should extract 0ms latency when dur=0 in server-timing header', () => {
+      const header = 'gfet4t7; dur=0, afe; dur=0';
+      const gfeLatency = tracer.extractGfeLatency(header);
+      assert.strictEqual(gfeLatency, 0);
+      const afeLatency = tracer.extractAfeLatency(header);
+      assert.strictEqual(afeLatency, 0);
+    });
+
     it('should return null if header is undefined', () => {
       const gfeLatency = tracer.extractGfeLatency(undefined as any);
       assert.strictEqual(gfeLatency, null);
@@ -330,6 +640,257 @@ describe('MetricsTracer', () => {
       assert.strictEqual(gfeLatency, null);
       const afeLatency = tracer.extractAfeLatency(header);
       assert.strictEqual(afeLatency, 30);
+    });
+
+    it('should extract zero latency correctly', () => {
+      const header = 'gfet4t7; dur=0, afe; dur=0';
+      assert.strictEqual(tracer.extractGfeLatency(header), 0);
+      assert.strictEqual(tracer.extractAfeLatency(header), 0);
+    });
+
+    it('should return null for empty or non-string header', () => {
+      assert.strictEqual(tracer.extractGfeLatency(''), null);
+      assert.strictEqual(tracer.extractAfeLatency(''), null);
+      assert.strictEqual(tracer.extractGfeLatency(null as any), null);
+      assert.strictEqual(tracer.extractAfeLatency(null as any), null);
+      assert.strictEqual(tracer.extractGfeLatency(123 as any), null);
+      assert.strictEqual(tracer.extractAfeLatency(123 as any), null);
+    });
+
+    it('should return null for non-numeric or negative durations', () => {
+      assert.strictEqual(tracer.extractGfeLatency('gfet4t7; dur='), null);
+      assert.strictEqual(tracer.extractGfeLatency('gfet4t7; dur=abc'), null);
+      assert.strictEqual(tracer.extractGfeLatency('gfet4t7; dur=-10'), null);
+      assert.strictEqual(tracer.extractAfeLatency('afe; dur='), null);
+      assert.strictEqual(tracer.extractAfeLatency('afe; dur=xyz'), null);
+      assert.strictEqual(tracer.extractAfeLatency('afe; dur=-5'), null);
+    });
+
+    it('should correctly distinguish prefixes embedded in longer metric names', () => {
+      const header = 'safe; dur=50, afe; dur=30';
+      assert.strictEqual(tracer.extractGfeLatency(header), null);
+      assert.strictEqual(tracer.extractAfeLatency(header), 30);
+    });
+
+    it('should support various delimiters such as comma without space and tabs', () => {
+      const commaSeparated = 'other=val,afe; dur=40';
+      assert.strictEqual(tracer.extractAfeLatency(commaSeparated), 40);
+
+      const tabSeparated = 'other=val\tafe; dur=50';
+      assert.strictEqual(tracer.extractAfeLatency(tabSeparated), 50);
+    });
+
+    it('should extract integer milliseconds from fractional durations', () => {
+      const header = 'gfet4t7; dur=123.45, afe; dur=67.89';
+      assert.strictEqual(tracer.extractGfeLatency(header), 123);
+      assert.strictEqual(tracer.extractAfeLatency(header), 67);
+    });
+
+    it('should skip earlier invalid occurrences and find valid subsequent occurrence', () => {
+      const header = 'gfet4t7; dur=invalid, gfet4t7; dur=123';
+      assert.strictEqual(tracer.extractGfeLatency(header), 123);
+    });
+
+    it('should return null when prefix is embedded in longer metric name with no subsequent match', () => {
+      assert.strictEqual(tracer.extractAfeLatency('safe; dur=50'), null);
+      assert.strictEqual(tracer.extractGfeLatency('notgfet4t7; dur=50'), null);
+    });
+
+    it('should return null if AFE server timing is disabled', () => {
+      const originalValue = process.env['SPANNER_DISABLE_AFE_SERVER_TIMING'];
+      try {
+        Spanner._resetAFEServerTimingForTest();
+        process.env['SPANNER_DISABLE_AFE_SERVER_TIMING'] = 'true';
+        const header = 'afe; dur=30';
+        assert.strictEqual(tracer.extractAfeLatency(header), null);
+      } finally {
+        Spanner._resetAFEServerTimingForTest();
+        if (originalValue !== undefined) {
+          process.env['SPANNER_DISABLE_AFE_SERVER_TIMING'] = originalValue;
+        } else {
+          delete process.env['SPANNER_DISABLE_AFE_SERVER_TIMING'];
+        }
+      }
+    });
+  });
+
+  describe('OTel attributes caching', () => {
+    it('should reuse cached attribute objects across metric recording methods for the same status', () => {
+      tracer.enabled = true;
+      tracer.gfeLatency = 120;
+      tracer.afeLatency = 45;
+
+      tracer.recordOperationStart();
+      tracer.recordAttemptStart();
+      tracer.recordAttemptCompletion(Status.OK);
+      tracer.recordGfeLatency(Status.OK);
+      tracer.recordAfeLatency(Status.OK);
+      tracer.recordOperationCompletion();
+
+      const [[, attemptAttributes]] = fakeAttemptLatency.record.args;
+      const [[, attemptCounterAttributes]] = fakeAttemptCounter.add.args;
+      const [[, gfeAttributes]] = fakeGfeLatency.record.args;
+      const [[, afeAttributes]] = fakeAfeLatency.record.args;
+      const [[, operationAttributes]] = fakeOperationLatency.record.args;
+      const [[, operationCounterAttributes]] = fakeOperationCounter.add.args;
+
+      assert.strictEqual(attemptAttributes, attemptCounterAttributes);
+      assert.strictEqual(attemptAttributes, gfeAttributes);
+      assert.strictEqual(attemptAttributes, afeAttributes);
+      assert.strictEqual(attemptAttributes, operationAttributes);
+      assert.strictEqual(attemptAttributes, operationCounterAttributes);
+
+      assert.deepStrictEqual(attemptAttributes, {
+        [Constants.METRIC_LABEL_KEY_DATABASE]: DATABASE,
+        [Constants.METRIC_LABEL_KEY_METHOD]: METHOD,
+        [Constants.MONITORED_RES_LABEL_KEY_INSTANCE]: INSTANCE,
+        [Constants.METRIC_LABEL_KEY_STATUS]: 'OK',
+      });
+    });
+
+    it('should cache distinct attribute objects for different status codes', () => {
+      tracer.enabled = true;
+      tracer.recordGfeConnectivityErrorCount(Status.OK);
+      tracer.recordGfeConnectivityErrorCount(Status.UNAVAILABLE);
+
+      const [[, okAttributes]] = fakeGfeCounter.add.args;
+      const [[, unavailableAttributes]] = fakeGfeCounter.add.args.slice(1);
+
+      assert.notStrictEqual(okAttributes, unavailableAttributes);
+      assert.strictEqual(okAttributes[Constants.METRIC_LABEL_KEY_STATUS], 'OK');
+      assert.strictEqual(
+        unavailableAttributes[Constants.METRIC_LABEL_KEY_STATUS],
+        'UNAVAILABLE',
+      );
+    });
+
+    it('should handle undefined status without status label', () => {
+      const attributes = (tracer as any)._getAttributesForStatus();
+      assert.strictEqual(
+        attributes[Constants.METRIC_LABEL_KEY_STATUS],
+        undefined,
+      );
+      assert.strictEqual(
+        attributes[Constants.METRIC_LABEL_KEY_DATABASE],
+        DATABASE,
+      );
+      assert.strictEqual(
+        attributes[Constants.MONITORED_RES_LABEL_KEY_INSTANCE],
+        INSTANCE,
+      );
+      assert.strictEqual(attributes[Constants.METRIC_LABEL_KEY_METHOD], METHOD);
+    });
+
+    it('should handle null status without status label', () => {
+      const attributes = (tracer as any)._getAttributesForStatus(null);
+      assert.strictEqual(
+        attributes[Constants.METRIC_LABEL_KEY_STATUS],
+        undefined,
+      );
+      assert.strictEqual(
+        attributes[Constants.METRIC_LABEL_KEY_DATABASE],
+        DATABASE,
+      );
+    });
+
+    it('should fallback to UNKNOWN for unrecognized numeric status code', () => {
+      const attributes = (tracer as any)._getAttributesForStatus(999);
+      assert.strictEqual(
+        attributes[Constants.METRIC_LABEL_KEY_STATUS],
+        'UNKNOWN',
+      );
+    });
+
+    it('should use external attributes cache map when supplied', () => {
+      const sharedCache = new Map<string, Record<string, string>>();
+      const customTracer = new MetricsTracer(
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        true,
+        DATABASE,
+        INSTANCE,
+        PROJECT_ID,
+        METHOD,
+        REQUEST,
+        sharedCache,
+      );
+
+      const attributes = (customTracer as any)._getAttributesForStatus(
+        Status.OK,
+      );
+      assert.strictEqual(sharedCache.get('OK'), attributes);
+    });
+
+    it('should freeze cached attribute objects to ensure immutability', () => {
+      const attributes = (tracer as any)._getAttributesForStatus(Status.OK);
+      assert.ok(Object.isFrozen(attributes));
+    });
+
+    it('should handle missing currentOperation or currentAttempt in _createAttemptOtelAttributes', () => {
+      tracer.currentOperation = null;
+      const attributesWithoutOperation = (
+        tracer as any
+      )._createAttemptOtelAttributes();
+      assert.strictEqual(
+        attributesWithoutOperation[Constants.METRIC_LABEL_KEY_STATUS],
+        undefined,
+      );
+
+      tracer.recordOperationStart();
+      const attributesWithoutAttempt = (
+        tracer as any
+      )._createAttemptOtelAttributes();
+      assert.strictEqual(
+        attributesWithoutAttempt[Constants.METRIC_LABEL_KEY_STATUS],
+        undefined,
+      );
+    });
+
+    it('should handle missing currentOperation or currentAttempt in _createOperationOtelAttributes', () => {
+      tracer.currentOperation = null;
+      const attributesWithoutOperation = (
+        tracer as any
+      )._createOperationOtelAttributes();
+      assert.strictEqual(
+        attributesWithoutOperation[Constants.METRIC_LABEL_KEY_STATUS],
+        'UNKNOWN',
+      );
+
+      tracer.recordOperationStart();
+      const attributesWithoutAttempt = (
+        tracer as any
+      )._createOperationOtelAttributes();
+      assert.strictEqual(
+        attributesWithoutAttempt[Constants.METRIC_LABEL_KEY_STATUS],
+        'UNKNOWN',
+      );
+    });
+
+    it('should record attempt and operation completion with UNKNOWN status for unrecognized status code', () => {
+      tracer.enabled = true;
+      tracer.recordOperationStart();
+      tracer.recordAttemptStart();
+      tracer.recordAttemptCompletion(999 as any);
+      tracer.recordOperationCompletion();
+
+      const [[, attemptAttributes]] = fakeAttemptLatency.record.args;
+      const [[, operationAttributes]] = fakeOperationLatency.record.args;
+
+      assert.strictEqual(
+        attemptAttributes[Constants.METRIC_LABEL_KEY_STATUS],
+        'UNKNOWN',
+      );
+      assert.strictEqual(
+        operationAttributes[Constants.METRIC_LABEL_KEY_STATUS],
+        'UNKNOWN',
+      );
+      assert.strictEqual(attemptAttributes, operationAttributes);
     });
   });
 });
