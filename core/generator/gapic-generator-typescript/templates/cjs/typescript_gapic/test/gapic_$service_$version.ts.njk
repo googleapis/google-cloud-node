@@ -1169,7 +1169,7 @@ describe('{{ api.naming.version }}.{{ service.name }}Client', () => {
                         } else {
                             resolve(result);
                         }
-                    }).catch(err => {throw err});
+                    }).catch(reject);
             });
             const response = await promise;
             {%- if method.options and method.options.deprecated %}
@@ -1281,7 +1281,7 @@ describe('{{ api.naming.version }}.{{ service.name }}Client', () => {
                         } else {
                             resolve(result);
                         }
-                    }).catch(err => {throw err});
+                    }).catch(reject);
             });
             const response = await promise;
             {%- if method.options and method.options.deprecated %}
@@ -1470,7 +1470,7 @@ describe('{{ api.naming.version }}.{{ service.name }}Client', () => {
                         } else {
                             resolve(result);
                         }
-                    }).catch(err => {throw err});
+                    }).catch(reject);
             });
             const response = await promise;
             {%- if method.options and method.options.deprecated %}

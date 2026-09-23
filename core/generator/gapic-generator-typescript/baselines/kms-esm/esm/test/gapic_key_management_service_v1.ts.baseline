@@ -4309,9 +4309,7 @@ describe('v1.KeyManagementServiceClient', () => {
               }
             },
           )
-          .catch(err => {
-            throw err;
-          });
+          .catch(reject);
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
@@ -4422,9 +4420,7 @@ describe('v1.KeyManagementServiceClient', () => {
               }
             },
           )
-          .catch(err => {
-            throw err;
-          });
+          .catch(reject);
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
@@ -4538,9 +4534,7 @@ describe('v1.KeyManagementServiceClient', () => {
               }
             },
           )
-          .catch(err => {
-            throw err;
-          });
+          .catch(reject);
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);

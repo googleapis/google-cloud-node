@@ -2003,9 +2003,7 @@ describe('v1beta1.CloudRedisClient', () => {
               }
             },
           )
-          .catch(err => {
-            throw err;
-          });
+          .catch(reject);
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
@@ -2087,9 +2085,7 @@ describe('v1beta1.CloudRedisClient', () => {
               }
             },
           )
-          .catch(err => {
-            throw err;
-          });
+          .catch(reject);
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
@@ -2171,9 +2167,7 @@ describe('v1beta1.CloudRedisClient', () => {
               }
             },
           )
-          .catch(err => {
-            throw err;
-          });
+          .catch(reject);
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
