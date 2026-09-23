@@ -102,7 +102,6 @@ fi
 
 # Then detect changes in the test scripts.
 
-CI_CHANGED=false
 set +e
 git diff --quiet ${GIT_DIFF_ARG} ci
 changed=$?
@@ -110,10 +109,10 @@ set -e
 if [[ "${changed}" -eq 0 ]]; then
     echo "no change detected in ci"
 else
-    echo "change detected in ci, running representative smoke test"
+    echo "change detected in ci, we should test everything"
     echo "result of git diff ${GIT_DIFF_ARG} ci:"
     git diff ${GIT_DIFF_ARG} ci
-    CI_CHANGED=true
+    GIT_DIFF_ARG=""
 fi
 
 # Now we have a fixed list, but we can change it to autodetect if
@@ -266,11 +265,6 @@ for subdir in ${subdirs[@]}; do
         fi
     done
 done
-
-if [[ "${CI_CHANGED}" == "true" && ${#test_dirs[@]} -eq 0 ]]; then
-    test_dirs+=("packages/google-cloud-kms/")
-fi
-
 # If RUN_TESTS_MODE is CALCULATE_SHARD_MATRIX, output dynamic matrix values to GitHub Actions and exit
 if [[ "${RUN_TESTS_MODE}" == "CALCULATE_SHARD_MATRIX" ]]; then
     count=${#test_dirs[@]}
