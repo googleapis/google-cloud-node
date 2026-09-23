@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.12.0](https://github.com/googleapis/google-cloud-node/compare/backupdr-v0.11.0...backupdr-v0.12.0) (2026-09-22)
+
+
+### Features
+
+* **google/cloud/backupdr/v1beta:** Add google-cloud-backupdr ([#9372](https://github.com/googleapis/google-cloud-node/issues/9372)) ([c07e77e](https://github.com/googleapis/google-cloud-node/commit/c07e77e240098d312cb9d973fc7e11a9c16569be))
+
 ## [0.11.0](https://github.com/googleapis/google-cloud-node/compare/backupdr-v0.10.0...backupdr-v0.11.0) (2026-09-08)
 
 

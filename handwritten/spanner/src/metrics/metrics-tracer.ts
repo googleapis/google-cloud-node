@@ -14,14 +14,14 @@
 
 import {status as Status} from '@grpc/grpc-js';
 import {Counter, Histogram} from '@opentelemetry/api';
-import {MetricsTracerFactory} from './metrics-tracer-factory';
+
 import {
   METRIC_LABEL_KEY_DATABASE,
   METRIC_LABEL_KEY_METHOD,
   METRIC_LABEL_KEY_STATUS,
   MONITORED_RES_LABEL_KEY_INSTANCE,
 } from './constants';
-import {Spanner} from '..';
+import {isAFEServerTimingEnabled} from '../common';
 
 /**
  * MetricAttemptTracer tracks the start time and status of a single gRPC attempt.
@@ -107,6 +107,92 @@ class MetricOperationTracer {
   }
 }
 
+const GFE_METRIC_PREFIX = 'gfet4t7; dur=';
+const AFE_METRIC_PREFIX = 'afe; dur=';
+
+/**
+ * Checks whether a character code represents an entry delimiter or whitespace in a
+ * 'server-timing' header (start of string, space, comma, or tab).
+ *
+ * @param charCode The character code to check.
+ * @returns True if the character code is a valid entry separator or whitespace.
+ */
+function isEntryDelimiter(charCode: number): boolean {
+  return (
+    charCode === 32 /* ' ' */ ||
+    charCode === 44 /* ',' */ ||
+    charCode === 9 /* '\t' */
+  );
+}
+
+/**
+ * Parses consecutive ASCII digit characters into an integer starting from the given index.
+ * Returns null if the character at startIndex is not a digit (e.g. non-numeric, negative, or empty).
+ * Parsing stops at the first non-digit (e.g. ',', ';', or decimal point), matching the legacy
+ * regex `([0-9]+)` behavior without intermediate string slice allocations.
+ *
+ * @param header The 'server-timing' header string.
+ * @param startIndex The index where numeric digits are expected to begin.
+ * @returns The parsed non-negative integer, or null if no valid digits were found.
+ */
+function parseConsecutiveDigits(
+  header: string,
+  startIndex: number,
+): number | null {
+  if (startIndex >= header.length) {
+    return null;
+  }
+  const firstCharCode = header.charCodeAt(startIndex);
+  if (firstCharCode < 48 || firstCharCode > 57) {
+    return null;
+  }
+  let value = firstCharCode - 48;
+  for (let index = startIndex + 1; index < header.length; index++) {
+    const code = header.charCodeAt(index);
+    if (code >= 48 && code <= 57) {
+      value = value * 10 + (code - 48);
+    } else {
+      break;
+    }
+  }
+  return value;
+}
+
+/**
+ * Extracts a numeric latency value in milliseconds for a given metric prefix from a
+ * 'server-timing' header string without regex allocations or intermediate substring slices.
+ *
+ * @param header The 'server-timing' header string.
+ * @param prefix The metric prefix (e.g. 'gfet4t7; dur=').
+ * @returns The extracted latency in milliseconds, or null if not found.
+ */
+function extractServerTimingLatency(
+  header: string,
+  prefix: string,
+): number | null {
+  if (!header || typeof header !== 'string') {
+    return null;
+  }
+  let prefixIndex = header.indexOf(prefix);
+  while (prefixIndex !== -1) {
+    // Ensure prefix is not part of a longer metric name (e.g., 'safe; dur=' matching 'afe; dur=')
+    if (
+      prefixIndex === 0 ||
+      isEntryDelimiter(header.charCodeAt(prefixIndex - 1))
+    ) {
+      const latency = parseConsecutiveDigits(
+        header,
+        prefixIndex + prefix.length,
+      );
+      if (latency !== null) {
+        return latency;
+      }
+    }
+    prefixIndex = header.indexOf(prefix, prefixIndex + 1);
+  }
+  return null;
+}
+
 /**
  * MetricsTracer is responsible for recording and managing metrics related to
  * gRPC Spanner operations and attempts counters, and latencies,
@@ -127,6 +213,12 @@ export class MetricsTracer {
    * Stores client and resource attributes for labeling metrics.
    */
   private _clientAttributes: {[key: string]: string} = {};
+
+  /**
+   * Cached OTel attribute objects keyed by status name, avoiding repeated
+   * object allocations on every metric recording call.
+   */
+  private _attributesByStatus: Map<string, Record<string, string>>;
 
   /*
    * The current GFE latency associated with this tracer.
@@ -165,11 +257,14 @@ export class MetricsTracer {
     private _instance: string,
     private _projectId: string,
     private _methodName: string,
-    private _request: string,
+    private _request?: string,
+    attributesCache?: Map<string, Record<string, string>>,
   ) {
     this._clientAttributes[METRIC_LABEL_KEY_DATABASE] = _database;
     this._clientAttributes[METRIC_LABEL_KEY_METHOD] = _methodName;
     this._clientAttributes[MONITORED_RES_LABEL_KEY_INSTANCE] = _instance;
+    this._attributesByStatus =
+      attributesCache ?? new Map<string, Record<string, string>>();
   }
 
   /**
@@ -222,8 +317,8 @@ export class MetricsTracer {
    * Increments the attempt count and creates a new MetricAttemptTracer.
    */
   public recordAttemptStart() {
-    if (!this.enabled) return;
-    this.currentOperation!.createNewAttempt();
+    if (!this.enabled || !this.currentOperation) return;
+    this.currentOperation.createNewAttempt();
   }
 
   /**
@@ -232,12 +327,13 @@ export class MetricsTracer {
    * @param status The status code of the attempt (default: Status.OK).
    */
   public recordAttemptCompletion(statusCode: Status = Status.OK) {
-    if (!this.enabled) return;
-    this.currentOperation!.currentAttempt!.status = Status[statusCode];
+    if (!this.enabled || !this.currentOperation?.currentAttempt) return;
+    const currentAttempt = this.currentOperation.currentAttempt;
+    currentAttempt.status = Status[statusCode] ?? Status[Status.UNKNOWN];
     const attemptAttributes = this._createAttemptOtelAttributes();
     const endTime = performance.now();
     const attemptLatencyMilliseconds = this._getMillisecondTimeDifference(
-      this.currentOperation!.currentAttempt!.startTime,
+      currentAttempt.startTime,
       endTime,
     );
     this.instrumentAttemptLatency?.record(
@@ -268,7 +364,7 @@ export class MetricsTracer {
     const endTime = performance.now();
     const operationAttributes = this._createOperationOtelAttributes();
     const operationLatencyMilliseconds = this._getMillisecondTimeDifference(
-      this.currentOperation!.startTime,
+      this.currentOperation.startTime,
       endTime,
     );
 
@@ -277,9 +373,7 @@ export class MetricsTracer {
       operationLatencyMilliseconds,
       operationAttributes,
     );
-    MetricsTracerFactory.getInstance(this._projectId)!.clearCurrentTracer(
-      this._request,
-    );
+    this.currentOperation = null;
   }
 
   /**
@@ -290,11 +384,7 @@ export class MetricsTracer {
    * @returns The extracted GFE latency in milliseconds, or null if not found.
    */
   public extractGfeLatency(header: string): number | null {
-    const regex = /gfet4t7; dur=([0-9]+).*/;
-    if (header === undefined) return null;
-    const match = header.match(regex);
-    if (!match) return null;
-    return Number(match[1]);
+    return extractServerTimingLatency(header, GFE_METRIC_PREFIX);
   }
 
   /**
@@ -305,31 +395,59 @@ export class MetricsTracer {
    * @returns The extracted AFE latency in milliseconds, or null if not found.
    */
   public extractAfeLatency(header: string): number | null {
-    if (!Spanner.isAFEServerTimingEnabled()) return null;
-    const regex = /afe; dur=([0-9]+).*/;
-    if (header === undefined) return null;
-    const match = header.match(regex);
-    if (!match) return null;
-    return Number(match[1]);
+    if (!isAFEServerTimingEnabled()) return null;
+    return extractServerTimingLatency(header, AFE_METRIC_PREFIX);
   }
 
   /**
-   * Records the provided GFE latency.
-   * @param latency The GFE latency in milliseconds.
+   * Returns a cached set of OTEL attributes for the given status, avoiding
+   * repeated object cloning on every metric record/add call.
+   *
+   * @param status Optional status code (as numeric Status enum or status name string).
+   * @returns The cached attributes object.
+   */
+  private _getAttributesForStatus(
+    status?: Status | string,
+  ): Record<string, string> {
+    const statusString =
+      typeof status === 'number'
+        ? (Status[status] ?? Status[Status.UNKNOWN])
+        : typeof status === 'string'
+          ? status
+          : undefined;
+    const cacheKey = statusString ?? '';
+    let attributes = this._attributesByStatus.get(cacheKey);
+    if (!attributes) {
+      const newAttributes: Record<string, string> = {...this._clientAttributes};
+      if (statusString !== undefined) {
+        newAttributes[METRIC_LABEL_KEY_STATUS] = statusString;
+      }
+      attributes = Object.freeze(newAttributes);
+      this._attributesByStatus.set(cacheKey, attributes);
+    }
+    return attributes;
+  }
+
+  /**
+   * Records the GFE latency for this attempt.
+   * @param statusCode The gRPC status code of the attempt.
    */
   public recordGfeLatency(statusCode: Status) {
-    if (!this.enabled) return;
-    if (!this.gfeLatency) {
+    if (!this.enabled || !this._instrumentGfeLatency) return;
+    if (
+      typeof this.gfeLatency !== 'number' ||
+      !Number.isFinite(this.gfeLatency) ||
+      this.gfeLatency < 0
+    ) {
       console.error(
         'ERROR: Attempted to record GFE metric with no latency value.',
       );
       return;
     }
 
-    const attributes = {...this._clientAttributes};
-    attributes[METRIC_LABEL_KEY_STATUS] = Status[statusCode];
+    const attributes = this._getAttributesForStatus(statusCode);
 
-    this._instrumentGfeLatency?.record(this.gfeLatency, attributes);
+    this._instrumentGfeLatency.record(this.gfeLatency, attributes);
     this.gfeLatency = null; // Reset latency value
   }
 
@@ -337,39 +455,52 @@ export class MetricsTracer {
    * Increments the GFE connectivity error count metric.
    */
   public recordGfeConnectivityErrorCount(statusCode: Status) {
-    if (!this.enabled) return;
-    const attributes = {...this._clientAttributes};
-    attributes[METRIC_LABEL_KEY_STATUS] = Status[statusCode];
-    this._instrumentGfeConnectivityErrorCount?.add(1, attributes);
+    if (!this.enabled || !this._instrumentGfeConnectivityErrorCount) return;
+    const attributes = this._getAttributesForStatus(statusCode);
+    this._instrumentGfeConnectivityErrorCount.add(1, attributes);
   }
 
   /**
    * Increments the AFE connectivity error count metric.
    */
   public recordAfeConnectivityErrorCount(statusCode: Status) {
-    if (!this.enabled || !Spanner.isAFEServerTimingEnabled()) return;
-    const attributes = {...this._clientAttributes};
-    attributes[METRIC_LABEL_KEY_STATUS] = Status[statusCode];
-    this._instrumentAfeConnectivityErrorCount?.add(1, attributes);
+    if (
+      !this.enabled ||
+      !this._instrumentAfeConnectivityErrorCount ||
+      !isAFEServerTimingEnabled()
+    ) {
+      return;
+    }
+    const attributes = this._getAttributesForStatus(statusCode);
+    this._instrumentAfeConnectivityErrorCount.add(1, attributes);
   }
 
   /**
-   * Records the provided AFE latency.
-   * @param latency The AFE latency in milliseconds.
+   * Records the AFE latency for this attempt.
+   * @param statusCode The gRPC status code of the attempt.
    */
   public recordAfeLatency(statusCode: Status) {
-    if (!this.enabled || !Spanner.isAFEServerTimingEnabled()) return;
-    if (!this.afeLatency) {
+    if (
+      !this.enabled ||
+      !this._instrumentAfeLatency ||
+      !isAFEServerTimingEnabled()
+    ) {
+      return;
+    }
+    if (
+      typeof this.afeLatency !== 'number' ||
+      !Number.isFinite(this.afeLatency) ||
+      this.afeLatency < 0
+    ) {
       console.error(
         'ERROR: Attempted to record AFE metric with no latency value.',
       );
       return;
     }
 
-    const attributes = {...this._clientAttributes};
-    attributes[METRIC_LABEL_KEY_STATUS] = Status[statusCode];
+    const attributes = this._getAttributesForStatus(statusCode);
 
-    this._instrumentAfeLatency?.record(this.afeLatency, attributes);
+    this._instrumentAfeLatency.record(this.afeLatency, attributes);
     this.afeLatency = null; // Reset latency value
   }
 
@@ -379,10 +510,9 @@ export class MetricsTracer {
    */
   private _createOperationOtelAttributes() {
     if (!this.enabled) return {};
-    const attributes = {...this._clientAttributes};
-    attributes[METRIC_LABEL_KEY_STATUS] =
-      this.currentOperation!.currentAttempt?.status ?? Status[Status.UNKNOWN];
-    return attributes;
+    const status =
+      this.currentOperation?.currentAttempt?.status ?? Status[Status.UNKNOWN];
+    return this._getAttributesForStatus(status);
   }
 
   /**
@@ -393,11 +523,11 @@ export class MetricsTracer {
    */
   private _createAttemptOtelAttributes() {
     if (!this.enabled) return {};
-    const attributes = {...this._clientAttributes};
-    if (this.currentOperation?.currentAttempt === null) return attributes;
-    attributes[METRIC_LABEL_KEY_STATUS] =
-      this.currentOperation!.currentAttempt.status;
-
-    return attributes;
+    if (!this.currentOperation?.currentAttempt) {
+      return this._getAttributesForStatus();
+    }
+    return this._getAttributesForStatus(
+      this.currentOperation.currentAttempt.status,
+    );
   }
 }
