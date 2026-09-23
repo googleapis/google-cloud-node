@@ -29,6 +29,7 @@ if (process.env.MOCHA_PARALLEL === 'false' || typeof Bun !== 'undefined') {
 }
 if (typeof Bun !== 'undefined') {
   config.require = [path.resolve(__dirname, 'bin/proxyquire-bun-shim.cjs')];
+  config.exit = true;
 }
 if (process.env.MOCHA_REPORTER) {
   config.reporter = process.env.MOCHA_REPORTER;
