@@ -23,7 +23,7 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 
 import assert from 'assert';
-import {describe, it} from 'mocha';
+import {afterEach, describe, it} from 'mocha';
 import * as gax from '../../src/gax';
 
 const SERVICE_NAME = 'test.interface.v1.api';
@@ -99,6 +99,10 @@ function expectBackoffSettings(obj: gax.BackoffSettings) {
 }
 
 describe('gax construct settings', () => {
+  afterEach(() => {
+    delete process.env.GOOGLE_SDK_NODE_ENABLE_TRACING;
+  });
+
   it('creates settings', () => {
     const otherArgs = {key: 'value'};
     const defaults = gax.constructSettings(
@@ -276,6 +280,54 @@ describe('gax construct settings', () => {
       RETRY_DICT,
       {},
       false,
+    );
+    const settings = defaults.bundlingMethod;
+    assert.strictEqual(settings.enableTelemetryTracing, false);
+    assert.strictEqual(settings.otherArgs.internalTelemetryInfo, undefined);
+    assert.strictEqual(settings.otherArgs.internalMethodName, undefined);
+  });
+
+  it('ignores client option and protoc param when GOOGLE_SDK_NODE_ENABLE_TRACING=true', () => {
+    process.env.GOOGLE_SDK_NODE_ENABLE_TRACING = 'true';
+    const telemetryInfo = {
+      gcpClientService: 'test.googleapis.com',
+      gcpVersion: '1.0.0',
+      gcpRepo: 'googleapis/google-cloud-node',
+      gcpArtifact: 'google-cloud-test',
+    };
+    // Even with client option false, env var enables tracing;
+    // protoc param (internalTelemetryInfo) is not attached to otherArgs
+    const defaults = gax.constructSettings(
+      SERVICE_NAME,
+      A_CONFIG,
+      {},
+      RETRY_DICT,
+      undefined,
+      false,
+      telemetryInfo,
+    );
+    const settings = defaults.bundlingMethod;
+    assert.strictEqual(settings.enableTelemetryTracing, true);
+    assert.strictEqual(settings.otherArgs.internalTelemetryInfo, undefined);
+    assert.strictEqual(settings.otherArgs.internalMethodName, 'BundlingMethod');
+  });
+
+  it('disables tracing when GOOGLE_SDK_NODE_ENABLE_TRACING=false even with client option and protoc param', () => {
+    process.env.GOOGLE_SDK_NODE_ENABLE_TRACING = 'false';
+    const telemetryInfo = {
+      gcpClientService: 'test.googleapis.com',
+      gcpVersion: '1.0.0',
+      gcpRepo: 'googleapis/google-cloud-node',
+      gcpArtifact: 'google-cloud-test',
+    };
+    const defaults = gax.constructSettings(
+      SERVICE_NAME,
+      A_CONFIG,
+      {},
+      RETRY_DICT,
+      undefined,
+      true,
+      telemetryInfo,
     );
     const settings = defaults.bundlingMethod;
     assert.strictEqual(settings.enableTelemetryTracing, false);

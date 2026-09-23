@@ -23,45 +23,51 @@ const randomUUID = () =>
   globalThis.crypto?.randomUUID() || require('crypto').randomUUID();
 
 /**
+ * Returns true if the GOOGLE_SDK_NODE_ENABLE_TRACING environment variable is explicitly set.
+ */
+export function isTracingEnvExplicitlySet(): boolean {
+  const env: Record<string, string | undefined> =
+    typeof process === 'object' && typeof process.env === 'object'
+      ? process.env
+      : {};
+  const envOptIn = env.GOOGLE_SDK_NODE_ENABLE_TRACING?.trim();
+  return envOptIn !== undefined && envOptIn !== '';
+}
+
+/**
+ * Returns true if the GOOGLE_SDK_NODE_ENABLE_TRACING environment variable is set to 'true' or '1'.
+ */
+export function isTracingEnvEnabled(): boolean {
+  const env: Record<string, string | undefined> =
+    typeof process === 'object' && typeof process.env === 'object'
+      ? process.env
+      : {};
+  const envOptIn = env.GOOGLE_SDK_NODE_ENABLE_TRACING?.trim()?.toLowerCase();
+  return envOptIn === 'true' || envOptIn === '1';
+}
+
+/**
  * Checks if telemetry tracing is enabled.
  *
- * Tracing is opt-in, and a caller opts in either with the
- * `enableTelemetryTracing` client option or with the
- * `GOOGLE_SDK_NODE_ENABLE_TRACING` environment variable. The environment
- * variable wins whenever it is set, so tracing can be switched on or off for a
- * process without touching the code that constructs the client.
+ * If `GOOGLE_SDK_NODE_ENABLE_TRACING` is explicitly set, then the client option
+ * doesn't matter (only the environment variable determines whether tracing is enabled).
+ * The client option is only checked if the environment variable isn't set.
  *
- * Two further conditions apply while the feature is experimental:
- * `GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED` must be `true`, and the client
- * must have supplied `internalTelemetryInfo` — a client generated without
- * tracing has no span metadata to report, so there is nothing to trace.
+ * Tracing can be enabled purely through environment variables without
+ * requiring client libraries to pass generator parameters, as metadata
+ * is resolved dynamically at runtime.
  *
  * @param settings
  * @returns true if telemetry tracing is enabled, false otherwise
  */
 export function checkTelemetryEnabled(settings?: CallSettings): boolean {
-  // `process` is undeclared in browsers and some edge runtimes, where reading
-  // it would throw a ReferenceError rather than yield undefined, so it is
-  // reached through a `typeof` guard and stands in as an empty environment.
-  // Tracing is then simply off there, since the environment cannot opt in.
-  const env: Record<string, string | undefined> =
-    typeof process === 'object' && typeof process.env === 'object'
-      ? process.env
-      : {};
+  if (isTracingEnvExplicitlySet()) {
+    return isTracingEnvEnabled();
+  }
 
-  // An absent or empty environment variable counts as unset, which is what
-  // separates it from an explicit `false`: only an explicit value overrides
-  // the opt-in the caller passed in `clientOptions`.
-  const envOptIn = env.GOOGLE_SDK_NODE_ENABLE_TRACING?.trim();
-  const tracingRequested = envOptIn
-    ? envOptIn.toLowerCase() === 'true'
-    : Boolean(settings?.enableTelemetryTracing);
-
-  return (
-    tracingRequested &&
-    env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED?.trim().toLowerCase() ===
-      'true' &&
-    settings?.otherArgs?.internalTelemetryInfo !== undefined
+  return Boolean(
+    settings?.enableTelemetryTracing ||
+    settings?.otherArgs?.enableTelemetryTracing,
   );
 }
 

@@ -30,6 +30,7 @@ import {GoogleError} from '../../src/googleError';
 import {OtelHarness} from './otelHarness';
 import * as tracerHelper from '../../src/observability/TracerHelper';
 import {StaticTraceContext} from '../../src/observability/TracerHelper';
+import {clearMetadataCache} from '../../src/observability/metadataResolver';
 import * as utils from './utils';
 import * as retries from '../../src/normalCalls/retries';
 
@@ -349,13 +350,20 @@ describe('createApiCall', () => {
     };
 
     beforeEach(() => {
+      clearMetadataCache();
       harness = new OtelHarness();
       harness.setup();
     });
 
     afterEach(() => {
+      clearMetadataCache();
       harness.teardown();
       delete process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED;
+      delete process.env.GOOGLE_SDK_NODE_ENABLE_TRACING;
+      delete process.env.GOOGLE_SDK_NODE_CLIENT_SERVICE;
+      delete process.env.GOOGLE_SDK_NODE_CLIENT_VERSION;
+      delete process.env.GOOGLE_SDK_NODE_REPO;
+      delete process.env.GOOGLE_SDK_NODE_ARTIFACT;
     });
 
     it('calls traceCall with dynamicArgs, staticArgs, and isStreamingCall when tracing is enabled', async () => {
@@ -540,6 +548,86 @@ describe('createApiCall', () => {
       assert.strictEqual(span.attributes['gcp.artifact'], '@google-cloud/echo');
       assert.strictEqual(span.attributes['gcp.method.name'], 'Echo');
       assert.strictEqual(span.attributes['gcp.method.type'], 'grpc');
+    });
+
+    it('enables tracing purely through GOOGLE_SDK_NODE_ENABLE_TRACING and resolves static metadata dynamically at runtime', async () => {
+      process.env.GOOGLE_SDK_NODE_ENABLE_TRACING = 'true';
+      const settings = new gax.CallSettings({
+        apiName: 'google.cloud.redis.v1.CloudRedis',
+        otherArgs: {
+          internalMethodName: 'GetInstance',
+        },
+      });
+
+      function func(
+        argument: {},
+        metadata: {},
+        options: {},
+        callback: (err: GoogleError | null, resp?: unknown) => void,
+      ) {
+        callback(null, {data: 'hello'});
+        return {
+          cancel: () => {},
+        };
+      }
+
+      const apiCall = gaxCreateApiCall(func, settings);
+      const [response] = (await apiCall({}, undefined)) as [
+        {data: string},
+        unknown,
+        unknown,
+      ];
+      assert.deepStrictEqual(response, {data: 'hello'});
+
+      const spans = harness.getSpans('google-gax');
+      assert.strictEqual(spans.length, 1);
+      const span = spans[0];
+      assert.strictEqual(span.name, 'CloudRedisClient.GetInstance');
+      assert.strictEqual(span.ended, true);
+      assert.strictEqual(span.attributes['gcp.client.service'], 'redis');
+      assert.ok(span.attributes['gcp.client.version']);
+      assert.ok(span.attributes['gcp.repo']);
+      assert.ok(span.attributes['gcp.artifact']);
+      assert.strictEqual(span.attributes['gcp.method.name'], 'GetInstance');
+      assert.strictEqual(span.attributes['gcp.method.type'], 'grpc');
+    });
+
+    it('resolves static metadata from environment variables when configured', async () => {
+      process.env.GOOGLE_SDK_NODE_ENABLE_TRACING = 'true';
+      process.env.GOOGLE_SDK_NODE_CLIENT_SERVICE = 'env-service';
+      process.env.GOOGLE_SDK_NODE_CLIENT_VERSION = '9.9.9';
+      process.env.GOOGLE_SDK_NODE_REPO = 'custom-org/custom-repo';
+      process.env.GOOGLE_SDK_NODE_ARTIFACT = '@custom/env-pkg';
+
+      const settings = new gax.CallSettings({
+        apiName: 'google.example.v1.Echo',
+        otherArgs: {
+          internalMethodName: 'Echo',
+        },
+      });
+
+      function func(
+        argument: {},
+        metadata: {},
+        options: {},
+        callback: (err: GoogleError | null, resp?: unknown) => void,
+      ) {
+        callback(null, {data: 'hello'});
+        return {
+          cancel: () => {},
+        };
+      }
+
+      const apiCall = gaxCreateApiCall(func, settings);
+      await apiCall({}, undefined);
+
+      const spans = harness.getSpans('google-gax');
+      assert.strictEqual(spans.length, 1);
+      const span = spans[0];
+      assert.strictEqual(span.attributes['gcp.client.service'], 'env-service');
+      assert.strictEqual(span.attributes['gcp.client.version'], '9.9.9');
+      assert.strictEqual(span.attributes['gcp.repo'], 'custom-org/custom-repo');
+      assert.strictEqual(span.attributes['gcp.artifact'], '@custom/env-pkg');
     });
 
     it('correctly pipes telemetry information for HTTP fallback calls', async () => {

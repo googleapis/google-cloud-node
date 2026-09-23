@@ -22,7 +22,11 @@ import type {Message} from 'protobufjs';
 import {warn} from './warnings';
 import {GoogleError} from './googleError';
 import {BundleOptions} from './bundlingCalls/bundleExecutor';
-import {toLowerCamelCase} from './util';
+import {
+  toLowerCamelCase,
+  isTracingEnvExplicitlySet,
+  isTracingEnvEnabled,
+} from './util';
 import {StaticTraceContext} from './observability/TracerHelper';
 import {Status} from './status';
 import {RequestType} from './apitypes';
@@ -805,9 +809,20 @@ export function constructSettings(
   enableTelemetryTracing?: boolean,
   internalTelemetryInfo?: StaticTraceContext,
 ) {
-  otherArgs = internalTelemetryInfo
-    ? {...otherArgs, internalTelemetryInfo}
-    : otherArgs || {};
+  const isEnvSet = isTracingEnvExplicitlySet();
+  const isEnvEnabled = isTracingEnvEnabled();
+
+  // If GOOGLE_SDK_NODE_ENABLE_TRACING is explicitly set, then the client option doesn't matter.
+  // The extra protoc param only matters if the environmental variable isn't set.
+  const tracingRequested = isEnvSet
+    ? isEnvEnabled
+    : Boolean(enableTelemetryTracing || internalTelemetryInfo);
+
+  if (!isEnvSet && internalTelemetryInfo) {
+    otherArgs = {...otherArgs, internalTelemetryInfo};
+  } else {
+    otherArgs = otherArgs || {};
+  }
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const defaults: any = {};
 
@@ -864,12 +879,11 @@ export function constructSettings(
       bundleOptions: bundlingConfig
         ? createBundleOptions(bundlingConfig)
         : null,
-      otherArgs:
-        internalTelemetryInfo || enableTelemetryTracing
-          ? {...otherArgs, internalMethodName: methodName}
-          : otherArgs,
+      otherArgs: tracingRequested
+        ? {...otherArgs, internalMethodName: methodName}
+        : otherArgs,
       apiName,
-      enableTelemetryTracing,
+      enableTelemetryTracing: isEnvSet ? isEnvEnabled : enableTelemetryTracing,
     });
   }
 

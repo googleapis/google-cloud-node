@@ -118,9 +118,15 @@ export {
   decodeAnyProtosInArray,
   decodeProtobufAny,
   checkTelemetryEnabled,
+  isTracingEnvExplicitlySet,
+  isTracingEnvEnabled,
 } from './util';
 
 export {StaticTraceContext, traceCall} from './observability/TracerHelper';
+export {
+  resolveStaticTraceContext,
+  clearMetadataCache,
+} from './observability/metadataResolver';
 
 export {ServiceError, ChannelCredentials} from '@grpc/grpc-js';
 export {warn} from './warnings';
