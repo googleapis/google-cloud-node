@@ -119,6 +119,13 @@ describe('metadataResolver', () => {
     it('handles empty apiName', () => {
       assert.strictEqual(extractServiceFromApiName(''), undefined);
     });
+
+    it('handles apiName ending with a dot or malformed segments gracefully', () => {
+      assert.strictEqual(extractServiceFromApiName('google.cloud.'), undefined);
+      assert.strictEqual(extractServiceFromApiName('...'), undefined);
+      assert.strictEqual(extractServiceFromApiName('google.'), undefined);
+      assert.strictEqual(extractServiceFromApiName('.'), undefined);
+    });
   });
 
   describe('extractFromSettings', () => {

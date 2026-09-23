@@ -48,11 +48,13 @@ export function extractServiceFromApiName(apiName: string): string | undefined {
   }
   if (parts.length >= 2) {
     const candidate = parts[parts.length - 2];
-    if (candidate !== 'google' && candidate !== 'cloud') {
+    if (candidate && candidate !== 'google' && candidate !== 'cloud') {
       return candidate;
     }
     const last = parts[parts.length - 1];
-    return last[0].toLowerCase() + last.slice(1);
+    if (last) {
+      return last[0].toLowerCase() + last.slice(1);
+    }
   }
   return undefined;
 }
@@ -182,8 +184,7 @@ export function resolveStaticTraceContext(
 ): StaticTraceContext {
   const envMeta = extractFromEnvironment();
   const explicit = settings?.otherArgs?.internalTelemetryInfo as
-    | StaticTraceContext
-    | undefined;
+    StaticTraceContext | undefined;
 
   let dynamic: StaticTraceContext;
   if (settings?.apiName) {
@@ -202,7 +203,8 @@ export function resolveStaticTraceContext(
       envMeta.gcpClientService ??
       explicit?.gcpClientService ??
       dynamic.gcpClientService,
-    gcpVersion: envMeta.gcpVersion ?? explicit?.gcpVersion ?? dynamic.gcpVersion,
+    gcpVersion:
+      envMeta.gcpVersion ?? explicit?.gcpVersion ?? dynamic.gcpVersion,
     gcpRepo: DEFAULT_GCP_REPO,
     gcpArtifact:
       envMeta.gcpArtifact ?? explicit?.gcpArtifact ?? dynamic.gcpArtifact,
