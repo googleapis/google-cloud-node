@@ -12,16 +12,178 @@
                     "java_multiple_files": true,
                     "java_outer_classname": "TransferProto",
                     "java_package": "com.google.cloud.lustre.v1",
-                    "(google.api.resource_definition).type": "compute.googleapis.com/Network",
-                    "(google.api.resource_definition).pattern": "projects/{project}/global/networks/{network}"
+                    "(google.api.resource_definition).type": "compute.googleapis.com/ResourcePolicy",
+                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/resourcePolicies/{resource_policy}"
                   },
                   "nested": {
+                    "DirectoryPolicy": {
+                      "options": {
+                        "(google.api.resource).type": "lustre.googleapis.com/DirectoryPolicy",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/instances/{instance}/directoryPolicies/{directory_policy}",
+                        "(google.api.resource).plural": "directoryPolicies",
+                        "(google.api.resource).singular": "directoryPolicy"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "directoryPath": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "lustreProjectId": {
+                          "type": "int64",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "uid": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_info).format": "UUID4",
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "CREATING": 1,
+                            "ACTIVE": 2,
+                            "DELETING": 3
+                          }
+                        }
+                      }
+                    },
+                    "CreateDirectoryPolicyRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "lustre.googleapis.com/DirectoryPolicy"
+                          }
+                        },
+                        "directoryPolicyId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "directoryPolicy": {
+                          "type": "DirectoryPolicy",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteDirectoryPolicyRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "lustre.googleapis.com/DirectoryPolicy"
+                          }
+                        }
+                      }
+                    },
+                    "GetDirectoryPolicyRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "lustre.googleapis.com/DirectoryPolicy"
+                          }
+                        }
+                      }
+                    },
+                    "ListDirectoryPoliciesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "lustre.googleapis.com/DirectoryPolicy"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListDirectoryPoliciesResponse": {
+                      "fields": {
+                        "directoryPolicies": {
+                          "rule": "repeated",
+                          "type": "DirectoryPolicy",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
                     "Instance": {
                       "options": {
                         "(google.api.resource).type": "lustre.googleapis.com/Instance",
                         "(google.api.resource).pattern": "projects/{project}/locations/{location}/instances/{instance}",
                         "(google.api.resource).plural": "instances",
                         "(google.api.resource).singular": "instance"
+                      },
+                      "oneofs": {
+                        "_availableVersion": {
+                          "oneof": [
+                            "availableVersion"
+                          ]
+                        },
+                        "_targetVersion": {
+                          "oneof": [
+                            "targetVersion"
+                          ]
+                        },
+                        "_effectiveVersion": {
+                          "oneof": [
+                            "effectiveVersion"
+                          ]
+                        }
                       },
                       "fields": {
                         "name": {
@@ -100,7 +262,7 @@
                           "type": "int64",
                           "id": 11,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
                         "gkeSupportEnabled": {
@@ -110,10 +272,98 @@
                             "deprecated": true,
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "kmsKey": {
+                          "type": "string",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKey"
+                          }
+                        },
+                        "stateReason": {
+                          "type": "string",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "placementPolicy": {
+                          "type": "string",
+                          "id": 17,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.resource_reference).type": "compute.googleapis.com/ResourcePolicy"
+                          }
+                        },
+                        "accessRulesOptions": {
+                          "type": "AccessRulesOptions",
+                          "id": 18,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "uid": {
+                          "type": "string",
+                          "id": 19,
+                          "options": {
+                            "(google.api.field_info).format": "UUID4",
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "maintenancePolicy": {
+                          "type": "MaintenancePolicy",
+                          "id": 20,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "upcomingMaintenanceSchedule": {
+                          "type": "MaintenanceSchedule",
+                          "id": 21,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "dynamicTierOptions": {
+                          "type": "DynamicTierOptions",
+                          "id": 24,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "availableVersion": {
+                          "type": "string",
+                          "id": 33,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "targetVersion": {
+                          "type": "string",
+                          "id": 34,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "effectiveVersion": {
+                          "type": "string",
+                          "id": 35,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
                         }
                       },
                       "nested": {
                         "State": {
+                          "valuesOptions": {
+                            "UPDATING": {
+                              "deprecated": true
+                            }
+                          },
                           "values": {
                             "STATE_UNSPECIFIED": 0,
                             "ACTIVE": 1,
@@ -122,7 +372,96 @@
                             "UPGRADING": 4,
                             "REPAIRING": 5,
                             "STOPPED": 6,
-                            "UPDATING": 7
+                            "UPDATING": 7,
+                            "SUSPENDED": 8
+                          }
+                        }
+                      }
+                    },
+                    "DynamicTierOptions": {
+                      "fields": {
+                        "mode": {
+                          "type": "Mode",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Mode": {
+                          "values": {
+                            "MODE_UNSPECIFIED": 0,
+                            "DISABLED": 1,
+                            "DEFAULT_CACHE": 2
+                          }
+                        }
+                      }
+                    },
+                    "AccessRulesOptions": {
+                      "fields": {
+                        "accessRules": {
+                          "rule": "repeated",
+                          "type": "AccessRule",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "defaultSquashMode": {
+                          "type": "SquashMode",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "defaultSquashUid": {
+                          "type": "int32",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "defaultSquashGid": {
+                          "type": "int32",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "AccessRule": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "ipAddressRanges": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "squashMode": {
+                              "type": "SquashMode",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "SquashMode": {
+                          "values": {
+                            "SQUASH_MODE_UNSPECIFIED": 0,
+                            "NO_SQUASH": 1,
+                            "ROOT_SQUASH": 2
                           }
                         }
                       }
@@ -277,6 +616,13 @@
                             "(google.api.field_info).format": "UUID4",
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "force": {
+                          "type": "bool",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -329,6 +675,144 @@
                           "id": 7,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "MaintenancePolicy": {
+                      "fields": {
+                        "weeklyMaintenanceWindows": {
+                          "rule": "repeated",
+                          "type": "WeeklyMaintenanceWindow",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "maintenanceExclusionWindow": {
+                          "rule": "repeated",
+                          "type": "MaintenanceExclusionWindow",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "WeeklyMaintenanceWindow": {
+                          "fields": {
+                            "dayOfWeek": {
+                              "type": "google.type.DayOfWeek",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "startTime": {
+                              "type": "google.type.TimeOfDay",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "MaintenanceExclusionWindow": {
+                          "fields": {
+                            "startDate": {
+                              "type": "google.type.Date",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "endDate": {
+                              "type": "google.type.Date",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "time": {
+                              "type": "google.type.TimeOfDay",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "MaintenanceSchedule": {
+                      "fields": {
+                        "startTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "endTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "RescheduleMaintenanceRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "lustre.googleapis.com/Instance"
+                          }
+                        },
+                        "reschedule": {
+                          "type": "Reschedule",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_info).format": "UUID4",
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Reschedule": {
+                          "fields": {
+                            "rescheduleType": {
+                              "type": "RescheduleType",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "scheduleTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "RescheduleType": {
+                          "values": {
+                            "RESCHEDULE_TYPE_UNSPECIFIED": 0,
+                            "IMMEDIATE": 1,
+                            "NEXT_AVAILABLE_WINDOW": 2,
+                            "BY_TIME": 3
                           }
                         }
                       }
@@ -457,6 +941,34 @@
                             }
                           ]
                         },
+                        "RescheduleMaintenance": {
+                          "requestType": "RescheduleMaintenanceRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/instances/*}:rescheduleMaintenance",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name,reschedule",
+                            "(google.longrunning.operation_info).response_type": "Instance",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/instances/*}:rescheduleMaintenance",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,reschedule"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Instance",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
                         "ImportData": {
                           "requestType": "ImportDataRequest",
                           "responseType": "google.longrunning.Operation",
@@ -508,6 +1020,531 @@
                               }
                             }
                           ]
+                        },
+                        "CreateMirror": {
+                          "requestType": "CreateMirrorRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*/instances/*}/mirrors",
+                            "(google.api.http).body": "mirror",
+                            "(google.api.method_signature)": "parent,mirror,mirror_id",
+                            "(google.longrunning.operation_info).response_type": "Mirror",
+                            "(google.longrunning.operation_info).metadata_type": "CreateMirrorMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*/instances/*}/mirrors",
+                                "body": "mirror"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,mirror,mirror_id"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Mirror",
+                                "metadata_type": "CreateMirrorMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "UpdateMirror": {
+                          "requestType": "UpdateMirrorRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{mirror.name=projects/*/locations/*/instances/*/mirrors/*}",
+                            "(google.api.http).body": "mirror",
+                            "(google.api.method_signature)": "mirror,update_mask",
+                            "(google.longrunning.operation_info).response_type": "Mirror",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{mirror.name=projects/*/locations/*/instances/*/mirrors/*}",
+                                "body": "mirror"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "mirror,update_mask"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Mirror",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "DeleteMirror": {
+                          "requestType": "DeleteMirrorRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/instances/*/mirrors/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/instances/*/mirrors/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "GetMirror": {
+                          "requestType": "GetMirrorRequest",
+                          "responseType": "Mirror",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/instances/*/mirrors/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/instances/*/mirrors/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListMirrors": {
+                          "requestType": "ListMirrorsRequest",
+                          "responseType": "ListMirrorsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*/instances/*}/mirrors",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*/instances/*}/mirrors"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "CreateDirectoryPolicy": {
+                          "requestType": "CreateDirectoryPolicyRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*/instances/*}/directoryPolicies",
+                            "(google.api.http).body": "directory_policy",
+                            "(google.api.method_signature)": "parent,directory_policy,directory_policy_id",
+                            "(google.longrunning.operation_info).response_type": "DirectoryPolicy",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*/instances/*}/directoryPolicies",
+                                "body": "directory_policy"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,directory_policy,directory_policy_id"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "DirectoryPolicy",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "DeleteDirectoryPolicy": {
+                          "requestType": "DeleteDirectoryPolicyRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/instances/*/directoryPolicies/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/instances/*/directoryPolicies/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "GetDirectoryPolicy": {
+                          "requestType": "GetDirectoryPolicyRequest",
+                          "responseType": "DirectoryPolicy",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/instances/*/directoryPolicies/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/instances/*/directoryPolicies/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListDirectoryPolicies": {
+                          "requestType": "ListDirectoryPoliciesRequest",
+                          "responseType": "ListDirectoryPoliciesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*/instances/*}/directoryPolicies",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*/instances/*}/directoryPolicies"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "Mirror": {
+                      "options": {
+                        "(google.api.resource).type": "lustre.googleapis.com/Mirror",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/instances/{instance}/mirrors/{mirror}",
+                        "(google.api.resource).plural": "mirrors",
+                        "(google.api.resource).singular": "mirror"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        },
+                        "gcsPath": {
+                          "type": "GcsPath",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "lustrePath": {
+                          "type": "LustrePath",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "direction": {
+                          "type": "Direction",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "deletedFilesRetained": {
+                          "type": "bool",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "uid": {
+                          "type": "string",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_info).format": "UUID4",
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Direction": {
+                          "values": {
+                            "DIRECTION_UNSPECIFIED": 0,
+                            "FROM_CLOUD_STORAGE": 1
+                          }
+                        },
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "CREATING": 1,
+                            "INITIAL_SYNC": 2,
+                            "DELETING": 3,
+                            "ACTIVE": 4,
+                            "SUSPENDED": 5
+                          }
+                        }
+                      }
+                    },
+                    "CreateMirrorRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "lustre.googleapis.com/Mirror"
+                          }
+                        },
+                        "mirrorId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "mirror": {
+                          "type": "Mirror",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_info).format": "UUID4",
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateMirrorRequest": {
+                      "fields": {
+                        "mirror": {
+                          "type": "Mirror",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_info).format": "UUID4",
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteMirrorRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "lustre.googleapis.com/Mirror"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_info).format": "UUID4",
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "GetMirrorRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "lustre.googleapis.com/Mirror"
+                          }
+                        }
+                      }
+                    },
+                    "ListMirrorsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "lustre.googleapis.com/Mirror"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListMirrorsResponse": {
+                      "fields": {
+                        "mirrors": {
+                          "rule": "repeated",
+                          "type": "Mirror",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "unreachable": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "UNORDERED_LIST"
+                          }
+                        }
+                      }
+                    },
+                    "CreateMirrorMetadata": {
+                      "fields": {
+                        "operationMetadata": {
+                          "type": "TransferOperationMetadata",
+                          "id": 1
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "endTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "target": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "verb": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "statusMessage": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "requestedCancellation": {
+                          "type": "bool",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "apiVersion": {
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -3131,6 +4168,65 @@
             },
             "Empty": {
               "fields": {}
+            }
+          }
+        },
+        "type": {
+          "options": {
+            "go_package": "google.golang.org/genproto/googleapis/type/timeofday;timeofday",
+            "java_multiple_files": true,
+            "java_outer_classname": "TimeOfDayProto",
+            "java_package": "com.google.type",
+            "objc_class_prefix": "GTP"
+          },
+          "nested": {
+            "Date": {
+              "fields": {
+                "year": {
+                  "type": "int32",
+                  "id": 1
+                },
+                "month": {
+                  "type": "int32",
+                  "id": 2
+                },
+                "day": {
+                  "type": "int32",
+                  "id": 3
+                }
+              }
+            },
+            "DayOfWeek": {
+              "values": {
+                "DAY_OF_WEEK_UNSPECIFIED": 0,
+                "MONDAY": 1,
+                "TUESDAY": 2,
+                "WEDNESDAY": 3,
+                "THURSDAY": 4,
+                "FRIDAY": 5,
+                "SATURDAY": 6,
+                "SUNDAY": 7
+              }
+            },
+            "TimeOfDay": {
+              "fields": {
+                "hours": {
+                  "type": "int32",
+                  "id": 1
+                },
+                "minutes": {
+                  "type": "int32",
+                  "id": 2
+                },
+                "seconds": {
+                  "type": "int32",
+                  "id": 3
+                },
+                "nanos": {
+                  "type": "int32",
+                  "id": 4
+                }
+              }
             }
           }
         },
