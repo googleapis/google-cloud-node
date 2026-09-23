@@ -60,9 +60,14 @@ export function extractServiceFromApiName(apiName: string): string | undefined {
 let fallbackVersion: string | undefined;
 try {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
-  fallbackVersion = require('../../../package.json').version;
+  fallbackVersion = require('../../package.json').version;
 } catch {
-  // Ignore fallback failure
+  try {
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    fallbackVersion = require('../../../package.json').version;
+  } catch {
+    // Ignore fallback failure
+  }
 }
 
 /**
