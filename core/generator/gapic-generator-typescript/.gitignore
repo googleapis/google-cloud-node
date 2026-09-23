@@ -25,7 +25,6 @@ docker/gitlog.txt
 .showcase-typescript
 .test-application-js
 .test-application-ts
-bazel-*
 .aspect
 node_modules
 google/**
