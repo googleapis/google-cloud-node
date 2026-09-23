@@ -21,11 +21,11 @@ sources:
 tools:
   pnpm:
     - name: gapic-generator-typescript
-      version: gapic-generator-v5.3.0
-      package: https://github.com/googleapis/google-cloud-node/archive/gapic-generator-v5.3.0.tar.gz
-      checksum: 4bc54d399b22c845fd4555f9435b7971153a2e3fafca32402658390711828f63
+      version: gapic-generator-v5.5.0
+      package: https://github.com/googleapis/google-cloud-node/archive/gapic-generator-v5.5.0.tar.gz
+      checksum: dec0756bf04ff1cb881cd7a8a51c538fd5d25daedd1b65d93800632d85baddea
       build:
-        - pnpm install --ignore-workspace --frozen-lockfile --config.auto-install-peers=true
+        - pnpm install --frozen-lockfile --filter @google-cloud/gapic-generator
         - pnpm run compile
         - pnpm add -g "$PWD"
       src_dir: core/generator/gapic-generator-typescript
@@ -1484,6 +1484,8 @@ libraries:
     copyright_year: "2026"
     nodejs:
       default_version: v1
+      dependencies:
+        google-gax: ^6.5.0
       extra_protoc_parameters:
         - enable_telemetry_tracing=true
       package_name: '@google-cloud/secret-manager'
