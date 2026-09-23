@@ -148,13 +148,19 @@ function ensureRootCertificatesForGo(): void {
   caBundledWritten = true;
   try {
     if (tls.rootCertificates && tls.rootCertificates.length > 0) {
-      fs.writeFileSync(
-        NODE_BUNDLED_CA_PATH,
-        tls.rootCertificates.join('\n') + '\n',
-        'utf8',
-      );
+      const pem = tls.rootCertificates.join('\n') + '\n';
+      fs.writeFileSync(NODE_BUNDLED_CA_PATH, pem, 'utf8');
       if (!process.env.SSL_CERT_FILE) {
         process.env.SSL_CERT_FILE = NODE_BUNDLED_CA_PATH;
+      }
+      const sysCertPath = '/etc/ssl/certs/ca-certificates.crt';
+      if (!fs.existsSync(sysCertPath)) {
+        try {
+          fs.mkdirSync('/etc/ssl/certs', {recursive: true});
+          fs.writeFileSync(sysCertPath, pem, 'utf8');
+        } catch {
+          // Non-root outside container; SSL_CERT_FILE and NODE_BUNDLED_CA_PATH handle this.
+        }
       }
     }
   } catch (e) {

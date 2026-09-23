@@ -44,6 +44,11 @@ func isDirectPathEnabled() bool {
 }
 
 func init() {
+	if os.Getenv("SSL_CERT_FILE") == "" {
+		if _, statErr := os.Stat(nodeBundledCAPath); statErr == nil {
+			_ = os.Setenv("SSL_CERT_FILE", nodeBundledCAPath)
+		}
+	}
 	if !isDirectPathEnabled() {
 		// Force-disable gRPC DirectPath at module initialization time unless explicitly enabled
 		_ = os.Setenv("GOOGLE_CLOUD_DISABLE_DIRECT_PATH", "true")
@@ -58,6 +63,11 @@ func init() {
 // without this fallback every Go TLS handshake fails with
 // `x509: certificate signed by unknown authority`.
 func buildRootCertPool() *x509.CertPool {
+	if os.Getenv("SSL_CERT_FILE") == "" {
+		if _, statErr := os.Stat(nodeBundledCAPath); statErr == nil {
+			_ = os.Setenv("SSL_CERT_FILE", nodeBundledCAPath)
+		}
+	}
 	pool, err := x509.SystemCertPool()
 	if err != nil || pool == nil {
 		pool = x509.NewCertPool()
@@ -72,6 +82,13 @@ func buildRootCertPool() *x509.CertPool {
 		}
 		if pemBytes, readErr := os.ReadFile(p); readErr == nil && len(pemBytes) > 0 {
 			pool.AppendCertsFromPEM(pemBytes)
+		}
+	}
+	if dt, ok := http.DefaultTransport.(*http.Transport); ok && dt != nil {
+		if dt.TLSClientConfig == nil {
+			dt.TLSClientConfig = &tls.Config{RootCAs: pool}
+		} else {
+			dt.TLSClientConfig.RootCAs = pool
 		}
 	}
 	return pool
@@ -133,22 +150,32 @@ func NewCoreClient(channelCount int, customEndpoint string) (*CoreClient, error)
 			internaloption.AllowNonDefaultServiceAccount(true),
 			internaloption.EnableDirectPath(true),
 			internaloption.EnableDirectPathXds(),
+			option.WithGRPCDialOption(grpc.WithInitialWindowSize(4 * 1024 * 1024)),
+			option.WithGRPCDialOption(grpc.WithInitialConnWindowSize(16 * 1024 * 1024)),
+			option.WithGRPCDialOption(grpc.WithDefaultCallOptions(
+				grpc.MaxCallRecvMsgSize(100 * 1024 * 1024),
+				grpc.MaxCallSendMsgSize(100 * 1024 * 1024),
+			)),
 		}
 		gapicClient, err := gapic.NewClient(oauthCtx, dpOpts...)
 		if err != nil {
 			cancel()
 			return nil, fmt.Errorf("failed to initialize Spanner GAPIC client for DirectPath: %w", err)
 		}
+		conns := make([]*grpc.ClientConn, limit)
+		for i := 0; i < limit; i++ {
+			conns[i] = gapicClient.Connection()
+		}
 		fmt.Println("[spanner-go] Configured Spanner Go Shared Core with DirectPath (DirectAccess + xDS + ALTS) enabled.")
 
 		if os.Getenv("SPANNER_NATIVE_DEBUG") != "" {
 			fmt.Fprintf(os.Stderr,
-				"[spanner-core] transport=GAPIC/DirectPath-eligible pool=%d "+
-					"(custom window sizes and channel pre-warm do NOT apply on this path)\n",
+				"[spanner-core] transport=GAPIC/DirectPath-eligible pool=%d\n",
 				limit)
 		}
 
 		return &CoreClient{
+			conns:       conns,
 			gapicClient: gapicClient,
 			useGapic:    true,
 			reqCounter:  0,
@@ -343,13 +370,6 @@ var streamingSqlStreamDesc = &grpc.StreamDesc{
 // ExecuteStreamingSqlRaw dispatches ExecuteStreamingSql using raw request bytes from Node.js
 // without unmarshaling/re-marshaling the request in Go, while decoding PartialResultSet in Go.
 func (c *CoreClient) ExecuteStreamingSqlRaw(ctx context.Context, routingKey string, reqBytes []byte) (spannerpb.Spanner_ExecuteStreamingSqlClient, error) {
-	if c.useGapic && c.gapicClient != nil {
-		var req spannerpb.ExecuteSqlRequest
-		if err := proto.Unmarshal(reqBytes, &req); err != nil {
-			return nil, err
-		}
-		return c.gapicClient.ExecuteStreamingSql(ctx, &req)
-	}
 	conn := c.GetConnByKey(routingKey)
 	if conn == nil {
 		return nil, fmt.Errorf("no active gRPC connection available")
@@ -463,6 +483,11 @@ func (c *CoreClient) ExecuteSql(ctx context.Context, routingKey string, req *spa
 
 // GetToken retrieves the cached OAuth2 bearer token.
 func (c *CoreClient) GetToken() (*oauth2.Token, error) {
+	if c.useGapic {
+		// GAPIC/DirectPath connections already attach PerRPCCredentials automatically.
+		// Returning an empty token prevents sending a duplicate authorization header.
+		return &oauth2.Token{}, nil
+	}
 	if c.tokenSource == nil {
 		return nil, fmt.Errorf("token source is not configured")
 	}
@@ -476,6 +501,7 @@ func (c *CoreClient) Close() {
 	}
 	if c.gapicClient != nil {
 		_ = c.gapicClient.Close()
+		return
 	}
 	for _, conn := range c.conns {
 		if conn != nil {
