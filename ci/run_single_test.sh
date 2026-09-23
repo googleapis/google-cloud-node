@@ -51,21 +51,29 @@ if command -v cygpath >/dev/null 2>&1; then
     PNPMFILE_PATH=$(cygpath -m "${PNPMFILE_PATH}")
 fi
 
-echo "pnpm install --engine-strict --pnpmfile \"${PNPMFILE_PATH}\""
-if ! pnpm install --engine-strict --pnpmfile "${PNPMFILE_PATH}"; then
-    echo "::error title=PNPM Install Failed::pnpm install failed in $(pwd)."
-    echo ""
-    echo "===================================================================================================="
-    echo "❌ PNPM Install Failed"
-    echo ""
-    echo "If this failure is caused by an outdated lockfile or changed package.json dependencies, run:"
-    echo "    pnpm install --lockfile-only"
-    echo "    git add pnpm-lock.yaml"
-    echo "    git commit -m \"chore: update pnpm-lock.yaml\""
-    echo "    git push"
-    echo "===================================================================================================="
-    echo ""
-    exit 1
+if [ ! -d "node_modules" ]; then
+    echo "pnpm install --engine-strict --pnpmfile \"${PNPMFILE_PATH}\""
+    if ! pnpm install --engine-strict --pnpmfile "${PNPMFILE_PATH}"; then
+        echo "::error title=PNPM Install Failed::pnpm install failed in $(pwd)."
+        echo ""
+        echo "===================================================================================================="
+        echo "❌ PNPM Install Failed"
+        echo ""
+        echo "If this failure is caused by an outdated lockfile or changed package.json dependencies, run:"
+        echo "    pnpm install --lockfile-only"
+        echo "    git add pnpm-lock.yaml"
+        echo "    git commit -m \"chore: update pnpm-lock.yaml\""
+        echo "    git push"
+        echo "===================================================================================================="
+        echo ""
+        exit 1
+    fi
+fi
+
+if [ ! -d "build" ] && [ "${TEST_TYPE}" != "lint" ]; then
+    if grep -q '"compile":' package.json; then
+        ${TEST_CMD} compile
+    fi
 fi
 
 
