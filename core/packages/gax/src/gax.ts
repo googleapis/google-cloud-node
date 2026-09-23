@@ -23,7 +23,7 @@ import type {ResumableUploadContext} from './resumableUpload';
 import {warn} from './warnings';
 import {GoogleError} from './googleError';
 import {BundleOptions} from './bundlingCalls/bundleExecutor';
-import {toLowerCamelCase} from './util';
+import {toLowerCamelCase, checkTelemetryEnabled} from './util';
 import {StaticTraceContext} from './observability/TracerHelper';
 import {Status} from './status';
 import {RequestType} from './apitypes';
@@ -819,6 +819,21 @@ export function constructSettings(
   enableTelemetryTracing?: boolean,
   internalTelemetryInfo?: StaticTraceContext,
 ) {
+  const env: Record<string, string | undefined> =
+    typeof process === 'object' && typeof process.env === 'object'
+      ? process.env
+      : {};
+  const envTracing = env.GOOGLE_SDK_NODE_ENABLE_TRACING?.trim();
+  const isEnvSet = envTracing !== undefined && envTracing !== '';
+
+  const isEnvEnabled = checkTelemetryEnabled();
+
+  // If GOOGLE_SDK_NODE_ENABLE_TRACING is explicitly set, then the client option doesn't matter.
+  // The extra protoc param only matters if the environmental variable isn't set.
+  const tracingRequested = isEnvSet
+    ? isEnvEnabled
+    : Boolean(internalTelemetryInfo || enableTelemetryTracing);
+
   otherArgs = internalTelemetryInfo
     ? {...otherArgs, internalTelemetryInfo}
     : otherArgs || {};
@@ -878,12 +893,11 @@ export function constructSettings(
       bundleOptions: bundlingConfig
         ? createBundleOptions(bundlingConfig)
         : null,
-      otherArgs:
-        internalTelemetryInfo || enableTelemetryTracing
-          ? {...otherArgs, internalMethodName: methodName}
-          : otherArgs,
+      otherArgs: tracingRequested
+        ? {...otherArgs, internalMethodName: methodName}
+        : otherArgs,
       apiName,
-      enableTelemetryTracing,
+      enableTelemetryTracing: isEnvSet ? isEnvEnabled : enableTelemetryTracing,
     });
   }
 
