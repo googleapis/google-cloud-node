@@ -30,6 +30,8 @@ import {commonPrefix} from './util.js';
 // https://blog.logrocket.com/alternatives-dirname-node-js-es-modules/#help-im-missing-dirname
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
+type SerializerType = Parameters<typeof serializer.fromProto3JSON>[0];
+
 function getStdin() {
   return new Promise<Buffer>(resolve => {
     const buffers: Buffer[] = [];
@@ -130,7 +132,7 @@ export class Generator {
         );
       }
       const deserialized = serializer.fromProto3JSON(
-        ServiceConfig as protobuf.Type,
+        ServiceConfig as unknown as SerializerType,
         json,
       );
       if (!deserialized) {
@@ -139,7 +141,7 @@ export class Generator {
         );
       }
       this.grpcServiceConfig = ServiceConfig.toObject(
-        deserialized as protobuf.Message,
+        deserialized as unknown as protobuf.Message,
       ) as protos.grpc.service_config.ServiceConfig;
     }
   }
