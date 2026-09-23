@@ -612,8 +612,8 @@ export function isAliasedWindowFunction(
   return (
     candidate !== undefined &&
     candidate !== null &&
-    isString(candidate.alias) &&
-    candidate.windowFunction instanceof WindowFunction
+    isString(candidate._alias) &&
+    candidate._windowFunction instanceof WindowFunction
   );
 }
 
@@ -812,9 +812,7 @@ export function aliasedAggregateToMap(
         | firestore.Pipelines.AliasedAggregate
         | firestore.Pipelines.AliasedWindowFunction,
     ) => {
-      const alias = isAliasedWindowFunction(aliased)
-        ? aliased.alias
-        : aliased._alias;
+      const alias = aliased._alias;
       // Validated client side because a duplicate alias cannot be encoded: the
       // second entry would silently overwrite the first in the map, and the
       // backend would never see it.
@@ -825,7 +823,7 @@ export function aliasedAggregateToMap(
       map.set(
         alias,
         isAliasedWindowFunction(aliased)
-          ? (aliased.windowFunction as WindowFunction)
+          ? (aliased._windowFunction as WindowFunction)
           : (aliased._aggregate as AggregateFunction),
       );
       return map;

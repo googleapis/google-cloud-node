@@ -6110,7 +6110,7 @@ declare namespace FirebaseFirestore {
        * over the window frame defined by the enclosing
        * {@link Pipeline.addWindowFields} stage.
        *
-       * Today the backend only accepts a frame (`documents` or `range`) here, and
+       * The backend only accepts a frame (`documents` or `range`) here, and
        * rejects `partition` and `sort`, which must be specified on the enclosing
        * `addWindowFields()` stage.
        *
@@ -6172,7 +6172,7 @@ declare namespace FirebaseFirestore {
        * over the window frame defined by the enclosing
        * {@link Pipeline.addWindowFields} stage.
        *
-       * Today the backend only accepts a frame (`documents` or `range`) here, and
+       * The backend only accepts a frame (`documents` or `range`) here, and
        * rejects `partition` and `sort`, which must be specified on the enclosing
        * `addWindowFields()` stage.
        *
@@ -12719,7 +12719,7 @@ declare namespace FirebaseFirestore {
        * Adds window function results to the output documents of the pipeline.
        *
        * Window functions evaluate expressions over a subset of documents (a "window frame") relative to the
-       * current document. This is similar to SQL window functions or MongoDB's `$setWindowFields` stage.
+       * current document.
        *
        * @example
        * ```typescript

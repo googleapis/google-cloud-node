@@ -3219,11 +3219,6 @@ class WindowFunction implements firestore.Pipelines.WindowFunction, HasUserData 
     constructor(name: string, params?: Expression[]);
     as(name: string): AliasedWindowFunction;
     // Warning: (tsdoc-undefined-tag) The TSDoc tag "@private" is not defined in this configuration
-    // Warning: (ae-forgotten-export) The symbol "WindowSpecInternal" needs to be exported by the entry point index.d.ts
-    //
-    // @internal (undocumented)
-    static _create(name: string, params: Expression[], window?: WindowSpecInternal): WindowFunction;
-    // Warning: (tsdoc-undefined-tag) The TSDoc tag "@private" is not defined in this configuration
     //
     // @internal
     _createdFromLiteral: boolean;

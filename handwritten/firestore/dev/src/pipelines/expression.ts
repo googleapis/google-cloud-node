@@ -3380,7 +3380,7 @@ export class AggregateFunction implements AggregateFunction, HasUserData {
    * over the window frame defined by the enclosing
    * `Pipeline.addWindowFields()` stage.
    *
-   * Today the backend only accepts a frame (`documents` or `range`) here, and
+   * The backend only accepts a frame (`documents` or `range`) here, and
    * rejects `partition` and `sort`, which must be specified on the enclosing
    * `addWindowFields()` stage.
    *
@@ -3404,7 +3404,7 @@ export class AggregateFunction implements AggregateFunction, HasUserData {
    * @returns A new `WindowFunction`.
    */
   over(window?: firestore.Pipelines.WindowSpec): WindowFunction {
-    return WindowFunction._create(
+    return new WindowFunction(
       this.name,
       this.params,
       window === undefined ? undefined : new WindowSpecInternal(window),
@@ -11296,9 +11296,7 @@ export class WindowSpecInternal implements HasUserData {
 
   constructor(window: firestore.Pipelines.WindowSpec) {
     const sort = window.sort;
-    this.partition = (window.partition ?? []).map(value =>
-      isString(value) ? field(value) : (value as Expression),
-    );
+    this.partition = (window.partition ?? []).map(fieldOrExpression);
     this.sort =
       sort === undefined
         ? []
@@ -11460,38 +11458,23 @@ export class WindowFunction
    */
   _createdFromLiteral = false;
 
-  /**
-   * The accumulator level window this function is evaluated over. When
-   * `undefined`, the window of the enclosing stage is used.
-   */
-  private window?: WindowSpecInternal;
-
   constructor(
     private name: string,
     private params: Expression[] = [],
+    /**
+     * The accumulator level window this function is evaluated over. When
+     * `undefined`, the window of the enclosing stage is used.
+     * @internal
+     */
+    private window?: WindowSpecInternal,
   ) {}
-
-  /**
-   * @internal
-   * @private
-   */
-  static _create(
-    name: string,
-    params: Expression[],
-    window?: WindowSpecInternal,
-  ): WindowFunction {
-    const wf = new WindowFunction(name, params);
-    wf.window = window;
-
-    return wf;
-  }
 
   /**
    * Evaluates this window function over a specific window frame, rather than
    * over the window frame defined by the enclosing
    * `Pipeline.addWindowFields()` stage.
    *
-   * Today the backend only accepts a frame (`documents` or `range`) here, and
+   * The backend only accepts a frame (`documents` or `range`) here, and
    * rejects `partition` and `sort`, which must be specified on the enclosing
    * `addWindowFields()` stage.
    *
@@ -11501,7 +11484,7 @@ export class WindowFunction
    * @returns A new `WindowFunction`.
    */
   over(window?: firestore.Pipelines.WindowSpec): WindowFunction {
-    return WindowFunction._create(
+    return new WindowFunction(
       this.name,
       this.params,
       window === undefined ? undefined : new WindowSpecInternal(window),
@@ -11616,7 +11599,7 @@ export class AliasedWindowFunction
  * @returns A new `WindowFunction`.
  */
 export function rank(): WindowFunction {
-  return WindowFunction._create('rank', []);
+  return new WindowFunction('rank', []);
 }
 
 /**
@@ -11637,7 +11620,7 @@ export function rank(): WindowFunction {
  * @returns A new `WindowFunction`.
  */
 export function denseRank(): WindowFunction {
-  return WindowFunction._create('dense_rank', []);
+  return new WindowFunction('dense_rank', []);
 }
 
 /**
@@ -11657,5 +11640,5 @@ export function denseRank(): WindowFunction {
  * @returns A new `WindowFunction`.
  */
 export function rowNumber(): WindowFunction {
-  return WindowFunction._create('row_number', []);
+  return new WindowFunction('row_number', []);
 }

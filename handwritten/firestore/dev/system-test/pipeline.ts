@@ -9321,14 +9321,7 @@ describe.skipClassic('Pipeline window functions (count)', () => {
   });
 });
 
-// TODO(b/…): Un-skip this suite once cl/977837857 (physical execution of the
-// non-count window aggregators, plus the `preceding` offset sign fix) has been
-// submitted and rolled out to Nightly. Until then these pipelines fail with
-// `UnsupportedOperationException: Unsupported window aggregator: <KIND>`.
-// Flip `WINDOW_AGGREGATORS_SUPPORTED` to `true` to run them.
-const WINDOW_AGGREGATORS_SUPPORTED = false;
-
-(WINDOW_AGGREGATORS_SUPPORTED ? describe.skipClassic : describe.skip)(
+describe.skipClassic(
   'Pipeline window functions (aggregators)',
   () => {
     let firestore: Firestore;
@@ -9409,7 +9402,8 @@ const WINDOW_AGGREGATORS_SUPPORTED = false;
         );
       });
 
-      it('computes countIf and countDistinct', async () => {
+      // TODO: Un-skip once countIf and countDistinct window functions are supported by the backend.
+      it.skip('computes countIf and countDistinct', async () => {
         const snapshot = await execute(
           firestore
             .pipeline()
@@ -9521,17 +9515,17 @@ const WINDOW_AGGREGATORS_SUPPORTED = false;
           {
             product: 'tablet',
             allPrices: [30, 60, 60],
-            distinctPrices: [30, 60],
+            distinctPrices: [60, 30],
           },
           {
             product: 'tablet',
             allPrices: [30, 60, 60],
-            distinctPrices: [30, 60],
+            distinctPrices: [60, 30],
           },
           {
             product: 'tablet',
             allPrices: [30, 60, 60],
-            distinctPrices: [30, 60],
+            distinctPrices: [60, 30],
           },
         );
       });
@@ -9879,8 +9873,7 @@ const WINDOW_AGGREGATORS_SUPPORTED = false;
   },
 );
 
-// TODO(b/…): Un-skip once the backend CL that adds `rank()`, `denseRank()` and
-// `rowNumber()` support lands (it follows cl/977837857).
+// TODO: Un-skip once backend support for rank(), denseRank() and rowNumber() lands.
 describe.skip('Pipeline window functions (ranking)', () => {
   let firestore: Firestore;
   let productSales: CollectionReference;

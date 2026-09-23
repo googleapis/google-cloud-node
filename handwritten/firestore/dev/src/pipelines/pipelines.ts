@@ -459,7 +459,7 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
    * Adds window function results to the output documents of the pipeline.
    *
    * Window functions evaluate expressions over a subset of documents (a "window frame") relative to the
-   * current document. This is similar to SQL window functions or MongoDB's `$setWindowFields` stage.
+   * current document.
    *
    * @example
    * ```typescript
