@@ -25,8 +25,6 @@ import {
   decodeProtobufAny,
   decodeAnyProtosInArray,
   checkTelemetryEnabled,
-  isTracingEnvExplicitlySet,
-  isTracingEnvEnabled,
 } from '../../src/util';
 import {StaticTraceContext} from '../../src/observability/TracerHelper';
 import {CallSettings} from '../../src/gax';
@@ -303,6 +301,11 @@ describe('util.ts', () => {
       assert.strictEqual(checkTelemetryEnabled(mockSettings), false);
     });
 
+    it('returns false when GOOGLE_SDK_NODE_ENABLE_TRACING=0 overrides the client option', () => {
+      process.env.GOOGLE_SDK_NODE_ENABLE_TRACING = '0';
+      assert.strictEqual(checkTelemetryEnabled(mockSettings), false);
+    });
+
     it('returns true when GOOGLE_SDK_NODE_ENABLE_TRACING=true overrides enableTelemetryTracing=false on client settings', () => {
       process.env.GOOGLE_SDK_NODE_ENABLE_TRACING = 'true';
       const disabledSettings = new CallSettings({
@@ -311,13 +314,27 @@ describe('util.ts', () => {
       assert.strictEqual(checkTelemetryEnabled(disabledSettings), true);
     });
 
-    it('falls back to the client option when GOOGLE_SDK_NODE_ENABLE_TRACING is empty', () => {
+    it('returns true when GOOGLE_SDK_NODE_ENABLE_TRACING=1 overrides enableTelemetryTracing=false on client settings', () => {
+      process.env.GOOGLE_SDK_NODE_ENABLE_TRACING = '1';
+      const disabledSettings = new CallSettings({
+        enableTelemetryTracing: false,
+      });
+      assert.strictEqual(checkTelemetryEnabled(disabledSettings), true);
+    });
+
+    it('falls back to the client option when GOOGLE_SDK_NODE_ENABLE_TRACING is empty or whitespace', () => {
       process.env.GOOGLE_SDK_NODE_ENABLE_TRACING = '';
+      assert.strictEqual(checkTelemetryEnabled(mockSettings), true);
+
+      process.env.GOOGLE_SDK_NODE_ENABLE_TRACING = '   ';
       assert.strictEqual(checkTelemetryEnabled(mockSettings), true);
     });
 
     it('treats an unrecognized GOOGLE_SDK_NODE_ENABLE_TRACING value as disabled', () => {
       process.env.GOOGLE_SDK_NODE_ENABLE_TRACING = 'yes';
+      assert.strictEqual(checkTelemetryEnabled(mockSettings), false);
+
+      process.env.GOOGLE_SDK_NODE_ENABLE_TRACING = 'foo';
       assert.strictEqual(checkTelemetryEnabled(mockSettings), false);
     });
 
@@ -338,54 +355,6 @@ describe('util.ts', () => {
       }
       assert.strictEqual(thrown, undefined);
       assert.strictEqual(result, true);
-    });
-  });
-
-  describe('isTracingEnvExplicitlySet and isTracingEnvEnabled', () => {
-    afterEach(() => {
-      delete process.env.GOOGLE_SDK_NODE_ENABLE_TRACING;
-    });
-
-    it('returns false when GOOGLE_SDK_NODE_ENABLE_TRACING is unset or empty', () => {
-      delete process.env.GOOGLE_SDK_NODE_ENABLE_TRACING;
-      assert.strictEqual(isTracingEnvExplicitlySet(), false);
-      assert.strictEqual(isTracingEnvEnabled(), false);
-
-      process.env.GOOGLE_SDK_NODE_ENABLE_TRACING = '';
-      assert.strictEqual(isTracingEnvExplicitlySet(), false);
-      assert.strictEqual(isTracingEnvEnabled(), false);
-
-      process.env.GOOGLE_SDK_NODE_ENABLE_TRACING = '   ';
-      assert.strictEqual(isTracingEnvExplicitlySet(), false);
-      assert.strictEqual(isTracingEnvEnabled(), false);
-    });
-
-    it('returns true for isTracingEnvExplicitlySet and isTracingEnvEnabled when set to true or 1', () => {
-      process.env.GOOGLE_SDK_NODE_ENABLE_TRACING = 'true';
-      assert.strictEqual(isTracingEnvExplicitlySet(), true);
-      assert.strictEqual(isTracingEnvEnabled(), true);
-
-      process.env.GOOGLE_SDK_NODE_ENABLE_TRACING = 'TRUE';
-      assert.strictEqual(isTracingEnvExplicitlySet(), true);
-      assert.strictEqual(isTracingEnvEnabled(), true);
-
-      process.env.GOOGLE_SDK_NODE_ENABLE_TRACING = '1';
-      assert.strictEqual(isTracingEnvExplicitlySet(), true);
-      assert.strictEqual(isTracingEnvEnabled(), true);
-    });
-
-    it('returns true for isTracingEnvExplicitlySet and false for isTracingEnvEnabled when set to false, 0, or invalid', () => {
-      process.env.GOOGLE_SDK_NODE_ENABLE_TRACING = 'false';
-      assert.strictEqual(isTracingEnvExplicitlySet(), true);
-      assert.strictEqual(isTracingEnvEnabled(), false);
-
-      process.env.GOOGLE_SDK_NODE_ENABLE_TRACING = '0';
-      assert.strictEqual(isTracingEnvExplicitlySet(), true);
-      assert.strictEqual(isTracingEnvEnabled(), false);
-
-      process.env.GOOGLE_SDK_NODE_ENABLE_TRACING = 'foo';
-      assert.strictEqual(isTracingEnvExplicitlySet(), true);
-      assert.strictEqual(isTracingEnvEnabled(), false);
     });
   });
 });

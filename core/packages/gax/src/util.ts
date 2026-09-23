@@ -23,30 +23,6 @@ const randomUUID = () =>
   globalThis.crypto?.randomUUID() || require('crypto').randomUUID();
 
 /**
- * Returns true if the GOOGLE_SDK_NODE_ENABLE_TRACING environment variable is explicitly set.
- */
-export function isTracingEnvExplicitlySet(): boolean {
-  const env: Record<string, string | undefined> =
-    typeof process === 'object' && typeof process.env === 'object'
-      ? process.env
-      : {};
-  const envOptIn = env.GOOGLE_SDK_NODE_ENABLE_TRACING?.trim();
-  return envOptIn !== undefined && envOptIn !== '';
-}
-
-/**
- * Returns true if the GOOGLE_SDK_NODE_ENABLE_TRACING environment variable is set to 'true' or '1'.
- */
-export function isTracingEnvEnabled(): boolean {
-  const env: Record<string, string | undefined> =
-    typeof process === 'object' && typeof process.env === 'object'
-      ? process.env
-      : {};
-  const envOptIn = env.GOOGLE_SDK_NODE_ENABLE_TRACING?.trim()?.toLowerCase();
-  return envOptIn === 'true' || envOptIn === '1';
-}
-
-/**
  * Checks if telemetry tracing is enabled.
  *
  * If `GOOGLE_SDK_NODE_ENABLE_TRACING` is explicitly set, then the client option
@@ -61,8 +37,15 @@ export function isTracingEnvEnabled(): boolean {
  * @returns true if telemetry tracing is enabled, false otherwise
  */
 export function checkTelemetryEnabled(settings?: CallSettings): boolean {
-  if (isTracingEnvExplicitlySet()) {
-    return isTracingEnvEnabled();
+  const env: Record<string, string | undefined> =
+    typeof process === 'object' && typeof process.env === 'object'
+      ? process.env
+      : {};
+  const envOptIn = env.GOOGLE_SDK_NODE_ENABLE_TRACING?.trim();
+
+  if (envOptIn !== undefined && envOptIn !== '') {
+    const lower = envOptIn.toLowerCase();
+    return lower === 'true' || lower === '1';
   }
 
   return Boolean(

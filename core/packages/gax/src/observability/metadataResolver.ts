@@ -16,7 +16,6 @@
 
 import {StaticTraceContext} from './TracerHelper';
 import {CallSettings} from '../gax';
-import {isTracingEnvExplicitlySet} from '../util';
 
 export const DEFAULT_GCP_REPO = 'googleapis/google-cloud-node';
 
@@ -174,9 +173,16 @@ export function resolveStaticTraceContext(
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   _callerFilePath?: string,
 ): StaticTraceContext {
+  const env: Record<string, string | undefined> =
+    typeof process === 'object' && typeof process.env === 'object'
+      ? process.env
+      : {};
+  const envTracing = env.GOOGLE_SDK_NODE_ENABLE_TRACING?.trim();
+  const isEnvSet = envTracing !== undefined && envTracing !== '';
+
   // If GOOGLE_SDK_NODE_ENABLE_TRACING is explicitly set, the client option doesn't matter
   // and the extra protoc param only matters if the environmental variable isn't set.
-  const explicit = !isTracingEnvExplicitlySet()
+  const explicit = !isEnvSet
     ? (settings?.otherArgs?.internalTelemetryInfo as
         StaticTraceContext | undefined)
     : undefined;

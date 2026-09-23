@@ -65,12 +65,6 @@ describe('exports', () => {
     it('exports checkTelemetryEnabled', () => {
       assert(typeof index.checkTelemetryEnabled === 'function');
     });
-    it('exports isTracingEnvExplicitlySet', () => {
-      assert(typeof index.isTracingEnvExplicitlySet === 'function');
-    });
-    it('exports isTracingEnvEnabled', () => {
-      assert(typeof index.isTracingEnvEnabled === 'function');
-    });
     it('exports resolveStaticTraceContext', () => {
       assert(typeof index.resolveStaticTraceContext === 'function');
     });

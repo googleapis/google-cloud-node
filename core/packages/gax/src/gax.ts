@@ -22,11 +22,7 @@ import type {Message} from 'protobufjs';
 import {warn} from './warnings';
 import {GoogleError} from './googleError';
 import {BundleOptions} from './bundlingCalls/bundleExecutor';
-import {
-  toLowerCamelCase,
-  isTracingEnvExplicitlySet,
-  isTracingEnvEnabled,
-} from './util';
+import {toLowerCamelCase, checkTelemetryEnabled} from './util';
 import {StaticTraceContext} from './observability/TracerHelper';
 import {Status} from './status';
 import {RequestType} from './apitypes';
@@ -809,14 +805,22 @@ export function constructSettings(
   enableTelemetryTracing?: boolean,
   internalTelemetryInfo?: StaticTraceContext,
 ) {
-  const isEnvSet = isTracingEnvExplicitlySet();
-  const isEnvEnabled = isTracingEnvEnabled();
+  const env: Record<string, string | undefined> =
+    typeof process === 'object' && typeof process.env === 'object'
+      ? process.env
+      : {};
+  const envTracing = env.GOOGLE_SDK_NODE_ENABLE_TRACING?.trim();
+  const isEnvSet = envTracing !== undefined && envTracing !== '';
 
   // If GOOGLE_SDK_NODE_ENABLE_TRACING is explicitly set, then the client option doesn't matter.
   // The extra protoc param only matters if the environmental variable isn't set.
-  const tracingRequested = isEnvSet
-    ? isEnvEnabled
-    : Boolean(enableTelemetryTracing || internalTelemetryInfo);
+  const tracingRequested = checkTelemetryEnabled(
+    new CallSettings({
+      enableTelemetryTracing: Boolean(
+        enableTelemetryTracing || internalTelemetryInfo,
+      ),
+    }),
+  );
 
   if (!isEnvSet && internalTelemetryInfo) {
     otherArgs = {...otherArgs, internalTelemetryInfo};
@@ -883,7 +887,7 @@ export function constructSettings(
         ? {...otherArgs, internalMethodName: methodName}
         : otherArgs,
       apiName,
-      enableTelemetryTracing: isEnvSet ? isEnvEnabled : enableTelemetryTracing,
+      enableTelemetryTracing: isEnvSet ? tracingRequested : enableTelemetryTracing,
     });
   }
 

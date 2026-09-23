@@ -118,8 +118,6 @@ export {
   decodeAnyProtosInArray,
   decodeProtobufAny,
   checkTelemetryEnabled,
-  isTracingEnvExplicitlySet,
-  isTracingEnvEnabled,
 } from './util';
 
 export {StaticTraceContext, traceCall} from './observability/TracerHelper';
