@@ -107,10 +107,11 @@
         "promise/catch-or-return": "off",
         // TODO(#9432): temporary. Unlike the promise rules above, these two
         // were reachable via gts before #8458, so this is a new relaxation.
-        // Removable once librarian.yaml pins a `gapic-generator-v*` release
-        // containing the template fixes -- note that merging a template fix to
-        // main is NOT sufficient, since librarian.yaml pins the generator by
-        // tag + tarball checksum.
+        // The generator template fixes do NOT exist yet -- #9432 specifies
+        // them and needs its own PR. Once they land, a new `gapic-generator-v*`
+        // tag must be cut and librarian.yaml bumped to it: the generator is
+        // pinned by tag + tarball checksum, so merging a template fix to main
+        // changes nothing on its own. Only then can these two lines be dropped.
         "@typescript-eslint/no-floating-promises": "off",
         "prefer-const": "off"
       }
