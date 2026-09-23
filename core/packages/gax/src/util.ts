@@ -31,9 +31,7 @@ const randomUUID = () =>
  * variable wins whenever it is set, so tracing can be switched on or off for a
  * process without touching the code that constructs the client.
  *
- * Two further conditions apply while the feature is experimental:
- * `GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED` must be `true`, and the client
- * must have supplied `internalTelemetryInfo` — a client generated without
+ * The client must have supplied `internalTelemetryInfo` — a client generated without
  * tracing has no span metadata to report, so there is nothing to trace.
  *
  * @param settings
@@ -43,7 +41,6 @@ export function checkTelemetryEnabled(settings?: CallSettings): boolean {
   // `process` is undeclared in browsers and some edge runtimes, where reading
   // it would throw a ReferenceError rather than yield undefined, so it is
   // reached through a `typeof` guard and stands in as an empty environment.
-  // Tracing is then simply off there, since the environment cannot opt in.
   const env: Record<string, string | undefined> =
     typeof process === 'object' && typeof process.env === 'object'
       ? process.env
@@ -58,10 +55,7 @@ export function checkTelemetryEnabled(settings?: CallSettings): boolean {
     : Boolean(settings?.enableTelemetryTracing);
 
   return (
-    tracingRequested &&
-    env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED?.trim().toLowerCase() ===
-      'true' &&
-    settings?.otherArgs?.internalTelemetryInfo !== undefined
+    tracingRequested && settings?.otherArgs?.internalTelemetryInfo !== undefined
   );
 }
 
