@@ -2,6 +2,7 @@
   "bump-minor-pre-major": true,
   "commit-batch-size": 10,
   "initial-version": "0.1.0",
+  "last-release-sha": "a3fde62dbe19594ffc40fc6fe55256a59a988890",
   "packages": {
     "core/common": {
       "component": "common"
