@@ -4,6 +4,310 @@
     {
       "changes": [
         {
+          "type": "fix",
+          "sha": "d2c4b08ae8f3a18c252a09a09e1ae1e49d4cd822",
+          "message": "Move gapic-generator-typescript into the root pnpm workspace",
+          "issues": [
+            "9418"
+          ],
+          "scope": "gax"
+        },
+        {
+          "type": "feat",
+          "sha": "0722a3415190ce725537091d67b49dbaccb5cd2a",
+          "message": "Use runtime-agnostic test runner in GAPIC package templates",
+          "issues": [],
+          "scope": "generator"
+        }
+      ],
+      "version": "5.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gapic-generator",
+      "id": "8dfdbddd-e970-49c1-9953-dd67e959cded",
+      "createTime": "2026-09-23T06:58:24.417Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "57d0cfd84827933a5da83c370b38942d0c2eadd8",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9368"
+          ]
+        }
+      ],
+      "version": "0.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/solar",
+      "id": "087788ce-bf8f-4969-8c56-bf5a9ca1def0",
+      "createTime": "2026-09-22T18:58:29.359Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "57d0cfd84827933a5da83c370b38942d0c2eadd8",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9368"
+          ]
+        }
+      ],
+      "version": "0.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/parametermanager",
+      "id": "1b64448e-ee07-4dbf-9686-229bc024ee81",
+      "createTime": "2026-09-22T18:58:29.321Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "57d0cfd84827933a5da83c370b38942d0c2eadd8",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9368"
+          ]
+        }
+      ],
+      "version": "0.17.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/networkservices",
+      "id": "2ad47eb4-efe1-4976-bb11-c4eec1e1c8ad",
+      "createTime": "2026-09-22T18:58:29.288Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "57d0cfd84827933a5da83c370b38942d0c2eadd8",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9368"
+          ]
+        }
+      ],
+      "version": "3.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/discoveryengine",
+      "id": "71e73e89-403c-4874-9b54-60d3a681a4f9",
+      "createTime": "2026-09-22T18:58:29.254Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "57d0cfd84827933a5da83c370b38942d0c2eadd8",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9368"
+          ]
+        }
+      ],
+      "version": "0.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/devicestreaming",
+      "id": "6d76d2b8-8dca-4e0b-a5b2-657f2b3cd69f",
+      "createTime": "2026-09-22T18:58:29.204Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "57d0cfd84827933a5da83c370b38942d0c2eadd8",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9368"
+          ]
+        }
+      ],
+      "version": "7.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/compute",
+      "id": "4355251c-b3c0-431b-98dd-ea6bead3c90d",
+      "createTime": "2026-09-22T18:58:29.162Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c07e77e240098d312cb9d973fc7e11a9c16569be",
+          "message": "Add google-cloud-backupdr",
+          "issues": [
+            "9372"
+          ],
+          "scope": "google/cloud/backupdr/v1beta"
+        }
+      ],
+      "version": "0.12.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/backupdr",
+      "id": "e063ceb2-c479-4131-8be5-39e754a47714",
+      "createTime": "2026-09-22T18:58:29.133Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "57d0cfd84827933a5da83c370b38942d0c2eadd8",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9368"
+          ]
+        }
+      ],
+      "version": "5.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/api-gateway",
+      "id": "3addaf6f-9a11-45cb-b4f8-449f9271d039",
+      "createTime": "2026-09-22T18:58:29.099Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "57d0cfd84827933a5da83c370b38942d0c2eadd8",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9368"
+          ]
+        }
+      ],
+      "version": "0.32.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-apps/chat",
+      "id": "e8c65433-f4d2-446b-9c53-24b793d4c03a",
+      "createTime": "2026-09-22T18:58:29.067Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "57d0cfd84827933a5da83c370b38942d0c2eadd8",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9368"
+          ]
+        }
+      ],
+      "version": "7.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-analytics/data",
+      "id": "917c3540-d648-4303-8cd6-0707fec143a4",
+      "createTime": "2026-09-22T18:58:29.032Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "57d0cfd84827933a5da83c370b38942d0c2eadd8",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9368"
+          ]
+        }
+      ],
+      "version": "0.14.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-ads/admanager",
+      "id": "01aa7014-ec4e-4a7a-be25-747c968bbc08",
+      "createTime": "2026-09-22T18:58:29.001Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "800322d5d1d116b93c9a5365fc8dd591037d2836",
+          "message": "Report response status codes on traced calls",
+          "issues": [
+            "9344"
+          ],
+          "scope": "gax"
+        },
+        {
+          "type": "feat",
+          "sha": "ed9d27902e3ec71f99aa86a22135f30555c72dcd",
+          "message": "Let callers enable tracing with env var",
+          "issues": [
+            "9377"
+          ],
+          "scope": "o11y"
+        },
+        {
+          "type": "feat",
+          "sha": "653de605e5954a0e378962e3f859f99f607dc6cd",
+          "message": "Pass through fallback parameter for HTTP calls",
+          "issues": [
+            "9277"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "ff39233da87eca175d3104467fc756010e9af0a3",
+          "message": "Add o11y gRPC tracing",
+          "issues": [
+            "9267"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "ddafe50c2487a7527eb57f7194dc63028fa22975",
+          "message": "Enforce the call deadline on the REST transport",
+          "issues": [
+            "9334"
+          ],
+          "scope": "gax"
+        },
+        {
+          "type": "fix",
+          "sha": "db76247673d12026348ab3ddd9a1e487a9e6468a",
+          "message": "Report transport failures as UNAVAILABLE, as gRPC does",
+          "issues": [],
+          "scope": "gax"
+        },
+        {
+          "type": "fix",
+          "sha": "6ce394b9c15301f12150af1123905f8918688c16",
+          "message": "Detect aborts and timeouts by error name",
+          "issues": [],
+          "scope": "gax"
+        },
+        {
+          "type": "fix",
+          "sha": "be36fd984f07656c83902e46869db605a3ec259a",
+          "message": "Map REST fallback transport errors to gRPC status codes",
+          "issues": [],
+          "scope": "gax"
+        }
+      ],
+      "version": "6.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "google-gax",
+      "id": "8a1bfb4e-f0ec-4a0b-8529-dcef943364ab",
+      "createTime": "2026-09-22T18:58:28.968Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "353315572a16fb6bf34bfec4b96acea5917e1bf8",
+          "message": "Wire enable_telemetry_tracing through the generator CLI",
+          "issues": [
+            "9373"
+          ],
+          "scope": "o11y"
+        }
+      ],
+      "version": "5.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gapic-generator",
+      "id": "a77f6184-aa0a-402f-a895-02bf1405cc57",
+      "createTime": "2026-09-22T18:58:28.941Z"
+    },
+    {
+      "changes": [
+        {
           "type": "feat",
           "sha": "ecd5bfd0e8ad8d2cf3b9fe003f7e35f2bbd592f5",
           "message": "Update cloud-spanner to minimum Node version of 22",
@@ -95131,5 +95435,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-09-18T13:12:38.821Z"
+  "updateTime": "2026-09-23T06:58:24.417Z"
 }
