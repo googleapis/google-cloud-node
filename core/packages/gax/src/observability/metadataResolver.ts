@@ -122,35 +122,6 @@ export function extractFromSettings(
   return result;
 }
 
-/**
- * Extracts static metadata from process environment variables.
- */
-export function extractFromEnvironment(): StaticTraceContext {
-  const env: Record<string, string | undefined> =
-    typeof process === 'object' && typeof process.env === 'object'
-      ? process.env
-      : {};
-
-  const result: StaticTraceContext = {};
-
-  const service = env.GOOGLE_SDK_NODE_CLIENT_SERVICE || env.GCP_CLIENT_SERVICE;
-  if (service?.trim()) {
-    result.gcpClientService = service.trim();
-  }
-
-  const version = env.GOOGLE_SDK_NODE_CLIENT_VERSION || env.GCP_CLIENT_VERSION;
-  if (version?.trim()) {
-    result.gcpVersion = version.trim();
-  }
-
-  const artifact = env.GOOGLE_SDK_NODE_ARTIFACT || env.GCP_ARTIFACT;
-  if (artifact?.trim()) {
-    result.gcpArtifact = artifact.trim();
-  }
-
-  return result;
-}
-
 const metadataCache = new Map<string, StaticTraceContext>();
 
 /**
@@ -161,8 +132,8 @@ export function clearMetadataCache(): void {
 }
 
 /**
- * Resolves static trace context dynamically at runtime by inspecting the executing
- * environment, CallSettings, and standard defaults.
+ * Resolves static trace context dynamically at runtime by inspecting CallSettings
+ * and standard defaults.
  *
  * @param {CallSettings} [settings] - Call settings for the RPC invocation.
  * @param {string} [_callerFilePath] - Optional explicit path to the caller source file (deprecated).
@@ -199,7 +170,6 @@ export function resolveStaticTraceContext(
     };
   }
 
-  const envMeta = extractFromEnvironment();
   const cacheKey = settings?.apiName || 'default';
 
   let cached = metadataCache.get(cacheKey);
@@ -209,13 +179,9 @@ export function resolveStaticTraceContext(
   }
 
   return {
-    gcpClientService:
-      explicit?.gcpClientService ??
-      envMeta.gcpClientService ??
-      cached.gcpClientService,
-    gcpVersion: explicit?.gcpVersion ?? envMeta.gcpVersion ?? cached.gcpVersion,
+    gcpClientService: explicit?.gcpClientService ?? cached.gcpClientService,
+    gcpVersion: explicit?.gcpVersion ?? cached.gcpVersion,
     gcpRepo: DEFAULT_GCP_REPO,
-    gcpArtifact:
-      explicit?.gcpArtifact ?? envMeta.gcpArtifact ?? cached.gcpArtifact,
+    gcpArtifact: explicit?.gcpArtifact ?? cached.gcpArtifact,
   };
 }

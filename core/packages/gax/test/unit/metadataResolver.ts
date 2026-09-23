@@ -19,7 +19,6 @@ import {describe, it, beforeEach, afterEach} from 'mocha';
 import {
   clearMetadataCache,
   extractClientServiceFromPackageName,
-  extractFromEnvironment,
   extractFromSettings,
   extractServiceFromApiName,
   resolveStaticTraceContext,
@@ -31,24 +30,12 @@ import {StaticTraceContext} from '../../src/observability/TracerHelper';
 describe('metadataResolver', () => {
   beforeEach(() => {
     clearMetadataCache();
-    delete process.env.GOOGLE_SDK_NODE_CLIENT_SERVICE;
-    delete process.env.GOOGLE_SDK_NODE_CLIENT_VERSION;
-    delete process.env.GOOGLE_SDK_NODE_ARTIFACT;
     delete process.env.GOOGLE_SDK_NODE_ENABLE_TRACING;
-    delete process.env.GCP_CLIENT_SERVICE;
-    delete process.env.GCP_CLIENT_VERSION;
-    delete process.env.GCP_ARTIFACT;
   });
 
   afterEach(() => {
     clearMetadataCache();
-    delete process.env.GOOGLE_SDK_NODE_CLIENT_SERVICE;
-    delete process.env.GOOGLE_SDK_NODE_CLIENT_VERSION;
-    delete process.env.GOOGLE_SDK_NODE_ARTIFACT;
     delete process.env.GOOGLE_SDK_NODE_ENABLE_TRACING;
-    delete process.env.GCP_CLIENT_SERVICE;
-    delete process.env.GCP_CLIENT_VERSION;
-    delete process.env.GCP_ARTIFACT;
   });
 
   describe('extractClientServiceFromPackageName', () => {
@@ -162,30 +149,6 @@ describe('metadataResolver', () => {
     it('handles undefined settings', () => {
       const metadata = extractFromSettings(undefined);
       assert.deepStrictEqual(metadata, {});
-    });
-  });
-
-  describe('extractFromEnvironment', () => {
-    it('extracts metadata from GOOGLE_SDK_NODE_* environment variables', () => {
-      process.env.GOOGLE_SDK_NODE_CLIENT_SERVICE = 'my-service';
-      process.env.GOOGLE_SDK_NODE_CLIENT_VERSION = '2.3.4';
-      process.env.GOOGLE_SDK_NODE_ARTIFACT = '@custom/package';
-
-      const metadata = extractFromEnvironment();
-      assert.strictEqual(metadata.gcpClientService, 'my-service');
-      assert.strictEqual(metadata.gcpVersion, '2.3.4');
-      assert.strictEqual(metadata.gcpArtifact, '@custom/package');
-    });
-
-    it('extracts metadata from GCP_* environment variables', () => {
-      process.env.GCP_CLIENT_SERVICE = 'gcp-service';
-      process.env.GCP_CLIENT_VERSION = '3.0.0';
-      process.env.GCP_ARTIFACT = '@gcp/package';
-
-      const metadata = extractFromEnvironment();
-      assert.strictEqual(metadata.gcpClientService, 'gcp-service');
-      assert.strictEqual(metadata.gcpVersion, '3.0.0');
-      assert.strictEqual(metadata.gcpArtifact, '@gcp/package');
     });
   });
 
