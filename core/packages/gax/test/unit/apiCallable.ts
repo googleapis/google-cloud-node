@@ -355,11 +355,11 @@ describe('createApiCall', () => {
 
     afterEach(() => {
       harness.teardown();
+      delete process.env.GOOGLE_SDK_NODE_ENABLE_TRACING;
       delete process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED;
     });
 
     it('calls traceCall with dynamicArgs, staticArgs, and isStreamingCall when tracing is enabled', async () => {
-      process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
       const traceCallSpy = sinon.spy(tracerHelper, 'traceCall');
 
       const settings = new gax.CallSettings({
@@ -398,8 +398,64 @@ describe('createApiCall', () => {
       assert.strictEqual(isStreamingCall, false);
     });
 
+    it('calls traceCall when tracing is enabled via GOOGLE_SDK_NODE_ENABLE_TRACING environment variable', async () => {
+      process.env.GOOGLE_SDK_NODE_ENABLE_TRACING = 'true';
+      const traceCallSpy = sinon.spy(tracerHelper, 'traceCall');
+
+      const settings = new gax.CallSettings({
+        apiName: 'google.example.v1.Echo',
+        otherArgs: {
+          internalTelemetryInfo: telemetryInfo,
+          internalMethodName: 'Echo',
+        },
+      });
+
+      function func(
+        argument: {},
+        metadata: {},
+        options: {},
+        callback: (err: GoogleError | null, resp?: unknown) => void,
+      ) {
+        callback(null, {data: 'hello'});
+        return {cancel: () => {}};
+      }
+
+      const apiCall = gaxCreateApiCall(func, settings);
+      await apiCall({param: 'test'}, undefined);
+
+      assert.strictEqual(traceCallSpy.calledOnce, true);
+    });
+
+    it('still calls traceCall when GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED is false', async () => {
+      process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'false';
+      const traceCallSpy = sinon.spy(tracerHelper, 'traceCall');
+
+      const settings = new gax.CallSettings({
+        apiName: 'google.example.v1.Echo',
+        enableTelemetryTracing: true,
+        otherArgs: {
+          internalTelemetryInfo: telemetryInfo,
+          internalMethodName: 'Echo',
+        },
+      });
+
+      function func(
+        argument: {},
+        metadata: {},
+        options: {},
+        callback: (err: GoogleError | null, resp?: unknown) => void,
+      ) {
+        callback(null, {data: 'hello'});
+        return {cancel: () => {}};
+      }
+
+      const apiCall = gaxCreateApiCall(func, settings);
+      await apiCall({param: 'test'}, undefined);
+
+      assert.strictEqual(traceCallSpy.calledOnce, true);
+    });
+
     it('passes isStreamingCall as true to traceCall for streaming calls when tracing is enabled', () => {
-      process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
       const traceCallSpy = sinon.spy(tracerHelper, 'traceCall');
 
       const settings = new gax.CallSettings({
@@ -430,7 +486,6 @@ describe('createApiCall', () => {
     });
 
     it('gracefully handles missing apiName and internalMethodName when tracing is enabled', async () => {
-      process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
       const traceCallSpy = sinon.spy(tracerHelper, 'traceCall');
 
       const settings = new gax.CallSettings({
@@ -463,7 +518,6 @@ describe('createApiCall', () => {
     });
 
     it('returns invokeCall directly without calling traceCall when tracing is disabled', async () => {
-      delete process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED;
       const traceCallSpy = sinon.spy(tracerHelper, 'traceCall');
 
       const settings = new gax.CallSettings({
@@ -493,7 +547,6 @@ describe('createApiCall', () => {
     });
 
     it('correctly pipes telemetry information into the active span for gRPC calls', async () => {
-      process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
       const settings = new gax.CallSettings({
         apiName: 'google.example.v1.Echo',
         enableTelemetryTracing: true,
@@ -543,7 +596,6 @@ describe('createApiCall', () => {
     });
 
     it('correctly pipes telemetry information for HTTP fallback calls', async () => {
-      process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
       const settings = new gax.CallSettings({
         apiName: 'google.example.v1.Echo',
         enableTelemetryTracing: true,
@@ -577,7 +629,6 @@ describe('createApiCall', () => {
     });
 
     it('passes fallback flag through when using fallback createApiCall with default options', async () => {
-      process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
       const traceCallSpy = sinon.spy(tracerHelper, 'traceCall');
 
       const settings = new gax.CallSettings({
@@ -617,7 +668,6 @@ describe('createApiCall', () => {
     });
 
     it('overrides an explicit _fallback argument, since the call is a fallback call by definition', async () => {
-      process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
       const traceCallSpy = sinon.spy(tracerHelper, 'traceCall');
 
       const settings = new gax.CallSettings({
@@ -658,7 +708,6 @@ describe('createApiCall', () => {
     });
 
     it('ends the span and labels it DEADLINE_EXCEEDED when a fallback call times out', async () => {
-      process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
       const settings = new gax.CallSettings({
         apiName: 'google.example.v1.Echo',
         enableTelemetryTracing: true,
@@ -726,7 +775,6 @@ describe('createApiCall', () => {
     });
 
     it('ends the span and preserves system error codes like ECONNREFUSED on a fallback call', async () => {
-      process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
       const settings = new gax.CallSettings({
         apiName: 'google.example.v1.Echo',
         enableTelemetryTracing: true,
@@ -793,7 +841,6 @@ describe('createApiCall', () => {
     });
 
     it('passes fallback flag and isStreamingCall as true for server-streaming fallback calls', () => {
-      process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
       const traceCallSpy = sinon.spy(tracerHelper, 'traceCall');
 
       const settings = new gax.CallSettings({
@@ -825,7 +872,6 @@ describe('createApiCall', () => {
     });
 
     it('sets rpcType to grpc when _fallback is boolean false', async () => {
-      process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
       const settings = new gax.CallSettings({
         apiName: 'google.example.v1.Echo',
         enableTelemetryTracing: true,
@@ -857,7 +903,6 @@ describe('createApiCall', () => {
     });
 
     it('sets rpcType to http when _fallback is "rest"', async () => {
-      process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
       const settings = new gax.CallSettings({
         apiName: 'google.example.v1.Echo',
         enableTelemetryTracing: true,
@@ -889,7 +934,6 @@ describe('createApiCall', () => {
     });
 
     it('sets rpcType to http when _fallback is "proto"', async () => {
-      process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
       const settings = new gax.CallSettings({
         apiName: 'google.example.v1.Echo',
         enableTelemetryTracing: true,
@@ -921,7 +965,6 @@ describe('createApiCall', () => {
     });
 
     it('pipes telemetry information configured via constructSettings', async () => {
-      process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
       const serviceName = 'google.example.v1.Echo';
       const defaults = gax.constructSettings(
         serviceName,
@@ -976,7 +1019,6 @@ describe('createApiCall', () => {
     });
 
     it('records error details on the span when the API call fails', async () => {
-      process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
       const settings = new gax.CallSettings({
         apiName: 'google.example.v1.Echo',
         enableTelemetryTracing: true,
@@ -1025,7 +1067,6 @@ describe('createApiCall', () => {
     });
 
     it('does not end span prematurely for successful asynchronous API calls', async () => {
-      process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
       const settings = new gax.CallSettings({
         apiName: 'google.example.v1.Echo',
         enableTelemetryTracing: true,
@@ -1067,7 +1108,6 @@ describe('createApiCall', () => {
     });
 
     it('cancels the call and ends the span', async () => {
-      process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
       const settings = new gax.CallSettings({
         apiName: 'google.example.v1.Echo',
         enableTelemetryTracing: true,
@@ -1112,7 +1152,6 @@ describe('createApiCall', () => {
     });
 
     it('does not create any spans when tracing is disabled', async () => {
-      delete process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED;
       const settings = new gax.CallSettings({
         apiName: 'google.example.v1.Echo',
         enableTelemetryTracing: false,
@@ -1142,7 +1181,6 @@ describe('createApiCall', () => {
     });
 
     it('manages span lifetime for streaming API calls until stream ends', done => {
-      process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
       const settings = new gax.CallSettings({
         apiName: 'google.example.v1.Echo',
         enableTelemetryTracing: true,
@@ -1193,7 +1231,6 @@ describe('createApiCall', () => {
     });
 
     it('records error details on the span when a streaming API call errors', done => {
-      process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
       const settings = new gax.CallSettings({
         apiName: 'google.example.v1.Echo',
         enableTelemetryTracing: true,
@@ -1272,8 +1309,6 @@ describe('createApiCall', () => {
       for (const transport of transports) {
         describe(`over ${transport.name}`, () => {
           it('omits resend count when the call succeeds on the first attempt', async () => {
-            process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
-
             let attempts = 0;
             function func(
               argument: {},
@@ -1301,8 +1336,6 @@ describe('createApiCall', () => {
           });
 
           it('reports one resend per retry', async () => {
-            process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
-
             let attempts = 0;
             function func(
               argument: {},
@@ -1342,8 +1375,6 @@ describe('createApiCall', () => {
           });
 
           it('reports resends correctly when retries are exhausted by maxRetries', async () => {
-            process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
-
             let attempts = 0;
             function func(
               argument: {},
@@ -1394,8 +1425,6 @@ describe('createApiCall', () => {
           });
 
           it('reports resends correctly when retries are exhausted by totalTimeoutMillis', async () => {
-            process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
-
             let attempts = 0;
             function func(
               argument: {},
@@ -1451,7 +1480,6 @@ describe('createApiCall', () => {
       // serves server-streaming through the `rest` branch of `setStream`,
       // which has no retry loop at all, so there is no resend to count.
       it('reports resends for a retried server-streaming gRPC call', done => {
-        process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
         const settings = new gax.CallSettings({
           apiName: 'google.example.v1.Echo',
           enableTelemetryTracing: true,
@@ -1515,7 +1543,6 @@ describe('createApiCall', () => {
       });
 
       it('reports resends for a default retry-request server-streaming gRPC call', done => {
-        process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
         const settings = new gax.CallSettings({
           apiName: 'google.example.v1.Echo',
           enableTelemetryTracing: true,
