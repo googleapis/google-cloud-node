@@ -416,6 +416,44 @@ describe('EndToEnd', async () => {
             expectedEventNames,
           );
         });
+
+        it('runPartitionedUpdate with string query', async () => {
+          await database.runPartitionedUpdate(updateSql);
+
+          const expectedSpanNames = [
+            'CloudSpanner.Snapshot.begin',
+            'CloudSpanner.Snapshot.runStream',
+            'CloudSpanner.Snapshot.run',
+            'CloudSpanner.Dml.runUpdate',
+            'CloudSpanner.PartitionedDml.runUpdate',
+            'CloudSpanner.Database.runPartitionedUpdate',
+          ];
+          const expectedEventNames = [
+            'Begin Transaction',
+            'Transaction Creation Done',
+            'Starting stream',
+            'Acquiring session',
+            'Cache hit: has usable session',
+            'Acquired session',
+          ];
+          verifySpansAndEvents(
+            traceExporter,
+            expectedSpanNames,
+            expectedEventNames,
+          );
+
+          const finishedSpans = traceExporter.getFinishedSpans();
+          for (const span of finishedSpans) {
+            const hasNumericAttributeKeys = Object.keys(span.attributes).some(
+              key => /^\d+$/.test(key),
+            );
+            assert.strictEqual(
+              hasNumericAttributeKeys,
+              false,
+              `Span ${span.name} should not contain numeric attributes from string spreading`,
+            );
+          }
+        });
       });
     });
   });
@@ -843,6 +881,28 @@ describe('ObservabilityOptions injection and propagation', async () => {
         expectedEventNames,
         `Unexpected events:\n\tGot:  ${actualEventNames}\n\tWant: ${expectedEventNames}`,
       );
+
+      for (const span of spansFromInjected) {
+        if (
+          span.name === 'CloudSpanner.Database.run' ||
+          span.name === 'CloudSpanner.Database.runStream' ||
+          span.name === 'CloudSpanner.Snapshot.runStream'
+        ) {
+          assert.strictEqual(
+            span.attributes['db.statement'],
+            'SELECT 1',
+            `Span ${span.name} should have db.statement set to 'SELECT 1'`,
+          );
+          const hasNumericAttributeKeys = Object.keys(span.attributes).some(
+            key => /^\d+$/.test(key),
+          );
+          assert.strictEqual(
+            hasNumericAttributeKeys,
+            false,
+            `Span ${span.name} should not contain numeric attributes from string spreading`,
+          );
+        }
+      }
     } catch (err) {
       assert.ifError(err);
     } finally {
@@ -1778,6 +1838,7 @@ describe('Traces for ExecuteStream broken stream retries', () => {
                 );
 
                 done();
+                return null;
               })
               .catch(err => done(err));
           });
@@ -1938,9 +1999,7 @@ describe('Traces for ExecuteStream broken stream retries', () => {
         assert.strictEqual(attempts, 1);
         tx!
           .commit()
-          .then(() => {
-            database.close().catch(assert.ifError);
-          })
+          .then(() => database.close())
           .catch(assert.ifError);
       });
     });

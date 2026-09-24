@@ -31,3 +31,4 @@ export {LongRunningDescriptor as LongrunningDescriptor} from './longRunningCalls
 export {PageDescriptor} from './paginationCalls/pageDescriptor';
 export {StreamDescriptor} from './streamingCalls/streamDescriptor';
 export {BundleDescriptor} from './bundlingCalls/bundleDescriptor';
+export {ResumableUploadDescriptor} from './resumableUpload';

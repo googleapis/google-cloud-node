@@ -165,37 +165,19 @@ describe('OpenTelemetry Context Isolation Tests', () => {
       await MetricsTracerFactory.resetInstance();
     });
 
-    it('should schedule MetricsTracerFactory cleanup setInterval in ROOT_CONTEXT', () => {
+    it('should not schedule any background cleanup setInterval', () => {
       const tracer = trace.getTracer('test');
+      const setIntervalStub = sandbox.stub(global, 'setInterval');
 
-      const setIntervalStub = sandbox
-        .stub(global, 'setInterval')
-        .callsFake(() => {
-          const activeSpan = trace.getSpan(context.active());
-
-          // Assert that the active context is ROOT_CONTEXT (i.e., no active span)
-          assert.strictEqual(
-            activeSpan,
-            undefined,
-            'setInterval scheduling must be isolated within ROOT_CONTEXT and not carry any active request span',
-          );
-          return {
-            unref: () => {},
-          } as unknown as NodeJS.Timeout;
-        });
-
-      // Start an active request context
       tracer.startActiveSpan('request-span', span => {
         try {
-          // Instantiate the singleton under a request context
           MetricsTracerFactory.getInstance('mock-project-id');
         } finally {
           span.end();
         }
       });
 
-      // Verify that the cleanup interval was scheduled
-      assert.strictEqual(setIntervalStub.callCount, 1);
+      assert.strictEqual(setIntervalStub.callCount, 0);
     });
   });
 });

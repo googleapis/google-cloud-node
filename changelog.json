@@ -5,6 +5,246 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "11d6a6fe0cec995da9f85db7a072f552873096f2",
+          "message": "Allow customers to enable tracing with environmental variables",
+          "issues": [
+            "9438"
+          ],
+          "scope": "gax"
+        },
+        {
+          "type": "feat",
+          "sha": "feb2851a5d65cbea797148dce70b89fe4dc68b69",
+          "message": "Remove experimental flag requirement for tracing",
+          "issues": [
+            "9423"
+          ],
+          "scope": "o11y"
+        }
+      ],
+      "version": "6.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "google-gax",
+      "id": "3bf94fed-e7ee-4014-b7e5-3303fbbe9cda",
+      "createTime": "2026-09-23T22:50:41.126Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "5cd945de7f4fd96878c1956d68bcf505e48686ce",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9427"
+          ]
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/monitoring-dashboards",
+      "id": "5c7077d6-e17a-4802-8362-8fab7ee001aa",
+      "createTime": "2026-09-23T19:29:05.424Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "5cd945de7f4fd96878c1956d68bcf505e48686ce",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9427"
+          ]
+        }
+      ],
+      "version": "0.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-ads/marketing-platform-admin",
+      "id": "0674555f-05cd-4c97-b710-66e1bb862415",
+      "createTime": "2026-09-23T19:29:05.398Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "5cd945de7f4fd96878c1956d68bcf505e48686ce",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9427"
+          ]
+        }
+      ],
+      "version": "0.13.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vectorsearch",
+      "id": "a0f342fb-4aae-46c8-b521-f0cce4dafb81",
+      "createTime": "2026-09-23T19:29:05.369Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "5cd945de7f4fd96878c1956d68bcf505e48686ce",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9427"
+          ]
+        }
+      ],
+      "version": "7.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/tasks",
+      "id": "b6fef7dc-dda5-4406-baac-542855e8ce97",
+      "createTime": "2026-09-23T19:29:05.343Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "5cd945de7f4fd96878c1956d68bcf505e48686ce",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9427"
+          ]
+        }
+      ],
+      "version": "0.29.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/sql",
+      "id": "cf2017b8-8872-4718-ae03-7ae0ce2664ad",
+      "createTime": "2026-09-23T19:29:05.317Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "5cd945de7f4fd96878c1956d68bcf505e48686ce",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9427"
+          ]
+        }
+      ],
+      "version": "0.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/lustre",
+      "id": "659e8d5c-ea28-4da3-9176-177a9810a2d2",
+      "createTime": "2026-09-23T19:29:05.291Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "5cd945de7f4fd96878c1956d68bcf505e48686ce",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9427"
+          ]
+        }
+      ],
+      "version": "0.13.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/geminidataanalytics",
+      "id": "013ecdf9-165a-4b41-8412-6768ef9dcc7d",
+      "createTime": "2026-09-23T19:29:05.264Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "5cd945de7f4fd96878c1956d68bcf505e48686ce",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9427"
+          ]
+        }
+      ],
+      "version": "0.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigtable-api",
+      "id": "f0196fa4-2708-4b6a-8c94-c21e73ec69b7",
+      "createTime": "2026-09-23T19:29:05.239Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "5cd945de7f4fd96878c1956d68bcf505e48686ce",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9427"
+          ]
+        }
+      ],
+      "version": "0.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/agentregistry",
+      "id": "66043c2d-4925-44c6-9c22-613605dc68a8",
+      "createTime": "2026-09-23T19:29:05.213Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "5cd945de7f4fd96878c1956d68bcf505e48686ce",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9427"
+          ]
+        }
+      ],
+      "version": "0.33.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-apps/chat",
+      "id": "b1f6b2b4-e44b-4bd0-8dc7-ef7dfa972f13",
+      "createTime": "2026-09-23T19:29:05.170Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "8116709bc39e5e0ea525cd6937ce079c25a0971b",
+          "message": "Support resumable uploads",
+          "issues": [
+            "9287"
+          ],
+          "scope": "gax"
+        }
+      ],
+      "version": "6.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "google-gax",
+      "id": "8f948fa0-e426-45fb-94b9-c5dcdd5e8be4",
+      "createTime": "2026-09-23T19:29:05.132Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "d2c4b08ae8f3a18c252a09a09e1ae1e49d4cd822",
+          "message": "Move gapic-generator-typescript into the root pnpm workspace",
+          "issues": [
+            "9418"
+          ],
+          "scope": "gax"
+        },
+        {
+          "type": "feat",
+          "sha": "0722a3415190ce725537091d67b49dbaccb5cd2a",
+          "message": "Use runtime-agnostic test runner in GAPIC package templates",
+          "issues": [],
+          "scope": "generator"
+        }
+      ],
+      "version": "5.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gapic-generator",
+      "id": "8dfdbddd-e970-49c1-9953-dd67e959cded",
+      "createTime": "2026-09-23T06:58:24.417Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "57d0cfd84827933a5da83c370b38942d0c2eadd8",
           "message": "Update API sources and regenerate",
           "issues": [
@@ -95410,5 +95650,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-09-22T18:58:29.359Z"
+  "updateTime": "2026-09-23T22:50:41.126Z"
 }
