@@ -299,11 +299,18 @@ class ReadRowsRequestHandler {
           // to ensure we unblock and avoid hanging if the stream ends while awaiting backpressure.
           debugLog('awaiting for back pressure');
           await new Promise<void>(resolve => {
-            this.stopWaiting = resolve;
-            stream.once('drain', resolve);
-            stream.once('close', resolve);
-            stream.once('error', resolve);
-            stream.once('finish', resolve);
+            const onEvent = () => {
+              stream.off('drain', onEvent);
+              stream.off('close', onEvent);
+              stream.off('error', onEvent);
+              stream.off('finish', onEvent);
+              resolve();
+            };
+            this.stopWaiting = onEvent;
+            stream.once('drain', onEvent);
+            stream.once('close', onEvent);
+            stream.once('error', onEvent);
+            stream.once('finish', onEvent);
           });
         }
         resolve();
