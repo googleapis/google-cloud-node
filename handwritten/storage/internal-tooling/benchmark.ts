@@ -1075,10 +1075,7 @@ async function runBenchmark(
     }
 
     if (shouldRun('List Files')) {
-      const listTimes = await runListFilesScenario(
-        bucket,
-        `bench-${safeName}`,
-      );
+      const listTimes = await runListFilesScenario(bucket, `bench-${safeName}`);
       reportResults('List Files', listTimes);
       logMemory('After List Files');
     }
