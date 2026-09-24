@@ -78,6 +78,7 @@ import {
   Gaxios,
   GaxiosError,
   GaxiosInterceptor,
+  GaxiosOptions,
   GaxiosOptionsPrepared,
   GaxiosResponse,
 } from 'gaxios';
@@ -2434,7 +2435,7 @@ class File extends ServiceObject<File, FileMetadata> {
     cb?: DeleteCallback,
   ): Promise<[GaxiosResponse]> | void {
     const options =
-      typeof optionsOrCallback === 'object' ? optionsOrCallback : {};
+      typeof optionsOrCallback === 'object' ? {...optionsOrCallback} : {};
     cb = typeof optionsOrCallback === 'function' ? optionsOrCallback : cb;
 
     this.disableAutoRetryConditionallyIdempotent_(
@@ -2443,18 +2444,60 @@ class File extends ServiceObject<File, FileMetadata> {
       options,
     );
 
-    void (async () => {
-      let resp;
+    const reqOpts: GaxiosOptions = {
+      ...options,
+      responseType: 'text',
+      validateStatus: (status: number) => {
+        return (
+          (status >= 200 && status < 300) || status === 404 || status === 403
+        );
+      },
+    };
+
+    const promise = (async (): Promise<[GaxiosResponse]> => {
+      let respTuple: [GaxiosResponse];
       try {
-        resp = await super.delete(options);
-      } catch (err) {
-        cb!(err as Error);
-        return;
+        respTuple = await super.delete(reqOpts);
+        const resp = respTuple[0];
+
+        if (resp.data && typeof resp.data.resume === 'function') {
+          resp.data.resume();
+        }
+
+        if (resp.status === 404) {
+          if (options.ignoreNotFound) {
+            return respTuple;
+          }
+          const err: Error & {code?: number} = new Error('Not Found');
+          err.code = 404;
+          throw err;
+        }
+
+        if (resp.status === 403) {
+          const err: Error & {code?: number} = new Error('Permission Denied');
+          err.code = 403;
+          throw err;
+        }
+
+        return respTuple;
       } finally {
         this.storage.retryOptions.autoRetry = this.instanceRetryValue;
       }
-      cb!(null, ...resp);
     })();
+
+    if (cb) {
+      promise
+        .then(resp => {
+          cb!(null, ...resp);
+          return;
+        })
+        .catch(err => {
+          cb!(err as Error);
+        });
+      return;
+    }
+
+    return promise;
   }
 
   download(options?: DownloadOptions): Promise<DownloadResponse>;
@@ -4949,6 +4992,7 @@ class File extends ServiceObject<File, FileMetadata> {
 promisifyAll(File, {
   exclude: [
     'cloudStorageURI',
+    'delete',
     'publicUrl',
     'request',
     'save',

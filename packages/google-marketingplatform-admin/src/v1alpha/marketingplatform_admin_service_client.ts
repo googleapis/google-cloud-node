@@ -203,6 +203,9 @@ export class MarketingplatformAdminServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      adminAccessBindingPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/adminAccessBindings/{admin_access_binding}',
+      ),
       analyticsAccountLinkPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/analyticsAccountLinks/{analytics_account_link}',
       ),
@@ -211,6 +214,12 @@ export class MarketingplatformAdminServiceClient {
       ),
       propertyPathTemplate: new this._gaxModule.PathTemplate(
         'properties/{property}',
+      ),
+      userGroupPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/userGroups/{user_group}',
+      ),
+      userGroupMemberPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/userGroups/{user_group}/members/{member}',
       ),
     };
 
@@ -227,6 +236,21 @@ export class MarketingplatformAdminServiceClient {
         'pageToken',
         'nextPageToken',
         'analyticsAccountLinks',
+      ),
+      listUserGroups: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'userGroups',
+      ),
+      listUserGroupMembers: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'userGroupMembers',
+      ),
+      listAdminAccessBindings: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'adminAccessBindings',
       ),
     };
 
@@ -289,6 +313,20 @@ export class MarketingplatformAdminServiceClient {
       'deleteAnalyticsAccountLink',
       'setPropertyServiceLevel',
       'reportPropertyUsage',
+      'getUserGroup',
+      'listUserGroups',
+      'createUserGroup',
+      'updateUserGroup',
+      'deleteUserGroup',
+      'getUserGroupMember',
+      'listUserGroupMembers',
+      'createUserGroupMember',
+      'updateUserGroupMember',
+      'deleteUserGroupMember',
+      'getAdminAccessBinding',
+      'listAdminAccessBindings',
+      'createAdminAccessBinding',
+      'updateAdminAccessBinding',
     ];
     for (const methodName of marketingplatformAdminServiceStubMethods) {
       const callPromise = this.marketingplatformAdminServiceStub.then(
@@ -407,7 +445,7 @@ export class MarketingplatformAdminServiceClient {
   // -- Service calls --
   // -------------------
   /**
-   * Lookup for a single organization.
+   * Looks up a single organization.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1158,7 +1196,7 @@ export class MarketingplatformAdminServiceClient {
       });
   }
   /**
-   * Get the usage and billing data for properties within the organization for
+   * Gets the usage and billing data for properties within the organization for
    * the specified month.
    *
    * Per direct client org, user needs to be OrgAdmin/BillingAdmin on the
@@ -1295,6 +1333,1613 @@ export class MarketingplatformAdminServiceClient {
           {} | undefined,
         ]) => {
           this._log.info('reportPropertyUsage response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Looks up a single user group.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the UserGroup to retrieve.
+   *   Format: organizations/{org_id}/userGroups/{user_group_id}
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.marketingplatform.admin.v1alpha.UserGroup|UserGroup}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/marketingplatform_admin_service.get_user_group.js</caption>
+   * region_tag:marketingplatformadmin_v1alpha_generated_MarketingplatformAdminService_GetUserGroup_async
+   */
+  getUserGroup(
+    request?: protos.google.marketingplatform.admin.v1alpha.IGetUserGroupRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.marketingplatform.admin.v1alpha.IUserGroup,
+      (
+        | protos.google.marketingplatform.admin.v1alpha.IGetUserGroupRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  getUserGroup(
+    request: protos.google.marketingplatform.admin.v1alpha.IGetUserGroupRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.marketingplatform.admin.v1alpha.IUserGroup,
+      | protos.google.marketingplatform.admin.v1alpha.IGetUserGroupRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getUserGroup(
+    request: protos.google.marketingplatform.admin.v1alpha.IGetUserGroupRequest,
+    callback: Callback<
+      protos.google.marketingplatform.admin.v1alpha.IUserGroup,
+      | protos.google.marketingplatform.admin.v1alpha.IGetUserGroupRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getUserGroup(
+    request?: protos.google.marketingplatform.admin.v1alpha.IGetUserGroupRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.marketingplatform.admin.v1alpha.IUserGroup,
+          | protos.google.marketingplatform.admin.v1alpha.IGetUserGroupRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.marketingplatform.admin.v1alpha.IUserGroup,
+      | protos.google.marketingplatform.admin.v1alpha.IGetUserGroupRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.marketingplatform.admin.v1alpha.IUserGroup,
+      (
+        | protos.google.marketingplatform.admin.v1alpha.IGetUserGroupRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getUserGroup request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.marketingplatform.admin.v1alpha.IUserGroup,
+          | protos.google.marketingplatform.admin.v1alpha.IGetUserGroupRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getUserGroup response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getUserGroup(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.marketingplatform.admin.v1alpha.IUserGroup,
+          (
+            | protos.google.marketingplatform.admin.v1alpha.IGetUserGroupRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getUserGroup response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Creates a user group in the specified GMP organization.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource where this UserGroup will be created.
+   *   Format: organizations/{org_id}
+   * @param {google.marketingplatform.admin.v1alpha.UserGroup} request.userGroup
+   *   Required. The user group to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.marketingplatform.admin.v1alpha.UserGroup|UserGroup}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/marketingplatform_admin_service.create_user_group.js</caption>
+   * region_tag:marketingplatformadmin_v1alpha_generated_MarketingplatformAdminService_CreateUserGroup_async
+   */
+  createUserGroup(
+    request?: protos.google.marketingplatform.admin.v1alpha.ICreateUserGroupRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.marketingplatform.admin.v1alpha.IUserGroup,
+      (
+        | protos.google.marketingplatform.admin.v1alpha.ICreateUserGroupRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  createUserGroup(
+    request: protos.google.marketingplatform.admin.v1alpha.ICreateUserGroupRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.marketingplatform.admin.v1alpha.IUserGroup,
+      | protos.google.marketingplatform.admin.v1alpha.ICreateUserGroupRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  createUserGroup(
+    request: protos.google.marketingplatform.admin.v1alpha.ICreateUserGroupRequest,
+    callback: Callback<
+      protos.google.marketingplatform.admin.v1alpha.IUserGroup,
+      | protos.google.marketingplatform.admin.v1alpha.ICreateUserGroupRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  createUserGroup(
+    request?: protos.google.marketingplatform.admin.v1alpha.ICreateUserGroupRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.marketingplatform.admin.v1alpha.IUserGroup,
+          | protos.google.marketingplatform.admin.v1alpha.ICreateUserGroupRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.marketingplatform.admin.v1alpha.IUserGroup,
+      | protos.google.marketingplatform.admin.v1alpha.ICreateUserGroupRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.marketingplatform.admin.v1alpha.IUserGroup,
+      (
+        | protos.google.marketingplatform.admin.v1alpha.ICreateUserGroupRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createUserGroup request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.marketingplatform.admin.v1alpha.IUserGroup,
+          | protos.google.marketingplatform.admin.v1alpha.ICreateUserGroupRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createUserGroup response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createUserGroup(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.marketingplatform.admin.v1alpha.IUserGroup,
+          (
+            | protos.google.marketingplatform.admin.v1alpha.ICreateUserGroupRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createUserGroup response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Updates a user group in the specified GMP organization.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.marketingplatform.admin.v1alpha.UserGroup} request.userGroup
+   *   Required. The user group to update.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. The list of fields to update. Field names must be in snake case
+   *   (for example, "field_to_update"). Omitted fields will not be updated. To
+   *   replace the entire entity, use one path with the string "*" to match all
+   *   fields.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.marketingplatform.admin.v1alpha.UserGroup|UserGroup}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/marketingplatform_admin_service.update_user_group.js</caption>
+   * region_tag:marketingplatformadmin_v1alpha_generated_MarketingplatformAdminService_UpdateUserGroup_async
+   */
+  updateUserGroup(
+    request?: protos.google.marketingplatform.admin.v1alpha.IUpdateUserGroupRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.marketingplatform.admin.v1alpha.IUserGroup,
+      (
+        | protos.google.marketingplatform.admin.v1alpha.IUpdateUserGroupRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  updateUserGroup(
+    request: protos.google.marketingplatform.admin.v1alpha.IUpdateUserGroupRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.marketingplatform.admin.v1alpha.IUserGroup,
+      | protos.google.marketingplatform.admin.v1alpha.IUpdateUserGroupRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  updateUserGroup(
+    request: protos.google.marketingplatform.admin.v1alpha.IUpdateUserGroupRequest,
+    callback: Callback<
+      protos.google.marketingplatform.admin.v1alpha.IUserGroup,
+      | protos.google.marketingplatform.admin.v1alpha.IUpdateUserGroupRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  updateUserGroup(
+    request?: protos.google.marketingplatform.admin.v1alpha.IUpdateUserGroupRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.marketingplatform.admin.v1alpha.IUserGroup,
+          | protos.google.marketingplatform.admin.v1alpha.IUpdateUserGroupRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.marketingplatform.admin.v1alpha.IUserGroup,
+      | protos.google.marketingplatform.admin.v1alpha.IUpdateUserGroupRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.marketingplatform.admin.v1alpha.IUserGroup,
+      (
+        | protos.google.marketingplatform.admin.v1alpha.IUpdateUserGroupRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'user_group.name': request.userGroup!.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateUserGroup request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.marketingplatform.admin.v1alpha.IUserGroup,
+          | protos.google.marketingplatform.admin.v1alpha.IUpdateUserGroupRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateUserGroup response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateUserGroup(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.marketingplatform.admin.v1alpha.IUserGroup,
+          (
+            | protos.google.marketingplatform.admin.v1alpha.IUpdateUserGroupRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateUserGroup response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Deletes a user group in the specified GMP organization.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the user group to delete.
+   *   Format: organizations/{org_id}/userGroups/{user_group_id}
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/marketingplatform_admin_service.delete_user_group.js</caption>
+   * region_tag:marketingplatformadmin_v1alpha_generated_MarketingplatformAdminService_DeleteUserGroup_async
+   */
+  deleteUserGroup(
+    request?: protos.google.marketingplatform.admin.v1alpha.IDeleteUserGroupRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.marketingplatform.admin.v1alpha.IDeleteUserGroupRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  deleteUserGroup(
+    request: protos.google.marketingplatform.admin.v1alpha.IDeleteUserGroupRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.marketingplatform.admin.v1alpha.IDeleteUserGroupRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  deleteUserGroup(
+    request: protos.google.marketingplatform.admin.v1alpha.IDeleteUserGroupRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.marketingplatform.admin.v1alpha.IDeleteUserGroupRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  deleteUserGroup(
+    request?: protos.google.marketingplatform.admin.v1alpha.IDeleteUserGroupRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.marketingplatform.admin.v1alpha.IDeleteUserGroupRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.marketingplatform.admin.v1alpha.IDeleteUserGroupRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.marketingplatform.admin.v1alpha.IDeleteUserGroupRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteUserGroup request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.marketingplatform.admin.v1alpha.IDeleteUserGroupRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteUserGroup response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteUserGroup(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.marketingplatform.admin.v1alpha.IDeleteUserGroupRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteUserGroup response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Looks up a single user group member.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the user group member to retrieve.
+   *   Format:
+   *   organizations/{org_id}/userGroups/{user_group_id}/members/{member_id}
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.marketingplatform.admin.v1alpha.UserGroupMember|UserGroupMember}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/marketingplatform_admin_service.get_user_group_member.js</caption>
+   * region_tag:marketingplatformadmin_v1alpha_generated_MarketingplatformAdminService_GetUserGroupMember_async
+   */
+  getUserGroupMember(
+    request?: protos.google.marketingplatform.admin.v1alpha.IGetUserGroupMemberRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.marketingplatform.admin.v1alpha.IUserGroupMember,
+      (
+        | protos.google.marketingplatform.admin.v1alpha.IGetUserGroupMemberRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  getUserGroupMember(
+    request: protos.google.marketingplatform.admin.v1alpha.IGetUserGroupMemberRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.marketingplatform.admin.v1alpha.IUserGroupMember,
+      | protos.google.marketingplatform.admin.v1alpha.IGetUserGroupMemberRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getUserGroupMember(
+    request: protos.google.marketingplatform.admin.v1alpha.IGetUserGroupMemberRequest,
+    callback: Callback<
+      protos.google.marketingplatform.admin.v1alpha.IUserGroupMember,
+      | protos.google.marketingplatform.admin.v1alpha.IGetUserGroupMemberRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getUserGroupMember(
+    request?: protos.google.marketingplatform.admin.v1alpha.IGetUserGroupMemberRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.marketingplatform.admin.v1alpha.IUserGroupMember,
+          | protos.google.marketingplatform.admin.v1alpha.IGetUserGroupMemberRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.marketingplatform.admin.v1alpha.IUserGroupMember,
+      | protos.google.marketingplatform.admin.v1alpha.IGetUserGroupMemberRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.marketingplatform.admin.v1alpha.IUserGroupMember,
+      (
+        | protos.google.marketingplatform.admin.v1alpha.IGetUserGroupMemberRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getUserGroupMember request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.marketingplatform.admin.v1alpha.IUserGroupMember,
+          | protos.google.marketingplatform.admin.v1alpha.IGetUserGroupMemberRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getUserGroupMember response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getUserGroupMember(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.marketingplatform.admin.v1alpha.IUserGroupMember,
+          (
+            | protos.google.marketingplatform.admin.v1alpha.IGetUserGroupMemberRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getUserGroupMember response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Adds a member to the specified GMP user group.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource where this UserGroupMember will be created.
+   *   Format: organizations/{org_id}/userGroups/{user_group_id}
+   * @param {google.marketingplatform.admin.v1alpha.UserGroupMember} request.userGroupMember
+   *   Required. The user group member to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.marketingplatform.admin.v1alpha.UserGroupMember|UserGroupMember}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/marketingplatform_admin_service.create_user_group_member.js</caption>
+   * region_tag:marketingplatformadmin_v1alpha_generated_MarketingplatformAdminService_CreateUserGroupMember_async
+   */
+  createUserGroupMember(
+    request?: protos.google.marketingplatform.admin.v1alpha.ICreateUserGroupMemberRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.marketingplatform.admin.v1alpha.IUserGroupMember,
+      (
+        | protos.google.marketingplatform.admin.v1alpha.ICreateUserGroupMemberRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  createUserGroupMember(
+    request: protos.google.marketingplatform.admin.v1alpha.ICreateUserGroupMemberRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.marketingplatform.admin.v1alpha.IUserGroupMember,
+      | protos.google.marketingplatform.admin.v1alpha.ICreateUserGroupMemberRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  createUserGroupMember(
+    request: protos.google.marketingplatform.admin.v1alpha.ICreateUserGroupMemberRequest,
+    callback: Callback<
+      protos.google.marketingplatform.admin.v1alpha.IUserGroupMember,
+      | protos.google.marketingplatform.admin.v1alpha.ICreateUserGroupMemberRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  createUserGroupMember(
+    request?: protos.google.marketingplatform.admin.v1alpha.ICreateUserGroupMemberRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.marketingplatform.admin.v1alpha.IUserGroupMember,
+          | protos.google.marketingplatform.admin.v1alpha.ICreateUserGroupMemberRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.marketingplatform.admin.v1alpha.IUserGroupMember,
+      | protos.google.marketingplatform.admin.v1alpha.ICreateUserGroupMemberRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.marketingplatform.admin.v1alpha.IUserGroupMember,
+      (
+        | protos.google.marketingplatform.admin.v1alpha.ICreateUserGroupMemberRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createUserGroupMember request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.marketingplatform.admin.v1alpha.IUserGroupMember,
+          | protos.google.marketingplatform.admin.v1alpha.ICreateUserGroupMemberRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createUserGroupMember response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createUserGroupMember(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.marketingplatform.admin.v1alpha.IUserGroupMember,
+          (
+            | protos.google.marketingplatform.admin.v1alpha.ICreateUserGroupMemberRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createUserGroupMember response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Updates a member in the specified GMP user group.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.marketingplatform.admin.v1alpha.UserGroupMember} request.userGroupMember
+   *   Required. The user group member to update.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. The list of fields to update. Field names must be in snake case
+   *   (for example, "field_to_update"). Omitted fields will not be updated. To
+   *   replace the entire entity, use one path with the string "*" to match all
+   *   fields.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.marketingplatform.admin.v1alpha.UserGroupMember|UserGroupMember}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/marketingplatform_admin_service.update_user_group_member.js</caption>
+   * region_tag:marketingplatformadmin_v1alpha_generated_MarketingplatformAdminService_UpdateUserGroupMember_async
+   */
+  updateUserGroupMember(
+    request?: protos.google.marketingplatform.admin.v1alpha.IUpdateUserGroupMemberRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.marketingplatform.admin.v1alpha.IUserGroupMember,
+      (
+        | protos.google.marketingplatform.admin.v1alpha.IUpdateUserGroupMemberRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  updateUserGroupMember(
+    request: protos.google.marketingplatform.admin.v1alpha.IUpdateUserGroupMemberRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.marketingplatform.admin.v1alpha.IUserGroupMember,
+      | protos.google.marketingplatform.admin.v1alpha.IUpdateUserGroupMemberRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  updateUserGroupMember(
+    request: protos.google.marketingplatform.admin.v1alpha.IUpdateUserGroupMemberRequest,
+    callback: Callback<
+      protos.google.marketingplatform.admin.v1alpha.IUserGroupMember,
+      | protos.google.marketingplatform.admin.v1alpha.IUpdateUserGroupMemberRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  updateUserGroupMember(
+    request?: protos.google.marketingplatform.admin.v1alpha.IUpdateUserGroupMemberRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.marketingplatform.admin.v1alpha.IUserGroupMember,
+          | protos.google.marketingplatform.admin.v1alpha.IUpdateUserGroupMemberRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.marketingplatform.admin.v1alpha.IUserGroupMember,
+      | protos.google.marketingplatform.admin.v1alpha.IUpdateUserGroupMemberRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.marketingplatform.admin.v1alpha.IUserGroupMember,
+      (
+        | protos.google.marketingplatform.admin.v1alpha.IUpdateUserGroupMemberRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'user_group_member.name': request.userGroupMember!.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateUserGroupMember request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.marketingplatform.admin.v1alpha.IUserGroupMember,
+          | protos.google.marketingplatform.admin.v1alpha.IUpdateUserGroupMemberRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateUserGroupMember response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateUserGroupMember(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.marketingplatform.admin.v1alpha.IUserGroupMember,
+          (
+            | protos.google.marketingplatform.admin.v1alpha.IUpdateUserGroupMemberRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateUserGroupMember response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Deletes a member in the specified GMP user group.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the user group member to delete.
+   *   Format:
+   *   organizations/{org_id}/userGroups/{user_group_id}/members/{member_id}
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/marketingplatform_admin_service.delete_user_group_member.js</caption>
+   * region_tag:marketingplatformadmin_v1alpha_generated_MarketingplatformAdminService_DeleteUserGroupMember_async
+   */
+  deleteUserGroupMember(
+    request?: protos.google.marketingplatform.admin.v1alpha.IDeleteUserGroupMemberRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.marketingplatform.admin.v1alpha.IDeleteUserGroupMemberRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  deleteUserGroupMember(
+    request: protos.google.marketingplatform.admin.v1alpha.IDeleteUserGroupMemberRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.marketingplatform.admin.v1alpha.IDeleteUserGroupMemberRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  deleteUserGroupMember(
+    request: protos.google.marketingplatform.admin.v1alpha.IDeleteUserGroupMemberRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.marketingplatform.admin.v1alpha.IDeleteUserGroupMemberRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  deleteUserGroupMember(
+    request?: protos.google.marketingplatform.admin.v1alpha.IDeleteUserGroupMemberRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.marketingplatform.admin.v1alpha.IDeleteUserGroupMemberRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.marketingplatform.admin.v1alpha.IDeleteUserGroupMemberRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.marketingplatform.admin.v1alpha.IDeleteUserGroupMemberRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteUserGroupMember request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.marketingplatform.admin.v1alpha.IDeleteUserGroupMemberRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteUserGroupMember response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteUserGroupMember(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.marketingplatform.admin.v1alpha.IDeleteUserGroupMemberRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteUserGroupMember response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Looks up a single admin access binding.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the AdminAccessBinding to retrieve.
+   *   Format:
+   *   organizations/{org_id}/adminAccessBindings/{admin_access_binding_id}
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.marketingplatform.admin.v1alpha.AdminAccessBinding|AdminAccessBinding}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/marketingplatform_admin_service.get_admin_access_binding.js</caption>
+   * region_tag:marketingplatformadmin_v1alpha_generated_MarketingplatformAdminService_GetAdminAccessBinding_async
+   */
+  getAdminAccessBinding(
+    request?: protos.google.marketingplatform.admin.v1alpha.IGetAdminAccessBindingRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.marketingplatform.admin.v1alpha.IAdminAccessBinding,
+      (
+        | protos.google.marketingplatform.admin.v1alpha.IGetAdminAccessBindingRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  getAdminAccessBinding(
+    request: protos.google.marketingplatform.admin.v1alpha.IGetAdminAccessBindingRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.marketingplatform.admin.v1alpha.IAdminAccessBinding,
+      | protos.google.marketingplatform.admin.v1alpha.IGetAdminAccessBindingRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getAdminAccessBinding(
+    request: protos.google.marketingplatform.admin.v1alpha.IGetAdminAccessBindingRequest,
+    callback: Callback<
+      protos.google.marketingplatform.admin.v1alpha.IAdminAccessBinding,
+      | protos.google.marketingplatform.admin.v1alpha.IGetAdminAccessBindingRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getAdminAccessBinding(
+    request?: protos.google.marketingplatform.admin.v1alpha.IGetAdminAccessBindingRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.marketingplatform.admin.v1alpha.IAdminAccessBinding,
+          | protos.google.marketingplatform.admin.v1alpha.IGetAdminAccessBindingRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.marketingplatform.admin.v1alpha.IAdminAccessBinding,
+      | protos.google.marketingplatform.admin.v1alpha.IGetAdminAccessBindingRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.marketingplatform.admin.v1alpha.IAdminAccessBinding,
+      (
+        | protos.google.marketingplatform.admin.v1alpha.IGetAdminAccessBindingRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getAdminAccessBinding request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.marketingplatform.admin.v1alpha.IAdminAccessBinding,
+          | protos.google.marketingplatform.admin.v1alpha.IGetAdminAccessBindingRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getAdminAccessBinding response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getAdminAccessBinding(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.marketingplatform.admin.v1alpha.IAdminAccessBinding,
+          (
+            | protos.google.marketingplatform.admin.v1alpha.IGetAdminAccessBindingRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getAdminAccessBinding response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Creates an admin access binding in the specified GMP organization.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent organization, which owns this Admin Access Binding.
+   *   Format: organizations/{org_id}
+   * @param {google.marketingplatform.admin.v1alpha.AdminAccessBinding} request.adminAccessBinding
+   *   Required. The Admin Access Binding to create.
+   *
+   *   Only 'user_email' input is allowed.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.marketingplatform.admin.v1alpha.AdminAccessBinding|AdminAccessBinding}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/marketingplatform_admin_service.create_admin_access_binding.js</caption>
+   * region_tag:marketingplatformadmin_v1alpha_generated_MarketingplatformAdminService_CreateAdminAccessBinding_async
+   */
+  createAdminAccessBinding(
+    request?: protos.google.marketingplatform.admin.v1alpha.ICreateAdminAccessBindingRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.marketingplatform.admin.v1alpha.IAdminAccessBinding,
+      (
+        | protos.google.marketingplatform.admin.v1alpha.ICreateAdminAccessBindingRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  createAdminAccessBinding(
+    request: protos.google.marketingplatform.admin.v1alpha.ICreateAdminAccessBindingRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.marketingplatform.admin.v1alpha.IAdminAccessBinding,
+      | protos.google.marketingplatform.admin.v1alpha.ICreateAdminAccessBindingRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  createAdminAccessBinding(
+    request: protos.google.marketingplatform.admin.v1alpha.ICreateAdminAccessBindingRequest,
+    callback: Callback<
+      protos.google.marketingplatform.admin.v1alpha.IAdminAccessBinding,
+      | protos.google.marketingplatform.admin.v1alpha.ICreateAdminAccessBindingRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  createAdminAccessBinding(
+    request?: protos.google.marketingplatform.admin.v1alpha.ICreateAdminAccessBindingRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.marketingplatform.admin.v1alpha.IAdminAccessBinding,
+          | protos.google.marketingplatform.admin.v1alpha.ICreateAdminAccessBindingRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.marketingplatform.admin.v1alpha.IAdminAccessBinding,
+      | protos.google.marketingplatform.admin.v1alpha.ICreateAdminAccessBindingRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.marketingplatform.admin.v1alpha.IAdminAccessBinding,
+      (
+        | protos.google.marketingplatform.admin.v1alpha.ICreateAdminAccessBindingRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createAdminAccessBinding request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.marketingplatform.admin.v1alpha.IAdminAccessBinding,
+          | protos.google.marketingplatform.admin.v1alpha.ICreateAdminAccessBindingRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createAdminAccessBinding response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createAdminAccessBinding(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.marketingplatform.admin.v1alpha.IAdminAccessBinding,
+          (
+            | protos.google.marketingplatform.admin.v1alpha.ICreateAdminAccessBindingRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createAdminAccessBinding response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Updates an admin access binding in the specified GMP organization.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.marketingplatform.admin.v1alpha.AdminAccessBinding} request.adminAccessBinding
+   *   Required. The AdminAccessBinding to update.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. The list of fields to update. Field names must be in snake case
+   *   (for example, "field_to_update"). Omitted fields will not be updated. To
+   *   replace the entire entity, use one path with the string "*" to match all
+   *   fields.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.marketingplatform.admin.v1alpha.AdminAccessBinding|AdminAccessBinding}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/marketingplatform_admin_service.update_admin_access_binding.js</caption>
+   * region_tag:marketingplatformadmin_v1alpha_generated_MarketingplatformAdminService_UpdateAdminAccessBinding_async
+   */
+  updateAdminAccessBinding(
+    request?: protos.google.marketingplatform.admin.v1alpha.IUpdateAdminAccessBindingRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.marketingplatform.admin.v1alpha.IAdminAccessBinding,
+      (
+        | protos.google.marketingplatform.admin.v1alpha.IUpdateAdminAccessBindingRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  updateAdminAccessBinding(
+    request: protos.google.marketingplatform.admin.v1alpha.IUpdateAdminAccessBindingRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.marketingplatform.admin.v1alpha.IAdminAccessBinding,
+      | protos.google.marketingplatform.admin.v1alpha.IUpdateAdminAccessBindingRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  updateAdminAccessBinding(
+    request: protos.google.marketingplatform.admin.v1alpha.IUpdateAdminAccessBindingRequest,
+    callback: Callback<
+      protos.google.marketingplatform.admin.v1alpha.IAdminAccessBinding,
+      | protos.google.marketingplatform.admin.v1alpha.IUpdateAdminAccessBindingRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  updateAdminAccessBinding(
+    request?: protos.google.marketingplatform.admin.v1alpha.IUpdateAdminAccessBindingRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.marketingplatform.admin.v1alpha.IAdminAccessBinding,
+          | protos.google.marketingplatform.admin.v1alpha.IUpdateAdminAccessBindingRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.marketingplatform.admin.v1alpha.IAdminAccessBinding,
+      | protos.google.marketingplatform.admin.v1alpha.IUpdateAdminAccessBindingRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.marketingplatform.admin.v1alpha.IAdminAccessBinding,
+      (
+        | protos.google.marketingplatform.admin.v1alpha.IUpdateAdminAccessBindingRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'admin_access_binding.name': request.adminAccessBinding!.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateAdminAccessBinding request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.marketingplatform.admin.v1alpha.IAdminAccessBinding,
+          | protos.google.marketingplatform.admin.v1alpha.IUpdateAdminAccessBindingRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateAdminAccessBinding response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateAdminAccessBinding(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.marketingplatform.admin.v1alpha.IAdminAccessBinding,
+          (
+            | protos.google.marketingplatform.admin.v1alpha.IUpdateAdminAccessBindingRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateAdminAccessBinding response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1796,9 +3441,795 @@ export class MarketingplatformAdminServiceClient {
       callSettings,
     ) as AsyncIterable<protos.google.marketingplatform.admin.v1alpha.IAnalyticsAccountLink>;
   }
+  /**
+   * Returns a list of user groups in the specified GMP organization.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent org where this UserGroup will be listed.
+   *   Format: organizations/{org_id}
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of user groups to return in one call. The
+   *   service may return fewer than this value.
+   *
+   *   If unspecified, at most 50 user groups will be returned. The maximum value
+   *   is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous ListUserGroups call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListUserGroups` must
+   *   match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.marketingplatform.admin.v1alpha.UserGroup|UserGroup}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listUserGroupsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listUserGroups(
+    request?: protos.google.marketingplatform.admin.v1alpha.IListUserGroupsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.marketingplatform.admin.v1alpha.IUserGroup[],
+      protos.google.marketingplatform.admin.v1alpha.IListUserGroupsRequest | null,
+      protos.google.marketingplatform.admin.v1alpha.IListUserGroupsResponse,
+    ]
+  >;
+  listUserGroups(
+    request: protos.google.marketingplatform.admin.v1alpha.IListUserGroupsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.marketingplatform.admin.v1alpha.IListUserGroupsRequest,
+      | protos.google.marketingplatform.admin.v1alpha.IListUserGroupsResponse
+      | null
+      | undefined,
+      protos.google.marketingplatform.admin.v1alpha.IUserGroup
+    >,
+  ): void;
+  listUserGroups(
+    request: protos.google.marketingplatform.admin.v1alpha.IListUserGroupsRequest,
+    callback: PaginationCallback<
+      protos.google.marketingplatform.admin.v1alpha.IListUserGroupsRequest,
+      | protos.google.marketingplatform.admin.v1alpha.IListUserGroupsResponse
+      | null
+      | undefined,
+      protos.google.marketingplatform.admin.v1alpha.IUserGroup
+    >,
+  ): void;
+  listUserGroups(
+    request?: protos.google.marketingplatform.admin.v1alpha.IListUserGroupsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.marketingplatform.admin.v1alpha.IListUserGroupsRequest,
+          | protos.google.marketingplatform.admin.v1alpha.IListUserGroupsResponse
+          | null
+          | undefined,
+          protos.google.marketingplatform.admin.v1alpha.IUserGroup
+        >,
+    callback?: PaginationCallback<
+      protos.google.marketingplatform.admin.v1alpha.IListUserGroupsRequest,
+      | protos.google.marketingplatform.admin.v1alpha.IListUserGroupsResponse
+      | null
+      | undefined,
+      protos.google.marketingplatform.admin.v1alpha.IUserGroup
+    >,
+  ): Promise<
+    [
+      protos.google.marketingplatform.admin.v1alpha.IUserGroup[],
+      protos.google.marketingplatform.admin.v1alpha.IListUserGroupsRequest | null,
+      protos.google.marketingplatform.admin.v1alpha.IListUserGroupsResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.marketingplatform.admin.v1alpha.IListUserGroupsRequest,
+          | protos.google.marketingplatform.admin.v1alpha.IListUserGroupsResponse
+          | null
+          | undefined,
+          protos.google.marketingplatform.admin.v1alpha.IUserGroup
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listUserGroups values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listUserGroups request %j', request);
+    return this.innerApiCalls
+      .listUserGroups(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.marketingplatform.admin.v1alpha.IUserGroup[],
+          protos.google.marketingplatform.admin.v1alpha.IListUserGroupsRequest | null,
+          protos.google.marketingplatform.admin.v1alpha.IListUserGroupsResponse,
+        ]) => {
+          this._log.info('listUserGroups values %j', response);
+          return [response, input, output];
+        },
+      );
+  }
+
+  /**
+   * Equivalent to `listUserGroups`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent org where this UserGroup will be listed.
+   *   Format: organizations/{org_id}
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of user groups to return in one call. The
+   *   service may return fewer than this value.
+   *
+   *   If unspecified, at most 50 user groups will be returned. The maximum value
+   *   is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous ListUserGroups call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListUserGroups` must
+   *   match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.marketingplatform.admin.v1alpha.UserGroup|UserGroup} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listUserGroupsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listUserGroupsStream(
+    request?: protos.google.marketingplatform.admin.v1alpha.IListUserGroupsRequest,
+    options?: CallOptions,
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listUserGroups'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listUserGroups stream %j', request);
+    return this.descriptors.page.listUserGroups.createStream(
+      this.innerApiCalls.listUserGroups as GaxCall,
+      request,
+      callSettings,
+    );
+  }
+
+  /**
+   * Equivalent to `listUserGroups`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent org where this UserGroup will be listed.
+   *   Format: organizations/{org_id}
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of user groups to return in one call. The
+   *   service may return fewer than this value.
+   *
+   *   If unspecified, at most 50 user groups will be returned. The maximum value
+   *   is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous ListUserGroups call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListUserGroups` must
+   *   match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.marketingplatform.admin.v1alpha.UserGroup|UserGroup}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/marketingplatform_admin_service.list_user_groups.js</caption>
+   * region_tag:marketingplatformadmin_v1alpha_generated_MarketingplatformAdminService_ListUserGroups_async
+   */
+  listUserGroupsAsync(
+    request?: protos.google.marketingplatform.admin.v1alpha.IListUserGroupsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.marketingplatform.admin.v1alpha.IUserGroup> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listUserGroups'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listUserGroups iterate %j', request);
+    return this.descriptors.page.listUserGroups.asyncIterate(
+      this.innerApiCalls['listUserGroups'] as GaxCall,
+      request as {},
+      callSettings,
+    ) as AsyncIterable<protos.google.marketingplatform.admin.v1alpha.IUserGroup>;
+  }
+  /**
+   * Returns a list of members in the specified user group.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent user group where this UserGroupMember will be listed.
+   *   Format: organizations/{org_id}/userGroups/{user_group_id}
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of user group members to return in one call.
+   *   The service may return fewer than this value.
+   *
+   *   If unspecified, at most 50 user group members will be returned. The
+   *   maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous ListUserGroupMembers call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `ListUserGroupMembers` must match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.marketingplatform.admin.v1alpha.UserGroupMember|UserGroupMember}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listUserGroupMembersAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listUserGroupMembers(
+    request?: protos.google.marketingplatform.admin.v1alpha.IListUserGroupMembersRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.marketingplatform.admin.v1alpha.IUserGroupMember[],
+      protos.google.marketingplatform.admin.v1alpha.IListUserGroupMembersRequest | null,
+      protos.google.marketingplatform.admin.v1alpha.IListUserGroupMembersResponse,
+    ]
+  >;
+  listUserGroupMembers(
+    request: protos.google.marketingplatform.admin.v1alpha.IListUserGroupMembersRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.marketingplatform.admin.v1alpha.IListUserGroupMembersRequest,
+      | protos.google.marketingplatform.admin.v1alpha.IListUserGroupMembersResponse
+      | null
+      | undefined,
+      protos.google.marketingplatform.admin.v1alpha.IUserGroupMember
+    >,
+  ): void;
+  listUserGroupMembers(
+    request: protos.google.marketingplatform.admin.v1alpha.IListUserGroupMembersRequest,
+    callback: PaginationCallback<
+      protos.google.marketingplatform.admin.v1alpha.IListUserGroupMembersRequest,
+      | protos.google.marketingplatform.admin.v1alpha.IListUserGroupMembersResponse
+      | null
+      | undefined,
+      protos.google.marketingplatform.admin.v1alpha.IUserGroupMember
+    >,
+  ): void;
+  listUserGroupMembers(
+    request?: protos.google.marketingplatform.admin.v1alpha.IListUserGroupMembersRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.marketingplatform.admin.v1alpha.IListUserGroupMembersRequest,
+          | protos.google.marketingplatform.admin.v1alpha.IListUserGroupMembersResponse
+          | null
+          | undefined,
+          protos.google.marketingplatform.admin.v1alpha.IUserGroupMember
+        >,
+    callback?: PaginationCallback<
+      protos.google.marketingplatform.admin.v1alpha.IListUserGroupMembersRequest,
+      | protos.google.marketingplatform.admin.v1alpha.IListUserGroupMembersResponse
+      | null
+      | undefined,
+      protos.google.marketingplatform.admin.v1alpha.IUserGroupMember
+    >,
+  ): Promise<
+    [
+      protos.google.marketingplatform.admin.v1alpha.IUserGroupMember[],
+      protos.google.marketingplatform.admin.v1alpha.IListUserGroupMembersRequest | null,
+      protos.google.marketingplatform.admin.v1alpha.IListUserGroupMembersResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.marketingplatform.admin.v1alpha.IListUserGroupMembersRequest,
+          | protos.google.marketingplatform.admin.v1alpha.IListUserGroupMembersResponse
+          | null
+          | undefined,
+          protos.google.marketingplatform.admin.v1alpha.IUserGroupMember
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listUserGroupMembers values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listUserGroupMembers request %j', request);
+    return this.innerApiCalls
+      .listUserGroupMembers(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.marketingplatform.admin.v1alpha.IUserGroupMember[],
+          protos.google.marketingplatform.admin.v1alpha.IListUserGroupMembersRequest | null,
+          protos.google.marketingplatform.admin.v1alpha.IListUserGroupMembersResponse,
+        ]) => {
+          this._log.info('listUserGroupMembers values %j', response);
+          return [response, input, output];
+        },
+      );
+  }
+
+  /**
+   * Equivalent to `listUserGroupMembers`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent user group where this UserGroupMember will be listed.
+   *   Format: organizations/{org_id}/userGroups/{user_group_id}
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of user group members to return in one call.
+   *   The service may return fewer than this value.
+   *
+   *   If unspecified, at most 50 user group members will be returned. The
+   *   maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous ListUserGroupMembers call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `ListUserGroupMembers` must match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.marketingplatform.admin.v1alpha.UserGroupMember|UserGroupMember} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listUserGroupMembersAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listUserGroupMembersStream(
+    request?: protos.google.marketingplatform.admin.v1alpha.IListUserGroupMembersRequest,
+    options?: CallOptions,
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listUserGroupMembers'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listUserGroupMembers stream %j', request);
+    return this.descriptors.page.listUserGroupMembers.createStream(
+      this.innerApiCalls.listUserGroupMembers as GaxCall,
+      request,
+      callSettings,
+    );
+  }
+
+  /**
+   * Equivalent to `listUserGroupMembers`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent user group where this UserGroupMember will be listed.
+   *   Format: organizations/{org_id}/userGroups/{user_group_id}
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of user group members to return in one call.
+   *   The service may return fewer than this value.
+   *
+   *   If unspecified, at most 50 user group members will be returned. The
+   *   maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous ListUserGroupMembers call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `ListUserGroupMembers` must match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.marketingplatform.admin.v1alpha.UserGroupMember|UserGroupMember}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/marketingplatform_admin_service.list_user_group_members.js</caption>
+   * region_tag:marketingplatformadmin_v1alpha_generated_MarketingplatformAdminService_ListUserGroupMembers_async
+   */
+  listUserGroupMembersAsync(
+    request?: protos.google.marketingplatform.admin.v1alpha.IListUserGroupMembersRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.marketingplatform.admin.v1alpha.IUserGroupMember> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listUserGroupMembers'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listUserGroupMembers iterate %j', request);
+    return this.descriptors.page.listUserGroupMembers.asyncIterate(
+      this.innerApiCalls['listUserGroupMembers'] as GaxCall,
+      request as {},
+      callSettings,
+    ) as AsyncIterable<protos.google.marketingplatform.admin.v1alpha.IUserGroupMember>;
+  }
+  /**
+   * Returns a list of admin access bindings in the specified GMP organization.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent organization, which owns this collection of Admin
+   *   Access Bindings. Format: organizations/{org_id}
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of Admin Access Bindings to return in one
+   *   call. The service may return fewer than this value.
+   *
+   *   If unspecified, at most 50 Admin Access Bindings will be returned. The
+   *   maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous ListAdminAccessBindings
+   *   call. Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `ListAdminAccessBindings` must match the call that provided the page
+   *   token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.marketingplatform.admin.v1alpha.AdminAccessBinding|AdminAccessBinding}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listAdminAccessBindingsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listAdminAccessBindings(
+    request?: protos.google.marketingplatform.admin.v1alpha.IListAdminAccessBindingsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.marketingplatform.admin.v1alpha.IAdminAccessBinding[],
+      protos.google.marketingplatform.admin.v1alpha.IListAdminAccessBindingsRequest | null,
+      protos.google.marketingplatform.admin.v1alpha.IListAdminAccessBindingsResponse,
+    ]
+  >;
+  listAdminAccessBindings(
+    request: protos.google.marketingplatform.admin.v1alpha.IListAdminAccessBindingsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.marketingplatform.admin.v1alpha.IListAdminAccessBindingsRequest,
+      | protos.google.marketingplatform.admin.v1alpha.IListAdminAccessBindingsResponse
+      | null
+      | undefined,
+      protos.google.marketingplatform.admin.v1alpha.IAdminAccessBinding
+    >,
+  ): void;
+  listAdminAccessBindings(
+    request: protos.google.marketingplatform.admin.v1alpha.IListAdminAccessBindingsRequest,
+    callback: PaginationCallback<
+      protos.google.marketingplatform.admin.v1alpha.IListAdminAccessBindingsRequest,
+      | protos.google.marketingplatform.admin.v1alpha.IListAdminAccessBindingsResponse
+      | null
+      | undefined,
+      protos.google.marketingplatform.admin.v1alpha.IAdminAccessBinding
+    >,
+  ): void;
+  listAdminAccessBindings(
+    request?: protos.google.marketingplatform.admin.v1alpha.IListAdminAccessBindingsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.marketingplatform.admin.v1alpha.IListAdminAccessBindingsRequest,
+          | protos.google.marketingplatform.admin.v1alpha.IListAdminAccessBindingsResponse
+          | null
+          | undefined,
+          protos.google.marketingplatform.admin.v1alpha.IAdminAccessBinding
+        >,
+    callback?: PaginationCallback<
+      protos.google.marketingplatform.admin.v1alpha.IListAdminAccessBindingsRequest,
+      | protos.google.marketingplatform.admin.v1alpha.IListAdminAccessBindingsResponse
+      | null
+      | undefined,
+      protos.google.marketingplatform.admin.v1alpha.IAdminAccessBinding
+    >,
+  ): Promise<
+    [
+      protos.google.marketingplatform.admin.v1alpha.IAdminAccessBinding[],
+      protos.google.marketingplatform.admin.v1alpha.IListAdminAccessBindingsRequest | null,
+      protos.google.marketingplatform.admin.v1alpha.IListAdminAccessBindingsResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.marketingplatform.admin.v1alpha.IListAdminAccessBindingsRequest,
+          | protos.google.marketingplatform.admin.v1alpha.IListAdminAccessBindingsResponse
+          | null
+          | undefined,
+          protos.google.marketingplatform.admin.v1alpha.IAdminAccessBinding
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listAdminAccessBindings values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listAdminAccessBindings request %j', request);
+    return this.innerApiCalls
+      .listAdminAccessBindings(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.marketingplatform.admin.v1alpha.IAdminAccessBinding[],
+          protos.google.marketingplatform.admin.v1alpha.IListAdminAccessBindingsRequest | null,
+          protos.google.marketingplatform.admin.v1alpha.IListAdminAccessBindingsResponse,
+        ]) => {
+          this._log.info('listAdminAccessBindings values %j', response);
+          return [response, input, output];
+        },
+      );
+  }
+
+  /**
+   * Equivalent to `listAdminAccessBindings`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent organization, which owns this collection of Admin
+   *   Access Bindings. Format: organizations/{org_id}
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of Admin Access Bindings to return in one
+   *   call. The service may return fewer than this value.
+   *
+   *   If unspecified, at most 50 Admin Access Bindings will be returned. The
+   *   maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous ListAdminAccessBindings
+   *   call. Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `ListAdminAccessBindings` must match the call that provided the page
+   *   token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.marketingplatform.admin.v1alpha.AdminAccessBinding|AdminAccessBinding} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listAdminAccessBindingsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listAdminAccessBindingsStream(
+    request?: protos.google.marketingplatform.admin.v1alpha.IListAdminAccessBindingsRequest,
+    options?: CallOptions,
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listAdminAccessBindings'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listAdminAccessBindings stream %j', request);
+    return this.descriptors.page.listAdminAccessBindings.createStream(
+      this.innerApiCalls.listAdminAccessBindings as GaxCall,
+      request,
+      callSettings,
+    );
+  }
+
+  /**
+   * Equivalent to `listAdminAccessBindings`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent organization, which owns this collection of Admin
+   *   Access Bindings. Format: organizations/{org_id}
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of Admin Access Bindings to return in one
+   *   call. The service may return fewer than this value.
+   *
+   *   If unspecified, at most 50 Admin Access Bindings will be returned. The
+   *   maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous ListAdminAccessBindings
+   *   call. Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `ListAdminAccessBindings` must match the call that provided the page
+   *   token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.marketingplatform.admin.v1alpha.AdminAccessBinding|AdminAccessBinding}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/marketingplatform_admin_service.list_admin_access_bindings.js</caption>
+   * region_tag:marketingplatformadmin_v1alpha_generated_MarketingplatformAdminService_ListAdminAccessBindings_async
+   */
+  listAdminAccessBindingsAsync(
+    request?: protos.google.marketingplatform.admin.v1alpha.IListAdminAccessBindingsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.marketingplatform.admin.v1alpha.IAdminAccessBinding> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listAdminAccessBindings'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listAdminAccessBindings iterate %j', request);
+    return this.descriptors.page.listAdminAccessBindings.asyncIterate(
+      this.innerApiCalls['listAdminAccessBindings'] as GaxCall,
+      request as {},
+      callSettings,
+    ) as AsyncIterable<protos.google.marketingplatform.admin.v1alpha.IAdminAccessBinding>;
+  }
   // --------------------
   // -- Path templates --
   // --------------------
+
+  /**
+   * Return a fully-qualified adminAccessBinding resource name string.
+   *
+   * @param {string} organization
+   * @param {string} admin_access_binding
+   * @returns {string} Resource name string.
+   */
+  adminAccessBindingPath(organization: string, adminAccessBinding: string) {
+    return this.pathTemplates.adminAccessBindingPathTemplate.render({
+      organization: organization,
+      admin_access_binding: adminAccessBinding,
+    });
+  }
+
+  /**
+   * Parse the organization from AdminAccessBinding resource.
+   *
+   * @param {string} adminAccessBindingName
+   *   A fully-qualified path representing AdminAccessBinding resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromAdminAccessBindingName(adminAccessBindingName: string) {
+    return this.pathTemplates.adminAccessBindingPathTemplate.match(
+      adminAccessBindingName,
+    ).organization;
+  }
+
+  /**
+   * Parse the admin_access_binding from AdminAccessBinding resource.
+   *
+   * @param {string} adminAccessBindingName
+   *   A fully-qualified path representing AdminAccessBinding resource.
+   * @returns {string} A string representing the admin_access_binding.
+   */
+  matchAdminAccessBindingFromAdminAccessBindingName(
+    adminAccessBindingName: string,
+  ) {
+    return this.pathTemplates.adminAccessBindingPathTemplate.match(
+      adminAccessBindingName,
+    ).admin_access_binding;
+  }
 
   /**
    * Return a fully-qualified analyticsAccountLink resource name string.
@@ -1889,6 +4320,99 @@ export class MarketingplatformAdminServiceClient {
    */
   matchPropertyFromPropertyName(propertyName: string) {
     return this.pathTemplates.propertyPathTemplate.match(propertyName).property;
+  }
+
+  /**
+   * Return a fully-qualified userGroup resource name string.
+   *
+   * @param {string} organization
+   * @param {string} user_group
+   * @returns {string} Resource name string.
+   */
+  userGroupPath(organization: string, userGroup: string) {
+    return this.pathTemplates.userGroupPathTemplate.render({
+      organization: organization,
+      user_group: userGroup,
+    });
+  }
+
+  /**
+   * Parse the organization from UserGroup resource.
+   *
+   * @param {string} userGroupName
+   *   A fully-qualified path representing UserGroup resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromUserGroupName(userGroupName: string) {
+    return this.pathTemplates.userGroupPathTemplate.match(userGroupName)
+      .organization;
+  }
+
+  /**
+   * Parse the user_group from UserGroup resource.
+   *
+   * @param {string} userGroupName
+   *   A fully-qualified path representing UserGroup resource.
+   * @returns {string} A string representing the user_group.
+   */
+  matchUserGroupFromUserGroupName(userGroupName: string) {
+    return this.pathTemplates.userGroupPathTemplate.match(userGroupName)
+      .user_group;
+  }
+
+  /**
+   * Return a fully-qualified userGroupMember resource name string.
+   *
+   * @param {string} organization
+   * @param {string} user_group
+   * @param {string} member
+   * @returns {string} Resource name string.
+   */
+  userGroupMemberPath(organization: string, userGroup: string, member: string) {
+    return this.pathTemplates.userGroupMemberPathTemplate.render({
+      organization: organization,
+      user_group: userGroup,
+      member: member,
+    });
+  }
+
+  /**
+   * Parse the organization from UserGroupMember resource.
+   *
+   * @param {string} userGroupMemberName
+   *   A fully-qualified path representing UserGroupMember resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromUserGroupMemberName(userGroupMemberName: string) {
+    return this.pathTemplates.userGroupMemberPathTemplate.match(
+      userGroupMemberName,
+    ).organization;
+  }
+
+  /**
+   * Parse the user_group from UserGroupMember resource.
+   *
+   * @param {string} userGroupMemberName
+   *   A fully-qualified path representing UserGroupMember resource.
+   * @returns {string} A string representing the user_group.
+   */
+  matchUserGroupFromUserGroupMemberName(userGroupMemberName: string) {
+    return this.pathTemplates.userGroupMemberPathTemplate.match(
+      userGroupMemberName,
+    ).user_group;
+  }
+
+  /**
+   * Parse the member from UserGroupMember resource.
+   *
+   * @param {string} userGroupMemberName
+   *   A fully-qualified path representing UserGroupMember resource.
+   * @returns {string} A string representing the member.
+   */
+  matchMemberFromUserGroupMemberName(userGroupMemberName: string) {
+    return this.pathTemplates.userGroupMemberPathTemplate.match(
+      userGroupMemberName,
+    ).member;
   }
 
   /**

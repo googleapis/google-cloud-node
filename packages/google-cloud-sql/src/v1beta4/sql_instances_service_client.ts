@@ -446,6 +446,8 @@ export class SqlInstancesServiceClient {
    *   Cloud SQL instance ID. This does not include the project ID.
    * @param {string} request.project
    *   Project ID of the project that contains the instance.
+   * @param {string} [request.location]
+   *   Optional. Region of the Cloud SQL instance.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -598,6 +600,8 @@ export class SqlInstancesServiceClient {
    *   Required. Cloud SQL instance ID. This does not include the project ID.
    * @param {string} request.project
    *   Required. Project ID of the project that contains the instance.
+   * @param {string} [request.location]
+   *   Optional. Region of the Cloud SQL instance.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -746,6 +750,8 @@ export class SqlInstancesServiceClient {
    *   Required. Cloud SQL instance ID. This does not include the project ID.
    * @param {string} request.project
    *   Required. Project ID of the project that contains the instance.
+   * @param {string} [request.location]
+   *   Optional. Region of the Cloud SQL instance.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -895,6 +901,8 @@ export class SqlInstancesServiceClient {
    * @param {string} request.project
    *   Project ID of the source Cloud SQL instance.
    * @param {google.cloud.sql.v1beta4.InstancesCloneRequest} request.body
+   * @param {string} [request.location]
+   *   Optional. Region of the Cloud SQL instance.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1041,6 +1049,8 @@ export class SqlInstancesServiceClient {
    *   Timestamp in UTC of when this resource is considered expired.
    * @param {string} [request.finalBackupDescription]
    *   Optional. The description of the final backup.
+   * @param {string} [request.location]
+   *   Optional. Region of the Cloud SQL instance.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1183,6 +1193,8 @@ export class SqlInstancesServiceClient {
    * @param {string} request.project
    *   ID of the project that contains the instance.
    * @param {google.cloud.sql.v1beta4.InstancesDemoteMasterRequest} request.body
+   * @param {string} [request.location]
+   *   Optional. Region of the Cloud SQL instance.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1332,6 +1344,8 @@ export class SqlInstancesServiceClient {
    *   Required. The project ID of the project that contains the instance.
    * @param {google.cloud.sql.v1beta4.InstancesDemoteRequest} request.body
    *   The request body.
+   * @param {string} [request.location]
+   *   Optional. Region of the Cloud SQL instance.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1474,6 +1488,8 @@ export class SqlInstancesServiceClient {
    * @param {string} request.project
    *   Project ID of the project that contains the instance to be exported.
    * @param {google.cloud.sql.v1beta4.InstancesExportRequest} request.body
+   * @param {string} [request.location]
+   *   Optional. Region of the Cloud SQL instance.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1622,6 +1638,8 @@ export class SqlInstancesServiceClient {
    * @param {string} request.project
    *   ID of the project that contains the read replica.
    * @param {google.cloud.sql.v1beta4.InstancesFailoverRequest} request.body
+   * @param {string} [request.location]
+   *   Optional. Region of the Cloud SQL instance.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1764,6 +1782,8 @@ export class SqlInstancesServiceClient {
    *   ID of the project that contains the instance.
    * @param {google.cloud.sql.v1beta4.InstancesReencryptRequest} request.body
    *   Reencrypt body that users request
+   * @param {string} [request.location]
+   *   Optional. Region of the Cloud SQL instance.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1904,6 +1924,8 @@ export class SqlInstancesServiceClient {
    *   Database instance ID. This does not include the project ID.
    * @param {string} request.project
    *   Project ID of the project that contains the instance.
+   * @param {string} [request.location]
+   *   Optional. Region of the Cloud SQL instance.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2043,6 +2065,8 @@ export class SqlInstancesServiceClient {
    * @param {string} request.project
    *   Project ID of the project that contains the instance.
    * @param {google.cloud.sql.v1beta4.InstancesImportRequest} request.body
+   * @param {string} [request.location]
+   *   Optional. Region of the Cloud SQL instance.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2183,6 +2207,8 @@ export class SqlInstancesServiceClient {
    *   Project ID of the project to which the newly created Cloud SQL instances
    *   should belong.
    * @param {google.cloud.sql.v1beta4.DatabaseInstance} request.body
+   * @param {string} [request.location]
+   *   Optional. Region of the Cloud SQL instance.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2259,10 +2285,29 @@ export class SqlInstancesServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
+    let routingParameter = {};
+    {
+      const fieldValue = request.project;
+      if (fieldValue !== undefined && fieldValue !== null) {
+        const match = fieldValue.toString().match(RegExp('(?<project>.*)'));
+        if (match) {
+          const parameterValue = match.groups?.['project'] ?? fieldValue;
+          Object.assign(routingParameter, {project: parameterValue});
+        }
+      }
+    }
+    {
+      const fieldValue = request.body?.region;
+      if (fieldValue !== undefined && fieldValue !== null) {
+        const match = fieldValue.toString().match(RegExp('(?<region>(?:.*)?)'));
+        if (match) {
+          const parameterValue = match.groups?.['region'] ?? fieldValue;
+          Object.assign(routingParameter, {region: parameterValue});
+        }
+      }
+    }
     options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-      });
+      this._gaxModule.routingHeader.fromParams(routingParameter);
     this.initialize().catch(err => {
       throw err;
     });
@@ -2338,6 +2383,8 @@ export class SqlInstancesServiceClient {
    *   results to view.
    * @param {string} request.project
    *   Project ID of the project for which to list Cloud SQL instances.
+   * @param {string} [request.location]
+   *   Optional. Region of the Cloud SQL instance.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2478,6 +2525,8 @@ export class SqlInstancesServiceClient {
    *   Cloud SQL instance ID. This does not include the project ID.
    * @param {string} request.project
    *   Project ID of the project that contains the instance.
+   * @param {string} [request.location]
+   *   Optional. Region of the Cloud SQL instance.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2629,6 +2678,8 @@ export class SqlInstancesServiceClient {
    *   Required. Cloud SQL instance ID. This does not include the project ID.
    * @param {string} request.project
    *   Required. Project ID of the project that contains the instance.
+   * @param {string} [request.location]
+   *   Optional. Region of the Cloud SQL instance.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2778,6 +2829,8 @@ export class SqlInstancesServiceClient {
    *   Required. Cloud SQL instance ID. This does not include the project ID.
    * @param {string} request.project
    *   Required. Project ID of the project that contains the instance.
+   * @param {string} [request.location]
+   *   Optional. Region of the Cloud SQL instance.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2932,6 +2985,8 @@ export class SqlInstancesServiceClient {
    *   Optional. Set PSC config to the same value as the existing config and force
    *   reconcile the PSC networking.
    * @param {google.cloud.sql.v1beta4.DatabaseInstance} request.body
+   * @param {string} [request.location]
+   *   Optional. Region of the Cloud SQL instance.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3078,6 +3133,8 @@ export class SqlInstancesServiceClient {
    *   DR replica when the original primary instance comes back online.
    *   If set to false or not specified, then the original primary
    *   instance becomes an independent Cloud SQL primary instance.
+   * @param {string} [request.location]
+   *   Optional. Region of the Cloud SQL instance.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3229,6 +3286,8 @@ export class SqlInstancesServiceClient {
    *   Optional. (MySQL and PostgreSQL only) Cloud SQL instance operations
    *   timeout, which is a sum of all database operations. Default value is 10
    *   minutes and can be modified to a maximum value of 24 hours.
+   * @param {string} [request.location]
+   *   Optional. Region of the Cloud SQL instance.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3378,6 +3437,8 @@ export class SqlInstancesServiceClient {
    *   Project ID of the project that contains the instance.
    * @param {google.cloud.sql.v1beta4.SqlInstancesResetSslConfigRequest.ResetSslMode} [request.mode]
    *   Optional. Reset SSL mode to use.
+   * @param {string} [request.location]
+   *   Optional. Region of the Cloud SQL instance.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3524,6 +3585,8 @@ export class SqlInstancesServiceClient {
    *   Cloud SQL instance ID. This does not include the project ID.
    * @param {string} request.project
    *   Project ID of the project that contains the instance to be restarted.
+   * @param {string} [request.location]
+   *   Optional. Region of the Cloud SQL instance.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3666,6 +3729,8 @@ export class SqlInstancesServiceClient {
    * @param {string} request.project
    *   Project ID of the project that contains the instance.
    * @param {google.cloud.sql.v1beta4.InstancesRestoreBackupRequest} request.body
+   * @param {string} [request.location]
+   *   Optional. Region of the Cloud SQL instance.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3816,6 +3881,8 @@ export class SqlInstancesServiceClient {
    * @param {string} request.project
    *   Project ID of the project that contains the instance.
    * @param {google.cloud.sql.v1beta4.InstancesRotateServerCaRequest} request.body
+   * @param {string} [request.location]
+   *   Optional. Region of the Cloud SQL instance.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3966,6 +4033,8 @@ export class SqlInstancesServiceClient {
    *   Required. Project ID of the project that contains the instance.
    * @param {google.cloud.sql.v1beta4.InstancesRotateServerCertificateRequest} request.body
    *   Required. Rotate server certificate request body.
+   * @param {string} [request.location]
+   *   Optional. Region of the Cloud SQL instance.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -4115,6 +4184,8 @@ export class SqlInstancesServiceClient {
    *   Required. Project ID of the project that contains the instance.
    * @param {google.cloud.sql.v1beta4.InstancesRotateEntraIdCertificateRequest} request.body
    *   Required. Rotate Entra ID certificate request body.
+   * @param {string} [request.location]
+   *   Optional. Region of the Cloud SQL instance.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -4261,6 +4332,8 @@ export class SqlInstancesServiceClient {
    *   Cloud SQL read replica instance name.
    * @param {string} request.project
    *   ID of the project that contains the read replica.
+   * @param {string} [request.location]
+   *   Optional. Region of the Cloud SQL instance.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -4407,6 +4480,8 @@ export class SqlInstancesServiceClient {
    *   Cloud SQL read replica instance name.
    * @param {string} request.project
    *   ID of the project that contains the read replica.
+   * @param {string} [request.location]
+   *   Optional. Region of the Cloud SQL instance.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -4555,6 +4630,8 @@ export class SqlInstancesServiceClient {
    * @param {string} request.project
    *   Project ID of the Cloud SQL project.
    * @param {google.cloud.sql.v1beta4.InstancesTruncateLogRequest} request.body
+   * @param {string} [request.location]
+   *   Optional. Region of the Cloud SQL instance.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -4703,6 +4780,8 @@ export class SqlInstancesServiceClient {
    * @param {string} request.project
    *   Project ID of the project that contains the instance.
    * @param {google.cloud.sql.v1beta4.DatabaseInstance} request.body
+   * @param {string} [request.location]
+   *   Optional. Region of the Cloud SQL instance.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -4847,6 +4926,8 @@ export class SqlInstancesServiceClient {
    * @param {string} request.project
    *   Project ID of the Cloud SQL project.
    * @param {google.cloud.sql.v1beta4.SslCertsCreateEphemeralRequest} request.body
+   * @param {string} [request.location]
+   *   Optional. Region of the Cloud SQL instance.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -4994,6 +5075,8 @@ export class SqlInstancesServiceClient {
    * @param {string} request.project
    *   ID of the project that contains the instance.
    * @param {google.cloud.sql.v1beta4.SqlInstancesRescheduleMaintenanceRequestBody} request.body
+   * @param {string} [request.location]
+   *   Optional. Region of the Cloud SQL instance.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -5158,6 +5241,8 @@ export class SqlInstancesServiceClient {
    * @param {number[]} [request.selectedObjects]
    *   Optional. Migrate only the specified objects from the source instance. If
    *   this field is empty, then migrate all objects.
+   * @param {string} [request.location]
+   *   Optional. Region of the Cloud SQL instance.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -5322,6 +5407,8 @@ export class SqlInstancesServiceClient {
    *   will wipe replica databases overlapping with the proposed selected_objects.
    *   If this field is not set and there are both overlapping and additional
    *   databases proposed, an error will be returned.
+   * @param {string} [request.location]
+   *   Optional. Region of the Cloud SQL instance.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -5470,6 +5557,8 @@ export class SqlInstancesServiceClient {
    *   Project ID of the project that contains the instance.
    * @param {google.cloud.sql.v1beta4.PerformDiskShrinkContext} request.body
    *   Perform disk shrink context.
+   * @param {string} [request.location]
+   *   Optional. Region of the Cloud SQL instance.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -5616,6 +5705,8 @@ export class SqlInstancesServiceClient {
    *   Cloud SQL instance ID. This does not include the project ID.
    * @param {string} request.project
    *   Project ID of the project that contains the instance.
+   * @param {string} [request.location]
+   *   Optional. Region of the Cloud SQL instance.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -5762,6 +5853,8 @@ export class SqlInstancesServiceClient {
    *   Cloud SQL read replica instance name.
    * @param {string} request.project
    *   ID of the project that contains the read replica.
+   * @param {string} [request.location]
+   *   Optional. Region of the Cloud SQL instance.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -5911,6 +6004,8 @@ export class SqlInstancesServiceClient {
    * @param {google.protobuf.Timestamp} request.sourceInstanceDeletionTime
    *   The timestamp used to identify the time when the source instance is
    *   deleted. If this instance is deleted, then you must set the timestamp.
+   * @param {string} [request.location]
+   *   Optional. Region of the Cloud SQL instance.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -6059,6 +6154,8 @@ export class SqlInstancesServiceClient {
    *   Required. Project ID of the project that contains the instance.
    * @param {google.cloud.sql.v1beta4.ExecuteSqlPayload} request.body
    *   The request body.
+   * @param {string} [request.location]
+   *   Optional. Region of the Cloud SQL instance.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -6211,6 +6308,8 @@ export class SqlInstancesServiceClient {
    *   project-id).
    * @param {google.cloud.sql.v1beta4.InstancesAcquireSsrsLeaseRequest} request.body
    *   The body for request to acquire an SSRS lease.
+   * @param {string} [request.location]
+   *   Optional. Region of the Cloud SQL instance.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -6361,6 +6460,8 @@ export class SqlInstancesServiceClient {
    * @param {string} request.project
    *   Required. The ID of the project that contains the instance (Example:
    *   project-id).
+   * @param {string} [request.location]
+   *   Optional. Region of the Cloud SQL instance.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -6510,6 +6611,8 @@ export class SqlInstancesServiceClient {
    * @param {google.cloud.sql.v1beta4.InstancesPreCheckMajorVersionUpgradeRequest} request.body
    *   Required. The context for request to perform the pre-check major version
    *   upgrade operation.
+   * @param {string} [request.location]
+   *   Optional. Region of the Cloud SQL instance.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

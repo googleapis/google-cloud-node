@@ -5,6 +5,45 @@
   "protoPackage": "google.cloud.geminidataanalytics.v1beta",
   "libraryPackage": "@google-cloud/geminidataanalytics",
   "services": {
+    "DataA2AService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "DataA2AServiceClient",
+          "rpcs": {
+            "SendMessage": {
+              "methods": [
+                "sendMessage"
+              ]
+            },
+            "GetAgentCard": {
+              "methods": [
+                "getAgentCard"
+              ]
+            },
+            "SendStreamingMessage": {
+              "methods": [
+                "sendStreamingMessage"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "DataA2AServiceClient",
+          "rpcs": {
+            "SendMessage": {
+              "methods": [
+                "sendMessage"
+              ]
+            },
+            "GetAgentCard": {
+              "methods": [
+                "getAgentCard"
+              ]
+            }
+          }
+        }
+      }
+    },
     "DataAgentService": {
       "clients": {
         "grpc": {
@@ -40,6 +79,11 @@
                 "setIamPolicy"
               ]
             },
+            "RetrieveAgentOpsObservability": {
+              "methods": [
+                "retrieveAgentOpsObservability"
+              ]
+            },
             "CreateDataAgent": {
               "methods": [
                 "createDataAgent"
@@ -53,6 +97,11 @@
             "DeleteDataAgent": {
               "methods": [
                 "deleteDataAgent"
+              ]
+            },
+            "SetAgentOpsObservability": {
+              "methods": [
+                "setAgentOpsObservability"
               ]
             },
             "ListDataAgents": {
@@ -104,6 +153,11 @@
                 "setIamPolicy"
               ]
             },
+            "RetrieveAgentOpsObservability": {
+              "methods": [
+                "retrieveAgentOpsObservability"
+              ]
+            },
             "CreateDataAgent": {
               "methods": [
                 "createDataAgent"
@@ -117,6 +171,11 @@
             "DeleteDataAgent": {
               "methods": [
                 "deleteDataAgent"
+              ]
+            },
+            "SetAgentOpsObservability": {
+              "methods": [
+                "setAgentOpsObservability"
               ]
             },
             "ListDataAgents": {
@@ -150,6 +209,11 @@
             "DeleteConversation": {
               "methods": [
                 "deleteConversation"
+              ]
+            },
+            "UpdateConversation": {
+              "methods": [
+                "updateConversation"
               ]
             },
             "GetConversation": {
@@ -194,6 +258,11 @@
             "DeleteConversation": {
               "methods": [
                 "deleteConversation"
+              ]
+            },
+            "UpdateConversation": {
+              "methods": [
+                "updateConversation"
               ]
             },
             "GetConversation": {

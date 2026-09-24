@@ -396,6 +396,8 @@ export class SqlUsersServiceClient {
    *   Name of the user in the instance.
    * @param {string} request.project
    *   Project ID of the project that contains the instance.
+   * @param {string} [request.location]
+   *   Optional. Region of the Cloud SQL instance.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -531,6 +533,8 @@ export class SqlUsersServiceClient {
    *   Project ID of the project that contains the instance.
    * @param {string} request.host
    *   Host of a user of the instance.
+   * @param {string} [request.location]
+   *   Optional. Region of the Cloud SQL instance.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -664,6 +668,8 @@ export class SqlUsersServiceClient {
    * @param {string} request.project
    *   Project ID of the project that contains the instance.
    * @param {google.cloud.sql.v1beta4.User} request.body
+   * @param {string} [request.location]
+   *   Optional. Region of the Cloud SQL instance.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -795,6 +801,8 @@ export class SqlUsersServiceClient {
    *   Database instance ID. This does not include the project ID.
    * @param {string} request.project
    *   Project ID of the project that contains the instance.
+   * @param {string} [request.location]
+   *   Optional. Region of the Cloud SQL instance.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -946,6 +954,8 @@ export class SqlUsersServiceClient {
    *   in the `server_roles` field. If `false` or unset, the server roles
    *   specified in `server_roles` are added to the user's existing server roles.
    * @param {google.cloud.sql.v1beta4.User} request.body
+   * @param {string} [request.location]
+   *   Optional. Region of the Cloud SQL instance.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
