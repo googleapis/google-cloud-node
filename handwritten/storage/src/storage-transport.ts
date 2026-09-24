@@ -164,13 +164,27 @@ export class StorageTransport {
           const stream = part.content as import('stream').Readable;
           const streamChunks: Buffer[] = [];
           await new Promise<void>((resolve, reject) => {
-            stream.on('data', chunk =>
+            const onData = (chunk: Buffer | string | Uint8Array) => {
               streamChunks.push(
                 Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk),
-              ),
-            );
-            stream.once('end', resolve);
-            stream.once('error', reject);
+              );
+            };
+            const onEnd = () => {
+              cleanup();
+              resolve();
+            };
+            const onError = (err: Error) => {
+              cleanup();
+              reject(err);
+            };
+            const cleanup = () => {
+              stream.removeListener('data', onData);
+              stream.removeListener('end', onEnd);
+              stream.removeListener('error', onError);
+            };
+            stream.on('data', onData);
+            stream.once('end', onEnd);
+            stream.once('error', onError);
             if (typeof stream.resume === 'function') {
               stream.resume();
             }
@@ -227,16 +241,19 @@ export class StorageTransport {
       ? urlString
       : new URL(normalizedUrl, this.baseUrl).toString();
 
-    let hasEtagInBody = false;
-    if (reqOpts.body && typeof reqOpts.body === 'string') {
+    let hasEtagInBody = !!(
+      (reqOpts.body as {etag?: unknown})?.etag ||
+      (reqOpts.data as {etag?: unknown})?.etag
+    );
+    if (
+      !hasEtagInBody &&
+      typeof reqOpts.body === 'string' &&
+      reqOpts.body.includes('"etag"')
+    ) {
       try {
         const parsed = JSON.parse(reqOpts.body);
-        if (parsed && parsed.etag) {
-          hasEtagInBody = true;
-        }
-      } catch (e) {
-        // If it's not valid JSON, it's just a raw string/file upload.
-        // We safely ignore it to prevent false positives.
+        hasEtagInBody = Boolean(parsed && parsed.etag);
+      } catch {
         hasEtagInBody = false;
       }
     }
@@ -343,8 +360,20 @@ export class StorageTransport {
               enumerable: false,
             },
           });
+          return data;
         }
-        return data;
+
+        const isBufferOrStream =
+          data instanceof Buffer ||
+          (data !== null &&
+            typeof data === 'object' &&
+            typeof (data as {on?: unknown}).on === 'function');
+
+        if (isBufferOrStream) {
+          return data;
+        }
+
+        return resp as unknown as T;
       };
 
       const enrichedPromise = requestPromise.catch(err => {
@@ -352,19 +381,18 @@ export class StorageTransport {
       });
 
       if (callback) {
-        // eslint-disable-next-line @typescript-eslint/no-floating-promises
-        (async () => {
-          try {
-            const resp = await enrichedPromise;
+        enrichedPromise.then(
+          resp => {
             callback(null, decorateMetadata(resp), resp);
-          } catch (err: unknown) {
+          },
+          err => {
             callback(
               err as GaxiosError,
               null,
               (err as {response?: GaxiosResponse}).response,
             );
-          }
-        })();
+          },
+        );
         return enrichedPromise;
       }
 
