@@ -299,6 +299,8 @@ class ReadRowsRequestHandler {
           // to ensure we unblock and avoid hanging if the stream ends while awaiting backpressure.
           debugLog('awaiting for back pressure');
           await new Promise<void>(resolve => {
+            // Clean up all registered listeners once any event triggers or stopWaiting
+            // is called, preventing listener leaks and MaxListenersExceededWarning.
             const onEvent = () => {
               stream.off('drain', onEvent);
               stream.off('close', onEvent);
