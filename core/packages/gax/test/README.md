@@ -72,7 +72,7 @@ The following steps will regenerate new Echo and Sequence clients from the lates
 A small end-to-end harness for the resumable upload API. It downloads the
 [gapic-showcase](https://github.com/googleapis/gapic-showcase) server, compiles
 the checked-in generated client for the showcase `ResumableUploadService`, and runs
-[`sample.js`](./showcase-resumable-upload/sample.js) against it:
+[`sample.ts`](./showcase-resumable-upload/sample.ts) against it:
 
 ```sh
 ./test/showcase-resumable-upload/run.sh

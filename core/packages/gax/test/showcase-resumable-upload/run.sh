@@ -52,6 +52,7 @@ echo "Compiling the generated showcase client"
 (cd "$CLIENT_DIR" && cp -R protos build/)
 
 DOWNLOAD_DIR="${TMPDIR:-/tmp}/gapic-showcase-$SHOWCASE_VERSION"
+mkdir -p "$DOWNLOAD_DIR"
 if [[ -z "$SHOWCASE_BIN" ]]; then
   os="$(uname -s | tr '[:upper:]' '[:lower:]')"
   case "$(uname -m)" in
@@ -67,7 +68,6 @@ if [[ -z "$SHOWCASE_BIN" ]]; then
 
   SHOWCASE_BIN="$DOWNLOAD_DIR/gapic-showcase"
   if [[ ! -x "$SHOWCASE_BIN" ]]; then
-    mkdir -p "$DOWNLOAD_DIR"
     tarball="$DOWNLOAD_DIR/gapic-showcase-$SHOWCASE_VERSION-$os-$arch.tar.gz"
     echo "Downloading gapic-showcase $SHOWCASE_VERSION from GitHub releases"
     curl -fsSL \

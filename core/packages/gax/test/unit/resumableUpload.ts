@@ -574,6 +574,10 @@ describe('resumable upload', () => {
           retryDelayMultiplier: 1.1,
           maxRetryDelayMillis: 5,
           maxRetries: 3,
+          initialRpcTimeoutMillis: 1000,
+          rpcTimeoutMultiplier: 1.0,
+          maxRpcTimeoutMillis: 1000,
+          totalTimeoutMillis: 10000,
         },
       },
     });

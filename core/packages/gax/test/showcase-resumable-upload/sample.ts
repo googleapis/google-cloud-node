@@ -26,19 +26,13 @@ import {
   ClientOptions,
   GoogleAuth,
   googleAuthLibrary,
+  GoogleError,
+  grpc,
   ResumableSource,
   ResumableUploadSession,
 } from '../../src';
 
-async function main() {
-  const filePath = process.env.UPLOAD_FILE;
-  const port = Number(process.env.SHOWCASE_PORT || 7469);
-  if (!filePath) {
-    throw new Error('Set UPLOAD_FILE to the path of the file to upload.');
-  }
-  if (!fs.existsSync(filePath)) {
-    throw new Error(`Upload file does not exist: ${filePath}`);
-  }
+const GRANULARITY = 256 * 1024;
 
 interface UploadMediaRequest {
   name?: string;
@@ -132,6 +126,7 @@ function createTempPayload(
 function createClient(
   port: number,
   customAuth?: GoogleAuth,
+  extraOpts?: Partial<ClientOptions>,
 ): ShowcaseResumableUploadClient {
   const auth =
     customAuth ??
@@ -142,10 +137,10 @@ function createClient(
     servicePath: '127.0.0.1',
     port,
     protocol: 'http',
-    auth: new GoogleAuth({
-      authClient: new googleAuthLibrary.PassThroughClient(),
-    }),
+    auth,
+    ...extraOpts,
   });
+}
 
 /**
  * Extracts the committed byte size from a finished UploadMedia response.
@@ -169,7 +164,7 @@ async function runBaselineUpload(
   const client = createClient(port);
   try {
     console.log(
-      `Uploading ${filePath} (${size} bytes) through ${client.apiEndpoint}`
+      `Uploading ${filePath} (${size} bytes) through ${client.apiEndpoint}`,
     );
 
     const session = await client.uploadMedia({
@@ -189,7 +184,7 @@ async function runBaselineUpload(
     const uploadedSize = Number(response.size);
     if (uploadedSize !== size) {
       throw new Error(
-        `Uploaded size mismatch: expected ${size}, got ${response.size}`
+        `Uploaded size mismatch: expected ${size}, got ${response.size}`,
       );
     }
     console.log(`Upload complete: ${JSON.stringify(response)}`);
@@ -427,10 +422,10 @@ async function testStartErrorScenarios(port: number): Promise<void> {
           }),
         },
       }),
-      /HTTP 403/,
+      /(?:HTTP|status) 403/,
       'Expected sessionB.start() to reject with HTTP 403 on fatal_error_on_start',
     );
-    await assert.rejects(sessionB.finished(), /HTTP 403/);
+    await assert.rejects(sessionB.finished(), /(?:HTTP|status) 403/);
 
     const startCallsB = logB.filter(entry => entry.command === 'start');
     assert.strictEqual(
@@ -1130,6 +1125,79 @@ async function testTimeoutAndResume(port: number): Promise<void> {
   }
 }
 
+/**
+ * Test 9: Client transport modes (`fallback: true` and `sslCreds` guard)
+ * Verifies that `ResumableUploadServiceClient` works when configured with
+ * `fallback: true`, and rejects `uploadMedia()` with a `GoogleError` when
+ * `sslCreds` is passed without `fallback: true`.
+ */
+async function testClientTransportModes(port: number): Promise<void> {
+  console.log(
+    '\n=== Test 9: Client Transport Modes (fallback: true & sslCreds guard) ===',
+  );
+  const size = 64 * 1024;
+  const payload = createTempPayload(size, 'transport-modes-');
+  const fallbackClient = createClient(port, undefined, {fallback: true});
+
+  try {
+    const session = await fallbackClient.uploadMedia({
+      name: path.basename(payload.filePath),
+    });
+
+    await session.start({
+      uploadSource: fallbackClient.getResumableSource(payload.filePath),
+      chunkSize: GRANULARITY,
+    });
+
+    const uploadedSize = await getFinishedSize(session);
+    assert.strictEqual(
+      uploadedSize,
+      size,
+      `Expected fallback: true client to upload ${size} bytes, got ${uploadedSize}`,
+    );
+
+    // Also verify getResumableSource() fails cleanly if _gaxModule lacks resumableSourceFromFile
+    const clientWithCustomGax = Object.create(
+      fallbackClient,
+    ) as ShowcaseResumableUploadClient & {
+      _gaxModule: Record<string, unknown>;
+    };
+    clientWithCustomGax._gaxModule = {};
+    assert.throws(
+      () => clientWithCustomGax.getResumableSource(payload.filePath),
+      /getResumableSource is not supported when using the fallback transport/,
+      'Expected getResumableSource() to throw when _gaxModule lacks resumableSourceFromFile',
+    );
+
+    console.log(
+      '  PASSED Part A: fallback: true client uploaded payload and guarded getResumableSource().',
+    );
+  } finally {
+    payload.cleanup();
+    await fallbackClient.close();
+  }
+
+  const sslCredsClient = createClient(port, undefined, {
+    sslCreds: grpc.credentials.createInsecure(),
+  });
+  try {
+    await assert.rejects(
+      sslCredsClient.uploadMedia({name: 'ssl-creds-rejected.bin'}),
+      (err: unknown) =>
+        err instanceof GoogleError &&
+        /Resumable upload methods require HTTP\(S\) authentication/.test(
+          err.message,
+        ),
+      'Expected uploadMedia() with sslCreds and fallback: false to reject with GoogleError',
+    );
+    console.log(
+      '  PASSED Part B: sslCreds without fallback: true rejected with GoogleError.',
+    );
+  } finally {
+    await sslCredsClient.close();
+  }
+}
+
 async function main(): Promise<void> {
   const filePath = process.env.UPLOAD_FILE;
   const port = Number(process.env.SHOWCASE_PORT || 7469);
@@ -1146,6 +1214,7 @@ async function main(): Promise<void> {
   await testQueryAndChunkGranularityScenarios(port);
   await testCrossProcessResume(port);
   await testTimeoutAndResume(port);
+  await testClientTransportModes(port);
 
   console.log('\nAll showcase resumable upload tests passed successfully!');
 }

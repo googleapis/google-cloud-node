@@ -1,7 +1,7 @@
 # Showcase resumable upload harness
 
 This directory contains a small end-to-end example of the resumable upload
-support added in the `scotty-1` work:
+support added in `google-gax`:
 
 * `fixtures/` — a generated `ResumableUploadServiceClient` for the real
   [gapic-showcase](https://github.com/googleapis/gapic-showcase)
@@ -38,6 +38,10 @@ support added in the `scotty-1` work:
      server-injected upload delay (`delay_ms`) exceeding `stallTimeoutMs` with
      automatic recovery/stream re-opening and global deadline timeout
      (`globalDeadlineMs`) with manual session resumption via `resumeUrl`.
+  9. **Client transport modes (`fallback: true` & `sslCreds` guard)**: Verifies
+     that `ResumableUploadServiceClient` uploads payloads in `fallback: true`
+     mode and rejects `uploadMedia()` with a `GoogleError` when `sslCreds` is
+     configured without `fallback: true`.
 * `run.sh` — downloads/starts a gapic-showcase server, builds the local
   google-gax checkout and the generated client, then runs `sample.ts`.
 
