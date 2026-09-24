@@ -17,7 +17,7 @@ import * as crypto from 'node:crypto';
 // Returns a shortened UUID that can be used to identify a
 // specific run of a specific test.
 function shortUUID(): string {
-  return crypto.randomUUID().split('-').shift()!;
+  return crypto.randomUUID().slice(0, 8);
 }
 
 export interface TokenMaker {
