@@ -299,6 +299,9 @@ class ReadRowsRequestHandler {
           await new Promise<void>(resolve => {
             this.stopWaiting = resolve;
             stream.once('drain', resolve);
+            stream.once('close', resolve);
+            stream.once('error', resolve);
+            stream.once('finish', resolve);
           });
         }
         resolve();
@@ -356,12 +359,17 @@ export class ReadRowsImpl {
 
     prettyPrintRequest(stream.request, debugLog);
     const readRowsRequestHandler = new ReadRowsRequestHandler(stream, debugLog);
-    stream.on('cancelled', () => {
-      debugLog('gRPC server received cancel()');
+    const onStreamEnded = () => {
       readRowsRequestHandler.cancelled = true;
       readRowsRequestHandler.stopWaiting();
+    };
+    stream.on('cancelled', () => {
+      debugLog('gRPC server received cancel()');
+      onStreamEnded();
       stream.emit('error', new Error('Cancelled'));
     });
+    stream.on('close', onStreamEnded);
+    stream.on('error', onStreamEnded);
     const chunks = generateChunksFromRequest(
       stream.request,
       this.serviceParameters,

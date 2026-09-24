@@ -71,6 +71,7 @@ describe('Bigtable/ReadRows', () => {
       server = new MockServer(resolve);
     });
     bigtable = new Bigtable({
+      projectId: 'fake-project',
       apiEndpoint: `localhost:${port}`,
     });
     table = bigtable.instance('fake-instance').table('fake-table');
@@ -80,7 +81,7 @@ describe('Bigtable/ReadRows', () => {
   // helper function because some tests run slower
   // under CI load and need a longer timeout
   function setWindowsTestTimeout(test: mocha.Context) {
-    test.timeout(60000);
+    test.timeout(200000);
   }
 
   it('should create read stream and read synchronously', function (done) {
@@ -115,7 +116,8 @@ describe('Bigtable/ReadRows', () => {
     });
   });
 
-  it('should create read stream and read synchronously using Transform stream', done => {
+  it('should create read stream and read synchronously using Transform stream', function (done) {
+    setWindowsTestTimeout(this);
     service.setService({
       ReadRows: ReadRowsImpl.createService(
         STANDARD_SERVICE_WITHOUT_ERRORS,
@@ -212,7 +214,8 @@ describe('Bigtable/ReadRows', () => {
     pipeline(readStream, transform, passThrough, () => {});
   });
 
-  it('should be able to stop reading from the read stream', done => {
+  it('should be able to stop reading from the read stream', function (done) {
+    setWindowsTestTimeout(this);
     // pick any key to stop after
     const stopAfter = 42;
 
