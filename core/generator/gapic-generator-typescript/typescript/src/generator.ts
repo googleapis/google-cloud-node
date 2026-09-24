@@ -97,6 +97,7 @@ export class Generator {
   legacyProtoLoad?: boolean;
   restNumericEnums?: boolean;
   mixinsOverride?: string[];
+  resumableUploadMethods?: string[];
   format?: string | string[];
   enableTelemetryTracing?: boolean;
 
@@ -267,6 +268,15 @@ export class Generator {
     }
   }
 
+  private readResumableUploadMethods() {
+    if (typeof this.paramMap['resumable-upload-methods'] === 'string') {
+      this.resumableUploadMethods = this.paramMap['resumable-upload-methods']
+        .split(';')
+        .map(name => name.trim())
+        .filter(name => name.length > 0);
+    }
+  }
+
   async initializeFromStdin() {
     const inputBuffer = await getStdin();
     const CodeGeneratorRequest = this.root.lookupType('CodeGeneratorRequest');
@@ -297,6 +307,7 @@ export class Generator {
       this.readRestNumericEnums();
       this.readFormat();
       this.readEnableTelemetryTracing();
+      this.readResumableUploadMethods();
     }
   }
 
@@ -358,6 +369,7 @@ export class Generator {
       restNumericEnums: this.restNumericEnums,
       mixinsOverridden: this.mixinsOverride !== undefined,
       enableTelemetryTracing: this.enableTelemetryTracing,
+      resumableUploadMethods: this.resumableUploadMethods,
     });
     return api;
   }
