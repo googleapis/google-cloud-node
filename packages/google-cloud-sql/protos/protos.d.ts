@@ -10923,6 +10923,9 @@ export namespace google {
 
                     /** SqlInstancesAddServerCaRequest project */
                     project?: (string|null);
+
+                    /** SqlInstancesAddServerCaRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlInstancesAddServerCaRequest. */
@@ -10939,6 +10942,9 @@ export namespace google {
 
                     /** SqlInstancesAddServerCaRequest project. */
                     public project: string;
+
+                    /** SqlInstancesAddServerCaRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlInstancesAddServerCaRequest instance using the specified properties.
@@ -11026,6 +11032,9 @@ export namespace google {
 
                     /** SqlInstancesAddServerCertificateRequest project */
                     project?: (string|null);
+
+                    /** SqlInstancesAddServerCertificateRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlInstancesAddServerCertificateRequest. */
@@ -11042,6 +11051,9 @@ export namespace google {
 
                     /** SqlInstancesAddServerCertificateRequest project. */
                     public project: string;
+
+                    /** SqlInstancesAddServerCertificateRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlInstancesAddServerCertificateRequest instance using the specified properties.
@@ -11129,6 +11141,9 @@ export namespace google {
 
                     /** SqlInstancesAddEntraIdCertificateRequest project */
                     project?: (string|null);
+
+                    /** SqlInstancesAddEntraIdCertificateRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlInstancesAddEntraIdCertificateRequest. */
@@ -11145,6 +11160,9 @@ export namespace google {
 
                     /** SqlInstancesAddEntraIdCertificateRequest project. */
                     public project: string;
+
+                    /** SqlInstancesAddEntraIdCertificateRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlInstancesAddEntraIdCertificateRequest instance using the specified properties.
@@ -11235,6 +11253,9 @@ export namespace google {
 
                     /** SqlInstancesCloneRequest body */
                     body?: (google.cloud.sql.v1.IInstancesCloneRequest|null);
+
+                    /** SqlInstancesCloneRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlInstancesCloneRequest. */
@@ -11254,6 +11275,9 @@ export namespace google {
 
                     /** SqlInstancesCloneRequest body. */
                     public body?: (google.cloud.sql.v1.IInstancesCloneRequest|null);
+
+                    /** SqlInstancesCloneRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlInstancesCloneRequest instance using the specified properties.
@@ -11353,6 +11377,9 @@ export namespace google {
 
                     /** SqlInstancesDeleteRequest finalBackupDescription */
                     finalBackupDescription?: (string|null);
+
+                    /** SqlInstancesDeleteRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlInstancesDeleteRequest. */
@@ -11381,6 +11408,9 @@ export namespace google {
 
                     /** SqlInstancesDeleteRequest finalBackupDescription. */
                     public finalBackupDescription: string;
+
+                    /** SqlInstancesDeleteRequest location. */
+                    public location: string;
 
                     /** SqlInstancesDeleteRequest expiration. */
                     public expiration?: ("finalBackupTtlDays"|"finalBackupExpiryTime");
@@ -11474,6 +11504,9 @@ export namespace google {
 
                     /** SqlInstancesDemoteMasterRequest body */
                     body?: (google.cloud.sql.v1.IInstancesDemoteMasterRequest|null);
+
+                    /** SqlInstancesDemoteMasterRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlInstancesDemoteMasterRequest. */
@@ -11493,6 +11526,9 @@ export namespace google {
 
                     /** SqlInstancesDemoteMasterRequest body. */
                     public body?: (google.cloud.sql.v1.IInstancesDemoteMasterRequest|null);
+
+                    /** SqlInstancesDemoteMasterRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlInstancesDemoteMasterRequest instance using the specified properties.
@@ -11583,6 +11619,9 @@ export namespace google {
 
                     /** SqlInstancesDemoteRequest body */
                     body?: (google.cloud.sql.v1.IInstancesDemoteRequest|null);
+
+                    /** SqlInstancesDemoteRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlInstancesDemoteRequest. */
@@ -11602,6 +11641,9 @@ export namespace google {
 
                     /** SqlInstancesDemoteRequest body. */
                     public body?: (google.cloud.sql.v1.IInstancesDemoteRequest|null);
+
+                    /** SqlInstancesDemoteRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlInstancesDemoteRequest instance using the specified properties.
@@ -11692,6 +11734,9 @@ export namespace google {
 
                     /** SqlInstancesExportRequest body */
                     body?: (google.cloud.sql.v1.IInstancesExportRequest|null);
+
+                    /** SqlInstancesExportRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlInstancesExportRequest. */
@@ -11711,6 +11756,9 @@ export namespace google {
 
                     /** SqlInstancesExportRequest body. */
                     public body?: (google.cloud.sql.v1.IInstancesExportRequest|null);
+
+                    /** SqlInstancesExportRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlInstancesExportRequest instance using the specified properties.
@@ -11801,6 +11849,9 @@ export namespace google {
 
                     /** SqlInstancesFailoverRequest body */
                     body?: (google.cloud.sql.v1.IInstancesFailoverRequest|null);
+
+                    /** SqlInstancesFailoverRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlInstancesFailoverRequest. */
@@ -11820,6 +11871,9 @@ export namespace google {
 
                     /** SqlInstancesFailoverRequest body. */
                     public body?: (google.cloud.sql.v1.IInstancesFailoverRequest|null);
+
+                    /** SqlInstancesFailoverRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlInstancesFailoverRequest instance using the specified properties.
@@ -11907,6 +11961,9 @@ export namespace google {
 
                     /** SqlInstancesGetRequest project */
                     project?: (string|null);
+
+                    /** SqlInstancesGetRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlInstancesGetRequest. */
@@ -11923,6 +11980,9 @@ export namespace google {
 
                     /** SqlInstancesGetRequest project. */
                     public project: string;
+
+                    /** SqlInstancesGetRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlInstancesGetRequest instance using the specified properties.
@@ -12013,6 +12073,9 @@ export namespace google {
 
                     /** SqlInstancesImportRequest body */
                     body?: (google.cloud.sql.v1.IInstancesImportRequest|null);
+
+                    /** SqlInstancesImportRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlInstancesImportRequest. */
@@ -12032,6 +12095,9 @@ export namespace google {
 
                     /** SqlInstancesImportRequest body. */
                     public body?: (google.cloud.sql.v1.IInstancesImportRequest|null);
+
+                    /** SqlInstancesImportRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlInstancesImportRequest instance using the specified properties.
@@ -12119,6 +12185,9 @@ export namespace google {
 
                     /** SqlInstancesInsertRequest body */
                     body?: (google.cloud.sql.v1.IDatabaseInstance|null);
+
+                    /** SqlInstancesInsertRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlInstancesInsertRequest. */
@@ -12135,6 +12204,9 @@ export namespace google {
 
                     /** SqlInstancesInsertRequest body. */
                     public body?: (google.cloud.sql.v1.IDatabaseInstance|null);
+
+                    /** SqlInstancesInsertRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlInstancesInsertRequest instance using the specified properties.
@@ -12228,6 +12300,9 @@ export namespace google {
 
                     /** SqlInstancesListRequest project */
                     project?: (string|null);
+
+                    /** SqlInstancesListRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlInstancesListRequest. */
@@ -12250,6 +12325,9 @@ export namespace google {
 
                     /** SqlInstancesListRequest project. */
                     public project: string;
+
+                    /** SqlInstancesListRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlInstancesListRequest instance using the specified properties.
@@ -12337,6 +12415,9 @@ export namespace google {
 
                     /** SqlInstancesListServerCasRequest project */
                     project?: (string|null);
+
+                    /** SqlInstancesListServerCasRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlInstancesListServerCasRequest. */
@@ -12353,6 +12434,9 @@ export namespace google {
 
                     /** SqlInstancesListServerCasRequest project. */
                     public project: string;
+
+                    /** SqlInstancesListServerCasRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlInstancesListServerCasRequest instance using the specified properties.
@@ -12440,6 +12524,9 @@ export namespace google {
 
                     /** SqlInstancesListServerCertificatesRequest project */
                     project?: (string|null);
+
+                    /** SqlInstancesListServerCertificatesRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlInstancesListServerCertificatesRequest. */
@@ -12456,6 +12543,9 @@ export namespace google {
 
                     /** SqlInstancesListServerCertificatesRequest project. */
                     public project: string;
+
+                    /** SqlInstancesListServerCertificatesRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlInstancesListServerCertificatesRequest instance using the specified properties.
@@ -12543,6 +12633,9 @@ export namespace google {
 
                     /** SqlInstancesListEntraIdCertificatesRequest project */
                     project?: (string|null);
+
+                    /** SqlInstancesListEntraIdCertificatesRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlInstancesListEntraIdCertificatesRequest. */
@@ -12559,6 +12652,9 @@ export namespace google {
 
                     /** SqlInstancesListEntraIdCertificatesRequest project. */
                     public project: string;
+
+                    /** SqlInstancesListEntraIdCertificatesRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlInstancesListEntraIdCertificatesRequest instance using the specified properties.
@@ -12655,6 +12751,9 @@ export namespace google {
 
                     /** SqlInstancesPatchRequest body */
                     body?: (google.cloud.sql.v1.IDatabaseInstance|null);
+
+                    /** SqlInstancesPatchRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlInstancesPatchRequest. */
@@ -12680,6 +12779,9 @@ export namespace google {
 
                     /** SqlInstancesPatchRequest body. */
                     public body?: (google.cloud.sql.v1.IDatabaseInstance|null);
+
+                    /** SqlInstancesPatchRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlInstancesPatchRequest instance using the specified properties.
@@ -12770,6 +12872,9 @@ export namespace google {
 
                     /** SqlInstancesPromoteReplicaRequest failover */
                     failover?: (boolean|null);
+
+                    /** SqlInstancesPromoteReplicaRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlInstancesPromoteReplicaRequest. */
@@ -12789,6 +12894,9 @@ export namespace google {
 
                     /** SqlInstancesPromoteReplicaRequest failover. */
                     public failover: boolean;
+
+                    /** SqlInstancesPromoteReplicaRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlInstancesPromoteReplicaRequest instance using the specified properties.
@@ -12879,6 +12987,9 @@ export namespace google {
 
                     /** SqlInstancesSwitchoverRequest dbTimeout */
                     dbTimeout?: (google.protobuf.IDuration|null);
+
+                    /** SqlInstancesSwitchoverRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlInstancesSwitchoverRequest. */
@@ -12898,6 +13009,9 @@ export namespace google {
 
                     /** SqlInstancesSwitchoverRequest dbTimeout. */
                     public dbTimeout?: (google.protobuf.IDuration|null);
+
+                    /** SqlInstancesSwitchoverRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlInstancesSwitchoverRequest instance using the specified properties.
@@ -12988,6 +13102,9 @@ export namespace google {
 
                     /** SqlInstancesResetSslConfigRequest mode */
                     mode?: (google.cloud.sql.v1.SqlInstancesResetSslConfigRequest.ResetSslMode|keyof typeof google.cloud.sql.v1.SqlInstancesResetSslConfigRequest.ResetSslMode|null);
+
+                    /** SqlInstancesResetSslConfigRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlInstancesResetSslConfigRequest. */
@@ -13007,6 +13124,9 @@ export namespace google {
 
                     /** SqlInstancesResetSslConfigRequest mode. */
                     public mode: (google.cloud.sql.v1.SqlInstancesResetSslConfigRequest.ResetSslMode|keyof typeof google.cloud.sql.v1.SqlInstancesResetSslConfigRequest.ResetSslMode);
+
+                    /** SqlInstancesResetSslConfigRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlInstancesResetSslConfigRequest instance using the specified properties.
@@ -13104,6 +13224,9 @@ export namespace google {
 
                     /** SqlInstancesRestartRequest project */
                     project?: (string|null);
+
+                    /** SqlInstancesRestartRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlInstancesRestartRequest. */
@@ -13120,6 +13243,9 @@ export namespace google {
 
                     /** SqlInstancesRestartRequest project. */
                     public project: string;
+
+                    /** SqlInstancesRestartRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlInstancesRestartRequest instance using the specified properties.
@@ -13210,6 +13336,9 @@ export namespace google {
 
                     /** SqlInstancesRestoreBackupRequest body */
                     body?: (google.cloud.sql.v1.IInstancesRestoreBackupRequest|null);
+
+                    /** SqlInstancesRestoreBackupRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlInstancesRestoreBackupRequest. */
@@ -13229,6 +13358,9 @@ export namespace google {
 
                     /** SqlInstancesRestoreBackupRequest body. */
                     public body?: (google.cloud.sql.v1.IInstancesRestoreBackupRequest|null);
+
+                    /** SqlInstancesRestoreBackupRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlInstancesRestoreBackupRequest instance using the specified properties.
@@ -13319,6 +13451,9 @@ export namespace google {
 
                     /** SqlInstancesRotateServerCaRequest body */
                     body?: (google.cloud.sql.v1.IInstancesRotateServerCaRequest|null);
+
+                    /** SqlInstancesRotateServerCaRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlInstancesRotateServerCaRequest. */
@@ -13338,6 +13473,9 @@ export namespace google {
 
                     /** SqlInstancesRotateServerCaRequest body. */
                     public body?: (google.cloud.sql.v1.IInstancesRotateServerCaRequest|null);
+
+                    /** SqlInstancesRotateServerCaRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlInstancesRotateServerCaRequest instance using the specified properties.
@@ -13428,6 +13566,9 @@ export namespace google {
 
                     /** SqlInstancesRotateServerCertificateRequest body */
                     body?: (google.cloud.sql.v1.IInstancesRotateServerCertificateRequest|null);
+
+                    /** SqlInstancesRotateServerCertificateRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlInstancesRotateServerCertificateRequest. */
@@ -13447,6 +13588,9 @@ export namespace google {
 
                     /** SqlInstancesRotateServerCertificateRequest body. */
                     public body?: (google.cloud.sql.v1.IInstancesRotateServerCertificateRequest|null);
+
+                    /** SqlInstancesRotateServerCertificateRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlInstancesRotateServerCertificateRequest instance using the specified properties.
@@ -13537,6 +13681,9 @@ export namespace google {
 
                     /** SqlInstancesRotateEntraIdCertificateRequest body */
                     body?: (google.cloud.sql.v1.IInstancesRotateEntraIdCertificateRequest|null);
+
+                    /** SqlInstancesRotateEntraIdCertificateRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlInstancesRotateEntraIdCertificateRequest. */
@@ -13556,6 +13703,9 @@ export namespace google {
 
                     /** SqlInstancesRotateEntraIdCertificateRequest body. */
                     public body?: (google.cloud.sql.v1.IInstancesRotateEntraIdCertificateRequest|null);
+
+                    /** SqlInstancesRotateEntraIdCertificateRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlInstancesRotateEntraIdCertificateRequest instance using the specified properties.
@@ -13643,6 +13793,9 @@ export namespace google {
 
                     /** SqlInstancesStartReplicaRequest project */
                     project?: (string|null);
+
+                    /** SqlInstancesStartReplicaRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlInstancesStartReplicaRequest. */
@@ -13659,6 +13812,9 @@ export namespace google {
 
                     /** SqlInstancesStartReplicaRequest project. */
                     public project: string;
+
+                    /** SqlInstancesStartReplicaRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlInstancesStartReplicaRequest instance using the specified properties.
@@ -13746,6 +13902,9 @@ export namespace google {
 
                     /** SqlInstancesStopReplicaRequest project */
                     project?: (string|null);
+
+                    /** SqlInstancesStopReplicaRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlInstancesStopReplicaRequest. */
@@ -13762,6 +13921,9 @@ export namespace google {
 
                     /** SqlInstancesStopReplicaRequest project. */
                     public project: string;
+
+                    /** SqlInstancesStopReplicaRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlInstancesStopReplicaRequest instance using the specified properties.
@@ -13852,6 +14014,9 @@ export namespace google {
 
                     /** SqlInstancesTruncateLogRequest body */
                     body?: (google.cloud.sql.v1.IInstancesTruncateLogRequest|null);
+
+                    /** SqlInstancesTruncateLogRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlInstancesTruncateLogRequest. */
@@ -13871,6 +14036,9 @@ export namespace google {
 
                     /** SqlInstancesTruncateLogRequest body. */
                     public body?: (google.cloud.sql.v1.IInstancesTruncateLogRequest|null);
+
+                    /** SqlInstancesTruncateLogRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlInstancesTruncateLogRequest instance using the specified properties.
@@ -13961,6 +14129,9 @@ export namespace google {
 
                     /** SqlInstancesPerformDiskShrinkRequest body */
                     body?: (google.cloud.sql.v1.IPerformDiskShrinkContext|null);
+
+                    /** SqlInstancesPerformDiskShrinkRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlInstancesPerformDiskShrinkRequest. */
@@ -13980,6 +14151,9 @@ export namespace google {
 
                     /** SqlInstancesPerformDiskShrinkRequest body. */
                     public body?: (google.cloud.sql.v1.IPerformDiskShrinkContext|null);
+
+                    /** SqlInstancesPerformDiskShrinkRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlInstancesPerformDiskShrinkRequest instance using the specified properties.
@@ -14070,6 +14244,9 @@ export namespace google {
 
                     /** SqlInstancesUpdateRequest body */
                     body?: (google.cloud.sql.v1.IDatabaseInstance|null);
+
+                    /** SqlInstancesUpdateRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlInstancesUpdateRequest. */
@@ -14089,6 +14266,9 @@ export namespace google {
 
                     /** SqlInstancesUpdateRequest body. */
                     public body?: (google.cloud.sql.v1.IDatabaseInstance|null);
+
+                    /** SqlInstancesUpdateRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlInstancesUpdateRequest instance using the specified properties.
@@ -14179,6 +14359,9 @@ export namespace google {
 
                     /** SqlInstancesRescheduleMaintenanceRequest body */
                     body?: (google.cloud.sql.v1.ISqlInstancesRescheduleMaintenanceRequestBody|null);
+
+                    /** SqlInstancesRescheduleMaintenanceRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlInstancesRescheduleMaintenanceRequest. */
@@ -14198,6 +14381,9 @@ export namespace google {
 
                     /** SqlInstancesRescheduleMaintenanceRequest body. */
                     public body?: (google.cloud.sql.v1.ISqlInstancesRescheduleMaintenanceRequestBody|null);
+
+                    /** SqlInstancesRescheduleMaintenanceRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlInstancesRescheduleMaintenanceRequest instance using the specified properties.
@@ -14288,6 +14474,9 @@ export namespace google {
 
                     /** SqlInstancesReencryptRequest body */
                     body?: (google.cloud.sql.v1.IInstancesReencryptRequest|null);
+
+                    /** SqlInstancesReencryptRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlInstancesReencryptRequest. */
@@ -14307,6 +14496,9 @@ export namespace google {
 
                     /** SqlInstancesReencryptRequest body. */
                     public body?: (google.cloud.sql.v1.IInstancesReencryptRequest|null);
+
+                    /** SqlInstancesReencryptRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlInstancesReencryptRequest instance using the specified properties.
@@ -14709,6 +14901,9 @@ export namespace google {
 
                     /** SqlInstancesGetDiskShrinkConfigRequest project */
                     project?: (string|null);
+
+                    /** SqlInstancesGetDiskShrinkConfigRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlInstancesGetDiskShrinkConfigRequest. */
@@ -14725,6 +14920,9 @@ export namespace google {
 
                     /** SqlInstancesGetDiskShrinkConfigRequest project. */
                     public project: string;
+
+                    /** SqlInstancesGetDiskShrinkConfigRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlInstancesGetDiskShrinkConfigRequest instance using the specified properties.
@@ -14833,6 +15031,9 @@ export namespace google {
 
                     /** SqlInstancesVerifyExternalSyncSettingsRequest selectedObjects */
                     selectedObjects?: (google.cloud.sql.v1.IExternalSyncSelectedObject[]|null);
+
+                    /** SqlInstancesVerifyExternalSyncSettingsRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlInstancesVerifyExternalSyncSettingsRequest. */
@@ -14870,6 +15071,9 @@ export namespace google {
 
                     /** SqlInstancesVerifyExternalSyncSettingsRequest selectedObjects. */
                     public selectedObjects: google.cloud.sql.v1.IExternalSyncSelectedObject[];
+
+                    /** SqlInstancesVerifyExternalSyncSettingsRequest location. */
+                    public location: string;
 
                     /** SqlInstancesVerifyExternalSyncSettingsRequest syncConfig. */
                     public syncConfig?: "mysqlSyncConfig";
@@ -14995,6 +15199,9 @@ export namespace google {
 
                     /** SqlInstancesStartExternalSyncRequest replicaOverwriteEnabled */
                     replicaOverwriteEnabled?: (boolean|null);
+
+                    /** SqlInstancesStartExternalSyncRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlInstancesStartExternalSyncRequest. */
@@ -15029,6 +15236,9 @@ export namespace google {
 
                     /** SqlInstancesStartExternalSyncRequest replicaOverwriteEnabled. */
                     public replicaOverwriteEnabled: boolean;
+
+                    /** SqlInstancesStartExternalSyncRequest location. */
+                    public location: string;
 
                     /** SqlInstancesStartExternalSyncRequest syncConfig. */
                     public syncConfig?: "mysqlSyncConfig";
@@ -15119,6 +15329,9 @@ export namespace google {
 
                     /** SqlInstancesResetReplicaSizeRequest project */
                     project?: (string|null);
+
+                    /** SqlInstancesResetReplicaSizeRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlInstancesResetReplicaSizeRequest. */
@@ -15135,6 +15348,9 @@ export namespace google {
 
                     /** SqlInstancesResetReplicaSizeRequest project. */
                     public project: string;
+
+                    /** SqlInstancesResetReplicaSizeRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlInstancesResetReplicaSizeRequest instance using the specified properties.
@@ -15225,6 +15441,9 @@ export namespace google {
 
                     /** SqlInstancesCreateEphemeralCertRequest body */
                     body?: (google.cloud.sql.v1.ISslCertsCreateEphemeralRequest|null);
+
+                    /** SqlInstancesCreateEphemeralCertRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlInstancesCreateEphemeralCertRequest. */
@@ -15244,6 +15463,9 @@ export namespace google {
 
                     /** SqlInstancesCreateEphemeralCertRequest body. */
                     public body?: (google.cloud.sql.v1.ISslCertsCreateEphemeralRequest|null);
+
+                    /** SqlInstancesCreateEphemeralCertRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlInstancesCreateEphemeralCertRequest instance using the specified properties.
@@ -17170,6 +17392,9 @@ export namespace google {
 
                     /** SqlInstancesPreCheckMajorVersionUpgradeRequest body */
                     body?: (google.cloud.sql.v1.IInstancesPreCheckMajorVersionUpgradeRequest|null);
+
+                    /** SqlInstancesPreCheckMajorVersionUpgradeRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlInstancesPreCheckMajorVersionUpgradeRequest. */
@@ -17189,6 +17414,9 @@ export namespace google {
 
                     /** SqlInstancesPreCheckMajorVersionUpgradeRequest body. */
                     public body?: (google.cloud.sql.v1.IInstancesPreCheckMajorVersionUpgradeRequest|null);
+
+                    /** SqlInstancesPreCheckMajorVersionUpgradeRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlInstancesPreCheckMajorVersionUpgradeRequest instance using the specified properties.
@@ -17497,6 +17725,9 @@ export namespace google {
 
                     /** SqlInstancesGetLatestRecoveryTimeRequest sourceInstanceDeletionTime */
                     sourceInstanceDeletionTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SqlInstancesGetLatestRecoveryTimeRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlInstancesGetLatestRecoveryTimeRequest. */
@@ -17516,6 +17747,9 @@ export namespace google {
 
                     /** SqlInstancesGetLatestRecoveryTimeRequest sourceInstanceDeletionTime. */
                     public sourceInstanceDeletionTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SqlInstancesGetLatestRecoveryTimeRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlInstancesGetLatestRecoveryTimeRequest instance using the specified properties.
@@ -18285,6 +18519,9 @@ export namespace google {
 
                     /** DatabaseInstance databaseCenterIntegrationEnabled */
                     databaseCenterIntegrationEnabled?: (google.protobuf.IBoolValue|null);
+
+                    /** DatabaseInstance databaseCenterIntegration */
+                    databaseCenterIntegration?: (google.cloud.sql.v1.DatabaseInstance.DatabaseCenterIntegration|keyof typeof google.cloud.sql.v1.DatabaseInstance.DatabaseCenterIntegration|null);
                 }
 
                 /** Represents a DatabaseInstance. */
@@ -18451,6 +18688,9 @@ export namespace google {
 
                     /** DatabaseInstance databaseCenterIntegrationEnabled. */
                     public databaseCenterIntegrationEnabled?: (google.protobuf.IBoolValue|null);
+
+                    /** DatabaseInstance databaseCenterIntegration. */
+                    public databaseCenterIntegration?: (google.cloud.sql.v1.DatabaseInstance.DatabaseCenterIntegration|keyof typeof google.cloud.sql.v1.DatabaseInstance.DatabaseCenterIntegration|null);
 
                     /**
                      * Creates a new DatabaseInstance instance using the specified properties.
@@ -19020,6 +19260,13 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** DatabaseCenterIntegration enum. */
+                    enum DatabaseCenterIntegration {
+                        DATABASE_CENTER_INTEGRATION_UNSPECIFIED = 0,
+                        ENABLED = 1,
+                        DISABLED = 2
                     }
                 }
 
@@ -21005,6 +21252,9 @@ export namespace google {
 
                     /** SqlInstancesExecuteSqlRequest body */
                     body?: (google.cloud.sql.v1.IExecuteSqlPayload|null);
+
+                    /** SqlInstancesExecuteSqlRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlInstancesExecuteSqlRequest. */
@@ -21024,6 +21274,9 @@ export namespace google {
 
                     /** SqlInstancesExecuteSqlRequest body. */
                     public body?: (google.cloud.sql.v1.IExecuteSqlPayload|null);
+
+                    /** SqlInstancesExecuteSqlRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlInstancesExecuteSqlRequest instance using the specified properties.
@@ -22008,6 +22261,9 @@ export namespace google {
 
                     /** SqlInstancesAcquireSsrsLeaseRequest body */
                     body?: (google.cloud.sql.v1.IInstancesAcquireSsrsLeaseRequest|null);
+
+                    /** SqlInstancesAcquireSsrsLeaseRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlInstancesAcquireSsrsLeaseRequest. */
@@ -22027,6 +22283,9 @@ export namespace google {
 
                     /** SqlInstancesAcquireSsrsLeaseRequest body. */
                     public body?: (google.cloud.sql.v1.IInstancesAcquireSsrsLeaseRequest|null);
+
+                    /** SqlInstancesAcquireSsrsLeaseRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlInstancesAcquireSsrsLeaseRequest instance using the specified properties.
@@ -22211,6 +22470,9 @@ export namespace google {
 
                     /** SqlInstancesReleaseSsrsLeaseRequest project */
                     project?: (string|null);
+
+                    /** SqlInstancesReleaseSsrsLeaseRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlInstancesReleaseSsrsLeaseRequest. */
@@ -22227,6 +22489,9 @@ export namespace google {
 
                     /** SqlInstancesReleaseSsrsLeaseRequest project. */
                     public project: string;
+
+                    /** SqlInstancesReleaseSsrsLeaseRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlInstancesReleaseSsrsLeaseRequest instance using the specified properties.
@@ -23522,6 +23787,9 @@ export namespace google {
 
                     /** SqlDatabasesDeleteRequest project */
                     project?: (string|null);
+
+                    /** SqlDatabasesDeleteRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlDatabasesDeleteRequest. */
@@ -23541,6 +23809,9 @@ export namespace google {
 
                     /** SqlDatabasesDeleteRequest project. */
                     public project: string;
+
+                    /** SqlDatabasesDeleteRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlDatabasesDeleteRequest instance using the specified properties.
@@ -23631,6 +23902,9 @@ export namespace google {
 
                     /** SqlDatabasesGetRequest project */
                     project?: (string|null);
+
+                    /** SqlDatabasesGetRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlDatabasesGetRequest. */
@@ -23650,6 +23924,9 @@ export namespace google {
 
                     /** SqlDatabasesGetRequest project. */
                     public project: string;
+
+                    /** SqlDatabasesGetRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlDatabasesGetRequest instance using the specified properties.
@@ -23740,6 +24017,9 @@ export namespace google {
 
                     /** SqlDatabasesInsertRequest body */
                     body?: (google.cloud.sql.v1.IDatabase|null);
+
+                    /** SqlDatabasesInsertRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlDatabasesInsertRequest. */
@@ -23759,6 +24039,9 @@ export namespace google {
 
                     /** SqlDatabasesInsertRequest body. */
                     public body?: (google.cloud.sql.v1.IDatabase|null);
+
+                    /** SqlDatabasesInsertRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlDatabasesInsertRequest instance using the specified properties.
@@ -23846,6 +24129,9 @@ export namespace google {
 
                     /** SqlDatabasesListRequest project */
                     project?: (string|null);
+
+                    /** SqlDatabasesListRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlDatabasesListRequest. */
@@ -23862,6 +24148,9 @@ export namespace google {
 
                     /** SqlDatabasesListRequest project. */
                     public project: string;
+
+                    /** SqlDatabasesListRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlDatabasesListRequest instance using the specified properties.
@@ -23955,6 +24244,9 @@ export namespace google {
 
                     /** SqlDatabasesUpdateRequest body */
                     body?: (google.cloud.sql.v1.IDatabase|null);
+
+                    /** SqlDatabasesUpdateRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlDatabasesUpdateRequest. */
@@ -23977,6 +24269,9 @@ export namespace google {
 
                     /** SqlDatabasesUpdateRequest body. */
                     public body?: (google.cloud.sql.v1.IDatabase|null);
+
+                    /** SqlDatabasesUpdateRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlDatabasesUpdateRequest instance using the specified properties.
@@ -26603,6 +26898,9 @@ export namespace google {
 
                     /** SqlUsersDeleteRequest project */
                     project?: (string|null);
+
+                    /** SqlUsersDeleteRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlUsersDeleteRequest. */
@@ -26625,6 +26923,9 @@ export namespace google {
 
                     /** SqlUsersDeleteRequest project. */
                     public project: string;
+
+                    /** SqlUsersDeleteRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlUsersDeleteRequest instance using the specified properties.
@@ -26718,6 +27019,9 @@ export namespace google {
 
                     /** SqlUsersGetRequest host */
                     host?: (string|null);
+
+                    /** SqlUsersGetRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlUsersGetRequest. */
@@ -26740,6 +27044,9 @@ export namespace google {
 
                     /** SqlUsersGetRequest host. */
                     public host: string;
+
+                    /** SqlUsersGetRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlUsersGetRequest instance using the specified properties.
@@ -26830,6 +27137,9 @@ export namespace google {
 
                     /** SqlUsersInsertRequest body */
                     body?: (google.cloud.sql.v1.IUser|null);
+
+                    /** SqlUsersInsertRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlUsersInsertRequest. */
@@ -26849,6 +27159,9 @@ export namespace google {
 
                     /** SqlUsersInsertRequest body. */
                     public body?: (google.cloud.sql.v1.IUser|null);
+
+                    /** SqlUsersInsertRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlUsersInsertRequest instance using the specified properties.
@@ -26936,6 +27249,9 @@ export namespace google {
 
                     /** SqlUsersListRequest project */
                     project?: (string|null);
+
+                    /** SqlUsersListRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlUsersListRequest. */
@@ -26952,6 +27268,9 @@ export namespace google {
 
                     /** SqlUsersListRequest project. */
                     public project: string;
+
+                    /** SqlUsersListRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlUsersListRequest instance using the specified properties.
@@ -27060,6 +27379,9 @@ export namespace google {
 
                     /** SqlUsersUpdateRequest body */
                     body?: (google.cloud.sql.v1.IUser|null);
+
+                    /** SqlUsersUpdateRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlUsersUpdateRequest. */
@@ -27097,6 +27419,9 @@ export namespace google {
 
                     /** SqlUsersUpdateRequest body. */
                     public body?: (google.cloud.sql.v1.IUser|null);
+
+                    /** SqlUsersUpdateRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlUsersUpdateRequest instance using the specified properties.
@@ -30461,6 +30786,9 @@ export namespace google {
 
                     /** SqlDatabasesDeleteRequest project */
                     project?: (string|null);
+
+                    /** SqlDatabasesDeleteRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlDatabasesDeleteRequest. */
@@ -30480,6 +30808,9 @@ export namespace google {
 
                     /** SqlDatabasesDeleteRequest project. */
                     public project: string;
+
+                    /** SqlDatabasesDeleteRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlDatabasesDeleteRequest instance using the specified properties.
@@ -30570,6 +30901,9 @@ export namespace google {
 
                     /** SqlDatabasesGetRequest project */
                     project?: (string|null);
+
+                    /** SqlDatabasesGetRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlDatabasesGetRequest. */
@@ -30589,6 +30923,9 @@ export namespace google {
 
                     /** SqlDatabasesGetRequest project. */
                     public project: string;
+
+                    /** SqlDatabasesGetRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlDatabasesGetRequest instance using the specified properties.
@@ -30679,6 +31016,9 @@ export namespace google {
 
                     /** SqlDatabasesInsertRequest body */
                     body?: (google.cloud.sql.v1beta4.IDatabase|null);
+
+                    /** SqlDatabasesInsertRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlDatabasesInsertRequest. */
@@ -30698,6 +31038,9 @@ export namespace google {
 
                     /** SqlDatabasesInsertRequest body. */
                     public body?: (google.cloud.sql.v1beta4.IDatabase|null);
+
+                    /** SqlDatabasesInsertRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlDatabasesInsertRequest instance using the specified properties.
@@ -30785,6 +31128,9 @@ export namespace google {
 
                     /** SqlDatabasesListRequest project */
                     project?: (string|null);
+
+                    /** SqlDatabasesListRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlDatabasesListRequest. */
@@ -30801,6 +31147,9 @@ export namespace google {
 
                     /** SqlDatabasesListRequest project. */
                     public project: string;
+
+                    /** SqlDatabasesListRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlDatabasesListRequest instance using the specified properties.
@@ -30894,6 +31243,9 @@ export namespace google {
 
                     /** SqlDatabasesUpdateRequest body */
                     body?: (google.cloud.sql.v1beta4.IDatabase|null);
+
+                    /** SqlDatabasesUpdateRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlDatabasesUpdateRequest. */
@@ -30916,6 +31268,9 @@ export namespace google {
 
                     /** SqlDatabasesUpdateRequest body. */
                     public body?: (google.cloud.sql.v1beta4.IDatabase|null);
+
+                    /** SqlDatabasesUpdateRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlDatabasesUpdateRequest instance using the specified properties.
@@ -31106,6 +31461,9 @@ export namespace google {
 
                     /** SqlInstancesAddServerCaRequest project */
                     project?: (string|null);
+
+                    /** SqlInstancesAddServerCaRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlInstancesAddServerCaRequest. */
@@ -31122,6 +31480,9 @@ export namespace google {
 
                     /** SqlInstancesAddServerCaRequest project. */
                     public project: string;
+
+                    /** SqlInstancesAddServerCaRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlInstancesAddServerCaRequest instance using the specified properties.
@@ -31209,6 +31570,9 @@ export namespace google {
 
                     /** SqlInstancesAddServerCertificateRequest project */
                     project?: (string|null);
+
+                    /** SqlInstancesAddServerCertificateRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlInstancesAddServerCertificateRequest. */
@@ -31225,6 +31589,9 @@ export namespace google {
 
                     /** SqlInstancesAddServerCertificateRequest project. */
                     public project: string;
+
+                    /** SqlInstancesAddServerCertificateRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlInstancesAddServerCertificateRequest instance using the specified properties.
@@ -31312,6 +31679,9 @@ export namespace google {
 
                     /** SqlInstancesAddEntraIdCertificateRequest project */
                     project?: (string|null);
+
+                    /** SqlInstancesAddEntraIdCertificateRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlInstancesAddEntraIdCertificateRequest. */
@@ -31328,6 +31698,9 @@ export namespace google {
 
                     /** SqlInstancesAddEntraIdCertificateRequest project. */
                     public project: string;
+
+                    /** SqlInstancesAddEntraIdCertificateRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlInstancesAddEntraIdCertificateRequest instance using the specified properties.
@@ -31418,6 +31791,9 @@ export namespace google {
 
                     /** SqlInstancesCloneRequest body */
                     body?: (google.cloud.sql.v1beta4.IInstancesCloneRequest|null);
+
+                    /** SqlInstancesCloneRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlInstancesCloneRequest. */
@@ -31437,6 +31813,9 @@ export namespace google {
 
                     /** SqlInstancesCloneRequest body. */
                     public body?: (google.cloud.sql.v1beta4.IInstancesCloneRequest|null);
+
+                    /** SqlInstancesCloneRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlInstancesCloneRequest instance using the specified properties.
@@ -31536,6 +31915,9 @@ export namespace google {
 
                     /** SqlInstancesDeleteRequest finalBackupDescription */
                     finalBackupDescription?: (string|null);
+
+                    /** SqlInstancesDeleteRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlInstancesDeleteRequest. */
@@ -31564,6 +31946,9 @@ export namespace google {
 
                     /** SqlInstancesDeleteRequest finalBackupDescription. */
                     public finalBackupDescription: string;
+
+                    /** SqlInstancesDeleteRequest location. */
+                    public location: string;
 
                     /** SqlInstancesDeleteRequest expiration. */
                     public expiration?: ("finalBackupTtlDays"|"finalBackupExpiryTime");
@@ -31657,6 +32042,9 @@ export namespace google {
 
                     /** SqlInstancesDemoteMasterRequest body */
                     body?: (google.cloud.sql.v1beta4.IInstancesDemoteMasterRequest|null);
+
+                    /** SqlInstancesDemoteMasterRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlInstancesDemoteMasterRequest. */
@@ -31676,6 +32064,9 @@ export namespace google {
 
                     /** SqlInstancesDemoteMasterRequest body. */
                     public body?: (google.cloud.sql.v1beta4.IInstancesDemoteMasterRequest|null);
+
+                    /** SqlInstancesDemoteMasterRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlInstancesDemoteMasterRequest instance using the specified properties.
@@ -31766,6 +32157,9 @@ export namespace google {
 
                     /** SqlInstancesDemoteRequest body */
                     body?: (google.cloud.sql.v1beta4.IInstancesDemoteRequest|null);
+
+                    /** SqlInstancesDemoteRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlInstancesDemoteRequest. */
@@ -31785,6 +32179,9 @@ export namespace google {
 
                     /** SqlInstancesDemoteRequest body. */
                     public body?: (google.cloud.sql.v1beta4.IInstancesDemoteRequest|null);
+
+                    /** SqlInstancesDemoteRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlInstancesDemoteRequest instance using the specified properties.
@@ -31875,6 +32272,9 @@ export namespace google {
 
                     /** SqlInstancesExportRequest body */
                     body?: (google.cloud.sql.v1beta4.IInstancesExportRequest|null);
+
+                    /** SqlInstancesExportRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlInstancesExportRequest. */
@@ -31894,6 +32294,9 @@ export namespace google {
 
                     /** SqlInstancesExportRequest body. */
                     public body?: (google.cloud.sql.v1beta4.IInstancesExportRequest|null);
+
+                    /** SqlInstancesExportRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlInstancesExportRequest instance using the specified properties.
@@ -31984,6 +32387,9 @@ export namespace google {
 
                     /** SqlInstancesFailoverRequest body */
                     body?: (google.cloud.sql.v1beta4.IInstancesFailoverRequest|null);
+
+                    /** SqlInstancesFailoverRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlInstancesFailoverRequest. */
@@ -32003,6 +32409,9 @@ export namespace google {
 
                     /** SqlInstancesFailoverRequest body. */
                     public body?: (google.cloud.sql.v1beta4.IInstancesFailoverRequest|null);
+
+                    /** SqlInstancesFailoverRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlInstancesFailoverRequest instance using the specified properties.
@@ -32090,6 +32499,9 @@ export namespace google {
 
                     /** SqlInstancesGetRequest project */
                     project?: (string|null);
+
+                    /** SqlInstancesGetRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlInstancesGetRequest. */
@@ -32106,6 +32518,9 @@ export namespace google {
 
                     /** SqlInstancesGetRequest project. */
                     public project: string;
+
+                    /** SqlInstancesGetRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlInstancesGetRequest instance using the specified properties.
@@ -32196,6 +32611,9 @@ export namespace google {
 
                     /** SqlInstancesImportRequest body */
                     body?: (google.cloud.sql.v1beta4.IInstancesImportRequest|null);
+
+                    /** SqlInstancesImportRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlInstancesImportRequest. */
@@ -32215,6 +32633,9 @@ export namespace google {
 
                     /** SqlInstancesImportRequest body. */
                     public body?: (google.cloud.sql.v1beta4.IInstancesImportRequest|null);
+
+                    /** SqlInstancesImportRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlInstancesImportRequest instance using the specified properties.
@@ -32302,6 +32723,9 @@ export namespace google {
 
                     /** SqlInstancesInsertRequest body */
                     body?: (google.cloud.sql.v1beta4.IDatabaseInstance|null);
+
+                    /** SqlInstancesInsertRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlInstancesInsertRequest. */
@@ -32318,6 +32742,9 @@ export namespace google {
 
                     /** SqlInstancesInsertRequest body. */
                     public body?: (google.cloud.sql.v1beta4.IDatabaseInstance|null);
+
+                    /** SqlInstancesInsertRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlInstancesInsertRequest instance using the specified properties.
@@ -32411,6 +32838,9 @@ export namespace google {
 
                     /** SqlInstancesListRequest project */
                     project?: (string|null);
+
+                    /** SqlInstancesListRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlInstancesListRequest. */
@@ -32433,6 +32863,9 @@ export namespace google {
 
                     /** SqlInstancesListRequest project. */
                     public project: string;
+
+                    /** SqlInstancesListRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlInstancesListRequest instance using the specified properties.
@@ -32520,6 +32953,9 @@ export namespace google {
 
                     /** SqlInstancesListServerCasRequest project */
                     project?: (string|null);
+
+                    /** SqlInstancesListServerCasRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlInstancesListServerCasRequest. */
@@ -32536,6 +32972,9 @@ export namespace google {
 
                     /** SqlInstancesListServerCasRequest project. */
                     public project: string;
+
+                    /** SqlInstancesListServerCasRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlInstancesListServerCasRequest instance using the specified properties.
@@ -32623,6 +33062,9 @@ export namespace google {
 
                     /** SqlInstancesListServerCertificatesRequest project */
                     project?: (string|null);
+
+                    /** SqlInstancesListServerCertificatesRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlInstancesListServerCertificatesRequest. */
@@ -32639,6 +33081,9 @@ export namespace google {
 
                     /** SqlInstancesListServerCertificatesRequest project. */
                     public project: string;
+
+                    /** SqlInstancesListServerCertificatesRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlInstancesListServerCertificatesRequest instance using the specified properties.
@@ -32726,6 +33171,9 @@ export namespace google {
 
                     /** SqlInstancesListEntraIdCertificatesRequest project */
                     project?: (string|null);
+
+                    /** SqlInstancesListEntraIdCertificatesRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlInstancesListEntraIdCertificatesRequest. */
@@ -32742,6 +33190,9 @@ export namespace google {
 
                     /** SqlInstancesListEntraIdCertificatesRequest project. */
                     public project: string;
+
+                    /** SqlInstancesListEntraIdCertificatesRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlInstancesListEntraIdCertificatesRequest instance using the specified properties.
@@ -32838,6 +33289,9 @@ export namespace google {
 
                     /** SqlInstancesPatchRequest body */
                     body?: (google.cloud.sql.v1beta4.IDatabaseInstance|null);
+
+                    /** SqlInstancesPatchRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlInstancesPatchRequest. */
@@ -32863,6 +33317,9 @@ export namespace google {
 
                     /** SqlInstancesPatchRequest body. */
                     public body?: (google.cloud.sql.v1beta4.IDatabaseInstance|null);
+
+                    /** SqlInstancesPatchRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlInstancesPatchRequest instance using the specified properties.
@@ -32953,6 +33410,9 @@ export namespace google {
 
                     /** SqlInstancesPromoteReplicaRequest failover */
                     failover?: (boolean|null);
+
+                    /** SqlInstancesPromoteReplicaRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlInstancesPromoteReplicaRequest. */
@@ -32972,6 +33432,9 @@ export namespace google {
 
                     /** SqlInstancesPromoteReplicaRequest failover. */
                     public failover: boolean;
+
+                    /** SqlInstancesPromoteReplicaRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlInstancesPromoteReplicaRequest instance using the specified properties.
@@ -33062,6 +33525,9 @@ export namespace google {
 
                     /** SqlInstancesSwitchoverRequest dbTimeout */
                     dbTimeout?: (google.protobuf.IDuration|null);
+
+                    /** SqlInstancesSwitchoverRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlInstancesSwitchoverRequest. */
@@ -33081,6 +33547,9 @@ export namespace google {
 
                     /** SqlInstancesSwitchoverRequest dbTimeout. */
                     public dbTimeout?: (google.protobuf.IDuration|null);
+
+                    /** SqlInstancesSwitchoverRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlInstancesSwitchoverRequest instance using the specified properties.
@@ -33171,6 +33640,9 @@ export namespace google {
 
                     /** SqlInstancesResetSslConfigRequest mode */
                     mode?: (google.cloud.sql.v1beta4.SqlInstancesResetSslConfigRequest.ResetSslMode|keyof typeof google.cloud.sql.v1beta4.SqlInstancesResetSslConfigRequest.ResetSslMode|null);
+
+                    /** SqlInstancesResetSslConfigRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlInstancesResetSslConfigRequest. */
@@ -33190,6 +33662,9 @@ export namespace google {
 
                     /** SqlInstancesResetSslConfigRequest mode. */
                     public mode: (google.cloud.sql.v1beta4.SqlInstancesResetSslConfigRequest.ResetSslMode|keyof typeof google.cloud.sql.v1beta4.SqlInstancesResetSslConfigRequest.ResetSslMode);
+
+                    /** SqlInstancesResetSslConfigRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlInstancesResetSslConfigRequest instance using the specified properties.
@@ -33287,6 +33762,9 @@ export namespace google {
 
                     /** SqlInstancesRestartRequest project */
                     project?: (string|null);
+
+                    /** SqlInstancesRestartRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlInstancesRestartRequest. */
@@ -33303,6 +33781,9 @@ export namespace google {
 
                     /** SqlInstancesRestartRequest project. */
                     public project: string;
+
+                    /** SqlInstancesRestartRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlInstancesRestartRequest instance using the specified properties.
@@ -33393,6 +33874,9 @@ export namespace google {
 
                     /** SqlInstancesRestoreBackupRequest body */
                     body?: (google.cloud.sql.v1beta4.IInstancesRestoreBackupRequest|null);
+
+                    /** SqlInstancesRestoreBackupRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlInstancesRestoreBackupRequest. */
@@ -33412,6 +33896,9 @@ export namespace google {
 
                     /** SqlInstancesRestoreBackupRequest body. */
                     public body?: (google.cloud.sql.v1beta4.IInstancesRestoreBackupRequest|null);
+
+                    /** SqlInstancesRestoreBackupRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlInstancesRestoreBackupRequest instance using the specified properties.
@@ -33502,6 +33989,9 @@ export namespace google {
 
                     /** SqlInstancesRotateServerCaRequest body */
                     body?: (google.cloud.sql.v1beta4.IInstancesRotateServerCaRequest|null);
+
+                    /** SqlInstancesRotateServerCaRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlInstancesRotateServerCaRequest. */
@@ -33521,6 +34011,9 @@ export namespace google {
 
                     /** SqlInstancesRotateServerCaRequest body. */
                     public body?: (google.cloud.sql.v1beta4.IInstancesRotateServerCaRequest|null);
+
+                    /** SqlInstancesRotateServerCaRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlInstancesRotateServerCaRequest instance using the specified properties.
@@ -33611,6 +34104,9 @@ export namespace google {
 
                     /** SqlInstancesRotateServerCertificateRequest body */
                     body?: (google.cloud.sql.v1beta4.IInstancesRotateServerCertificateRequest|null);
+
+                    /** SqlInstancesRotateServerCertificateRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlInstancesRotateServerCertificateRequest. */
@@ -33630,6 +34126,9 @@ export namespace google {
 
                     /** SqlInstancesRotateServerCertificateRequest body. */
                     public body?: (google.cloud.sql.v1beta4.IInstancesRotateServerCertificateRequest|null);
+
+                    /** SqlInstancesRotateServerCertificateRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlInstancesRotateServerCertificateRequest instance using the specified properties.
@@ -33720,6 +34219,9 @@ export namespace google {
 
                     /** SqlInstancesRotateEntraIdCertificateRequest body */
                     body?: (google.cloud.sql.v1beta4.IInstancesRotateEntraIdCertificateRequest|null);
+
+                    /** SqlInstancesRotateEntraIdCertificateRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlInstancesRotateEntraIdCertificateRequest. */
@@ -33739,6 +34241,9 @@ export namespace google {
 
                     /** SqlInstancesRotateEntraIdCertificateRequest body. */
                     public body?: (google.cloud.sql.v1beta4.IInstancesRotateEntraIdCertificateRequest|null);
+
+                    /** SqlInstancesRotateEntraIdCertificateRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlInstancesRotateEntraIdCertificateRequest instance using the specified properties.
@@ -33826,6 +34331,9 @@ export namespace google {
 
                     /** SqlInstancesStartReplicaRequest project */
                     project?: (string|null);
+
+                    /** SqlInstancesStartReplicaRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlInstancesStartReplicaRequest. */
@@ -33842,6 +34350,9 @@ export namespace google {
 
                     /** SqlInstancesStartReplicaRequest project. */
                     public project: string;
+
+                    /** SqlInstancesStartReplicaRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlInstancesStartReplicaRequest instance using the specified properties.
@@ -33929,6 +34440,9 @@ export namespace google {
 
                     /** SqlInstancesStopReplicaRequest project */
                     project?: (string|null);
+
+                    /** SqlInstancesStopReplicaRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlInstancesStopReplicaRequest. */
@@ -33945,6 +34459,9 @@ export namespace google {
 
                     /** SqlInstancesStopReplicaRequest project. */
                     public project: string;
+
+                    /** SqlInstancesStopReplicaRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlInstancesStopReplicaRequest instance using the specified properties.
@@ -34035,6 +34552,9 @@ export namespace google {
 
                     /** SqlInstancesTruncateLogRequest body */
                     body?: (google.cloud.sql.v1beta4.IInstancesTruncateLogRequest|null);
+
+                    /** SqlInstancesTruncateLogRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlInstancesTruncateLogRequest. */
@@ -34054,6 +34574,9 @@ export namespace google {
 
                     /** SqlInstancesTruncateLogRequest body. */
                     public body?: (google.cloud.sql.v1beta4.IInstancesTruncateLogRequest|null);
+
+                    /** SqlInstancesTruncateLogRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlInstancesTruncateLogRequest instance using the specified properties.
@@ -34144,6 +34667,9 @@ export namespace google {
 
                     /** SqlInstancesUpdateRequest body */
                     body?: (google.cloud.sql.v1beta4.IDatabaseInstance|null);
+
+                    /** SqlInstancesUpdateRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlInstancesUpdateRequest. */
@@ -34163,6 +34689,9 @@ export namespace google {
 
                     /** SqlInstancesUpdateRequest body. */
                     public body?: (google.cloud.sql.v1beta4.IDatabaseInstance|null);
+
+                    /** SqlInstancesUpdateRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlInstancesUpdateRequest instance using the specified properties.
@@ -34253,6 +34782,9 @@ export namespace google {
 
                     /** SqlInstancesReencryptRequest body */
                     body?: (google.cloud.sql.v1beta4.IInstancesReencryptRequest|null);
+
+                    /** SqlInstancesReencryptRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlInstancesReencryptRequest. */
@@ -34272,6 +34804,9 @@ export namespace google {
 
                     /** SqlInstancesReencryptRequest body. */
                     public body?: (google.cloud.sql.v1beta4.IInstancesReencryptRequest|null);
+
+                    /** SqlInstancesReencryptRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlInstancesReencryptRequest instance using the specified properties.
@@ -34572,6 +35107,9 @@ export namespace google {
 
                     /** SqlInstancesRescheduleMaintenanceRequest body */
                     body?: (google.cloud.sql.v1beta4.ISqlInstancesRescheduleMaintenanceRequestBody|null);
+
+                    /** SqlInstancesRescheduleMaintenanceRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlInstancesRescheduleMaintenanceRequest. */
@@ -34591,6 +35129,9 @@ export namespace google {
 
                     /** SqlInstancesRescheduleMaintenanceRequest body. */
                     public body?: (google.cloud.sql.v1beta4.ISqlInstancesRescheduleMaintenanceRequestBody|null);
+
+                    /** SqlInstancesRescheduleMaintenanceRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlInstancesRescheduleMaintenanceRequest instance using the specified properties.
@@ -34681,6 +35222,9 @@ export namespace google {
 
                     /** SqlInstancesPerformDiskShrinkRequest body */
                     body?: (google.cloud.sql.v1beta4.IPerformDiskShrinkContext|null);
+
+                    /** SqlInstancesPerformDiskShrinkRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlInstancesPerformDiskShrinkRequest. */
@@ -34700,6 +35244,9 @@ export namespace google {
 
                     /** SqlInstancesPerformDiskShrinkRequest body. */
                     public body?: (google.cloud.sql.v1beta4.IPerformDiskShrinkContext|null);
+
+                    /** SqlInstancesPerformDiskShrinkRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlInstancesPerformDiskShrinkRequest instance using the specified properties.
@@ -34913,6 +35460,9 @@ export namespace google {
 
                     /** SqlInstancesVerifyExternalSyncSettingsRequest selectedObjects */
                     selectedObjects?: (google.cloud.sql.v1beta4.IExternalSyncSelectedObject[]|null);
+
+                    /** SqlInstancesVerifyExternalSyncSettingsRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlInstancesVerifyExternalSyncSettingsRequest. */
@@ -34950,6 +35500,9 @@ export namespace google {
 
                     /** SqlInstancesVerifyExternalSyncSettingsRequest selectedObjects. */
                     public selectedObjects: google.cloud.sql.v1beta4.IExternalSyncSelectedObject[];
+
+                    /** SqlInstancesVerifyExternalSyncSettingsRequest location. */
+                    public location: string;
 
                     /** SqlInstancesVerifyExternalSyncSettingsRequest syncConfig. */
                     public syncConfig?: "mysqlSyncConfig";
@@ -35075,6 +35628,9 @@ export namespace google {
 
                     /** SqlInstancesStartExternalSyncRequest replicaOverwriteEnabled */
                     replicaOverwriteEnabled?: (boolean|null);
+
+                    /** SqlInstancesStartExternalSyncRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlInstancesStartExternalSyncRequest. */
@@ -35109,6 +35665,9 @@ export namespace google {
 
                     /** SqlInstancesStartExternalSyncRequest replicaOverwriteEnabled. */
                     public replicaOverwriteEnabled: boolean;
+
+                    /** SqlInstancesStartExternalSyncRequest location. */
+                    public location: string;
 
                     /** SqlInstancesStartExternalSyncRequest syncConfig. */
                     public syncConfig?: "mysqlSyncConfig";
@@ -35199,6 +35758,9 @@ export namespace google {
 
                     /** SqlInstancesResetReplicaSizeRequest project */
                     project?: (string|null);
+
+                    /** SqlInstancesResetReplicaSizeRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlInstancesResetReplicaSizeRequest. */
@@ -35215,6 +35777,9 @@ export namespace google {
 
                     /** SqlInstancesResetReplicaSizeRequest project. */
                     public project: string;
+
+                    /** SqlInstancesResetReplicaSizeRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlInstancesResetReplicaSizeRequest instance using the specified properties.
@@ -35644,6 +36209,9 @@ export namespace google {
 
                     /** SqlInstancesCreateEphemeralCertRequest body */
                     body?: (google.cloud.sql.v1beta4.ISslCertsCreateEphemeralRequest|null);
+
+                    /** SqlInstancesCreateEphemeralCertRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlInstancesCreateEphemeralCertRequest. */
@@ -35663,6 +36231,9 @@ export namespace google {
 
                     /** SqlInstancesCreateEphemeralCertRequest body. */
                     public body?: (google.cloud.sql.v1beta4.ISslCertsCreateEphemeralRequest|null);
+
+                    /** SqlInstancesCreateEphemeralCertRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlInstancesCreateEphemeralCertRequest instance using the specified properties.
@@ -36180,6 +36751,9 @@ export namespace google {
 
                     /** SqlInstancesGetDiskShrinkConfigRequest project */
                     project?: (string|null);
+
+                    /** SqlInstancesGetDiskShrinkConfigRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlInstancesGetDiskShrinkConfigRequest. */
@@ -36196,6 +36770,9 @@ export namespace google {
 
                     /** SqlInstancesGetDiskShrinkConfigRequest project. */
                     public project: string;
+
+                    /** SqlInstancesGetDiskShrinkConfigRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlInstancesGetDiskShrinkConfigRequest instance using the specified properties.
@@ -36286,6 +36863,9 @@ export namespace google {
 
                     /** SqlInstancesGetLatestRecoveryTimeRequest sourceInstanceDeletionTime */
                     sourceInstanceDeletionTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SqlInstancesGetLatestRecoveryTimeRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlInstancesGetLatestRecoveryTimeRequest. */
@@ -36305,6 +36885,9 @@ export namespace google {
 
                     /** SqlInstancesGetLatestRecoveryTimeRequest sourceInstanceDeletionTime. */
                     public sourceInstanceDeletionTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SqlInstancesGetLatestRecoveryTimeRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlInstancesGetLatestRecoveryTimeRequest instance using the specified properties.
@@ -36504,6 +37087,9 @@ export namespace google {
 
                     /** SqlInstancesExecuteSqlRequest body */
                     body?: (google.cloud.sql.v1beta4.IExecuteSqlPayload|null);
+
+                    /** SqlInstancesExecuteSqlRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlInstancesExecuteSqlRequest. */
@@ -36523,6 +37109,9 @@ export namespace google {
 
                     /** SqlInstancesExecuteSqlRequest body. */
                     public body?: (google.cloud.sql.v1beta4.IExecuteSqlPayload|null);
+
+                    /** SqlInstancesExecuteSqlRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlInstancesExecuteSqlRequest instance using the specified properties.
@@ -36610,6 +37199,9 @@ export namespace google {
 
                     /** SqlInstancesReleaseSsrsLeaseRequest project */
                     project?: (string|null);
+
+                    /** SqlInstancesReleaseSsrsLeaseRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlInstancesReleaseSsrsLeaseRequest. */
@@ -36626,6 +37218,9 @@ export namespace google {
 
                     /** SqlInstancesReleaseSsrsLeaseRequest project. */
                     public project: string;
+
+                    /** SqlInstancesReleaseSsrsLeaseRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlInstancesReleaseSsrsLeaseRequest instance using the specified properties.
@@ -37707,6 +38302,9 @@ export namespace google {
 
                     /** SqlInstancesAcquireSsrsLeaseRequest body */
                     body?: (google.cloud.sql.v1beta4.IInstancesAcquireSsrsLeaseRequest|null);
+
+                    /** SqlInstancesAcquireSsrsLeaseRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlInstancesAcquireSsrsLeaseRequest. */
@@ -37726,6 +38324,9 @@ export namespace google {
 
                     /** SqlInstancesAcquireSsrsLeaseRequest body. */
                     public body?: (google.cloud.sql.v1beta4.IInstancesAcquireSsrsLeaseRequest|null);
+
+                    /** SqlInstancesAcquireSsrsLeaseRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlInstancesAcquireSsrsLeaseRequest instance using the specified properties.
@@ -37816,6 +38417,9 @@ export namespace google {
 
                     /** SqlInstancesPreCheckMajorVersionUpgradeRequest body */
                     body?: (google.cloud.sql.v1beta4.IInstancesPreCheckMajorVersionUpgradeRequest|null);
+
+                    /** SqlInstancesPreCheckMajorVersionUpgradeRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlInstancesPreCheckMajorVersionUpgradeRequest. */
@@ -37835,6 +38439,9 @@ export namespace google {
 
                     /** SqlInstancesPreCheckMajorVersionUpgradeRequest body. */
                     public body?: (google.cloud.sql.v1beta4.IInstancesPreCheckMajorVersionUpgradeRequest|null);
+
+                    /** SqlInstancesPreCheckMajorVersionUpgradeRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlInstancesPreCheckMajorVersionUpgradeRequest instance using the specified properties.
@@ -40312,6 +40919,9 @@ export namespace google {
 
                     /** DatabaseInstance databaseCenterIntegrationEnabled */
                     databaseCenterIntegrationEnabled?: (google.protobuf.IBoolValue|null);
+
+                    /** DatabaseInstance databaseCenterIntegration */
+                    databaseCenterIntegration?: (google.cloud.sql.v1beta4.DatabaseInstance.DatabaseCenterIntegration|keyof typeof google.cloud.sql.v1beta4.DatabaseInstance.DatabaseCenterIntegration|null);
                 }
 
                 /** Represents a DatabaseInstance. */
@@ -40478,6 +41088,9 @@ export namespace google {
 
                     /** DatabaseInstance databaseCenterIntegrationEnabled. */
                     public databaseCenterIntegrationEnabled?: (google.protobuf.IBoolValue|null);
+
+                    /** DatabaseInstance databaseCenterIntegration. */
+                    public databaseCenterIntegration?: (google.cloud.sql.v1beta4.DatabaseInstance.DatabaseCenterIntegration|keyof typeof google.cloud.sql.v1beta4.DatabaseInstance.DatabaseCenterIntegration|null);
 
                     /**
                      * Creates a new DatabaseInstance instance using the specified properties.
@@ -41047,6 +41660,13 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** DatabaseCenterIntegration enum. */
+                    enum DatabaseCenterIntegration {
+                        DATABASE_CENTER_INTEGRATION_UNSPECIFIED = 0,
+                        ENABLED = 1,
+                        DISABLED = 2
                     }
                 }
 
@@ -55214,6 +55834,9 @@ export namespace google {
 
                     /** SqlUsersDeleteRequest project */
                     project?: (string|null);
+
+                    /** SqlUsersDeleteRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlUsersDeleteRequest. */
@@ -55236,6 +55859,9 @@ export namespace google {
 
                     /** SqlUsersDeleteRequest project. */
                     public project: string;
+
+                    /** SqlUsersDeleteRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlUsersDeleteRequest instance using the specified properties.
@@ -55329,6 +55955,9 @@ export namespace google {
 
                     /** SqlUsersGetRequest host */
                     host?: (string|null);
+
+                    /** SqlUsersGetRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlUsersGetRequest. */
@@ -55351,6 +55980,9 @@ export namespace google {
 
                     /** SqlUsersGetRequest host. */
                     public host: string;
+
+                    /** SqlUsersGetRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlUsersGetRequest instance using the specified properties.
@@ -55441,6 +56073,9 @@ export namespace google {
 
                     /** SqlUsersInsertRequest body */
                     body?: (google.cloud.sql.v1beta4.IUser|null);
+
+                    /** SqlUsersInsertRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlUsersInsertRequest. */
@@ -55460,6 +56095,9 @@ export namespace google {
 
                     /** SqlUsersInsertRequest body. */
                     public body?: (google.cloud.sql.v1beta4.IUser|null);
+
+                    /** SqlUsersInsertRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlUsersInsertRequest instance using the specified properties.
@@ -55547,6 +56185,9 @@ export namespace google {
 
                     /** SqlUsersListRequest project */
                     project?: (string|null);
+
+                    /** SqlUsersListRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlUsersListRequest. */
@@ -55563,6 +56204,9 @@ export namespace google {
 
                     /** SqlUsersListRequest project. */
                     public project: string;
+
+                    /** SqlUsersListRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlUsersListRequest instance using the specified properties.
@@ -55671,6 +56315,9 @@ export namespace google {
 
                     /** SqlUsersUpdateRequest body */
                     body?: (google.cloud.sql.v1beta4.IUser|null);
+
+                    /** SqlUsersUpdateRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlUsersUpdateRequest. */
@@ -55708,6 +56355,9 @@ export namespace google {
 
                     /** SqlUsersUpdateRequest body. */
                     public body?: (google.cloud.sql.v1beta4.IUser|null);
+
+                    /** SqlUsersUpdateRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlUsersUpdateRequest instance using the specified properties.
@@ -59376,6 +60026,206 @@ export namespace google {
              */
             public static getTypeUrl(typeUrlPrefix?: string): string;
         }
+
+        /** Properties of a RoutingRule. */
+        interface IRoutingRule {
+
+            /** RoutingRule routingParameters */
+            routingParameters?: (google.api.IRoutingParameter[]|null);
+        }
+
+        /** Represents a RoutingRule. */
+        class RoutingRule implements IRoutingRule {
+
+            /**
+             * Constructs a new RoutingRule.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IRoutingRule);
+
+            /** RoutingRule routingParameters. */
+            public routingParameters: google.api.IRoutingParameter[];
+
+            /**
+             * Creates a new RoutingRule instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns RoutingRule instance
+             */
+            public static create(properties?: google.api.IRoutingRule): google.api.RoutingRule;
+
+            /**
+             * Encodes the specified RoutingRule message. Does not implicitly {@link google.api.RoutingRule.verify|verify} messages.
+             * @param message RoutingRule message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IRoutingRule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified RoutingRule message, length delimited. Does not implicitly {@link google.api.RoutingRule.verify|verify} messages.
+             * @param message RoutingRule message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IRoutingRule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a RoutingRule message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns RoutingRule
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.RoutingRule;
+
+            /**
+             * Decodes a RoutingRule message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns RoutingRule
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.RoutingRule;
+
+            /**
+             * Verifies a RoutingRule message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a RoutingRule message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns RoutingRule
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.RoutingRule;
+
+            /**
+             * Creates a plain object from a RoutingRule message. Also converts values to other types if specified.
+             * @param message RoutingRule
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.RoutingRule, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this RoutingRule to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for RoutingRule
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a RoutingParameter. */
+        interface IRoutingParameter {
+
+            /** RoutingParameter field */
+            field?: (string|null);
+
+            /** RoutingParameter pathTemplate */
+            pathTemplate?: (string|null);
+        }
+
+        /** Represents a RoutingParameter. */
+        class RoutingParameter implements IRoutingParameter {
+
+            /**
+             * Constructs a new RoutingParameter.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IRoutingParameter);
+
+            /** RoutingParameter field. */
+            public field: string;
+
+            /** RoutingParameter pathTemplate. */
+            public pathTemplate: string;
+
+            /**
+             * Creates a new RoutingParameter instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns RoutingParameter instance
+             */
+            public static create(properties?: google.api.IRoutingParameter): google.api.RoutingParameter;
+
+            /**
+             * Encodes the specified RoutingParameter message. Does not implicitly {@link google.api.RoutingParameter.verify|verify} messages.
+             * @param message RoutingParameter message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IRoutingParameter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified RoutingParameter message, length delimited. Does not implicitly {@link google.api.RoutingParameter.verify|verify} messages.
+             * @param message RoutingParameter message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IRoutingParameter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a RoutingParameter message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns RoutingParameter
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.RoutingParameter;
+
+            /**
+             * Decodes a RoutingParameter message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns RoutingParameter
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.RoutingParameter;
+
+            /**
+             * Verifies a RoutingParameter message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a RoutingParameter message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns RoutingParameter
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.RoutingParameter;
+
+            /**
+             * Creates a plain object from a RoutingParameter message. Also converts values to other types if specified.
+             * @param message RoutingParameter
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.RoutingParameter, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this RoutingParameter to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for RoutingParameter
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
     }
 
     /** Namespace protobuf. */
@@ -62453,6 +63303,9 @@ export namespace google {
 
             /** MethodOptions .google.api.methodSignature */
             ".google.api.methodSignature"?: (string[]|null);
+
+            /** MethodOptions .google.api.routing */
+            ".google.api.routing"?: (google.api.IRoutingRule|null);
         }
 
         /** Represents a MethodOptions. */

@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.8.0](https://github.com/googleapis/google-cloud-node/compare/google-cloud-bigtable-api-v0.7.0...google-cloud-bigtable-api-v0.8.0) (2026-09-23)
+
+
+### Features
+
+* Update API sources and regenerate ([#9427](https://github.com/googleapis/google-cloud-node/issues/9427)) ([5cd945d](https://github.com/googleapis/google-cloud-node/commit/5cd945de7f4fd96878c1956d68bcf505e48686ce))
+
 ## [0.7.0](https://github.com/googleapis/google-cloud-node/compare/google-cloud-bigtable-api-v0.6.0...google-cloud-bigtable-api-v0.7.0) (2026-09-15)
 
 

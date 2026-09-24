@@ -36,6 +36,19 @@ export {
   PageDescriptor,
   StreamDescriptor,
 } from './descriptor';
+export {ResumableUploadDescriptor} from './resumableUpload';
+export {
+  ResumableUploadSession,
+  resumableUploadStub,
+  ResumableUploadState,
+} from './resumableUpload';
+export type {
+  ResumableUploadContext,
+  ResumableUploadProgress,
+  ResumableUploadStartParams,
+  ResumableSource,
+} from './resumableUpload';
+export {resumableSourceFromFile} from './resumableSourceFromFile';
 export {
   CallOptions,
   CallSettings,
@@ -121,6 +134,10 @@ export {
 } from './util';
 
 export {StaticTraceContext, traceCall} from './observability/TracerHelper';
+export {
+  resolveStaticTraceContext,
+  clearMetadataCache,
+} from './observability/metadataResolver';
 
 export {ServiceError, ChannelCredentials} from '@grpc/grpc-js';
 export {warn} from './warnings';

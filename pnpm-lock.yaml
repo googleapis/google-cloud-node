@@ -11456,8 +11456,8 @@ importers:
   packages/google-cloud-secretmanager:
     dependencies:
       google-gax:
-        specifier: ^6.0.0
-        version: 6.1.0
+        specifier: ^6.5.0
+        version: 6.5.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -20673,6 +20673,10 @@ packages:
     resolution: {integrity: sha512-PN84pgPw6USmNfy8hlMkifsII+VzCTddRODjPqGZ0JKQuB3WYMEMMepTypmE7ymMXFYiOe3Oi0dHskQ4jkOZfg==}
     engines: {node: '>=22'}
 
+  google-gax@6.5.0:
+    resolution: {integrity: sha512-blRydUxE3Rfl+2CfzamnUUqSXgI9DkzU9FJXv9jvB0m1qX9p2k9vLhu4DGFKt7kgqhZFniGAVdBdEsEC3gmuEQ==}
+    engines: {node: '>=22'}
+
   google-logging-utils@0.0.2:
     resolution: {integrity: sha512-NEgUnEcBiP5HrPzufUkBzJOD/Sxsco3rLNo1F1TNf7ieU8ryUzBhqba8r756CjLX7rn3fHl6iLEwPYuqpoKgQQ==}
     engines: {node: '>=14'}
@@ -26080,7 +26084,7 @@ snapshots:
 
   '@google-cloud/grafeas@7.0.0':
     dependencies:
-      google-gax: 6.1.0
+      google-gax: 6.5.0
     transitivePeerDependencies:
       - supports-color
 
@@ -28635,7 +28639,7 @@ snapshots:
 
   '@webpack-cli/configtest@3.0.1(webpack-cli@6.0.1)(webpack@5.109.0)':
     dependencies:
-      webpack: 5.109.0(uglify-js@3.19.3)(webpack-cli@6.0.1)
+      webpack: 5.109.0(webpack-cli@6.0.1)
       webpack-cli: 6.0.1(webpack@5.109.0)
 
   '@webpack-cli/info@2.0.2(webpack-cli@5.1.4)(webpack@5.109.0)':
@@ -28645,7 +28649,7 @@ snapshots:
 
   '@webpack-cli/info@3.0.1(webpack-cli@6.0.1)(webpack@5.109.0)':
     dependencies:
-      webpack: 5.109.0(uglify-js@3.19.3)(webpack-cli@6.0.1)
+      webpack: 5.109.0(webpack-cli@6.0.1)
       webpack-cli: 6.0.1(webpack@5.109.0)
 
   '@webpack-cli/serve@2.0.5(webpack-cli@5.1.4)(webpack@5.109.0)':
@@ -28655,7 +28659,7 @@ snapshots:
 
   '@webpack-cli/serve@3.0.1(webpack-cli@6.0.1)(webpack@5.109.0)':
     dependencies:
-      webpack: 5.109.0(uglify-js@3.19.3)(webpack-cli@6.0.1)
+      webpack: 5.109.0(webpack-cli@6.0.1)
       webpack-cli: 6.0.1(webpack@5.109.0)
 
   '@xtuc/ieee754@1.2.0': {}
@@ -31920,6 +31924,22 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  google-gax@6.5.0:
+    dependencies:
+      '@grpc/grpc-js': 1.14.4
+      '@grpc/proto-loader': 0.8.1
+      '@opentelemetry/api': 1.9.1
+      duplexify: 4.1.3
+      google-auth-library: 11.0.2
+      google-logging-utils: 2.0.1
+      node-fetch: 3.3.2
+      object-hash: 3.0.0
+      proto3-json-serializer: 4.0.2
+      protobufjs: 7.5.9
+      retry-request: 9.0.1
+    transitivePeerDependencies:
+      - supports-color
+
   google-logging-utils@0.0.2: {}
 
   google-logging-utils@1.1.3: {}
@@ -34263,7 +34283,7 @@ snapshots:
     dependencies:
       loader-utils: 2.0.4
       schema-utils: 3.3.0
-      webpack: 5.109.0(uglify-js@3.19.3)(webpack-cli@6.0.1)
+      webpack: 5.109.0(webpack-cli@6.0.1)
 
   nunjucks@3.2.4(chokidar@3.6.0):
     dependencies:
@@ -36453,7 +36473,7 @@ snapshots:
       picomatch: 4.0.5
       source-map: 0.7.6
       typescript: 5.8.3
-      webpack: 5.109.0(uglify-js@3.19.3)(webpack-cli@6.0.1)
+      webpack: 5.109.0(webpack-cli@6.0.1)
     optionalDependencies:
       loader-utils: 2.0.4
 
@@ -36941,7 +36961,7 @@ snapshots:
       import-local: 3.2.0
       interpret: 3.1.1
       rechoir: 0.8.0
-      webpack: 5.109.0(uglify-js@3.19.3)(webpack-cli@6.0.1)
+      webpack: 5.109.0(webpack-cli@6.0.1)
       webpack-merge: 6.0.1
 
   webpack-merge@4.2.2:
