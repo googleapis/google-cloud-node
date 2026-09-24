@@ -653,6 +653,11 @@ describe('Transaction', () => {
         snapshot.end();
       });
 
+      it('should emit an "end" event when listener is attached after end in same tick', done => {
+        snapshot.end();
+        snapshot.on('end', done);
+      });
+
       it('should noop if already ended', done => {
         snapshot.on('end', done);
         snapshot.end();

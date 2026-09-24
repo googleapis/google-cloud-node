@@ -25,7 +25,11 @@ import {AuthClient, GoogleAuth, GoogleAuthOptions} from 'google-auth-library';
 // @ts-ignore
 import {getPackageJSON} from './package-json-helper.cjs';
 import {GCCL_GCS_CMD_KEY, decorateHeaders} from './nodejs-common/util.js';
-import {RETRYABLE_ERR_FN_DEFAULT, RetryOptions} from './storage.js';
+import {
+  IdempotencyStrategy,
+  RETRYABLE_ERR_FN_DEFAULT,
+  RetryOptions,
+} from './storage.js';
 
 export interface StandardStorageQueryParams {
   alt?: 'json' | 'media';
@@ -164,13 +168,27 @@ export class StorageTransport {
           const stream = part.content as import('stream').Readable;
           const streamChunks: Buffer[] = [];
           await new Promise<void>((resolve, reject) => {
-            stream.on('data', chunk =>
+            const onData = (chunk: Buffer | string | Uint8Array) => {
               streamChunks.push(
                 Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk),
-              ),
-            );
-            stream.once('end', resolve);
-            stream.once('error', reject);
+              );
+            };
+            const onEnd = () => {
+              cleanup();
+              resolve();
+            };
+            const onError = (err: Error) => {
+              cleanup();
+              reject(err);
+            };
+            const cleanup = () => {
+              stream.removeListener('data', onData);
+              stream.removeListener('end', onEnd);
+              stream.removeListener('error', onError);
+            };
+            stream.on('data', onData);
+            stream.once('end', onEnd);
+            stream.once('error', onError);
             if (typeof stream.resume === 'function') {
               stream.resume();
             }
@@ -227,22 +245,27 @@ export class StorageTransport {
       ? urlString
       : new URL(normalizedUrl, this.baseUrl).toString();
 
-    let hasEtagInBody = false;
-    if (reqOpts.body && typeof reqOpts.body === 'string') {
+    let hasEtagInBody = !!(
+      (reqOpts.body as {etag?: unknown})?.etag ||
+      (reqOpts.data as {etag?: unknown})?.etag
+    );
+    if (
+      !hasEtagInBody &&
+      typeof reqOpts.body === 'string' &&
+      reqOpts.body.includes('"etag"')
+    ) {
       try {
         const parsed = JSON.parse(reqOpts.body);
-        if (parsed && parsed.etag) {
-          hasEtagInBody = true;
-        }
-      } catch (e) {
-        // If it's not valid JSON, it's just a raw string/file upload.
-        // We safely ignore it to prevent false positives.
+        hasEtagInBody = Boolean(parsed && parsed.etag);
+      } catch {
         hasEtagInBody = false;
       }
     }
 
     // Compute the final hasPrecondition flag
     const hasPrecondition = !!(
+      this.retryOptions.idempotencyStrategy ===
+        IdempotencyStrategy.RetryAlways ||
       reqOpts.hasPrecondition ||
       reqOpts.queryParameters?.ifGenerationMatch !== undefined ||
       reqOpts.queryParameters?.ifMetagenerationMatch !== undefined ||
@@ -278,6 +301,13 @@ export class StorageTransport {
       return err;
     };
 
+    const isRetryDisabled =
+      this.retryOptions.autoRetry === false ||
+      this.retryOptions.idempotencyStrategy === IdempotencyStrategy.RetryNever;
+    const maxRetries = isRetryDisabled
+      ? 0
+      : (reqOpts.maxRetries ?? this.retryOptions.maxRetries ?? 3);
+
     try {
       const requestPromise = this.authClient.request<T>({
         adapter: async (opts: GaxiosOptions) => {
@@ -292,13 +322,13 @@ export class StorageTransport {
           return requestGaxiosInstance.request(innerOpts);
         },
         retryConfig: {
-          retry: this.retryOptions.maxRetries ?? 3,
-          noResponseRetries: this.retryOptions.maxRetries ?? 3,
+          retry: maxRetries,
+          noResponseRetries: maxRetries,
           maxRetryDelay: this.retryOptions.maxRetryDelay,
           retryDelayMultiplier: this.retryOptions.retryDelayMultiplier,
           totalTimeout: this.retryOptions.totalTimeout,
           shouldRetry: (err: GaxiosError) =>
-            !!this.retryOptions.retryableErrorFn?.(err),
+            !isRetryDisabled && !!this.retryOptions.retryableErrorFn?.(err),
         },
         ...reqOpts,
         hasPrecondition, // Pass flag to Gaxios / AuthClient options
@@ -343,8 +373,20 @@ export class StorageTransport {
               enumerable: false,
             },
           });
+          return data;
         }
-        return data;
+
+        const isBufferOrStream =
+          data instanceof Buffer ||
+          (data !== null &&
+            typeof data === 'object' &&
+            typeof (data as {on?: unknown}).on === 'function');
+
+        if (isBufferOrStream) {
+          return data;
+        }
+
+        return resp as unknown as T;
       };
 
       const enrichedPromise = requestPromise.catch(err => {
@@ -352,18 +394,19 @@ export class StorageTransport {
       });
 
       if (callback) {
-        // eslint-disable-next-line @typescript-eslint/no-floating-promises
-        (async () => {
+        void (async () => {
+          let resp: GaxiosResponse<T>;
           try {
-            const resp = await enrichedPromise;
-            callback(null, decorateMetadata(resp), resp);
+            resp = await enrichedPromise;
           } catch (err: unknown) {
             callback(
               err as GaxiosError,
               null,
               (err as {response?: GaxiosResponse}).response,
             );
+            return;
           }
+          callback(null, decorateMetadata(resp), resp);
         })();
         return enrichedPromise;
       }

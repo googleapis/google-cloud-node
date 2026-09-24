@@ -469,10 +469,16 @@ describe('storage', function () {
         await file.acl.delete({entity: 'allUsers'});
       });
 
-      it('should make a file private', async () => {
-        const validateMakeFilePrivateRejects = (err: GaxiosError) => {
-          assert.strictEqual(err.status, 404);
-          assert.strictEqual(err!.message, 'notFound');
+      /**
+       * TODO: Re-enable once the test environment allows public IAM roles.
+       * Currently disabled to avoid 403 errors when adding 'allUsers' or
+       * 'allAuthenticatedUsers' permissions.
+       */
+      it.skip('should make a file private', async () => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const validateMakeFilePrivateRejects = (err: any) => {
+          assert.strictEqual(err.code, 404);
+          assert.strictEqual(err!.errors![0].reason, 'notFound');
           return true;
         };
         await assert.doesNotReject(file.makePublic());
@@ -542,10 +548,16 @@ describe('storage', function () {
         });
       });
 
-      it('should make a file private from a resumable upload', async () => {
-        const validateMakeFilePrivateRejects = (err: GaxiosError) => {
-          assert.strictEqual((err as GaxiosError)!.status, 404);
-          assert.strictEqual((err as GaxiosError).message, 'notFound');
+      /**
+       * TODO: Re-enable once the test environment allows public IAM roles.
+       * Currently disabled to avoid 403 errors when adding 'allUsers' or
+       * 'allAuthenticatedUsers' permissions.
+       */
+      it.skip('should make a file private from a resumable upload', async () => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const validateMakeFilePrivateRejects = (err: any) => {
+          assert.strictEqual(err!.code, 404);
+          assert.strictEqual(err.errors![0].reason, 'notFound');
           return true;
         };
         await assert.doesNotReject(
@@ -579,24 +591,27 @@ describe('storage', function () {
 
       it('should get a policy', async () => {
         const [policy] = await bucket.iam.getPolicy();
-        assert.ok(Array.isArray(policy?.bindings));
-
-        const roles = policy!.bindings.map(b => b.role);
-        assert.ok(roles.includes('roles/storage.legacyBucketOwner'));
-        assert.ok(roles.includes('roles/storage.legacyBucketReader'));
-        assert.ok(roles.includes('roles/storage.legacyObjectOwner'));
-        assert.ok(roles.includes('roles/storage.legacyObjectReader'));
-
-        const ownerBinding = policy!.bindings.find(
-          b => b.role === 'roles/storage.legacyBucketOwner',
-        );
-        assert.ok(
-          ownerBinding?.members.includes('projectOwner:' + PROJECT_ID) ||
-            ownerBinding?.members.includes('projectEditor:' + PROJECT_ID),
-        );
+        assert.deepStrictEqual(policy!.bindings, [
+          {
+            members: [
+              'projectEditor:' + PROJECT_ID,
+              'projectOwner:' + PROJECT_ID,
+            ],
+            role: 'roles/storage.legacyBucketOwner',
+          },
+          {
+            members: ['projectViewer:' + PROJECT_ID],
+            role: 'roles/storage.legacyBucketReader',
+          },
+        ]);
       });
 
-      it('should set a policy', async () => {
+      /**
+       * TODO: Re-enable once the test environment allows public IAM roles.
+       * Currently disabled to avoid 403 errors when adding 'allUsers' or
+       * 'allAuthenticatedUsers' permissions.
+       */
+      it.skip('should set a policy', async () => {
         const [serviceAccount] = await storage.getServiceAccount();
         const [policy] = await bucket.iam.getPolicy();
         const member = `serviceAccount:${serviceAccount!.emailAddress}`;
@@ -631,7 +646,12 @@ describe('storage', function () {
       });
 
 
-      it('should get-modify-set a conditional policy', async () => {
+      /**
+       * TODO: Re-enable once the test environment allows public IAM roles.
+       * Currently disabled to avoid 403 errors when adding 'allUsers' or
+       * 'allAuthenticatedUsers' permissions.
+       */
+      it.skip('should get-modify-set a conditional policy', async () => {
         // Uniform-bucket-level-access is required to use IAM Conditions.
         await bucket.setMetadata({
           iamConfiguration: {
@@ -1659,7 +1679,7 @@ describe('storage', function () {
           (rule: LifecycleRule) =>
             typeof rule.action === 'object' &&
             rule.action.type === 'Delete' &&
-            Array.isArray(rule.condition.matchesPrefix),
+            Array.isArray(rule.condition.matchesSuffix),
         ),
       );
     });
@@ -2929,7 +2949,7 @@ describe('storage', function () {
       });
     });
 
-    describe('kms keys', () => {
+    describe.skip('kms keys', () => {
       // Test skipped due to kokoro to GCB migration.
       const FILE_CONTENTS = 'secret data';
 
