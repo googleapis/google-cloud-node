@@ -2955,6 +2955,9 @@ importers:
       gapic-tools:
         specifier: ^2.0.0
         version: 2.0.1(protobufjs@7.5.9)
+      google-test-utils:
+        specifier: ^0.1.0
+        version: 0.1.0
       gts:
         specifier: ^6.0.0
         version: 6.0.2(typescript@5.9.3)
@@ -20695,6 +20698,10 @@ packages:
     resolution: {integrity: sha512-fbvUWVNh3rKGlVFWwlUNF7Sk1Tah0a89q02rLTXsWjbKKHGeuURAa8tl9rvu5TyWny1YiSIo5eDqF260Tai6vQ==}
     engines: {node: '>=22'}
 
+  google-test-utils@0.1.0:
+    resolution: {integrity: sha512-4KwTSw4Xm6hz9sVxvz/xvy/0/InwbR2icIGjcyNdI2KVQ7J6sTVKatoeHwsg74kA4DaGchEgL48vc5FMtkMOLg==}
+    engines: {node: '>=22'}
+
   googleapis-common@4.4.3:
     resolution: {integrity: sha512-W46WKCk3QtlCCfmZyQIH5zxmDOyeV5Qj+qs7nr2ox08eRkEJMWp6iwv542R/PsokXaGUSrmif4vCC4+rGzRSsQ==}
     engines: {node: '>=10.10.0'}
@@ -31879,6 +31886,8 @@ snapshots:
       protobufjs: 7.5.9
       walkdir: 0.4.1
 
+  google-test-utils@0.1.0: {}
+
   googleapis-common@4.4.3(encoding@0.1.13):
     dependencies:
       extend: 3.0.2
@@ -36356,7 +36365,7 @@ snapshots:
       picomatch: 4.0.5
       source-map: 0.7.6
       typescript: 5.8.3
-      webpack: 5.109.0(webpack-cli@6.0.1)
+      webpack: 5.109.0(uglify-js@3.19.3)(webpack-cli@6.0.1)
     optionalDependencies:
       loader-utils: 2.0.4
 
