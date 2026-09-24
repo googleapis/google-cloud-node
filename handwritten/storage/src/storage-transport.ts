@@ -381,18 +381,20 @@ export class StorageTransport {
       });
 
       if (callback) {
-        enrichedPromise.then(
-          resp => {
-            callback(null, decorateMetadata(resp), resp);
-          },
-          err => {
+        void (async () => {
+          let resp: GaxiosResponse<T>;
+          try {
+            resp = await enrichedPromise;
+          } catch (err: unknown) {
             callback(
               err as GaxiosError,
               null,
               (err as {response?: GaxiosResponse}).response,
             );
-          },
-        );
+            return;
+          }
+          callback(null, decorateMetadata(resp), resp);
+        })();
         return enrichedPromise;
       }
 
