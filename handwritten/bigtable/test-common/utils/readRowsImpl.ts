@@ -363,7 +363,10 @@ export class ReadRowsImpl {
     const readRowsRequestHandler = new ReadRowsRequestHandler(stream, debugLog);
     // When the client closes, errors, or cancels the stream, notify the handler
     // to stop sending chunks and unblock any pending backpressure wait.
+    let streamEnded = false;
     const onStreamEnded = () => {
+      if (streamEnded) return;
+      streamEnded = true;
       readRowsRequestHandler.cancelled = true;
       readRowsRequestHandler.stopWaiting();
     };
