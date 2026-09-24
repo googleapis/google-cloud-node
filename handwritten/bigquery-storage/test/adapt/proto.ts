@@ -110,7 +110,7 @@ describe('Adapt Protos', () => {
       }
       const TestProto = Type.fromDescriptor(protoDescriptor);
       const raw = {
-        id: 1,
+        id: '1',
         username: 'Alice',
         _CHANGE_TYPE: 'INSERT',
         _CHANGE_SEQUENCE_NUMBER: 'FF',
@@ -186,7 +186,7 @@ describe('Adapt Protos', () => {
 
       const FlexibleProto = Type.fromDescriptor(protoDescriptor);
       const raw = {
-        field_54m55Yil44Kz44Op44Og: 1,
+        field_54m55Yil44Kz44Op44Og: '1',
         field_ZmllbGQtbmFtZQ: 'test',
         field_Zm9vXCfkY0: 'foo',
       };
@@ -316,6 +316,7 @@ describe('Adapt Protos', () => {
         ],
       });
       const NestedProto = Type.fromDescriptor(protoDescriptor);
+      const now = Date.now();
       const raw = {
         record_id: '12345',
         recordDetails: [
@@ -323,8 +324,8 @@ describe('Adapt Protos', () => {
           {key: 'title', value: 'clown'},
         ],
         metadata: {
-          createdAt: Date.now(),
-          updatedAt: Date.now(),
+          createdAt: String(now),
+          updatedAt: String(now),
         },
       };
       const serialized = NestedProto.encode(raw).finish();
@@ -381,8 +382,8 @@ describe('Adapt Protos', () => {
         },
         // The value is given in microseconds since the Unix epoch (1970-01-01)
         range_ts: {
-          start: new Date('2024-04-05T15:45:58.981Z').getTime() * 1000,
-          end: new Date('2024-04-05T16:45:58.981Z').getTime() * 1000,
+          start: String(new Date('2024-04-05T15:45:58.981Z').getTime() * 1000),
+          end: String(new Date('2024-04-05T16:45:58.981Z').getTime() * 1000),
         },
       };
       const serialized = TestProto.encode(raw).finish();
@@ -435,10 +436,12 @@ describe('Adapt Protos', () => {
       const raw = {
         rowNum: '1',
         range: {
-          start: new Date('2024-04-05T15:45:58.981Z').getTime() * 1000,
+          start: String(
+            new Date('2024-04-05T15:45:58.981Z').getTime() * 1000,
+          ),
         },
         nested: {
-          integer: 10,
+          integer: '10',
         },
       };
       const serialized = TestProto.encode(raw).finish();
