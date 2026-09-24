@@ -71,6 +71,7 @@ describe('Bigtable/ReadRows', () => {
       server = new MockServer(resolve);
     });
     bigtable = new Bigtable({
+      // Explicit projectId avoids metadata server queries during test initialization
       projectId: 'fake-project',
       apiEndpoint: `localhost:${port}`,
     });
@@ -78,8 +79,9 @@ describe('Bigtable/ReadRows', () => {
     service = new BigtableClientMockService(server);
   });
 
-  // helper function because some tests run slower
-  // under CI load and need a longer timeout
+  // Helper function because some tests process large volumes of chunks and run
+  // significantly slower under heavy CI load (especially Windows runners),
+  // requiring an extended timeout to prevent flaky timeouts.
   function setWindowsTestTimeout(test: mocha.Context) {
     test.timeout(200000);
   }

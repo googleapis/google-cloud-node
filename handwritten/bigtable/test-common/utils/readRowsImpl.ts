@@ -295,6 +295,8 @@ class ReadRowsRequestHandler {
         }
         if (!canSendMore) {
           // Before doing any more writing with the stream, drain the stream.
+          // Listen for 'drain' as well as termination events ('close', 'error', 'finish')
+          // to ensure we unblock and avoid hanging if the stream ends while awaiting backpressure.
           debugLog('awaiting for back pressure');
           await new Promise<void>(resolve => {
             this.stopWaiting = resolve;
@@ -359,6 +361,8 @@ export class ReadRowsImpl {
 
     prettyPrintRequest(stream.request, debugLog);
     const readRowsRequestHandler = new ReadRowsRequestHandler(stream, debugLog);
+    // When the client closes, errors, or cancels the stream, notify the handler
+    // to stop sending chunks and unblock any pending backpressure wait.
     const onStreamEnded = () => {
       readRowsRequestHandler.cancelled = true;
       readRowsRequestHandler.stopWaiting();
@@ -368,6 +372,7 @@ export class ReadRowsImpl {
       onStreamEnded();
       stream.emit('error', new Error('Cancelled'));
     });
+    // Also listen for close and error events so the server doesn't hang if the connection drops.
     stream.on('close', onStreamEnded);
     stream.on('error', onStreamEnded);
     const chunks = generateChunksFromRequest(
