@@ -10,7 +10,7 @@
   "main": "build/src/index.js",
   "types": "build/src/index.d.ts",
   "scripts": {
-    "test": "c8 mocha 'build/test/test-*.js'",
+    "test": "node ../../bin/run-test.cjs --config ../../.mocharc.cjs 'build/test/test-*.js'",
     "system-test": "echo 'skipping tests for time being'",
     "samples-test": "echo 'no sample tests'",
     "clean": "gts clean",
