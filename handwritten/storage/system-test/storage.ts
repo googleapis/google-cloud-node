@@ -591,21 +591,19 @@ describe('storage', function () {
 
       it('should get a policy', async () => {
         const [policy] = await bucket.iam.getPolicy();
-        assert.ok(Array.isArray(policy?.bindings));
-
-        const roles = policy!.bindings.map(b => b.role);
-        assert.ok(roles.includes('roles/storage.legacyBucketOwner'));
-        assert.ok(roles.includes('roles/storage.legacyBucketReader'));
-        assert.ok(roles.includes('roles/storage.legacyObjectOwner'));
-        assert.ok(roles.includes('roles/storage.legacyObjectReader'));
-
-        const ownerBinding = policy!.bindings.find(
-          b => b.role === 'roles/storage.legacyBucketOwner',
-        );
-        assert.ok(
-          ownerBinding?.members.includes('projectOwner:' + PROJECT_ID) ||
-            ownerBinding?.members.includes('projectEditor:' + PROJECT_ID),
-        );
+        assert.deepStrictEqual(policy!.bindings, [
+          {
+            members: [
+              'projectEditor:' + PROJECT_ID,
+              'projectOwner:' + PROJECT_ID,
+            ],
+            role: 'roles/storage.legacyBucketOwner',
+          },
+          {
+            members: ['projectViewer:' + PROJECT_ID],
+            role: 'roles/storage.legacyBucketReader',
+          },
+        ]);
       });
 
       /**
