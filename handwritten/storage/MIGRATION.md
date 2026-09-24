@@ -1,29 +1,23 @@
-# Storage v7 to v8 Migration Guide - Gaxios Update
+# Storage Migration Guide - Gaxios (`StorageTransport`) Update
 
-This guide helps you migrate your application from `@google-cloud/storage` v7 to v8, focusing on the architectural and API changes introduced by migrating from `teeny-request`, `retry-request`, and `form-data` to `gaxios` v7 (`StorageTransport`) and native Node.js Web APIs.
+This guide helps you migrate your `@google-cloud/storage` application through the HTTP transport update—replacing `teeny-request`, `retry-request`, `form-data`, and `node-fetch` with **`gaxios` v7 (`StorageTransport`)** and native Node.js Web APIs (`Headers`, `URL`, `FormData`, `Blob`, `fetch`).
 
 ---
 
 ## Key Breaking Changes for Storage Users
 
-### 1. Minimum Node.js Version (`>=22`) & Dual ESM/CJS Exports
+### 1. Response Headers are now `Headers` objects
 
-`@google-cloud/storage` v8 requires **Node.js 22 or higher** and ships as a dual ESM and CommonJS package (`"type": "module"` with `exports` conditions for both `import` and `require`).
+When you receive a full API response from Storage methods (e.g., via callbacks or promise resolutions that include the response object), the `headers` property of the response (`GaxiosResponse['headers']`) is now a standard Web `Headers` instance rather than a plain JavaScript object.
 
----
-
-### 2. Response Headers are now `Headers` objects
-
-When you receive a full API response from Storage methods (e.g., via callbacks or promise resolutions that include the response object), the `headers` property of the response is now a standard Web `Headers` instance rather than a plain JavaScript object.
-
-**Before (Storage v7):**
+**Before (`teeny-request`):**
 
 ```js
 const [retrievedFile, apiResponse] = await file.get();
 const contentType = apiResponse.headers['content-type'];
 ```
 
-**After (Storage v8):**
+**After (`Gaxios` / `StorageTransport`):**
 
 ```js
 const [retrievedFile, apiResponse] = await file.get();
@@ -33,18 +27,18 @@ const contentType = apiResponse.headers.get('content-type');
 
 ---
 
-### 3. Passing and Reading Request Headers in Options
+### 2. Passing and Reading Request Headers in Options
 
 If you pass custom headers in options to Storage methods (which extend `GaxiosOptions`), you can still pass plain objects, as the Storage library will convert them to standard `Headers` internally for the request. However, if you read them back from the prepared options or response (`apiResponse.config.headers`), they will be `Headers` objects.
 
-**Before (Storage v7):**
+**Before (`teeny-request`):**
 
 ```js
 // Reading request headers back from response metadata returned a plain object
 const customHeader = apiResponse.config.headers['x-custom-header'];
 ```
 
-**After (Storage v8):**
+**After (`Gaxios` / `StorageTransport`):**
 
 ```js
 // Reading request headers back from response metadata requires .get()
@@ -56,33 +50,37 @@ const customHeader = apiResponse.config.headers.get('x-custom-header');
 
 ---
 
-### 4. URL Resolution (`baseURL` and Native `URL` Objects)
+### 3. URL Resolution (`baseURL` and Native `URL` Objects)
 
 If you are using custom `baseURL` options or passing relative URLs to methods that accept them, resolution now strictly follows the standard native `URL` constructor spec (`new URL(url, baseURL)`). Additionally, `config.url` on prepared request configurations (`GaxiosOptionsPrepared`) is now a native `URL` instance instead of a string.
 
-**Before (Storage v7):**
+> [!IMPORTANT]
+> **Relative Path Normalization in `StorageTransport`:** `StorageTransport.makeRequest()` automatically normalizes non-absolute URLs to begin with a leading `/` before calling `new URL(normalizedUrl, this.baseUrl)`. Because a leading slash resolves relative to the host root, any relative URL passed to `makeRequest()` against a `baseUrl` containing `/storage/v1` must explicitly include the `/storage/v1` prefix (e.g., `url: '/storage/v1/b/my-bucket'`).
 
-Using standard path-joining custom resolution:
+**Before (`teeny-request` / `Service`):**
+
+Using custom path-joining resolution:
 
 - `baseURL`: `https://storage.googleapis.com/storage/v1`
-- `url`: `/b/my-bucket`
+- `url`: `/b/my-bucket` (or `b/my-bucket`)
 - Resolved URL: `https://storage.googleapis.com/storage/v1/b/my-bucket`
 
-**After (Storage v8):**
+**After (`Gaxios` / `StorageTransport`):**
 
 Strictly resolved via the standard native `URL` constructor rules (where a leading slash resolves relative to the root of the host):
 
 - `baseURL`: `https://storage.googleapis.com/storage/v1`
-- `url`: `/b/my-bucket`
+- `url`: `/b/my-bucket` (or `b/my-bucket`, which is normalized to `/b/my-bucket`)
 - Resolved URL: `https://storage.googleapis.com/b/my-bucket` (resolves relative to host root, stripping `storage/v1`)
+- To preserve `/storage/v1`, pass `url`: `/storage/v1/b/my-bucket`
 
 ---
 
-### 5. Request Interceptors (`interceptors_` / `interceptors`)
+### 4. Request Interceptors (`interceptors_` / `interceptors`)
 
 The legacy `teeny-request` interceptor format (`{ request: (reqOpts) => reqOpts }`) has been replaced by Gaxios request interceptors (`GaxiosInterceptor<GaxiosOptionsPrepared>`).
 
-**Before (Storage v7):**
+**Before (`teeny-request`):**
 
 ```js
 const storage = new Storage({
@@ -97,7 +95,7 @@ const storage = new Storage({
 });
 ```
 
-**After (Storage v8):**
+**After (`Gaxios` / `StorageTransport`):**
 
 ```js
 const storage = new Storage({
@@ -114,15 +112,17 @@ const storage = new Storage({
 
 ---
 
-### 6. Error Objects & Custom Retry Functions (`retryOptions.retryableErrorFn`)
+### 5. Error Objects & Custom Retry Functions (`retryOptions.retryableErrorFn`)
 
 The legacy `retry-request` library and `ApiError` class have been replaced by Gaxios's retry mechanism and `GaxiosError`.
 
-- **Error structure**: Errors passed to `retryOptions.retryableErrorFn(err)` are `GaxiosError` instances where HTTP status is available at `err.response?.status` (or `err.status` / `err.code`), the parsed error body is at `err.response?.data`, and the request configuration is at `err.config`.
+- **Error structure in `retryableErrorFn` vs. final rejected errors**:
+  - **Inside `retryOptions.retryableErrorFn(err)`**: `err` is the raw `GaxiosError` evaluated by Gaxios's `shouldRetry` hook *before* `StorageTransport` decorates it. HTTP status is at `err.response?.status` (or `err.status` / `err.code`), the parsed error payload is at `err.response?.data` (`err.response?.data?.error?.errors`), and the request configuration is at `err.config`. Top-level `err.errors` is not yet populated at this stage.
+  - **Final rejected / callback errors**: Once retries are exhausted, `StorageTransport` decorates the `GaxiosError` for backward compatibility by copying `err.code` (`err.response?.status || err.status || err.code`), `err.message`, and `err.errors` (`err.response?.data?.error?.errors`) onto the top-level error instance.
 - **Idempotency requirement in default retry function**: `RETRYABLE_ERR_FN_DEFAULT(err)` now inspects `err.config` (`isRequestIdempotent(err.config) && isTransientError(err)`). Calling `RETRYABLE_ERR_FN_DEFAULT(err)` without an `err.config` object will return `false`.
 - **Retry configuration mapping**: `StorageOptions.retryOptions` (`maxRetries`, `retryDelayMultiplier`, `maxRetryDelay`, `totalTimeout`, `retryableErrorFn`) maps directly to Gaxios `retryConfig` (`retry`, `noResponseRetries`, `retryDelayMultiplier`, `maxRetryDelay`, `totalTimeout`, `shouldRetry`).
 
-**Before (Storage v7):**
+**Before (`retry-request` / `ApiError`):**
 
 ```js
 const storage = new Storage({
@@ -135,13 +135,13 @@ const storage = new Storage({
 });
 ```
 
-**After (Storage v8):**
+**After (`Gaxios` / `GaxiosError`):**
 
 ```js
 const storage = new Storage({
   retryOptions: {
     retryableErrorFn: err => {
-      // GaxiosError provides err.response?.status, err.response?.data, and err.config
+      // Raw GaxiosError in shouldRetry provides err.response?.status, err.response?.data, and err.config
       const status = err.response?.status;
       const errors = err.response?.data?.error?.errors || [];
       return status === 502 || errors.some(e => e.reason === 'rateLimitExceeded');
@@ -152,14 +152,14 @@ const storage = new Storage({
 
 ---
 
-### 7. Multipart Uploads & `FormData` (`form-data` Dependency Removed)
+### 6. Multipart Uploads & `FormData` (`form-data` Dependency Removed)
 
 The external `form-data` and `node-fetch` dependencies have been removed in favor of Node.js native Web APIs (`FormData`, `Blob`, `fetch`) and Gaxios multipart options (`GaxiosMultipartOptions`).
 
 1. **V4 Signed POST Policy Uploads (`generateSignedPostPolicyV4`)**:
    Use global `FormData` and `Blob` with native `fetch` instead of the `form-data` npm package.
 
-   **Before (Storage v7):**
+   **Before (`form-data` / `node-fetch`):**
 
    ```js
    const FormData = require('form-data');
@@ -172,7 +172,7 @@ The external `form-data` and `node-fetch` dependencies have been removed in favo
    await fetch(policy.url, {method: 'POST', body: form, headers: form.getHeaders()});
    ```
 
-   **After (Storage v8):**
+   **After (Native Web `FormData` / `fetch`):**
 
    ```js
    const [policy] = await file.generateSignedPostPolicyV4(options);
@@ -183,9 +183,9 @@ The external `form-data` and `node-fetch` dependencies have been removed in favo
    ```
 
 2. **Low-Level `multipart` Request Option (`StorageRequestOptions.multipart`)**:
-   If calling `storageTransport.makeRequest` directly with `multipart`, each part must use `{ headers, content }` (`GaxiosMultipartOptions`) instead of `{ 'Content-Type', body }`.
+   If calling `storageTransport.makeRequest` directly with `multipart`, each part must use `{ headers, content }` (`GaxiosMultipartOptions`) instead of `{ 'Content-Type', body }`. (While `StorageTransport` accepts either a `Headers` instance or a plain object for `part.headers` at runtime, using `new Headers(...)` is required for TypeScript compatibility with `GaxiosMultipartOptions`.)
 
-   **Before (Storage v7):**
+   **Before (`teeny-request`):**
 
    ```js
    multipart: [
@@ -194,7 +194,7 @@ The external `form-data` and `node-fetch` dependencies have been removed in favo
    ]
    ```
 
-   **After (Storage v8):**
+   **After (`Gaxios` / `StorageTransport`):**
 
    ```js
    multipart: [
@@ -205,16 +205,16 @@ The external `form-data` and `node-fetch` dependencies have been removed in favo
 
 ---
 
-### 8. Custom HTTP Agents (`http.Agent` / `https.Agent`) & Proxies
+### 7. Custom HTTP Agents (`http.Agent` / `https.Agent`) & Proxies
 
-Legacy `teeny-request` connection pool options (`forever: true`, `pool: { maxSockets }`) are no longer used. In v8, custom HTTP/HTTPS agents and proxies are configured through Gaxios options:
+Legacy `teeny-request` connection pool options (`forever: true`, `pool: { maxSockets }`) are no longer used. Custom HTTP/HTTPS agents and proxies are now configured through Gaxios options:
 
 - **Environment variables**: `HTTPS_PROXY`, `HTTP_PROXY`, and `NO_PROXY` are automatically respected by Gaxios.
 - **Per-request or custom transport**: Pass `agent` (`http.Agent` / `https.Agent`), `proxy` (`string | URL`), or `noProxy` (`(string | URL | RegExp)[]`) in `StorageRequestOptions`, or provide a pre-configured `gaxiosInstance` (`new Gaxios({ agent, proxy, noProxy })`) to `StorageTransport`.
 
 ---
 
-### 9. Low-Level Request Option Renames (`Service` / `ServiceObject` -> `StorageTransport`)
+### 8. Low-Level Request Option Renames (`Service` / `ServiceObject` -> `StorageTransport`)
 
 The internal `Service` class (`src/nodejs-common/service.ts`) has been removed and replaced by `StorageTransport`. If your integration calls low-level `request()` or `storageTransport.makeRequest()` directly:
 
@@ -226,7 +226,7 @@ The internal `Service` class (`src/nodejs-common/service.ts`) has been removed a
 
 ## Upgrade Instructions
 
-Update your `@google-cloud/storage` dependency to version 8:
+Update your `@google-cloud/storage` dependency to the latest release:
 
 ```sh
 npm install @google-cloud/storage@latest
