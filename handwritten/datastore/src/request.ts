@@ -61,7 +61,7 @@ import {
   RunQueryResponse,
   RunQueryCallback,
 } from './query';
-import type {Datastore, Transaction} from '.';
+import {Datastore, Transaction} from '.';
 import ITimestamp = google.protobuf.ITimestamp;
 import {AggregateQuery} from './aggregate';
 import {RunOptions} from './transaction';
@@ -1362,10 +1362,7 @@ class DatastoreRequest {
  *
  */
 function isTransaction(request: DatastoreRequest): request is Transaction {
-  return (
-    (request as any).state !== TransactionState.NOT_TRANSACTION ||
-    request.constructor?.name === 'Transaction'
-  );
+  return request instanceof Transaction;
 }
 
 /**
