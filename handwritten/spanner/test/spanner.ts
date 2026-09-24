@@ -2131,6 +2131,32 @@ describe('Spanner with mock server', () => {
         });
       });
 
+      it('should not register release listener or invoke release when running query on multiplexed session', done => {
+        const query = {
+          sql: selectSql,
+        } as ExecuteSqlRequest;
+        const database = newTestDatabase();
+        const testSandbox = sinon.createSandbox();
+        const releaseSpy = testSandbox.spy(database.sessionFactory_, 'release');
+        const onceSpy = testSandbox.spy(Snapshot.prototype, 'once');
+        database.run(query, (err, resp) => {
+          assert.ifError(err);
+          assert.strictEqual(resp.length, 3);
+          assert.strictEqual(
+            onceSpy.withArgs('end', sinon.match.func).callCount,
+            0,
+          );
+          setImmediate(() => {
+            try {
+              assert.strictEqual(releaseSpy.callCount, 0);
+              done();
+            } finally {
+              testSandbox.restore();
+            }
+          });
+        });
+      });
+
       it('should execute the transaction(database.getSnapshot) successfully using multiplexed session', done => {
         const database = newTestDatabase();
         const pool = (database.sessionFactory_ as SessionFactory)
@@ -2265,6 +2291,32 @@ describe('Spanner with mock server', () => {
           assert.notEqual(multiplexedSession._multiplexedSession, null);
           assert.strictEqual(resp.length, 3);
           done();
+        });
+      });
+
+      it('should release regular session on snapshot end when multiplexed session is disabled', done => {
+        const query = {
+          sql: selectSql,
+        } as ExecuteSqlRequest;
+        const database = newTestDatabase({min: 1, max: 1});
+        const testSandbox = sinon.createSandbox();
+        const releaseSpy = testSandbox.spy(database.sessionFactory_, 'release');
+        const onceSpy = testSandbox.spy(Snapshot.prototype, 'once');
+        database.run(query, (err, resp) => {
+          assert.ifError(err);
+          assert.strictEqual(resp.length, 3);
+          assert.strictEqual(
+            onceSpy.withArgs('end', sinon.match.func).callCount,
+            1,
+          );
+          setImmediate(() => {
+            try {
+              assert.strictEqual(releaseSpy.callCount, 1);
+              done();
+            } finally {
+              testSandbox.restore();
+            }
+          });
         });
       });
 
