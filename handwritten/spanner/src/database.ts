@@ -3082,13 +3082,15 @@ class Database extends common.GrpcServiceObject {
       metadata?: ResultSetMetadata,
     ) => void,
   ): void {
-    snapshot.once('end', () => {
-      try {
-        this.sessionFactory_.release(session);
-      } catch (releaseError) {
-        this.emit('error', releaseError);
-      }
-    });
+    if (!session.metadata?.multiplexed) {
+      snapshot.once('end', () => {
+        try {
+          this.sessionFactory_.release(session);
+        } catch (releaseError) {
+          this.emit('error', releaseError);
+        }
+      });
+    }
 
     const snapshotWithRun = snapshot as Snapshot & {
       _run?: (
