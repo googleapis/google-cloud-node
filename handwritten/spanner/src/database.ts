@@ -118,6 +118,7 @@ import {
   setSpanError,
   setSpanErrorAndException,
   traceConfig,
+  getQueryTraceConfig,
 } from './instrument';
 import {
   AtomicCounter,
@@ -2942,8 +2943,8 @@ class Database extends common.GrpcServiceObject {
     startTrace(
       'Database.run',
       {
-        ...(query as ExecuteSqlRequest),
         ...this._traceConfig,
+        ...getQueryTraceConfig(query),
       },
       span => {
         this.runStream(query, options)
@@ -2983,9 +2984,9 @@ class Database extends common.GrpcServiceObject {
     options: TimestampBounds,
     callback: RunCallback,
   ): void {
-    const traceConfig = {
-      ...(query as ExecuteSqlRequest),
+    const traceConfig: traceConfig = {
       ...this._traceConfig,
+      ...getQueryTraceConfig(query),
     };
 
     startTrace('Database.run', traceConfig, runSpan => {
@@ -3079,13 +3080,15 @@ class Database extends common.GrpcServiceObject {
       metadata?: ResultSetMetadata,
     ) => void,
   ): void {
-    snapshot.once('end', () => {
-      try {
-        this.sessionFactory_.release(session);
-      } catch (releaseError) {
-        this.emit('error', releaseError);
-      }
-    });
+    if (!session.metadata?.multiplexed) {
+      snapshot.once('end', () => {
+        try {
+          this.sessionFactory_.release(session);
+        } catch (releaseError) {
+          this.emit('error', releaseError);
+        }
+      });
+    }
 
     const snapshotWithRun = snapshot as Snapshot & {
       _run?: (
@@ -3140,10 +3143,8 @@ class Database extends common.GrpcServiceObject {
     return startTrace(
       'Database.runPartitionedUpdate',
       {
-        ...(query as RunPartitionedUpdateOptions),
         ...this._traceConfig,
-        requestTag: (query as RunPartitionedUpdateOptions)?.requestOptions
-          ?.requestTag,
+        ...getQueryTraceConfig(query),
       },
       span => {
         this.sessionFactory_.getSessionForPartitionedOps((err, session) => {
@@ -3333,9 +3334,8 @@ class Database extends common.GrpcServiceObject {
     return startTrace(
       'Database.runStream',
       {
-        ...(query as ExecuteSqlRequest),
         ...this._traceConfig,
-        requestTag: (query as ExecuteSqlRequest)?.requestOptions?.requestTag,
+        ...getQueryTraceConfig(query),
       },
       span => {
         this.sessionFactory_.getSession((err, session) => {
