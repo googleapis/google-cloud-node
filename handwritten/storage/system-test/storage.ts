@@ -1679,7 +1679,7 @@ describe('storage', function () {
           (rule: LifecycleRule) =>
             typeof rule.action === 'object' &&
             rule.action.type === 'Delete' &&
-            Array.isArray(rule.condition.matchesPrefix),
+            Array.isArray(rule.condition.matchesSuffix),
         ),
       );
     });
