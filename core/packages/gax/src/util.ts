@@ -25,14 +25,16 @@ const randomUUID = () =>
 /**
  * Checks if telemetry tracing is enabled.
  *
- * Tracing is opt-in, and a caller opts in either with the
- * `enableTelemetryTracing` client option or with the
- * `GOOGLE_SDK_NODE_ENABLE_TRACING` environment variable. The environment
- * variable wins whenever it is set, so tracing can be switched on or off for a
- * process without touching the code that constructs the client.
+ * If `GOOGLE_SDK_NODE_ENABLE_TRACING` is explicitly set, then the client option
+ * doesn't matter (only the environment variable determines whether tracing is enabled).
+ * The client option is only checked if the environment variable isn't set.
  *
- * The client must have supplied `internalTelemetryInfo` — a client generated without
- * tracing has no span metadata to report, so there is nothing to trace.
+ * Tracing can be enabled purely through environment variables without
+ * requiring client libraries to pass generator parameters, as metadata
+ * is resolved dynamically at runtime.
+ *
+ * If the environment variable is not set, tracing requires the client option
+ * and the client must have supplied `internalTelemetryInfo` (the extra protoc param).
  *
  * @param settings
  * @returns true if telemetry tracing is enabled, false otherwise
@@ -45,17 +47,20 @@ export function checkTelemetryEnabled(settings?: CallSettings): boolean {
     typeof process === 'object' && typeof process.env === 'object'
       ? process.env
       : {};
-
-  // An absent or empty environment variable counts as unset, which is what
-  // separates it from an explicit `false`: only an explicit value overrides
-  // the opt-in the caller passed in `clientOptions`.
   const envOptIn = env.GOOGLE_SDK_NODE_ENABLE_TRACING?.trim();
-  const tracingRequested = envOptIn
-    ? envOptIn.toLowerCase() === 'true'
-    : Boolean(settings?.enableTelemetryTracing);
+
+  if (envOptIn !== undefined && envOptIn !== '') {
+    const lower = envOptIn.toLowerCase();
+    return lower === 'true' || lower === '1';
+  }
+
+  const clientOptIn = Boolean(
+    settings?.enableTelemetryTracing ||
+    settings?.otherArgs?.enableTelemetryTracing,
+  );
 
   return (
-    tracingRequested && settings?.otherArgs?.internalTelemetryInfo !== undefined
+    clientOptIn && settings?.otherArgs?.internalTelemetryInfo !== undefined
   );
 }
 

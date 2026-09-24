@@ -5,6 +5,33 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "11d6a6fe0cec995da9f85db7a072f552873096f2",
+          "message": "Allow customers to enable tracing with environmental variables",
+          "issues": [
+            "9438"
+          ],
+          "scope": "gax"
+        },
+        {
+          "type": "feat",
+          "sha": "feb2851a5d65cbea797148dce70b89fe4dc68b69",
+          "message": "Remove experimental flag requirement for tracing",
+          "issues": [
+            "9423"
+          ],
+          "scope": "o11y"
+        }
+      ],
+      "version": "6.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "google-gax",
+      "id": "3bf94fed-e7ee-4014-b7e5-3303fbbe9cda",
+      "createTime": "2026-09-23T22:50:41.126Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "5cd945de7f4fd96878c1956d68bcf505e48686ce",
           "message": "Update API sources and regenerate",
           "issues": [
@@ -95623,5 +95650,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-09-23T19:29:05.424Z"
+  "updateTime": "2026-09-23T22:50:41.126Z"
 }
