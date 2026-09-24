@@ -15,6 +15,16 @@
                 "getInstance"
               ]
             },
+            "GetMirror": {
+              "methods": [
+                "getMirror"
+              ]
+            },
+            "GetDirectoryPolicy": {
+              "methods": [
+                "getDirectoryPolicy"
+              ]
+            },
             "CreateInstance": {
               "methods": [
                 "createInstance"
@@ -30,6 +40,11 @@
                 "deleteInstance"
               ]
             },
+            "RescheduleMaintenance": {
+              "methods": [
+                "rescheduleMaintenance"
+              ]
+            },
             "ImportData": {
               "methods": [
                 "importData"
@@ -40,11 +55,50 @@
                 "exportData"
               ]
             },
+            "CreateMirror": {
+              "methods": [
+                "createMirror"
+              ]
+            },
+            "UpdateMirror": {
+              "methods": [
+                "updateMirror"
+              ]
+            },
+            "DeleteMirror": {
+              "methods": [
+                "deleteMirror"
+              ]
+            },
+            "CreateDirectoryPolicy": {
+              "methods": [
+                "createDirectoryPolicy"
+              ]
+            },
+            "DeleteDirectoryPolicy": {
+              "methods": [
+                "deleteDirectoryPolicy"
+              ]
+            },
             "ListInstances": {
               "methods": [
                 "listInstances",
                 "listInstancesStream",
                 "listInstancesAsync"
+              ]
+            },
+            "ListMirrors": {
+              "methods": [
+                "listMirrors",
+                "listMirrorsStream",
+                "listMirrorsAsync"
+              ]
+            },
+            "ListDirectoryPolicies": {
+              "methods": [
+                "listDirectoryPolicies",
+                "listDirectoryPoliciesStream",
+                "listDirectoryPoliciesAsync"
               ]
             }
           }
@@ -57,6 +111,16 @@
                 "getInstance"
               ]
             },
+            "GetMirror": {
+              "methods": [
+                "getMirror"
+              ]
+            },
+            "GetDirectoryPolicy": {
+              "methods": [
+                "getDirectoryPolicy"
+              ]
+            },
             "CreateInstance": {
               "methods": [
                 "createInstance"
@@ -72,6 +136,11 @@
                 "deleteInstance"
               ]
             },
+            "RescheduleMaintenance": {
+              "methods": [
+                "rescheduleMaintenance"
+              ]
+            },
             "ImportData": {
               "methods": [
                 "importData"
@@ -82,11 +151,50 @@
                 "exportData"
               ]
             },
+            "CreateMirror": {
+              "methods": [
+                "createMirror"
+              ]
+            },
+            "UpdateMirror": {
+              "methods": [
+                "updateMirror"
+              ]
+            },
+            "DeleteMirror": {
+              "methods": [
+                "deleteMirror"
+              ]
+            },
+            "CreateDirectoryPolicy": {
+              "methods": [
+                "createDirectoryPolicy"
+              ]
+            },
+            "DeleteDirectoryPolicy": {
+              "methods": [
+                "deleteDirectoryPolicy"
+              ]
+            },
             "ListInstances": {
               "methods": [
                 "listInstances",
                 "listInstancesStream",
                 "listInstancesAsync"
+              ]
+            },
+            "ListMirrors": {
+              "methods": [
+                "listMirrors",
+                "listMirrorsStream",
+                "listMirrorsAsync"
+              ]
+            },
+            "ListDirectoryPolicies": {
+              "methods": [
+                "listDirectoryPolicies",
+                "listDirectoryPoliciesStream",
+                "listDirectoryPoliciesAsync"
               ]
             }
           }

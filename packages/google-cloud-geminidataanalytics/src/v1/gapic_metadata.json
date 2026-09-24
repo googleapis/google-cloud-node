@@ -40,6 +40,11 @@
                 "setIamPolicy"
               ]
             },
+            "RetrieveAgentOpsObservability": {
+              "methods": [
+                "retrieveAgentOpsObservability"
+              ]
+            },
             "CreateDataAgent": {
               "methods": [
                 "createDataAgent"
@@ -53,6 +58,11 @@
             "DeleteDataAgent": {
               "methods": [
                 "deleteDataAgent"
+              ]
+            },
+            "SetAgentOpsObservability": {
+              "methods": [
+                "setAgentOpsObservability"
               ]
             },
             "ListDataAgents": {
@@ -104,6 +114,11 @@
                 "setIamPolicy"
               ]
             },
+            "RetrieveAgentOpsObservability": {
+              "methods": [
+                "retrieveAgentOpsObservability"
+              ]
+            },
             "CreateDataAgent": {
               "methods": [
                 "createDataAgent"
@@ -117,6 +132,11 @@
             "DeleteDataAgent": {
               "methods": [
                 "deleteDataAgent"
+              ]
+            },
+            "SetAgentOpsObservability": {
+              "methods": [
+                "setAgentOpsObservability"
               ]
             },
             "ListDataAgents": {
@@ -150,6 +170,11 @@
             "DeleteConversation": {
               "methods": [
                 "deleteConversation"
+              ]
+            },
+            "UpdateConversation": {
+              "methods": [
+                "updateConversation"
               ]
             },
             "GetConversation": {
@@ -189,6 +214,11 @@
             "DeleteConversation": {
               "methods": [
                 "deleteConversation"
+              ]
+            },
+            "UpdateConversation": {
+              "methods": [
+                "updateConversation"
               ]
             },
             "GetConversation": {
