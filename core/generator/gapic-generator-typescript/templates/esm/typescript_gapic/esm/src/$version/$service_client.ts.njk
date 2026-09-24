@@ -808,6 +808,11 @@ export class {{ service.name }}Client {
    */
   getResumableSource(filePath: string): gax.ResumableSource {
     const gaxModule = this._gaxModule as typeof gax;
+    if (typeof gaxModule.resumableSourceFromFile !== 'function') {
+      throw new Error(
+        'getResumableSource is not supported when using the fallback transport; provide a custom ResumableSource instead.',
+      );
+    }
     return gaxModule.resumableSourceFromFile(filePath);
   }
 {%- endif %}
