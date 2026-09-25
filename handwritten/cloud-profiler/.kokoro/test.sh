@@ -33,8 +33,8 @@ if [[ $KOKORO_BUILD_ARTIFACTS_SUBDIR = *"continuous"* ]] || [[ $KOKORO_BUILD_ART
   export MOCHA_REPORTER=xunit
   cleanup() {
     if [[ -f "${KOKORO_GFILE_DIR:-}/linux_amd64/flakybot" ]]; then
-      chmod +x $KOKORO_GFILE_DIR/linux_amd64/flakybot
-      $KOKORO_GFILE_DIR/linux_amd64/flakybot || true
+      chmod +x "$KOKORO_GFILE_DIR/linux_amd64/flakybot"
+      "$KOKORO_GFILE_DIR/linux_amd64/flakybot" || true
     fi
   }
   trap cleanup EXIT HUP
@@ -53,7 +53,7 @@ if npx check-node-version@3.3.0 --silent --node $COVERAGE_NODE; then
     $NYC_BIN report || true
   fi
   if [ -f "${KOKORO_GFILE_DIR:-}/codecov.sh" ]; then
-    bash $KOKORO_GFILE_DIR/codecov.sh || true
+    bash "$KOKORO_GFILE_DIR/codecov.sh" || true
   fi
 else
   echo "coverage is only reported for Node $COVERAGE_NODE"
