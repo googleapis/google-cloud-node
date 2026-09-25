@@ -96,6 +96,8 @@ describe('LogSync', () => {
     let buffer: stream.Writable;
 
     beforeEach(() => {
+      // Prevent automatic diagnostic instrumentation from writing an extra log
+      // entry to the transport stream during tests.
       instrumentation.setInstrumentationStatus(true);
       ENTRY = new Entry(undefined, 'testlog');
       ENTRIES = [ENTRY] as Entry[];
