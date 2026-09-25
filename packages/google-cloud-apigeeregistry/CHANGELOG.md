@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.1](https://github.com/googleapis/google-cloud-node/compare/apigee-registry-v3.0.0...apigee-registry-v3.0.1) (2026-09-25)
+
+
+### Bug Fixes
+
+* Update package.json and .gitignore across packages ([#9378](https://github.com/googleapis/google-cloud-node/issues/9378)) ([9c54cec](https://github.com/googleapis/google-cloud-node/commit/9c54cece565b5cbcae63a9856c1ef3448307d46e))
+
 ## [3.0.0](https://github.com/googleapis/google-cloud-node/compare/apigee-registry-v2.2.2...apigee-registry-v3.0.0) (2026-08-04)
 
 

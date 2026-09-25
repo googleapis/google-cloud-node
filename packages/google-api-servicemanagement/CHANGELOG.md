@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.1.1](https://github.com/googleapis/google-cloud-node/compare/service-management-v4.1.0...service-management-v4.1.1) (2026-09-25)
+
+
+### Bug Fixes
+
+* Update package.json and .gitignore across packages ([#9378](https://github.com/googleapis/google-cloud-node/issues/9378)) ([9c54cec](https://github.com/googleapis/google-cloud-node/commit/9c54cece565b5cbcae63a9856c1ef3448307d46e))
+
 ## [4.1.0](https://github.com/googleapis/google-cloud-node/compare/service-management-v4.0.0...service-management-v4.1.0) (2026-09-08)
 
 
