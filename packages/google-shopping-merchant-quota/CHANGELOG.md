@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.10.1](https://github.com/googleapis/google-cloud-node/compare/quota-v0.10.0...quota-v0.10.1) (2026-09-25)
+
+
+### Bug Fixes
+
+* Update package.json and .gitignore across packages ([#9378](https://github.com/googleapis/google-cloud-node/issues/9378)) ([9c54cec](https://github.com/googleapis/google-cloud-node/commit/9c54cece565b5cbcae63a9856c1ef3448307d46e))
+
 ## [0.10.0](https://github.com/googleapis/google-cloud-node/compare/quota-v0.9.1...quota-v0.10.0) (2026-08-04)
 
 

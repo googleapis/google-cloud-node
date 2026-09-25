@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/eventarc",
-  "version": "5.1.0",
+  "version": "5.1.1",
   "description": "eventarc client for Node.js",
   "repository": {
     "type": "git",

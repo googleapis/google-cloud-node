@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.1](https://github.com/googleapis/google-cloud-node/compare/capacityplanner-v0.4.0...capacityplanner-v0.4.1) (2026-09-25)
+
+
+### Bug Fixes
+
+* Update package.json and .gitignore across packages ([#9378](https://github.com/googleapis/google-cloud-node/issues/9378)) ([9c54cec](https://github.com/googleapis/google-cloud-node/commit/9c54cece565b5cbcae63a9856c1ef3448307d46e))
+
 ## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/capacityplanner-v0.3.0...capacityplanner-v0.4.0) (2026-09-08)
 
 

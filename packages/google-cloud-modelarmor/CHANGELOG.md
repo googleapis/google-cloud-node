@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.9.1](https://github.com/googleapis/google-cloud-node/compare/modelarmor-v0.9.0...modelarmor-v0.9.1) (2026-09-25)
+
+
+### Bug Fixes
+
+* Update package.json and .gitignore across packages ([#9378](https://github.com/googleapis/google-cloud-node/issues/9378)) ([9c54cec](https://github.com/googleapis/google-cloud-node/commit/9c54cece565b5cbcae63a9856c1ef3448307d46e))
+
 ## [0.9.0](https://github.com/googleapis/google-cloud-node/compare/modelarmor-v0.8.0...modelarmor-v0.9.0) (2026-09-08)
 
 

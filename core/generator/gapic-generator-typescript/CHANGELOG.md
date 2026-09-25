@@ -1,6 +1,19 @@
 # Changelog
 
 
+## [5.6.0](https://github.com/googleapis/google-cloud-node/compare/gapic-generator-v5.5.0...gapic-generator-v5.6.0) (2026-09-25)
+
+
+### Features
+
+* **generator:** Generate resumable upload client methods ([#9285](https://github.com/googleapis/google-cloud-node/issues/9285)) ([7333216](https://github.com/googleapis/google-cloud-node/commit/733321662eb9b832df1b80227292465814ace10e))
+* **generator:** Select resumable upload methods ([#9284](https://github.com/googleapis/google-cloud-node/issues/9284)) ([a9d7cab](https://github.com/googleapis/google-cloud-node/commit/a9d7cab354d75107296197310fc0cd50c965a148))
+
+
+### Bug Fixes
+
+* Update package.json and .gitignore across packages ([#9378](https://github.com/googleapis/google-cloud-node/issues/9378)) ([9c54cec](https://github.com/googleapis/google-cloud-node/commit/9c54cece565b5cbcae63a9856c1ef3448307d46e))
+
 ## [5.5.0](https://github.com/googleapis/google-cloud-node/compare/gapic-generator-v5.4.0...gapic-generator-v5.5.0) (2026-09-23)
 
 

@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.15.1](https://github.com/googleapis/google-cloud-node/compare/redis-cluster-v0.15.0...redis-cluster-v0.15.1) (2026-09-25)
+
+
+### Bug Fixes
+
+* Update package.json and .gitignore across packages ([#9378](https://github.com/googleapis/google-cloud-node/issues/9378)) ([9c54cec](https://github.com/googleapis/google-cloud-node/commit/9c54cece565b5cbcae63a9856c1ef3448307d46e))
+
 ## [0.15.0](https://github.com/googleapis/google-cloud-node/compare/redis-cluster-v0.14.0...redis-cluster-v0.15.0) (2026-09-08)
 
 
