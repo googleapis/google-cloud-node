@@ -18,12 +18,17 @@ import {randomBytes} from 'crypto';
 // eslint-disable-next-line n/no-extraneous-import
 import * as grpc from '@grpc/grpc-js';
 import {getActiveOrNoopSpan} from './instrument';
-const randIdForProcess = randomBytes(8)
-  .readUint32LE(0)
-  .toString(16)
-  .padStart(8, '0');
+const randIdForProcess = randomBytes(8).toString('hex');
 const REQUEST_HEADER_VERSION = 1;
 const PROCESS_PREFIX = `${REQUEST_HEADER_VERSION}.${randIdForProcess}.`;
+
+function getProcessId(): string {
+  return (
+    process.env.SPANNER_PROCESS_ID ||
+    process.env.GOOGLE_CLOUD_SPANNER_PROCESS_ID ||
+    randIdForProcess
+  );
+}
 const X_GOOG_SPANNER_REQUEST_ID_HEADER = 'x-goog-spanner-request-id';
 
 class AtomicCounter {
@@ -51,8 +56,8 @@ class AtomicCounter {
   }
 }
 
-function getRequestIdPrefix(clientId = 1, channelId = 1): string {
-  return `${PROCESS_PREFIX}${clientId ?? 1}.${channelId ?? 1}.`;
+function getRequestIdPrefix(clientId = 1, channelId = 0): string {
+  return `${REQUEST_HEADER_VERSION}.${getProcessId()}.${clientId ?? 1}.${channelId ?? 0}.`;
 }
 
 function craftRequestId(
@@ -61,7 +66,7 @@ function craftRequestId(
   nthRequest: number,
   attempt: number,
 ) {
-  return `${PROCESS_PREFIX}${nthClientId ?? 1}.${channelId ?? 1}.${nthRequest ?? 1}.${attempt ?? 1}`;
+  return `${REQUEST_HEADER_VERSION}.${getProcessId()}.${nthClientId ?? 1}.${channelId ?? 0}.${nthRequest ?? 1}.${attempt ?? 1}`;
 }
 
 const nthClientId = new AtomicCounter();
@@ -110,6 +115,9 @@ function injectRequestIDIntoError(config: any, err: Error) {
   const requestID = extractRequestID(config);
   if (requestID) {
     Object.assign(err, {requestID: requestID});
+    if (err.message && !err.message.includes(requestID)) {
+      err.message = `${err.message} (x-goog-spanner-request-id: ${requestID})`;
+    }
   }
 }
 
@@ -122,26 +130,69 @@ function injectRequestIDIntoHeaders(
   if (!session) {
     return headers;
   }
-  const database = session.parent;
+  const actualDatabase =
+    session && typeof session._nextNthRequest === 'function'
+      ? session
+      : session?.parent;
   if (nthRequest === undefined || nthRequest === null) {
-    if (!database || typeof database._nextNthRequest !== 'function') {
+    if (
+      !actualDatabase ||
+      typeof actualDatabase._nextNthRequest !== 'function'
+    ) {
       return headers;
     }
-    nthRequest = database._nextNthRequest();
+    nthRequest = actualDatabase._nextNthRequest();
   }
   const requestCount = nthRequest ?? 1;
   const attemptCount = attempt ?? 1;
 
   const withReqId = {...headers};
-  withReqId[X_GOOG_SPANNER_REQUEST_ID_HEADER] = database?._requestIdPrefix
-    ? `${database._requestIdPrefix}${requestCount}.${attemptCount}`
+  withReqId[X_GOOG_SPANNER_REQUEST_ID_HEADER] = actualDatabase?._requestIdPrefix
+    ? `${actualDatabase._requestIdPrefix}${requestCount}.${attemptCount}`
     : craftRequestId(
-        database?._clientId ?? database?._nthClientId ?? 1,
-        database?._channelId ?? 1,
+        actualDatabase?._clientId ?? actualDatabase?._nthClientId ?? 1,
+        actualDatabase?._channelId ?? 0,
         requestCount,
         attemptCount,
       );
   return withReqId;
+}
+
+function createRequestIdInterceptor(config: any) {
+  let attemptCount = 0;
+  let cachedBase: string | undefined;
+  let cachedInitialAttempt = 1;
+  return (options: any, nextCall: any) => {
+    return new grpc.InterceptingCall(nextCall(options), {
+      start: function (metadata: grpc.Metadata, listener: any, next: any) {
+        attemptCount++;
+        const currentReqIds = metadata.get(X_GOOG_SPANNER_REQUEST_ID_HEADER);
+        if (currentReqIds && currentReqIds.length > 0) {
+          if (cachedBase === undefined) {
+            const currentReqId = String(currentReqIds[0]);
+            const lastDot = currentReqId.lastIndexOf('.');
+            if (lastDot !== -1) {
+              cachedBase = currentReqId.substring(0, lastDot);
+              const parsedAttempt = parseInt(
+                currentReqId.substring(lastDot + 1),
+                10,
+              );
+              cachedInitialAttempt = isNaN(parsedAttempt) ? 1 : parsedAttempt;
+            }
+          }
+          if (cachedBase !== undefined) {
+            const newAttempt = cachedInitialAttempt + (attemptCount - 1);
+            const newReqId = `${cachedBase}.${newAttempt}`;
+            metadata.set(X_GOOG_SPANNER_REQUEST_ID_HEADER, newReqId);
+            if (config && config.headers) {
+              config.headers[X_GOOG_SPANNER_REQUEST_ID_HEADER] = newReqId;
+            }
+          }
+        }
+        next(metadata, listener);
+      },
+    });
+  };
 }
 
 function nextNthRequest(database): number {
@@ -172,7 +223,7 @@ function attributeXGoogSpannerRequestIdToActiveSpan(config: any) {
   span.setAttribute(X_GOOG_SPANNER_REQUEST_ID_SPAN_ATTR, reqId);
 }
 
-const X_GOOG_REQ_ID_REGEX = /^1\.[0-9A-Fa-f]{8}(\.\d+){3}\.\d+/;
+const X_GOOG_REQ_ID_REGEX = /^1\.[0-9A-Fa-f]{16}(\.\d+){3}\.\d+$/;
 
 export {
   AtomicCounter,
@@ -182,6 +233,8 @@ export {
   X_GOOG_SPANNER_REQUEST_ID_SPAN_ATTR,
   attributeXGoogSpannerRequestIdToActiveSpan,
   craftRequestId,
+  createRequestIdInterceptor,
+  getProcessId,
   getRequestIdPrefix,
   injectRequestIDIntoError,
   injectRequestIDIntoHeaders,

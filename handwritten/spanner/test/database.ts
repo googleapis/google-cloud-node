@@ -497,7 +497,7 @@ describe('Database', () => {
         Object.assign(
           {
             [LEADER_AWARE_ROUTING_HEADER]: 'true',
-            [X_GOOG_SPANNER_REQUEST_ID_HEADER]: craftRequestId(1, 1, 1, 1),
+            [X_GOOG_SPANNER_REQUEST_ID_HEADER]: craftRequestId(1, 0, 1, 1),
           },
           database.commonHeaders_,
         ),
@@ -805,7 +805,16 @@ describe('Database', () => {
       assert.strictEqual(args.method, 'batchWrite');
       assert.deepStrictEqual(args.reqOpts, expectedReqOpts);
       assert.deepStrictEqual(args.gaxOpts, expectedGaxOpts);
-      assert.deepStrictEqual(args.headers, database.commonHeaders_);
+      assert.deepStrictEqual(
+        args.headers,
+        Object.assign(
+          {
+            [LEADER_AWARE_ROUTING_HEADER]: 'true',
+            [X_GOOG_SPANNER_REQUEST_ID_HEADER]: craftRequestId(1, 0, 1, 1),
+          },
+          database.commonHeaders_,
+        ),
+      );
     });
 
     it('should return error when passing an empty list of mutationGroups', done => {
@@ -2615,7 +2624,7 @@ describe('Database', () => {
           Object.assign(
             {
               [LEADER_AWARE_ROUTING_HEADER]: 'true',
-              [X_GOOG_SPANNER_REQUEST_ID_HEADER]: craftRequestId(1, 1, 1, 1),
+              [X_GOOG_SPANNER_REQUEST_ID_HEADER]: craftRequestId(1, 0, 1, 1),
             },
             database.commonHeaders_,
           ),
@@ -3060,7 +3069,7 @@ describe('Database', () => {
         assert.deepStrictEqual(config.gaxOpts, gaxOpts);
         assert.deepStrictEqual(config.headers, {
           ...database.commonHeaders_,
-          [X_GOOG_SPANNER_REQUEST_ID_HEADER]: craftRequestId(1, 1, 1, 1),
+          [X_GOOG_SPANNER_REQUEST_ID_HEADER]: craftRequestId(1, 0, 1, 1),
         });
         done();
       };

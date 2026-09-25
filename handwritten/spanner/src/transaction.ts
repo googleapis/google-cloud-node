@@ -1627,7 +1627,9 @@ export class Snapshot extends EventEmitter {
         });
       };
 
-      const retryableCodes = [grpc.status.UNAVAILABLE];
+      const retryableCodes = gaxOptions?.retry?.retryCodes ?? [
+        Status.UNAVAILABLE,
+      ];
       const wrappedMakeRequest = this._wrapWithIdWaiter(makeRequest);
       const startTime = Date.now();
       const timeout = gaxOptions?.timeout ?? Infinity;
@@ -2249,7 +2251,9 @@ export class Snapshot extends EventEmitter {
    */
   protected _getDirectedReadOptions(
     directedReadOptions:
-      google.spanner.v1.IDirectedReadOptions | null | undefined,
+      | google.spanner.v1.IDirectedReadOptions
+      | null
+      | undefined,
   ) {
     if (
       !directedReadOptions &&
@@ -2493,6 +2497,8 @@ export class Transaction extends Dml {
   commitTimestampProto?: spannerClient.protobuf.ITimestamp;
   private _queuedMutations: spannerClient.spanner.v1.Mutation[];
   private _retryCommit: Boolean;
+  private _commitNthRequest?: number;
+  private _commitAttempt?: number;
 
   /**
    * Timestamp at which the transaction was committed. Will be populated once
@@ -2951,6 +2957,12 @@ export class Transaction extends Dml {
           }
         }
 
+        const nthRequest = this._commitNthRequest ?? nextNthRequest(database);
+        this._commitNthRequest = nthRequest;
+        const attempt = this._commitAttempt
+          ? ++this._commitAttempt
+          : (this._commitAttempt = 1);
+
         this.request(
           {
             client: 'SpannerClient',
@@ -2960,8 +2972,8 @@ export class Transaction extends Dml {
             headers: injectRequestIDIntoHeaders(
               this.commonHeaders_,
               this.session,
-              nextNthRequest(database),
-              1,
+              nthRequest,
+              attempt,
             ),
           },
           (
@@ -3307,7 +3319,8 @@ export class Transaction extends Dml {
   ): void;
   rollback(
     gaxOptionsOrCallback?:
-      CallOptions | spannerClient.spanner.v1.Spanner.RollbackCallback,
+      | CallOptions
+      | spannerClient.spanner.v1.Spanner.RollbackCallback,
     cb?: spannerClient.spanner.v1.Spanner.RollbackCallback,
   ): void | Promise<void> {
     let gaxOpts =
@@ -3330,6 +3343,8 @@ export class Transaction extends Dml {
         transactionId,
       };
 
+      const database = this.session?.parent as Database;
+
       if (this._affinityKey) {
         if (!gaxOpts || Object.keys(gaxOpts).length === 0) {
           gaxOpts = this._unbindGaxOpts as any;
@@ -3344,7 +3359,12 @@ export class Transaction extends Dml {
           method: 'rollback',
           reqOpts,
           gaxOpts,
-          headers: {...this.commonHeaders_},
+          headers: injectRequestIDIntoHeaders(
+            this.commonHeaders_,
+            this.session,
+            nextNthRequest(database),
+            1,
+          ),
         },
         (err: null | ServiceError) => {
           if (err) {

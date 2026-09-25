@@ -443,7 +443,7 @@ describe('Transaction', () => {
         assert.strictEqual(method, 'streamingRead');
         assert.deepStrictEqual(headers, {
           ...snapshot.commonHeaders_,
-          [X_GOOG_SPANNER_REQUEST_ID_HEADER]: craftRequestId(1, 1, 1, 1),
+          [X_GOOG_SPANNER_REQUEST_ID_HEADER]: craftRequestId(1, 0, 1, 1),
         });
       });
 
@@ -1670,7 +1670,7 @@ describe('Transaction', () => {
         assert.strictEqual(method, 'executeStreamingSql');
         assert.deepStrictEqual(headers, {
           ...snapshot.commonHeaders_,
-          [X_GOOG_SPANNER_REQUEST_ID_HEADER]: craftRequestId(1, 1, 1, 1),
+          [X_GOOG_SPANNER_REQUEST_ID_HEADER]: craftRequestId(1, 0, 1, 1),
         });
       });
 
@@ -2731,7 +2731,7 @@ describe('Transaction', () => {
           headers,
           Object.assign(
             {
-              [X_GOOG_SPANNER_REQUEST_ID_HEADER]: craftRequestId(1, 1, 1, 1),
+              [X_GOOG_SPANNER_REQUEST_ID_HEADER]: craftRequestId(1, 0, 1, 1),
               [LEADER_AWARE_ROUTING_HEADER]: 'true',
             },
             transaction.commonHeaders_,
@@ -3134,7 +3134,7 @@ describe('Transaction', () => {
           headers,
           Object.assign(
             {
-              [X_GOOG_SPANNER_REQUEST_ID_HEADER]: craftRequestId(1, 1, 1, 1),
+              [X_GOOG_SPANNER_REQUEST_ID_HEADER]: craftRequestId(1, 0, 1, 1),
               [LEADER_AWARE_ROUTING_HEADER]: true,
             },
             transaction.commonHeaders_,
@@ -3776,7 +3776,10 @@ describe('Transaction', () => {
         assert.deepStrictEqual(
           headers,
           Object.assign(
-            {[LEADER_AWARE_ROUTING_HEADER]: 'true'},
+            {
+              [X_GOOG_SPANNER_REQUEST_ID_HEADER]: craftRequestId(1, 0, 1, 1),
+              [LEADER_AWARE_ROUTING_HEADER]: 'true',
+            },
             transaction.commonHeaders_,
           ),
         );
@@ -4469,7 +4472,7 @@ describe('Transaction', () => {
             config.headers,
             Object.assign(
               {
-                [X_GOOG_SPANNER_REQUEST_ID_HEADER]: craftRequestId(1, 1, 1, 1),
+                [X_GOOG_SPANNER_REQUEST_ID_HEADER]: craftRequestId(1, 0, 1, 1),
                 [LEADER_AWARE_ROUTING_HEADER]: true,
               },
               transaction.commonHeaders_,
@@ -4564,7 +4567,7 @@ describe('Transaction', () => {
           headers,
           Object.assign(
             {
-              [X_GOOG_SPANNER_REQUEST_ID_HEADER]: craftRequestId(1, 1, 1, 1),
+              [X_GOOG_SPANNER_REQUEST_ID_HEADER]: craftRequestId(1, 0, 1, 1),
               [LEADER_AWARE_ROUTING_HEADER]: true,
             },
             transaction.commonHeaders_,
