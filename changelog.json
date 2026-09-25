@@ -4,6 +4,31 @@
     {
       "changes": [
         {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "07ae774a8e52185a3598c878513377e7a019f127",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9293"
+          ]
+        }
+      ],
+      "version": "1.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-ads/datamanager",
+      "id": "6c10f40a-43cb-4231-b717-379708c32b91",
+      "createTime": "2026-09-25T15:34:53.004Z"
+    },
+    {
+      "changes": [
+        {
           "type": "feat",
           "sha": "11d6a6fe0cec995da9f85db7a072f552873096f2",
           "message": "Allow customers to enable tracing with environmental variables",
@@ -95650,5 +95675,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-09-23T22:50:41.126Z"
+  "updateTime": "2026-09-25T15:34:53.004Z"
 }
