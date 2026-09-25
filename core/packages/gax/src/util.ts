@@ -303,3 +303,8 @@ export const ignoredClientHeaderTokens = [
   'gapic',
   'gccl',
 ];
+
+/**
+ * Maximum traversal depth for unwrapping nested error causes.
+ */
+export const DEPTH_TO_CHECK = 10;

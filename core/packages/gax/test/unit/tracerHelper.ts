@@ -49,6 +49,7 @@ import {
 } from '../../src/apitypes';
 import {GoogleError} from '../../src/googleError';
 import {Status} from '../../src/status';
+import {DEPTH_TO_CHECK} from '../../src/util';
 import {OngoingCallPromise} from '../../src/call';
 import {
   OtelHarness,
@@ -1004,14 +1005,39 @@ describe('TracerHelper', () => {
             assert.strictEqual(isPreConnectionFailure(errA), false);
           });
 
-          it('handles deep cause chains (> 10 depth) without stack overflow', () => {
-            let current = new GoogleError('root');
+          it('handles deep cause chains (> DEPTH_TO_CHECK depth) without stack overflow', () => {
+            const root = new GoogleError('root');
+            let current = root;
             for (let i = 0; i < 20; i++) {
               const next = new GoogleError(`level-${i}`);
               current.cause = next;
               current = next;
             }
-            assert.strictEqual(isPreConnectionFailure(current), false);
+            assert.strictEqual(isPreConnectionFailure(root), false);
+          });
+
+          it('respects DEPTH_TO_CHECK limit when unwrapping cause chain', () => {
+            // Error within DEPTH_TO_CHECK levels is detected
+            const rootWithin = new GoogleError('root');
+            let currWithin = rootWithin;
+            for (let i = 0; i < DEPTH_TO_CHECK - 2; i++) {
+              const next = new GoogleError(`level-${i}`);
+              currWithin.cause = next;
+              currWithin = next;
+            }
+            currWithin.cause = new TypeError('client validation failure');
+            assert.strictEqual(isPreConnectionFailure(rootWithin), true);
+
+            // Error deeper than DEPTH_TO_CHECK levels is not reached
+            const rootDeeper = new GoogleError('root');
+            let currDeeper = rootDeeper;
+            for (let i = 0; i < DEPTH_TO_CHECK + 5; i++) {
+              const next = new GoogleError(`level-${i}`);
+              currDeeper.cause = next;
+              currDeeper = next;
+            }
+            currDeeper.cause = new TypeError('too deep to find');
+            assert.strictEqual(isPreConnectionFailure(rootDeeper), false);
           });
 
           it('identifies pre-connection errors directly and wrapped in GoogleError', () => {

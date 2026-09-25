@@ -28,6 +28,7 @@ import {Status} from '../status';
 import {
   connectionCodes,
   decodeCodes,
+  DEPTH_TO_CHECK,
   genericClasses,
   preConnectionCodes,
   redirectCodes,
@@ -137,9 +138,11 @@ export function resolveErrorInfoReason(e: unknown): string | undefined {
   }
 
   let current: unknown = e;
-  let depth = 0;
   const seen = new Set<unknown>();
-  while (current && typeof current === 'object' && depth < 10) {
+  for (let depth = 0; depth < DEPTH_TO_CHECK; depth++) {
+    if (!current || typeof current !== 'object') {
+      break;
+    }
     // Guard against circular cause references.
     if (seen.has(current)) {
       break;
@@ -189,7 +192,6 @@ export function resolveErrorInfoReason(e: unknown): string | undefined {
 
     // Traverse error cause chain.
     current = err.cause;
-    depth++;
   }
 
   return undefined;
@@ -227,7 +229,7 @@ export function resolveClientNetworkOrOperationalError(
 ): string | undefined {
   let current: unknown = e;
   const seen = new Set<unknown>();
-  for (let depth = 0; depth < 10; depth++) {
+  for (let depth = 0; depth < DEPTH_TO_CHECK; depth++) {
     if (!current || typeof current !== 'object') {
       break;
     }
@@ -326,9 +328,11 @@ export function resolveLanguageSpecificErrorType(
   }
 
   let current: unknown = e;
-  let depth = 0;
   const seen = new Set<unknown>();
-  while (current && typeof current === 'object' && depth < 10) {
+  for (let depth = 0; depth < DEPTH_TO_CHECK; depth++) {
+    if (!current || typeof current !== 'object') {
+      break;
+    }
     // Guard against circular cause references.
     if (seen.has(current)) {
       break;
@@ -362,7 +366,6 @@ export function resolveLanguageSpecificErrorType(
 
     // Unwrap cause chain when encountering generic wrapper classes.
     current = err.cause;
-    depth++;
   }
 
   return undefined;
@@ -433,9 +436,11 @@ function resolveExceptionType(e: Error): string {
  */
 function resolveSystemErrorCode(e: unknown): string | undefined {
   let current: unknown = e;
-  let depth = 0;
   const seen = new Set<unknown>();
-  while (current && typeof current === 'object' && depth < 10) {
+  for (let depth = 0; depth < DEPTH_TO_CHECK; depth++) {
+    if (!current || typeof current !== 'object') {
+      break;
+    }
     if (seen.has(current)) {
       break;
     }
@@ -445,7 +450,6 @@ function resolveSystemErrorCode(e: unknown): string | undefined {
       return code;
     }
     current = (current as {cause?: unknown}).cause;
-    depth++;
   }
   return undefined;
 }
@@ -456,9 +460,11 @@ function resolveSystemErrorCode(e: unknown): string | undefined {
  */
 function resolveRpcStatusName(e: unknown): string | undefined {
   let current: unknown = e;
-  let depth = 0;
   const seen = new Set<unknown>();
-  while (current && typeof current === 'object' && depth < 10) {
+  for (let depth = 0; depth < DEPTH_TO_CHECK; depth++) {
+    if (!current || typeof current !== 'object') {
+      break;
+    }
     if (seen.has(current)) {
       break;
     }
@@ -472,7 +478,6 @@ function resolveRpcStatusName(e: unknown): string | undefined {
       return Status[code];
     }
     current = (current as {cause?: unknown}).cause;
-    depth++;
   }
   return undefined;
 }
@@ -482,9 +487,11 @@ function resolveRpcStatusName(e: unknown): string | undefined {
  */
 function resolveHttpStatusCode(e: unknown): number | undefined {
   let current: unknown = e;
-  let depth = 0;
   const seen = new Set<unknown>();
-  while (current && typeof current === 'object' && depth < 10) {
+  for (let depth = 0; depth < DEPTH_TO_CHECK; depth++) {
+    if (!current || typeof current !== 'object') {
+      break;
+    }
     if (seen.has(current)) {
       break;
     }
@@ -494,7 +501,6 @@ function resolveHttpStatusCode(e: unknown): number | undefined {
       return code;
     }
     current = (current as {cause?: unknown}).cause;
-    depth++;
   }
   return undefined;
 }
@@ -505,10 +511,9 @@ function resolveHttpStatusCode(e: unknown): number | undefined {
  */
 export function isPreConnectionFailure(e: unknown): boolean {
   let current: unknown = e;
-  let depth = 0;
   const seen = new Set<unknown>();
 
-  while (depth < 10) {
+  for (let depth = 0; depth < DEPTH_TO_CHECK; depth++) {
     // Server status code indicates a response was received.
     if (
       resolveHttpStatusCode(current) !== undefined ||
@@ -561,7 +566,6 @@ export function isPreConnectionFailure(e: unknown): boolean {
       err.cause
     ) {
       current = err.cause;
-      depth++;
     } else {
       return false;
     }
@@ -599,9 +603,11 @@ export function isServerSideError(
     return false;
   }
   let current: unknown = e;
-  let depth = 0;
   const seen = new Set<unknown>();
-  while (current && typeof current === 'object' && depth < 10) {
+  for (let depth = 0; depth < DEPTH_TO_CHECK; depth++) {
+    if (!current || typeof current !== 'object') {
+      break;
+    }
     if (seen.has(current)) {
       break;
     }
@@ -611,7 +617,6 @@ export function isServerSideError(
       return false;
     }
     current = err.cause;
-    depth++;
   }
   if (rpcType === 'grpc') {
     return resolveRpcStatusName(e) !== undefined;

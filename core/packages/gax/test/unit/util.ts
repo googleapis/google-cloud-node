@@ -33,6 +33,7 @@ import {
   genericClasses,
   preConnectionCodes,
   ignoredClientHeaderTokens,
+  DEPTH_TO_CHECK,
 } from '../../src/util';
 import {StaticTraceContext} from '../../src/observability/TracerHelper';
 import {CallSettings} from '../../src/gax';
@@ -414,6 +415,10 @@ describe('util.ts', () => {
       assert(ignoredClientHeaderTokens.includes('gl-node'));
       assert(ignoredClientHeaderTokens.includes('gax'));
       assert(ignoredClientHeaderTokens.includes('gapic'));
+    });
+
+    it('defines DEPTH_TO_CHECK constant as 10', () => {
+      assert.strictEqual(DEPTH_TO_CHECK, 10);
     });
   });
 });
