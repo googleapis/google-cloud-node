@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/devicestreaming",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "Device Streaming API client for Node.js",
   "repository": {
     "type": "git",
