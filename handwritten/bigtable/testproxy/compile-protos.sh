@@ -4,7 +4,7 @@
 echo "Running from $(pwd)"
 
 # If protos already exist, skip unless explicitly forced
-if [ -f testproxy/protos/protos.d.ts ] && [ -f testproxy/protos/protos.js ] && [ "$FORCE_COMPILE_PROTOS" != "true" ]; then
+if [ -f testproxy/protos/protos.d.ts ] && [ -f testproxy/protos/protos.js ] && [ -f testproxy/protos/protos.json ] && [ "$FORCE_COMPILE_PROTOS" != "true" ]; then
   echo "testproxy protos already exist, skipping regeneration."
   exit 0
 fi
