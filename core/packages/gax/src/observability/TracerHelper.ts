@@ -570,7 +570,7 @@ export function resolveServerExceptionDetails(e: Error): {
     e instanceof GoogleError &&
     e.metadata &&
     typeof e.metadata.get === 'function' &&
-    e.metadata.get('grpc-status-details-bin')
+    (e.metadata.get('grpc-status-details-bin') as unknown[])?.length > 0
   ) {
     GoogleError.parseGRPCStatusDetails(e);
   }
