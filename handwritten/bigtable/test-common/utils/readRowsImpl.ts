@@ -306,6 +306,7 @@ class ReadRowsRequestHandler {
               stream.off('close', onEvent);
               stream.off('error', onEvent);
               stream.off('finish', onEvent);
+              this.stopWaiting = () => {};
               resolve();
             };
             this.stopWaiting = onEvent;
