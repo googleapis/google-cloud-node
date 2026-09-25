@@ -22,7 +22,7 @@
     "docs": "compodoc src/",
     "lint": "gts check",
     "presystem-test": "pnpm run compile",
-    "system-test": "MOCHA_THROW_DEPRECATION=false ../../bin/run-test.cjs --no-parallel build/system-test",
+    "system-test": "MOCHA_THROW_DEPRECATION=false ../../bin/run-test.cjs build/system-test",
     "test": "../../bin/run-test.cjs build/test/unit",
     "clean": "gts clean",
     "compile": "tsc -p .",

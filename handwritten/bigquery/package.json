@@ -37,7 +37,7 @@
     "lint": "gts check",
     "samples-test": "cd samples/ && pnpm link ../ && pnpm test && cd ../",
     "test": "../../bin/run-test.cjs build/test",
-    "system-test": "../../bin/run-test.cjs --no-parallel build/system-test --timeout 600000",
+    "system-test": "../../bin/run-test.cjs build/system-test --timeout 600000",
     "presystem-test": "pnpm run compile",
     "clean": "gts clean",
     "compile": "tsc -p . && cp src/types.d.ts build/src/",
