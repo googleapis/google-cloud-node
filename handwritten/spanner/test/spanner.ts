@@ -549,7 +549,7 @@ describe('Spanner with mock server', () => {
         assert.strictEqual((e as ServiceError).code, Status.UNKNOWN);
         assert.deepStrictEqual(
           (e as RequestIDError).requestID,
-          `1.${randIdForProcess}.1.1.3.1`,
+          `1.${randIdForProcess}.1.0.3.1`,
         );
       } finally {
         snapshot.end();
@@ -710,7 +710,7 @@ describe('Spanner with mock server', () => {
             assert.strictEqual((e as ServiceError).code, Status.UNKNOWN);
             assert.deepStrictEqual(
               (e as RequestIDError).requestID,
-              `1.${randIdForProcess}.1.1.2.1`,
+              `1.${randIdForProcess}.1.0.2.1`,
             );
             return undefined;
           } finally {
@@ -1385,11 +1385,11 @@ describe('Spanner with mock server', () => {
             const wantStreamingCalls = [
               {
                 method: '/google.spanner.v1.Spanner/ExecuteStreamingSql',
-                reqId: `1.${randIdForProcess}.1.1.2.1`,
+                reqId: `1.${randIdForProcess}.1.0.2.1`,
               },
               {
                 method: '/google.spanner.v1.Spanner/ExecuteStreamingSql',
-                reqId: `1.${randIdForProcess}.1.1.2.2`,
+                reqId: `1.${randIdForProcess}.1.0.2.2`,
               },
             ];
             assert.deepStrictEqual(gotStreamingCalls, wantStreamingCalls);
@@ -1410,7 +1410,10 @@ describe('Spanner with mock server', () => {
       );
       database.run(selectSql, err => {
         assert.ok(err, 'Missing expected error');
-        assert.strictEqual(err!.message, '2 UNKNOWN: Non-retryable error');
+        assert.strictEqual(
+          err!.message,
+          `2 UNKNOWN: Non-retryable error (x-goog-spanner-request-id: ${(err as RequestIDError).requestID})`,
+        );
         database
           .close()
           .then(() => done())
@@ -1431,7 +1434,10 @@ describe('Spanner with mock server', () => {
       const stream = database.runStream(selectSql);
       stream
         .on('error', err => {
-          assert.strictEqual(err.message, '2 UNKNOWN: Test error');
+          assert.strictEqual(
+            err.message,
+            `2 UNKNOWN: Test error (x-goog-spanner-request-id: ${(err as RequestIDError).requestID})`,
+          );
           database
             .close()
             .then(() => done())
@@ -1480,11 +1486,11 @@ describe('Spanner with mock server', () => {
       } catch (e) {
         assert.strictEqual(
           (e as ServiceError).message,
-          '2 UNKNOWN: Test error',
+          `2 UNKNOWN: Test error (x-goog-spanner-request-id: ${(e as RequestIDError).requestID})`,
         );
         assert.deepStrictEqual(
           (e as RequestIDError).requestID,
-          `1.${randIdForProcess}.1.1.2.1`,
+          `1.${randIdForProcess}.1.0.2.1`,
         );
       } finally {
         await database.close();
@@ -1538,12 +1544,12 @@ describe('Spanner with mock server', () => {
       } catch (e) {
         assert.strictEqual(
           (e as ServiceError).message,
-          '14 UNAVAILABLE: Transient error',
+          `14 UNAVAILABLE: Transient error (x-goog-spanner-request-id: ${(e as RequestIDError).requestID})`,
         );
         // Ensure that we have a requestID returned and it was on the 2nd request.
         assert.deepStrictEqual(
           (e as RequestIDError).requestID,
-          `1.${randIdForProcess}.1.1.2.1`,
+          `1.${randIdForProcess}.1.0.2.1`,
         );
       } finally {
         await database.close();
@@ -1854,7 +1860,7 @@ describe('Spanner with mock server', () => {
             );
             assert.deepStrictEqual(
               (e as RequestIDError).requestID,
-              `1.${randIdForProcess}.1.1.2.1`,
+              `1.${randIdForProcess}.1.0.2.1`,
             );
           }
           await database.close();
@@ -1893,10 +1899,13 @@ describe('Spanner with mock server', () => {
           );
           database.run(selectSql, err => {
             assert.ok(err, 'Missing expected error');
-            assert.strictEqual(err!.message, '2 UNKNOWN: Non-retryable error');
+            assert.strictEqual(
+              err!.message,
+              `2 UNKNOWN: Non-retryable error (x-goog-spanner-request-id: ${(err as RequestIDError).requestID})`,
+            );
             assert.deepStrictEqual(
               (err as RequestIDError).requestID,
-              `1.${randIdForProcess}.1.1.2.1`,
+              `1.${randIdForProcess}.1.0.2.1`,
             );
             database
               .close()
@@ -1919,11 +1928,14 @@ describe('Spanner with mock server', () => {
           database
             .runStream(selectSql)
             .on('error', err => {
-              assert.strictEqual(err.message, '2 UNKNOWN: Non-retryable error');
+              assert.strictEqual(
+                err.message,
+                `2 UNKNOWN: Non-retryable error (x-goog-spanner-request-id: ${(err as RequestIDError).requestID})`,
+              );
               assert.strictEqual(receivedRows.length, index);
               assert.deepStrictEqual(
                 (err as RequestIDError).requestID,
-                `1.${randIdForProcess}.1.1.2.1`,
+                `1.${randIdForProcess}.1.0.2.1`,
               );
               database
                 .close()
@@ -2010,7 +2022,7 @@ describe('Spanner with mock server', () => {
           assert.ok(err, 'Missing expected error');
           assert.deepStrictEqual(
             (err as RequestIDError).requestID,
-            `1.${randIdForProcess}.1.1.2.1`,
+            `1.${randIdForProcess}.1.0.2.1`,
           );
           assert.strictEqual(err!.code, grpc.status.INVALID_ARGUMENT);
           // Only the update RPC should be retried and not the entire
@@ -2488,9 +2500,6 @@ describe('Spanner with mock server', () => {
           .pool_ as SessionPool;
         const multiplexedSession = (database.sessionFactory_ as SessionFactory)
           .multiplexedSession_ as MultiplexedSession;
-        database.commonHeaders_ = {
-          'x-goog-spanner-request-id': `1.${randIdForProcess}.1.1.5.1`,
-        };
         database
           .batchWriteAtLeastOnce([mutationGroup])
           .on('error', done)
@@ -2527,9 +2536,6 @@ describe('Spanner with mock server', () => {
           .pool_ as SessionPool;
         const multiplexedSession = (database.sessionFactory_ as SessionFactory)
           .multiplexedSession_ as MultiplexedSession;
-        database.commonHeaders_ = {
-          'x-goog-spanner-request-id': `1.${randIdForProcess}.1.1.5.1`,
-        };
         database
           .batchWriteAtLeastOnce([mutationGroup])
           .on('error', done)
@@ -2565,9 +2571,6 @@ describe('Spanner with mock server', () => {
           .pool_ as SessionPool;
         const multiplexedSession = (database.sessionFactory_ as SessionFactory)
           .multiplexedSession_ as MultiplexedSession;
-        database.commonHeaders_ = {
-          'x-goog-spanner-request-id': `1.${randIdForProcess}.1.1.5.1`,
-        };
         database
           .batchWriteAtLeastOnce([mutationGroup])
           .on('error', done)
@@ -2605,9 +2608,6 @@ describe('Spanner with mock server', () => {
           .pool_ as SessionPool;
         const multiplexedSession = (database.sessionFactory_ as SessionFactory)
           .multiplexedSession_ as MultiplexedSession;
-        database.commonHeaders_ = {
-          'x-goog-spanner-request-id': `1.${randIdForProcess}.1.1.5.1`,
-        };
         database
           .batchWriteAtLeastOnce([mutationGroup])
           .on('error', done)
@@ -3588,7 +3588,7 @@ describe('Spanner with mock server', () => {
 
     it('should reuse sessions after executing invalid sql', async () => {
       // The query to execute
-      const requestIDRegex = new RegExp(`1.${randIdForProcess}.1.1.\\d+.1`);
+      const requestIDRegex = new RegExp(`1.${randIdForProcess}.1.0.\\d+.1`);
       const query = {
         sql: invalidSql,
       };
@@ -3636,7 +3636,7 @@ describe('Spanner with mock server', () => {
 
     it('should reuse sessions after executing an invalid streaming sql', async () => {
       // The query to execute
-      const requestIDRegex = new RegExp(`1.${randIdForProcess}.1.1.\\d+.1`);
+      const requestIDRegex = new RegExp(`1.${randIdForProcess}.1.0.\\d+.1`);
       const query = {
         sql: invalidSql,
       };
@@ -4541,7 +4541,7 @@ describe('Spanner with mock server', () => {
           );
           assert.deepStrictEqual(
             (err as RequestIDError).requestID,
-            `1.${randIdForProcess}.1.1.3.1`,
+            `1.${randIdForProcess}.1.0.3.1`,
           );
         } finally {
           await database.close();
@@ -5300,7 +5300,7 @@ describe('Spanner with mock server', () => {
           assert.match((err as Error).message, /Table FOO not found/);
           assert.deepStrictEqual(
             (err as RequestIDError).requestID,
-            `1.${randIdForProcess}.1.1.3.1`,
+            `1.${randIdForProcess}.1.0.3.1`,
           );
         }
       });
@@ -5962,11 +5962,11 @@ describe('Spanner with mock server', () => {
         } catch (e) {
           assert.strictEqual(
             (e as ServiceError).message,
-            `${grpc.status.NOT_FOUND} NOT_FOUND: ${fooNotFoundErr.message}`,
+            `${grpc.status.NOT_FOUND} NOT_FOUND: ${fooNotFoundErr.message} (x-goog-spanner-request-id: ${(e as RequestIDError).requestID})`,
           );
           assert.deepStrictEqual(
             (e as RequestIDError).requestID,
-            `1.${randIdForProcess}.1.1.2.1`,
+            `1.${randIdForProcess}.1.0.2.1`,
           );
         }
         await tx.run(selectSql);
@@ -5994,7 +5994,7 @@ describe('Spanner with mock server', () => {
           } catch (e) {
             assert.strictEqual(
               (e as ServiceError).message,
-              `${grpc.status.NOT_FOUND} NOT_FOUND: ${fooNotFoundErr.message}`,
+              `${grpc.status.NOT_FOUND} NOT_FOUND: ${fooNotFoundErr.message} (x-goog-spanner-request-id: ${(e as RequestIDError).requestID})`,
             );
           }
           await tx.run(selectSql);
@@ -6023,11 +6023,11 @@ describe('Spanner with mock server', () => {
         } catch (e) {
           assert.strictEqual(
             (e as ServiceError).message,
-            `${grpc.status.NOT_FOUND} NOT_FOUND: ${fooNotFoundErr.message}`,
+            `${grpc.status.NOT_FOUND} NOT_FOUND: ${fooNotFoundErr.message} (x-goog-spanner-request-id: ${(e as RequestIDError).requestID})`,
           );
           assert.deepStrictEqual(
             (e as RequestIDError).requestID,
-            `1.${randIdForProcess}.1.1.2.1`,
+            `1.${randIdForProcess}.1.0.2.1`,
           );
         }
         await tx.run(selectSql);
@@ -6055,11 +6055,11 @@ describe('Spanner with mock server', () => {
           } catch (e) {
             assert.strictEqual(
               (e as ServiceError).message,
-              `${grpc.status.NOT_FOUND} NOT_FOUND: ${fooNotFoundErr.message}`,
+              `${grpc.status.NOT_FOUND} NOT_FOUND: ${fooNotFoundErr.message} (x-goog-spanner-request-id: ${(e as RequestIDError).requestID})`,
             );
             assert.deepStrictEqual(
               (e as RequestIDError).requestID,
-              `1.${randIdForProcess}.1.1.2.1`,
+              `1.${randIdForProcess}.1.0.2.1`,
             );
           }
           await tx.run(selectSql);
@@ -6099,11 +6099,11 @@ describe('Spanner with mock server', () => {
       } catch (e) {
         assert.strictEqual(
           (e as ServiceError).message,
-          '2 UNKNOWN: Test error',
+          `2 UNKNOWN: Test error (x-goog-spanner-request-id: ${(e as RequestIDError).requestID})`,
         );
         assert.deepStrictEqual(
           (e as RequestIDError).requestID,
-          `1.${randIdForProcess}.1.1.4.1`,
+          `1.${randIdForProcess}.1.0.4.1`,
         );
       } finally {
         await database.close();
@@ -6191,11 +6191,11 @@ describe('Spanner with mock server', () => {
       } catch (e) {
         assert.strictEqual(
           (e as ServiceError).message,
-          '2 UNKNOWN: Test error',
+          `2 UNKNOWN: Test error (x-goog-spanner-request-id: ${(e as RequestIDError).requestID})`,
         );
         assert.deepStrictEqual(
           (e as RequestIDError).requestID,
-          `1.${randIdForProcess}.1.1.2.1`,
+          `1.${randIdForProcess}.1.0.2.1`,
         );
       } finally {
         await database.close();
@@ -6233,7 +6233,7 @@ describe('Spanner with mock server', () => {
         );
         assert.strictEqual(
           (e as ServiceError).message,
-          '2 UNKNOWN: Test error',
+          `2 UNKNOWN: Test error (x-goog-spanner-request-id: ${(e as RequestIDError).requestID})`,
         );
       } finally {
         await database.close();
@@ -7414,19 +7414,19 @@ describe('Spanner with mock server', () => {
       const wantUnaryCallsWithoutBatchCreateSessions = [
         {
           method: '/google.spanner.v1.Spanner/BeginTransaction',
-          reqId: `1.${randIdForProcess}.1.1.3.1`,
+          reqId: `1.${randIdForProcess}.1.0.3.1`,
         },
         {
           method: '/google.spanner.v1.Spanner/BeginTransaction',
-          reqId: `1.${randIdForProcess}.1.1.5.1`,
+          reqId: `1.${randIdForProcess}.1.0.5.1`,
         },
         {
           method: '/google.spanner.v1.Spanner/BeginTransaction',
-          reqId: `1.${randIdForProcess}.1.1.7.1`,
+          reqId: `1.${randIdForProcess}.1.0.7.1`,
         },
         {
           method: '/google.spanner.v1.Spanner/Commit',
-          reqId: `1.${randIdForProcess}.1.1.9.1`,
+          reqId: `1.${randIdForProcess}.1.0.9.1`,
         },
       ];
       const gotUnaryCalls = xGoogReqIDInterceptor.getUnaryCalls();
@@ -7445,19 +7445,19 @@ describe('Spanner with mock server', () => {
       const wantStreamingCalls = [
         {
           method: '/google.spanner.v1.Spanner/ExecuteStreamingSql',
-          reqId: `1.${randIdForProcess}.1.1.2.1`,
+          reqId: `1.${randIdForProcess}.1.0.2.1`,
         },
         {
           method: '/google.spanner.v1.Spanner/ExecuteStreamingSql',
-          reqId: `1.${randIdForProcess}.1.1.4.1`,
+          reqId: `1.${randIdForProcess}.1.0.4.1`,
         },
         {
           method: '/google.spanner.v1.Spanner/ExecuteStreamingSql',
-          reqId: `1.${randIdForProcess}.1.1.6.1`,
+          reqId: `1.${randIdForProcess}.1.0.6.1`,
         },
         {
           method: '/google.spanner.v1.Spanner/ExecuteStreamingSql',
-          reqId: `1.${randIdForProcess}.1.1.8.1`,
+          reqId: `1.${randIdForProcess}.1.0.8.1`,
         },
       ];
       assert.deepStrictEqual(gotStreamingCalls, wantStreamingCalls);
@@ -7490,6 +7490,387 @@ describe('Spanner with mock server', () => {
           );
         }
       });
+    });
+
+    it('header attached to standalone single-use query (database.run)', async () => {
+      const database = newTestDatabase();
+      xGoogReqIDInterceptor.reset();
+      const [rows] = await database.run(selectSql);
+      assert.strictEqual(rows.length, 3);
+      const streamingCalls = xGoogReqIDInterceptor.getStreamingCalls();
+      const execCall = streamingCalls.find(
+        c => c.method === '/google.spanner.v1.Spanner/ExecuteStreamingSql',
+      );
+      assert.ok(execCall, 'Expected ExecuteStreamingSql call');
+      assert.match(execCall.reqId, X_GOOG_REQ_ID_REGEX);
+      assert.ok(
+        execCall.reqId.endsWith('.1'),
+        `Expected attempt 1, got ${execCall.reqId}`,
+      );
+      await database.close();
+    });
+
+    it('header attached to standalone single-use read (table.read)', async () => {
+      const readRequest = {
+        table: 'NUMBERS',
+        keySet: {
+          keys: [],
+          all: true,
+          ranges: [],
+        },
+      };
+      spannerMock.putReadRequestResult(
+        readRequest,
+        mock.ReadRequestResult.resultSet(mock.createReadRequestResultSet()),
+      );
+      const database = newTestDatabase();
+      xGoogReqIDInterceptor.reset();
+      const [rows] = await database
+        .table('NUMBERS')
+        .read({columns: ['SingerId', 'Name']});
+      assert.ok(rows);
+      const streamingCalls = xGoogReqIDInterceptor.getStreamingCalls();
+      const readCall = streamingCalls.find(
+        c => c.method === '/google.spanner.v1.Spanner/StreamingRead',
+      );
+      assert.ok(readCall, 'Expected StreamingRead call');
+      assert.match(readCall.reqId, X_GOOG_REQ_ID_REGEX);
+      assert.ok(
+        readCall.reqId.endsWith('.1'),
+        `Expected attempt 1, got ${readCall.reqId}`,
+      );
+      await database.close();
+    });
+
+    it('header attached to transaction rollback', async () => {
+      const database = newTestDatabase();
+      xGoogReqIDInterceptor.reset();
+      await database.runTransactionAsync(async transaction => {
+        await transaction!.run(selectSql);
+        await transaction!.rollback();
+      });
+      const unaryCalls = xGoogReqIDInterceptor.getUnaryCalls();
+      const rollbackCall = unaryCalls.find(
+        c => c.method === '/google.spanner.v1.Spanner/Rollback',
+      );
+      assert.ok(rollbackCall, 'Expected Rollback call');
+      assert.match(rollbackCall.reqId, X_GOOG_REQ_ID_REGEX);
+      await database.close();
+    });
+
+    it('header attached to direct table mutations (table.upsert)', async () => {
+      const database = newTestDatabase();
+      xGoogReqIDInterceptor.reset();
+      await database.table('foo').upsert({id: 1, name: 'bar'});
+      const unaryCalls = xGoogReqIDInterceptor.getUnaryCalls();
+      const commitCall = unaryCalls.find(
+        c => c.method === '/google.spanner.v1.Spanner/Commit',
+      );
+      assert.ok(commitCall, 'Expected Commit call for table.upsert');
+      assert.match(commitCall.reqId, X_GOOG_REQ_ID_REGEX);
+      assert.ok(
+        commitCall.reqId.endsWith('.1'),
+        `Expected attempt 1, got ${commitCall.reqId}`,
+      );
+      await database.close();
+    });
+
+    it('header attached to transaction commit with mutation payload', async () => {
+      const database = newTestDatabase();
+      xGoogReqIDInterceptor.reset();
+      await database.runTransactionAsync(async transaction => {
+        transaction!.insert('foo', {id: 2, name: 'baz'});
+        await transaction!.commit();
+      });
+      const unaryCalls = xGoogReqIDInterceptor.getUnaryCalls();
+      const commitCall = unaryCalls.find(
+        c => c.method === '/google.spanner.v1.Spanner/Commit',
+      );
+      assert.ok(commitCall, 'Expected Commit call with mutations');
+      assert.match(commitCall.reqId, X_GOOG_REQ_ID_REGEX);
+      await database.close();
+    });
+
+    it('header attached to executeBatchDml', async () => {
+      const database = newTestDatabase();
+      xGoogReqIDInterceptor.reset();
+      await database.runTransactionAsync(async transaction => {
+        await transaction!.batchUpdate([insertSql]);
+        await transaction!.commit();
+      });
+      const unaryCalls = xGoogReqIDInterceptor.getUnaryCalls();
+      const batchDmlCall = unaryCalls.find(
+        c => c.method === '/google.spanner.v1.Spanner/ExecuteBatchDml',
+      );
+      assert.ok(batchDmlCall, 'Expected ExecuteBatchDml call');
+      assert.match(batchDmlCall.reqId, X_GOOG_REQ_ID_REGEX);
+      assert.ok(batchDmlCall.reqId.endsWith('.1'));
+      await database.close();
+    });
+
+    it('header attached to batchWriteAtLeastOnce', async () => {
+      const database = newTestDatabase({min: 1, max: 1});
+      const mutationGroup = new MutationGroup();
+      mutationGroup.insert('Singers', {
+        Id: '1',
+        Name: 'One',
+      });
+      xGoogReqIDInterceptor.reset();
+      await new Promise<void>((resolve, reject) => {
+        database
+          .batchWriteAtLeastOnce([mutationGroup])
+          .on('error', reject)
+          .on('data', () => {})
+          .on('end', () => resolve());
+      });
+      const streamingCalls = xGoogReqIDInterceptor.getStreamingCalls();
+      const batchWriteCall = streamingCalls.find(
+        c => c.method === '/google.spanner.v1.Spanner/BatchWrite',
+      );
+      assert.ok(batchWriteCall, 'Expected BatchWrite call');
+      assert.match(batchWriteCall.reqId, X_GOOG_REQ_ID_REGEX);
+      assert.ok(batchWriteCall.reqId.endsWith('.1'));
+      await database.close();
+    });
+
+    it('header attached to partitionRead and partitionQuery', async () => {
+      const database = newTestDatabase();
+      const [batchTx] = await database.createBatchTransaction();
+      xGoogReqIDInterceptor.reset();
+
+      const [readPartitions] =
+        await batchTx.createReadPartitions(readPartitionsQuery);
+      assert.ok(readPartitions.length > 0);
+
+      const [queryPartitions] = await batchTx.createQueryPartitions({
+        sql: select1,
+      });
+      assert.ok(queryPartitions.length > 0);
+
+      const unaryCalls = xGoogReqIDInterceptor.getUnaryCalls();
+      const partitionReadCall = unaryCalls.find(
+        c => c.method === '/google.spanner.v1.Spanner/PartitionRead',
+      );
+      assert.ok(partitionReadCall, 'Expected PartitionRead call');
+      assert.match(partitionReadCall.reqId, X_GOOG_REQ_ID_REGEX);
+
+      const partitionQueryCall = unaryCalls.find(
+        c => c.method === '/google.spanner.v1.Spanner/PartitionQuery',
+      );
+      assert.ok(partitionQueryCall, 'Expected PartitionQuery call');
+      assert.match(partitionQueryCall.reqId, X_GOOG_REQ_ID_REGEX);
+
+      batchTx.close();
+      await database.close();
+    });
+
+    it('header attached to executePartitionedDml (database.runPartitionedUpdate)', async () => {
+      const database = newTestDatabase();
+      xGoogReqIDInterceptor.reset();
+      const [updateCount] = await database.runPartitionedUpdate(updateSql);
+      assert.strictEqual(updateCount, 2);
+
+      const unaryCalls = xGoogReqIDInterceptor.getUnaryCalls();
+      const beginTxCall = unaryCalls.find(
+        c => c.method === '/google.spanner.v1.Spanner/BeginTransaction',
+      );
+      assert.ok(beginTxCall, 'Expected BeginTransaction call');
+      assert.match(beginTxCall.reqId, X_GOOG_REQ_ID_REGEX);
+
+      const streamingCalls = xGoogReqIDInterceptor.getStreamingCalls();
+      const execCall = streamingCalls.find(
+        c => c.method === '/google.spanner.v1.Spanner/ExecuteStreamingSql',
+      );
+      assert.ok(execCall, 'Expected ExecuteStreamingSql call');
+      assert.match(execCall.reqId, X_GOOG_REQ_ID_REGEX);
+
+      await database.close();
+    });
+
+    it('exhaustive simulation of fatal non-retryable gRPC status codes', async () => {
+      const fatalCodes = [
+        {code: grpc.status.CANCELLED, name: 'CANCELLED'},
+        {code: grpc.status.UNKNOWN, name: 'UNKNOWN'},
+        {code: grpc.status.INVALID_ARGUMENT, name: 'INVALID_ARGUMENT'},
+        {code: grpc.status.DEADLINE_EXCEEDED, name: 'DEADLINE_EXCEEDED'},
+        {code: grpc.status.NOT_FOUND, name: 'NOT_FOUND'},
+        {code: grpc.status.ALREADY_EXISTS, name: 'ALREADY_EXISTS'},
+        {code: grpc.status.PERMISSION_DENIED, name: 'PERMISSION_DENIED'},
+        {code: grpc.status.UNAUTHENTICATED, name: 'UNAUTHENTICATED'},
+        {code: grpc.status.FAILED_PRECONDITION, name: 'FAILED_PRECONDITION'},
+        {code: grpc.status.OUT_OF_RANGE, name: 'OUT_OF_RANGE'},
+        {code: grpc.status.UNIMPLEMENTED, name: 'UNIMPLEMENTED'},
+        {code: grpc.status.INTERNAL, name: 'INTERNAL'},
+        {code: grpc.status.DATA_LOSS, name: 'DATA_LOSS'},
+      ];
+
+      for (const {code, name} of fatalCodes) {
+        const database = newTestDatabase();
+        spannerMock.setExecutionTime(
+          spannerMock.executeStreamingSql,
+          SimulatedExecutionTime.ofError({
+            code,
+            message: `Fatal error simulation for ${name}`,
+          } as MockError),
+        );
+
+        xGoogReqIDInterceptor.reset();
+        let thrownError: any = null;
+        try {
+          await database.run(selectSql);
+        } catch (err) {
+          thrownError = err;
+        }
+
+        assert.ok(thrownError, `Expected error for code ${name}`);
+        assert.strictEqual(thrownError.code, code);
+        const reqId = thrownError.requestID;
+        assert.ok(reqId, `Expected requestID property on error for ${name}`);
+        assert.match(reqId, X_GOOG_REQ_ID_REGEX);
+        assert.ok(
+          reqId.endsWith('.1'),
+          `Fatal error ${name} must not be retried; attempt must be 1, got ${reqId}`,
+        );
+        assert.ok(
+          thrownError.message.includes(`(x-goog-spanner-request-id: ${reqId})`),
+          `Error message should contain request id for ${name}: ${thrownError.message}`,
+        );
+
+        const execCalls = xGoogReqIDInterceptor
+          .getStreamingCalls()
+          .filter(
+            c => c.method === '/google.spanner.v1.Spanner/ExecuteStreamingSql',
+          );
+        assert.strictEqual(
+          execCalls.length,
+          1,
+          `Expected exactly 1 attempt for fatal error ${name}`,
+        );
+
+        await database.close();
+      }
+    });
+
+    it('retryable error simulation with attempt incrementation and exhaustion (UNAVAILABLE)', async () => {
+      const database = newTestDatabase();
+      const transientErr = {
+        code: grpc.status.UNAVAILABLE,
+        message: 'Unavailable',
+      } as MockError;
+      const fatalErr = {
+        code: grpc.status.INVALID_ARGUMENT,
+        message: 'Bad request',
+      } as MockError;
+      spannerMock.setExecutionTime(
+        spannerMock.executeStreamingSql,
+        SimulatedExecutionTime.ofErrors([transientErr, transientErr, fatalErr]),
+      );
+
+      xGoogReqIDInterceptor.reset();
+      let thrownError: any = null;
+      try {
+        await database.run({sql: selectSql});
+      } catch (err) {
+        thrownError = err;
+      }
+
+      assert.ok(thrownError, 'Expected error upon exhaustion');
+      assert.strictEqual(thrownError.code, grpc.status.INVALID_ARGUMENT);
+      const reqId = thrownError.requestID;
+      assert.ok(reqId, 'Expected requestID on exhausted error');
+      assert.match(reqId, X_GOOG_REQ_ID_REGEX);
+      assert.ok(
+        reqId.endsWith('.3'),
+        `Exhausted error must reflect final attempt 3, got ${reqId}`,
+      );
+      assert.ok(
+        thrownError.message.includes(`(x-goog-spanner-request-id: ${reqId})`),
+        `Error message should contain final request id: ${thrownError.message}`,
+      );
+
+      const execCalls = xGoogReqIDInterceptor
+        .getStreamingCalls()
+        .filter(
+          c => c.method === '/google.spanner.v1.Spanner/ExecuteStreamingSql',
+        );
+      assert.strictEqual(execCalls.length, 3, 'Expected 3 attempts');
+      assert.ok(execCalls[0].reqId.endsWith('.1'));
+      assert.ok(execCalls[1].reqId.endsWith('.2'));
+      assert.ok(execCalls[2].reqId.endsWith('.3'));
+
+      await database.close();
+    });
+
+    it('respects custom process ID override via environment variable during API calls', async () => {
+      process.env.SPANNER_PROCESS_ID = '0123456789abcdef';
+      try {
+        const database = newTestDatabase();
+        xGoogReqIDInterceptor.reset();
+        await database.run(selectSql);
+
+        const execCalls = xGoogReqIDInterceptor
+          .getStreamingCalls()
+          .filter(
+            c => c.method === '/google.spanner.v1.Spanner/ExecuteStreamingSql',
+          );
+        assert.ok(execCalls.length > 0, 'Expected ExecuteStreamingSql call');
+        for (const call of execCalls) {
+          assert.match(
+            call.reqId,
+            /^1\.0123456789abcdef\.\d+\.0\.\d+\.\d+$/,
+            `Expected request ID with custom process ID '0123456789abcdef', got ${call.reqId}`,
+          );
+        }
+        await database.close();
+      } finally {
+        delete process.env.SPANNER_PROCESS_ID;
+      }
+    });
+
+    it('parallel execution: concurrent Spanner API calls assign unique request IDs without duplicates', async () => {
+      const database = newTestDatabase();
+      xGoogReqIDInterceptor.reset();
+      const CONCURRENT_REQUESTS = 25;
+      const promises: Array<Promise<any>> = [];
+      for (let i = 0; i < CONCURRENT_REQUESTS; i++) {
+        promises.push(database.run(selectSql));
+      }
+      await Promise.all(promises);
+
+      const execCalls = xGoogReqIDInterceptor
+        .getStreamingCalls()
+        .filter(
+          c => c.method === '/google.spanner.v1.Spanner/ExecuteStreamingSql',
+        );
+      assert.strictEqual(
+        execCalls.length,
+        CONCURRENT_REQUESTS,
+        `Expected ${CONCURRENT_REQUESTS} calls, got ${execCalls.length}`,
+      );
+
+      const reqIds = execCalls.map(c => c.reqId);
+      const uniqueReqIds = new Set(reqIds);
+      assert.strictEqual(
+        uniqueReqIds.size,
+        CONCURRENT_REQUESTS,
+        'All concurrent request IDs must be unique',
+      );
+
+      const requestNumbers = reqIds.map(id => {
+        const parts = id.split('.');
+        assert.strictEqual(parts.length, 6, `Invalid request ID format: ${id}`);
+        assert.strictEqual(parts[5], '1', `Initial attempt should be 1: ${id}`);
+        return parseInt(parts[4], 10);
+      });
+
+      const uniqueRequestNumbers = new Set(requestNumbers);
+      assert.strictEqual(
+        uniqueRequestNumbers.size,
+        CONCURRENT_REQUESTS,
+        'All <request> sequence numbers must be distinct (no race condition duplicates)',
+      );
+
+      await database.close();
     });
   });
 

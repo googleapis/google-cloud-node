@@ -20,12 +20,15 @@ import {
   RequestIDError,
   X_GOOG_SPANNER_REQUEST_ID_HEADER,
   craftRequestId,
+  createRequestIdInterceptor,
+  getProcessId,
   injectRequestIDIntoError,
   injectRequestIDIntoHeaders,
   newAtomicCounter,
   nextNthRequest,
   randIdForProcess,
 } from '../src/request_id_header';
+import * as grpc from '@grpc/grpc-js';
 
 describe('RequestId', () => {
   describe('AtomicCounter', () => {
@@ -78,12 +81,13 @@ describe('RequestId', () => {
   });
 
   describe('craftRequestId', () => {
-    it('has a 32-bit hex-formatted process-id', done => {
+    it('has a 64-bit hex-formatted process-id', done => {
       assert.match(
         randIdForProcess,
-        /^[0-9A-Fa-f]{8}$/,
-        `process-id should be a 32-bit hexadecimal number, but was ${randIdForProcess}`,
+        /^[0-9A-Fa-f]{16}$/,
+        `process-id should be a 64-bit hexadecimal number, but was ${randIdForProcess}`,
       );
+      assert.strictEqual(randIdForProcess.length, 16);
       done();
     });
 
@@ -92,6 +96,33 @@ describe('RequestId', () => {
         craftRequestId(1, 2, 3, 4),
         `1.${randIdForProcess}.1.2.3.4`,
       );
+      done();
+    });
+
+    it('respects SPANNER_PROCESS_ID environment variable override', done => {
+      process.env.SPANNER_PROCESS_ID = 'customproc123';
+      try {
+        assert.strictEqual(getProcessId(), 'customproc123');
+        assert.strictEqual(
+          craftRequestId(1, 0, 1, 1),
+          '1.customproc123.1.0.1.1',
+        );
+      } finally {
+        delete process.env.SPANNER_PROCESS_ID;
+      }
+      assert.strictEqual(getProcessId(), randIdForProcess);
+      done();
+    });
+
+    it('respects GOOGLE_CLOUD_SPANNER_PROCESS_ID environment variable override', done => {
+      process.env.GOOGLE_CLOUD_SPANNER_PROCESS_ID = 'proc9876';
+      try {
+        assert.strictEqual(getProcessId(), 'proc9876');
+        assert.strictEqual(craftRequestId(2, 0, 3, 1), '1.proc9876.2.0.3.1');
+      } finally {
+        delete process.env.GOOGLE_CLOUD_SPANNER_PROCESS_ID;
+      }
+      assert.strictEqual(getProcessId(), randIdForProcess);
       done();
     });
   });
@@ -103,6 +134,10 @@ describe('RequestId', () => {
       config.headers[X_GOOG_SPANNER_REQUEST_ID_HEADER] = '1.2.3.4.5.6';
       injectRequestIDIntoError(config, err);
       assert.strictEqual((err as RequestIDError).requestID, '1.2.3.4.5.6');
+      assert.strictEqual(
+        err.message,
+        'this one (x-goog-spanner-request-id: 1.2.3.4.5.6)',
+      );
       done();
     });
   });
@@ -124,7 +159,7 @@ describe('RequestId', () => {
       };
       const got = injectRequestIDIntoHeaders({}, session, 2, 5);
       const want = {
-        'x-goog-spanner-request-id': `1.${randIdForProcess}.1.1.2.5`,
+        'x-goog-spanner-request-id': `1.${randIdForProcess}.1.0.2.5`,
       };
       assert.deepStrictEqual(got, want);
       done();
@@ -142,7 +177,7 @@ describe('RequestId', () => {
       const inputHeaders: {[k: string]: string} = {};
       const got = injectRequestIDIntoHeaders(inputHeaders, session);
       const want = {
-        'x-goog-spanner-request-id': `1.${randIdForProcess}.1.1.5.1`,
+        'x-goog-spanner-request-id': `1.${randIdForProcess}.1.0.5.1`,
       };
       assert.deepStrictEqual(got, want);
       done();
@@ -167,5 +202,68 @@ describe('RequestId', () => {
       4,
       'With override should infer value',
     );
+  });
+
+  describe('createRequestIdInterceptor', () => {
+    it('increments attempt number on each call attempt', done => {
+      const config = {
+        headers: {
+          [X_GOOG_SPANNER_REQUEST_ID_HEADER]: '1.abcde123.1.1.5.1',
+        },
+      };
+      const interceptor = createRequestIdInterceptor(config);
+
+      let lastReceivedMetadata: grpc.Metadata | null = null;
+      const fakeNextCall = (options: any) => {
+        return {
+          start: (metadata: grpc.Metadata, listener: any) => {
+            lastReceivedMetadata = metadata;
+          },
+        };
+      };
+
+      // 1st attempt
+      const call1 = interceptor({}, fakeNextCall);
+      const metadata1 = new grpc.Metadata();
+      metadata1.set(X_GOOG_SPANNER_REQUEST_ID_HEADER, '1.abcde123.1.1.5.1');
+      call1.start(metadata1, {});
+      assert.strictEqual(
+        lastReceivedMetadata!.get(X_GOOG_SPANNER_REQUEST_ID_HEADER)[0],
+        '1.abcde123.1.1.5.1',
+      );
+      assert.strictEqual(
+        config.headers[X_GOOG_SPANNER_REQUEST_ID_HEADER],
+        '1.abcde123.1.1.5.1',
+      );
+
+      // 2nd attempt (retry)
+      const call2 = interceptor({}, fakeNextCall);
+      const metadata2 = new grpc.Metadata();
+      metadata2.set(X_GOOG_SPANNER_REQUEST_ID_HEADER, '1.abcde123.1.1.5.1');
+      call2.start(metadata2, {});
+      assert.strictEqual(
+        lastReceivedMetadata!.get(X_GOOG_SPANNER_REQUEST_ID_HEADER)[0],
+        '1.abcde123.1.1.5.2',
+      );
+      assert.strictEqual(
+        config.headers[X_GOOG_SPANNER_REQUEST_ID_HEADER],
+        '1.abcde123.1.1.5.2',
+      );
+
+      // 3rd attempt (retry)
+      const call3 = interceptor({}, fakeNextCall);
+      const metadata3 = new grpc.Metadata();
+      metadata3.set(X_GOOG_SPANNER_REQUEST_ID_HEADER, '1.abcde123.1.1.5.1');
+      call3.start(metadata3, {});
+      assert.strictEqual(
+        lastReceivedMetadata!.get(X_GOOG_SPANNER_REQUEST_ID_HEADER)[0],
+        '1.abcde123.1.1.5.3',
+      );
+      assert.strictEqual(
+        config.headers[X_GOOG_SPANNER_REQUEST_ID_HEADER],
+        '1.abcde123.1.1.5.3',
+      );
+      done();
+    });
   });
 });
