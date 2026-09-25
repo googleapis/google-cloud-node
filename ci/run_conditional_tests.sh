@@ -144,8 +144,9 @@ windows_exempt_tests="core/ core/packages/ core/dev-packages/ .github/scripts/fi
 # Gather all test directories into an array
 test_dirs=()
 
-for subdir in ${subdirs[@]}; do
-    for d in `ls -d ${subdir}/*/`; do
+for subdir in "${subdirs[@]}"; do
+    for d in "${subdir}"/*/; do
+        [[ -d "$d" ]] || continue
         if [ -s "ignore.json" ] && jq -e ".ignored[] | select(. == \"$d\")" ignore.json > /dev/null 2>&1; then
             echo "Skipping ${d} (explicitly ignored in ignore.json)"
             continue
@@ -184,10 +185,10 @@ for subdir in ${subdirs[@]}; do
         fi
 
         # Our CI uses Git Bash on Windows to execute this script, which returns "msys" or "cygwin" for OSTYPE.
-        if [[ "$OSTYPE" == "msys" || "$OSTYPE" == "cygwin" || "$OS" == "Windows_NT" ]]; then
+        if [[ "$OSTYPE" == "msys"* || "$OSTYPE" == "cygwin"* || "$OS" == "Windows_NT" ]]; then
             is_exempt=false
             for exempt in ${windows_exempt_tests}; do
-                if [[ "${d}" == "${exempt}" || "${d}" == "${exempt}/"* ]]; then
+                if [[ "${d}" == "${exempt}" || "${d}" == "${exempt%/}/"* ]]; then
                     is_exempt=true
                     break
                 fi
@@ -286,15 +287,33 @@ if [[ "${RUN_TESTS_MODE}" == "CALCULATE_SHARD_MATRIX" ]]; then
 fi
 
 # If SHARD_TOTAL and SHARD_INDEX are provided, we will only run a subset of the tests.
+shard_dirs=()
 for i in "${!test_dirs[@]}"; do
-    d="${test_dirs[$i]}"
-
     if [[ -n "${SHARD_TOTAL}" && -n "${SHARD_INDEX}" ]]; then
         if (( SHARD_TOTAL > 0 && i % SHARD_TOTAL != SHARD_INDEX )); then
             continue
         fi
     fi
+    shard_dirs+=("${test_dirs[$i]}")
+done
 
+if (( ${#shard_dirs[@]} > 0 )); then
+    if [ ! -d "${PROJECT_ROOT}/node_modules/.pnpm" ]; then
+        echo "Installing workspace dependencies at ${PROJECT_ROOT}..."
+        pnpm --dir "${PROJECT_ROOT}" install --frozen-lockfile --ignore-scripts
+    fi
+
+    turbo_filters=()
+    for d in "${shard_dirs[@]}"; do
+        turbo_filters+=("--filter=...{./${d%/}}")
+    done
+    echo "Compiling ${#shard_dirs[@]} package(s) assigned to this shard..."
+    npm_config_enable_pre_post_scripts=true TURBO_DAEMON=false TURBO_NO_UPDATE_NOTIFIER=1 pnpm --dir "${PROJECT_ROOT}" exec turbo run compile --no-daemon --env-mode=loose --concurrency=4 "${turbo_filters[@]}" || \
+    npm_config_enable_pre_post_scripts=true TURBO_DAEMON=false TURBO_NO_UPDATE_NOTIFIER=1 pnpm --dir "${PROJECT_ROOT}" exec turbo run compile --no-daemon --env-mode=loose --concurrency=2 "${turbo_filters[@]}"
+    export SHARD_COMPILED=true
+fi
+
+for d in "${shard_dirs[@]}"; do
     echo "running test in ${d}"
     pushd "${d}" >/dev/null
     # Temporarily allow failure.
