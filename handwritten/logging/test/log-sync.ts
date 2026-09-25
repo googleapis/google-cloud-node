@@ -23,6 +23,7 @@ import * as logCommon from '../src/utils/log-common';
 import * as stream from 'stream';
 import * as extend from 'extend';
 import * as fs from 'fs';
+import * as instrumentation from '../src/utils/instrumentation';
 
 describe('LogSync', () => {
   const PROJECT_ID = 'project-id';
@@ -95,6 +96,9 @@ describe('LogSync', () => {
     let buffer: stream.Writable;
 
     beforeEach(() => {
+      // Prevent automatic diagnostic instrumentation from writing an extra log
+      // entry to the transport stream during tests.
+      instrumentation.setInstrumentationStatus(true);
       ENTRY = new Entry(undefined, 'testlog');
       ENTRIES = [ENTRY] as Entry[];
       OPTIONS = {} as WriteOptions;
@@ -102,7 +106,11 @@ describe('LogSync', () => {
     });
 
     afterEach(() => {
-      fs.rmSync(TEST_FILE, {force: true});
+      try {
+        fs.rmSync(TEST_FILE, {force: true});
+      } finally {
+        instrumentation.setInstrumentationStatus(false);
+      }
     });
 
     function createLogger() {

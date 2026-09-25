@@ -21,8 +21,8 @@
     "prelint": "cd samples; npm link ../; npm install",
     "lint": "gts check",
     "prepare": "npm run compile",
-    "system-test": "node ../../bin/run-test.cjs --config ../../.mocharc.cjs --no-parallel build/system-test --timeout 600000",
-    "test": "node ../../bin/run-test.cjs --config ../../.mocharc.cjs build/test",
+    "system-test": "run-test build/system-test --timeout 600000",
+    "test": "run-test build/test",
     "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
     "precompile": "gts clean"
   },
