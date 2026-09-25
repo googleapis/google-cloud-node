@@ -21,8 +21,8 @@
     "prelint": "cd samples; npm link ../; npm install",
     "lint": "gts check",
     "prepare": "npm run compile",
-    "system-test": "run-test --no-parallel build/system-test --timeout 600000",
-    "test": "run-test build/test",
+    "system-test": "../../bin/run-test.cjs build/system-test --timeout 600000",
+    "test": "../../bin/run-test.cjs build/test",
     "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
     "precompile": "gts clean"
   },
