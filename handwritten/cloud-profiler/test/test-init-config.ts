@@ -39,10 +39,10 @@ describe('nodeVersionOkay', () => {
   it('should accept pre-release versions', () => {
     assert.strictEqual(true, nodeVersionOkay(`v${version}.0.0-pre`));
   });
-  it('should accept v12.4.1', () => {
+  it(`should accept v${version}.4.1`, () => {
     assert.strictEqual(true, nodeVersionOkay(`v${version}.4.1`));
   });
-  it('should not accept v11.4.0', () => {
+  it(`should not accept v${version - 1}.4.0`, () => {
     assert.strictEqual(false, nodeVersionOkay(`v${version - 1}.4.0`));
   });
 });
@@ -235,7 +235,7 @@ describe('createProfiler', () => {
     );
     await createProfiler(config)
       .then(() => {
-        assert.fail('expected error because no service in config');
+        return assert.fail('expected error because no service in config');
       })
       .catch((e: Error) => {
         assert.strictEqual(
