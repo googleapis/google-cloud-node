@@ -20,7 +20,6 @@ import {isEmpty, toArray} from './helper';
 import Long = require('long');
 import {EventEmitter} from 'events';
 import {grpc, CallOptions, ServiceError, Status, GoogleError} from 'google-gax';
-import * as extend from 'extend';
 import {common as p} from 'protobufjs';
 import {finished, Readable, PassThrough, Stream} from 'stream';
 
@@ -406,25 +405,35 @@ export class Snapshot extends EventEmitter {
    *
    * @param {Session} session The parent Session object.
    * @param {TimestampBounds} [options] Snapshot timestamp bounds.
-   * @param {QueryOptions} [queryOptions] Default query options to use when none
-   *        are specified for a query.
+   * @param {AffinityKind | null} [affinityKind=AffinityKind.ReadOnly] Affinity kind,
+   *        or null for single-use snapshots.
    */
   constructor(
     session: Session,
     options?: TimestampBounds,
     queryOptions?: IQueryOptions,
-    affinityKind: AffinityKind = AffinityKind.ReadOnly,
+    affinityKind: AffinityKind | null = AffinityKind.ReadOnly,
   ) {
     super();
 
     this.ended = false;
     this.session = session;
     this.queryOptions = Object.assign({}, queryOptions);
-    this._affinity = new TransactionAffinity(affinityKind);
-    // If the session is multiplexed, generate a unique affinity key for this
-    // specific transaction/snapshot. This allows requests using the same shared
-    // multiplexed session to be distributed across different gRPC channels.
-    if (session.metadata && session.metadata.multiplexed) {
+    if (affinityKind !== null && affinityKind !== undefined) {
+      this._affinity = new TransactionAffinity(affinityKind);
+    }
+    const isLegacyPool = this._getSpanner?.()?.isLegacyChannelPool === true;
+    // If the session is multiplexed, determine if affinity handling is required:
+    // 1. In the experimental channel pool, affinity is only needed for multi-use snapshots or
+    //    read-write transactions (this._affinity is present) so the pool can pin the channel.
+    //    Single-use queries leave affinity undefined to use per-RPC P2C load balancing.
+    // 2. In the legacy grpc-gcp pool, all multiplexed requests require an explicit affinityKey
+    //    to prevent grpc-gcp from routing 100% of requests to Channel 0 (the session create channel).
+    if (
+      (this._affinity || isLegacyPool) &&
+      session.metadata &&
+      session.metadata.multiplexed
+    ) {
       this._affinityKey = `mux-affinity-${process.pid}-${nextAffinityId++}`;
       // Pre-construct and cache the bind gax options to avoid creating
       // a new object on every request, which improves performance.
@@ -432,7 +441,7 @@ export class Snapshot extends EventEmitter {
         otherArgs: {
           options: {
             affinityKey: this._affinityKey,
-            affinity: this._affinity,
+            ...(this._affinity ? {affinity: this._affinity} : {}),
           },
         },
       };
@@ -443,7 +452,7 @@ export class Snapshot extends EventEmitter {
           options: {
             affinityKey: this._affinityKey,
             unbind: true,
-            affinity: this._affinity,
+            ...(this._affinity ? {affinity: this._affinity} : {}),
           },
         },
       };
@@ -500,12 +509,18 @@ export class Snapshot extends EventEmitter {
     if (!config.gaxOpts || Object.keys(config.gaxOpts).length === 0) {
       config.gaxOpts = this._bindGaxOpts;
     } else {
-      config.gaxOpts = injectGaxOpt(
-        config.gaxOpts,
-        'affinityKey',
-        this._affinityKey,
-      );
-      config.gaxOpts = injectGaxOpt(config.gaxOpts, 'affinity', this._affinity);
+      const otherArgs = config.gaxOpts.otherArgs;
+      config.gaxOpts = Object.assign({}, config.gaxOpts, {
+        otherArgs: Object.assign({}, otherArgs, {
+          options: Object.assign(
+            {},
+            otherArgs?.options,
+            this._affinity
+              ? {affinityKey: this._affinityKey, affinity: this._affinity}
+              : {affinityKey: this._affinityKey},
+          ),
+        }),
+      });
     }
     return config;
   }
@@ -2569,16 +2584,23 @@ export class Transaction extends Dml {
     this.requestOptions = requestOptions;
     this._retryCommit = false;
     if (!this._affinityKey && this._affinity) {
+      const affinity = this._affinity;
+      const defaultGaxOptions = {
+        otherArgs: {
+          options: {
+            affinity,
+          },
+        },
+      };
+
       const originalRequest = this.request;
       this.request = (config: any, callback?: Function) => {
         if (!config) {
           return originalRequest.call(this, config, callback!);
         }
-        const gaxOptions = injectGaxOpt(
-          extend(true, {}, config.gaxOpts),
-          'affinity',
-          this._affinity,
-        );
+        const gaxOptions = config.gaxOpts
+          ? injectGaxOpt(config.gaxOpts, 'affinity', affinity)
+          : defaultGaxOptions;
         return originalRequest.call(
           this,
           Object.assign({}, config, {gaxOpts: gaxOptions}),
@@ -2591,11 +2613,9 @@ export class Transaction extends Dml {
         if (!config) {
           return originalRequestStream.call(this, config);
         }
-        const gaxOptions = injectGaxOpt(
-          extend(true, {}, config.gaxOpts),
-          'affinity',
-          this._affinity,
-        );
+        const gaxOptions = config.gaxOpts
+          ? injectGaxOpt(config.gaxOpts, 'affinity', affinity)
+          : defaultGaxOptions;
         return originalRequestStream.call(
           this,
           Object.assign({}, config, {gaxOpts: gaxOptions}),

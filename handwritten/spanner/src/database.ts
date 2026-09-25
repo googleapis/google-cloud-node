@@ -124,7 +124,7 @@ import {
 import {
   AtomicCounter,
   X_GOOG_SPANNER_REQUEST_ID_HEADER,
-  craftRequestId,
+  getRequestIdPrefix,
   newAtomicCounter,
 } from './request_id_header';
 
@@ -371,7 +371,32 @@ class Database extends common.GrpcServiceObject {
   _observabilityOptions?: ObservabilityOptions; // TODO: exmaine if we can remove it
   private _traceConfig: traceConfig;
   private _nthRequest: AtomicCounter;
-  public _clientId: number;
+  private _clientIdValue = 1;
+  public get _clientId(): number {
+    return this._clientIdValue;
+  }
+  public set _clientId(value: number) {
+    this._clientIdValue = value ?? 1;
+    this._updateRequestIdPrefix();
+  }
+
+  private _channelIdValue = 1;
+  public get _channelId(): number {
+    return this._channelIdValue;
+  }
+  public set _channelId(value: number) {
+    this._channelIdValue = value ?? 1;
+    this._updateRequestIdPrefix();
+  }
+
+  private _updateRequestIdPrefix(): void {
+    this._requestIdPrefix = getRequestIdPrefix(
+      this._clientIdValue,
+      this._channelIdValue,
+    );
+  }
+
+  public _requestIdPrefix: string = getRequestIdPrefix(1, 1);
   constructor(
     instance: Instance,
     name: string,
@@ -491,11 +516,11 @@ class Database extends common.GrpcServiceObject {
 
     this.request = instance.request;
     this._nthRequest = newAtomicCounter(0);
-    if (this.parent && this.parent.parent) {
-      this._clientId = (this.parent.parent as Spanner)._nthClientId;
-    } else {
-      this._clientId = instance._nthClientId;
-    }
+    const spanner = instance.parent as Spanner | undefined;
+    this._clientId =
+      spanner?._nthClientId ??
+      (instance as {_nthClientId?: number})._nthClientId ??
+      1;
     this._observabilityOptions = instance._observabilityOptions;
     this.commonHeaders_ = {
       ...instance.commonHeaders_,
@@ -770,18 +795,9 @@ class Database extends common.GrpcServiceObject {
     attempt: number,
     priorMetadata?: {[k: string]: string},
   ): {[k: string]: string} {
-    if (!priorMetadata) {
-      priorMetadata = {};
-    }
-    const withReqId = {
-      ...priorMetadata,
-    };
-    withReqId[X_GOOG_SPANNER_REQUEST_ID_HEADER] = craftRequestId(
-      this._clientId || 1,
-      1, // TODO: Properly infer the channelId
-      nthRequest,
-      attempt,
-    );
+    const withReqId = priorMetadata ? {...priorMetadata} : {};
+    withReqId[X_GOOG_SPANNER_REQUEST_ID_HEADER] =
+      `${this._requestIdPrefix}${nthRequest ?? 1}.${attempt ?? 1}`;
     return withReqId;
   }
 
@@ -3057,7 +3073,7 @@ class Database extends common.GrpcServiceObject {
         streamSpan.addEvent('Using Session', {'session.id': session?.id});
       }
       try {
-        snapshot = session!.snapshot(options, this.queryOptions_);
+        snapshot = session!.snapshot(options, this.queryOptions_, true);
         this._runOnSnapshot(snapshot, session!, query, complete);
       } catch (syncError) {
         // Defer error delivery via nextTick so callback callers never experience
@@ -3359,7 +3375,7 @@ class Database extends common.GrpcServiceObject {
 
           span.addEvent('Using Session', {'session.id': session?.id});
 
-          const snapshot = session!.snapshot(options, this.queryOptions_);
+          const snapshot = session!.snapshot(options, this.queryOptions_, true);
 
           this._releaseOnEnd(session!, snapshot, span);
 

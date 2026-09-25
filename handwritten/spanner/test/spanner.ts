@@ -357,6 +357,7 @@ describe('Spanner with mock server', () => {
     // process.env.SPANNER_EMULATOR_HOST = `localhost:${port}`;
     process.env.GOOGLE_CLOUD_PROJECT = 'test-project';
     await disableMetrics(sandbox);
+    resetNthClientId();
     spanner = new Spanner({
       servicePath: 'localhost',
       port,
@@ -424,6 +425,30 @@ describe('Spanner with mock server', () => {
         assert.strictEqual(
           customPooledChannel.internalChannel?.channelzEnabled,
           true,
+        );
+      } finally {
+        await customSpanner.close();
+      }
+    });
+
+    it('should disable caller stack traces by default and allow overriding it', async () => {
+      assert.strictEqual(
+        (spanner.options as any)['grpc-node.enable_caller_stack_traces'],
+        0,
+      );
+
+      const customSpanner = new Spanner({
+        servicePath: 'localhost',
+        port,
+        sslCreds: grpc.credentials.createInsecure(),
+        'grpc-node.enable_caller_stack_traces': 1,
+      });
+      try {
+        assert.strictEqual(
+          (customSpanner.options as any)[
+            'grpc-node.enable_caller_stack_traces'
+          ],
+          1,
         );
       } finally {
         await customSpanner.close();

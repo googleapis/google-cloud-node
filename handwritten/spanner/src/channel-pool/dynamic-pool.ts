@@ -24,6 +24,27 @@ import {
   DynamicChannelPoolOptions,
 } from './types';
 
+class DynamicChannelLease implements ChannelLease {
+  private isReleased = false;
+
+  constructor(
+    readonly entry: ChannelEntry,
+    private readonly pool: DynamicChannelPool,
+  ) {}
+
+  release(): void {
+    if (!this.isReleased) {
+      this.isReleased = true;
+      if (this.entry.inFlightRpcs > 0) {
+        this.entry.inFlightRpcs--;
+      }
+      if (this.entry.state === 'DRAINING') {
+        this.pool.checkDrainedEntry(this.entry);
+      }
+    }
+  }
+}
+
 /**
  * Dynamic load-based channel pool that scales up under high concurrency
  * and gracefully drains channels during sustained idle periods.
@@ -47,6 +68,12 @@ export class DynamicChannelPool implements ChannelPool {
     channel: grpc.Channel,
     sessionName: string,
   ) => Promise<void>;
+
+  private readonly onAffinityReset = (entryToDrain: ChannelEntry): void => {
+    if (entryToDrain.state === 'DRAINING') {
+      this.checkDrainedEntry(entryToDrain);
+    }
+  };
 
   private scaleDownTimer?: NodeJS.Timeout;
   private consecutiveLowLoadChecks = 0;
@@ -81,7 +108,7 @@ export class DynamicChannelPool implements ChannelPool {
     const maxChannels =
       typeof rawMax === 'number' && !Number.isNaN(rawMax)
         ? Math.max(initialCount, rawMax)
-        : Math.max(initialCount, 256);
+        : Math.max(initialCount, 10);
 
     this.minChannels = initialCount;
     this.maxChannels = maxChannels;
@@ -156,19 +183,14 @@ export class DynamicChannelPool implements ChannelPool {
       entry = affinity.pinnedEntry;
     } else {
       if (affinity?.pinnedEntry && affinity.kind === AffinityKind.ReadWrite) {
-        affinity.pinnedEntry.activeRwTransactions = Math.max(
-          0,
-          affinity.pinnedEntry.activeRwTransactions - 1,
-        );
+        if (affinity.pinnedEntry.activeRwTransactions > 0) {
+          affinity.pinnedEntry.activeRwTransactions--;
+        }
       }
       entry = selectPowerOfTwo(this.activeEntries);
       if (affinity) {
         affinity.pinnedEntry = entry;
-        affinity.onReset = (entryToDrain: ChannelEntry) => {
-          if (entryToDrain.state === 'DRAINING') {
-            this.checkDrainedEntry(entryToDrain);
-          }
-        };
+        affinity.onReset = this.onAffinityReset;
         if (affinity.kind === AffinityKind.ReadWrite) {
           entry.activeRwTransactions++;
         }
@@ -179,33 +201,15 @@ export class DynamicChannelPool implements ChannelPool {
     entry.lastActivity = Date.now();
 
     // 3. Event-driven scale-up check
-    if (entry.inFlightRpcs > this.maxRpcPerChannel) {
+    if (
+      entry.inFlightRpcs > this.maxRpcPerChannel &&
+      this.activeEntries.length < this.maxChannels &&
+      !this.isScalingUp
+    ) {
       this.maybeScaleUp();
     }
 
-    let released = false;
-    return {
-      entry,
-      release: () => {
-        if (!released) {
-          released = true;
-          entry.inFlightRpcs = Math.max(0, entry.inFlightRpcs - 1);
-          entry.lastActivity = Date.now();
-          if (entry.state === 'DRAINING') {
-            this.checkDrainedEntry(entry);
-          }
-          if (this.drainingEntries.length > 0) {
-            for (
-              let index = this.drainingEntries.length - 1;
-              index >= 0;
-              index--
-            ) {
-              this.checkDrainedEntry(this.drainingEntries[index]);
-            }
-          }
-        }
-      },
-    };
+    return new DynamicChannelLease(entry, this);
   }
 
   get size(): number {
@@ -435,9 +439,10 @@ export class DynamicChannelPool implements ChannelPool {
             2,
             Math.ceil((currentLength * this.maxScaleUpPercent) / 100),
           );
-          // Do NOT veto scale-up when average load is below max: if a channel exceeded maxRpcPerChannel,
-          // we add at least 1 channel (and up to maxToAddByPercent bounded by maxChannels).
-          const needed = Math.max(1, desiredChannels - currentLength);
+          const needed = desiredChannels - currentLength;
+          if (needed <= 0) {
+            return;
+          }
           const count = Math.min(
             needed,
             maxToAddByPercent,
@@ -607,7 +612,7 @@ export class DynamicChannelPool implements ChannelPool {
     }
   }
 
-  private checkDrainedEntry(entry: ChannelEntry): void {
+  checkDrainedEntry(entry: ChannelEntry): void {
     if (
       entry.state === 'DRAINING' &&
       entry.inFlightRpcs === 0 &&

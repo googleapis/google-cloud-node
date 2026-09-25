@@ -69,13 +69,6 @@ export class ChannelPoolChannelAdapter implements grpc.ChannelInterface {
   ): any {
     // Fallback if call is initiated outside of callInvocationTransformer
     const lease = this.pool.acquire();
-    let released = false;
-    const releaseOnce = () => {
-      if (!released) {
-        released = true;
-        lease.release();
-      }
-    };
     let call: any;
     try {
       call = (lease.entry.channel as any).createCall(
@@ -86,37 +79,25 @@ export class ChannelPoolChannelAdapter implements grpc.ChannelInterface {
         propagateFlags,
       );
     } catch (error) {
-      releaseOnce();
+      lease.release();
       throw error;
     }
     return new grpc.InterceptingCall(call, {
       start: (metadata, listener, next) => {
         try {
           next(metadata, {
-            onReceiveMetadata: (receivedMetadata, nextMetadata) => {
-              nextMetadata(receivedMetadata);
-            },
-            onReceiveMessage: (message, nextMessage) => {
-              nextMessage(message);
-            },
             onReceiveStatus: (status, nextStatus) => {
-              releaseOnce();
+              lease.release();
               nextStatus(status);
             },
           });
         } catch (error) {
-          releaseOnce();
+          lease.release();
           throw error;
         }
       },
-      sendMessage: (message, next) => {
-        next(message);
-      },
-      halfClose: next => {
-        next();
-      },
       cancel: next => {
-        releaseOnce();
+        lease.release();
         next();
       },
     });

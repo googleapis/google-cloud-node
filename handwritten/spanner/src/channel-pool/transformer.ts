@@ -16,7 +16,99 @@
 
 import * as grpc from '@grpc/grpc-js';
 import {TransactionAffinity} from './affinity';
-import {ChannelPool} from './types';
+import {ChannelLease, ChannelPool} from './types';
+
+const CHANNEL_ID_STRINGS: string[] = Array.from({length: 256}, (_, index) =>
+  String(index),
+);
+
+/**
+ * Updates the channel ID component (index 3) of an x-goog-spanner-request-id header.
+ * Uses index scan instead of splitting into string arrays to avoid memory allocations.
+ */
+function updateChannelIdInRequestId(
+  requestId: string,
+  channelId: number,
+): string {
+  let dotCount = 0;
+  let thirdDotIndex = -1;
+  let fourthDotIndex = -1;
+  const length = requestId.length;
+  for (let index = 0; index < length; index++) {
+    if (requestId.charCodeAt(index) === 46 /* '.' */) {
+      dotCount++;
+      if (dotCount === 3) {
+        thirdDotIndex = index;
+      } else if (dotCount === 4) {
+        fourthDotIndex = index;
+        break;
+      }
+    }
+  }
+  if (thirdDotIndex !== -1 && fourthDotIndex !== -1) {
+    if (
+      channelId >= 0 &&
+      channelId <= 9 &&
+      fourthDotIndex - thirdDotIndex === 2 &&
+      requestId.charCodeAt(thirdDotIndex + 1) === 48 + channelId
+    ) {
+      return requestId;
+    }
+    const channelIdString =
+      channelId >= 0 && channelId < 256
+        ? CHANNEL_ID_STRINGS[channelId]
+        : String(channelId);
+    if (
+      requestId.slice(thirdDotIndex + 1, fourthDotIndex) === channelIdString
+    ) {
+      return requestId;
+    }
+    return (
+      requestId.slice(0, thirdDotIndex + 1) +
+      channelIdString +
+      requestId.slice(fourthDotIndex)
+    );
+  }
+  return `${requestId}.${channelId}`;
+}
+
+/**
+ * Creates an interceptor that releases the acquired channel lease on call completion or cancellation.
+ * Only implements start and cancel on Requester, and onReceiveStatus on Listener, allowing grpc-js
+ * to use default pass-through implementations for all other methods without per-chunk wrapper closures.
+ */
+function createReleaseInterceptor(lease: ChannelLease): grpc.Interceptor {
+  return (options, nextCall) => {
+    const requester: grpc.Requester = {
+      start: (metadata, listener, next) => {
+        try {
+          next(metadata, {
+            onReceiveStatus: (status, nextStatus) => {
+              lease.release();
+              nextStatus(status);
+            },
+          });
+        } catch (error) {
+          lease.release();
+          throw error;
+        }
+      },
+      cancel: next => {
+        lease.release();
+        next();
+      },
+    };
+
+    let nextCallResult: ReturnType<typeof nextCall>;
+    try {
+      nextCallResult = nextCall(options);
+    } catch (error) {
+      lease.release();
+      throw error;
+    }
+    return new grpc.InterceptingCall(nextCallResult, requester);
+  };
+}
 
 /**
  * Creates a gRPC CallInvocationTransformer that routes calls through a Spanner ChannelPool.
@@ -27,126 +119,63 @@ import {ChannelPool} from './types';
 export function createCallInvocationTransformer(
   poolOrResolver: ChannelPool | (() => ChannelPool | undefined),
 ) {
+  let resolvedPool: ChannelPool | undefined =
+    typeof poolOrResolver === 'function' ? undefined : poolOrResolver;
+
   return function spannerCallInvocationTransformer(
     callProperties: grpc.CallProperties<any, any>,
   ): grpc.CallProperties<any, any> {
     const pool =
-      typeof poolOrResolver === 'function' ? poolOrResolver() : poolOrResolver;
+      resolvedPool ??
+      (resolvedPool =
+        typeof poolOrResolver === 'function'
+          ? poolOrResolver()
+          : poolOrResolver);
 
     if (!pool) {
       return callProperties;
     }
 
+    const rawCallOptions = callProperties.callOptions as any;
+    const targetChannel: grpc.Channel | undefined =
+      rawCallOptions?.targetChannel ??
+      rawCallOptions?.otherArgs?.options?.targetChannel;
+    if (targetChannel) {
+      callProperties.channel = targetChannel;
+      return callProperties;
+    }
+
     const affinity: TransactionAffinity | undefined =
-      (callProperties.callOptions as any)?.affinity ??
-      (callProperties.callOptions as any)?.otherArgs?.options?.affinity;
+      rawCallOptions?.affinity ?? rawCallOptions?.otherArgs?.options?.affinity;
     const lease = pool.acquire(affinity);
 
     // Update logical channel ID in Spanner Request ID header if present
     if (callProperties.metadata) {
       const existing = callProperties.metadata.get('x-goog-spanner-request-id');
       if (existing.length > 0 && typeof existing[0] === 'string') {
-        const requestId = existing[0];
-        let dotCount = 0;
-        let thirdDotIndex = -1;
-        let fourthDotIndex = -1;
-        let hasFifthDot = false;
-        for (let i = 0; i < requestId.length; i++) {
-          if (requestId.charCodeAt(i) === 46 /* '.' */) {
-            dotCount++;
-            if (dotCount === 3) {
-              thirdDotIndex = i;
-            } else if (dotCount === 4) {
-              fourthDotIndex = i;
-            } else if (dotCount === 5) {
-              hasFifthDot = true;
-              break;
-            }
-          }
-        }
-        if (hasFifthDot) {
-          const updatedRequestId =
-            requestId.slice(0, thirdDotIndex + 1) +
-            lease.entry.id +
-            requestId.slice(fourthDotIndex);
-          callProperties.metadata.set(
-            'x-goog-spanner-request-id',
-            updatedRequestId,
-          );
-        } else {
-          callProperties.metadata.set(
-            'x-goog-spanner-request-id',
-            `${requestId}.${lease.entry.id}`,
-          );
+        const updated = updateChannelIdInRequestId(existing[0], lease.entry.id);
+        if (updated !== existing[0]) {
+          callProperties.metadata.set('x-goog-spanner-request-id', updated);
         }
       }
     }
 
-    const releaseInterceptor: grpc.Interceptor = (options, nextCall) => {
-      let released = false;
-      const releaseOnce = () => {
-        if (!released) {
-          released = true;
-          lease.release();
-        }
+    const releaseInterceptor = createReleaseInterceptor(lease);
+    const existingInterceptors = callProperties.callOptions?.interceptors;
+    const interceptors = existingInterceptors
+      ? [...existingInterceptors, releaseInterceptor]
+      : [releaseInterceptor];
+
+    if (callProperties.callOptions) {
+      callProperties.callOptions = {
+        ...callProperties.callOptions,
+        interceptors,
       };
+    } else {
+      callProperties.callOptions = {interceptors};
+    }
+    callProperties.channel = lease.entry.channel;
 
-      const requester: grpc.Requester = {
-        start: (metadata, listener, next) => {
-          const newListener: grpc.Listener = {
-            onReceiveMetadata: (receivedMetadata, nextMetadata) => {
-              nextMetadata(receivedMetadata);
-            },
-            onReceiveMessage: (message, nextMessage) => {
-              nextMessage(message);
-            },
-            onReceiveStatus: (status, nextStatus) => {
-              releaseOnce();
-              nextStatus(status);
-            },
-          };
-          try {
-            next(metadata, newListener);
-          } catch (error) {
-            releaseOnce();
-            throw error;
-          }
-        },
-        sendMessage: (message, next) => {
-          next(message);
-        },
-        halfClose: next => {
-          next();
-        },
-        cancel: next => {
-          releaseOnce();
-          next();
-        },
-      };
-
-      let nextCallResult: ReturnType<typeof nextCall>;
-      try {
-        nextCallResult = nextCall(options);
-      } catch (error) {
-        releaseOnce();
-        throw error;
-      }
-      return new grpc.InterceptingCall(nextCallResult, requester);
-    };
-
-    const callOptions = Object.assign({}, callProperties.callOptions);
-    callOptions.interceptors = (callOptions.interceptors || []).concat([
-      releaseInterceptor,
-    ]);
-
-    return {
-      argument: callProperties.argument,
-      metadata: callProperties.metadata,
-      call: callProperties.call,
-      channel: lease.entry.channel,
-      methodDefinition: callProperties.methodDefinition,
-      callOptions,
-      callback: callProperties.callback,
-    };
+    return callProperties;
   };
 }

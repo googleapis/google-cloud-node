@@ -402,7 +402,7 @@ describe('ChannelPool Module', () => {
       );
 
       assert.strictEqual((pool as any).minChannels, 4);
-      assert.strictEqual((pool as any).maxChannels, 256);
+      assert.strictEqual((pool as any).maxChannels, 10);
       assert.strictEqual((pool as any).maxRpcPerChannel, 8);
       assert.strictEqual((pool as any).minRpcPerChannel, 2);
       assert.strictEqual((pool as any).maxScaleUpPercent, 100);
@@ -492,7 +492,7 @@ describe('ChannelPool Module', () => {
       await pool.close();
     });
 
-    it('should scale up without veto when a single channel exceeds maxRpcPerChannel even if total load is low', async () => {
+    it('should veto scale-up when a single channel exceeds maxRpcPerChannel but total load does not require more channels', async () => {
       const pool = new DynamicChannelPool(
         'localhost:9010',
         grpc.credentials.createInsecure(),
@@ -510,18 +510,20 @@ describe('ChannelPool Module', () => {
 
       // Artificially put 9 RPCs on channel 0 while other channels have 0 load.
       // totalLoad = 9. targetRpc = 5. desiredChannels = ceil(9/5) = 2 <= 4.
-      // If a veto existed, it would not scale up because desiredChannels <= currentLen.
-      // Without veto, it must still add at least 1 channel because channel 0 exceeded maxRpcPerChannel = 8.
+      // With veto (needed <= 0), it must NOT scale up because desiredChannels <= currentLen.
       const activeEntries = (pool as any).activeEntries;
       activeEntries[0].inFlightRpcs = 9;
       (pool as any).maybeScaleUp();
 
-      const deadline = Date.now() + 1000;
-      while (pool.activeCount <= 4 && Date.now() < deadline) {
-        await new Promise(resolve => setImmediate(resolve));
-      }
+      // Allow setImmediate task to execute
+      await new Promise(resolve => setImmediate(resolve));
+      await new Promise(resolve => setImmediate(resolve));
 
-      assert.strictEqual(pool.activeCount > 4, true);
+      assert.strictEqual(
+        pool.activeCount,
+        4,
+        `Expected pool to remain at 4 channels due to veto, got ${pool.activeCount}`,
+      );
 
       activeEntries[0].inFlightRpcs = 0;
       await pool.close();
@@ -611,7 +613,7 @@ describe('ChannelPool Module', () => {
         {minChannels: NaN, maxChannels: NaN},
       );
       assert.strictEqual((pool as any).minChannels, 4);
-      assert.strictEqual((pool as any).maxChannels, 256);
+      assert.strictEqual((pool as any).maxChannels, 10);
       assert.strictEqual(pool.activeCount, 4);
       await pool.close();
     });
@@ -943,7 +945,7 @@ describe('ChannelPool Module', () => {
         );
         assert.strictEqual(pool.size, 6);
         assert.strictEqual((pool as any).minChannels, 6);
-        assert.strictEqual((pool as any).maxChannels, 256);
+        assert.strictEqual((pool as any).maxChannels, 10);
         await pool.close();
       } finally {
         if (previousEnv !== undefined) {
@@ -1378,52 +1380,38 @@ describe('ChannelPool Module', () => {
       done();
     });
 
-    it('should append channel id if request id has fewer than 6 parts', done => {
-      const fakeChannel = new grpc.Channel(
-        'localhost:9010',
-        grpc.credentials.createInsecure(),
-        {},
-      );
-      const fakeEntry: ChannelEntry = {
-        id: 3,
-        channel: fakeChannel,
-        inFlightRpcs: 0,
-        activeRwTransactions: 0,
-        state: 'ACTIVE',
-        lastActivity: Date.now(),
+    it('should bypass pool acquisition and route directly to targetChannel when specified in callOptions', () => {
+      const explicitChannel: any = {
+        createCall: sinon.stub(),
       };
       const mockPool: ChannelPool = {
-        acquire: sinon.stub().returns({
-          entry: fakeEntry,
-          release: sinon.stub(),
-        }),
+        acquire: sinon.stub(),
         size: 1,
         activeCount: 1,
         close: async () => {},
         getConnectivityState: () => grpc.connectivityState.READY,
         watchConnectivityState: () => {},
         getTarget: () => 'localhost:9010',
-        getChannels: () => [fakeChannel],
+        getChannels: () => [],
       };
 
       const transformer = createCallInvocationTransformer(mockPool);
-      const metadata = new grpc.Metadata();
-      metadata.set('x-goog-spanner-request-id', '1.abcd1234.1.1.5');
-
       const callProperties: any = {
-        metadata,
-        callOptions: {},
+        callOptions: {
+          otherArgs: {
+            options: {
+              targetChannel: explicitChannel,
+            },
+          },
+        },
         argument: {},
         methodDefinition: {path: '/google.spanner.v1.Spanner/ExecuteSql'},
       };
 
-      transformer(callProperties);
+      const transformed = transformer(callProperties);
 
-      assert.strictEqual(
-        metadata.get('x-goog-spanner-request-id')[0],
-        '1.abcd1234.1.1.5.3',
-      );
-      done();
+      assert.strictEqual(transformed.channel, explicitChannel);
+      assert.strictEqual((mockPool.acquire as sinon.SinonStub).called, false);
     });
   });
 
@@ -1634,7 +1622,7 @@ describe('ChannelPool Module', () => {
       }
     });
 
-    it('should allow falling back to legacy grpc-gcp pool via channelPool option', async () => {
+    it('should allow falling back to legacy grpc-gcp pool via channelPool option and execute queries', async () => {
       const spanner = new Spanner({
         projectId: 'test-project',
         servicePath: 'localhost',
@@ -1644,7 +1632,45 @@ describe('ChannelPool Module', () => {
       });
 
       assert.strictEqual(spanner.channelPool, undefined);
+      assert.strictEqual(spanner.isLegacyChannelPool, true);
+
+      const database = spanner.instance('instance').database('database');
+      const [rows] = await database.run('SELECT 1');
+      assert.strictEqual(rows.length, 1);
+
       await spanner.close();
+    });
+
+    it('should defensively normalize uppercase channelPool string options', async () => {
+      const spannerLegacy = new Spanner({
+        projectId: 'test-project',
+        servicePath: 'localhost',
+        port,
+        sslCreds: grpc.credentials.createInsecure(),
+        channelPool: 'GRPC-GCP',
+      });
+
+      assert.strictEqual(spannerLegacy.channelPool, undefined);
+      assert.strictEqual(spannerLegacy.isLegacyChannelPool, true);
+      await spannerLegacy.close();
+
+      const spannerDynamic = new Spanner({
+        projectId: 'test-project',
+        servicePath: 'localhost',
+        port,
+        sslCreds: grpc.credentials.createInsecure(),
+        channelPool: 'DYNAMIC',
+      });
+
+      const databaseDynamic = spannerDynamic
+        .instance('instance')
+        .database('database');
+      const [rows] = await databaseDynamic.run('SELECT 1');
+      assert.strictEqual(rows.length, 1);
+      assert(spannerDynamic.channelPool);
+      assert(spannerDynamic.channelPool instanceof DynamicChannelPool);
+      assert.strictEqual(spannerDynamic.isLegacyChannelPool, false);
+      await spannerDynamic.close();
     });
 
     it('should initialize StaticChannelPool and execute queries', async () => {

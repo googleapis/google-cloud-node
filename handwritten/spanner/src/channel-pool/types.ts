@@ -36,7 +36,10 @@ export interface ChannelEntry {
   activeRwTransactions: number;
   /** Current state of the channel. */
   state: ChannelState;
-  /** Timestamp (epoch milliseconds) of the most recent activity. */
+  /**
+   * Timestamp (epoch milliseconds) of the most recent lease acquisition,
+   * used for P2C tie-breaking to prefer warmer channels.
+   */
   lastActivity: number;
   /** Timestamp (epoch milliseconds) when the channel was created. */
   createdAt?: number;
@@ -48,7 +51,11 @@ export interface ChannelEntry {
 export interface ChannelLease {
   /** The leased channel entry. */
   readonly entry: ChannelEntry;
-  /** Releases the in-flight lease when the RPC completes or is cancelled. */
+  /**
+   * Releases the in-flight lease when the RPC completes or is cancelled.
+   * Implementations must be idempotent, as cancellation and completion
+   * listeners may both invoke this method for the same RPC.
+   */
   release(): void;
 }
 
@@ -116,7 +123,7 @@ export interface StaticChannelPoolOptions {
 export interface DynamicChannelPoolOptions {
   /** Minimum number of channels to retain in the pool. Defaults to 4. */
   minChannels?: number;
-  /** Maximum number of channels allowed. Defaults to 256. */
+  /** Maximum number of channels allowed. Defaults to 10. */
   maxChannels?: number;
   /** Load threshold per channel (in-flight RPCs) to trigger scale-up. Defaults to 8. */
   maxRpcPerChannel?: number;

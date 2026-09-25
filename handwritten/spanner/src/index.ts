@@ -170,6 +170,8 @@ export type GetInstanceConfigOperationsCallback = PagedCallback<
  * @property {boolean} [disableBuiltInMetrics=True] If set to true, built-in metrics will be disabled.
  * @property {number} ['grpc.enable_channelz'=0] Whether to enable gRPC Channelz service tracking.
  * Defaults to 0 (disabled) to eliminate per-RPC tracking and allocation overhead. Set to 1 to enable.
+ * @property {number|boolean} ['grpc-node.enable_caller_stack_traces'=0] Whether to construct an Error on every RPC to capture the caller's stack trace.
+ * Defaults to 0 (disabled) to eliminate per-RPC Error construction overhead. Set to 1 to enable.
  */
 export interface SpannerOptions extends GrpcClientOptions {
   apiEndpoint?: string;
@@ -204,6 +206,12 @@ export interface SpannerOptions extends GrpcClientOptions {
    * Set to `1` if live connection introspection via gRPC Channelz (e.g. grpcdebug) is required.
    */
   'grpc.enable_channelz'?: number;
+  /**
+   * Whether to construct an Error object on every call to capture the caller's stack trace.
+   * Defaults to `0` (disabled) to eliminate per-RPC Error construction overhead.
+   * Set to `1` if caller stack traces on gRPC errors are required.
+   */
+  'grpc-node.enable_caller_stack_traces'?: number | boolean;
 }
 export interface RequestConfig {
   client: string;
@@ -353,6 +361,7 @@ class Spanner extends GrpcService {
   private _isInSecureCredentials: boolean;
   private _metricsEnabled = false;
   readonly _nthClientId: number;
+  readonly isLegacyChannelPool: boolean;
   private channelPool_?: ChannelPool;
   private _ownsChannelPool = false;
   private _pendingProjectIdCallbacks?: Array<
@@ -438,15 +447,30 @@ class Spanner extends GrpcService {
     }
 
     const rawPool = options?.channelPool;
+    const normalizedPool =
+      typeof rawPool === 'string' ? rawPool.toLowerCase() : rawPool;
     const envChannelPool = process.env.SPANNER_CHANNEL_POOL?.toLowerCase();
     const isLegacyPool =
-      rawPool === 'grpc-gcp' ||
-      rawPool === 'legacy' ||
-      (rawPool as any) === false ||
-      (rawPool === undefined &&
+      normalizedPool === 'grpc-gcp' ||
+      normalizedPool === 'legacy' ||
+      (normalizedPool as any) === false ||
+      (normalizedPool === undefined &&
         (envChannelPool === 'grpc-gcp' || envChannelPool === 'legacy'));
 
     let initialChannelPool: ChannelPool | undefined;
+
+    let defaultEnableCallerStackTraces: number | boolean = 0;
+    if (process.env.GRPC_NODE_ENABLE_CALLER_STACK_TRACES !== undefined) {
+      const rawEnv = process.env.GRPC_NODE_ENABLE_CALLER_STACK_TRACES;
+      if (rawEnv === 'false' || rawEnv === '0') {
+        defaultEnableCallerStackTraces = 0;
+      } else if (rawEnv === 'true' || rawEnv === '1') {
+        defaultEnableCallerStackTraces = 1;
+      } else {
+        const parsed = parseInt(rawEnv, 10);
+        defaultEnableCallerStackTraces = Number.isNaN(parsed) ? 0 : parsed;
+      }
+    }
 
     if (!isLegacyPool) {
       let channelPoolInstance: ChannelPool | undefined;
@@ -460,8 +484,8 @@ class Spanner extends GrpcService {
         poolConfig = rawPool as ChannelPoolConfig;
       } else {
         let poolType: 'dynamic' | 'static' = 'static';
-        if (rawPool === 'dynamic' || rawPool === 'static') {
-          poolType = rawPool;
+        if (normalizedPool === 'dynamic' || normalizedPool === 'static') {
+          poolType = normalizedPool;
         } else if (
           envChannelPool === 'dynamic' ||
           envChannelPool === 'static'
@@ -484,39 +508,43 @@ class Spanner extends GrpcService {
               };
       }
 
+      let primeClient: v1.SpannerClient | undefined;
+      const getPrimeClient = (): v1.SpannerClient => {
+        if (!primeClient) {
+          if (this.clients_ && this.clients_.has('SpannerClient')) {
+            primeClient = this.clients_.get(
+              'SpannerClient',
+            ) as v1.SpannerClient;
+          } else {
+            const client = new v1.SpannerClient(this.options as any);
+            this.clients_?.set('SpannerClient', client);
+            primeClient = client;
+          }
+        }
+        return primeClient;
+      };
+
       const primeFn = async (channel: grpc.Channel, sessionName: string) => {
-        const unclosableChannel = new Proxy(channel, {
-          get(target, property) {
-            if (property === 'close') {
-              return () => {};
-            }
-            const value = Reflect.get(target, property);
-            return typeof value === 'function' ? value.bind(target) : value;
-          },
-        });
-        const primeClient = new v1.SpannerClient({
-          ...options,
-          'grpc.channelFactoryOverride': () => unclosableChannel,
-          'grpc.callInvocationTransformer': undefined,
-          'grpc.gcpApiConfig': undefined,
-        } as any);
-        const timeoutMilliseconds =
+        const client = getPrimeClient();
+        const timeoutMs =
           poolConfig.type === 'dynamic'
             ? (poolConfig.primeTimeoutMs ?? 5000)
             : 5000;
-        try {
-          await primeClient.executeSql(
-            {
-              session: sessionName,
-              sql: 'SELECT 1',
+        await client.executeSql(
+          {
+            session: sessionName,
+            sql: 'SELECT 1',
+          },
+          {
+            timeout: timeoutMs,
+            targetChannel: channel,
+            otherArgs: {
+              options: {
+                targetChannel: channel,
+              },
             },
-            {
-              timeout: timeoutMilliseconds,
-            },
-          );
-        } finally {
-          await primeClient.close();
-        }
+          } as any,
+        );
       };
 
       if (poolConfig.type === 'dynamic' && !poolConfig.primeFn) {
@@ -553,6 +581,8 @@ class Spanner extends GrpcService {
           'grpc.keepalive_time_ms': 120000,
           // Disable Channelz by default to reduce per-RPC tracking and allocation overhead
           'grpc.enable_channelz': 0,
+          'grpc-node.enable_caller_stack_traces':
+            defaultEnableCallerStackTraces,
           'grpc.callInvocationTransformer': callInvocationTransformer,
           'grpc.channelFactoryOverride': channelFactoryOverride,
           grpc,
@@ -570,6 +600,8 @@ class Spanner extends GrpcService {
           'grpc.keepalive_time_ms': 120000,
           // Disable Channelz by default to reduce per-RPC tracking and allocation overhead
           'grpc.enable_channelz': 0,
+          'grpc-node.enable_caller_stack_traces':
+            defaultEnableCallerStackTraces,
           // Enable grpc-gcp support
           'grpc.callInvocationTransformer':
             grpcGcp.gcpCallInvocationTransformer,
@@ -631,6 +663,7 @@ class Spanner extends GrpcService {
       packageJson: require('../../package.json'),
     } as {} as GrpcServiceConfig;
     super(config, options);
+    this.isLegacyChannelPool = isLegacyPool;
     if (initialChannelPool) {
       this.channelPool_ = initialChannelPool;
     }

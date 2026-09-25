@@ -34,24 +34,47 @@ export function selectPowerOfTwo(entries: ChannelEntry[]): ChannelEntry {
     return entries[0];
   }
 
-  const index1 = Math.floor(Math.random() * length);
-  let index2 = Math.floor(Math.random() * (length - 1));
-  if (index2 >= index1) {
-    index2++;
+  if (length === 2) {
+    const firstEntry = entries[0];
+    const secondEntry = entries[1];
+    const firstLoad = firstEntry.inFlightRpcs + firstEntry.activeRwTransactions;
+    const secondLoad =
+      secondEntry.inFlightRpcs + secondEntry.activeRwTransactions;
+    if (firstLoad < secondLoad) {
+      return firstEntry;
+    }
+    if (secondLoad < firstLoad) {
+      return secondEntry;
+    }
+    return firstEntry.lastActivity >= secondEntry.lastActivity
+      ? firstEntry
+      : secondEntry;
   }
 
-  const entry1 = entries[index1];
-  const entry2 = entries[index2];
-
-  const load1 = entry1.inFlightRpcs + entry1.activeRwTransactions;
-  const load2 = entry2.inFlightRpcs + entry2.activeRwTransactions;
-
-  if (load1 < load2) {
-    return entry1;
+  const combinations = length * (length - 1);
+  const sample = (Math.random() * combinations) | 0;
+  const divisor = length - 1;
+  const firstIndex = (sample / divisor) | 0;
+  let secondIndex = sample % divisor;
+  if (secondIndex >= firstIndex) {
+    secondIndex++;
   }
-  if (load2 < load1) {
-    return entry2;
+
+  const firstEntry = entries[firstIndex];
+  const secondEntry = entries[secondIndex];
+
+  const firstLoad = firstEntry.inFlightRpcs + firstEntry.activeRwTransactions;
+  const secondLoad =
+    secondEntry.inFlightRpcs + secondEntry.activeRwTransactions;
+
+  if (firstLoad < secondLoad) {
+    return firstEntry;
+  }
+  if (secondLoad < firstLoad) {
+    return secondEntry;
   }
   // Tie-breaker: prefer warmer channel
-  return entry1.lastActivity >= entry2.lastActivity ? entry1 : entry2;
+  return firstEntry.lastActivity >= secondEntry.lastActivity
+    ? firstEntry
+    : secondEntry;
 }

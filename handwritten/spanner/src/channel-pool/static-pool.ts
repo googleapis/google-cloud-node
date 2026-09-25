@@ -24,6 +24,21 @@ import {
   StaticChannelPoolOptions,
 } from './types';
 
+class StaticChannelLease implements ChannelLease {
+  private isReleased = false;
+
+  constructor(readonly entry: ChannelEntry) {}
+
+  release(): void {
+    if (!this.isReleased) {
+      this.isReleased = true;
+      if (this.entry.inFlightRpcs > 0) {
+        this.entry.inFlightRpcs--;
+      }
+    }
+  }
+}
+
 /**
  * Fixed-size channel pool that allocates N channels on startup and uses P2C selection.
  * Operates with zero background timers and predictable resource usage.
@@ -86,10 +101,9 @@ export class StaticChannelPool implements ChannelPool {
       entry = affinity.pinnedEntry;
     } else {
       if (affinity?.pinnedEntry && affinity.kind === AffinityKind.ReadWrite) {
-        affinity.pinnedEntry.activeRwTransactions = Math.max(
-          0,
-          affinity.pinnedEntry.activeRwTransactions - 1,
-        );
+        if (affinity.pinnedEntry.activeRwTransactions > 0) {
+          affinity.pinnedEntry.activeRwTransactions--;
+        }
       }
       entry = selectPowerOfTwo(this.entries);
       if (affinity) {
@@ -103,17 +117,7 @@ export class StaticChannelPool implements ChannelPool {
     entry.inFlightRpcs++;
     entry.lastActivity = Date.now();
 
-    let released = false;
-    return {
-      entry,
-      release: () => {
-        if (!released) {
-          released = true;
-          entry.inFlightRpcs = Math.max(0, entry.inFlightRpcs - 1);
-          entry.lastActivity = Date.now();
-        }
-      },
-    };
+    return new StaticChannelLease(entry);
   }
 
   get size(): number {

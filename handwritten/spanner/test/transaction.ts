@@ -21,7 +21,6 @@ import {EventEmitter} from 'events';
 import {common as p} from 'protobufjs';
 import * as proxyquire from 'proxyquire';
 import * as sinon from 'sinon';
-import * as extend from 'extend';
 
 import {codec} from '../src/codec';
 import {protos} from '@google-cloud/spanner-api';
@@ -278,6 +277,129 @@ describe('Transaction', () => {
           timeout: 1000,
           otherArgs: {options: {unbind: true}},
         });
+      });
+
+      it('should not create affinity or affinityKey for single-use snapshots', () => {
+        const multiplexedSession = Object.assign({}, SESSION, {
+          metadata: {multiplexed: true},
+        });
+        const singleUseSnapshot = new Snapshot(
+          multiplexedSession,
+          undefined,
+          undefined,
+          null,
+        );
+        assert.strictEqual(singleUseSnapshot.affinity, undefined);
+        assert.strictEqual(singleUseSnapshot._affinityKey, undefined);
+        assert.strictEqual(singleUseSnapshot._bindGaxOpts, undefined);
+        assert.strictEqual(singleUseSnapshot._unbindGaxOpts, undefined);
+      });
+
+      it('should not inject affinity in `Session#request` for single-use snapshots', () => {
+        REQUEST.resetHistory();
+        const multiplexedSession = Object.assign({}, SESSION, {
+          metadata: {multiplexed: true},
+        });
+        const singleUseSnapshot = new Snapshot(
+          multiplexedSession,
+          undefined,
+          undefined,
+          null,
+        );
+        singleUseSnapshot.request({client: 'SpannerClient'}, () => {});
+        assert.strictEqual(REQUEST.callCount, 1);
+        const argument = REQUEST.lastCall.args[0];
+        assert.strictEqual(argument.gaxOpts, undefined);
+      });
+
+      it('should not inject affinity in `Session#requestStream` for single-use snapshots', () => {
+        REQUEST_STREAM.resetHistory();
+        const multiplexedSession = Object.assign({}, SESSION, {
+          metadata: {multiplexed: true},
+        });
+        const singleUseSnapshot = new Snapshot(
+          multiplexedSession,
+          undefined,
+          undefined,
+          null,
+        );
+        singleUseSnapshot.requestStream({client: 'SpannerClient'});
+        assert.strictEqual(REQUEST_STREAM.callCount, 1);
+        const argument = REQUEST_STREAM.lastCall.args[0];
+        assert.strictEqual(argument.gaxOpts, undefined);
+      });
+
+      it('should not unbind channel on end() for single-use snapshots', () => {
+        const multiplexedSession = Object.assign({}, SESSION, {
+          metadata: {multiplexed: true},
+        });
+        const singleUseSnapshot = new Snapshot(
+          multiplexedSession,
+          undefined,
+          undefined,
+          null,
+        );
+        singleUseSnapshot.end();
+        assert.strictEqual(singleUseSnapshot.ended, true);
+      });
+
+      it('should generate _affinityKey and propagate to request/requestStream for single-use snapshots when legacy grpc-gcp pool is enabled', () => {
+        REQUEST.resetHistory();
+        REQUEST_STREAM.resetHistory();
+        const legacySpanner = Object.assign({}, SPANNER, {
+          isLegacyChannelPool: true,
+        });
+        const legacyInstance = Object.assign({}, INSTANCE, {
+          parent: legacySpanner,
+        });
+        const legacyDatabase = Object.assign({}, DATABASE, {
+          parent: legacyInstance,
+        });
+        const multiplexedSession = Object.assign({}, SESSION, {
+          parent: legacyDatabase,
+          metadata: {multiplexed: true},
+        });
+        const singleUseSnapshot = new Snapshot(
+          multiplexedSession,
+          undefined,
+          undefined,
+          null,
+        );
+        assert.strictEqual(singleUseSnapshot.affinity, undefined);
+        assert.ok(singleUseSnapshot._affinityKey);
+        assert.ok(singleUseSnapshot._affinityKey.startsWith('mux-affinity-'));
+        assert.strictEqual(
+          singleUseSnapshot._bindGaxOpts.otherArgs.options.affinityKey,
+          singleUseSnapshot._affinityKey,
+        );
+        assert.strictEqual(
+          singleUseSnapshot._bindGaxOpts.otherArgs.options.affinity,
+          undefined,
+        );
+
+        singleUseSnapshot.request({client: 'SpannerClient'});
+        assert.strictEqual(REQUEST.callCount, 1);
+        const requestArg = REQUEST.lastCall.args[0];
+        assert.strictEqual(
+          requestArg.gaxOpts.otherArgs.options.affinityKey,
+          singleUseSnapshot._affinityKey,
+        );
+        assert.strictEqual(
+          requestArg.gaxOpts.otherArgs.options.affinity,
+          undefined,
+        );
+
+        singleUseSnapshot.requestStream({client: 'SpannerClient'});
+        assert.strictEqual(REQUEST_STREAM.callCount, 1);
+        const streamArg = REQUEST_STREAM.lastCall.args[0];
+        assert.strictEqual(
+          streamArg.gaxOpts.otherArgs.options.affinityKey,
+          singleUseSnapshot._affinityKey,
+        );
+        assert.strictEqual(
+          streamArg.gaxOpts.otherArgs.options.affinity,
+          undefined,
+        );
       });
 
       it('should set the commonHeaders_', () => {

@@ -41,7 +41,9 @@ export class TransactionAffinity {
   reset(): void {
     const entry = this.pinnedEntry;
     if (entry && this.kind === AffinityKind.ReadWrite) {
-      entry.activeRwTransactions = Math.max(0, entry.activeRwTransactions - 1);
+      if (entry.activeRwTransactions > 0) {
+        entry.activeRwTransactions--;
+      }
     }
     this.pinnedEntry = null;
     if (entry && this.onReset) {
