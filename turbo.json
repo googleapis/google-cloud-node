@@ -8,8 +8,7 @@
         "test/**",
         "system-test/**",
         "protos/**",
-        "tsconfig.json",
-        "package.json"
+        "tsconfig.json"
       ],
       "outputs": ["build/**", "esm/**"]
     }

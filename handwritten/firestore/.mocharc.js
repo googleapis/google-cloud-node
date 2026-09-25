@@ -16,6 +16,7 @@ const config = {
   "throw-deprecation": true,
   "timeout": 10000,
   "recursive": true,
+  "exit": true,
   // Number of times to retry a failed test.
   "retries": Number(process.env.TEST_RETRIES) || 0,
   // Logs retried tests.
