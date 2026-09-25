@@ -20,6 +20,7 @@ import {EventEmitter} from 'events';
 import {Duplex, Writable} from 'stream';
 import {SpanStatusCode} from '@opentelemetry/api';
 import {describe, it, beforeEach, afterEach} from 'mocha';
+import * as grpc from '@grpc/grpc-js';
 import {
   getGaxTracer,
   traceCall,
@@ -27,6 +28,11 @@ import {
   handleStream,
   DynamicTraceContext,
   StaticTraceContext,
+  resolveErrorInfoReason,
+  resolveServerErrorCode,
+  resolveClientNetworkOrOperationalError,
+  resolveLanguageSpecificErrorType,
+  resolveErrorType,
 } from '../../src/observability/TracerHelper';
 import {
   GaxCallResult,
@@ -245,32 +251,30 @@ describe('TracerHelper', () => {
       it('falls through to the exception type when no response arrived', async () => {
         // An expired deadline on the fallback transport: a real gRPC status,
         // but no response and so no HTTP status. The gRPC code is not this
-        // transport's identifier, so the class is reported instead. The status
-        // itself stays on rpc.response.status_code.
+        // transport's identifier, so CLIENT_TIMEOUT is reported per Tier 3.
         const error = new GoogleError('Deadline exceeded');
         error.code = Status.DEADLINE_EXCEEDED;
 
         assert.strictEqual(
           await errorTypeOf(error, httpDynamicArgs),
-          'GoogleError',
+          'CLIENT_TIMEOUT',
         );
         harness.assertResponseStatus({rpcStatus: 'DEADLINE_EXCEEDED'});
       });
 
       it('prefers a system error code to the class on either transport', async () => {
         // A refused connection never reaches a server, so neither transport
-        // has a status to report. 'ECONNREFUSED' is the only description of
-        // the failure available: the class is the bare Error.
+        // has a status to report. 'CLIENT_CONNECTION_ERROR' is reported per Tier 3.
         const error = Object.assign(new Error('connect ECONNREFUSED'), {
           code: 'ECONNREFUSED',
         });
 
         assert.strictEqual(
           await errorTypeOf(error, httpDynamicArgs),
-          'ECONNREFUSED',
+          'CLIENT_CONNECTION_ERROR',
         );
         harness.reset();
-        assert.strictEqual(await errorTypeOf(error), 'ECONNREFUSED');
+        assert.strictEqual(await errorTypeOf(error), 'CLIENT_CONNECTION_ERROR');
       });
 
       it('preserves a system error code wrapped on cause by fallback _toGoogleError', async () => {
@@ -286,13 +290,579 @@ describe('TracerHelper', () => {
 
         assert.strictEqual(
           await errorTypeOf(error, httpDynamicArgs),
-          'ECONNREFUSED',
+          'CLIENT_CONNECTION_ERROR',
         );
         harness.assertResponseStatus({rpcStatus: 'UNAVAILABLE'});
       });
+
+      it('checks e.cause when the outer error is a GoogleError', async () => {
+        const fetchError = new TypeError('Failed to fetch');
+        const error = new GoogleError(fetchError.message);
+        error.cause = fetchError;
+
+        assert.strictEqual(
+          await errorTypeOf(error, httpDynamicArgs),
+          'TypeError',
+        );
+      });
+
+      it('checks e.cause on gRPC when the outer error is a GoogleError', async () => {
+        const innerError = new RangeError('out of bounds');
+        const error = new GoogleError(innerError.message);
+        error.cause = innerError;
+
+        assert.strictEqual(await errorTypeOf(error), 'RangeError');
+      });
+
+      it('resolves TimeoutError and AbortError exception names for DOMExceptions on gRPC and HTTP', async () => {
+        const abortDomException = new DOMException(
+          'This operation was aborted',
+          'AbortError',
+        );
+        const timeoutDomException = new DOMException(
+          'The operation was aborted due to timeout',
+          'TimeoutError',
+        );
+
+        assert.strictEqual(await errorTypeOf(abortDomException), 'AbortError');
+        harness.reset();
+        assert.strictEqual(
+          await errorTypeOf(abortDomException, httpDynamicArgs),
+          'AbortError',
+        );
+        harness.reset();
+        assert.strictEqual(
+          await errorTypeOf(timeoutDomException),
+          'CLIENT_TIMEOUT',
+        );
+        harness.reset();
+        assert.strictEqual(
+          await errorTypeOf(timeoutDomException, httpDynamicArgs),
+          'CLIENT_TIMEOUT',
+        );
+      });
+
+      it('resolves client-side error.type from cause when outer GoogleError has a gRPC status code', async () => {
+        const abortError = new DOMException('Operation aborted', 'AbortError');
+        const timeoutError = new DOMException('Timed out', 'TimeoutError');
+        const nodeCodeError = Object.assign(
+          new TypeError('Invalid argument type'),
+          {code: 'ERR_INVALID_ARG_TYPE'},
+        );
+
+        const cancelledError = new GoogleError(abortError.message);
+        cancelledError.code = Status.CANCELLED;
+        cancelledError.cause = abortError;
+
+        const deadlineError = new GoogleError(timeoutError.message);
+        deadlineError.code = Status.DEADLINE_EXCEEDED;
+        deadlineError.cause = timeoutError;
+
+        const invalidArgError = new GoogleError(nodeCodeError.message);
+        invalidArgError.code = Status.INVALID_ARGUMENT;
+        invalidArgError.cause = nodeCodeError;
+
+        assert.strictEqual(await errorTypeOf(cancelledError), 'AbortError');
+        harness.reset();
+        assert.strictEqual(await errorTypeOf(deadlineError), 'CLIENT_TIMEOUT');
+        harness.reset();
+        assert.strictEqual(
+          await errorTypeOf(invalidArgError),
+          'CLIENT_REQUEST_ERROR',
+        );
+      });
+
+      it('resolves Node error codes such as ERR_INVALID_ARG_TYPE and ECONNREFUSED', async () => {
+        const argError = Object.assign(new TypeError('Invalid argument'), {
+          code: 'ERR_INVALID_ARG_TYPE',
+        });
+        const connError = Object.assign(new Error('Connection refused'), {
+          code: 'ECONNREFUSED',
+        });
+
+        assert.strictEqual(await errorTypeOf(argError), 'CLIENT_REQUEST_ERROR');
+        harness.reset();
+        assert.strictEqual(
+          await errorTypeOf(argError, httpDynamicArgs),
+          'CLIENT_REQUEST_ERROR',
+        );
+        harness.reset();
+        assert.strictEqual(
+          await errorTypeOf(connError),
+          'CLIENT_CONNECTION_ERROR',
+        );
+        harness.reset();
+        assert.strictEqual(
+          await errorTypeOf(connError, httpDynamicArgs),
+          'CLIENT_CONNECTION_ERROR',
+        );
+      });
+
+      it('resolves server-side errors to canonical gRPC status or HTTP status', async () => {
+        const grpcServerError = Object.assign(
+          new Error('3 INVALID_ARGUMENT: Bad parameter'),
+          {code: Status.INVALID_ARGUMENT},
+        );
+        const httpServerError = Object.assign(new GoogleError('Bad Request'), {
+          code: Status.INVALID_ARGUMENT,
+          httpStatusCode: 400,
+        });
+
+        assert.strictEqual(
+          await errorTypeOf(grpcServerError),
+          'INVALID_ARGUMENT',
+        );
+        harness.reset();
+        assert.strictEqual(
+          await errorTypeOf(httpServerError, httpDynamicArgs),
+          '400',
+        );
+      });
+
+      it('unwraps nested causes when intermediate errors are GoogleErrors', async () => {
+        const rootError = new TypeError('root failure');
+        const intermediateError = new GoogleError('intermediate');
+        intermediateError.cause = rootError;
+        const outerError = new GoogleError('outer');
+        outerError.cause = intermediateError;
+
+        assert.strictEqual(
+          await errorTypeOf(outerError, httpDynamicArgs),
+          'TypeError',
+        );
+      });
+
+      it('prefers protocol status on the outer GoogleError over e.cause exception type', async () => {
+        const innerError = new TypeError('inner');
+        const error = new GoogleError('service unavailable');
+        error.code = Status.UNAVAILABLE;
+        error.httpStatusCode = 503;
+        error.cause = innerError;
+
+        assert.strictEqual(await errorTypeOf(error, httpDynamicArgs), '503');
+      });
     });
 
-    it('uses the string code for Node system errors', async () => {
+    describe('error.type 5-tier resolution hierarchy', () => {
+      const httpDynamicArgs: DynamicTraceContext = {
+        clientName: 'ComputeClient',
+        methodName: 'InsertInstance',
+        rpcType: 'http',
+      };
+
+      const errorTypeOf = async (
+        thrown: unknown,
+        args: DynamicTraceContext = dynamicArgs,
+      ) => {
+        await assert.rejects(async () => {
+          await traceCall(args, staticArgs, async () => {
+            throw thrown;
+          });
+        });
+        return harness.requireSingleSpan('google-gax').attributes['error.type'];
+      };
+
+      describe('Tier 1: google.rpc.ErrorInfo.reason', () => {
+        it('uses ErrorInfo.reason when available on gRPC, taking precedence over status code', async () => {
+          const error = Object.assign(new GoogleError('rate limit exceeded'), {
+            code: Status.RESOURCE_EXHAUSTED,
+            reason: 'RATE_LIMIT_EXCEEDED',
+          });
+          assert.strictEqual(
+            await errorTypeOf(error, dynamicArgs),
+            'RATE_LIMIT_EXCEEDED',
+          );
+        });
+
+        it('uses ErrorInfo.reason when available on HTTP, taking precedence over status code', async () => {
+          const error = Object.assign(new GoogleError('service disabled'), {
+            httpStatusCode: 403,
+            reason: 'SERVICE_DISABLED',
+          });
+          assert.strictEqual(
+            await errorTypeOf(error, httpDynamicArgs),
+            'SERVICE_DISABLED',
+          );
+        });
+
+        it('extracts reason from statusDetails array', async () => {
+          const error = Object.assign(new GoogleError('detailed failure'), {
+            code: Status.FAILED_PRECONDITION,
+            statusDetails: [{reason: 'RESOURCE_PROJECT_INVALID'}],
+          });
+          assert.strictEqual(
+            await errorTypeOf(error, dynamicArgs),
+            'RESOURCE_PROJECT_INVALID',
+          );
+        });
+
+        it('extracts reason from cause chain', async () => {
+          const innerError = Object.assign(new Error('inner'), {
+            reason: 'ACCESS_TOKEN_EXPIRED',
+          });
+          const error = new GoogleError('outer');
+          error.cause = innerError;
+          assert.strictEqual(
+            await errorTypeOf(error, dynamicArgs),
+            'ACCESS_TOKEN_EXPIRED',
+          );
+        });
+      });
+
+      describe('Tier 2: Specific Server Error Code', () => {
+        it('uses HTTP status code string for HTTP calls', async () => {
+          const error400 = Object.assign(new GoogleError('Bad Request'), {
+            httpStatusCode: 400,
+          });
+          const error503 = Object.assign(
+            new GoogleError('Service Unavailable'),
+            {
+              httpStatusCode: 503,
+            },
+          );
+          assert.strictEqual(
+            await errorTypeOf(error400, httpDynamicArgs),
+            '400',
+          );
+          harness.reset();
+          assert.strictEqual(
+            await errorTypeOf(error503, httpDynamicArgs),
+            '503',
+          );
+        });
+
+        it('uses uppercase gRPC canonical status name for gRPC calls', async () => {
+          const permDenied = Object.assign(new Error('Permission Denied'), {
+            code: Status.PERMISSION_DENIED,
+          });
+          const unavailable = Object.assign(new Error('Unavailable'), {
+            code: Status.UNAVAILABLE,
+          });
+          assert.strictEqual(
+            await errorTypeOf(permDenied, dynamicArgs),
+            'PERMISSION_DENIED',
+          );
+          harness.reset();
+          assert.strictEqual(
+            await errorTypeOf(unavailable, dynamicArgs),
+            'UNAVAILABLE',
+          );
+        });
+      });
+
+      describe('Tier 3: Client-Side Network/Operational Errors', () => {
+        it('resolves CLIENT_TIMEOUT for timeout conditions', async () => {
+          const domTimeout = new DOMException('timed out', 'TimeoutError');
+          const etimedout = Object.assign(new Error('connection timed out'), {
+            code: 'ETIMEDOUT',
+          });
+          const esocket = Object.assign(new Error('socket timed out'), {
+            code: 'ESOCKETTIMEDOUT',
+          });
+          const gaxTimeout = new GoogleError(
+            'Total timeout of API exceeded before completion',
+          );
+
+          assert.strictEqual(
+            await errorTypeOf(domTimeout, dynamicArgs),
+            'CLIENT_TIMEOUT',
+          );
+          harness.reset();
+          assert.strictEqual(
+            await errorTypeOf(etimedout, dynamicArgs),
+            'CLIENT_TIMEOUT',
+          );
+          harness.reset();
+          assert.strictEqual(
+            await errorTypeOf(esocket, dynamicArgs),
+            'CLIENT_TIMEOUT',
+          );
+          harness.reset();
+          assert.strictEqual(
+            await errorTypeOf(gaxTimeout, dynamicArgs),
+            'CLIENT_TIMEOUT',
+          );
+        });
+
+        it('resolves CLIENT_CONNECTION_ERROR for DNS, socket, connection, and TLS errors', async () => {
+          const codes = [
+            'ENOTFOUND',
+            'EAI_AGAIN',
+            'ECONNREFUSED',
+            'ECONNRESET',
+            'EHOSTUNREACH',
+            'ENETUNREACH',
+            'CERT_HAS_EXPIRED',
+            'UNABLE_TO_VERIFY_LEAF_SIGNATURE',
+            'ERR_TLS_CERT_ALTNAME_INVALID',
+            'ERR_SSL_PROTOCOL_ERROR',
+          ];
+
+          for (const code of codes) {
+            const err = Object.assign(new Error(`error with ${code}`), {code});
+            assert.strictEqual(
+              await errorTypeOf(err, dynamicArgs),
+              'CLIENT_CONNECTION_ERROR',
+              `Expected ${code} to resolve to CLIENT_CONNECTION_ERROR`,
+            );
+            harness.reset();
+          }
+        });
+
+        it('resolves CLIENT_REQUEST_ERROR for client parameter and request formatting errors', async () => {
+          const argTypeErr = Object.assign(new TypeError('invalid type'), {
+            code: 'ERR_INVALID_ARG_TYPE',
+          });
+          const invalidUrlErr = Object.assign(new Error('invalid url'), {
+            code: 'ERR_INVALID_URL',
+          });
+          const uriErr = new URIError('malformed URI sequence');
+
+          assert.strictEqual(
+            await errorTypeOf(argTypeErr, dynamicArgs),
+            'CLIENT_REQUEST_ERROR',
+          );
+          harness.reset();
+          assert.strictEqual(
+            await errorTypeOf(invalidUrlErr, dynamicArgs),
+            'CLIENT_REQUEST_ERROR',
+          );
+          harness.reset();
+          assert.strictEqual(
+            await errorTypeOf(uriErr, dynamicArgs),
+            'CLIENT_REQUEST_ERROR',
+          );
+        });
+
+        it('resolves CLIENT_REQUEST_BODY_ERROR for stream body errors', async () => {
+          const streamErr = Object.assign(new Error('write after end'), {
+            code: 'ERR_STREAM_WRITE_AFTER_END',
+          });
+          assert.strictEqual(
+            await errorTypeOf(streamErr, dynamicArgs),
+            'CLIENT_REQUEST_BODY_ERROR',
+          );
+        });
+
+        it('resolves CLIENT_RESPONSE_DECODE_ERROR for response decoding errors', async () => {
+          class DecodeError extends Error {}
+          const decodeErr = new DecodeError('failed to decode response');
+          const syntaxErr = new SyntaxError('Unexpected token < in JSON');
+
+          assert.strictEqual(
+            await errorTypeOf(decodeErr, dynamicArgs),
+            'CLIENT_RESPONSE_DECODE_ERROR',
+          );
+          harness.reset();
+          assert.strictEqual(
+            await errorTypeOf(syntaxErr, dynamicArgs),
+            'CLIENT_RESPONSE_DECODE_ERROR',
+          );
+        });
+
+        it('resolves CLIENT_REDIRECT_ERROR for redirect errors', async () => {
+          const redirectErr = Object.assign(new Error('too many redirects'), {
+            code: 'ERR_TOO_MANY_REDIRECTS',
+          });
+          assert.strictEqual(
+            await errorTypeOf(redirectErr, dynamicArgs),
+            'CLIENT_REDIRECT_ERROR',
+          );
+        });
+
+        it('resolves CLIENT_AUTHENTICATION_ERROR for authentication errors', async () => {
+          class GoogleAuthError extends Error {}
+          const authErr = new GoogleAuthError('Missing credentials');
+          const codeAuthErr = Object.assign(new Error('No credentials'), {
+            code: 'ERR_NO_CREDENTIALS',
+          });
+
+          assert.strictEqual(
+            await errorTypeOf(authErr, dynamicArgs),
+            'CLIENT_AUTHENTICATION_ERROR',
+          );
+          harness.reset();
+          assert.strictEqual(
+            await errorTypeOf(codeAuthErr, dynamicArgs),
+            'CLIENT_AUTHENTICATION_ERROR',
+          );
+        });
+      });
+
+      describe('Tier 4: Language-specific error type', () => {
+        it('resolves AbortError, TypeError, RangeError, and custom error classes', async () => {
+          class CustomRpcError extends Error {}
+          const abortErr = new DOMException('Operation aborted', 'AbortError');
+          const typeErr = new TypeError('parameter error');
+          const rangeErr = new RangeError('value out of range');
+          const customErr = new CustomRpcError('custom error');
+
+          assert.strictEqual(
+            await errorTypeOf(abortErr, dynamicArgs),
+            'AbortError',
+          );
+          harness.reset();
+          assert.strictEqual(
+            await errorTypeOf(typeErr, dynamicArgs),
+            'TypeError',
+          );
+          harness.reset();
+          assert.strictEqual(
+            await errorTypeOf(rangeErr, dynamicArgs),
+            'RangeError',
+          );
+          harness.reset();
+          assert.strictEqual(
+            await errorTypeOf(customErr, dynamicArgs),
+            'CustomRpcError',
+          );
+        });
+      });
+
+      describe('Tier 5: Internal Fallback', () => {
+        it('falls back to INTERNAL for bare Error, bare GoogleError, and non-Errors', async () => {
+          const bareError = new Error('internal logic error');
+          const bareGoogleError = new GoogleError('unexpected error');
+
+          assert.strictEqual(
+            await errorTypeOf(bareError, dynamicArgs),
+            'INTERNAL',
+          );
+          harness.reset();
+          assert.strictEqual(
+            await errorTypeOf(bareGoogleError, dynamicArgs),
+            'INTERNAL',
+          );
+          harness.reset();
+          assert.strictEqual(
+            await errorTypeOf('unexpected string', dynamicArgs),
+            'INTERNAL',
+          );
+        });
+      });
+
+      describe('helper functions direct unit tests', () => {
+        it('resolveErrorInfoReason handles direct reason, statusDetails, and cause', () => {
+          assert.strictEqual(
+            resolveErrorInfoReason({reason: 'RATE_LIMIT_EXCEEDED'}),
+            'RATE_LIMIT_EXCEEDED',
+          );
+          assert.strictEqual(
+            resolveErrorInfoReason({
+              statusDetails: [{reason: 'SERVICE_DISABLED'}],
+            }),
+            'SERVICE_DISABLED',
+          );
+          assert.strictEqual(
+            resolveErrorInfoReason({
+              cause: {reason: 'ACCESS_TOKEN_EXPIRED'},
+            }),
+            'ACCESS_TOKEN_EXPIRED',
+          );
+          assert.strictEqual(
+            resolveErrorInfoReason(new Error('none')),
+            undefined,
+          );
+        });
+
+        it('resolveServerErrorCode handles http and grpc', () => {
+          const httpErr = Object.assign(new Error('Not Found'), {
+            httpStatusCode: 404,
+          });
+          const grpcErr = Object.assign(new Error('Not Found'), {
+            code: Status.NOT_FOUND,
+          });
+          assert.strictEqual(resolveServerErrorCode(httpErr, 'http'), '404');
+          assert.strictEqual(
+            resolveServerErrorCode(grpcErr, 'grpc'),
+            'NOT_FOUND',
+          );
+          assert.strictEqual(
+            resolveServerErrorCode(grpcErr, 'http'),
+            undefined,
+          );
+          assert.strictEqual(
+            resolveServerErrorCode(httpErr, 'grpc'),
+            undefined,
+          );
+        });
+
+        it('resolveClientNetworkOrOperationalError maps codes and classes', () => {
+          assert.strictEqual(
+            resolveClientNetworkOrOperationalError({code: 'ECONNREFUSED'}),
+            'CLIENT_CONNECTION_ERROR',
+          );
+          assert.strictEqual(
+            resolveClientNetworkOrOperationalError({name: 'TimeoutError'}),
+            'CLIENT_TIMEOUT',
+          );
+          assert.strictEqual(
+            resolveClientNetworkOrOperationalError({
+              code: 'ERR_INVALID_ARG_TYPE',
+            }),
+            'CLIENT_REQUEST_ERROR',
+          );
+          assert.strictEqual(
+            resolveClientNetworkOrOperationalError(new Error('normal error')),
+            undefined,
+          );
+        });
+
+        it('resolveLanguageSpecificErrorType excludes generic classes and unwraps cause', () => {
+          assert.strictEqual(
+            resolveLanguageSpecificErrorType(new RangeError('out of bounds')),
+            'RangeError',
+          );
+          assert.strictEqual(
+            resolveLanguageSpecificErrorType(new Error('generic')),
+            undefined,
+          );
+          const outer = new GoogleError('outer');
+          outer.cause = new TypeError('inner');
+          assert.strictEqual(
+            resolveLanguageSpecificErrorType(outer),
+            'TypeError',
+          );
+        });
+
+        it('resolveErrorType implements the 5 tiers', () => {
+          // Tier 1 beats Tier 2
+          const t1 = Object.assign(new GoogleError('foo'), {
+            reason: 'MY_REASON',
+            code: Status.INVALID_ARGUMENT,
+          });
+          assert.strictEqual(resolveErrorType(t1, 'grpc'), 'MY_REASON');
+
+          // Tier 2 beats Tier 3
+          const t2 = Object.assign(new GoogleError('foo'), {
+            code: Status.PERMISSION_DENIED,
+          });
+          assert.strictEqual(resolveErrorType(t2, 'grpc'), 'PERMISSION_DENIED');
+
+          // Tier 3 beats Tier 4
+          const t3 = Object.assign(new TypeError('invalid type'), {
+            code: 'ERR_INVALID_ARG_TYPE',
+          });
+          assert.strictEqual(
+            resolveErrorType(t3, 'grpc'),
+            'CLIENT_REQUEST_ERROR',
+          );
+
+          // Tier 4 beats Tier 5
+          const t4 = new TypeError('normal type error');
+          assert.strictEqual(resolveErrorType(t4, 'grpc'), 'TypeError');
+
+          // Tier 5 fallback
+          assert.strictEqual(
+            resolveErrorType(new Error('generic'), 'grpc'),
+            'INTERNAL',
+          );
+          assert.strictEqual(resolveErrorType('string', 'grpc'), 'INTERNAL');
+        });
+      });
+    });
+
+    it('uses CLIENT_CONNECTION_ERROR for ECONNREFUSED', async () => {
       const error = Object.assign(new Error('connect ECONNREFUSED'), {
         code: 'ECONNREFUSED',
       });
@@ -304,11 +874,14 @@ describe('TracerHelper', () => {
       });
 
       const span = harness.requireSingleSpan('google-gax');
-      assert.strictEqual(span.attributes['error.type'], 'ECONNREFUSED');
+      assert.strictEqual(
+        span.attributes['error.type'],
+        'CLIENT_CONNECTION_ERROR',
+      );
     });
 
     // Fallback branches. Each of these must not produce a bogus error.type.
-    it('treats a zero status code as absent rather than as OK', async () => {
+    it('treats a zero status code as absent rather than as OK and falls back to INTERNAL', async () => {
       // Zero is the proto3 default for an unset code, which is why
       // GoogleError.parseHttpError deletes the field. Reporting 'OK' as the
       // type of a failed call would be actively wrong.
@@ -321,10 +894,10 @@ describe('TracerHelper', () => {
       });
 
       const span = harness.requireSingleSpan('google-gax');
-      assert.strictEqual(span.attributes['error.type'], 'Error');
+      assert.strictEqual(span.attributes['error.type'], 'INTERNAL');
     });
 
-    it('falls back to the class name for a code outside the Status range', async () => {
+    it('falls back to INTERNAL for a code outside the Status range', async () => {
       const error = Object.assign(new Error('bogus code'), {code: 4242});
 
       await assert.rejects(async () => {
@@ -334,10 +907,10 @@ describe('TracerHelper', () => {
       });
 
       const span = harness.requireSingleSpan('google-gax');
-      assert.strictEqual(span.attributes['error.type'], 'Error');
+      assert.strictEqual(span.attributes['error.type'], 'INTERNAL');
     });
 
-    it('falls back to the class name for an empty string code', async () => {
+    it('falls back to INTERNAL for an empty string code', async () => {
       const error = Object.assign(new Error('empty code'), {code: ''});
 
       await assert.rejects(async () => {
@@ -347,10 +920,10 @@ describe('TracerHelper', () => {
       });
 
       const span = harness.requireSingleSpan('google-gax');
-      assert.strictEqual(span.attributes['error.type'], 'Error');
+      assert.strictEqual(span.attributes['error.type'], 'INTERNAL');
     });
 
-    it('falls back to the class name for a GoogleError carrying no code', async () => {
+    it('falls back to INTERNAL for a GoogleError carrying no code', async () => {
       const error = new GoogleError('no code present');
 
       await assert.rejects(async () => {
@@ -360,10 +933,10 @@ describe('TracerHelper', () => {
       });
 
       const span = harness.requireSingleSpan('google-gax');
-      assert.strictEqual(span.attributes['error.type'], 'GoogleError');
+      assert.strictEqual(span.attributes['error.type'], 'INTERNAL');
     });
 
-    it('reports the _OTHER error.type when a non-Error is thrown', async () => {
+    it('reports the INTERNAL error.type when a non-Error is thrown', async () => {
       await assert.rejects(async () => {
         await traceCall(dynamicArgs, staticArgs, async () => {
           throw 'plain string failure';
@@ -373,7 +946,7 @@ describe('TracerHelper', () => {
       const span = harness.requireSingleSpan('google-gax');
       // Something must be reported, or the failure is invisible to any
       // error-rate query that groups on error.type.
-      assert.strictEqual(span.attributes['error.type'], '_OTHER');
+      assert.strictEqual(span.attributes['error.type'], 'INTERNAL');
       assert.strictEqual(span.attributes['exception.type'], undefined);
       assert.strictEqual(span.status.code, SpanStatusCode.ERROR);
       // The thrown value survives as the status description.
@@ -525,9 +1098,24 @@ describe('TracerHelper', () => {
           assert.strictEqual(await exceptionTypeOf(new Error('boom')), 'Error');
         });
 
-        it('keeps the message and stacktrace the SDK would have recorded', async () => {
-          // The error is no longer handed to recordException as-is, so the two
-          // attributes that are forwarded by hand have to be checked.
+        it('records local client stack trace & client error message for client-side errors', async () => {
+          const error = new GoogleError('client validation failure');
+
+          const span = await failWith(error);
+          const attributes = span.events[0].attributes;
+
+          assert.strictEqual(
+            attributes?.['exception.message'],
+            'client validation failure',
+          );
+          assert.strictEqual(
+            attributes?.['exception.stacktrace'],
+            error.stack,
+            'the stack must be forwarded verbatim from the original error for client-side errors',
+          );
+        });
+
+        it('records server error details and omits client stacktrace when no statusDetails or metadata exist', async () => {
           const error = new GoogleError('object does not exist');
           error.code = Status.NOT_FOUND;
 
@@ -540,8 +1128,70 @@ describe('TracerHelper', () => {
           );
           assert.strictEqual(
             attributes?.['exception.stacktrace'],
-            error.stack,
-            'the stack must be forwarded verbatim from the original error',
+            undefined,
+            'server-side error must not record the local client stack trace',
+          );
+        });
+
+        it('records server error details and formats status details and metadata as exception.stacktrace for gRPC server errors', async () => {
+          const metadata = new grpc.Metadata();
+          metadata.set('x-goog-request-id', 'req-123');
+          const error = Object.assign(
+            new GoogleError('Detailed server failure'),
+            {
+              code: Status.INVALID_ARGUMENT,
+              details: 'Field name is invalid',
+              statusDetails: [
+                {field: 'name', description: 'must be non-empty'},
+              ],
+              metadata,
+              reason: 'INVALID_FIELD',
+              domain: 'googleapis.com',
+              errorInfoMetadata: {consumer: 'projects/123'},
+            },
+          );
+
+          const span = await failWith(error);
+          harness.assertExceptionEvent(
+            {
+              type: 'GoogleError',
+              message: 'Field name is invalid',
+              stacktrace:
+                'status_details: [{"field":"name","description":"must be non-empty"}]\n' +
+                'metadata: {"x-goog-request-id":"req-123"}',
+            },
+            {span},
+          );
+        });
+
+        it('records server error details and formats status details and metadata as exception.stacktrace for HTTP fallback server errors', async () => {
+          const error = Object.assign(new GoogleError('HTTP server error'), {
+            httpStatusCode: 400,
+            details: 'Bad HTTP Request',
+            statusDetails: 'Quota exceeded',
+            metadata: {'content-type': 'application/json'},
+          });
+
+          await assert.rejects(async () => {
+            await traceCall(
+              {...dynamicArgs, rpcType: 'http'},
+              staticArgs,
+              async () => {
+                throw error;
+              },
+            );
+          });
+
+          const span = harness.requireSingleSpan('google-gax');
+          harness.assertExceptionEvent(
+            {
+              type: 'GoogleError',
+              message: 'Bad HTTP Request',
+              stacktrace:
+                'status_details: Quota exceeded\n' +
+                'metadata: {"content-type":"application/json"}',
+            },
+            {span},
           );
         });
       });
@@ -573,16 +1223,16 @@ describe('TracerHelper', () => {
         assert.strictEqual(span.events.length, 1);
         assert.strictEqual(span.status.code, SpanStatusCode.ERROR);
         assert.strictEqual(span.status.message, 'stream broke');
-        assert.strictEqual(span.attributes['error.type'], 'Error');
+        assert.strictEqual(span.attributes['error.type'], 'INTERNAL');
       });
 
       it('still resolves the RPC status for a non-Error carrying a code', async () => {
-        // error.type falls back to _OTHER because a non-Error has no class
+        // error.type falls back to INTERNAL because a non-Error has no class
         // worth reporting, but the domain status is resolved independently and
         // is still recoverable. The two do not have to agree here.
         const span = await failWith({code: Status.NOT_FOUND});
 
-        assert.strictEqual(span.attributes['error.type'], '_OTHER');
+        assert.strictEqual(span.attributes['error.type'], 'INTERNAL');
         harness.assertResponseStatus({rpcStatus: 'NOT_FOUND'}, {span});
         assert.strictEqual(span.events.length, 0);
         // Nothing better is available for an object with no message, so the
@@ -601,7 +1251,7 @@ describe('TracerHelper', () => {
         });
 
         assert.strictEqual(span.status.message, 'object does not exist');
-        assert.strictEqual(span.attributes['error.type'], '_OTHER');
+        assert.strictEqual(span.attributes['error.type'], 'INTERNAL');
         harness.assertResponseStatus({rpcStatus: 'NOT_FOUND'}, {span});
       });
 
@@ -638,7 +1288,7 @@ describe('TracerHelper', () => {
 
         assert.strictEqual(span.status.code, SpanStatusCode.ERROR);
         assert.strictEqual(span.status.message, '');
-        assert.strictEqual(span.attributes['error.type'], 'Error');
+        assert.strictEqual(span.attributes['error.type'], 'INTERNAL');
       });
 
       it('keeps the first description when a second, different failure arrives', async () => {
@@ -668,8 +1318,8 @@ describe('TracerHelper', () => {
 
         assert.strictEqual(span.status.code, SpanStatusCode.ERROR);
         assert.strictEqual(span.status.message, 'null');
-        assert.strictEqual(span.attributes['error.type'], '_OTHER');
-        harness.assertResponseStatus({rpcStatus: 'UNKNOWN'}, {span});
+        assert.strictEqual(span.attributes['error.type'], 'INTERNAL');
+        harness.assertResponseStatus({rpcStatus: undefined}, {span});
       });
 
       it('reports no error information at all when the call succeeds', async () => {
@@ -755,6 +1405,8 @@ describe('TracerHelper', () => {
         });
 
         harness.assertResponseStatus({rpcStatus: 'NOT_FOUND'});
+        const spans = harness.getSpans('google-gax');
+        assert.strictEqual(spans[0].status.message, '5 NOT_FOUND');
       });
 
       it('reports the received http status alongside the mapped gRPC status', async () => {
@@ -775,6 +1427,8 @@ describe('TracerHelper', () => {
           rpcStatus: 'FAILED_PRECONDITION',
           httpStatus: 418,
         });
+        const spans = harness.getSpans('google-gax');
+        assert.strictEqual(spans[0].status.message, 'teapot');
       });
 
       it('omits the http status when no response was received', async () => {
@@ -791,9 +1445,11 @@ describe('TracerHelper', () => {
         });
 
         harness.assertResponseStatus({rpcStatus: 'DEADLINE_EXCEEDED'});
+        const spans = harness.getSpans('google-gax');
+        assert.strictEqual(spans[0].status.message, 'Deadline exceeded');
       });
 
-      it('reports UNKNOWN for a failure carrying no gRPC status', async () => {
+      it('does not set response status codes for a failure carrying no gRPC status', async () => {
         const error = Object.assign(new Error('connect ECONNREFUSED'), {
           code: 'ECONNREFUSED',
         });
@@ -804,12 +1460,26 @@ describe('TracerHelper', () => {
           });
         });
 
-        harness.assertResponseStatus({rpcStatus: 'UNKNOWN'});
+        harness.assertResponseStatus({rpcStatus: undefined});
+        const spans = harness.getSpans('google-gax');
+        assert.strictEqual(spans[0].status.message, 'connect ECONNREFUSED');
+        assert.strictEqual(
+          spans[0].attributes['grpc.response.status_code'],
+          undefined,
+        );
+        assert.strictEqual(
+          spans[0].attributes['rpc.response.status_code'],
+          undefined,
+        );
+        assert.strictEqual(
+          spans[0].attributes['http.response.status_code'],
+          undefined,
+        );
       });
 
-      it('reports UNKNOWN rather than OK for a zero status code', async () => {
+      it('does not set response status codes for a zero status code', async () => {
         // Zero is the proto3 default for an unset code, so a failed call must
-        // not be labelled OK.
+        // not be labelled OK or report a response status.
         const error = Object.assign(new Error('unset code'), {code: 0});
 
         await assert.rejects(async () => {
@@ -818,17 +1488,185 @@ describe('TracerHelper', () => {
           });
         });
 
-        harness.assertResponseStatus({rpcStatus: 'UNKNOWN'});
+        harness.assertResponseStatus({rpcStatus: undefined});
       });
 
-      it('reports UNKNOWN when a non-Error is thrown', async () => {
+      it('does not set response status codes when a non-Error is thrown', async () => {
         await assert.rejects(async () => {
           await traceCall(dynamicArgs, staticArgs, async () => {
             throw 'plain string failure';
           });
         });
 
-        harness.assertResponseStatus({rpcStatus: 'UNKNOWN'});
+        harness.assertResponseStatus({rpcStatus: undefined});
+      });
+
+      it('does not set response status codes for client-side errors on gRPC', async () => {
+        const error = new TypeError('client parameter validation failed');
+
+        await assert.rejects(async () => {
+          await traceCall(dynamicArgs, staticArgs, async () => {
+            throw error;
+          });
+        });
+
+        harness.assertResponseStatus({rpcStatus: undefined});
+        const span = harness.requireSingleSpan('google-gax');
+        assert.strictEqual(
+          span.status.message,
+          'client parameter validation failed',
+        );
+        assert.strictEqual(
+          span.attributes['grpc.response.status_code'],
+          undefined,
+        );
+        assert.strictEqual(
+          span.attributes['rpc.response.status_code'],
+          undefined,
+        );
+        assert.strictEqual(
+          span.attributes['http.response.status_code'],
+          undefined,
+        );
+      });
+
+      it('does not set response status codes for client-side errors on HTTP', async () => {
+        const error = new TypeError('client-side http error');
+
+        await assert.rejects(async () => {
+          await traceCall(httpDynamicArgs, staticArgs, async () => {
+            throw error;
+          });
+        });
+
+        harness.assertResponseStatus({rpcStatus: undefined});
+        const span = harness.requireSingleSpan('google-gax');
+        assert.strictEqual(span.status.message, 'client-side http error');
+        assert.strictEqual(
+          span.attributes['grpc.response.status_code'],
+          undefined,
+        );
+        assert.strictEqual(
+          span.attributes['rpc.response.status_code'],
+          undefined,
+        );
+        assert.strictEqual(
+          span.attributes['http.response.status_code'],
+          undefined,
+        );
+      });
+
+      it('reports server.address and server.port when call succeeds', async () => {
+        const staticWithServer: StaticTraceContext = {
+          ...staticArgs,
+          serverAddress: 'storage.googleapis.com',
+          serverPort: 443,
+        };
+        await traceCall(dynamicArgs, staticWithServer, async () => 'ok');
+        harness.assertServerAddressAndPort({
+          address: 'storage.googleapis.com',
+          port: 443,
+        });
+      });
+
+      it('reports server.address and server.port for a server-side gRPC error', async () => {
+        const staticWithServer: StaticTraceContext = {
+          ...staticArgs,
+          serverAddress: 'storage.googleapis.com',
+          serverPort: 443,
+        };
+        const error = Object.assign(new Error('3 INVALID_ARGUMENT'), {
+          code: Status.INVALID_ARGUMENT,
+        });
+        await assert.rejects(async () => {
+          await traceCall(dynamicArgs, staticWithServer, async () => {
+            throw error;
+          });
+        });
+        harness.assertServerAddressAndPort({
+          address: 'storage.googleapis.com',
+          port: 443,
+        });
+      });
+
+      it('reports server.address and server.port for a server-side HTTP error', async () => {
+        const staticWithServer: StaticTraceContext = {
+          ...staticArgs,
+          serverAddress: 'storage.googleapis.com',
+          serverPort: 443,
+        };
+        const error = Object.assign(new GoogleError('Bad Request'), {
+          httpStatusCode: 400,
+        });
+        await assert.rejects(async () => {
+          await traceCall(httpDynamicArgs, staticWithServer, async () => {
+            throw error;
+          });
+        });
+        harness.assertServerAddressAndPort({
+          address: 'storage.googleapis.com',
+          port: 443,
+        });
+      });
+
+      it('omits server.address and server.port for a DNS resolution failure (ENOTFOUND)', async () => {
+        const staticWithServer: StaticTraceContext = {
+          ...staticArgs,
+          serverAddress: 'storage.googleapis.com',
+          serverPort: 443,
+        };
+        const error = Object.assign(new Error('getaddrinfo ENOTFOUND'), {
+          code: 'ENOTFOUND',
+        });
+        await assert.rejects(async () => {
+          await traceCall(dynamicArgs, staticWithServer, async () => {
+            throw error;
+          });
+        });
+        harness.assertServerAddressAndPort({
+          address: undefined,
+          port: undefined,
+        });
+      });
+
+      it('omits server.address and server.port for a connection failure (ECONNREFUSED)', async () => {
+        const staticWithServer: StaticTraceContext = {
+          ...staticArgs,
+          serverAddress: 'storage.googleapis.com',
+          serverPort: 443,
+        };
+        const error = Object.assign(new Error('connect ECONNREFUSED'), {
+          code: 'ECONNREFUSED',
+        });
+        await assert.rejects(async () => {
+          await traceCall(dynamicArgs, staticWithServer, async () => {
+            throw error;
+          });
+        });
+        harness.assertServerAddressAndPort({
+          address: undefined,
+          port: undefined,
+        });
+      });
+
+      it('omits server.address and server.port for client validation errors', async () => {
+        const staticWithServer: StaticTraceContext = {
+          ...staticArgs,
+          serverAddress: 'storage.googleapis.com',
+          serverPort: 443,
+        };
+        const error = Object.assign(new TypeError('Invalid argument'), {
+          code: 'ERR_INVALID_ARG_TYPE',
+        });
+        await assert.rejects(async () => {
+          await traceCall(dynamicArgs, staticWithServer, async () => {
+            throw error;
+          });
+        });
+        harness.assertServerAddressAndPort({
+          address: undefined,
+          port: undefined,
+        });
       });
 
       it('reports the status of a stream failure', () => {
