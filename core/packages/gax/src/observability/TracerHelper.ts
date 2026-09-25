@@ -460,11 +460,14 @@ function resolveHttpStatusCode(e: unknown): number | undefined {
  * or connection establishment.
  */
 function isPreConnectionFailure(e: unknown): boolean {
+  if (
+    resolveHttpStatusCode(e) !== undefined ||
+    resolveRpcStatusName(e) !== undefined
+  ) {
+    return false;
+  }
   if (!e || !(e instanceof Error || (typeof e === 'object' && 'stack' in e))) {
     return true;
-  }
-  if (resolveHttpStatusCode(e) !== undefined) {
-    return false;
   }
   const err = e as {name?: unknown; cause?: unknown};
   if (
@@ -508,11 +511,11 @@ export function isServerSideError(
   e: unknown,
   rpcType: 'grpc' | 'http',
 ): boolean {
-  if (!e || !(e instanceof Error || (typeof e === 'object' && 'stack' in e))) {
-    return false;
-  }
   if (rpcType === 'http') {
     return resolveHttpStatusCode(e) !== undefined;
+  }
+  if (!e || typeof e !== 'object') {
+    return false;
   }
   if (isPreConnectionFailure(e)) {
     return false;

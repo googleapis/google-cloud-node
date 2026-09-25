@@ -30,6 +30,7 @@ import {
   StaticTraceContext,
   resolveErrorInfoReason,
   resolveServerErrorCode,
+  isServerSideError,
   resolveClientNetworkOrOperationalError,
   resolveLanguageSpecificErrorType,
   resolveErrorType,
@@ -788,6 +789,54 @@ describe('TracerHelper', () => {
           );
         });
 
+        it('resolveServerErrorCode handles plain error objects without stack property', () => {
+          assert.strictEqual(
+            resolveServerErrorCode({httpStatusCode: 500}, 'http'),
+            '500',
+          );
+          assert.strictEqual(
+            resolveServerErrorCode({code: Status.NOT_FOUND}, 'grpc'),
+            'NOT_FOUND',
+          );
+          assert.strictEqual(
+            resolveServerErrorCode({code: 5}, 'grpc'),
+            'NOT_FOUND',
+          );
+          assert.strictEqual(
+            resolveServerErrorCode({httpStatusCode: 500}, 'grpc'),
+            undefined,
+          );
+          assert.strictEqual(
+            resolveServerErrorCode({code: 5}, 'http'),
+            undefined,
+          );
+        });
+
+        it('isServerSideError recognizes plain error objects with valid status codes', () => {
+          assert.strictEqual(
+            isServerSideError({httpStatusCode: 500}, 'http'),
+            true,
+          );
+          assert.strictEqual(
+            isServerSideError({code: Status.NOT_FOUND}, 'grpc'),
+            true,
+          );
+          assert.strictEqual(isServerSideError({code: 5}, 'grpc'), true);
+          assert.strictEqual(
+            isServerSideError({httpStatusCode: 500}, 'grpc'),
+            false,
+          );
+          assert.strictEqual(isServerSideError({code: 5}, 'http'), false);
+          assert.strictEqual(
+            isServerSideError({message: 'no code'}, 'grpc'),
+            false,
+          );
+          assert.strictEqual(
+            isServerSideError({message: 'no code'}, 'http'),
+            false,
+          );
+        });
+
         it('resolveClientNetworkOrOperationalError maps codes and classes', () => {
           assert.strictEqual(
             resolveClientNetworkOrOperationalError({code: 'ECONNREFUSED'}),
@@ -1300,12 +1349,11 @@ describe('TracerHelper', () => {
       });
 
       it('still resolves the RPC status for a non-Error carrying a code', async () => {
-        // error.type falls back to INTERNAL because a non-Error has no class
-        // worth reporting, but the domain status is resolved independently and
-        // is still recoverable. The two do not have to agree here.
+        // error.type resolves to NOT_FOUND from the server error code, and the
+        // domain status is also resolved independently as NOT_FOUND.
         const span = await failWith({code: Status.NOT_FOUND});
 
-        assert.strictEqual(span.attributes['error.type'], 'INTERNAL');
+        assert.strictEqual(span.attributes['error.type'], 'NOT_FOUND');
         harness.assertResponseStatus({rpcStatus: 'NOT_FOUND'}, {span});
         assert.strictEqual(span.events.length, 0);
         // Nothing better is available for an object with no message, so the
@@ -1324,7 +1372,7 @@ describe('TracerHelper', () => {
         });
 
         assert.strictEqual(span.status.message, 'object does not exist');
-        assert.strictEqual(span.attributes['error.type'], 'INTERNAL');
+        assert.strictEqual(span.attributes['error.type'], 'NOT_FOUND');
         harness.assertResponseStatus({rpcStatus: 'NOT_FOUND'}, {span});
       });
 
@@ -1680,6 +1728,51 @@ describe('TracerHelper', () => {
           address: 'storage.googleapis.com',
           port: 443,
         });
+      });
+
+      it('reports server.address and server.port for a plain object server-side HTTP error without stack', async () => {
+        const staticWithServer: StaticTraceContext = {
+          ...staticArgs,
+          serverAddress: 'storage.googleapis.com',
+          serverPort: 443,
+        };
+        const error = {httpStatusCode: 500};
+        await assert.rejects(async () => {
+          await traceCall(httpDynamicArgs, staticWithServer, async () => {
+            throw error;
+          });
+        });
+        harness.assertServerAddressAndPort({
+          address: 'storage.googleapis.com',
+          port: 443,
+        });
+        const span = harness.requireSingleSpan('google-gax');
+        assert.strictEqual(span.attributes['error.type'], '500');
+        assert.strictEqual(span.attributes['http.response.status_code'], 500);
+      });
+
+      it('reports server.address and server.port for a plain object server-side gRPC error without stack', async () => {
+        const staticWithServer: StaticTraceContext = {
+          ...staticArgs,
+          serverAddress: 'storage.googleapis.com',
+          serverPort: 443,
+        };
+        const error = {code: Status.NOT_FOUND};
+        await assert.rejects(async () => {
+          await traceCall(dynamicArgs, staticWithServer, async () => {
+            throw error;
+          });
+        });
+        harness.assertServerAddressAndPort({
+          address: 'storage.googleapis.com',
+          port: 443,
+        });
+        const span = harness.requireSingleSpan('google-gax');
+        assert.strictEqual(span.attributes['error.type'], 'NOT_FOUND');
+        assert.strictEqual(
+          span.attributes['grpc.response.status_code'],
+          'NOT_FOUND',
+        );
       });
 
       it('omits server.address and server.port for a DNS resolution failure (ENOTFOUND)', async () => {
