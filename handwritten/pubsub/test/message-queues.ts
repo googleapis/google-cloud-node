@@ -738,8 +738,7 @@ describe('MessageQueues', () => {
       // a deadlock that timed out under Bun where background fallback timers
       // are not scheduled while blocked on unresolved promises.
       const completion = modAckQueue.add(new FakeMessage() as Message, 10);
-      await modAckQueue.flush('test');
-      await completion;
+      await Promise.all([completion, modAckQueue.flush('test')]);
 
       const [, callOptions] = stub.lastCall.args;
       assert.strictEqual(callOptions, fakeCallOptions);
