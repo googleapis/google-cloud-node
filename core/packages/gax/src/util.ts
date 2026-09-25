@@ -205,3 +205,101 @@ export const decodeAnyProtosInArray = (
   }
   return protoListDecoded;
 };
+
+/**
+ * System and network error codes mapped to CLIENT_CONNECTION_ERROR.
+ */
+export const connectionCodes = [
+  'ENOTFOUND',
+  'EAI_AGAIN',
+  'ECONNREFUSED',
+  'ECONNRESET',
+  'EHOSTUNREACH',
+  'ENETUNREACH',
+  'ENETDOWN',
+  'EPIPE',
+  'UND_ERR_CONNECT_TIMEOUT',
+  'UND_ERR_SOCKET',
+  'CERT_HAS_EXPIRED',
+  'UNABLE_TO_VERIFY_LEAF_SIGNATURE',
+  'DEPTH_ZERO_SELF_SIGNED_CERT',
+  'SELF_SIGNED_CERT_IN_CHAIN',
+  'ERR_TLS_CERT_ALTNAME_INVALID',
+  'UNABLE_TO_GET_ISSUER_CERT',
+];
+
+/**
+ * System and client request error codes mapped to CLIENT_REQUEST_ERROR.
+ */
+export const requestCodes = [
+  'ERR_INVALID_ARG_TYPE',
+  'ERR_INVALID_URL',
+  'ERR_HTTP_INVALID_HEADER_VALUE',
+  'ERR_INVALID_HTTP_TOKEN',
+  'ERR_INVALID_PROTOCOL',
+  'ERR_INVALID_ARG_VALUE',
+];
+
+/**
+ * Stream and body error codes mapped to CLIENT_REQUEST_BODY_ERROR.
+ */
+export const requestBodyCodes = [
+  'ERR_STREAM_WRITE_AFTER_END',
+  'ERR_STREAM_DESTROYED',
+  'ERR_STREAM_ALREADY_FINISHED',
+  'ERR_STREAM_CANNOT_PIPE',
+  'ERR_STREAM_NULL_VALUES',
+  'ERR_STREAM_PREMATURE_CLOSE',
+];
+
+/**
+ * Buffer error codes mapped to CLIENT_RESPONSE_DECODE_ERROR.
+ */
+export const decodeCodes = ['ERR_BUFFER_OUT_OF_BOUNDS'];
+
+/**
+ * Redirect error codes mapped to CLIENT_REDIRECT_ERROR.
+ */
+export const redirectCodes = [
+  'ERR_TOO_MANY_REDIRECTS',
+  'ERR_FR_TOO_MANY_REDIRECTS',
+];
+
+/**
+ * Generic class / constructor names that should be unwrapped to find more specific error causes.
+ */
+export const genericClasses = [
+  'Error',
+  'GoogleError',
+  'Object',
+  'DOMException',
+];
+
+/**
+ * Error codes indicating failures prior to network connection establishment.
+ */
+export const preConnectionCodes = [
+  'ENOTFOUND',
+  'EAI_AGAIN',
+  'ECONNREFUSED',
+  'ECONNRESET',
+  'EHOSTUNREACH',
+  'ENETUNREACH',
+  'ERR_INVALID_ARG_TYPE',
+  'ERR_INVALID_URL',
+];
+
+/**
+ * Standard or infrastructure tokens in the x-goog-api-client header that should
+ * be ignored when resolving the client artifact/package name.
+ */
+export const ignoredClientHeaderTokens = [
+  'gl-node',
+  'gl-web',
+  'grpc',
+  'rest',
+  'gax',
+  'auth',
+  'gapic',
+  'gccl',
+];

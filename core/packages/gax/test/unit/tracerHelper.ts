@@ -33,6 +33,7 @@ import {
   resolveClientNetworkOrOperationalError,
   resolveLanguageSpecificErrorType,
   resolveErrorType,
+  resolveServerExceptionDetails,
 } from '../../src/observability/TracerHelper';
 import {
   GaxCallResult,
@@ -1193,6 +1194,78 @@ describe('TracerHelper', () => {
             },
             {span},
           );
+        });
+
+        it('encodes Buffer and Array of Buffers in metadata as base64', () => {
+          const error = Object.assign(new GoogleError('Buffer error'), {
+            metadata: {
+              'bin-key': Buffer.from('hello'),
+              'bin-array': [Buffer.from('foo'), 'bar', Buffer.from('baz')],
+              'regular-key': 'value',
+            },
+          });
+          const {stacktrace} = resolveServerExceptionDetails(error);
+          assert.strictEqual(
+            stacktrace,
+            'metadata: {"bin-key":"aGVsbG8=","bin-array":["Zm9v","bar","YmF6"],"regular-key":"value"}',
+          );
+        });
+
+        it('formats metadata safely without ReferenceError when Buffer is not defined', () => {
+          const originalBuffer = (globalThis as Record<string, unknown>).Buffer;
+          try {
+            delete (globalThis as Record<string, unknown>).Buffer;
+            const error = Object.assign(new GoogleError('Browser error'), {
+              metadata: {
+                'content-type': 'application/json',
+                headers: ['x-goog-request-id', 'req-456'],
+              },
+            });
+            const {stacktrace} = resolveServerExceptionDetails(error);
+            assert.strictEqual(
+              stacktrace,
+              'metadata: {"content-type":"application/json","headers":["x-goog-request-id","req-456"]}',
+            );
+          } finally {
+            (globalThis as Record<string, unknown>).Buffer = originalBuffer;
+          }
+        });
+
+        it('records exception event without ReferenceError when Buffer is not defined in browser/fallback environments', async () => {
+          const originalBuffer = (globalThis as Record<string, unknown>).Buffer;
+          try {
+            delete (globalThis as Record<string, unknown>).Buffer;
+            const error = Object.assign(new GoogleError('HTTP server error'), {
+              httpStatusCode: 500,
+              details: 'Internal Server Error',
+              statusDetails: 'Service unavailable',
+              metadata: {'content-type': 'application/json'},
+            });
+
+            await assert.rejects(async () => {
+              await traceCall(
+                {...dynamicArgs, rpcType: 'http'},
+                staticArgs,
+                async () => {
+                  throw error;
+                },
+              );
+            });
+
+            const span = harness.requireSingleSpan('google-gax');
+            harness.assertExceptionEvent(
+              {
+                type: 'GoogleError',
+                message: 'Internal Server Error',
+                stacktrace:
+                  'status_details: Service unavailable\n' +
+                  'metadata: {"content-type":"application/json"}',
+              },
+              {span},
+            );
+          } finally {
+            (globalThis as Record<string, unknown>).Buffer = originalBuffer;
+          }
         });
       });
 

@@ -16,6 +16,7 @@
 
 import {StaticTraceContext} from './TracerHelper';
 import {CallSettings} from '../gax';
+import {ignoredClientHeaderTokens} from '../util';
 
 export const DEFAULT_GCP_REPO = 'googleapis/google-cloud-node';
 
@@ -99,18 +100,7 @@ export function extractFromSettings(
           if (!result.gcpVersion) {
             result.gcpVersion = ver;
           }
-        } else if (
-          ![
-            'gl-node',
-            'gl-web',
-            'grpc',
-            'rest',
-            'gax',
-            'auth',
-            'gapic',
-            'gccl',
-          ].includes(name)
-        ) {
+        } else if (!ignoredClientHeaderTokens.includes(name)) {
           result.gcpArtifact = name;
           if (!result.gcpVersion) {
             result.gcpVersion = ver;

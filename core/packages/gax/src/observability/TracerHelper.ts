@@ -25,6 +25,15 @@ import {
 import {APICallback, GaxCallResult} from '../apitypes';
 import {GoogleError} from '../googleError';
 import {Status} from '../status';
+import {
+  connectionCodes,
+  decodeCodes,
+  genericClasses,
+  preConnectionCodes,
+  redirectCodes,
+  requestBodyCodes,
+  requestCodes,
+} from '../util';
 
 /**
  * Static metadata about the Google Cloud client library used to populate
@@ -229,24 +238,6 @@ export function resolveClientNetworkOrOperationalError(
     }
 
     // 2. CLIENT_CONNECTION_ERROR
-    const connectionCodes = [
-      'ENOTFOUND',
-      'EAI_AGAIN',
-      'ECONNREFUSED',
-      'ECONNRESET',
-      'EHOSTUNREACH',
-      'ENETUNREACH',
-      'ENETDOWN',
-      'EPIPE',
-      'UND_ERR_CONNECT_TIMEOUT',
-      'UND_ERR_SOCKET',
-      'CERT_HAS_EXPIRED',
-      'UNABLE_TO_VERIFY_LEAF_SIGNATURE',
-      'DEPTH_ZERO_SELF_SIGNED_CERT',
-      'SELF_SIGNED_CERT_IN_CHAIN',
-      'ERR_TLS_CERT_ALTNAME_INVALID',
-      'UNABLE_TO_GET_ISSUER_CERT',
-    ];
     if (
       (code && connectionCodes.includes(code)) ||
       (code && code.startsWith('ERR_SSL')) ||
@@ -256,14 +247,6 @@ export function resolveClientNetworkOrOperationalError(
     }
 
     // 3. CLIENT_REQUEST_ERROR
-    const requestCodes = [
-      'ERR_INVALID_ARG_TYPE',
-      'ERR_INVALID_URL',
-      'ERR_HTTP_INVALID_HEADER_VALUE',
-      'ERR_INVALID_HTTP_TOKEN',
-      'ERR_INVALID_PROTOCOL',
-      'ERR_INVALID_ARG_VALUE',
-    ];
     if (
       (code && requestCodes.includes(code)) ||
       name === 'URIError' ||
@@ -273,20 +256,11 @@ export function resolveClientNetworkOrOperationalError(
     }
 
     // 4. CLIENT_REQUEST_BODY_ERROR
-    const requestBodyCodes = [
-      'ERR_STREAM_WRITE_AFTER_END',
-      'ERR_STREAM_DESTROYED',
-      'ERR_STREAM_ALREADY_FINISHED',
-      'ERR_STREAM_CANNOT_PIPE',
-      'ERR_STREAM_NULL_VALUES',
-      'ERR_STREAM_PREMATURE_CLOSE',
-    ];
     if (code && requestBodyCodes.includes(code)) {
       return 'CLIENT_REQUEST_BODY_ERROR';
     }
 
     // 5. CLIENT_RESPONSE_DECODE_ERROR
-    const decodeCodes = ['ERR_BUFFER_OUT_OF_BOUNDS'];
     if (
       (code && decodeCodes.includes(code)) ||
       name === 'DecodeError' ||
@@ -298,10 +272,6 @@ export function resolveClientNetworkOrOperationalError(
     }
 
     // 6. CLIENT_REDIRECT_ERROR
-    const redirectCodes = [
-      'ERR_TOO_MANY_REDIRECTS',
-      'ERR_FR_TOO_MANY_REDIRECTS',
-    ];
     if (code && redirectCodes.includes(code)) {
       return 'CLIENT_REDIRECT_ERROR';
     }
@@ -349,7 +319,6 @@ export function resolveLanguageSpecificErrorType(
     }
 
     const className = err.constructor?.name;
-    const genericClasses = ['Error', 'GoogleError', 'Object', 'DOMException'];
 
     if (className && !genericClasses.includes(className)) {
       return className;
@@ -509,20 +478,8 @@ function isPreConnectionFailure(e: unknown): boolean {
     return true;
   }
   const systemCode = resolveSystemErrorCode(e);
-  if (systemCode) {
-    const preConnectionCodes = [
-      'ENOTFOUND',
-      'EAI_AGAIN',
-      'ECONNREFUSED',
-      'ECONNRESET',
-      'EHOSTUNREACH',
-      'ENETUNREACH',
-      'ERR_INVALID_ARG_TYPE',
-      'ERR_INVALID_URL',
-    ];
-    if (preConnectionCodes.includes(systemCode)) {
-      return true;
-    }
+  if (systemCode && preConnectionCodes.includes(systemCode)) {
+    return true;
   }
   if (
     (e instanceof GoogleError ||
@@ -577,6 +534,10 @@ export function isServerSideError(
     return resolveRpcStatusName(e) !== undefined;
   }
   return false;
+}
+
+function isBuffer(val: unknown): val is Buffer {
+  return typeof Buffer !== 'undefined' && Buffer.isBuffer(val);
 }
 
 /**
@@ -643,11 +604,11 @@ export function resolveServerExceptionDetails(e: Error): {
     }
     const cleanMap: Record<string, unknown> = {};
     for (const [key, val] of Object.entries(map)) {
-      if (Buffer.isBuffer(val)) {
+      if (isBuffer(val)) {
         cleanMap[key] = val.toString('base64');
       } else if (Array.isArray(val)) {
         cleanMap[key] = val.map(item =>
-          Buffer.isBuffer(item) ? item.toString('base64') : item,
+          isBuffer(item) ? item.toString('base64') : item,
         );
       } else {
         cleanMap[key] = val;
