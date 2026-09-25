@@ -3430,6 +3430,7 @@ declare namespace FirebaseFirestore {
       | 'Constant'
       | 'Function'
       | 'AggregateFunction'
+      | 'WindowFunction'
       | 'ListOfExprs'
       | 'AliasedExpression'
       | 'Variable'
@@ -6103,6 +6104,36 @@ declare namespace FirebaseFirestore {
        *     AggregateFunction and associates it with the provided alias.
        */
       as(name: string): AliasedAggregate;
+
+      /**
+       * Evaluates this aggregate function over a specific window frame, rather than
+       * over the window frame defined by the enclosing
+       * {@link Pipeline.addWindowFields} stage.
+       *
+       * The backend only accepts a frame (`documents` or `range`) here, and
+       * rejects `partition` and `sort`, which must be specified on the enclosing
+       * `addWindowFields()` stage.
+       *
+       * @example
+       * ```typescript
+       * firestore.pipeline().collection("sales")
+       *   .addWindowFields(
+       *     { sort: ascending('date') },
+       *     // Uses the stage's default frame.
+       *     sum('amount').as('runningTotal'),
+       *     // Overrides the stage frame with a 3 document moving window.
+       *     average('amount')
+       *       .over({ documents: { preceding: 1, following: 1 } })
+       *       .as('movingAverage')
+       *   );
+       * ```
+       *
+       * @param window - A {@link WindowSpec} containing the
+       *     `documents` or `range` frame to evaluate this aggregate over. If omitted, the
+       *     enclosing stage's frame is used.
+       * @returns A new {@link WindowFunction}.
+       */
+      over(window?: WindowSpec): WindowFunction;
     }
 
     /**
@@ -6118,6 +6149,65 @@ declare namespace FirebaseFirestore {
 
       /**
        * Specifies the name of the property that will contain the aggregate result in the output document.
+       * @internal
+       */
+      readonly _alias: string;
+    }
+
+    /**
+     * A function that is evaluated over a window frame of documents, as part of an
+     * {@link Pipeline.addWindowFields} stage.
+     *
+     * A `WindowFunction` is created either by one of the dedicated window function
+     * factories (such as {@link rank}), or by calling
+     * `over()` on an {@link AggregateFunction}.
+     */
+    export class WindowFunction {
+      expressionType: ExpressionType;
+
+      constructor(name: string, params?: Expression[]);
+
+      /**
+       * Evaluates this window function over a specific window frame, rather than
+       * over the window frame defined by the enclosing
+       * {@link Pipeline.addWindowFields} stage.
+       *
+       * The backend only accepts a frame (`documents` or `range`) here, and
+       * rejects `partition` and `sort`, which must be specified on the enclosing
+       * `addWindowFields()` stage.
+       *
+       * @param window - A {@link WindowSpec} containing
+       *     the `documents` or `range` frame to evaluate this function over. If
+       *     omitted, the enclosing stage's frame is used.
+       * @returns A new {@link WindowFunction}.
+       */
+      over(window?: WindowSpec): WindowFunction;
+
+      /**
+       * Assigns an alias to this `WindowFunction`. The alias specifies the name that
+       * the computed value will have in the output document.
+       *
+       * @param name - The alias to assign to this `WindowFunction`.
+       * @returns A new {@link AliasedWindowFunction}.
+       */
+      as(name: string): AliasedWindowFunction;
+    }
+
+    /**
+     * A {@link WindowFunction} with an alias.
+     */
+    export class AliasedWindowFunction {
+      constructor(windowFunction: WindowFunction, alias: string);
+
+      readonly windowFunction: WindowFunction;
+      readonly alias: string;
+
+      /**
+       * @internal
+       */
+      readonly _windowFunction: WindowFunction;
+
+      /**
        * @internal
        */
       readonly _alias: string;
@@ -12204,6 +12294,62 @@ declare namespace FirebaseFirestore {
       location: GeoPoint | Expression,
     ): Expression;
 
+    /**
+     * Creates a window function that computes the rank of the current document
+     * within its window frame. Documents that compare equal in the window sort
+     * order receive the same rank, and the next rank is offset by the number of
+     * tied documents.
+     *
+     * @example
+     * ```typescript
+     * firestore.pipeline().collection("employees")
+     *   .addWindowFields(
+     *     { partition: ['department'], sort: descending('salary') },
+     *     rank().as('salaryRank')
+     *   );
+     * ```
+     *
+     * @returns A new {@link WindowFunction}.
+     */
+    export function rank(): WindowFunction;
+
+    /**
+     * Creates a window function that computes the rank of the current document
+     * within its window frame, without gaps in the ranking sequence. Documents that
+     * compare equal in the window sort order receive the same rank, and the next
+     * rank is always incremented by one.
+     *
+     * @example
+     * ```typescript
+     * firestore.pipeline().collection("employees")
+     *   .addWindowFields(
+     *     { partition: ['department'], sort: descending('salary') },
+     *     denseRank().as('salaryRank')
+     *   );
+     * ```
+     *
+     * @returns A new {@link WindowFunction}.
+     */
+    export function denseRank(): WindowFunction;
+
+    /**
+     * Creates a window function that computes the sequential position of the
+     * current document within its window frame, starting at 1. Documents that
+     * compare equal in the window sort order receive distinct row numbers.
+     *
+     * @example
+     * ```typescript
+     * firestore.pipeline().collection("employees")
+     *   .addWindowFields(
+     *     { partition: ['department'], sort: descending('salary') },
+     *     rowNumber().as('salaryRowNumber')
+     *   );
+     * ```
+     *
+     * @returns A new {@link WindowFunction}.
+     */
+    export function rowNumber(): WindowFunction;
+
     // TODO(search) enable when supported by the backend
     // /**
     //  * Evaluates if the value in the field specified by `fieldName` is between
@@ -12568,6 +12714,110 @@ declare namespace FirebaseFirestore {
        * @returns A new Pipeline object with this stage appended to the stage list.
        */
       addFields(options: AddFieldsStageOptions): Pipeline;
+
+      /**
+       * Adds window function results to the output documents of the pipeline.
+       *
+       * Window functions evaluate expressions over a subset of documents (a "window frame") relative to the
+       * current document.
+       *
+       * @example
+       * ```typescript
+       * // 1. Unsorted partition/group aggregation (evaluates over the entire group)
+       * firestore.pipeline().collection("employees")
+       *   .addWindowFields(
+       *     {
+       *       partition: ['department']
+       *     },
+       *     average(field('salary')).as('departmentAverageSalary')
+       *   );
+       *
+       * // 2. Document-based moving average with explicit boundaries
+       * firestore.pipeline().collection("sales")
+       *   .addWindowFields(
+       *     {
+       *       sort: ascending('date'),
+       *       documents: { preceding: 1, following: 1 }
+       *     },
+       *     average(field('amount')).as('movingAverageAmount')
+       *   );
+       *
+       * // 3. Document-based running total using default boundaries (unbounded preceding to current row).
+       * // Note: Offsets are physical document counts, so no time unit is required or used even when sorting on 'date'.
+       * firestore.pipeline().collection("sales")
+       *   .addWindowFields(
+       *     {
+       *       sort: ascending('date'),
+       *       documents: { preceding: 'unbounded', following: 'current' }
+       *     },
+       *     sum(field('amount')).as('runningTotal')
+       *   );
+       *
+       * // 4. Range-based running average using default boundaries (unbounded preceding to current value)
+       * firestore.pipeline().collection("products")
+       *   .addWindowFields(
+       *     {
+       *       sort: ascending('price'),
+       *       range: { preceding: 'unbounded', following: 'current' }
+       *     },
+       *     average(field('rating')).as('cumulativeAvgRating')
+       *   );
+       *
+       * // 5. Range-based date/time window with a time unit (cumulative sales over the last 30 days)
+       * firestore.pipeline().collection("sales")
+       *   .addWindowFields(
+       *     {
+       *       sort: ascending('date'),
+       *       range: { preceding: 30, following: 'current', unit: 'day' }
+       *     },
+       *     sum(field('amount')).as('thirtyDayCumulativeSales')
+       *   );
+       * ```
+       *
+       * @param window - The specification defining how documents are partitioned, ordered, and bounded in the window frame.
+       * @param field - The first window field to add, specified as an {@link AliasedAggregate} or {@link AliasedWindowFunction}.
+       * @param additionalFields - Optional additional window fields to add to the documents.
+       * @returns A new Pipeline object with this stage appended to the stage list.
+       */
+      addWindowFields(
+        window: WindowSpec,
+        field: AliasedAggregate | AliasedWindowFunction,
+        ...additionalFields: Array<AliasedAggregate | AliasedWindowFunction>
+      ): Pipeline;
+
+      /**
+       * Adds window function results to the output documents of the pipeline using options.
+       *
+       * @example
+       * ```typescript
+       * // 1. Unsorted partition/group aggregation using options
+       * firestore.pipeline().collection("employees")
+       *   .addWindowFields({
+       *     window: {
+       *       partition: ['department']
+       *     },
+       *     fields: [
+       *       average(field('salary')).as('departmentAverageSalary')
+       *     ]
+       *   });
+       *
+       * // 2. Document-based moving average using options
+       * firestore.pipeline().collection("sales")
+       *   .addWindowFields({
+       *     window: {
+       *       sort: ascending('date'),
+       *       documents: { preceding: 1, following: 1 }
+       *     },
+       *     fields: [
+       *       average(field('amount')).as('movingAverageAmount')
+       *     ]
+       *   });
+       * ```
+       *
+       * @param options - An object specifying the window frame configuration and the fields to add.
+       * @returns A new Pipeline object with this stage appended to the stage list.
+       */
+      addWindowFields(options: AddWindowFieldsStageOptions): Pipeline;
       /**
        * Remove fields from outputs of previous stages.
        *
@@ -13768,6 +14018,128 @@ declare namespace FirebaseFirestore {
        *  At least one field is required.
        */
       fields: Selectable[];
+    };
+
+    export interface DocumentWindowFrame {
+      /**
+       * The lower bound (inclusive) of the window frame, relative to the current document's position.
+       *
+       * Can be:
+       * - A number specifying the number of documents preceding the current document.
+       * - `'current'` to represent the current document itself.
+       * - `'unbounded'` to include all documents from the first document in the group.
+       */
+      preceding: number | 'current' | 'unbounded' | Expression;
+
+      /**
+       * The upper bound (inclusive) of the window frame, relative to the current document's position.
+       *
+       * Can be:
+       * - A number specifying the number of documents following the current document.
+       * - `'current'` to represent the current document itself.
+       * - `'unbounded'` to include all documents to the last document in the group.
+       */
+      following: number | 'current' | 'unbounded' | Expression;
+    }
+
+    export interface RangeWindowFrame {
+      /**
+       * The lower bound (inclusive) of the window frame, relative to the sort value of the current document.
+       *
+       * Can be:
+       * - A number specifying the value-based offset from the current document's sort value.
+       * - `'current'` to represent only documents with the same sort value as the current document.
+       * - `'unbounded'` to include all documents from the start of the group.
+       */
+      preceding: number | 'current' | 'unbounded' | Expression;
+
+      /**
+       * The upper bound (inclusive) of the window frame, relative to the sort value of the current document.
+       *
+       * Can be:
+       * - A number specifying the value-based offset from the current document's sort value.
+       * - `'current'` to represent only documents with the same sort value as the current document.
+       * - `'unbounded'` to include all documents to the end of the group.
+       */
+      following: number | 'current' | 'unbounded' | Expression;
+
+      /**
+       * The unit used to calculate range boundaries when the `sort` field contains date or time values.
+       */
+      unit?:
+        | 'microsecond'
+        | 'millisecond'
+        | 'second'
+        | 'minute'
+        | 'hour'
+        | 'day'
+        | 'week'
+        | 'week(monday)'
+        | 'week(tuesday)'
+        | 'week(wednesday)'
+        | 'week(thursday)'
+        | 'week(friday)'
+        | 'week(saturday)'
+        | 'week(sunday)'
+        | 'isoweek'
+        | 'month'
+        | 'quarter'
+        | 'year'
+        | Expression;
+    }
+
+    /**
+     * A type that specifies a window frame, over which a window function will be evaluated.
+     *
+     * Default frame behavior:
+     * - If `sort` is not specified, the default frame is `documents` from `'unbounded'` preceding to `'unbounded'` following (the entire partition/group).
+     * - If `sort` is specified, the default frame is `range` from `'unbounded'` preceding to `'current'` row value.
+     */
+    export type WindowSpec = {
+      /**
+       * Evaluate the window function over documents in the same group as the current document. Documents are grouped by having the same value for all provided {@link Expression}s and fields as specified in this `partition` array. If a string value is provided, it is treated as the name of a field in the document. If this value is left unspecified, then a single group is used for all input documents to the stage.
+       */
+      partition?: Array<string | Expression>;
+
+      /**
+       * The sort order of the documents in each group.
+       *
+       * Setting a value for `sort` changes the default window frame behavior.
+       * See {@link WindowSpec} for default frame specifications.
+       *
+       * See {@link Ordering}.
+       */
+      sort?: Ordering | Ordering[];
+    } & OneOf<{
+      /**
+       * Defines a document-count based window frame relative to the position of the current document in the sorted group.
+       *
+       * See {@link WindowSpec} for default frame specifications if `documents` or `range` is not set.
+       */
+      documents?: DocumentWindowFrame;
+
+      /**
+       * Defines a range-value based window frame relative to the sort value of the current document.
+       *
+       * See {@link WindowSpec} for default frame specifications if `documents` or `range` is not set.
+       */
+      range?: RangeWindowFrame;
+    }>;
+
+    /**
+     * Options defining how an AddWindowFieldsStage is evaluated. See {@link Pipeline.addWindowFields}.
+     */
+    export type AddWindowFieldsStageOptions = StageOptions & {
+      /**
+       * The window spec to evaluate the window function over.
+       */
+      window: WindowSpec;
+
+      /**
+       * The fields to add to each document, specified as an {@link AliasedAggregate} or {@link AliasedWindowFunction}.
+       * At least one field is required.
+       */
+      fields: Array<AliasedAggregate | AliasedWindowFunction>;
     };
     /**
      * Options defining how a RemoveFieldsStage is evaluated. See {@link Pipeline.removeFields}.

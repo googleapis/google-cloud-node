@@ -68,6 +68,7 @@ class AggregateFunction implements AggregateFunction, HasUserData {
     _createdFromLiteral: boolean;
     // (undocumented)
     expressionType: firestore.Pipelines.ExpressionType;
+    over(window?: firestore.Pipelines.WindowSpec): WindowFunction;
     // (undocumented)
     _protoValueType: "ProtoValue";
     // Warning: (tsdoc-undefined-tag) The TSDoc tag "@private" is not defined in this configuration
@@ -168,6 +169,27 @@ class AliasedExpression implements firestore.Pipelines.Selectable, HasUserData {
     //
     // @internal (undocumented)
     _validateUserData(ignoreUndefinedProperties: boolean): void;
+}
+
+// @public
+class AliasedWindowFunction implements firestore.Pipelines.AliasedWindowFunction, HasUserData {
+    constructor(windowFunction: WindowFunction, alias: string);
+    // (undocumented)
+    readonly alias: string;
+    // @internal (undocumented)
+    readonly _alias: string;
+    // Warning: (tsdoc-undefined-tag) The TSDoc tag "@private" is not defined in this configuration
+    //
+    // @internal
+    _createdFromLiteral: boolean;
+    // Warning: (tsdoc-undefined-tag) The TSDoc tag "@private" is not defined in this configuration
+    //
+    // @internal (undocumented)
+    _validateUserData(ignoreUndefinedProperties: boolean): void;
+    // (undocumented)
+    readonly windowFunction: WindowFunction;
+    // @internal (undocumented)
+    readonly _windowFunction: WindowFunction;
 }
 
 // @public
@@ -720,6 +742,9 @@ export const DEFAULT_MAX_IDLE_CHANNELS = 1;
 //
 // @public
 export const DEFAULT_MAX_TRANSACTION_ATTEMPTS = 5;
+
+// @public
+function denseRank(): WindowFunction;
 
 // @public
 function descending(expr: Expression): Ordering;
@@ -1999,6 +2024,8 @@ class Pipeline implements firestore.Pipelines.Pipeline {
     addFields(field: firestore.Pipelines.Selectable, ...additionalFields: firestore.Pipelines.Selectable[]): Pipeline;
     // Warning: (tsdoc-escape-right-brace) The "}" character should be escaped using a backslash to avoid confusion with a TSDoc inline tag
     addFields(options: firestore.Pipelines.AddFieldsStageOptions): Pipeline;
+    addWindowFields(window: firestore.Pipelines.WindowSpec, field: firestore.Pipelines.AliasedAggregate | firestore.Pipelines.AliasedWindowFunction, ...additionalFields: Array<firestore.Pipelines.AliasedAggregate | firestore.Pipelines.AliasedWindowFunction>): Pipeline;
+    addWindowFields(options: firestore.Pipelines.AddWindowFieldsStageOptions): Pipeline;
     aggregate(accumulator: firestore.Pipelines.AliasedAggregate, ...additionalAccumulators: firestore.Pipelines.AliasedAggregate[]): Pipeline;
     aggregate(options: firestore.Pipelines.AggregateStageOptions): Pipeline;
     define(aliasedExpression: firestore.Pipelines.AliasedExpression, ...additionalExpressions: firestore.Pipelines.AliasedExpression[]): Pipeline;
@@ -2277,7 +2304,12 @@ declare namespace Pipelines {
         coalesce,
         documentMatches,
         score,
-        geoDistance
+        geoDistance,
+        WindowFunction,
+        AliasedWindowFunction,
+        rank,
+        denseRank,
+        rowNumber
     }
 }
 export { Pipelines }
@@ -2620,6 +2652,9 @@ export class QuerySnapshot<AppModelType = firestore.DocumentData, DbModelType ex
 function rand(): FunctionExpression;
 
 // @public
+function rank(): WindowFunction;
+
+// @public
 function regexContains(fieldName: string, pattern: string): BooleanExpression;
 
 // @public
@@ -2684,6 +2719,9 @@ function round(fieldName: string, decimalPlaces: number | Expression): FunctionE
 
 // @public
 function round(expression: Expression, decimalPlaces: number | Expression): FunctionExpression;
+
+// @public
+function rowNumber(): WindowFunction;
 
 // @public
 function rtrim(fieldName: string, valueToTrim?: string | Expression | Uint8Array | Buffer): FunctionExpression;
@@ -3174,6 +3212,29 @@ export class VectorValue implements firestore.VectorValue {
     //
     // @internal (undocumented)
     _toProto(serializer: Serializer): api.IValue;
+}
+
+// @public
+class WindowFunction implements firestore.Pipelines.WindowFunction, HasUserData {
+    constructor(name: string, params?: Expression[]);
+    as(name: string): AliasedWindowFunction;
+    // Warning: (tsdoc-undefined-tag) The TSDoc tag "@private" is not defined in this configuration
+    //
+    // @internal
+    _createdFromLiteral: boolean;
+    // (undocumented)
+    expressionType: firestore.Pipelines.ExpressionType;
+    over(window?: firestore.Pipelines.WindowSpec): WindowFunction;
+    // (undocumented)
+    _protoValueType: "ProtoValue";
+    // Warning: (tsdoc-undefined-tag) The TSDoc tag "@private" is not defined in this configuration
+    //
+    // @internal (undocumented)
+    _toProto(serializer: Serializer): api.IValue;
+    // Warning: (tsdoc-undefined-tag) The TSDoc tag "@private" is not defined in this configuration
+    //
+    // @internal (undocumented)
+    _validateUserData(ignoreUndefinedProperties: boolean): void;
 }
 
 // Warning: (tsdoc-undefined-tag) The TSDoc tag "@class" is not defined in this configuration
