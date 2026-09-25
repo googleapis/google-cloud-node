@@ -54,7 +54,7 @@
     "compile:cjs": "tsc -p ./tsconfig.cjs.json",
     "compile:esm": "tsc -p .",
     "compile": "npm run compile:cjs && npm run compile:esm",
-    "conformance-test": "cross-env NODE_OPTIONS=\"--no-deprecation\" node ../../bin/run-test.cjs --config ../../.mocharc.cjs --parallel build/cjs/conformance-test/ --require build/cjs/conformance-test/globalHooks.js",
+    "conformance-test": "cross-env NODE_OPTIONS=\"--no-deprecation\" mocha --parallel build/cjs/conformance-test/ --require build/cjs/conformance-test/globalHooks.js",
     "docs": "jsdoc -c .jsdoc.json",
     "fix": "gts fix",
     "lint": "gts check",
@@ -67,9 +67,9 @@
     "presystem-test:esm": "pnpm run compile:esm",
     "presystem-test": "pnpm run compile --sourceMap",
     "pretest": "pnpm run compile --sourceMap",
-    "system-test:esm": "mkdir -p $HOME/.config && node ../../bin/run-test.cjs --config ../../.mocharc.cjs --no-parallel build/esm/system-test --timeout 600000 --exit",
-    "system-test": "mkdir -p $HOME/.config && node ../../bin/run-test.cjs --config ../../.mocharc.cjs --no-parallel build/cjs/system-test --timeout 600000 --exit",
-    "test": "cross-env NODE_OPTIONS=\"--require ./scripts/preload-yargs.cjs --no-deprecation\" node ../../bin/run-test.cjs --config ../../.mocharc.cjs build/cjs/test"
+    "system-test:esm": "mkdir -p $HOME/.config && mocha build/esm/system-test --timeout 600000 --exit",
+    "system-test": "mkdir -p $HOME/.config && mocha build/cjs/system-test --timeout 600000 --exit",
+    "test": "cross-env NODE_OPTIONS=\"--require ./scripts/preload-yargs.cjs --no-deprecation\" c8 mocha build/cjs/test"
   },
   "dependencies": {
     "@google-cloud/paginator": "^7.0.1",
