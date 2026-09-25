@@ -30,6 +30,7 @@ const METADATA_URL =
 
 const configEnv = {
   NODE_ENV: process.env.NODE_ENV,
+  NODE_ENV: process.env.NODE_ENV,
   GCLOUD_PROJECT: process.env.GCLOUD_PROJECT,
   GAE_MODULE_NAME: process.env.GAE_MODULE_NAME,
   GAE_MODULE_VERSION: process.env.GAE_MODULE_VERSION,
