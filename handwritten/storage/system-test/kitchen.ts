@@ -55,7 +55,10 @@ describe('resumable-upload', () => {
     retryableErrorFn: RETRYABLE_ERR_FN_DEFAULT,
   };
 
-  const bucket = new Storage({retryOptions}).bucket(bucketName);
+  const bucket = new Storage({
+    projectId: process.env.PROJECT_ID,
+    retryOptions: retryOptions,
+  }).bucket(bucketName);
   let filePath: string;
 
   before(async () => {
@@ -97,7 +100,7 @@ describe('resumable-upload', () => {
     // see: https://cloud.google.com/storage/docs/exponential-backoff:
     const ms = Math.pow(2, retries) * 1000 + Math.random() * 2000;
     console.info(`retrying "${title}" in ${ms}ms`);
-    setTimeout(done(), ms);
+    setTimeout(() => { done(); }, ms);
   }
 
   it('should work', done => {
@@ -207,7 +210,7 @@ describe('resumable-upload', () => {
     });
 
     assert.ok(!resp.data);
-    assert.equal((resp.headers as any)['content-length'], '0');
+    assert.equal(resp.headers.get('content-length'), '0');
   });
 
   it('should return a non-resumable failed upload', done => {
