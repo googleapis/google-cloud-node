@@ -106,8 +106,11 @@ describe('LogSync', () => {
     });
 
     afterEach(() => {
-      fs.rmSync(TEST_FILE, {force: true});
-      instrumentation.setInstrumentationStatus(false);
+      try {
+        fs.rmSync(TEST_FILE, {force: true});
+      } finally {
+        instrumentation.setInstrumentationStatus(false);
+      }
     });
 
     function createLogger() {
