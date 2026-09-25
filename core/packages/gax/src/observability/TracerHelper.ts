@@ -121,7 +121,7 @@ export function resolveErrorInfoReason(e: unknown): string | undefined {
     return undefined;
   }
 
-  // If e is a GoogleError with gRPC status details metadata that hasn't decoded yet, decode it:
+  // Decode binary gRPC status details if present and not yet parsed.
   if (
     e instanceof GoogleError &&
     e.metadata &&
@@ -132,7 +132,7 @@ export function resolveErrorInfoReason(e: unknown): string | undefined {
     try {
       GoogleError.parseGRPCStatusDetails(e);
     } catch {
-      // Ignore decoding errors
+      // Ignore decoding errors.
     }
   }
 
@@ -140,6 +140,7 @@ export function resolveErrorInfoReason(e: unknown): string | undefined {
   let depth = 0;
   const seen = new Set<unknown>();
   while (current && typeof current === 'object' && depth < 10) {
+    // Guard against circular cause references.
     if (seen.has(current)) {
       break;
     }
@@ -151,10 +152,12 @@ export function resolveErrorInfoReason(e: unknown): string | undefined {
       cause?: unknown;
     };
 
+    // Check direct reason property on error.
     if (typeof err.reason === 'string' && err.reason.length > 0) {
       return err.reason;
     }
 
+    // Check errorInfo object on error.
     if (err.errorInfo && typeof err.errorInfo === 'object') {
       const infoReason = (err.errorInfo as {reason?: unknown}).reason;
       if (typeof infoReason === 'string' && infoReason.length > 0) {
@@ -162,6 +165,7 @@ export function resolveErrorInfoReason(e: unknown): string | undefined {
       }
     }
 
+    // Inspect statusDetails array for reason or errorInfo.
     if (Array.isArray(err.statusDetails)) {
       for (const detail of err.statusDetails) {
         if (detail && typeof detail === 'object') {
@@ -183,6 +187,7 @@ export function resolveErrorInfoReason(e: unknown): string | undefined {
       }
     }
 
+    // Traverse error cause chain.
     current = err.cause;
     depth++;
   }
@@ -221,9 +226,11 @@ export function resolveClientNetworkOrOperationalError(
   e: unknown,
 ): string | undefined {
   let current: unknown = e;
-  let depth = 0;
   const seen = new Set<unknown>();
-  while (current && typeof current === 'object' && depth < 10) {
+  for (let depth = 0; depth < 10; depth++) {
+    if (!current || typeof current !== 'object') {
+      break;
+    }
     if (seen.has(current)) {
       break;
     }
@@ -301,7 +308,6 @@ export function resolveClientNetworkOrOperationalError(
     }
 
     current = err.cause;
-    depth++;
   }
 
   return undefined;
@@ -323,6 +329,7 @@ export function resolveLanguageSpecificErrorType(
   let depth = 0;
   const seen = new Set<unknown>();
   while (current && typeof current === 'object' && depth < 10) {
+    // Guard against circular cause references.
     if (seen.has(current)) {
       break;
     }
@@ -333,16 +340,18 @@ export function resolveLanguageSpecificErrorType(
       cause?: unknown;
     };
 
+    // Prioritize AbortError regardless of class hierarchy.
     if (err.name === 'AbortError') {
       return 'AbortError';
     }
 
+    // Prefer specific constructor class name over generic base wrappers.
     const className = err.constructor?.name;
-
     if (className && !genericClasses.includes(className)) {
       return className;
     }
 
+    // Fall back to non-generic error name if available.
     if (
       typeof err.name === 'string' &&
       err.name.length > 0 &&
@@ -351,6 +360,7 @@ export function resolveLanguageSpecificErrorType(
       return err.name;
     }
 
+    // Unwrap cause chain when encountering generic wrapper classes.
     current = err.cause;
     depth++;
   }
@@ -499,12 +509,15 @@ export function isPreConnectionFailure(e: unknown): boolean {
   const seen = new Set<unknown>();
 
   while (depth < 10) {
+    // Server status code indicates a response was received.
     if (
       resolveHttpStatusCode(current) !== undefined ||
       resolveRpcStatusName(current) !== undefined
     ) {
       return false;
     }
+
+    // Non-Error throws or objects without stack are client failures.
     if (
       !current ||
       !(
@@ -514,11 +527,14 @@ export function isPreConnectionFailure(e: unknown): boolean {
     ) {
       return true;
     }
+
+    // Guard against circular cause references.
     if (seen.has(current)) {
       return false;
     }
     seen.add(current);
 
+    // Client-side validation errors happen before connection.
     const err = current as {name?: unknown; cause?: unknown};
     if (
       current instanceof TypeError ||
@@ -530,10 +546,14 @@ export function isPreConnectionFailure(e: unknown): boolean {
     ) {
       return true;
     }
+
+    // Check for network error codes occurring before connection establishment.
     const systemCode = resolveSystemErrorCode(current);
     if (systemCode && preConnectionCodes.includes(systemCode)) {
       return true;
     }
+
+    // Unwrap GoogleError wrappers to inspect underlying cause.
     if (
       (current instanceof GoogleError ||
         (current as {constructor?: {name?: string}}).constructor?.name ===

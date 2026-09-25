@@ -84,6 +84,7 @@ export function extractFromSettings(
     return result;
   }
 
+  // Extract artifact and version from x-goog-api-client header.
   const headers = (
     settings.otherArgs as {headers?: Record<string, string>} | undefined
   )?.headers;
@@ -110,6 +111,7 @@ export function extractFromSettings(
     }
   }
 
+  // Resolve service name and default artifact from apiName.
   if (typeof settings.apiName === 'string' && settings.apiName) {
     const serviceFromApi = extractServiceFromApiName(settings.apiName);
     if (serviceFromApi) {
@@ -123,10 +125,12 @@ export function extractFromSettings(
     }
   }
 
+  // Fall back to package.json version if missing.
   if (!result.gcpVersion && fallbackVersion) {
     result.gcpVersion = fallbackVersion;
   }
 
+  // Extract server address and port from endpoint settings.
   const otherArgs = settings.otherArgs as
     | {
         servicePath?: string;
@@ -149,6 +153,8 @@ export function extractFromSettings(
       result.serverAddress = endpoint;
     }
   }
+
+  // Resolve server port if not already parsed from endpoint.
   const port =
     (settings as {port?: number; servicePort?: number}).port ||
     (settings as {port?: number; servicePort?: number}).servicePort ||
