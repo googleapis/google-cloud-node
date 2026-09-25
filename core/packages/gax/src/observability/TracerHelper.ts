@@ -17,6 +17,7 @@
 import {EventEmitter} from 'events';
 import {
   Attributes,
+  context,
   Span,
   SpanStatusCode,
   trace,
@@ -1135,7 +1136,9 @@ export function traceCall(
       : undefined;
 
     try {
-      const result = fn(tracedCallback, recordResend);
+      const result = context.with(trace.setSpan(context.active(), span), () =>
+        fn(tracedCallback, recordResend),
+      );
       const promiseTarget = !isStreamCall ? getPromiseTarget(result) : null;
       if (isStreamCall && result instanceof EventEmitter) {
         handleStream(result, recordError, endSpan, !!callback);
