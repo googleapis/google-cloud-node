@@ -295,10 +295,25 @@ class ReadRowsRequestHandler {
         }
         if (!canSendMore) {
           // Before doing any more writing with the stream, drain the stream.
+          // Listen for 'drain' as well as termination events ('close', 'error', 'finish')
+          // to ensure we unblock and avoid hanging if the stream ends while awaiting backpressure.
           debugLog('awaiting for back pressure');
           await new Promise<void>(resolve => {
-            this.stopWaiting = resolve;
-            stream.once('drain', resolve);
+            // Clean up all registered listeners once any event triggers or stopWaiting
+            // is called, preventing listener leaks and MaxListenersExceededWarning.
+            const onEvent = () => {
+              stream.off('drain', onEvent);
+              stream.off('close', onEvent);
+              stream.off('error', onEvent);
+              stream.off('finish', onEvent);
+              this.stopWaiting = () => {};
+              resolve();
+            };
+            this.stopWaiting = onEvent;
+            stream.once('drain', onEvent);
+            stream.once('close', onEvent);
+            stream.once('error', onEvent);
+            stream.once('finish', onEvent);
           });
         }
         resolve();
@@ -356,12 +371,23 @@ export class ReadRowsImpl {
 
     prettyPrintRequest(stream.request, debugLog);
     const readRowsRequestHandler = new ReadRowsRequestHandler(stream, debugLog);
-    stream.on('cancelled', () => {
-      debugLog('gRPC server received cancel()');
+    // When the client closes, errors, or cancels the stream, notify the handler
+    // to stop sending chunks and unblock any pending backpressure wait.
+    let streamEnded = false;
+    const onStreamEnded = () => {
+      if (streamEnded) return;
+      streamEnded = true;
       readRowsRequestHandler.cancelled = true;
       readRowsRequestHandler.stopWaiting();
+    };
+    stream.on('cancelled', () => {
+      debugLog('gRPC server received cancel()');
+      onStreamEnded();
       stream.emit('error', new Error('Cancelled'));
     });
+    // Also listen for close and error events so the server doesn't hang if the connection drops.
+    stream.on('close', onStreamEnded);
+    stream.on('error', onStreamEnded);
     const chunks = generateChunksFromRequest(
       stream.request,
       this.serviceParameters,
