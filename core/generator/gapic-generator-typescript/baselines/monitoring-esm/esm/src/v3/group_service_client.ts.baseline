@@ -2723,6 +2723,7 @@ export class GroupServiceClient {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
+        return;
       });
     }
     return Promise.resolve();

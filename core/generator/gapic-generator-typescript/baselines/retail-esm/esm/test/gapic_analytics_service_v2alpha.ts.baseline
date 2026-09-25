@@ -236,6 +236,7 @@ describe('v2alpha.AnalyticsServiceClient', () => {
         .close()
         .then(() => {
           done();
+          return;
         })
         .catch(err => {
           throw err;
@@ -252,6 +253,7 @@ describe('v2alpha.AnalyticsServiceClient', () => {
         .close()
         .then(() => {
           done();
+          return;
         })
         .catch(err => {
           throw err;

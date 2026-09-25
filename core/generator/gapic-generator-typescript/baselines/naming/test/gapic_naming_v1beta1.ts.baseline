@@ -243,6 +243,7 @@ describe('v1beta1.NamingClient', () => {
         .close()
         .then(() => {
           done();
+          return;
         })
         .catch(err => {
           throw err;
@@ -259,6 +260,7 @@ describe('v1beta1.NamingClient', () => {
         .close()
         .then(() => {
           done();
+          return;
         })
         .catch(err => {
           throw err;

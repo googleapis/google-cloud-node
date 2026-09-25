@@ -159,6 +159,7 @@ describe('v1.TestServiceClient', () => {
         .close()
         .then(() => {
           done();
+          return;
         })
         .catch(err => {
           throw err;
@@ -175,6 +176,7 @@ describe('v1.TestServiceClient', () => {
         .close()
         .then(() => {
           done();
+          return;
         })
         .catch(err => {
           throw err;

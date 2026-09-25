@@ -221,6 +221,7 @@ describe('v1.RegionOperationsClient', () => {
         .close()
         .then(() => {
           done();
+          return;
         })
         .catch(err => {
           throw err;
@@ -237,6 +238,7 @@ describe('v1.RegionOperationsClient', () => {
         .close()
         .then(() => {
           done();
+          return;
         })
         .catch(err => {
           throw err;

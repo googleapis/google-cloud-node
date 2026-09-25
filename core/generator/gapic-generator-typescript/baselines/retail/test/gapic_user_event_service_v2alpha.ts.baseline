@@ -234,6 +234,7 @@ describe('v2alpha.UserEventServiceClient', () => {
         .close()
         .then(() => {
           done();
+          return;
         })
         .catch(err => {
           throw err;
@@ -250,6 +251,7 @@ describe('v2alpha.UserEventServiceClient', () => {
         .close()
         .then(() => {
           done();
+          return;
         })
         .catch(err => {
           throw err;

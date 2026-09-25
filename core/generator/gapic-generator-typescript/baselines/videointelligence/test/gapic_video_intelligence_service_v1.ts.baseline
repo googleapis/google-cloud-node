@@ -236,6 +236,7 @@ describe('v1.VideoIntelligenceServiceClient', () => {
         .close()
         .then(() => {
           done();
+          return;
         })
         .catch(err => {
           throw err;
@@ -253,6 +254,7 @@ describe('v1.VideoIntelligenceServiceClient', () => {
         .close()
         .then(() => {
           done();
+          return;
         })
         .catch(err => {
           throw err;

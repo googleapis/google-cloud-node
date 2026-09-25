@@ -229,6 +229,7 @@ describe('v1.AssetServiceClient', () => {
         .close()
         .then(() => {
           done();
+          return;
         })
         .catch(err => {
           throw err;
@@ -245,6 +246,7 @@ describe('v1.AssetServiceClient', () => {
         .close()
         .then(() => {
           done();
+          return;
         })
         .catch(err => {
           throw err;
