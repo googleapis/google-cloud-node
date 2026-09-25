@@ -18,7 +18,9 @@
  * @module common/paginator
  */
 
-import * as extend from 'extend';
+import * as extendMod from 'extend';
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const extend: typeof extendMod = (extendMod as any).default || extendMod;
 import {TransformOptions} from 'stream';
 import {ResourceStream} from './resource-stream';
 
@@ -236,7 +238,7 @@ export class Paginator {
     if (!callback) {
       return promise.then(results => [results, query, ...otherArgs]);
     }
-    promise.then(
+    return promise.then(
       results => callback(null, results, query, ...otherArgs),
       (err: Error) => callback(err),
     );

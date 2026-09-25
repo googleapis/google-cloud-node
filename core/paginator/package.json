@@ -10,6 +10,7 @@
     "url": "https://github.com/googleapis/google-cloud-node.git"
   },
   "scripts": {
+    "test:bun": "bun test",
     "test": "jest --coverage",
     "compile": "tsc -p .",
     "fix": "gts fix",
