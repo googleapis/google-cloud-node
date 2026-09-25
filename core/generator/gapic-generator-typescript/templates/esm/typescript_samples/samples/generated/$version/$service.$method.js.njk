@@ -94,6 +94,14 @@ function main({%- for comment in filteredComments -%}
     stream.write(request);
     stream.end();
   }
+{% elif method.resumableUpload %}
+    // Run request
+    const session = await {{ (api.naming.productName).toCamelCase() }}Client.{{ method.name.toCamelCase() }}(request);
+    const uploadSource = {{ (api.naming.productName).toCamelCase() }}Client.getResumableSource('/path/to/file');
+    await session.start({uploadSource});
+    const response = await session.finished();
+    console.log(response);
+  }
 {% else %}
     // Run request
     const response = await {{ (api.naming.productName).toCamelCase() }}Client.{{ method.name.toCamelCase() }}(request);
