@@ -129,12 +129,21 @@ export function resolveErrorInfoReason(e: unknown): string | undefined {
     (e.metadata.get('grpc-status-details-bin') as unknown[])?.length > 0 &&
     !e.reason
   ) {
-    GoogleError.parseGRPCStatusDetails(e);
+    try {
+      GoogleError.parseGRPCStatusDetails(e);
+    } catch {
+      // Ignore decoding errors
+    }
   }
 
   let current: unknown = e;
   let depth = 0;
+  const seen = new Set<unknown>();
   while (current && typeof current === 'object' && depth < 10) {
+    if (seen.has(current)) {
+      break;
+    }
+    seen.add(current);
     const err = current as {
       reason?: unknown;
       statusDetails?: unknown;
@@ -213,7 +222,12 @@ export function resolveClientNetworkOrOperationalError(
 ): string | undefined {
   let current: unknown = e;
   let depth = 0;
+  const seen = new Set<unknown>();
   while (current && typeof current === 'object' && depth < 10) {
+    if (seen.has(current)) {
+      break;
+    }
+    seen.add(current);
     const err = current as {
       name?: unknown;
       code?: unknown;
@@ -307,7 +321,12 @@ export function resolveLanguageSpecificErrorType(
 
   let current: unknown = e;
   let depth = 0;
+  const seen = new Set<unknown>();
   while (current && typeof current === 'object' && depth < 10) {
+    if (seen.has(current)) {
+      break;
+    }
+    seen.add(current);
     const err = current as {
       name?: unknown;
       constructor?: {name?: string};
@@ -405,7 +424,12 @@ function resolveExceptionType(e: Error): string {
 function resolveSystemErrorCode(e: unknown): string | undefined {
   let current: unknown = e;
   let depth = 0;
+  const seen = new Set<unknown>();
   while (current && typeof current === 'object' && depth < 10) {
+    if (seen.has(current)) {
+      break;
+    }
+    seen.add(current);
     const code = (current as {code?: unknown}).code;
     if (typeof code === 'string' && code.length > 0) {
       return code;
@@ -423,7 +447,12 @@ function resolveSystemErrorCode(e: unknown): string | undefined {
 function resolveRpcStatusName(e: unknown): string | undefined {
   let current: unknown = e;
   let depth = 0;
+  const seen = new Set<unknown>();
   while (current && typeof current === 'object' && depth < 10) {
+    if (seen.has(current)) {
+      break;
+    }
+    seen.add(current);
     const code = (current as {code?: unknown}).code;
     if (
       typeof code === 'number' &&
@@ -444,7 +473,12 @@ function resolveRpcStatusName(e: unknown): string | undefined {
 function resolveHttpStatusCode(e: unknown): number | undefined {
   let current: unknown = e;
   let depth = 0;
+  const seen = new Set<unknown>();
   while (current && typeof current === 'object' && depth < 10) {
+    if (seen.has(current)) {
+      break;
+    }
+    seen.add(current);
     const code = (current as {httpStatusCode?: unknown}).httpStatusCode;
     if (typeof code === 'number') {
       return code;
@@ -459,39 +493,60 @@ function resolveHttpStatusCode(e: unknown): number | undefined {
  * Determines if a failure occurred on the client side before DNS resolution
  * or connection establishment.
  */
-function isPreConnectionFailure(e: unknown): boolean {
-  if (
-    resolveHttpStatusCode(e) !== undefined ||
-    resolveRpcStatusName(e) !== undefined
-  ) {
-    return false;
+export function isPreConnectionFailure(e: unknown): boolean {
+  let current: unknown = e;
+  let depth = 0;
+  const seen = new Set<unknown>();
+
+  while (depth < 10) {
+    if (
+      resolveHttpStatusCode(current) !== undefined ||
+      resolveRpcStatusName(current) !== undefined
+    ) {
+      return false;
+    }
+    if (
+      !current ||
+      !(
+        current instanceof Error ||
+        (typeof current === 'object' && 'stack' in current)
+      )
+    ) {
+      return true;
+    }
+    if (seen.has(current)) {
+      return false;
+    }
+    seen.add(current);
+
+    const err = current as {name?: unknown; cause?: unknown};
+    if (
+      current instanceof TypeError ||
+      current instanceof RangeError ||
+      current instanceof URIError ||
+      err.name === 'TypeError' ||
+      err.name === 'RangeError' ||
+      err.name === 'URIError'
+    ) {
+      return true;
+    }
+    const systemCode = resolveSystemErrorCode(current);
+    if (systemCode && preConnectionCodes.includes(systemCode)) {
+      return true;
+    }
+    if (
+      (current instanceof GoogleError ||
+        (current as {constructor?: {name?: string}}).constructor?.name ===
+          'GoogleError') &&
+      err.cause
+    ) {
+      current = err.cause;
+      depth++;
+    } else {
+      return false;
+    }
   }
-  if (!e || !(e instanceof Error || (typeof e === 'object' && 'stack' in e))) {
-    return true;
-  }
-  const err = e as {name?: unknown; cause?: unknown};
-  if (
-    e instanceof TypeError ||
-    e instanceof RangeError ||
-    e instanceof URIError ||
-    err.name === 'TypeError' ||
-    err.name === 'RangeError' ||
-    err.name === 'URIError'
-  ) {
-    return true;
-  }
-  const systemCode = resolveSystemErrorCode(e);
-  if (systemCode && preConnectionCodes.includes(systemCode)) {
-    return true;
-  }
-  if (
-    (e instanceof GoogleError ||
-      (e as {constructor?: {name?: string}}).constructor?.name ===
-        'GoogleError') &&
-    (e as {cause?: unknown}).cause
-  ) {
-    return isPreConnectionFailure((e as {cause?: unknown}).cause);
-  }
+
   return false;
 }
 
@@ -525,7 +580,12 @@ export function isServerSideError(
   }
   let current: unknown = e;
   let depth = 0;
+  const seen = new Set<unknown>();
   while (current && typeof current === 'object' && depth < 10) {
+    if (seen.has(current)) {
+      break;
+    }
+    seen.add(current);
     const err = current as {name?: unknown; cause?: unknown};
     if (err.name === 'AbortError' || err.name === 'TimeoutError') {
       return false;
@@ -541,6 +601,49 @@ export function isServerSideError(
 
 function isBuffer(val: unknown): val is Buffer {
   return typeof Buffer !== 'undefined' && Buffer.isBuffer(val);
+}
+
+/**
+ * Safely converts a value to a JSON string without throwing exceptions on
+ * circular references, BigInt values, or non-serializable properties.
+ */
+export function safeJsonStringify(value: unknown): string | undefined {
+  if (value === undefined) {
+    return undefined;
+  }
+  try {
+    const ancestors: unknown[] = [];
+    return JSON.stringify(
+      value,
+      function (this: unknown, _key: string, val: unknown) {
+        if (typeof val === 'bigint') {
+          return val.toString();
+        }
+        if (typeof val !== 'object' || val === null) {
+          return val;
+        }
+        if (ancestors.includes(this)) {
+          while (
+            ancestors.length > 0 &&
+            ancestors[ancestors.length - 1] !== this
+          ) {
+            ancestors.pop();
+          }
+        }
+        if (ancestors.includes(val)) {
+          return '[Circular]';
+        }
+        ancestors.push(val);
+        return val;
+      },
+    );
+  } catch {
+    try {
+      return String(value);
+    } catch {
+      return undefined;
+    }
+  }
 }
 
 /**
@@ -575,7 +678,11 @@ export function resolveServerExceptionDetails(e: Error): {
     typeof e.metadata.get === 'function' &&
     (e.metadata.get('grpc-status-details-bin') as unknown[])?.length > 0
   ) {
-    GoogleError.parseGRPCStatusDetails(e);
+    try {
+      GoogleError.parseGRPCStatusDetails(e);
+    } catch {
+      // Ignore decoding errors
+    }
   }
 
   // Server error details: prefer details if non-empty string, else message
@@ -592,32 +699,36 @@ export function resolveServerExceptionDetails(e: Error): {
     statusDetailsStr =
       typeof rawStatusDetails === 'string'
         ? rawStatusDetails
-        : JSON.stringify(rawStatusDetails);
+        : safeJsonStringify(rawStatusDetails);
   }
 
   // Metadata attached by GFE / backend
   const rawMetadata = errObj.metadata ?? causeObj?.metadata;
   let metadataStr: string | undefined;
   if (rawMetadata && typeof rawMetadata === 'object') {
-    let map: Record<string, unknown>;
-    if (typeof (rawMetadata as {getMap?: unknown}).getMap === 'function') {
-      map = (rawMetadata as {getMap: () => Record<string, unknown>}).getMap();
-    } else {
-      map = rawMetadata as Record<string, unknown>;
-    }
-    const cleanMap: Record<string, unknown> = {};
-    for (const [key, val] of Object.entries(map)) {
-      if (isBuffer(val)) {
-        cleanMap[key] = val.toString('base64');
-      } else if (Array.isArray(val)) {
-        cleanMap[key] = val.map(item =>
-          isBuffer(item) ? item.toString('base64') : item,
-        );
+    try {
+      let map: Record<string, unknown>;
+      if (typeof (rawMetadata as {getMap?: unknown}).getMap === 'function') {
+        map = (rawMetadata as {getMap: () => Record<string, unknown>}).getMap();
       } else {
-        cleanMap[key] = val;
+        map = rawMetadata as Record<string, unknown>;
       }
+      const cleanMap: Record<string, unknown> = {};
+      for (const [key, val] of Object.entries(map)) {
+        if (isBuffer(val)) {
+          cleanMap[key] = val.toString('base64');
+        } else if (Array.isArray(val)) {
+          cleanMap[key] = val.map(item =>
+            isBuffer(item) ? item.toString('base64') : item,
+          );
+        } else {
+          cleanMap[key] = val;
+        }
+      }
+      metadataStr = safeJsonStringify(cleanMap);
+    } catch {
+      metadataStr = safeJsonStringify(rawMetadata);
     }
-    metadataStr = JSON.stringify(cleanMap);
   }
 
   // Format status details and metadata as exception.stacktrace (replacing the local client stack trace)

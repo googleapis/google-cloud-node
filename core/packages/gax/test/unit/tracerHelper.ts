@@ -35,6 +35,8 @@ import {
   resolveLanguageSpecificErrorType,
   resolveErrorType,
   resolveServerExceptionDetails,
+  isPreConnectionFailure,
+  safeJsonStringify,
 } from '../../src/observability/TracerHelper';
 import {
   GaxCallResult,
@@ -909,6 +911,186 @@ describe('TracerHelper', () => {
           );
           assert.strictEqual(resolveErrorType('string', 'grpc'), 'INTERNAL');
         });
+
+        describe('safeJsonStringify', () => {
+          it('returns undefined for undefined and serializes primitives', () => {
+            assert.strictEqual(safeJsonStringify(undefined), undefined);
+            assert.strictEqual(safeJsonStringify(null), 'null');
+            assert.strictEqual(safeJsonStringify(123), '123');
+            assert.strictEqual(safeJsonStringify('abc'), '"abc"');
+            assert.strictEqual(safeJsonStringify(true), 'true');
+          });
+
+          it('serializes BigInt values as strings', () => {
+            const obj = {big: 9007199254740993n, list: [1n, 2n]};
+            assert.strictEqual(
+              safeJsonStringify(obj),
+              '{"big":"9007199254740993","list":["1","2"]}',
+            );
+          });
+
+          it('handles circular references in objects', () => {
+            const circular: Record<string, unknown> = {name: 'test'};
+            circular.self = circular;
+            assert.strictEqual(
+              safeJsonStringify(circular),
+              '{"name":"test","self":"[Circular]"}',
+            );
+          });
+
+          it('handles circular references in arrays', () => {
+            const arr: unknown[] = [1, 2];
+            arr.push(arr);
+            assert.strictEqual(safeJsonStringify(arr), '[1,2,"[Circular]"]');
+          });
+
+          it('handles deep circular references', () => {
+            const root: Record<string, unknown> = {
+              a: {
+                b: {
+                  c: {},
+                },
+              },
+            };
+            (root.a as Record<string, unknown>).b = root;
+            assert.strictEqual(
+              safeJsonStringify(root),
+              '{"a":{"b":"[Circular]"}}',
+            );
+          });
+
+          it('does not falsely mark shared references in DAGs as circular', () => {
+            const shared = {sharedKey: 'sharedValue'};
+            const dag = {first: shared, second: shared};
+            assert.strictEqual(
+              safeJsonStringify(dag),
+              '{"first":{"sharedKey":"sharedValue"},"second":{"sharedKey":"sharedValue"}}',
+            );
+          });
+
+          it('safely handles non-serializable objects and throwing getters without throwing', () => {
+            const badObj = {
+              get throwingProp() {
+                throw new Error('getter threw');
+              },
+            };
+            const result = safeJsonStringify(badObj);
+            assert.strictEqual(result, '[object Object]');
+          });
+
+          it('safely handles objects with throwing toString without throwing', () => {
+            const badObj = {
+              get throwingProp() {
+                throw new Error('getter threw');
+              },
+              toString() {
+                throw new Error('toString threw');
+              },
+            };
+            assert.strictEqual(safeJsonStringify(badObj), undefined);
+          });
+        });
+
+        describe('isPreConnectionFailure', () => {
+          it('handles circular references in cause without infinite recursion', () => {
+            const circularError = new GoogleError('circular error');
+            circularError.cause = circularError;
+            assert.strictEqual(isPreConnectionFailure(circularError), false);
+
+            const errA = new GoogleError('errA');
+            const errB = new GoogleError('errB');
+            errA.cause = errB;
+            errB.cause = errA;
+            assert.strictEqual(isPreConnectionFailure(errA), false);
+          });
+
+          it('handles deep cause chains (> 10 depth) without stack overflow', () => {
+            let current = new GoogleError('root');
+            for (let i = 0; i < 20; i++) {
+              const next = new GoogleError(`level-${i}`);
+              current.cause = next;
+              current = next;
+            }
+            assert.strictEqual(isPreConnectionFailure(current), false);
+          });
+
+          it('identifies pre-connection errors directly and wrapped in GoogleError', () => {
+            assert.strictEqual(
+              isPreConnectionFailure(new TypeError('type err')),
+              true,
+            );
+            assert.strictEqual(
+              isPreConnectionFailure(new RangeError('range err')),
+              true,
+            );
+            assert.strictEqual(
+              isPreConnectionFailure(new URIError('uri err')),
+              true,
+            );
+
+            const wrappedType = new GoogleError('wrapped');
+            wrappedType.cause = new TypeError('inner');
+            assert.strictEqual(isPreConnectionFailure(wrappedType), true);
+
+            const netErr = Object.assign(new Error('connect ECONNREFUSED'), {
+              code: 'ECONNREFUSED',
+            });
+            const wrappedNet = new GoogleError('wrapped connection');
+            wrappedNet.cause = netErr;
+            assert.strictEqual(isPreConnectionFailure(wrappedNet), true);
+          });
+
+          it('returns false for server-side errors', () => {
+            const grpcErr = Object.assign(new GoogleError('grpc err'), {
+              code: Status.UNAVAILABLE,
+            });
+            assert.strictEqual(isPreConnectionFailure(grpcErr), false);
+
+            const httpErr = Object.assign(new GoogleError('http err'), {
+              httpStatusCode: 503,
+            });
+            assert.strictEqual(isPreConnectionFailure(httpErr), false);
+          });
+
+          it('returns true for non-Errors and primitives', () => {
+            assert.strictEqual(isPreConnectionFailure(null), true);
+            assert.strictEqual(isPreConnectionFailure('string throw'), true);
+            assert.strictEqual(isPreConnectionFailure(123), true);
+          });
+        });
+
+        describe('cause traversal circular reference protection in helpers', () => {
+          it('resolveErrorInfoReason terminates cleanly with circular cause', () => {
+            const err: Record<string, unknown> = {message: 'test'};
+            err.cause = err;
+            assert.strictEqual(resolveErrorInfoReason(err), undefined);
+          });
+
+          it('resolveClientNetworkOrOperationalError terminates cleanly with circular cause', () => {
+            const err: Record<string, unknown> = {message: 'test'};
+            err.cause = err;
+            assert.strictEqual(
+              resolveClientNetworkOrOperationalError(err),
+              undefined,
+            );
+          });
+
+          it('resolveLanguageSpecificErrorType terminates cleanly with circular cause', () => {
+            const err = new GoogleError('test');
+            err.cause = err;
+            assert.strictEqual(
+              resolveLanguageSpecificErrorType(err),
+              undefined,
+            );
+          });
+
+          it('isServerSideError terminates cleanly with circular cause', () => {
+            const err = new GoogleError('test');
+            err.cause = err;
+            assert.strictEqual(isServerSideError(err, 'grpc'), false);
+            assert.strictEqual(isServerSideError(err, 'http'), false);
+          });
+        });
       });
     });
 
@@ -1315,6 +1497,130 @@ describe('TracerHelper', () => {
           } finally {
             (globalThis as Record<string, unknown>).Buffer = originalBuffer;
           }
+        });
+
+        it('safely formats statusDetails containing circular references', () => {
+          const detail: Record<string, unknown> = {
+            reason: 'RATE_LIMIT_EXCEEDED',
+          };
+          detail.self = detail;
+          const error = Object.assign(
+            new GoogleError('Circular statusDetails error'),
+            {
+              statusDetails: [detail],
+            },
+          );
+          const {stacktrace} = resolveServerExceptionDetails(error);
+          assert.strictEqual(
+            stacktrace,
+            'status_details: [{"reason":"RATE_LIMIT_EXCEEDED","self":"[Circular]"}]',
+          );
+        });
+
+        it('safely formats statusDetails containing BigInt values', () => {
+          const error = Object.assign(
+            new GoogleError('BigInt statusDetails error'),
+            {
+              statusDetails: [{retryDelayNanos: 5000000000n}],
+            },
+          );
+          const {stacktrace} = resolveServerExceptionDetails(error);
+          assert.strictEqual(
+            stacktrace,
+            'status_details: [{"retryDelayNanos":"5000000000"}]',
+          );
+        });
+
+        it('safely formats metadata containing circular references', () => {
+          const meta: Record<string, unknown> = {'x-request-id': 'req-123'};
+          meta.self = meta;
+          const error = Object.assign(
+            new GoogleError('Circular metadata error'),
+            {
+              metadata: meta,
+            },
+          );
+          const {stacktrace} = resolveServerExceptionDetails(error);
+          assert.strictEqual(
+            stacktrace,
+            'metadata: {"x-request-id":"req-123","self":{"x-request-id":"req-123","self":"[Circular]"}}',
+          );
+        });
+
+        it('safely formats metadata containing BigInt values', () => {
+          const error = Object.assign(
+            new GoogleError('BigInt metadata error'),
+            {
+              metadata: {'quota-consumed': 1000000000000n},
+            },
+          );
+          const {stacktrace} = resolveServerExceptionDetails(error);
+          assert.strictEqual(
+            stacktrace,
+            'metadata: {"quota-consumed":"1000000000000"}',
+          );
+        });
+
+        it('safely handles non-serializable throwing properties in metadata without throwing', () => {
+          const badMeta = {
+            get bad() {
+              throw new Error('boom');
+            },
+          };
+          const error = Object.assign(
+            new GoogleError('Throwing metadata error'),
+            {
+              metadata: badMeta,
+            },
+          );
+          const {stacktrace} = resolveServerExceptionDetails(error);
+          assert.strictEqual(stacktrace, 'metadata: [object Object]');
+        });
+
+        it('survives traceCall when server error has circular statusDetails and BigInt metadata', async () => {
+          const circularDetail: Record<string, unknown> = {code: 429};
+          circularDetail.cycle = circularDetail;
+
+          const error = Object.assign(new GoogleError('Quota exhausted'), {
+            code: Status.RESOURCE_EXHAUSTED,
+            details: 'Quota exhausted on backend',
+            statusDetails: [circularDetail],
+            metadata: {'big-count': 9999999999999n},
+          });
+
+          await assert.rejects(async () => {
+            await traceCall(dynamicArgs, staticArgs, async () => {
+              throw error;
+            });
+          });
+
+          const span = harness.requireSingleSpan('google-gax');
+          assert.strictEqual(span.status.code, SpanStatusCode.ERROR);
+          assert.strictEqual(span.status.message, 'Quota exhausted');
+          harness.assertExceptionEvent(
+            {
+              type: 'GoogleError',
+              message: 'Quota exhausted on backend',
+              stacktrace:
+                'status_details: [{"code":429,"cycle":"[Circular]"}]\n' +
+                'metadata: {"big-count":"9999999999999"}',
+            },
+            {span},
+          );
+        });
+
+        it('survives traceCall when thrown error has circular cause', async () => {
+          const circularError = new GoogleError('wrapper error');
+          circularError.cause = circularError;
+
+          await assert.rejects(async () => {
+            await traceCall(dynamicArgs, staticArgs, async () => {
+              throw circularError;
+            });
+          });
+
+          const span = harness.requireSingleSpan('google-gax');
+          assert.strictEqual(span.status.code, SpanStatusCode.ERROR);
         });
       });
 
