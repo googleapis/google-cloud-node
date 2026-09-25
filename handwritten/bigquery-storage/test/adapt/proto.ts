@@ -436,9 +436,7 @@ describe('Adapt Protos', () => {
       const raw = {
         rowNum: '1',
         range: {
-          start: String(
-            new Date('2024-04-05T15:45:58.981Z').getTime() * 1000,
-          ),
+          start: String(new Date('2024-04-05T15:45:58.981Z').getTime() * 1000),
         },
         nested: {
           integer: '10',
