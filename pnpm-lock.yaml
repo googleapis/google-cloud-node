@@ -2132,6 +2132,12 @@ importers:
       '@google-cloud/storage':
         specifier: ^7.16.0
         version: 7.21.0(encoding@0.1.13)
+      '@grpc/grpc-js':
+        specifier: ^1.13.2
+        version: 1.14.4
+      '@grpc/proto-loader':
+        specifier: ^0.7.13
+        version: 0.7.15
       '@types/extend':
         specifier: ^3.0.4
         version: 3.0.4
