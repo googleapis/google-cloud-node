@@ -126,7 +126,7 @@ export function resolveErrorInfoReason(e: unknown): string | undefined {
     e instanceof GoogleError &&
     e.metadata &&
     typeof e.metadata.get === 'function' &&
-    e.metadata.get('grpc-status-details-bin') &&
+    (e.metadata.get('grpc-status-details-bin') as unknown[])?.length > 0 &&
     !e.reason
   ) {
     GoogleError.parseGRPCStatusDetails(e);
