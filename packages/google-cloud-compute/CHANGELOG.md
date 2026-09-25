@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/compute?activeTab=versions
 
+## [7.5.1](https://github.com/googleapis/google-cloud-node/compare/compute-v7.5.0...compute-v7.5.1) (2026-09-25)
+
+
+### Bug Fixes
+
+* Update package.json and .gitignore across packages ([#9378](https://github.com/googleapis/google-cloud-node/issues/9378)) ([9c54cec](https://github.com/googleapis/google-cloud-node/commit/9c54cece565b5cbcae63a9856c1ef3448307d46e))
+
 ## [7.5.0](https://github.com/googleapis/google-cloud-node/compare/compute-v7.4.0...compute-v7.5.0) (2026-09-22)
 
 

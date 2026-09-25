@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/configdelivery",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Config Delivery API client for Node.js",
   "repository": {
     "type": "git",
