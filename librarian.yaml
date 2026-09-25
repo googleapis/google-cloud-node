@@ -209,7 +209,7 @@ libraries:
       package_name: '@google/area120-tables'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/area120-tables/latest
   - name: google-chat
-    version: 0.32.0
+    version: 0.33.0
     apis:
       - path: google/chat/v1
     copyright_year: "2026"
@@ -241,7 +241,7 @@ libraries:
       - path: google/cloud/agentidentity/v1beta
     copyright_year: "2026"
   - name: google-cloud-agentregistry
-    version: 0.4.0
+    version: 0.5.0
     apis:
       - path: google/cloud/agentregistry/v1
     copyright_year: "2026"
@@ -507,7 +507,7 @@ libraries:
       metadata_name_override: bigquerystorage-api
       name_pretty_override: BigQuery Storage API
   - name: google-cloud-bigtable-api
-    version: 0.7.0
+    version: 0.8.0
     apis:
       - path: google/bigtable/v2
       - path: google/bigtable/admin/v2
@@ -970,7 +970,7 @@ libraries:
     nodejs:
       default_version: v1alpha
   - name: google-cloud-geminidataanalytics
-    version: 0.12.0
+    version: 0.13.0
     apis:
       - path: google/cloud/geminidataanalytics/v1
       - path: google/cloud/geminidataanalytics/v1beta
@@ -1117,7 +1117,7 @@ libraries:
       metadata_name_override: logging-api
       name_pretty_override: Logging API
   - name: google-cloud-lustre
-    version: 0.4.0
+    version: 0.5.0
     apis:
       - path: google/cloud/lustre/v1
     copyright_year: "2026"
@@ -1597,7 +1597,7 @@ libraries:
         pumpify: ^2.0.1
         stream-events: ^1.0.5
   - name: google-cloud-sql
-    version: 0.28.0
+    version: 0.29.0
     apis:
       - path: google/cloud/sql/v1
       - path: google/cloud/sql/v1beta4
@@ -1636,7 +1636,7 @@ libraries:
       default_version: v4
       main_service: talent
   - name: google-cloud-tasks
-    version: 7.1.1
+    version: 7.2.0
     apis:
       - path: google/cloud/tasks/v2
       - path: google/cloud/tasks/v2beta3
@@ -1693,7 +1693,7 @@ libraries:
         extend: ^3.0.2
         is-html: ^2.0.0
   - name: google-cloud-vectorsearch
-    version: 0.12.0
+    version: 0.13.0
     apis:
       - path: google/cloud/vectorsearch/v1
       - path: google/cloud/vectorsearch/v1beta
@@ -2067,7 +2067,7 @@ libraries:
       package_name: '@googlemaps/solar'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/solar/latest
   - name: google-marketingplatform-admin
-    version: 0.5.0
+    version: 0.6.0
     apis:
       - path: google/marketingplatform/admin/v1alpha
         nodejs:
@@ -2078,7 +2078,7 @@ libraries:
       package_name: '@google-ads/marketing-platform-admin'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/marketingplatformadminapi/latest
   - name: google-monitoring-dashboard
-    version: 5.0.0
+    version: 5.1.0
     apis:
       - path: google/monitoring/dashboard/v1
     copyright_year: "2026"

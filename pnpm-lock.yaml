@@ -1555,6 +1555,36 @@ importers:
         specifier: ^5.8.2
         version: 5.9.3
 
+  core/test-utils:
+    devDependencies:
+      '@types/jest':
+        specifier: ^29.5.12
+        version: 29.5.14
+      '@types/node':
+        specifier: ^22.13.8
+        version: 22.20.1
+      gts:
+        specifier: ^6.0.2
+        version: 6.0.2(typescript@5.9.3)
+      jest:
+        specifier: ^29.7.0
+        version: 29.7.0(@types/node@22.20.1)(ts-node@10.9.2(@types/node@22.20.1)(typescript@5.9.3))
+      jsdoc:
+        specifier: ^4.0.4
+        version: 4.0.5
+      jsdoc-fresh:
+        specifier: ^6.0.0
+        version: 6.0.0
+      jsdoc-region-tag:
+        specifier: ^5.0.0
+        version: 5.0.0
+      ts-jest:
+        specifier: ^29.4.10
+        version: 29.4.12(@babel/core@7.27.7)(@jest/transform@29.7.0)(@jest/types@29.6.3)(babel-jest@29.7.0(@babel/core@7.27.7))(jest-util@29.7.0)(jest@29.7.0(@types/node@22.20.1)(ts-node@10.9.2(@types/node@22.20.1)(typescript@5.9.3)))(typescript@5.9.3)
+      typescript:
+        specifier: ^5.8.2
+        version: 5.9.3
+
   handwritten/bigquery:
     dependencies:
       '@google-cloud/common':
@@ -2102,6 +2132,12 @@ importers:
       '@google-cloud/storage':
         specifier: ^7.16.0
         version: 7.21.0(encoding@0.1.13)
+      '@grpc/grpc-js':
+        specifier: ^1.13.2
+        version: 1.14.4
+      '@grpc/proto-loader':
+        specifier: ^0.7.13
+        version: 0.7.15
       '@types/extend':
         specifier: ^3.0.4
         version: 3.0.4
@@ -2925,6 +2961,9 @@ importers:
       gapic-tools:
         specifier: ^2.0.0
         version: 2.0.1(protobufjs@7.5.9)
+      google-test-utils:
+        specifier: ^0.1.0
+        version: 0.1.0
       gts:
         specifier: ^6.0.0
         version: 6.0.2(typescript@5.9.3)
@@ -20665,6 +20704,10 @@ packages:
     resolution: {integrity: sha512-fbvUWVNh3rKGlVFWwlUNF7Sk1Tah0a89q02rLTXsWjbKKHGeuURAa8tl9rvu5TyWny1YiSIo5eDqF260Tai6vQ==}
     engines: {node: '>=22'}
 
+  google-test-utils@0.1.0:
+    resolution: {integrity: sha512-4KwTSw4Xm6hz9sVxvz/xvy/0/InwbR2icIGjcyNdI2KVQ7J6sTVKatoeHwsg74kA4DaGchEgL48vc5FMtkMOLg==}
+    engines: {node: '>=22'}
+
   googleapis-common@4.4.3:
     resolution: {integrity: sha512-W46WKCk3QtlCCfmZyQIH5zxmDOyeV5Qj+qs7nr2ox08eRkEJMWp6iwv542R/PsokXaGUSrmif4vCC4+rGzRSsQ==}
     engines: {node: '>=10.10.0'}
@@ -31849,6 +31892,8 @@ snapshots:
       protobufjs: 7.5.9
       walkdir: 0.4.1
 
+  google-test-utils@0.1.0: {}
+
   googleapis-common@4.4.3(encoding@0.1.13):
     dependencies:
       extend: 3.0.2
@@ -36326,7 +36371,7 @@ snapshots:
       picomatch: 4.0.5
       source-map: 0.7.6
       typescript: 5.8.3
-      webpack: 5.109.0(webpack-cli@6.0.1)
+      webpack: 5.109.0(uglify-js@3.19.3)(webpack-cli@6.0.1)
     optionalDependencies:
       loader-utils: 2.0.4
 

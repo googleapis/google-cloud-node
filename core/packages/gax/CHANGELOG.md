@@ -5,6 +5,27 @@
 
 [1]: https://www.npmjs.com/package/gax-nodejs?activeTab=versions
 
+## [6.8.0](https://github.com/googleapis/google-cloud-node/compare/google-gax-v6.7.0...google-gax-v6.8.0) (2026-09-25)
+
+
+### Features
+
+* **gax:** Differentiate between server side and client side errors ([#9451](https://github.com/googleapis/google-cloud-node/issues/9451)) ([c477918](https://github.com/googleapis/google-cloud-node/commit/c4779187403c213716b199690e293942c09b1bac))
+
+## [6.7.0](https://github.com/googleapis/google-cloud-node/compare/google-gax-v6.6.0...google-gax-v6.7.0) (2026-09-23)
+
+
+### Features
+
+* **gax:** Allow customers to enable tracing with environmental variables ([#9438](https://github.com/googleapis/google-cloud-node/issues/9438)) ([11d6a6f](https://github.com/googleapis/google-cloud-node/commit/11d6a6fe0cec995da9f85db7a072f552873096f2))
+* **o11y:** Remove experimental flag requirement for tracing ([#9423](https://github.com/googleapis/google-cloud-node/issues/9423)) ([feb2851](https://github.com/googleapis/google-cloud-node/commit/feb2851a5d65cbea797148dce70b89fe4dc68b69))
+
+## [6.6.0](https://github.com/googleapis/google-cloud-node/compare/google-gax-v6.5.0...google-gax-v6.6.0) (2026-09-23)
+
+
+### Features
+
+* **gax:** Support resumable uploads ([#9287](https://github.com/googleapis/google-cloud-node/issues/9287)) ([8116709](https://github.com/googleapis/google-cloud-node/commit/8116709bc39e5e0ea525cd6937ce079c25a0971b))
 
 ## [6.5.0](https://github.com/googleapis/google-cloud-node/compare/google-gax-v6.4.0...google-gax-v6.5.0) (2026-09-22)
 

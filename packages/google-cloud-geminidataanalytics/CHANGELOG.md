@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.13.0](https://github.com/googleapis/google-cloud-node/compare/geminidataanalytics-v0.12.0...geminidataanalytics-v0.13.0) (2026-09-23)
+
+
+### Features
+
+* Update API sources and regenerate ([#9427](https://github.com/googleapis/google-cloud-node/issues/9427)) ([5cd945d](https://github.com/googleapis/google-cloud-node/commit/5cd945de7f4fd96878c1956d68bcf505e48686ce))
+
 ## [0.12.0](https://github.com/googleapis/google-cloud-node/compare/geminidataanalytics-v0.11.0...geminidataanalytics-v0.12.0) (2026-09-15)
 
 

@@ -106,6 +106,7 @@ function fakePartialResultStream(this: Function & {calledWith_: IArguments}) {
 export class FakeSession {
   calledWith_: IArguments;
   formattedName_: any;
+  metadata?: google.spanner.v1.ISession | null;
   constructor() {
     this.calledWith_ = arguments;
   }
@@ -2068,6 +2069,23 @@ describe('Database', () => {
         fakeSnapshot.emit('end');
         assert.strictEqual(releaseStub.callCount, 1);
         assert.strictEqual(releaseStub.lastCall.args[0], fakeSession);
+        done();
+      });
+    });
+
+    it('should not register release listener on snapshot end when using multiplexed session', done => {
+      fakeSession.metadata = {multiplexed: true};
+      const releaseStub = sandbox.stub(
+        fakeSessionFactory,
+        'release',
+      ) as sinon.SinonStub;
+
+      database.run(QUERY, (err, rows) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(rows, [{id: 1}]);
+        assert.strictEqual(fakeSnapshot.listenerCount('end'), 0);
+        fakeSnapshot.emit('end');
+        assert.strictEqual(releaseStub.callCount, 0);
         done();
       });
     });
