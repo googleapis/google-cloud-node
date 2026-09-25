@@ -23,7 +23,18 @@ import {
   Tracer,
 } from '@opentelemetry/api';
 import {APICallback, GaxCallResult} from '../apitypes';
+import {GoogleError} from '../googleError';
 import {Status} from '../status';
+import {
+  connectionCodes,
+  decodeCodes,
+  DEPTH_TO_CHECK,
+  genericClasses,
+  preConnectionCodes,
+  redirectCodes,
+  requestBodyCodes,
+  requestCodes,
+} from '../util';
 
 /**
  * Static metadata about the Google Cloud client library used to populate
@@ -46,6 +57,14 @@ export interface StaticTraceContext {
    * The NPM package name of the client library (e.g. '@google-cloud/storage').
    */
   gcpArtifact?: string;
+  /**
+   * Server domain name or IP address for the RPC call.
+   */
+  serverAddress?: string;
+  /**
+   * Server port number for the RPC call.
+   */
+  serverPort?: number;
 }
 
 /**
@@ -65,6 +84,14 @@ export interface DynamicTraceContext {
    * The transport protocol used for the RPC ('grpc' or 'http').
    */
   rpcType: 'grpc' | 'http';
+  /**
+   * Server domain name or IP address for the RPC call.
+   */
+  serverAddress?: string;
+  /**
+   * Server port number for the RPC call.
+   */
+  serverPort?: number;
 }
 
 /**
@@ -87,29 +114,317 @@ export function getGaxTracer(): Tracer {
 }
 
 /**
- * Resolves the OpenTelemetry `error.type` attribute for a failed call.
- *
- * Per OpenTelemetry semantic conventions, uses the protocol-level status
- * (canonical gRPC status name for gRPC, HTTP status code for HTTP/fallback),
- * falling back to Node system error codes (e.g. `ECONNREFUSED`) or the
- * exception class name.
+ * Resolves google.rpc.ErrorInfo reason if present on the error or its cause chain.
+ * Corresponds to Tier 1 in the error.type hierarchy.
  */
-function resolveErrorType(e: Error, rpcType: 'grpc' | 'http'): string {
-  const protocolStatus =
-    rpcType === 'grpc'
-      ? resolveRpcStatusName(e)
-      : resolveHttpStatusCode(e)?.toString();
-  return protocolStatus ?? resolveSystemErrorCode(e) ?? resolveExceptionType(e);
+export function resolveErrorInfoReason(e: unknown): string | undefined {
+  if (!e || typeof e !== 'object') {
+    return undefined;
+  }
+
+  // Decode binary gRPC status details if present and not yet parsed.
+  if (
+    e instanceof GoogleError &&
+    e.metadata &&
+    typeof e.metadata.get === 'function' &&
+    (e.metadata.get('grpc-status-details-bin') as unknown[])?.length > 0 &&
+    !e.reason
+  ) {
+    try {
+      GoogleError.parseGRPCStatusDetails(e);
+    } catch {
+      // Ignore decoding errors.
+    }
+  }
+
+  let current: unknown = e;
+  const seen = new Set<unknown>();
+  for (let depth = 0; depth < DEPTH_TO_CHECK; depth++) {
+    if (!current || typeof current !== 'object') {
+      break;
+    }
+    // Guard against circular cause references.
+    if (seen.has(current)) {
+      break;
+    }
+    seen.add(current);
+    const err = current as {
+      reason?: unknown;
+      statusDetails?: unknown;
+      errorInfo?: unknown;
+      cause?: unknown;
+    };
+
+    // Check direct reason property on error.
+    if (typeof err.reason === 'string' && err.reason.length > 0) {
+      return err.reason;
+    }
+
+    // Check errorInfo object on error.
+    if (err.errorInfo && typeof err.errorInfo === 'object') {
+      const infoReason = (err.errorInfo as {reason?: unknown}).reason;
+      if (typeof infoReason === 'string' && infoReason.length > 0) {
+        return infoReason;
+      }
+    }
+
+    // Inspect statusDetails array for reason or errorInfo.
+    if (Array.isArray(err.statusDetails)) {
+      for (const detail of err.statusDetails) {
+        if (detail && typeof detail === 'object') {
+          if (
+            'reason' in detail &&
+            typeof (detail as {reason?: unknown}).reason === 'string' &&
+            (detail as {reason: string}).reason.length > 0
+          ) {
+            return (detail as {reason: string}).reason;
+          }
+          if (
+            'errorInfo' in detail &&
+            detail.errorInfo &&
+            typeof (detail.errorInfo as {reason?: unknown}).reason === 'string'
+          ) {
+            return (detail.errorInfo as {reason: string}).reason;
+          }
+        }
+      }
+    }
+
+    // Traverse error cause chain.
+    current = err.cause;
+  }
+
+  return undefined;
 }
 
 /**
- * Resolves the exception type name for a failed call. Prefers the error's
- * constructor name (e.g. `GoogleError`, `TypeError`) over `e.name`, falling
- * back to `e.name` when the constructor is the generic `Error`.
+ * Resolves a server error code received from the backend service:
+ * - For HTTP: The HTTP status code string (e.g. '400', '403', '503').
+ * - For gRPC: The canonical gRPC status code name in uppercase (e.g. 'PERMISSION_DENIED', 'UNAVAILABLE').
+ * Corresponds to Tier 2 in the error.type hierarchy.
+ */
+export function resolveServerErrorCode(
+  e: unknown,
+  rpcType: 'grpc' | 'http',
+): string | undefined {
+  if (!isServerSideError(e, rpcType)) {
+    return undefined;
+  }
+  if (rpcType === 'http') {
+    const httpStatus = resolveHttpStatusCode(e);
+    return httpStatus !== undefined ? httpStatus.toString() : undefined;
+  }
+  if (rpcType === 'grpc') {
+    return resolveRpcStatusName(e);
+  }
+  return undefined;
+}
+
+/**
+ * Resolves client-side network and operational errors to standard CLIENT_* identifiers.
+ * Corresponds to Tier 3 in the error.type hierarchy.
+ */
+export function resolveClientNetworkOrOperationalError(
+  e: unknown,
+): string | undefined {
+  let current: unknown = e;
+  const seen = new Set<unknown>();
+  for (let depth = 0; depth < DEPTH_TO_CHECK; depth++) {
+    if (!current || typeof current !== 'object') {
+      break;
+    }
+    if (seen.has(current)) {
+      break;
+    }
+    seen.add(current);
+    const err = current as {
+      name?: unknown;
+      code?: unknown;
+      message?: unknown;
+      cause?: unknown;
+      constructor?: {name?: string};
+    };
+
+    const name = typeof err.name === 'string' ? err.name : undefined;
+    const constructorName = err.constructor?.name;
+    const code = typeof err.code === 'string' ? err.code : undefined;
+    const message = typeof err.message === 'string' ? err.message : '';
+
+    // 1. CLIENT_TIMEOUT
+    if (
+      name === 'TimeoutError' ||
+      code === 'ETIMEDOUT' ||
+      code === 'ESOCKETTIMEDOUT' ||
+      /timeout.*exceeded|deadline.*exceeded|total timeout/i.test(message)
+    ) {
+      return 'CLIENT_TIMEOUT';
+    }
+
+    // 2. CLIENT_CONNECTION_ERROR
+    if (
+      (code && connectionCodes.includes(code)) ||
+      (code && code.startsWith('ERR_SSL')) ||
+      name === 'TLSError'
+    ) {
+      return 'CLIENT_CONNECTION_ERROR';
+    }
+
+    // 3. CLIENT_REQUEST_ERROR
+    if (
+      (code && requestCodes.includes(code)) ||
+      name === 'URIError' ||
+      constructorName === 'URIError'
+    ) {
+      return 'CLIENT_REQUEST_ERROR';
+    }
+
+    // 4. CLIENT_REQUEST_BODY_ERROR
+    if (code && requestBodyCodes.includes(code)) {
+      return 'CLIENT_REQUEST_BODY_ERROR';
+    }
+
+    // 5. CLIENT_RESPONSE_DECODE_ERROR
+    if (
+      (code && decodeCodes.includes(code)) ||
+      name === 'DecodeError' ||
+      constructorName === 'DecodeError' ||
+      name === 'SyntaxError' ||
+      constructorName === 'SyntaxError'
+    ) {
+      return 'CLIENT_RESPONSE_DECODE_ERROR';
+    }
+
+    // 6. CLIENT_REDIRECT_ERROR
+    if (code && redirectCodes.includes(code)) {
+      return 'CLIENT_REDIRECT_ERROR';
+    }
+
+    // 7. CLIENT_AUTHENTICATION_ERROR
+    if (
+      name === 'GoogleAuthError' ||
+      constructorName === 'GoogleAuthError' ||
+      code === 'ERR_NO_CREDENTIALS' ||
+      code === 'MISSING_CREDENTIALS'
+    ) {
+      return 'CLIENT_AUTHENTICATION_ERROR';
+    }
+
+    current = err.cause;
+  }
+
+  return undefined;
+}
+
+/**
+ * Resolves a language-specific error type name (e.g. AbortError, TypeError, RangeError, CustomRpcError).
+ * Generic wrapper types (Error, GoogleError, Object, DOMException) are excluded and unwrap e.cause.
+ * Corresponds to Tier 4 in the error.type hierarchy.
+ */
+export function resolveLanguageSpecificErrorType(
+  e: unknown,
+): string | undefined {
+  if (!e || typeof e !== 'object') {
+    return undefined;
+  }
+
+  let current: unknown = e;
+  const seen = new Set<unknown>();
+  for (let depth = 0; depth < DEPTH_TO_CHECK; depth++) {
+    if (!current || typeof current !== 'object') {
+      break;
+    }
+    // Guard against circular cause references.
+    if (seen.has(current)) {
+      break;
+    }
+    seen.add(current);
+    const err = current as {
+      name?: unknown;
+      constructor?: {name?: string};
+      cause?: unknown;
+    };
+
+    // Prioritize AbortError regardless of class hierarchy.
+    if (err.name === 'AbortError') {
+      return 'AbortError';
+    }
+
+    // Prefer specific constructor class name over generic base wrappers.
+    const className = err.constructor?.name;
+    if (className && !genericClasses.includes(className)) {
+      return className;
+    }
+
+    // Fall back to non-generic error name if available.
+    if (
+      typeof err.name === 'string' &&
+      err.name.length > 0 &&
+      !genericClasses.includes(err.name)
+    ) {
+      return err.name;
+    }
+
+    // Unwrap cause chain when encountering generic wrapper classes.
+    current = err.cause;
+  }
+
+  return undefined;
+}
+
+/**
+ * Resolves the OpenTelemetry `error.type` attribute according to the 5-tier hierarchy:
+ * 1. google.rpc.ErrorInfo.reason
+ * 2. Specific Server Error Code (HTTP status code or gRPC status name)
+ * 3. Client-Side Network/Operational Errors (CLIENT_* standardized strings)
+ * 4. Language-specific error type (e.g. AbortError, RangeError, TypeError, CustomRpcError)
+ * 5. Internal Fallback ("INTERNAL")
+ */
+export function resolveErrorType(e: unknown, rpcType: 'grpc' | 'http'): string {
+  // Tier 1: google.rpc.ErrorInfo.reason
+  const errorInfoReason = resolveErrorInfoReason(e);
+  if (errorInfoReason) {
+    return errorInfoReason;
+  }
+
+  // Tier 2: Specific Server Error Code
+  const serverErrorCode = resolveServerErrorCode(e, rpcType);
+  if (serverErrorCode) {
+    return serverErrorCode;
+  }
+
+  // Tier 3: Client-Side Network/Operational Errors
+  const clientError = resolveClientNetworkOrOperationalError(e);
+  if (clientError) {
+    return clientError;
+  }
+
+  // Tier 4: Language-specific error type
+  const languageError = resolveLanguageSpecificErrorType(e);
+  if (languageError) {
+    return languageError;
+  }
+
+  // Tier 5: Internal Fallback
+  return 'INTERNAL';
+}
+
+/**
+ * Resolves the exception type name for a failed call. Prefers specific
+ * exception names (e.g. `AbortError`, `TimeoutError`, `TypeError`) and
+ * constructor names over generic `Error`, falling back to `e.name` when
+ * the constructor is generic or `DOMException`.
  */
 function resolveExceptionType(e: Error): string {
+  if (e.name && (e.name === 'AbortError' || e.name === 'TimeoutError')) {
+    return e.name;
+  }
   const className = e.constructor?.name;
-  if (className && className !== 'Error') {
+  if (
+    className &&
+    className !== 'Error' &&
+    className !== 'Object' &&
+    className !== 'DOMException'
+  ) {
     return className;
   }
   return e.name || 'Error';
@@ -121,14 +436,20 @@ function resolveExceptionType(e: Error): string {
  */
 function resolveSystemErrorCode(e: unknown): string | undefined {
   let current: unknown = e;
-  let depth = 0;
-  while (current && typeof current === 'object' && depth < 10) {
+  const seen = new Set<unknown>();
+  for (let depth = 0; depth < DEPTH_TO_CHECK; depth++) {
+    if (!current || typeof current !== 'object') {
+      break;
+    }
+    if (seen.has(current)) {
+      break;
+    }
+    seen.add(current);
     const code = (current as {code?: unknown}).code;
     if (typeof code === 'string' && code.length > 0) {
       return code;
     }
     current = (current as {cause?: unknown}).cause;
-    depth++;
   }
   return undefined;
 }
@@ -138,13 +459,25 @@ function resolveSystemErrorCode(e: unknown): string | undefined {
  * and codes outside the `Status` enum are treated as absent for failed calls.
  */
 function resolveRpcStatusName(e: unknown): string | undefined {
-  const code = (e as {code?: unknown} | null)?.code;
-  if (
-    typeof code === 'number' &&
-    code !== Status.OK &&
-    Status[code] !== undefined
-  ) {
-    return Status[code];
+  let current: unknown = e;
+  const seen = new Set<unknown>();
+  for (let depth = 0; depth < DEPTH_TO_CHECK; depth++) {
+    if (!current || typeof current !== 'object') {
+      break;
+    }
+    if (seen.has(current)) {
+      break;
+    }
+    seen.add(current);
+    const code = (current as {code?: unknown}).code;
+    if (
+      typeof code === 'number' &&
+      code !== Status.OK &&
+      Status[code] !== undefined
+    ) {
+      return Status[code];
+    }
+    current = (current as {cause?: unknown}).cause;
   }
   return undefined;
 }
@@ -153,8 +486,92 @@ function resolveRpcStatusName(e: unknown): string | undefined {
  * Reads the HTTP response status recorded on a fallback error.
  */
 function resolveHttpStatusCode(e: unknown): number | undefined {
-  const code = (e as {httpStatusCode?: unknown} | null)?.httpStatusCode;
-  return typeof code === 'number' ? code : undefined;
+  let current: unknown = e;
+  const seen = new Set<unknown>();
+  for (let depth = 0; depth < DEPTH_TO_CHECK; depth++) {
+    if (!current || typeof current !== 'object') {
+      break;
+    }
+    if (seen.has(current)) {
+      break;
+    }
+    seen.add(current);
+    const code = (current as {httpStatusCode?: unknown}).httpStatusCode;
+    if (typeof code === 'number') {
+      return code;
+    }
+    current = (current as {cause?: unknown}).cause;
+  }
+  return undefined;
+}
+
+/**
+ * Determines if a failure occurred on the client side before DNS resolution
+ * or connection establishment.
+ */
+export function isPreConnectionFailure(e: unknown): boolean {
+  let current: unknown = e;
+  const seen = new Set<unknown>();
+
+  for (let depth = 0; depth < DEPTH_TO_CHECK; depth++) {
+    // Server status code indicates a response was received.
+    if (
+      resolveHttpStatusCode(current) !== undefined ||
+      resolveRpcStatusName(current) !== undefined
+    ) {
+      return false;
+    }
+
+    // Non-Error throws or objects without stack are client failures.
+    if (
+      !current ||
+      !(
+        current instanceof Error ||
+        (typeof current === 'object' && 'stack' in current)
+      )
+    ) {
+      return true;
+    }
+
+    // Guard against circular cause references.
+    if (seen.has(current)) {
+      return false;
+    }
+    seen.add(current);
+
+    // Client-side validation errors happen before connection.
+    const err = current as {name?: unknown; cause?: unknown};
+    if (
+      current instanceof TypeError ||
+      current instanceof RangeError ||
+      current instanceof URIError ||
+      err.name === 'TypeError' ||
+      err.name === 'RangeError' ||
+      err.name === 'URIError'
+    ) {
+      return true;
+    }
+
+    // Check for network error codes occurring before connection establishment.
+    const systemCode = resolveSystemErrorCode(current);
+    if (systemCode && preConnectionCodes.includes(systemCode)) {
+      return true;
+    }
+
+    // Unwrap GoogleError wrappers to inspect underlying cause.
+    if (
+      (current instanceof GoogleError ||
+        (current as {constructor?: {name?: string}}).constructor?.name ===
+          'GoogleError') &&
+      err.cause
+    ) {
+      current = err.cause;
+    } else {
+      return false;
+    }
+  }
+
+  return false;
 }
 
 /**
@@ -164,6 +581,233 @@ function resolveHttpStatusCode(e: unknown): number | undefined {
 function resolveErrorMessage(e: unknown): string {
   const message = (e as {message?: unknown} | null)?.message;
   return typeof message === 'string' ? message : String(e);
+}
+
+/**
+ * Determines whether a failure is a server-side error (i.e. a server response arrived).
+ */
+export function isServerSideError(
+  e: unknown,
+  rpcType: 'grpc' | 'http',
+): boolean {
+  if (rpcType === 'http') {
+    return resolveHttpStatusCode(e) !== undefined;
+  }
+  if (!e || typeof e !== 'object') {
+    return false;
+  }
+  if (isPreConnectionFailure(e)) {
+    return false;
+  }
+  if (resolveClientNetworkOrOperationalError(e) !== undefined) {
+    return false;
+  }
+  let current: unknown = e;
+  const seen = new Set<unknown>();
+  for (let depth = 0; depth < DEPTH_TO_CHECK; depth++) {
+    if (!current || typeof current !== 'object') {
+      break;
+    }
+    if (seen.has(current)) {
+      break;
+    }
+    seen.add(current);
+    const err = current as {name?: unknown; cause?: unknown};
+    if (err.name === 'AbortError' || err.name === 'TimeoutError') {
+      return false;
+    }
+    current = err.cause;
+  }
+  if (rpcType === 'grpc') {
+    return resolveRpcStatusName(e) !== undefined;
+  }
+  return false;
+}
+
+function isBuffer(val: unknown): val is Buffer {
+  return typeof Buffer !== 'undefined' && Buffer.isBuffer(val);
+}
+
+/**
+ * Safely converts a value to a JSON string without throwing exceptions on
+ * circular references, BigInt values, or non-serializable properties.
+ */
+export function safeJsonStringify(value: unknown): string | undefined {
+  if (value === undefined) {
+    return undefined;
+  }
+  try {
+    const ancestors: unknown[] = [];
+    return JSON.stringify(
+      value,
+      function (this: unknown, _key: string, val: unknown) {
+        if (typeof val === 'bigint') {
+          return val.toString();
+        }
+        if (typeof val !== 'object' || val === null) {
+          return val;
+        }
+        if (ancestors.includes(this)) {
+          while (
+            ancestors.length > 0 &&
+            ancestors[ancestors.length - 1] !== this
+          ) {
+            ancestors.pop();
+          }
+        }
+        if (ancestors.includes(val)) {
+          return '[Circular]';
+        }
+        ancestors.push(val);
+        return val;
+      },
+    );
+  } catch {
+    try {
+      return String(value);
+    } catch {
+      return undefined;
+    }
+  }
+}
+
+/**
+ * Extracts and formats status details and metadata attached by GFE/backend on server-side errors,
+ * returning the server error message and a formatted stacktrace string.
+ */
+export function resolveServerExceptionDetails(e: Error): {
+  message: string;
+  stacktrace?: string;
+} {
+  const errObj = e as {
+    details?: unknown;
+    statusDetails?: unknown;
+    metadata?: unknown;
+    cause?: unknown;
+  };
+
+  const causeObj =
+    errObj.cause && typeof errObj.cause === 'object'
+      ? (errObj.cause as {
+          details?: unknown;
+          statusDetails?: unknown;
+          metadata?: unknown;
+        })
+      : undefined;
+
+  // If e is a GoogleError with gRPC metadata that hasn't decoded statusDetails yet, parse it:
+  if (
+    !errObj.statusDetails &&
+    e instanceof GoogleError &&
+    e.metadata &&
+    typeof e.metadata.get === 'function' &&
+    (e.metadata.get('grpc-status-details-bin') as unknown[])?.length > 0
+  ) {
+    try {
+      GoogleError.parseGRPCStatusDetails(e);
+    } catch {
+      // Ignore decoding errors
+    }
+  }
+
+  // Server error details: prefer details if non-empty string, else message
+  const serverDetails = errObj.details ?? causeObj?.details;
+  const message =
+    typeof serverDetails === 'string' && serverDetails.length > 0
+      ? serverDetails
+      : e.message;
+
+  // Status details
+  const rawStatusDetails = errObj.statusDetails ?? causeObj?.statusDetails;
+  let statusDetailsStr: string | undefined;
+  if (rawStatusDetails !== undefined && rawStatusDetails !== null) {
+    statusDetailsStr =
+      typeof rawStatusDetails === 'string'
+        ? rawStatusDetails
+        : safeJsonStringify(rawStatusDetails);
+  }
+
+  // Metadata attached by GFE / backend
+  const rawMetadata = errObj.metadata ?? causeObj?.metadata;
+  let metadataStr: string | undefined;
+  if (rawMetadata && typeof rawMetadata === 'object') {
+    try {
+      let map: Record<string, unknown>;
+      if (typeof (rawMetadata as {getMap?: unknown}).getMap === 'function') {
+        map = (rawMetadata as {getMap: () => Record<string, unknown>}).getMap();
+      } else {
+        map = rawMetadata as Record<string, unknown>;
+      }
+      const cleanMap: Record<string, unknown> = {};
+      for (const [key, val] of Object.entries(map)) {
+        if (isBuffer(val)) {
+          cleanMap[key] = val.toString('base64');
+        } else if (Array.isArray(val)) {
+          cleanMap[key] = val.map(item =>
+            isBuffer(item) ? item.toString('base64') : item,
+          );
+        } else {
+          cleanMap[key] = val;
+        }
+      }
+      metadataStr = safeJsonStringify(cleanMap);
+    } catch {
+      metadataStr = safeJsonStringify(rawMetadata);
+    }
+  }
+
+  // Format status details and metadata as exception.stacktrace (replacing the local client stack trace)
+  const stacktraceParts: string[] = [];
+  if (statusDetailsStr) {
+    stacktraceParts.push(`status_details: ${statusDetailsStr}`);
+  }
+  if (metadataStr) {
+    stacktraceParts.push(`metadata: ${metadataStr}`);
+  }
+  const stacktrace =
+    stacktraceParts.length > 0 ? stacktraceParts.join('\n') : undefined;
+
+  return {
+    message,
+    stacktrace,
+  };
+}
+
+/**
+ * Records an `exception` span event. For client-side errors, records local client
+ * stack trace and client error message. For server-side errors, records server
+ * error details and formats status details and metadata as `exception.stacktrace`
+ * (replacing the local client stack trace).
+ */
+function recordExceptionEvent(
+  span: Span,
+  e: Error,
+  rpcType: 'grpc' | 'http',
+): void {
+  const exceptionType = resolveExceptionType(e);
+
+  if (isServerSideError(e, rpcType)) {
+    const {message, stacktrace} = resolveServerExceptionDetails(e);
+
+    const attributes: Attributes = {
+      'exception.type': exceptionType,
+      'exception.message': message,
+    };
+    if (stacktrace) {
+      attributes['exception.stacktrace'] = stacktrace;
+    }
+    span.addEvent('exception', attributes);
+  } else {
+    // Client-side error: records local client stack trace & client error message
+    const attributes: Attributes = {
+      'exception.type': exceptionType,
+      'exception.message': e.message,
+    };
+    if (e.stack) {
+      attributes['exception.stacktrace'] = e.stack;
+    }
+    span.addEvent('exception', attributes);
+  }
 }
 
 /**
@@ -369,8 +1013,19 @@ export function traceCall(
       'gcp.method.type': dynamicArgs.rpcType,
     });
 
+    let rawAddress = dynamicArgs.serverAddress ?? staticArgs.serverAddress;
+    let rawPort = dynamicArgs.serverPort ?? staticArgs.serverPort;
+    if (rawAddress) {
+      const match = rawAddress.match(/^(\[[^\]]+\]|[^:]+):(\d+)$/);
+      if (match) {
+        rawAddress = match[1];
+        rawPort = rawPort ?? Number(match[2]);
+      }
+    }
+
     let spanEnded = false;
     let errorRecorded = false;
+    let recordedError: unknown;
     let rpcStatusName: string | undefined;
     let httpStatusCode: number | undefined;
 
@@ -411,13 +1066,26 @@ export function traceCall(
     };
 
     const setStatusAttributes = () => {
-      const attributes: Attributes = {
-        'rpc.response.status_code': rpcStatusName,
-      };
-      if (dynamicArgs.rpcType === 'grpc') {
-        attributes['grpc.response.status_code'] = rpcStatusName;
-      } else if (httpStatusCode !== undefined) {
+      const attributes: Attributes = {};
+      if (rpcStatusName !== undefined) {
+        attributes['rpc.response.status_code'] = rpcStatusName;
+        if (dynamicArgs.rpcType === 'grpc') {
+          attributes['grpc.response.status_code'] = rpcStatusName;
+        }
+      }
+      if (dynamicArgs.rpcType === 'http' && httpStatusCode !== undefined) {
         attributes['http.response.status_code'] = httpStatusCode;
+      }
+      // server.address and server.port are present on server-side errors and successful calls,
+      // but absent on client-side failures that occur before DNS resolution or connection establishment.
+      if (
+        rawAddress !== undefined &&
+        (!errorRecorded || !isPreConnectionFailure(recordedError))
+      ) {
+        attributes['server.address'] = rawAddress;
+        if (rawPort !== undefined) {
+          attributes['server.port'] = rawPort;
+        }
       }
       span.setAttributes(attributes);
     };
@@ -439,24 +1107,16 @@ export function traceCall(
     };
 
     const recordError = (e: unknown) => {
-      rpcStatusName = resolveRpcStatusName(e) ?? Status[Status.UNKNOWN];
+      recordedError = e;
+      rpcStatusName = resolveRpcStatusName(e);
       httpStatusCode = resolveHttpStatusCode(e);
+      span.setAttributes({
+        'error.type': resolveErrorType(e, dynamicArgs.rpcType),
+      });
       if (e instanceof Error) {
-        span.setAttributes({
-          'error.type': resolveErrorType(e, dynamicArgs.rpcType),
-        });
-        // Pass the resolved class name to avoid the OTel SDK deriving
-        // exception.type from numeric error codes.
-        span.recordException({
-          name: resolveExceptionType(e),
-          message: e.message,
-          stack: e.stack,
-        });
+        recordExceptionEvent(span, e, dynamicArgs.rpcType);
         setErrorStatus(e.message);
       } else {
-        span.setAttributes({
-          'error.type': '_OTHER',
-        });
         setErrorStatus(resolveErrorMessage(e));
       }
     };
