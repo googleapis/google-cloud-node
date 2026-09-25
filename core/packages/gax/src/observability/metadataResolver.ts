@@ -16,6 +16,7 @@
 
 import {StaticTraceContext} from './TracerHelper';
 import {CallSettings} from '../gax';
+import {ignoredClientHeaderTokens} from '../util';
 
 export const DEFAULT_GCP_REPO = 'googleapis/google-cloud-node';
 
@@ -83,6 +84,7 @@ export function extractFromSettings(
     return result;
   }
 
+  // Extract artifact and version from x-goog-api-client header.
   const headers = (
     settings.otherArgs as {headers?: Record<string, string>} | undefined
   )?.headers;
@@ -99,18 +101,7 @@ export function extractFromSettings(
           if (!result.gcpVersion) {
             result.gcpVersion = ver;
           }
-        } else if (
-          ![
-            'gl-node',
-            'gl-web',
-            'grpc',
-            'rest',
-            'gax',
-            'auth',
-            'gapic',
-            'gccl',
-          ].includes(name)
-        ) {
+        } else if (!ignoredClientHeaderTokens.includes(name)) {
           result.gcpArtifact = name;
           if (!result.gcpVersion) {
             result.gcpVersion = ver;
@@ -120,6 +111,7 @@ export function extractFromSettings(
     }
   }
 
+  // Resolve service name and default artifact from apiName.
   if (typeof settings.apiName === 'string' && settings.apiName) {
     const serviceFromApi = extractServiceFromApiName(settings.apiName);
     if (serviceFromApi) {
@@ -133,8 +125,43 @@ export function extractFromSettings(
     }
   }
 
+  // Fall back to package.json version if missing.
   if (!result.gcpVersion && fallbackVersion) {
     result.gcpVersion = fallbackVersion;
+  }
+
+  // Extract server address and port from endpoint settings.
+  const otherArgs = settings.otherArgs as
+    | {
+        servicePath?: string;
+        apiEndpoint?: string;
+        port?: number;
+        servicePort?: number;
+      }
+    | undefined;
+  const endpoint =
+    (settings as {servicePath?: string; apiEndpoint?: string}).servicePath ||
+    (settings as {servicePath?: string; apiEndpoint?: string}).apiEndpoint ||
+    otherArgs?.servicePath ||
+    otherArgs?.apiEndpoint;
+  if (endpoint && typeof endpoint === 'string') {
+    const match = endpoint.match(/^(\[[^\]]+\]|[^:]+):(\d+)$/);
+    if (match) {
+      result.serverAddress = match[1];
+      result.serverPort = Number(match[2]);
+    } else {
+      result.serverAddress = endpoint;
+    }
+  }
+
+  // Resolve server port if not already parsed from endpoint.
+  const port =
+    (settings as {port?: number; servicePort?: number}).port ||
+    (settings as {port?: number; servicePort?: number}).servicePort ||
+    otherArgs?.port ||
+    otherArgs?.servicePort;
+  if (port && typeof port === 'number' && !result.serverPort) {
+    result.serverPort = port;
   }
 
   return result;
@@ -164,6 +191,17 @@ export function extractFromEnvironment(): StaticTraceContext {
   const artifact = env.GOOGLE_SDK_NODE_ARTIFACT || env.GCP_ARTIFACT;
   if (artifact?.trim()) {
     result.gcpArtifact = artifact.trim();
+  }
+
+  const serverAddress =
+    env.GOOGLE_SDK_NODE_SERVER_ADDRESS || env.SERVER_ADDRESS;
+  if (serverAddress?.trim()) {
+    result.serverAddress = serverAddress.trim();
+  }
+
+  const serverPort = env.GOOGLE_SDK_NODE_SERVER_PORT || env.SERVER_PORT;
+  if (serverPort && !isNaN(Number(serverPort))) {
+    result.serverPort = Number(serverPort);
   }
 
   return result;
@@ -209,7 +247,7 @@ export function resolveStaticTraceContext(
     dynamic = extractFromSettings(settings);
   }
 
-  return {
+  const context: StaticTraceContext = {
     gcpClientService:
       envMeta.gcpClientService ??
       explicit?.gcpClientService ??
@@ -220,4 +258,18 @@ export function resolveStaticTraceContext(
     gcpArtifact:
       envMeta.gcpArtifact ?? explicit?.gcpArtifact ?? dynamic.gcpArtifact,
   };
+
+  const serverAddress =
+    envMeta.serverAddress ?? explicit?.serverAddress ?? dynamic.serverAddress;
+  if (serverAddress !== undefined) {
+    context.serverAddress = serverAddress;
+  }
+
+  const serverPort =
+    envMeta.serverPort ?? explicit?.serverPort ?? dynamic.serverPort;
+  if (serverPort !== undefined) {
+    context.serverPort = serverPort;
+  }
+
+  return context;
 }
