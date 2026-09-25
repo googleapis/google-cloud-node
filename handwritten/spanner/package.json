@@ -34,10 +34,10 @@
     "docs": "jsdoc -c .jsdoc.js",
     "predocs": "pnpm run compile",
     "lint": "gts check",
-    "system-test": "mocha build/system-test --timeout 1600000",
-    "observability-test": "mocha build/observability-test --timeout 1600000",
-    "cleanup": "mocha scripts/cleanup.js --timeout 30000",
-    "test": "mocha build/test build/test/common build/observability-test",
+    "system-test": "node ../../bin/run-test.cjs --config ../../.mocharc.cjs --no-parallel build/system-test --timeout 1600000",
+    "observability-test": "node ../../bin/run-test.cjs --config ../../.mocharc.cjs --no-parallel build/observability-test --timeout 1600000",
+    "cleanup": "node ../../bin/run-test.cjs --config ../../.mocharc.cjs --no-parallel scripts/cleanup.js --timeout 30000",
+    "test": "node ../../bin/run-test.cjs --config ../../.mocharc.cjs build/test build/test/common build/observability-test",
     "ycsb": "node ./benchmark/ycsb.js  run -P ./benchmark/workloada -p table=usertable -p cloudspanner.instance=ycsb-instance -p operationcount=100 -p cloudspanner.database=ycsb",
     "fix": "gts fix",
     "clean": "gts clean",
@@ -48,7 +48,7 @@
     "preobservability-test": "pnpm run compile",
     "benchwrapper": "node bin/benchwrapper.js",
     "precompile": "gts clean",
-    "coverage": "c8 mocha build/test build/test/common && c8 report --check-coverage"
+    "coverage": "node ../../bin/run-test.cjs --config ../../.mocharc.cjs build/test build/test/common && c8 report --check-coverage"
   },
   "dependencies": {
     "@babel/core": "7.27.7",
