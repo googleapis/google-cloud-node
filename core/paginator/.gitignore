@@ -2,6 +2,6 @@ node_modules
 .nyc_output
 build
 docs/
-coverage/
+.coverage
 __pycache__
 .DS_Store
