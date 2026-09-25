@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/PACKAGE NAME?activeTab=versions
 
+## [7.1.1](https://github.com/googleapis/google-cloud-node/compare/dlp-v7.1.0...dlp-v7.1.1) (2026-09-25)
+
+
+### Bug Fixes
+
+* Update package.json and .gitignore across packages ([#9378](https://github.com/googleapis/google-cloud-node/issues/9378)) ([9c54cec](https://github.com/googleapis/google-cloud-node/commit/9c54cece565b5cbcae63a9856c1ef3448307d46e))
+
 ## [7.1.0](https://github.com/googleapis/google-cloud-node/compare/dlp-v7.0.1...dlp-v7.1.0) (2026-09-03)
 
 
