@@ -5,6 +5,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/firestore?activeTab=versions
 
+## [9.3.0](https://github.com/googleapis/google-cloud-node/compare/firestore-v9.2.0...firestore-v9.3.0) (2026-09-25)
+
+
+### Features
+
+* **firestore:** Support extended types in Node SDK ([#8357](https://github.com/googleapis/google-cloud-node/issues/8357)) ([0c78d29](https://github.com/googleapis/google-cloud-node/commit/0c78d2994b77482a76f53d2fec7d1461715e5288))
+
 ## [9.2.0](https://github.com/googleapis/google-cloud-node/compare/firestore-v9.1.0...firestore-v9.2.0) (2026-09-16)
 
 

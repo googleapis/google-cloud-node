@@ -5,6 +5,24 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "0c78d2994b77482a76f53d2fec7d1461715e5288",
+          "message": "Support extended types in Node SDK",
+          "issues": [
+            "8357"
+          ],
+          "scope": "firestore"
+        }
+      ],
+      "version": "9.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/firestore",
+      "id": "241c9d24-cf55-44bc-8bf5-aa2239ba2745",
+      "createTime": "2026-09-25T15:34:52.831Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "11d6a6fe0cec995da9f85db7a072f552873096f2",
           "message": "Allow customers to enable tracing with environmental variables",
           "issues": [
@@ -95650,5 +95668,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-09-23T22:50:41.126Z"
+  "updateTime": "2026-09-25T15:34:52.831Z"
 }
