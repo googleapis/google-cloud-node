@@ -16,13 +16,52 @@
 
 import * as assert from 'assert';
 import {EventEmitter} from 'events';
-import {trace, context, HrTime, SpanStatusCode} from '@opentelemetry/api';
+import {AsyncLocalStorage} from 'async_hooks';
+import {
+  trace,
+  context,
+  Context,
+  ContextManager,
+  ROOT_CONTEXT,
+  HrTime,
+  SpanStatusCode,
+} from '@opentelemetry/api';
 import {
   BasicTracerProvider,
   InMemorySpanExporter,
   SimpleSpanProcessor,
   ReadableSpan,
 } from '@opentelemetry/sdk-trace-base';
+
+class AsyncLocalStorageContextManager implements ContextManager {
+  private _storage = new AsyncLocalStorage<Context>();
+
+  active(): Context {
+    return this._storage.getStore() ?? ROOT_CONTEXT;
+  }
+
+  with<A extends unknown[], F extends (...args: A) => ReturnType<F>>(
+    context: Context,
+    fn: F,
+    thisArg?: ThisParameterType<F>,
+    ...args: A
+  ): ReturnType<F> {
+    return this._storage.run(context, () => fn.apply(thisArg, args));
+  }
+
+  bind<T>(_context: Context, target: T): T {
+    return target;
+  }
+
+  enable(): this {
+    return this;
+  }
+
+  disable(): this {
+    this._storage.disable();
+    return this;
+  }
+}
 
 /**
  * Converts an OpenTelemetry `HrTime` tuple to milliseconds.
@@ -43,6 +82,7 @@ const HTTP_RESEND_COUNT = 'http.request.resend_count';
 export class OtelHarness {
   readonly exporter: InMemorySpanExporter;
   readonly provider: BasicTracerProvider;
+  private contextManager?: AsyncLocalStorageContextManager;
 
   constructor() {
     this.exporter = new InMemorySpanExporter();
@@ -52,11 +92,15 @@ export class OtelHarness {
   }
 
   setup(): void {
+    this.contextManager = new AsyncLocalStorageContextManager();
+    this.contextManager.enable();
+    context.setGlobalContextManager(this.contextManager);
     trace.setGlobalTracerProvider(this.provider);
   }
 
   teardown(): void {
     trace.disable();
+    this.contextManager?.disable();
     context.disable();
     this.reset();
   }
