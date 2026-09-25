@@ -41,8 +41,8 @@ import {
   BatchUpdateOptions,
   ExecuteSqlRequest,
   ReadRequest,
-  RunCallback,
 } from '../src/transaction';
+import {Session} from '../src/session';
 import {Row} from '../src/partial-result-stream';
 import {grpc} from 'google-gax';
 import * as through from 'through2';
@@ -84,6 +84,21 @@ describe('Transaction', () => {
       [AFE_SERVER_TIMING_HEADER]: 'true',
     },
   };
+
+  function createSession(options?: {routeToLeaderEnabled?: boolean}): Session {
+    return Object.assign({}, SESSION, {
+      parent: {
+        ...DATABASE,
+        parent: {
+          ...INSTANCE,
+          parent: {
+            ...SPANNER,
+            routeToLeaderEnabled: options?.routeToLeaderEnabled,
+          },
+        },
+      },
+    }) as unknown as Session;
+  }
 
   const PARTIAL_RESULT_STREAM = sandbox.stub();
   const PROMISIFY_ALL = sandbox.stub();
@@ -250,7 +265,11 @@ describe('Transaction', () => {
         assert.deepStrictEqual(arg.gaxOpts, {
           timeout: 1000,
           otherArgs: {
-            options: {unbind: true, affinityKey: txn._affinityKey},
+            options: {
+              unbind: true,
+              affinityKey: txn._affinityKey,
+              affinity: txn.affinity,
+            },
           },
         });
         // The caller supplied gax options must not be modified.
@@ -260,11 +279,150 @@ describe('Transaction', () => {
         });
       });
 
+      it('should not create affinity or affinityKey for single-use snapshots', () => {
+        const multiplexedSession = Object.assign({}, SESSION, {
+          metadata: {multiplexed: true},
+        });
+        const singleUseSnapshot = new Snapshot(
+          multiplexedSession,
+          undefined,
+          undefined,
+          null,
+        );
+        assert.strictEqual(singleUseSnapshot.affinity, undefined);
+        assert.strictEqual(singleUseSnapshot._affinityKey, undefined);
+        assert.strictEqual(singleUseSnapshot._bindGaxOpts, undefined);
+        assert.strictEqual(singleUseSnapshot._unbindGaxOpts, undefined);
+      });
+
+      it('should not inject affinity in `Session#request` for single-use snapshots', () => {
+        REQUEST.resetHistory();
+        const multiplexedSession = Object.assign({}, SESSION, {
+          metadata: {multiplexed: true},
+        });
+        const singleUseSnapshot = new Snapshot(
+          multiplexedSession,
+          undefined,
+          undefined,
+          null,
+        );
+        singleUseSnapshot.request({client: 'SpannerClient'}, () => {});
+        assert.strictEqual(REQUEST.callCount, 1);
+        const argument = REQUEST.lastCall.args[0];
+        assert.strictEqual(argument.gaxOpts, undefined);
+      });
+
+      it('should not inject affinity in `Session#requestStream` for single-use snapshots', () => {
+        REQUEST_STREAM.resetHistory();
+        const multiplexedSession = Object.assign({}, SESSION, {
+          metadata: {multiplexed: true},
+        });
+        const singleUseSnapshot = new Snapshot(
+          multiplexedSession,
+          undefined,
+          undefined,
+          null,
+        );
+        singleUseSnapshot.requestStream({client: 'SpannerClient'});
+        assert.strictEqual(REQUEST_STREAM.callCount, 1);
+        const argument = REQUEST_STREAM.lastCall.args[0];
+        assert.strictEqual(argument.gaxOpts, undefined);
+      });
+
+      it('should not unbind channel on end() for single-use snapshots', () => {
+        const multiplexedSession = Object.assign({}, SESSION, {
+          metadata: {multiplexed: true},
+        });
+        const singleUseSnapshot = new Snapshot(
+          multiplexedSession,
+          undefined,
+          undefined,
+          null,
+        );
+        singleUseSnapshot.end();
+        assert.strictEqual(singleUseSnapshot.ended, true);
+      });
+
+      it('should generate _affinityKey and propagate to request/requestStream for single-use snapshots when legacy grpc-gcp pool is enabled', () => {
+        REQUEST.resetHistory();
+        REQUEST_STREAM.resetHistory();
+        const legacySpanner = Object.assign({}, SPANNER, {
+          isLegacyChannelPool: true,
+        });
+        const legacyInstance = Object.assign({}, INSTANCE, {
+          parent: legacySpanner,
+        });
+        const legacyDatabase = Object.assign({}, DATABASE, {
+          parent: legacyInstance,
+        });
+        const multiplexedSession = Object.assign({}, SESSION, {
+          parent: legacyDatabase,
+          metadata: {multiplexed: true},
+        });
+        const singleUseSnapshot = new Snapshot(
+          multiplexedSession,
+          undefined,
+          undefined,
+          null,
+        );
+        assert.strictEqual(singleUseSnapshot.affinity, undefined);
+        assert.ok(singleUseSnapshot._affinityKey);
+        assert.ok(singleUseSnapshot._affinityKey.startsWith('mux-affinity-'));
+        assert.strictEqual(
+          singleUseSnapshot._bindGaxOpts.otherArgs.options.affinityKey,
+          singleUseSnapshot._affinityKey,
+        );
+        assert.strictEqual(
+          singleUseSnapshot._bindGaxOpts.otherArgs.options.affinity,
+          undefined,
+        );
+
+        singleUseSnapshot.request({client: 'SpannerClient'});
+        assert.strictEqual(REQUEST.callCount, 1);
+        const requestArg = REQUEST.lastCall.args[0];
+        assert.strictEqual(
+          requestArg.gaxOpts.otherArgs.options.affinityKey,
+          singleUseSnapshot._affinityKey,
+        );
+        assert.strictEqual(
+          requestArg.gaxOpts.otherArgs.options.affinity,
+          undefined,
+        );
+
+        singleUseSnapshot.requestStream({client: 'SpannerClient'});
+        assert.strictEqual(REQUEST_STREAM.callCount, 1);
+        const streamArg = REQUEST_STREAM.lastCall.args[0];
+        assert.strictEqual(
+          streamArg.gaxOpts.otherArgs.options.affinityKey,
+          singleUseSnapshot._affinityKey,
+        );
+        assert.strictEqual(
+          streamArg.gaxOpts.otherArgs.options.affinity,
+          undefined,
+        );
+      });
+
       it('should set the commonHeaders_', () => {
         assert.deepStrictEqual(snapshot.commonHeaders_, {
           [CLOUD_RESOURCE_HEADER]: snapshot.session.parent.formattedName_,
           [AFE_SERVER_TIMING_HEADER]: 'true',
         });
+      });
+
+      it('should not include leader-aware routing header in commonHeaders_ even when routeToLeaderEnabled is true', () => {
+        const s = new Snapshot(SESSION);
+        assert.strictEqual(
+          s.commonHeaders_[LEADER_AWARE_ROUTING_HEADER],
+          undefined,
+        );
+      });
+
+      it('should not include leader-aware routing header in commonHeaders_ when routeToLeaderEnabled is false', () => {
+        const s = new Snapshot(createSession({routeToLeaderEnabled: false}));
+        assert.strictEqual(
+          s.commonHeaders_[LEADER_AWARE_ROUTING_HEADER],
+          undefined,
+        );
       });
     });
 
@@ -284,6 +442,13 @@ describe('Transaction', () => {
         assert.strictEqual(reqOpts.session, SESSION_NAME);
         assert.deepStrictEqual(gaxOpts, {});
         assert.deepStrictEqual(headers, snapshot.commonHeaders_);
+      });
+
+      it('should not include leader-aware routing header in beginTransaction request', () => {
+        snapshot.begin();
+
+        const {headers} = REQUEST.lastCall.args[0];
+        assert.strictEqual(headers[LEADER_AWARE_ROUTING_HEADER], undefined);
       });
 
       it('should accept gaxOptions', done => {
@@ -407,6 +572,21 @@ describe('Transaction', () => {
           ...snapshot.commonHeaders_,
           [X_GOOG_SPANNER_REQUEST_ID_HEADER]: craftRequestId(1, 1, 1, 1),
         });
+      });
+
+      it('should not include leader-aware routing header in single-use read', () => {
+        snapshot.createReadStream(TABLE);
+
+        const {headers} = REQUEST_STREAM.lastCall.args[0];
+        assert.strictEqual(headers[LEADER_AWARE_ROUTING_HEADER], undefined);
+      });
+
+      it('should not include leader-aware routing header in multi-use read', () => {
+        snapshot.id = 'transaction-id-123';
+        snapshot.createReadStream(TABLE);
+
+        const {headers} = REQUEST_STREAM.lastCall.args[0];
+        assert.strictEqual(headers[LEADER_AWARE_ROUTING_HEADER], undefined);
       });
 
       it('should use the transaction id if present', () => {
@@ -1621,6 +1801,21 @@ describe('Transaction', () => {
         });
       });
 
+      it('should not include leader-aware routing header in single-use read-only query', () => {
+        snapshot.runStream(QUERY);
+
+        const {headers} = REQUEST_STREAM.lastCall.args[0];
+        assert.strictEqual(headers[LEADER_AWARE_ROUTING_HEADER], undefined);
+      });
+
+      it('should not include leader-aware routing header in multi-use read-only query', () => {
+        snapshot.id = 'transaction-id-123';
+        snapshot.runStream(QUERY);
+
+        const {headers} = REQUEST_STREAM.lastCall.args[0];
+        assert.strictEqual(headers[LEADER_AWARE_ROUTING_HEADER], undefined);
+      });
+
       it('should use the transaction id if present', () => {
         const id = 'transaction-id-123';
         const expectedTransaction = {id};
@@ -2456,6 +2651,133 @@ describe('Transaction', () => {
       it('should inherit from Dml', () => {
         assert(transaction instanceof Dml);
       });
+
+      it('should preserve this context, clone gaxOpts with affinity, and preserve non-plain objects in reqOpts', () => {
+        let capturedConfig: any;
+        const fakeSession = Object.assign({}, SESSION, {
+          metadata: undefined,
+          request: sinon.spy((config: any, callback: Function) => {
+            capturedConfig = config;
+            callback();
+          }),
+          requestStream: sinon.spy((config: any) => {
+            capturedConfig = config;
+            return {} as any;
+          }),
+        });
+        const txn = new Transaction(fakeSession);
+        assert.ok((txn as any)._affinity);
+        assert.strictEqual((txn as any)._affinityKey, undefined);
+
+        class CustomParameter {
+          constructor(public value: string) {}
+        }
+        const customInstance = new CustomParameter('test');
+        const originalConfig = {
+          reqOpts: {
+            parameter: customInstance,
+          },
+          gaxOpts: {
+            otherArgs: {
+              options: {
+                custom: 'value',
+              },
+            },
+          },
+        };
+        const configToPass = {
+          reqOpts: {
+            parameter: customInstance,
+          },
+          gaxOpts: {
+            otherArgs: {
+              options: {
+                custom: 'value',
+              },
+            },
+          },
+        };
+
+        txn.request(configToPass, () => {});
+        assert.strictEqual(fakeSession.request.calledOnce, true);
+        // Original config object must not be mutated
+        assert.deepStrictEqual(configToPass, originalConfig);
+        // Non-plain object instance in reqOpts is preserved
+        assert.strictEqual(capturedConfig.reqOpts.parameter, customInstance);
+        // The spy received a cloned gaxOpts with affinity injected
+        assert.notStrictEqual(capturedConfig.gaxOpts, originalConfig.gaxOpts);
+        assert.strictEqual(
+          capturedConfig.gaxOpts.otherArgs.options.affinity,
+          (txn as any)._affinity,
+        );
+
+        txn.requestStream(configToPass);
+        assert.strictEqual(fakeSession.requestStream.calledOnce, true);
+        assert.deepStrictEqual(configToPass, originalConfig);
+        assert.strictEqual(capturedConfig.reqOpts.parameter, customInstance);
+        assert.notStrictEqual(capturedConfig.gaxOpts, originalConfig.gaxOpts);
+        assert.strictEqual(
+          capturedConfig.gaxOpts.otherArgs.options.affinity,
+          (txn as any)._affinity,
+        );
+      });
+
+      it('should precompute leader-aware routing header in commonHeaders_ when routeToLeaderEnabled is true', () => {
+        const txn = new Transaction(SESSION);
+        assert.strictEqual(
+          txn.commonHeaders_[LEADER_AWARE_ROUTING_HEADER],
+          'true',
+        );
+      });
+
+      it('should not mutate session.commonHeaders_ when routeToLeaderEnabled is true', () => {
+        const session = createSession({routeToLeaderEnabled: true});
+        const originalHeaders = {...session.commonHeaders_};
+        const txn = new Transaction(session);
+        assert.strictEqual(
+          txn.commonHeaders_[LEADER_AWARE_ROUTING_HEADER],
+          'true',
+        );
+        assert.deepStrictEqual(session.commonHeaders_, originalHeaders);
+        assert.strictEqual(
+          session.commonHeaders_[LEADER_AWARE_ROUTING_HEADER],
+          undefined,
+        );
+      });
+
+      it('should not include leader-aware routing header in commonHeaders_ when routeToLeaderEnabled is false', () => {
+        const txn = new Transaction(
+          createSession({routeToLeaderEnabled: false}),
+        );
+        assert.strictEqual(
+          txn.commonHeaders_[LEADER_AWARE_ROUTING_HEADER],
+          undefined,
+        );
+      });
+
+      it('should not include leader-aware routing header when routeToLeaderEnabled is undefined', () => {
+        const txn = new Transaction(
+          createSession({routeToLeaderEnabled: undefined}),
+        );
+        assert.strictEqual(
+          txn.commonHeaders_[LEADER_AWARE_ROUTING_HEADER],
+          undefined,
+        );
+      });
+
+      it('should safely initialize when session lacks parent hierarchy', () => {
+        const mockSession = {
+          request: sandbox.stub(),
+          requestStream: sandbox.stub(),
+          parent: {formattedName_: 'database-name'},
+          commonHeaders_: {},
+        };
+        const txn = new Transaction(mockSession as unknown as Session);
+        assert.strictEqual(
+          txn.commonHeaders_[LEADER_AWARE_ROUTING_HEADER],
+          undefined,
+        );
+      });
     });
 
     describe('batchUpdate', () => {
@@ -2612,6 +2934,17 @@ describe('Transaction', () => {
             transaction.commonHeaders_,
           ),
         );
+      });
+
+      it('should not include leader-aware routing header when routeToLeaderEnabled is false', () => {
+        const txn = new Transaction(
+          createSession({routeToLeaderEnabled: false}),
+        );
+        const stub = sandbox.stub(txn, 'request');
+        txn.batchUpdate(STRING_STATEMENTS, assert.ifError);
+
+        const {headers} = stub.lastCall.args[0];
+        assert.strictEqual(headers[LEADER_AWARE_ROUTING_HEADER], undefined);
       });
 
       it('should encode sql string statements', () => {
@@ -2776,6 +3109,17 @@ describe('Transaction', () => {
             transaction.commonHeaders_,
           ),
         );
+      });
+
+      it('should not include leader-aware routing header when routeToLeaderEnabled is false', () => {
+        const txn = new Transaction(
+          createSession({routeToLeaderEnabled: false}),
+        );
+        const stub = sandbox.stub(txn, 'request');
+        txn.begin();
+
+        const {headers} = stub.lastCall.args[0];
+        assert.strictEqual(headers[LEADER_AWARE_ROUTING_HEADER], undefined);
       });
 
       it('should accept gaxOptions', done => {
@@ -2993,6 +3337,17 @@ describe('Transaction', () => {
             transaction.commonHeaders_,
           ),
         );
+      });
+
+      it('should not include leader-aware routing header when routeToLeaderEnabled is false', () => {
+        const txn = new Transaction(
+          createSession({routeToLeaderEnabled: false}),
+        );
+        const stub = sandbox.stub(txn, 'request');
+        txn.commit();
+
+        const {headers} = stub.lastCall.args[0];
+        assert.strictEqual(headers[LEADER_AWARE_ROUTING_HEADER], undefined);
       });
 
       it('should inject _unbindGaxOpts for commit if _affinityKey is present', () => {
@@ -3595,8 +3950,10 @@ describe('Transaction', () => {
 
       it('should not return an error if the `id` is not set', done => {
         delete transaction.id;
+        const endStub = sandbox.stub(transaction, 'end');
         transaction.rollback(err => {
           assert.deepStrictEqual(err, null);
+          assert.strictEqual(endStub.callCount, 1);
           done();
         });
       });
@@ -3618,10 +3975,23 @@ describe('Transaction', () => {
         assert.deepStrictEqual(
           headers,
           Object.assign(
-            {[LEADER_AWARE_ROUTING_HEADER]: true},
+            {[LEADER_AWARE_ROUTING_HEADER]: 'true'},
             transaction.commonHeaders_,
           ),
         );
+        assert.notStrictEqual(headers, transaction.commonHeaders_);
+      });
+
+      it('should not include leader-aware routing header when routeToLeaderEnabled is false', () => {
+        const txn = new Transaction(
+          createSession({routeToLeaderEnabled: false}),
+        );
+        const stub = sandbox.stub(txn, 'request');
+        txn.id = 'transaction-id-123';
+        txn.rollback();
+
+        const {headers} = stub.lastCall.args[0];
+        assert.strictEqual(headers[LEADER_AWARE_ROUTING_HEADER], undefined);
       });
 
       it('should inject _unbindGaxOpts for rollback if _affinityKey is present', () => {
@@ -4310,6 +4680,25 @@ describe('Transaction', () => {
         transaction.runStream(QUERY);
       });
 
+      it('should not include leader-aware routing header when routeToLeaderEnabled is false', done => {
+        const txn = new Transaction(
+          createSession({routeToLeaderEnabled: false}),
+        );
+        const QUERY: ExecuteSqlRequest = {
+          sql: 'SELET * FROM `MyTable`',
+        };
+
+        txn.requestStream = config => {
+          assert.strictEqual(
+            config.headers[LEADER_AWARE_ROUTING_HEADER],
+            undefined,
+          );
+          done();
+        };
+
+        txn.runStream(QUERY);
+      });
+
       it('should set transaction tag when not `singleUse`', done => {
         const QUERY: ExecuteSqlRequest = {
           sql: 'SELET * FROM `MyTable`',
@@ -4380,6 +4769,17 @@ describe('Transaction', () => {
             transaction.commonHeaders_,
           ),
         );
+      });
+
+      it('should not include leader-aware routing header when routeToLeaderEnabled is false', () => {
+        const txn = new Transaction(
+          createSession({routeToLeaderEnabled: false}),
+        );
+        const TABLE = 'my-table-123';
+        txn.createReadStream(TABLE);
+
+        const {headers} = REQUEST_STREAM.lastCall.args[0];
+        assert.strictEqual(headers[LEADER_AWARE_ROUTING_HEADER], undefined);
       });
 
       it('should set transaction tag if not `singleUse`', () => {
@@ -4518,6 +4918,65 @@ describe('Transaction', () => {
       it('should inherit from Dml', () => {
         assert(pdml instanceof Dml);
       });
+
+      it('should precompute leader-aware routing header in commonHeaders_ when routeToLeaderEnabled is true', () => {
+        const partitionedDml = new PartitionedDml(SESSION);
+        assert.strictEqual(
+          partitionedDml.commonHeaders_[LEADER_AWARE_ROUTING_HEADER],
+          'true',
+        );
+      });
+
+      it('should not mutate session.commonHeaders_ when routeToLeaderEnabled is true', () => {
+        const session = createSession({routeToLeaderEnabled: true});
+        const originalHeaders = {...session.commonHeaders_};
+        const partitionedDml = new PartitionedDml(session);
+        assert.strictEqual(
+          partitionedDml.commonHeaders_[LEADER_AWARE_ROUTING_HEADER],
+          'true',
+        );
+        assert.deepStrictEqual(session.commonHeaders_, originalHeaders);
+        assert.strictEqual(
+          session.commonHeaders_[LEADER_AWARE_ROUTING_HEADER],
+          undefined,
+        );
+      });
+
+      it('should not include leader-aware routing header in commonHeaders_ when routeToLeaderEnabled is false', () => {
+        const partitionedDml = new PartitionedDml(
+          createSession({routeToLeaderEnabled: false}),
+        );
+        assert.strictEqual(
+          partitionedDml.commonHeaders_[LEADER_AWARE_ROUTING_HEADER],
+          undefined,
+        );
+      });
+
+      it('should not include leader-aware routing header when routeToLeaderEnabled is undefined', () => {
+        const partitionedDml = new PartitionedDml(
+          createSession({routeToLeaderEnabled: undefined}),
+        );
+        assert.strictEqual(
+          partitionedDml.commonHeaders_[LEADER_AWARE_ROUTING_HEADER],
+          undefined,
+        );
+      });
+
+      it('should safely initialize when session lacks parent hierarchy', () => {
+        const mockSession = {
+          request: sandbox.stub(),
+          requestStream: sandbox.stub(),
+          parent: {formattedName_: 'database-name'},
+          commonHeaders_: {},
+        };
+        const partitionedDml = new PartitionedDml(
+          mockSession as unknown as Session,
+        );
+        assert.strictEqual(
+          partitionedDml.commonHeaders_[LEADER_AWARE_ROUTING_HEADER],
+          undefined,
+        );
+      });
     });
 
     describe('begin', () => {
@@ -4537,6 +4996,17 @@ describe('Transaction', () => {
             pdml.commonHeaders_,
           ),
         );
+      });
+
+      it('should not include leader-aware routing header when routeToLeaderEnabled is false', () => {
+        const partitionedDml = new PartitionedDml(
+          createSession({routeToLeaderEnabled: false}),
+        );
+        const stub = sandbox.stub(partitionedDml, 'request');
+        partitionedDml.begin();
+
+        const {headers} = stub.lastCall.args[0];
+        assert.strictEqual(headers[LEADER_AWARE_ROUTING_HEADER], undefined);
       });
     });
 

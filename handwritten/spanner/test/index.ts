@@ -192,6 +192,7 @@ describe('Spanner', () => {
 
   const OPTIONS = {
     projectId: 'project-id',
+    channelPool: 'legacy' as const,
   };
 
   before(() => {
@@ -241,6 +242,7 @@ describe('Spanner', () => {
       grpc,
       'grpc.keepalive_time_ms': 120000,
       'grpc.enable_channelz': 0,
+      'grpc-node.enable_caller_stack_traces': 0,
       'grpc.callInvocationTransformer':
         fakeGrpcGcp().gcpCallInvocationTransformer,
       'grpc.channelFactoryOverride': fakeGrpcGcp().gcpChannelFactoryOverride,
@@ -318,6 +320,24 @@ describe('Spanner', () => {
       );
       assert.strictEqual(
         (spannerEnabled.options as any)['grpc.enable_channelz'],
+        1,
+      );
+    });
+
+    it('should disable caller stack traces by default and allow overriding it', () => {
+      const spannerDefault = new Spanner(OPTIONS);
+      assert.strictEqual(
+        (spannerDefault.options as any)['grpc-node.enable_caller_stack_traces'],
+        0,
+      );
+
+      const spannerEnabled = new Spanner(
+        Object.assign({}, OPTIONS, {
+          'grpc-node.enable_caller_stack_traces': 1,
+        }),
+      );
+      assert.strictEqual(
+        (spannerEnabled.options as any)['grpc-node.enable_caller_stack_traces'],
         1,
       );
     });

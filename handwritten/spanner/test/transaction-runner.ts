@@ -299,6 +299,18 @@ describe('TransactionRunner', () => {
         });
       });
 
+      it('should reset transaction affinity on error', async () => {
+        const fakeError = new Error('err') as grpc.ServiceError;
+        fakeError.code = grpc.status.UNKNOWN;
+        const resetStub = sandbox.stub();
+        (fakeTransaction as any).affinity = {reset: resetStub};
+
+        runFn.rejects(fakeError);
+
+        await assert.rejects(runner.run(), fakeError);
+        assert.strictEqual(resetStub.callCount, 1);
+      });
+
       it('should retry on ABORTED errors', async () => {
         const fakeReturnValue = 11;
         const fakeError = new Error('err') as grpc.ServiceError;
@@ -330,7 +342,7 @@ describe('TransactionRunner', () => {
         runner
           .run()
           .then(() => {
-            done(new Error('missing expected DEADLINE_EXCEEDED error'));
+            return done(new Error('missing expected DEADLINE_EXCEEDED error'));
           })
           .catch(err => {
             assert.strictEqual(err.code, grpc.status.DEADLINE_EXCEEDED);

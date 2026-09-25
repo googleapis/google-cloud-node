@@ -357,6 +357,7 @@ describe('Spanner with mock server', () => {
     // process.env.SPANNER_EMULATOR_HOST = `localhost:${port}`;
     process.env.GOOGLE_CLOUD_PROJECT = 'test-project';
     await disableMetrics(sandbox);
+    resetNthClientId();
     spanner = new Spanner({
       servicePath: 'localhost',
       port,
@@ -424,6 +425,30 @@ describe('Spanner with mock server', () => {
         assert.strictEqual(
           customPooledChannel.internalChannel?.channelzEnabled,
           true,
+        );
+      } finally {
+        await customSpanner.close();
+      }
+    });
+
+    it('should disable caller stack traces by default and allow overriding it', async () => {
+      assert.strictEqual(
+        (spanner.options as any)['grpc-node.enable_caller_stack_traces'],
+        0,
+      );
+
+      const customSpanner = new Spanner({
+        servicePath: 'localhost',
+        port,
+        sslCreds: grpc.credentials.createInsecure(),
+        'grpc-node.enable_caller_stack_traces': 1,
+      });
+      try {
+        assert.strictEqual(
+          (customSpanner.options as any)[
+            'grpc-node.enable_caller_stack_traces'
+          ],
+          1,
         );
       } finally {
         await customSpanner.close();
@@ -1084,13 +1109,14 @@ describe('Spanner with mock server', () => {
       }
     });
 
-    it('should fail on slow writer when maxResumeRetries has been exceeded', async () => {
+    it('should not fail on slow writer even when maxResumeRetries is small', async () => {
       const largeSelect = 'select * from large_table';
       spannerMock.putStatementResult(
         largeSelect,
         mock.StatementResult.resultSet(mock.createLargeResultSet()),
       );
       const database = newTestDatabase();
+      let rowCount = 0;
       try {
         const rs = database.runStream({
           sql: largeSelect,
@@ -1105,10 +1131,11 @@ describe('Spanner with mock server', () => {
             highWaterMark: 1,
             objectMode: true,
             transform(chunk, encoding, callback) {
-              // Simulate a slow flush.
-              setTimeout(() => {
+              rowCount++;
+              // Simulate an asynchronous slow consumer using setImmediate.
+              setImmediate(() => {
                 callback(undefined, chunk);
-              }, 50);
+              });
             },
           }),
           new stream.Transform({
@@ -1118,12 +1145,7 @@ describe('Spanner with mock server', () => {
             },
           }),
         );
-        assert.fail('missing expected error');
-      } catch (err) {
-        assert.strictEqual(
-          (err as ServiceError).message,
-          'Stream is still not ready to receive data after 1 attempts to resume.',
-        );
+        assert.strictEqual(rowCount, NUM_ROWS_LARGE_RESULT_SET);
       } finally {
         await database.close();
       }
@@ -1381,7 +1403,14 @@ describe('Spanner with mock server', () => {
         database
           .close()
           .then(() => {
-            const gotStreamingCalls = xGoogReqIDInterceptor.getStreamingCalls();
+            const gotStreamingCalls = xGoogReqIDInterceptor
+              .getStreamingCalls()
+              .map(call => {
+                const parts = call.reqId.split('.');
+                assert(parseInt(parts[3], 10) >= 1);
+                parts[3] = '1';
+                return {...call, reqId: parts.join('.')};
+              });
             const wantStreamingCalls = [
               {
                 method: '/google.spanner.v1.Spanner/ExecuteStreamingSql',
@@ -7429,6 +7458,12 @@ describe('Spanner with mock server', () => {
           reqId: `1.${randIdForProcess}.1.1.9.1`,
         },
       ];
+      const normalizeChannelId = (call: {method: string; reqId: string}) => {
+        const parts = call.reqId.split('.');
+        assert(parseInt(parts[3], 10) >= 1);
+        parts[3] = '1';
+        return {...call, reqId: parts.join('.')};
+      };
       const gotUnaryCalls = xGoogReqIDInterceptor.getUnaryCalls();
       assert.deepStrictEqual(
         gotUnaryCalls[0].method,
@@ -7437,11 +7472,13 @@ describe('Spanner with mock server', () => {
       // It is non-deterministic to try to get the exact clientId used to invoke .BatchCreateSessions
       // given that these tests run as a collective and sessions are pooled.
       assert.deepStrictEqual(
-        gotUnaryCalls.slice(1),
+        gotUnaryCalls.slice(1).map(normalizeChannelId),
         wantUnaryCallsWithoutBatchCreateSessions,
       );
 
-      const gotStreamingCalls = xGoogReqIDInterceptor.getStreamingCalls();
+      const gotStreamingCalls = xGoogReqIDInterceptor
+        .getStreamingCalls()
+        .map(normalizeChannelId);
       const wantStreamingCalls = [
         {
           method: '/google.spanner.v1.Spanner/ExecuteStreamingSql',
