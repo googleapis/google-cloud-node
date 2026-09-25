@@ -1,6 +1,6 @@
 {
   "name": "@googlemaps/solar",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "Solar API client for Node.js",
   "repository": {
     "type": "git",
@@ -66,10 +66,5 @@
   },
   "overrides": {
     "@sinonjs/fake-timers": "15.2.1"
-  },
-  "pnpm": {
-    "overrides": {
-      "@sinonjs/fake-timers": "15.2.1"
-    }
   }
 }

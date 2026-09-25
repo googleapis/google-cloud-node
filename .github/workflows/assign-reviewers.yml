@@ -33,21 +33,17 @@ jobs:
             });
 
             const PATH_ROUTING = [
-              { prefix: 'handwritten/bigquery/', team: 'bigquery-team' },
-              { prefix: 'handwritten/bigquery-storage/', team: 'bigquery-team' },
-              { prefix: 'handwritten/bigtable/', team: 'bigtable-team' },
-              { prefix: 'handwritten/cloud-profiler/', team: 'cloud-profiler-team' },
-              { prefix: 'handwritten/storage/', team: 'gcs-team' },
-              { prefix: 'handwritten/firestore/', team: 'firestore-team' },
-              { prefix: 'handwritten/pubsub/', team: 'pubsub-team' },
-              { prefix: 'handwritten/spanner/', team: 'spanner-team' },
-              { prefix: 'handwritten/spanner-driver/', team: 'spanner-team' },
-              { prefix: 'core/packages/google-auth-library-nodejs/', team: 'aion-team' },
-              { prefix: '.github/workflows/bigtable-conformance.yaml', team: 'bigtable-team' },
-              { prefix: '.github/workflows/mandatory-conformance.yaml', team: 'bigtable-team' },
-              { prefix: '.github/workflows/storage-conformance.yaml', team: 'gcs-team' },
-              { prefix: '.github/workflows/system-tests-against-emulator.yaml', team: 'spanner-team' },
-              { prefix: '.github/workflows/discovery.yaml', team: 'bigquery-team' },
+              { prefix: 'handwritten/bigquery/', team: 'bigquery-team', allowSharedFiles: true },
+              { prefix: 'handwritten/bigquery-storage/', team: 'bigquery-team', allowSharedFiles: true },
+              { prefix: 'handwritten/cloud-profiler/', team: 'cloud-profiler-team', allowSharedFiles: true },
+              { prefix: 'handwritten/storage/', team: 'gcs-team', allowSharedFiles: true },
+              { prefix: 'handwritten/firestore/', team: 'firestore-team', allowSharedFiles: true },
+              { prefix: 'handwritten/spanner/', team: 'spanner-team', allowSharedFiles: true },
+              { prefix: 'handwritten/spanner-driver/', team: 'spanner-team', allowSharedFiles: true },
+              { prefix: 'core/packages/google-auth-library-nodejs/', team: 'aion-team', allowSharedFiles: false },
+              { prefix: '.github/workflows/storage-conformance.yaml', team: 'gcs-team', allowSharedFiles: true },
+              { prefix: '.github/workflows/system-tests-against-emulator.yaml', team: 'spanner-team', allowSharedFiles: true },
+              { prefix: '.github/workflows/discovery.yaml', team: 'bigquery-team', allowSharedFiles: true },
             ];
 
             const SHARED_PARTNER_FILES = new Set([
@@ -58,30 +54,65 @@ jobs:
               'changelog.json',
             ]);
 
+            const ALL_PARTNER_TEAMS = new Set([
+              ...PATH_ROUTING.map(r => r.team),
+              'bigtable-team',
+              'pubsub-team',
+              'cloud-sdk-librarian-team',
+            ]);
+
             const assignedTeams = new Set();
+            let allowSharedPartnerFiles = false;
             for (const route of PATH_ROUTING) {
               if (files.some(file => file.filename.startsWith(route.prefix))) {
                 assignedTeams.add(route.team);
+                if (route.allowSharedFiles) {
+                  allowSharedPartnerFiles = true;
+                }
               }
             }
 
             const hasNonPartnerFiles = files.some(
               file =>
                 !PATH_ROUTING.some(route => file.filename.startsWith(route.prefix)) &&
-                !SHARED_PARTNER_FILES.has(file.filename)
+                !(allowSharedPartnerFiles && SHARED_PARTNER_FILES.has(file.filename))
+            );
+            const hasOnlyPartnerAndSharedFiles = files.every(
+              file =>
+                PATH_ROUTING.some(route => file.filename.startsWith(route.prefix)) ||
+                SHARED_PARTNER_FILES.has(file.filename)
             );
             const requiresDefaultTeamReview = assignedTeams.size === 0 || hasNonPartnerFiles;
+
+            // Fetch live requested reviewers and teams in case CODEOWNERS updated them after webhook event creation
+            let requestedReviewers = context.payload.pull_request.requested_reviewers || [];
+            let requestedTeams = context.payload.pull_request.requested_teams || [];
+            try {
+              const { data: liveReviewers } = await github.rest.pulls.listRequestedReviewers({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                pull_number: context.payload.pull_request.number,
+              });
+              if (liveReviewers.teams) {
+                requestedTeams = liveReviewers.teams;
+              }
+              if (liveReviewers.users) {
+                requestedReviewers = liveReviewers.users;
+              }
+            } catch (err) {
+              console.warn("Failed to fetch live requested reviewers:", err.message || err);
+            }
 
             // Release PRs should remain the responsibility of the oncall (and any matched partner team),
             // so we route them to the default team (plus partner team if applicable) rather than individual team members.
             if (author === 'release-please[bot]' || author === 'release-please') {
               const targetTeams = new Set(['cloud-sdk-nodejs-team']);
-              if (!hasNonPartnerFiles) {
+              if (hasOnlyPartnerAndSharedFiles) {
                 for (const team of assignedTeams) {
                   targetTeams.add(team);
                 }
               }
-              const requestedTeams = context.payload.pull_request.requested_teams || [];
+
               const missingTeams = Array.from(targetTeams).filter(
                 slug => !requestedTeams.some(team => team.slug === slug)
               );
@@ -96,6 +127,24 @@ jobs:
                   });
                 } catch (err) {
                   console.error("Failed to assign release team reviewers:", err.message || err);
+                }
+              }
+
+              const unneededTeams = requestedTeams
+                .filter(team => ALL_PARTNER_TEAMS.has(team.slug) && !targetTeams.has(team.slug))
+                .map(team => team.slug);
+              if (unneededTeams.length > 0) {
+                console.log(`Removing unneeded partner teams from release PR: ${unneededTeams.join(', ')}`);
+                try {
+                  await github.rest.pulls.removeRequestedReviewers({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    pull_number: context.payload.pull_request.number,
+                    reviewers: [],
+                    team_reviewers: unneededTeams,
+                  });
+                } catch (err) {
+                  console.warn("Failed to remove unneeded partner teams from release PR:", err.message || err);
                 }
               }
               return;
@@ -126,15 +175,30 @@ jobs:
               if (user.login && KNOWN_BOTS.has(user.login)) return true;
               return false;
             };
-
-            const requestedReviewers = context.payload.pull_request.requested_reviewers || [];
-            const requestedTeams = context.payload.pull_request.requested_teams || [];
-
             const humanRequestedReviewers = requestedReviewers.filter(r => !isBot(r));
             const hasDefaultTeam = requestedTeams.some(team => team.slug === 'cloud-sdk-nodejs-team');
             const hasAllAssignedTeams =
               assignedTeams.size > 0 &&
               Array.from(assignedTeams).every(slug => requestedTeams.some(team => team.slug === slug));
+
+            // Remove any requested partner teams that do not match modified routes in the PR
+            const unneededPartnerTeams = requestedTeams
+              .filter(team => ALL_PARTNER_TEAMS.has(team.slug) && !assignedTeams.has(team.slug))
+              .map(team => team.slug);
+            if (unneededPartnerTeams.length > 0) {
+              console.log(`Removing unneeded partner teams: ${unneededPartnerTeams.join(', ')}`);
+              try {
+                await github.rest.pulls.removeRequestedReviewers({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  pull_number: context.payload.pull_request.number,
+                  reviewers: [],
+                  team_reviewers: unneededPartnerTeams,
+                });
+              } catch (err) {
+                console.warn("Failed to remove unneeded partner teams:", err.message || err);
+              }
+            }
 
             // Check if PR has already been reviewed by human reviewers (excluding bots and author)
             let hasReviews = false;

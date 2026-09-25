@@ -15,6 +15,7 @@
 import * as sinon from 'sinon';
 import * as assert from 'assert';
 import {grpc} from 'google-gax';
+import {status as Status} from '@grpc/grpc-js';
 import * as mock from '../mockserver/mockspanner';
 import {MockError, SimulatedExecutionTime} from '../mockserver/mockspanner';
 import {Database, Instance, Spanner} from '../../src';
@@ -333,7 +334,7 @@ describe('Test metrics with mock server', () => {
       const database = newTestDatabase();
       const err = {
         message: 'Temporary unavailable',
-        code: grpc.status.UNAVAILABLE,
+        code: Status.UNAVAILABLE,
       } as MockError;
       spannerMock.setExecutionTime(
         spannerMock.executeStreamingSql,
@@ -506,7 +507,7 @@ describe('Test metrics with mock server', () => {
       const database = newTestDatabase();
       const err = {
         message: 'Temporary unavailable',
-        code: grpc.status.UNAVAILABLE,
+        code: Status.UNAVAILABLE,
       } as MockError;
       spannerMock.setExecutionTime(
         spannerMock.commit,
@@ -757,7 +758,7 @@ describe('Test metrics with mock server', () => {
       const database = newTestDatabase();
       const permissionDeniedError = {
         message: 'Permission denied on table NUMBERS',
-        code: grpc.status.PERMISSION_DENIED,
+        code: Status.PERMISSION_DENIED,
       } as MockError;
       spannerMock.setExecutionTime(
         spannerMock.executeStreamingSql,
@@ -766,7 +767,7 @@ describe('Test metrics with mock server', () => {
 
       await assert.rejects(
         database.run(selectSql),
-        (error: any) => error.code === grpc.status.PERMISSION_DENIED,
+        (error: any) => error.code === Status.PERMISSION_DENIED,
       );
 
       const {resourceMetrics} = await reader.collect();
@@ -812,7 +813,7 @@ describe('Test metrics with mock server', () => {
       const database = newTestDatabase();
       const permissionDeniedError = {
         message: 'Permission denied on commit',
-        code: grpc.status.PERMISSION_DENIED,
+        code: Status.PERMISSION_DENIED,
       } as MockError;
       spannerMock.setExecutionTime(
         spannerMock.commit,
@@ -824,7 +825,7 @@ describe('Test metrics with mock server', () => {
           await transaction.run(selectSql);
           await transaction.commit();
         }),
-        (error: any) => error.code === grpc.status.PERMISSION_DENIED,
+        (error: any) => error.code === Status.PERMISSION_DENIED,
       );
 
       const {resourceMetrics} = await reader.collect();
@@ -868,7 +869,7 @@ describe('Test metrics with mock server', () => {
       const failingSql = 'SELECT * FROM NON_EXISTENT_TABLE';
       const notFoundError = {
         message: 'Table not found',
-        code: grpc.status.NOT_FOUND,
+        code: Status.NOT_FOUND,
       } as MockError;
       spannerMock.putStatementResult(
         failingSql,

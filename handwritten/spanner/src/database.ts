@@ -2989,7 +2989,6 @@ class Database extends common.GrpcServiceObject {
       this._executeRunOnSession(query, options, null, null, callback);
       return;
     }
-
     const traceConfig: traceConfig = {
       ...this._traceConfig,
       ...getQueryTraceConfig(query),
@@ -3092,13 +3091,15 @@ class Database extends common.GrpcServiceObject {
       metadata?: ResultSetMetadata,
     ) => void,
   ): void {
-    snapshot.once('end', () => {
-      try {
-        this.sessionFactory_.release(session);
-      } catch (releaseError) {
-        this.emit('error', releaseError);
-      }
-    });
+    if (!session.metadata?.multiplexed) {
+      snapshot.once('end', () => {
+        try {
+          this.sessionFactory_.release(session);
+        } catch (releaseError) {
+          this.emit('error', releaseError);
+        }
+      });
+    }
 
     const snapshotWithRun = snapshot as Snapshot & {
       _run?: (

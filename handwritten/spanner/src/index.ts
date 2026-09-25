@@ -115,6 +115,7 @@ import {MetricInterceptor} from './metrics/interceptor';
 import {CloudMonitoringMetricsExporter} from './metrics/spanner-metrics-exporter';
 import {MetricsTracerFactory} from './metrics/metrics-tracer-factory';
 import {MetricsTracer} from './metrics/metrics-tracer';
+import {RequestStreamCoordinator} from './request-stream-coordinator';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const gcpApiConfig = require('./spanner_grpc_config.json');
@@ -2143,27 +2144,49 @@ class Spanner extends GrpcService {
 
     callback(null, wrappedRequestFn);
   }
-
-  private _getResourceName(reqOpts?: {
-    database?: string | object;
-    session?: string | object;
-    name?: string;
-  }): string {
-    if (!reqOpts) {
-      return '';
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  private _getResourceName(config?: any): string {
+    const reqOpts = config?.reqOpts;
+    if (reqOpts) {
+      if (typeof reqOpts.database === 'string') {
+        return reqOpts.database;
+      }
+      if (typeof reqOpts.session === 'string') {
+        return reqOpts.session;
+      }
+      if (typeof reqOpts.name === 'string') {
+        return reqOpts.name;
+      }
     }
-    if (typeof reqOpts.database === 'string') {
-      return reqOpts.database;
-    }
-    if (typeof reqOpts.session === 'string') {
-      return reqOpts.session;
-    }
-    if (typeof reqOpts.name === 'string') {
-      return reqOpts.name;
+    const resourceHeader = config?.headers?.[CLOUD_RESOURCE_HEADER];
+    if (typeof resourceHeader === 'string') {
+      return resourceHeader;
     }
     return '';
   }
 
+  private _initMetricsTracer(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    config: any,
+  ): MetricsTracer | null {
+    let metricsTracer: MetricsTracer | null = null;
+    if (
+      this._metricsEnabled &&
+      config.client === 'SpannerClient' &&
+      this.projectId_ &&
+      this.projectId_ !== '{{projectId}}'
+    ) {
+      metricsTracer =
+        MetricsTracerFactory?.getInstance(this.projectId_)?.createMetricsTracer(
+          config.method,
+          this._getResourceName(config),
+          config.headers?.['x-goog-spanner-request-id'],
+        ) ?? null;
+    }
+    metricsTracer?.recordOperationStart();
+    config.metricsTracer = metricsTracer ?? undefined;
+    return metricsTracer;
+  }
   /**
    * Funnel all API requests through this method to be sure we have a project
    * ID.
@@ -2177,22 +2200,7 @@ class Spanner extends GrpcService {
    */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   request(config: any, callback?: any): any {
-    let metricsTracer: MetricsTracer | null = null;
-    if (
-      this._metricsEnabled &&
-      config.client === 'SpannerClient' &&
-      this.projectId_ &&
-      this.projectId_ !== '{{projectId}}'
-    ) {
-      metricsTracer =
-        MetricsTracerFactory?.getInstance(this.projectId_)?.createMetricsTracer(
-          config.method,
-          this._getResourceName(config.reqOpts),
-          config.headers?.['x-goog-spanner-request-id'],
-        ) ?? null;
-    }
-    metricsTracer?.recordOperationStart();
-    config.metricsTracer = metricsTracer ?? undefined;
+    const metricsTracer = this._initMetricsTracer(config);
     if (typeof callback === 'function') {
       this.prepareGapicRequest_(config, (err, requestFn) => {
         if (err) {
@@ -2279,97 +2287,22 @@ class Spanner extends GrpcService {
    */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   requestStream(config): any {
-    let metricsTracer: MetricsTracer | null = null;
-    if (
-      this._metricsEnabled &&
-      config.client === 'SpannerClient' &&
-      this.projectId_ &&
-      this.projectId_ !== '{{projectId}}'
-    ) {
-      metricsTracer =
-        MetricsTracerFactory?.getInstance(this.projectId_)?.createMetricsTracer(
-          config.method,
-          this._getResourceName(config.reqOpts),
-          config.headers?.['x-goog-spanner-request-id'],
-        ) ?? null;
-    }
-    metricsTracer?.recordOperationStart();
-    config.metricsTracer = metricsTracer ?? undefined;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    let callStream: any = null;
-    let cleanedUp = false;
-    const cleanup = () => {
-      if (cleanedUp) {
-        return;
-      }
-      cleanedUp = true;
-      if (callStream) {
-        if (typeof callStream.cancel === 'function') {
-          callStream.cancel();
-        } else if (
-          typeof callStream.destroy === 'function' &&
-          !callStream.destroyed
-        ) {
-          callStream.destroy();
-        }
-      }
-      metricsTracer?.recordOperationCompletion();
-    };
-
+    const metricsTracer = this._initMetricsTracer(config);
     const stream = streamEvents(through.obj());
-    const origDestroy = stream._destroy;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    stream._destroy = function (err: any, cb: any) {
-      cleanup();
-      if (typeof origDestroy === 'function') {
-        origDestroy.call(stream, err, cb);
-      } else if (typeof cb === 'function') {
-        cb(err);
-      }
-    };
+    const coordinator = new RequestStreamCoordinator(stream, metricsTracer);
+    coordinator.setup();
+
     stream.once('reading', () => {
+      coordinator.startRequest();
       this.prepareGapicRequest_(config, (err, requestFn) => {
-        if (stream.destroyed) {
-          cleanup();
-          return;
-        }
         if (err) {
-          stream.destroy(err);
+          coordinator.handleRequestError(err);
           return;
         }
-        try {
-          callStream = requestFn();
-          if (stream.destroyed) {
-            cleanup();
-            return;
-          }
-          if (callStream) {
-            const cancelUpstream = () => {
-              cleanup();
-            };
-            stream.once('close', cancelUpstream);
-            callStream.once('close', () => {
-              stream.removeListener('close', cancelUpstream);
-            });
-            callStream
-              .on('error', (err: Error) => {
-                stream.destroy(err);
-              })
-              .pipe(stream);
-          } else {
-            stream.destroy(new Error('Failed to initialize request stream.'));
-          }
-        } catch (error) {
-          stream.destroy(error as Error);
-        }
+        coordinator.attachRequestFn(requestFn);
       });
     });
-    stream.on('finish', () => {
-      stream.destroy();
-    });
-    stream.on('close', () => {
-      cleanup();
-    });
+
     return stream;
   }
 
