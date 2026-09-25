@@ -107,7 +107,7 @@ system)
     retval=$?
     ;;
 units)
-    if [ ! -d "build" ]; then
+    if [ ! -d "build" ] && grep -q '"compile":' package.json; then
         ${TEST_CMD} compile || exit $?
     fi
     ${TEST_CMD} test
