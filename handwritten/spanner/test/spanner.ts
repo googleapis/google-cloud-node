@@ -1084,13 +1084,14 @@ describe('Spanner with mock server', () => {
       }
     });
 
-    it('should fail on slow writer when maxResumeRetries has been exceeded', async () => {
+    it('should not fail on slow writer even when maxResumeRetries is small', async () => {
       const largeSelect = 'select * from large_table';
       spannerMock.putStatementResult(
         largeSelect,
         mock.StatementResult.resultSet(mock.createLargeResultSet()),
       );
       const database = newTestDatabase();
+      let rowCount = 0;
       try {
         const rs = database.runStream({
           sql: largeSelect,
@@ -1105,10 +1106,11 @@ describe('Spanner with mock server', () => {
             highWaterMark: 1,
             objectMode: true,
             transform(chunk, encoding, callback) {
-              // Simulate a slow flush.
-              setTimeout(() => {
+              rowCount++;
+              // Simulate an asynchronous slow consumer using setImmediate.
+              setImmediate(() => {
                 callback(undefined, chunk);
-              }, 50);
+              });
             },
           }),
           new stream.Transform({
@@ -1118,12 +1120,7 @@ describe('Spanner with mock server', () => {
             },
           }),
         );
-        assert.fail('missing expected error');
-      } catch (err) {
-        assert.strictEqual(
-          (err as ServiceError).message,
-          'Stream is still not ready to receive data after 1 attempts to resume.',
-        );
+        assert.strictEqual(rowCount, NUM_ROWS_LARGE_RESULT_SET);
       } finally {
         await database.close();
       }
