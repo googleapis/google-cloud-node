@@ -38,9 +38,9 @@
     "prepare": "npm run compile",
     "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
     "presystem-test": "pnpm run compile",
-    "system-test": "../../bin/run-test.cjs build/system-test --timeout 600000",
+    "system-test": "run-test build/system-test --timeout 600000",
     "pretest": "pnpm run compile",
-    "test": "cross-env NODE_OPTIONS='--no-deprecation' ../../bin/run-test.cjs build/test",
+    "test": "cross-env NODE_OPTIONS='--no-deprecation' run-test build/test",
     "precompile": "gts clean",
     "postpublish": "./.kokoro/publish-min.sh"
   },

@@ -36,9 +36,9 @@
     "prepare": "npm run compile",
     "samples-test": "cd samples/ && npm link ../ && npm install && npm test && cd ../",
     "presystem-test": "npm run compile",
-    "system-test": "../../bin/run-test.cjs build/system-test --timeout 600000",
+    "system-test": "run-test build/system-test --timeout 600000",
     "pretest": "npm run compile",
-    "test": "../../bin/run-test.cjs build/test",
+    "test": "run-test build/test",
     "precompile": "gts clean"
   },
   "dependencies": {
