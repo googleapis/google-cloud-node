@@ -733,8 +733,13 @@ describe('MessageQueues', () => {
         .resolves();
 
       modAckQueue.setOptions({callOptions: fakeCallOptions});
-      await modAckQueue.add(new FakeMessage() as Message, 10);
+      // add() returns a promise that only resolves when the batch is flushed.
+      // We must flush before awaiting completion; awaiting add() directly causes
+      // a deadlock that timed out under Bun where background fallback timers
+      // are not scheduled while blocked on unresolved promises.
+      const completion = modAckQueue.add(new FakeMessage() as Message, 10);
       await modAckQueue.flush('test');
+      await completion;
 
       const [, callOptions] = stub.lastCall.args;
       assert.strictEqual(callOptions, fakeCallOptions);
