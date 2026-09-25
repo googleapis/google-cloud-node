@@ -41,7 +41,6 @@ import {
   BatchUpdateOptions,
   ExecuteSqlRequest,
   ReadRequest,
-  RunCallback,
 } from '../src/transaction';
 import {Row} from '../src/partial-result-stream';
 import {grpc} from 'google-gax';
@@ -250,7 +249,11 @@ describe('Transaction', () => {
         assert.deepStrictEqual(arg.gaxOpts, {
           timeout: 1000,
           otherArgs: {
-            options: {unbind: true, affinityKey: txn._affinityKey},
+            options: {
+              unbind: true,
+              affinityKey: txn._affinityKey,
+              affinity: txn.affinity,
+            },
           },
         });
         // The caller supplied gax options must not be modified.
@@ -258,6 +261,129 @@ describe('Transaction', () => {
           timeout: 1000,
           otherArgs: {options: {unbind: true}},
         });
+      });
+
+      it('should not create affinity or affinityKey for single-use snapshots', () => {
+        const multiplexedSession = Object.assign({}, SESSION, {
+          metadata: {multiplexed: true},
+        });
+        const singleUseSnapshot = new Snapshot(
+          multiplexedSession,
+          undefined,
+          undefined,
+          null,
+        );
+        assert.strictEqual(singleUseSnapshot.affinity, undefined);
+        assert.strictEqual(singleUseSnapshot._affinityKey, undefined);
+        assert.strictEqual(singleUseSnapshot._bindGaxOpts, undefined);
+        assert.strictEqual(singleUseSnapshot._unbindGaxOpts, undefined);
+      });
+
+      it('should not inject affinity in `Session#request` for single-use snapshots', () => {
+        REQUEST.resetHistory();
+        const multiplexedSession = Object.assign({}, SESSION, {
+          metadata: {multiplexed: true},
+        });
+        const singleUseSnapshot = new Snapshot(
+          multiplexedSession,
+          undefined,
+          undefined,
+          null,
+        );
+        singleUseSnapshot.request({client: 'SpannerClient'}, () => {});
+        assert.strictEqual(REQUEST.callCount, 1);
+        const argument = REQUEST.lastCall.args[0];
+        assert.strictEqual(argument.gaxOpts, undefined);
+      });
+
+      it('should not inject affinity in `Session#requestStream` for single-use snapshots', () => {
+        REQUEST_STREAM.resetHistory();
+        const multiplexedSession = Object.assign({}, SESSION, {
+          metadata: {multiplexed: true},
+        });
+        const singleUseSnapshot = new Snapshot(
+          multiplexedSession,
+          undefined,
+          undefined,
+          null,
+        );
+        singleUseSnapshot.requestStream({client: 'SpannerClient'});
+        assert.strictEqual(REQUEST_STREAM.callCount, 1);
+        const argument = REQUEST_STREAM.lastCall.args[0];
+        assert.strictEqual(argument.gaxOpts, undefined);
+      });
+
+      it('should not unbind channel on end() for single-use snapshots', () => {
+        const multiplexedSession = Object.assign({}, SESSION, {
+          metadata: {multiplexed: true},
+        });
+        const singleUseSnapshot = new Snapshot(
+          multiplexedSession,
+          undefined,
+          undefined,
+          null,
+        );
+        singleUseSnapshot.end();
+        assert.strictEqual(singleUseSnapshot.ended, true);
+      });
+
+      it('should generate _affinityKey and propagate to request/requestStream for single-use snapshots when legacy grpc-gcp pool is enabled', () => {
+        REQUEST.resetHistory();
+        REQUEST_STREAM.resetHistory();
+        const legacySpanner = Object.assign({}, SPANNER, {
+          isLegacyChannelPool: true,
+        });
+        const legacyInstance = Object.assign({}, INSTANCE, {
+          parent: legacySpanner,
+        });
+        const legacyDatabase = Object.assign({}, DATABASE, {
+          parent: legacyInstance,
+        });
+        const multiplexedSession = Object.assign({}, SESSION, {
+          parent: legacyDatabase,
+          metadata: {multiplexed: true},
+        });
+        const singleUseSnapshot = new Snapshot(
+          multiplexedSession,
+          undefined,
+          undefined,
+          null,
+        );
+        assert.strictEqual(singleUseSnapshot.affinity, undefined);
+        assert.ok(singleUseSnapshot._affinityKey);
+        assert.ok(singleUseSnapshot._affinityKey.startsWith('mux-affinity-'));
+        assert.strictEqual(
+          singleUseSnapshot._bindGaxOpts.otherArgs.options.affinityKey,
+          singleUseSnapshot._affinityKey,
+        );
+        assert.strictEqual(
+          singleUseSnapshot._bindGaxOpts.otherArgs.options.affinity,
+          undefined,
+        );
+
+        singleUseSnapshot.request({client: 'SpannerClient'});
+        assert.strictEqual(REQUEST.callCount, 1);
+        const requestArg = REQUEST.lastCall.args[0];
+        assert.strictEqual(
+          requestArg.gaxOpts.otherArgs.options.affinityKey,
+          singleUseSnapshot._affinityKey,
+        );
+        assert.strictEqual(
+          requestArg.gaxOpts.otherArgs.options.affinity,
+          undefined,
+        );
+
+        singleUseSnapshot.requestStream({client: 'SpannerClient'});
+        assert.strictEqual(REQUEST_STREAM.callCount, 1);
+        const streamArg = REQUEST_STREAM.lastCall.args[0];
+        assert.strictEqual(
+          streamArg.gaxOpts.otherArgs.options.affinityKey,
+          singleUseSnapshot._affinityKey,
+        );
+        assert.strictEqual(
+          streamArg.gaxOpts.otherArgs.options.affinity,
+          undefined,
+        );
       });
 
       it('should set the commonHeaders_', () => {
@@ -2456,6 +2582,76 @@ describe('Transaction', () => {
       it('should inherit from Dml', () => {
         assert(transaction instanceof Dml);
       });
+
+      it('should preserve this context, clone gaxOpts with affinity, and preserve non-plain objects in reqOpts', () => {
+        let capturedConfig: any;
+        const fakeSession = Object.assign({}, SESSION, {
+          metadata: undefined,
+          request: sinon.spy((config: any, callback: Function) => {
+            capturedConfig = config;
+            callback();
+          }),
+          requestStream: sinon.spy((config: any) => {
+            capturedConfig = config;
+            return {} as any;
+          }),
+        });
+        const txn = new Transaction(fakeSession);
+        assert.ok((txn as any)._affinity);
+        assert.strictEqual((txn as any)._affinityKey, undefined);
+
+        class CustomParameter {
+          constructor(public value: string) {}
+        }
+        const customInstance = new CustomParameter('test');
+        const originalConfig = {
+          reqOpts: {
+            parameter: customInstance,
+          },
+          gaxOpts: {
+            otherArgs: {
+              options: {
+                custom: 'value',
+              },
+            },
+          },
+        };
+        const configToPass = {
+          reqOpts: {
+            parameter: customInstance,
+          },
+          gaxOpts: {
+            otherArgs: {
+              options: {
+                custom: 'value',
+              },
+            },
+          },
+        };
+
+        txn.request(configToPass, () => {});
+        assert.strictEqual(fakeSession.request.calledOnce, true);
+        // Original config object must not be mutated
+        assert.deepStrictEqual(configToPass, originalConfig);
+        // Non-plain object instance in reqOpts is preserved
+        assert.strictEqual(capturedConfig.reqOpts.parameter, customInstance);
+        // The spy received a cloned gaxOpts with affinity injected
+        assert.notStrictEqual(capturedConfig.gaxOpts, originalConfig.gaxOpts);
+        assert.strictEqual(
+          capturedConfig.gaxOpts.otherArgs.options.affinity,
+          (txn as any)._affinity,
+        );
+
+        txn.requestStream(configToPass);
+        assert.strictEqual(fakeSession.requestStream.calledOnce, true);
+        assert.deepStrictEqual(configToPass, originalConfig);
+        assert.strictEqual(capturedConfig.reqOpts.parameter, customInstance);
+        assert.notStrictEqual(capturedConfig.gaxOpts, originalConfig.gaxOpts);
+        assert.strictEqual(
+          capturedConfig.gaxOpts.otherArgs.options.affinity,
+          (txn as any)._affinity,
+        );
+      });
     });
 
     describe('batchUpdate', () => {
@@ -3595,8 +3791,10 @@ describe('Transaction', () => {
 
       it('should not return an error if the `id` is not set', done => {
         delete transaction.id;
+        const endStub = sandbox.stub(transaction, 'end');
         transaction.rollback(err => {
           assert.deepStrictEqual(err, null);
+          assert.strictEqual(endStub.callCount, 1);
           done();
         });
       });
