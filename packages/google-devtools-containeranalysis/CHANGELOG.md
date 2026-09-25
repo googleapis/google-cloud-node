@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/containeranalysis?activeTab=versions
 
+## [7.0.2](https://github.com/googleapis/google-cloud-node/compare/containeranalysis-v7.0.1...containeranalysis-v7.0.2) (2026-09-25)
+
+
+### Bug Fixes
+
+* Update package.json and .gitignore across packages ([#9378](https://github.com/googleapis/google-cloud-node/issues/9378)) ([9c54cec](https://github.com/googleapis/google-cloud-node/commit/9c54cece565b5cbcae63a9856c1ef3448307d46e))
+
 ## [7.0.1](https://github.com/googleapis/google-cloud-node/compare/containeranalysis-v7.0.0...containeranalysis-v7.0.1) (2026-08-12)
 
 

@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.1](https://github.com/googleapis/google-cloud-node/compare/marketing-platform-admin-v0.6.0...marketing-platform-admin-v0.6.1) (2026-09-25)
+
+
+### Bug Fixes
+
+* Update package.json and .gitignore across packages ([#9378](https://github.com/googleapis/google-cloud-node/issues/9378)) ([9c54cec](https://github.com/googleapis/google-cloud-node/commit/9c54cece565b5cbcae63a9856c1ef3448307d46e))
+
 ## [0.6.0](https://github.com/googleapis/google-cloud-node/compare/marketing-platform-admin-v0.5.0...marketing-platform-admin-v0.6.0) (2026-09-23)
 
 
