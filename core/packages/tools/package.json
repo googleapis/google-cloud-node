@@ -25,7 +25,8 @@
     "compileProtos": "./bin/compileProtos.js",
     "minifyProtoJson": "./bin/minifyProtoJson.js",
     "prepublishProtos": "./bin/prepublishProtos.js",
-    "listProtos": "./bin/listProtos.js"
+    "listProtos": "./bin/listProtos.js",
+    "run-test": "./bin/run-test.js"
   },
   "author": "Google API Authors",
   "license": "Apache-2.0",
