@@ -33,10 +33,10 @@
   "scripts": {
     "docs": "jsdoc -c .jsdoc.js",
     "lint": "gts check",
-    "test": "run-test build/test",
+    "test": "../../bin/run-test.cjs build/test",
     "samples-test": "pnpm run compile && cd samples/ && pnpm link ../ && pnpm i && pnpm test",
     "presystem-test": "pnpm run compile",
-    "system-test": "pnpm run compile && run-test --no-parallel build/system-test",
+    "system-test": "pnpm run compile && ../../bin/run-test.cjs --no-parallel build/system-test",
     "clean": "gts clean",
     "compile": "tsc -p .",
     "fix": "gts fix",

@@ -39,10 +39,10 @@
     "lint": "gts check",
     "prepare": "npm run compile",
     "pretest": "pnpm run compile",
-    "test:esm": "run-test build/esm/test/unit/**/*.js",
-    "test:cjs": "run-test build/cjs/test/unit/**/*.js",
+    "test:esm": "../../bin/run-test.cjs build/esm/test/unit/**/*.js",
+    "test:cjs": "../../bin/run-test.cjs build/cjs/test/unit/**/*.js",
     "test": "pnpm run test:esm && pnpm run test:cjs",
-    "system-test": "run-test --no-parallel build/esm/system-test/**/*.js --timeout 60000",
+    "system-test": "../../bin/run-test.cjs --no-parallel build/esm/system-test/**/*.js --timeout 60000",
     "test:pg-suite": "node test/pg-suite/run_pg_suite.cjs"
   },
   "dependencies": {
