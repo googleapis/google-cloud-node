@@ -17,6 +17,9 @@
 set -eo pipefail
 
 export NPM_CONFIG_PREFIX=${HOME}/.npm-global
+export PATH="${NPM_CONFIG_PREFIX}/bin:${PATH}"
+mkdir -p "${NPM_CONFIG_PREFIX}/lib"
+npm config -g ls || npm i -g npm@"$(npm --version)"
 
 # Start the releasetool reporter
 python3 -m releasetool publish-reporter-script > /tmp/publisher-script; source /tmp/publisher-script
@@ -26,8 +29,9 @@ cd $(dirname $0)/..
 NPM_TOKEN=$(cat $KOKORO_KEYSTORE_DIR/73713_google-cloud-npm-token-1)
 echo "//wombat-dressing-room.appspot.com/:_authToken=${NPM_TOKEN}" > ~/.npmrc
 
-npm install -g pnpm@9
-pnpm install
+npm install -g pnpm@10
+pnpm install --filter @google-cloud/profiler... --frozen-lockfile
+pnpm --filter @google-cloud/profiler... run compile
 npm pack .
 # npm provides no way to specify, observe, or predict the name of the tarball
 # file it generates.  We have to look in the current directory for the freshest
