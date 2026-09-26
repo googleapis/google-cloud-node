@@ -12,8 +12,9 @@
 
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
-  * [Pagination](#pagination)
   * [Quickstart](#quickstart)
+  * [Pagination](#pagination)
+  * [Observability](#observability)
 
 ## Before you begin
 
@@ -30,6 +31,24 @@ Before running the samples, make sure you've followed the steps outlined in
 
 
 
+
+### Quickstart
+
+View the [source code](https://github.com/googleapis/gax-nodejs/blob/main/samples/quickstart.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/gax-nodejs&page=editor&open_in_editor=samples/quickstart.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/quickstart.js`
+
+
+-----
+
+
+
+
 ### Pagination
 
 View the [source code](https://github.com/googleapis/gax-nodejs/blob/main/samples/pagination.js).
@@ -42,21 +61,20 @@ __Usage:__
 `node samples/pagination.js`
 
 
+
+
 -----
 
+### Observability
 
+View the [source code](https://github.com/googleapis/gax-nodejs/blob/main/samples/observability.js).
 
-
-### Quickstart
-
-View the [source code](https://github.com/googleapis/gax-nodejs/blob/main/samples/quickstart.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/gax-nodejs&page=editor&open_in_editor=samples/quickstart.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/gax-nodejs&page=editor&open_in_editor=samples/observability.js,samples/README.md)
 
 __Usage:__
 
 
-`node samples/quickstart.js`
+`node samples/observability.js`
 
 
 
