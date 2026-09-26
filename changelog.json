@@ -4,6 +4,78 @@
     {
       "changes": [
         {
+          "type": "perf",
+          "sha": "bfa6bd98c1a2306a222a12d8f99740172b55f1f5",
+          "message": "Skip no-op release listener for queries on multiplexed sessions",
+          "issues": [
+            "9445"
+          ],
+          "scope": "spanner"
+        },
+        {
+          "type": "perf",
+          "sha": "cadb10a6342e192a9aae4277efa1c67428c1e7f2",
+          "message": "Carry MetricsTracer on call context instead of global registry",
+          "issues": [
+            "9310"
+          ],
+          "scope": "spanner"
+        },
+        {
+          "type": "fix",
+          "sha": "db1b7ed3ab00b586cce6cab39875ff1f5a3ee1b4",
+          "message": "Preserve query immutability and optimize trace config handling",
+          "issues": [
+            "9264"
+          ],
+          "scope": "spanner"
+        },
+        {
+          "type": "perf",
+          "sha": "9491cf2ae38c7e6001fce796ab601eb0cc8d6f01",
+          "message": "Optimize prepareGapicRequest dispatch and eliminate deep cloning",
+          "issues": [
+            "9271"
+          ],
+          "scope": "spanner"
+        },
+        {
+          "type": "perf",
+          "sha": "25b04860d27af606b15219e6744f83e10b9a0caa",
+          "message": "Eliminate per-RPC regex operations in metrics layer",
+          "issues": [
+            "9308"
+          ],
+          "scope": "spanner"
+        },
+        {
+          "type": "perf",
+          "sha": "4f56e9d0697558f4c6e48bb8e6400402745094ee",
+          "message": "Hoist AFE timing check to skip AFE metrics",
+          "issues": [
+            "9313"
+          ],
+          "scope": "spanner"
+        },
+        {
+          "type": "perf",
+          "sha": "244dc8ad723b0bd522ee73d1227cdbe6fe13eda1",
+          "message": "Cache OTel attribute objects in metrics tracer",
+          "issues": [
+            "9309"
+          ],
+          "scope": "spanner"
+        }
+      ],
+      "version": "9.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/spanner",
+      "id": "84b1da7f-8f40-4d4e-985e-a4e333f2ab2b",
+      "createTime": "2026-09-25T15:34:53.126Z"
+    },
+    {
+      "changes": [
+        {
           "type": "feat",
           "sha": "11d6a6fe0cec995da9f85db7a072f552873096f2",
           "message": "Allow customers to enable tracing with environmental variables",
@@ -95650,5 +95722,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-09-23T22:50:41.126Z"
+  "updateTime": "2026-09-25T15:34:53.126Z"
 }
