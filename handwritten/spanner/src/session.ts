@@ -399,7 +399,7 @@ export class Session extends common.GrpcServiceObject {
         gaxOpts,
         headers: injectRequestIDIntoHeaders(
           headers,
-          this.session,
+          this,
           nextNthRequest(database),
           1,
         ),
@@ -551,8 +551,8 @@ export class Session extends common.GrpcServiceObject {
   }
 
   private channelId(): number {
-    // The Node.js client does not use a gRPC channel pool, so this always returns 1.
-    return 1;
+    // The Node.js client does not use a gRPC channel pool, so this always returns 0.
+    return 0;
   }
 }
 

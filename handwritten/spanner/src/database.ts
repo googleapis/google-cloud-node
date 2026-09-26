@@ -779,7 +779,7 @@ class Database extends common.GrpcServiceObject {
     };
     withReqId[X_GOOG_SPANNER_REQUEST_ID_HEADER] = craftRequestId(
       this._clientId || 1,
-      1, // TODO: Properly infer the channelId
+      this._channelId ?? 0,
       nthRequest,
       attempt,
     );
@@ -2388,7 +2388,8 @@ class Database extends common.GrpcServiceObject {
   ): void;
   async getOperations(
     optionsOrCallback?:
-      GetDatabaseOperationsOptions | GetDatabaseOperationsCallback,
+      | GetDatabaseOperationsOptions
+      | GetDatabaseOperationsCallback,
   ): Promise<GetDatabaseOperationsResponse> {
     const options =
       typeof optionsOrCallback === 'object' ? optionsOrCallback : {};
@@ -3844,12 +3845,20 @@ class Database extends common.GrpcServiceObject {
             },
           );
           let dataReceived = false;
+          const headers = this._metadataWithRequestId(
+            this._nextNthRequest(),
+            1,
+            this.commonHeaders_,
+          );
+          if (this._getSpanner().routeToLeaderEnabled) {
+            addLeaderAwareRoutingHeader(headers);
+          }
           let dataStream = this.requestStream({
             client: 'SpannerClient',
             method: 'batchWrite',
             reqOpts,
             gaxOpts,
-            headers: this.commonHeaders_,
+            headers,
           });
           dataStream
             .once('data', () => (dataReceived = true))
