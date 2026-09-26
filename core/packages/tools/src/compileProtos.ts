@@ -309,6 +309,14 @@ async function compileProtos(
     gaxProtos,
     '-o',
     jsOutput,
+    // Use the CommonJS wrapper rather than pbjs' default UMD wrapper. The UMD
+    // wrapper also emits an AMD branch, `define(["protobufjs/minimal"], ...)`,
+    // and bundlers statically resolve both branches of the wrapper. Since the
+    // generated libraries do not depend on protobufjs directly (it is reached
+    // through google-gax, see fixJsFile below), that specifier fails to resolve
+    // under strict node_modules layouts even though the branch never runs.
+    '-w',
+    'commonjs',
   ];
   pbjsArgs4js.push(...protos);
   await pbjsMain(pbjsArgs4js);
