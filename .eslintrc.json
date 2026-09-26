@@ -132,7 +132,11 @@
     "**/coverage",
     "**/.nyc_output",
     "**/protos",
-    "**/*.d.ts"
+    "**/*.d.ts",
+    "**/showcase-echo-client",
+    "**/test-application",
+    "**/showcase-server",
+    "**/browser-test"
   ]
   // LINT.ThenChange(bin/linter.mjs:ignored_path_segments)
 }
