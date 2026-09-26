@@ -298,6 +298,18 @@ describe('teeny', () => {
     });
   });
 
+  // see: https://github.com/googleapis/google-cloud-node/issues/9185
+  it('should remove the listener limit on the fetch response stream', done => {
+    const scope = mockJson();
+    const stream = teenyRequest({uri}).on('error', done);
+    stream.on('response', res => {
+      assert.strictEqual(res.body.getMaxListeners(), 0);
+      scope.done();
+      done();
+    });
+    stream.resume();
+  });
+
   it('should expose TeenyStatistics instance', () => {
     assert.ok(teenyRequest.stats instanceof TeenyStatistics);
   });
