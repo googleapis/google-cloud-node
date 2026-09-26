@@ -56,6 +56,7 @@ async function main() {
   // 6. FLUSH SPANS BEFORE PROCESS EXIT
   // Ensures all buffered spans in BatchSpanProcessor are exported to Cloud Trace
   await provider.forceFlush();
+  console.log('Tracing initialized successfully.');
 }
 
 main().catch(console.error);
