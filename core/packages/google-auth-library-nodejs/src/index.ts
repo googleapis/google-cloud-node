@@ -27,7 +27,6 @@ export {
   Credentials,
   JWTInput,
 } from './auth/credentials';
-export {GCPEnv} from './auth/envDetect';
 export {GoogleAuthOptions, ProjectIdCallback} from './auth/googleauth';
 export {IAMAuth, RequestMetadata} from './auth/iam';
 export {IdTokenClient, IdTokenProvider} from './auth/idtokenclient';
