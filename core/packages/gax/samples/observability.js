@@ -24,7 +24,6 @@ async function main() {
   const { registerInstrumentations } = require('@opentelemetry/instrumentation');
   const { HttpInstrumentation } = require('@opentelemetry/instrumentation-http');
   const { GrpcInstrumentation } = require('@opentelemetry/instrumentation-grpc');
-  const { trace } = require('@opentelemetry/api');
 
   // 2. CONFIGURE TRACING: SET UP A TRACER PROVIDER AND EXPORTER
   const cloudTraceExporter = new TraceExporter();
