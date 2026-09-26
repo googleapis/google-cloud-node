@@ -1789,6 +1789,101 @@ describe('Promise', () => {
     }, 15);
   });
 
+  it('does not retry a cancelled call whose error is retryable', done => {
+    // The REST fallback reports any transport-level failure as UNAVAILABLE,
+    // including the abort that `cancel()` itself triggers, so a cancelled call
+    // arrives here carrying a retryable code. Retrying it would discard the
+    // cancellation, and because `cancel()` has already run nothing remains that
+    // could stop the new attempt: it would run unbounded and this promise would
+    // never settle. Before the fix this test times out rather than failing.
+    const retryOptions = gax.createRetryOptions(
+      [status.UNAVAILABLE],
+      gax.createBackoffSettings(1, 1, 1, 1000, 1, 1000, 5000),
+    );
+
+    let callCount = 0;
+    function func(
+      argument: {},
+      metadata: {},
+      options: {},
+      callback: Function,
+    ) {
+      callCount++;
+      // Completes only when cancelled, like a request to an endpoint that
+      // accepted the connection and then went quiet.
+      return function cancelFunc() {
+        const err = new GoogleError('The operation was aborted.');
+        err.code = status.UNAVAILABLE;
+        callback(err);
+      };
+    }
+
+    const apiCall = createApiCall(func, {
+      settings: {retry: retryOptions},
+      returnCancelFunc: true,
+    });
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const promise = (apiCall as any)(null);
+    promise
+      .then(() => done(new Error('should not reach')))
+      .catch((err: GoogleError) => {
+        try {
+          assert.strictEqual(err.code, status.CANCELLED);
+          assert.strictEqual(
+            callCount,
+            1,
+            `expected no retry after cancel, saw ${callCount} invocations`,
+          );
+          done();
+        } catch (e) {
+          done(e);
+        }
+      });
+    setTimeout(() => promise.cancel(), 10);
+  });
+
+  it('keeps a CANCELLED reported by the transport intact', done => {
+    // A transport that already resolved the abort to CANCELLED has said
+    // everything worth saying, so it should not be re-wrapped.
+    const retryOptions = gax.createRetryOptions(
+      [status.UNAVAILABLE],
+      gax.createBackoffSettings(1, 1, 1, 1000, 1, 1000, 5000),
+    );
+
+    const transportError = new GoogleError('cancelled by the transport');
+    transportError.code = status.CANCELLED;
+
+    function func(
+      argument: {},
+      metadata: {},
+      options: {},
+      callback: Function,
+    ) {
+      return function cancelFunc() {
+        callback(transportError);
+      };
+    }
+
+    const apiCall = createApiCall(func, {
+      settings: {retry: retryOptions},
+      returnCancelFunc: true,
+    });
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const promise = (apiCall as any)(null);
+    promise
+      .then(() => done(new Error('should not reach')))
+      .catch((err: GoogleError) => {
+        try {
+          assert.strictEqual(err, transportError);
+          assert.strictEqual(err.message, 'cancelled by the transport');
+          done();
+        } catch (e) {
+          done(e);
+        }
+      });
+    setTimeout(() => promise.cancel(), 10);
+  });
+
   it('does not return promise when callback is supplied', done => {
     function func(argument: {}, metadata: {}, options: {}, callback: Function) {
       callback(null, 42);
