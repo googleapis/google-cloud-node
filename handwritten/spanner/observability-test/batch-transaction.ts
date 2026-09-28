@@ -160,9 +160,11 @@ describe('BatchTransaction', () => {
       assert.strictEqual(spans.length, 2, 'Exactly 2 spans expected');
 
       // Sort the spans by duration.
-      spans.sort((spanA, spanB) => {
-        spanA.duration < spanB.duration;
-      });
+      spans.sort(
+        (spanA, spanB) =>
+          spanA.duration[0] - spanB.duration[0] ||
+          spanA.duration[1] - spanB.duration[1],
+      );
 
       const actualSpanNames: string[] = [];
       spans.forEach(span => {
@@ -224,9 +226,11 @@ describe('BatchTransaction', () => {
       assert.strictEqual(spans.length, 2, 'Exactly 2 spans expected');
 
       // Sort the spans by duration.
-      spans.sort((spanA, spanB) => {
-        spanA.duration < spanB.duration;
-      });
+      spans.sort(
+        (spanA, spanB) =>
+          spanA.duration[0] - spanB.duration[0] ||
+          spanA.duration[1] - spanB.duration[1],
+      );
 
       const actualSpanNames: string[] = [];
       spans.forEach(span => {

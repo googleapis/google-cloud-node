@@ -1744,6 +1744,7 @@ class Spanner extends GrpcService {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     callback: (err: Error | null, requestFn?: any) => void,
   ): void {
+    const activeContext = context.active();
     if (this.projectId && this.projectIdReplaced_) {
       this._prepareGapicRequestWithProjectId(config, this.projectId, callback);
       return;
@@ -1754,7 +1755,9 @@ class Spanner extends GrpcService {
           callback(error);
           return;
         }
-        this._prepareGapicRequestWithProjectId(config, projectId!, callback);
+        context.with(activeContext, () => {
+          this._prepareGapicRequestWithProjectId(config, projectId!, callback);
+        });
       });
       return;
     }
@@ -1777,7 +1780,9 @@ class Spanner extends GrpcService {
         return;
       }
       try {
-        this._prepareGapicRequestWithProjectId(config, projectId!, callback);
+        context.with(activeContext, () => {
+          this._prepareGapicRequestWithProjectId(config, projectId!, callback);
+        });
       } finally {
         for (const pendingCallback of pendingCallbacks) {
           try {
@@ -2135,6 +2140,7 @@ class Spanner extends GrpcService {
    */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   requestStream(config): any {
+    const activeContext = context.active();
     const metricsTracer = this._initMetricsTracer(config);
     const stream = streamEvents(through.obj());
     const coordinator = new RequestStreamCoordinator(stream, metricsTracer);
@@ -2142,12 +2148,14 @@ class Spanner extends GrpcService {
 
     stream.once('reading', () => {
       coordinator.startRequest();
-      this.prepareGapicRequest_(config, (err, requestFn) => {
-        if (err) {
-          coordinator.handleRequestError(err);
-          return;
-        }
-        coordinator.attachRequestFn(requestFn);
+      context.with(activeContext, () => {
+        this.prepareGapicRequest_(config, (err, requestFn) => {
+          if (err) {
+            coordinator.handleRequestError(err);
+            return;
+          }
+          coordinator.attachRequestFn(requestFn);
+        });
       });
     });
 

@@ -23,6 +23,7 @@ import {
   Span,
   SpanStatusCode,
   context,
+  propagation,
   trace,
   INVALID_SPAN_CONTEXT,
   ROOT_CONTEXT,
@@ -123,33 +124,51 @@ export {
 };
 
 const {
+  AsyncLocalStorageContextManager,
   AsyncHooksContextManager,
 } = require('@opentelemetry/context-async-hooks');
 
-let contextManagerInstallAttempted = false;
-
 /*
- * If no global ContextManager is registered, install an AsyncHooksContextManager
- * so that async/await trace context propagation works for apps that haven't
- * configured OpenTelemetry themselves. If the host app has already installed a
- * ContextManager, leave it alone — tearing down a working manager breaks the
+ * If no global ContextManager is registered, install an AsyncLocalStorageContextManager
+ * (or AsyncHooksContextManager) so that async/await trace context propagation works for
+ * apps that haven't configured OpenTelemetry themselves. If the host app has already
+ * installed a ContextManager, leave it alone — tearing down a working manager breaks the
  * host's baggage and span parentage on the next gRPC call.
- *
- * setGlobalContextManager() returns false when a manager is already registered,
- * which is the documented signal that we shouldn't replace it. The
- * `contextManagerInstallAttempted` latch makes the call idempotent so we don't
- * allocate a new AsyncHooksContextManager on each Spanner client construction.
  */
 function ensureInitialContextManagerSet() {
-  if (contextManagerInstallAttempted) return;
-  contextManagerInstallAttempted = true;
-  const contextManager = new AsyncHooksContextManager();
+  const currentManager = (context as any)._getContextManager?.();
+  if (
+    currentManager &&
+    currentManager.constructor?.name !== 'NoopContextManager'
+  ) {
+    return;
+  }
+  const ContextManagerClass =
+    AsyncLocalStorageContextManager || AsyncHooksContextManager;
+  const contextManager = new ContextManagerClass();
   if (context.setGlobalContextManager(contextManager)) {
     contextManager.enable();
   }
 }
 
-export {ensureInitialContextManagerSet};
+/**
+ * Ensures a global trace context propagator is configured for W3C traceparent
+ * headers (used when end-to-end tracing is enabled). Leaves any custom
+ * propagator intact if one was already registered.
+ */
+function ensureContextPropagation() {
+  const currentPropagator = (propagation as any)._getGlobalPropagator?.();
+  if (
+    currentPropagator &&
+    currentPropagator.constructor?.name !== 'NoopTextMapPropagator'
+  ) {
+    return;
+  }
+  const {W3CTraceContextPropagator} = require('@opentelemetry/core');
+  propagation.setGlobalPropagator(new W3CTraceContextPropagator());
+}
+
+export {ensureInitialContextManagerSet, ensureContextPropagation};
 
 let globalTracingEnabled: boolean | undefined = undefined;
 let lastCheckTime = 0;
@@ -202,7 +221,18 @@ function isGlobalTracingEnabled(): boolean {
  * @returns {boolean} True if tracing is enabled.
  */
 export function isTracingEnabled(opts?: ObservabilityOptions): boolean {
-  if (opts?.tracerProvider) {
+  if (
+    opts?.tracerProvider ||
+    opts?.enableEndToEndTracing ||
+    process.env.SPANNER_ENABLE_END_TO_END_TRACING?.toLowerCase() === 'true'
+  ) {
+    ensureInitialContextManagerSet();
+    if (
+      opts?.enableEndToEndTracing ||
+      process.env.SPANNER_ENABLE_END_TO_END_TRACING?.toLowerCase() === 'true'
+    ) {
+      ensureContextPropagation();
+    }
     return true;
   }
 

@@ -82,6 +82,7 @@ import {
   TimestampBounds,
   Transaction,
 } from './transaction';
+import {context as otelContext, trace as otelTrace} from '@opentelemetry/api';
 import {
   AsyncRunTransactionCallback,
   AsyncTransactionRunner,
@@ -3730,7 +3731,8 @@ class Database extends common.GrpcServiceObject {
             );
 
             try {
-              return await runner.run();
+              const spanContext = otelTrace.setSpan(otelContext.active(), span);
+              return await otelContext.with(spanContext, () => runner.run());
             } catch (e) {
               setSpanErrorAndException(span, e as Error);
               throw e;
