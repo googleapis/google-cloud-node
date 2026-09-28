@@ -207,6 +207,26 @@ if (
       ) {
         return false;
       }
+      if (a instanceof Date || b instanceof Date) {
+        return (
+          a instanceof Date &&
+          b instanceof Date &&
+          a.getTime() === b.getTime()
+        );
+      }
+      if (a instanceof RegExp || b instanceof RegExp) {
+        return (
+          a instanceof RegExp &&
+          b instanceof RegExp &&
+          a.toString() === b.toString()
+        );
+      }
+      if (
+        typeof Buffer !== 'undefined' &&
+        (Buffer.isBuffer(a) || Buffer.isBuffer(b))
+      ) {
+        return Buffer.isBuffer(a) && Buffer.isBuffer(b) && a.equals(b);
+      }
       if (Array.isArray(a) !== Array.isArray(b)) return false;
       const keysA = Object.keys(a);
       const keysB = Object.keys(b);
