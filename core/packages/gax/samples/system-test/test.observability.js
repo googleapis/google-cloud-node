@@ -21,7 +21,8 @@ const assert = require('assert');
 const {describe, it} = require('mocha');
 const cp = require('child_process');
 
-const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
+const execSync = (cmd, options = {}) =>
+  cp.execSync(cmd, {encoding: 'utf-8', ...options});
 
 const cwd = path.join(__dirname, '..');
 

@@ -19,7 +19,7 @@
 ## Before you begin
 
 Before running the samples, make sure you've followed the steps outlined in
-[Using the client library](https://github.com/googleapis/gax-nodejs#using-the-client-library).
+[Using the client library](https://github.com/googleapis/google-cloud-node#using-the-client-library).
 
 `cd samples`
 
@@ -34,9 +34,9 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/gax-nodejs/blob/main/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/core/packages/gax/samples/quickstart.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/gax-nodejs&page=editor&open_in_editor=samples/quickstart.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node/blob/main/core/packages/gax/samples/quickstart.js)
 
 __Usage:__
 
@@ -51,9 +51,9 @@ __Usage:__
 
 ### Pagination
 
-View the [source code](https://github.com/googleapis/gax-nodejs/blob/main/samples/pagination.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/core/packages/gax/samples/pagination.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/gax-nodejs&page=editor&open_in_editor=samples/pagination.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node/blob/main/core/packages/gax/samples/pagination.js)
 
 __Usage:__
 
@@ -67,9 +67,9 @@ __Usage:__
 
 ### Observability
 
-View the [source code](https://github.com/googleapis/gax-nodejs/blob/main/samples/observability.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/core/packages/gax/samples/observability.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/gax-nodejs&page=editor&open_in_editor=samples/observability.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node/blob/main/core/packages/gax/samples/observability.js)
 
 __Usage:__
 

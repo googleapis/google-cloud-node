@@ -52,11 +52,11 @@ process.env.GOOGLE_SDK_NODE_ENABLE_TRACING = 'true';
 
 // 5. IMPORT CLIENT LIBRARIES AFTER OPENTELEMETRY SETUP
 // Replace with your Google Cloud client library, for example:
-// const { Storage } = require('@google-cloud/storage');
+// const { SecretManagerServiceClient } = require('@google-cloud/secret-manager');
 
 async function main() {
-  // const client = new Storage();
-  // await client.getBuckets();
+  // const client = new SecretManagerServiceClient();
+  // await client.listSecrets({parent: 'projects/my-project'});
 
   // 6. FLUSH SPANS BEFORE PROCESS EXIT
   // Ensures all buffered spans in BatchSpanProcessor are exported to Cloud Trace
