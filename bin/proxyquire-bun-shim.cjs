@@ -762,7 +762,7 @@ if (
       Module._load !== defaultModuleLoad
     ) {
       return patchGaxiosIfPresent(
-        Module._load.call(this, id, this, /* isMain */ false),
+        Module._load(id, this, /* isMain */ false),
       );
     }
     return patchGaxiosIfPresent(origRequire.apply(this, arguments));
