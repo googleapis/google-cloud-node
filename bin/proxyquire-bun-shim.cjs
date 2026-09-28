@@ -198,7 +198,15 @@ if (
     const assert = require('assert');
     const origDeepEqual = assert.deepEqual;
     function looseDeepEqual(a, b) {
-      if (a == b) return true;
+      if (a === b) return true;
+      if (
+        typeof a !== 'object' &&
+        typeof b !== 'object' &&
+        a !== null &&
+        b !== null
+      ) {
+        return a == b;
+      }
       if (
         a === null ||
         b === null ||
