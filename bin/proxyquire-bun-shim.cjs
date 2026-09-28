@@ -239,6 +239,22 @@ if (
       ) {
         return Buffer.isBuffer(a) && Buffer.isBuffer(b) && a.equals(b);
       }
+      if (a instanceof Map || b instanceof Map) {
+        return (
+          a instanceof Map &&
+          b instanceof Map &&
+          a.size === b.size &&
+          looseDeepEqual(Array.from(a.entries()), Array.from(b.entries()))
+        );
+      }
+      if (a instanceof Set || b instanceof Set) {
+        return (
+          a instanceof Set &&
+          b instanceof Set &&
+          a.size === b.size &&
+          looseDeepEqual(Array.from(a.values()), Array.from(b.values()))
+        );
+      }
       if (Array.isArray(a) !== Array.isArray(b)) return false;
       const keysA = Object.keys(a);
       const keysB = Object.keys(b);
