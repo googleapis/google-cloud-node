@@ -411,13 +411,21 @@ if (
       const isHttps = parsedUrl.protocol === 'https:';
       const transport = isHttps ? https : http;
 
-      // Normalize headers from plain objects, Header instances, or Maps.
+      // Normalize headers from plain objects, Header instances, Arrays of tuples, or Maps.
       let headers = {};
       if (init.headers) {
         if (
-          init.headers instanceof Headers ||
-          (init.headers && typeof init.headers.entries === 'function')
+          typeof Headers !== 'undefined' &&
+          init.headers instanceof Headers
         ) {
+          for (const [k, v] of init.headers.entries()) {
+            headers[k] = v;
+          }
+        } else if (Array.isArray(init.headers)) {
+          for (const [k, v] of init.headers) {
+            headers[k] = v;
+          }
+        } else if (typeof init.headers.entries === 'function') {
           for (const [k, v] of init.headers.entries()) {
             headers[k] = v;
           }
