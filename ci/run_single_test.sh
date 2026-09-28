@@ -59,7 +59,7 @@ if ! pnpm install --engine-strict --pnpmfile "${PNPMFILE_PATH}"; then
     echo "❌ PNPM Install Failed"
     echo ""
     echo "If this failure is caused by an outdated lockfile or changed package.json dependencies, run:"
-    echo "    pnpm install --no-frozen-lockfile"
+    echo "    pnpm install --lockfile-only"
     echo "    git add pnpm-lock.yaml"
     echo "    git commit -m \"chore: update pnpm-lock.yaml\""
     echo "    git push"
@@ -107,6 +107,9 @@ system)
     retval=$?
     ;;
 units)
+    if [ ! -d "build" ] && grep -q '"compile":' package.json; then
+        ${TEST_CMD} compile || exit $?
+    fi
     ${TEST_CMD} test
     retval=$?
     ;;
