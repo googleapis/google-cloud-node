@@ -20,12 +20,14 @@
 // 1. INITIALIZE OPENTELEMETRY BEFORE IMPORTING ANY CLIENT LIBRARIES
 // In Node.js, instrumentations must patch the networking modules (http, grpc)
 // before any Google Cloud client libraries are loaded into the module cache.
-const { NodeTracerProvider } = require('@opentelemetry/sdk-trace-node');
-const { BatchSpanProcessor } = require('@opentelemetry/sdk-trace-base');
-const { TraceExporter } = require('@google-cloud/opentelemetry-cloud-trace-exporter');
-const { registerInstrumentations } = require('@opentelemetry/instrumentation');
-const { HttpInstrumentation } = require('@opentelemetry/instrumentation-http');
-const { GrpcInstrumentation } = require('@opentelemetry/instrumentation-grpc');
+const {NodeTracerProvider} = require('@opentelemetry/sdk-trace-node');
+const {BatchSpanProcessor} = require('@opentelemetry/sdk-trace-base');
+const {
+  TraceExporter,
+} = require('@google-cloud/opentelemetry-cloud-trace-exporter');
+const {registerInstrumentations} = require('@opentelemetry/instrumentation');
+const {HttpInstrumentation} = require('@opentelemetry/instrumentation-http');
+const {GrpcInstrumentation} = require('@opentelemetry/instrumentation-grpc');
 
 // 2. CONFIGURE TRACING: SET UP A TRACER PROVIDER AND EXPORTER
 const cloudTraceExporter = new TraceExporter();
