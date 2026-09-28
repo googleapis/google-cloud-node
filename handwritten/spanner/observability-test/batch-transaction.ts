@@ -32,6 +32,11 @@ const {
 const {SimpleSpanProcessor} = require('@opentelemetry/sdk-trace-base');
 import {Session, Spanner} from '../src';
 import * as bt from '../src/batch-transaction';
+const {
+  AsyncLocalStorageContextManager,
+  AsyncHooksContextManager,
+} = require('@opentelemetry/context-async-hooks');
+const {setGlobalContextManager} = require('./helper');
 
 const fakePfy = extend({}, pfy, {
   promisifyAll(klass, options) {
@@ -118,6 +123,11 @@ describe('BatchTransaction', () => {
     exporter: traceExporter,
     spanProcessors: [new SimpleSpanProcessor(traceExporter)],
   });
+  provider.register();
+
+  after(async () => {
+    await provider.shutdown();
+  });
 
   afterEach(() => {
     traceExporter.reset();
@@ -136,6 +146,9 @@ describe('BatchTransaction', () => {
   const RESPONSE = {partitions: PARTITIONS};
 
   beforeEach(() => {
+    const contextManager = new (AsyncLocalStorageContextManager ||
+      AsyncHooksContextManager)();
+    setGlobalContextManager(contextManager);
     batchTransaction = new BatchTransaction(SESSION as {} as Session);
     batchTransaction.session = SESSION as {} as Session;
     batchTransaction.id = ID;
