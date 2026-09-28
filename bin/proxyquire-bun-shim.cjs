@@ -265,18 +265,70 @@ if (
     }
     const origDeepStrictEqual = assert.deepStrictEqual;
     if (typeof origDeepStrictEqual === 'function') {
+      // Bun <= 1.4 strictly requires prototype reference equality in
+      // assert.deepStrictEqual. In Node 20+, Array subclasses whose constructor
+      // is Array (such as RowImpl) are compared by contents and properties against
+      // plain arrays. In affected Bun versions, retry only for arrays where both
+      // constructors are Array, transferring own properties so custom prototypes
+      // or property mismatches continue to fail strictly.
+      const [bunMajor, bunMinor] = (
+        (typeof process !== 'undefined' && process.versions?.bun) ||
+        '0.0'
+      )
+        .split('.')
+        .map(Number);
+      const hasBunArrayProtoIssue =
+        bunMajor === 1 &&
+        bunMinor <= 4 &&
+        (() => {
+          try {
+            class TestArr extends Array {}
+            Object.defineProperty(TestArr.prototype, 'constructor', {
+              value: Array,
+              writable: true,
+              configurable: true,
+              enumerable: false,
+            });
+            origDeepStrictEqual(new TestArr(), []);
+            return false;
+          } catch {
+            return true;
+          }
+        })();
+
       assert.deepStrictEqual = function (actual, expected, message) {
         try {
           return origDeepStrictEqual.call(this, actual, expected, message);
         } catch (err) {
-          if (Array.isArray(actual) && Array.isArray(expected)) {
+          if (
+            hasBunArrayProtoIssue &&
+            Array.isArray(actual) &&
+            Array.isArray(expected) &&
+            actual.constructor === Array &&
+            expected.constructor === Array
+          ) {
             try {
-              return origDeepStrictEqual.call(
-                this,
-                [...actual],
-                [...expected],
-                message,
-              );
+              const copyA = Array.from(actual);
+              for (const k of Reflect.ownKeys(actual)) {
+                if (k !== 'length') {
+                  Object.defineProperty(
+                    copyA,
+                    k,
+                    Object.getOwnPropertyDescriptor(actual, k),
+                  );
+                }
+              }
+              const copyB = Array.from(expected);
+              for (const k of Reflect.ownKeys(expected)) {
+                if (k !== 'length') {
+                  Object.defineProperty(
+                    copyB,
+                    k,
+                    Object.getOwnPropertyDescriptor(expected, k),
+                  );
+                }
+              }
+              return origDeepStrictEqual.call(this, copyA, copyB, message);
             } catch {
               throw err;
             }
