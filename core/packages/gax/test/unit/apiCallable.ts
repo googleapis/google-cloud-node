@@ -851,9 +851,8 @@ describe('createApiCall', () => {
       assert.strictEqual(span.attributes['gcp.method.type'], 'http');
       // On the fallback transport error.type reports the HTTP status the
       // server sent. A deadline expires before any response arrives, so there
-      // is none, and the attribute falls through to the exception type. The
-      // deadline is not lost: it is reported as the gRPC status below.
-      assert.strictEqual(span.attributes['error.type'], 'GoogleError');
+      // is none, and the attribute resolves to CLIENT_TIMEOUT per Tier 3.
+      assert.strictEqual(span.attributes['error.type'], 'CLIENT_TIMEOUT');
       assert.strictEqual(
         span.attributes['rpc.response.status_code'],
         'DEADLINE_EXCEEDED',
@@ -911,7 +910,10 @@ describe('createApiCall', () => {
       const span = spans[0];
       assert.strictEqual(span.ended, true);
       assert.strictEqual(span.attributes['gcp.method.type'], 'http');
-      assert.strictEqual(span.attributes['error.type'], 'ECONNREFUSED');
+      assert.strictEqual(
+        span.attributes['error.type'],
+        'CLIENT_CONNECTION_ERROR',
+      );
       assert.strictEqual(
         span.attributes['rpc.response.status_code'],
         'UNAVAILABLE',

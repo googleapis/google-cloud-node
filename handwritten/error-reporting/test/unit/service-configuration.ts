@@ -28,6 +28,8 @@ const serviceConfigEnv = {
   GAE_MODULE_VERSION: process.env.GAE_MODULE_VERSION,
   FUNCTION_NAME: process.env.FUNCTION_NAME,
   GAE_MODULE_NAME: process.env.GAE_MODULE_NAME,
+  K_SERVICE: process.env.K_SERVICE,
+  K_REVISION: process.env.K_REVISION,
 };
 function sterilizeServiceConfigEnv() {
   Object.keys(serviceConfigEnv).forEach(key => {
@@ -55,11 +57,19 @@ function setEnv(envData: {
   );
 }
 function restoreServiceConfigEnv() {
-  Object.assign(process.env, serviceConfigEnv);
+  sterilizeServiceConfigEnv();
+  for (const [key, value] of Object.entries(serviceConfigEnv)) {
+    if (value !== undefined) {
+      process.env[key] = value;
+    }
+  }
 }
 
 describe('Testing service configuration', () => {
   beforeEach(() => {
+    sterilizeServiceConfigEnv();
+  });
+  afterEach(() => {
     sterilizeServiceConfigEnv();
   });
   after(() => {

@@ -1598,6 +1598,7 @@ async.each(
               [
                 "Cannot read properties of null (reading 'toString')", // Later Node versions
                 "Cannot read property 'toString' of null", // Node 14
+                "null is not an object (evaluating 'data.name.toString')", // Bun / JavaScriptCore
               ].includes((err as {message: string}).message),
             );
             done();
