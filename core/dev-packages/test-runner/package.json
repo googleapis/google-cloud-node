@@ -1,0 +1,15 @@
+{
+  "name": "google-cloud-node-test-runner",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Puts bin/run-test.cjs on PATH as `run-test` for all workspace packages",
+  "bin": {
+    "run-test": "./bin/run-test.cjs"
+  },
+  "scripts": {
+    "lint": "echo no lint",
+    "system-test": "echo no system tests",
+    "test": "echo no tests"
+  },
+  "license": "Apache-2.0"
+}

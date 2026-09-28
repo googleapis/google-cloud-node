@@ -48,6 +48,9 @@ importers:
       eslint-plugin-promise:
         specifier: ^6.1.1
         version: 6.6.0(eslint@8.57.1)
+      google-cloud-node-test-runner:
+        specifier: workspace:*
+        version: link:core/dev-packages/test-runner
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -250,6 +253,8 @@ importers:
       typescript:
         specifier: ^5.8.2
         version: 5.9.3
+
+  core/dev-packages/test-runner: {}
 
   core/generator/gapic-generator-typescript:
     dependencies:
