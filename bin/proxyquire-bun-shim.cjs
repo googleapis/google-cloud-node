@@ -28,6 +28,18 @@ if (
   globalThis.__GOOGLE_CLOUD_BUN_PROXYQUIRE_SHIM__ = true;
 
   const origRequire = Module.prototype.require;
+
+  // ---------------------------------------------------------------------------
+  // 1. Module._load Delegation
+  // ---------------------------------------------------------------------------
+  // In Node.js, `require()` internally delegates to `Module._load(request, parent, isMain)`.
+  // Several test suites (such as lazy import error-recovery tests in Storage `test/util.ts`)
+  // temporarily monkeypatch `Module._load` to simulate import failures or intercept requires.
+  // In Bun, `require()` is implemented natively in C++ and bypasses `Module._load` entirely.
+  //
+  // To preserve compatibility, we register a default `Module._load` stub and inspect it
+  // inside our `Module.prototype.require` hook. Whenever a test replaces `Module._load`
+  // with a custom implementation, we delegate to that custom loader.
   const defaultModuleLoad = function (request, parent) {
     const ctx =
       parent && typeof parent.require === 'function' ? parent : module;
@@ -35,6 +47,36 @@ if (
   };
   Module._load = defaultModuleLoad;
 
+  // ---------------------------------------------------------------------------
+  // 2. Generational Module Cache Snapshots (Module._cache & require.cache)
+  // ---------------------------------------------------------------------------
+  // Test isolation libraries (such as `mockery` and `proxyquire`) frequently swap
+  // the module cache using the following idiom:
+  //
+  //   const originalCache = Module._cache; // or `require.cache`
+  //   Module._cache = {};                  // clear cache for isolated load
+  //   // ... run tests with mocks ...
+  //   Module._cache = originalCache;       // restore previous cache
+  //
+  // In Bun, `require.cache` and `Module._cache` are native proxies to the C++ runtime's
+  // internal module table (`bunNativeCache`). If we simply delete keys from `bunNativeCache`
+  // in-place on assignment, `originalCache` (which holds a direct reference to that same object)
+  // has its properties deleted too. Consequently, when `mockery` or `proxyquire` attempts to
+  // restore `Module._cache = originalCache`, the saved cache is already empty. This caused
+  // previously loaded singletons/classes (like `Bucket` in Storage) to be re-required as distinct
+  // instances, breaking `instanceof` checks across subsequent test files.
+  //
+  // To solve this in Bun, we implement generational cache management:
+  // - `createCacheGeneration`: Wraps the active cache state in a Proxy. While active, reads and
+  //   writes reflect directly into Bun's native C++ cache (`bunNativeCache`) so Bun's native loader
+  //   sees newly required modules.
+  // - When `setCache(newCache)` is invoked (e.g., `Module._cache = {}` or `Module._cache = originalCache`),
+  //   the outgoing generation is `detach()`ed: it takes a snapshot of all active entries in
+  //   `bunNativeCache` and decouples from future mutations. The caller's `originalCache` variable
+  //   thus safely preserves all previously loaded modules.
+  // - `bunNativeCache` is then synchronized to match `newCache` (clearing deleted entries and
+  //   repopulating new ones so Bun's native loader sees the clean or restored state).
+  // - A new active generation is created and bound to both `Module._cache` and `require.cache`.
   const bunNativeCache = require.cache;
 
   function createCacheGeneration(initialEntries = {}) {
@@ -102,7 +144,10 @@ if (
   }
 
   function setCache(newCache) {
+    // 1. Detach the current generation, saving all active entries before mutating native cache.
     currentGen.detach();
+
+    // 2. Synchronize Bun's native cache to match the incoming newCache object.
     const newKeys = new Set(
       newCache && typeof newCache === 'object' ? Object.keys(newCache) : [],
     );
@@ -116,6 +161,8 @@ if (
         bunNativeCache[k] = v;
       }
     }
+
+    // 3. Initialize a fresh generation representing the synchronized native cache.
     currentGen = createCacheGeneration(bunNativeCache);
   }
 
@@ -330,6 +377,25 @@ if (
   const https = require('https');
   const {Readable, PassThrough} = require('stream');
 
+  // ---------------------------------------------------------------------------
+  // 3. Nock-Compatible HTTP/HTTPS Fetch Transport (__googleCloudBunFetch)
+  // ---------------------------------------------------------------------------
+  // Libraries such as `gaxios` and `teeny-request` use Fetch API calls when
+  // running in modern runtimes. In Bun, native `globalThis.fetch` is written
+  // in C++ and bypasses Node's `http` and `https` modules entirely.
+  //
+  // However, HTTP mocking libraries (primarily `nock`) work by monkeypatching
+  // Node's `http.ClientRequest` and `https.request`. Because native fetch never
+  // touches those Node modules, tests asserting on mocked HTTP endpoints
+  // (e.g., Storage `resumable-upload` tests) failed with:
+  //   - DNS lookup / connection timeouts (`ETIMEOUT fake.local:80`)
+  //   - OAuth token failures (`invalid_grant: account not found`)
+  //   - `Mocks not yet satisfied` assertions from `nock`
+  //
+  // To bridge this gap, `__googleCloudBunFetch` intercepts HTTP/HTTPS requests
+  // and routes them through Node's `http.request` / `https.request` stack,
+  // allowing `nock` to intercept requests seamlessly while returning standard
+  // Fetch `Response` objects expected by caller libraries.
   globalThis.__googleCloudBunFetch = async (url, init = {}) => {
     let parsedUrl;
     try {
@@ -345,6 +411,7 @@ if (
       const isHttps = parsedUrl.protocol === 'https:';
       const transport = isHttps ? https : http;
 
+      // Normalize headers from plain objects, Header instances, or Maps.
       let headers = {};
       if (init.headers) {
         if (
@@ -370,6 +437,7 @@ if (
 
       try {
         const res = await new Promise((resolve, reject) => {
+          // Route through Node http/https transport so nock can intercept.
           const req = transport.request(reqOptions, incoming => {
             const responseStream = new PassThrough();
             incoming.pipe(responseStream);
@@ -662,6 +730,9 @@ if (
         }
       }
     }
+    // If a test suite has monkeypatched Module._load (e.g. testing dynamic import
+    // error recovery in test/util.ts), route the require through Module._load so
+    // the monkeypatched behavior takes effect under Bun.
     if (
       typeof Module._load === 'function' &&
       Module._load !== defaultModuleLoad
