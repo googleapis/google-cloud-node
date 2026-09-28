@@ -36,7 +36,7 @@ const {
   AsyncLocalStorageContextManager,
   AsyncHooksContextManager,
 } = require('@opentelemetry/context-async-hooks');
-const {setGlobalContextManager} = require('./helper');
+const {setGlobalContextManager, disableContextAndManager} = require('./helper');
 
 const fakePfy = extend({}, pfy, {
   promisifyAll(klass, options) {
