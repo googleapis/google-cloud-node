@@ -17,17 +17,20 @@
 set -eo pipefail
 
 export NPM_CONFIG_PREFIX=${HOME}/.npm-global
+export PATH="${NPM_CONFIG_PREFIX}/bin:${PATH}"
+mkdir -p "${NPM_CONFIG_PREFIX}/lib"
+npm config -g ls || npm i -g npm@"$(npm --version)"
 
 cd $(dirname $0)/..
 
-npm install -g pnpm@9
-pnpm install
+npm install -g pnpm@10
+pnpm install --filter @google-cloud/profiler... --frozen-lockfile
+pnpm --filter @google-cloud/profiler... run compile
 
 # Install and link samples
 if [ -f samples/package.json ]; then
   cd samples/
   npm link ../
-  npm install -g pnpm@9
   pnpm install
   cd ..
 fi

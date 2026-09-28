@@ -24,6 +24,7 @@ import {perftools} from 'pprof/proto/profile';
 import * as msToStr from 'pretty-ms';
 import {promisify} from 'util';
 import * as zlib from 'zlib';
+// eslint-disable-next-line import/namespace
 import * as r from 'teeny-request';
 
 import {ProfilerConfig} from './config';
@@ -352,7 +353,7 @@ export class Profiler extends ServiceObject {
       }
     }
     this.logger.debug(`Cloud Profiler Node.js agent version: ${pjson.version}`);
-    this.runLoop();
+    void this.runLoop();
   }
 
   /**
