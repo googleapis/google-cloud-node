@@ -28,6 +28,117 @@ if (
   globalThis.__GOOGLE_CLOUD_BUN_PROXYQUIRE_SHIM__ = true;
 
   const origRequire = Module.prototype.require;
+  const defaultModuleLoad = function (request, parent) {
+    const ctx =
+      parent && typeof parent.require === 'function' ? parent : module;
+    return origRequire.call(ctx, request);
+  };
+  Module._load = defaultModuleLoad;
+
+  const bunNativeCache = require.cache;
+
+  function createCacheGeneration(initialEntries = {}) {
+    const map = Object.assign(Object.create(null), initialEntries);
+    let detached = false;
+
+    const proxy = new Proxy(map, {
+      get(target, prop) {
+        if (typeof prop === 'symbol') return target[prop];
+        if (!detached && prop in bunNativeCache) return bunNativeCache[prop];
+        return target[prop];
+      },
+      set(target, prop, val) {
+        target[prop] = val;
+        if (!detached) bunNativeCache[prop] = val;
+        return true;
+      },
+      deleteProperty(target, prop) {
+        delete target[prop];
+        if (!detached) delete bunNativeCache[prop];
+        return true;
+      },
+      has(target, prop) {
+        if (typeof prop === 'symbol') return prop in target;
+        if (!detached && prop in bunNativeCache) return true;
+        return prop in target;
+      },
+      ownKeys(target) {
+        if (!detached) {
+          const keys = new Set([
+            ...Object.keys(bunNativeCache),
+            ...Object.keys(target),
+          ]);
+          return Array.from(keys);
+        }
+        return Object.keys(target);
+      },
+      getOwnPropertyDescriptor(target, prop) {
+        if (
+          !detached &&
+          Object.prototype.hasOwnProperty.call(bunNativeCache, prop)
+        ) {
+          return Object.getOwnPropertyDescriptor(bunNativeCache, prop);
+        }
+        return Object.getOwnPropertyDescriptor(target, prop);
+      },
+    });
+
+    return {
+      map,
+      proxy,
+      detach() {
+        for (const k of Object.keys(bunNativeCache)) {
+          map[k] = bunNativeCache[k];
+        }
+        detached = true;
+      },
+    };
+  }
+
+  let currentGen = createCacheGeneration(bunNativeCache);
+
+  function getCache() {
+    return currentGen.proxy;
+  }
+
+  function setCache(newCache) {
+    currentGen.detach();
+    const newKeys = new Set(
+      newCache && typeof newCache === 'object' ? Object.keys(newCache) : [],
+    );
+    for (const k of Object.keys(bunNativeCache)) {
+      if (!newKeys.has(k)) {
+        delete bunNativeCache[k];
+      }
+    }
+    if (newCache && typeof newCache === 'object') {
+      for (const [k, v] of Object.entries(newCache)) {
+        bunNativeCache[k] = v;
+      }
+    }
+    currentGen = createCacheGeneration(bunNativeCache);
+  }
+
+  Object.defineProperty(Module, '_cache', {
+    get: getCache,
+    set: setCache,
+    configurable: true,
+    enumerable: true,
+  });
+
+  try {
+    const proto = Object.getPrototypeOf(require);
+    if (proto) {
+      Object.defineProperty(proto, 'cache', {
+        get: getCache,
+        set: setCache,
+        configurable: true,
+        enumerable: true,
+      });
+    }
+  } catch {
+    // Ignore if prototype is not configurable
+  }
   const hasOwn = (o, k) =>
     o !== null &&
     typeof o === 'object' &&
@@ -215,9 +326,182 @@ if (
   }
 
   const fs = require('fs');
+  const http = require('http');
+  const https = require('https');
   const {Readable, PassThrough} = require('stream');
 
-  globalThis.__googleCloudBunFetch = async (url, init) => {
+  globalThis.__googleCloudBunFetch = async (url, init = {}) => {
+    let parsedUrl;
+    try {
+      parsedUrl = new URL(String(url));
+    } catch {
+      parsedUrl = undefined;
+    }
+
+    if (
+      parsedUrl &&
+      (parsedUrl.protocol === 'http:' || parsedUrl.protocol === 'https:')
+    ) {
+      const isHttps = parsedUrl.protocol === 'https:';
+      const transport = isHttps ? https : http;
+
+      let headers = {};
+      if (init.headers) {
+        if (
+          init.headers instanceof Headers ||
+          (init.headers && typeof init.headers.entries === 'function')
+        ) {
+          for (const [k, v] of init.headers.entries()) {
+            headers[k] = v;
+          }
+        } else {
+          headers = {...init.headers};
+        }
+      }
+
+      const reqOptions = {
+        method: init.method || 'GET',
+        hostname: parsedUrl.hostname,
+        port: parsedUrl.port || (isHttps ? 443 : 80),
+        path: (parsedUrl.pathname || '/') + parsedUrl.search,
+        headers,
+        agent: init.agent,
+      };
+
+      try {
+        const res = await new Promise((resolve, reject) => {
+          const req = transport.request(reqOptions, incoming => {
+            const responseStream = new PassThrough();
+            incoming.pipe(responseStream);
+
+            const fetchHeaders = new Headers();
+            for (const [k, v] of Object.entries(incoming.headers)) {
+              if (Array.isArray(v)) {
+                v.forEach(val => fetchHeaders.append(k, val));
+              } else if (v !== undefined) {
+                fetchHeaders.set(k, v);
+              }
+            }
+
+            const response = new Response(Readable.toWeb(responseStream), {
+              status: incoming.statusCode || 200,
+              statusText: incoming.statusMessage || '',
+              headers: fetchHeaders,
+            });
+            Object.defineProperty(response, 'url', {value: String(url)});
+
+            let nodeStream;
+            const rawBody = response.body;
+            const origText = response.text.bind(response);
+            const origJson = response.json.bind(response);
+            Object.defineProperty(response, 'body', {
+              get() {
+                nodeStream ||= Readable.fromWeb(rawBody);
+                return nodeStream;
+              },
+              configurable: true,
+              enumerable: true,
+            });
+            response.text = async () => {
+              if (!nodeStream) return origText();
+              const chunks = [];
+              for await (const chunk of nodeStream) {
+                chunks.push(
+                  Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk),
+                );
+              }
+              return Buffer.concat(chunks).toString('utf8');
+            };
+            response.json = async () => {
+              return JSON.parse(await response.text());
+            };
+
+            resolve(response);
+          });
+
+          if (init.signal) {
+            if (init.signal.aborted) {
+              req.destroy(
+                Object.assign(new Error('The user aborted a request.'), {
+                  name: 'AbortError',
+                }),
+              );
+              return reject(
+                Object.assign(new Error('The user aborted a request.'), {
+                  name: 'AbortError',
+                }),
+              );
+            }
+            init.signal.addEventListener('abort', () => {
+              req.destroy(
+                Object.assign(new Error('The user aborted a request.'), {
+                  name: 'AbortError',
+                }),
+              );
+            });
+          }
+
+          if (init.timeout) {
+            req.setTimeout(init.timeout, () => {
+              req.destroy(
+                Object.assign(
+                  new Error('The operation was aborted due to timeout'),
+                  {name: 'AbortError', type: 'aborted', code: 'ETIMEDOUT'},
+                ),
+              );
+            });
+          }
+
+          req.on('error', reject);
+
+          if (init.body) {
+            if (typeof init.body.pipe === 'function') {
+              init.body.pipe(req);
+            } else if (
+              typeof init.body === 'string' ||
+              Buffer.isBuffer(init.body)
+            ) {
+              req.write(init.body);
+              req.end();
+            } else if (
+              typeof Readable.fromWeb === 'function' &&
+              typeof ReadableStream !== 'undefined' &&
+              init.body instanceof ReadableStream
+            ) {
+              Readable.fromWeb(init.body).pipe(req);
+            } else {
+              req.end();
+            }
+          } else {
+            req.end();
+          }
+        });
+        return res;
+      } catch (err) {
+        const msg = String(err?.message || err || '');
+        if (err?.name === 'TimeoutError' || /timed out/i.test(msg)) {
+          throw Object.assign(
+            new Error('The operation was aborted due to timeout'),
+            {name: 'AbortError', type: 'aborted', code: 'ETIMEDOUT'},
+          );
+        }
+        if (
+          err?.name === 'AbortError' ||
+          /aborted/i.test(msg) ||
+          init?.signal?.aborted
+        ) {
+          throw Object.assign(new Error('The user aborted a request.'), {
+            name: 'AbortError',
+            type: 'aborted',
+          });
+        }
+        if (!(err instanceof Error) && err && typeof err === 'object') {
+          throw Object.assign(new Error(err.message || err.code || 'Error'), err);
+        }
+        throw err;
+      }
+    }
+
     if (
       init &&
       init.body &&
@@ -377,6 +661,14 @@ if (
           return patchGaxiosIfPresent(applyStub(this, id, stub, fr.noCallThru));
         }
       }
+    }
+    if (
+      typeof Module._load === 'function' &&
+      Module._load !== defaultModuleLoad
+    ) {
+      return patchGaxiosIfPresent(
+        Module._load.call(this, id, this, /* isMain */ false),
+      );
     }
     return patchGaxiosIfPresent(origRequire.apply(this, arguments));
   };
