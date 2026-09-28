@@ -36,7 +36,7 @@ const {
   AsyncLocalStorageContextManager,
   AsyncHooksContextManager,
 } = require('@opentelemetry/context-async-hooks');
-const {setGlobalContextManager} = require('./helper');
+const {setGlobalContextManager, disableContextAndManager} = require('./helper');
 
 const fakePfy = extend({}, pfy, {
   promisifyAll(klass, options) {
@@ -145,8 +145,10 @@ describe('BatchTransaction', () => {
   const PARTITIONS = [{partitionToken: 'a'}, {partitionToken: 'b'}];
   const RESPONSE = {partitions: PARTITIONS};
 
+  let contextManager: any;
+
   beforeEach(() => {
-    const contextManager = new (AsyncLocalStorageContextManager ||
+    contextManager = new (AsyncLocalStorageContextManager ||
       AsyncHooksContextManager)();
     setGlobalContextManager(contextManager);
     batchTransaction = new BatchTransaction(SESSION as {} as Session);
