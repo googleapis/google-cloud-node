@@ -199,6 +199,10 @@ if (
     const origDeepEqual = assert.deepEqual;
     function looseDeepEqual(a, b) {
       if (a === b) return true;
+      // In Node.js, assert.deepEqual performs abstract equality (==) on primitives
+      // (e.g. assert.deepEqual('1', 1) passes). In Bun, native assert.deepEqual('1', 1)
+      // throws. Allow loose primitive equality only when both operands are non-null
+      // primitives to avoid false positives like null == undefined or [] == false.
       if (
         typeof a !== 'object' &&
         typeof b !== 'object' &&
