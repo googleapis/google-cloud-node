@@ -25,6 +25,15 @@ import {
   decodeProtobufAny,
   decodeAnyProtosInArray,
   checkTelemetryEnabled,
+  connectionCodes,
+  requestCodes,
+  requestBodyCodes,
+  decodeCodes,
+  redirectCodes,
+  genericClasses,
+  preConnectionCodes,
+  ignoredClientHeaderTokens,
+  DEPTH_TO_CHECK,
 } from '../../src/util';
 import {StaticTraceContext} from '../../src/observability/TracerHelper';
 import {CallSettings} from '../../src/gax';
@@ -355,6 +364,61 @@ describe('util.ts', () => {
       }
       assert.strictEqual(thrown, undefined);
       assert.strictEqual(result, true);
+    });
+  });
+
+  describe('error code and class constants', () => {
+    it('defines connectionCodes containing common network errors', () => {
+      assert(Array.isArray(connectionCodes));
+      assert(connectionCodes.includes('ECONNREFUSED'));
+      assert(connectionCodes.includes('ENOTFOUND'));
+    });
+
+    it('defines requestCodes containing request error codes', () => {
+      assert(Array.isArray(requestCodes));
+      assert(requestCodes.includes('ERR_INVALID_ARG_TYPE'));
+      assert(requestCodes.includes('ERR_INVALID_URL'));
+    });
+
+    it('defines requestBodyCodes containing stream error codes', () => {
+      assert(Array.isArray(requestBodyCodes));
+      assert(requestBodyCodes.includes('ERR_STREAM_WRITE_AFTER_END'));
+    });
+
+    it('defines decodeCodes containing buffer error codes', () => {
+      assert(Array.isArray(decodeCodes));
+      assert(decodeCodes.includes('ERR_BUFFER_OUT_OF_BOUNDS'));
+    });
+
+    it('defines redirectCodes containing redirect error codes', () => {
+      assert(Array.isArray(redirectCodes));
+      assert(redirectCodes.includes('ERR_TOO_MANY_REDIRECTS'));
+    });
+
+    it('defines genericClasses containing standard base error types', () => {
+      assert(Array.isArray(genericClasses));
+      assert(genericClasses.includes('Error'));
+      assert(genericClasses.includes('GoogleError'));
+      assert(genericClasses.includes('Object'));
+      assert(genericClasses.includes('DOMException'));
+    });
+
+    it('defines preConnectionCodes containing pre-connection error codes', () => {
+      assert(Array.isArray(preConnectionCodes));
+      assert(preConnectionCodes.includes('ECONNREFUSED'));
+      assert(preConnectionCodes.includes('ENOTFOUND'));
+      assert(preConnectionCodes.includes('ERR_INVALID_URL'));
+    });
+
+    it('defines ignoredClientHeaderTokens containing ignored client header tokens', () => {
+      assert(Array.isArray(ignoredClientHeaderTokens));
+      assert(ignoredClientHeaderTokens.includes('gl-node'));
+      assert(ignoredClientHeaderTokens.includes('gax'));
+      assert(ignoredClientHeaderTokens.includes('gapic'));
+    });
+
+    it('defines DEPTH_TO_CHECK constant as 10', () => {
+      assert.strictEqual(DEPTH_TO_CHECK, 10);
     });
   });
 });

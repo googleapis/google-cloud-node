@@ -235,20 +235,32 @@ export class OtelHarness {
    * a failure that never received a response, such as an expired deadline.
    *
    * @param {object} expected - Expected status values.
-   * @param {string} expected.rpcStatus - gRPC status name, e.g. 'OK' or 'NOT_FOUND'.
+   * @param {string} [expected.rpcStatus] - gRPC status name, e.g. 'OK' or 'NOT_FOUND'. Undefined if no response arrived.
    * @param {number} [expected.httpStatus] - HTTP status expected on a fallback span.
    * @param {object} [options] - Span selection.
    * @param {string} [options.tracerName] - Restrict the lookup to one instrumentation scope.
    * @param {ReadableSpan} [options.span] - Span to check; defaults to the only exported span.
    */
   assertResponseStatus(
-    expected: {rpcStatus: string; httpStatus?: number},
+    expected: {
+      rpcStatus?: string;
+      httpStatus?: number;
+      serverAddress?: string;
+      serverPort?: number;
+    },
     options: {tracerName?: string; span?: ReadableSpan} = {},
   ): void {
     const target = options.span ?? this.requireSingleSpan(options.tracerName);
     const actual = this.responseStatus(target);
     const transport = target.attributes['gcp.method.type'];
     const where = `span '${target.name}'`;
+
+    if ('serverAddress' in expected || 'serverPort' in expected) {
+      this.assertServerAddressAndPort(
+        {address: expected.serverAddress, port: expected.serverPort},
+        options,
+      );
+    }
 
     assert.ok(
       transport === 'grpc' || transport === 'http',
@@ -260,18 +272,24 @@ export class OtelHarness {
     assert.strictEqual(
       actual.rpc,
       expected.rpcStatus,
-      `expected ${where} to report rpc.response.status_code ` +
-        `${JSON.stringify(expected.rpcStatus)}, got ${JSON.stringify(actual.rpc)}. ` +
-        'This attribute is reported on every call, on both transports.',
+      expected.rpcStatus === undefined
+        ? `expected ${where} to report no rpc.response.status_code, got ` +
+            `${JSON.stringify(actual.rpc)}. Response status is omitted when there is no server response.`
+        : `expected ${where} to report rpc.response.status_code ` +
+            `${JSON.stringify(expected.rpcStatus)}, got ${JSON.stringify(actual.rpc)}. ` +
+            'This attribute is reported on every call with a server response, on both transports.',
     );
 
     if (transport === 'grpc') {
       assert.strictEqual(
         actual.grpc,
         expected.rpcStatus,
-        `expected ${where} to report grpc.response.status_code ` +
-          `${JSON.stringify(expected.rpcStatus)}, got ${JSON.stringify(actual.grpc)}. ` +
-          'On a gRPC span it mirrors rpc.response.status_code.',
+        expected.rpcStatus === undefined
+          ? `expected ${where} to report no grpc.response.status_code, got ` +
+              `${JSON.stringify(actual.grpc)}. Response status is omitted when there is no server response.`
+          : `expected ${where} to report grpc.response.status_code ` +
+              `${JSON.stringify(expected.rpcStatus)}, got ${JSON.stringify(actual.grpc)}. ` +
+              'On a gRPC span it mirrors rpc.response.status_code.',
       );
       assert.strictEqual(
         actual.http,
@@ -308,6 +326,44 @@ export class OtelHarness {
             `${expected.httpStatus}, got ${JSON.stringify(actual.http)}. ` +
             'This is the status the transport received, which is not ' +
             'recoverable from the gRPC status it was mapped to.',
+    );
+  }
+
+  /**
+   * Asserts the `server.address` and `server.port` attributes on a span.
+   *
+   * Per OpenTelemetry semantic conventions, `server.address` and `server.port`
+   * may be absent if it's a client side failure that occurred before DNS resolution
+   * or connection establishment, but are present if it's a server side error.
+   *
+   * @param {object} expected - Expected server address and port.
+   * @param {string} [expected.address] - Expected server.address; undefined if asserted absent.
+   * @param {number} [expected.port] - Expected server.port; undefined if asserted absent.
+   * @param {object} [options] - Span selection.
+   * @param {string} [options.tracerName] - Restrict the lookup to one instrumentation scope.
+   * @param {ReadableSpan} [options.span] - Span to check; defaults to the only exported span.
+   */
+  assertServerAddressAndPort(
+    expected: {address?: string; port?: number},
+    options: {tracerName?: string; span?: ReadableSpan} = {},
+  ): void {
+    const target = options.span ?? this.requireSingleSpan(options.tracerName);
+    const where = `span '${target.name}'`;
+
+    assert.strictEqual(
+      target.attributes['server.address'],
+      expected.address,
+      expected.address === undefined
+        ? `expected ${where} to omit server.address, got ${JSON.stringify(target.attributes['server.address'])}.`
+        : `expected ${where} to report server.address ${JSON.stringify(expected.address)}, got ${JSON.stringify(target.attributes['server.address'])}.`,
+    );
+
+    assert.strictEqual(
+      target.attributes['server.port'],
+      expected.port,
+      expected.port === undefined
+        ? `expected ${where} to omit server.port, got ${JSON.stringify(target.attributes['server.port'])}.`
+        : `expected ${where} to report server.port ${JSON.stringify(expected.port)}, got ${JSON.stringify(target.attributes['server.port'])}.`,
     );
   }
 
@@ -361,6 +417,120 @@ export class OtelHarness {
       `${where} is a ${transport} span but reported ${otherKey} ` +
         `${JSON.stringify(target.attributes[otherKey])}. The resend count ` +
         `belongs under ${expectedKey} there.`,
+    );
+  }
+
+  /**
+   * Asserts the `exception` event attributes on a span.
+   *
+   * Per OpenTelemetry semantic conventions and Google Cloud guidelines,
+   * client-side errors record local client stack trace and error message,
+   * while server-side errors record server error details (and any status details/metadata
+   * attached by GFE/backend) formatted as exception.stacktrace (replacing the local client stack trace).
+   * Status details, metadata, reason, domain, and error_info_metadata are not recorded
+   * as separate span or event attributes.
+   *
+   * @param {object} expected - Expected attributes on the exception event.
+   * @param {string} [expected.type] - Expected exception.type.
+   * @param {string} [expected.message] - Expected exception.message.
+   * @param {string | null} [expected.stacktrace] - Expected exception.stacktrace, or null if asserted absent.
+   * @param {object} [options] - Span selection.
+   * @param {string} [options.tracerName] - Restrict the lookup to one instrumentation scope.
+   * @param {ReadableSpan} [options.span] - Span to check; defaults to the only exported span.
+   */
+  assertExceptionEvent(
+    expected: {
+      type?: string;
+      message?: string;
+      stacktrace?: string | null;
+    },
+    options: {tracerName?: string; span?: ReadableSpan} = {},
+  ): void {
+    const target = options.span ?? this.requireSingleSpan(options.tracerName);
+    const event = target.events.find(e => e.name === 'exception');
+    assert.ok(
+      event,
+      `expected span '${target.name}' to have an 'exception' event, but none was found`,
+    );
+    const attrs = event.attributes ?? {};
+    if (expected.type !== undefined) {
+      assert.strictEqual(
+        attrs['exception.type'],
+        expected.type,
+        `expected exception.type to be ${expected.type}, got ${attrs['exception.type']}`,
+      );
+    }
+    if (expected.message !== undefined) {
+      assert.strictEqual(
+        attrs['exception.message'],
+        expected.message,
+        `expected exception.message to be ${expected.message}, got ${attrs['exception.message']}`,
+      );
+    }
+    if (expected.stacktrace === null) {
+      assert.strictEqual(
+        attrs['exception.stacktrace'],
+        undefined,
+        `expected exception.stacktrace to be absent, got ${attrs['exception.stacktrace']}`,
+      );
+    } else if (expected.stacktrace !== undefined) {
+      assert.strictEqual(
+        attrs['exception.stacktrace'],
+        expected.stacktrace,
+        `expected exception.stacktrace to be ${expected.stacktrace}, got ${attrs['exception.stacktrace']}`,
+      );
+    }
+
+    assert.strictEqual(
+      attrs['status_details'],
+      undefined,
+      'status_details must not be recorded as an event attribute',
+    );
+    assert.strictEqual(
+      attrs['metadata'],
+      undefined,
+      'metadata must not be recorded as an event attribute',
+    );
+    assert.strictEqual(
+      attrs['reason'],
+      undefined,
+      'reason must not be recorded as an event attribute',
+    );
+    assert.strictEqual(
+      attrs['domain'],
+      undefined,
+      'domain must not be recorded as an event attribute',
+    );
+    assert.strictEqual(
+      attrs['error_info_metadata'],
+      undefined,
+      'error_info_metadata must not be recorded as an event attribute',
+    );
+
+    assert.strictEqual(
+      target.attributes['status_details'],
+      undefined,
+      'status_details must not be recorded as a span attribute',
+    );
+    assert.strictEqual(
+      target.attributes['metadata'],
+      undefined,
+      'metadata must not be recorded as a span attribute',
+    );
+    assert.strictEqual(
+      target.attributes['reason'],
+      undefined,
+      'reason must not be recorded as a span attribute',
+    );
+    assert.strictEqual(
+      target.attributes['domain'],
+      undefined,
+      'domain must not be recorded as a span attribute',
+    );
+    assert.strictEqual(
+      target.attributes['error_info_metadata'],
+      undefined,
+      'error_info_metadata must not be recorded as a span attribute',
     );
   }
 }
