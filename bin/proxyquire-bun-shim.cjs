@@ -535,9 +535,25 @@ if (
               init.body.pipe(req);
             } else if (
               typeof init.body === 'string' ||
-              Buffer.isBuffer(init.body)
+              Buffer.isBuffer(init.body) ||
+              init.body instanceof Uint8Array ||
+              init.body instanceof ArrayBuffer ||
+              (typeof ArrayBuffer !== 'undefined' &&
+                ArrayBuffer.isView(init.body))
             ) {
-              req.write(init.body);
+              const chunk =
+                init.body instanceof ArrayBuffer
+                  ? new Uint8Array(init.body)
+                  : init.body instanceof Uint8Array
+                  ? init.body
+                  : ArrayBuffer.isView(init.body)
+                  ? new Uint8Array(
+                      init.body.buffer,
+                      init.body.byteOffset,
+                      init.body.byteLength,
+                    )
+                  : init.body;
+              req.write(chunk);
               req.end();
             } else if (
               typeof Readable.fromWeb === 'function' &&
