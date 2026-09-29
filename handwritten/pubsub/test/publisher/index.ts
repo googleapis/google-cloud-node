@@ -28,6 +28,7 @@ import {PublishError} from '../../src/publisher/publish-error';
 import * as util from '../../src/util';
 
 import {defaultOptions} from '../../src/default-options';
+import {Duration} from '../../src/temporal';
 import * as tracing from '../../src/telemetry-tracing';
 import {exporter} from '../tracing';
 import {SpanKind} from '@opentelemetry/api';
@@ -484,6 +485,57 @@ describe('Publisher', () => {
       publisher.setOptions(newOptions);
 
       stubs.forEach(s => assert.ok(s.calledOnce));
+    });
+
+    it('should configure hedging options and token bucket when hedging is enabled', () => {
+      publisher.setOptions({
+        hedging: {
+          hedgeDelay: Duration.from({milliseconds: 300}),
+          maxTokens: 20,
+          refillRatio: 0.2,
+        },
+      });
+
+      assert.ok(publisher.hedgingOptions);
+      assert.strictEqual(publisher.hedgingOptions.hedgeDelay.milliseconds, 300);
+      assert.strictEqual(publisher.hedgingOptions.maxTokens, 20);
+      assert.strictEqual(publisher.hedgingOptions.refillRatio, 0.2);
+      assert.strictEqual(publisher.getHedgeTokenBalance(), 0);
+
+      for (let i = 0; i < 5; i++) {
+        publisher.refillTokenBucket();
+      }
+      assert.strictEqual(publisher.getHedgeTokenBalance(), 1.0);
+      assert.strictEqual(publisher.tryAcquireHedgeToken(), true);
+      assert.strictEqual(publisher.getHedgeTokenBalance(), 0);
+    });
+
+    it('should preserve hedging options when setOptions is called with other options', () => {
+      publisher.setOptions({
+        hedging: {
+          hedgeDelay: Duration.from({milliseconds: 300}),
+          maxTokens: 20,
+          refillRatio: 0.2,
+        },
+      });
+      publisher.setOptions({
+        batching: {maxMessages: 50},
+      });
+      assert.ok(publisher.hedgingOptions);
+      assert.strictEqual(publisher.hedgingOptions.hedgeDelay.milliseconds, 300);
+      assert.strictEqual(publisher.hedgingOptions.maxTokens, 20);
+      assert.strictEqual(publisher.hedgingOptions.refillRatio, 0.2);
+    });
+
+    it('should throw when hedging and messageOrdering are both enabled', () => {
+      assert.throws(
+        () =>
+          publisher.setOptions({
+            messageOrdering: true,
+            hedging: {},
+          }),
+        /Publish hedging and message ordering cannot be enabled at the same time\./,
+      );
     });
   });
 

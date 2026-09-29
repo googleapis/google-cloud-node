@@ -98,7 +98,12 @@ export {
   TestIamPermissionsCallback,
   IAM,
 } from './iam';
-export {Attributes, PublishCallback, PublishOptions} from './publisher';
+export {
+  Attributes,
+  HedgingOptions,
+  PublishCallback,
+  PublishOptions,
+} from './publisher';
 export {BatchPublishOptions} from './publisher/message-batch';
 export {PublishError} from './publisher/publish-error';
 export {FlowControlOptions} from './publisher/flow-control';
