@@ -372,6 +372,8 @@ if (
     // ignore
   }
 
+  const enableFetchShim = process.env.BUN_ENABLE_FETCH_SHIM === 'true';
+
   const fs = require('fs');
   const http = require('http');
   const https = require('https');
@@ -392,11 +394,13 @@ if (
   //   - OAuth token failures (`invalid_grant: account not found`)
   //   - `Mocks not yet satisfied` assertions from `nock`
   //
-  // To bridge this gap, `__googleCloudBunFetch` intercepts HTTP/HTTPS requests
-  // and routes them through Node's `http.request` / `https.request` stack,
-  // allowing `nock` to intercept requests seamlessly while returning standard
-  // Fetch `Response` objects expected by caller libraries.
-  globalThis.__googleCloudBunFetch = async (url, init = {}) => {
+  // When opted into via `--fetch-shim` (`BUN_ENABLE_FETCH_SHIM=true`),
+  // `__googleCloudBunFetch` intercepts HTTP/HTTPS requests and routes them through
+  // Node's `http.request` / `https.request` stack, allowing `nock` to intercept
+  // requests seamlessly while returning standard Fetch `Response` objects expected
+  // by caller libraries.
+  if (enableFetchShim) {
+    globalThis.__googleCloudBunFetch = async (url, init = {}) => {
     let parsedUrl;
     try {
       parsedUrl = new URL(String(url));
@@ -688,24 +692,26 @@ if (
     });
   }
 
-  if (Module._extensions && typeof Module._extensions['.js'] === 'function') {
-    const origJsExt = Module._extensions['.js'];
-    Module._extensions['.js'] = function (mod, filename) {
-      if (/teeny-request[\\/]+build[\\/]+src[\\/]+index\.js$/.test(filename)) {
-        const code = fs
-          .readFileSync(filename, 'utf8')
-          .replaceAll(
-            "import('node-fetch')",
-            'Promise.resolve({default: globalThis.__googleCloudBunFetch})',
-          );
-        return mod._compile(code, filename);
-      }
-      return origJsExt.apply(this, arguments);
-    };
+    if (Module._extensions && typeof Module._extensions['.js'] === 'function') {
+      const origJsExt = Module._extensions['.js'];
+      Module._extensions['.js'] = function (mod, filename) {
+        if (/teeny-request[\\/]+build[\\/]+src[\\/]+index\.js$/.test(filename)) {
+          const code = fs
+            .readFileSync(filename, 'utf8')
+            .replaceAll(
+              "import('node-fetch')",
+              'Promise.resolve({default: globalThis.__googleCloudBunFetch})',
+            );
+          return mod._compile(code, filename);
+        }
+        return origJsExt.apply(this, arguments);
+      };
+    }
   }
 
   function patchGaxiosIfPresent(res) {
     if (
+      enableFetchShim &&
       res &&
       typeof res === 'object' &&
       typeof res.Gaxios === 'function' &&
