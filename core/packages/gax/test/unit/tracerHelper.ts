@@ -18,7 +18,7 @@ import * as assert from 'assert';
 import * as vm from 'vm';
 import {EventEmitter} from 'events';
 import {Duplex, Writable} from 'stream';
-import {SpanStatusCode} from '@opentelemetry/api';
+import {SpanStatusCode, trace} from '@opentelemetry/api';
 import {describe, it, beforeEach, afterEach} from 'mocha';
 import * as grpc from '@grpc/grpc-js';
 import {
@@ -124,6 +124,157 @@ describe('TracerHelper', () => {
       assert.strictEqual(span.attributes['error.type'], undefined);
       assert.strictEqual(span.status.code, SpanStatusCode.UNSET);
       assert.strictEqual(span.events.length, 0);
+    });
+
+    describe('child span propagation and hierarchy (T3 -> T4)', () => {
+      it('tags synchronous child spans with the T3 parent span id', async () => {
+        const childTracer = trace.getTracer('child-tracer');
+        let childParentSpanId: string | undefined;
+
+        await traceCall(dynamicArgs, staticArgs, () => {
+          const childSpan = childTracer.startSpan('ChildOperation');
+          childParentSpanId = (
+            childSpan as unknown as {parentSpanContext?: {spanId?: string}}
+          ).parentSpanContext?.spanId;
+          childSpan.end();
+          return {data: 'sync-child'};
+        });
+
+        const allSpans = harness.exporter.getFinishedSpans();
+        assert.strictEqual(allSpans.length, 2, 'Expected 2 spans (T3 + T4)');
+
+        const t3Span = harness.requireSingleSpan('google-gax');
+        const t4Span = allSpans.find(s => s.name === 'ChildOperation');
+        assert.ok(t4Span, 'T4 child span must exist');
+
+        assert.strictEqual(
+          childParentSpanId,
+          t3Span.spanContext().spanId,
+          'T4.parentSpanId should be T3.spanId',
+        );
+        assert.strictEqual(
+          t4Span?.parentSpanContext?.spanId,
+          t3Span.spanContext().spanId,
+          'Finished T4 span parentSpanId should match T3 spanId',
+        );
+        assert.strictEqual(
+          t4Span?.spanContext().traceId,
+          t3Span.spanContext().traceId,
+          'T4 span should share traceId with T3 parent',
+        );
+      });
+
+      it('tags asynchronous promise child spans with the T3 parent span id', async () => {
+        const childTracer = trace.getTracer('child-tracer');
+        let childParentSpanId: string | undefined;
+
+        await traceCall(dynamicArgs, staticArgs, async () => {
+          await new Promise<void>(resolve => setImmediate(resolve));
+          const childSpan = childTracer.startSpan('AsyncChildOperation');
+          childParentSpanId = (
+            childSpan as unknown as {parentSpanContext?: {spanId?: string}}
+          ).parentSpanContext?.spanId;
+          childSpan.end();
+          return {data: 'async-child'};
+        });
+
+        const allSpans = harness.exporter.getFinishedSpans();
+        assert.strictEqual(allSpans.length, 2, 'Expected 2 spans (T3 + T4)');
+
+        const t3Span = harness.requireSingleSpan('google-gax');
+        const t4Span = allSpans.find(s => s.name === 'AsyncChildOperation');
+        assert.ok(t4Span, 'T4 child span must exist');
+
+        assert.strictEqual(
+          childParentSpanId,
+          t3Span.spanContext().spanId,
+          'T4.parentSpanId should be T3.spanId for async calls',
+        );
+        assert.strictEqual(
+          t4Span?.parentSpanContext?.spanId,
+          t3Span.spanContext().spanId,
+        );
+        assert.strictEqual(
+          t4Span?.spanContext().traceId,
+          t3Span.spanContext().traceId,
+        );
+      });
+
+      it('tags child spans in stream calls with the T3 parent span id', async () => {
+        const childTracer = trace.getTracer('child-tracer');
+        const stream = new EventEmitter();
+        let childParentSpanId: string | undefined;
+
+        const streamResult = traceCall(
+          dynamicArgs,
+          staticArgs,
+          () => {
+            const childSpan = childTracer.startSpan('StreamChildOperation');
+            childParentSpanId = (
+              childSpan as unknown as {parentSpanContext?: {spanId?: string}}
+            ).parentSpanContext?.spanId;
+            childSpan.end();
+            return stream;
+          },
+          true,
+        );
+
+        assert.strictEqual(streamResult, stream);
+        stream.emit('end');
+
+        const allSpans = harness.exporter.getFinishedSpans();
+        assert.strictEqual(allSpans.length, 2, 'Expected 2 spans (T3 + T4)');
+
+        const t3Span = harness.requireSingleSpan('google-gax');
+        const t4Span = allSpans.find(s => s.name === 'StreamChildOperation');
+        assert.ok(t4Span, 'T4 child span must exist');
+
+        assert.strictEqual(
+          childParentSpanId,
+          t3Span.spanContext().spanId,
+          'T4.parentSpanId should be T3.spanId in stream calls',
+        );
+        assert.strictEqual(
+          t4Span?.parentSpanContext?.spanId,
+          t3Span.spanContext().spanId,
+        );
+      });
+
+      it('tags child spans with T3 parent span id for HTTP rpcType', async () => {
+        const httpDynamicArgs: DynamicTraceContext = {
+          clientName: 'EchoClient',
+          methodName: 'Echo',
+          rpcType: 'http',
+        };
+        const childTracer = trace.getTracer('child-tracer');
+        let childParentSpanId: string | undefined;
+
+        await traceCall(httpDynamicArgs, staticArgs, async () => {
+          const childSpan = childTracer.startSpan('HttpClientCall');
+          childParentSpanId = (
+            childSpan as unknown as {parentSpanContext?: {spanId?: string}}
+          ).parentSpanContext?.spanId;
+          childSpan.end();
+          return {data: 'http-child'};
+        });
+
+        const allSpans = harness.exporter.getFinishedSpans();
+        assert.strictEqual(allSpans.length, 2);
+
+        const t3Span = harness.requireSingleSpan('google-gax');
+        const t4Span = allSpans.find(s => s.name === 'HttpClientCall');
+        assert.ok(t4Span);
+
+        assert.strictEqual(
+          childParentSpanId,
+          t3Span.spanContext().spanId,
+          'T4.parentSpanId should be T3.spanId for HTTP calls',
+        );
+        assert.strictEqual(
+          t4Span?.parentSpanContext?.spanId,
+          t3Span.spanContext().spanId,
+        );
+      });
     });
 
     it('records error attributes, exceptions, and rethrows when fn throws an Error', async () => {
