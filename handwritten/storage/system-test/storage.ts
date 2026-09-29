@@ -61,8 +61,6 @@ const UNIFORM_ACCESS_WAIT_TIME = 5 * 1000; // 5s
 const BUCKET_METADATA_UPDATE_WAIT_TIME = 1250; // 1.25s buckets have a max rate of one metadata update per second.
 
 // block all attempts to chat with the metadata server (kokoro runs on GCE)
-process.env.GCE_METADATA_HOST = '169.254.169.254.invalid';
-process.env.DETECT_GCP_RETRIES = '0';
 nock('http://metadata.google.internal')
   .get(() => true)
   .replyWithError({code: 'ENOTFOUND'})
