@@ -36,6 +36,7 @@ import {Key} from './table';
 import {
   Span,
   ObservabilityOptions,
+  isTracingEnabled,
   startTrace,
   setSpanError,
   setSpanErrorAndException,
@@ -67,6 +68,7 @@ import {
   X_GOOG_SPANNER_REQUEST_ID_HEADER,
   X_GOOG_SPANNER_REQUEST_ID_SPAN_ATTR,
 } from './request_id_header';
+import {AffinityKind, TransactionAffinity} from './channel-pool';
 
 export type Rows = Array<Row | Json>;
 type ResultStats = ResultSetStats | IResultSetStats;
@@ -344,6 +346,7 @@ export class Snapshot extends EventEmitter {
     | null;
   id?: Uint8Array | string;
   protected _affinityKey?: string;
+  protected _affinity?: TransactionAffinity;
   protected _bindGaxOpts?: CallOptions;
   protected _unbindGaxOpts?: CallOptions;
   multiplexedSessionPreviousTransactionId?: Uint8Array | string;
@@ -402,23 +405,35 @@ export class Snapshot extends EventEmitter {
    *
    * @param {Session} session The parent Session object.
    * @param {TimestampBounds} [options] Snapshot timestamp bounds.
-   * @param {QueryOptions} [queryOptions] Default query options to use when none
-   *        are specified for a query.
+   * @param {AffinityKind | null} [affinityKind=AffinityKind.ReadOnly] Affinity kind,
+   *        or null for single-use snapshots.
    */
   constructor(
     session: Session,
     options?: TimestampBounds,
     queryOptions?: IQueryOptions,
+    affinityKind: AffinityKind | null = AffinityKind.ReadOnly,
   ) {
     super();
 
     this.ended = false;
     this.session = session;
     this.queryOptions = Object.assign({}, queryOptions);
-    // If the session is multiplexed, generate a unique affinity key for this
-    // specific transaction/snapshot. This allows requests using the same shared
-    // multiplexed session to be distributed across different gRPC channels.
-    if (session.metadata && session.metadata.multiplexed) {
+    if (affinityKind !== null && affinityKind !== undefined) {
+      this._affinity = new TransactionAffinity(affinityKind);
+    }
+    const isLegacyPool = this._getSpanner?.()?.isLegacyChannelPool === true;
+    // If the session is multiplexed, determine if affinity handling is required:
+    // 1. In the experimental channel pool, affinity is only needed for multi-use snapshots or
+    //    read-write transactions (this._affinity is present) so the pool can pin the channel.
+    //    Single-use queries leave affinity undefined to use per-RPC P2C load balancing.
+    // 2. In the legacy grpc-gcp pool, all multiplexed requests require an explicit affinityKey
+    //    to prevent grpc-gcp from routing 100% of requests to Channel 0 (the session create channel).
+    if (
+      (this._affinity || isLegacyPool) &&
+      session.metadata &&
+      session.metadata.multiplexed
+    ) {
       this._affinityKey = `mux-affinity-${process.pid}-${nextAffinityId++}`;
       // Pre-construct and cache the bind gax options to avoid creating
       // a new object on every request, which improves performance.
@@ -426,6 +441,7 @@ export class Snapshot extends EventEmitter {
         otherArgs: {
           options: {
             affinityKey: this._affinityKey,
+            ...(this._affinity ? {affinity: this._affinity} : {}),
           },
         },
       };
@@ -436,6 +452,7 @@ export class Snapshot extends EventEmitter {
           options: {
             affinityKey: this._affinityKey,
             unbind: true,
+            ...(this._affinity ? {affinity: this._affinity} : {}),
           },
         },
       };
@@ -465,10 +482,14 @@ export class Snapshot extends EventEmitter {
     this._mutationKey = null;
   }
 
+  get affinity(): TransactionAffinity | undefined {
+    return this._affinity;
+  }
+
   /**
-   * Binds the multiplexed session affinity key to the gax options of an
-   * outgoing request, so that all requests of this transaction are routed to
-   * the same gRPC channel.
+   * Binds the multiplexed session affinity key and transaction affinity to the
+   * gax options of an outgoing request, so that all requests of this
+   * transaction are routed to the same gRPC channel.
    *
    * `config` is always a request descriptor that was freshly constructed by the
    * caller for this one RPC (and {@link Spanner#prepareGapicRequest_} already
@@ -488,11 +509,18 @@ export class Snapshot extends EventEmitter {
     if (!config.gaxOpts || Object.keys(config.gaxOpts).length === 0) {
       config.gaxOpts = this._bindGaxOpts;
     } else {
-      config.gaxOpts = injectGaxOpt(
-        config.gaxOpts,
-        'affinityKey',
-        this._affinityKey,
-      );
+      const otherArgs = config.gaxOpts.otherArgs;
+      config.gaxOpts = Object.assign({}, config.gaxOpts, {
+        otherArgs: Object.assign({}, otherArgs, {
+          options: Object.assign(
+            {},
+            otherArgs?.options,
+            this._affinity
+              ? {affinityKey: this._affinityKey, affinity: this._affinity}
+              : {affinityKey: this._affinityKey},
+          ),
+        }),
+      });
     }
     return config;
   }
@@ -707,15 +735,6 @@ export class Snapshot extends EventEmitter {
       reqOpts.requestOptions = this.requestOptions;
     }
 
-    const headers = this.commonHeaders_;
-    if (
-      this._getSpanner().routeToLeaderEnabled &&
-      (this._options.readWrite !== undefined ||
-        this._options.partitionedDml !== undefined)
-    ) {
-      addLeaderAwareRoutingHeader(headers);
-    }
-
     return startTrace(
       'Snapshot.begin',
       {
@@ -731,7 +750,10 @@ export class Snapshot extends EventEmitter {
             method: 'beginTransaction',
             reqOpts,
             gaxOpts,
-            headers: injectRequestIDIntoHeaders(headers, this.session),
+            headers: injectRequestIDIntoHeaders(
+              this.commonHeaders_,
+              this.session,
+            ),
           },
           (
             err: null | grpc.ServiceError,
@@ -979,15 +1001,6 @@ export class Snapshot extends EventEmitter {
       },
     );
 
-    const headers = this.commonHeaders_;
-    if (
-      this._getSpanner().routeToLeaderEnabled &&
-      (this._options.readWrite !== undefined ||
-        this._options.partitionedDml !== undefined)
-    ) {
-      addLeaderAwareRoutingHeader(headers);
-    }
-
     const traceConfig: traceConfig = {
       ...this._traceConfig,
       tableName: table,
@@ -1026,7 +1039,7 @@ export class Snapshot extends EventEmitter {
           reqOpts: Object.assign({}, reqOpts, {resumeToken}),
           gaxOpts: gaxOptions,
           headers: injectRequestIDIntoHeaders(
-            headers,
+            this.commonHeaders_,
             this.session,
             nthRequest,
             attempt,
@@ -1136,6 +1149,7 @@ export class Snapshot extends EventEmitter {
     }
 
     this.ended = true;
+    this._affinity?.reset();
     this._releaseWaitingRequests(new Error('Transaction has ended.'));
     process.nextTick(() => this.emit('end'));
 
@@ -1533,24 +1547,18 @@ export class Snapshot extends EventEmitter {
       });
     };
 
-    const headers = Object.assign({}, this.commonHeaders_);
-    if (
-      this._getSpanner().routeToLeaderEnabled &&
-      (this._options.readWrite !== undefined ||
-        this._options.partitionedDml !== undefined)
-    ) {
-      addLeaderAwareRoutingHeader(headers);
-    }
-
-    const traceConfig: traceConfig = {
-      ...this._traceConfig,
-      transactionTag: this.requestOptions?.transactionTag,
-      ...getQueryTraceConfig(queryInput),
-    };
-
     const executeWithSpans = (
-      fn: (runSpan: Span | null, streamSpan: Span) => void,
+      fn: (runSpan: Span | null, streamSpan: Span | null) => void,
     ) => {
+      if (!isTracingEnabled(this._traceConfig?.opts)) {
+        fn(null, null);
+        return;
+      }
+      const traceConfig: traceConfig = {
+        ...this._traceConfig,
+        transactionTag: this.requestOptions?.transactionTag,
+        ...getQueryTraceConfig(queryInput),
+      };
       const startRunSpan = options?.startRunSpan !== false;
       if (startRunSpan) {
         return startTrace('Snapshot.run', traceConfig, runSpan => {
@@ -1581,10 +1589,10 @@ export class Snapshot extends EventEmitter {
           return;
         }
         completed = true;
-        if (err) {
+        if (err && streamSpan) {
           setSpanError(streamSpan, err);
         }
-        streamSpan.end();
+        streamSpan?.end();
         if (runSpan) {
           if (err) {
             setSpanError(runSpan, err);
@@ -1601,17 +1609,19 @@ export class Snapshot extends EventEmitter {
 
       const makeRequest = (resumeToken?: ResumeToken): Readable => {
         attempt++;
-        if (!resumeToken) {
-          if (attempt === 1) {
-            streamSpan.addEvent('Starting stream');
+        if (streamSpan) {
+          if (!resumeToken) {
+            if (attempt === 1) {
+              streamSpan.addEvent('Starting stream');
+            } else {
+              streamSpan.addEvent('Re-attempting start stream', {attempt});
+            }
           } else {
-            streamSpan.addEvent('Re-attempting start stream', {attempt});
+            streamSpan.addEvent('Resuming stream', {
+              resume_token: resumeToken!.toString(),
+              attempt,
+            });
           }
-        } else {
-          streamSpan.addEvent('Resuming stream', {
-            resume_token: resumeToken!.toString(),
-            attempt,
-          });
         }
 
         if (
@@ -1630,7 +1640,7 @@ export class Snapshot extends EventEmitter {
         }
 
         const injectedHeaders = injectRequestIDIntoHeaders(
-          headers,
+          this.commonHeaders_,
           this.session,
           nthRequest,
           attempt,
@@ -1684,10 +1694,10 @@ export class Snapshot extends EventEmitter {
 
           const wasAborted = isErrorAborted(err);
           if (!this.id && this._useInRunner && !wasAborted) {
-            streamSpan.addEvent('Stream broken. Safe to retry');
+            streamSpan?.addEvent('Stream broken. Safe to retry');
             void this.begin();
           } else if (wasAborted) {
-            streamSpan.addEvent('Stream broken. Not safe to retry', {
+            streamSpan?.addEvent('Stream broken. Not safe to retry', {
               'transaction.id': this.id?.toString(),
             });
           }
@@ -1855,11 +1865,11 @@ export class Snapshot extends EventEmitter {
    * @property {object} [gaxOptions] Request configuration options,
    *     See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions}
    *     for more details.
-   *  @property {number} [maxResumeRetries] The maximum number of times that the
-   *     stream will retry to push data downstream, when the downstream indicates
-   *     that it is not ready for any more data. Increase this value if you
-   *     experience 'Stream is still not ready to receive data' errors as a
-   *     result of a slow writer in your receiving stream.
+   * @property {number} [maxResumeRetries] The maximum number of times that the
+   *     query will retry on retryable errors (such as UNAVAILABLE). Only
+   *     applicable to non-streaming queries executed via {@link Snapshot#run}.
+   *     For streaming queries ({@link Snapshot#runStream}), this option is
+   *     deprecated as backpressure is managed automatically.
    *  @property {object} [directedReadOptions]
    *     Indicates which replicas or regions should be used for non-transactional reads or queries.
    */
@@ -1995,15 +2005,6 @@ export class Snapshot extends EventEmitter {
       });
     };
 
-    const headers = this.commonHeaders_;
-    if (
-      this._getSpanner().routeToLeaderEnabled &&
-      (this._options.readWrite !== undefined ||
-        this._options.partitionedDml !== undefined)
-    ) {
-      addLeaderAwareRoutingHeader(headers);
-    }
-
     const traceConfig: traceConfig = {
       ...this._traceConfig,
       transactionTag: this.requestOptions?.transactionTag,
@@ -2047,7 +2048,7 @@ export class Snapshot extends EventEmitter {
           reqOpts: Object.assign({}, reqOpts, {resumeToken}),
           gaxOpts: gaxOptions,
           headers: injectRequestIDIntoHeaders(
-            headers,
+            this.commonHeaders_,
             this.session,
             nthRequest,
             attempt,
@@ -2304,14 +2305,16 @@ export class Snapshot extends EventEmitter {
    */
   protected _update(
     resp: spannerClient.spanner.v1.ITransaction,
-    span: Span,
+    span?: Span | null,
   ): void {
     const {id, readTimestamp} = resp;
 
     this.id = id!;
     this.metadata = resp;
 
-    span.addEvent('Transaction Creation Done', {id: this.id.toString()});
+    if (span) {
+      span.addEvent('Transaction Creation Done', {id: this.id.toString()});
+    }
 
     if (readTimestamp) {
       this.readTimestampProto = readTimestamp;
@@ -2377,7 +2380,7 @@ export class Snapshot extends EventEmitter {
    * @returns {Spanner}
    */
   protected _getSpanner(): Spanner {
-    return this.session.parent.parent.parent as Spanner;
+    return (this.session?.parent as Database)?.parent?.parent as Spanner;
   }
 }
 
@@ -2573,13 +2576,55 @@ export class Transaction extends Dml {
     queryOptions?: IQueryOptions,
     requestOptions?: Pick<IRequestOptions, 'transactionTag'>,
   ) {
-    super(session, undefined, queryOptions);
+    super(session, undefined, queryOptions, AffinityKind.ReadWrite);
 
     this._queuedMutations = [];
     this._options = {readWrite: options};
     this._options.isolationLevel = IsolationLevel.ISOLATION_LEVEL_UNSPECIFIED;
     this.requestOptions = requestOptions;
     this._retryCommit = false;
+    if (!this._affinityKey && this._affinity) {
+      const affinity = this._affinity;
+      const defaultGaxOptions = {
+        otherArgs: {
+          options: {
+            affinity,
+          },
+        },
+      };
+
+      const originalRequest = this.request;
+      this.request = (config: any, callback?: Function) => {
+        if (!config) {
+          return originalRequest.call(this, config, callback!);
+        }
+        const gaxOptions = config.gaxOpts
+          ? injectGaxOpt(config.gaxOpts, 'affinity', affinity)
+          : defaultGaxOptions;
+        return originalRequest.call(
+          this,
+          Object.assign({}, config, {gaxOpts: gaxOptions}),
+          callback!,
+        );
+      };
+
+      const originalRequestStream = this.requestStream;
+      this.requestStream = (config: any) => {
+        if (!config) {
+          return originalRequestStream.call(this, config);
+        }
+        const gaxOptions = config.gaxOpts
+          ? injectGaxOpt(config.gaxOpts, 'affinity', affinity)
+          : defaultGaxOptions;
+        return originalRequestStream.call(
+          this,
+          Object.assign({}, config, {gaxOpts: gaxOptions}),
+        );
+      };
+    }
+    if (this._getSpanner()?.routeToLeaderEnabled) {
+      addLeaderAwareRoutingHeader(this.commonHeaders_);
+    }
   }
 
   /**
@@ -2734,9 +2779,6 @@ export class Transaction extends Dml {
       nextNthRequest(database),
       1,
     );
-    if (this._getSpanner().routeToLeaderEnabled) {
-      addLeaderAwareRoutingHeader(headers);
-    }
 
     const traceConfig: traceConfig = {
       ...this._traceConfig,
@@ -2973,11 +3015,6 @@ export class Transaction extends Dml {
           this.requestOptions,
         );
 
-        const headers = this.commonHeaders_;
-        if (this._getSpanner().routeToLeaderEnabled) {
-          addLeaderAwareRoutingHeader(headers);
-        }
-
         span.addEvent('Starting Commit');
 
         const database = this.session.parent as Database;
@@ -2996,7 +3033,7 @@ export class Transaction extends Dml {
             reqOpts,
             gaxOpts,
             headers: injectRequestIDIntoHeaders(
-              headers,
+              this.commonHeaders_,
               this.session,
               nextNthRequest(database),
               1,
@@ -3357,6 +3394,7 @@ export class Transaction extends Dml {
       if (!this.id) {
         span.addEvent('Transaction ID is unknown, nothing to rollback.');
         span.end();
+        this.end();
         callback(null);
         return;
       }
@@ -3367,11 +3405,6 @@ export class Transaction extends Dml {
         session,
         transactionId,
       };
-
-      const headers = this.commonHeaders_;
-      if (this._getSpanner().routeToLeaderEnabled) {
-        addLeaderAwareRoutingHeader(headers);
-      }
 
       if (this._affinityKey) {
         if (!gaxOpts || Object.keys(gaxOpts).length === 0) {
@@ -3387,7 +3420,7 @@ export class Transaction extends Dml {
           method: 'rollback',
           reqOpts,
           gaxOpts,
-          headers: headers,
+          headers: {...this.commonHeaders_},
         },
         (err: null | ServiceError) => {
           if (err) {
@@ -3921,6 +3954,9 @@ export class PartitionedDml extends Dml {
   ) {
     super(session);
     this._options = {partitionedDml: options};
+    if (this._getSpanner()?.routeToLeaderEnabled) {
+      addLeaderAwareRoutingHeader(this.commonHeaders_);
+    }
   }
   /**
    * Use option excludeTxnFromChangeStreams to exclude partitionedDml

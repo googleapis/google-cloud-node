@@ -114,6 +114,7 @@ import {
   ObservabilityOptions,
   Span,
   getActiveOrNoopSpan,
+  isTracingEnabled,
   startTrace,
   setSpanError,
   setSpanErrorAndException,
@@ -749,16 +750,14 @@ class Database extends common.GrpcServiceObject {
       sessionCount: count,
     };
 
-    const headers = this.commonHeaders_;
-    if (this._getSpanner().routeToLeaderEnabled) {
-      addLeaderAwareRoutingHeader(headers);
-    }
-
     const allHeaders = this._metadataWithRequestId(
       this._nextNthRequest(),
       1,
-      headers,
+      this.commonHeaders_,
     );
+    if (this._getSpanner().routeToLeaderEnabled) {
+      addLeaderAwareRoutingHeader(allHeaders);
+    }
 
     startTrace('Database.batchCreateSessions', this._traceConfig, span => {
       this.request<google.spanner.v1.IBatchCreateSessionsResponse>(
@@ -3002,6 +3001,10 @@ class Database extends common.GrpcServiceObject {
     options: TimestampBounds,
     callback: RunCallback,
   ): void {
+    if (!isTracingEnabled(this._traceConfig?.opts)) {
+      this._executeRunOnSession(query, options, null, null, callback);
+      return;
+    }
     const traceConfig: traceConfig = {
       ...this._traceConfig,
       ...getQueryTraceConfig(query),
@@ -3029,8 +3032,8 @@ class Database extends common.GrpcServiceObject {
   private _executeRunOnSession(
     query: string | ExecuteSqlRequest,
     options: TimestampBounds,
-    runSpan: Span,
-    streamSpan: Span,
+    runSpan: Span | null,
+    streamSpan: Span | null,
     callback: RunCallback,
   ): void {
     let snapshot: Snapshot | undefined;
@@ -3047,12 +3050,16 @@ class Database extends common.GrpcServiceObject {
       }
       completed = true;
       if (error) {
-        setSpanError(streamSpan, error as Error);
-        setSpanError(runSpan, error as Error);
+        if (streamSpan) {
+          setSpanError(streamSpan, error as Error);
+        }
+        if (runSpan) {
+          setSpanError(runSpan, error as Error);
+        }
       }
       snapshot?.end();
-      streamSpan.end();
-      runSpan.end();
+      streamSpan?.end();
+      runSpan?.end();
       callback!(error, rows, stats!, metadata!);
     };
 
@@ -3062,9 +3069,11 @@ class Database extends common.GrpcServiceObject {
         return;
       }
 
-      streamSpan.addEvent('Using Session', {'session.id': session?.id});
+      if (streamSpan) {
+        streamSpan.addEvent('Using Session', {'session.id': session?.id});
+      }
       try {
-        snapshot = session!.snapshot(options, this.queryOptions_);
+        snapshot = session!.snapshot(options, this.queryOptions_, true);
         this._runOnSnapshot(snapshot, session!, query, complete);
       } catch (syncError) {
         // Defer error delivery via nextTick so callback callers never experience
@@ -3366,7 +3375,7 @@ class Database extends common.GrpcServiceObject {
 
           span.addEvent('Using Session', {'session.id': session?.id});
 
-          const snapshot = session!.snapshot(options, this.queryOptions_);
+          const snapshot = session!.snapshot(options, this.queryOptions_, true);
 
           this._releaseOnEnd(session!, snapshot, span);
 

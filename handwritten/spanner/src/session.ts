@@ -21,6 +21,7 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const common = require('./common-grpc/service-object');
 import {promisifyAll} from '@google-cloud/promisify';
+// eslint-disable-next-line import/namespace
 import * as r from 'teeny-request';
 import {
   Snapshot,
@@ -28,6 +29,7 @@ import {
   PartitionedDml,
   TimestampBounds,
 } from './transaction';
+import {AffinityKind} from './channel-pool';
 import {protos} from '@google-cloud/spanner-api';
 import google = protos.google;
 import {
@@ -484,7 +486,9 @@ export class Session extends common.GrpcServiceObject {
    * Create a Snapshot transaction.
    *
    * @param {TimestampBounds} [options] The timestamp bounds.
-   * @param {google.spanner.v1.ExecuteSqlRequest.IQueryOptions} [queryOptions] The default query options to use.
+   * @param {google.spanner.v1.ExecuteSqlRequest.IQueryOptions} [queryOptions] The
+   *     default query options to use.
+   * @param {boolean} [isSingleUse=false] Whether this snapshot is for a single-use query.
    * @returns {Snapshot}
    *
    * @example
@@ -495,8 +499,14 @@ export class Session extends common.GrpcServiceObject {
   snapshot(
     options?: TimestampBounds,
     queryOptions?: google.spanner.v1.ExecuteSqlRequest.IQueryOptions,
+    isSingleUse = false,
   ) {
-    return new Snapshot(this, options, queryOptions);
+    return new Snapshot(
+      this,
+      options,
+      queryOptions,
+      isSingleUse ? null : AffinityKind.ReadOnly,
+    );
   }
   /**
    * Create a read write Transaction.

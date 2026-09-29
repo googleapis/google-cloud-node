@@ -496,12 +496,39 @@ describe('Database', () => {
         headers,
         Object.assign(
           {
-            [LEADER_AWARE_ROUTING_HEADER]: true,
+            [LEADER_AWARE_ROUTING_HEADER]: 'true',
             [X_GOOG_SPANNER_REQUEST_ID_HEADER]: craftRequestId(1, 1, 1, 1),
           },
           database.commonHeaders_,
         ),
       );
+    });
+
+    it('should not mutate commonHeaders_', () => {
+      sandbox.stub(database, 'request');
+      const expectedCommonHeaders = Object.assign({}, database.commonHeaders_);
+
+      database.batchCreateSessions({count: 10}, assert.ifError);
+
+      assert.deepStrictEqual(database.commonHeaders_, expectedCommonHeaders);
+      assert.strictEqual(
+        database.commonHeaders_[LEADER_AWARE_ROUTING_HEADER],
+        undefined,
+      );
+    });
+
+    it('should not include leader-aware routing header when routeToLeaderEnabled is false', () => {
+      const stub = sandbox.stub(database, 'request');
+      database.instance = {
+        parent: {
+          routeToLeaderEnabled: false,
+        },
+      } as {} as Instance;
+
+      database.batchCreateSessions({count: 10}, assert.ifError);
+
+      const {headers} = stub.lastCall.args[0];
+      assert.strictEqual(headers[LEADER_AWARE_ROUTING_HEADER], undefined);
     });
 
     it('should accept just a count number', () => {
@@ -2106,6 +2133,7 @@ describe('Database', () => {
       database.run(QUERY, options, (err, rows) => {
         assert.ifError(err);
         assert.strictEqual(snapshotStub.lastCall.args[0], options);
+        assert.strictEqual(snapshotStub.lastCall.args[2], true);
         done();
       });
     });
@@ -2383,6 +2411,7 @@ describe('Database', () => {
 
       const options = snapshotStub.lastCall.args[0];
       assert.strictEqual(options, fakeOptions);
+      assert.strictEqual(snapshotStub.lastCall.args[2], true);
     });
 
     it('should call through to `snapshot.runStream`', () => {
@@ -2790,6 +2819,7 @@ describe('Database', () => {
 
       const bounds = snapshotStub.lastCall.args[0];
       assert.strictEqual(bounds, fakeTimestampBounds);
+      assert.notStrictEqual(snapshotStub.lastCall.args[2], true);
     });
 
     it('should throw error if maxStaleness is passed in the timestamp bounds to the snapshot', () => {

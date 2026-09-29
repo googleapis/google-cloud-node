@@ -45,11 +45,9 @@ interface RequestFunction {
  * @property {boolean} [json=false] Indicates if the Row objects should be
  *     formatted into JSON.
  * @property {JSONOptions} [jsonOptions] JSON options.
- * @property {number} [maxResumeRetries=20] The maximum number of times that the
- *     stream will retry to push data downstream, when the downstream indicates
- *     that it is not ready for any more data. Increase this value if you
- *     experience 'Stream is still not ready to receive data' errors as a
- *     result of a slow writer in your receiving stream.
+ * @property {number} [maxResumeRetries] @deprecated Backpressure is now handled
+ *     automatically via stream flow control. This option is no longer used by
+ *     streaming queries and is retained only for backward compatibility.
  * @property {object} [columnsMetadata] An object map that can be used to pass
  * additional properties for each column type which can help in deserializing
  * the data coming from backend. (Eg: We need to pass Proto Function and Enum
@@ -367,15 +365,17 @@ export class PartialResultStream extends Transform implements ResultEvents {
   private _options: RowOptions;
   private _pendingValue?: p.IValue;
   private _pendingValueForResume?: p.IValue;
-  private _values: p.IValue[];
-  private _numPushFailed = 0;
+  private _rowValues?: Value[];
+  private _valueIndex: number;
+  private _valueIndexForResume?: number;
+  private _resumeCallback?: () => void;
   private _isFirstChunk = true;
   constructor(options = {}) {
     super({objectMode: true});
 
     this._destroyed = false;
-    this._options = Object.assign({maxResumeRetries: 20}, options);
-    this._values = [];
+    this._options = Object.assign({}, options);
+    this._valueIndex = 0;
     this._isFirstChunk = true;
   }
   /**
@@ -389,6 +389,8 @@ export class PartialResultStream extends Transform implements ResultEvents {
     }
 
     this._destroyed = true;
+    this._resumeCallback = undefined;
+    this._rowValues = undefined;
 
     process.nextTick(() => {
       if (err) {
@@ -447,109 +449,134 @@ export class PartialResultStream extends Transform implements ResultEvents {
     if (res) {
       next();
     } else {
-      // Wait a little before we push any more data into the pipeline as a
-      // component downstream has indicated that a break is needed. Pause the
-      // request stream to prevent it from filling up the buffer while we are
-      // waiting.
-      // The stream will initially pause for 2ms, and then double the pause time
-      // for each new pause.
-      const initialPauseMs = 2;
-      setTimeout(() => {
-        this._tryResume(next, 2 * initialPauseMs);
-      }, initialPauseMs);
+      // Downstream buffer has reached highWaterMark and cannot accept more data
+      // at the moment. Hold the completion callback until the downstream consumer
+      // drains and Node invokes _read(), resuming the upstream request stream.
+      this._resumeCallback = next as () => void;
     }
   }
 
-  private _tryResume(next: Function, timeout: number) {
-    // Try to push an empty chunk to check whether more data can be accepted.
-    if (this.push(undefined)) {
-      this._numPushFailed = 0;
+  _read(size: number): void {
+    if (this._resumeCallback) {
+      const callback = this._resumeCallback;
+      this._resumeCallback = undefined;
       this.emit('resumed');
-      next();
-    } else {
-      // Downstream returned false indicating that it is still not ready for
-      // more data.
-      this._numPushFailed++;
-      if (this._numPushFailed === this._options.maxResumeRetries) {
-        this.destroy(
-          new Error(
-            `Stream is still not ready to receive data after ${this._numPushFailed} attempts to resume.`,
-          ),
-        );
-        return;
-      }
-      setTimeout(() => {
-        const nextTimeout = Math.min(timeout * 2, 1024);
-        this._tryResume(next, nextTimeout);
-      }, timeout);
+      callback();
     }
+    super._read(size);
   }
 
   _resetPendingValues() {
-    if (this._pendingValueForResume) {
-      this._pendingValue = this._pendingValueForResume;
+    this._pendingValue = this._pendingValueForResume;
+    if (this._valueIndexForResume !== undefined) {
+      this._valueIndex = this._valueIndexForResume;
     } else {
-      delete this._pendingValue;
+      this._valueIndex = 0;
     }
+    this._rowValues?.fill(undefined, this._valueIndex);
   }
 
   /**
-   * Manages any chunked values.
+   * Manages stream chunks, chunked value merging across chunk boundaries,
+   * row assembly, and resume token checkpoints.
+   *
+   * Processing follows 5 distinct stages:
+   * 1. Single-chunk fast path: If the entire stream response is in this first chunk,
+   *    decode rows directly and bypass incremental chunk buffering.
+   * 2. Pending value merge: If the previous chunk ended with an incomplete chunked
+   *    value, merge it with the incoming continuation value at chunkValues[0].
+   * 3. Chunked value hold: If this chunk ends with a chunked value, hold the tail
+   *    value (chunkValues[numValues - 1]) in `this._pendingValue` for the next chunk.
+   * 4. Complete value decoding: Iterate from `startIndex` to `endIndex`, decoding
+   *    and adding values into row buffers via `_addValue`.
+   * 5. Checkpoint tracking: If this chunk contains a resume token, save the pending
+   *    chunked value and the current column write cursor (`_valueIndex`) for retries.
    *
    * @private
-   *
-   * @param {object} chunk The partial result set.
+   * @param {google.spanner.v1.PartialResultSet} chunk The partial result set.
+   * @returns {boolean} Whether downstream can accept more data.
    */
   private _addChunk(chunk: google.spanner.v1.PartialResultSet): boolean {
     const isFirstChunk = this._isFirstChunk;
     this._isFirstChunk = false;
 
-    // Fast path for single-chunk stream responses:
+    // Stage 1: Fast path for single-chunk stream responses:
     if (isFirstChunk && chunk.last && !chunk.chunkedValue) {
       return this._addSingleChunk(chunk);
     }
 
     const chunkValues = chunk.values;
     const numValues = chunkValues.length;
-    const values: Value[] = new Array(numValues);
-    for (let i = 0; i < numValues; i++) {
-      values[i] = GrpcService.decodeValue_(chunkValues[i]);
-    }
+    let startIndex = 0;
+    let endIndex = numValues;
+    let canAcceptMore = true;
 
-    // If we have a chunk to merge, merge the values now.
-    if (this._pendingValue) {
-      const currentField = this._values.length % this._fields.length;
+    // Stage 2: Merge pending chunked value from the previous chunk with the
+    // incoming continuation value at chunkValues[0].
+    if (this._pendingValue && numValues > 0) {
+      const currentField = this._valueIndex;
       const field = this._fields[currentField];
+      const headValue = this._pendingValue;
+      const continuationValue = GrpcService.decodeValue_(chunkValues[0]);
       const merged = PartialResultStream.merge(
         field.type as google.spanner.v1.Type,
-        this._pendingValue,
-        values.shift(),
+        headValue,
+        continuationValue,
       );
 
-      values.unshift(...merged);
-      delete this._pendingValue;
-    }
+      // We consumed chunkValues[0] as the continuation of the pending value.
+      startIndex = 1;
 
-    // If the chunk is chunked, store the last value for merging with the next
-    // chunk to be processed.
-    if (chunk.chunkedValue) {
-      this._pendingValue = values.pop();
-      if (_hasResumeToken(chunk)) {
-        this._pendingValueForResume = this._pendingValue;
+      // If this chunk only had 1 value and is still chunked, the last element
+      // of merged remains pending for the next chunk.
+      let mergedCount = merged.length;
+      if (numValues === 1 && chunk.chunkedValue) {
+        mergedCount--;
+        this._pendingValue = merged[mergedCount];
+      } else {
+        this._pendingValue = undefined;
       }
-    } else if (_hasResumeToken(chunk)) {
-      delete this._pendingValueForResume;
+
+      for (let i = 0; i < mergedCount; i++) {
+        if (!this._addValue(merged[i]) && canAcceptMore) {
+          canAcceptMore = false;
+          this.emit('paused');
+        }
+      }
     }
 
-    let res = true;
-    const len = values.length;
-    for (let i = 0; i < len; i++) {
-      res = this._addValue(values[i]) && res;
-      if (!res) {
+    // Stage 3: If this chunk ends with a chunked value, hold the tail value for
+    // merging with the next chunk instead of decoding it into the current row now.
+    if (chunk.chunkedValue && numValues > 0) {
+      if (numValues > 1 || !startIndex) {
+        endIndex = numValues - 1;
+        this._pendingValue = GrpcService.decodeValue_(
+          chunkValues[numValues - 1],
+        );
+      }
+    }
+
+    // Stage 4: Decode in-place and push complete values into row buffers.
+    for (let i = startIndex; i < endIndex; i++) {
+      const value = GrpcService.decodeValue_(chunkValues[i]);
+      if (!this._addValue(value) && canAcceptMore) {
+        canAcceptMore = false;
         this.emit('paused');
       }
     }
-    return res;
+
+    // Stage 5: If this chunk contains a resume token, record the checkpoint state.
+    // Both the pending chunked value and the row column index are preserved so that
+    // a retry can resume at the exact column position.
+    if (_hasResumeToken(chunk)) {
+      if (chunk.chunkedValue) {
+        this._pendingValueForResume = this._pendingValue;
+      } else {
+        this._pendingValueForResume = undefined;
+      }
+      this._valueIndexForResume = this._valueIndex;
+    }
+    return canAcceptMore;
   }
 
   /**
@@ -587,18 +614,20 @@ export class PartialResultStream extends Transform implements ResultEvents {
    * @param {*} value The complete value.
    */
   private _addValue(value: Value): boolean {
-    const values = this._values;
+    if (!this._rowValues) {
+      this._rowValues = new Array(this._fields.length);
+    }
 
-    values.push(value);
+    this._rowValues[this._valueIndex++] = value;
 
-    if (values.length !== this._fields.length) {
+    if (this._valueIndex !== this._fields.length) {
       return true;
     }
 
-    this._values = [];
+    this._valueIndex = 0;
 
     return this.push(
-      formatRow(this._fields, this._decoders, values, this._options),
+      formatRow(this._fields, this._decoders, this._rowValues, this._options),
     );
   }
 
@@ -898,9 +927,7 @@ export function partialResultStream(
   };
 
   const makeRequest = (): void => {
-    if (isDefined(lastResumeToken) && lastResumeToken.length > 0) {
-      partialRSStream._resetPendingValues();
-    }
+    partialRSStream._resetPendingValues();
     lastRequestStream = requestFn(lastResumeToken);
     lastRequestStream.on('end', endListener);
     errorListener = (err: grpc.ServiceError) => {
