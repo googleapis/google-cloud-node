@@ -4,6 +4,5377 @@
     {
       "changes": [
         {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "7.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/grafeas",
+      "id": "db6ca6dc-6b5f-442c-a4c8-ca1b0250a8eb",
+      "createTime": "2026-09-28T17:20:06.442Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "0.5.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/streetview-publish",
+      "id": "609f7786-abc4-40b7-b832-669201e3a9ef",
+      "createTime": "2026-09-28T17:20:06.412Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "5.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/storage-transfer",
+      "id": "916d8761-2a0d-4a65-bda2-a73f955afae9",
+      "createTime": "2026-09-28T17:20:06.385Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "0.12.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/storage-control",
+      "id": "758e7950-ddde-4b9f-8fd7-7069774c004f",
+      "createTime": "2026-09-28T17:20:06.355Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "0.7.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/reviews",
+      "id": "4d33f906-7246-4812-a583-5f4f0c255a30",
+      "createTime": "2026-09-28T17:20:06.328Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "0.17.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/reports",
+      "id": "c60b477a-1f8d-48e9-9d81-e568dc62e768",
+      "createTime": "2026-09-28T17:20:06.298Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "0.10.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/quota",
+      "id": "28da1e14-22e2-46e5-87c2-33f99e041a97",
+      "createTime": "2026-09-28T17:20:06.270Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "0.7.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/promotions",
+      "id": "f62289ef-c0d6-4450-ac4f-b229c665d80b",
+      "createTime": "2026-09-28T17:20:06.240Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "0.11.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/products",
+      "id": "8e6ec897-164f-4bdd-b824-8b04cfeab338",
+      "createTime": "2026-09-28T17:20:06.212Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "0.5.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/ordertracking",
+      "id": "57ea409a-c74b-477d-a3f3-4ce10e33d48e",
+      "createTime": "2026-09-28T17:20:06.178Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "0.10.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/notifications",
+      "id": "28a62131-016d-43e9-831d-8eb1a5ca35ec",
+      "createTime": "2026-09-28T17:20:06.143Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "0.11.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/lfp",
+      "id": "4af6af83-f39d-4292-b75a-64134094fce1",
+      "createTime": "2026-09-28T17:20:06.108Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "0.5.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/issueresolution",
+      "id": "369144d6-9293-4c1a-bb78-201e62e427ad",
+      "createTime": "2026-09-28T17:20:06.080Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "0.14.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/inventories",
+      "id": "a04934d6-6137-4338-9164-5892d49040b5",
+      "createTime": "2026-09-28T17:20:06.047Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "0.12.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/datasources",
+      "id": "d5f697c3-ded5-4816-ad70-c2818e3178f6",
+      "createTime": "2026-09-28T17:20:06.016Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "0.8.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/conversions",
+      "id": "492e07ce-94d9-4042-8e2c-f47c7e78a866",
+      "createTime": "2026-09-28T17:20:05.983Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "4.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/accounts",
+      "id": "ba5e0e70-63c6-40a1-ad42-1d2d6fd91925",
+      "createTime": "2026-09-28T17:20:05.956Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "0.12.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/css",
+      "id": "0cfc013a-327c-498b-9bc0-3b67ffdf01c6",
+      "createTime": "2026-09-28T17:20:05.926Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "7.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dlp",
+      "id": "a2f2ee07-3394-4b25-9f26-0160252768c7",
+      "createTime": "2026-09-28T17:20:05.898Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "5.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/monitoring-dashboards",
+      "id": "7521fd7e-5b5e-4b4d-b58f-276d40c23c33",
+      "createTime": "2026-09-28T17:20:05.869Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "0.6.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-ads/marketing-platform-admin",
+      "id": "680e9d88-964f-44aa-bed0-6e9e07502342",
+      "createTime": "2026-09-28T17:20:05.842Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "0.7.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/solar",
+      "id": "b3d8eca3-9b19-4343-82e1-4bd1bcc78645",
+      "createTime": "2026-09-28T17:20:05.812Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "3.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/routing",
+      "id": "d1a38238-7b9e-43ab-aade-778907c49680",
+      "createTime": "2026-09-28T17:20:05.784Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "0.7.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/routeoptimization",
+      "id": "99f74b77-ce86-4b76-ac9d-9126483c50d8",
+      "createTime": "2026-09-28T17:20:05.755Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "3.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/places",
+      "id": "3f7b448d-cce5-4888-b421-bb51e82f4a4c",
+      "createTime": "2026-09-28T17:20:05.724Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "0.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/navconnect",
+      "id": "34f89063-daa2-4373-ba66-cfcb138e892a",
+      "createTime": "2026-09-28T17:20:05.691Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "4.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/maps-platform-datasets",
+      "id": "cd4d0bcd-05f7-4614-9a0b-476f94d09376",
+      "createTime": "2026-09-28T17:20:05.662Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "0.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/geocode",
+      "id": "87142dee-449b-4ddb-bc54-3832ba5674e4",
+      "createTime": "2026-09-28T17:20:05.634Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "0.7.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/fleetengine-delivery",
+      "id": "d1cfe7fc-d0a1-47f7-8af0-f358df228f6e",
+      "createTime": "2026-09-28T17:20:05.583Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "0.9.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/fleetengine",
+      "id": "126f8cb9-ffa6-45fd-a0c6-afdad53df19f",
+      "createTime": "2026-09-28T17:20:05.539Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "0.7.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/areainsights",
+      "id": "d2cfe29e-aeb9-4681-9d85-3627a160baf8",
+      "createTime": "2026-09-28T17:20:05.513Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "4.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/addressvalidation",
+      "id": "e4765355-8060-4d00-ab1e-018a76d9879f",
+      "createTime": "2026-09-28T17:20:05.484Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "5.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/access-context-manager",
+      "id": "65be29c0-b224-4714-8e21-7c73a7ec7f98",
+      "createTime": "2026-09-28T17:20:05.458Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "5.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/iam-credentials",
+      "id": "a9c3e211-226f-4d27-b467-1d337ef093a3",
+      "createTime": "2026-09-28T17:20:05.429Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "3.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/iam",
+      "id": "8a9c034e-606b-4f72-9f07-dac7d1129ee6",
+      "createTime": "2026-09-28T17:20:05.402Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "7.0.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/containeranalysis",
+      "id": "f47ae6c3-3345-4a26-91be-68544db090d8",
+      "createTime": "2026-09-28T17:20:05.372Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "0.10.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/cloudprofiler",
+      "id": "ebcd0aea-9d42-43d4-ad19-80a1aff06bfe",
+      "createTime": "2026-09-28T17:20:05.340Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "6.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/cloudbuild",
+      "id": "e5b69bd4-78b8-4bb8-961e-eca1f86ea2f0",
+      "createTime": "2026-09-28T17:20:05.307Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "5.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/artifact-registry",
+      "id": "903258e8-4156-44f8-b0a7-c1cd60b8a11d",
+      "createTime": "2026-09-28T17:20:05.280Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "5.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataflow",
+      "id": "8cc89d89-2d71-4a41-9104-a8bc39aa6189",
+      "createTime": "2026-09-28T17:20:05.250Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "7.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/container",
+      "id": "6825e7ea-23e0-4c53-815d-9caaab4229bf",
+      "createTime": "2026-09-28T17:20:05.223Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "3.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/workstations",
+      "id": "9fe51a25-63fa-4496-8359-8b7d226ba585",
+      "createTime": "2026-09-28T17:20:05.193Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "0.4.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/workloadmanager",
+      "id": "3a0622d6-947a-4dde-b8b4-252859e25070",
+      "createTime": "2026-09-28T17:20:05.166Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "6.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/workflows",
+      "id": "23d53db1-b89c-4967-a47f-2b49ee1bda2b",
+      "createTime": "2026-09-28T17:20:05.136Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "5.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/web-security-scanner",
+      "id": "3a31f9c6-600c-4d2c-82ea-bca93f773e59",
+      "createTime": "2026-09-28T17:20:05.109Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "6.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/web-risk",
+      "id": "febd61b2-d905-49e4-a109-7db2d520088a",
+      "createTime": "2026-09-28T17:20:05.079Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "5.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vpc-access",
+      "id": "7bf4ef88-d5f7-406a-89c8-88c5cbadcbc4",
+      "createTime": "2026-09-28T17:20:05.051Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "3.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vmwareengine",
+      "id": "5625e82a-0b49-4d3b-a219-7e137d484788",
+      "createTime": "2026-09-28T17:20:05.014Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "5.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vmmigration",
+      "id": "4219dfef-8c95-41bc-a3d2-c49c9152dc4a",
+      "createTime": "2026-09-28T17:20:04.988Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "0.4.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/visionai",
+      "id": "567693cc-c4c8-4c30-a06b-28e05e781a7c",
+      "createTime": "2026-09-28T17:20:04.958Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "6.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vision",
+      "id": "192b3f47-adb0-4c57-b774-5a4940b2c478",
+      "createTime": "2026-09-28T17:20:04.932Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "7.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/video-intelligence",
+      "id": "e6195dfd-b3fb-40d6-9698-11d4bbe64885",
+      "createTime": "2026-09-28T17:20:04.903Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "5.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/video-transcoder",
+      "id": "26b77a32-79fb-476a-9cea-4a3c4bea052c",
+      "createTime": "2026-09-28T17:20:04.877Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "4.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/video-stitcher",
+      "id": "92a58946-cc83-49a1-a542-e8ab799c62bf",
+      "createTime": "2026-09-28T17:20:04.847Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "3.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/livestream",
+      "id": "9dce4636-527c-4f42-ab68-08bd22ba0ff4",
+      "createTime": "2026-09-28T17:20:04.821Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "0.13.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vectorsearch",
+      "id": "4b0d5d1f-302a-47d4-a901-f5ce7e0b101d",
+      "createTime": "2026-09-28T17:20:04.792Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "10.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/translate",
+      "id": "00b46f04-ca5c-400d-9e8b-cc68beafa9f1",
+      "createTime": "2026-09-28T17:20:04.765Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "5.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/tpu",
+      "id": "2674248e-a75a-4f0c-b655-c4376f2b6292",
+      "createTime": "2026-09-28T17:20:04.737Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "7.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/text-to-speech",
+      "id": "b8ec35cb-a485-4788-9583-7d268ebdd348",
+      "createTime": "2026-09-28T17:20:04.711Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "0.7.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/telcoautomation",
+      "id": "c39acdb5-561d-4e6f-8ba1-8e0040c53b3b",
+      "createTime": "2026-09-28T17:20:04.682Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "7.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/tasks",
+      "id": "61874968-e3a5-4c1d-93c7-5247da7e1301",
+      "createTime": "2026-09-28T17:20:04.656Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "8.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/talent",
+      "id": "5dbbea4b-c369-4cb5-a288-f195af501033",
+      "createTime": "2026-09-28T17:20:04.628Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "3.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/support",
+      "id": "86b119a3-9caf-4311-b02b-b24c9b5880d8",
+      "createTime": "2026-09-28T17:20:04.602Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "3.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/storageinsights",
+      "id": "bcf44dde-a97d-4194-98ef-3c99c83e93e8",
+      "createTime": "2026-09-28T17:20:04.573Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "0.7.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/storagebatchoperations",
+      "id": "d6ab90fe-7a04-440a-9632-b1d858073dea",
+      "createTime": "2026-09-28T17:20:04.546Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "0.29.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/sql",
+      "id": "79bf33cf-bb77-4b4d-b27c-7d6a0c9cc827",
+      "createTime": "2026-09-28T17:20:04.517Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "8.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/speech",
+      "id": "438a988e-89b4-4d80-a9be-46103f2d16ef",
+      "createTime": "2026-09-28T17:20:04.491Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "5.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/shell",
+      "id": "a9bc2ae5-5934-4889-970b-f49e8a36d0c2",
+      "createTime": "2026-09-28T17:20:04.462Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "0.10.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/servicehealth",
+      "id": "7e1ce02f-487a-4a5d-82c0-a23ffc1abdf3",
+      "createTime": "2026-09-28T17:20:04.436Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "7.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/service-directory",
+      "id": "7303aa84-290c-4862-b1f2-c52c74b9c8e8",
+      "createTime": "2026-09-28T17:20:04.408Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "0.10.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/securitycentermanagement",
+      "id": "b8da5060-dcea-48c6-9df2-12365549aa8a",
+      "createTime": "2026-09-28T17:20:04.381Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "10.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/security-center",
+      "id": "0c0a981c-c145-43a5-b109-51fdbbfe96d5",
+      "createTime": "2026-09-28T17:20:04.352Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "3.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/publicca",
+      "id": "83800b42-cee3-4a8c-b859-0ae5770663fe",
+      "createTime": "2026-09-28T17:20:04.327Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "8.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/security-private-ca",
+      "id": "5f9aaf18-8001-43a3-9096-799e440edba8",
+      "createTime": "2026-09-28T17:20:04.299Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "0.14.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/securesourcemanager",
+      "id": "839bc115-84c0-4e25-8046-a8cec5aa20f4",
+      "createTime": "2026-09-28T17:20:04.274Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "7.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/secret-manager",
+      "id": "ac0c4a7f-acdc-488d-966f-b81e04546d87",
+      "createTime": "2026-09-28T17:20:04.243Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "6.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/scheduler",
+      "id": "83cd6e6d-ebe2-4d9a-9fe0-178e8673eb3e",
+      "createTime": "2026-09-28T17:20:04.213Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "0.6.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/saasservicemgmt",
+      "id": "99a202b3-2437-4327-b03f-2adc1605cced",
+      "createTime": "2026-09-28T17:20:04.181Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "4.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/run",
+      "id": "20b0ecce-dd2c-4880-9d5f-19463bdceb8d",
+      "createTime": "2026-09-28T17:20:04.155Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "5.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/retail",
+      "id": "83d987ce-12ce-4ffb-acd5-3b0ed951eb7a",
+      "createTime": "2026-09-28T17:20:04.124Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "7.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/resource-manager",
+      "id": "cb58e815-5ba5-4e7b-8421-69748850abb7",
+      "createTime": "2026-09-28T17:20:04.090Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "0.15.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/redis-cluster",
+      "id": "a8fe0fa2-28b7-4de3-acab-c4180d090ff0",
+      "createTime": "2026-09-28T17:20:04.056Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "6.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/redis",
+      "id": "5f08eb6f-c9da-4d98-8773-d180ec98b3fc",
+      "createTime": "2026-09-28T17:20:04.030Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "8.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/recommender",
+      "id": "e7a8af2f-5f5f-4811-98b3-e2b332dca4ca",
+      "createTime": "2026-09-28T17:20:04.000Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "7.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/recaptcha-enterprise",
+      "id": "9f705d5a-33cc-4d67-91d8-f726b36dcaa9",
+      "createTime": "2026-09-28T17:20:03.974Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "3.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/rapidmigrationassessment",
+      "id": "4b76b5a8-16d7-4973-8178-c3c87286c4fa",
+      "createTime": "2026-09-28T17:20:03.945Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "0.8.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/privilegedaccessmanager",
+      "id": "65c4e2bc-98a5-4347-a248-f9d5c88b7f7c",
+      "createTime": "2026-09-28T17:20:03.919Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "5.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/private-catalog",
+      "id": "28eaffbf-b009-4509-b705-dcb76f975b95",
+      "createTime": "2026-09-28T17:20:03.891Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "0.10.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/policy-troubleshooter-iam",
+      "id": "f54723c0-f42f-47a6-8caf-40c5c33f8cdd",
+      "createTime": "2026-09-28T17:20:03.864Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "5.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/policy-troubleshooter",
+      "id": "dced287e-526c-4217-a468-6e5efc7dc399",
+      "createTime": "2026-09-28T17:20:03.836Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "0.10.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/policysimulator",
+      "id": "03b84bdc-5e3f-4c27-bf73-19a8cd96a83a",
+      "createTime": "2026-09-28T17:20:03.810Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "6.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/phishing-protection",
+      "id": "80730510-6035-4e78-b6ea-f66ff3860939",
+      "createTime": "2026-09-28T17:20:03.782Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "0.8.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/parametermanager",
+      "id": "9430fc3a-76a9-409c-b7b8-1d1475c0f430",
+      "createTime": "2026-09-28T17:20:03.755Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "0.14.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/parallelstore",
+      "id": "01f266f4-09d8-490a-857b-a6c5de652b24",
+      "createTime": "2026-09-28T17:20:03.727Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "7.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/os-login",
+      "id": "bcaf46bb-7a8a-49c6-b34f-a05ca47565be",
+      "createTime": "2026-09-28T17:20:03.702Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "5.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/os-config",
+      "id": "640b5b40-aaac-4a33-9c83-0ba4f6e6d1f8",
+      "createTime": "2026-09-28T17:20:03.673Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "5.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/org-policy",
+      "id": "d193866b-bafa-4d6f-b978-e2d1a00607a8",
+      "createTime": "2026-09-28T17:20:03.647Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "5.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/orchestration-airflow",
+      "id": "0e5837da-3659-48de-8783-6876b7eac499",
+      "createTime": "2026-09-28T17:20:03.618Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "0.11.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/oracledatabase",
+      "id": "0619a884-6d90-4015-ba43-9feedbd4c7ad",
+      "createTime": "2026-09-28T17:20:03.592Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "5.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/notebooks",
+      "id": "b64b54bf-4a17-41fb-9d17-111d7a76f9cb",
+      "createTime": "2026-09-28T17:20:03.563Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "0.17.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/networkservices",
+      "id": "4d0dc15f-5d52-47e7-b965-d72f57b0b6c5",
+      "createTime": "2026-09-28T17:20:03.538Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "4.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/network-security",
+      "id": "aaa414d4-2e80-4067-a30d-e4432730c393",
+      "createTime": "2026-09-28T17:20:03.510Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "6.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/network-management",
+      "id": "71c9faaa-fdc5-46c2-98ff-737e7f9583a8",
+      "createTime": "2026-09-28T17:20:03.483Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "5.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/network-connectivity",
+      "id": "794cb1cc-d9db-455d-b5f9-938479a7cf9b",
+      "createTime": "2026-09-28T17:20:03.454Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "0.20.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/netapp",
+      "id": "8f750ef5-9198-45e8-a160-cd2a3432f53c",
+      "createTime": "2026-09-28T17:20:03.427Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "6.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/monitoring",
+      "id": "a5bfd18f-ca3b-4807-9340-8e653df45e00",
+      "createTime": "2026-09-28T17:20:03.396Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "0.9.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/modelarmor",
+      "id": "1f137d3c-7f1f-4be4-bede-17e71e7c1c52",
+      "createTime": "2026-09-28T17:20:03.371Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "3.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/migrationcenter",
+      "id": "c952ffb4-56e5-4598-b89d-85f519de6d29",
+      "createTime": "2026-09-28T17:20:03.342Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "6.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataproc-metastore",
+      "id": "1ceb5c16-b396-4649-a57f-22a2585d607a",
+      "createTime": "2026-09-28T17:20:03.316Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "0.10.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/memorystore",
+      "id": "9a7843c0-76ea-42b4-a3ba-d662467607a4",
+      "createTime": "2026-09-28T17:20:03.288Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "5.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/memcache",
+      "id": "02c80589-94ae-49ab-8bab-23f5025ff744",
+      "createTime": "2026-09-28T17:20:03.263Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "6.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/media-translation",
+      "id": "7bc50bd7-cf82-4505-9190-b524f9913c90",
+      "createTime": "2026-09-28T17:20:03.235Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "0.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/managedkafka-schemaregistry",
+      "id": "c06b5cc1-a4da-4348-81e7-2c6b24c8e934",
+      "createTime": "2026-09-28T17:20:03.209Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "0.10.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/managedkafka",
+      "id": "c86e90ed-d9cf-4f3f-83e8-d5f4c015510a",
+      "createTime": "2026-09-28T17:20:03.180Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "5.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/managed-identities",
+      "id": "05535b68-bdd0-46d6-83be-e1acdfcaee7d",
+      "createTime": "2026-09-28T17:20:03.153Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "0.6.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/maintenance-api",
+      "id": "59de1041-f59c-432e-9e10-26e2a30e930b",
+      "createTime": "2026-09-28T17:20:03.124Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "0.5.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/lustre",
+      "id": "d7556991-b682-475a-a75b-d97254353f54",
+      "createTime": "2026-09-28T17:20:03.098Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "0.4.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/locationfinder",
+      "id": "288155e8-26b9-473b-a147-8ebe8b1c267a",
+      "createTime": "2026-09-28T17:20:03.068Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "5.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/life-sciences",
+      "id": "514536ce-12b6-4fe1-ae62-bcbed3d927de",
+      "createTime": "2026-09-28T17:20:03.041Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "0.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/licensemanager",
+      "id": "93bf0c17-b0a7-4a5f-8f7a-bc2e6d0415ec",
+      "createTime": "2026-09-28T17:20:03.011Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "8.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/language",
+      "id": "c2725ccf-9874-4d31-8c07-4b5c739aaf32",
+      "createTime": "2026-09-28T17:20:02.986Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "3.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/kms-inventory",
+      "id": "651a090f-e97c-48f9-8088-bcb090b2b0ba",
+      "createTime": "2026-09-28T17:20:02.955Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "6.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/kms",
+      "id": "2b536000-c89c-4e20-b6de-655212a28957",
+      "createTime": "2026-09-28T17:20:02.928Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "6.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/iot",
+      "id": "157818ba-590b-437d-9c69-72784c70fb41",
+      "createTime": "2026-09-28T17:20:02.900Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "5.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/ids",
+      "id": "dcd8b7d7-b04a-4a56-bb46-d43410688249",
+      "createTime": "2026-09-28T17:20:02.874Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "5.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/iap",
+      "id": "d93b6897-32be-4a90-a974-a7ea0da0155e",
+      "createTime": "2026-09-28T17:20:02.845Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "0.5.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/hypercomputecluster",
+      "id": "1ae7b92a-9958-498f-b4ee-5bcfa544b2a5",
+      "createTime": "2026-09-28T17:20:02.819Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "3.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gsuiteaddons",
+      "id": "23e95632-42ff-4ea5-a979-c45b94c350ca",
+      "createTime": "2026-09-28T17:20:02.789Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "0.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gkerecommender",
+      "id": "0a40e154-340a-43ef-ade6-27fb2d67ce70",
+      "createTime": "2026-09-28T17:20:02.763Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "3.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gkemulticloud",
+      "id": "402ea62d-0367-4ad4-80e2-e6b91e29003e",
+      "createTime": "2026-09-28T17:20:02.734Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "7.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gke-hub",
+      "id": "68b863ce-e9cc-46aa-b55e-1cae7e58e00c",
+      "createTime": "2026-09-28T17:20:02.709Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "6.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gke-connect-gateway",
+      "id": "7490eb9b-68d7-4944-b1f6-027a5e7c90f8",
+      "createTime": "2026-09-28T17:20:02.678Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "3.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gke-backup",
+      "id": "c81f65c4-85c9-4e80-bbe7-ff34964ac4b0",
+      "createTime": "2026-09-28T17:20:02.647Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "0.13.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/geminidataanalytics",
+      "id": "0661df54-c1a3-49d9-bba4-24c5d993079a",
+      "createTime": "2026-09-28T17:20:02.617Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "0.12.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gdchardwaremanagement",
+      "id": "e0518cb7-5627-4e2d-af7a-2b6eff0b3d77",
+      "createTime": "2026-09-28T17:20:02.591Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "5.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/functions",
+      "id": "63276e40-930c-49f0-ae42-d8f699432b0e",
+      "createTime": "2026-09-28T17:20:02.561Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "0.6.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/financialservices",
+      "id": "0c7260c7-3508-4198-bbac-5ec86a5c7c6d",
+      "createTime": "2026-09-28T17:20:02.534Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "5.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/filestore",
+      "id": "bb10ed44-95e1-4acf-974d-4d5808ec255d",
+      "createTime": "2026-09-28T17:20:02.505Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "5.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/eventarc-publishing",
+      "id": "05fc1c97-441b-47cb-8c9e-5cac844113a4",
+      "createTime": "2026-09-28T17:20:02.479Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "5.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/eventarc",
+      "id": "d1ee5742-6d67-41d6-970e-23b32e010492",
+      "createTime": "2026-09-28T17:20:02.451Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "5.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/essential-contacts",
+      "id": "2d0090f0-559e-431d-871b-44f45495ce5d",
+      "createTime": "2026-09-28T17:20:02.425Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "0.13.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/edgenetwork",
+      "id": "e836c7d9-656b-442d-b0ac-3d0b18722bcf",
+      "createTime": "2026-09-28T17:20:02.396Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "0.10.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/edgecontainer",
+      "id": "9b73eb46-c1f1-4ad8-8873-1359ce0373cf",
+      "createTime": "2026-09-28T17:20:02.371Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "5.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/domains",
+      "id": "60d8df7a-111c-4a5f-96ba-0afd9920d27c",
+      "createTime": "2026-09-28T17:20:02.343Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "10.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/documentai",
+      "id": "e9028f61-92de-48d3-8d8e-1a758b8d3ff0",
+      "createTime": "2026-09-28T17:20:02.317Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "3.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/discoveryengine",
+      "id": "05369a11-41df-4fb7-94e5-b254a851ed60",
+      "createTime": "2026-09-28T17:20:02.287Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "6.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dialogflow-cx",
+      "id": "7ce66ccd-c7b6-49bd-83a1-ba0f7435ae31",
+      "createTime": "2026-09-28T17:20:02.260Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "8.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dialogflow",
+      "id": "79e95fe5-3b85-4093-b47f-97df286ab546",
+      "createTime": "2026-09-28T17:20:02.231Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "0.5.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/devicestreaming",
+      "id": "d3806349-e02b-4f44-a701-606b4b8d5dad",
+      "createTime": "2026-09-28T17:20:02.205Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "0.9.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/developerconnect",
+      "id": "66319750-84ea-4043-9ea7-47bee932cf31",
+      "createTime": "2026-09-28T17:20:02.176Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "6.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/deploy",
+      "id": "516b0d46-dff4-4915-af68-788657b3745f",
+      "createTime": "2026-09-28T17:20:02.151Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "5.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/datastream",
+      "id": "83b67ce6-2e83-406d-a5c7-13a2f519465f",
+      "createTime": "2026-09-28T17:20:02.123Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "5.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/data-qna",
+      "id": "aca6f4b7-7cf7-4d7f-a1ef-89820baca590",
+      "createTime": "2026-09-28T17:20:02.097Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "7.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataproc",
+      "id": "bf429ef2-506b-459d-a90e-87f25024f4ef",
+      "createTime": "2026-09-28T17:20:02.066Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "6.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataplex",
+      "id": "1d7d170d-d95b-422f-ad41-8a3a74fce4f2",
+      "createTime": "2026-09-28T17:20:02.039Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "6.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/datalabeling",
+      "id": "1caf7e69-b508-4a8b-9548-9b439e266af7",
+      "createTime": "2026-09-28T17:20:02.010Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "5.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/data-fusion",
+      "id": "75b34d26-7ec7-4f6a-b280-e5a4e353bfbd",
+      "createTime": "2026-09-28T17:20:01.985Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "3.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataform",
+      "id": "a4f5c04f-3e9e-44e3-8e99-df66b4b00956",
+      "createTime": "2026-09-28T17:20:01.957Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "0.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/configmanagement",
+      "id": "e8ed5f2e-b2fc-48fa-972f-3d6216c9888e",
+      "createTime": "2026-09-28T17:20:01.931Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "3.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/lineage",
+      "id": "75bd3c25-921e-4d77-9ff3-60f4bfbe5802",
+      "createTime": "2026-09-28T17:20:01.888Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "6.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/datacatalog",
+      "id": "f9c74950-7c7a-4157-97bb-a15b049ed3db",
+      "createTime": "2026-09-28T17:20:01.862Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "3.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/contentwarehouse",
+      "id": "402111db-a249-4e4f-b3f0-80cd2600f7ab",
+      "createTime": "2026-09-28T17:20:01.832Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "5.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/contact-center-insights",
+      "id": "6f4a5fa7-9829-42ee-8f91-e940e5f8114c",
+      "createTime": "2026-09-28T17:20:01.805Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "0.7.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/connectors",
+      "id": "a6d55b55-98ad-4b71-bc5f-ab5c6ad944f0",
+      "createTime": "2026-09-28T17:20:01.776Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "0.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/configdelivery",
+      "id": "f02f8068-a95c-469d-926e-d34a02c2f62d",
+      "createTime": "2026-09-28T17:20:01.750Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "0.15.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/config",
+      "id": "f67d8504-c8cd-4e9c-807d-12ca4c76fbf6",
+      "createTime": "2026-09-28T17:20:01.721Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "3.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/confidentialcomputing",
+      "id": "cb953bfa-4598-4c40-a919-cbb9315bfc12",
+      "createTime": "2026-09-28T17:20:01.696Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "7.5.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/compute",
+      "id": "ab358ea8-12cd-4512-aa3d-4cec0f371c32",
+      "createTime": "2026-09-28T17:20:01.666Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "0.9.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/procurement",
+      "id": "1cfa2ee3-65ea-4051-8181-10da28985426",
+      "createTime": "2026-09-28T17:20:01.640Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "0.4.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/cloudsecuritycompliance",
+      "id": "4df28223-b3df-45a6-bbca-5c89c193461a",
+      "createTime": "2026-09-28T17:20:01.611Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "5.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dms",
+      "id": "8f004d96-dc94-4483-902e-440b85a4a060",
+      "createTime": "2026-09-28T17:20:01.586Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "0.8.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/cloudcontrolspartner",
+      "id": "2c80be0f-6355-4aea-9618-01961b7ec448",
+      "createTime": "2026-09-28T17:20:01.558Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "0.10.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/chronicle",
+      "id": "c16fbb79-d9ef-4c22-8ce1-57abbd8d4b33",
+      "createTime": "2026-09-28T17:20:01.532Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "5.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/channel",
+      "id": "f13c5498-a273-442c-a557-4d89373f7ba8",
+      "createTime": "2026-09-28T17:20:01.504Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "0.9.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/ces",
+      "id": "5369f03a-d4b2-4784-bd98-74f7589a8fc0",
+      "createTime": "2026-09-28T17:20:01.478Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "3.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/certificate-manager",
+      "id": "e3ec564c-4e04-4ef4-a8b7-8151f6ea7eb7",
+      "createTime": "2026-09-28T17:20:01.449Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "0.4.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/capacityplanner",
+      "id": "491483d1-7ad1-4648-a3ce-36ec24652fcd",
+      "createTime": "2026-09-28T17:20:01.423Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "5.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/binary-authorization",
+      "id": "8822bc79-3b93-418d-b624-ed945a809424",
+      "createTime": "2026-09-28T17:20:01.393Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "7.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/billing-budgets",
+      "id": "589ca864-f5f7-4d48-ab41-aa9fb51aaeee",
+      "createTime": "2026-09-28T17:20:01.367Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "6.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/billing",
+      "id": "8aca0f05-c657-4808-8020-98b825833318",
+      "createTime": "2026-09-28T17:20:01.337Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "5.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-reservation",
+      "id": "38d31362-471d-426f-afe9-03bc095927b3",
+      "createTime": "2026-09-28T17:20:01.312Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "3.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-migration",
+      "id": "652248d2-8977-4369-afc6-0666a5c81f84",
+      "createTime": "2026-09-28T17:20:01.283Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "6.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-data-transfer",
+      "id": "754b8c4e-eddb-4451-9975-64a84b900c0c",
+      "createTime": "2026-09-28T17:20:01.257Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "3.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-datapolicies",
+      "id": "93378c29-6f95-46de-a8fe-a42779048bf6",
+      "createTime": "2026-09-28T17:20:01.225Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "3.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-data-exchange",
+      "id": "e113740e-6f39-47f9-88e0-0fb2071fafc0",
+      "createTime": "2026-09-28T17:20:01.200Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "5.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-connection",
+      "id": "6287fc71-5f8a-4349-83a9-ff2e660265df",
+      "createTime": "2026-09-28T17:20:01.171Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "3.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-analyticshub",
+      "id": "9fbf799e-b17d-453c-b333-6595803343de",
+      "createTime": "2026-09-28T17:20:01.145Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "3.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/clientgateways",
+      "id": "be8aa8c5-bdef-421c-bf2d-1af65add0419",
+      "createTime": "2026-09-28T17:20:01.117Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "4.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/clientconnectorservices",
+      "id": "4ce19827-2fee-4cfa-a4f3-e85f3a38157e",
+      "createTime": "2026-09-28T17:20:01.092Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "3.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/appgateways",
+      "id": "3aabb302-533c-460b-83e1-95fb098437f3",
+      "createTime": "2026-09-28T17:20:01.063Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "3.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/appconnectors",
+      "id": "33dc6a14-9341-4765-a9be-3b50b8b409e7",
+      "createTime": "2026-09-28T17:20:01.037Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "3.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/appconnections",
+      "id": "80740158-20fd-412d-bdcc-fbe0ed3cfd32",
+      "createTime": "2026-09-28T17:20:01.007Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "3.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/batch",
+      "id": "cce6cdec-c3d0-47f2-91c4-a653e3949011",
+      "createTime": "2026-09-28T17:20:00.979Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "3.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bare-metal-solution",
+      "id": "220d8856-8706-4803-a45b-12bdcfb6cf9d",
+      "createTime": "2026-09-28T17:20:00.948Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "0.12.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/backupdr",
+      "id": "ebaa7a4a-54d0-48e4-b1dc-117a433d8ee1",
+      "createTime": "2026-09-28T17:20:00.921Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "6.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/automl",
+      "id": "bf6eee44-e976-4f70-bb9e-df6f9c85830d",
+      "createTime": "2026-09-28T17:20:00.894Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "0.5.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/auditmanager",
+      "id": "0fe1a2b4-d559-49b4-97c8-d52a03c6415f",
+      "createTime": "2026-09-28T17:20:00.868Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "6.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/assured-workloads",
+      "id": "2adab4ab-422d-4a8c-a982-de1f11443238",
+      "createTime": "2026-09-28T17:20:00.839Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "7.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/asset",
+      "id": "a5586d13-15b2-49fa-960f-4560cd8680bd",
+      "createTime": "2026-09-28T17:20:00.811Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "0.8.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/apphub",
+      "id": "4b1aebfd-3dec-4118-ac6e-38df2c18793a",
+      "createTime": "2026-09-28T17:20:00.783Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "0.4.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/apiregistry",
+      "id": "a6472d5b-1ef3-4edb-afd1-fb101e14a9d2",
+      "createTime": "2026-09-28T17:20:00.758Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "0.7.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/apihub",
+      "id": "84354cc1-d8db-45c3-bc35-3ffa457d634e",
+      "createTime": "2026-09-28T17:20:00.726Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "3.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/apigee-registry",
+      "id": "adb29218-90e3-4bdb-ae73-01374934fb5c",
+      "createTime": "2026-09-28T17:20:00.701Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "5.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/apigee-connect",
+      "id": "f76791ea-5f22-4004-8c4b-ef804ffdef06",
+      "createTime": "2026-09-28T17:20:00.674Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "5.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/api-gateway",
+      "id": "911a87f1-422e-4ea6-a3de-cb954a32f087",
+      "createTime": "2026-09-28T17:20:00.649Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "3.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/alloydb",
+      "id": "7f155c00-686c-4c9b-9dcb-2ca41ea84344",
+      "createTime": "2026-09-28T17:20:00.617Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "7.4.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "98edb2c1-07a7-4e57-a798-2b0921159554",
+      "createTime": "2026-09-28T17:20:00.585Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "3.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/advisorynotifications",
+      "id": "e300fe3c-aa01-4a49-9dc1-df9164d728d4",
+      "createTime": "2026-09-28T17:20:00.551Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "5.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/access-approval",
+      "id": "a8737e4c-c328-4865-8358-39dcaf72474f",
+      "createTime": "2026-09-28T17:20:00.522Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "0.33.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-apps/chat",
+      "id": "67eb48d4-0f00-4965-a2e7-832be8c99cda",
+      "createTime": "2026-09-28T17:20:00.496Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "5.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google/area120-tables",
+      "id": "8b99e471-6860-4d90-885f-a3e902ac31c6",
+      "createTime": "2026-09-28T17:20:00.446Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "0.10.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-apps/meet",
+      "id": "31470a5e-7abd-4746-bc23-e7a754d7d130",
+      "createTime": "2026-09-28T17:20:00.406Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "0.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/subscriptions",
+      "id": "02e62d1d-6fcc-402d-9d4a-3c5bb7c703a2",
+      "createTime": "2026-09-28T17:20:00.374Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "5.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/appengine-admin",
+      "id": "38d496bd-05f1-4c27-98ed-f05c96002b88",
+      "createTime": "2026-09-28T17:20:00.341Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "5.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/service-usage",
+      "id": "897a6270-8a07-4c00-bde0-2aeb5c6a4a88",
+      "createTime": "2026-09-28T17:20:00.306Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "4.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/service-management",
+      "id": "c017e2c4-8f19-4283-a2ff-fc570bcc4c6b",
+      "createTime": "2026-09-28T17:20:00.276Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "5.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/service-control",
+      "id": "f0330e9c-3863-4e50-82df-1d70745945c9",
+      "createTime": "2026-09-28T17:20:00.251Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "3.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/cloudquotas",
+      "id": "45324f61-18f9-433c-b4a1-e414d95ae524",
+      "createTime": "2026-09-28T17:20:00.218Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "3.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/apikeys",
+      "id": "4b3c519b-cdb2-4b23-b537-45bb35d94943",
+      "createTime": "2026-09-28T17:20:00.192Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "7.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-analytics/data",
+      "id": "0b7cdfb1-956b-4b12-b950-17af59540fa6",
+      "createTime": "2026-09-28T17:20:00.163Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "10.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-analytics/admin",
+      "id": "79b7373b-3f3a-41c7-b9cb-abd29093f1b1",
+      "createTime": "2026-09-28T17:20:00.137Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "4.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-ai/generativelanguage",
+      "id": "5acd80fe-0d9c-4989-8552-e922f4207df6",
+      "createTime": "2026-09-28T17:20:00.106Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "0.14.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-ads/admanager",
+      "id": "998caff8-e711-4992-a104-953c9e1641fe",
+      "createTime": "2026-09-28T17:20:00.080Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "5000690968994302554184a8230956950ccc9aab",
+          "message": "Add new test-utils library",
+          "issues": [
+            "9229"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "google-test-utils",
+      "id": "20ad99b4-39b9-4fa7-a71d-4ea4ad616471",
+      "createTime": "2026-09-28T17:20:00.049Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "a6c20e9864a75b43701bd4c6d1f2bcf58ae019b9",
+          "message": "Propagate span context to child spans in TracerHelper",
+          "issues": [
+            "9455"
+          ],
+          "scope": "gax"
+        },
+        {
+          "type": "feat",
+          "sha": "c4779187403c213716b199690e293942c09b1bac",
+          "message": "Differentiate between server side and client side errors",
+          "issues": [
+            "9451"
+          ],
+          "scope": "gax"
+        },
+        {
+          "type": "feat",
+          "sha": "11d6a6fe0cec995da9f85db7a072f552873096f2",
+          "message": "Allow customers to enable tracing with environmental variables",
+          "issues": [
+            "9438"
+          ],
+          "scope": "gax"
+        },
+        {
+          "type": "feat",
+          "sha": "feb2851a5d65cbea797148dce70b89fe4dc68b69",
+          "message": "Remove experimental flag requirement for tracing",
+          "issues": [
+            "9423"
+          ],
+          "scope": "o11y"
+        },
+        {
+          "type": "feat",
+          "sha": "8116709bc39e5e0ea525cd6937ce079c25a0971b",
+          "message": "Support resumable uploads",
+          "issues": [
+            "9287"
+          ],
+          "scope": "gax"
+        }
+      ],
+      "version": "6.9.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "google-gax",
+      "id": "e9b88623-6846-4ad4-b7fe-8c60b7d1d0bb",
+      "createTime": "2026-09-28T17:20:00.022Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "733321662eb9b832df1b80227292465814ace10e",
+          "message": "Generate resumable upload client methods",
+          "issues": [
+            "9285"
+          ],
+          "scope": "generator"
+        },
+        {
+          "type": "feat",
+          "sha": "a9d7cab354d75107296197310fc0cd50c965a148",
+          "message": "Select resumable upload methods",
+          "issues": [
+            "9284"
+          ],
+          "scope": "generator"
+        },
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "5.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gapic-generator",
+      "id": "6733af51-8591-473d-b428-b60b319ecc0a",
+      "createTime": "2026-09-28T17:19:59.995Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "11d6a6fe0cec995da9f85db7a072f552873096f2",
+          "message": "Allow customers to enable tracing with environmental variables",
+          "issues": [
+            "9438"
+          ],
+          "scope": "gax"
+        },
+        {
+          "type": "feat",
+          "sha": "feb2851a5d65cbea797148dce70b89fe4dc68b69",
+          "message": "Remove experimental flag requirement for tracing",
+          "issues": [
+            "9423"
+          ],
+          "scope": "o11y"
+        }
+      ],
+      "version": "6.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "google-gax",
+      "id": "3bf94fed-e7ee-4014-b7e5-3303fbbe9cda",
+      "createTime": "2026-09-23T22:50:41.126Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "5cd945de7f4fd96878c1956d68bcf505e48686ce",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9427"
+          ]
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/monitoring-dashboards",
+      "id": "5c7077d6-e17a-4802-8362-8fab7ee001aa",
+      "createTime": "2026-09-23T19:29:05.424Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "5cd945de7f4fd96878c1956d68bcf505e48686ce",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9427"
+          ]
+        }
+      ],
+      "version": "0.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-ads/marketing-platform-admin",
+      "id": "0674555f-05cd-4c97-b710-66e1bb862415",
+      "createTime": "2026-09-23T19:29:05.398Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "5cd945de7f4fd96878c1956d68bcf505e48686ce",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9427"
+          ]
+        }
+      ],
+      "version": "0.13.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vectorsearch",
+      "id": "a0f342fb-4aae-46c8-b521-f0cce4dafb81",
+      "createTime": "2026-09-23T19:29:05.369Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "5cd945de7f4fd96878c1956d68bcf505e48686ce",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9427"
+          ]
+        }
+      ],
+      "version": "7.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/tasks",
+      "id": "b6fef7dc-dda5-4406-baac-542855e8ce97",
+      "createTime": "2026-09-23T19:29:05.343Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "5cd945de7f4fd96878c1956d68bcf505e48686ce",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9427"
+          ]
+        }
+      ],
+      "version": "0.29.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/sql",
+      "id": "cf2017b8-8872-4718-ae03-7ae0ce2664ad",
+      "createTime": "2026-09-23T19:29:05.317Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "5cd945de7f4fd96878c1956d68bcf505e48686ce",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9427"
+          ]
+        }
+      ],
+      "version": "0.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/lustre",
+      "id": "659e8d5c-ea28-4da3-9176-177a9810a2d2",
+      "createTime": "2026-09-23T19:29:05.291Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "5cd945de7f4fd96878c1956d68bcf505e48686ce",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9427"
+          ]
+        }
+      ],
+      "version": "0.13.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/geminidataanalytics",
+      "id": "013ecdf9-165a-4b41-8412-6768ef9dcc7d",
+      "createTime": "2026-09-23T19:29:05.264Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "5cd945de7f4fd96878c1956d68bcf505e48686ce",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9427"
+          ]
+        }
+      ],
+      "version": "0.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigtable-api",
+      "id": "f0196fa4-2708-4b6a-8c94-c21e73ec69b7",
+      "createTime": "2026-09-23T19:29:05.239Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "5cd945de7f4fd96878c1956d68bcf505e48686ce",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9427"
+          ]
+        }
+      ],
+      "version": "0.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/agentregistry",
+      "id": "66043c2d-4925-44c6-9c22-613605dc68a8",
+      "createTime": "2026-09-23T19:29:05.213Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "5cd945de7f4fd96878c1956d68bcf505e48686ce",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9427"
+          ]
+        }
+      ],
+      "version": "0.33.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-apps/chat",
+      "id": "b1f6b2b4-e44b-4bd0-8dc7-ef7dfa972f13",
+      "createTime": "2026-09-23T19:29:05.170Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "8116709bc39e5e0ea525cd6937ce079c25a0971b",
+          "message": "Support resumable uploads",
+          "issues": [
+            "9287"
+          ],
+          "scope": "gax"
+        }
+      ],
+      "version": "6.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "google-gax",
+      "id": "8f948fa0-e426-45fb-94b9-c5dcdd5e8be4",
+      "createTime": "2026-09-23T19:29:05.132Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "d2c4b08ae8f3a18c252a09a09e1ae1e49d4cd822",
+          "message": "Move gapic-generator-typescript into the root pnpm workspace",
+          "issues": [
+            "9418"
+          ],
+          "scope": "gax"
+        },
+        {
+          "type": "feat",
+          "sha": "0722a3415190ce725537091d67b49dbaccb5cd2a",
+          "message": "Use runtime-agnostic test runner in GAPIC package templates",
+          "issues": [],
+          "scope": "generator"
+        }
+      ],
+      "version": "5.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gapic-generator",
+      "id": "8dfdbddd-e970-49c1-9953-dd67e959cded",
+      "createTime": "2026-09-23T06:58:24.417Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "57d0cfd84827933a5da83c370b38942d0c2eadd8",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9368"
+          ]
+        }
+      ],
+      "version": "0.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/solar",
+      "id": "087788ce-bf8f-4969-8c56-bf5a9ca1def0",
+      "createTime": "2026-09-22T18:58:29.359Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "57d0cfd84827933a5da83c370b38942d0c2eadd8",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9368"
+          ]
+        }
+      ],
+      "version": "0.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/parametermanager",
+      "id": "1b64448e-ee07-4dbf-9686-229bc024ee81",
+      "createTime": "2026-09-22T18:58:29.321Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "57d0cfd84827933a5da83c370b38942d0c2eadd8",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9368"
+          ]
+        }
+      ],
+      "version": "0.17.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/networkservices",
+      "id": "2ad47eb4-efe1-4976-bb11-c4eec1e1c8ad",
+      "createTime": "2026-09-22T18:58:29.288Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "57d0cfd84827933a5da83c370b38942d0c2eadd8",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9368"
+          ]
+        }
+      ],
+      "version": "3.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/discoveryengine",
+      "id": "71e73e89-403c-4874-9b54-60d3a681a4f9",
+      "createTime": "2026-09-22T18:58:29.254Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "57d0cfd84827933a5da83c370b38942d0c2eadd8",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9368"
+          ]
+        }
+      ],
+      "version": "0.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/devicestreaming",
+      "id": "6d76d2b8-8dca-4e0b-a5b2-657f2b3cd69f",
+      "createTime": "2026-09-22T18:58:29.204Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "57d0cfd84827933a5da83c370b38942d0c2eadd8",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9368"
+          ]
+        }
+      ],
+      "version": "7.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/compute",
+      "id": "4355251c-b3c0-431b-98dd-ea6bead3c90d",
+      "createTime": "2026-09-22T18:58:29.162Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c07e77e240098d312cb9d973fc7e11a9c16569be",
+          "message": "Add google-cloud-backupdr",
+          "issues": [
+            "9372"
+          ],
+          "scope": "google/cloud/backupdr/v1beta"
+        }
+      ],
+      "version": "0.12.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/backupdr",
+      "id": "e063ceb2-c479-4131-8be5-39e754a47714",
+      "createTime": "2026-09-22T18:58:29.133Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "57d0cfd84827933a5da83c370b38942d0c2eadd8",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9368"
+          ]
+        }
+      ],
+      "version": "5.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/api-gateway",
+      "id": "3addaf6f-9a11-45cb-b4f8-449f9271d039",
+      "createTime": "2026-09-22T18:58:29.099Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "57d0cfd84827933a5da83c370b38942d0c2eadd8",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9368"
+          ]
+        }
+      ],
+      "version": "0.32.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-apps/chat",
+      "id": "e8c65433-f4d2-446b-9c53-24b793d4c03a",
+      "createTime": "2026-09-22T18:58:29.067Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "57d0cfd84827933a5da83c370b38942d0c2eadd8",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9368"
+          ]
+        }
+      ],
+      "version": "7.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-analytics/data",
+      "id": "917c3540-d648-4303-8cd6-0707fec143a4",
+      "createTime": "2026-09-22T18:58:29.032Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "57d0cfd84827933a5da83c370b38942d0c2eadd8",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9368"
+          ]
+        }
+      ],
+      "version": "0.14.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-ads/admanager",
+      "id": "01aa7014-ec4e-4a7a-be25-747c968bbc08",
+      "createTime": "2026-09-22T18:58:29.001Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "800322d5d1d116b93c9a5365fc8dd591037d2836",
+          "message": "Report response status codes on traced calls",
+          "issues": [
+            "9344"
+          ],
+          "scope": "gax"
+        },
+        {
+          "type": "feat",
+          "sha": "ed9d27902e3ec71f99aa86a22135f30555c72dcd",
+          "message": "Let callers enable tracing with env var",
+          "issues": [
+            "9377"
+          ],
+          "scope": "o11y"
+        },
+        {
+          "type": "feat",
+          "sha": "653de605e5954a0e378962e3f859f99f607dc6cd",
+          "message": "Pass through fallback parameter for HTTP calls",
+          "issues": [
+            "9277"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "ff39233da87eca175d3104467fc756010e9af0a3",
+          "message": "Add o11y gRPC tracing",
+          "issues": [
+            "9267"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "ddafe50c2487a7527eb57f7194dc63028fa22975",
+          "message": "Enforce the call deadline on the REST transport",
+          "issues": [
+            "9334"
+          ],
+          "scope": "gax"
+        },
+        {
+          "type": "fix",
+          "sha": "db76247673d12026348ab3ddd9a1e487a9e6468a",
+          "message": "Report transport failures as UNAVAILABLE, as gRPC does",
+          "issues": [],
+          "scope": "gax"
+        },
+        {
+          "type": "fix",
+          "sha": "6ce394b9c15301f12150af1123905f8918688c16",
+          "message": "Detect aborts and timeouts by error name",
+          "issues": [],
+          "scope": "gax"
+        },
+        {
+          "type": "fix",
+          "sha": "be36fd984f07656c83902e46869db605a3ec259a",
+          "message": "Map REST fallback transport errors to gRPC status codes",
+          "issues": [],
+          "scope": "gax"
+        }
+      ],
+      "version": "6.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "google-gax",
+      "id": "8a1bfb4e-f0ec-4a0b-8529-dcef943364ab",
+      "createTime": "2026-09-22T18:58:28.968Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "353315572a16fb6bf34bfec4b96acea5917e1bf8",
+          "message": "Wire enable_telemetry_tracing through the generator CLI",
+          "issues": [
+            "9373"
+          ],
+          "scope": "o11y"
+        }
+      ],
+      "version": "5.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gapic-generator",
+      "id": "a77f6184-aa0a-402f-a895-02bf1405cc57",
+      "createTime": "2026-09-22T18:58:28.941Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "ecd5bfd0e8ad8d2cf3b9fe003f7e35f2bbd592f5",
+          "message": "Update cloud-spanner to minimum Node version of 22",
+          "issues": [
+            "9291"
+          ],
+          "scope": "Spanner",
+          "breakingChangeNote": "Update cloud-spanner to minimum Node version of 22 ([#9291](https://github.com/googleapis/google-cloud-node/issues/9291))"
+        },
+        {
+          "type": "perf",
+          "sha": "7085e03eb009a93b4368f5649472c0ac330d5a51",
+          "message": "Remove rest-parameter allocations in wrappedRequestFn",
+          "issues": [
+            "9365"
+          ],
+          "scope": "spanner"
+        },
+        {
+          "type": "perf",
+          "sha": "1b1b411769fc0847e23a52cadaf3c6225ae281ea",
+          "message": "Optimize codec.getType and reuse type singletons",
+          "issues": [
+            "9366"
+          ],
+          "scope": "spanner"
+        },
+        {
+          "type": "perf",
+          "sha": "dbbc55c508cf886863dff00e12ce362026515661",
+          "message": "Synchronous multiplexed session hand-off for non-stream callers",
+          "issues": [
+            "9362"
+          ],
+          "scope": "spanner"
+        },
+        {
+          "type": "perf",
+          "sha": "11c257b5a64b0d360f2c9d47c412e59e9fd5a756",
+          "message": "Disable gRPC channelz by default",
+          "issues": [
+            "9320"
+          ],
+          "scope": "spanner"
+        },
+        {
+          "type": "perf",
+          "sha": "a44180d659ff8734fcacd8e294fc9c8c0a181071",
+          "message": "Bypass gRPC message interception in metrics interceptor",
+          "issues": [
+            "9306"
+          ],
+          "scope": "spanner"
+        },
+        {
+          "type": "feat",
+          "sha": "ed3a44e7f396b1f71aa29c8291a740aaab4fef0b",
+          "message": "Upgrade OpenTelemetry to v2",
+          "issues": [
+            "9329"
+          ],
+          "scope": "Spanner",
+          "breakingChangeNote": "upgrade OpenTelemetry to v2 ([#9329](https://github.com/googleapis/google-cloud-node/issues/9329))"
+        }
+      ],
+      "version": "9.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/spanner",
+      "id": "e205caa0-2f3d-4787-a0d1-e65c87dc6727",
+      "createTime": "2026-09-18T13:12:38.821Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "1ea27c9c9bf4e4cbf79381321dcb9bce7951a76f",
+          "message": "PNPM workspace",
+          "issues": [
+            "8973"
+          ]
+        }
+      ],
+      "version": "8.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/storage",
+      "id": "fe5ed0f2-7d0f-42df-822a-cd7e14a16432",
+      "createTime": "2026-09-17T14:33:17.947Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "435bcae6aa20c9fd50da0c8b67fe443c946e44cc",
+          "message": "Allow uninitialized client references in pipeline sources",
+          "issues": [
+            "9318"
+          ],
+          "scope": "firestore"
+        },
+        {
+          "type": "feat",
+          "sha": "1ea27c9c9bf4e4cbf79381321dcb9bce7951a76f",
+          "message": "PNPM workspace",
+          "issues": [
+            "8973"
+          ]
+        }
+      ],
+      "version": "9.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/firestore",
+      "id": "9cb091ce-93be-4b49-b3a2-10dc77c2d075",
+      "createTime": "2026-09-16T08:41:22.919Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "d2e6a231ce9440a9db56243e8eddcbe4f2377868",
+          "message": "Upgrade minimum Node.js version to 22",
+          "issues": [
+            "9357"
+          ],
+          "breakingChangeNote": "upgrade minimum Node.js version to 22 ([#9357](https://github.com/googleapis/google-cloud-node/issues/9357))"
+        }
+      ],
+      "version": "0.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/loyaltycustomers",
+      "id": "91ed9971-9c27-4a47-877b-91d005c6344f",
+      "createTime": "2026-09-16T21:15:48.434Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "d2e6a231ce9440a9db56243e8eddcbe4f2377868",
+          "message": "Upgrade minimum Node.js version to 22",
+          "issues": [
+            "9357"
+          ],
+          "breakingChangeNote": "upgrade minimum Node.js version to 22 ([#9357](https://github.com/googleapis/google-cloud-node/issues/9357))"
+        }
+      ],
+      "version": "0.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/workloadidentity",
+      "id": "1bd7aaf0-35bb-4e49-943d-06135cd15c3c",
+      "createTime": "2026-09-16T21:15:48.409Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "99f6657d912f8fd44b96ae5199624f11f77ced09",
+          "message": "Remove unintentionally added file",
+          "issues": [
+            "9356"
+          ]
+        }
+      ],
+      "version": "7.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/tasks",
+      "id": "e65ad494-3267-4587-ba09-f2d381c7633a",
+      "createTime": "2026-09-16T21:15:48.368Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "d2e6a231ce9440a9db56243e8eddcbe4f2377868",
+          "message": "Upgrade minimum Node.js version to 22",
+          "issues": [
+            "9357"
+          ],
+          "breakingChangeNote": "upgrade minimum Node.js version to 22 ([#9357](https://github.com/googleapis/google-cloud-node/issues/9357))"
+        }
+      ],
+      "version": "0.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/ftp",
+      "id": "75e7586e-5c2c-41fd-aac7-fc0f87a3b860",
+      "createTime": "2026-09-16T21:15:48.344Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "d2e6a231ce9440a9db56243e8eddcbe4f2377868",
+          "message": "Upgrade minimum Node.js version to 22",
+          "issues": [
+            "9357"
+          ],
+          "breakingChangeNote": "upgrade minimum Node.js version to 22 ([#9357](https://github.com/googleapis/google-cloud-node/issues/9357))"
+        }
+      ],
+      "version": "0.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/apptopology",
+      "id": "91d83216-7d84-4bd5-ab8f-d6a3e93e2c66",
+      "createTime": "2026-09-16T21:15:48.318Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "10b654f12f0d3355845d4cb0833f493d43368222",
+          "message": "Support CLOUD_RUN_WORKER_POOL residency detection and harden isAvailable error unwrapping",
+          "issues": [
+            "9349"
+          ],
+          "scope": "gcp-metadata"
+        },
+        {
+          "type": "fix",
+          "sha": "e0ff8c5ac1ca2be2f78ef2977cb2b16b43367639",
+          "message": "Update IsGoogleCloudServerless function to check for Cloud Run Worker Pools",
+          "issues": [
+            "9226"
+          ]
+        }
+      ],
+      "version": "9.0.4",
+      "language": "JAVASCRIPT",
+      "artifactName": "gcp-metadata",
+      "id": "576eda8c-e34d-47aa-9abc-8d41c83e55ba",
+      "createTime": "2026-09-16T21:15:48.282Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "1ea27c9c9bf4e4cbf79381321dcb9bce7951a76f",
+          "message": "PNPM workspace",
+          "issues": [
+            "8973"
+          ]
+        }
+      ],
+      "version": "0.12.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/storage-control",
+      "id": "543c0df4-a070-488d-a2a2-8adde1d54e0e",
+      "createTime": "2026-09-15T17:49:40.964Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "07ae774a8e52185a3598c878513377e7a019f127",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9293"
+          ]
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/loyaltycustomers",
+      "id": "0e52bcc5-198b-4263-8055-d832414b0abf",
+      "createTime": "2026-09-15T17:49:40.935Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "07ae774a8e52185a3598c878513377e7a019f127",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9293"
+          ]
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/visionai",
+      "id": "55e00a41-da2b-472a-b181-3697916ecebe",
+      "createTime": "2026-09-15T17:49:40.903Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "07ae774a8e52185a3598c878513377e7a019f127",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9293"
+          ]
+        }
+      ],
+      "version": "0.12.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vectorsearch",
+      "id": "a99f4a28-bcc1-42fe-b65c-98defd1ee7e5",
+      "createTime": "2026-09-15T17:49:40.871Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "07ae774a8e52185a3598c878513377e7a019f127",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9293"
+          ]
+        }
+      ],
+      "version": "0.14.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/securesourcemanager",
+      "id": "645756f0-a783-4bc2-9c24-1d191129ed6d",
+      "createTime": "2026-09-15T17:49:40.839Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "07ae774a8e52185a3598c878513377e7a019f127",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9293"
+          ]
+        }
+      ],
+      "version": "5.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/retail",
+      "id": "5aba0124-9add-4291-84d3-6ef89c396527",
+      "createTime": "2026-09-15T17:49:40.809Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "07ae774a8e52185a3598c878513377e7a019f127",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9293"
+          ]
+        }
+      ],
+      "version": "0.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/pubsub-api",
+      "id": "4027dc92-7e3e-4b1f-bf93-64b2426c6301",
+      "createTime": "2026-09-15T17:49:40.779Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "07ae774a8e52185a3598c878513377e7a019f127",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9293"
+          ]
+        }
+      ],
+      "version": "3.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/kms-inventory",
+      "id": "a120b70f-371c-4b95-8885-ffe0619419b5",
+      "createTime": "2026-09-15T17:49:40.754Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "07ae774a8e52185a3598c878513377e7a019f127",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9293"
+          ]
+        }
+      ],
+      "version": "6.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/kms",
+      "id": "58341b83-b4fc-4568-b652-74ad1f4cf43f",
+      "createTime": "2026-09-15T17:49:40.726Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "07ae774a8e52185a3598c878513377e7a019f127",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9293"
+          ]
+        }
+      ],
+      "version": "0.12.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/geminidataanalytics",
+      "id": "932b132c-4d75-4b1a-8277-13b1cf247ad9",
+      "createTime": "2026-09-15T17:49:40.701Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "1ea27c9c9bf4e4cbf79381321dcb9bce7951a76f",
+          "message": "PNPM workspace",
+          "issues": [
+            "8973"
+          ]
+        }
+      ],
+      "version": "6.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dialogflow-cx",
+      "id": "83f15a3c-dd61-4902-a7e9-e33d86188117",
+      "createTime": "2026-09-15T17:49:40.673Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "07ae774a8e52185a3598c878513377e7a019f127",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9293"
+          ]
+        }
+      ],
+      "version": "7.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/compute",
+      "id": "42223c35-430b-4742-bb9a-d1187a2123f7",
+      "createTime": "2026-09-15T17:49:40.648Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "07ae774a8e52185a3598c878513377e7a019f127",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9293"
+          ]
+        }
+      ],
+      "version": "0.10.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/chronicle",
+      "id": "b94261d4-a894-43f1-af37-49e05581a508",
+      "createTime": "2026-09-15T17:49:40.621Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "07ae774a8e52185a3598c878513377e7a019f127",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9293"
+          ]
+        }
+      ],
+      "version": "0.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigtable-api",
+      "id": "698788d3-2b65-449e-93e3-59b578f76cc5",
+      "createTime": "2026-09-15T17:49:40.595Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "07ae774a8e52185a3598c878513377e7a019f127",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9293"
+          ]
+        }
+      ],
+      "version": "0.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/auditmanager",
+      "id": "a54a02a1-ca2a-4678-a5aa-bd1c94dce12d",
+      "createTime": "2026-09-15T17:49:40.568Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "07ae774a8e52185a3598c878513377e7a019f127",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9293"
+          ]
+        }
+      ],
+      "version": "5.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/api-gateway",
+      "id": "5586a30d-bee5-4fe2-af5d-26778b829926",
+      "createTime": "2026-09-15T17:49:40.541Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "07ae774a8e52185a3598c878513377e7a019f127",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9293"
+          ]
+        }
+      ],
+      "version": "3.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/alloydb",
+      "id": "7d9bc49c-0ea7-40c7-93eb-723510844822",
+      "createTime": "2026-09-15T17:49:40.511Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "07ae774a8e52185a3598c878513377e7a019f127",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9293"
+          ]
+        }
+      ],
+      "version": "0.10.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-apps/meet",
+      "id": "d4c58036-e00d-42c1-b37e-92053364f883",
+      "createTime": "2026-09-15T17:49:40.483Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "07ae774a8e52185a3598c878513377e7a019f127",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9293"
+          ]
+        }
+      ],
+      "version": "0.13.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-ads/admanager",
+      "id": "0a780760-5d5b-45a5-a9e5-a43134c4d2f0",
+      "createTime": "2026-09-15T17:49:40.452Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "1ea27c9c9bf4e4cbf79381321dcb9bce7951a76f",
+          "message": "PNPM workspace",
+          "issues": [
+            "8973"
+          ]
+        }
+      ],
+      "version": "6.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/pubsub",
+      "id": "a6554007-b1df-4a4b-990b-f3852c21dded",
+      "createTime": "2026-09-15T17:49:40.427Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "1ea27c9c9bf4e4cbf79381321dcb9bce7951a76f",
+          "message": "PNPM workspace",
+          "issues": [
+            "8973"
+          ]
+        }
+      ],
+      "version": "7.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/logging-winston",
+      "id": "4b500f68-a599-43c2-918f-7c6bee257e0d",
+      "createTime": "2026-09-15T17:49:40.398Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "1ea27c9c9bf4e4cbf79381321dcb9bce7951a76f",
+          "message": "PNPM workspace",
+          "issues": [
+            "8973"
+          ]
+        }
+      ],
+      "version": "6.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/logging-bunyan",
+      "id": "b1d61406-af6c-424f-b755-14d55c3d5ba6",
+      "createTime": "2026-09-15T17:49:40.372Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "1ea27c9c9bf4e4cbf79381321dcb9bce7951a76f",
+          "message": "PNPM workspace",
+          "issues": [
+            "8973"
+          ]
+        }
+      ],
+      "version": "12.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/logging",
+      "id": "d8b1a0a4-7e31-4f99-9288-7b31c618d7fe",
+      "createTime": "2026-09-15T17:49:40.344Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "1ea27c9c9bf4e4cbf79381321dcb9bce7951a76f",
+          "message": "PNPM workspace",
+          "issues": [
+            "8973"
+          ]
+        }
+      ],
+      "version": "6.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dns",
+      "id": "e47c080e-bed9-4249-bf28-740c04ec1d74",
+      "createTime": "2026-09-15T17:49:40.317Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "1ea27c9c9bf4e4cbf79381321dcb9bce7951a76f",
+          "message": "PNPM workspace",
+          "issues": [
+            "8973"
+          ]
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/error-reporting",
+      "id": "dccb89f4-b4a0-462b-ba89-bd54579fb46a",
+      "createTime": "2026-09-15T17:49:40.290Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "1ea27c9c9bf4e4cbf79381321dcb9bce7951a76f",
+          "message": "PNPM workspace",
+          "issues": [
+            "8973"
+          ]
+        }
+      ],
+      "version": "11.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/datastore",
+      "id": "9530f99f-1926-47ce-bb7e-561cd45ad1f5",
+      "createTime": "2026-09-15T17:49:40.265Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "1ea27c9c9bf4e4cbf79381321dcb9bce7951a76f",
+          "message": "PNPM workspace",
+          "issues": [
+            "8973"
+          ]
+        }
+      ],
+      "version": "8.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/profiler",
+      "id": "8fcbe27e-a294-497e-998e-290c368bf0f4",
+      "createTime": "2026-09-15T17:49:40.237Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "1ea27c9c9bf4e4cbf79381321dcb9bce7951a76f",
+          "message": "PNPM workspace",
+          "issues": [
+            "8973"
+          ]
+        }
+      ],
+      "version": "7.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigtable",
+      "id": "54b93b46-1939-46a1-b6e3-4dcc99f09769",
+      "createTime": "2026-09-15T17:49:40.211Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "1ea27c9c9bf4e4cbf79381321dcb9bce7951a76f",
+          "message": "PNPM workspace",
+          "issues": [
+            "8973"
+          ]
+        }
+      ],
+      "version": "6.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-storage",
+      "id": "981d49c2-817f-4511-a52d-0ddfe18e6482",
+      "createTime": "2026-09-15T17:49:40.184Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "1ea27c9c9bf4e4cbf79381321dcb9bce7951a76f",
+          "message": "PNPM workspace",
+          "issues": [
+            "8973"
+          ]
+        }
+      ],
+      "version": "9.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery",
+      "id": "bdf256e8-7bdf-4f29-a2ef-e1379c1292c4",
+      "createTime": "2026-09-15T17:49:40.158Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "1ea27c9c9bf4e4cbf79381321dcb9bce7951a76f",
+          "message": "PNPM workspace",
+          "issues": [
+            "8973"
+          ]
+        }
+      ],
+      "version": "6.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/promisify",
+      "id": "bb2678e1-fc62-4ff0-be41-54c1951fa4ff",
+      "createTime": "2026-09-15T17:49:40.130Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "1ea27c9c9bf4e4cbf79381321dcb9bce7951a76f",
+          "message": "PNPM workspace",
+          "issues": [
+            "8973"
+          ]
+        }
+      ],
+      "version": "6.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/projectify",
+      "id": "05a7282c-227e-4e76-8c5b-4db3a807c0fc",
+      "createTime": "2026-09-15T17:49:40.105Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "1ea27c9c9bf4e4cbf79381321dcb9bce7951a76f",
+          "message": "PNPM workspace",
+          "issues": [
+            "8973"
+          ]
+        }
+      ],
+      "version": "6.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/precise-date",
+      "id": "b86d9f6a-b0e0-4892-a4a6-dacb2a8edb4a",
+      "createTime": "2026-09-15T17:49:40.079Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "1ea27c9c9bf4e4cbf79381321dcb9bce7951a76f",
+          "message": "PNPM workspace",
+          "issues": [
+            "8973"
+          ]
+        }
+      ],
+      "version": "7.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/paginator",
+      "id": "39370d2a-11ca-4535-b7dd-5bda03080631",
+      "createTime": "2026-09-15T17:49:40.030Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "1ea27c9c9bf4e4cbf79381321dcb9bce7951a76f",
+          "message": "PNPM workspace",
+          "issues": [
+            "8973"
+          ]
+        }
+      ],
+      "version": "2.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "gapic-tools",
+      "id": "7919631e-5b8c-43fb-a23c-26be482315a3",
+      "createTime": "2026-09-15T17:49:39.994Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "1ea27c9c9bf4e4cbf79381321dcb9bce7951a76f",
+          "message": "PNPM workspace",
+          "issues": [
+            "8973"
+          ]
+        }
+      ],
+      "version": "9.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "googleapis-common",
+      "id": "0edd8f72-acba-416b-986c-d2ebe5a9cf94",
+      "createTime": "2026-09-15T17:49:39.967Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "1ea27c9c9bf4e4cbf79381321dcb9bce7951a76f",
+          "message": "PNPM workspace",
+          "issues": [
+            "8973"
+          ]
+        }
+      ],
+      "version": "11.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "google-auth-library",
+      "id": "c084575c-3144-4c43-a282-335dc4d9766e",
+      "createTime": "2026-09-15T17:49:39.940Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "1ea27c9c9bf4e4cbf79381321dcb9bce7951a76f",
+          "message": "PNPM workspace",
+          "issues": [
+            "8973"
+          ]
+        }
+      ],
+      "version": "8.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "gaxios",
+      "id": "ae38c2af-2c34-4491-8588-d266bda81fd8",
+      "createTime": "2026-09-15T17:49:39.915Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "ee3b95b4dc5c4128adf22656f50675cdd2845597",
+          "message": "O11y tracer helper updates",
+          "issues": [
+            "9269"
+          ],
+          "scope": "gax"
+        },
+        {
+          "type": "feat",
+          "sha": "1ea27c9c9bf4e4cbf79381321dcb9bce7951a76f",
+          "message": "PNPM workspace",
+          "issues": [
+            "8973"
+          ]
+        }
+      ],
+      "version": "6.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "google-gax",
+      "id": "e904604d-6404-4cff-9006-35ee905ab15d",
+      "createTime": "2026-09-15T17:49:39.886Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "1ea27c9c9bf4e4cbf79381321dcb9bce7951a76f",
+          "message": "PNPM workspace",
+          "issues": [
+            "8973"
+          ]
+        }
+      ],
+      "version": "5.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gapic-generator",
+      "id": "83227a64-3df4-4ded-97a1-0b18a2e69147",
+      "createTime": "2026-09-15T17:49:39.860Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "1ea27c9c9bf4e4cbf79381321dcb9bce7951a76f",
+          "message": "PNPM workspace",
+          "issues": [
+            "8973"
+          ]
+        }
+      ],
+      "version": "5.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "pack-n-play",
+      "id": "5279ab79-2236-406e-90bf-6e53c0957f7a",
+      "createTime": "2026-09-15T17:49:39.832Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "1ea27c9c9bf4e4cbf79381321dcb9bce7951a76f",
+          "message": "PNPM workspace",
+          "issues": [
+            "8973"
+          ]
+        }
+      ],
+      "version": "8.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/common",
+      "id": "c84d3712-a190-4f9f-9b3c-fb50ab462b1a",
+      "createTime": "2026-09-15T17:49:39.806Z"
+    },
+    {
+      "changes": [
+        {
           "type": "feat",
           "sha": "1ea27c9c9bf4e4cbf79381321dcb9bce7951a76f",
           "message": "PNPM workspace",
@@ -94176,5 +99547,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-09-14T17:38:31.205Z"
+  "updateTime": "2026-09-28T17:20:06.442Z"
 }

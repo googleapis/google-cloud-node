@@ -40,6 +40,10 @@ function main() {
    *  Reencrypt body that users request
    */
   // const body = {}
+  /**
+   *  Optional. Region of the Cloud SQL instance.
+   */
+  // const location = 'abc123'
 
   // Imports the Sql library
   const {SqlInstancesServiceClient} = require('@google-cloud/sql').v1beta4;

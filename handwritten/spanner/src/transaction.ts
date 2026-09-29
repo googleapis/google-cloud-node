@@ -40,6 +40,7 @@ import {
   setSpanError,
   setSpanErrorAndException,
   traceConfig,
+  getQueryTraceConfig,
 } from './instrument';
 import {NormalCallback, addLeaderAwareRoutingHeader} from './common';
 import {protos} from '@google-cloud/spanner-api';
@@ -438,35 +439,12 @@ export class Snapshot extends EventEmitter {
           },
         },
       };
-      this.request = (config: any, callback?: Function) => {
-        let gaxOpts;
-        if (!config.gaxOpts || Object.keys(config.gaxOpts).length === 0) {
-          gaxOpts = this._bindGaxOpts as any;
-        } else {
-          gaxOpts = injectGaxOpt(
-            config.gaxOpts,
-            'affinityKey',
-            this._affinityKey,
-          );
-        }
-        config = Object.assign({}, config, {gaxOpts});
-        return session.request(config, callback);
-      };
-
-      this.requestStream = (config: any) => {
-        let gaxOpts;
-        if (!config.gaxOpts || Object.keys(config.gaxOpts).length === 0) {
-          gaxOpts = this._bindGaxOpts as any;
-        } else {
-          gaxOpts = injectGaxOpt(
-            config.gaxOpts,
-            'affinityKey',
-            this._affinityKey,
-          );
-        }
-        config = Object.assign({}, config, {gaxOpts});
-        return session.requestStream(config);
-      };
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      this.request = (config: any, callback?: Function) =>
+        session.request(this._applyAffinityGaxOpts(config), callback);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      this.requestStream = (config: any) =>
+        session.requestStream(this._applyAffinityGaxOpts(config));
     } else {
       this.request = session.request.bind(session);
       this.requestStream = session.requestStream.bind(session);
@@ -485,6 +463,38 @@ export class Snapshot extends EventEmitter {
     };
     this._latestPreCommitToken = null;
     this._mutationKey = null;
+  }
+
+  /**
+   * Binds the multiplexed session affinity key to the gax options of an
+   * outgoing request, so that all requests of this transaction are routed to
+   * the same gRPC channel.
+   *
+   * `config` is always a request descriptor that was freshly constructed by the
+   * caller for this one RPC (and {@link Spanner#prepareGapicRequest_} already
+   * modifies `config.headers` in place), so the affinity key is assigned
+   * directly instead of allocating a copy of the descriptor per request.
+   *
+   * @private
+   *
+   * @param {object} config The request configuration.
+   * @returns {object} The same request configuration.
+   */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  private _applyAffinityGaxOpts(config: any): any {
+    if (!config) {
+      return config;
+    }
+    if (!config.gaxOpts || Object.keys(config.gaxOpts).length === 0) {
+      config.gaxOpts = this._bindGaxOpts;
+    } else {
+      config.gaxOpts = injectGaxOpt(
+        config.gaxOpts,
+        'affinityKey',
+        this._affinityKey,
+      );
+    }
+    return config;
   }
 
   protected _updatePrecommitToken(resp: PrecommitTokenProvider): void {
@@ -922,7 +932,13 @@ export class Snapshot extends EventEmitter {
       maxResumeRetries,
       requestOptions,
       columnsMetadata,
+      keys: _omittedKeys,
+      ranges: _omittedRanges,
+      directedReadOptions: rawDirectedReadOptions,
+      ...cleanRequest
     } = request;
+    void _omittedKeys;
+    void _omittedRanges;
     const keySet = Snapshot.encodeKeySet(request);
     const transaction: spannerClient.spanner.v1.ITransactionSelector = {};
 
@@ -943,23 +959,12 @@ export class Snapshot extends EventEmitter {
     }
 
     const directedReadOptions = this._getDirectedReadOptions(
-      request.directedReadOptions,
+      rawDirectedReadOptions,
     );
 
-    request = Object.assign({}, request);
-
-    delete request.gaxOptions;
-    delete request.json;
-    delete request.jsonOptions;
-    delete request.maxResumeRetries;
-    delete request.keys;
-    delete request.ranges;
-    delete request.requestOptions;
-    delete request.directedReadOptions;
-    delete request.columnsMetadata;
-
     const reqOpts: spannerClient.spanner.v1.IReadRequest = Object.assign(
-      request,
+      {},
+      cleanRequest,
       {
         session: this.session.formattedName_!,
         requestOptions: this.configureTagOptions(
@@ -1292,6 +1297,8 @@ export class Snapshot extends EventEmitter {
       {
         tableName: table,
         ...this._traceConfig,
+        transactionTag: this.requestOptions?.transactionTag,
+        requestTag: request?.requestOptions?.requestTag,
       },
       span => {
         this.createReadStream(table, request)
@@ -1417,8 +1424,9 @@ export class Snapshot extends EventEmitter {
     startTrace(
       'Snapshot.run',
       {
-        ...(query as ExecuteSqlRequest),
         ...this._traceConfig,
+        transactionTag: this.requestOptions?.transactionTag,
+        ...getQueryTraceConfig(query),
       },
       span => {
         this.runStream(query)
@@ -1534,11 +1542,10 @@ export class Snapshot extends EventEmitter {
       addLeaderAwareRoutingHeader(headers);
     }
 
-    const traceConfig = {
-      transactionTag: this.requestOptions?.transactionTag,
-      requestTag: requestOptions?.requestTag,
-      ...query,
+    const traceConfig: traceConfig = {
       ...this._traceConfig,
+      transactionTag: this.requestOptions?.transactionTag,
+      ...getQueryTraceConfig(queryInput),
     };
 
     const executeWithSpans = (
@@ -1916,14 +1923,13 @@ export class Snapshot extends EventEmitter {
    * ```
    */
   runStream(query: string | ExecuteSqlRequest): PartialResultStream {
-    if (typeof query === 'string') {
-      query = {sql: query} as ExecuteSqlRequest;
-    }
+    const originalQuery: ExecuteSqlRequest =
+      typeof query === 'string' ? {sql: query} : query;
 
-    query = Object.assign({}, query) as ExecuteSqlRequest;
-    query.queryOptions = Object.assign(
-      Object.assign({}, this.queryOptions),
-      query.queryOptions,
+    const queryOptions = Object.assign(
+      {},
+      this.queryOptions,
+      originalQuery.queryOptions,
     );
 
     const {
@@ -1933,16 +1939,30 @@ export class Snapshot extends EventEmitter {
       maxResumeRetries,
       requestOptions,
       columnsMetadata,
-    } = query;
+      types: _omittedTypes,
+      directedReadOptions: rawDirectedReadOptions,
+      ...cleanQuery
+    } = originalQuery;
+    void _omittedTypes;
     let reqOpts;
 
     const directedReadOptions = this._getDirectedReadOptions(
-      query.directedReadOptions,
+      rawDirectedReadOptions,
     );
+    const statementSeqno = this._seqno++;
+
+    let encodedParams:
+      | {
+          params: p.IStruct;
+          paramTypes: {[field: string]: spannerClient.spanner.v1.Type};
+        }
+      | undefined;
 
     const sanitizeRequest = () => {
-      query = query as ExecuteSqlRequest;
-      const {params, paramTypes} = Snapshot.encodeParams(query);
+      if (!encodedParams) {
+        encodedParams = Snapshot.encodeParams(originalQuery);
+      }
+      const {params, paramTypes} = encodedParams;
       const transaction: spannerClient.spanner.v1.ITransactionSelector = {};
       if (this.id) {
         transaction.id = this.id as Uint8Array;
@@ -1959,18 +1979,10 @@ export class Snapshot extends EventEmitter {
       ) {
         this._setPreviousTransactionId(transaction);
       }
-      delete query.gaxOptions;
-      delete query.json;
-      delete query.jsonOptions;
-      delete query.maxResumeRetries;
-      delete query.requestOptions;
-      delete query.types;
-      delete query.directedReadOptions;
-      delete query.columnsMetadata;
-
-      reqOpts = Object.assign(query, {
+      reqOpts = Object.assign({}, cleanQuery, {
         session: this.session.formattedName_!,
-        seqno: this._seqno++,
+        seqno: statementSeqno,
+        queryOptions,
         requestOptions: this.configureTagOptions(
           typeof transaction.singleUse !== 'undefined',
           this.requestOptions?.transactionTag ?? undefined,
@@ -1993,10 +2005,9 @@ export class Snapshot extends EventEmitter {
     }
 
     const traceConfig: traceConfig = {
-      transactionTag: this.requestOptions?.transactionTag,
-      requestTag: requestOptions?.requestTag,
-      ...query,
       ...this._traceConfig,
+      transactionTag: this.requestOptions?.transactionTag,
+      ...getQueryTraceConfig(originalQuery),
     };
     return startTrace('Snapshot.runStream', traceConfig, span => {
       let attempt = 0;
@@ -2106,10 +2117,10 @@ export class Snapshot extends EventEmitter {
     requestOptions = {},
   ): IRequestOptions | null {
     if (!singleUse && transactionTag) {
-      (requestOptions as IRequestOptions).transactionTag = transactionTag;
+      return Object.assign({}, requestOptions, {transactionTag});
     }
 
-    return requestOptions!;
+    return Object.assign({}, requestOptions);
   }
 
   /**
@@ -2122,7 +2133,10 @@ export class Snapshot extends EventEmitter {
    * @returns {object}
    */
   static encodeKeySet(request: ReadRequest): spannerClient.spanner.v1.IKeySet {
-    const keySet: spannerClient.spanner.v1.IKeySet = request.keySet || {};
+    const keySet: spannerClient.spanner.v1.IKeySet = Object.assign(
+      {},
+      request.keySet,
+    );
 
     if (request.keys) {
       keySet.keys = toArray(request.keys as string[]).map(
@@ -2208,11 +2222,21 @@ export class Snapshot extends EventEmitter {
    * @returns {object}
    */
   static encodeParams(request: ExecuteSqlRequest) {
-    const typeMap = request.types || {};
+    if (!request.params && !request.types && !request.paramTypes) {
+      return {
+        params: {fields: {}},
+        paramTypes: {},
+      };
+    }
 
-    const params: p.IStruct = {fields: request.params?.fields || {}};
+    const isUuidUntyped = codec.isUuidUntypedEnv();
+    const typeMap = Object.assign({}, request.types);
+
+    const params: p.IStruct = {
+      fields: Object.assign({}, request.params?.fields),
+    };
     const paramTypes: {[field: string]: spannerClient.spanner.v1.Type} =
-      request.paramTypes || {};
+      Object.assign({}, request.paramTypes);
 
     if (request.params && !request.params.fields) {
       const fields = {};
@@ -2221,7 +2245,7 @@ export class Snapshot extends EventEmitter {
         const value = request.params![param];
 
         if (!typeMap[param]) {
-          typeMap[param] = codec.getType(value);
+          typeMap[param] = codec.getType(value, isUuidUntyped);
         }
         fields[param] = codec.encode(value);
       });
@@ -2232,7 +2256,7 @@ export class Snapshot extends EventEmitter {
     if (!isEmpty(typeMap)) {
       Object.keys(typeMap).forEach(param => {
         const type = typeMap[param];
-        if (process.env['SPANNER_ENABLE_UUID_AS_UNTYPED'] === 'true') {
+        if (isUuidUntyped) {
           const typeObject = codec.createTypeObject(type);
           if (
             (type.child &&
@@ -2414,10 +2438,9 @@ export class Dml extends Snapshot {
     return startTrace(
       'Dml.runUpdate',
       {
-        ...query,
         ...this._traceConfig,
         transactionTag: this.requestOptions?.transactionTag,
-        requestTag: query.requestOptions?.requestTag,
+        ...getQueryTraceConfig(query),
       },
       span => {
         this.run(
@@ -3948,8 +3971,8 @@ export class PartitionedDml extends Dml {
     return startTrace(
       'PartitionedDml.runUpdate',
       {
-        ...(query as ExecuteSqlRequest),
         ...this._traceConfig,
+        ...getQueryTraceConfig(query),
       },
       span => {
         super.runUpdate(query, (err, count) => {

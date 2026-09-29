@@ -1,7 +1,7 @@
 {
   "name": "@google-cloud/talent",
   "description": "Cloud Talent Solution API client for Node.js",
-  "version": "8.1.0",
+  "version": "8.1.1",
   "license": "Apache-2.0",
   "author": "Google LLC",
   "engines": {
@@ -67,10 +67,5 @@
   "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-talent",
   "overrides": {
     "@sinonjs/fake-timers": "15.2.1"
-  },
-  "pnpm": {
-    "overrides": {
-      "@sinonjs/fake-timers": "15.2.1"
-    }
   }
 }

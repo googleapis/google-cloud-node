@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.5.1](https://github.com/googleapis/google-cloud-node/compare/devicestreaming-v0.5.0...devicestreaming-v0.5.1) (2026-09-28)
+
+
+### Bug Fixes
+
+* Update package.json and .gitignore across packages ([#9378](https://github.com/googleapis/google-cloud-node/issues/9378)) ([9c54cec](https://github.com/googleapis/google-cloud-node/commit/9c54cece565b5cbcae63a9856c1ef3448307d46e))
+
+## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/devicestreaming-v0.4.0...devicestreaming-v0.5.0) (2026-09-22)
+
+
+### Features
+
+* Update API sources and regenerate ([#9368](https://github.com/googleapis/google-cloud-node/issues/9368)) ([57d0cfd](https://github.com/googleapis/google-cloud-node/commit/57d0cfd84827933a5da83c370b38942d0c2eadd8))
+
 ## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/devicestreaming-v0.3.0...devicestreaming-v0.4.0) (2026-09-08)
 
 

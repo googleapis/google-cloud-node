@@ -17,15 +17,12 @@ import {GrpcService} from './common-grpc/service';
 import {PreciseDate} from '@google-cloud/precise-date';
 import {
   isArray,
-  isBoolean,
   isDate,
   isDecimal,
-  isInfinite,
   isInteger,
   isNull,
   isNumber,
   isObject,
-  isString,
   isUndefined,
   isUuid,
   toArray,
@@ -81,8 +78,6 @@ function isValidTimestamp(
   }
   return isValidDate(year, month, day);
 }
-
-let uuidUntypedFlagWarned = false;
 
 export interface Field {
   name: string;
@@ -1398,6 +1393,7 @@ const TypeCode: {
   bytes: 'BYTES',
   json: 'JSON',
   jsonb: 'JSON',
+  pgJsonb: 'JSON',
   interval: 'INTERVAL',
   proto: 'PROTO',
   enum: 'ENUM',
@@ -1422,6 +1418,24 @@ interface FieldType extends Type {
   name: string;
 }
 
+// Parameterless type singletons. These are frozen and reused across `getType`
+// calls to eliminate heap allocations and GC pressure during parameter encoding.
+const TYPE_STRING: Type = Object.freeze({type: 'string'});
+const TYPE_BOOL: Type = Object.freeze({type: 'bool'});
+const TYPE_INT64: Type = Object.freeze({type: 'int64'});
+const TYPE_FLOAT64: Type = Object.freeze({type: 'float64'});
+const TYPE_FLOAT32: Type = Object.freeze({type: 'float32'});
+const TYPE_NUMERIC: Type = Object.freeze({type: 'numeric'});
+const TYPE_PG_NUMERIC: Type = Object.freeze({type: 'pgNumeric'});
+const TYPE_PG_JSONB: Type = Object.freeze({type: 'pgJsonb'});
+const TYPE_PG_OID: Type = Object.freeze({type: 'pgOid'});
+const TYPE_INTERVAL: Type = Object.freeze({type: 'interval'});
+const TYPE_BYTES: Type = Object.freeze({type: 'bytes'});
+const TYPE_DATE: Type = Object.freeze({type: 'date'});
+const TYPE_TIMESTAMP: Type = Object.freeze({type: 'timestamp'});
+const TYPE_JSON: Type = Object.freeze({type: 'json'});
+const TYPE_UNSPECIFIED: Type = Object.freeze({type: 'unspecified'});
+
 /**
  * @typedef {ParamType} StructField
  * @property {string} name The name of the field.
@@ -1434,6 +1448,9 @@ interface FieldType extends Type {
  *     - float64
  *     - int64
  *     - numeric
+ *     - pgNumeric
+ *     - pgJsonb
+ *     - pgOid
  *     - bool
  *     - string
  *     - bytes
@@ -1445,18 +1462,45 @@ interface FieldType extends Type {
  *     - date
  *     - struct
  *     - array
+ *     - unspecified
  * @property {StructField[]} [fields] **For struct types only**. Type
  *     definitions for the individual fields.
  * @property {string|ParamType} [child] **For array types only**. The array
  *     element type.
  */
+let uuidUntypedFlagWarned = false;
+
+function _resetUuidUntypedFlagWarnedForTest(): void {
+  uuidUntypedFlagWarned = false;
+}
+
+function isUuidUntypedEnv(): boolean {
+  if (process.env['SPANNER_ENABLE_UUID_AS_UNTYPED']?.toLowerCase() === 'true') {
+    if (!uuidUntypedFlagWarned) {
+      process.emitWarning(
+        'SPANNER_ENABLE_UUID_AS_UNTYPED environment variable is deprecated and will be removed in a future release.',
+        'DeprecationWarning',
+      );
+      uuidUntypedFlagWarned = true;
+    }
+    return true;
+  }
+  return false;
+}
+
 /**
  * Get the corresponding Spanner data type for the provided value.
+ *
+ * NOTE: This function is internal and not exposed in the public API.
+ * Parameterless types return shared, frozen singletons to eliminate allocation
+ * and GC overhead. Callers must treat the returned Type descriptor as read-only.
  *
  * @private
  *
  * @param {*} value - The value.
- * @returns {object}
+ * @param {boolean} [enableUuidAsUntyped] - Whether UUID strings should be
+ *     typed as unspecified.
+ * @returns {Type}
  *
  * @example
  * ```
@@ -1464,40 +1508,69 @@ interface FieldType extends Type {
  * // {type: 'float64'}
  * ```
  */
-function getType(value: Value): Type {
-  const isSpecialNumber =
-    isInfinite(value) || (isNumber(value) && isNaN(value));
+function getType(value: Value, enableUuidAsUntyped?: boolean): Type {
+  if (value === null || value === undefined) {
+    return TYPE_UNSPECIFIED;
+  }
+
+  if (typeof value === 'string') {
+    const isUuidUntyped = enableUuidAsUntyped ?? isUuidUntypedEnv();
+    if (isUuidUntyped && isUuid(value)) {
+      return TYPE_UNSPECIFIED;
+    }
+    return TYPE_STRING;
+  }
+
+  if (typeof value === 'number') {
+    return Number.isInteger(value) ? TYPE_INT64 : TYPE_FLOAT64;
+  }
+
+  if (typeof value === 'boolean') {
+    return TYPE_BOOL;
+  }
+
+  if (Buffer.isBuffer(value)) {
+    return TYPE_BYTES;
+  }
+
+  if (value instanceof SpannerDate) {
+    return TYPE_DATE;
+  }
+
+  if (value instanceof Date || isDate(value)) {
+    return TYPE_TIMESTAMP;
+  }
+
+  if (value instanceof Int) {
+    return TYPE_INT64;
+  }
+
+  if (value instanceof Float) {
+    return TYPE_FLOAT64;
+  }
 
   if (value instanceof Float32) {
-    return {type: 'float32'};
-  }
-
-  if (isDecimal(value) || isSpecialNumber || value instanceof Float) {
-    return {type: 'float64'};
-  }
-
-  if (isNumber(value) || value instanceof Int) {
-    return {type: 'int64'};
+    return TYPE_FLOAT32;
   }
 
   if (value instanceof Numeric) {
-    return {type: 'numeric'};
+    return TYPE_NUMERIC;
   }
 
   if (value instanceof PGNumeric) {
-    return {type: 'pgNumeric'};
+    return TYPE_PG_NUMERIC;
   }
 
   if (value instanceof PGJsonb) {
-    return {type: 'pgJsonb'};
+    return TYPE_PG_JSONB;
   }
 
   if (value instanceof PGOid) {
-    return {type: 'pgOid'};
+    return TYPE_PG_OID;
   }
 
   if (value instanceof Interval) {
-    return {type: 'interval'};
+    return TYPE_INTERVAL;
   }
 
   if (value instanceof ProtoMessage) {
@@ -1508,49 +1581,17 @@ function getType(value: Value): Type {
     return {type: 'enum', fullName: value.fullName};
   }
 
-  if (isBoolean(value)) {
-    return {type: 'bool'};
-  }
-
-  if (process.env['SPANNER_ENABLE_UUID_AS_UNTYPED'] === 'true') {
-    if (!uuidUntypedFlagWarned) {
-      process.emitWarning(
-        'SPANNER_ENABLE_UUID_AS_UNTYPED environment variable is deprecated and will be removed in a future release.',
-        'DeprecationWarning',
-      );
-      uuidUntypedFlagWarned = true;
-    }
-    if (isUuid(value)) {
-      return {type: 'unspecified'};
-    }
-  }
-
-  if (isString(value)) {
-    return {type: 'string'};
-  }
-
-  if (Buffer.isBuffer(value)) {
-    return {type: 'bytes'};
-  }
-
-  if (value instanceof SpannerDate) {
-    return {type: 'date'};
-  }
-
-  if (isDate(value)) {
-    return {type: 'timestamp'};
-  }
-
   if (value instanceof Struct) {
+    const isUuidUntyped = enableUuidAsUntyped ?? isUuidUntypedEnv();
     return {
       type: 'struct',
       fields: Array.from(value).map(({name, value}) => {
-        return Object.assign({name}, getType(value));
+        return Object.assign({name}, getType(value, isUuidUntyped));
       }),
     };
   }
 
-  if (isArray(value)) {
+  if (Array.isArray(value)) {
     let child;
 
     for (let i = 0; i < value.length; i++) {
@@ -1563,15 +1604,27 @@ function getType(value: Value): Type {
 
     return {
       type: 'array',
-      child: getType(child),
+      child: getType(child, enableUuidAsUntyped),
     };
   }
 
-  if (isObject(value)) {
-    return {type: 'json'};
+  if (value instanceof String) {
+    return TYPE_STRING;
   }
 
-  return {type: 'unspecified'};
+  if (value instanceof Number) {
+    return Number.isInteger(value.valueOf()) ? TYPE_INT64 : TYPE_FLOAT64;
+  }
+
+  if (value instanceof Boolean) {
+    return TYPE_BOOL;
+  }
+
+  if (isObject(value)) {
+    return TYPE_JSON;
+  }
+
+  return TYPE_UNSPECIFIED;
 }
 
 /**
@@ -1666,7 +1719,7 @@ function createTypeObject(
   if (friendlyType.type === 'pgNumeric') {
     type.typeAnnotation =
       spannerClient.spanner.v1.TypeAnnotationCode.PG_NUMERIC;
-  } else if (friendlyType.type === 'jsonb') {
+  } else if (friendlyType.type === 'jsonb' || friendlyType.type === 'pgJsonb') {
     type.typeAnnotation = spannerClient.spanner.v1.TypeAnnotationCode.PG_JSONB;
   } else if (friendlyType.type === 'pgOid') {
     type.typeAnnotation = spannerClient.spanner.v1.TypeAnnotationCode.PG_OID;
@@ -1696,4 +1749,6 @@ export const codec = {
   encode,
   getType,
   Struct,
+  _resetUuidUntypedFlagWarnedForTest,
+  isUuidUntypedEnv,
 };

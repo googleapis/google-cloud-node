@@ -5,6 +5,14 @@
 
 [1]: https://www.npmjs.com/package/gcp-metadata?activeTab=versions
 
+## [9.0.4](https://github.com/googleapis/google-cloud-node/compare/gcp-metadata-v9.0.3...gcp-metadata-v9.0.4) (2026-09-16)
+
+
+### Bug Fixes
+
+* **gcp-metadata:** Support CLOUD_RUN_WORKER_POOL residency detection and harden isAvailable error unwrapping ([#9349](https://github.com/googleapis/google-cloud-node/issues/9349)) ([10b654f](https://github.com/googleapis/google-cloud-node/commit/10b654f12f0d3355845d4cb0833f493d43368222))
+* Update IsGoogleCloudServerless function to check for Cloud Run Worker Pools ([#9226](https://github.com/googleapis/google-cloud-node/issues/9226)) ([e0ff8c5](https://github.com/googleapis/google-cloud-node/commit/e0ff8c5ac1ca2be2f78ef2977cb2b16b43367639))
+
 ## [9.0.3](https://github.com/googleapis/google-cloud-node/compare/gcp-metadata-v9.0.2...gcp-metadata-v9.0.3) (2026-08-12)
 
 

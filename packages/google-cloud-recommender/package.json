@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/recommender",
-  "version": "8.1.0",
+  "version": "8.1.1",
   "description": "Recommender client for Node.js",
   "repository": {
     "type": "git",
@@ -54,10 +54,5 @@
   },
   "overrides": {
     "@sinonjs/fake-timers": "15.2.1"
-  },
-  "pnpm": {
-    "overrides": {
-      "@sinonjs/fake-timers": "15.2.1"
-    }
   }
 }

@@ -14244,6 +14244,613 @@
                         }
                       }
                     },
+                    "CapacityAdviceRequest": {
+                      "oneofs": {
+                        "_distributionPolicy": {
+                          "oneof": [
+                            "distributionPolicy"
+                          ]
+                        },
+                        "_instanceFlexibilityPolicy": {
+                          "oneof": [
+                            "instanceFlexibilityPolicy"
+                          ]
+                        },
+                        "_instanceProperties": {
+                          "oneof": [
+                            "instanceProperties"
+                          ]
+                        },
+                        "_size": {
+                          "oneof": [
+                            "size"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "distributionPolicy": {
+                          "type": "CapacityAdviceRequestDistributionPolicy",
+                          "id": 534558541,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "instanceFlexibilityPolicy": {
+                          "type": "CapacityAdviceRequestInstanceFlexibilityPolicy",
+                          "id": 26937090,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "instanceProperties": {
+                          "type": "CapacityAdviceRequestInstanceProperties",
+                          "id": 215355165,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "size": {
+                          "type": "int32",
+                          "id": 3530753,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "CapacityAdviceRequestDistributionPolicy": {
+                      "oneofs": {
+                        "_targetShape": {
+                          "oneof": [
+                            "targetShape"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "targetShape": {
+                          "type": "string",
+                          "id": 338621299,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "zones": {
+                          "rule": "repeated",
+                          "type": "CapacityAdviceRequestDistributionPolicyZoneConfiguration",
+                          "id": 116085319
+                        }
+                      },
+                      "nested": {
+                        "TargetShape": {
+                          "values": {
+                            "UNDEFINED_TARGET_SHAPE": 0,
+                            "ANY": 64972,
+                            "ANY_SINGLE_ZONE": 61100880,
+                            "BALANCED": 468409608,
+                            "TARGET_SHAPE_UNSPECIFIED": 449316907
+                          }
+                        }
+                      }
+                    },
+                    "CapacityAdviceRequestDistributionPolicyZoneConfiguration": {
+                      "oneofs": {
+                        "_zone": {
+                          "oneof": [
+                            "zone"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "zone": {
+                          "type": "string",
+                          "id": 3744684,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "CapacityAdviceRequestInstanceFlexibilityPolicy": {
+                      "fields": {
+                        "instanceSelections": {
+                          "keyType": "string",
+                          "type": "CapacityAdviceRequestInstanceFlexibilityPolicyInstanceSelection",
+                          "id": 22954577
+                        }
+                      }
+                    },
+                    "CapacityAdviceRequestInstanceFlexibilityPolicyInstanceSelection": {
+                      "fields": {
+                        "disks": {
+                          "rule": "repeated",
+                          "type": "CapacityAdviceRequestInstanceFlexibilityPolicyInstanceSelectionAttachedDisk",
+                          "id": 95594102
+                        },
+                        "guestAccelerators": {
+                          "rule": "repeated",
+                          "type": "AcceleratorConfig",
+                          "id": 463595119
+                        },
+                        "machineTypes": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 79720065
+                        }
+                      }
+                    },
+                    "CapacityAdviceRequestInstanceFlexibilityPolicyInstanceSelectionAttachedDisk": {
+                      "oneofs": {
+                        "_type": {
+                          "oneof": [
+                            "type"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "type": {
+                          "type": "string",
+                          "id": 3575610,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Type": {
+                          "values": {
+                            "UNDEFINED_TYPE": 0,
+                            "DISK_TYPE_UNSPECIFIED": 333621236,
+                            "SCRATCH": 496778970
+                          }
+                        }
+                      }
+                    },
+                    "CapacityAdviceRequestInstanceProperties": {
+                      "oneofs": {
+                        "_scheduling": {
+                          "oneof": [
+                            "scheduling"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "scheduling": {
+                          "type": "CapacityAdviceRequestInstancePropertiesScheduling",
+                          "id": 386688404,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "CapacityAdviceRequestInstancePropertiesScheduling": {
+                      "oneofs": {
+                        "_provisioningModel": {
+                          "oneof": [
+                            "provisioningModel"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "provisioningModel": {
+                          "type": "string",
+                          "id": 494423,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "ProvisioningModel": {
+                          "values": {
+                            "UNDEFINED_PROVISIONING_MODEL": 0,
+                            "FLEX_START": 101746812,
+                            "RESERVATION_BOUND": 293538571,
+                            "SPOT": 2552066,
+                            "STANDARD": 484642493
+                          }
+                        }
+                      }
+                    },
+                    "CapacityAdviceResponse": {
+                      "fields": {
+                        "recommendations": {
+                          "rule": "repeated",
+                          "type": "CapacityAdviceResponseRecommendation",
+                          "id": 324515802
+                        }
+                      }
+                    },
+                    "CapacityAdviceResponseRecommendation": {
+                      "oneofs": {
+                        "_scores": {
+                          "oneof": [
+                            "scores"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "scores": {
+                          "type": "CapacityAdviceResponseRecommendationScores",
+                          "id": 165975073,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "shards": {
+                          "rule": "repeated",
+                          "type": "CapacityAdviceResponseRecommendationShard",
+                          "id": 170175573
+                        }
+                      }
+                    },
+                    "CapacityAdviceResponseRecommendationScores": {
+                      "oneofs": {
+                        "_estimatedUptime": {
+                          "oneof": [
+                            "estimatedUptime"
+                          ]
+                        },
+                        "_obtainability": {
+                          "oneof": [
+                            "obtainability"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "estimatedUptime": {
+                          "type": "string",
+                          "id": 223976779,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "obtainability": {
+                          "type": "double",
+                          "id": 260735205,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "CapacityAdviceResponseRecommendationShard": {
+                      "oneofs": {
+                        "_instanceCount": {
+                          "oneof": [
+                            "instanceCount"
+                          ]
+                        },
+                        "_machineType": {
+                          "oneof": [
+                            "machineType"
+                          ]
+                        },
+                        "_provisioningModel": {
+                          "oneof": [
+                            "provisioningModel"
+                          ]
+                        },
+                        "_zone": {
+                          "oneof": [
+                            "zone"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "instanceCount": {
+                          "type": "int32",
+                          "id": 77317349,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "machineType": {
+                          "type": "string",
+                          "id": 227711026,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "provisioningModel": {
+                          "type": "string",
+                          "id": 494423,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "zone": {
+                          "type": "string",
+                          "id": 3744684,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "ProvisioningModel": {
+                          "values": {
+                            "UNDEFINED_PROVISIONING_MODEL": 0,
+                            "FLEX_START": 101746812,
+                            "RESERVATION_BOUND": 293538571,
+                            "SPOT": 2552066,
+                            "STANDARD": 484642493
+                          }
+                        }
+                      }
+                    },
+                    "CapacityAdviceRpcRequest": {
+                      "fields": {
+                        "capacityAdviceRequestResource": {
+                          "type": "CapacityAdviceRequest",
+                          "id": 176354208,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "CapacityHistoryAdviceRequest": {
+                      "fields": {
+                        "capacityHistoryRequestResource": {
+                          "type": "CapacityHistoryRequest",
+                          "id": 182030318,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "CapacityHistoryRequest": {
+                      "oneofs": {
+                        "_instanceProperties": {
+                          "oneof": [
+                            "instanceProperties"
+                          ]
+                        },
+                        "_locationPolicy": {
+                          "oneof": [
+                            "locationPolicy"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "instanceProperties": {
+                          "type": "CapacityHistoryRequestInstanceProperties",
+                          "id": 215355165,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "locationPolicy": {
+                          "type": "CapacityHistoryRequestLocationPolicy",
+                          "id": 465689852,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "types": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 110844025
+                        }
+                      },
+                      "nested": {
+                        "Types": {
+                          "values": {
+                            "UNDEFINED_TYPES": 0,
+                            "HISTORY_TYPE_UNSPECIFIED": 58549757,
+                            "PREEMPTION": 512869337,
+                            "PRICE": 76396841
+                          }
+                        }
+                      }
+                    },
+                    "CapacityHistoryRequestInstanceProperties": {
+                      "oneofs": {
+                        "_machineType": {
+                          "oneof": [
+                            "machineType"
+                          ]
+                        },
+                        "_scheduling": {
+                          "oneof": [
+                            "scheduling"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "machineType": {
+                          "type": "string",
+                          "id": 227711026,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "scheduling": {
+                          "type": "CapacityHistoryRequestInstancePropertiesScheduling",
+                          "id": 386688404,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "CapacityHistoryRequestInstancePropertiesScheduling": {
+                      "oneofs": {
+                        "_provisioningModel": {
+                          "oneof": [
+                            "provisioningModel"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "provisioningModel": {
+                          "type": "string",
+                          "id": 494423,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "ProvisioningModel": {
+                          "values": {
+                            "UNDEFINED_PROVISIONING_MODEL": 0,
+                            "FLEX_START": 101746812,
+                            "RESERVATION_BOUND": 293538571,
+                            "SPOT": 2552066,
+                            "STANDARD": 484642493
+                          }
+                        }
+                      }
+                    },
+                    "CapacityHistoryRequestLocationPolicy": {
+                      "oneofs": {
+                        "_location": {
+                          "oneof": [
+                            "location"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "location": {
+                          "type": "string",
+                          "id": 290430901,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "CapacityHistoryResponse": {
+                      "oneofs": {
+                        "_location": {
+                          "oneof": [
+                            "location"
+                          ]
+                        },
+                        "_machineType": {
+                          "oneof": [
+                            "machineType"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "location": {
+                          "type": "string",
+                          "id": 290430901,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "machineType": {
+                          "type": "string",
+                          "id": 227711026,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "preemptionHistory": {
+                          "rule": "repeated",
+                          "type": "CapacityHistoryResponsePreemptionRecord",
+                          "id": 364018222
+                        },
+                        "priceHistory": {
+                          "rule": "repeated",
+                          "type": "CapacityHistoryResponsePriceRecord",
+                          "id": 326230942
+                        }
+                      }
+                    },
+                    "CapacityHistoryResponsePreemptionRecord": {
+                      "oneofs": {
+                        "_interval": {
+                          "oneof": [
+                            "interval"
+                          ]
+                        },
+                        "_preemptionRate": {
+                          "oneof": [
+                            "preemptionRate"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "interval": {
+                          "type": "Interval",
+                          "id": 33547461,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "preemptionRate": {
+                          "type": "double",
+                          "id": 140651910,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "CapacityHistoryResponsePriceRecord": {
+                      "oneofs": {
+                        "_interval": {
+                          "oneof": [
+                            "interval"
+                          ]
+                        },
+                        "_listPrice": {
+                          "oneof": [
+                            "listPrice"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "interval": {
+                          "type": "Interval",
+                          "id": 33547461,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "listPrice": {
+                          "type": "Money",
+                          "id": 167990888,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
                     "CircuitBreakers": {
                       "oneofs": {
                         "_maxConnections": {
@@ -14783,6 +15390,9 @@
                             "NETWORK_OPTIMIZED_U4P": 147044872,
                             "NETWORK_OPTIMIZED_U4S": 147044875,
                             "STORAGE_OPTIMIZED_Z3": 316796085,
+                            "STORAGE_OPTIMIZED_Z4D4T": 18503022,
+                            "STORAGE_OPTIMIZED_Z4DH": 35233722,
+                            "STORAGE_OPTIMIZED_Z4DS": 35233733,
                             "TYPE_UNSPECIFIED": 437714322
                           }
                         }
@@ -30078,6 +30688,24 @@
                         }
                       }
                     },
+                    "GetProjectViewRequest": {
+                      "fields": {
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "GetPublicAdvertisedPrefixeRequest": {
                       "fields": {
                         "project": {
@@ -33305,6 +33933,7 @@
                           "values": {
                             "UNDEFINED_TYPE": 0,
                             "BARE_METAL_LINUX_COMPATIBLE": 354232740,
+                            "BMSAI_CAPABLE": 449302109,
                             "CCA_CAPABLE": 79012270,
                             "FEATURE_TYPE_UNSPECIFIED": 531767259,
                             "GVNIC": 68209305,
@@ -44967,7 +45596,21 @@
                       }
                     },
                     "InstancePropertiesPatch": {
+                      "oneofs": {
+                        "_exposeHostTopology": {
+                          "oneof": [
+                            "exposeHostTopology"
+                          ]
+                        }
+                      },
                       "fields": {
+                        "exposeHostTopology": {
+                          "type": "bool",
+                          "id": 428530155,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "labels": {
                           "keyType": "string",
                           "type": "string",
@@ -51316,6 +51959,36 @@
                         "result": {
                           "type": "InterconnectMacsecConfig",
                           "id": 139315229,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "Interval": {
+                      "oneofs": {
+                        "_endTime": {
+                          "oneof": [
+                            "endTime"
+                          ]
+                        },
+                        "_startTime": {
+                          "oneof": [
+                            "startTime"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "endTime": {
+                          "type": "string",
+                          "id": 114938801,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "startTime": {
+                          "type": "string",
+                          "id": 37467274,
                           "options": {
                             "proto3_optional": true
                           }
@@ -65055,6 +65728,48 @@
                         }
                       }
                     },
+                    "Money": {
+                      "oneofs": {
+                        "_currencyCode": {
+                          "oneof": [
+                            "currencyCode"
+                          ]
+                        },
+                        "_nanos": {
+                          "oneof": [
+                            "nanos"
+                          ]
+                        },
+                        "_units": {
+                          "oneof": [
+                            "units"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "currencyCode": {
+                          "type": "string",
+                          "id": 34986331,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "nanos": {
+                          "type": "int32",
+                          "id": 104586303,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "units": {
+                          "type": "int64",
+                          "id": 111433583,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
                     "MoveAddressRequest": {
                       "oneofs": {
                         "_requestId": {
@@ -77075,6 +77790,24 @@
                             "UNDEFINED_XPN_PROJECT_STATUS": 0,
                             "HOST": 2223528,
                             "UNSPECIFIED_XPN_PROJECT_STATUS": 340393257
+                          }
+                        }
+                      }
+                    },
+                    "ProjectView": {
+                      "oneofs": {
+                        "_project": {
+                          "oneof": [
+                            "project"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "project": {
+                          "type": "Project",
+                          "id": 227560217,
+                          "options": {
+                            "proto3_optional": true
                           }
                         }
                       }
@@ -89702,6 +90435,11 @@
                             "availabilityDomain"
                           ]
                         },
+                        "_exposeHostTopology": {
+                          "oneof": [
+                            "exposeHostTopology"
+                          ]
+                        },
                         "_gracefulShutdown": {
                           "oneof": [
                             "gracefulShutdown"
@@ -89784,6 +90522,13 @@
                         "availabilityDomain": {
                           "type": "int32",
                           "id": 252514344,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "exposeHostTopology": {
+                          "type": "bool",
+                          "id": 428530155,
                           "options": {
                             "proto3_optional": true
                           }
@@ -112873,6 +113618,46 @@
                               "(google.api.method_signature)": "project,region,calendar_mode_advice_request_resource"
                             }
                           ]
+                        },
+                        "Capacity": {
+                          "requestType": "CapacityAdviceRpcRequest",
+                          "responseType": "CapacityAdviceResponse",
+                          "options": {
+                            "(google.api.http).body": "capacity_advice_request_resource",
+                            "(google.api.http).post": "/compute/v1/projects/{project}/regions/{region}/advice/capacity",
+                            "(google.api.method_signature)": "project,region,capacity_advice_request_resource"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "capacity_advice_request_resource",
+                                "post": "/compute/v1/projects/{project}/regions/{region}/advice/capacity"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,region,capacity_advice_request_resource"
+                            }
+                          ]
+                        },
+                        "CapacityHistory": {
+                          "requestType": "CapacityHistoryAdviceRequest",
+                          "responseType": "CapacityHistoryResponse",
+                          "options": {
+                            "(google.api.http).body": "capacity_history_request_resource",
+                            "(google.api.http).post": "/compute/v1/projects/{project}/regions/{region}/advice/capacityHistory",
+                            "(google.api.method_signature)": "project,region,capacity_history_request_resource"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "capacity_history_request_resource",
+                                "post": "/compute/v1/projects/{project}/regions/{region}/advice/capacityHistory"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,region,capacity_history_request_resource"
+                            }
+                          ]
                         }
                       }
                     },
@@ -123037,6 +123822,32 @@
                             },
                             {
                               "(google.cloud.operation_service)": "GlobalOperations"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "ProjectViews": {
+                      "options": {
+                        "(google.api.default_host)": "compute.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/compute.readonly,https://www.googleapis.com/auth/compute,https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "Get": {
+                          "requestType": "GetProjectViewRequest",
+                          "responseType": "ProjectView",
+                          "options": {
+                            "(google.api.http).get": "/compute/v1/projects/{project}/regions/{region}/projectViews",
+                            "(google.api.method_signature)": "project,region"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/compute/v1/projects/{project}/regions/{region}/projectViews"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,region"
                             }
                           ]
                         }
@@ -142467,6 +143278,11 @@
                     },
                     "AliasIpRange": {
                       "oneofs": {
+                        "_effectiveSubnetworkRangeName": {
+                          "oneof": [
+                            "effectiveSubnetworkRangeName"
+                          ]
+                        },
                         "_ipCidrRange": {
                           "oneof": [
                             "ipCidrRange"
@@ -142479,6 +143295,18 @@
                         }
                       },
                       "fields": {
+                        "candidateSubnetworkRangeNames": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 148215089
+                        },
+                        "effectiveSubnetworkRangeName": {
+                          "type": "string",
+                          "id": 110951590,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "ipCidrRange": {
                           "type": "string",
                           "id": 98117322,
@@ -149135,6 +149963,143 @@
                         }
                       }
                     },
+                    "CalendarModeExtensionAdviceRequest": {
+                      "oneofs": {
+                        "_endTimeNotLaterThan": {
+                          "oneof": [
+                            "endTimeNotLaterThan"
+                          ]
+                        },
+                        "_futureReservation": {
+                          "oneof": [
+                            "futureReservation"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "endTimeNotLaterThan": {
+                          "type": "string",
+                          "id": 526866094,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "futureReservation": {
+                          "type": "string",
+                          "id": 56206160,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "CalendarModeExtensionAdviceResponse": {
+                      "oneofs": {
+                        "_endTime": {
+                          "oneof": [
+                            "endTime"
+                          ]
+                        },
+                        "_notRecommendedReason": {
+                          "oneof": [
+                            "notRecommendedReason"
+                          ]
+                        },
+                        "_recommendationId": {
+                          "oneof": [
+                            "recommendationId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "endTime": {
+                          "type": "string",
+                          "id": 114938801,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "notRecommendedReason": {
+                          "type": "CalendarModeExtensionAdviceResponseNotRecommendedReason",
+                          "id": 516813204,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "recommendationId": {
+                          "type": "string",
+                          "id": 474540897,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "CalendarModeExtensionAdviceResponseNotRecommendedReason": {
+                      "oneofs": {
+                        "_details": {
+                          "oneof": [
+                            "details"
+                          ]
+                        },
+                        "_status": {
+                          "oneof": [
+                            "status"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "details": {
+                          "type": "string",
+                          "id": 483979842,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "status": {
+                          "type": "string",
+                          "id": 181260274,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Status": {
+                          "values": {
+                            "UNDEFINED_STATUS": 0,
+                            "CONDITIONS_NOT_MET": 363628457,
+                            "NOT_RECOMMENDED_REASON_STATUS_UNSPECIFIED": 183381653,
+                            "NO_CAPACITY": 274240888
+                          }
+                        }
+                      }
+                    },
+                    "CalendarModeExtensionAdviceRpcRequest": {
+                      "fields": {
+                        "calendarModeExtensionAdviceRequestResource": {
+                          "type": "CalendarModeExtensionAdviceRequest",
+                          "id": 450334890,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "CalendarModeRecommendation": {
                       "fields": {
                         "recommendationsPerSpec": {
@@ -150574,6 +151539,9 @@
                             "NETWORK_OPTIMIZED_U4P": 147044872,
                             "NETWORK_OPTIMIZED_U4S": 147044875,
                             "STORAGE_OPTIMIZED_Z3": 316796085,
+                            "STORAGE_OPTIMIZED_Z4D4T": 18503022,
+                            "STORAGE_OPTIMIZED_Z4DH": 35233722,
+                            "STORAGE_OPTIMIZED_Z4DS": 35233733,
                             "TYPE_UNSPECIFIED": 437714322
                           }
                         }
@@ -159047,6 +160015,33 @@
                         }
                       }
                     },
+                    "DynamicCompressionPolicy": {
+                      "oneofs": {
+                        "_compressionMode": {
+                          "oneof": [
+                            "compressionMode"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "compressionMode": {
+                          "type": "string",
+                          "id": 95520988,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "CompressionMode": {
+                          "values": {
+                            "UNDEFINED_COMPRESSION_MODE": 0,
+                            "AUTOMATIC": 165298699,
+                            "DISABLED": 516696700
+                          }
+                        }
+                      }
+                    },
                     "EnableXpnHostProjectRequest": {
                       "oneofs": {
                         "_requestId": {
@@ -165774,6 +166769,45 @@
                         }
                       }
                     },
+                    "GetIamPolicyRegionSslPolicyRequest": {
+                      "oneofs": {
+                        "_optionsRequestedPolicyVersion": {
+                          "oneof": [
+                            "optionsRequestedPolicyVersion"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "optionsRequestedPolicyVersion": {
+                          "type": "int32",
+                          "id": 499220029,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "resource": {
+                          "type": "string",
+                          "id": 195806222,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "GetIamPolicyReservationBlockRequest": {
                       "oneofs": {
                         "_optionsRequestedPolicyVersion": {
@@ -166016,6 +167050,38 @@
                       }
                     },
                     "GetIamPolicySnapshotRequest": {
+                      "oneofs": {
+                        "_optionsRequestedPolicyVersion": {
+                          "oneof": [
+                            "optionsRequestedPolicyVersion"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "optionsRequestedPolicyVersion": {
+                          "type": "int32",
+                          "id": 499220029,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "resource": {
+                          "type": "string",
+                          "id": 195806222,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "GetIamPolicySslPolicyRequest": {
                       "oneofs": {
                         "_optionsRequestedPolicyVersion": {
                           "oneof": [
@@ -170919,6 +171985,7 @@
                           "values": {
                             "UNDEFINED_TYPE": 0,
                             "BARE_METAL_LINUX_COMPATIBLE": 354232740,
+                            "BMSAI_CAPABLE": 449302109,
                             "CCA_CAPABLE": 79012270,
                             "FEATURE_TYPE_UNSPECIFIED": 531767259,
                             "GVNIC": 68209305,
@@ -173987,6 +175054,11 @@
                             "corsPolicy"
                           ]
                         },
+                        "_dynamicCompressionPolicy": {
+                          "oneof": [
+                            "dynamicCompressionPolicy"
+                          ]
+                        },
                         "_faultInjectionPolicy": {
                           "oneof": [
                             "faultInjectionPolicy"
@@ -174034,6 +175106,13 @@
                         "corsPolicy": {
                           "type": "CorsPolicy",
                           "id": 398943748,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "dynamicCompressionPolicy": {
+                          "type": "DynamicCompressionPolicy",
+                          "id": 356626987,
                           "options": {
                             "proto3_optional": true
                           }
@@ -183512,7 +184591,21 @@
                       }
                     },
                     "InstancePropertiesPatch": {
+                      "oneofs": {
+                        "_exposeHostTopology": {
+                          "oneof": [
+                            "exposeHostTopology"
+                          ]
+                        }
+                      },
                       "fields": {
+                        "exposeHostTopology": {
+                          "type": "bool",
+                          "id": 428530155,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "labels": {
                           "keyType": "string",
                           "type": "string",
@@ -189174,12 +190267,24 @@
                           "oneof": [
                             "failOpen"
                           ]
+                        },
+                        "_interconnectKeyGroup": {
+                          "oneof": [
+                            "interconnectKeyGroup"
+                          ]
                         }
                       },
                       "fields": {
                         "failOpen": {
                           "type": "bool",
                           "id": 532597451,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "interconnectKeyGroup": {
+                          "type": "string",
+                          "id": 304265774,
                           "options": {
                             "proto3_optional": true
                           }
@@ -228205,6 +229310,11 @@
                             "host"
                           ]
                         },
+                        "_machine": {
+                          "oneof": [
+                            "machine"
+                          ]
+                        },
                         "_subblock": {
                           "oneof": [
                             "subblock"
@@ -228236,6 +229346,13 @@
                         "host": {
                           "type": "string",
                           "id": 3208616,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "machine": {
+                          "type": "string",
+                          "id": 288441415,
                           "options": {
                             "proto3_optional": true
                           }
@@ -233061,6 +234178,11 @@
                             "availabilityDomain"
                           ]
                         },
+                        "_exposeHostTopology": {
+                          "oneof": [
+                            "exposeHostTopology"
+                          ]
+                        },
                         "_gracefulShutdown": {
                           "oneof": [
                             "gracefulShutdown"
@@ -233153,6 +234275,13 @@
                         "availabilityDomain": {
                           "type": "int32",
                           "id": 252514344,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "exposeHostTopology": {
+                          "type": "bool",
+                          "id": 428530155,
                           "options": {
                             "proto3_optional": true
                           }
@@ -237540,6 +238669,38 @@
                         }
                       }
                     },
+                    "SetIamPolicyRegionSslPolicyRequest": {
+                      "fields": {
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "regionSetPolicyRequestResource": {
+                          "type": "RegionSetPolicyRequest",
+                          "id": 276489091,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "resource": {
+                          "type": "string",
+                          "id": 195806222,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "SetIamPolicyReservationBlockRequest": {
                       "fields": {
                         "parentResource": {
@@ -237740,6 +238901,31 @@
                       }
                     },
                     "SetIamPolicySnapshotRequest": {
+                      "fields": {
+                        "globalSetPolicyRequestResource": {
+                          "type": "GlobalSetPolicyRequest",
+                          "id": 337048498,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "resource": {
+                          "type": "string",
+                          "id": 195806222,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "SetIamPolicySslPolicyRequest": {
                       "fields": {
                         "globalSetPolicyRequestResource": {
                           "type": "GlobalSetPolicyRequest",
@@ -258619,6 +259805,26 @@
                             }
                           ]
                         },
+                        "CalendarModeExtension": {
+                          "requestType": "CalendarModeExtensionAdviceRpcRequest",
+                          "responseType": "CalendarModeExtensionAdviceResponse",
+                          "options": {
+                            "(google.api.http).body": "calendar_mode_extension_advice_request_resource",
+                            "(google.api.http).post": "/compute/beta/projects/{project}/regions/{region}/advice/calendarModeExtension",
+                            "(google.api.method_signature)": "project,region,calendar_mode_extension_advice_request_resource"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "calendar_mode_extension_advice_request_resource",
+                                "post": "/compute/beta/projects/{project}/regions/{region}/advice/calendarModeExtension"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,region,calendar_mode_extension_advice_request_resource"
+                            }
+                          ]
+                        },
                         "Capacity": {
                           "requestType": "CapacityAdviceRpcRequest",
                           "responseType": "CapacityAdviceResponse",
@@ -275909,6 +277115,24 @@
                             }
                           ]
                         },
+                        "GetIamPolicy": {
+                          "requestType": "GetIamPolicyRegionSslPolicyRequest",
+                          "responseType": "Policy",
+                          "options": {
+                            "(google.api.http).get": "/compute/beta/projects/{project}/regions/{region}/sslPolicies/{resource}/getIamPolicy",
+                            "(google.api.method_signature)": "project,region,resource"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/compute/beta/projects/{project}/regions/{region}/sslPolicies/{resource}/getIamPolicy"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,region,resource"
+                            }
+                          ]
+                        },
                         "Insert": {
                           "requestType": "InsertRegionSslPolicyRequest",
                           "responseType": "Operation",
@@ -275990,6 +277214,26 @@
                             },
                             {
                               "(google.cloud.operation_service)": "RegionOperations"
+                            }
+                          ]
+                        },
+                        "SetIamPolicy": {
+                          "requestType": "SetIamPolicyRegionSslPolicyRequest",
+                          "responseType": "Policy",
+                          "options": {
+                            "(google.api.http).body": "region_set_policy_request_resource",
+                            "(google.api.http).post": "/compute/beta/projects/{project}/regions/{region}/sslPolicies/{resource}/setIamPolicy",
+                            "(google.api.method_signature)": "project,region,resource,region_set_policy_request_resource"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "region_set_policy_request_resource",
+                                "post": "/compute/beta/projects/{project}/regions/{region}/sslPolicies/{resource}/setIamPolicy"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,region,resource,region_set_policy_request_resource"
                             }
                           ]
                         },
@@ -279575,6 +280819,24 @@
                             }
                           ]
                         },
+                        "GetIamPolicy": {
+                          "requestType": "GetIamPolicySslPolicyRequest",
+                          "responseType": "Policy",
+                          "options": {
+                            "(google.api.http).get": "/compute/beta/projects/{project}/global/sslPolicies/{resource}/getIamPolicy",
+                            "(google.api.method_signature)": "project,resource"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/compute/beta/projects/{project}/global/sslPolicies/{resource}/getIamPolicy"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,resource"
+                            }
+                          ]
+                        },
                         "Insert": {
                           "requestType": "InsertSslPolicyRequest",
                           "responseType": "Operation",
@@ -279656,6 +280918,26 @@
                             },
                             {
                               "(google.cloud.operation_service)": "GlobalOperations"
+                            }
+                          ]
+                        },
+                        "SetIamPolicy": {
+                          "requestType": "SetIamPolicySslPolicyRequest",
+                          "responseType": "Policy",
+                          "options": {
+                            "(google.api.http).body": "global_set_policy_request_resource",
+                            "(google.api.http).post": "/compute/beta/projects/{project}/global/sslPolicies/{resource}/setIamPolicy",
+                            "(google.api.method_signature)": "project,resource,global_set_policy_request_resource"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "global_set_policy_request_resource",
+                                "post": "/compute/beta/projects/{project}/global/sslPolicies/{resource}/setIamPolicy"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,resource,global_set_policy_request_resource"
                             }
                           ]
                         },

@@ -169,6 +169,18 @@ describe('MultiplexedSession', () => {
     });
   });
 
+  describe('getSessionSync', () => {
+    it('should return null when no session is cached', () => {
+      multiplexedSession._multiplexedSession = null;
+      assert.strictEqual(multiplexedSession.getSessionSync(), null);
+    });
+
+    it('should synchronously return the cached session when available', () => {
+      multiplexedSession._multiplexedSession = fakeMuxSession;
+      assert.strictEqual(multiplexedSession.getSessionSync(), fakeMuxSession);
+    });
+  });
+
   describe('getSession', () => {
     let restoreProcessListeners: (() => void) | null = null;
 

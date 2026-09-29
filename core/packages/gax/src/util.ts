@@ -23,16 +23,45 @@ const randomUUID = () =>
   globalThis.crypto?.randomUUID() || require('crypto').randomUUID();
 
 /**
- * Checks if telemetry tracing is enabled
+ * Checks if telemetry tracing is enabled.
+ *
+ * If `GOOGLE_SDK_NODE_ENABLE_TRACING` is explicitly set, then the client option
+ * doesn't matter (only the environment variable determines whether tracing is enabled).
+ * The client option is only checked if the environment variable isn't set.
+ *
+ * Tracing can be enabled purely through environment variables without
+ * requiring client libraries to pass generator parameters, as metadata
+ * is resolved dynamically at runtime.
+ *
+ * If the environment variable is not set, tracing requires the client option
+ * and the client must have supplied `internalTelemetryInfo` (the extra protoc param).
+ *
  * @param settings
  * @returns true if telemetry tracing is enabled, false otherwise
  */
 export function checkTelemetryEnabled(settings?: CallSettings): boolean {
-  const tracingEnabled =
-    Boolean(settings?.enableTelemetryTracing) &&
-    process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED === 'true' &&
-    settings?.otherArgs?.internalTelemetryInfo !== undefined;
-  return Boolean(tracingEnabled);
+  // `process` is undeclared in browsers and some edge runtimes, where reading
+  // it would throw a ReferenceError rather than yield undefined, so it is
+  // reached through a `typeof` guard and stands in as an empty environment.
+  const env: Record<string, string | undefined> =
+    typeof process === 'object' && typeof process.env === 'object'
+      ? process.env
+      : {};
+  const envOptIn = env.GOOGLE_SDK_NODE_ENABLE_TRACING?.trim();
+
+  if (envOptIn !== undefined && envOptIn !== '') {
+    const lower = envOptIn.toLowerCase();
+    return lower === 'true' || lower === '1';
+  }
+
+  const clientOptIn = Boolean(
+    settings?.enableTelemetryTracing ||
+    settings?.otherArgs?.enableTelemetryTracing,
+  );
+
+  return (
+    clientOptIn && settings?.otherArgs?.internalTelemetryInfo !== undefined
+  );
 }
 
 function words(str: string, normalize = false) {
@@ -176,3 +205,106 @@ export const decodeAnyProtosInArray = (
   }
   return protoListDecoded;
 };
+
+/**
+ * System and network error codes mapped to CLIENT_CONNECTION_ERROR.
+ */
+export const connectionCodes = [
+  'ENOTFOUND',
+  'EAI_AGAIN',
+  'ECONNREFUSED',
+  'ECONNRESET',
+  'EHOSTUNREACH',
+  'ENETUNREACH',
+  'ENETDOWN',
+  'EPIPE',
+  'UND_ERR_CONNECT_TIMEOUT',
+  'UND_ERR_SOCKET',
+  'CERT_HAS_EXPIRED',
+  'UNABLE_TO_VERIFY_LEAF_SIGNATURE',
+  'DEPTH_ZERO_SELF_SIGNED_CERT',
+  'SELF_SIGNED_CERT_IN_CHAIN',
+  'ERR_TLS_CERT_ALTNAME_INVALID',
+  'UNABLE_TO_GET_ISSUER_CERT',
+];
+
+/**
+ * System and client request error codes mapped to CLIENT_REQUEST_ERROR.
+ */
+export const requestCodes = [
+  'ERR_INVALID_ARG_TYPE',
+  'ERR_INVALID_URL',
+  'ERR_HTTP_INVALID_HEADER_VALUE',
+  'ERR_INVALID_HTTP_TOKEN',
+  'ERR_INVALID_PROTOCOL',
+  'ERR_INVALID_ARG_VALUE',
+];
+
+/**
+ * Stream and body error codes mapped to CLIENT_REQUEST_BODY_ERROR.
+ */
+export const requestBodyCodes = [
+  'ERR_STREAM_WRITE_AFTER_END',
+  'ERR_STREAM_DESTROYED',
+  'ERR_STREAM_ALREADY_FINISHED',
+  'ERR_STREAM_CANNOT_PIPE',
+  'ERR_STREAM_NULL_VALUES',
+  'ERR_STREAM_PREMATURE_CLOSE',
+];
+
+/**
+ * Buffer error codes mapped to CLIENT_RESPONSE_DECODE_ERROR.
+ */
+export const decodeCodes = ['ERR_BUFFER_OUT_OF_BOUNDS'];
+
+/**
+ * Redirect error codes mapped to CLIENT_REDIRECT_ERROR.
+ */
+export const redirectCodes = [
+  'ERR_TOO_MANY_REDIRECTS',
+  'ERR_FR_TOO_MANY_REDIRECTS',
+];
+
+/**
+ * Generic class / constructor names that should be unwrapped to find more specific error causes.
+ */
+export const genericClasses = [
+  'Error',
+  'GoogleError',
+  'Object',
+  'DOMException',
+];
+
+/**
+ * Error codes indicating failures prior to network connection establishment.
+ */
+export const preConnectionCodes = [
+  'ENOTFOUND',
+  'EAI_AGAIN',
+  'ECONNREFUSED',
+  'ECONNRESET',
+  'EHOSTUNREACH',
+  'ENETUNREACH',
+  'ERR_INVALID_ARG_TYPE',
+  'ERR_INVALID_URL',
+];
+
+/**
+ * Standard or infrastructure tokens in the x-goog-api-client header that should
+ * be ignored when resolving the client artifact/package name.
+ */
+export const ignoredClientHeaderTokens = [
+  'gl-node',
+  'gl-web',
+  'grpc',
+  'rest',
+  'gax',
+  'auth',
+  'gapic',
+  'gccl',
+];
+
+/**
+ * Maximum traversal depth for unwrapping nested error causes.
+ */
+export const DEPTH_TO_CHECK = 10;

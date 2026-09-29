@@ -296,6 +296,9 @@ export class PrivateAuctionDealServiceClient {
       daiEncodingProfilePathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/daiEncodingProfiles/{dai_encoding_profile}',
       ),
+      daiSessionPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/daiSessions/{dai_session}',
+      ),
       defaultThirdPartyDataDeclarationPathTemplate:
         new this._gaxModule.PathTemplate(
           'networks/{network_code}/defaultThirdPartyDataDeclaration',
@@ -1055,6 +1058,7 @@ export class PrivateAuctionDealServiceClient {
    *
    *   **Filterable fields:**
    *
+   *   * `archived`
    *   * `auctionPriorityEnabled`
    *   * `blockOverrideEnabled`
    *   * `buyerAccountId`
@@ -1066,6 +1070,7 @@ export class PrivateAuctionDealServiceClient {
    *   * `privateAuctionDealId`
    *   * `privateAuctionDisplayName`
    *   * `privateAuctionId`
+   *   * `publisherFloorExempt`
    *   * `status`
    *   * `updateTime`
    * @param {string} [request.orderBy]
@@ -1216,6 +1221,7 @@ export class PrivateAuctionDealServiceClient {
    *
    *   **Filterable fields:**
    *
+   *   * `archived`
    *   * `auctionPriorityEnabled`
    *   * `blockOverrideEnabled`
    *   * `buyerAccountId`
@@ -1227,6 +1233,7 @@ export class PrivateAuctionDealServiceClient {
    *   * `privateAuctionDealId`
    *   * `privateAuctionDisplayName`
    *   * `privateAuctionId`
+   *   * `publisherFloorExempt`
    *   * `status`
    *   * `updateTime`
    * @param {string} [request.orderBy]
@@ -1300,6 +1307,7 @@ export class PrivateAuctionDealServiceClient {
    *
    *   **Filterable fields:**
    *
+   *   * `archived`
    *   * `auctionPriorityEnabled`
    *   * `blockOverrideEnabled`
    *   * `buyerAccountId`
@@ -1311,6 +1319,7 @@ export class PrivateAuctionDealServiceClient {
    *   * `privateAuctionDealId`
    *   * `privateAuctionDisplayName`
    *   * `privateAuctionId`
+   *   * `publisherFloorExempt`
    *   * `status`
    *   * `updateTime`
    * @param {string} [request.orderBy]
@@ -2517,6 +2526,44 @@ export class PrivateAuctionDealServiceClient {
     return this.pathTemplates.daiEncodingProfilePathTemplate.match(
       daiEncodingProfileName,
     ).dai_encoding_profile;
+  }
+
+  /**
+   * Return a fully-qualified daiSession resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} dai_session
+   * @returns {string} Resource name string.
+   */
+  daiSessionPath(networkCode: string, daiSession: string) {
+    return this.pathTemplates.daiSessionPathTemplate.render({
+      network_code: networkCode,
+      dai_session: daiSession,
+    });
+  }
+
+  /**
+   * Parse the network_code from DaiSession resource.
+   *
+   * @param {string} daiSessionName
+   *   A fully-qualified path representing DaiSession resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromDaiSessionName(daiSessionName: string) {
+    return this.pathTemplates.daiSessionPathTemplate.match(daiSessionName)
+      .network_code;
+  }
+
+  /**
+   * Parse the dai_session from DaiSession resource.
+   *
+   * @param {string} daiSessionName
+   *   A fully-qualified path representing DaiSession resource.
+   * @returns {string} A string representing the dai_session.
+   */
+  matchDaiSessionFromDaiSessionName(daiSessionName: string) {
+    return this.pathTemplates.daiSessionPathTemplate.match(daiSessionName)
+      .dai_session;
   }
 
   /**

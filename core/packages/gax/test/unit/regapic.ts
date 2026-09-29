@@ -185,6 +185,38 @@ describe('REGAPIC', () => {
     });
   });
 
+  it('should report a streaming request failure to the callback as well', done => {
+    const requestObject = {content: 'test content'};
+
+    setMockFallbackResponse(
+      gaxGrpc,
+      new Response(JSON.stringify({error: {message: 'Fetch error'}}), {
+        status: 500,
+      }),
+    );
+    void gaxGrpc.createStub(echoService, stubOptions).then(echoStub => {
+      // The test above omits the callback, which leaves the `callback(err)`
+      // arm of the stub's stream failure path unexercised. A generated client
+      // always passes one, and both have to fire: the callback settles
+      // whatever is waiting on the call, and the 'error' event reaches the
+      // consumer of the stream.
+      let callbackErr: Error | undefined;
+      const stream = echoStub.expand(requestObject, {}, {}, (err?: Error) => {
+        callbackErr = err;
+      }) as StreamArrayParser;
+      stream.on('error', err => {
+        try {
+          assert.strictEqual((err as Error).message, 'Fetch error');
+          // Reported before the event is emitted, so it is already set here.
+          assert.strictEqual(callbackErr?.message, 'Fetch error');
+          done();
+        } catch (err) {
+          done(err);
+        }
+      });
+    });
+  });
+
   describe('should support enum conversion in proto message', () => {
     it('should support enum conversion in proto message response', done => {
       const requestObject = {name: 'shelves/shelf-name'};

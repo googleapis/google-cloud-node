@@ -169,6 +169,11 @@
                 "calendarMode"
               ]
             },
+            "CalendarModeExtension": {
+              "methods": [
+                "calendarModeExtension"
+              ]
+            },
             "Capacity": {
               "methods": [
                 "capacity"
@@ -187,6 +192,11 @@
             "CalendarMode": {
               "methods": [
                 "calendarMode"
+              ]
+            },
+            "CalendarModeExtension": {
+              "methods": [
+                "calendarModeExtension"
               ]
             },
             "Capacity": {
@@ -9950,6 +9960,11 @@
                 "get"
               ]
             },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
             "Insert": {
               "methods": [
                 "insert"
@@ -9963,6 +9978,11 @@
             "Patch": {
               "methods": [
                 "patch"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
               ]
             },
             "TestIamPermissions": {
@@ -9992,6 +10012,11 @@
                 "get"
               ]
             },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
             "Insert": {
               "methods": [
                 "insert"
@@ -10005,6 +10030,11 @@
             "Patch": {
               "methods": [
                 "patch"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
               ]
             },
             "TestIamPermissions": {
@@ -12060,6 +12090,11 @@
                 "get"
               ]
             },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
             "Insert": {
               "methods": [
                 "insert"
@@ -12073,6 +12108,11 @@
             "Patch": {
               "methods": [
                 "patch"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
               ]
             },
             "TestIamPermissions": {
@@ -12109,6 +12149,11 @@
                 "get"
               ]
             },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
             "Insert": {
               "methods": [
                 "insert"
@@ -12122,6 +12167,11 @@
             "Patch": {
               "methods": [
                 "patch"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
               ]
             },
             "TestIamPermissions": {

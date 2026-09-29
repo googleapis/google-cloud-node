@@ -227,12 +227,16 @@ describe('Bucket', () => {
   before(() => {
     const bucketModule = proxyquire('../src/bucket.js', {
       fs: fakeFs,
-      'p-limit': fakePLimit,
       '@google-cloud/promisify': fakePromisify,
       '@google-cloud/paginator': fakePaginator,
       './nodejs-common': {
         ServiceObject: FakeServiceObject,
         util: fakeUtil,
+      },
+      './util.js': {
+        ...require('../src/util.js'),
+        getPLimit: async () => fakePLimit,
+        getMime: async () => mime,
       },
       './acl.js': {Acl: FakeAcl},
       './file.js': {File: FakeFile},

@@ -342,14 +342,14 @@ with an issue in this repository.
 
 1.  Install dependencies:
 
-        npm install
+        pnpm install
 
 1.  Run the tests:
 
-        npm test
+        pnpm run test
 
 1.  Lint (and maybe fix) any changes:
 
-        npm run fix
+        pnpm run fix
 
 [setup]: https://cloud.google.com/nodejs/docs/setup

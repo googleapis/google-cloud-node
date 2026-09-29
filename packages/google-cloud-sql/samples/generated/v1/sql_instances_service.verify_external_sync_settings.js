@@ -68,6 +68,10 @@ function main() {
    *  this field is empty, then migrate all objects.
    */
   // const selectedObjects = [1,2,3,4]
+  /**
+   *  Optional. Region of the Cloud SQL instance.
+   */
+  // const location = 'abc123'
 
   // Imports the Sql library
   const {SqlInstancesServiceClient} = require('@google-cloud/sql').v1;

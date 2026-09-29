@@ -14,9 +14,11 @@
  * limitations under the License.
  */
 
+/* eslint-disable import/namespace, promise/catch-or-return, promise/always-return */
+
 import {GrpcService, GrpcServiceConfig} from './common-grpc/service';
 import {PreciseDate} from '@google-cloud/precise-date';
-import {replaceProjectIdToken} from './helper';
+import {hasProjectIdToken, replaceProjectIdToken} from './helper';
 import {promisifyAll} from '@google-cloud/promisify';
 import * as extend from 'extend';
 import {GoogleAuth, GoogleAuthOptions} from 'google-auth-library';
@@ -41,7 +43,7 @@ import {
   IProtoMessageParams,
   IProtoEnumParams,
 } from './codec';
-import {context, propagation} from '@opentelemetry/api';
+import {context, propagation, ROOT_CONTEXT} from '@opentelemetry/api';
 import {Backup} from './backup';
 import {Database} from './database';
 import {
@@ -74,6 +76,8 @@ import {
   CLOUD_RESOURCE_HEADER,
   NormalCallback,
   getCommonHeaders,
+  isAFEServerTimingEnabled,
+  resetAFEServerTimingForTest,
 } from './common';
 import {Session} from './session';
 import {SessionPool} from './session-pool';
@@ -103,6 +107,7 @@ import {MetricInterceptor} from './metrics/interceptor';
 import {CloudMonitoringMetricsExporter} from './metrics/spanner-metrics-exporter';
 import {MetricsTracerFactory} from './metrics/metrics-tracer-factory';
 import {MetricsTracer} from './metrics/metrics-tracer';
+import {RequestStreamCoordinator} from './request-stream-coordinator';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const gcpApiConfig = require('./spanner_grpc_config.json');
@@ -155,6 +160,8 @@ export type GetInstanceConfigOperationsCallback = PagedCallback<
  * DirectedReadOptions won't be set for readWrite transactions"
  * @property {ObservabilityOptions} [observabilityOptions] Sets the observability options to be used for OpenTelemetry tracing
  * @property {boolean} [disableBuiltInMetrics=True] If set to true, built-in metrics will be disabled.
+ * @property {number} ['grpc.enable_channelz'=0] Whether to enable gRPC Channelz service tracking.
+ * Defaults to 0 (disabled) to eliminate per-RPC tracking and allocation overhead. Set to 1 to enable.
  */
 export interface SpannerOptions extends GrpcClientOptions {
   apiEndpoint?: string;
@@ -182,6 +189,12 @@ export interface SpannerOptions extends GrpcClientOptions {
    */
   universe_domain?: string;
   universeDomain?: string;
+  /**
+   * Whether to enable gRPC Channelz service tracking.
+   * Defaults to `0` (disabled) to eliminate per-RPC allocation and tracking overhead.
+   * Set to `1` if live connection introspection via gRPC Channelz (e.g. grpcdebug) is required.
+   */
+  'grpc.enable_channelz'?: number;
 }
 export interface RequestConfig {
   client: string;
@@ -190,6 +203,7 @@ export interface RequestConfig {
   reqOpts: any;
   gaxOpts?: CallOptions;
   headers: {[k: string]: string};
+  metricsTracer?: MetricsTracer;
 }
 export interface CreateInstanceRequest {
   config?: string;
@@ -329,8 +343,10 @@ class Spanner extends GrpcService {
   private _universeDomain: string;
   private _isInSecureCredentials: boolean;
   private _metricsEnabled = false;
-  private static _isAFEServerTimingEnabled: boolean | undefined;
   readonly _nthClientId: number;
+  private _pendingProjectIdCallbacks?: Array<
+    (error: Error | null, projectId?: string) => void
+  >;
 
   /**
    * Placeholder used to auto populate a column with the commit timestamp.
@@ -349,24 +365,18 @@ class Spanner extends GrpcService {
    * Returns whether AFE (Application Frontend Extension) server timing is enabled.
    *
    * This method checks the value of the environment variable
-   * `SPANNER_DISABLE_AFE_SERVER_TIMING`. If the variable is explicitly set to the
-   * string `'true'`, then AFE server timing is considered disabled, and this method
-   * returns `false`. For all other values (including if the variable is unset),
-   * the method returns `true`.
+   * `SPANNER_DISABLE_AFE_SERVER_TIMING`. If the variable is explicitly set to
+   * the string `'true'` (case-insensitive), then AFE server timing is
+   * considered disabled, and this method returns `false`. For all other
+   * values (including if the variable is unset), the method returns `true`.
    *
    * @returns {boolean} `true` if AFE server timing is enabled; otherwise, `false`.
    */
-  public static isAFEServerTimingEnabled = (): boolean => {
-    if (this._isAFEServerTimingEnabled === undefined) {
-      this._isAFEServerTimingEnabled =
-        process.env['SPANNER_DISABLE_AFE_SERVER_TIMING'] !== 'true';
-    }
-    return this._isAFEServerTimingEnabled;
-  };
+  public static isAFEServerTimingEnabled = isAFEServerTimingEnabled;
 
   /** Resets the cached value (use in tests if env changes). */
   public static _resetAFEServerTimingForTest(): void {
-    this._isAFEServerTimingEnabled = undefined;
+    resetAFEServerTimingForTest();
   }
 
   /**
@@ -423,6 +433,8 @@ class Spanner extends GrpcService {
         scopes,
         // Add grpc keep alive setting
         'grpc.keepalive_time_ms': 120000,
+        // Disable Channelz by default to reduce per-RPC tracking and allocation overhead
+        'grpc.enable_channelz': 0,
         // Enable grpc-gcp support
         'grpc.callInvocationTransformer': grpcGcp.gcpCallInvocationTransformer,
         'grpc.channelFactoryOverride': grpcGcp.gcpChannelFactoryOverride,
@@ -534,7 +546,7 @@ class Spanner extends GrpcService {
     if (!this.clients_.has(clientName)) {
       this.clients_.set(
         clientName,
-        new v1[clientName](this.options as ClientOptions),
+        new v1.InstanceAdminClient(this.options as ClientOptions),
       );
     }
     return this.clients_.get(clientName)! as v1.InstanceAdminClient;
@@ -558,7 +570,7 @@ class Spanner extends GrpcService {
     if (!this.clients_.has(clientName)) {
       this.clients_.set(
         clientName,
-        new v1[clientName](this.options as ClientOptions),
+        new v1.DatabaseAdminClient(this.options as ClientOptions),
       );
     }
     return this.clients_.get(clientName)! as v1.DatabaseAdminClient;
@@ -612,16 +624,14 @@ class Spanner extends GrpcService {
     };
 
     const res = performTeardown();
-
     if (callback) {
       // process.nextTick prevents Unhandled Promise Rejections if callback throws
-      res.then(
-        () => process.nextTick(() => callback(null)),
-        err => process.nextTick(() => callback(err)),
-      );
-    } else {
-      return res;
+      res
+        .then(() => process.nextTick(() => callback(null)))
+        .catch(err => process.nextTick(() => callback(err)));
+      return;
     }
+    return res;
   }
 
   /**
@@ -1676,35 +1686,46 @@ class Spanner extends GrpcService {
       !metricsExplicitlyDisabled && !this._isInSecureCredentials;
     MetricsTracerFactory.enabled = this._metricsEnabled;
     if (this._metricsEnabled) {
-      try {
-        this.auth.getProjectId((err, projectId) => {
-          if (err || !projectId) {
-            console.error(
-              'Unable to get Project Id for client side metrics, will skip exporting client' +
-                ' side metrics' +
-                err,
-            );
-            return;
-          }
-
-          this.projectId_ = projectId;
-          const factory = MetricsTracerFactory.getInstance(projectId);
-          const periodicReader = new PeriodicExportingMetricReader({
-            exporter: new CloudMonitoringMetricsExporter(
-              {auth: this.auth},
-              projectId,
-            ),
-            exportIntervalMillis: 60000,
+      const initializeMetrics = (projectId: string) => {
+        this.projectId_ = projectId;
+        const factory = MetricsTracerFactory.getInstance(projectId);
+        if (factory && !factory.hasMetricReaders()) {
+          context.with(ROOT_CONTEXT, () => {
+            const periodicReader = new PeriodicExportingMetricReader({
+              exporter: new CloudMonitoringMetricsExporter(
+                {auth: this.auth},
+                projectId,
+              ),
+              exportIntervalMillis: 60000,
+            });
+            factory.getMeterProvider([periodicReader]);
           });
-          // Retrieve the MeterProvider to trigger construction
-          factory!.getMeterProvider([periodicReader]);
-        });
-      } catch (err) {
-        console.error(
-          'Unable to configure client side metrics, will skip exporting client' +
-            ' side metrics' +
-            err,
-        );
+        }
+      };
+
+      if (this.projectId_ && this.projectId_ !== '{{projectId}}') {
+        initializeMetrics(this.projectId_);
+      } else {
+        try {
+          this.auth.getProjectId((err, projectId) => {
+            if (err || !projectId) {
+              console.error(
+                'Unable to get Project Id for client side metrics, will skip exporting client' +
+                  ' side metrics' +
+                  err,
+              );
+              return;
+            }
+
+            initializeMetrics(projectId);
+          });
+        } catch (err) {
+          console.error(
+            'Unable to configure client side metrics, will skip exporting client' +
+              ' side metrics' +
+              err,
+          );
+        }
       }
     }
   }
@@ -1718,51 +1739,136 @@ class Spanner extends GrpcService {
    * @param {object} config Request config
    * @param {function} callback Callback function
    */
-  prepareGapicRequest_(config, callback) {
-    this.auth.getProjectId((err, projectId) => {
-      if (err) {
-        callback(err);
+  prepareGapicRequest_(
+    config: RequestConfig,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    callback: (err: Error | null, requestFn?: any) => void,
+  ): void {
+    if (this.projectId && this.projectIdReplaced_) {
+      this._prepareGapicRequestWithProjectId(config, this.projectId, callback);
+      return;
+    }
+    if (this._pendingProjectIdCallbacks) {
+      this._pendingProjectIdCallbacks.push((error, projectId) => {
+        if (error) {
+          callback(error);
+          return;
+        }
+        this._prepareGapicRequestWithProjectId(config, projectId!, callback);
+      });
+      return;
+    }
+    this._pendingProjectIdCallbacks = [];
+    this.auth.getProjectId((error, projectId) => {
+      const pendingCallbacks = this._pendingProjectIdCallbacks || [];
+      this._pendingProjectIdCallbacks = undefined;
+      if (error) {
+        try {
+          callback(error);
+        } finally {
+          for (const pendingCallback of pendingCallbacks) {
+            try {
+              pendingCallback(error);
+            } catch {
+              // Prevent one failing user callback from stranding subsequent pending callers.
+            }
+          }
+        }
         return;
       }
-      const clientName = config.client;
       try {
-        if (!this.clients_.has(clientName)) {
-          this.clients_.set(clientName, new v1[clientName](this.options));
+        this._prepareGapicRequestWithProjectId(config, projectId!, callback);
+      } finally {
+        for (const pendingCallback of pendingCallbacks) {
+          try {
+            pendingCallback(null, projectId!);
+          } catch {
+            // Prevent one failing user callback from stranding subsequent pending callers.
+          }
         }
-      } catch (err) {
-        callback(err, null);
+      }
+    });
+  }
+
+  private _prepareGapicRequestWithProjectId(
+    config: RequestConfig,
+    projectId: string,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    callback: (err: Error | null, requestFn?: any) => void,
+  ): void {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    let wrappedRequestFn: any;
+    try {
+      const clientName = config.client;
+      if (!this.clients_.has(clientName)) {
+        this.clients_.set(
+          clientName,
+          new (v1 as Record<string, any>)[clientName](this.options),
+        );
       }
       const gaxClient = this.clients_.get(clientName)!;
-      let reqOpts = extend(true, {}, config.reqOpts);
-      reqOpts = replaceProjectIdToken(reqOpts, projectId!);
-      // It would have been preferable to replace the projectId already in the
-      // constructor of Spanner, but that is not possible as auth.getProjectId
-      // is an async method. This is therefore the first place where we have
-      // access to the value that should be used instead of the placeholder.
+      let reqOpts = config.reqOpts;
+      if (!this.projectIdReplaced_ || hasProjectIdToken(reqOpts)) {
+        reqOpts = extend(true, {}, config.reqOpts);
+        reqOpts = replaceProjectIdToken(reqOpts, projectId);
+      }
       if (!this.projectIdReplaced_) {
-        this.projectId = replaceProjectIdToken(this.projectId, projectId!);
+        this.projectId = replaceProjectIdToken(this.projectId, projectId);
         this.projectFormattedName_ = replaceProjectIdToken(
           this.projectFormattedName_,
-          projectId!,
+          projectId,
         );
+        if (
+          this.commonHeaders_[CLOUD_RESOURCE_HEADER]?.includes('{{projectId}}')
+        ) {
+          this.commonHeaders_[CLOUD_RESOURCE_HEADER] = replaceProjectIdToken(
+            this.commonHeaders_[CLOUD_RESOURCE_HEADER],
+            projectId,
+          );
+        }
         this.instances_.forEach(instance => {
           instance.formattedName_ = replaceProjectIdToken(
             instance.formattedName_,
-            projectId!,
+            projectId,
           );
+          if (
+            instance.commonHeaders_?.[CLOUD_RESOURCE_HEADER]?.includes(
+              '{{projectId}}',
+            )
+          ) {
+            instance.commonHeaders_[CLOUD_RESOURCE_HEADER] =
+              replaceProjectIdToken(
+                instance.commonHeaders_[CLOUD_RESOURCE_HEADER],
+                projectId,
+              );
+          }
           instance.databases_.forEach(database => {
             database.formattedName_ = replaceProjectIdToken(
               database.formattedName_,
-              projectId!,
+              projectId,
             );
+            if (
+              database.commonHeaders_?.[CLOUD_RESOURCE_HEADER]?.includes(
+                '{{projectId}}',
+              )
+            ) {
+              database.commonHeaders_[CLOUD_RESOURCE_HEADER] =
+                replaceProjectIdToken(
+                  database.commonHeaders_[CLOUD_RESOURCE_HEADER],
+                  projectId,
+                );
+            }
           });
         });
         this.projectIdReplaced_ = true;
       }
-      config.headers[CLOUD_RESOURCE_HEADER] = replaceProjectIdToken(
-        config.headers[CLOUD_RESOURCE_HEADER],
-        projectId!,
-      );
+      config.headers = extend(true, {}, config.headers);
+      if (config.headers[CLOUD_RESOURCE_HEADER]?.includes('{{projectId}}')) {
+        config.headers[CLOUD_RESOURCE_HEADER] = replaceProjectIdToken(
+          config.headers[CLOUD_RESOURCE_HEADER],
+          projectId!,
+        );
+      }
       if (isTracingEnabled(this._observabilityOptions)) {
         // Do context propagation
         propagation.inject(context.active(), config.headers, {
@@ -1773,74 +1879,160 @@ class Spanner extends GrpcService {
         // Attach the x-goog-spanner-request-id to the currently active span.
         attributeXGoogSpannerRequestIdToActiveSpan(config);
       }
-      const interceptors: any[] = [];
-      if (this._metricsEnabled) {
-        interceptors.push(MetricInterceptor);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const customInterceptors: any[] =
+        config.gaxOpts?.otherArgs?.options?.interceptors ?? [];
+      const shouldIntercept =
+        this._metricsEnabled &&
+        (config.client === 'SpannerClient' || config.metricsTracer);
+      const interceptors = shouldIntercept
+        ? [...customInterceptors, MetricInterceptor]
+        : customInterceptors;
+      const headers = Object.assign(
+        {},
+        config.gaxOpts?.otherArgs?.headers,
+        config.headers,
+      );
+      const options = Object.assign({}, config.gaxOpts?.otherArgs?.options, {
+        interceptors,
+        metricsTracer: config.metricsTracer,
+      });
+      // Deep clone caller-owned properties to prevent downstream mutations
+      // (e.g. gax mutating `retry.backoffSettings`), while attaching our
+      // freshly merged otherArgs without redundantly deep-cloning them.
+      let gaxOpts: CallOptions;
+      if (config.gaxOpts) {
+        const {otherArgs: callerOtherArgs, ...restGaxOpts} = config.gaxOpts;
+        gaxOpts = extend(true, {}, restGaxOpts);
+        gaxOpts.otherArgs = Object.assign({}, callerOtherArgs, {
+          headers,
+          options,
+        });
+      } else {
+        gaxOpts = {otherArgs: {headers, options}};
       }
+
       const requestFn = gaxClient[config.method].bind(
         gaxClient,
         reqOpts,
-        // Add headers to `gaxOpts`
-        extend(true, {}, config.gaxOpts, {
-          otherArgs: {
-            headers: config.headers,
-            options: {
-              interceptors: interceptors,
-            },
-          },
-        }),
+        gaxOpts,
       );
 
-      // Wrap requestFn to inject the spanner request id into every returned error.
-      const wrappedRequestFn = (...args) => {
-        const hasCallback =
-          args &&
-          args.length > 0 &&
-          typeof args[args.length - 1] === 'function';
+      // Extract a lightweight config reference containing only headers so error
+      // enrichment is decoupled from the caller's mutable config object.
+      const errorConfig = {headers: config?.headers};
 
-        switch (hasCallback) {
-          case true: {
-            const cb = args[args.length - 1];
-            const priorArgs = args.slice(0, args.length - 1);
-            requestFn(...priorArgs, (...results) => {
-              if (results && results.length > 0) {
-                const err = results[0] as Error;
-                injectRequestIDIntoError(config, err);
+      // Wrap requestFn to inject the Spanner request ID (x-goog-spanner-request-id)
+      // into any error returned via callback, rejected promise, stream event, or
+      // synchronous exception.
+      //
+      // Because reqOpts and gaxOpts are already pre-bound to requestFn, wrappedRequestFn
+      // receives at most one argument: an optional callback.
+      wrappedRequestFn = (callback?: Function) => {
+        // Callback mode: invoke requestFn with an intercepted callback to enrich
+        // the error parameter before delegating to the caller's callback.
+        if (typeof callback === 'function') {
+          try {
+            requestFn((...results: unknown[]) => {
+              if (results[0]) {
+                injectRequestIDIntoError(errorConfig, results[0] as Error);
               }
-
-              cb(...results);
+              callback(...results);
             });
-            return;
+          } catch (err) {
+            injectRequestIDIntoError(errorConfig, err as Error);
+            throw err;
           }
-
-          case false: {
-            const res = requestFn(...args);
-            const stream = res as EventEmitter;
-            if (stream) {
-              stream.on('error', err => {
-                injectRequestIDIntoError(config, err as Error);
-              });
-            }
-
-            const originallyPromise = res instanceof Promise;
-            if (!originallyPromise) {
-              return res;
-            }
-
-            return new Promise((resolve, reject) => {
-              requestFn(...args)
-                .then(resolve)
-                .catch(err => {
-                  injectRequestIDIntoError(config, err as Error);
-                  reject(err);
-                });
-            });
-          }
+          return;
         }
-      };
 
-      callback(null, wrappedRequestFn);
-    });
+        // Non-callback mode: invoke requestFn() for Promise or Stream callers.
+        let res;
+        try {
+          res = requestFn();
+        } catch (err) {
+          injectRequestIDIntoError(errorConfig, err as Error);
+          throw err;
+        }
+
+        // Handle Promise / Thenable return values (e.g. unary requests).
+        // Attach a rejection handler to inject the request ID into rejected errors.
+        // If the promise is cancellable (e.g. google-gax CancellablePromise), preserve
+        // its .cancel() method so callers can cancel the underlying operation.
+        if (res && typeof (res as PromiseLike<unknown>).then === 'function') {
+          const chained = (res as PromiseLike<unknown>).then(null, err => {
+            injectRequestIDIntoError(errorConfig, err as Error);
+            throw err;
+          });
+          if (typeof (res as {cancel?: Function}).cancel === 'function') {
+            (chained as {cancel?: Function}).cancel = (
+              res as {cancel: Function}
+            ).cancel.bind(res);
+          }
+          return chained;
+        }
+
+        // Handle Stream return values (e.g. streaming reads or queries).
+        // Listen for 'error' events to enrich the emitted error with the request ID.
+        const stream = res as EventEmitter;
+        if (stream && typeof stream.on === 'function') {
+          stream.on('error', err => {
+            injectRequestIDIntoError(errorConfig, err as Error);
+          });
+        }
+
+        return res;
+      };
+    } catch (error) {
+      callback(error as Error, null);
+      return;
+    }
+
+    callback(null, wrappedRequestFn);
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  private _getResourceName(config?: any): string {
+    const reqOpts = config?.reqOpts;
+    if (reqOpts) {
+      if (typeof reqOpts.database === 'string') {
+        return reqOpts.database;
+      }
+      if (typeof reqOpts.session === 'string') {
+        return reqOpts.session;
+      }
+      if (typeof reqOpts.name === 'string') {
+        return reqOpts.name;
+      }
+    }
+    const resourceHeader = config?.headers?.[CLOUD_RESOURCE_HEADER];
+    if (typeof resourceHeader === 'string') {
+      return resourceHeader;
+    }
+    return '';
+  }
+
+  private _initMetricsTracer(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    config: any,
+  ): MetricsTracer | null {
+    let metricsTracer: MetricsTracer | null = null;
+    if (
+      this._metricsEnabled &&
+      config.client === 'SpannerClient' &&
+      this.projectId_ &&
+      this.projectId_ !== '{{projectId}}'
+    ) {
+      metricsTracer =
+        MetricsTracerFactory?.getInstance(this.projectId_)?.createMetricsTracer(
+          config.method,
+          this._getResourceName(config),
+          config.headers?.['x-goog-spanner-request-id'],
+        ) ?? null;
+    }
+    metricsTracer?.recordOperationStart();
+    config.metricsTracer = metricsTracer ?? undefined;
+    return metricsTracer;
   }
 
   /**
@@ -1856,31 +2048,43 @@ class Spanner extends GrpcService {
    */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   request(config: any, callback?: any): any {
-    let metricsTracer: MetricsTracer | null = null;
-    if (
-      this._metricsEnabled &&
-      config.client === 'SpannerClient' &&
-      this.projectId_
-    ) {
-      metricsTracer =
-        MetricsTracerFactory?.getInstance(this.projectId_)?.createMetricsTracer(
-          config.method,
-          config.reqOpts.database ?? config.reqOpts.session,
-          config.headers['x-goog-spanner-request-id'],
-        ) ?? null;
-    }
-    metricsTracer?.recordOperationStart();
+    const metricsTracer = this._initMetricsTracer(config);
     if (typeof callback === 'function') {
       this.prepareGapicRequest_(config, (err, requestFn) => {
         if (err) {
           callback(err);
           metricsTracer?.recordOperationCompletion();
         } else {
-          const wrappedCallback = (...args) => {
+          let callbackInvoked = false;
+          let callbackThrew = false;
+          let callbackError: unknown;
+          const wrappedCallback = (...args: unknown[]) => {
+            if (callbackInvoked) {
+              return;
+            }
+            callbackInvoked = true;
             metricsTracer?.recordOperationCompletion();
-            callback(...args);
+            try {
+              callback(...args);
+            } catch (error) {
+              callbackThrew = true;
+              callbackError = error;
+              throw error;
+            }
           };
-          requestFn(wrappedCallback);
+          try {
+            requestFn(wrappedCallback);
+          } catch (error) {
+            if (callbackThrew) {
+              throw callbackError;
+            }
+            if (callbackInvoked) {
+              return;
+            }
+            callbackInvoked = true;
+            metricsTracer?.recordOperationCompletion();
+            callback(error);
+          }
         }
       });
     } else {
@@ -1890,20 +2094,27 @@ class Spanner extends GrpcService {
             metricsTracer?.recordOperationCompletion();
             reject(err);
           } else {
-            const result = requestFn();
-            if (result && typeof result.then === 'function') {
-              result
-                .then(val => {
-                  metricsTracer?.recordOperationCompletion();
-                  resolve(val);
-                })
-                .catch(error => {
-                  metricsTracer?.recordOperationCompletion();
-                  reject(error);
-                });
-            } else {
+            try {
+              const result = requestFn();
+              if (result && typeof result.then === 'function') {
+                result
+                  .then(val => {
+                    metricsTracer?.recordOperationCompletion();
+                    resolve(val);
+                    return val;
+                  })
+                  .catch(error => {
+                    metricsTracer?.recordOperationCompletion();
+                    reject(error);
+                    return null;
+                  });
+              } else {
+                metricsTracer?.recordOperationCompletion();
+                resolve(result);
+              }
+            } catch (error) {
               metricsTracer?.recordOperationCompletion();
-              resolve(result);
+              reject(error);
             }
           }
         });
@@ -1924,40 +2135,22 @@ class Spanner extends GrpcService {
    */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   requestStream(config): any {
-    let metricsTracer: MetricsTracer | null = null;
-    if (
-      this._metricsEnabled &&
-      config.client === 'SpannerClient' &&
-      this.projectId_
-    ) {
-      metricsTracer =
-        MetricsTracerFactory?.getInstance(this.projectId_)?.createMetricsTracer(
-          config.method,
-          config.reqOpts.session ?? config.reqOpts.database,
-          config.headers['x-goog-spanner-request-id'],
-        ) ?? null;
-    }
-    metricsTracer?.recordOperationStart();
+    const metricsTracer = this._initMetricsTracer(config);
     const stream = streamEvents(through.obj());
+    const coordinator = new RequestStreamCoordinator(stream, metricsTracer);
+    coordinator.setup();
+
     stream.once('reading', () => {
+      coordinator.startRequest();
       this.prepareGapicRequest_(config, (err, requestFn) => {
         if (err) {
-          stream.destroy(err);
+          coordinator.handleRequestError(err);
           return;
         }
-        requestFn()
-          .on('error', err => {
-            stream.destroy(err);
-          })
-          .pipe(stream);
+        coordinator.attachRequestFn(requestFn);
       });
     });
-    stream.on('finish', () => {
-      stream.destroy();
-    });
-    stream.on('close', () => {
-      metricsTracer?.recordOperationCompletion();
-    });
+
     return stream;
   }
 

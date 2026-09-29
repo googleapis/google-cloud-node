@@ -15008,6 +15008,9 @@ export namespace google {
                     /** Table automatedBackupPolicy */
                     automatedBackupPolicy?: (google.bigtable.admin.v2.Table.IAutomatedBackupPolicy|null);
 
+                    /** Table effectiveAutomatedBackupPolicy */
+                    effectiveAutomatedBackupPolicy?: (google.bigtable.admin.v2.Table.IAutomatedBackupPolicy|null);
+
                     /** Table tieredStorageConfig */
                     tieredStorageConfig?: (google.bigtable.admin.v2.ITieredStorageConfig|null);
 
@@ -15047,6 +15050,9 @@ export namespace google {
 
                     /** Table automatedBackupPolicy. */
                     public automatedBackupPolicy?: (google.bigtable.admin.v2.Table.IAutomatedBackupPolicy|null);
+
+                    /** Table effectiveAutomatedBackupPolicy. */
+                    public effectiveAutomatedBackupPolicy?: (google.bigtable.admin.v2.Table.IAutomatedBackupPolicy|null);
 
                     /** Table tieredStorageConfig. */
                     public tieredStorageConfig?: (google.bigtable.admin.v2.ITieredStorageConfig|null);
@@ -15281,6 +15287,12 @@ export namespace google {
 
                         /** AutomatedBackupPolicy locations */
                         locations?: (string[]|null);
+
+                        /** AutomatedBackupPolicy keepHotDuration */
+                        keepHotDuration?: (google.protobuf.IDuration|null);
+
+                        /** AutomatedBackupPolicy disabled */
+                        disabled?: (boolean|null);
                     }
 
                     /** Represents an AutomatedBackupPolicy. */
@@ -15300,6 +15312,12 @@ export namespace google {
 
                         /** AutomatedBackupPolicy locations. */
                         public locations: string[];
+
+                        /** AutomatedBackupPolicy keepHotDuration. */
+                        public keepHotDuration?: (google.protobuf.IDuration|null);
+
+                        /** AutomatedBackupPolicy disabled. */
+                        public disabled: boolean;
 
                         /**
                          * Creates a new AutomatedBackupPolicy instance using the specified properties.

@@ -118,6 +118,13 @@ function main(servingConfig) {
    */
   // const dataStoreSpecs = [1,2,3,4]
   /**
+   *  Optional. The maximum number of results to retrieve from each data store.
+   *  If not specified, it will use the
+   *  SearchRequest.DataStoreSpec.num_results google.cloud.discoveryengine.v1.SearchRequest.DataStoreSpec.num_results 
+   *  if provided, otherwise there is no limit.
+   */
+  // const numResultsPerDataStore = 1234
+  /**
    *  The filter syntax consists of an expression language for constructing a
    *  predicate from one or more fields of the documents being filtered. Filter
    *  expression is case-sensitive.
@@ -305,6 +312,15 @@ function main(servingConfig) {
    *    Google model to determine the keyword-based overlap between the query and
    *    the document.
    *    * `base_rank`: the default rank of the result
+   *    * `media_actor_match`: whether the media actor matches the query
+   *    * `media_director_match`: whether the media director matches the query
+   *    * `media_genre_match`: whether the media genre matches the query
+   *    * `media_language_match`: whether the media language matches the query
+   *    * `media_title_match`: whether the media title matches the query
+   *    * `media_prefix_similarity_rank`: prefix similarity rank for media
+   *    results
+   *    * `media_semantic_similarity_rank`: semantic similarity rank for media
+   *    results
    */
   // const rankingExpression = 'abc123'
   /**
@@ -380,9 +396,6 @@ function main(servingConfig) {
    *    Call /answer API with the session ID generated in the first call.
    *    Here, the answer generation happens in the context of the search
    *    results from the first search call.
-   *  Multi-turn Search feature is currently at private GA stage. Please use
-   *  v1alpha or v1beta version instead before we launch this feature to public
-   *  GA. Or ask for allowlisting through Google Support team.
    */
   // const session = 'abc123'
   /**
@@ -412,6 +425,25 @@ function main(servingConfig) {
    *  Optional. The specification for returning the relevance score.
    */
   // const relevanceScoreSpec = {}
+  /**
+   *  Optional. SearchAddonSpec is used to disable add-ons for search as per new
+   *  repricing model.
+   *  This field is only supported for search requests.
+   */
+  // const searchAddonSpec = {}
+  /**
+   *  Optional. Optional configuration for the Custom Ranking feature.
+   */
+  // const customRankingParams = {}
+  /**
+   *  Optional. The entity for customers that may run multiple different
+   *  entities, domains, sites or regions, for example, "Google US", "Google
+   *  Ads", "Waymo", "google.com", "youtube.com", etc. If this is set, it should
+   *  be exactly matched with
+   *  UserEvent.entity google.cloud.discoveryengine.v1.UserEvent.entity  to get
+   *  search results boosted by entity.
+   */
+  // const entity = 'abc123'
 
   // Imports the Discoveryengine library
   const {SearchServiceClient} = require('@google-cloud/discoveryengine').v1;

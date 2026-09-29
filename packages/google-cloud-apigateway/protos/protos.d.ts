@@ -672,6 +672,12 @@ export namespace google {
 
                     /** Gateway defaultHostname */
                     defaultHostname?: (string|null);
+
+                    /** Gateway streamingMode */
+                    streamingMode?: (google.cloud.apigateway.v1.Gateway.StreamingMode|keyof typeof google.cloud.apigateway.v1.Gateway.StreamingMode|null);
+
+                    /** Gateway effectiveStreamingMode */
+                    effectiveStreamingMode?: (google.cloud.apigateway.v1.Gateway.EffectiveStreamingMode|keyof typeof google.cloud.apigateway.v1.Gateway.EffectiveStreamingMode|null);
                 }
 
                 /** Represents a Gateway. */
@@ -706,6 +712,12 @@ export namespace google {
 
                     /** Gateway defaultHostname. */
                     public defaultHostname: string;
+
+                    /** Gateway streamingMode. */
+                    public streamingMode: (google.cloud.apigateway.v1.Gateway.StreamingMode|keyof typeof google.cloud.apigateway.v1.Gateway.StreamingMode);
+
+                    /** Gateway effectiveStreamingMode. */
+                    public effectiveStreamingMode: (google.cloud.apigateway.v1.Gateway.EffectiveStreamingMode|keyof typeof google.cloud.apigateway.v1.Gateway.EffectiveStreamingMode);
 
                     /**
                      * Creates a new Gateway instance using the specified properties.
@@ -795,6 +807,19 @@ export namespace google {
                         FAILED = 3,
                         DELETING = 4,
                         UPDATING = 5
+                    }
+
+                    /** StreamingMode enum. */
+                    enum StreamingMode {
+                        STREAMING_MODE_UNSPECIFIED = 0,
+                        STREAMING_MODE_ENABLED = 1
+                    }
+
+                    /** EffectiveStreamingMode enum. */
+                    enum EffectiveStreamingMode {
+                        EFFECTIVE_STREAMING_MODE_UNSPECIFIED = 0,
+                        EFFECTIVE_STREAMING_MODE_DISABLED = 1,
+                        EFFECTIVE_STREAMING_MODE_ENABLED = 2
                     }
                 }
 

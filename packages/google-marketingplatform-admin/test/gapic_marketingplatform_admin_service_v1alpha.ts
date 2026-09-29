@@ -1247,6 +1247,1645 @@ describe('v1alpha.MarketingplatformAdminServiceClient', () => {
     });
   });
 
+  describe('getUserGroup', () => {
+    it('invokes getUserGroup without error', async () => {
+      const client =
+        new marketingplatformadminserviceModule.v1alpha.MarketingplatformAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.marketingplatform.admin.v1alpha.GetUserGroupRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.marketingplatform.admin.v1alpha.GetUserGroupRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.marketingplatform.admin.v1alpha.UserGroup(),
+      );
+      client.innerApiCalls.getUserGroup = stubSimpleCall(expectedResponse);
+      const [response] = await client.getUserGroup(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getUserGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getUserGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getUserGroup without error using callback', async () => {
+      const client =
+        new marketingplatformadminserviceModule.v1alpha.MarketingplatformAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.marketingplatform.admin.v1alpha.GetUserGroupRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.marketingplatform.admin.v1alpha.GetUserGroupRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.marketingplatform.admin.v1alpha.UserGroup(),
+      );
+      client.innerApiCalls.getUserGroup =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getUserGroup(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.marketingplatform.admin.v1alpha.IUserGroup | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getUserGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getUserGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getUserGroup with error', async () => {
+      const client =
+        new marketingplatformadminserviceModule.v1alpha.MarketingplatformAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.marketingplatform.admin.v1alpha.GetUserGroupRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.marketingplatform.admin.v1alpha.GetUserGroupRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getUserGroup = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.getUserGroup(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getUserGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getUserGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getUserGroup with closed client', async () => {
+      const client =
+        new marketingplatformadminserviceModule.v1alpha.MarketingplatformAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.marketingplatform.admin.v1alpha.GetUserGroupRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.marketingplatform.admin.v1alpha.GetUserGroupRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(client.getUserGroup(request), expectedError);
+    });
+  });
+
+  describe('createUserGroup', () => {
+    it('invokes createUserGroup without error', async () => {
+      const client =
+        new marketingplatformadminserviceModule.v1alpha.MarketingplatformAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.marketingplatform.admin.v1alpha.CreateUserGroupRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.marketingplatform.admin.v1alpha.CreateUserGroupRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.marketingplatform.admin.v1alpha.UserGroup(),
+      );
+      client.innerApiCalls.createUserGroup = stubSimpleCall(expectedResponse);
+      const [response] = await client.createUserGroup(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createUserGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createUserGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createUserGroup without error using callback', async () => {
+      const client =
+        new marketingplatformadminserviceModule.v1alpha.MarketingplatformAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.marketingplatform.admin.v1alpha.CreateUserGroupRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.marketingplatform.admin.v1alpha.CreateUserGroupRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.marketingplatform.admin.v1alpha.UserGroup(),
+      );
+      client.innerApiCalls.createUserGroup =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createUserGroup(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.marketingplatform.admin.v1alpha.IUserGroup | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createUserGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createUserGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createUserGroup with error', async () => {
+      const client =
+        new marketingplatformadminserviceModule.v1alpha.MarketingplatformAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.marketingplatform.admin.v1alpha.CreateUserGroupRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.marketingplatform.admin.v1alpha.CreateUserGroupRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createUserGroup = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.createUserGroup(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createUserGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createUserGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createUserGroup with closed client', async () => {
+      const client =
+        new marketingplatformadminserviceModule.v1alpha.MarketingplatformAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.marketingplatform.admin.v1alpha.CreateUserGroupRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.marketingplatform.admin.v1alpha.CreateUserGroupRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(client.createUserGroup(request), expectedError);
+    });
+  });
+
+  describe('updateUserGroup', () => {
+    it('invokes updateUserGroup without error', async () => {
+      const client =
+        new marketingplatformadminserviceModule.v1alpha.MarketingplatformAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.marketingplatform.admin.v1alpha.UpdateUserGroupRequest(),
+      );
+      request.userGroup ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.marketingplatform.admin.v1alpha.UpdateUserGroupRequest',
+        ['userGroup', 'name'],
+      );
+      request.userGroup.name = defaultValue1;
+      const expectedHeaderRequestParams = `user_group.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.marketingplatform.admin.v1alpha.UserGroup(),
+      );
+      client.innerApiCalls.updateUserGroup = stubSimpleCall(expectedResponse);
+      const [response] = await client.updateUserGroup(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateUserGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateUserGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateUserGroup without error using callback', async () => {
+      const client =
+        new marketingplatformadminserviceModule.v1alpha.MarketingplatformAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.marketingplatform.admin.v1alpha.UpdateUserGroupRequest(),
+      );
+      request.userGroup ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.marketingplatform.admin.v1alpha.UpdateUserGroupRequest',
+        ['userGroup', 'name'],
+      );
+      request.userGroup.name = defaultValue1;
+      const expectedHeaderRequestParams = `user_group.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.marketingplatform.admin.v1alpha.UserGroup(),
+      );
+      client.innerApiCalls.updateUserGroup =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateUserGroup(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.marketingplatform.admin.v1alpha.IUserGroup | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateUserGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateUserGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateUserGroup with error', async () => {
+      const client =
+        new marketingplatformadminserviceModule.v1alpha.MarketingplatformAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.marketingplatform.admin.v1alpha.UpdateUserGroupRequest(),
+      );
+      request.userGroup ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.marketingplatform.admin.v1alpha.UpdateUserGroupRequest',
+        ['userGroup', 'name'],
+      );
+      request.userGroup.name = defaultValue1;
+      const expectedHeaderRequestParams = `user_group.name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateUserGroup = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.updateUserGroup(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateUserGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateUserGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateUserGroup with closed client', async () => {
+      const client =
+        new marketingplatformadminserviceModule.v1alpha.MarketingplatformAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.marketingplatform.admin.v1alpha.UpdateUserGroupRequest(),
+      );
+      request.userGroup ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.marketingplatform.admin.v1alpha.UpdateUserGroupRequest',
+        ['userGroup', 'name'],
+      );
+      request.userGroup.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(client.updateUserGroup(request), expectedError);
+    });
+  });
+
+  describe('deleteUserGroup', () => {
+    it('invokes deleteUserGroup without error', async () => {
+      const client =
+        new marketingplatformadminserviceModule.v1alpha.MarketingplatformAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.marketingplatform.admin.v1alpha.DeleteUserGroupRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.marketingplatform.admin.v1alpha.DeleteUserGroupRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty(),
+      );
+      client.innerApiCalls.deleteUserGroup = stubSimpleCall(expectedResponse);
+      const [response] = await client.deleteUserGroup(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteUserGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteUserGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteUserGroup without error using callback', async () => {
+      const client =
+        new marketingplatformadminserviceModule.v1alpha.MarketingplatformAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.marketingplatform.admin.v1alpha.DeleteUserGroupRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.marketingplatform.admin.v1alpha.DeleteUserGroupRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty(),
+      );
+      client.innerApiCalls.deleteUserGroup =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteUserGroup(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.protobuf.IEmpty | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteUserGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteUserGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteUserGroup with error', async () => {
+      const client =
+        new marketingplatformadminserviceModule.v1alpha.MarketingplatformAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.marketingplatform.admin.v1alpha.DeleteUserGroupRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.marketingplatform.admin.v1alpha.DeleteUserGroupRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteUserGroup = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.deleteUserGroup(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteUserGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteUserGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteUserGroup with closed client', async () => {
+      const client =
+        new marketingplatformadminserviceModule.v1alpha.MarketingplatformAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.marketingplatform.admin.v1alpha.DeleteUserGroupRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.marketingplatform.admin.v1alpha.DeleteUserGroupRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(client.deleteUserGroup(request), expectedError);
+    });
+  });
+
+  describe('getUserGroupMember', () => {
+    it('invokes getUserGroupMember without error', async () => {
+      const client =
+        new marketingplatformadminserviceModule.v1alpha.MarketingplatformAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.marketingplatform.admin.v1alpha.GetUserGroupMemberRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.marketingplatform.admin.v1alpha.GetUserGroupMemberRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.marketingplatform.admin.v1alpha.UserGroupMember(),
+      );
+      client.innerApiCalls.getUserGroupMember =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.getUserGroupMember(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getUserGroupMember as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getUserGroupMember as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getUserGroupMember without error using callback', async () => {
+      const client =
+        new marketingplatformadminserviceModule.v1alpha.MarketingplatformAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.marketingplatform.admin.v1alpha.GetUserGroupMemberRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.marketingplatform.admin.v1alpha.GetUserGroupMemberRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.marketingplatform.admin.v1alpha.UserGroupMember(),
+      );
+      client.innerApiCalls.getUserGroupMember =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getUserGroupMember(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.marketingplatform.admin.v1alpha.IUserGroupMember | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getUserGroupMember as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getUserGroupMember as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getUserGroupMember with error', async () => {
+      const client =
+        new marketingplatformadminserviceModule.v1alpha.MarketingplatformAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.marketingplatform.admin.v1alpha.GetUserGroupMemberRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.marketingplatform.admin.v1alpha.GetUserGroupMemberRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getUserGroupMember = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.getUserGroupMember(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getUserGroupMember as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getUserGroupMember as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getUserGroupMember with closed client', async () => {
+      const client =
+        new marketingplatformadminserviceModule.v1alpha.MarketingplatformAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.marketingplatform.admin.v1alpha.GetUserGroupMemberRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.marketingplatform.admin.v1alpha.GetUserGroupMemberRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(client.getUserGroupMember(request), expectedError);
+    });
+  });
+
+  describe('createUserGroupMember', () => {
+    it('invokes createUserGroupMember without error', async () => {
+      const client =
+        new marketingplatformadminserviceModule.v1alpha.MarketingplatformAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.marketingplatform.admin.v1alpha.CreateUserGroupMemberRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.marketingplatform.admin.v1alpha.CreateUserGroupMemberRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.marketingplatform.admin.v1alpha.UserGroupMember(),
+      );
+      client.innerApiCalls.createUserGroupMember =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.createUserGroupMember(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createUserGroupMember as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createUserGroupMember as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createUserGroupMember without error using callback', async () => {
+      const client =
+        new marketingplatformadminserviceModule.v1alpha.MarketingplatformAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.marketingplatform.admin.v1alpha.CreateUserGroupMemberRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.marketingplatform.admin.v1alpha.CreateUserGroupMemberRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.marketingplatform.admin.v1alpha.UserGroupMember(),
+      );
+      client.innerApiCalls.createUserGroupMember =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createUserGroupMember(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.marketingplatform.admin.v1alpha.IUserGroupMember | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createUserGroupMember as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createUserGroupMember as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createUserGroupMember with error', async () => {
+      const client =
+        new marketingplatformadminserviceModule.v1alpha.MarketingplatformAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.marketingplatform.admin.v1alpha.CreateUserGroupMemberRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.marketingplatform.admin.v1alpha.CreateUserGroupMemberRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createUserGroupMember = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.createUserGroupMember(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.createUserGroupMember as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createUserGroupMember as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createUserGroupMember with closed client', async () => {
+      const client =
+        new marketingplatformadminserviceModule.v1alpha.MarketingplatformAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.marketingplatform.admin.v1alpha.CreateUserGroupMemberRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.marketingplatform.admin.v1alpha.CreateUserGroupMemberRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(
+        client.createUserGroupMember(request),
+        expectedError,
+      );
+    });
+  });
+
+  describe('updateUserGroupMember', () => {
+    it('invokes updateUserGroupMember without error', async () => {
+      const client =
+        new marketingplatformadminserviceModule.v1alpha.MarketingplatformAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.marketingplatform.admin.v1alpha.UpdateUserGroupMemberRequest(),
+      );
+      request.userGroupMember ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.marketingplatform.admin.v1alpha.UpdateUserGroupMemberRequest',
+        ['userGroupMember', 'name'],
+      );
+      request.userGroupMember.name = defaultValue1;
+      const expectedHeaderRequestParams = `user_group_member.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.marketingplatform.admin.v1alpha.UserGroupMember(),
+      );
+      client.innerApiCalls.updateUserGroupMember =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.updateUserGroupMember(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateUserGroupMember as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateUserGroupMember as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateUserGroupMember without error using callback', async () => {
+      const client =
+        new marketingplatformadminserviceModule.v1alpha.MarketingplatformAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.marketingplatform.admin.v1alpha.UpdateUserGroupMemberRequest(),
+      );
+      request.userGroupMember ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.marketingplatform.admin.v1alpha.UpdateUserGroupMemberRequest',
+        ['userGroupMember', 'name'],
+      );
+      request.userGroupMember.name = defaultValue1;
+      const expectedHeaderRequestParams = `user_group_member.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.marketingplatform.admin.v1alpha.UserGroupMember(),
+      );
+      client.innerApiCalls.updateUserGroupMember =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateUserGroupMember(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.marketingplatform.admin.v1alpha.IUserGroupMember | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateUserGroupMember as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateUserGroupMember as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateUserGroupMember with error', async () => {
+      const client =
+        new marketingplatformadminserviceModule.v1alpha.MarketingplatformAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.marketingplatform.admin.v1alpha.UpdateUserGroupMemberRequest(),
+      );
+      request.userGroupMember ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.marketingplatform.admin.v1alpha.UpdateUserGroupMemberRequest',
+        ['userGroupMember', 'name'],
+      );
+      request.userGroupMember.name = defaultValue1;
+      const expectedHeaderRequestParams = `user_group_member.name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateUserGroupMember = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.updateUserGroupMember(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.updateUserGroupMember as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateUserGroupMember as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateUserGroupMember with closed client', async () => {
+      const client =
+        new marketingplatformadminserviceModule.v1alpha.MarketingplatformAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.marketingplatform.admin.v1alpha.UpdateUserGroupMemberRequest(),
+      );
+      request.userGroupMember ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.marketingplatform.admin.v1alpha.UpdateUserGroupMemberRequest',
+        ['userGroupMember', 'name'],
+      );
+      request.userGroupMember.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(
+        client.updateUserGroupMember(request),
+        expectedError,
+      );
+    });
+  });
+
+  describe('deleteUserGroupMember', () => {
+    it('invokes deleteUserGroupMember without error', async () => {
+      const client =
+        new marketingplatformadminserviceModule.v1alpha.MarketingplatformAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.marketingplatform.admin.v1alpha.DeleteUserGroupMemberRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.marketingplatform.admin.v1alpha.DeleteUserGroupMemberRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty(),
+      );
+      client.innerApiCalls.deleteUserGroupMember =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.deleteUserGroupMember(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteUserGroupMember as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteUserGroupMember as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteUserGroupMember without error using callback', async () => {
+      const client =
+        new marketingplatformadminserviceModule.v1alpha.MarketingplatformAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.marketingplatform.admin.v1alpha.DeleteUserGroupMemberRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.marketingplatform.admin.v1alpha.DeleteUserGroupMemberRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty(),
+      );
+      client.innerApiCalls.deleteUserGroupMember =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteUserGroupMember(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.protobuf.IEmpty | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteUserGroupMember as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteUserGroupMember as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteUserGroupMember with error', async () => {
+      const client =
+        new marketingplatformadminserviceModule.v1alpha.MarketingplatformAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.marketingplatform.admin.v1alpha.DeleteUserGroupMemberRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.marketingplatform.admin.v1alpha.DeleteUserGroupMemberRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteUserGroupMember = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.deleteUserGroupMember(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.deleteUserGroupMember as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteUserGroupMember as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteUserGroupMember with closed client', async () => {
+      const client =
+        new marketingplatformadminserviceModule.v1alpha.MarketingplatformAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.marketingplatform.admin.v1alpha.DeleteUserGroupMemberRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.marketingplatform.admin.v1alpha.DeleteUserGroupMemberRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(
+        client.deleteUserGroupMember(request),
+        expectedError,
+      );
+    });
+  });
+
+  describe('getAdminAccessBinding', () => {
+    it('invokes getAdminAccessBinding without error', async () => {
+      const client =
+        new marketingplatformadminserviceModule.v1alpha.MarketingplatformAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.marketingplatform.admin.v1alpha.GetAdminAccessBindingRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.marketingplatform.admin.v1alpha.GetAdminAccessBindingRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.marketingplatform.admin.v1alpha.AdminAccessBinding(),
+      );
+      client.innerApiCalls.getAdminAccessBinding =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.getAdminAccessBinding(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getAdminAccessBinding as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAdminAccessBinding as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getAdminAccessBinding without error using callback', async () => {
+      const client =
+        new marketingplatformadminserviceModule.v1alpha.MarketingplatformAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.marketingplatform.admin.v1alpha.GetAdminAccessBindingRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.marketingplatform.admin.v1alpha.GetAdminAccessBindingRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.marketingplatform.admin.v1alpha.AdminAccessBinding(),
+      );
+      client.innerApiCalls.getAdminAccessBinding =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getAdminAccessBinding(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.marketingplatform.admin.v1alpha.IAdminAccessBinding | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getAdminAccessBinding as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAdminAccessBinding as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getAdminAccessBinding with error', async () => {
+      const client =
+        new marketingplatformadminserviceModule.v1alpha.MarketingplatformAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.marketingplatform.admin.v1alpha.GetAdminAccessBindingRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.marketingplatform.admin.v1alpha.GetAdminAccessBindingRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getAdminAccessBinding = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.getAdminAccessBinding(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.getAdminAccessBinding as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAdminAccessBinding as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getAdminAccessBinding with closed client', async () => {
+      const client =
+        new marketingplatformadminserviceModule.v1alpha.MarketingplatformAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.marketingplatform.admin.v1alpha.GetAdminAccessBindingRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.marketingplatform.admin.v1alpha.GetAdminAccessBindingRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(
+        client.getAdminAccessBinding(request),
+        expectedError,
+      );
+    });
+  });
+
+  describe('createAdminAccessBinding', () => {
+    it('invokes createAdminAccessBinding without error', async () => {
+      const client =
+        new marketingplatformadminserviceModule.v1alpha.MarketingplatformAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.marketingplatform.admin.v1alpha.CreateAdminAccessBindingRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.marketingplatform.admin.v1alpha.CreateAdminAccessBindingRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.marketingplatform.admin.v1alpha.AdminAccessBinding(),
+      );
+      client.innerApiCalls.createAdminAccessBinding =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.createAdminAccessBinding(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createAdminAccessBinding as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAdminAccessBinding as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createAdminAccessBinding without error using callback', async () => {
+      const client =
+        new marketingplatformadminserviceModule.v1alpha.MarketingplatformAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.marketingplatform.admin.v1alpha.CreateAdminAccessBindingRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.marketingplatform.admin.v1alpha.CreateAdminAccessBindingRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.marketingplatform.admin.v1alpha.AdminAccessBinding(),
+      );
+      client.innerApiCalls.createAdminAccessBinding =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createAdminAccessBinding(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.marketingplatform.admin.v1alpha.IAdminAccessBinding | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createAdminAccessBinding as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAdminAccessBinding as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createAdminAccessBinding with error', async () => {
+      const client =
+        new marketingplatformadminserviceModule.v1alpha.MarketingplatformAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.marketingplatform.admin.v1alpha.CreateAdminAccessBindingRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.marketingplatform.admin.v1alpha.CreateAdminAccessBindingRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createAdminAccessBinding = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.createAdminAccessBinding(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.createAdminAccessBinding as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAdminAccessBinding as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createAdminAccessBinding with closed client', async () => {
+      const client =
+        new marketingplatformadminserviceModule.v1alpha.MarketingplatformAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.marketingplatform.admin.v1alpha.CreateAdminAccessBindingRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.marketingplatform.admin.v1alpha.CreateAdminAccessBindingRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(
+        client.createAdminAccessBinding(request),
+        expectedError,
+      );
+    });
+  });
+
+  describe('updateAdminAccessBinding', () => {
+    it('invokes updateAdminAccessBinding without error', async () => {
+      const client =
+        new marketingplatformadminserviceModule.v1alpha.MarketingplatformAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.marketingplatform.admin.v1alpha.UpdateAdminAccessBindingRequest(),
+      );
+      request.adminAccessBinding ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.marketingplatform.admin.v1alpha.UpdateAdminAccessBindingRequest',
+        ['adminAccessBinding', 'name'],
+      );
+      request.adminAccessBinding.name = defaultValue1;
+      const expectedHeaderRequestParams = `admin_access_binding.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.marketingplatform.admin.v1alpha.AdminAccessBinding(),
+      );
+      client.innerApiCalls.updateAdminAccessBinding =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.updateAdminAccessBinding(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateAdminAccessBinding as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateAdminAccessBinding as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateAdminAccessBinding without error using callback', async () => {
+      const client =
+        new marketingplatformadminserviceModule.v1alpha.MarketingplatformAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.marketingplatform.admin.v1alpha.UpdateAdminAccessBindingRequest(),
+      );
+      request.adminAccessBinding ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.marketingplatform.admin.v1alpha.UpdateAdminAccessBindingRequest',
+        ['adminAccessBinding', 'name'],
+      );
+      request.adminAccessBinding.name = defaultValue1;
+      const expectedHeaderRequestParams = `admin_access_binding.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.marketingplatform.admin.v1alpha.AdminAccessBinding(),
+      );
+      client.innerApiCalls.updateAdminAccessBinding =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateAdminAccessBinding(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.marketingplatform.admin.v1alpha.IAdminAccessBinding | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateAdminAccessBinding as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateAdminAccessBinding as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateAdminAccessBinding with error', async () => {
+      const client =
+        new marketingplatformadminserviceModule.v1alpha.MarketingplatformAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.marketingplatform.admin.v1alpha.UpdateAdminAccessBindingRequest(),
+      );
+      request.adminAccessBinding ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.marketingplatform.admin.v1alpha.UpdateAdminAccessBindingRequest',
+        ['adminAccessBinding', 'name'],
+      );
+      request.adminAccessBinding.name = defaultValue1;
+      const expectedHeaderRequestParams = `admin_access_binding.name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateAdminAccessBinding = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.updateAdminAccessBinding(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.updateAdminAccessBinding as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateAdminAccessBinding as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateAdminAccessBinding with closed client', async () => {
+      const client =
+        new marketingplatformadminserviceModule.v1alpha.MarketingplatformAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.marketingplatform.admin.v1alpha.UpdateAdminAccessBindingRequest(),
+      );
+      request.adminAccessBinding ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.marketingplatform.admin.v1alpha.UpdateAdminAccessBindingRequest',
+        ['adminAccessBinding', 'name'],
+      );
+      request.adminAccessBinding.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(
+        client.updateAdminAccessBinding(request),
+        expectedError,
+      );
+    });
+  });
+
   describe('listOrganizations', () => {
     it('invokes listOrganizations without error', async () => {
       const client =
@@ -1889,7 +3528,1165 @@ describe('v1alpha.MarketingplatformAdminServiceClient', () => {
     });
   });
 
+  describe('listUserGroups', () => {
+    it('invokes listUserGroups without error', async () => {
+      const client =
+        new marketingplatformadminserviceModule.v1alpha.MarketingplatformAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.marketingplatform.admin.v1alpha.ListUserGroupsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.marketingplatform.admin.v1alpha.ListUserGroupsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.marketingplatform.admin.v1alpha.UserGroup(),
+        ),
+        generateSampleMessage(
+          new protos.google.marketingplatform.admin.v1alpha.UserGroup(),
+        ),
+        generateSampleMessage(
+          new protos.google.marketingplatform.admin.v1alpha.UserGroup(),
+        ),
+      ];
+      client.innerApiCalls.listUserGroups = stubSimpleCall(expectedResponse);
+      const [response] = await client.listUserGroups(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listUserGroups as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listUserGroups as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listUserGroups without error using callback', async () => {
+      const client =
+        new marketingplatformadminserviceModule.v1alpha.MarketingplatformAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.marketingplatform.admin.v1alpha.ListUserGroupsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.marketingplatform.admin.v1alpha.ListUserGroupsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.marketingplatform.admin.v1alpha.UserGroup(),
+        ),
+        generateSampleMessage(
+          new protos.google.marketingplatform.admin.v1alpha.UserGroup(),
+        ),
+        generateSampleMessage(
+          new protos.google.marketingplatform.admin.v1alpha.UserGroup(),
+        ),
+      ];
+      client.innerApiCalls.listUserGroups =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listUserGroups(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              protos.google.marketingplatform.admin.v1alpha.IUserGroup[] | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listUserGroups as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listUserGroups as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listUserGroups with error', async () => {
+      const client =
+        new marketingplatformadminserviceModule.v1alpha.MarketingplatformAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.marketingplatform.admin.v1alpha.ListUserGroupsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.marketingplatform.admin.v1alpha.ListUserGroupsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listUserGroups = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.listUserGroups(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listUserGroups as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listUserGroups as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listUserGroupsStream without error', async () => {
+      const client =
+        new marketingplatformadminserviceModule.v1alpha.MarketingplatformAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.marketingplatform.admin.v1alpha.ListUserGroupsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.marketingplatform.admin.v1alpha.ListUserGroupsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.marketingplatform.admin.v1alpha.UserGroup(),
+        ),
+        generateSampleMessage(
+          new protos.google.marketingplatform.admin.v1alpha.UserGroup(),
+        ),
+        generateSampleMessage(
+          new protos.google.marketingplatform.admin.v1alpha.UserGroup(),
+        ),
+      ];
+      client.descriptors.page.listUserGroups.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listUserGroupsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.marketingplatform.admin.v1alpha.UserGroup[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.marketingplatform.admin.v1alpha.UserGroup,
+          ) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listUserGroups.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listUserGroups, request),
+      );
+      assert(
+        (client.descriptors.page.listUserGroups.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('invokes listUserGroupsStream with error', async () => {
+      const client =
+        new marketingplatformadminserviceModule.v1alpha.MarketingplatformAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.marketingplatform.admin.v1alpha.ListUserGroupsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.marketingplatform.admin.v1alpha.ListUserGroupsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listUserGroups.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listUserGroupsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.marketingplatform.admin.v1alpha.UserGroup[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.marketingplatform.admin.v1alpha.UserGroup,
+          ) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listUserGroups.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listUserGroups, request),
+      );
+      assert(
+        (client.descriptors.page.listUserGroups.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with listUserGroups without error', async () => {
+      const client =
+        new marketingplatformadminserviceModule.v1alpha.MarketingplatformAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.marketingplatform.admin.v1alpha.ListUserGroupsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.marketingplatform.admin.v1alpha.ListUserGroupsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.marketingplatform.admin.v1alpha.UserGroup(),
+        ),
+        generateSampleMessage(
+          new protos.google.marketingplatform.admin.v1alpha.UserGroup(),
+        ),
+        generateSampleMessage(
+          new protos.google.marketingplatform.admin.v1alpha.UserGroup(),
+        ),
+      ];
+      client.descriptors.page.listUserGroups.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.marketingplatform.admin.v1alpha.IUserGroup[] =
+        [];
+      const iterable = client.listUserGroupsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listUserGroups.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (client.descriptors.page.listUserGroups.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with listUserGroups with error', async () => {
+      const client =
+        new marketingplatformadminserviceModule.v1alpha.MarketingplatformAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.marketingplatform.admin.v1alpha.ListUserGroupsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.marketingplatform.admin.v1alpha.ListUserGroupsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listUserGroups.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listUserGroupsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.marketingplatform.admin.v1alpha.IUserGroup[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listUserGroups.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (client.descriptors.page.listUserGroups.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+  });
+
+  describe('listUserGroupMembers', () => {
+    it('invokes listUserGroupMembers without error', async () => {
+      const client =
+        new marketingplatformadminserviceModule.v1alpha.MarketingplatformAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.marketingplatform.admin.v1alpha.ListUserGroupMembersRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.marketingplatform.admin.v1alpha.ListUserGroupMembersRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.marketingplatform.admin.v1alpha.UserGroupMember(),
+        ),
+        generateSampleMessage(
+          new protos.google.marketingplatform.admin.v1alpha.UserGroupMember(),
+        ),
+        generateSampleMessage(
+          new protos.google.marketingplatform.admin.v1alpha.UserGroupMember(),
+        ),
+      ];
+      client.innerApiCalls.listUserGroupMembers =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listUserGroupMembers(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listUserGroupMembers as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listUserGroupMembers as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listUserGroupMembers without error using callback', async () => {
+      const client =
+        new marketingplatformadminserviceModule.v1alpha.MarketingplatformAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.marketingplatform.admin.v1alpha.ListUserGroupMembersRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.marketingplatform.admin.v1alpha.ListUserGroupMembersRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.marketingplatform.admin.v1alpha.UserGroupMember(),
+        ),
+        generateSampleMessage(
+          new protos.google.marketingplatform.admin.v1alpha.UserGroupMember(),
+        ),
+        generateSampleMessage(
+          new protos.google.marketingplatform.admin.v1alpha.UserGroupMember(),
+        ),
+      ];
+      client.innerApiCalls.listUserGroupMembers =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listUserGroupMembers(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.marketingplatform.admin.v1alpha.IUserGroupMember[]
+              | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listUserGroupMembers as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listUserGroupMembers as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listUserGroupMembers with error', async () => {
+      const client =
+        new marketingplatformadminserviceModule.v1alpha.MarketingplatformAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.marketingplatform.admin.v1alpha.ListUserGroupMembersRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.marketingplatform.admin.v1alpha.ListUserGroupMembersRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listUserGroupMembers = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.listUserGroupMembers(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listUserGroupMembers as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listUserGroupMembers as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listUserGroupMembersStream without error', async () => {
+      const client =
+        new marketingplatformadminserviceModule.v1alpha.MarketingplatformAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.marketingplatform.admin.v1alpha.ListUserGroupMembersRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.marketingplatform.admin.v1alpha.ListUserGroupMembersRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.marketingplatform.admin.v1alpha.UserGroupMember(),
+        ),
+        generateSampleMessage(
+          new protos.google.marketingplatform.admin.v1alpha.UserGroupMember(),
+        ),
+        generateSampleMessage(
+          new protos.google.marketingplatform.admin.v1alpha.UserGroupMember(),
+        ),
+      ];
+      client.descriptors.page.listUserGroupMembers.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listUserGroupMembersStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.marketingplatform.admin.v1alpha.UserGroupMember[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.marketingplatform.admin.v1alpha.UserGroupMember,
+          ) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listUserGroupMembers.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listUserGroupMembers, request),
+      );
+      assert(
+        (client.descriptors.page.listUserGroupMembers.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('invokes listUserGroupMembersStream with error', async () => {
+      const client =
+        new marketingplatformadminserviceModule.v1alpha.MarketingplatformAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.marketingplatform.admin.v1alpha.ListUserGroupMembersRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.marketingplatform.admin.v1alpha.ListUserGroupMembersRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listUserGroupMembers.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listUserGroupMembersStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.marketingplatform.admin.v1alpha.UserGroupMember[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.marketingplatform.admin.v1alpha.UserGroupMember,
+          ) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listUserGroupMembers.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listUserGroupMembers, request),
+      );
+      assert(
+        (client.descriptors.page.listUserGroupMembers.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with listUserGroupMembers without error', async () => {
+      const client =
+        new marketingplatformadminserviceModule.v1alpha.MarketingplatformAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.marketingplatform.admin.v1alpha.ListUserGroupMembersRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.marketingplatform.admin.v1alpha.ListUserGroupMembersRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.marketingplatform.admin.v1alpha.UserGroupMember(),
+        ),
+        generateSampleMessage(
+          new protos.google.marketingplatform.admin.v1alpha.UserGroupMember(),
+        ),
+        generateSampleMessage(
+          new protos.google.marketingplatform.admin.v1alpha.UserGroupMember(),
+        ),
+      ];
+      client.descriptors.page.listUserGroupMembers.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.marketingplatform.admin.v1alpha.IUserGroupMember[] =
+        [];
+      const iterable = client.listUserGroupMembersAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listUserGroupMembers.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (client.descriptors.page.listUserGroupMembers.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with listUserGroupMembers with error', async () => {
+      const client =
+        new marketingplatformadminserviceModule.v1alpha.MarketingplatformAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.marketingplatform.admin.v1alpha.ListUserGroupMembersRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.marketingplatform.admin.v1alpha.ListUserGroupMembersRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listUserGroupMembers.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listUserGroupMembersAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.marketingplatform.admin.v1alpha.IUserGroupMember[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listUserGroupMembers.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (client.descriptors.page.listUserGroupMembers.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+  });
+
+  describe('listAdminAccessBindings', () => {
+    it('invokes listAdminAccessBindings without error', async () => {
+      const client =
+        new marketingplatformadminserviceModule.v1alpha.MarketingplatformAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.marketingplatform.admin.v1alpha.ListAdminAccessBindingsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.marketingplatform.admin.v1alpha.ListAdminAccessBindingsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.marketingplatform.admin.v1alpha.AdminAccessBinding(),
+        ),
+        generateSampleMessage(
+          new protos.google.marketingplatform.admin.v1alpha.AdminAccessBinding(),
+        ),
+        generateSampleMessage(
+          new protos.google.marketingplatform.admin.v1alpha.AdminAccessBinding(),
+        ),
+      ];
+      client.innerApiCalls.listAdminAccessBindings =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listAdminAccessBindings(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listAdminAccessBindings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAdminAccessBindings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listAdminAccessBindings without error using callback', async () => {
+      const client =
+        new marketingplatformadminserviceModule.v1alpha.MarketingplatformAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.marketingplatform.admin.v1alpha.ListAdminAccessBindingsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.marketingplatform.admin.v1alpha.ListAdminAccessBindingsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.marketingplatform.admin.v1alpha.AdminAccessBinding(),
+        ),
+        generateSampleMessage(
+          new protos.google.marketingplatform.admin.v1alpha.AdminAccessBinding(),
+        ),
+        generateSampleMessage(
+          new protos.google.marketingplatform.admin.v1alpha.AdminAccessBinding(),
+        ),
+      ];
+      client.innerApiCalls.listAdminAccessBindings =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listAdminAccessBindings(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.marketingplatform.admin.v1alpha.IAdminAccessBinding[]
+              | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listAdminAccessBindings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAdminAccessBindings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listAdminAccessBindings with error', async () => {
+      const client =
+        new marketingplatformadminserviceModule.v1alpha.MarketingplatformAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.marketingplatform.admin.v1alpha.ListAdminAccessBindingsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.marketingplatform.admin.v1alpha.ListAdminAccessBindingsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listAdminAccessBindings = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.listAdminAccessBindings(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.listAdminAccessBindings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAdminAccessBindings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listAdminAccessBindingsStream without error', async () => {
+      const client =
+        new marketingplatformadminserviceModule.v1alpha.MarketingplatformAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.marketingplatform.admin.v1alpha.ListAdminAccessBindingsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.marketingplatform.admin.v1alpha.ListAdminAccessBindingsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.marketingplatform.admin.v1alpha.AdminAccessBinding(),
+        ),
+        generateSampleMessage(
+          new protos.google.marketingplatform.admin.v1alpha.AdminAccessBinding(),
+        ),
+        generateSampleMessage(
+          new protos.google.marketingplatform.admin.v1alpha.AdminAccessBinding(),
+        ),
+      ];
+      client.descriptors.page.listAdminAccessBindings.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listAdminAccessBindingsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.marketingplatform.admin.v1alpha.AdminAccessBinding[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.marketingplatform.admin.v1alpha.AdminAccessBinding,
+          ) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (
+          client.descriptors.page.listAdminAccessBindings
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listAdminAccessBindings, request),
+      );
+      assert(
+        (
+          client.descriptors.page.listAdminAccessBindings
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('invokes listAdminAccessBindingsStream with error', async () => {
+      const client =
+        new marketingplatformadminserviceModule.v1alpha.MarketingplatformAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.marketingplatform.admin.v1alpha.ListAdminAccessBindingsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.marketingplatform.admin.v1alpha.ListAdminAccessBindingsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listAdminAccessBindings.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listAdminAccessBindingsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.marketingplatform.admin.v1alpha.AdminAccessBinding[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.marketingplatform.admin.v1alpha.AdminAccessBinding,
+          ) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (
+          client.descriptors.page.listAdminAccessBindings
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listAdminAccessBindings, request),
+      );
+      assert(
+        (
+          client.descriptors.page.listAdminAccessBindings
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with listAdminAccessBindings without error', async () => {
+      const client =
+        new marketingplatformadminserviceModule.v1alpha.MarketingplatformAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.marketingplatform.admin.v1alpha.ListAdminAccessBindingsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.marketingplatform.admin.v1alpha.ListAdminAccessBindingsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.marketingplatform.admin.v1alpha.AdminAccessBinding(),
+        ),
+        generateSampleMessage(
+          new protos.google.marketingplatform.admin.v1alpha.AdminAccessBinding(),
+        ),
+        generateSampleMessage(
+          new protos.google.marketingplatform.admin.v1alpha.AdminAccessBinding(),
+        ),
+      ];
+      client.descriptors.page.listAdminAccessBindings.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.marketingplatform.admin.v1alpha.IAdminAccessBinding[] =
+        [];
+      const iterable = client.listAdminAccessBindingsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listAdminAccessBindings
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (
+          client.descriptors.page.listAdminAccessBindings
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with listAdminAccessBindings with error', async () => {
+      const client =
+        new marketingplatformadminserviceModule.v1alpha.MarketingplatformAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.marketingplatform.admin.v1alpha.ListAdminAccessBindingsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.marketingplatform.admin.v1alpha.ListAdminAccessBindingsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listAdminAccessBindings.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listAdminAccessBindingsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.marketingplatform.admin.v1alpha.IAdminAccessBinding[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listAdminAccessBindings
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (
+          client.descriptors.page.listAdminAccessBindings
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+  });
+
   describe('Path templates', () => {
+    describe('adminAccessBinding', async () => {
+      const fakePath = '/rendered/path/adminAccessBinding';
+      const expectedParameters = {
+        organization: 'organizationValue',
+        admin_access_binding: 'adminAccessBindingValue',
+      };
+      const client =
+        new marketingplatformadminserviceModule.v1alpha.MarketingplatformAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      client.pathTemplates.adminAccessBindingPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.adminAccessBindingPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('adminAccessBindingPath', () => {
+        const result = client.adminAccessBindingPath(
+          'organizationValue',
+          'adminAccessBindingValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.adminAccessBindingPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchOrganizationFromAdminAccessBindingName', () => {
+        const result =
+          client.matchOrganizationFromAdminAccessBindingName(fakePath);
+        assert.strictEqual(result, 'organizationValue');
+        assert(
+          (
+            client.pathTemplates.adminAccessBindingPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchAdminAccessBindingFromAdminAccessBindingName', () => {
+        const result =
+          client.matchAdminAccessBindingFromAdminAccessBindingName(fakePath);
+        assert.strictEqual(result, 'adminAccessBindingValue');
+        assert(
+          (
+            client.pathTemplates.adminAccessBindingPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('analyticsAccountLink', async () => {
       const fakePath = '/rendered/path/analyticsAccountLink';
       const expectedParameters = {
@@ -2034,6 +4831,129 @@ describe('v1alpha.MarketingplatformAdminServiceClient', () => {
         assert.strictEqual(result, 'propertyValue');
         assert(
           (client.pathTemplates.propertyPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('userGroup', async () => {
+      const fakePath = '/rendered/path/userGroup';
+      const expectedParameters = {
+        organization: 'organizationValue',
+        user_group: 'userGroupValue',
+      };
+      const client =
+        new marketingplatformadminserviceModule.v1alpha.MarketingplatformAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      client.pathTemplates.userGroupPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.userGroupPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('userGroupPath', () => {
+        const result = client.userGroupPath(
+          'organizationValue',
+          'userGroupValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.userGroupPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchOrganizationFromUserGroupName', () => {
+        const result = client.matchOrganizationFromUserGroupName(fakePath);
+        assert.strictEqual(result, 'organizationValue');
+        assert(
+          (client.pathTemplates.userGroupPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchUserGroupFromUserGroupName', () => {
+        const result = client.matchUserGroupFromUserGroupName(fakePath);
+        assert.strictEqual(result, 'userGroupValue');
+        assert(
+          (client.pathTemplates.userGroupPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('userGroupMember', async () => {
+      const fakePath = '/rendered/path/userGroupMember';
+      const expectedParameters = {
+        organization: 'organizationValue',
+        user_group: 'userGroupValue',
+        member: 'memberValue',
+      };
+      const client =
+        new marketingplatformadminserviceModule.v1alpha.MarketingplatformAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      client.pathTemplates.userGroupMemberPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.userGroupMemberPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('userGroupMemberPath', () => {
+        const result = client.userGroupMemberPath(
+          'organizationValue',
+          'userGroupValue',
+          'memberValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.userGroupMemberPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchOrganizationFromUserGroupMemberName', () => {
+        const result =
+          client.matchOrganizationFromUserGroupMemberName(fakePath);
+        assert.strictEqual(result, 'organizationValue');
+        assert(
+          (client.pathTemplates.userGroupMemberPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchUserGroupFromUserGroupMemberName', () => {
+        const result = client.matchUserGroupFromUserGroupMemberName(fakePath);
+        assert.strictEqual(result, 'userGroupValue');
+        assert(
+          (client.pathTemplates.userGroupMemberPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchMemberFromUserGroupMemberName', () => {
+        const result = client.matchMemberFromUserGroupMemberName(fakePath);
+        assert.strictEqual(result, 'memberValue');
+        assert(
+          (client.pathTemplates.userGroupMemberPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath),
         );

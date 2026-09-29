@@ -20,6 +20,11 @@
                 "getLbRouteExtension"
               ]
             },
+            "GetExtensionBinding": {
+              "methods": [
+                "getExtensionBinding"
+              ]
+            },
             "CreateLbTrafficExtension": {
               "methods": [
                 "createLbTrafficExtension"
@@ -50,6 +55,21 @@
                 "deleteLbRouteExtension"
               ]
             },
+            "CreateExtensionBinding": {
+              "methods": [
+                "createExtensionBinding"
+              ]
+            },
+            "UpdateExtensionBinding": {
+              "methods": [
+                "updateExtensionBinding"
+              ]
+            },
+            "DeleteExtensionBinding": {
+              "methods": [
+                "deleteExtensionBinding"
+              ]
+            },
             "ListLbTrafficExtensions": {
               "methods": [
                 "listLbTrafficExtensions",
@@ -62,6 +82,13 @@
                 "listLbRouteExtensions",
                 "listLbRouteExtensionsStream",
                 "listLbRouteExtensionsAsync"
+              ]
+            },
+            "ListExtensionBindings": {
+              "methods": [
+                "listExtensionBindings",
+                "listExtensionBindingsStream",
+                "listExtensionBindingsAsync"
               ]
             }
           }
@@ -79,6 +106,11 @@
                 "getLbRouteExtension"
               ]
             },
+            "GetExtensionBinding": {
+              "methods": [
+                "getExtensionBinding"
+              ]
+            },
             "CreateLbTrafficExtension": {
               "methods": [
                 "createLbTrafficExtension"
@@ -109,6 +141,21 @@
                 "deleteLbRouteExtension"
               ]
             },
+            "CreateExtensionBinding": {
+              "methods": [
+                "createExtensionBinding"
+              ]
+            },
+            "UpdateExtensionBinding": {
+              "methods": [
+                "updateExtensionBinding"
+              ]
+            },
+            "DeleteExtensionBinding": {
+              "methods": [
+                "deleteExtensionBinding"
+              ]
+            },
             "ListLbTrafficExtensions": {
               "methods": [
                 "listLbTrafficExtensions",
@@ -121,6 +168,13 @@
                 "listLbRouteExtensions",
                 "listLbRouteExtensionsStream",
                 "listLbRouteExtensionsAsync"
+              ]
+            },
+            "ListExtensionBindings": {
+              "methods": [
+                "listExtensionBindings",
+                "listExtensionBindingsStream",
+                "listExtensionBindingsAsync"
               ]
             }
           }

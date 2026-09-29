@@ -216,7 +216,7 @@ export async function createProfiler(config: Config = {}): Promise<Profiler> {
  */
 export async function start(config: Config = {}): Promise<void> {
   const profiler = await createProfiler(config);
-  profiler.start();
+  void profiler.start();
 }
 
 /**
@@ -284,5 +284,5 @@ export async function startLocal(config: Config = {}): Promise<void> {
 
 // If the module was --require'd from the command line, start the agent.
 if (module.parent && module.parent.id === 'internal/preload') {
-  start();
+  void start();
 }

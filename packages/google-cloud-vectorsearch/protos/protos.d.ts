@@ -806,6 +806,9 @@ export namespace google {
                     /** Properties of an IndexHint. */
                     interface IIndexHint {
 
+                        /** IndexHint denseScannParams */
+                        denseScannParams?: (google.cloud.vectorsearch.v1.SearchHint.IndexHint.IDenseScannParams|null);
+
                         /** IndexHint name */
                         name?: (string|null);
                     }
@@ -819,8 +822,14 @@ export namespace google {
                          */
                         constructor(properties?: google.cloud.vectorsearch.v1.SearchHint.IIndexHint);
 
+                        /** IndexHint denseScannParams. */
+                        public denseScannParams?: (google.cloud.vectorsearch.v1.SearchHint.IndexHint.IDenseScannParams|null);
+
                         /** IndexHint name. */
                         public name: string;
+
+                        /** IndexHint params. */
+                        public params?: "denseScannParams";
 
                         /**
                          * Creates a new IndexHint instance using the specified properties.
@@ -898,6 +907,106 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace IndexHint {
+
+                        /** Properties of a DenseScannParams. */
+                        interface IDenseScannParams {
+
+                            /** DenseScannParams targetRecall */
+                            targetRecall?: (number|null);
+                        }
+
+                        /** Represents a DenseScannParams. */
+                        class DenseScannParams implements IDenseScannParams {
+
+                            /**
+                             * Constructs a new DenseScannParams.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.vectorsearch.v1.SearchHint.IndexHint.IDenseScannParams);
+
+                            /** DenseScannParams targetRecall. */
+                            public targetRecall?: (number|null);
+
+                            /**
+                             * Creates a new DenseScannParams instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns DenseScannParams instance
+                             */
+                            public static create(properties?: google.cloud.vectorsearch.v1.SearchHint.IndexHint.IDenseScannParams): google.cloud.vectorsearch.v1.SearchHint.IndexHint.DenseScannParams;
+
+                            /**
+                             * Encodes the specified DenseScannParams message. Does not implicitly {@link google.cloud.vectorsearch.v1.SearchHint.IndexHint.DenseScannParams.verify|verify} messages.
+                             * @param message DenseScannParams message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.vectorsearch.v1.SearchHint.IndexHint.IDenseScannParams, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified DenseScannParams message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1.SearchHint.IndexHint.DenseScannParams.verify|verify} messages.
+                             * @param message DenseScannParams message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.vectorsearch.v1.SearchHint.IndexHint.IDenseScannParams, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a DenseScannParams message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns DenseScannParams
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1.SearchHint.IndexHint.DenseScannParams;
+
+                            /**
+                             * Decodes a DenseScannParams message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns DenseScannParams
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1.SearchHint.IndexHint.DenseScannParams;
+
+                            /**
+                             * Verifies a DenseScannParams message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a DenseScannParams message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns DenseScannParams
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1.SearchHint.IndexHint.DenseScannParams;
+
+                            /**
+                             * Creates a plain object from a DenseScannParams message. Also converts values to other types if specified.
+                             * @param message DenseScannParams
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.vectorsearch.v1.SearchHint.IndexHint.DenseScannParams, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this DenseScannParams to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for DenseScannParams
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
                     }
 
                     /** Properties of a KnnHint. */
@@ -8939,6 +9048,9 @@ export namespace google {
 
                             /** DenseScannParams initialCandidateCount */
                             initialCandidateCount?: (number|null);
+
+                            /** DenseScannParams targetRecall */
+                            targetRecall?: (number|null);
                         }
 
                         /** Represents a DenseScannParams. */
@@ -8955,6 +9067,9 @@ export namespace google {
 
                             /** DenseScannParams initialCandidateCount. */
                             public initialCandidateCount: number;
+
+                            /** DenseScannParams targetRecall. */
+                            public targetRecall?: (number|null);
 
                             /**
                              * Creates a new DenseScannParams instance using the specified properties.
@@ -10350,6 +10465,9 @@ export namespace google {
 
                     /** SearchResult distance */
                     distance?: (number|null);
+
+                    /** SearchResult searchResultMetadata */
+                    searchResultMetadata?: (google.cloud.vectorsearch.v1beta.SearchResult.ISearchResultMetadata|null);
                 }
 
                 /** Represents a SearchResult. */
@@ -10366,6 +10484,9 @@ export namespace google {
 
                     /** SearchResult distance. */
                     public distance?: (number|null);
+
+                    /** SearchResult searchResultMetadata. */
+                    public searchResultMetadata?: (google.cloud.vectorsearch.v1beta.SearchResult.ISearchResultMetadata|null);
 
                     /**
                      * Creates a new SearchResult instance using the specified properties.
@@ -10443,6 +10564,436 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace SearchResult {
+
+                    /** Properties of a SearchResultMetadata. */
+                    interface ISearchResultMetadata {
+
+                        /** SearchResultMetadata searchDistances */
+                        searchDistances?: (google.cloud.vectorsearch.v1beta.SearchResult.SearchResultMetadata.ISearchDistance[]|null);
+
+                        /** SearchResultMetadata rrfRankerResult */
+                        rrfRankerResult?: (google.cloud.vectorsearch.v1beta.SearchResult.SearchResultMetadata.IRrfRankerResult|null);
+
+                        /** SearchResultMetadata vertexRankerResult */
+                        vertexRankerResult?: (google.cloud.vectorsearch.v1beta.SearchResult.SearchResultMetadata.IVertexRankerResult|null);
+                    }
+
+                    /** Represents a SearchResultMetadata. */
+                    class SearchResultMetadata implements ISearchResultMetadata {
+
+                        /**
+                         * Constructs a new SearchResultMetadata.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.vectorsearch.v1beta.SearchResult.ISearchResultMetadata);
+
+                        /** SearchResultMetadata searchDistances. */
+                        public searchDistances: google.cloud.vectorsearch.v1beta.SearchResult.SearchResultMetadata.ISearchDistance[];
+
+                        /** SearchResultMetadata rrfRankerResult. */
+                        public rrfRankerResult?: (google.cloud.vectorsearch.v1beta.SearchResult.SearchResultMetadata.IRrfRankerResult|null);
+
+                        /** SearchResultMetadata vertexRankerResult. */
+                        public vertexRankerResult?: (google.cloud.vectorsearch.v1beta.SearchResult.SearchResultMetadata.IVertexRankerResult|null);
+
+                        /**
+                         * Creates a new SearchResultMetadata instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SearchResultMetadata instance
+                         */
+                        public static create(properties?: google.cloud.vectorsearch.v1beta.SearchResult.ISearchResultMetadata): google.cloud.vectorsearch.v1beta.SearchResult.SearchResultMetadata;
+
+                        /**
+                         * Encodes the specified SearchResultMetadata message. Does not implicitly {@link google.cloud.vectorsearch.v1beta.SearchResult.SearchResultMetadata.verify|verify} messages.
+                         * @param message SearchResultMetadata message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.vectorsearch.v1beta.SearchResult.ISearchResultMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SearchResultMetadata message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1beta.SearchResult.SearchResultMetadata.verify|verify} messages.
+                         * @param message SearchResultMetadata message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.vectorsearch.v1beta.SearchResult.ISearchResultMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SearchResultMetadata message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SearchResultMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1beta.SearchResult.SearchResultMetadata;
+
+                        /**
+                         * Decodes a SearchResultMetadata message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SearchResultMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1beta.SearchResult.SearchResultMetadata;
+
+                        /**
+                         * Verifies a SearchResultMetadata message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SearchResultMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SearchResultMetadata
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1beta.SearchResult.SearchResultMetadata;
+
+                        /**
+                         * Creates a plain object from a SearchResultMetadata message. Also converts values to other types if specified.
+                         * @param message SearchResultMetadata
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.vectorsearch.v1beta.SearchResult.SearchResultMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SearchResultMetadata to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SearchResultMetadata
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace SearchResultMetadata {
+
+                        /** Properties of a SearchDistance. */
+                        interface ISearchDistance {
+
+                            /** SearchDistance searchIndex */
+                            searchIndex?: (number|null);
+
+                            /** SearchDistance rank */
+                            rank?: (number|null);
+
+                            /** SearchDistance distance */
+                            distance?: (number|null);
+                        }
+
+                        /** Represents a SearchDistance. */
+                        class SearchDistance implements ISearchDistance {
+
+                            /**
+                             * Constructs a new SearchDistance.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.vectorsearch.v1beta.SearchResult.SearchResultMetadata.ISearchDistance);
+
+                            /** SearchDistance searchIndex. */
+                            public searchIndex: number;
+
+                            /** SearchDistance rank. */
+                            public rank: number;
+
+                            /** SearchDistance distance. */
+                            public distance: number;
+
+                            /**
+                             * Creates a new SearchDistance instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns SearchDistance instance
+                             */
+                            public static create(properties?: google.cloud.vectorsearch.v1beta.SearchResult.SearchResultMetadata.ISearchDistance): google.cloud.vectorsearch.v1beta.SearchResult.SearchResultMetadata.SearchDistance;
+
+                            /**
+                             * Encodes the specified SearchDistance message. Does not implicitly {@link google.cloud.vectorsearch.v1beta.SearchResult.SearchResultMetadata.SearchDistance.verify|verify} messages.
+                             * @param message SearchDistance message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.vectorsearch.v1beta.SearchResult.SearchResultMetadata.ISearchDistance, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified SearchDistance message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1beta.SearchResult.SearchResultMetadata.SearchDistance.verify|verify} messages.
+                             * @param message SearchDistance message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.vectorsearch.v1beta.SearchResult.SearchResultMetadata.ISearchDistance, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a SearchDistance message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns SearchDistance
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1beta.SearchResult.SearchResultMetadata.SearchDistance;
+
+                            /**
+                             * Decodes a SearchDistance message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns SearchDistance
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1beta.SearchResult.SearchResultMetadata.SearchDistance;
+
+                            /**
+                             * Verifies a SearchDistance message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a SearchDistance message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns SearchDistance
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1beta.SearchResult.SearchResultMetadata.SearchDistance;
+
+                            /**
+                             * Creates a plain object from a SearchDistance message. Also converts values to other types if specified.
+                             * @param message SearchDistance
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.vectorsearch.v1beta.SearchResult.SearchResultMetadata.SearchDistance, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this SearchDistance to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for SearchDistance
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a RrfRankerResult. */
+                        interface IRrfRankerResult {
+
+                            /** RrfRankerResult rank */
+                            rank?: (number|null);
+
+                            /** RrfRankerResult score */
+                            score?: (number|null);
+                        }
+
+                        /** Represents a RrfRankerResult. */
+                        class RrfRankerResult implements IRrfRankerResult {
+
+                            /**
+                             * Constructs a new RrfRankerResult.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.vectorsearch.v1beta.SearchResult.SearchResultMetadata.IRrfRankerResult);
+
+                            /** RrfRankerResult rank. */
+                            public rank: number;
+
+                            /** RrfRankerResult score. */
+                            public score: number;
+
+                            /**
+                             * Creates a new RrfRankerResult instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns RrfRankerResult instance
+                             */
+                            public static create(properties?: google.cloud.vectorsearch.v1beta.SearchResult.SearchResultMetadata.IRrfRankerResult): google.cloud.vectorsearch.v1beta.SearchResult.SearchResultMetadata.RrfRankerResult;
+
+                            /**
+                             * Encodes the specified RrfRankerResult message. Does not implicitly {@link google.cloud.vectorsearch.v1beta.SearchResult.SearchResultMetadata.RrfRankerResult.verify|verify} messages.
+                             * @param message RrfRankerResult message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.vectorsearch.v1beta.SearchResult.SearchResultMetadata.IRrfRankerResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified RrfRankerResult message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1beta.SearchResult.SearchResultMetadata.RrfRankerResult.verify|verify} messages.
+                             * @param message RrfRankerResult message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.vectorsearch.v1beta.SearchResult.SearchResultMetadata.IRrfRankerResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a RrfRankerResult message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns RrfRankerResult
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1beta.SearchResult.SearchResultMetadata.RrfRankerResult;
+
+                            /**
+                             * Decodes a RrfRankerResult message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns RrfRankerResult
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1beta.SearchResult.SearchResultMetadata.RrfRankerResult;
+
+                            /**
+                             * Verifies a RrfRankerResult message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a RrfRankerResult message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns RrfRankerResult
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1beta.SearchResult.SearchResultMetadata.RrfRankerResult;
+
+                            /**
+                             * Creates a plain object from a RrfRankerResult message. Also converts values to other types if specified.
+                             * @param message RrfRankerResult
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.vectorsearch.v1beta.SearchResult.SearchResultMetadata.RrfRankerResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this RrfRankerResult to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for RrfRankerResult
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a VertexRankerResult. */
+                        interface IVertexRankerResult {
+
+                            /** VertexRankerResult rank */
+                            rank?: (number|null);
+
+                            /** VertexRankerResult score */
+                            score?: (number|null);
+                        }
+
+                        /** Represents a VertexRankerResult. */
+                        class VertexRankerResult implements IVertexRankerResult {
+
+                            /**
+                             * Constructs a new VertexRankerResult.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.vectorsearch.v1beta.SearchResult.SearchResultMetadata.IVertexRankerResult);
+
+                            /** VertexRankerResult rank. */
+                            public rank: number;
+
+                            /** VertexRankerResult score. */
+                            public score: number;
+
+                            /**
+                             * Creates a new VertexRankerResult instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns VertexRankerResult instance
+                             */
+                            public static create(properties?: google.cloud.vectorsearch.v1beta.SearchResult.SearchResultMetadata.IVertexRankerResult): google.cloud.vectorsearch.v1beta.SearchResult.SearchResultMetadata.VertexRankerResult;
+
+                            /**
+                             * Encodes the specified VertexRankerResult message. Does not implicitly {@link google.cloud.vectorsearch.v1beta.SearchResult.SearchResultMetadata.VertexRankerResult.verify|verify} messages.
+                             * @param message VertexRankerResult message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.vectorsearch.v1beta.SearchResult.SearchResultMetadata.IVertexRankerResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified VertexRankerResult message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1beta.SearchResult.SearchResultMetadata.VertexRankerResult.verify|verify} messages.
+                             * @param message VertexRankerResult message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.vectorsearch.v1beta.SearchResult.SearchResultMetadata.IVertexRankerResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a VertexRankerResult message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns VertexRankerResult
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1beta.SearchResult.SearchResultMetadata.VertexRankerResult;
+
+                            /**
+                             * Decodes a VertexRankerResult message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns VertexRankerResult
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1beta.SearchResult.SearchResultMetadata.VertexRankerResult;
+
+                            /**
+                             * Verifies a VertexRankerResult message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a VertexRankerResult message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns VertexRankerResult
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1beta.SearchResult.SearchResultMetadata.VertexRankerResult;
+
+                            /**
+                             * Creates a plain object from a VertexRankerResult message. Also converts values to other types if specified.
+                             * @param message VertexRankerResult
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.vectorsearch.v1beta.SearchResult.SearchResultMetadata.VertexRankerResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this VertexRankerResult to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for VertexRankerResult
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
                 }
 
                 /** Properties of a SearchResponseMetadata. */
@@ -11207,6 +11758,9 @@ export namespace google {
 
                     /** BatchSearchDataObjectsRequest combine */
                     combine?: (google.cloud.vectorsearch.v1beta.BatchSearchDataObjectsRequest.ICombineResultsOptions|null);
+
+                    /** BatchSearchDataObjectsRequest metadataOptions */
+                    metadataOptions?: (google.cloud.vectorsearch.v1beta.BatchSearchDataObjectsRequest.IBatchSearchMetadataOptions|null);
                 }
 
                 /** Represents a BatchSearchDataObjectsRequest. */
@@ -11226,6 +11780,9 @@ export namespace google {
 
                     /** BatchSearchDataObjectsRequest combine. */
                     public combine?: (google.cloud.vectorsearch.v1beta.BatchSearchDataObjectsRequest.ICombineResultsOptions|null);
+
+                    /** BatchSearchDataObjectsRequest metadataOptions. */
+                    public metadataOptions?: (google.cloud.vectorsearch.v1beta.BatchSearchDataObjectsRequest.IBatchSearchMetadataOptions|null);
 
                     /**
                      * Creates a new BatchSearchDataObjectsRequest instance using the specified properties.
@@ -11410,6 +11967,103 @@ export namespace google {
 
                         /**
                          * Gets the default type url for CombineResultsOptions
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a BatchSearchMetadataOptions. */
+                    interface IBatchSearchMetadataOptions {
+
+                        /** BatchSearchMetadataOptions searchSignalsEnabled */
+                        searchSignalsEnabled?: (boolean|null);
+                    }
+
+                    /** Represents a BatchSearchMetadataOptions. */
+                    class BatchSearchMetadataOptions implements IBatchSearchMetadataOptions {
+
+                        /**
+                         * Constructs a new BatchSearchMetadataOptions.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.vectorsearch.v1beta.BatchSearchDataObjectsRequest.IBatchSearchMetadataOptions);
+
+                        /** BatchSearchMetadataOptions searchSignalsEnabled. */
+                        public searchSignalsEnabled: boolean;
+
+                        /**
+                         * Creates a new BatchSearchMetadataOptions instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns BatchSearchMetadataOptions instance
+                         */
+                        public static create(properties?: google.cloud.vectorsearch.v1beta.BatchSearchDataObjectsRequest.IBatchSearchMetadataOptions): google.cloud.vectorsearch.v1beta.BatchSearchDataObjectsRequest.BatchSearchMetadataOptions;
+
+                        /**
+                         * Encodes the specified BatchSearchMetadataOptions message. Does not implicitly {@link google.cloud.vectorsearch.v1beta.BatchSearchDataObjectsRequest.BatchSearchMetadataOptions.verify|verify} messages.
+                         * @param message BatchSearchMetadataOptions message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.vectorsearch.v1beta.BatchSearchDataObjectsRequest.IBatchSearchMetadataOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified BatchSearchMetadataOptions message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1beta.BatchSearchDataObjectsRequest.BatchSearchMetadataOptions.verify|verify} messages.
+                         * @param message BatchSearchMetadataOptions message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.vectorsearch.v1beta.BatchSearchDataObjectsRequest.IBatchSearchMetadataOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a BatchSearchMetadataOptions message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns BatchSearchMetadataOptions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1beta.BatchSearchDataObjectsRequest.BatchSearchMetadataOptions;
+
+                        /**
+                         * Decodes a BatchSearchMetadataOptions message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns BatchSearchMetadataOptions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1beta.BatchSearchDataObjectsRequest.BatchSearchMetadataOptions;
+
+                        /**
+                         * Verifies a BatchSearchMetadataOptions message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a BatchSearchMetadataOptions message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns BatchSearchMetadataOptions
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1beta.BatchSearchDataObjectsRequest.BatchSearchMetadataOptions;
+
+                        /**
+                         * Creates a plain object from a BatchSearchMetadataOptions message. Also converts values to other types if specified.
+                         * @param message BatchSearchMetadataOptions
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.vectorsearch.v1beta.BatchSearchDataObjectsRequest.BatchSearchMetadataOptions, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this BatchSearchMetadataOptions to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for BatchSearchMetadataOptions
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */

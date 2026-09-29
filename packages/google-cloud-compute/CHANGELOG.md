@@ -4,6 +4,27 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/compute?activeTab=versions
 
+## [7.5.1](https://github.com/googleapis/google-cloud-node/compare/compute-v7.5.0...compute-v7.5.1) (2026-09-28)
+
+
+### Bug Fixes
+
+* Update package.json and .gitignore across packages ([#9378](https://github.com/googleapis/google-cloud-node/issues/9378)) ([9c54cec](https://github.com/googleapis/google-cloud-node/commit/9c54cece565b5cbcae63a9856c1ef3448307d46e))
+
+## [7.5.0](https://github.com/googleapis/google-cloud-node/compare/compute-v7.4.0...compute-v7.5.0) (2026-09-22)
+
+
+### Features
+
+* Update API sources and regenerate ([#9368](https://github.com/googleapis/google-cloud-node/issues/9368)) ([57d0cfd](https://github.com/googleapis/google-cloud-node/commit/57d0cfd84827933a5da83c370b38942d0c2eadd8))
+
+## [7.4.0](https://github.com/googleapis/google-cloud-node/compare/compute-v7.3.0...compute-v7.4.0) (2026-09-15)
+
+
+### Features
+
+* Update API sources and regenerate ([#9293](https://github.com/googleapis/google-cloud-node/issues/9293)) ([07ae774](https://github.com/googleapis/google-cloud-node/commit/07ae774a8e52185a3598c878513377e7a019f127))
+
 ## [7.3.0](https://github.com/googleapis/google-cloud-node/compare/compute-v7.2.0...compute-v7.3.0) (2026-09-08)
 
 

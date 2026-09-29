@@ -88,6 +88,32 @@
         "@typescript-eslint/no-explicit-any": ["off"],
         "@typescript-eslint/no-floating-promises": ["off"]
       }
+    },
+    // Generated GAPIC surfaces (clients + their generated unit tests) are
+    // emitted verbatim by gapic-generator-typescript and cannot be hand-edited,
+    // so rules they violate have to be handled here rather than in the output.
+    {
+      "files": [
+        "packages/*/src/v*/**/*.ts",
+        "packages/*/esm/src/v*/**/*.ts",
+        "packages/*/test/gapic_*.ts",
+        "packages/*/esm/test/gapic_*.ts"
+      ],
+      "rules": {
+        // Restores pre-#8458 behavior. Generated packages each shipped a
+        // `root: true` .eslintrc.json extending only gts, so when the promise
+        // plugin was added to this config in #8446 it never reached them.
+        "promise/always-return": "off",
+        "promise/catch-or-return": "off",
+        // TODO(#9432): temporary. Unlike the promise rules above, these two
+        // were reachable via gts before #8458, so this is a new relaxation.
+        // Removable once librarian.yaml pins a `gapic-generator-v*` release
+        // containing the template fixes -- note that merging a template fix to
+        // main is NOT sufficient, since librarian.yaml pins the generator by
+        // tag + tarball checksum.
+        "@typescript-eslint/no-floating-promises": "off",
+        "prefer-const": "off"
+      }
     }
   ],
   // LINT.IfChange(ignorePatterns)

@@ -4,6 +4,27 @@
 
 [1]: https://www.npmjs.com/package/nodejs-tasks?activeTab=versions
 
+## [7.2.1](https://github.com/googleapis/google-cloud-node/compare/tasks-v7.2.0...tasks-v7.2.1) (2026-09-28)
+
+
+### Bug Fixes
+
+* Update package.json and .gitignore across packages ([#9378](https://github.com/googleapis/google-cloud-node/issues/9378)) ([9c54cec](https://github.com/googleapis/google-cloud-node/commit/9c54cece565b5cbcae63a9856c1ef3448307d46e))
+
+## [7.2.0](https://github.com/googleapis/google-cloud-node/compare/tasks-v7.1.1...tasks-v7.2.0) (2026-09-23)
+
+
+### Features
+
+* Update API sources and regenerate ([#9427](https://github.com/googleapis/google-cloud-node/issues/9427)) ([5cd945d](https://github.com/googleapis/google-cloud-node/commit/5cd945de7f4fd96878c1956d68bcf505e48686ce))
+
+## [7.1.1](https://github.com/googleapis/google-cloud-node/compare/tasks-v7.1.0...tasks-v7.1.1) (2026-09-16)
+
+
+### Bug Fixes
+
+* Remove unintentionally added file ([#9356](https://github.com/googleapis/google-cloud-node/issues/9356)) ([99f6657](https://github.com/googleapis/google-cloud-node/commit/99f6657d912f8fd44b96ae5199624f11f77ced09))
+
 ## [7.1.0](https://github.com/googleapis/google-cloud-node/compare/tasks-v7.0.0...tasks-v7.1.0) (2026-09-08)
 
 

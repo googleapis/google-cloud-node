@@ -44,6 +44,10 @@ function main(instance, project) {
    *  The body for request to acquire an SSRS lease.
    */
   // const body = {}
+  /**
+   *  Optional. Region of the Cloud SQL instance.
+   */
+  // const location = 'abc123'
 
   // Imports the Sql library
   const {SqlInstancesServiceClient} = require('@google-cloud/sql').v1beta4;

@@ -1,5 +1,7 @@
 [
+  "../../protos/google/cloud/lustre/v1/directory_policy.proto",
   "../../protos/google/cloud/lustre/v1/instance.proto",
   "../../protos/google/cloud/lustre/v1/lustre.proto",
+  "../../protos/google/cloud/lustre/v1/mirror.proto",
   "../../protos/google/cloud/lustre/v1/transfer.proto"
 ]

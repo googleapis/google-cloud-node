@@ -1219,7 +1219,7 @@
                     "SearchService": {
                       "options": {
                         "(google.api.default_host)": "discoveryengine.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/discoveryengine.assist.readwrite,https://www.googleapis.com/auth/discoveryengine.readwrite,https://www.googleapis.com/auth/discoveryengine.serving.readwrite"
                       },
                       "methods": {
                         "Search": {
@@ -1333,6 +1333,13 @@
                           "rule": "repeated",
                           "type": "DataStoreSpec",
                           "id": 32
+                        },
+                        "numResultsPerDataStore": {
+                          "type": "int32",
+                          "id": 65,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "filter": {
                           "type": "string",
@@ -1464,6 +1471,27 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "searchAddonSpec": {
+                          "type": "SearchAddonSpec",
+                          "id": 62,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "customRankingParams": {
+                          "type": "CustomRankingParams",
+                          "id": 64,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "entity": {
+                          "type": "string",
+                          "id": 66,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -1509,6 +1537,13 @@
                             "customSearchOperators": {
                               "type": "string",
                               "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "numResults": {
+                              "type": "int32",
+                              "id": 9,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
@@ -1896,13 +1931,62 @@
                           }
                         },
                         "SearchAsYouTypeSpec": {
+                          "oneofs": {
+                            "_scoreThreshold": {
+                              "oneof": [
+                                "scoreThreshold"
+                              ]
+                            }
+                          },
                           "fields": {
                             "condition": {
                               "type": "Condition",
                               "id": 1
+                            },
+                            "fields": {
+                              "rule": "repeated",
+                              "type": "Field",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "scoreThreshold": {
+                              "type": "double",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
+                              }
                             }
                           },
                           "nested": {
+                            "Field": {
+                              "oneofs": {
+                                "_weight": {
+                                  "oneof": [
+                                    "weight"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "key": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "weight": {
+                                  "type": "double",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL",
+                                    "proto3_optional": true
+                                  }
+                                }
+                              }
+                            },
                             "Condition": {
                               "values": {
                                 "CONDITION_UNSPECIFIED": 0,
@@ -1977,17 +2061,6 @@
                             }
                           }
                         },
-                        "RelevanceScoreSpec": {
-                          "fields": {
-                            "returnRelevanceScore": {
-                              "type": "bool",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
-                              }
-                            }
-                          }
-                        },
                         "RelevanceFilterSpec": {
                           "fields": {
                             "keywordSearchThreshold": {
@@ -2024,6 +2097,54 @@
                                   "type": "float",
                                   "id": 2
                                 }
+                              }
+                            }
+                          }
+                        },
+                        "RelevanceScoreSpec": {
+                          "fields": {
+                            "returnRelevanceScore": {
+                              "type": "bool",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "SearchAddonSpec": {
+                          "fields": {
+                            "disableSemanticAddOn": {
+                              "type": "bool",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "disableKpiPersonalizationAddOn": {
+                              "type": "bool",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "disableGenerativeAnswerAddOn": {
+                              "type": "bool",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "CustomRankingParams": {
+                          "fields": {
+                            "expressionsToPrecompute": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
                               }
                             }
                           }
@@ -2092,6 +2213,15 @@
                           "type": "Summary",
                           "id": 9
                         },
+                        "appliedControls": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.resource_reference).type": "discoveryengine.googleapis.com/Control"
+                          }
+                        },
                         "queryExpansionInfo": {
                           "type": "QueryExpansionInfo",
                           "id": 14
@@ -2146,6 +2276,13 @@
                             "rankSignals": {
                               "type": "RankSignals",
                               "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "retrievalSignals": {
+                              "type": "RetrievalSignals",
+                              "id": 11,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
@@ -2261,6 +2398,14 @@
                                   "options": {
                                     "(google.api.field_behavior)": "OPTIONAL"
                                   }
+                                },
+                                "precomputedExpressionValues": {
+                                  "rule": "repeated",
+                                  "type": "float",
+                                  "id": 34,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
                                 }
                               },
                               "nested": {
@@ -2280,6 +2425,34 @@
                                         "(google.api.field_behavior)": "OPTIONAL"
                                       }
                                     }
+                                  }
+                                }
+                              }
+                            },
+                            "RetrievalSignals": {
+                              "fields": {
+                                "retrievalSources": {
+                                  "rule": "repeated",
+                                  "type": "RetrievalSource",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "semanticRelevanceScore": {
+                                  "type": "float",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              },
+                              "nested": {
+                                "RetrievalSource": {
+                                  "values": {
+                                    "RETRIEVAL_SOURCE_UNSPECIFIED": 0,
+                                    "KEYWORD_SEARCH": 1,
+                                    "SEMANTIC_SEARCH": 2
                                   }
                                 }
                               }

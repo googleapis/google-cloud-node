@@ -9,8 +9,6 @@ coverage
 yarn-error.log
 samples/*.keys.json
 .nyc_output
-package-lock.json
-yarn.lock
 dist/
 __pycache__
 .DS_Store

@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.14.1](https://github.com/googleapis/google-cloud-node/compare/securesourcemanager-v0.14.0...securesourcemanager-v0.14.1) (2026-09-28)
+
+
+### Bug Fixes
+
+* Update package.json and .gitignore across packages ([#9378](https://github.com/googleapis/google-cloud-node/issues/9378)) ([9c54cec](https://github.com/googleapis/google-cloud-node/commit/9c54cece565b5cbcae63a9856c1ef3448307d46e))
+
+## [0.14.0](https://github.com/googleapis/google-cloud-node/compare/securesourcemanager-v0.13.0...securesourcemanager-v0.14.0) (2026-09-15)
+
+
+### Features
+
+* Update API sources and regenerate ([#9293](https://github.com/googleapis/google-cloud-node/issues/9293)) ([07ae774](https://github.com/googleapis/google-cloud-node/commit/07ae774a8e52185a3598c878513377e7a019f127))
+
 ## [0.13.0](https://github.com/googleapis/google-cloud-node/compare/securesourcemanager-v0.12.0...securesourcemanager-v0.13.0) (2026-09-08)
 
 

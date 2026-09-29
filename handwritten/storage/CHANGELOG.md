@@ -5,6 +5,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/storage?activeTab=versions
 
+## [8.2.0](https://github.com/googleapis/google-cloud-node/compare/storage-v8.1.0...storage-v8.2.0) (2026-09-17)
+
+
+### Features
+
+* PNPM workspace ([#8973](https://github.com/googleapis/google-cloud-node/issues/8973)) ([1ea27c9](https://github.com/googleapis/google-cloud-node/commit/1ea27c9c9bf4e4cbf79381321dcb9bce7951a76f))
+
 ## [8.1.0](https://github.com/googleapis/google-cloud-node/compare/storage-v8.0.1...storage-v8.1.0) (2026-09-08)
 
 

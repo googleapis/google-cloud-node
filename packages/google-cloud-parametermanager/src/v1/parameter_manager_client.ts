@@ -224,6 +224,12 @@ export class ParameterManagerClient {
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}',
       ),
+      templatePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/templates/{template}',
+      ),
+      templateVersionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/templates/{template}/versions/{template_version}',
+      ),
     };
 
     // Some of the methods on this service return "paged" results,
@@ -239,6 +245,16 @@ export class ParameterManagerClient {
         'pageToken',
         'nextPageToken',
         'parameterVersions',
+      ),
+      listTemplates: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'templates',
+      ),
+      listTemplateVersions: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'templateVersions',
       ),
     };
 
@@ -304,6 +320,17 @@ export class ParameterManagerClient {
       'createParameterVersion',
       'updateParameterVersion',
       'deleteParameterVersion',
+      'listTemplates',
+      'getTemplate',
+      'createTemplate',
+      'updateTemplate',
+      'deleteTemplate',
+      'listTemplateVersions',
+      'getTemplateVersion',
+      'createTemplateVersion',
+      'updateTemplateVersion',
+      'deleteTemplateVersion',
+      'renderTemplateVersion',
     ];
     for (const methodName of parameterManagerStubMethods) {
       const callPromise = this.parameterManagerStub.then(
@@ -1815,6 +1842,1405 @@ export class ParameterManagerClient {
         throw error;
       });
   }
+  /**
+   * Gets details of a single Template.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the resource in the format
+   *   `projects/* /locations/* /templates/*`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.parametermanager.v1.Template|Template}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/parameter_manager.get_template.js</caption>
+   * region_tag:parametermanager_v1_generated_ParameterManager_GetTemplate_async
+   */
+  getTemplate(
+    request?: protos.google.cloud.parametermanager.v1.IGetTemplateRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.parametermanager.v1.ITemplate,
+      protos.google.cloud.parametermanager.v1.IGetTemplateRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  getTemplate(
+    request: protos.google.cloud.parametermanager.v1.IGetTemplateRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.parametermanager.v1.ITemplate,
+      | protos.google.cloud.parametermanager.v1.IGetTemplateRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getTemplate(
+    request: protos.google.cloud.parametermanager.v1.IGetTemplateRequest,
+    callback: Callback<
+      protos.google.cloud.parametermanager.v1.ITemplate,
+      | protos.google.cloud.parametermanager.v1.IGetTemplateRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getTemplate(
+    request?: protos.google.cloud.parametermanager.v1.IGetTemplateRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.parametermanager.v1.ITemplate,
+          | protos.google.cloud.parametermanager.v1.IGetTemplateRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.parametermanager.v1.ITemplate,
+      | protos.google.cloud.parametermanager.v1.IGetTemplateRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.parametermanager.v1.ITemplate,
+      protos.google.cloud.parametermanager.v1.IGetTemplateRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getTemplate request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.parametermanager.v1.ITemplate,
+          | protos.google.cloud.parametermanager.v1.IGetTemplateRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getTemplate response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getTemplate(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.parametermanager.v1.ITemplate,
+          (
+            | protos.google.cloud.parametermanager.v1.IGetTemplateRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getTemplate response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Creates a new Template in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Value for parent in the format
+   *   `projects/* /locations/*`.
+   * @param {string} request.templateId
+   *   Required. Id of the Template resource
+   * @param {google.cloud.parametermanager.v1.Template} request.template
+   *   Required. The Template resource being created
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed. The server will
+   *   guarantee that for at least 60 minutes since the first request.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.parametermanager.v1.Template|Template}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/parameter_manager.create_template.js</caption>
+   * region_tag:parametermanager_v1_generated_ParameterManager_CreateTemplate_async
+   */
+  createTemplate(
+    request?: protos.google.cloud.parametermanager.v1.ICreateTemplateRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.parametermanager.v1.ITemplate,
+      (
+        | protos.google.cloud.parametermanager.v1.ICreateTemplateRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  createTemplate(
+    request: protos.google.cloud.parametermanager.v1.ICreateTemplateRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.parametermanager.v1.ITemplate,
+      | protos.google.cloud.parametermanager.v1.ICreateTemplateRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  createTemplate(
+    request: protos.google.cloud.parametermanager.v1.ICreateTemplateRequest,
+    callback: Callback<
+      protos.google.cloud.parametermanager.v1.ITemplate,
+      | protos.google.cloud.parametermanager.v1.ICreateTemplateRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  createTemplate(
+    request?: protos.google.cloud.parametermanager.v1.ICreateTemplateRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.parametermanager.v1.ITemplate,
+          | protos.google.cloud.parametermanager.v1.ICreateTemplateRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.parametermanager.v1.ITemplate,
+      | protos.google.cloud.parametermanager.v1.ICreateTemplateRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.parametermanager.v1.ITemplate,
+      (
+        | protos.google.cloud.parametermanager.v1.ICreateTemplateRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createTemplate request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.parametermanager.v1.ITemplate,
+          | protos.google.cloud.parametermanager.v1.ICreateTemplateRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createTemplate response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createTemplate(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.parametermanager.v1.ITemplate,
+          (
+            | protos.google.cloud.parametermanager.v1.ICreateTemplateRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createTemplate response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Updates a single Template.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. Field mask is used to specify the fields to be overwritten in the
+   *   Template resource by the update.
+   *   The fields specified in the update_mask are relative to the resource, not
+   *   the full request. A mutable field will be overwritten if it is in the
+   *   mask. If the user does not provide a mask then all mutable fields present
+   *   in the request will be overwritten.
+   * @param {google.cloud.parametermanager.v1.Template} request.template
+   *   Required. The Template resource being updated
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed. The server will
+   *   guarantee that for at least 60 minutes since the first request.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.parametermanager.v1.Template|Template}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/parameter_manager.update_template.js</caption>
+   * region_tag:parametermanager_v1_generated_ParameterManager_UpdateTemplate_async
+   */
+  updateTemplate(
+    request?: protos.google.cloud.parametermanager.v1.IUpdateTemplateRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.parametermanager.v1.ITemplate,
+      (
+        | protos.google.cloud.parametermanager.v1.IUpdateTemplateRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  updateTemplate(
+    request: protos.google.cloud.parametermanager.v1.IUpdateTemplateRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.parametermanager.v1.ITemplate,
+      | protos.google.cloud.parametermanager.v1.IUpdateTemplateRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  updateTemplate(
+    request: protos.google.cloud.parametermanager.v1.IUpdateTemplateRequest,
+    callback: Callback<
+      protos.google.cloud.parametermanager.v1.ITemplate,
+      | protos.google.cloud.parametermanager.v1.IUpdateTemplateRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  updateTemplate(
+    request?: protos.google.cloud.parametermanager.v1.IUpdateTemplateRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.parametermanager.v1.ITemplate,
+          | protos.google.cloud.parametermanager.v1.IUpdateTemplateRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.parametermanager.v1.ITemplate,
+      | protos.google.cloud.parametermanager.v1.IUpdateTemplateRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.parametermanager.v1.ITemplate,
+      (
+        | protos.google.cloud.parametermanager.v1.IUpdateTemplateRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'template.name': request.template!.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateTemplate request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.parametermanager.v1.ITemplate,
+          | protos.google.cloud.parametermanager.v1.IUpdateTemplateRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateTemplate response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateTemplate(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.parametermanager.v1.ITemplate,
+          (
+            | protos.google.cloud.parametermanager.v1.IUpdateTemplateRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateTemplate response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Deletes a single Template.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the resource in the format
+   *   `projects/* /locations/* /templates/*`.
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed. The server will
+   *   guarantee that for at least 60 minutes after the first request.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/parameter_manager.delete_template.js</caption>
+   * region_tag:parametermanager_v1_generated_ParameterManager_DeleteTemplate_async
+   */
+  deleteTemplate(
+    request?: protos.google.cloud.parametermanager.v1.IDeleteTemplateRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.parametermanager.v1.IDeleteTemplateRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  deleteTemplate(
+    request: protos.google.cloud.parametermanager.v1.IDeleteTemplateRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.parametermanager.v1.IDeleteTemplateRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  deleteTemplate(
+    request: protos.google.cloud.parametermanager.v1.IDeleteTemplateRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.parametermanager.v1.IDeleteTemplateRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  deleteTemplate(
+    request?: protos.google.cloud.parametermanager.v1.IDeleteTemplateRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.parametermanager.v1.IDeleteTemplateRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.parametermanager.v1.IDeleteTemplateRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.parametermanager.v1.IDeleteTemplateRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteTemplate request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.parametermanager.v1.IDeleteTemplateRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteTemplate response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteTemplate(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.parametermanager.v1.IDeleteTemplateRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteTemplate response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Gets details of a single TemplateVersion.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the resource in the format
+   *   `projects/* /locations/* /templates/* /versions/*`.
+   * @param {google.cloud.parametermanager.v1.View} [request.view]
+   *   Optional. Specifies the view of the TemplateVersion to return.
+   *   In the default FULL view, all metadata & payload associated with the
+   *   TemplateVersion will be returned.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.parametermanager.v1.TemplateVersion|TemplateVersion}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/parameter_manager.get_template_version.js</caption>
+   * region_tag:parametermanager_v1_generated_ParameterManager_GetTemplateVersion_async
+   */
+  getTemplateVersion(
+    request?: protos.google.cloud.parametermanager.v1.IGetTemplateVersionRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.parametermanager.v1.ITemplateVersion,
+      (
+        | protos.google.cloud.parametermanager.v1.IGetTemplateVersionRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  getTemplateVersion(
+    request: protos.google.cloud.parametermanager.v1.IGetTemplateVersionRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.parametermanager.v1.ITemplateVersion,
+      | protos.google.cloud.parametermanager.v1.IGetTemplateVersionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getTemplateVersion(
+    request: protos.google.cloud.parametermanager.v1.IGetTemplateVersionRequest,
+    callback: Callback<
+      protos.google.cloud.parametermanager.v1.ITemplateVersion,
+      | protos.google.cloud.parametermanager.v1.IGetTemplateVersionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getTemplateVersion(
+    request?: protos.google.cloud.parametermanager.v1.IGetTemplateVersionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.parametermanager.v1.ITemplateVersion,
+          | protos.google.cloud.parametermanager.v1.IGetTemplateVersionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.parametermanager.v1.ITemplateVersion,
+      | protos.google.cloud.parametermanager.v1.IGetTemplateVersionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.parametermanager.v1.ITemplateVersion,
+      (
+        | protos.google.cloud.parametermanager.v1.IGetTemplateVersionRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getTemplateVersion request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.parametermanager.v1.ITemplateVersion,
+          | protos.google.cloud.parametermanager.v1.IGetTemplateVersionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getTemplateVersion response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getTemplateVersion(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.parametermanager.v1.ITemplateVersion,
+          (
+            | protos.google.cloud.parametermanager.v1.IGetTemplateVersionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getTemplateVersion response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Creates a new TemplateVersion in a given project, location, and template.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Value for parent in the format
+   *   `projects/* /locations/* /templates/*`.
+   * @param {string} request.templateVersionId
+   *   Required. Id of the TemplateVersion resource
+   * @param {google.cloud.parametermanager.v1.TemplateVersion} request.templateVersion
+   *   Required. The TemplateVersion resource being created
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed. The server will
+   *   guarantee that for at least 60 minutes since the first request.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.parametermanager.v1.TemplateVersion|TemplateVersion}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/parameter_manager.create_template_version.js</caption>
+   * region_tag:parametermanager_v1_generated_ParameterManager_CreateTemplateVersion_async
+   */
+  createTemplateVersion(
+    request?: protos.google.cloud.parametermanager.v1.ICreateTemplateVersionRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.parametermanager.v1.ITemplateVersion,
+      (
+        | protos.google.cloud.parametermanager.v1.ICreateTemplateVersionRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  createTemplateVersion(
+    request: protos.google.cloud.parametermanager.v1.ICreateTemplateVersionRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.parametermanager.v1.ITemplateVersion,
+      | protos.google.cloud.parametermanager.v1.ICreateTemplateVersionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  createTemplateVersion(
+    request: protos.google.cloud.parametermanager.v1.ICreateTemplateVersionRequest,
+    callback: Callback<
+      protos.google.cloud.parametermanager.v1.ITemplateVersion,
+      | protos.google.cloud.parametermanager.v1.ICreateTemplateVersionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  createTemplateVersion(
+    request?: protos.google.cloud.parametermanager.v1.ICreateTemplateVersionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.parametermanager.v1.ITemplateVersion,
+          | protos.google.cloud.parametermanager.v1.ICreateTemplateVersionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.parametermanager.v1.ITemplateVersion,
+      | protos.google.cloud.parametermanager.v1.ICreateTemplateVersionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.parametermanager.v1.ITemplateVersion,
+      (
+        | protos.google.cloud.parametermanager.v1.ICreateTemplateVersionRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createTemplateVersion request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.parametermanager.v1.ITemplateVersion,
+          | protos.google.cloud.parametermanager.v1.ICreateTemplateVersionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createTemplateVersion response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createTemplateVersion(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.parametermanager.v1.ITemplateVersion,
+          (
+            | protos.google.cloud.parametermanager.v1.ICreateTemplateVersionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createTemplateVersion response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Updates a single TemplateVersion.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. Field mask is used to specify the fields to be overwritten in the
+   *   TemplateVersion resource by the update.
+   *   The fields specified in the update_mask are relative to the resource, not
+   *   the full request. A mutable field will be overwritten if it is in the
+   *   mask. If the user does not provide a mask then all mutable fields present
+   *   in the request will be overwritten.
+   * @param {google.cloud.parametermanager.v1.TemplateVersion} request.templateVersion
+   *   Required. The TemplateVersion resource being updated
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed. The server will
+   *   guarantee that for at least 60 minutes since the first request.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.parametermanager.v1.TemplateVersion|TemplateVersion}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/parameter_manager.update_template_version.js</caption>
+   * region_tag:parametermanager_v1_generated_ParameterManager_UpdateTemplateVersion_async
+   */
+  updateTemplateVersion(
+    request?: protos.google.cloud.parametermanager.v1.IUpdateTemplateVersionRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.parametermanager.v1.ITemplateVersion,
+      (
+        | protos.google.cloud.parametermanager.v1.IUpdateTemplateVersionRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  updateTemplateVersion(
+    request: protos.google.cloud.parametermanager.v1.IUpdateTemplateVersionRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.parametermanager.v1.ITemplateVersion,
+      | protos.google.cloud.parametermanager.v1.IUpdateTemplateVersionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  updateTemplateVersion(
+    request: protos.google.cloud.parametermanager.v1.IUpdateTemplateVersionRequest,
+    callback: Callback<
+      protos.google.cloud.parametermanager.v1.ITemplateVersion,
+      | protos.google.cloud.parametermanager.v1.IUpdateTemplateVersionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  updateTemplateVersion(
+    request?: protos.google.cloud.parametermanager.v1.IUpdateTemplateVersionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.parametermanager.v1.ITemplateVersion,
+          | protos.google.cloud.parametermanager.v1.IUpdateTemplateVersionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.parametermanager.v1.ITemplateVersion,
+      | protos.google.cloud.parametermanager.v1.IUpdateTemplateVersionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.parametermanager.v1.ITemplateVersion,
+      (
+        | protos.google.cloud.parametermanager.v1.IUpdateTemplateVersionRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'template_version.name': request.templateVersion!.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateTemplateVersion request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.parametermanager.v1.ITemplateVersion,
+          | protos.google.cloud.parametermanager.v1.IUpdateTemplateVersionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateTemplateVersion response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateTemplateVersion(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.parametermanager.v1.ITemplateVersion,
+          (
+            | protos.google.cloud.parametermanager.v1.IUpdateTemplateVersionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateTemplateVersion response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Deletes a single TemplateVersion.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the resource in the format
+   *   `projects/* /locations/* /templates/* /versions/*`.
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed. The server will
+   *   guarantee that for at least 60 minutes after the first request.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/parameter_manager.delete_template_version.js</caption>
+   * region_tag:parametermanager_v1_generated_ParameterManager_DeleteTemplateVersion_async
+   */
+  deleteTemplateVersion(
+    request?: protos.google.cloud.parametermanager.v1.IDeleteTemplateVersionRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.parametermanager.v1.IDeleteTemplateVersionRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  deleteTemplateVersion(
+    request: protos.google.cloud.parametermanager.v1.IDeleteTemplateVersionRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.parametermanager.v1.IDeleteTemplateVersionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  deleteTemplateVersion(
+    request: protos.google.cloud.parametermanager.v1.IDeleteTemplateVersionRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.parametermanager.v1.IDeleteTemplateVersionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  deleteTemplateVersion(
+    request?: protos.google.cloud.parametermanager.v1.IDeleteTemplateVersionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.parametermanager.v1.IDeleteTemplateVersionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.parametermanager.v1.IDeleteTemplateVersionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.parametermanager.v1.IDeleteTemplateVersionRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteTemplateVersion request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.parametermanager.v1.IDeleteTemplateVersionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteTemplateVersion response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteTemplateVersion(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.parametermanager.v1.IDeleteTemplateVersionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteTemplateVersion response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Gets rendered version of a TemplateVersion.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the resource
+   * @param {string} request.parameterVersion
+   *   Required. Parameter version used to render the template version.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.parametermanager.v1.RenderTemplateVersionResponse|RenderTemplateVersionResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/parameter_manager.render_template_version.js</caption>
+   * region_tag:parametermanager_v1_generated_ParameterManager_RenderTemplateVersion_async
+   */
+  renderTemplateVersion(
+    request?: protos.google.cloud.parametermanager.v1.IRenderTemplateVersionRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.parametermanager.v1.IRenderTemplateVersionResponse,
+      (
+        | protos.google.cloud.parametermanager.v1.IRenderTemplateVersionRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  renderTemplateVersion(
+    request: protos.google.cloud.parametermanager.v1.IRenderTemplateVersionRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.parametermanager.v1.IRenderTemplateVersionResponse,
+      | protos.google.cloud.parametermanager.v1.IRenderTemplateVersionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  renderTemplateVersion(
+    request: protos.google.cloud.parametermanager.v1.IRenderTemplateVersionRequest,
+    callback: Callback<
+      protos.google.cloud.parametermanager.v1.IRenderTemplateVersionResponse,
+      | protos.google.cloud.parametermanager.v1.IRenderTemplateVersionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  renderTemplateVersion(
+    request?: protos.google.cloud.parametermanager.v1.IRenderTemplateVersionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.parametermanager.v1.IRenderTemplateVersionResponse,
+          | protos.google.cloud.parametermanager.v1.IRenderTemplateVersionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.parametermanager.v1.IRenderTemplateVersionResponse,
+      | protos.google.cloud.parametermanager.v1.IRenderTemplateVersionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.parametermanager.v1.IRenderTemplateVersionResponse,
+      (
+        | protos.google.cloud.parametermanager.v1.IRenderTemplateVersionRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('renderTemplateVersion request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.parametermanager.v1.IRenderTemplateVersionResponse,
+          | protos.google.cloud.parametermanager.v1.IRenderTemplateVersionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('renderTemplateVersion response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .renderTemplateVersion(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.parametermanager.v1.IRenderTemplateVersionResponse,
+          (
+            | protos.google.cloud.parametermanager.v1.IRenderTemplateVersionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('renderTemplateVersion response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
 
   /**
    * Lists Parameters in a given project and location.
@@ -1828,7 +3254,11 @@ export class ParameterManagerClient {
    *   Optional. Requested page size. Server may return fewer items than
    *   requested. If unspecified, server will pick an appropriate default.
    * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
+   *   Optional. A page token, received from a previous `ListParameters` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListParameters` must
+   *   match the call that provided the page token.
    * @param {string} [request.filter]
    *   Optional. Filtering results
    * @param {string} [request.orderBy]
@@ -1959,7 +3389,11 @@ export class ParameterManagerClient {
    *   Optional. Requested page size. Server may return fewer items than
    *   requested. If unspecified, server will pick an appropriate default.
    * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
+   *   Optional. A page token, received from a previous `ListParameters` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListParameters` must
+   *   match the call that provided the page token.
    * @param {string} [request.filter]
    *   Optional. Filtering results
    * @param {string} [request.orderBy]
@@ -2013,7 +3447,11 @@ export class ParameterManagerClient {
    *   Optional. Requested page size. Server may return fewer items than
    *   requested. If unspecified, server will pick an appropriate default.
    * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
+   *   Optional. A page token, received from a previous `ListParameters` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListParameters` must
+   *   match the call that provided the page token.
    * @param {string} [request.filter]
    *   Optional. Filtering results
    * @param {string} [request.orderBy]
@@ -2066,7 +3504,11 @@ export class ParameterManagerClient {
    *   Optional. Requested page size. Server may return fewer items than
    *   requested. If unspecified, server will pick an appropriate default.
    * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
+   *   Optional. A page token, received from a previous `ListParameterVersions`
+   *   call. Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListParameterVersions`
+   *   must match the call that provided the page token.
    * @param {string} [request.filter]
    *   Optional. Filtering results
    * @param {string} [request.orderBy]
@@ -2197,7 +3639,11 @@ export class ParameterManagerClient {
    *   Optional. Requested page size. Server may return fewer items than
    *   requested. If unspecified, server will pick an appropriate default.
    * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
+   *   Optional. A page token, received from a previous `ListParameterVersions`
+   *   call. Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListParameterVersions`
+   *   must match the call that provided the page token.
    * @param {string} [request.filter]
    *   Optional. Filtering results
    * @param {string} [request.orderBy]
@@ -2251,7 +3697,11 @@ export class ParameterManagerClient {
    *   Optional. Requested page size. Server may return fewer items than
    *   requested. If unspecified, server will pick an appropriate default.
    * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
+   *   Optional. A page token, received from a previous `ListParameterVersions`
+   *   call. Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListParameterVersions`
+   *   must match the call that provided the page token.
    * @param {string} [request.filter]
    *   Optional. Filtering results
    * @param {string} [request.orderBy]
@@ -2291,6 +3741,506 @@ export class ParameterManagerClient {
       request as {},
       callSettings,
     ) as AsyncIterable<protos.google.cloud.parametermanager.v1.IParameterVersion>;
+  }
+  /**
+   * Lists Templates in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ListTemplatesRequest in the format
+   *   `projects/* /locations/*`.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListTemplates` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListTemplates` must
+   *   match the call that provided the page token.
+   * @param {string} [request.filter]
+   *   Optional. Filtering results
+   * @param {string} [request.orderBy]
+   *   Optional. Hint for how to order the results
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.parametermanager.v1.Template|Template}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listTemplatesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listTemplates(
+    request?: protos.google.cloud.parametermanager.v1.IListTemplatesRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.parametermanager.v1.ITemplate[],
+      protos.google.cloud.parametermanager.v1.IListTemplatesRequest | null,
+      protos.google.cloud.parametermanager.v1.IListTemplatesResponse,
+    ]
+  >;
+  listTemplates(
+    request: protos.google.cloud.parametermanager.v1.IListTemplatesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.parametermanager.v1.IListTemplatesRequest,
+      | protos.google.cloud.parametermanager.v1.IListTemplatesResponse
+      | null
+      | undefined,
+      protos.google.cloud.parametermanager.v1.ITemplate
+    >,
+  ): void;
+  listTemplates(
+    request: protos.google.cloud.parametermanager.v1.IListTemplatesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.parametermanager.v1.IListTemplatesRequest,
+      | protos.google.cloud.parametermanager.v1.IListTemplatesResponse
+      | null
+      | undefined,
+      protos.google.cloud.parametermanager.v1.ITemplate
+    >,
+  ): void;
+  listTemplates(
+    request?: protos.google.cloud.parametermanager.v1.IListTemplatesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.parametermanager.v1.IListTemplatesRequest,
+          | protos.google.cloud.parametermanager.v1.IListTemplatesResponse
+          | null
+          | undefined,
+          protos.google.cloud.parametermanager.v1.ITemplate
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.parametermanager.v1.IListTemplatesRequest,
+      | protos.google.cloud.parametermanager.v1.IListTemplatesResponse
+      | null
+      | undefined,
+      protos.google.cloud.parametermanager.v1.ITemplate
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.parametermanager.v1.ITemplate[],
+      protos.google.cloud.parametermanager.v1.IListTemplatesRequest | null,
+      protos.google.cloud.parametermanager.v1.IListTemplatesResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.parametermanager.v1.IListTemplatesRequest,
+          | protos.google.cloud.parametermanager.v1.IListTemplatesResponse
+          | null
+          | undefined,
+          protos.google.cloud.parametermanager.v1.ITemplate
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listTemplates values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listTemplates request %j', request);
+    return this.innerApiCalls
+      .listTemplates(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.parametermanager.v1.ITemplate[],
+          protos.google.cloud.parametermanager.v1.IListTemplatesRequest | null,
+          protos.google.cloud.parametermanager.v1.IListTemplatesResponse,
+        ]) => {
+          this._log.info('listTemplates values %j', response);
+          return [response, input, output];
+        },
+      );
+  }
+
+  /**
+   * Equivalent to `listTemplates`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ListTemplatesRequest in the format
+   *   `projects/* /locations/*`.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListTemplates` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListTemplates` must
+   *   match the call that provided the page token.
+   * @param {string} [request.filter]
+   *   Optional. Filtering results
+   * @param {string} [request.orderBy]
+   *   Optional. Hint for how to order the results
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.parametermanager.v1.Template|Template} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listTemplatesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listTemplatesStream(
+    request?: protos.google.cloud.parametermanager.v1.IListTemplatesRequest,
+    options?: CallOptions,
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listTemplates'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listTemplates stream %j', request);
+    return this.descriptors.page.listTemplates.createStream(
+      this.innerApiCalls.listTemplates as GaxCall,
+      request,
+      callSettings,
+    );
+  }
+
+  /**
+   * Equivalent to `listTemplates`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ListTemplatesRequest in the format
+   *   `projects/* /locations/*`.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListTemplates` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListTemplates` must
+   *   match the call that provided the page token.
+   * @param {string} [request.filter]
+   *   Optional. Filtering results
+   * @param {string} [request.orderBy]
+   *   Optional. Hint for how to order the results
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.parametermanager.v1.Template|Template}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/parameter_manager.list_templates.js</caption>
+   * region_tag:parametermanager_v1_generated_ParameterManager_ListTemplates_async
+   */
+  listTemplatesAsync(
+    request?: protos.google.cloud.parametermanager.v1.IListTemplatesRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.parametermanager.v1.ITemplate> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listTemplates'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listTemplates iterate %j', request);
+    return this.descriptors.page.listTemplates.asyncIterate(
+      this.innerApiCalls['listTemplates'] as GaxCall,
+      request as {},
+      callSettings,
+    ) as AsyncIterable<protos.google.cloud.parametermanager.v1.ITemplate>;
+  }
+  /**
+   * Lists TemplateVersions in a given project, location, and template.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ListTemplateVersionsRequest in the format
+   *   `projects/* /locations/* /templates/*`.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListTemplateVersions`
+   *   call. Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListTemplateVersions`
+   *   must match the call that provided the page token.
+   * @param {string} [request.filter]
+   *   Optional. Filtering results
+   * @param {string} [request.orderBy]
+   *   Optional. Hint for how to order the results
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.parametermanager.v1.TemplateVersion|TemplateVersion}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listTemplateVersionsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listTemplateVersions(
+    request?: protos.google.cloud.parametermanager.v1.IListTemplateVersionsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.parametermanager.v1.ITemplateVersion[],
+      protos.google.cloud.parametermanager.v1.IListTemplateVersionsRequest | null,
+      protos.google.cloud.parametermanager.v1.IListTemplateVersionsResponse,
+    ]
+  >;
+  listTemplateVersions(
+    request: protos.google.cloud.parametermanager.v1.IListTemplateVersionsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.parametermanager.v1.IListTemplateVersionsRequest,
+      | protos.google.cloud.parametermanager.v1.IListTemplateVersionsResponse
+      | null
+      | undefined,
+      protos.google.cloud.parametermanager.v1.ITemplateVersion
+    >,
+  ): void;
+  listTemplateVersions(
+    request: protos.google.cloud.parametermanager.v1.IListTemplateVersionsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.parametermanager.v1.IListTemplateVersionsRequest,
+      | protos.google.cloud.parametermanager.v1.IListTemplateVersionsResponse
+      | null
+      | undefined,
+      protos.google.cloud.parametermanager.v1.ITemplateVersion
+    >,
+  ): void;
+  listTemplateVersions(
+    request?: protos.google.cloud.parametermanager.v1.IListTemplateVersionsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.parametermanager.v1.IListTemplateVersionsRequest,
+          | protos.google.cloud.parametermanager.v1.IListTemplateVersionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.parametermanager.v1.ITemplateVersion
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.parametermanager.v1.IListTemplateVersionsRequest,
+      | protos.google.cloud.parametermanager.v1.IListTemplateVersionsResponse
+      | null
+      | undefined,
+      protos.google.cloud.parametermanager.v1.ITemplateVersion
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.parametermanager.v1.ITemplateVersion[],
+      protos.google.cloud.parametermanager.v1.IListTemplateVersionsRequest | null,
+      protos.google.cloud.parametermanager.v1.IListTemplateVersionsResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.parametermanager.v1.IListTemplateVersionsRequest,
+          | protos.google.cloud.parametermanager.v1.IListTemplateVersionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.parametermanager.v1.ITemplateVersion
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listTemplateVersions values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listTemplateVersions request %j', request);
+    return this.innerApiCalls
+      .listTemplateVersions(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.parametermanager.v1.ITemplateVersion[],
+          protos.google.cloud.parametermanager.v1.IListTemplateVersionsRequest | null,
+          protos.google.cloud.parametermanager.v1.IListTemplateVersionsResponse,
+        ]) => {
+          this._log.info('listTemplateVersions values %j', response);
+          return [response, input, output];
+        },
+      );
+  }
+
+  /**
+   * Equivalent to `listTemplateVersions`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ListTemplateVersionsRequest in the format
+   *   `projects/* /locations/* /templates/*`.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListTemplateVersions`
+   *   call. Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListTemplateVersions`
+   *   must match the call that provided the page token.
+   * @param {string} [request.filter]
+   *   Optional. Filtering results
+   * @param {string} [request.orderBy]
+   *   Optional. Hint for how to order the results
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.parametermanager.v1.TemplateVersion|TemplateVersion} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listTemplateVersionsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listTemplateVersionsStream(
+    request?: protos.google.cloud.parametermanager.v1.IListTemplateVersionsRequest,
+    options?: CallOptions,
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listTemplateVersions'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listTemplateVersions stream %j', request);
+    return this.descriptors.page.listTemplateVersions.createStream(
+      this.innerApiCalls.listTemplateVersions as GaxCall,
+      request,
+      callSettings,
+    );
+  }
+
+  /**
+   * Equivalent to `listTemplateVersions`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ListTemplateVersionsRequest in the format
+   *   `projects/* /locations/* /templates/*`.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListTemplateVersions`
+   *   call. Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListTemplateVersions`
+   *   must match the call that provided the page token.
+   * @param {string} [request.filter]
+   *   Optional. Filtering results
+   * @param {string} [request.orderBy]
+   *   Optional. Hint for how to order the results
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.parametermanager.v1.TemplateVersion|TemplateVersion}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/parameter_manager.list_template_versions.js</caption>
+   * region_tag:parametermanager_v1_generated_ParameterManager_ListTemplateVersions_async
+   */
+  listTemplateVersionsAsync(
+    request?: protos.google.cloud.parametermanager.v1.IListTemplateVersionsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.parametermanager.v1.ITemplateVersion> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listTemplateVersions'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listTemplateVersions iterate %j', request);
+    return this.descriptors.page.listTemplateVersions.asyncIterate(
+      this.innerApiCalls['listTemplateVersions'] as GaxCall,
+      request as {},
+      callSettings,
+    ) as AsyncIterable<protos.google.cloud.parametermanager.v1.ITemplateVersion>;
   }
 
   /**
@@ -2629,6 +4579,130 @@ export class ParameterManagerClient {
    */
   matchProjectFromProjectName(projectName: string) {
     return this.pathTemplates.projectPathTemplate.match(projectName).project;
+  }
+
+  /**
+   * Return a fully-qualified template resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} template
+   * @returns {string} Resource name string.
+   */
+  templatePath(project: string, location: string, template: string) {
+    return this.pathTemplates.templatePathTemplate.render({
+      project: project,
+      location: location,
+      template: template,
+    });
+  }
+
+  /**
+   * Parse the project from Template resource.
+   *
+   * @param {string} templateName
+   *   A fully-qualified path representing Template resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromTemplateName(templateName: string) {
+    return this.pathTemplates.templatePathTemplate.match(templateName).project;
+  }
+
+  /**
+   * Parse the location from Template resource.
+   *
+   * @param {string} templateName
+   *   A fully-qualified path representing Template resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromTemplateName(templateName: string) {
+    return this.pathTemplates.templatePathTemplate.match(templateName).location;
+  }
+
+  /**
+   * Parse the template from Template resource.
+   *
+   * @param {string} templateName
+   *   A fully-qualified path representing Template resource.
+   * @returns {string} A string representing the template.
+   */
+  matchTemplateFromTemplateName(templateName: string) {
+    return this.pathTemplates.templatePathTemplate.match(templateName).template;
+  }
+
+  /**
+   * Return a fully-qualified templateVersion resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} template
+   * @param {string} template_version
+   * @returns {string} Resource name string.
+   */
+  templateVersionPath(
+    project: string,
+    location: string,
+    template: string,
+    templateVersion: string,
+  ) {
+    return this.pathTemplates.templateVersionPathTemplate.render({
+      project: project,
+      location: location,
+      template: template,
+      template_version: templateVersion,
+    });
+  }
+
+  /**
+   * Parse the project from TemplateVersion resource.
+   *
+   * @param {string} templateVersionName
+   *   A fully-qualified path representing TemplateVersion resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromTemplateVersionName(templateVersionName: string) {
+    return this.pathTemplates.templateVersionPathTemplate.match(
+      templateVersionName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from TemplateVersion resource.
+   *
+   * @param {string} templateVersionName
+   *   A fully-qualified path representing TemplateVersion resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromTemplateVersionName(templateVersionName: string) {
+    return this.pathTemplates.templateVersionPathTemplate.match(
+      templateVersionName,
+    ).location;
+  }
+
+  /**
+   * Parse the template from TemplateVersion resource.
+   *
+   * @param {string} templateVersionName
+   *   A fully-qualified path representing TemplateVersion resource.
+   * @returns {string} A string representing the template.
+   */
+  matchTemplateFromTemplateVersionName(templateVersionName: string) {
+    return this.pathTemplates.templateVersionPathTemplate.match(
+      templateVersionName,
+    ).template;
+  }
+
+  /**
+   * Parse the template_version from TemplateVersion resource.
+   *
+   * @param {string} templateVersionName
+   *   A fully-qualified path representing TemplateVersion resource.
+   * @returns {string} A string representing the template_version.
+   */
+  matchTemplateVersionFromTemplateVersionName(templateVersionName: string) {
+    return this.pathTemplates.templateVersionPathTemplate.match(
+      templateVersionName,
+    ).template_version;
   }
 
   /**

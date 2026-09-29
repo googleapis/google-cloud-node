@@ -295,6 +295,20 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "streamingMode": {
+                          "type": "StreamingMode",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "effectiveStreamingMode": {
+                          "type": "EffectiveStreamingMode",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -306,6 +320,19 @@
                             "FAILED": 3,
                             "DELETING": 4,
                             "UPDATING": 5
+                          }
+                        },
+                        "StreamingMode": {
+                          "values": {
+                            "STREAMING_MODE_UNSPECIFIED": 0,
+                            "STREAMING_MODE_ENABLED": 1
+                          }
+                        },
+                        "EffectiveStreamingMode": {
+                          "values": {
+                            "EFFECTIVE_STREAMING_MODE_UNSPECIFIED": 0,
+                            "EFFECTIVE_STREAMING_MODE_DISABLED": 1,
+                            "EFFECTIVE_STREAMING_MODE_ENABLED": 2
                           }
                         }
                       }

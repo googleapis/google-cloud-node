@@ -38,7 +38,11 @@ import {
 } from 'google-gax';
 import {Backup} from './backup';
 import {BatchTransaction, TransactionIdentifier} from './batch-transaction';
-import {SessionFactory, SessionFactoryInterface} from './session-factory';
+import {
+  GetSessionCallback,
+  SessionFactory,
+  SessionFactoryInterface,
+} from './session-factory';
 import {protos} from '@google-cloud/spanner-api';
 import google = protos.google;
 import databaseAdmin = protos.google;
@@ -114,11 +118,12 @@ import {
   setSpanError,
   setSpanErrorAndException,
   traceConfig,
+  getQueryTraceConfig,
 } from './instrument';
 import {
   AtomicCounter,
   X_GOOG_SPANNER_REQUEST_ID_HEADER,
-  craftRequestId,
+  getRequestIdPrefix,
   newAtomicCounter,
 } from './request_id_header';
 
@@ -365,7 +370,32 @@ class Database extends common.GrpcServiceObject {
   _observabilityOptions?: ObservabilityOptions; // TODO: exmaine if we can remove it
   private _traceConfig: traceConfig;
   private _nthRequest: AtomicCounter;
-  public _clientId: number;
+  private _clientIdValue = 1;
+  public get _clientId(): number {
+    return this._clientIdValue;
+  }
+  public set _clientId(value: number) {
+    this._clientIdValue = value ?? 1;
+    this._updateRequestIdPrefix();
+  }
+
+  private _channelIdValue = 1;
+  public get _channelId(): number {
+    return this._channelIdValue;
+  }
+  public set _channelId(value: number) {
+    this._channelIdValue = value ?? 1;
+    this._updateRequestIdPrefix();
+  }
+
+  private _updateRequestIdPrefix(): void {
+    this._requestIdPrefix = getRequestIdPrefix(
+      this._clientIdValue,
+      this._channelIdValue,
+    );
+  }
+
+  public _requestIdPrefix: string = getRequestIdPrefix(1, 1);
   constructor(
     instance: Instance,
     name: string,
@@ -485,11 +515,11 @@ class Database extends common.GrpcServiceObject {
 
     this.request = instance.request;
     this._nthRequest = newAtomicCounter(0);
-    if (this.parent && this.parent.parent) {
-      this._clientId = (this.parent.parent as Spanner)._nthClientId;
-    } else {
-      this._clientId = instance._nthClientId;
-    }
+    const spanner = instance.parent as Spanner | undefined;
+    this._clientId =
+      spanner?._nthClientId ??
+      (instance as {_nthClientId?: number})._nthClientId ??
+      1;
     this._observabilityOptions = instance._observabilityOptions;
     this.commonHeaders_ = {
       ...instance.commonHeaders_,
@@ -766,18 +796,9 @@ class Database extends common.GrpcServiceObject {
     attempt: number,
     priorMetadata?: {[k: string]: string},
   ): {[k: string]: string} {
-    if (!priorMetadata) {
-      priorMetadata = {};
-    }
-    const withReqId = {
-      ...priorMetadata,
-    };
-    withReqId[X_GOOG_SPANNER_REQUEST_ID_HEADER] = craftRequestId(
-      this._clientId || 1,
-      1, // TODO: Properly infer the channelId
-      nthRequest,
-      attempt,
-    );
+    const withReqId = priorMetadata ? {...priorMetadata} : {};
+    withReqId[X_GOOG_SPANNER_REQUEST_ID_HEADER] =
+      `${this._requestIdPrefix}${nthRequest ?? 1}.${attempt ?? 1}`;
     return withReqId;
   }
 
@@ -2531,7 +2552,7 @@ class Database extends common.GrpcServiceObject {
     callback?: PoolRequestCallback,
   ): void | Promise<Session> {
     const sessionFactory_ = this.sessionFactory_;
-    sessionFactory_.getSessionForReadWrite((err, session) => {
+    const onSession: GetSessionCallback = (err, session) => {
       if (err) {
         callback!(err as ServiceError, null);
         return;
@@ -2544,7 +2565,17 @@ class Database extends common.GrpcServiceObject {
         sessionFactory_.release(session!);
         callback!(err, ...args);
       });
-    });
+    };
+
+    const session = sessionFactory_.isMultiplexedEnabledForRW?.()
+      ? sessionFactory_.getSessionSync?.()
+      : null;
+    if (session) {
+      onSession(null, session);
+      return;
+    }
+
+    sessionFactory_.getSessionForReadWrite(onSession);
   }
 
   /**
@@ -2930,8 +2961,8 @@ class Database extends common.GrpcServiceObject {
     startTrace(
       'Database.run',
       {
-        ...(query as ExecuteSqlRequest),
         ...this._traceConfig,
+        ...getQueryTraceConfig(query),
       },
       span => {
         this.runStream(query, options)
@@ -2971,9 +3002,9 @@ class Database extends common.GrpcServiceObject {
     options: TimestampBounds,
     callback: RunCallback,
   ): void {
-    const traceConfig = {
-      ...(query as ExecuteSqlRequest),
+    const traceConfig: traceConfig = {
       ...this._traceConfig,
+      ...getQueryTraceConfig(query),
     };
 
     startTrace('Database.run', traceConfig, runSpan => {
@@ -3025,16 +3056,30 @@ class Database extends common.GrpcServiceObject {
       callback!(error, rows, stats!, metadata!);
     };
 
-    this.sessionFactory_.getSession((error, session) => {
+    const onSession: GetSessionCallback = (error, session) => {
       if (error) {
         complete(error as grpc.ServiceError);
         return;
       }
 
       streamSpan.addEvent('Using Session', {'session.id': session?.id});
-      snapshot = session!.snapshot(options, this.queryOptions_);
-      this._runOnSnapshot(snapshot, session!, query, complete);
-    });
+      try {
+        snapshot = session!.snapshot(options, this.queryOptions_);
+        this._runOnSnapshot(snapshot, session!, query, complete);
+      } catch (syncError) {
+        // Defer error delivery via nextTick so callback callers never experience
+        // synchronous callback execution (Zalgo) when getSessionSync() returns synchronously.
+        process.nextTick(() => complete(syncError as grpc.ServiceError));
+      }
+    };
+
+    const session = this.sessionFactory_.getSessionSync?.();
+    if (session) {
+      onSession(null, session);
+      return;
+    }
+
+    this.sessionFactory_.getSession(onSession);
   }
 
   /**
@@ -3053,13 +3098,15 @@ class Database extends common.GrpcServiceObject {
       metadata?: ResultSetMetadata,
     ) => void,
   ): void {
-    snapshot.once('end', () => {
-      try {
-        this.sessionFactory_.release(session);
-      } catch (releaseError) {
-        this.emit('error', releaseError);
-      }
-    });
+    if (!session.metadata?.multiplexed) {
+      snapshot.once('end', () => {
+        try {
+          this.sessionFactory_.release(session);
+        } catch (releaseError) {
+          this.emit('error', releaseError);
+        }
+      });
+    }
 
     const snapshotWithRun = snapshot as Snapshot & {
       _run?: (
@@ -3081,7 +3128,9 @@ class Database extends common.GrpcServiceObject {
         snapshot.run(query, callback as RunCallback);
       }
     } catch (syncError) {
-      callback(syncError as grpc.ServiceError);
+      // Defer error delivery via nextTick so callback callers never experience
+      // synchronous callback execution (Zalgo) when getSessionSync() returns synchronously.
+      process.nextTick(() => callback(syncError as grpc.ServiceError));
     }
   }
   /**
@@ -3112,10 +3161,8 @@ class Database extends common.GrpcServiceObject {
     return startTrace(
       'Database.runPartitionedUpdate',
       {
-        ...(query as RunPartitionedUpdateOptions),
         ...this._traceConfig,
-        requestTag: (query as RunPartitionedUpdateOptions)?.requestOptions
-          ?.requestTag,
+        ...getQueryTraceConfig(query),
       },
       span => {
         this.sessionFactory_.getSessionForPartitionedOps((err, session) => {
@@ -3305,9 +3352,8 @@ class Database extends common.GrpcServiceObject {
     return startTrace(
       'Database.runStream',
       {
-        ...(query as ExecuteSqlRequest),
         ...this._traceConfig,
-        requestTag: (query as ExecuteSqlRequest)?.requestOptions?.requestTag,
+        ...getQueryTraceConfig(query),
       },
       span => {
         this.sessionFactory_.getSession((err, session) => {

@@ -326,14 +326,25 @@ async function ensurePackageDependencies(packages) {
     const nodeModulesPath = path.join(pkg, 'node_modules');
     if (existsSync(packageJsonPath) && !existsSync(nodeModulesPath)) {
       console.log(`  Installing dependencies in ${pkg}...`);
-      const npmCmd = process.platform === 'win32' ? 'npm.cmd' : 'npm';
-      await execFileAsync(
-        npmCmd,
-        ['install', '--no-audit', '--no-fund', '--ignore-scripts'],
-        {
-          cwd: pkg,
-        },
-      );
+      if (existsSync(path.join(pkg, 'pnpm-lock.yaml'))) {
+        const pnpmCmd = process.platform === 'win32' ? 'pnpm.cmd' : 'pnpm';
+        await execFileAsync(
+          pnpmCmd,
+          ['install', '--ignore-workspace', '--ignore-scripts'],
+          {
+            cwd: pkg,
+          },
+        );
+      } else {
+        const npmCmd = process.platform === 'win32' ? 'npm.cmd' : 'npm';
+        await execFileAsync(
+          npmCmd,
+          ['install', '--no-audit', '--no-fund', '--ignore-scripts'],
+          {
+            cwd: pkg,
+          },
+        );
+      }
     }
   });
   await Promise.all(installs);

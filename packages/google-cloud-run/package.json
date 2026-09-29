@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/run",
-  "version": "4.1.0",
+  "version": "4.1.1",
   "description": "Cloud Run Admin API",
   "repository": {
     "type": "git",
@@ -63,10 +63,5 @@
   "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-run",
   "overrides": {
     "@sinonjs/fake-timers": "15.2.1"
-  },
-  "pnpm": {
-    "overrides": {
-      "@sinonjs/fake-timers": "15.2.1"
-    }
   }
 }

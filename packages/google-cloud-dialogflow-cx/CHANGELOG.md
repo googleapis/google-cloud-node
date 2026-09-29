@@ -1,5 +1,19 @@
 # Changelog
 
+## [6.2.1](https://github.com/googleapis/google-cloud-node/compare/dialogflow-cx-v6.2.0...dialogflow-cx-v6.2.1) (2026-09-28)
+
+
+### Bug Fixes
+
+* Update package.json and .gitignore across packages ([#9378](https://github.com/googleapis/google-cloud-node/issues/9378)) ([9c54cec](https://github.com/googleapis/google-cloud-node/commit/9c54cece565b5cbcae63a9856c1ef3448307d46e))
+
+## [6.2.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-cx-v6.1.0...dialogflow-cx-v6.2.0) (2026-09-15)
+
+
+### Features
+
+* PNPM workspace ([#8973](https://github.com/googleapis/google-cloud-node/issues/8973)) ([1ea27c9](https://github.com/googleapis/google-cloud-node/commit/1ea27c9c9bf4e4cbf79381321dcb9bce7951a76f))
+
 ## [6.1.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-cx-v6.0.1...dialogflow-cx-v6.1.0) (2026-09-08)
 
 

@@ -5138,6 +5138,20 @@ export namespace google {
                     public listReportTasks(request: google.analytics.data.v1alpha.IListReportTasksRequest): Promise<google.analytics.data.v1alpha.ListReportTasksResponse>;
 
                     /**
+                     * Calls Chat.
+                     * @param request ChatRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ChatResponse
+                     */
+                    public chat(request: google.analytics.data.v1alpha.IChatRequest, callback: google.analytics.data.v1alpha.AlphaAnalyticsData.ChatCallback): void;
+
+                    /**
+                     * Calls Chat.
+                     * @param request ChatRequest message or plain object
+                     * @returns Promise
+                     */
+                    public chat(request: google.analytics.data.v1alpha.IChatRequest): Promise<google.analytics.data.v1alpha.ChatResponse>;
+
+                    /**
                      * Calls RunReport.
                      * @param request RunReportRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and RunReportResponse
@@ -5258,6 +5272,13 @@ export namespace google {
                      * @param [response] ListReportTasksResponse
                      */
                     type ListReportTasksCallback = (error: (Error|null), response?: google.analytics.data.v1alpha.ListReportTasksResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.analytics.data.v1alpha.AlphaAnalyticsData|chat}.
+                     * @param error Error, if any
+                     * @param [response] ChatResponse
+                     */
+                    type ChatCallback = (error: (Error|null), response?: google.analytics.data.v1alpha.ChatResponse) => void;
 
                     /**
                      * Callback as used by {@link google.analytics.data.v1alpha.AlphaAnalyticsData|runReport}.
@@ -8769,6 +8790,230 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a ChatRequest. */
+                interface IChatRequest {
+
+                    /** ChatRequest property */
+                    property?: (string|null);
+
+                    /** ChatRequest userQuery */
+                    userQuery?: (string|null);
+
+                    /** ChatRequest sessionId */
+                    sessionId?: (string|null);
+
+                    /** ChatRequest returnPropertyQuota */
+                    returnPropertyQuota?: (boolean|null);
+                }
+
+                /** Represents a ChatRequest. */
+                class ChatRequest implements IChatRequest {
+
+                    /**
+                     * Constructs a new ChatRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.data.v1alpha.IChatRequest);
+
+                    /** ChatRequest property. */
+                    public property: string;
+
+                    /** ChatRequest userQuery. */
+                    public userQuery: string;
+
+                    /** ChatRequest sessionId. */
+                    public sessionId?: (string|null);
+
+                    /** ChatRequest returnPropertyQuota. */
+                    public returnPropertyQuota: boolean;
+
+                    /**
+                     * Creates a new ChatRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ChatRequest instance
+                     */
+                    public static create(properties?: google.analytics.data.v1alpha.IChatRequest): google.analytics.data.v1alpha.ChatRequest;
+
+                    /**
+                     * Encodes the specified ChatRequest message. Does not implicitly {@link google.analytics.data.v1alpha.ChatRequest.verify|verify} messages.
+                     * @param message ChatRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.data.v1alpha.IChatRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ChatRequest message, length delimited. Does not implicitly {@link google.analytics.data.v1alpha.ChatRequest.verify|verify} messages.
+                     * @param message ChatRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.data.v1alpha.IChatRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ChatRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ChatRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1alpha.ChatRequest;
+
+                    /**
+                     * Decodes a ChatRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ChatRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1alpha.ChatRequest;
+
+                    /**
+                     * Verifies a ChatRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ChatRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ChatRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.data.v1alpha.ChatRequest;
+
+                    /**
+                     * Creates a plain object from a ChatRequest message. Also converts values to other types if specified.
+                     * @param message ChatRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.data.v1alpha.ChatRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ChatRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ChatRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ChatResponse. */
+                interface IChatResponse {
+
+                    /** ChatResponse sessionId */
+                    sessionId?: (string|null);
+
+                    /** ChatResponse blocks */
+                    blocks?: (google.analytics.data.v1alpha.IResponseBlock[]|null);
+
+                    /** ChatResponse propertyQuota */
+                    propertyQuota?: (google.analytics.data.v1alpha.IPropertyChatQuota|null);
+                }
+
+                /** Represents a ChatResponse. */
+                class ChatResponse implements IChatResponse {
+
+                    /**
+                     * Constructs a new ChatResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.data.v1alpha.IChatResponse);
+
+                    /** ChatResponse sessionId. */
+                    public sessionId: string;
+
+                    /** ChatResponse blocks. */
+                    public blocks: google.analytics.data.v1alpha.IResponseBlock[];
+
+                    /** ChatResponse propertyQuota. */
+                    public propertyQuota?: (google.analytics.data.v1alpha.IPropertyChatQuota|null);
+
+                    /**
+                     * Creates a new ChatResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ChatResponse instance
+                     */
+                    public static create(properties?: google.analytics.data.v1alpha.IChatResponse): google.analytics.data.v1alpha.ChatResponse;
+
+                    /**
+                     * Encodes the specified ChatResponse message. Does not implicitly {@link google.analytics.data.v1alpha.ChatResponse.verify|verify} messages.
+                     * @param message ChatResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.data.v1alpha.IChatResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ChatResponse message, length delimited. Does not implicitly {@link google.analytics.data.v1alpha.ChatResponse.verify|verify} messages.
+                     * @param message ChatResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.data.v1alpha.IChatResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ChatResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ChatResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1alpha.ChatResponse;
+
+                    /**
+                     * Decodes a ChatResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ChatResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1alpha.ChatResponse;
+
+                    /**
+                     * Verifies a ChatResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ChatResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ChatResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.data.v1alpha.ChatResponse;
+
+                    /**
+                     * Creates a plain object from a ChatResponse message. Also converts values to other types if specified.
+                     * @param message ChatResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.data.v1alpha.ChatResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ChatResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ChatResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a RunReportRequest. */
                 interface IRunReportRequest {
 
@@ -11860,6 +12105,9 @@ export namespace google {
 
                     /** ResponseMetaData section */
                     section?: (google.analytics.data.v1alpha.Section|keyof typeof google.analytics.data.v1alpha.Section|null);
+
+                    /** ResponseMetaData dataTruncationReasons */
+                    dataTruncationReasons?: (google.analytics.data.v1alpha.ResponseMetaData.IDataTruncationReason[]|null);
                 }
 
                 /** Represents a ResponseMetaData. */
@@ -11894,6 +12142,9 @@ export namespace google {
 
                     /** ResponseMetaData section. */
                     public section: (google.analytics.data.v1alpha.Section|keyof typeof google.analytics.data.v1alpha.Section);
+
+                    /** ResponseMetaData dataTruncationReasons. */
+                    public dataTruncationReasons: google.analytics.data.v1alpha.ResponseMetaData.IDataTruncationReason[];
 
                     /**
                      * Creates a new ResponseMetaData instance using the specified properties.
@@ -12171,6 +12422,242 @@ export namespace google {
 
                             /**
                              * Gets the default type url for ActiveMetricRestriction
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
+
+                    /** Properties of a DataTruncationReason. */
+                    interface IDataTruncationReason {
+
+                        /** DataTruncationReason dataTruncationType */
+                        dataTruncationType?: (google.analytics.data.v1alpha.ResponseMetaData.DataTruncationReason.DataTruncationType|keyof typeof google.analytics.data.v1alpha.ResponseMetaData.DataTruncationReason.DataTruncationType|null);
+
+                        /** DataTruncationReason dataTruncationMessage */
+                        dataTruncationMessage?: (string|null);
+
+                        /** DataTruncationReason dataTruncationDate */
+                        dataTruncationDate?: (string|null);
+
+                        /** DataTruncationReason dataTruncationDateRanges */
+                        dataTruncationDateRanges?: (google.analytics.data.v1alpha.ResponseMetaData.DataTruncationReason.IDataTruncationDateRange[]|null);
+                    }
+
+                    /** Represents a DataTruncationReason. */
+                    class DataTruncationReason implements IDataTruncationReason {
+
+                        /**
+                         * Constructs a new DataTruncationReason.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.analytics.data.v1alpha.ResponseMetaData.IDataTruncationReason);
+
+                        /** DataTruncationReason dataTruncationType. */
+                        public dataTruncationType?: (google.analytics.data.v1alpha.ResponseMetaData.DataTruncationReason.DataTruncationType|keyof typeof google.analytics.data.v1alpha.ResponseMetaData.DataTruncationReason.DataTruncationType|null);
+
+                        /** DataTruncationReason dataTruncationMessage. */
+                        public dataTruncationMessage?: (string|null);
+
+                        /** DataTruncationReason dataTruncationDate. */
+                        public dataTruncationDate?: (string|null);
+
+                        /** DataTruncationReason dataTruncationDateRanges. */
+                        public dataTruncationDateRanges: google.analytics.data.v1alpha.ResponseMetaData.DataTruncationReason.IDataTruncationDateRange[];
+
+                        /**
+                         * Creates a new DataTruncationReason instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DataTruncationReason instance
+                         */
+                        public static create(properties?: google.analytics.data.v1alpha.ResponseMetaData.IDataTruncationReason): google.analytics.data.v1alpha.ResponseMetaData.DataTruncationReason;
+
+                        /**
+                         * Encodes the specified DataTruncationReason message. Does not implicitly {@link google.analytics.data.v1alpha.ResponseMetaData.DataTruncationReason.verify|verify} messages.
+                         * @param message DataTruncationReason message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.analytics.data.v1alpha.ResponseMetaData.IDataTruncationReason, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DataTruncationReason message, length delimited. Does not implicitly {@link google.analytics.data.v1alpha.ResponseMetaData.DataTruncationReason.verify|verify} messages.
+                         * @param message DataTruncationReason message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.analytics.data.v1alpha.ResponseMetaData.IDataTruncationReason, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DataTruncationReason message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DataTruncationReason
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1alpha.ResponseMetaData.DataTruncationReason;
+
+                        /**
+                         * Decodes a DataTruncationReason message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DataTruncationReason
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1alpha.ResponseMetaData.DataTruncationReason;
+
+                        /**
+                         * Verifies a DataTruncationReason message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DataTruncationReason message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DataTruncationReason
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.analytics.data.v1alpha.ResponseMetaData.DataTruncationReason;
+
+                        /**
+                         * Creates a plain object from a DataTruncationReason message. Also converts values to other types if specified.
+                         * @param message DataTruncationReason
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.analytics.data.v1alpha.ResponseMetaData.DataTruncationReason, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DataTruncationReason to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DataTruncationReason
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace DataTruncationReason {
+
+                        /** DataTruncationType enum. */
+                        enum DataTruncationType {
+                            DATA_TRUNCATION_TYPE_UNSPECIFIED = 0,
+                            DATA_TRUNCATION_TYPE_RULES_BASED_MODELS = 1,
+                            DATA_TRUNCATION_TYPE_DATA_DRIVEN_ATTRIBUTION = 2,
+                            DATA_TRUNCATION_TYPE_DV360 = 3,
+                            DATA_TRUNCATION_TYPE_CM360 = 4,
+                            DATA_TRUNCATION_TYPE_ITEM_SCOPED_ECOMMERCE_METRICS = 5,
+                            DATA_TRUNCATION_TYPE_EVENT_SCOPED_ECOMMERCE_METRICS = 6,
+                            DATA_TRUNCATION_TYPE_DATE_RANGE = 7,
+                            DATA_TRUNCATION_TYPE_PROPERTY = 8,
+                            DATA_TRUNCATION_TYPE_CONVERSIONS = 9,
+                            DATA_TRUNCATION_TYPE_GOOGLE_ADS = 10
+                        }
+
+                        /** Properties of a DataTruncationDateRange. */
+                        interface IDataTruncationDateRange {
+
+                            /** DataTruncationDateRange startDate */
+                            startDate?: (string|null);
+
+                            /** DataTruncationDateRange endDate */
+                            endDate?: (string|null);
+                        }
+
+                        /** Represents a DataTruncationDateRange. */
+                        class DataTruncationDateRange implements IDataTruncationDateRange {
+
+                            /**
+                             * Constructs a new DataTruncationDateRange.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.analytics.data.v1alpha.ResponseMetaData.DataTruncationReason.IDataTruncationDateRange);
+
+                            /** DataTruncationDateRange startDate. */
+                            public startDate?: (string|null);
+
+                            /** DataTruncationDateRange endDate. */
+                            public endDate?: (string|null);
+
+                            /**
+                             * Creates a new DataTruncationDateRange instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns DataTruncationDateRange instance
+                             */
+                            public static create(properties?: google.analytics.data.v1alpha.ResponseMetaData.DataTruncationReason.IDataTruncationDateRange): google.analytics.data.v1alpha.ResponseMetaData.DataTruncationReason.DataTruncationDateRange;
+
+                            /**
+                             * Encodes the specified DataTruncationDateRange message. Does not implicitly {@link google.analytics.data.v1alpha.ResponseMetaData.DataTruncationReason.DataTruncationDateRange.verify|verify} messages.
+                             * @param message DataTruncationDateRange message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.analytics.data.v1alpha.ResponseMetaData.DataTruncationReason.IDataTruncationDateRange, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified DataTruncationDateRange message, length delimited. Does not implicitly {@link google.analytics.data.v1alpha.ResponseMetaData.DataTruncationReason.DataTruncationDateRange.verify|verify} messages.
+                             * @param message DataTruncationDateRange message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.analytics.data.v1alpha.ResponseMetaData.DataTruncationReason.IDataTruncationDateRange, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a DataTruncationDateRange message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns DataTruncationDateRange
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1alpha.ResponseMetaData.DataTruncationReason.DataTruncationDateRange;
+
+                            /**
+                             * Decodes a DataTruncationDateRange message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns DataTruncationDateRange
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1alpha.ResponseMetaData.DataTruncationReason.DataTruncationDateRange;
+
+                            /**
+                             * Verifies a DataTruncationDateRange message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a DataTruncationDateRange message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns DataTruncationDateRange
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.analytics.data.v1alpha.ResponseMetaData.DataTruncationReason.DataTruncationDateRange;
+
+                            /**
+                             * Creates a plain object from a DataTruncationDateRange message. Also converts values to other types if specified.
+                             * @param message DataTruncationDateRange
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.analytics.data.v1alpha.ResponseMetaData.DataTruncationReason.DataTruncationDateRange, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this DataTruncationDateRange to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for DataTruncationDateRange
                              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                              * @returns The default type url
                              */
@@ -13449,6 +13936,515 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ResponseBlock. */
+                interface IResponseBlock {
+
+                    /** ResponseBlock text */
+                    text?: (string|null);
+
+                    /** ResponseBlock table */
+                    table?: (google.analytics.data.v1alpha.ResponseBlock.IDataTable|null);
+                }
+
+                /** Represents a ResponseBlock. */
+                class ResponseBlock implements IResponseBlock {
+
+                    /**
+                     * Constructs a new ResponseBlock.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.data.v1alpha.IResponseBlock);
+
+                    /** ResponseBlock text. */
+                    public text?: (string|null);
+
+                    /** ResponseBlock table. */
+                    public table?: (google.analytics.data.v1alpha.ResponseBlock.IDataTable|null);
+
+                    /** ResponseBlock block. */
+                    public block?: ("text"|"table");
+
+                    /**
+                     * Creates a new ResponseBlock instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ResponseBlock instance
+                     */
+                    public static create(properties?: google.analytics.data.v1alpha.IResponseBlock): google.analytics.data.v1alpha.ResponseBlock;
+
+                    /**
+                     * Encodes the specified ResponseBlock message. Does not implicitly {@link google.analytics.data.v1alpha.ResponseBlock.verify|verify} messages.
+                     * @param message ResponseBlock message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.data.v1alpha.IResponseBlock, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ResponseBlock message, length delimited. Does not implicitly {@link google.analytics.data.v1alpha.ResponseBlock.verify|verify} messages.
+                     * @param message ResponseBlock message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.data.v1alpha.IResponseBlock, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ResponseBlock message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ResponseBlock
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1alpha.ResponseBlock;
+
+                    /**
+                     * Decodes a ResponseBlock message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ResponseBlock
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1alpha.ResponseBlock;
+
+                    /**
+                     * Verifies a ResponseBlock message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ResponseBlock message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ResponseBlock
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.data.v1alpha.ResponseBlock;
+
+                    /**
+                     * Creates a plain object from a ResponseBlock message. Also converts values to other types if specified.
+                     * @param message ResponseBlock
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.data.v1alpha.ResponseBlock, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ResponseBlock to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ResponseBlock
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ResponseBlock {
+
+                    /** Properties of a DataTableCell. */
+                    interface IDataTableCell {
+
+                        /** DataTableCell value */
+                        value?: (string|null);
+                    }
+
+                    /** Represents a DataTableCell. */
+                    class DataTableCell implements IDataTableCell {
+
+                        /**
+                         * Constructs a new DataTableCell.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.analytics.data.v1alpha.ResponseBlock.IDataTableCell);
+
+                        /** DataTableCell value. */
+                        public value: string;
+
+                        /**
+                         * Creates a new DataTableCell instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DataTableCell instance
+                         */
+                        public static create(properties?: google.analytics.data.v1alpha.ResponseBlock.IDataTableCell): google.analytics.data.v1alpha.ResponseBlock.DataTableCell;
+
+                        /**
+                         * Encodes the specified DataTableCell message. Does not implicitly {@link google.analytics.data.v1alpha.ResponseBlock.DataTableCell.verify|verify} messages.
+                         * @param message DataTableCell message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.analytics.data.v1alpha.ResponseBlock.IDataTableCell, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DataTableCell message, length delimited. Does not implicitly {@link google.analytics.data.v1alpha.ResponseBlock.DataTableCell.verify|verify} messages.
+                         * @param message DataTableCell message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.analytics.data.v1alpha.ResponseBlock.IDataTableCell, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DataTableCell message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DataTableCell
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1alpha.ResponseBlock.DataTableCell;
+
+                        /**
+                         * Decodes a DataTableCell message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DataTableCell
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1alpha.ResponseBlock.DataTableCell;
+
+                        /**
+                         * Verifies a DataTableCell message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DataTableCell message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DataTableCell
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.analytics.data.v1alpha.ResponseBlock.DataTableCell;
+
+                        /**
+                         * Creates a plain object from a DataTableCell message. Also converts values to other types if specified.
+                         * @param message DataTableCell
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.analytics.data.v1alpha.ResponseBlock.DataTableCell, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DataTableCell to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DataTableCell
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a DataTableHeader. */
+                    interface IDataTableHeader {
+
+                        /** DataTableHeader header */
+                        header?: (string|null);
+
+                        /** DataTableHeader dataType */
+                        dataType?: (string|null);
+                    }
+
+                    /** Represents a DataTableHeader. */
+                    class DataTableHeader implements IDataTableHeader {
+
+                        /**
+                         * Constructs a new DataTableHeader.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.analytics.data.v1alpha.ResponseBlock.IDataTableHeader);
+
+                        /** DataTableHeader header. */
+                        public header: string;
+
+                        /** DataTableHeader dataType. */
+                        public dataType: string;
+
+                        /**
+                         * Creates a new DataTableHeader instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DataTableHeader instance
+                         */
+                        public static create(properties?: google.analytics.data.v1alpha.ResponseBlock.IDataTableHeader): google.analytics.data.v1alpha.ResponseBlock.DataTableHeader;
+
+                        /**
+                         * Encodes the specified DataTableHeader message. Does not implicitly {@link google.analytics.data.v1alpha.ResponseBlock.DataTableHeader.verify|verify} messages.
+                         * @param message DataTableHeader message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.analytics.data.v1alpha.ResponseBlock.IDataTableHeader, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DataTableHeader message, length delimited. Does not implicitly {@link google.analytics.data.v1alpha.ResponseBlock.DataTableHeader.verify|verify} messages.
+                         * @param message DataTableHeader message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.analytics.data.v1alpha.ResponseBlock.IDataTableHeader, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DataTableHeader message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DataTableHeader
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1alpha.ResponseBlock.DataTableHeader;
+
+                        /**
+                         * Decodes a DataTableHeader message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DataTableHeader
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1alpha.ResponseBlock.DataTableHeader;
+
+                        /**
+                         * Verifies a DataTableHeader message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DataTableHeader message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DataTableHeader
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.analytics.data.v1alpha.ResponseBlock.DataTableHeader;
+
+                        /**
+                         * Creates a plain object from a DataTableHeader message. Also converts values to other types if specified.
+                         * @param message DataTableHeader
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.analytics.data.v1alpha.ResponseBlock.DataTableHeader, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DataTableHeader to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DataTableHeader
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a DataTableRow. */
+                    interface IDataTableRow {
+
+                        /** DataTableRow columns */
+                        columns?: (google.analytics.data.v1alpha.ResponseBlock.IDataTableCell[]|null);
+                    }
+
+                    /** Represents a DataTableRow. */
+                    class DataTableRow implements IDataTableRow {
+
+                        /**
+                         * Constructs a new DataTableRow.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.analytics.data.v1alpha.ResponseBlock.IDataTableRow);
+
+                        /** DataTableRow columns. */
+                        public columns: google.analytics.data.v1alpha.ResponseBlock.IDataTableCell[];
+
+                        /**
+                         * Creates a new DataTableRow instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DataTableRow instance
+                         */
+                        public static create(properties?: google.analytics.data.v1alpha.ResponseBlock.IDataTableRow): google.analytics.data.v1alpha.ResponseBlock.DataTableRow;
+
+                        /**
+                         * Encodes the specified DataTableRow message. Does not implicitly {@link google.analytics.data.v1alpha.ResponseBlock.DataTableRow.verify|verify} messages.
+                         * @param message DataTableRow message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.analytics.data.v1alpha.ResponseBlock.IDataTableRow, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DataTableRow message, length delimited. Does not implicitly {@link google.analytics.data.v1alpha.ResponseBlock.DataTableRow.verify|verify} messages.
+                         * @param message DataTableRow message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.analytics.data.v1alpha.ResponseBlock.IDataTableRow, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DataTableRow message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DataTableRow
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1alpha.ResponseBlock.DataTableRow;
+
+                        /**
+                         * Decodes a DataTableRow message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DataTableRow
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1alpha.ResponseBlock.DataTableRow;
+
+                        /**
+                         * Verifies a DataTableRow message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DataTableRow message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DataTableRow
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.analytics.data.v1alpha.ResponseBlock.DataTableRow;
+
+                        /**
+                         * Creates a plain object from a DataTableRow message. Also converts values to other types if specified.
+                         * @param message DataTableRow
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.analytics.data.v1alpha.ResponseBlock.DataTableRow, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DataTableRow to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DataTableRow
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a DataTable. */
+                    interface IDataTable {
+
+                        /** DataTable headers */
+                        headers?: (google.analytics.data.v1alpha.ResponseBlock.IDataTableHeader[]|null);
+
+                        /** DataTable rows */
+                        rows?: (google.analytics.data.v1alpha.ResponseBlock.IDataTableRow[]|null);
+                    }
+
+                    /** Represents a DataTable. */
+                    class DataTable implements IDataTable {
+
+                        /**
+                         * Constructs a new DataTable.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.analytics.data.v1alpha.ResponseBlock.IDataTable);
+
+                        /** DataTable headers. */
+                        public headers: google.analytics.data.v1alpha.ResponseBlock.IDataTableHeader[];
+
+                        /** DataTable rows. */
+                        public rows: google.analytics.data.v1alpha.ResponseBlock.IDataTableRow[];
+
+                        /**
+                         * Creates a new DataTable instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DataTable instance
+                         */
+                        public static create(properties?: google.analytics.data.v1alpha.ResponseBlock.IDataTable): google.analytics.data.v1alpha.ResponseBlock.DataTable;
+
+                        /**
+                         * Encodes the specified DataTable message. Does not implicitly {@link google.analytics.data.v1alpha.ResponseBlock.DataTable.verify|verify} messages.
+                         * @param message DataTable message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.analytics.data.v1alpha.ResponseBlock.IDataTable, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DataTable message, length delimited. Does not implicitly {@link google.analytics.data.v1alpha.ResponseBlock.DataTable.verify|verify} messages.
+                         * @param message DataTable message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.analytics.data.v1alpha.ResponseBlock.IDataTable, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DataTable message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DataTable
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1alpha.ResponseBlock.DataTable;
+
+                        /**
+                         * Decodes a DataTable message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DataTable
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1alpha.ResponseBlock.DataTable;
+
+                        /**
+                         * Verifies a DataTable message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DataTable message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DataTable
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.analytics.data.v1alpha.ResponseBlock.DataTable;
+
+                        /**
+                         * Creates a plain object from a DataTable message. Also converts values to other types if specified.
+                         * @param message DataTable
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.analytics.data.v1alpha.ResponseBlock.DataTable, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DataTable to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DataTable
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
                 }
 
                 /** Properties of a UserSegment. */
@@ -17704,6 +18700,109 @@ export namespace google {
 
                     /**
                      * Gets the default type url for ConversionMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a PropertyChatQuota. */
+                interface IPropertyChatQuota {
+
+                    /** PropertyChatQuota tokensPerDay */
+                    tokensPerDay?: (google.analytics.data.v1alpha.IQuotaStatus|null);
+
+                    /** PropertyChatQuota tokensPerHour */
+                    tokensPerHour?: (google.analytics.data.v1alpha.IQuotaStatus|null);
+                }
+
+                /** Represents a PropertyChatQuota. */
+                class PropertyChatQuota implements IPropertyChatQuota {
+
+                    /**
+                     * Constructs a new PropertyChatQuota.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.data.v1alpha.IPropertyChatQuota);
+
+                    /** PropertyChatQuota tokensPerDay. */
+                    public tokensPerDay?: (google.analytics.data.v1alpha.IQuotaStatus|null);
+
+                    /** PropertyChatQuota tokensPerHour. */
+                    public tokensPerHour?: (google.analytics.data.v1alpha.IQuotaStatus|null);
+
+                    /**
+                     * Creates a new PropertyChatQuota instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PropertyChatQuota instance
+                     */
+                    public static create(properties?: google.analytics.data.v1alpha.IPropertyChatQuota): google.analytics.data.v1alpha.PropertyChatQuota;
+
+                    /**
+                     * Encodes the specified PropertyChatQuota message. Does not implicitly {@link google.analytics.data.v1alpha.PropertyChatQuota.verify|verify} messages.
+                     * @param message PropertyChatQuota message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.data.v1alpha.IPropertyChatQuota, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PropertyChatQuota message, length delimited. Does not implicitly {@link google.analytics.data.v1alpha.PropertyChatQuota.verify|verify} messages.
+                     * @param message PropertyChatQuota message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.data.v1alpha.IPropertyChatQuota, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PropertyChatQuota message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PropertyChatQuota
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1alpha.PropertyChatQuota;
+
+                    /**
+                     * Decodes a PropertyChatQuota message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PropertyChatQuota
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1alpha.PropertyChatQuota;
+
+                    /**
+                     * Verifies a PropertyChatQuota message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PropertyChatQuota message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PropertyChatQuota
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.data.v1alpha.PropertyChatQuota;
+
+                    /**
+                     * Creates a plain object from a PropertyChatQuota message. Also converts values to other types if specified.
+                     * @param message PropertyChatQuota
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.data.v1alpha.PropertyChatQuota, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PropertyChatQuota to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PropertyChatQuota
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -23791,6 +24890,9 @@ export namespace google {
 
                     /** ResponseMetaData samplingMetadatas */
                     samplingMetadatas?: (google.analytics.data.v1beta.ISamplingMetadata[]|null);
+
+                    /** ResponseMetaData dataTruncationReasons */
+                    dataTruncationReasons?: (google.analytics.data.v1beta.ResponseMetaData.IDataTruncationReason[]|null);
                 }
 
                 /** Represents a ResponseMetaData. */
@@ -23822,6 +24924,9 @@ export namespace google {
 
                     /** ResponseMetaData samplingMetadatas. */
                     public samplingMetadatas: google.analytics.data.v1beta.ISamplingMetadata[];
+
+                    /** ResponseMetaData dataTruncationReasons. */
+                    public dataTruncationReasons: google.analytics.data.v1beta.ResponseMetaData.IDataTruncationReason[];
 
                     /**
                      * Creates a new ResponseMetaData instance using the specified properties.
@@ -24099,6 +25204,242 @@ export namespace google {
 
                             /**
                              * Gets the default type url for ActiveMetricRestriction
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
+
+                    /** Properties of a DataTruncationReason. */
+                    interface IDataTruncationReason {
+
+                        /** DataTruncationReason dataTruncationType */
+                        dataTruncationType?: (google.analytics.data.v1beta.ResponseMetaData.DataTruncationReason.DataTruncationType|keyof typeof google.analytics.data.v1beta.ResponseMetaData.DataTruncationReason.DataTruncationType|null);
+
+                        /** DataTruncationReason dataTruncationMessage */
+                        dataTruncationMessage?: (string|null);
+
+                        /** DataTruncationReason dataTruncationDate */
+                        dataTruncationDate?: (string|null);
+
+                        /** DataTruncationReason dataTruncationDateRanges */
+                        dataTruncationDateRanges?: (google.analytics.data.v1beta.ResponseMetaData.DataTruncationReason.IDataTruncationDateRange[]|null);
+                    }
+
+                    /** Represents a DataTruncationReason. */
+                    class DataTruncationReason implements IDataTruncationReason {
+
+                        /**
+                         * Constructs a new DataTruncationReason.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.analytics.data.v1beta.ResponseMetaData.IDataTruncationReason);
+
+                        /** DataTruncationReason dataTruncationType. */
+                        public dataTruncationType?: (google.analytics.data.v1beta.ResponseMetaData.DataTruncationReason.DataTruncationType|keyof typeof google.analytics.data.v1beta.ResponseMetaData.DataTruncationReason.DataTruncationType|null);
+
+                        /** DataTruncationReason dataTruncationMessage. */
+                        public dataTruncationMessage?: (string|null);
+
+                        /** DataTruncationReason dataTruncationDate. */
+                        public dataTruncationDate?: (string|null);
+
+                        /** DataTruncationReason dataTruncationDateRanges. */
+                        public dataTruncationDateRanges: google.analytics.data.v1beta.ResponseMetaData.DataTruncationReason.IDataTruncationDateRange[];
+
+                        /**
+                         * Creates a new DataTruncationReason instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DataTruncationReason instance
+                         */
+                        public static create(properties?: google.analytics.data.v1beta.ResponseMetaData.IDataTruncationReason): google.analytics.data.v1beta.ResponseMetaData.DataTruncationReason;
+
+                        /**
+                         * Encodes the specified DataTruncationReason message. Does not implicitly {@link google.analytics.data.v1beta.ResponseMetaData.DataTruncationReason.verify|verify} messages.
+                         * @param message DataTruncationReason message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.analytics.data.v1beta.ResponseMetaData.IDataTruncationReason, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DataTruncationReason message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.ResponseMetaData.DataTruncationReason.verify|verify} messages.
+                         * @param message DataTruncationReason message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.analytics.data.v1beta.ResponseMetaData.IDataTruncationReason, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DataTruncationReason message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DataTruncationReason
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1beta.ResponseMetaData.DataTruncationReason;
+
+                        /**
+                         * Decodes a DataTruncationReason message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DataTruncationReason
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1beta.ResponseMetaData.DataTruncationReason;
+
+                        /**
+                         * Verifies a DataTruncationReason message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DataTruncationReason message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DataTruncationReason
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.analytics.data.v1beta.ResponseMetaData.DataTruncationReason;
+
+                        /**
+                         * Creates a plain object from a DataTruncationReason message. Also converts values to other types if specified.
+                         * @param message DataTruncationReason
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.analytics.data.v1beta.ResponseMetaData.DataTruncationReason, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DataTruncationReason to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DataTruncationReason
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace DataTruncationReason {
+
+                        /** DataTruncationType enum. */
+                        enum DataTruncationType {
+                            DATA_TRUNCATION_TYPE_UNSPECIFIED = 0,
+                            DATA_TRUNCATION_TYPE_RULES_BASED_MODELS = 1,
+                            DATA_TRUNCATION_TYPE_DATA_DRIVEN_ATTRIBUTION = 2,
+                            DATA_TRUNCATION_TYPE_DV360 = 3,
+                            DATA_TRUNCATION_TYPE_CM360 = 4,
+                            DATA_TRUNCATION_TYPE_ITEM_SCOPED_ECOMMERCE_METRICS = 5,
+                            DATA_TRUNCATION_TYPE_EVENT_SCOPED_ECOMMERCE_METRICS = 6,
+                            DATA_TRUNCATION_TYPE_DATE_RANGE = 7,
+                            DATA_TRUNCATION_TYPE_PROPERTY = 8,
+                            DATA_TRUNCATION_TYPE_CONVERSIONS = 9,
+                            DATA_TRUNCATION_TYPE_GOOGLE_ADS = 10
+                        }
+
+                        /** Properties of a DataTruncationDateRange. */
+                        interface IDataTruncationDateRange {
+
+                            /** DataTruncationDateRange startDate */
+                            startDate?: (string|null);
+
+                            /** DataTruncationDateRange endDate */
+                            endDate?: (string|null);
+                        }
+
+                        /** Represents a DataTruncationDateRange. */
+                        class DataTruncationDateRange implements IDataTruncationDateRange {
+
+                            /**
+                             * Constructs a new DataTruncationDateRange.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.analytics.data.v1beta.ResponseMetaData.DataTruncationReason.IDataTruncationDateRange);
+
+                            /** DataTruncationDateRange startDate. */
+                            public startDate?: (string|null);
+
+                            /** DataTruncationDateRange endDate. */
+                            public endDate?: (string|null);
+
+                            /**
+                             * Creates a new DataTruncationDateRange instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns DataTruncationDateRange instance
+                             */
+                            public static create(properties?: google.analytics.data.v1beta.ResponseMetaData.DataTruncationReason.IDataTruncationDateRange): google.analytics.data.v1beta.ResponseMetaData.DataTruncationReason.DataTruncationDateRange;
+
+                            /**
+                             * Encodes the specified DataTruncationDateRange message. Does not implicitly {@link google.analytics.data.v1beta.ResponseMetaData.DataTruncationReason.DataTruncationDateRange.verify|verify} messages.
+                             * @param message DataTruncationDateRange message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.analytics.data.v1beta.ResponseMetaData.DataTruncationReason.IDataTruncationDateRange, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified DataTruncationDateRange message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.ResponseMetaData.DataTruncationReason.DataTruncationDateRange.verify|verify} messages.
+                             * @param message DataTruncationDateRange message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.analytics.data.v1beta.ResponseMetaData.DataTruncationReason.IDataTruncationDateRange, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a DataTruncationDateRange message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns DataTruncationDateRange
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1beta.ResponseMetaData.DataTruncationReason.DataTruncationDateRange;
+
+                            /**
+                             * Decodes a DataTruncationDateRange message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns DataTruncationDateRange
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1beta.ResponseMetaData.DataTruncationReason.DataTruncationDateRange;
+
+                            /**
+                             * Verifies a DataTruncationDateRange message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a DataTruncationDateRange message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns DataTruncationDateRange
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.analytics.data.v1beta.ResponseMetaData.DataTruncationReason.DataTruncationDateRange;
+
+                            /**
+                             * Creates a plain object from a DataTruncationDateRange message. Also converts values to other types if specified.
+                             * @param message DataTruncationDateRange
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.analytics.data.v1beta.ResponseMetaData.DataTruncationReason.DataTruncationDateRange, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this DataTruncationDateRange to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for DataTruncationDateRange
                              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                              * @returns The default type url
                              */
