@@ -1803,6 +1803,92 @@ describe('Promise', () => {
       undefined,
     );
   });
+
+  it('cancels promise-based call via AbortSignal', done => {
+    function func(argument: {}, metadata: {}, options: {}, callback: Function) {
+      setTimeout(() => {
+        callback(null, 42);
+      }, 10);
+    }
+    const controller = new AbortController();
+    const apiCall = createApiCall(func, {cancel: done});
+    const promise = apiCall({}, {signal: controller.signal});
+    promise
+      .then(() => {
+        return done(new Error('should not reach'));
+      })
+      .catch((err: unknown) => {
+        assert(err instanceof GoogleError);
+        assert.strictEqual(err.code, status.CANCELLED);
+        done();
+      });
+    controller.abort();
+  });
+
+  it('cancels callback-based call via AbortSignal', done => {
+    let cancelCalled = false;
+    function func(argument: {}, metadata: {}, options: {}, callback: Function) {
+      const timer = setTimeout(() => {
+        callback(null, 42);
+      }, 50);
+      return () => {
+        cancelCalled = true;
+        clearTimeout(timer);
+        const err = new GoogleError('cancelled');
+        err.code = status.CANCELLED;
+        callback(err);
+      };
+    }
+    const controller = new AbortController();
+    const apiCall = createApiCall(func, {returnCancelFunc: true});
+    void apiCall({}, {signal: controller.signal}, err => {
+      try {
+        assert.strictEqual(cancelCalled, true);
+        assert(err instanceof GoogleError);
+        assert.strictEqual(err.code, status.CANCELLED);
+        done();
+      } catch (assertErr) {
+        done(assertErr);
+      }
+    });
+    setTimeout(() => {
+      controller.abort();
+    }, 5);
+  });
+
+  it('immediately cancels call when AbortSignal is already aborted', done => {
+    let funcCalled = false;
+    function func(argument: {}, metadata: {}, options: {}, callback: Function) {
+      funcCalled = true;
+      callback(null, 42);
+    }
+    const controller = new AbortController();
+    controller.abort();
+    const apiCall = createApiCall(func);
+    void apiCall({}, {signal: controller.signal}, err => {
+      try {
+        assert.strictEqual(funcCalled, false);
+        assert(err instanceof GoogleError);
+        assert.strictEqual(err.code, status.CANCELLED);
+        done();
+      } catch (assertErr) {
+        done(assertErr);
+      }
+    });
+  });
+
+  it('removes abort listener from AbortSignal when call completes', async () => {
+    function func(argument: {}, metadata: {}, options: {}, callback: Function) {
+      callback(null, 42);
+    }
+    const controller = new AbortController();
+    const removeSpy = sinon.spy(controller.signal, 'removeEventListener');
+    const apiCall = createApiCall(func);
+    const [response] = await apiCall({}, {signal: controller.signal});
+    assert.strictEqual(response, 42);
+    assert.strictEqual(removeSpy.calledWith('abort'), true);
+    removeSpy.restore();
+  });
 });
 
 describe('retryable', () => {

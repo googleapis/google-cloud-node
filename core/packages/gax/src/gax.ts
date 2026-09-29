@@ -178,6 +178,10 @@ export interface CallOptions {
    * GAPIC-generated client libraries; do not set manually.
    */
   resumableUpload?: ResumableUploadContext;
+  /**
+   * An AbortSignal to cancel the ongoing API call.
+   */
+  signal?: AbortSignal;
 }
 
 export class CallSettings {
@@ -196,6 +200,7 @@ export class CallSettings {
   retryRequestOptions?: RetryRequestOptions;
   enableTelemetryTracing?: boolean;
   resumableUpload?: ResumableUploadContext;
+  signal?: AbortSignal;
 
   /**
    * @param {Object} settings - An object containing parameters of this settings.
@@ -232,6 +237,7 @@ export class CallSettings {
     this.enableTelemetryTracing = settings.enableTelemetryTracing;
     this.resumableUpload =
       'resumableUpload' in settings ? settings.resumableUpload : undefined;
+    this.signal = 'signal' in settings ? settings.signal : undefined;
   }
 
   /**
@@ -257,6 +263,7 @@ export class CallSettings {
     let retryRequestOptions = this.retryRequestOptions;
     let enableTelemetryTracing = this.enableTelemetryTracing;
     let resumableUpload = this.resumableUpload;
+    let signal = this.signal;
 
     // If the user provides a timeout to the method, that timeout value will be used
     // to override the backoff settings.
@@ -318,6 +325,9 @@ export class CallSettings {
     if ('resumableUpload' in options) {
       resumableUpload = options.resumableUpload;
     }
+    if ('signal' in options) {
+      signal = options.signal;
+    }
 
     return new CallSettings({
       timeout,
@@ -332,6 +342,7 @@ export class CallSettings {
       retryRequestOptions,
       enableTelemetryTracing,
       resumableUpload,
+      signal,
     });
   }
 }
