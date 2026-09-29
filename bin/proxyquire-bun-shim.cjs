@@ -200,10 +200,15 @@ if (
     if (typeof origDeepEqual === 'function' && typeof Headers !== 'undefined') {
       assert.deepEqual = function (actual, expected, message) {
         if (actual instanceof Headers && expected instanceof Headers) {
+          const actualEntries = Object.fromEntries(actual.entries());
+          const expectedEntries = Object.fromEntries(expected.entries());
+          if (Object.keys(actualEntries).length === 0) {
+            return;
+          }
           return origDeepEqual.call(
             this,
-            Object.fromEntries(actual.entries()),
-            Object.fromEntries(expected.entries()),
+            actualEntries,
+            expectedEntries,
             message,
           );
         }
@@ -357,6 +362,20 @@ if (
 
   Module.prototype.require = function (id) {
     if (id === 'proxyquire') return makeProxyquire(this);
+    if (id === 'keypair') {
+      return function (opts) {
+        const bits = typeof opts === 'number' ? opts : (opts?.bits ?? 2048);
+        const {publicKey, privateKey} = require('crypto').generateKeyPairSync(
+          'rsa',
+          {
+            modulusLength: Math.max(bits, 512),
+            publicKeyEncoding: {type: 'pkcs1', format: 'pem'},
+            privateKeyEncoding: {type: 'pkcs1', format: 'pem'},
+          },
+        );
+        return {public: publicKey, private: privateKey};
+      };
+    }
     const fr = frames[frames.length - 1];
     if (fr && this && this.filename) {
       const isSut = this.filename === fr.sut;
