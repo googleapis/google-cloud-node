@@ -33,6 +33,7 @@ const fetch = (...args: Parameters<typeof nodeFetch>) =>
 export interface CoreOptions {
   method?: string;
   timeout?: number;
+  maxResponseSize?: number;
   gzip?: boolean;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   json?: any;
@@ -74,6 +75,8 @@ export interface Response<T = any> {
 
 export interface RequestPart {
   body: string | Readable;
+  // content type of this part, written into the multipart preamble
+  'Content-Type'?: string;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -98,7 +101,10 @@ interface Headers {
 function requestToFetchOptions(reqOpts: Options) {
   const options: f.RequestInit = {
     method: reqOpts.method || 'GET',
-    ...(reqOpts.timeout && {timeout: reqOpts.timeout}),
+    // node-fetch dropped its own `timeout` option in v3, it only honours an
+    // AbortSignal. Without this a stalled request would never give up.
+    ...(reqOpts.timeout && {signal: AbortSignal.timeout(reqOpts.timeout)}),
+    ...(reqOpts.maxResponseSize && {size: reqOpts.maxResponseSize}),
     ...(typeof reqOpts.gzip === 'boolean' && {compress: reqOpts.gzip}),
   };
 
@@ -181,7 +187,7 @@ function fetchToRequestResponse(opts: f.RequestInit, res: f.Response) {
 }
 
 /**
- * Create POST body from two parts as multipart/related content-type
+ * Create POST body from N parts as multipart/related content-type
  * @private
  * @param boundary
  * @param multipart
@@ -190,23 +196,50 @@ function createMultipartStream(boundary: string, multipart: RequestPart[]) {
   const finale = `--${boundary}--`;
   const stream: PassThrough = new PassThrough();
 
-  for (const part of multipart) {
-    const preamble = `--${boundary}\r\nContent-Type: ${
-      (part as {['Content-Type']?: string})['Content-Type']
-    }\r\n\r\n`;
-    stream.write(preamble);
+  // Part metadata ends up in the MIME preamble. Only the first line of it is
+  // used, anything after a line break would add headers or whole extra parts
+  // to the upload.
+  const partContentType = (part: RequestPart) => {
+    const value = String(part['Content-Type'] ?? '');
+    return value.split(/[\r\n]/)[0] || 'application/octet-stream';
+  };
+
+  const writePart = (part: RequestPart, done: () => void) => {
+    stream.write(
+      `--${boundary}\r\nContent-Type: ${partContentType(part)}\r\n\r\n`,
+    );
     if (typeof part.body === 'string') {
       stream.write(part.body);
       stream.write('\r\n');
-    } else {
-      part.body.pipe(stream, {end: false});
-      part.body.on('end', () => {
-        stream.write('\r\n');
-        stream.write(finale);
-        stream.end();
-      });
+      done();
+      return;
     }
-  }
+    part.body.on('error', err => stream.destroy(err));
+    part.body.pipe(stream, {end: false});
+    part.body.on('end', () => {
+      if (stream.destroyed) {
+        return;
+      }
+      stream.write('\r\n');
+      done();
+    });
+  };
+
+  // One part at a time. Writing all of them at once mixes the bodies in with
+  // the preambles and attributes bytes to the wrong part.
+  const writeNext = (index: number) => {
+    if (stream.destroyed) {
+      return;
+    }
+    if (index === multipart.length) {
+      stream.write(finale);
+      stream.end();
+      return;
+    }
+    writePart(multipart[index], () => writeNext(index + 1));
+  };
+  writeNext(0);
+
   return stream;
 }
 
@@ -219,12 +252,14 @@ function teenyRequest(
   const {uri, options} = requestToFetchOptions(reqOpts);
 
   const multipart = reqOpts.multipart as RequestPart[];
-  if (reqOpts.multipart && multipart.length === 2) {
+  if (multipart && multipart.length > 0) {
     if (!callback) {
       // TODO: add support for multipart uploads through streaming
       throw new Error('Multipart without callback is not implemented.');
     }
     const boundary: string = randomUUID();
+    // copy, so the caller's header object is not modified
+    options.headers = {...((options.headers as Headers) || {})};
     (options.headers as Headers)['Content-Type'] =
       `multipart/related; boundary=${boundary}`;
     options.body = createMultipartStream(boundary, multipart);

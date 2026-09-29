@@ -58,7 +58,11 @@ describe('teeny', () => {
     statsStub = sandbox.stub(teenyRequest.stats);
   });
 
-  afterEach(() => {
+  afterEach(async () => {
+    // not every test waits for its callback, so give the requests still in
+    // flight a chance to finish before the stubs and the stats instance go
+    // away. otherwise their calls land on the stubs of the next test.
+    await new Promise(resolve => setTimeout(resolve, 20));
     pool.clear();
     sandbox.restore();
     teenyRequest.resetStats();
@@ -330,26 +334,28 @@ describe('teeny', () => {
     });
   });
 
-  it('should track stats, callback mode, success', () => {
+  it('should track stats, callback mode, success', done => {
     const scope = mockJson();
     teenyRequest({uri}, () => {
       assert.ok(statsStub.requestStarting.calledOnceWithExactly());
       assert.ok(statsStub.requestFinished.calledOnceWithExactly());
       scope.done();
+      done();
     });
   });
 
-  it('should track stats, callback mode, failure', () => {
+  it('should track stats, callback mode, failure', done => {
     const scope = mockError();
     teenyRequest({uri}, err => {
       assert.ok(err);
       assert.ok(statsStub.requestStarting.calledOnceWithExactly());
       assert.ok(statsStub.requestFinished.calledOnceWithExactly());
       scope.done();
+      done();
     });
   });
 
-  it('should track stats, stream mode, success', () => {
+  it('should track stats, stream mode, success', done => {
     const scope = mockJson();
     const readable = teenyRequest({uri});
     assert.ok(statsStub.requestStarting.calledOnceWithExactly());
@@ -357,10 +363,11 @@ describe('teeny', () => {
     readable.once('response', () => {
       assert.ok(statsStub.requestFinished.calledOnceWithExactly());
       scope.done();
+      done();
     });
   });
 
-  it('should track stats, stream mode, failure', () => {
+  it('should track stats, stream mode, failure', done => {
     const scope = mockError();
     const readable = teenyRequest({uri});
     assert.ok(statsStub.requestStarting.calledOnceWithExactly());
@@ -369,10 +376,11 @@ describe('teeny', () => {
       assert.ok(err);
       assert.ok(statsStub.requestFinished.calledOnceWithExactly());
       scope.done();
+      done();
     });
   });
 
-  it('should accept a Buffer as the body of a request', () => {
+  it('should accept a Buffer as the body of a request', done => {
     const scope = nock(uri).post('/', 'hello').reply(200, '🌍');
     teenyRequest(
       {uri, method: 'POST', body: Buffer.from('hello')},
@@ -381,11 +389,12 @@ describe('teeny', () => {
         assert.strictEqual(response.statusCode, 200);
         assert.strictEqual(body, '🌍');
         scope.done();
+        done();
       },
     );
   });
 
-  it('should accept a plain string as the body of a request', () => {
+  it('should accept a plain string as the body of a request', done => {
     const scope = nock(uri).post('/', 'hello').reply(200, '🌍');
     teenyRequest(
       {uri, method: 'POST', body: 'hello'},
@@ -394,11 +403,12 @@ describe('teeny', () => {
         assert.strictEqual(response.statusCode, 200);
         assert.strictEqual(body, '🌍');
         scope.done();
+        done();
       },
     );
   });
 
-  it('should accept json as the body of a request', () => {
+  it('should accept json as the body of a request', done => {
     const body = {hello: '🌍'};
     const scope = nock(uri).post('/', JSON.stringify(body)).reply(200, '👋');
     teenyRequest({uri, method: 'POST', json: body}, (error, response, body) => {
@@ -406,13 +416,12 @@ describe('teeny', () => {
       assert.strictEqual(response.statusCode, 200);
       assert.strictEqual(body, '👋');
       scope.done();
+      done();
     });
   });
 
-  // TODO multipart is broken with 2 strings
-  // see: https://github.com/googleapis/teeny-request/issues/168
-  it.skip('should track stats, multipart mode, success', done => {
-    const scope = mockJson();
+  it('should track stats, multipart mode, success', done => {
+    const scope = nock(uri).post('/').reply(200, {hello: '🌍'});
     teenyRequest(
       {
         method: 'POST',
@@ -420,7 +429,8 @@ describe('teeny', () => {
         multipart: [{body: 'foo'}, {body: 'bar'}],
         uri,
       },
-      () => {
+      err => {
+        assert.ifError(err);
         assert.ok(statsStub.requestStarting.calledOnceWithExactly());
         assert.ok(statsStub.requestFinished.calledOnceWithExactly());
         scope.done();
@@ -429,8 +439,8 @@ describe('teeny', () => {
     );
   });
 
-  it.skip('should track stats, multipart mode, failure', () => {
-    const scope = mockError();
+  it('should track stats, multipart mode, failure', done => {
+    const scope = nock(uri).post('/').replyWithError('mock err');
     teenyRequest(
       {
         method: 'POST',
@@ -443,8 +453,125 @@ describe('teeny', () => {
         assert.ok(statsStub.requestStarting.calledOnceWithExactly());
         assert.ok(statsStub.requestFinished.calledOnceWithExactly());
         scope.done();
+        done();
       },
     );
+  });
+
+  it('should terminate a multipart body made of strings', done => {
+    const scope = nock(uri)
+      .post('/', (body: Buffer | string) =>
+        /^--[0-9a-f-]{36}\r\nContent-Type: application\/octet-stream\r\n\r\nfoo\r\n--[0-9a-f-]{36}\r\nContent-Type: application\/octet-stream\r\n\r\nbar\r\n--[0-9a-f-]{36}--$/.test(
+          body.toString(),
+        ),
+      )
+      .reply(200);
+    teenyRequest(
+      {
+        method: 'POST',
+        headers: {},
+        multipart: [{body: 'foo'}, {body: 'bar'}],
+        uri,
+      },
+      err => {
+        assert.ifError(err);
+        scope.done();
+        done();
+      },
+    );
+  });
+
+  it('should keep multipart parts in order, with any number of parts', done => {
+    const scope = nock(uri)
+      .post('/', (body: Buffer | string) => {
+        const raw = body.toString();
+        const preambles = raw.match(/^--[0-9a-f-]{36}\r\n/gm) || [];
+        return (
+          preambles.length === 3 &&
+          raw.indexOf('one') < raw.indexOf('two') &&
+          raw.indexOf('two') < raw.indexOf('three')
+        );
+      })
+      .reply(200);
+    teenyRequest(
+      {
+        method: 'POST',
+        headers: {},
+        multipart: [{body: 'one'}, {body: 'two'}, {body: 'three'}],
+        uri,
+      },
+      err => {
+        assert.ifError(err);
+        scope.done();
+        done();
+      },
+    );
+  });
+
+  it('should not let a part content type inject multipart headers', done => {
+    const scope = nock(uri)
+      .post('/', (body: Buffer | string) => {
+        const raw = body.toString();
+        return (
+          raw.includes('Content-Type: text/plain\r\n\r\nlegit') &&
+          !raw.includes('X-Injected')
+        );
+      })
+      .reply(200);
+    teenyRequest(
+      {
+        method: 'POST',
+        headers: {},
+        multipart: [
+          {
+            'Content-Type':
+              'text/plain\r\nX-Injected: yes\r\n\r\nsmuggled\r\n--smuggled',
+            body: 'legit',
+          },
+        ],
+        uri,
+      },
+      err => {
+        assert.ifError(err);
+        scope.done();
+        done();
+      },
+    );
+  });
+
+  it('should not modify the headers object of the caller', done => {
+    const headers = {'X-Api-Key': 'key'};
+    const scope = nock(uri).post('/').reply(200);
+    teenyRequest(
+      {method: 'POST', headers, multipart: [{body: 'foo'}, {body: 'bar'}], uri},
+      err => {
+        assert.ifError(err);
+        assert.deepStrictEqual(headers, {'X-Api-Key': 'key'});
+        scope.done();
+        done();
+      },
+    );
+  });
+
+  it('should give up when the timeout is reached', done => {
+    const scope = nock(uri).get('/').delay(500).reply(200);
+    teenyRequest({uri, timeout: 10}, err => {
+      assert.ok(err);
+      scope.done();
+      done();
+    });
+  });
+
+  it('should error when the response is bigger than maxResponseSize', done => {
+    const scope = nock(uri)
+      .get('/')
+      .reply(200, 'x'.repeat(1024), {'content-type': 'text/plain'});
+    teenyRequest({uri, maxResponseSize: 16}, err => {
+      assert.ok(err);
+      assert.match(err!.message, /over limit/);
+      scope.done();
+      done();
+    });
   });
 
   it('should throw an exception if uri is an empty string', () => {

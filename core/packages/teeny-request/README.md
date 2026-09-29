@@ -42,9 +42,13 @@ Options are limited to the following
 * json
 * qs
 * useQuerystring
-* timeout in ms
+* timeout in ms, the request is aborted when it runs out
+* maxResponseSize in bytes, the request errors when the response is bigger
 * gzip
 * proxy
+* forever, reuse one keep alive agent per target host
+* pool, connection options for that agent (keepAlive, maxSockets, maxFreeSockets, ...). Options that decide where a connection goes or how the peer is verified (host, port, ca, cert, key, rejectUnauthorized, ...) are ignored, so one request cannot change the agent under other requests.
+* multipart, array of parts (`{body, 'Content-Type'}`) sent as one `multipart/related` request
 
 ```ts
 request({uri:'http://service.com/upload', method:'POST', json: {key:'value'}}, function(err,httpResponse,body){ /* ... */ })
