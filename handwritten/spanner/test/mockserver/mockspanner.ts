@@ -56,7 +56,8 @@ const packageDefinition = protoLoader.loadSync(PROTO_PATH, {
   includeDirs: [IMPORT_PATH, PROTO_DIR, GAX_PROTO_DIR],
 });
 const protoDescriptor = grpc.loadPackageDefinition(packageDefinition);
-const spannerProtoDescriptor = protoDescriptor['google']['spanner']['v1'];
+export const spannerProtoDescriptor =
+  protoDescriptor['google']['spanner']['v1'];
 const RETRY_INFO_BIN = 'google.rpc.retryinfo-bin';
 const RETRY_INFO_TYPE = 'type.googleapis.com/google.rpc.retryinfo';
 
@@ -308,6 +309,16 @@ export function createUnimplementedError(msg: string): grpc.ServiceError {
   }) as grpc.ServiceError;
 }
 
+export interface ContentionManagerLike {
+  executeWithQueue<T>(
+    peerAddress: string,
+    action: () => Promise<T> | T,
+  ): Promise<T>;
+  totalQueuedCount(): number;
+  totalCompletedCount(): number;
+  resetCounts(): void;
+}
+
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface Request {}
 
@@ -347,6 +358,7 @@ export class MockSpanner {
     string,
     SimulatedExecutionTime
   >();
+  private contentionManager?: ContentionManagerLike;
 
   private constructor() {
     this.putStatementResult = this.putStatementResult.bind(this);
@@ -361,6 +373,7 @@ export class MockSpanner {
     this.commit = this.commit.bind(this);
     this.rollback = this.rollback.bind(this);
 
+    this.executeSql = this.executeSql.bind(this);
     this.executeBatchDml = this.executeBatchDml.bind(this);
     this.executeStreamingSql = this.executeStreamingSql.bind(this);
     this.partitionQuery = this.partitionQuery.bind(this);
@@ -370,6 +383,14 @@ export class MockSpanner {
     this.partitionRead = this.partitionRead.bind(this);
     this.batchWrite = this.batchWrite.bind(this);
     this.mutationOnly = false;
+  }
+
+  setContentionManager(contentionManager?: ContentionManagerLike): void {
+    this.contentionManager = contentionManager;
+  }
+
+  getContentionManager(): ContentionManagerLike | undefined {
+    return this.contentionManager;
   }
 
   /**
@@ -404,13 +425,20 @@ export class MockSpanner {
    * @param query The `ReadRequest` to associate with the result.
    * @param result The `ReadRequestResult` to return when the `query` is received.
    */
-  putReadRequestResult(query: ReadRequest, result: ReadRequestResult) {
+  putReadRequestResult(query: ReadRequest | string, result: ReadRequestResult) {
+    if (typeof query === 'string') {
+      this.readRequestResults.set(query, result);
+      return;
+    }
     const keySet = JSON.stringify(
       query.keySet ?? {},
       Object.keys(query.keySet ?? {}).sort(),
     );
     const key = `${query.table}|${keySet}`;
     this.readRequestResults.set(key, result);
+    if (query.table) {
+      this.readRequestResults.set(query.table, result);
+    }
   }
 
   /**
@@ -577,6 +605,7 @@ export class MockSpanner {
           null,
           protobuf.BatchCreateSessionsResponse.create({session: sessions}),
         );
+        return null;
       })
       .catch(err => {
         callback(err);
@@ -597,6 +626,7 @@ export class MockSpanner {
             call.request!.session?.multiplexed ?? false,
           ),
         );
+        return null;
       })
       .catch(err => {
         callback(err);
@@ -616,6 +646,7 @@ export class MockSpanner {
         } else {
           callback(MockSpanner.createSessionNotFoundError(call.request!.name));
         }
+        return null;
       })
       .catch(err => {
         callback(err);
@@ -640,6 +671,7 @@ export class MockSpanner {
             }),
           }),
         );
+        return null;
       })
       .catch(err => {
         callback(err);
@@ -662,11 +694,51 @@ export class MockSpanner {
   }
 
   executeSql(
-    call: grpc.ServerUnaryCall<protobuf.ExecuteSqlRequest, {}>,
+    call: grpc.ServerUnaryCall<protobuf.ExecuteSqlRequest, protobuf.ResultSet>,
     callback: protobuf.Spanner.ExecuteSqlCallback,
   ) {
     this.pushRequest(call.request!, call.metadata);
-    callback(createUnimplementedError('ExecuteSql is not yet implemented'));
+    const handleRequest = () => {
+      const res = this.statementResults.get(call.request!.sql);
+      if (res && res.type === StatementResultType.RESULT_SET) {
+        callback(null, res.resultSet as protobuf.ResultSet);
+        return;
+      }
+      if (res && res.type === StatementResultType.UPDATE_COUNT) {
+        callback(
+          null,
+          protobuf.ResultSet.create({
+            stats: {
+              rowCountExact: res.updateCount,
+            },
+          }),
+        );
+        return;
+      }
+      if (call.request!.sql === 'SELECT 1') {
+        callback(null, createSelect1ResultSet());
+        return;
+      }
+      callback(
+        createUnimplementedError(
+          `ExecuteSql result for '${call.request!.sql}' is not registered`,
+        ),
+      );
+    };
+
+    if (this.contentionManager) {
+      const peer = call.getPeer ? call.getPeer() : 'unknown';
+      this.contentionManager
+        .executeWithQueue(peer, async () => {
+          handleRequest();
+        })
+        .catch(err => callback(err));
+      return;
+    }
+
+    this.simulateExecutionTime(this.executeSql.name)
+      .then(handleRequest)
+      .catch(err => callback(err));
   }
 
   executeStreamingSql(
@@ -676,137 +748,167 @@ export class MockSpanner {
     >,
   ) {
     this.pushRequest(call.request!, call.metadata);
+    if (this.contentionManager) {
+      const peer = call.getPeer ? call.getPeer() : 'unknown';
+      this.contentionManager
+        .executeWithQueue(peer, async () => {
+          await new Promise<void>(resolve => {
+            let finished = false;
+            const onFinish = () => {
+              if (!finished) {
+                finished = true;
+                resolve();
+              }
+            };
+            call.once('finish', onFinish);
+            call.once('close', onFinish);
+            call.once('error', onFinish);
+            this._executeStreamingSqlInternal(call);
+          });
+        })
+        .catch(err => {
+          call.sendMetadata(new Metadata());
+          call.emit('error', err);
+          call.end();
+        });
+      return;
+    }
     this.simulateExecutionTime(this.executeStreamingSql.name)
       .then(() => {
-        let transactionKey;
-        if (call.request!.transaction) {
-          const fullTransactionId = `${call.request!.session}/transactions/${
-            call.request!.transaction.id
-          }`;
-          transactionKey = fullTransactionId;
-          if (this.abortedTransactions.has(fullTransactionId)) {
-            call.sendMetadata(new Metadata());
-            call.emit(
-              'error',
-              MockSpanner.createTransactionAbortedError(`${fullTransactionId}`),
-            );
-            call.end();
-            return;
-          }
-        }
-        const res = this.statementResults.get(call.request!.sql);
-        const session = this.sessions.get(call.request!.session);
-        if (res) {
-          if (call.request!.transaction?.begin) {
-            const txn = this._updateTransaction(
-              call.request!.session,
-              call.request!.transaction.begin,
-            );
-            if (txn instanceof Error) {
-              call.sendMetadata(new Metadata());
-              call.emit('error', txn);
-              call.end();
-              return;
-            }
-            transactionKey = `${call.request!.session}/transactions/${txn.id.toString()}`;
-            if (res.type === StatementResultType.RESULT_SET) {
-              (res.resultSet as protobuf.ResultSet).metadata!.transaction = txn;
-            }
-          }
-
-          // get the current seqNum
-          const currentSeqNum = this.transactionSeqNum.get(transactionKey) || 0;
-          const nextSeqNum = currentSeqNum + 1;
-
-          // set the next seqNum
-          this.transactionSeqNum.set(transactionKey, nextSeqNum);
-          const precommitToken = session?.multiplexed
-            ? protobuf.MultiplexedSessionPrecommitToken.create({
-                precommitToken: Buffer.from('mock-precommit-token'),
-                seqNum: nextSeqNum,
-              })
-            : null;
-          let partialResultSets;
-          let resumeIndex;
-          let streamErr;
-          switch (res.type) {
-            case StatementResultType.RESULT_SET:
-              (res.resultSet as protobuf.ResultSet).precommitToken =
-                precommitToken;
-              if (Array.isArray(res.resultSet)) {
-                partialResultSets = res.resultSet;
-              } else {
-                partialResultSets = MockSpanner.toPartialResultSets(
-                  res.resultSet,
-                  call.request!.queryMode,
-                );
-              }
-              // Resume on the next index after the last one seen by the client.
-              resumeIndex =
-                call.request!.resumeToken.length === 0
-                  ? 0
-                  : Number.parseInt(call.request!.resumeToken.toString(), 10) +
-                    1;
-              for (
-                let index = resumeIndex;
-                index < partialResultSets.length;
-                index++
-              ) {
-                const streamErr = this.shiftStreamError(
-                  this.executeStreamingSql.name,
-                  index,
-                );
-                if (streamErr) {
-                  call.sendMetadata(new Metadata());
-                  call.emit('error', streamErr);
-                  break;
-                }
-                call.write(partialResultSets[index]);
-              }
-              break;
-            case StatementResultType.UPDATE_COUNT:
-              call.write(
-                MockSpanner.emptyPartialResultSet(
-                  precommitToken,
-                  Buffer.from('1'.padStart(8, '0')),
-                ),
-              );
-              streamErr = this.shiftStreamError(
-                this.executeStreamingSql.name,
-                1,
-              );
-              if (streamErr) {
-                call.sendMetadata(new Metadata());
-                call.emit('error', streamErr);
-                break;
-              }
-              call.write(
-                MockSpanner.toPartialResultSet(precommitToken, res.updateCount),
-              );
-              break;
-            case StatementResultType.ERROR:
-              call.sendMetadata(new Metadata());
-              call.emit('error', res.error);
-              break;
-            default:
-              call.emit(
-                'error',
-                new Error(`Unknown StatementResult type: ${res.type}`),
-              );
-          }
-        } else {
-          call.emit(
-            'error',
-            new Error(`There is no result registered for ${call.request!.sql}`),
-          );
-        }
-        call.end();
+        this._executeStreamingSqlInternal(call);
+        return null;
       })
       .catch(err => {
         call.sendMetadata(new Metadata());
         call.emit('error', err);
         call.end();
       });
+  }
+
+  private _executeStreamingSqlInternal(
+    call: grpc.ServerWritableStream<
+      protobuf.ExecuteSqlRequest,
+      protobuf.PartialResultSet
+    >,
+  ): void {
+    let transactionKey;
+    if (call.request!.transaction) {
+      const fullTransactionId = `${call.request!.session}/transactions/${
+        call.request!.transaction.id
+      }`;
+      transactionKey = fullTransactionId;
+      if (this.abortedTransactions.has(fullTransactionId)) {
+        call.sendMetadata(new Metadata());
+        call.emit(
+          'error',
+          MockSpanner.createTransactionAbortedError(`${fullTransactionId}`),
+        );
+        call.end();
+        return;
+      }
+    }
+    const res = this.statementResults.get(call.request!.sql);
+    const session = this.sessions.get(call.request!.session);
+    if (res) {
+      if (call.request!.transaction?.begin) {
+        const txn = this._updateTransaction(
+          call.request!.session,
+          call.request!.transaction.begin,
+        );
+        if (txn instanceof Error) {
+          call.sendMetadata(new Metadata());
+          call.emit('error', txn);
+          call.end();
+          return;
+        }
+        transactionKey = `${call.request!.session}/transactions/${txn.id.toString()}`;
+        if (res.type === StatementResultType.RESULT_SET) {
+          (res.resultSet as protobuf.ResultSet).metadata!.transaction = txn;
+        }
+      }
+
+      // get the current seqNum
+      const currentSeqNum = this.transactionSeqNum.get(transactionKey) || 0;
+      const nextSeqNum = currentSeqNum + 1;
+
+      // set the next seqNum
+      this.transactionSeqNum.set(transactionKey, nextSeqNum);
+      const precommitToken = session?.multiplexed
+        ? protobuf.MultiplexedSessionPrecommitToken.create({
+            precommitToken: Buffer.from('mock-precommit-token'),
+            seqNum: nextSeqNum,
+          })
+        : null;
+      let partialResultSets;
+      let resumeIndex;
+      let streamErr;
+      switch (res.type) {
+        case StatementResultType.RESULT_SET:
+          (res.resultSet as protobuf.ResultSet).precommitToken = precommitToken;
+          if (Array.isArray(res.resultSet)) {
+            partialResultSets = res.resultSet;
+          } else {
+            partialResultSets = MockSpanner.toPartialResultSets(
+              res.resultSet,
+              call.request!.queryMode,
+            );
+          }
+          // Resume on the next index after the last one seen by the client.
+          resumeIndex =
+            call.request!.resumeToken.length === 0
+              ? 0
+              : Number.parseInt(call.request!.resumeToken.toString(), 10) + 1;
+          for (
+            let index = resumeIndex;
+            index < partialResultSets.length;
+            index++
+          ) {
+            const streamErr = this.shiftStreamError(
+              this.executeStreamingSql.name,
+              index,
+            );
+            if (streamErr) {
+              call.sendMetadata(new Metadata());
+              call.emit('error', streamErr);
+              break;
+            }
+            call.write(partialResultSets[index]);
+          }
+          break;
+        case StatementResultType.UPDATE_COUNT:
+          call.write(
+            MockSpanner.emptyPartialResultSet(
+              precommitToken,
+              Buffer.from('1'.padStart(8, '0')),
+            ),
+          );
+          streamErr = this.shiftStreamError(this.executeStreamingSql.name, 1);
+          if (streamErr) {
+            call.sendMetadata(new Metadata());
+            call.emit('error', streamErr);
+            break;
+          }
+          call.write(
+            MockSpanner.toPartialResultSet(precommitToken, res.updateCount),
+          );
+          break;
+        case StatementResultType.ERROR:
+          call.sendMetadata(new Metadata());
+          call.emit('error', res.error);
+          break;
+        default:
+          call.emit(
+            'error',
+            new Error(`Unknown StatementResult type: ${res.type}`),
+          );
+      }
+    } else {
+      call.emit(
+        'error',
+        new Error(`There is no result registered for ${call.request!.sql}`),
+      );
+    }
+    call.end();
   }
 
   /**
@@ -992,6 +1094,7 @@ export class MockSpanner {
             status: statementStatus,
           }),
         );
+        return null;
       })
       .catch(err => {
         callback(err);
@@ -1008,127 +1111,158 @@ export class MockSpanner {
 
   streamingRead(call: grpc.ServerWritableStream<protobuf.ReadRequest, {}>) {
     this.pushRequest(call.request!, call.metadata);
+    if (this.contentionManager) {
+      const peer = call.getPeer ? call.getPeer() : 'unknown';
+      this.contentionManager
+        .executeWithQueue(peer, async () => {
+          await new Promise<void>(resolve => {
+            let finished = false;
+            const onFinish = () => {
+              if (!finished) {
+                finished = true;
+                resolve();
+              }
+            };
+            call.once('finish', onFinish);
+            call.once('close', onFinish);
+            call.once('error', onFinish);
+            this._streamingReadInternal(call);
+          });
+        })
+        .catch(err => {
+          call.sendMetadata(new Metadata());
+          call.emit('error', err);
+          call.end();
+        });
+      return;
+    }
 
     this.simulateExecutionTime(this.streamingRead.name)
       .then(() => {
-        let transactionKey;
-        if (call.request!.transaction) {
-          const fullTransactionId = `${call.request!.session}/transactions/${
-            call.request!.transaction.id
-          }`;
-          transactionKey = fullTransactionId;
-          if (this.abortedTransactions.has(fullTransactionId)) {
-            call.sendMetadata(new Metadata());
-            call.emit(
-              'error',
-              MockSpanner.createTransactionAbortedError(`${fullTransactionId}`),
-            );
-            call.end();
-            return;
-          }
-        }
-        const keySet = JSON.stringify(
-          call.request!.keySet ?? {},
-          Object.keys(call.request!.keySet ?? {}).sort(),
-        );
-        const key = `${call.request!.table}|${keySet}`;
-        const res = this.readRequestResults.get(key);
-        const session = this.sessions.get(call.request!.session);
-        if (res) {
-          if (call.request!.transaction?.begin) {
-            const txn = this._updateTransaction(
-              call.request!.session,
-              call.request!.transaction.begin,
-            );
-            if (txn instanceof Error) {
-              call.sendMetadata(new Metadata());
-              call.emit('error', txn);
-              call.end();
-              return;
-            }
-            transactionKey = `${call.request!.session}/transactions/${txn.id.toString()}`;
-            if (res.type === ReadRequestResultType.RESULT_SET) {
-              call.sendMetadata(new Metadata());
-              (res.resultSet as protobuf.ResultSet).metadata!.transaction = txn;
-            }
-          }
-
-          // get the current seqNum
-          const currentSeqNum = this.transactionSeqNum.get(transactionKey) || 0;
-          const nextSeqNum = currentSeqNum + 1;
-
-          // set the next SeqNum
-          this.transactionSeqNum.set(transactionKey, nextSeqNum);
-          const precommitToken = session?.multiplexed
-            ? protobuf.MultiplexedSessionPrecommitToken.create({
-                precommitToken: Buffer.from('mock-precommit-token'),
-                seqNum: nextSeqNum,
-              })
-            : null;
-          let partialResultSets;
-          let resumeIndex;
-          switch (res.type) {
-            case ReadRequestResultType.RESULT_SET:
-              (res.resultSet as protobuf.ResultSet).precommitToken =
-                precommitToken;
-              if (Array.isArray(res.resultSet)) {
-                partialResultSets = res.resultSet;
-              } else {
-                partialResultSets = MockSpanner.toPartialResultSets(
-                  res.resultSet,
-                  'NORMAL',
-                );
-              }
-              // Resume on the next index after the last one seen by the client.
-              resumeIndex =
-                call.request!.resumeToken.length === 0
-                  ? 0
-                  : parseInt(
-                      Buffer.from(call.request!.resumeToken).toString(),
-                      10,
-                    ) + 1;
-              for (
-                let index = resumeIndex;
-                index < partialResultSets.length;
-                index++
-              ) {
-                const streamErr = this.shiftStreamError(
-                  this.streamingRead.name,
-                  index,
-                );
-                if (streamErr) {
-                  call.sendMetadata(new Metadata());
-                  call.emit('error', streamErr);
-                  break;
-                }
-                call.write(partialResultSets[index]);
-              }
-              break;
-            case ReadRequestResultType.ERROR:
-              call.sendMetadata(new Metadata());
-              call.emit('error', res.error);
-              break;
-            default:
-              call.emit(
-                'error',
-                new Error(`Unknown ReadRequestResult type: ${res.type}`),
-              );
-          }
-        } else {
-          call.emit(
-            'error',
-            new Error(
-              `There is no result registered for ${call.request!.table}`,
-            ),
-          );
-        }
-        call.end();
+        this._streamingReadInternal(call);
+        return null;
       })
       .catch(err => {
         call.sendMetadata(new Metadata());
         call.emit('error', err);
         call.end();
       });
+  }
+
+  private _streamingReadInternal(
+    call: grpc.ServerWritableStream<protobuf.ReadRequest, {}>,
+  ): void {
+    let transactionKey;
+    if (call.request!.transaction) {
+      const fullTransactionId = `${call.request!.session}/transactions/${
+        call.request!.transaction.id
+      }`;
+      transactionKey = fullTransactionId;
+      if (this.abortedTransactions.has(fullTransactionId)) {
+        call.sendMetadata(new Metadata());
+        call.emit(
+          'error',
+          MockSpanner.createTransactionAbortedError(`${fullTransactionId}`),
+        );
+        call.end();
+        return;
+      }
+    }
+    const keySet = JSON.stringify(
+      call.request!.keySet ?? {},
+      Object.keys(call.request!.keySet ?? {}).sort(),
+    );
+    const key = `${call.request!.table}|${keySet}`;
+    const res =
+      this.readRequestResults.get(key) ||
+      this.readRequestResults.get(call.request!.table);
+    const session = this.sessions.get(call.request!.session);
+    if (res) {
+      if (call.request!.transaction?.begin) {
+        const txn = this._updateTransaction(
+          call.request!.session,
+          call.request!.transaction.begin,
+        );
+        if (txn instanceof Error) {
+          call.sendMetadata(new Metadata());
+          call.emit('error', txn);
+          call.end();
+          return;
+        }
+        transactionKey = `${call.request!.session}/transactions/${txn.id.toString()}`;
+        if (res.type === ReadRequestResultType.RESULT_SET) {
+          call.sendMetadata(new Metadata());
+          (res.resultSet as protobuf.ResultSet).metadata!.transaction = txn;
+        }
+      }
+
+      // get the current seqNum
+      const currentSeqNum = this.transactionSeqNum.get(transactionKey) || 0;
+      const nextSeqNum = currentSeqNum + 1;
+
+      // set the next SeqNum
+      this.transactionSeqNum.set(transactionKey, nextSeqNum);
+      const precommitToken = session?.multiplexed
+        ? protobuf.MultiplexedSessionPrecommitToken.create({
+            precommitToken: Buffer.from('mock-precommit-token'),
+            seqNum: nextSeqNum,
+          })
+        : null;
+      let partialResultSets;
+      let resumeIndex;
+      switch (res.type) {
+        case ReadRequestResultType.RESULT_SET:
+          (res.resultSet as protobuf.ResultSet).precommitToken = precommitToken;
+          if (Array.isArray(res.resultSet)) {
+            partialResultSets = res.resultSet;
+          } else {
+            partialResultSets = MockSpanner.toPartialResultSets(
+              res.resultSet,
+              'NORMAL',
+            );
+          }
+          // Resume on the next index after the last one seen by the client.
+          resumeIndex =
+            call.request!.resumeToken.length === 0
+              ? 0
+              : parseInt(
+                  Buffer.from(call.request!.resumeToken).toString(),
+                  10,
+                ) + 1;
+          for (
+            let index = resumeIndex;
+            index < partialResultSets.length;
+            index++
+          ) {
+            const streamErr = this.shiftStreamError(
+              this.streamingRead.name,
+              index,
+            );
+            if (streamErr) {
+              call.sendMetadata(new Metadata());
+              call.emit('error', streamErr);
+              break;
+            }
+            call.write(partialResultSets[index]);
+          }
+          break;
+        case ReadRequestResultType.ERROR:
+          call.sendMetadata(new Metadata());
+          call.emit('error', res.error);
+          break;
+        default:
+          call.emit(
+            'error',
+            new Error(`Unknown ReadRequestResult type: ${res.type}`),
+          );
+      }
+    } else {
+      call.emit(
+        'error',
+        new Error(`There is no result registered for ${call.request!.table}`),
+      );
+    }
+    call.end();
   }
 
   beginTransaction(
@@ -1139,19 +1273,31 @@ export class MockSpanner {
     callback: protobuf.Spanner.BeginTransactionCallback,
   ) {
     this.pushRequest(call.request!, call.metadata);
+    const handleRequest = () => {
+      this.mutationOnly = call.request.mutationKey ? true : false;
+      const res = this._updateTransaction(
+        call.request!.session,
+        call.request!.options,
+      );
+      if (res instanceof Error) {
+        callback(res);
+      } else {
+        callback(null, res);
+      }
+    };
+
+    if (this.contentionManager) {
+      const peer = call.getPeer ? call.getPeer() : 'unknown';
+      this.contentionManager
+        .executeWithQueue(peer, async () => {
+          handleRequest();
+        })
+        .catch(err => callback(err));
+      return;
+    }
+
     this.simulateExecutionTime(this.beginTransaction.name)
-      .then(() => {
-        this.mutationOnly = call.request.mutationKey ? true : false;
-        const res = this._updateTransaction(
-          call.request!.session,
-          call.request!.options,
-        );
-        if (res instanceof Error) {
-          callback(res);
-        } else {
-          callback(null, res);
-        }
-      })
+      .then(handleRequest)
       .catch(err => {
         callback(err);
       });
@@ -1162,57 +1308,64 @@ export class MockSpanner {
     callback: protobuf.Spanner.CommitCallback,
   ) {
     this.pushRequest(call.request!, call.metadata);
-    this.simulateExecutionTime(this.commit.name)
-      .then(() => {
-        const fullTransactionId = `${call.request!.session}/transactions/${
-          call.request!.transactionId
-        }`;
-        if (this.abortedTransactions.has(fullTransactionId)) {
-          callback(
-            MockSpanner.createTransactionAbortedError(`${fullTransactionId}`),
-          );
-          return;
-        }
-        const session = this.sessions.get(call.request!.session);
-        if (session) {
-          if (call.request!.transactionId) {
-            const buffer = Buffer.from(call.request!.transactionId as string);
-            const transactionId = buffer.toString();
-            const fullTransactionId =
-              session.name + '/transactions/' + transactionId;
-            const transaction = this.transactions.get(fullTransactionId);
-            if (transaction) {
-              // unique transaction key
-              const transactionKey = `${call.request.session}/transactions/${call.request.transactionId}`;
-              // delete the transaction key
-              this.transactionSeqNum.delete(transactionKey);
-              this.transactions.delete(fullTransactionId);
-              this.transactionOptions.delete(fullTransactionId);
-              callback(
-                null,
-                protobuf.CommitResponse.create({
-                  commitTimestamp: now(),
-                }),
-              );
-            } else {
-              callback(
-                MockSpanner.createTransactionNotFoundError(fullTransactionId),
-              );
-            }
-          } else if (call.request!.singleUseTransaction) {
+    const handleRequest = () => {
+      const fullTransactionId = `${call.request!.session}/transactions/${
+        call.request!.transactionId
+      }`;
+      if (this.abortedTransactions.has(fullTransactionId)) {
+        callback(
+          MockSpanner.createTransactionAbortedError(`${fullTransactionId}`),
+        );
+        return;
+      }
+      const session = this.sessions.get(call.request!.session);
+      if (session) {
+        if (call.request!.transactionId) {
+          const buffer = Buffer.from(call.request!.transactionId as string);
+          const transactionId = buffer.toString();
+          const fullTxnId = session.name + '/transactions/' + transactionId;
+          const transaction = this.transactions.get(fullTxnId);
+          if (transaction) {
+            // unique transaction key
+            const transactionKey = `${call.request.session}/transactions/${call.request.transactionId}`;
+            // delete the transaction key
+            this.transactionSeqNum.delete(transactionKey);
+            this.transactions.delete(fullTxnId);
+            this.transactionOptions.delete(fullTxnId);
             callback(
               null,
               protobuf.CommitResponse.create({
                 commitTimestamp: now(),
               }),
             );
+          } else {
+            callback(MockSpanner.createTransactionNotFoundError(fullTxnId));
           }
-        } else {
+        } else if (call.request!.singleUseTransaction) {
           callback(
-            MockSpanner.createSessionNotFoundError(call.request!.session),
+            null,
+            protobuf.CommitResponse.create({
+              commitTimestamp: now(),
+            }),
           );
         }
-      })
+      } else {
+        callback(MockSpanner.createSessionNotFoundError(call.request!.session));
+      }
+    };
+
+    if (this.contentionManager) {
+      const peer = call.getPeer ? call.getPeer() : 'unknown';
+      this.contentionManager
+        .executeWithQueue(peer, async () => {
+          handleRequest();
+        })
+        .catch(err => callback(err));
+      return;
+    }
+
+    this.simulateExecutionTime(this.commit.name)
+      .then(handleRequest)
       .catch(err => {
         callback(err);
       });
@@ -1223,26 +1376,43 @@ export class MockSpanner {
     callback: protobuf.Spanner.RollbackCallback,
   ) {
     this.pushRequest(call.request!, call.metadata);
-    const session = this.sessions.get(call.request!.session);
-    if (session) {
-      const buffer = Buffer.from(call.request!.transactionId as string);
-      const transactionId = buffer.toString();
-      const fullTransactionId = session.name + '/transactions/' + transactionId;
-      const transaction = this.transactions.get(fullTransactionId);
-      if (transaction) {
-        // unique transaction key
-        const transactionKey = `${call.request.session}/transactions/${call.request.transactionId}`;
-        // delete the key
-        this.transactionSeqNum.delete(transactionKey);
-        this.transactions.delete(fullTransactionId);
-        this.transactionOptions.delete(fullTransactionId);
-        callback(null, google.protobuf.Empty.create());
+    const handleRequest = () => {
+      const session = this.sessions.get(call.request!.session);
+      if (session) {
+        const buffer = Buffer.from(call.request!.transactionId as string);
+        const transactionId = buffer.toString();
+        const fullTransactionId =
+          session.name + '/transactions/' + transactionId;
+        const transaction = this.transactions.get(fullTransactionId);
+        if (transaction) {
+          // unique transaction key
+          const transactionKey = `${call.request.session}/transactions/${call.request.transactionId}`;
+          // delete the key
+          this.transactionSeqNum.delete(transactionKey);
+          this.transactions.delete(fullTransactionId);
+          this.transactionOptions.delete(fullTransactionId);
+          callback(null, google.protobuf.Empty.create());
+        } else {
+          callback(
+            MockSpanner.createTransactionNotFoundError(fullTransactionId),
+          );
+        }
       } else {
-        callback(MockSpanner.createTransactionNotFoundError(fullTransactionId));
+        callback(MockSpanner.createSessionNotFoundError(call.request!.session));
       }
-    } else {
-      callback(MockSpanner.createSessionNotFoundError(call.request!.session));
+    };
+
+    if (this.contentionManager) {
+      const peer = call.getPeer ? call.getPeer() : 'unknown';
+      this.contentionManager
+        .executeWithQueue(peer, async () => {
+          handleRequest();
+        })
+        .catch(err => callback(err));
+      return;
     }
+
+    handleRequest();
   }
 
   partitionQuery(
@@ -1256,6 +1426,7 @@ export class MockSpanner {
           partitions: [{partitionToken: Buffer.from('mock-token')}],
         });
         callback(null, response);
+        return null;
       })
       .catch(err => callback(err));
   }
@@ -1271,6 +1442,7 @@ export class MockSpanner {
           partitions: [{partitionToken: Buffer.from('mock-token')}],
         });
         callback(null, response);
+        return null;
       })
       .catch(err => callback(err));
   }
@@ -1289,6 +1461,7 @@ export class MockSpanner {
         });
         call.write(response);
         call.end();
+        return null;
       })
       .catch(err => call.destroy(err));
   }

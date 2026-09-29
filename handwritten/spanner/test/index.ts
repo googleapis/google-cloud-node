@@ -192,6 +192,7 @@ describe('Spanner', () => {
 
   const OPTIONS = {
     projectId: 'project-id',
+    channelPool: 'legacy' as const,
   };
 
   before(() => {
