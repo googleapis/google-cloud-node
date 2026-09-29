@@ -29,6 +29,7 @@ function main(project) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
+   *  Required. Project ID for this request.
    */
   // const project = 'my-project'
 

@@ -2028,6 +2028,33 @@
                             "(google.api.field_behavior)": "OPTIONAL",
                             "proto3_optional": true
                           }
+                        },
+                        "metadata": {
+                          "type": "HeartRateVariabilityMetadata",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "HeartRateVariabilityMetadata": {
+                          "fields": {
+                            "highFrequencyPower": {
+                              "type": "double",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "lowFrequencyPower": {
+                              "type": "double",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
                         }
                       }
                     },
@@ -4106,7 +4133,19 @@
                             "LONGING": 53,
                             "ACCOMPLISHED": 54,
                             "LOVING": 55,
-                            "COMPASSIONATE": 56
+                            "COMPASSIONATE": 56,
+                            "DEPRESSED": 57,
+                            "GOOD": 58,
+                            "LOW_ENERGY": 59,
+                            "OBSESSIVE_THOUGHTS": 60,
+                            "PANIC": 61,
+                            "PLAYFUL": 62,
+                            "PLEASED": 63,
+                            "SENSITIVE": 64,
+                            "SLEEPY": 65,
+                            "SWINGS": 66,
+                            "UNHAPPY": 67,
+                            "VERY_SELF_CRITICAL": 68
                           }
                         },
                         "Valence": {

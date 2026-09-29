@@ -151,6 +151,74 @@
         }
       }
     },
+    "CompanionAgents": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "CompanionAgentsClient",
+          "rpcs": {
+            "CreateCompanionAgent": {
+              "methods": [
+                "createCompanionAgent"
+              ]
+            },
+            "GetCompanionAgent": {
+              "methods": [
+                "getCompanionAgent"
+              ]
+            },
+            "UpdateCompanionAgent": {
+              "methods": [
+                "updateCompanionAgent"
+              ]
+            },
+            "DeleteCompanionAgent": {
+              "methods": [
+                "deleteCompanionAgent"
+              ]
+            },
+            "ListCompanionAgents": {
+              "methods": [
+                "listCompanionAgents",
+                "listCompanionAgentsStream",
+                "listCompanionAgentsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "CompanionAgentsClient",
+          "rpcs": {
+            "CreateCompanionAgent": {
+              "methods": [
+                "createCompanionAgent"
+              ]
+            },
+            "GetCompanionAgent": {
+              "methods": [
+                "getCompanionAgent"
+              ]
+            },
+            "UpdateCompanionAgent": {
+              "methods": [
+                "updateCompanionAgent"
+              ]
+            },
+            "DeleteCompanionAgent": {
+              "methods": [
+                "deleteCompanionAgent"
+              ]
+            },
+            "ListCompanionAgents": {
+              "methods": [
+                "listCompanionAgents",
+                "listCompanionAgentsStream",
+                "listCompanionAgentsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
     "Contexts": {
       "clients": {
         "grpc": {
@@ -1325,6 +1393,16 @@
             "StreamingAnalyzeContent": {
               "methods": [
                 "streamingAnalyzeContent"
+              ]
+            },
+            "BidiStreamingAnalyzeContent": {
+              "methods": [
+                "bidiStreamingAnalyzeContent"
+              ]
+            },
+            "StreamingReactiveCompanionSuggestions": {
+              "methods": [
+                "streamingReactiveCompanionSuggestions"
               ]
             },
             "ListParticipants": {
