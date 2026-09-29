@@ -131,6 +131,12 @@ async function main(processArgv: string[]) {
     )
     .string('mixins')
     .describe(
+      'resumable_upload_methods',
+      'Semicolon-separated list of ServiceName.MethodName pairs that should be treated as resumable upload methods, e.g. ResumableUploadService.CreateResumableUpload.',
+    )
+    .string('resumable_upload_methods')
+    .alias('resumable_upload_methods', 'resumable-upload-methods')
+    .describe(
       'enable_telemetry_tracing',
       'Set to true to generate a library instrumented with telemetry tracing.',
     )
@@ -158,6 +164,8 @@ async function main(processArgv: string[]) {
   const legacyProtoLoad = argv.legacyProtoLoad as boolean | undefined;
   const restNumericEnums = argv.restNumericEnums as boolean | undefined;
   const mixins = argv.mixins as string | undefined;
+  const resumableUploadMethods = argv.resumableUploadMethods as
+    string | undefined;
   const enableTelemetryTracing = argv.enableTelemetryTracing as
     boolean | undefined;
 
@@ -251,6 +259,11 @@ async function main(processArgv: string[]) {
   }
   if (mixins) {
     protocCommand.push(`--typescript_gapic_opt="mixins=${mixins}"`);
+  }
+  if (resumableUploadMethods) {
+    protocCommand.push(
+      `--typescript_gapic_opt="resumable-upload-methods=${resumableUploadMethods}"`,
+    );
   }
   protocCommand.push(...protoDirsArg);
   protocCommand.push(...protoFiles);

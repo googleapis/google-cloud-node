@@ -4,6 +4,7 @@ packages:
   - 'core/precise-date'
   - 'core/projectify'
   - 'core/promisify'
+  - 'core/test-utils'
   - 'core/packages/*'
   - 'core/generator/*'
   - 'core/dev-packages/*'

@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/eventarc-publishing",
-  "version": "5.1.0",
+  "version": "5.1.1",
   "description": "publishing client for Node.js",
   "repository": {
     "type": "git",
