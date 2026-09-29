@@ -36,8 +36,8 @@
     "fix": "gts fix",
     "lint": "gts check",
     "prepare": "npm run compile-protos && npm run compile",
-    "system-test": "c8 mocha --config ../../.mocharc.cjs --no-parallel build/system-test",
-    "test": "c8 mocha --config ../../.mocharc.cjs build/test"
+    "system-test": "node ../../bin/run-test.cjs --config ../../.mocharc.cjs --no-parallel build/system-test",
+    "test": "node ../../bin/run-test.cjs --config ../../.mocharc.cjs build/test"
   },
   "dependencies": {
     "google-gax": "^6.0.1"
