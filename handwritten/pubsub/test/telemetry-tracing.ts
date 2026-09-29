@@ -482,4 +482,34 @@ describe('OpenTelemetryTracer', () => {
       );
     });
   });
+
+  describe('PubsubEvents', () => {
+    it('adds publish start (hedged) and publish end (hedged) events to parentSpan', () => {
+      const message: PubsubMessage = {};
+      const topicName = 'projects/test/topics/topicfoo';
+      const span = otel.PubsubSpans.createPublisherSpan(
+        message,
+        topicName,
+        'test',
+      );
+      assert.ok(span);
+      message.parentSpan = span;
+
+      otel.PubsubEvents.publishStart(message);
+      otel.PubsubEvents.publishStartHedged(message);
+      otel.PubsubEvents.publishEndHedged(message);
+      span.end();
+
+      const spans = exporter.getFinishedSpans();
+      assert.strictEqual(spans.length, 1);
+      const finishedSpan = spans[0];
+      assert.ok(finishedSpan);
+      const eventNames = finishedSpan.events.map(e => e.name);
+      assert.deepStrictEqual(eventNames, [
+        'publish start',
+        'publish start (hedged)',
+        'publish end (hedged)',
+      ]);
+    });
+  });
 });
