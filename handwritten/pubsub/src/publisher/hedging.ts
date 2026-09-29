@@ -15,8 +15,9 @@
  */
 
 import {CallOptions} from 'google-gax';
+import {google} from '../../protos/protos';
 import {defaultOptions} from '../default-options';
-import {Duration} from '../temporal';
+import {Duration, atLeast, atMost} from '../temporal';
 
 /**
  * Minimum allowed hedging delay (100ms).
@@ -27,6 +28,16 @@ const MIN_HEDGE_DELAY = Duration.from({milliseconds: 100});
  * Maximum allowed hedging delay (10s).
  */
 const MAX_HEDGE_DELAY = Duration.from({seconds: 10});
+
+/**
+ * Maximum timeout for an individual hedged publish attempt (10s).
+ */
+const MAX_HEDGE_ATTEMPT_TIMEOUT = Duration.from({seconds: 10});
+
+/**
+ * Zero duration constant for non-negative clamping and comparisons.
+ */
+const ZERO_DURATION = Duration.from({milliseconds: 0});
 
 /**
  * Minimum allowed maxTokens value.
@@ -246,5 +257,288 @@ export class HedgingTokenBucket {
    */
   getTokenBalance(): number {
     return this.hedgeTokenBucket / HEDGE_TOKEN_SCALE;
+  }
+}
+
+/**
+ * Outcome of a hedged publish batch.
+ */
+export interface HedgedPublishResult {
+  readonly response?: google.pubsub.v1.IPublishResponse | null;
+  readonly wasHedged: boolean;
+  readonly successfulAttempt: number;
+}
+
+/**
+ * Callback invoked by HedgingScheduler when a hedged attempt should be started.
+ */
+export type StartHedgedAttemptCallback = (
+  attemptNumber: number,
+  attemptTimeout: Duration,
+) => void;
+
+/**
+ * Coordinates multiple publish attempts (attempt 0 = original, 1..N = hedged)
+ * for a single batch of messages.
+ */
+export class CancellationSharer {
+  readonly absoluteDeadline: Duration;
+  readonly promise: Promise<HedgedPublishResult>;
+
+  private readonly onSuccess: () => void;
+  private readonly runningAttempts = new Map<number, AbortController>();
+  private done_ = false;
+  private successfulAttempt_?: number;
+  private lastError: unknown;
+  private resolvePromise?: (result: HedgedPublishResult) => void;
+  private rejectPromise?: (err: unknown) => void;
+
+  constructor(absoluteDeadline: Duration, onSuccess: () => void) {
+    this.absoluteDeadline = absoluteDeadline;
+    this.onSuccess = onSuccess;
+    this.promise = new Promise<HedgedPublishResult>((resolve, reject) => {
+      this.resolvePromise = resolve;
+      this.rejectPromise = reject;
+    });
+  }
+
+  /**
+   * Registers an in-flight publish attempt with this coordinator.
+   */
+  addAttempt(
+    attemptNumber: number,
+    abortController: AbortController,
+    attemptPromise: Promise<
+      google.pubsub.v1.IPublishResponse | null | undefined
+    >,
+  ): void {
+    if (this.done_) {
+      abortController.abort();
+      return;
+    }
+
+    this.runningAttempts.set(attemptNumber, abortController);
+
+    attemptPromise
+      .then(response => {
+        this.handleAttemptSuccess(attemptNumber, response);
+        return undefined;
+      })
+      .catch((err: unknown) => {
+        this.handleAttemptFailure(attemptNumber, err);
+      });
+  }
+
+  /**
+   * Returns true if this batch has already completed (succeeded, failed, or cancelled).
+   */
+  get isDone(): boolean {
+    return this.done_;
+  }
+
+  /**
+   * Returns the attempt number that succeeded, or undefined if none has succeeded.
+   */
+  get successfulAttempt(): number | undefined {
+    return this.successfulAttempt_;
+  }
+
+  /**
+   * Cancels all running attempts and marks the coordinator as done.
+   */
+  cancel(): void {
+    if (this.done_) {
+      return;
+    }
+    this.done_ = true;
+    this.cancelAll();
+    this.rejectPromise?.(new Error('Cancelled'));
+  }
+
+  private handleAttemptSuccess(
+    attemptNumber: number,
+    response?: google.pubsub.v1.IPublishResponse | null,
+  ): void {
+    if (this.done_) {
+      return;
+    }
+    this.done_ = true;
+    this.successfulAttempt_ = attemptNumber;
+    this.onSuccess();
+    this.cancelAllExcept(attemptNumber);
+    this.resolvePromise?.({
+      response,
+      wasHedged: attemptNumber > 0,
+      successfulAttempt: attemptNumber,
+    });
+  }
+
+  private handleAttemptFailure(attemptNumber: number, err: unknown): void {
+    if (this.done_) {
+      return;
+    }
+    this.runningAttempts.delete(attemptNumber);
+    this.lastError = err;
+
+    if (attemptNumber === 0 || this.runningAttempts.size === 0) {
+      this.done_ = true;
+      this.cancelAll();
+      this.rejectPromise?.(this.lastError);
+    }
+  }
+
+  private cancelAll(): void {
+    for (const controller of this.runningAttempts.values()) {
+      controller.abort();
+    }
+    this.runningAttempts.clear();
+  }
+
+  private cancelAllExcept(winningAttempt: number): void {
+    for (const [attempt, controller] of this.runningAttempts.entries()) {
+      if (attempt !== winningAttempt) {
+        controller.abort();
+      }
+    }
+    this.runningAttempts.clear();
+  }
+}
+
+/**
+ * Represents a pending hedging check in the publisher's hedging queue.
+ */
+export class HedgedRequest {
+  readonly coordinator: CancellationSharer;
+  readonly attemptNumber: number;
+  readonly sendAfter: Duration;
+  readonly startHedgedAttempt: StartHedgedAttemptCallback;
+
+  constructor(
+    coordinator: CancellationSharer,
+    attemptNumber: number,
+    sendAfter: Duration,
+    startHedgedAttempt: StartHedgedAttemptCallback,
+  ) {
+    this.coordinator = coordinator;
+    this.attemptNumber = attemptNumber;
+    this.sendAfter = sendAfter;
+    this.startHedgedAttempt = startHedgedAttempt;
+  }
+}
+
+/**
+ * Event-driven FIFO queue and single-timer scheduler for publish hedging.
+ */
+export class HedgingScheduler {
+  private readonly options: ResolvedHedgingOptions;
+  private readonly tokenBucket: HedgingTokenBucket;
+  private readonly onRateLimited?: () => void;
+  private readonly hedgingQueue: HedgedRequest[] = [];
+  private queueProcessingTimer?: NodeJS.Timeout;
+
+  constructor(
+    options: ResolvedHedgingOptions,
+    tokenBucket: HedgingTokenBucket,
+    onRateLimited?: () => void,
+  ) {
+    this.options = options;
+    this.tokenBucket = tokenBucket;
+    this.onRateLimited = onRateLimited;
+  }
+
+  /**
+   * Returns the current wall-clock time as a Duration since epoch.
+   */
+  private nowDuration(): Duration {
+    return Duration.from({milliseconds: Date.now()});
+  }
+
+  /**
+   * Schedules the initial hedge check (attempt 1) for a newly started publish batch.
+   */
+  scheduleFirstHedge(
+    coordinator: CancellationSharer,
+    startHedgedAttempt: StartHedgedAttemptCallback,
+  ): void {
+    if (coordinator.isDone) {
+      return;
+    }
+    const sendAfter = this.nowDuration().add(this.options.hedgeDelay);
+    const request = new HedgedRequest(
+      coordinator,
+      1,
+      sendAfter,
+      startHedgedAttempt,
+    );
+    this.hedgingQueue.push(request);
+    this.scheduleQueueProcessing();
+  }
+
+  /**
+   * Clears any scheduled timer and empties the pending hedging queue.
+   */
+  clear(): void {
+    if (this.queueProcessingTimer) {
+      clearTimeout(this.queueProcessingTimer);
+      this.queueProcessingTimer = undefined;
+    }
+    this.hedgingQueue.length = 0;
+  }
+
+  private scheduleQueueProcessing(): void {
+    if (this.queueProcessingTimer) {
+      return;
+    }
+    const nextItem = this.hedgingQueue[0];
+    if (!nextItem) {
+      return;
+    }
+    const delay = atLeast(
+      nextItem.sendAfter.subtract(this.nowDuration()),
+      ZERO_DURATION,
+    );
+    this.queueProcessingTimer = setTimeout(() => {
+      this.processQueue();
+    }, delay.milliseconds);
+  }
+
+  private processQueue(): void {
+    this.queueProcessingTimer = undefined;
+    const now = this.nowDuration();
+
+    while (
+      this.hedgingQueue.length > 0 &&
+      Duration.compare(this.hedgingQueue[0].sendAfter, now) <= 0
+    ) {
+      const item = this.hedgingQueue.shift();
+      if (!item || item.coordinator.isDone) {
+        continue;
+      }
+
+      const remainingTimeout = item.coordinator.absoluteDeadline.subtract(now);
+      if (Duration.compare(remainingTimeout, ZERO_DURATION) <= 0) {
+        continue;
+      }
+
+      const attemptTimeout = atMost(
+        remainingTimeout,
+        MAX_HEDGE_ATTEMPT_TIMEOUT,
+      );
+
+      if (this.tokenBucket.tryAcquireHedgeToken()) {
+        const nextItem = new HedgedRequest(
+          item.coordinator,
+          item.attemptNumber + 1,
+          now.add(this.options.hedgeDelay),
+          item.startHedgedAttempt,
+        );
+        this.hedgingQueue.push(nextItem);
+        item.startHedgedAttempt(item.attemptNumber, attemptTimeout);
+      } else {
+        this.onRateLimited?.();
+      }
+    }
+
+    this.scheduleQueueProcessing();
   }
 }
