@@ -2275,8 +2275,8 @@ importers:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
       joi:
-        specifier: ^17.0.0
-        version: 17.13.4
+        specifier: ^17.13.7
+        version: 17.13.7
       js-green-licenses:
         specifier: ^4.0.0
         version: 4.0.0(encoding@0.1.13)
@@ -21559,8 +21559,8 @@ packages:
   jju@1.4.0:
     resolution: {integrity: sha512-8wb9Yw966OSxApiCt0K3yNJL8pnNeIv+OEq2YMidz4FKP6nonSRoOXc80iXY4JaN2FC11B9qsNmDsm+ZOfMROA==}
 
-  joi@17.13.4:
-    resolution: {integrity: sha512-1RuuER6kmt8K8I3nIWvPZKi5RQCb568ZPyY4Pwjlua+yo+63ZTmIwxLZH0heBmiKN4uxjvCiarDrjaeH84xicQ==}
+  joi@17.13.7:
+    resolution: {integrity: sha512-MF80Dm5Y2veNy8QWVx9Bj3ui4mo7+VPSPsR1M+oaHXV0Gx6zGX9a2F+OZG3Blby9tOlzU9Rs5FUimlEhbKtfnQ==}
 
   jpeg-exif@1.1.4:
     resolution: {integrity: sha512-a+bKEcCjtuW5WTdgeXFzswSrdqi0jk4XlEtZlx5A94wCoBpFjfFTbo/Tra5SpNCl/YFZPvcV1dJc+TAYeg6ROQ==}
@@ -28606,7 +28606,7 @@ snapshots:
 
   '@webpack-cli/configtest@3.0.1(webpack-cli@6.0.1)(webpack@5.109.0)':
     dependencies:
-      webpack: 5.109.0(webpack-cli@6.0.1)
+      webpack: 5.109.0(uglify-js@3.19.3)(webpack-cli@6.0.1)
       webpack-cli: 6.0.1(webpack@5.109.0)
 
   '@webpack-cli/info@2.0.2(webpack-cli@5.1.4)(webpack@5.109.0)':
@@ -28616,7 +28616,7 @@ snapshots:
 
   '@webpack-cli/info@3.0.1(webpack-cli@6.0.1)(webpack@5.109.0)':
     dependencies:
-      webpack: 5.109.0(webpack-cli@6.0.1)
+      webpack: 5.109.0(uglify-js@3.19.3)(webpack-cli@6.0.1)
       webpack-cli: 6.0.1(webpack@5.109.0)
 
   '@webpack-cli/serve@2.0.5(webpack-cli@5.1.4)(webpack@5.109.0)':
@@ -28626,7 +28626,7 @@ snapshots:
 
   '@webpack-cli/serve@3.0.1(webpack-cli@6.0.1)(webpack@5.109.0)':
     dependencies:
-      webpack: 5.109.0(webpack-cli@6.0.1)
+      webpack: 5.109.0(uglify-js@3.19.3)(webpack-cli@6.0.1)
       webpack-cli: 6.0.1(webpack@5.109.0)
 
   '@xtuc/ieee754@1.2.0': {}
@@ -33087,7 +33087,7 @@ snapshots:
 
   jju@1.4.0: {}
 
-  joi@17.13.4:
+  joi@17.13.7:
     dependencies:
       '@hapi/hoek': 9.3.0
       '@hapi/topo': 5.1.0
@@ -34190,7 +34190,7 @@ snapshots:
     dependencies:
       loader-utils: 2.0.4
       schema-utils: 3.3.0
-      webpack: 5.109.0(webpack-cli@6.0.1)
+      webpack: 5.109.0(uglify-js@3.19.3)(webpack-cli@6.0.1)
 
   nunjucks@3.2.4(chokidar@3.6.0):
     dependencies:
@@ -36857,7 +36857,7 @@ snapshots:
       import-local: 3.2.0
       interpret: 3.1.1
       rechoir: 0.8.0
-      webpack: 5.109.0(webpack-cli@6.0.1)
+      webpack: 5.109.0(uglify-js@3.19.3)(webpack-cli@6.0.1)
       webpack-merge: 6.0.1
 
   webpack-merge@4.2.2:
