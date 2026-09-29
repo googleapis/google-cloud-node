@@ -275,7 +275,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-apigateway
-    version: 5.3.1
+    version: 5.4.0
     apis:
       - path: google/cloud/apigateway/v1
     copyright_year: "2026"
@@ -507,7 +507,7 @@ libraries:
       metadata_name_override: bigquerystorage-api
       name_pretty_override: BigQuery Storage API
   - name: google-cloud-bigtable-api
-    version: 0.8.0
+    version: 0.9.0
     apis:
       - path: google/bigtable/v2
       - path: google/bigtable/admin/v2
@@ -627,7 +627,7 @@ libraries:
       - path: google/cloud/commerceproducer/v1beta
     copyright_year: "2026"
   - name: google-cloud-compute
-    version: 7.5.1
+    version: 7.6.0
     apis:
       - path: google/cloud/compute/v1
         nodejs:
@@ -739,7 +739,7 @@ libraries:
       default_version: v1
       package_name: '@google-cloud/configmanagement'
   - name: google-cloud-dataform
-    version: 3.3.1
+    version: 3.4.0
     apis:
       - path: google/cloud/dataform/v1
       - path: google/cloud/dataform/v1beta1
@@ -829,7 +829,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-dialogflow
-    version: 8.1.1
+    version: 8.2.0
     apis:
       - path: google/cloud/dialogflow/v2
       - path: google/cloud/dialogflow/v2beta1
@@ -1438,7 +1438,7 @@ libraries:
       default_version: v3
       package_name: '@google-cloud/resource-manager'
   - name: google-cloud-retail
-    version: 5.3.1
+    version: 5.4.0
     apis:
       - path: google/cloud/retail/v2
         nodejs:
@@ -1872,7 +1872,7 @@ libraries:
       package_name: '@google/developer-knowledge'
       metadata_name_override: google-developer-knowledge
   - name: google-devicesandservices-health
-    version: 0.7.0
+    version: 0.8.0
     apis:
       - path: google/devicesandservices/health/v4
     copyright_year: "2026"

@@ -5,6 +5,143 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "514e2f64ba67ad3ab956fbe3eeafa507d44ca597",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9472"
+          ]
+        }
+      ],
+      "version": "0.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/health",
+      "id": "9946cfdf-80fe-4a4e-bf3c-5a2b0aef2f83",
+      "createTime": "2026-09-29T18:18:07.698Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "514e2f64ba67ad3ab956fbe3eeafa507d44ca597",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9472"
+          ]
+        }
+      ],
+      "version": "5.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/retail",
+      "id": "666f192e-abcd-4154-9519-853698840326",
+      "createTime": "2026-09-29T18:18:07.666Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "514e2f64ba67ad3ab956fbe3eeafa507d44ca597",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9472"
+          ]
+        }
+      ],
+      "version": "8.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dialogflow",
+      "id": "40c0d1d4-c2a4-4d5d-9925-bb41ddac37e8",
+      "createTime": "2026-09-29T18:18:07.633Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "514e2f64ba67ad3ab956fbe3eeafa507d44ca597",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9472"
+          ]
+        }
+      ],
+      "version": "3.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataform",
+      "id": "5eba48ed-3271-4ce2-8b46-3a8026a6619f",
+      "createTime": "2026-09-29T18:18:07.598Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "514e2f64ba67ad3ab956fbe3eeafa507d44ca597",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9472"
+          ]
+        }
+      ],
+      "version": "7.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/compute",
+      "id": "b8947877-fd73-4318-a07a-11a43752bc72",
+      "createTime": "2026-09-29T18:18:07.560Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "514e2f64ba67ad3ab956fbe3eeafa507d44ca597",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9472"
+          ]
+        }
+      ],
+      "version": "0.9.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigtable-api",
+      "id": "c38db4d9-61fe-46f8-934a-c782069ea89f",
+      "createTime": "2026-09-29T18:18:07.531Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "514e2f64ba67ad3ab956fbe3eeafa507d44ca597",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9472"
+          ]
+        }
+      ],
+      "version": "5.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/api-gateway",
+      "id": "df1c8143-d3c3-4997-8fd8-a24831ba0baf",
+      "createTime": "2026-09-29T18:18:07.502Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c0e0540ebaca4c934d3439156bef2e437a2c5e32",
+          "message": "Add o11y sample",
+          "issues": [
+            "9456"
+          ],
+          "scope": "docs"
+        }
+      ],
+      "version": "6.10.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "google-gax",
+      "id": "207f19ab-d2cd-47ee-a687-bcdcfd6ed3fc",
+      "createTime": "2026-09-29T18:18:07.455Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "0c78d2994b77482a76f53d2fec7d1461715e5288",
           "message": "Support extended types in Node SDK",
           "issues": [
@@ -99565,5 +99702,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-09-29T06:58:48.261Z"
+  "updateTime": "2026-09-29T18:18:07.698Z"
 }
