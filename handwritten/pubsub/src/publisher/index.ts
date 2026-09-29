@@ -36,9 +36,14 @@ import {promisifySome} from '../util';
 import {PubsubMessage, Attributes} from './pubsub-message';
 export {PubsubMessage, Attributes} from './pubsub-message';
 export {
+  CancellationSharer,
+  HedgedPublishResult,
+  HedgedRequest,
   HedgingOptions,
-  ResolvedHedgingOptions,
+  HedgingScheduler,
   HedgingTokenBucket,
+  ResolvedHedgingOptions,
+  StartHedgedAttemptCallback,
 } from './hedging';
 
 export type PublishCallback = RequestCallback<string>;
