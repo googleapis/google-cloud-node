@@ -12,13 +12,14 @@
 
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
-  * [Pagination](#pagination)
   * [Quickstart](#quickstart)
+  * [Pagination](#pagination)
+  * [Observability](#observability)
 
 ## Before you begin
 
 Before running the samples, make sure you've followed the steps outlined in
-[Using the client library](https://github.com/googleapis/gax-nodejs#using-the-client-library).
+[Using the client library](https://github.com/googleapis/google-cloud-node#using-the-client-library).
 
 `cd samples`
 
@@ -30,16 +31,17 @@ Before running the samples, make sure you've followed the steps outlined in
 
 
 
-### Pagination
 
-View the [source code](https://github.com/googleapis/gax-nodejs/blob/main/samples/pagination.js).
+### Quickstart
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/gax-nodejs&page=editor&open_in_editor=samples/pagination.js,samples/README.md)
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/core/packages/gax/samples/quickstart.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node/blob/main/core/packages/gax/samples/quickstart.js)
 
 __Usage:__
 
 
-`node samples/pagination.js`
+`node samples/quickstart.js`
 
 
 -----
@@ -47,16 +49,32 @@ __Usage:__
 
 
 
-### Quickstart
+### Pagination
 
-View the [source code](https://github.com/googleapis/gax-nodejs/blob/main/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/core/packages/gax/samples/pagination.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/gax-nodejs&page=editor&open_in_editor=samples/quickstart.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node/blob/main/core/packages/gax/samples/pagination.js)
 
 __Usage:__
 
 
-`node samples/quickstart.js`
+`node samples/pagination.js`
+
+
+
+
+-----
+
+### Observability
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/core/packages/gax/samples/observability.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node/blob/main/core/packages/gax/samples/observability.js)
+
+__Usage:__
+
+
+`node samples/observability.js`
 
 
 
