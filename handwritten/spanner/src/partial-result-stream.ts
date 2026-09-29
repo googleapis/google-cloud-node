@@ -15,8 +15,7 @@
  */
 
 import {GrpcService} from './common-grpc/service';
-import {common as p} from 'protobufjs';
-import {PassThrough, Readable, Transform} from 'stream';
+import {Readable, Transform} from 'stream';
 import * as streamEvents from 'stream-events';
 import {grpc, CallOptions} from 'google-gax';
 import {DeadlineError, isRetryableInternalError} from './transaction-runner';
@@ -45,11 +44,9 @@ interface RequestFunction {
  * @property {boolean} [json=false] Indicates if the Row objects should be
  *     formatted into JSON.
  * @property {JSONOptions} [jsonOptions] JSON options.
- * @property {number} [maxResumeRetries=20] The maximum number of times that the
- *     stream will retry to push data downstream, when the downstream indicates
- *     that it is not ready for any more data. Increase this value if you
- *     experience 'Stream is still not ready to receive data' errors as a
- *     result of a slow writer in your receiving stream.
+ * @property {number} [maxResumeRetries=20] Deprecated. This option is no longer
+ *     used. Backpressure is now handled natively via Node.js stream flow
+ *     control without polling or retry limits.
  * @property {object} [columnsMetadata] An object map that can be used to pass
  * additional properties for each column type which can help in deserializing
  * the data coming from backend. (Eg: We need to pass Proto Function and Enum
@@ -58,6 +55,10 @@ interface RequestFunction {
 export interface RowOptions {
   json?: boolean;
   jsonOptions?: JSONOptions;
+  /**
+   * @deprecated Backpressure is now handled natively via Node.js stream flow
+   * control without polling or retry limits.
+   */
   maxResumeRetries?: number;
   /**
    * An object where column names as keys and custom objects as corresponding
@@ -361,22 +362,18 @@ interface ResultEvents {
  * @param {RowOptions} [options] The row options.
  */
 export class PartialResultStream extends Transform implements ResultEvents {
-  private _destroyed: boolean;
   private _fields!: google.spanner.v1.StructType.Field[];
   private _decoders!: Function[];
   private _options: RowOptions;
-  private _pendingValue?: p.IValue;
-  private _pendingValueForResume?: p.IValue;
+  private _pendingValue?: Value;
   private _rowValues?: Value[];
   private _valueIndex: number;
-  private _valueIndexForResume?: number;
-  private _numPushFailed = 0;
+  private _resumeCallback?: () => void;
   private _isFirstChunk = true;
   constructor(options = {}) {
     super({objectMode: true});
 
-    this._destroyed = false;
-    this._options = Object.assign({maxResumeRetries: 20}, options);
+    this._options = Object.assign({}, options);
     this._valueIndex = 0;
     this._isFirstChunk = true;
   }
@@ -386,20 +383,14 @@ export class PartialResultStream extends Transform implements ResultEvents {
    * @param {Error} [err] Optional error to destroy stream with.
    */
   destroy(err?: Error): this {
-    if (this._destroyed) {
+    if (this.destroyed) {
       return this;
     }
 
-    this._destroyed = true;
     this._rowValues = undefined;
+    this._resumeCallback = undefined;
 
-    process.nextTick(() => {
-      if (err) {
-        this.emit('error', err);
-      }
-      this.emit('close');
-    });
-    return this;
+    return super.destroy(err);
   }
   /**
    * Processes each chunk.
@@ -415,6 +406,10 @@ export class PartialResultStream extends Transform implements ResultEvents {
     enc: string,
     next: Function,
   ): void {
+    if (this.destroyed) {
+      return;
+    }
+
     this.emit('response', chunk);
 
     if (chunk.stats) {
@@ -427,10 +422,10 @@ export class PartialResultStream extends Transform implements ResultEvents {
       this._decoders = createFieldDecoders(this._fields, this._options);
     }
 
-    let res = true;
+    let canAcceptMore = true;
     if (!isEmpty(chunk.values)) {
       try {
-        res = this._addChunk(chunk);
+        canAcceptMore = this._addChunk(chunk);
       } catch (err) {
         next(err as Error);
         return;
@@ -438,7 +433,18 @@ export class PartialResultStream extends Transform implements ResultEvents {
     }
 
     if (chunk.last) {
+      if (this._valueIndex !== 0 || this._pendingValue !== undefined) {
+        next(
+          new Error(
+            'Stream received chunk.last=true before row or chunked value was complete.',
+          ),
+        );
+        return;
+      }
       this.push(null);
+      if (!canAcceptMore) {
+        this.emit('paused');
+      }
       // Calling next() notifies Node's stream machinery that processing of this
       // chunk is complete on the Writable side of this Transform stream.
       // This is a local, synchronous callback to Node's internal buffer; it does
@@ -447,62 +453,44 @@ export class PartialResultStream extends Transform implements ResultEvents {
       return;
     }
 
-    if (res) {
+    if (canAcceptMore) {
       next();
     } else {
-      // Wait a little before we push any more data into the pipeline as a
-      // component downstream has indicated that a break is needed. Pause the
-      // request stream to prevent it from filling up the buffer while we are
-      // waiting.
-      // The stream will initially pause for 2ms, and then double the pause time
-      // for each new pause.
-      const initialPauseMs = 2;
-      setTimeout(() => {
-        this._tryResume(next, 2 * initialPauseMs);
-      }, initialPauseMs);
+      // Downstream buffer has reached highWaterMark and cannot accept more data
+      // at the moment. Hold the completion callback until the downstream consumer
+      // drains and Node invokes _read(), resuming the upstream request stream.
+      this._resumeCallback = next as () => void;
+      this.emit('paused');
     }
   }
 
-  private _tryResume(next: Function, timeout: number) {
-    // Try to push an empty chunk to check whether more data can be accepted.
-    if (this.push(undefined)) {
-      this._numPushFailed = 0;
+  _flush(callback: Function): void {
+    if (this._valueIndex !== 0 || this._pendingValue !== undefined) {
+      callback(
+        new Error(
+          'Stream ended prematurely before row or chunked value was complete.',
+        ),
+      );
+      return;
+    }
+    callback();
+  }
+
+  _read(size: number): void {
+    if (this._resumeCallback) {
+      const callback = this._resumeCallback;
+      this._resumeCallback = undefined;
       this.emit('resumed');
-      next();
-    } else {
-      // Downstream returned false indicating that it is still not ready for
-      // more data.
-      this._numPushFailed++;
-      if (this._numPushFailed === this._options.maxResumeRetries) {
-        this.destroy(
-          new Error(
-            `Stream is still not ready to receive data after ${this._numPushFailed} attempts to resume.`,
-          ),
-        );
-        return;
-      }
-      setTimeout(() => {
-        const nextTimeout = Math.min(timeout * 2, 1024);
-        this._tryResume(next, nextTimeout);
-      }, timeout);
+      callback();
     }
-  }
-
-  _resetPendingValues() {
-    this._pendingValue = this._pendingValueForResume;
-    if (this._valueIndexForResume !== undefined) {
-      this._valueIndex = this._valueIndexForResume;
-    } else {
-      this._valueIndex = 0;
-    }
-    this._rowValues?.fill(undefined, this._valueIndex);
+    super._read(size);
   }
 
   /**
    * Manages stream chunks, chunked value merging across chunk boundaries,
    * row assembly, and resume token checkpoints.
    *
-   * Processing follows 5 distinct stages:
+   * Processing follows 4 distinct stages:
    * 1. Single-chunk fast path: If the entire stream response is in this first chunk,
    *    decode rows directly and bypass incremental chunk buffering.
    * 2. Pending value merge: If the previous chunk ended with an incomplete chunked
@@ -511,8 +499,6 @@ export class PartialResultStream extends Transform implements ResultEvents {
    *    value (chunkValues[numValues - 1]) in `this._pendingValue` for the next chunk.
    * 4. Complete value decoding: Iterate from `startIndex` to `endIndex`, decoding
    *    and adding values into row buffers via `_addValue`.
-   * 5. Checkpoint tracking: If this chunk contains a resume token, save the pending
-   *    chunked value and the current column write cursor (`_valueIndex`) for retries.
    *
    * @private
    * @param {google.spanner.v1.PartialResultSet} chunk The partial result set.
@@ -535,7 +521,7 @@ export class PartialResultStream extends Transform implements ResultEvents {
 
     // Stage 2: Merge pending chunked value from the previous chunk with the
     // incoming continuation value at chunkValues[0].
-    if (this._pendingValue && numValues > 0) {
+    if (this._pendingValue !== undefined && numValues > 0) {
       const currentField = this._valueIndex;
       const field = this._fields[currentField];
       const headValue = this._pendingValue;
@@ -560,9 +546,11 @@ export class PartialResultStream extends Transform implements ResultEvents {
       }
 
       for (let i = 0; i < mergedCount; i++) {
+        if (this.destroyed) {
+          return false;
+        }
         if (!this._addValue(merged[i]) && canAcceptMore) {
           canAcceptMore = false;
-          this.emit('paused');
         }
       }
     }
@@ -580,23 +568,13 @@ export class PartialResultStream extends Transform implements ResultEvents {
 
     // Stage 4: Decode in-place and push complete values into row buffers.
     for (let i = startIndex; i < endIndex; i++) {
+      if (this.destroyed) {
+        return false;
+      }
       const value = GrpcService.decodeValue_(chunkValues[i]);
       if (!this._addValue(value) && canAcceptMore) {
         canAcceptMore = false;
-        this.emit('paused');
       }
-    }
-
-    // Stage 5: If this chunk contains a resume token, record the checkpoint state.
-    // Both the pending chunked value and the row column index are preserved so that
-    // a retry can resume at the exact column position.
-    if (_hasResumeToken(chunk)) {
-      if (chunk.chunkedValue) {
-        this._pendingValueForResume = this._pendingValue;
-      } else {
-        this._pendingValueForResume = undefined;
-      }
-      this._valueIndexForResume = this._valueIndex;
     }
 
     return canAcceptMore;
@@ -611,6 +589,12 @@ export class PartialResultStream extends Transform implements ResultEvents {
    * @returns {boolean} Whether the stream can accept more data.
    */
   private _addSingleChunk(chunk: google.spanner.v1.PartialResultSet): boolean {
+    const chunkValues = chunk.values || [];
+    if (chunkValues.length % this._fields.length !== 0) {
+      throw new Error(
+        'Stream received chunk.last=true before row or chunked value was complete.',
+      );
+    }
     const rows = decodeRowsDirect(
       chunk,
       this._options,
@@ -619,10 +603,12 @@ export class PartialResultStream extends Transform implements ResultEvents {
     );
     let canAcceptMore = true;
     for (let i = 0; i < rows.length; i++) {
+      if (this.destroyed) {
+        return false;
+      }
       const accepted = this.push(rows[i]);
       if (!accepted && canAcceptMore) {
         canAcceptMore = false;
-        this.emit('paused');
       }
     }
     return canAcceptMore;
@@ -637,6 +623,10 @@ export class PartialResultStream extends Transform implements ResultEvents {
    * @param {*} value The complete value.
    */
   private _addValue(value: Value): boolean {
+    if (this.destroyed) {
+      return false;
+    }
+
     if (!this._rowValues) {
       this._rowValues = new Array(this._fields.length);
     }
@@ -654,34 +644,6 @@ export class PartialResultStream extends Transform implements ResultEvents {
     );
   }
 
-  /**
-   * Directly creates a plain JSON object from row cell values, bypassing
-   * Struct, Row, and WrappedNumber class wrappers when possible.
-   *
-   * @private
-   *
-   * @param {Value[]} values The raw cell values for the current row.
-   * @returns {Json} The plain JavaScript object representing the row.
-   */
-  private _createJsonRow(values: Value[]): Json {
-    return createJsonRow(
-      this._fields,
-      this._decoders,
-      values,
-      Boolean(this._options.jsonOptions?.includeNameless),
-    );
-  }
-  /**
-   * Converts an array of values into a row.
-   *
-   * @private
-   *
-   * @param {Array.<*>} values The row values.
-   * @returns {Row}
-   */
-  private _createRow(values: Value[]): Row {
-    return createRow(this._fields, this._decoders, values);
-  }
   /**
    * Attempts to merge chunked values together.
    *
@@ -733,6 +695,13 @@ export class PartialResultStream extends Transform implements ResultEvents {
     head: Value[],
     tail: Value[],
   ): Value[] {
+    if (head.length === 0) {
+      return tail;
+    }
+    if (tail.length === 0) {
+      return head;
+    }
+
     let listType: google.spanner.v1.Type;
 
     if (
@@ -752,100 +721,6 @@ export class PartialResultStream extends Transform implements ResultEvents {
     );
 
     return [...head, ...merged, ...tail];
-  }
-}
-
-/**
- * A custom Transform stream that buffers PartialResultSet chunks and flushes them
- * asynchronously to prevent blocking the event loop.
- *
- * It holds chunks in a queue until a "checkpoint" is reached (as determined by
- * `isCheckpointFn`) or until the queue exceeds `maxQueued` items.
- *
- * @private
- */
-class CheckpointStream extends Transform {
-  private queue: google.spanner.v1.PartialResultSet[] = [];
-  private maxQueued: number;
-  private isCheckpointFn: (
-    chunk: google.spanner.v1.PartialResultSet,
-  ) => boolean;
-
-  constructor(options: {
-    maxQueued?: number;
-    isCheckpointFn: (chunk: google.spanner.v1.PartialResultSet) => boolean;
-  }) {
-    super({objectMode: true});
-    this.maxQueued = options.maxQueued ?? 10;
-    this.isCheckpointFn = options.isCheckpointFn;
-  }
-
-  /**
-   * Buffers chunks and flushes queue synchronously on checkpoints or when max limit is reached.
-   *
-   * @param {google.spanner.v1.PartialResultSet} chunk The chunk to transform.
-   * @param {string} enc Encoding (unused).
-   * @param {Function} callback Callback to signal completion of transformation.
-   */
-  _transform(
-    chunk: google.spanner.v1.PartialResultSet,
-    enc: string,
-    callback: () => void,
-  ): void {
-    this.queue.push(chunk);
-    const isCheckpoint = this.isCheckpointFn(chunk);
-    let shouldFlush = false;
-    if (isCheckpoint) {
-      this.emit('checkpoint', chunk);
-      shouldFlush = true;
-    } else if (this.queue.length > this.maxQueued) {
-      shouldFlush = true;
-    }
-
-    if (!shouldFlush) {
-      return callback();
-    }
-
-    this._flushQueue();
-    callback();
-  }
-
-  /**
-   * Flushes queued chunks synchronously to prevent state races on retry/reset.
-   *
-   * @private
-   */
-  private _flushQueue(): void {
-    while (this.queue.length > 0 && !this.destroyed) {
-      this.push(this.queue.shift());
-    }
-  }
-
-  /**
-   * Flushes remaining queued chunks before destroying the stream with the provided error.
-   *
-   * @param {Error} err The error to destroy the stream with.
-   */
-  flushAndDestroy(err: Error): void {
-    this._flushQueue();
-    this.destroy(err);
-  }
-
-  /**
-   * Clears the queue without flushing, useful when retrying and discarding partial data.
-   */
-  reset(): void {
-    this.queue = [];
-  }
-
-  /**
-   * Flushes all remaining queued chunks when the stream ends.
-   *
-   * @param {Function} callback Callback to call when flushing is complete.
-   */
-  _flush(callback: () => void): void {
-    this._flushQueue();
-    callback();
   }
 }
 
@@ -871,77 +746,121 @@ export function partialResultStream(
 ): PartialResultStream {
   const retryableCodes = [grpc.status.UNAVAILABLE];
   const maxQueued = 10;
-  let lastResumeToken: ResumeToken;
+  let lastResumeToken: ResumeToken | undefined;
   let lastRequestStream: Readable | undefined;
-  let errorListener: (err: grpc.ServiceError) => void;
+  let dataListener:
+    ((chunk: google.spanner.v1.PartialResultSet) => void) | undefined;
+  let endListener: (() => void) | undefined;
+  let errorListener: ((err: grpc.ServiceError) => void) | undefined;
   const startTime = Date.now();
   const timeout = options?.gaxOptions?.timeout ?? Infinity;
 
-  // requestsStream allows multiple streams to be connected into one. This is good;
-  // if we need to retry a request and pipe more data to the user's stream.
-  // We also add an additional stream that can be used to flush any remaining
-  // items in the checkpoint stream that have been received, and that did not
-  // contain a resume token.
-  const requestsStream = new PassThrough({objectMode: true});
-  const flushStream = new PassThrough({objectMode: true});
-  flushStream.pipe(requestsStream);
-  const partialRSStream = new PartialResultStream(options);
-  const userStream = streamEvents(partialRSStream);
-  // We keep track of the number of PartialResultSets that did not include a
-  // resume token, as that is an indication whether it is safe to retry the
-  // stream halfway.
-  let withoutCheckpointCount = 0;
-  let receivedLast = false;
-  const batchAndSplitOnTokenStream = new CheckpointStream({
-    maxQueued,
-    isCheckpointFn: (chunk: google.spanner.v1.PartialResultSet): boolean => {
-      if (chunk.last) {
-        receivedLast = true;
-        destroyRequestStream();
-        requestsStream.end();
-      }
-      const withCheckpoint = _hasResumeToken(chunk) || Boolean(chunk.last);
-      if (withCheckpoint) {
-        withoutCheckpointCount = 0;
-      } else {
-        withoutCheckpointCount++;
-      }
-      return withCheckpoint;
-    },
-  });
+  const chunkQueue: google.spanner.v1.PartialResultSet[] = [];
+  const partialResultStreamInstance = new PartialResultStream(options);
+  const userStream = streamEvents(partialResultStreamInstance);
 
-  // This listener ensures that the last request that executed successfully
-  // after one or more retries will end the requestsStream.
-  const endListener = () => {
-    if (receivedLast) {
+  let withoutCheckpointCount = 0;
+  let safeToRetry = true;
+  let receivedLast = false;
+  let isDownstreamPaused = false;
+  let isStreamEnded = false;
+  let isDestroyed = false;
+
+  const drainQueue = (): void => {
+    if (isDestroyed || userStream.destroyed) {
       return;
     }
-    setImmediate(() => {
-      if (receivedLast) {
-        return;
+
+    let lastCheckpointIndex = -1;
+    for (let i = chunkQueue.length - 1; i >= 0; i--) {
+      if (_hasResumeToken(chunkQueue[i]) || chunkQueue[i].last) {
+        lastCheckpointIndex = i;
+        break;
       }
-      // Push a fake PartialResultSet without any values but with a resume token
-      // into the stream to ensure that the checkpoint stream is emptied, and
-      // then push `null` to end the stream.
-      flushStream.push({resumeToken: '_'});
-      flushStream.push(null);
-    });
+    }
+
+    let safeCount = 0;
+    if (
+      isStreamEnded ||
+      receivedLast ||
+      !safeToRetry ||
+      withoutCheckpointCount > maxQueued
+    ) {
+      safeCount = chunkQueue.length;
+    } else if (lastCheckpointIndex !== -1) {
+      safeCount = lastCheckpointIndex + 1;
+    }
+
+    while (safeCount > 0 && !isDownstreamPaused && !userStream.destroyed) {
+      const chunk = chunkQueue.shift()!;
+      safeCount--;
+      if (lastCheckpointIndex >= 0) {
+        lastCheckpointIndex--;
+      } else if (!isStreamEnded && !receivedLast) {
+        safeToRetry = false;
+      }
+
+      const canAcceptMore = userStream.write(chunk);
+      if (!canAcceptMore) {
+        isDownstreamPaused = true;
+        if (lastRequestStream && !lastRequestStream.isPaused()) {
+          lastRequestStream.pause();
+        }
+        break;
+      }
+    }
+
+    if (
+      (isStreamEnded || receivedLast) &&
+      chunkQueue.length === 0 &&
+      !userStream.destroyed &&
+      userStream.writable &&
+      !userStream.writableEnded
+    ) {
+      userStream.end();
+    }
   };
 
-  const destroyRequestStream = (): void => {
+  const handleResume = (): void => {
+    isDownstreamPaused = false;
+    drainQueue();
+    if (
+      lastRequestStream &&
+      lastRequestStream.isPaused() &&
+      !isDownstreamPaused
+    ) {
+      lastRequestStream.resume();
+    }
+  };
+
+  userStream.on('paused', () => {
+    isDownstreamPaused = true;
+    if (lastRequestStream && !lastRequestStream.isPaused()) {
+      lastRequestStream.pause();
+    }
+  });
+
+  userStream.on('resumed', handleResume);
+  userStream.on('drain', handleResume);
+
+  const destroyRequestStream = (allowDrain = false): void => {
     if (lastRequestStream) {
       const streamToClean = lastRequestStream;
       lastRequestStream = undefined;
-      streamToClean.removeListener('end', endListener);
+      if (dataListener) {
+        streamToClean.removeListener('data', dataListener);
+        dataListener = undefined;
+      }
+      if (endListener) {
+        streamToClean.removeListener('end', endListener);
+        endListener = undefined;
+      }
       if (errorListener) {
         streamToClean.removeListener('error', errorListener);
+        errorListener = undefined;
       }
       streamToClean.on('error', () => {});
-      streamToClean.unpipe(requestsStream);
-      if (receivedLast) {
-        // Query completed successfully. Do not cancel the gRPC call; allow it
-        // to drain remaining trailers/EOF in the background so it is not marked
-        // CANCELLED by Spanner or Cloud Monitoring.
+      if (allowDrain || receivedLast) {
         streamToClean.resume();
       } else {
         streamToClean.destroy();
@@ -949,84 +868,115 @@ export function partialResultStream(
     }
   };
 
+  const flushAndDestroy = (err: Error): void => {
+    isDestroyed = true;
+    destroyRequestStream(false);
+    if (!userStream.destroyed && userStream.writable) {
+      while (chunkQueue.length > 0) {
+        const chunk = chunkQueue.shift()!;
+        userStream.write(chunk);
+      }
+    }
+    setImmediate(() => userStream.destroy(err));
+  };
+
   const makeRequest = (): void => {
-    partialRSStream._resetPendingValues();
+    if (isDestroyed || userStream.destroyed) {
+      return;
+    }
+
     lastRequestStream = requestFn(lastResumeToken);
-    lastRequestStream.on('end', endListener);
+
+    if (isDownstreamPaused) {
+      lastRequestStream.pause();
+    }
+
+    dataListener = (chunk: google.spanner.v1.PartialResultSet) => {
+      if (receivedLast) {
+        return;
+      }
+
+      chunkQueue.push(chunk);
+
+      if (chunk.last) {
+        receivedLast = true;
+        destroyRequestStream(true);
+      }
+
+      if (_hasResumeToken(chunk)) {
+        lastResumeToken = chunk.resumeToken;
+        safeToRetry = true;
+        withoutCheckpointCount = 0;
+      } else if (!chunk.last) {
+        withoutCheckpointCount++;
+      }
+
+      drainQueue();
+    };
+
+    endListener = () => {
+      if (receivedLast) {
+        return;
+      }
+      destroyRequestStream(true);
+      isStreamEnded = true;
+      drainQueue();
+    };
+
     errorListener = (err: grpc.ServiceError) => {
       if (receivedLast) {
         return;
       }
-      destroyRequestStream();
+      destroyRequestStream(false);
       setImmediate(() => retry(err));
     };
+
+    lastRequestStream.on('data', dataListener);
+    lastRequestStream.on('end', endListener);
     lastRequestStream.on('error', errorListener);
-    lastRequestStream.pipe(requestsStream, {end: false});
   };
 
   const retry = (err: grpc.ServiceError): void => {
-    destroyRequestStream();
+    if (isDestroyed || userStream.destroyed) {
+      return;
+    }
+
     const elapsed = Date.now() - startTime;
     if (elapsed >= timeout) {
-      // The timeout has reached so this will flush any rows the
-      // checkpoint stream has queued. After that, we will destroy the
-      // user's stream with the Deadline exceeded error.
-      setImmediate(() =>
-        batchAndSplitOnTokenStream.flushAndDestroy(new DeadlineError(err)),
-      );
+      flushAndDestroy(new DeadlineError(err));
       return;
     }
 
     if (
       !(
         err.code &&
-        (retryableCodes!.includes(err.code) || isRetryableInternalError(err))
+        (retryableCodes.includes(err.code) || isRetryableInternalError(err))
       ) ||
-      // If we have received too many chunks without a resume token, it is not
-      // safe to retry.
-      withoutCheckpointCount > maxQueued
+      !safeToRetry
     ) {
-      // This is not a retryable error so this will flush any rows the
-      // checkpoint stream has queued. After that, we will destroy the
-      // user's stream with the same error.
-      setImmediate(() => batchAndSplitOnTokenStream.flushAndDestroy(err));
+      flushAndDestroy(err);
       return;
     }
 
-    // Delay the retry until all the values that are already in the stream
-    // pipeline have been handled. This ensures that the checkpoint stream is
-    // reset to the correct point. Calling .reset() directly here could cause
-    // any values that are currently in the pipeline and that have not been
-    // handled yet, to be pushed twice into the entire stream.
-    setImmediate(() => {
-      // Empty queued rows on the checkpoint stream (will not emit them to user).
-      batchAndSplitOnTokenStream.reset();
-      makeRequest();
-    });
+    while (
+      chunkQueue.length > 0 &&
+      !_hasResumeToken(chunkQueue[chunkQueue.length - 1])
+    ) {
+      chunkQueue.pop();
+    }
+    withoutCheckpointCount = 0;
+
+    makeRequest();
   };
 
   userStream.once('reading', makeRequest);
   userStream.once('close', () => {
-    destroyRequestStream();
-    requestsStream.destroy();
-    flushStream.destroy();
-    batchAndSplitOnTokenStream.destroy();
+    isDestroyed = true;
+    destroyRequestStream(false);
+    chunkQueue.length = 0;
   });
 
-  return (
-    requestsStream
-      .pipe(batchAndSplitOnTokenStream)
-      // If we get this error, the checkpoint stream has flushed any rows
-      // it had queued. We can now destroy the user's stream, as our retry
-      // attempts are over.
-      .on('error', (err: Error) => userStream.destroy(err))
-      .on('checkpoint', (row: google.spanner.v1.PartialResultSet) => {
-        lastResumeToken = row.resumeToken;
-      })
-      .pipe(userStream)
-      .on('paused', () => requestsStream.pause())
-      .on('resumed', () => requestsStream.resume())
-  );
+  return userStream;
 }
 
 function _hasResumeToken(chunk: google.spanner.v1.PartialResultSet): boolean {
