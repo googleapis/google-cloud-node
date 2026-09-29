@@ -14,12 +14,14 @@
  * limitations under the License.
  */
 
-import {ServiceError} from 'google-gax';
+import {CallOptions, ServiceError} from 'google-gax';
 import {EventEmitter} from 'events';
+import * as extend from 'extend';
 
 import {BatchPublishOptions, MessageBatch} from './message-batch';
 import {PublishError} from './publish-error';
 import {Publisher, PubsubMessage, PublishCallback} from './';
+import {CancellationSharer, resolveTotalTimeout} from './hedging';
 import {google} from '../../protos/protos';
 import * as tracing from '../telemetry-tracing';
 import {filterMessage} from './pubsub-message';
@@ -51,7 +53,7 @@ export abstract class MessageQueue extends EventEmitter {
   constructor(publisher: Publisher) {
     super();
     this.publisher = publisher;
-    this.batchOptions = publisher.settings.batching!;
+    this.batchOptions = publisher.settings.batching ?? {};
   }
 
   /**
@@ -64,7 +66,17 @@ export abstract class MessageQueue extends EventEmitter {
    * @private
    */
   updateOptions() {
-    this.batchOptions = this.publisher.settings.batching!;
+    this.batchOptions = this.publisher.settings.batching ?? {};
+  }
+
+  /**
+   * Indicates whether this queue implementation supports publish hedging.
+   * Ordered queues override this to return false.
+   *
+   * @protected
+   */
+  protected allowsHedging(): boolean {
+    return true;
   }
 
   /**
@@ -132,13 +144,18 @@ export abstract class MessageQueue extends EventEmitter {
     // Make sure we have a projectId filled in to update telemetry spans.
     // The overall spans may not have the correct projectId because it wasn't
     // known at the time publishMessage was called.
-    const spanMessages = messages.filter(m => !!m.parentSpan);
+    const spanMessages = messages.filter(m => Boolean(m.parentSpan));
     if (spanMessages.length) {
       if (!topic.pubsub.isIdResolved) {
         await topic.pubsub.getClientConfig();
       }
       spanMessages.forEach(m => {
-        tracing.PubsubSpans.updatePublisherTopicName(m.parentSpan!, topic.name);
+        if (m.parentSpan) {
+          tracing.PubsubSpans.updatePublisherTopicName(
+            m.parentSpan,
+            topic.name,
+          );
+        }
         tracing.PubsubEvents.publishStart(m);
       });
     }
@@ -155,16 +172,92 @@ export abstract class MessageQueue extends EventEmitter {
 
     const requestCallback = topic.request<google.pubsub.v1.IPublishResponse>;
     const request = promisify(requestCallback.bind(topic));
-    try {
-      const resp = await request({
-        client: 'PublisherClient',
-        method: 'publish',
-        reqOpts,
-        gaxOpts: settings.gaxOpts!,
-      });
 
-      if (resp) {
-        const messageIds = resp.messageIds || [];
+    const hedgingScheduler = this.allowsHedging()
+      ? this.publisher.hedgingScheduler
+      : undefined;
+
+    if (!hedgingScheduler || !this.publisher.hedgingOptions) {
+      try {
+        const resp = await request({
+          client: 'PublisherClient',
+          method: 'publish',
+          reqOpts,
+          gaxOpts: settings.gaxOpts,
+        });
+
+        if (resp) {
+          const messageIds = resp.messageIds || [];
+          callbacks.forEach((callback, i) => callback(null, messageIds[i]));
+        }
+      } catch (e) {
+        const err = e as ServiceError;
+        callbacks.forEach(callback => callback(err));
+
+        throw e;
+      } finally {
+        rpcSpan?.end();
+        messages.forEach(m => {
+          // We're finished with both the RPC and the whole publish operation,
+          // so close out all of the related spans.
+          tracing.PubsubEvents.publishEnd(m);
+          m.parentSpan?.end();
+        });
+      }
+      return;
+    }
+
+    const totalTimeout = resolveTotalTimeout(settings.gaxOpts);
+    const absoluteDeadline = hedgingScheduler.nowDuration().add(totalTimeout);
+    const coordinator = new CancellationSharer(absoluteDeadline, () => {
+      this.publisher.refillTokenBucket();
+    });
+
+    const originalAbortController = new AbortController();
+    const originalGaxOpts: CallOptions = extend(true, {}, settings.gaxOpts, {
+      signal: originalAbortController.signal,
+    });
+    const originalAttemptPromise = request({
+      client: 'PublisherClient',
+      method: 'publish',
+      reqOpts,
+      gaxOpts: originalGaxOpts,
+    });
+    coordinator.addAttempt(0, originalAbortController, originalAttemptPromise);
+
+    hedgingScheduler.scheduleFirstHedge(
+      coordinator,
+      (attemptNumber, attemptTimeout) => {
+        logs.publishHedged.debug('Publishing hedged attempt %i', attemptNumber);
+        spanMessages.forEach(m => {
+          tracing.PubsubEvents.publishStartHedged(m);
+        });
+        const hedgedAbortController = new AbortController();
+        const hedgedGaxOpts: CallOptions = extend(true, {}, settings.gaxOpts, {
+          timeout: attemptTimeout.milliseconds,
+          retry: null,
+          signal: hedgedAbortController.signal,
+        });
+        const hedgedAttemptPromise = request({
+          client: 'PublisherClient',
+          method: 'publish',
+          reqOpts,
+          gaxOpts: hedgedGaxOpts,
+        });
+        coordinator.addAttempt(
+          attemptNumber,
+          hedgedAbortController,
+          hedgedAttemptPromise,
+        );
+      },
+    );
+
+    let wasHedged = false;
+    try {
+      const result = await coordinator.promise;
+      wasHedged = result.wasHedged;
+      if (result.response) {
+        const messageIds = result.response.messageIds || [];
         callbacks.forEach((callback, i) => callback(null, messageIds[i]));
       }
     } catch (e) {
@@ -175,9 +268,11 @@ export abstract class MessageQueue extends EventEmitter {
     } finally {
       rpcSpan?.end();
       messages.forEach(m => {
-        // We're finished with both the RPC and the whole publish operation,
-        // so close out all of the related spans.
-        tracing.PubsubEvents.publishEnd(m);
+        if (wasHedged) {
+          tracing.PubsubEvents.publishEndHedged(m);
+        } else {
+          tracing.PubsubEvents.publishEnd(m);
+        }
         m.parentSpan?.end();
       });
     }
@@ -312,6 +407,10 @@ export class OrderedQueue extends MessageQueue {
     this.batches = [];
     this.inFlight = false;
     this.key = key;
+  }
+
+  protected allowsHedging(): boolean {
+    return false;
   }
 
   // This needs to update our existing message batches.
