@@ -31,6 +31,7 @@ export interface Options {
   restNumericEnums?: boolean;
   mixinsOverridden?: boolean;
   enableTelemetryTracing?: boolean;
+  resumableUploadMethods?: string[];
 }
 
 export class Naming {

@@ -35,6 +35,10 @@ describe('metadataResolver', () => {
     delete process.env.GOOGLE_SDK_NODE_CLIENT_VERSION;
     delete process.env.GOOGLE_SDK_NODE_ARTIFACT;
     delete process.env.GOOGLE_SDK_NODE_ENABLE_TRACING;
+    delete process.env.GOOGLE_SDK_NODE_SERVER_ADDRESS;
+    delete process.env.GOOGLE_SDK_NODE_SERVER_PORT;
+    delete process.env.SERVER_ADDRESS;
+    delete process.env.SERVER_PORT;
     delete process.env.GCP_CLIENT_SERVICE;
     delete process.env.GCP_CLIENT_VERSION;
     delete process.env.GCP_ARTIFACT;
@@ -46,6 +50,10 @@ describe('metadataResolver', () => {
     delete process.env.GOOGLE_SDK_NODE_CLIENT_VERSION;
     delete process.env.GOOGLE_SDK_NODE_ARTIFACT;
     delete process.env.GOOGLE_SDK_NODE_ENABLE_TRACING;
+    delete process.env.GOOGLE_SDK_NODE_SERVER_ADDRESS;
+    delete process.env.GOOGLE_SDK_NODE_SERVER_PORT;
+    delete process.env.SERVER_ADDRESS;
+    delete process.env.SERVER_PORT;
     delete process.env.GCP_CLIENT_SERVICE;
     delete process.env.GCP_CLIENT_VERSION;
     delete process.env.GCP_ARTIFACT;
@@ -351,6 +359,26 @@ describe('metadataResolver', () => {
         resolvedSecond.gcpClientService,
       );
       assert.strictEqual(resolvedFirst.gcpVersion, resolvedSecond.gcpVersion);
+    });
+
+    it('extracts serverAddress and serverPort from settings', () => {
+      const settingsWithEndpoint = new CallSettings({
+        apiName: 'google.cloud.redis.v1.CloudRedis',
+        otherArgs: {
+          servicePath: 'redis.googleapis.com:443',
+        },
+      });
+      const metadata = resolveStaticTraceContext(settingsWithEndpoint);
+      assert.strictEqual(metadata.serverAddress, 'redis.googleapis.com');
+      assert.strictEqual(metadata.serverPort, 443);
+    });
+
+    it('extracts serverAddress and serverPort from environment variables', () => {
+      process.env.GOOGLE_SDK_NODE_SERVER_ADDRESS = 'custom.endpoint.com';
+      process.env.GOOGLE_SDK_NODE_SERVER_PORT = '8443';
+      const metadata = resolveStaticTraceContext();
+      assert.strictEqual(metadata.serverAddress, 'custom.endpoint.com');
+      assert.strictEqual(metadata.serverPort, 8443);
     });
   });
 });

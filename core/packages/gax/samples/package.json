@@ -14,7 +14,13 @@
     "*.js"
   ],
   "dependencies": {
-    "google-gax": "^6.7.0"
+    "@google-cloud/opentelemetry-cloud-trace-exporter": "^3.0.0",
+    "@opentelemetry/instrumentation": "^0.222.0",
+    "@opentelemetry/instrumentation-grpc": "^0.222.0",
+    "@opentelemetry/instrumentation-http": "^0.222.0",
+    "@opentelemetry/sdk-trace-base": "^2.11.0",
+    "@opentelemetry/sdk-trace-node": "^2.11.0",
+    "google-gax": "^6.9.0"
   },
   "devDependencies": {
     "c8": "^9.0.0",
