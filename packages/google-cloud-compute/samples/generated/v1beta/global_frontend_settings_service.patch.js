@@ -33,13 +33,15 @@ function main(globalFrontendSettingsResource, project) {
    */
   // const globalFrontendSettingsResource = {}
   /**
+   *  Required. Project ID for this request.
    */
   // const project = 'my-project'
   /**
+   *  An optional request ID to identify requests.
    */
   // const requestId = 'abc123'
   /**
-   *  e.g., "type"
+   *  Field mask to support patch. E.g., "type".
    */
   // const updateMask = 'abc123'
 
