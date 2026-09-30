@@ -71873,10 +71873,17 @@
                         }
                       }
                     },
+                    "MemoryType": {
+                      "values": {
+                        "MEMORY_TYPE_UNSPECIFIED": 0,
+                        "NATURAL_LANGUAGE_COLLECTION": 1,
+                        "STRUCTURED_PROFILE": 3
+                      }
+                    },
                     "Memory": {
                       "options": {
                         "(google.api.resource).type": "aiplatform.googleapis.com/Memory",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/reasoningEngines/{reasoning_engine}/memories/{memory}",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/memoryBanks/{memory_bank}/memories/{memory}",
                         "(google.api.resource).plural": "memories",
                         "(google.api.resource).singular": "memory"
                       },
@@ -71885,6 +71892,13 @@
                           "oneof": [
                             "expireTime",
                             "ttl"
+                          ]
+                        },
+                        "revisionExpiration": {
+                          "oneof": [
+                            "revisionExpireTime",
+                            "revisionTtl",
+                            "disableMemoryRevisions"
                           ]
                         }
                       },
@@ -71901,6 +71915,27 @@
                           "id": 14,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "revisionExpireTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 16,
+                          "options": {
+                            "(google.api.field_behavior)": "INPUT_ONLY"
+                          }
+                        },
+                        "revisionTtl": {
+                          "type": "google.protobuf.Duration",
+                          "id": 17,
+                          "options": {
+                            "(google.api.field_behavior)": "INPUT_ONLY"
+                          }
+                        },
+                        "disableMemoryRevisions": {
+                          "type": "bool",
+                          "id": 18,
+                          "options": {
+                            "(google.api.field_behavior)": "INPUT_ONLY"
                           }
                         },
                         "name": {
@@ -71942,7 +71977,7 @@
                           "type": "string",
                           "id": 10,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
                         "scope": {
@@ -71952,6 +71987,576 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
+                        },
+                        "topics": {
+                          "rule": "repeated",
+                          "type": "MemoryTopicId",
+                          "id": 15,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "revisionLabels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 19,
+                          "options": {
+                            "(google.api.field_behavior)": "INPUT_ONLY"
+                          }
+                        },
+                        "metadata": {
+                          "keyType": "string",
+                          "type": "MemoryMetadataValue",
+                          "id": 21,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "memoryType": {
+                          "type": "MemoryType",
+                          "id": 22,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "structuredContent": {
+                          "type": "StructuredContent",
+                          "id": 24,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "context": {
+                          "type": "string",
+                          "id": 25,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "StructuredContent": {
+                          "fields": {
+                            "data": {
+                              "type": "google.protobuf.Struct",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "schemaId": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "MemoryTopicId": {
+                      "oneofs": {
+                        "topicId": {
+                          "oneof": [
+                            "customMemoryTopicLabel",
+                            "managedMemoryTopic"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "customMemoryTopicLabel": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "managedMemoryTopic": {
+                          "type": "MemoryBankCustomizationConfig.MemoryTopic.ManagedMemoryTopic.ManagedTopicEnum",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "MemoryBankCustomizationConfig": {
+                      "fields": {
+                        "scopeKeys": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "memoryTopics": {
+                          "rule": "repeated",
+                          "type": "MemoryTopic",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "generateMemoriesExamples": {
+                          "rule": "repeated",
+                          "type": "GenerateMemoriesExample",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "enableThirdPersonMemories": {
+                          "type": "bool",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "consolidationConfig": {
+                          "type": "ConsolidationConfig",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "disableNaturalLanguageMemories": {
+                          "type": "bool",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "MemoryTopic": {
+                          "oneofs": {
+                            "topicType": {
+                              "oneof": [
+                                "customMemoryTopic",
+                                "managedMemoryTopic"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "customMemoryTopic": {
+                              "type": "CustomMemoryTopic",
+                              "id": 3
+                            },
+                            "managedMemoryTopic": {
+                              "type": "ManagedMemoryTopic",
+                              "id": 4
+                            }
+                          },
+                          "nested": {
+                            "CustomMemoryTopic": {
+                              "fields": {
+                                "label": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "description": {
+                                  "type": "string",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                }
+                              }
+                            },
+                            "ManagedMemoryTopic": {
+                              "fields": {
+                                "managedTopicEnum": {
+                                  "type": "ManagedTopicEnum",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                }
+                              },
+                              "nested": {
+                                "ManagedTopicEnum": {
+                                  "values": {
+                                    "MANAGED_TOPIC_ENUM_UNSPECIFIED": 0,
+                                    "USER_PERSONAL_INFO": 1,
+                                    "USER_PREFERENCES": 2,
+                                    "KEY_CONVERSATION_DETAILS": 3,
+                                    "EXPLICIT_INSTRUCTIONS": 4
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "GenerateMemoriesExample": {
+                          "oneofs": {
+                            "source": {
+                              "oneof": [
+                                "conversationSource"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "conversationSource": {
+                              "type": "ConversationSource",
+                              "id": 3
+                            },
+                            "generatedMemories": {
+                              "rule": "repeated",
+                              "type": "GeneratedMemory",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "ConversationSource": {
+                              "fields": {
+                                "events": {
+                                  "rule": "repeated",
+                                  "type": "Event",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              },
+                              "nested": {
+                                "Event": {
+                                  "fields": {
+                                    "content": {
+                                      "type": "Content",
+                                      "id": 1,
+                                      "options": {
+                                        "(google.api.field_behavior)": "REQUIRED"
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "GeneratedMemory": {
+                              "fields": {
+                                "fact": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "topics": {
+                                  "rule": "repeated",
+                                  "type": "MemoryTopicId",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "ConsolidationConfig": {
+                          "fields": {
+                            "revisionsPerCandidateCount": {
+                              "type": "int32",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "StructuredMemoryConfig": {
+                      "fields": {
+                        "scopeKeys": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "schemaConfigs": {
+                          "rule": "repeated",
+                          "type": "SchemaConfig",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "SchemaConfig": {
+                          "fields": {
+                            "id": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "schema": {
+                              "type": "Schema",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "memoryType": {
+                              "type": "MemoryType",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "jsonSchema": {
+                              "type": "google.protobuf.Value",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "MemoryRevision": {
+                      "options": {
+                        "(google.api.resource).type": "aiplatform.googleapis.com/MemoryRevision",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/memoryBanks/{memory_bank}/memories/{memory}/revisions/{memory_revision}",
+                        "(google.api.resource).plural": "memoryRevisions",
+                        "(google.api.resource).singular": "memoryRevision"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "expireTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "fact": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "extractedMemories": {
+                          "rule": "repeated",
+                          "type": "IntermediateExtractedMemory",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "structuredData": {
+                          "type": "google.protobuf.Struct",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "context": {
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "IntermediateExtractedMemory": {
+                      "fields": {
+                        "fact": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "structuredData": {
+                          "type": "google.protobuf.Struct",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "context": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "MemoryMetadataValue": {
+                      "oneofs": {
+                        "value": {
+                          "oneof": [
+                            "stringValue",
+                            "doubleValue",
+                            "boolValue",
+                            "timestampValue"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "stringValue": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "doubleValue": {
+                          "type": "double",
+                          "id": 2
+                        },
+                        "boolValue": {
+                          "type": "bool",
+                          "id": 3
+                        },
+                        "timestampValue": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "MemoryConjunctionFilter": {
+                      "fields": {
+                        "filters": {
+                          "rule": "repeated",
+                          "type": "MemoryFilter",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "MemoryFilter": {
+                      "fields": {
+                        "key": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "op": {
+                          "type": "Operator",
+                          "id": 2
+                        },
+                        "value": {
+                          "type": "MemoryMetadataValue",
+                          "id": 3
+                        },
+                        "negate": {
+                          "type": "bool",
+                          "id": 4
+                        }
+                      },
+                      "nested": {
+                        "Operator": {
+                          "values": {
+                            "OPERATOR_UNSPECIFIED": 0,
+                            "EQUAL": 1,
+                            "GREATER_THAN": 2,
+                            "LESS_THAN": 3
+                          }
+                        }
+                      }
+                    },
+                    "MemoryGenerationTriggerConfig": {
+                      "fields": {
+                        "generationRule": {
+                          "type": "GenerationTriggerRule",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "GenerationTriggerRule": {
+                          "oneofs": {
+                            "timeBasedCondition": {
+                              "oneof": [
+                                "idleDuration",
+                                "fixedInterval"
+                              ]
+                            },
+                            "overlapWindow": {
+                              "oneof": [
+                                "overlapEventCount"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "idleDuration": {
+                              "type": "google.protobuf.Duration",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "fixedInterval": {
+                              "type": "google.protobuf.Duration",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "overlapEventCount": {
+                              "type": "int32",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "eventCount": {
+                              "type": "int32",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "MemoryProfile": {
+                      "fields": {
+                        "schemaId": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "profile": {
+                          "type": "google.protobuf.Struct",
+                          "id": 2
                         }
                       }
                     },
