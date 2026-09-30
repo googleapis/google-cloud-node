@@ -19,7 +19,7 @@
 import {util} from '@google-cloud/common';
 import * as pfy from '@google-cloud/promisify';
 import * as assert from 'assert';
-import {before, beforeEach, afterEach, describe, it} from 'mocha';
+import {before, after, beforeEach, afterEach, describe, it} from 'mocha';
 import * as extend from 'extend';
 import * as proxyquire from 'proxyquire';
 import * as sinon from 'sinon';
@@ -36,7 +36,6 @@ const {
   AsyncLocalStorageContextManager,
   AsyncHooksContextManager,
 } = require('@opentelemetry/context-async-hooks');
-import {ContextManager} from '@opentelemetry/api';
 const {setGlobalContextManager, disableContextAndManager} = require('./helper');
 
 const fakePfy = extend({}, pfy, {
@@ -126,18 +125,19 @@ describe('BatchTransaction', () => {
   });
   provider.register();
 
-  let contextManager: ContextManager;
+  const contextManager = new (
+    AsyncLocalStorageContextManager || AsyncHooksContextManager
+  )();
+  setGlobalContextManager(contextManager);
 
   after(async () => {
     await provider.shutdown();
+    disableContextAndManager(contextManager);
   });
 
   afterEach(() => {
     traceExporter.reset();
     sandbox.restore();
-    if (contextManager) {
-      disableContextAndManager(contextManager);
-    }
   });
 
   const REQUEST = sandbox.stub();
@@ -152,10 +152,6 @@ describe('BatchTransaction', () => {
   const RESPONSE = {partitions: PARTITIONS};
 
   beforeEach(() => {
-    contextManager = new (
-      AsyncLocalStorageContextManager || AsyncHooksContextManager
-    )();
-    setGlobalContextManager(contextManager);
     batchTransaction = new BatchTransaction(SESSION as {} as Session);
     batchTransaction.session = SESSION as {} as Session;
     batchTransaction.id = ID;
