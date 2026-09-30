@@ -147,8 +147,9 @@ async function setup(
 
 describe('EndToEnd', async () => {
   const sandbox = sinon.createSandbox();
-  const contextManager = new (AsyncLocalStorageContextManager ||
-    AsyncHooksContextManager)();
+  const contextManager = new (
+    AsyncLocalStorageContextManager || AsyncHooksContextManager
+  )();
   setGlobalContextManager(contextManager);
   const traceExporter = new InMemorySpanExporter();
   const sampler = new AlwaysOnSampler();

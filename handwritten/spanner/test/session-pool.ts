@@ -619,7 +619,7 @@ describe('SessionPool', () => {
       sessionPool.options.acquireTimeout = 1;
 
       sessionPool._acquires.add = fn => {
-        return new Promise(r => setTimeout(r, 3)).then(fn);
+        return new Promise(resolve => setTimeout(resolve, 3)).then(fn);
       };
 
       try {
