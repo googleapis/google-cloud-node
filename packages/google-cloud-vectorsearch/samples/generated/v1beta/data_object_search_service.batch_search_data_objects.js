@@ -41,6 +41,11 @@ function main(parent, searches) {
    *  Optional. Options for combining the results of the batch search operations.
    */
   // const combine = {}
+  /**
+   *  Optional. Options controlling which metadata is included in the search
+   *  results.
+   */
+  // const metadataOptions = {}
 
   // Imports the Vectorsearch library
   const {DataObjectSearchServiceClient} = require('@google-cloud/vectorsearch').v1beta;

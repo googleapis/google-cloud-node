@@ -1782,6 +1782,9 @@ export namespace google {
 
                     /** DeviceSession androidDevice */
                     androidDevice?: (google.cloud.devicestreaming.v1.IAndroidDevice|null);
+
+                    /** DeviceSession clientInfo */
+                    clientInfo?: (google.cloud.devicestreaming.v1.IClientInfo|null);
                 }
 
                 /** Represents a DeviceSession. */
@@ -1822,6 +1825,9 @@ export namespace google {
 
                     /** DeviceSession androidDevice. */
                     public androidDevice?: (google.cloud.devicestreaming.v1.IAndroidDevice|null);
+
+                    /** DeviceSession clientInfo. */
+                    public clientInfo?: (google.cloud.devicestreaming.v1.IClientInfo|null);
 
                     /** DeviceSession expiration. */
                     public expiration?: ("ttl"|"expireTime");
@@ -2026,6 +2032,109 @@ export namespace google {
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
+                }
+
+                /** Properties of a ClientInfo. */
+                interface IClientInfo {
+
+                    /** ClientInfo client */
+                    client?: (string|null);
+
+                    /** ClientInfo version */
+                    version?: (string|null);
+                }
+
+                /** Represents a ClientInfo. */
+                class ClientInfo implements IClientInfo {
+
+                    /**
+                     * Constructs a new ClientInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.devicestreaming.v1.IClientInfo);
+
+                    /** ClientInfo client. */
+                    public client: string;
+
+                    /** ClientInfo version. */
+                    public version: string;
+
+                    /**
+                     * Creates a new ClientInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ClientInfo instance
+                     */
+                    public static create(properties?: google.cloud.devicestreaming.v1.IClientInfo): google.cloud.devicestreaming.v1.ClientInfo;
+
+                    /**
+                     * Encodes the specified ClientInfo message. Does not implicitly {@link google.cloud.devicestreaming.v1.ClientInfo.verify|verify} messages.
+                     * @param message ClientInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.devicestreaming.v1.IClientInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ClientInfo message, length delimited. Does not implicitly {@link google.cloud.devicestreaming.v1.ClientInfo.verify|verify} messages.
+                     * @param message ClientInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.devicestreaming.v1.IClientInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ClientInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ClientInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.devicestreaming.v1.ClientInfo;
+
+                    /**
+                     * Decodes a ClientInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ClientInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.devicestreaming.v1.ClientInfo;
+
+                    /**
+                     * Verifies a ClientInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ClientInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ClientInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.devicestreaming.v1.ClientInfo;
+
+                    /**
+                     * Creates a plain object from a ClientInfo message. Also converts values to other types if specified.
+                     * @param message ClientInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.devicestreaming.v1.ClientInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ClientInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ClientInfo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of an AndroidDevice. */

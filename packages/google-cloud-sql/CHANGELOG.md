@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.29.1](https://github.com/googleapis/google-cloud-node/compare/sql-v0.29.0...sql-v0.29.1) (2026-09-28)
+
+
+### Bug Fixes
+
+* Update package.json and .gitignore across packages ([#9378](https://github.com/googleapis/google-cloud-node/issues/9378)) ([9c54cec](https://github.com/googleapis/google-cloud-node/commit/9c54cece565b5cbcae63a9856c1ef3448307d46e))
+
+## [0.29.0](https://github.com/googleapis/google-cloud-node/compare/sql-v0.28.0...sql-v0.29.0) (2026-09-23)
+
+
+### Features
+
+* Update API sources and regenerate ([#9427](https://github.com/googleapis/google-cloud-node/issues/9427)) ([5cd945d](https://github.com/googleapis/google-cloud-node/commit/5cd945de7f4fd96878c1956d68bcf505e48686ce))
+
 ## [0.28.0](https://github.com/googleapis/google-cloud-node/compare/sql-v0.27.0...sql-v0.28.0) (2026-09-08)
 
 

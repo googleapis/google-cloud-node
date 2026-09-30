@@ -1,7 +1,7 @@
 {
   "name": "@google-cloud/tasks",
   "description": "Cloud Tasks API client for Node.js",
-  "version": "7.1.0",
+  "version": "7.2.1",
   "license": "Apache-2.0",
   "author": "Google LLC",
   "repository": {
@@ -62,11 +62,11 @@
     "fix": "gts fix",
     "lint": "gts check",
     "prepare": "npm run compile-protos && npm run compile",
-    "system-test:cjs": "c8 mocha --config ../../.mocharc.cjs --no-parallel build/cjs/system-test",
-    "system-test:esm": "c8 mocha --config ../../.mocharc.cjs --no-parallel build/esm/system-test",
+    "system-test:cjs": "node ../../bin/run-test.cjs --config ../../.mocharc.cjs --no-parallel build/cjs/system-test",
+    "system-test:esm": "node ../../bin/run-test.cjs --config ../../.mocharc.cjs --no-parallel build/esm/system-test",
     "system-test": "npm run system-test:esm && npm run system-test:cjs",
-    "test:cjs": "c8 mocha --config ../../.mocharc.cjs build/cjs/test",
-    "test:esm": "c8 mocha --config ../../.mocharc.cjs build/esm/test",
+    "test:cjs": "node ../../bin/run-test.cjs --config ../../.mocharc.cjs build/cjs/test",
+    "test:esm": "node ../../bin/run-test.cjs --config ../../.mocharc.cjs build/esm/test",
     "prelint": "cd samples; npm link ../; npm i",
     "samples-test": "cd samples/ && npm link ../ && npm i && npm test",
     "test": "npm run test:esm && npm run test:cjs",
@@ -108,10 +108,5 @@
   "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-tasks",
   "overrides": {
     "@sinonjs/fake-timers": "15.2.1"
-  },
-  "pnpm": {
-    "overrides": {
-      "@sinonjs/fake-timers": "15.2.1"
-    }
   }
 }

@@ -45,6 +45,7 @@ import {
   CustomTargetingValueServiceClient,
   DaiAuthenticationKeyServiceClient,
   DaiEncodingProfileServiceClient,
+  DaiSessionServiceClient,
   DeviceCapabilityServiceClient,
   DeviceCategoryServiceClient,
   DeviceManufacturerServiceClient,
@@ -197,6 +198,9 @@ function doStuffWithDaiAuthenticationKeyServiceClient(
 function doStuffWithDaiEncodingProfileServiceClient(
   client: DaiEncodingProfileServiceClient,
 ) {
+  client.close();
+}
+function doStuffWithDaiSessionServiceClient(client: DaiSessionServiceClient) {
   client.close();
 }
 function doStuffWithDeviceCapabilityServiceClient(
@@ -434,6 +438,9 @@ function main() {
   // check that the client instance can be created
   const daiEncodingProfileServiceClient = new DaiEncodingProfileServiceClient();
   doStuffWithDaiEncodingProfileServiceClient(daiEncodingProfileServiceClient);
+  // check that the client instance can be created
+  const daiSessionServiceClient = new DaiSessionServiceClient();
+  doStuffWithDaiSessionServiceClient(daiSessionServiceClient);
   // check that the client instance can be created
   const deviceCapabilityServiceClient = new DeviceCapabilityServiceClient();
   doStuffWithDeviceCapabilityServiceClient(deviceCapabilityServiceClient);

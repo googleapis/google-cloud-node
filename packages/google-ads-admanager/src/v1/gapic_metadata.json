@@ -2133,6 +2133,30 @@
         }
       }
     },
+    "DaiSessionService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "DaiSessionServiceClient",
+          "rpcs": {
+            "GetDaiSession": {
+              "methods": [
+                "getDaiSession"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "DaiSessionServiceClient",
+          "rpcs": {
+            "GetDaiSession": {
+              "methods": [
+                "getDaiSession"
+              ]
+            }
+          }
+        }
+      }
+    },
     "DeviceCapabilityService": {
       "clients": {
         "grpc": {

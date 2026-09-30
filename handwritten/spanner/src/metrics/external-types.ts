@@ -35,3 +35,16 @@ export enum ValueType {
   DOUBLE = 'DOUBLE',
   DISTRIBUTION = 'DISTRIBUTION',
 }
+
+/**
+ * A Google Cloud Monitoring monitored resource.
+ *
+ * Previously imported from `@google-cloud/opentelemetry-resource-util`, which is
+ * deprecated and scheduled for archival. The interface is a plain data shape, so
+ * it is declared locally instead.
+ * See https://cloud.google.com/monitoring/api/ref_v3/rest/v3/MonitoredResource
+ */
+export interface MonitoredResource {
+  type: string;
+  labels: {[key: string]: string};
+}

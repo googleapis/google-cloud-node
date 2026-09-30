@@ -416,4 +416,305 @@ describe('v1.AdviceClient', () => {
       await assert.rejects(client.calendarMode(request), expectedError);
     });
   });
+
+  describe('capacity', () => {
+    it('invokes capacity without error', async () => {
+      const client = new adviceModule.v1.AdviceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.CapacityAdviceRpcRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.CapacityAdviceRpcRequest',
+        ['project'],
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.CapacityAdviceRpcRequest',
+        ['region'],
+      );
+      request.region = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.CapacityAdviceResponse(),
+      );
+      client.innerApiCalls.capacity = stubSimpleCall(expectedResponse);
+      const [response] = await client.capacity(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.capacity as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.capacity as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes capacity without error using callback', async () => {
+      const client = new adviceModule.v1.AdviceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.CapacityAdviceRpcRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.CapacityAdviceRpcRequest',
+        ['project'],
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.CapacityAdviceRpcRequest',
+        ['region'],
+      );
+      request.region = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.CapacityAdviceResponse(),
+      );
+      client.innerApiCalls.capacity =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.capacity(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.compute.v1.ICapacityAdviceResponse | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.capacity as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.capacity as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes capacity with error', async () => {
+      const client = new adviceModule.v1.AdviceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.CapacityAdviceRpcRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.CapacityAdviceRpcRequest',
+        ['project'],
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.CapacityAdviceRpcRequest',
+        ['region'],
+      );
+      request.region = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.capacity = stubSimpleCall(undefined, expectedError);
+      await assert.rejects(client.capacity(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.capacity as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.capacity as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes capacity with closed client', async () => {
+      const client = new adviceModule.v1.AdviceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.CapacityAdviceRpcRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.CapacityAdviceRpcRequest',
+        ['project'],
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.CapacityAdviceRpcRequest',
+        ['region'],
+      );
+      request.region = defaultValue2;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(client.capacity(request), expectedError);
+    });
+  });
+
+  describe('capacityHistory', () => {
+    it('invokes capacityHistory without error', async () => {
+      const client = new adviceModule.v1.AdviceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.CapacityHistoryAdviceRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.CapacityHistoryAdviceRequest',
+        ['project'],
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.CapacityHistoryAdviceRequest',
+        ['region'],
+      );
+      request.region = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.CapacityHistoryResponse(),
+      );
+      client.innerApiCalls.capacityHistory = stubSimpleCall(expectedResponse);
+      const [response] = await client.capacityHistory(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.capacityHistory as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.capacityHistory as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes capacityHistory without error using callback', async () => {
+      const client = new adviceModule.v1.AdviceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.CapacityHistoryAdviceRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.CapacityHistoryAdviceRequest',
+        ['project'],
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.CapacityHistoryAdviceRequest',
+        ['region'],
+      );
+      request.region = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.CapacityHistoryResponse(),
+      );
+      client.innerApiCalls.capacityHistory =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.capacityHistory(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.compute.v1.ICapacityHistoryResponse | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.capacityHistory as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.capacityHistory as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes capacityHistory with error', async () => {
+      const client = new adviceModule.v1.AdviceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.CapacityHistoryAdviceRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.CapacityHistoryAdviceRequest',
+        ['project'],
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.CapacityHistoryAdviceRequest',
+        ['region'],
+      );
+      request.region = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.capacityHistory = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.capacityHistory(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.capacityHistory as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.capacityHistory as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes capacityHistory with closed client', async () => {
+      const client = new adviceModule.v1.AdviceClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.CapacityHistoryAdviceRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.CapacityHistoryAdviceRequest',
+        ['project'],
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.CapacityHistoryAdviceRequest',
+        ['region'],
+      );
+      request.region = defaultValue2;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(client.capacityHistory(request), expectedError);
+    });
+  });
 });

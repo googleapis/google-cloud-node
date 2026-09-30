@@ -72,6 +72,7 @@ export {OrganizationSecurityPoliciesClient} from './organization_security_polici
 export {PacketMirroringsClient} from './packet_mirrorings_client';
 export {PreviewFeaturesClient} from './preview_features_client';
 export {ProjectsClient} from './projects_client';
+export {ProjectViewsClient} from './project_views_client';
 export {PublicAdvertisedPrefixesClient} from './public_advertised_prefixes_client';
 export {PublicDelegatedPrefixesClient} from './public_delegated_prefixes_client';
 export {RegionAutoscalersClient} from './region_autoscalers_client';

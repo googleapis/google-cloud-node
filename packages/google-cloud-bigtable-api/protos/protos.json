@@ -4228,6 +4228,13 @@
                           "type": "AutomatedBackupPolicy",
                           "id": 13
                         },
+                        "effectiveAutomatedBackupPolicy": {
+                          "type": "AutomatedBackupPolicy",
+                          "id": 19,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
                         "tieredStorageConfig": {
                           "type": "TieredStorageConfig",
                           "id": 14
@@ -4306,6 +4313,20 @@
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL",
                                 "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                              }
+                            },
+                            "keepHotDuration": {
+                              "type": "google.protobuf.Duration",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "disabled": {
+                              "type": "bool",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
                               }
                             }
                           }
@@ -8347,7 +8368,8 @@
                     "payload": {
                       "oneof": [
                         "readRow",
-                        "mutateRow"
+                        "mutateRow",
+                        "checkAndMutateRow"
                       ]
                     }
                   },
@@ -8359,6 +8381,10 @@
                     "mutateRow": {
                       "type": "SessionMutateRowRequest",
                       "id": 2
+                    },
+                    "checkAndMutateRow": {
+                      "type": "SessionCheckAndMutateRowRequest",
+                      "id": 4
                     }
                   }
                 },
@@ -8370,7 +8396,8 @@
                     "payload": {
                       "oneof": [
                         "readRow",
-                        "mutateRow"
+                        "mutateRow",
+                        "checkAndMutateRow"
                       ]
                     }
                   },
@@ -8382,6 +8409,10 @@
                     "mutateRow": {
                       "type": "SessionMutateRowResponse",
                       "id": 2
+                    },
+                    "checkAndMutateRow": {
+                      "type": "SessionCheckAndMutateRowResponse",
+                      "id": 4
                     }
                   }
                 },
@@ -8393,7 +8424,8 @@
                     "payload": {
                       "oneof": [
                         "readRow",
-                        "mutateRow"
+                        "mutateRow",
+                        "checkAndMutateRow"
                       ]
                     }
                   },
@@ -8405,6 +8437,10 @@
                     "mutateRow": {
                       "type": "SessionMutateRowRequest",
                       "id": 2
+                    },
+                    "checkAndMutateRow": {
+                      "type": "SessionCheckAndMutateRowRequest",
+                      "id": 4
                     }
                   }
                 },
@@ -8416,7 +8452,8 @@
                     "payload": {
                       "oneof": [
                         "readRow",
-                        "mutateRow"
+                        "mutateRow",
+                        "checkAndMutateRow"
                       ]
                     }
                   },
@@ -8428,6 +8465,10 @@
                     "mutateRow": {
                       "type": "SessionMutateRowResponse",
                       "id": 2
+                    },
+                    "checkAndMutateRow": {
+                      "type": "SessionCheckAndMutateRowResponse",
+                      "id": 4
                     }
                   }
                 },
@@ -8506,6 +8547,36 @@
                 },
                 "SessionMutateRowResponse": {
                   "fields": {}
+                },
+                "SessionCheckAndMutateRowRequest": {
+                  "fields": {
+                    "key": {
+                      "type": "bytes",
+                      "id": 1
+                    },
+                    "predicateFilter": {
+                      "type": "RowFilter",
+                      "id": 2
+                    },
+                    "trueMutations": {
+                      "rule": "repeated",
+                      "type": "Mutation",
+                      "id": 3
+                    },
+                    "falseMutations": {
+                      "rule": "repeated",
+                      "type": "Mutation",
+                      "id": 4
+                    }
+                  }
+                },
+                "SessionCheckAndMutateRowResponse": {
+                  "fields": {
+                    "predicateMatched": {
+                      "type": "bool",
+                      "id": 1
+                    }
+                  }
                 },
                 "SessionParametersResponse": {
                   "fields": {

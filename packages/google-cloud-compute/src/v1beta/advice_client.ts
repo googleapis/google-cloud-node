@@ -244,7 +244,12 @@ export class AdviceClient {
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const adviceStubMethods = ['calendarMode', 'capacity', 'capacityHistory'];
+    const adviceStubMethods = [
+      'calendarMode',
+      'calendarModeExtension',
+      'capacity',
+      'capacityHistory',
+    ];
     for (const methodName of adviceStubMethods) {
       const callPromise = this.adviceStub.then(
         stub =>
@@ -492,6 +497,157 @@ export class AdviceClient {
           {} | undefined,
         ]) => {
           this._log.info('calendarMode response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Advises on whether extending an existing future reservation is possible
+   * based on the desired extension end time. If capacity isn't available for
+   * the entire requested duration, the method recommends the longest possible
+   * extension.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.compute.v1beta.CalendarModeExtensionAdviceRequest} request.calendarModeExtensionAdviceRequestResource
+   *   The body resource for this request
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.region
+   *   Name of the region for this request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.compute.v1beta.CalendarModeExtensionAdviceResponse|CalendarModeExtensionAdviceResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/advice.calendar_mode_extension.js</caption>
+   * region_tag:compute_v1beta_generated_Advice_CalendarModeExtension_async
+   */
+  calendarModeExtension(
+    request?: protos.google.cloud.compute.v1beta.ICalendarModeExtensionAdviceRpcRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1beta.ICalendarModeExtensionAdviceResponse,
+      (
+        | protos.google.cloud.compute.v1beta.ICalendarModeExtensionAdviceRpcRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  calendarModeExtension(
+    request: protos.google.cloud.compute.v1beta.ICalendarModeExtensionAdviceRpcRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1beta.ICalendarModeExtensionAdviceResponse,
+      | protos.google.cloud.compute.v1beta.ICalendarModeExtensionAdviceRpcRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  calendarModeExtension(
+    request: protos.google.cloud.compute.v1beta.ICalendarModeExtensionAdviceRpcRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1beta.ICalendarModeExtensionAdviceResponse,
+      | protos.google.cloud.compute.v1beta.ICalendarModeExtensionAdviceRpcRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  calendarModeExtension(
+    request?: protos.google.cloud.compute.v1beta.ICalendarModeExtensionAdviceRpcRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.compute.v1beta.ICalendarModeExtensionAdviceResponse,
+          | protos.google.cloud.compute.v1beta.ICalendarModeExtensionAdviceRpcRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1beta.ICalendarModeExtensionAdviceResponse,
+      | protos.google.cloud.compute.v1beta.ICalendarModeExtensionAdviceRpcRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1beta.ICalendarModeExtensionAdviceResponse,
+      (
+        | protos.google.cloud.compute.v1beta.ICalendarModeExtensionAdviceRpcRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        project: request.project ?? '',
+        region: request.region ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('calendarModeExtension request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.compute.v1beta.ICalendarModeExtensionAdviceResponse,
+          | protos.google.cloud.compute.v1beta.ICalendarModeExtensionAdviceRpcRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('calendarModeExtension response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .calendarModeExtension(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.compute.v1beta.ICalendarModeExtensionAdviceResponse,
+          (
+            | protos.google.cloud.compute.v1beta.ICalendarModeExtensionAdviceRpcRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('calendarModeExtension response %j', response);
           return [response, options, rawResponse];
         },
       )

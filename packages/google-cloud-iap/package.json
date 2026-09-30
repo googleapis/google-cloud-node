@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/iap",
-  "version": "5.1.0",
+  "version": "5.1.1",
   "description": "iap client for Node.js",
   "repository": {
     "type": "git",
@@ -39,8 +39,8 @@
     "prelint": "cd samples; npm link ../; npm i",
     "postpack": "minifyProtoJson",
     "samples-test": "cd samples/ && npm link ../ && npm i && npm test",
-    "system-test": "c8 mocha --config ../../.mocharc.cjs --no-parallel build/system-test",
-    "test": "c8 mocha --config ../../.mocharc.cjs build/test"
+    "system-test": "node ../../bin/run-test.cjs --config ../../.mocharc.cjs --no-parallel build/system-test",
+    "test": "node ../../bin/run-test.cjs --config ../../.mocharc.cjs build/test"
   },
   "dependencies": {
     "google-gax": "^6.0.0"
@@ -67,10 +67,5 @@
   "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-iap",
   "overrides": {
     "@sinonjs/fake-timers": "15.2.1"
-  },
-  "pnpm": {
-    "overrides": {
-      "@sinonjs/fake-timers": "15.2.1"
-    }
   }
 }

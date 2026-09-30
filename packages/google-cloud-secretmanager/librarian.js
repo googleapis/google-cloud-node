@@ -132,18 +132,23 @@ const replacement1 = `return Promise.resolve();
 }`;
 
 const replacement2 = `topicPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/topics/{topic}'
+        'projects/{project}/topics/{topic}',
       ),
       secretPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/secrets/{secret}'
+        'projects/{project}/secrets/{secret}',
       ),
       secretVersionPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/secrets/{secret}/versions/{secret_version}'
+        'projects/{project}/secrets/{secret}/versions/{secret_version}',
       ),
     };`;
 
 filePaths.forEach(filePath => {
   if (fs.existsSync(filePath)) {
+    replaceInFile(
+      filePath,
+      /return this\.secretManagerServiceStub\.then\(stub => \{/g,
+      '// eslint-disable-next-line promise/always-return\n      return this.secretManagerServiceStub.then(stub => {'
+    );
     replaceInFile(filePath, /return\sPromise\.resolve\(\);\s+}\s+}/g, replacement1);
     replaceInFile(filePath, /topicPathTemplate:\s+new\s+this\._gaxModule\.PathTemplate\(\s+'projects\/{project}\/topics\/{topic}',?\s*\),?\s*};/g, replacement2);
   }

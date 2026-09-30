@@ -243,6 +243,20 @@ export namespace google {
                     public createTask(request: google.cloud.tasks.v2.ICreateTaskRequest): Promise<google.cloud.tasks.v2.Task>;
 
                     /**
+                     * Calls BatchCreateTasks.
+                     * @param request BatchCreateTasksRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public batchCreateTasks(request: google.cloud.tasks.v2.IBatchCreateTasksRequest, callback: google.cloud.tasks.v2.CloudTasks.BatchCreateTasksCallback): void;
+
+                    /**
+                     * Calls BatchCreateTasks.
+                     * @param request BatchCreateTasksRequest message or plain object
+                     * @returns Promise
+                     */
+                    public batchCreateTasks(request: google.cloud.tasks.v2.IBatchCreateTasksRequest): Promise<google.longrunning.Operation>;
+
+                    /**
                      * Calls DeleteTask.
                      * @param request DeleteTaskRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and Empty
@@ -257,6 +271,20 @@ export namespace google {
                     public deleteTask(request: google.cloud.tasks.v2.IDeleteTaskRequest): Promise<google.protobuf.Empty>;
 
                     /**
+                     * Calls BatchDeleteTasks.
+                     * @param request BatchDeleteTasksRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public batchDeleteTasks(request: google.cloud.tasks.v2.IBatchDeleteTasksRequest, callback: google.cloud.tasks.v2.CloudTasks.BatchDeleteTasksCallback): void;
+
+                    /**
+                     * Calls BatchDeleteTasks.
+                     * @param request BatchDeleteTasksRequest message or plain object
+                     * @returns Promise
+                     */
+                    public batchDeleteTasks(request: google.cloud.tasks.v2.IBatchDeleteTasksRequest): Promise<google.longrunning.Operation>;
+
+                    /**
                      * Calls RunTask.
                      * @param request RunTaskRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and Task
@@ -269,6 +297,34 @@ export namespace google {
                      * @returns Promise
                      */
                     public runTask(request: google.cloud.tasks.v2.IRunTaskRequest): Promise<google.cloud.tasks.v2.Task>;
+
+                    /**
+                     * Calls UpdateCmekConfig.
+                     * @param request UpdateCmekConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and CmekConfig
+                     */
+                    public updateCmekConfig(request: google.cloud.tasks.v2.IUpdateCmekConfigRequest, callback: google.cloud.tasks.v2.CloudTasks.UpdateCmekConfigCallback): void;
+
+                    /**
+                     * Calls UpdateCmekConfig.
+                     * @param request UpdateCmekConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateCmekConfig(request: google.cloud.tasks.v2.IUpdateCmekConfigRequest): Promise<google.cloud.tasks.v2.CmekConfig>;
+
+                    /**
+                     * Calls GetCmekConfig.
+                     * @param request GetCmekConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and CmekConfig
+                     */
+                    public getCmekConfig(request: google.cloud.tasks.v2.IGetCmekConfigRequest, callback: google.cloud.tasks.v2.CloudTasks.GetCmekConfigCallback): void;
+
+                    /**
+                     * Calls GetCmekConfig.
+                     * @param request GetCmekConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getCmekConfig(request: google.cloud.tasks.v2.IGetCmekConfigRequest): Promise<google.cloud.tasks.v2.CmekConfig>;
                 }
 
                 namespace CloudTasks {
@@ -372,6 +428,13 @@ export namespace google {
                     type CreateTaskCallback = (error: (Error|null), response?: google.cloud.tasks.v2.Task) => void;
 
                     /**
+                     * Callback as used by {@link google.cloud.tasks.v2.CloudTasks|batchCreateTasks}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type BatchCreateTasksCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
                      * Callback as used by {@link google.cloud.tasks.v2.CloudTasks|deleteTask}.
                      * @param error Error, if any
                      * @param [response] Empty
@@ -379,11 +442,32 @@ export namespace google {
                     type DeleteTaskCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
 
                     /**
+                     * Callback as used by {@link google.cloud.tasks.v2.CloudTasks|batchDeleteTasks}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type BatchDeleteTasksCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
                      * Callback as used by {@link google.cloud.tasks.v2.CloudTasks|runTask}.
                      * @param error Error, if any
                      * @param [response] Task
                      */
                     type RunTaskCallback = (error: (Error|null), response?: google.cloud.tasks.v2.Task) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.tasks.v2.CloudTasks|updateCmekConfig}.
+                     * @param error Error, if any
+                     * @param [response] CmekConfig
+                     */
+                    type UpdateCmekConfigCallback = (error: (Error|null), response?: google.cloud.tasks.v2.CmekConfig) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.tasks.v2.CloudTasks|getCmekConfig}.
+                     * @param error Error, if any
+                     * @param [response] CmekConfig
+                     */
+                    type GetCmekConfigCallback = (error: (Error|null), response?: google.cloud.tasks.v2.CmekConfig) => void;
                 }
 
                 /** Properties of a ListQueuesRequest. */
@@ -1725,6 +1809,115 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a BatchCreateTasksRequest. */
+                interface IBatchCreateTasksRequest {
+
+                    /** BatchCreateTasksRequest parent */
+                    parent?: (string|null);
+
+                    /** BatchCreateTasksRequest requests */
+                    requests?: (google.cloud.tasks.v2.ICreateTaskRequest[]|null);
+
+                    /** BatchCreateTasksRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a BatchCreateTasksRequest. */
+                class BatchCreateTasksRequest implements IBatchCreateTasksRequest {
+
+                    /**
+                     * Constructs a new BatchCreateTasksRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.tasks.v2.IBatchCreateTasksRequest);
+
+                    /** BatchCreateTasksRequest parent. */
+                    public parent: string;
+
+                    /** BatchCreateTasksRequest requests. */
+                    public requests: google.cloud.tasks.v2.ICreateTaskRequest[];
+
+                    /** BatchCreateTasksRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new BatchCreateTasksRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchCreateTasksRequest instance
+                     */
+                    public static create(properties?: google.cloud.tasks.v2.IBatchCreateTasksRequest): google.cloud.tasks.v2.BatchCreateTasksRequest;
+
+                    /**
+                     * Encodes the specified BatchCreateTasksRequest message. Does not implicitly {@link google.cloud.tasks.v2.BatchCreateTasksRequest.verify|verify} messages.
+                     * @param message BatchCreateTasksRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.tasks.v2.IBatchCreateTasksRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchCreateTasksRequest message, length delimited. Does not implicitly {@link google.cloud.tasks.v2.BatchCreateTasksRequest.verify|verify} messages.
+                     * @param message BatchCreateTasksRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.tasks.v2.IBatchCreateTasksRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchCreateTasksRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchCreateTasksRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.tasks.v2.BatchCreateTasksRequest;
+
+                    /**
+                     * Decodes a BatchCreateTasksRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchCreateTasksRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.tasks.v2.BatchCreateTasksRequest;
+
+                    /**
+                     * Verifies a BatchCreateTasksRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchCreateTasksRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchCreateTasksRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.tasks.v2.BatchCreateTasksRequest;
+
+                    /**
+                     * Creates a plain object from a BatchCreateTasksRequest message. Also converts values to other types if specified.
+                     * @param message BatchCreateTasksRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.tasks.v2.BatchCreateTasksRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchCreateTasksRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchCreateTasksRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a DeleteTaskRequest. */
                 interface IDeleteTaskRequest {
 
@@ -1820,6 +2013,242 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BatchDeleteTasksRequest. */
+                interface IBatchDeleteTasksRequest {
+
+                    /** BatchDeleteTasksRequest parent */
+                    parent?: (string|null);
+
+                    /** BatchDeleteTasksRequest names */
+                    names?: (string[]|null);
+
+                    /** BatchDeleteTasksRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a BatchDeleteTasksRequest. */
+                class BatchDeleteTasksRequest implements IBatchDeleteTasksRequest {
+
+                    /**
+                     * Constructs a new BatchDeleteTasksRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.tasks.v2.IBatchDeleteTasksRequest);
+
+                    /** BatchDeleteTasksRequest parent. */
+                    public parent: string;
+
+                    /** BatchDeleteTasksRequest names. */
+                    public names: string[];
+
+                    /** BatchDeleteTasksRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new BatchDeleteTasksRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchDeleteTasksRequest instance
+                     */
+                    public static create(properties?: google.cloud.tasks.v2.IBatchDeleteTasksRequest): google.cloud.tasks.v2.BatchDeleteTasksRequest;
+
+                    /**
+                     * Encodes the specified BatchDeleteTasksRequest message. Does not implicitly {@link google.cloud.tasks.v2.BatchDeleteTasksRequest.verify|verify} messages.
+                     * @param message BatchDeleteTasksRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.tasks.v2.IBatchDeleteTasksRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchDeleteTasksRequest message, length delimited. Does not implicitly {@link google.cloud.tasks.v2.BatchDeleteTasksRequest.verify|verify} messages.
+                     * @param message BatchDeleteTasksRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.tasks.v2.IBatchDeleteTasksRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchDeleteTasksRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchDeleteTasksRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.tasks.v2.BatchDeleteTasksRequest;
+
+                    /**
+                     * Decodes a BatchDeleteTasksRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchDeleteTasksRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.tasks.v2.BatchDeleteTasksRequest;
+
+                    /**
+                     * Verifies a BatchDeleteTasksRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchDeleteTasksRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchDeleteTasksRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.tasks.v2.BatchDeleteTasksRequest;
+
+                    /**
+                     * Creates a plain object from a BatchDeleteTasksRequest message. Also converts values to other types if specified.
+                     * @param message BatchDeleteTasksRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.tasks.v2.BatchDeleteTasksRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchDeleteTasksRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchDeleteTasksRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BatchDeleteTasksMetadata. */
+                interface IBatchDeleteTasksMetadata {
+
+                    /** BatchDeleteTasksMetadata startTime */
+                    startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** BatchDeleteTasksMetadata endTime */
+                    endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** BatchDeleteTasksMetadata state */
+                    state?: (google.cloud.tasks.v2.BatchDeleteTasksMetadata.State|keyof typeof google.cloud.tasks.v2.BatchDeleteTasksMetadata.State|null);
+
+                    /** BatchDeleteTasksMetadata failedRequests */
+                    failedRequests?: ({ [k: string]: google.rpc.IStatus }|null);
+                }
+
+                /** Represents a BatchDeleteTasksMetadata. */
+                class BatchDeleteTasksMetadata implements IBatchDeleteTasksMetadata {
+
+                    /**
+                     * Constructs a new BatchDeleteTasksMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.tasks.v2.IBatchDeleteTasksMetadata);
+
+                    /** BatchDeleteTasksMetadata startTime. */
+                    public startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** BatchDeleteTasksMetadata endTime. */
+                    public endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** BatchDeleteTasksMetadata state. */
+                    public state: (google.cloud.tasks.v2.BatchDeleteTasksMetadata.State|keyof typeof google.cloud.tasks.v2.BatchDeleteTasksMetadata.State);
+
+                    /** BatchDeleteTasksMetadata failedRequests. */
+                    public failedRequests: { [k: string]: google.rpc.IStatus };
+
+                    /**
+                     * Creates a new BatchDeleteTasksMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchDeleteTasksMetadata instance
+                     */
+                    public static create(properties?: google.cloud.tasks.v2.IBatchDeleteTasksMetadata): google.cloud.tasks.v2.BatchDeleteTasksMetadata;
+
+                    /**
+                     * Encodes the specified BatchDeleteTasksMetadata message. Does not implicitly {@link google.cloud.tasks.v2.BatchDeleteTasksMetadata.verify|verify} messages.
+                     * @param message BatchDeleteTasksMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.tasks.v2.IBatchDeleteTasksMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchDeleteTasksMetadata message, length delimited. Does not implicitly {@link google.cloud.tasks.v2.BatchDeleteTasksMetadata.verify|verify} messages.
+                     * @param message BatchDeleteTasksMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.tasks.v2.IBatchDeleteTasksMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchDeleteTasksMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchDeleteTasksMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.tasks.v2.BatchDeleteTasksMetadata;
+
+                    /**
+                     * Decodes a BatchDeleteTasksMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchDeleteTasksMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.tasks.v2.BatchDeleteTasksMetadata;
+
+                    /**
+                     * Verifies a BatchDeleteTasksMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchDeleteTasksMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchDeleteTasksMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.tasks.v2.BatchDeleteTasksMetadata;
+
+                    /**
+                     * Creates a plain object from a BatchDeleteTasksMetadata message. Also converts values to other types if specified.
+                     * @param message BatchDeleteTasksMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.tasks.v2.BatchDeleteTasksMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchDeleteTasksMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchDeleteTasksMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace BatchDeleteTasksMetadata {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        RUNNING = 1,
+                        SUCCEEDED = 2,
+                        PARTIALLY_SUCCEEDED = 3,
+                        FAILED = 4
+                    }
                 }
 
                 /** Properties of a RunTaskRequest. */
@@ -1925,6 +2354,534 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of an UpdateCmekConfigRequest. */
+                interface IUpdateCmekConfigRequest {
+
+                    /** UpdateCmekConfigRequest cmekConfig */
+                    cmekConfig?: (google.cloud.tasks.v2.ICmekConfig|null);
+
+                    /** UpdateCmekConfigRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateCmekConfigRequest. */
+                class UpdateCmekConfigRequest implements IUpdateCmekConfigRequest {
+
+                    /**
+                     * Constructs a new UpdateCmekConfigRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.tasks.v2.IUpdateCmekConfigRequest);
+
+                    /** UpdateCmekConfigRequest cmekConfig. */
+                    public cmekConfig?: (google.cloud.tasks.v2.ICmekConfig|null);
+
+                    /** UpdateCmekConfigRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateCmekConfigRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateCmekConfigRequest instance
+                     */
+                    public static create(properties?: google.cloud.tasks.v2.IUpdateCmekConfigRequest): google.cloud.tasks.v2.UpdateCmekConfigRequest;
+
+                    /**
+                     * Encodes the specified UpdateCmekConfigRequest message. Does not implicitly {@link google.cloud.tasks.v2.UpdateCmekConfigRequest.verify|verify} messages.
+                     * @param message UpdateCmekConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.tasks.v2.IUpdateCmekConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateCmekConfigRequest message, length delimited. Does not implicitly {@link google.cloud.tasks.v2.UpdateCmekConfigRequest.verify|verify} messages.
+                     * @param message UpdateCmekConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.tasks.v2.IUpdateCmekConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateCmekConfigRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateCmekConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.tasks.v2.UpdateCmekConfigRequest;
+
+                    /**
+                     * Decodes an UpdateCmekConfigRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateCmekConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.tasks.v2.UpdateCmekConfigRequest;
+
+                    /**
+                     * Verifies an UpdateCmekConfigRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateCmekConfigRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateCmekConfigRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.tasks.v2.UpdateCmekConfigRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateCmekConfigRequest message. Also converts values to other types if specified.
+                     * @param message UpdateCmekConfigRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.tasks.v2.UpdateCmekConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateCmekConfigRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateCmekConfigRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetCmekConfigRequest. */
+                interface IGetCmekConfigRequest {
+
+                    /** GetCmekConfigRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetCmekConfigRequest. */
+                class GetCmekConfigRequest implements IGetCmekConfigRequest {
+
+                    /**
+                     * Constructs a new GetCmekConfigRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.tasks.v2.IGetCmekConfigRequest);
+
+                    /** GetCmekConfigRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetCmekConfigRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetCmekConfigRequest instance
+                     */
+                    public static create(properties?: google.cloud.tasks.v2.IGetCmekConfigRequest): google.cloud.tasks.v2.GetCmekConfigRequest;
+
+                    /**
+                     * Encodes the specified GetCmekConfigRequest message. Does not implicitly {@link google.cloud.tasks.v2.GetCmekConfigRequest.verify|verify} messages.
+                     * @param message GetCmekConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.tasks.v2.IGetCmekConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetCmekConfigRequest message, length delimited. Does not implicitly {@link google.cloud.tasks.v2.GetCmekConfigRequest.verify|verify} messages.
+                     * @param message GetCmekConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.tasks.v2.IGetCmekConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetCmekConfigRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetCmekConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.tasks.v2.GetCmekConfigRequest;
+
+                    /**
+                     * Decodes a GetCmekConfigRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetCmekConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.tasks.v2.GetCmekConfigRequest;
+
+                    /**
+                     * Verifies a GetCmekConfigRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetCmekConfigRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetCmekConfigRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.tasks.v2.GetCmekConfigRequest;
+
+                    /**
+                     * Creates a plain object from a GetCmekConfigRequest message. Also converts values to other types if specified.
+                     * @param message GetCmekConfigRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.tasks.v2.GetCmekConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetCmekConfigRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetCmekConfigRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BatchCreateTasksResponse. */
+                interface IBatchCreateTasksResponse {
+
+                    /** BatchCreateTasksResponse tasks */
+                    tasks?: (google.cloud.tasks.v2.ITask[]|null);
+                }
+
+                /** Represents a BatchCreateTasksResponse. */
+                class BatchCreateTasksResponse implements IBatchCreateTasksResponse {
+
+                    /**
+                     * Constructs a new BatchCreateTasksResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.tasks.v2.IBatchCreateTasksResponse);
+
+                    /** BatchCreateTasksResponse tasks. */
+                    public tasks: google.cloud.tasks.v2.ITask[];
+
+                    /**
+                     * Creates a new BatchCreateTasksResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchCreateTasksResponse instance
+                     */
+                    public static create(properties?: google.cloud.tasks.v2.IBatchCreateTasksResponse): google.cloud.tasks.v2.BatchCreateTasksResponse;
+
+                    /**
+                     * Encodes the specified BatchCreateTasksResponse message. Does not implicitly {@link google.cloud.tasks.v2.BatchCreateTasksResponse.verify|verify} messages.
+                     * @param message BatchCreateTasksResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.tasks.v2.IBatchCreateTasksResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchCreateTasksResponse message, length delimited. Does not implicitly {@link google.cloud.tasks.v2.BatchCreateTasksResponse.verify|verify} messages.
+                     * @param message BatchCreateTasksResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.tasks.v2.IBatchCreateTasksResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchCreateTasksResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchCreateTasksResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.tasks.v2.BatchCreateTasksResponse;
+
+                    /**
+                     * Decodes a BatchCreateTasksResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchCreateTasksResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.tasks.v2.BatchCreateTasksResponse;
+
+                    /**
+                     * Verifies a BatchCreateTasksResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchCreateTasksResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchCreateTasksResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.tasks.v2.BatchCreateTasksResponse;
+
+                    /**
+                     * Creates a plain object from a BatchCreateTasksResponse message. Also converts values to other types if specified.
+                     * @param message BatchCreateTasksResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.tasks.v2.BatchCreateTasksResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchCreateTasksResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchCreateTasksResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BatchCreateTasksMetadata. */
+                interface IBatchCreateTasksMetadata {
+
+                    /** BatchCreateTasksMetadata startTime */
+                    startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** BatchCreateTasksMetadata endTime */
+                    endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** BatchCreateTasksMetadata state */
+                    state?: (google.cloud.tasks.v2.BatchCreateTasksMetadata.State|keyof typeof google.cloud.tasks.v2.BatchCreateTasksMetadata.State|null);
+
+                    /** BatchCreateTasksMetadata failedRequests */
+                    failedRequests?: ({ [k: string]: google.rpc.IStatus }|null);
+                }
+
+                /** Represents a BatchCreateTasksMetadata. */
+                class BatchCreateTasksMetadata implements IBatchCreateTasksMetadata {
+
+                    /**
+                     * Constructs a new BatchCreateTasksMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.tasks.v2.IBatchCreateTasksMetadata);
+
+                    /** BatchCreateTasksMetadata startTime. */
+                    public startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** BatchCreateTasksMetadata endTime. */
+                    public endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** BatchCreateTasksMetadata state. */
+                    public state: (google.cloud.tasks.v2.BatchCreateTasksMetadata.State|keyof typeof google.cloud.tasks.v2.BatchCreateTasksMetadata.State);
+
+                    /** BatchCreateTasksMetadata failedRequests. */
+                    public failedRequests: { [k: string]: google.rpc.IStatus };
+
+                    /**
+                     * Creates a new BatchCreateTasksMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchCreateTasksMetadata instance
+                     */
+                    public static create(properties?: google.cloud.tasks.v2.IBatchCreateTasksMetadata): google.cloud.tasks.v2.BatchCreateTasksMetadata;
+
+                    /**
+                     * Encodes the specified BatchCreateTasksMetadata message. Does not implicitly {@link google.cloud.tasks.v2.BatchCreateTasksMetadata.verify|verify} messages.
+                     * @param message BatchCreateTasksMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.tasks.v2.IBatchCreateTasksMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchCreateTasksMetadata message, length delimited. Does not implicitly {@link google.cloud.tasks.v2.BatchCreateTasksMetadata.verify|verify} messages.
+                     * @param message BatchCreateTasksMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.tasks.v2.IBatchCreateTasksMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchCreateTasksMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchCreateTasksMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.tasks.v2.BatchCreateTasksMetadata;
+
+                    /**
+                     * Decodes a BatchCreateTasksMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchCreateTasksMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.tasks.v2.BatchCreateTasksMetadata;
+
+                    /**
+                     * Verifies a BatchCreateTasksMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchCreateTasksMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchCreateTasksMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.tasks.v2.BatchCreateTasksMetadata;
+
+                    /**
+                     * Creates a plain object from a BatchCreateTasksMetadata message. Also converts values to other types if specified.
+                     * @param message BatchCreateTasksMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.tasks.v2.BatchCreateTasksMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchCreateTasksMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchCreateTasksMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace BatchCreateTasksMetadata {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        RUNNING = 1,
+                        SUCCEEDED = 2,
+                        PARTIALLY_SUCCEEDED = 5,
+                        FAILED = 3,
+                        CANCELLED = 4
+                    }
+                }
+
+                /** Properties of a CmekConfig. */
+                interface ICmekConfig {
+
+                    /** CmekConfig name */
+                    name?: (string|null);
+
+                    /** CmekConfig kmsKey */
+                    kmsKey?: (string|null);
+                }
+
+                /** Represents a CmekConfig. */
+                class CmekConfig implements ICmekConfig {
+
+                    /**
+                     * Constructs a new CmekConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.tasks.v2.ICmekConfig);
+
+                    /** CmekConfig name. */
+                    public name: string;
+
+                    /** CmekConfig kmsKey. */
+                    public kmsKey: string;
+
+                    /**
+                     * Creates a new CmekConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CmekConfig instance
+                     */
+                    public static create(properties?: google.cloud.tasks.v2.ICmekConfig): google.cloud.tasks.v2.CmekConfig;
+
+                    /**
+                     * Encodes the specified CmekConfig message. Does not implicitly {@link google.cloud.tasks.v2.CmekConfig.verify|verify} messages.
+                     * @param message CmekConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.tasks.v2.ICmekConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CmekConfig message, length delimited. Does not implicitly {@link google.cloud.tasks.v2.CmekConfig.verify|verify} messages.
+                     * @param message CmekConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.tasks.v2.ICmekConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CmekConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CmekConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.tasks.v2.CmekConfig;
+
+                    /**
+                     * Decodes a CmekConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CmekConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.tasks.v2.CmekConfig;
+
+                    /**
+                     * Verifies a CmekConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CmekConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CmekConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.tasks.v2.CmekConfig;
+
+                    /**
+                     * Creates a plain object from a CmekConfig message. Also converts values to other types if specified.
+                     * @param message CmekConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.tasks.v2.CmekConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CmekConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CmekConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a Queue. */
                 interface IQueue {
 
@@ -1933,6 +2890,9 @@ export namespace google {
 
                     /** Queue appEngineRoutingOverride */
                     appEngineRoutingOverride?: (google.cloud.tasks.v2.IAppEngineRouting|null);
+
+                    /** Queue httpTarget */
+                    httpTarget?: (google.cloud.tasks.v2.IHttpTarget|null);
 
                     /** Queue rateLimits */
                     rateLimits?: (google.cloud.tasks.v2.IRateLimits|null);
@@ -1964,6 +2924,9 @@ export namespace google {
 
                     /** Queue appEngineRoutingOverride. */
                     public appEngineRoutingOverride?: (google.cloud.tasks.v2.IAppEngineRouting|null);
+
+                    /** Queue httpTarget. */
+                    public httpTarget?: (google.cloud.tasks.v2.IHttpTarget|null);
 
                     /** Queue rateLimits. */
                     public rateLimits?: (google.cloud.tasks.v2.IRateLimits|null);
@@ -2394,6 +3357,671 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a PathOverride. */
+                interface IPathOverride {
+
+                    /** PathOverride path */
+                    path?: (string|null);
+                }
+
+                /** Represents a PathOverride. */
+                class PathOverride implements IPathOverride {
+
+                    /**
+                     * Constructs a new PathOverride.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.tasks.v2.IPathOverride);
+
+                    /** PathOverride path. */
+                    public path: string;
+
+                    /**
+                     * Creates a new PathOverride instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PathOverride instance
+                     */
+                    public static create(properties?: google.cloud.tasks.v2.IPathOverride): google.cloud.tasks.v2.PathOverride;
+
+                    /**
+                     * Encodes the specified PathOverride message. Does not implicitly {@link google.cloud.tasks.v2.PathOverride.verify|verify} messages.
+                     * @param message PathOverride message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.tasks.v2.IPathOverride, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PathOverride message, length delimited. Does not implicitly {@link google.cloud.tasks.v2.PathOverride.verify|verify} messages.
+                     * @param message PathOverride message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.tasks.v2.IPathOverride, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PathOverride message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PathOverride
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.tasks.v2.PathOverride;
+
+                    /**
+                     * Decodes a PathOverride message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PathOverride
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.tasks.v2.PathOverride;
+
+                    /**
+                     * Verifies a PathOverride message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PathOverride message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PathOverride
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.tasks.v2.PathOverride;
+
+                    /**
+                     * Creates a plain object from a PathOverride message. Also converts values to other types if specified.
+                     * @param message PathOverride
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.tasks.v2.PathOverride, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PathOverride to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PathOverride
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a QueryOverride. */
+                interface IQueryOverride {
+
+                    /** QueryOverride queryParams */
+                    queryParams?: (string|null);
+                }
+
+                /** Represents a QueryOverride. */
+                class QueryOverride implements IQueryOverride {
+
+                    /**
+                     * Constructs a new QueryOverride.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.tasks.v2.IQueryOverride);
+
+                    /** QueryOverride queryParams. */
+                    public queryParams: string;
+
+                    /**
+                     * Creates a new QueryOverride instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns QueryOverride instance
+                     */
+                    public static create(properties?: google.cloud.tasks.v2.IQueryOverride): google.cloud.tasks.v2.QueryOverride;
+
+                    /**
+                     * Encodes the specified QueryOverride message. Does not implicitly {@link google.cloud.tasks.v2.QueryOverride.verify|verify} messages.
+                     * @param message QueryOverride message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.tasks.v2.IQueryOverride, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified QueryOverride message, length delimited. Does not implicitly {@link google.cloud.tasks.v2.QueryOverride.verify|verify} messages.
+                     * @param message QueryOverride message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.tasks.v2.IQueryOverride, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a QueryOverride message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns QueryOverride
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.tasks.v2.QueryOverride;
+
+                    /**
+                     * Decodes a QueryOverride message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns QueryOverride
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.tasks.v2.QueryOverride;
+
+                    /**
+                     * Verifies a QueryOverride message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a QueryOverride message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns QueryOverride
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.tasks.v2.QueryOverride;
+
+                    /**
+                     * Creates a plain object from a QueryOverride message. Also converts values to other types if specified.
+                     * @param message QueryOverride
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.tasks.v2.QueryOverride, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this QueryOverride to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for QueryOverride
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UriOverride. */
+                interface IUriOverride {
+
+                    /** UriOverride scheme */
+                    scheme?: (google.cloud.tasks.v2.UriOverride.Scheme|keyof typeof google.cloud.tasks.v2.UriOverride.Scheme|null);
+
+                    /** UriOverride host */
+                    host?: (string|null);
+
+                    /** UriOverride port */
+                    port?: (number|Long|string|null);
+
+                    /** UriOverride pathOverride */
+                    pathOverride?: (google.cloud.tasks.v2.IPathOverride|null);
+
+                    /** UriOverride queryOverride */
+                    queryOverride?: (google.cloud.tasks.v2.IQueryOverride|null);
+
+                    /** UriOverride uriOverrideEnforceMode */
+                    uriOverrideEnforceMode?: (google.cloud.tasks.v2.UriOverride.UriOverrideEnforceMode|keyof typeof google.cloud.tasks.v2.UriOverride.UriOverrideEnforceMode|null);
+                }
+
+                /** Represents an UriOverride. */
+                class UriOverride implements IUriOverride {
+
+                    /**
+                     * Constructs a new UriOverride.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.tasks.v2.IUriOverride);
+
+                    /** UriOverride scheme. */
+                    public scheme?: (google.cloud.tasks.v2.UriOverride.Scheme|keyof typeof google.cloud.tasks.v2.UriOverride.Scheme|null);
+
+                    /** UriOverride host. */
+                    public host?: (string|null);
+
+                    /** UriOverride port. */
+                    public port?: (number|Long|string|null);
+
+                    /** UriOverride pathOverride. */
+                    public pathOverride?: (google.cloud.tasks.v2.IPathOverride|null);
+
+                    /** UriOverride queryOverride. */
+                    public queryOverride?: (google.cloud.tasks.v2.IQueryOverride|null);
+
+                    /** UriOverride uriOverrideEnforceMode. */
+                    public uriOverrideEnforceMode: (google.cloud.tasks.v2.UriOverride.UriOverrideEnforceMode|keyof typeof google.cloud.tasks.v2.UriOverride.UriOverrideEnforceMode);
+
+                    /**
+                     * Creates a new UriOverride instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UriOverride instance
+                     */
+                    public static create(properties?: google.cloud.tasks.v2.IUriOverride): google.cloud.tasks.v2.UriOverride;
+
+                    /**
+                     * Encodes the specified UriOverride message. Does not implicitly {@link google.cloud.tasks.v2.UriOverride.verify|verify} messages.
+                     * @param message UriOverride message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.tasks.v2.IUriOverride, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UriOverride message, length delimited. Does not implicitly {@link google.cloud.tasks.v2.UriOverride.verify|verify} messages.
+                     * @param message UriOverride message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.tasks.v2.IUriOverride, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UriOverride message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UriOverride
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.tasks.v2.UriOverride;
+
+                    /**
+                     * Decodes an UriOverride message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UriOverride
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.tasks.v2.UriOverride;
+
+                    /**
+                     * Verifies an UriOverride message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UriOverride message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UriOverride
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.tasks.v2.UriOverride;
+
+                    /**
+                     * Creates a plain object from an UriOverride message. Also converts values to other types if specified.
+                     * @param message UriOverride
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.tasks.v2.UriOverride, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UriOverride to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UriOverride
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace UriOverride {
+
+                    /** Scheme enum. */
+                    enum Scheme {
+                        SCHEME_UNSPECIFIED = 0,
+                        HTTP = 1,
+                        HTTPS = 2
+                    }
+
+                    /** UriOverrideEnforceMode enum. */
+                    enum UriOverrideEnforceMode {
+                        URI_OVERRIDE_ENFORCE_MODE_UNSPECIFIED = 0,
+                        IF_NOT_EXISTS = 1,
+                        ALWAYS = 2
+                    }
+                }
+
+                /** Properties of a HttpTarget. */
+                interface IHttpTarget {
+
+                    /** HttpTarget uriOverride */
+                    uriOverride?: (google.cloud.tasks.v2.IUriOverride|null);
+
+                    /** HttpTarget httpMethod */
+                    httpMethod?: (google.cloud.tasks.v2.HttpMethod|keyof typeof google.cloud.tasks.v2.HttpMethod|null);
+
+                    /** HttpTarget headerOverrides */
+                    headerOverrides?: (google.cloud.tasks.v2.HttpTarget.IHeaderOverride[]|null);
+
+                    /** HttpTarget oauthToken */
+                    oauthToken?: (google.cloud.tasks.v2.IOAuthToken|null);
+
+                    /** HttpTarget oidcToken */
+                    oidcToken?: (google.cloud.tasks.v2.IOidcToken|null);
+                }
+
+                /** Represents a HttpTarget. */
+                class HttpTarget implements IHttpTarget {
+
+                    /**
+                     * Constructs a new HttpTarget.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.tasks.v2.IHttpTarget);
+
+                    /** HttpTarget uriOverride. */
+                    public uriOverride?: (google.cloud.tasks.v2.IUriOverride|null);
+
+                    /** HttpTarget httpMethod. */
+                    public httpMethod: (google.cloud.tasks.v2.HttpMethod|keyof typeof google.cloud.tasks.v2.HttpMethod);
+
+                    /** HttpTarget headerOverrides. */
+                    public headerOverrides: google.cloud.tasks.v2.HttpTarget.IHeaderOverride[];
+
+                    /** HttpTarget oauthToken. */
+                    public oauthToken?: (google.cloud.tasks.v2.IOAuthToken|null);
+
+                    /** HttpTarget oidcToken. */
+                    public oidcToken?: (google.cloud.tasks.v2.IOidcToken|null);
+
+                    /** HttpTarget authorizationHeader. */
+                    public authorizationHeader?: ("oauthToken"|"oidcToken");
+
+                    /**
+                     * Creates a new HttpTarget instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns HttpTarget instance
+                     */
+                    public static create(properties?: google.cloud.tasks.v2.IHttpTarget): google.cloud.tasks.v2.HttpTarget;
+
+                    /**
+                     * Encodes the specified HttpTarget message. Does not implicitly {@link google.cloud.tasks.v2.HttpTarget.verify|verify} messages.
+                     * @param message HttpTarget message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.tasks.v2.IHttpTarget, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified HttpTarget message, length delimited. Does not implicitly {@link google.cloud.tasks.v2.HttpTarget.verify|verify} messages.
+                     * @param message HttpTarget message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.tasks.v2.IHttpTarget, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a HttpTarget message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns HttpTarget
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.tasks.v2.HttpTarget;
+
+                    /**
+                     * Decodes a HttpTarget message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns HttpTarget
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.tasks.v2.HttpTarget;
+
+                    /**
+                     * Verifies a HttpTarget message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a HttpTarget message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns HttpTarget
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.tasks.v2.HttpTarget;
+
+                    /**
+                     * Creates a plain object from a HttpTarget message. Also converts values to other types if specified.
+                     * @param message HttpTarget
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.tasks.v2.HttpTarget, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this HttpTarget to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for HttpTarget
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace HttpTarget {
+
+                    /** Properties of a Header. */
+                    interface IHeader {
+
+                        /** Header key */
+                        key?: (string|null);
+
+                        /** Header value */
+                        value?: (string|null);
+                    }
+
+                    /** Represents a Header. */
+                    class Header implements IHeader {
+
+                        /**
+                         * Constructs a new Header.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.tasks.v2.HttpTarget.IHeader);
+
+                        /** Header key. */
+                        public key: string;
+
+                        /** Header value. */
+                        public value: string;
+
+                        /**
+                         * Creates a new Header instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Header instance
+                         */
+                        public static create(properties?: google.cloud.tasks.v2.HttpTarget.IHeader): google.cloud.tasks.v2.HttpTarget.Header;
+
+                        /**
+                         * Encodes the specified Header message. Does not implicitly {@link google.cloud.tasks.v2.HttpTarget.Header.verify|verify} messages.
+                         * @param message Header message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.tasks.v2.HttpTarget.IHeader, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Header message, length delimited. Does not implicitly {@link google.cloud.tasks.v2.HttpTarget.Header.verify|verify} messages.
+                         * @param message Header message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.tasks.v2.HttpTarget.IHeader, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Header message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Header
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.tasks.v2.HttpTarget.Header;
+
+                        /**
+                         * Decodes a Header message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Header
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.tasks.v2.HttpTarget.Header;
+
+                        /**
+                         * Verifies a Header message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Header message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Header
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.tasks.v2.HttpTarget.Header;
+
+                        /**
+                         * Creates a plain object from a Header message. Also converts values to other types if specified.
+                         * @param message Header
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.tasks.v2.HttpTarget.Header, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Header to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Header
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a HeaderOverride. */
+                    interface IHeaderOverride {
+
+                        /** HeaderOverride header */
+                        header?: (google.cloud.tasks.v2.HttpTarget.IHeader|null);
+                    }
+
+                    /** Represents a HeaderOverride. */
+                    class HeaderOverride implements IHeaderOverride {
+
+                        /**
+                         * Constructs a new HeaderOverride.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.tasks.v2.HttpTarget.IHeaderOverride);
+
+                        /** HeaderOverride header. */
+                        public header?: (google.cloud.tasks.v2.HttpTarget.IHeader|null);
+
+                        /**
+                         * Creates a new HeaderOverride instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns HeaderOverride instance
+                         */
+                        public static create(properties?: google.cloud.tasks.v2.HttpTarget.IHeaderOverride): google.cloud.tasks.v2.HttpTarget.HeaderOverride;
+
+                        /**
+                         * Encodes the specified HeaderOverride message. Does not implicitly {@link google.cloud.tasks.v2.HttpTarget.HeaderOverride.verify|verify} messages.
+                         * @param message HeaderOverride message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.tasks.v2.HttpTarget.IHeaderOverride, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified HeaderOverride message, length delimited. Does not implicitly {@link google.cloud.tasks.v2.HttpTarget.HeaderOverride.verify|verify} messages.
+                         * @param message HeaderOverride message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.tasks.v2.HttpTarget.IHeaderOverride, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a HeaderOverride message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns HeaderOverride
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.tasks.v2.HttpTarget.HeaderOverride;
+
+                        /**
+                         * Decodes a HeaderOverride message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns HeaderOverride
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.tasks.v2.HttpTarget.HeaderOverride;
+
+                        /**
+                         * Verifies a HeaderOverride message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a HeaderOverride message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns HeaderOverride
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.tasks.v2.HttpTarget.HeaderOverride;
+
+                        /**
+                         * Creates a plain object from a HeaderOverride message. Also converts values to other types if specified.
+                         * @param message HeaderOverride
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.tasks.v2.HttpTarget.HeaderOverride, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this HeaderOverride to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for HeaderOverride
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
                 }
 
                 /** Properties of a HttpRequest. */
@@ -3015,6 +4643,9 @@ export namespace google {
 
                     /** Task view */
                     view?: (google.cloud.tasks.v2.Task.View|keyof typeof google.cloud.tasks.v2.Task.View|null);
+
+                    /** Task retryConfig */
+                    retryConfig?: (google.cloud.tasks.v2.IRetryConfig|null);
                 }
 
                 /** Represents a Task. */
@@ -3058,6 +4689,9 @@ export namespace google {
 
                     /** Task view. */
                     public view: (google.cloud.tasks.v2.Task.View|keyof typeof google.cloud.tasks.v2.Task.View);
+
+                    /** Task retryConfig. */
+                    public retryConfig?: (google.cloud.tasks.v2.IRetryConfig|null);
 
                     /** Task messageType. */
                     public messageType?: ("appEngineHttpRequest"|"httpRequest");
@@ -16112,6 +17746,218 @@ export namespace google {
             IDENTIFIER = 8
         }
 
+        /** Properties of a FieldInfo. */
+        interface IFieldInfo {
+
+            /** FieldInfo format */
+            format?: (google.api.FieldInfo.Format|keyof typeof google.api.FieldInfo.Format|null);
+
+            /** FieldInfo referencedTypes */
+            referencedTypes?: (google.api.ITypeReference[]|null);
+        }
+
+        /** Represents a FieldInfo. */
+        class FieldInfo implements IFieldInfo {
+
+            /**
+             * Constructs a new FieldInfo.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IFieldInfo);
+
+            /** FieldInfo format. */
+            public format: (google.api.FieldInfo.Format|keyof typeof google.api.FieldInfo.Format);
+
+            /** FieldInfo referencedTypes. */
+            public referencedTypes: google.api.ITypeReference[];
+
+            /**
+             * Creates a new FieldInfo instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns FieldInfo instance
+             */
+            public static create(properties?: google.api.IFieldInfo): google.api.FieldInfo;
+
+            /**
+             * Encodes the specified FieldInfo message. Does not implicitly {@link google.api.FieldInfo.verify|verify} messages.
+             * @param message FieldInfo message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IFieldInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified FieldInfo message, length delimited. Does not implicitly {@link google.api.FieldInfo.verify|verify} messages.
+             * @param message FieldInfo message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IFieldInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a FieldInfo message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns FieldInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.FieldInfo;
+
+            /**
+             * Decodes a FieldInfo message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns FieldInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.FieldInfo;
+
+            /**
+             * Verifies a FieldInfo message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a FieldInfo message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns FieldInfo
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.FieldInfo;
+
+            /**
+             * Creates a plain object from a FieldInfo message. Also converts values to other types if specified.
+             * @param message FieldInfo
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.FieldInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this FieldInfo to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FieldInfo
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace FieldInfo {
+
+            /** Format enum. */
+            enum Format {
+                FORMAT_UNSPECIFIED = 0,
+                UUID4 = 1,
+                IPV4 = 2,
+                IPV6 = 3,
+                IPV4_OR_IPV6 = 4
+            }
+        }
+
+        /** Properties of a TypeReference. */
+        interface ITypeReference {
+
+            /** TypeReference typeName */
+            typeName?: (string|null);
+        }
+
+        /** Represents a TypeReference. */
+        class TypeReference implements ITypeReference {
+
+            /**
+             * Constructs a new TypeReference.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.ITypeReference);
+
+            /** TypeReference typeName. */
+            public typeName: string;
+
+            /**
+             * Creates a new TypeReference instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns TypeReference instance
+             */
+            public static create(properties?: google.api.ITypeReference): google.api.TypeReference;
+
+            /**
+             * Encodes the specified TypeReference message. Does not implicitly {@link google.api.TypeReference.verify|verify} messages.
+             * @param message TypeReference message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.ITypeReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified TypeReference message, length delimited. Does not implicitly {@link google.api.TypeReference.verify|verify} messages.
+             * @param message TypeReference message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.ITypeReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a TypeReference message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns TypeReference
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.TypeReference;
+
+            /**
+             * Decodes a TypeReference message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns TypeReference
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.TypeReference;
+
+            /**
+             * Verifies a TypeReference message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a TypeReference message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns TypeReference
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.TypeReference;
+
+            /**
+             * Creates a plain object from a TypeReference message. Also converts values to other types if specified.
+             * @param message TypeReference
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.TypeReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this TypeReference to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for TypeReference
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
         /** Properties of a ResourceDescriptor. */
         interface IResourceDescriptor {
 
@@ -16467,218 +18313,6 @@ export namespace google {
 
             /**
              * Gets the default type url for HttpBody
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
-        /** Properties of a FieldInfo. */
-        interface IFieldInfo {
-
-            /** FieldInfo format */
-            format?: (google.api.FieldInfo.Format|keyof typeof google.api.FieldInfo.Format|null);
-
-            /** FieldInfo referencedTypes */
-            referencedTypes?: (google.api.ITypeReference[]|null);
-        }
-
-        /** Represents a FieldInfo. */
-        class FieldInfo implements IFieldInfo {
-
-            /**
-             * Constructs a new FieldInfo.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.api.IFieldInfo);
-
-            /** FieldInfo format. */
-            public format: (google.api.FieldInfo.Format|keyof typeof google.api.FieldInfo.Format);
-
-            /** FieldInfo referencedTypes. */
-            public referencedTypes: google.api.ITypeReference[];
-
-            /**
-             * Creates a new FieldInfo instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns FieldInfo instance
-             */
-            public static create(properties?: google.api.IFieldInfo): google.api.FieldInfo;
-
-            /**
-             * Encodes the specified FieldInfo message. Does not implicitly {@link google.api.FieldInfo.verify|verify} messages.
-             * @param message FieldInfo message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.api.IFieldInfo, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified FieldInfo message, length delimited. Does not implicitly {@link google.api.FieldInfo.verify|verify} messages.
-             * @param message FieldInfo message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.api.IFieldInfo, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a FieldInfo message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns FieldInfo
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.FieldInfo;
-
-            /**
-             * Decodes a FieldInfo message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns FieldInfo
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.FieldInfo;
-
-            /**
-             * Verifies a FieldInfo message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a FieldInfo message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns FieldInfo
-             */
-            public static fromObject(object: { [k: string]: any }): google.api.FieldInfo;
-
-            /**
-             * Creates a plain object from a FieldInfo message. Also converts values to other types if specified.
-             * @param message FieldInfo
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.api.FieldInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this FieldInfo to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for FieldInfo
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
-        namespace FieldInfo {
-
-            /** Format enum. */
-            enum Format {
-                FORMAT_UNSPECIFIED = 0,
-                UUID4 = 1,
-                IPV4 = 2,
-                IPV6 = 3,
-                IPV4_OR_IPV6 = 4
-            }
-        }
-
-        /** Properties of a TypeReference. */
-        interface ITypeReference {
-
-            /** TypeReference typeName */
-            typeName?: (string|null);
-        }
-
-        /** Represents a TypeReference. */
-        class TypeReference implements ITypeReference {
-
-            /**
-             * Constructs a new TypeReference.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.api.ITypeReference);
-
-            /** TypeReference typeName. */
-            public typeName: string;
-
-            /**
-             * Creates a new TypeReference instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns TypeReference instance
-             */
-            public static create(properties?: google.api.ITypeReference): google.api.TypeReference;
-
-            /**
-             * Encodes the specified TypeReference message. Does not implicitly {@link google.api.TypeReference.verify|verify} messages.
-             * @param message TypeReference message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.api.ITypeReference, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified TypeReference message, length delimited. Does not implicitly {@link google.api.TypeReference.verify|verify} messages.
-             * @param message TypeReference message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.api.ITypeReference, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a TypeReference message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns TypeReference
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.TypeReference;
-
-            /**
-             * Decodes a TypeReference message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns TypeReference
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.TypeReference;
-
-            /**
-             * Verifies a TypeReference message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a TypeReference message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns TypeReference
-             */
-            public static fromObject(object: { [k: string]: any }): google.api.TypeReference;
-
-            /**
-             * Creates a plain object from a TypeReference message. Also converts values to other types if specified.
-             * @param message TypeReference
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.api.TypeReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this TypeReference to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for TypeReference
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */
@@ -18880,11 +20514,11 @@ export namespace google {
             /** FieldOptions .google.api.fieldBehavior */
             ".google.api.fieldBehavior"?: (google.api.FieldBehavior[]|null);
 
-            /** FieldOptions .google.api.resourceReference */
-            ".google.api.resourceReference"?: (google.api.IResourceReference|null);
-
             /** FieldOptions .google.api.fieldInfo */
             ".google.api.fieldInfo"?: (google.api.IFieldInfo|null);
+
+            /** FieldOptions .google.api.resourceReference */
+            ".google.api.resourceReference"?: (google.api.IResourceReference|null);
         }
 
         /** Represents a FieldOptions. */

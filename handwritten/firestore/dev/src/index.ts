@@ -114,7 +114,18 @@ export {BulkWriter} from './bulk-writer';
 export type {BulkWriterError} from './bulk-writer';
 export type {BundleBuilder} from './bundle';
 export {DocumentSnapshot, QueryDocumentSnapshot} from './document';
-export {FieldValue, VectorValue} from './field-value';
+export {
+  FieldValue,
+  VectorValue,
+  MinKey,
+  MaxKey,
+  BsonObjectId,
+  BsonTimestamp,
+  Bytes,
+  Decimal128Value,
+  RegexValue,
+  Int32Value,
+} from './field-value';
 export {Filter} from './filter';
 export {WriteBatch, WriteResult} from './write-batch';
 export {Transaction} from './transaction';

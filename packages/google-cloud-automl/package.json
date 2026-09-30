@@ -1,7 +1,7 @@
 {
   "name": "@google-cloud/automl",
   "description": "Cloud AutoML API client for Node.js",
-  "version": "6.1.0",
+  "version": "6.1.1",
   "license": "Apache-2.0",
   "author": "Google LLC",
   "engines": {
@@ -31,12 +31,12 @@
     "Cloud AutoML API"
   ],
   "scripts": {
-    "test": "c8 mocha --config ../../.mocharc.cjs build/test",
+    "test": "node ../../bin/run-test.cjs --config ../../.mocharc.cjs build/test",
     "samples-test": "npm run compile && cd samples/ && npm link ../ && npm i && npm test",
     "lint": "gts check",
     "fix": "gts fix",
     "prelint": "cd samples; npm link ../; npm install",
-    "system-test": "npm run compile && c8 mocha --config ../../.mocharc.cjs --no-parallel build/system-test",
+    "system-test": "npm run compile && node ../../bin/run-test.cjs --config ../../.mocharc.cjs --no-parallel build/system-test",
     "docs": "jsdoc -c .jsdoc.js",
     "clean": "gts clean",
     "compile": "tsc -p . && cp -r protos build/",
@@ -71,10 +71,5 @@
   "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-automl",
   "overrides": {
     "@sinonjs/fake-timers": "15.2.1"
-  },
-  "pnpm": {
-    "overrides": {
-      "@sinonjs/fake-timers": "15.2.1"
-    }
   }
 }

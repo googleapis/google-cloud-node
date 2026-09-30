@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/ftp-v0.2.0...ftp-v0.3.0) (2026-09-16)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade minimum Node.js version to 22 ([#9357](https://github.com/googleapis/google-cloud-node/issues/9357))
+
+### Features
+
+* Upgrade minimum Node.js version to 22 ([#9357](https://github.com/googleapis/google-cloud-node/issues/9357)) ([d2e6a23](https://github.com/googleapis/google-cloud-node/commit/d2e6a231ce9440a9db56243e8eddcbe4f2377868))
+
 ## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/ftp-v0.1.0...ftp-v0.2.0) (2026-09-08)
 
 

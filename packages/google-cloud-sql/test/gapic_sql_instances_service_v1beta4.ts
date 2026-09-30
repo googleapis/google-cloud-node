@@ -2152,12 +2152,10 @@ describe('v1beta4.SqlInstancesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.SqlInstancesInsertRequest(),
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.sql.v1beta4.SqlInstancesInsertRequest',
-        ['project'],
-      );
-      request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
+      request.body = {};
+      // path template: {region=**}
+      request.body.region = 'value';
+      const expectedHeaderRequestParams = 'region=value';
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.Operation(),
       );
@@ -2184,12 +2182,10 @@ describe('v1beta4.SqlInstancesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.SqlInstancesInsertRequest(),
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.sql.v1beta4.SqlInstancesInsertRequest',
-        ['project'],
-      );
-      request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
+      request.body = {};
+      // path template: {region=**}
+      request.body.region = 'value';
+      const expectedHeaderRequestParams = 'region=value';
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.Operation(),
       );
@@ -2232,12 +2228,10 @@ describe('v1beta4.SqlInstancesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.SqlInstancesInsertRequest(),
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.sql.v1beta4.SqlInstancesInsertRequest',
-        ['project'],
-      );
-      request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
+      request.body = {};
+      // path template: {region=**}
+      request.body.region = 'value';
+      const expectedHeaderRequestParams = 'region=value';
       const expectedError = new Error('expected');
       client.innerApiCalls.insert = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.insert(request), expectedError);
@@ -2261,11 +2255,9 @@ describe('v1beta4.SqlInstancesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.SqlInstancesInsertRequest(),
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.sql.v1beta4.SqlInstancesInsertRequest',
-        ['project'],
-      );
-      request.project = defaultValue1;
+      request.body = {};
+      // path template: {region=**}
+      request.body.region = 'value';
       const expectedError = new Error('The client has already been closed.');
       client.close().catch(err => {
         throw err;

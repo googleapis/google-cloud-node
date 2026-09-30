@@ -1,7 +1,7 @@
 {
   "name": "@google-cloud/monitoring",
   "description": "Stackdriver Monitoring API client for Node.js",
-  "version": "6.1.0",
+  "version": "6.1.1",
   "license": "Apache-2.0",
   "author": "Google Inc",
   "engines": {
@@ -42,8 +42,8 @@
     "prelint": "cd samples; npm link ../; npm i",
     "postpack": "minifyProtoJson",
     "samples-test": "cd samples/ && npm link ../ && npm i && npm test",
-    "system-test": "c8 mocha --config ../../.mocharc.cjs --no-parallel build/system-test",
-    "test": "c8 mocha --config ../../.mocharc.cjs build/test"
+    "system-test": "node ../../bin/run-test.cjs --config ../../.mocharc.cjs --no-parallel build/system-test",
+    "test": "node ../../bin/run-test.cjs --config ../../.mocharc.cjs build/test"
   },
   "dependencies": {
     "google-gax": "^6.0.0"
@@ -68,10 +68,5 @@
   "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-monitoring",
   "overrides": {
     "@sinonjs/fake-timers": "15.2.1"
-  },
-  "pnpm": {
-    "overrides": {
-      "@sinonjs/fake-timers": "15.2.1"
-    }
   }
 }

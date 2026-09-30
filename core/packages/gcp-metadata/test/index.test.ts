@@ -237,7 +237,7 @@ describe('unit test', () => {
 
     try {
       await gcp.instance();
-    } catch (err: any) {
+    } catch (err: unknown) {
       assert(err instanceof GaxiosError);
       assert.strictEqual(err.status, 404);
     }
@@ -530,6 +530,51 @@ describe('unit test', () => {
     await secondary;
     primary.done();
     assert.strictEqual(false, isGCE);
+  });
+
+  it('should emit MetadataLookupWarning with unwrapped error codes when AggregateError contains unexpected errors', async () => {
+    const primary = nock(HOST)
+      .get(`${PATH}/${TYPE}`)
+      .replyWithError({message: 'Request aborted', code: 'AbortError'});
+    const secondary = nock(SECONDARY_HOST)
+      .get(`${PATH}/${TYPE}`)
+      .replyWithError({message: 'connect ETIMEDOUT', code: 'ETIMEDOUT'});
+
+    const emitWarningStub = sandbox.stub(process, 'emitWarning');
+
+    const isGCE = await gcp.isAvailable();
+    assert.strictEqual(isGCE, false);
+    assert.strictEqual(emitWarningStub.calledOnce, true);
+    assert.match(String(emitWarningStub.firstCall.args[0]), /code = ETIMEDOUT/);
+    assert.strictEqual(
+      emitWarningStub.firstCall.args[1],
+      'MetadataLookupWarning',
+    );
+    primary.done();
+    secondary.done();
+  });
+
+  it('should safely handle circular error cause chains and empty AggregateError in isAvailable', async () => {
+    const cyclicErrorA = new Error('cycle A') as Error & {cause?: unknown};
+    const cyclicErrorB = new Error('cycle B') as Error & {cause?: unknown};
+    cyclicErrorB.cause = cyclicErrorA;
+    cyclicErrorA.cause = cyclicErrorB;
+
+    const primary = nock(HOST)
+      .get(`${PATH}/${TYPE}`)
+      .replyWithError(cyclicErrorA);
+    const secondary = nock(SECONDARY_HOST)
+      .get(`${PATH}/${TYPE}`)
+      .replyWithError(new AggregateError([], 'empty aggregate'));
+
+    const emitWarningStub = sandbox.stub(process, 'emitWarning');
+
+    const isGCE = await gcp.isAvailable();
+    assert.strictEqual(isGCE, false);
+    assert.strictEqual(emitWarningStub.calledOnce, true);
+    assert.match(String(emitWarningStub.firstCall.args[0]), /code = UNKNOWN/);
+    primary.done();
+    secondary.done();
   });
 
   it('should return first successful response', async () => {

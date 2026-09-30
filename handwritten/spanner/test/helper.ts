@@ -16,7 +16,7 @@
 
 import * as assert from 'assert';
 import {describe, it} from 'mocha';
-import {replaceProjectIdToken} from '../src/helper';
+import {hasProjectIdToken, replaceProjectIdToken} from '../src/helper';
 import {Stream} from 'stream';
 
 describe('helper', () => {
@@ -207,6 +207,140 @@ describe('helper', () => {
       assert.throws(() => {
         replaceProjectIdToken(input, '{{projectId}}');
       }, /Sorry, we cannot connect to Cloud Services/);
+    });
+  });
+
+  describe('hasProjectIdToken', () => {
+    it('should return true for strings containing placeholder', () => {
+      assert.strictEqual(
+        hasProjectIdToken('projects/{{projectId}}/instances'),
+        true,
+      );
+      assert.strictEqual(hasProjectIdToken('{{projectId}}'), true);
+      assert.strictEqual(
+        hasProjectIdToken('prefix-{{projectId}}-suffix'),
+        true,
+      );
+    });
+
+    it('should return false for strings without placeholder', () => {
+      assert.strictEqual(
+        hasProjectIdToken('projects/my-project/instances'),
+        false,
+      );
+      assert.strictEqual(hasProjectIdToken(''), false);
+    });
+
+    it('should return false for primitive non-string values', () => {
+      assert.strictEqual(hasProjectIdToken(null), false);
+      assert.strictEqual(hasProjectIdToken(undefined), false);
+      assert.strictEqual(hasProjectIdToken(12345), false);
+      assert.strictEqual(hasProjectIdToken(true), false);
+      assert.strictEqual(hasProjectIdToken(false), false);
+    });
+
+    it('should return false for Buffers, Streams, and Dates', () => {
+      const buffer = Buffer.from('projects/{{projectId}}');
+      const stream = new Stream();
+      Object.assign(stream, {session: 'projects/{{projectId}}'});
+      const date = new Date();
+      Object.assign(date, {session: 'projects/{{projectId}}'});
+
+      assert.strictEqual(hasProjectIdToken(buffer), false);
+      assert.strictEqual(hasProjectIdToken(stream), false);
+      assert.strictEqual(hasProjectIdToken(date), false);
+    });
+
+    it('should return true for arrays containing placeholder', () => {
+      assert.strictEqual(
+        hasProjectIdToken(['normal-string', 'projects/{{projectId}}']),
+        true,
+      );
+      assert.strictEqual(
+        hasProjectIdToken([['nested', 'projects/{{projectId}}']]),
+        true,
+      );
+    });
+
+    it('should return false for arrays without placeholder', () => {
+      assert.strictEqual(
+        hasProjectIdToken(['normal-string', 'another-string']),
+        false,
+      );
+      assert.strictEqual(hasProjectIdToken([]), false);
+    });
+
+    it('should return true for objects with placeholder in KEYS_TO_SCAN', () => {
+      assert.strictEqual(
+        hasProjectIdToken({session: 'projects/{{projectId}}/sessions/123'}),
+        true,
+      );
+      assert.strictEqual(
+        hasProjectIdToken({database: 'projects/{{projectId}}/databases/db'}),
+        true,
+      );
+      assert.strictEqual(
+        hasProjectIdToken({parent: 'projects/{{projectId}}'}),
+        true,
+      );
+      assert.strictEqual(
+        hasProjectIdToken({name: 'projects/{{projectId}}/instances/inst'}),
+        true,
+      );
+      assert.strictEqual(
+        hasProjectIdToken({instance: 'projects/{{projectId}}/instances/inst'}),
+        true,
+      );
+      assert.strictEqual(
+        hasProjectIdToken({backup: 'projects/{{projectId}}/backups/b1'}),
+        true,
+      );
+      assert.strictEqual(
+        hasProjectIdToken({
+          config: {parent: 'projects/{{projectId}}'},
+        }),
+        true,
+      );
+      assert.strictEqual(
+        hasProjectIdToken({
+          encryptionConfig: {kmsKeyName: 'projects/{{projectId}}/keys/k1'},
+        }),
+        true,
+      );
+    });
+
+    it('should return false for objects with placeholder only in non-scanned keys', () => {
+      const input = {
+        sql: 'SELECT * FROM users WHERE col = "{{projectId}}"',
+        query: '{{projectId}}',
+        params: {
+          param1: '{{projectId}}',
+          deep: {
+            token: '{{projectId}}',
+          },
+        },
+        mutations: [
+          {
+            insert: {
+              table: 'users',
+              values: ['{{projectId}}'],
+            },
+          },
+        ],
+      };
+
+      assert.strictEqual(hasProjectIdToken(input), false);
+    });
+
+    it('should return false for objects without placeholder', () => {
+      const input = {
+        session: 'projects/my-project/sessions/123',
+        database: 'projects/my-project/databases/db',
+        parent: 'projects/my-project',
+      };
+
+      assert.strictEqual(hasProjectIdToken(input), false);
+      assert.strictEqual(hasProjectIdToken({}), false);
     });
   });
 });

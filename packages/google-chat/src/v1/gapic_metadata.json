@@ -105,6 +105,16 @@
                 "deleteReaction"
               ]
             },
+            "CreateMessagePin": {
+              "methods": [
+                "createMessagePin"
+              ]
+            },
+            "DeleteMessagePin": {
+              "methods": [
+                "deleteMessagePin"
+              ]
+            },
             "CreateCustomEmoji": {
               "methods": [
                 "createCustomEmoji"
@@ -247,6 +257,13 @@
                 "listReactions",
                 "listReactionsStream",
                 "listReactionsAsync"
+              ]
+            },
+            "ListMessagePins": {
+              "methods": [
+                "listMessagePins",
+                "listMessagePinsStream",
+                "listMessagePinsAsync"
               ]
             },
             "ListCustomEmojis": {
@@ -377,6 +394,16 @@
                 "deleteReaction"
               ]
             },
+            "CreateMessagePin": {
+              "methods": [
+                "createMessagePin"
+              ]
+            },
+            "DeleteMessagePin": {
+              "methods": [
+                "deleteMessagePin"
+              ]
+            },
             "CreateCustomEmoji": {
               "methods": [
                 "createCustomEmoji"
@@ -519,6 +546,13 @@
                 "listReactions",
                 "listReactionsStream",
                 "listReactionsAsync"
+              ]
+            },
+            "ListMessagePins": {
+              "methods": [
+                "listMessagePins",
+                "listMessagePinsStream",
+                "listMessagePinsAsync"
               ]
             },
             "ListCustomEmojis": {

@@ -55,6 +55,51 @@
                 "deleteParameterVersion"
               ]
             },
+            "GetTemplate": {
+              "methods": [
+                "getTemplate"
+              ]
+            },
+            "CreateTemplate": {
+              "methods": [
+                "createTemplate"
+              ]
+            },
+            "UpdateTemplate": {
+              "methods": [
+                "updateTemplate"
+              ]
+            },
+            "DeleteTemplate": {
+              "methods": [
+                "deleteTemplate"
+              ]
+            },
+            "GetTemplateVersion": {
+              "methods": [
+                "getTemplateVersion"
+              ]
+            },
+            "CreateTemplateVersion": {
+              "methods": [
+                "createTemplateVersion"
+              ]
+            },
+            "UpdateTemplateVersion": {
+              "methods": [
+                "updateTemplateVersion"
+              ]
+            },
+            "DeleteTemplateVersion": {
+              "methods": [
+                "deleteTemplateVersion"
+              ]
+            },
+            "RenderTemplateVersion": {
+              "methods": [
+                "renderTemplateVersion"
+              ]
+            },
             "ListParameters": {
               "methods": [
                 "listParameters",
@@ -67,6 +112,20 @@
                 "listParameterVersions",
                 "listParameterVersionsStream",
                 "listParameterVersionsAsync"
+              ]
+            },
+            "ListTemplates": {
+              "methods": [
+                "listTemplates",
+                "listTemplatesStream",
+                "listTemplatesAsync"
+              ]
+            },
+            "ListTemplateVersions": {
+              "methods": [
+                "listTemplateVersions",
+                "listTemplateVersionsStream",
+                "listTemplateVersionsAsync"
               ]
             }
           }
@@ -119,6 +178,51 @@
                 "deleteParameterVersion"
               ]
             },
+            "GetTemplate": {
+              "methods": [
+                "getTemplate"
+              ]
+            },
+            "CreateTemplate": {
+              "methods": [
+                "createTemplate"
+              ]
+            },
+            "UpdateTemplate": {
+              "methods": [
+                "updateTemplate"
+              ]
+            },
+            "DeleteTemplate": {
+              "methods": [
+                "deleteTemplate"
+              ]
+            },
+            "GetTemplateVersion": {
+              "methods": [
+                "getTemplateVersion"
+              ]
+            },
+            "CreateTemplateVersion": {
+              "methods": [
+                "createTemplateVersion"
+              ]
+            },
+            "UpdateTemplateVersion": {
+              "methods": [
+                "updateTemplateVersion"
+              ]
+            },
+            "DeleteTemplateVersion": {
+              "methods": [
+                "deleteTemplateVersion"
+              ]
+            },
+            "RenderTemplateVersion": {
+              "methods": [
+                "renderTemplateVersion"
+              ]
+            },
             "ListParameters": {
               "methods": [
                 "listParameters",
@@ -131,6 +235,20 @@
                 "listParameterVersions",
                 "listParameterVersionsStream",
                 "listParameterVersionsAsync"
+              ]
+            },
+            "ListTemplates": {
+              "methods": [
+                "listTemplates",
+                "listTemplatesStream",
+                "listTemplatesAsync"
+              ]
+            },
+            "ListTemplateVersions": {
+              "methods": [
+                "listTemplateVersions",
+                "listTemplateVersionsStream",
+                "listTemplateVersionsAsync"
               ]
             }
           }

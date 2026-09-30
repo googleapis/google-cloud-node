@@ -567,6 +567,9 @@ export class DataObjectSearchServiceClient {
    *   Required. A list of search requests to execute in parallel.
    * @param {google.cloud.vectorsearch.v1beta.BatchSearchDataObjectsRequest.CombineResultsOptions} [request.combine]
    *   Optional. Options for combining the results of the batch search operations.
+   * @param {google.cloud.vectorsearch.v1beta.BatchSearchDataObjectsRequest.BatchSearchMetadataOptions} [request.metadataOptions]
+   *   Optional. Options controlling which metadata is included in the search
+   *   results.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

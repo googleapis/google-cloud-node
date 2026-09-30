@@ -41,6 +41,10 @@ function main() {
    *  deleted. If this instance is deleted, then you must set the timestamp.
    */
   // const sourceInstanceDeletionTime = {}
+  /**
+   *  Optional. Region of the Cloud SQL instance.
+   */
+  // const location = 'abc123'
 
   // Imports the Sql library
   const {SqlInstancesServiceClient} = require('@google-cloud/sql').v1;

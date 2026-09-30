@@ -230,6 +230,212 @@
                               "(google.api.method_signature)": "name"
                             }
                           ]
+                        },
+                        "ListTemplates": {
+                          "requestType": "ListTemplatesRequest",
+                          "responseType": "ListTemplatesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/templates",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*}/templates"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "GetTemplate": {
+                          "requestType": "GetTemplateRequest",
+                          "responseType": "Template",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/templates/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/templates/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "CreateTemplate": {
+                          "requestType": "CreateTemplateRequest",
+                          "responseType": "Template",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/templates",
+                            "(google.api.http).body": "template",
+                            "(google.api.method_signature)": "parent,template,template_id"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*}/templates",
+                                "body": "template"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,template,template_id"
+                            }
+                          ]
+                        },
+                        "UpdateTemplate": {
+                          "requestType": "UpdateTemplateRequest",
+                          "responseType": "Template",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{template.name=projects/*/locations/*/templates/*}",
+                            "(google.api.http).body": "template",
+                            "(google.api.method_signature)": "template,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{template.name=projects/*/locations/*/templates/*}",
+                                "body": "template"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "template,update_mask"
+                            }
+                          ]
+                        },
+                        "DeleteTemplate": {
+                          "requestType": "DeleteTemplateRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/templates/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/templates/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListTemplateVersions": {
+                          "requestType": "ListTemplateVersionsRequest",
+                          "responseType": "ListTemplateVersionsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*/templates/*}/versions",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*/templates/*}/versions"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "GetTemplateVersion": {
+                          "requestType": "GetTemplateVersionRequest",
+                          "responseType": "TemplateVersion",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/templates/*/versions/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/templates/*/versions/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "CreateTemplateVersion": {
+                          "requestType": "CreateTemplateVersionRequest",
+                          "responseType": "TemplateVersion",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*/templates/*}/versions",
+                            "(google.api.http).body": "template_version",
+                            "(google.api.method_signature)": "parent,template_version,template_version_id"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*/templates/*}/versions",
+                                "body": "template_version"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,template_version,template_version_id"
+                            }
+                          ]
+                        },
+                        "UpdateTemplateVersion": {
+                          "requestType": "UpdateTemplateVersionRequest",
+                          "responseType": "TemplateVersion",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{template_version.name=projects/*/locations/*/templates/*/versions/*}",
+                            "(google.api.http).body": "template_version",
+                            "(google.api.method_signature)": "template_version,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{template_version.name=projects/*/locations/*/templates/*/versions/*}",
+                                "body": "template_version"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "template_version,update_mask"
+                            }
+                          ]
+                        },
+                        "DeleteTemplateVersion": {
+                          "requestType": "DeleteTemplateVersionRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/templates/*/versions/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/templates/*/versions/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "RenderTemplateVersion": {
+                          "requestType": "RenderTemplateVersionRequest",
+                          "responseType": "RenderTemplateVersionResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/templates/*/versions/*}:render",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/templates/*/versions/*}:render"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         }
                       }
                     },
@@ -239,6 +445,13 @@
                         "UNFORMATTED": 1,
                         "YAML": 2,
                         "JSON": 3
+                      }
+                    },
+                    "TemplateFormat": {
+                      "values": {
+                        "TEMPLATE_FORMAT_UNSPECIFIED": 0,
+                        "TEMPLATE_FORMAT_YAML": 1,
+                        "TEMPLATE_FORMAT_JSON": 2
                       }
                     },
                     "View": {
@@ -313,6 +526,14 @@
                             "(google.api.field_behavior)": "OPTIONAL",
                             "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKey",
                             "proto3_optional": true
+                          }
+                        },
+                        "tags": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -482,6 +703,11 @@
                           "oneof": [
                             "kmsKeyVersion"
                           ]
+                        },
+                        "_checksumSource": {
+                          "oneof": [
+                            "checksumSource"
+                          ]
                         }
                       },
                       "fields": {
@@ -527,16 +753,48 @@
                             "(google.api.field_behavior)": "OPTIONAL",
                             "proto3_optional": true
                           }
+                        },
+                        "checksumSource": {
+                          "type": "ChecksumSource",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "ChecksumSource": {
+                          "values": {
+                            "CHECKSUM_SOURCE_UNSPECIFIED": 0,
+                            "SERVER_GENERATED": 1,
+                            "USER_SPECIFIED": 2
+                          }
                         }
                       }
                     },
                     "ParameterVersionPayload": {
+                      "oneofs": {
+                        "_dataCrc32c": {
+                          "oneof": [
+                            "dataCrc32c"
+                          ]
+                        }
+                      },
                       "fields": {
                         "data": {
                           "type": "bytes",
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "dataCrc32c": {
+                          "type": "int64",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
                           }
                         }
                       }
@@ -732,6 +990,478 @@
                           "options": {
                             "(google.api.field_info).format": "UUID4",
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "Template": {
+                      "options": {
+                        "(google.api.resource).type": "parametermanager.googleapis.com/Template",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/templates/{template}",
+                        "(google.api.resource).plural": "templates",
+                        "(google.api.resource).singular": "template"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "format": {
+                          "type": "TemplateFormat",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListTemplatesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "parametermanager.googleapis.com/Template"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListTemplatesResponse": {
+                      "fields": {
+                        "templates": {
+                          "rule": "repeated",
+                          "type": "Template",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "unreachable": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "UNORDERED_LIST"
+                          }
+                        }
+                      }
+                    },
+                    "GetTemplateRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "parametermanager.googleapis.com/Template"
+                          }
+                        }
+                      }
+                    },
+                    "CreateTemplateRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "parametermanager.googleapis.com/Template"
+                          }
+                        },
+                        "templateId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "template": {
+                          "type": "Template",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_info).format": "UUID4",
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateTemplateRequest": {
+                      "fields": {
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "template": {
+                          "type": "Template",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_info).format": "UUID4",
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteTemplateRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "parametermanager.googleapis.com/Template"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_info).format": "UUID4",
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "TemplateVersion": {
+                      "options": {
+                        "(google.api.resource).type": "parametermanager.googleapis.com/TemplateVersion",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/templates/{template}/versions/{template_version}",
+                        "(google.api.resource).plural": "templateVersions",
+                        "(google.api.resource).singular": "templateVersion"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "disabled": {
+                          "type": "bool",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "payload": {
+                          "type": "TemplateVersionPayload",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        }
+                      }
+                    },
+                    "TemplateVersionPayload": {
+                      "fields": {
+                        "data": {
+                          "type": "bytes",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "ListTemplateVersionsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "parametermanager.googleapis.com/TemplateVersion"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListTemplateVersionsResponse": {
+                      "fields": {
+                        "templateVersions": {
+                          "rule": "repeated",
+                          "type": "TemplateVersion",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "unreachable": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "UNORDERED_LIST"
+                          }
+                        }
+                      }
+                    },
+                    "GetTemplateVersionRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "parametermanager.googleapis.com/TemplateVersion"
+                          }
+                        },
+                        "view": {
+                          "type": "View",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "CreateTemplateVersionRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "parametermanager.googleapis.com/TemplateVersion"
+                          }
+                        },
+                        "templateVersionId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "templateVersion": {
+                          "type": "TemplateVersion",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_info).format": "UUID4",
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateTemplateVersionRequest": {
+                      "fields": {
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "templateVersion": {
+                          "type": "TemplateVersion",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_info).format": "UUID4",
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteTemplateVersionRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "parametermanager.googleapis.com/TemplateVersion"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_info).format": "UUID4",
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "RenderTemplateVersionRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "parametermanager.googleapis.com/TemplateVersion"
+                          }
+                        },
+                        "parameterVersion": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "parametermanager.googleapis.com/ParameterVersion"
+                          }
+                        }
+                      }
+                    },
+                    "RenderTemplateVersionResponse": {
+                      "fields": {
+                        "templateVersion": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.resource_reference).type": "parametermanager.googleapis.com/TemplateVersion"
+                          }
+                        },
+                        "payload": {
+                          "type": "TemplateVersionPayload",
+                          "id": 2
+                        },
+                        "renderedPayload": {
+                          "type": "bytes",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "templateFormat": {
+                          "type": "TemplateFormat",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "parameterVersion": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "parametermanager.googleapis.com/ParameterVersion"
                           }
                         }
                       }

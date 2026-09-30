@@ -20,7 +20,18 @@ import {ApiMapValue, ProtobufJsValue} from './types';
 import {validateObject} from './validate';
 
 import api = google.firestore.v1;
-import {RESERVED_MAP_KEY, RESERVED_MAP_KEY_VECTOR_VALUE} from './map-type';
+import {
+  RESERVED_BSON_BINARY_KEY,
+  RESERVED_INT32_KEY,
+  RESERVED_MAP_KEY,
+  RESERVED_MAP_KEY_VECTOR_VALUE,
+  RESERVED_MAX_KEY,
+  RESERVED_MIN_KEY,
+  RESERVED_BSON_OBJECT_ID_KEY,
+  RESERVED_REGEX_KEY,
+  RESERVED_BSON_TIMESTAMP_KEY,
+  RESERVED_DECIMAL128_KEY,
+} from './map-type';
 
 /*!
  * @module firestore/convert
@@ -105,6 +116,51 @@ function bytesFromJson(bytesValue: string | Uint8Array): Uint8Array {
 }
 
 /**
+ * Detects the 'valueType' for cases where a map value has been used to
+ * represent another type.
+ * @param mapValue The map value to probe.
+ */
+function detectMapRepresentation(
+  mapValue: api.IMapValue | null | undefined,
+): string {
+  const fields = mapValue?.fields;
+  if (fields) {
+    const props = Object.keys(fields);
+    if (
+      props.indexOf(RESERVED_MAP_KEY) !== -1 &&
+      detectValueType(fields[RESERVED_MAP_KEY]) === 'stringValue' &&
+      fields[RESERVED_MAP_KEY].stringValue === RESERVED_MAP_KEY_VECTOR_VALUE
+    ) {
+      return 'vectorValue';
+    } else if (props.length === 1) {
+      if (props[0] === RESERVED_MIN_KEY) {
+        return 'minKeyValue';
+      } else if (props[0] === RESERVED_MAX_KEY) {
+        return 'maxKeyValue';
+      } else if (props[0] === RESERVED_REGEX_KEY) {
+        return 'regexValue';
+      } else if (props[0] === RESERVED_BSON_OBJECT_ID_KEY) {
+        return 'bsonObjectIdValue';
+      } else if (
+        props[0] === RESERVED_INT32_KEY &&
+        fields[RESERVED_INT32_KEY]?.integerValue !== undefined
+      ) {
+        return 'int32Value';
+      } else if (props[0] === RESERVED_DECIMAL128_KEY) {
+        return 'decimal128Value';
+      } else if (props[0] === RESERVED_BSON_TIMESTAMP_KEY) {
+        return 'bsonTimestampValue';
+      } else if (props[0] === RESERVED_BSON_BINARY_KEY) {
+        return 'bsonBinaryValue';
+      }
+    }
+  }
+
+  // If none of the above cases apply, it's a regular map.
+  return 'mapValue';
+}
+
+/**
  * Detects 'valueType' from a Proto3 JSON `firestore.v1.Value` proto.
  *
  * @private
@@ -163,19 +219,10 @@ export function detectValueType(proto: ProtobufJsValue): string {
     valueType = detectedValues[0];
   }
 
-  // Special handling of mapValues used to represent other data types
+  // Special handling of mapValues which may or may not have been
+  // used to represent other data types.
   if (valueType === 'mapValue') {
-    const fields = proto.mapValue?.fields;
-    if (fields) {
-      const props = Object.keys(fields);
-      if (
-        props.indexOf(RESERVED_MAP_KEY) !== -1 &&
-        detectValueType(fields[RESERVED_MAP_KEY]) === 'stringValue' &&
-        fields[RESERVED_MAP_KEY].stringValue === RESERVED_MAP_KEY_VECTOR_VALUE
-      ) {
-        valueType = 'vectorValue';
-      }
-    }
+    valueType = detectMapRepresentation(proto.mapValue);
   }
 
   return valueType;
@@ -261,7 +308,15 @@ export function valueFromJson(fieldValue: api.IValue): api.IValue {
       };
     }
     case 'mapValue':
-    case 'vectorValue': {
+    case 'vectorValue':
+    case 'regexValue':
+    case 'bsonObjectIdValue':
+    case 'bsonBinaryValue':
+    case 'int32Value':
+    case 'decimal128Value':
+    case 'bsonTimestampValue':
+    case 'minKeyValue':
+    case 'maxKeyValue': {
       const mapValue: ApiMapValue = {};
       const fields = fieldValue.mapValue!.fields;
       if (fields) {

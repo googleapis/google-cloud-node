@@ -157,6 +157,202 @@ export namespace google {
                      * @returns Promise
                      */
                     public reportPropertyUsage(request: google.marketingplatform.admin.v1alpha.IReportPropertyUsageRequest): Promise<google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse>;
+
+                    /**
+                     * Calls GetUserGroup.
+                     * @param request GetUserGroupRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and UserGroup
+                     */
+                    public getUserGroup(request: google.marketingplatform.admin.v1alpha.IGetUserGroupRequest, callback: google.marketingplatform.admin.v1alpha.MarketingplatformAdminService.GetUserGroupCallback): void;
+
+                    /**
+                     * Calls GetUserGroup.
+                     * @param request GetUserGroupRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getUserGroup(request: google.marketingplatform.admin.v1alpha.IGetUserGroupRequest): Promise<google.marketingplatform.admin.v1alpha.UserGroup>;
+
+                    /**
+                     * Calls ListUserGroups.
+                     * @param request ListUserGroupsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListUserGroupsResponse
+                     */
+                    public listUserGroups(request: google.marketingplatform.admin.v1alpha.IListUserGroupsRequest, callback: google.marketingplatform.admin.v1alpha.MarketingplatformAdminService.ListUserGroupsCallback): void;
+
+                    /**
+                     * Calls ListUserGroups.
+                     * @param request ListUserGroupsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listUserGroups(request: google.marketingplatform.admin.v1alpha.IListUserGroupsRequest): Promise<google.marketingplatform.admin.v1alpha.ListUserGroupsResponse>;
+
+                    /**
+                     * Calls CreateUserGroup.
+                     * @param request CreateUserGroupRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and UserGroup
+                     */
+                    public createUserGroup(request: google.marketingplatform.admin.v1alpha.ICreateUserGroupRequest, callback: google.marketingplatform.admin.v1alpha.MarketingplatformAdminService.CreateUserGroupCallback): void;
+
+                    /**
+                     * Calls CreateUserGroup.
+                     * @param request CreateUserGroupRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createUserGroup(request: google.marketingplatform.admin.v1alpha.ICreateUserGroupRequest): Promise<google.marketingplatform.admin.v1alpha.UserGroup>;
+
+                    /**
+                     * Calls UpdateUserGroup.
+                     * @param request UpdateUserGroupRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and UserGroup
+                     */
+                    public updateUserGroup(request: google.marketingplatform.admin.v1alpha.IUpdateUserGroupRequest, callback: google.marketingplatform.admin.v1alpha.MarketingplatformAdminService.UpdateUserGroupCallback): void;
+
+                    /**
+                     * Calls UpdateUserGroup.
+                     * @param request UpdateUserGroupRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateUserGroup(request: google.marketingplatform.admin.v1alpha.IUpdateUserGroupRequest): Promise<google.marketingplatform.admin.v1alpha.UserGroup>;
+
+                    /**
+                     * Calls DeleteUserGroup.
+                     * @param request DeleteUserGroupRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteUserGroup(request: google.marketingplatform.admin.v1alpha.IDeleteUserGroupRequest, callback: google.marketingplatform.admin.v1alpha.MarketingplatformAdminService.DeleteUserGroupCallback): void;
+
+                    /**
+                     * Calls DeleteUserGroup.
+                     * @param request DeleteUserGroupRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteUserGroup(request: google.marketingplatform.admin.v1alpha.IDeleteUserGroupRequest): Promise<google.protobuf.Empty>;
+
+                    /**
+                     * Calls GetUserGroupMember.
+                     * @param request GetUserGroupMemberRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and UserGroupMember
+                     */
+                    public getUserGroupMember(request: google.marketingplatform.admin.v1alpha.IGetUserGroupMemberRequest, callback: google.marketingplatform.admin.v1alpha.MarketingplatformAdminService.GetUserGroupMemberCallback): void;
+
+                    /**
+                     * Calls GetUserGroupMember.
+                     * @param request GetUserGroupMemberRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getUserGroupMember(request: google.marketingplatform.admin.v1alpha.IGetUserGroupMemberRequest): Promise<google.marketingplatform.admin.v1alpha.UserGroupMember>;
+
+                    /**
+                     * Calls ListUserGroupMembers.
+                     * @param request ListUserGroupMembersRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListUserGroupMembersResponse
+                     */
+                    public listUserGroupMembers(request: google.marketingplatform.admin.v1alpha.IListUserGroupMembersRequest, callback: google.marketingplatform.admin.v1alpha.MarketingplatformAdminService.ListUserGroupMembersCallback): void;
+
+                    /**
+                     * Calls ListUserGroupMembers.
+                     * @param request ListUserGroupMembersRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listUserGroupMembers(request: google.marketingplatform.admin.v1alpha.IListUserGroupMembersRequest): Promise<google.marketingplatform.admin.v1alpha.ListUserGroupMembersResponse>;
+
+                    /**
+                     * Calls CreateUserGroupMember.
+                     * @param request CreateUserGroupMemberRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and UserGroupMember
+                     */
+                    public createUserGroupMember(request: google.marketingplatform.admin.v1alpha.ICreateUserGroupMemberRequest, callback: google.marketingplatform.admin.v1alpha.MarketingplatformAdminService.CreateUserGroupMemberCallback): void;
+
+                    /**
+                     * Calls CreateUserGroupMember.
+                     * @param request CreateUserGroupMemberRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createUserGroupMember(request: google.marketingplatform.admin.v1alpha.ICreateUserGroupMemberRequest): Promise<google.marketingplatform.admin.v1alpha.UserGroupMember>;
+
+                    /**
+                     * Calls UpdateUserGroupMember.
+                     * @param request UpdateUserGroupMemberRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and UserGroupMember
+                     */
+                    public updateUserGroupMember(request: google.marketingplatform.admin.v1alpha.IUpdateUserGroupMemberRequest, callback: google.marketingplatform.admin.v1alpha.MarketingplatformAdminService.UpdateUserGroupMemberCallback): void;
+
+                    /**
+                     * Calls UpdateUserGroupMember.
+                     * @param request UpdateUserGroupMemberRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateUserGroupMember(request: google.marketingplatform.admin.v1alpha.IUpdateUserGroupMemberRequest): Promise<google.marketingplatform.admin.v1alpha.UserGroupMember>;
+
+                    /**
+                     * Calls DeleteUserGroupMember.
+                     * @param request DeleteUserGroupMemberRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteUserGroupMember(request: google.marketingplatform.admin.v1alpha.IDeleteUserGroupMemberRequest, callback: google.marketingplatform.admin.v1alpha.MarketingplatformAdminService.DeleteUserGroupMemberCallback): void;
+
+                    /**
+                     * Calls DeleteUserGroupMember.
+                     * @param request DeleteUserGroupMemberRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteUserGroupMember(request: google.marketingplatform.admin.v1alpha.IDeleteUserGroupMemberRequest): Promise<google.protobuf.Empty>;
+
+                    /**
+                     * Calls GetAdminAccessBinding.
+                     * @param request GetAdminAccessBindingRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and AdminAccessBinding
+                     */
+                    public getAdminAccessBinding(request: google.marketingplatform.admin.v1alpha.IGetAdminAccessBindingRequest, callback: google.marketingplatform.admin.v1alpha.MarketingplatformAdminService.GetAdminAccessBindingCallback): void;
+
+                    /**
+                     * Calls GetAdminAccessBinding.
+                     * @param request GetAdminAccessBindingRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getAdminAccessBinding(request: google.marketingplatform.admin.v1alpha.IGetAdminAccessBindingRequest): Promise<google.marketingplatform.admin.v1alpha.AdminAccessBinding>;
+
+                    /**
+                     * Calls ListAdminAccessBindings.
+                     * @param request ListAdminAccessBindingsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListAdminAccessBindingsResponse
+                     */
+                    public listAdminAccessBindings(request: google.marketingplatform.admin.v1alpha.IListAdminAccessBindingsRequest, callback: google.marketingplatform.admin.v1alpha.MarketingplatformAdminService.ListAdminAccessBindingsCallback): void;
+
+                    /**
+                     * Calls ListAdminAccessBindings.
+                     * @param request ListAdminAccessBindingsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listAdminAccessBindings(request: google.marketingplatform.admin.v1alpha.IListAdminAccessBindingsRequest): Promise<google.marketingplatform.admin.v1alpha.ListAdminAccessBindingsResponse>;
+
+                    /**
+                     * Calls CreateAdminAccessBinding.
+                     * @param request CreateAdminAccessBindingRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and AdminAccessBinding
+                     */
+                    public createAdminAccessBinding(request: google.marketingplatform.admin.v1alpha.ICreateAdminAccessBindingRequest, callback: google.marketingplatform.admin.v1alpha.MarketingplatformAdminService.CreateAdminAccessBindingCallback): void;
+
+                    /**
+                     * Calls CreateAdminAccessBinding.
+                     * @param request CreateAdminAccessBindingRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createAdminAccessBinding(request: google.marketingplatform.admin.v1alpha.ICreateAdminAccessBindingRequest): Promise<google.marketingplatform.admin.v1alpha.AdminAccessBinding>;
+
+                    /**
+                     * Calls UpdateAdminAccessBinding.
+                     * @param request UpdateAdminAccessBindingRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and AdminAccessBinding
+                     */
+                    public updateAdminAccessBinding(request: google.marketingplatform.admin.v1alpha.IUpdateAdminAccessBindingRequest, callback: google.marketingplatform.admin.v1alpha.MarketingplatformAdminService.UpdateAdminAccessBindingCallback): void;
+
+                    /**
+                     * Calls UpdateAdminAccessBinding.
+                     * @param request UpdateAdminAccessBindingRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateAdminAccessBinding(request: google.marketingplatform.admin.v1alpha.IUpdateAdminAccessBindingRequest): Promise<google.marketingplatform.admin.v1alpha.AdminAccessBinding>;
                 }
 
                 namespace MarketingplatformAdminService {
@@ -216,6 +412,104 @@ export namespace google {
                      * @param [response] ReportPropertyUsageResponse
                      */
                     type ReportPropertyUsageCallback = (error: (Error|null), response?: google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.marketingplatform.admin.v1alpha.MarketingplatformAdminService|getUserGroup}.
+                     * @param error Error, if any
+                     * @param [response] UserGroup
+                     */
+                    type GetUserGroupCallback = (error: (Error|null), response?: google.marketingplatform.admin.v1alpha.UserGroup) => void;
+
+                    /**
+                     * Callback as used by {@link google.marketingplatform.admin.v1alpha.MarketingplatformAdminService|listUserGroups}.
+                     * @param error Error, if any
+                     * @param [response] ListUserGroupsResponse
+                     */
+                    type ListUserGroupsCallback = (error: (Error|null), response?: google.marketingplatform.admin.v1alpha.ListUserGroupsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.marketingplatform.admin.v1alpha.MarketingplatformAdminService|createUserGroup}.
+                     * @param error Error, if any
+                     * @param [response] UserGroup
+                     */
+                    type CreateUserGroupCallback = (error: (Error|null), response?: google.marketingplatform.admin.v1alpha.UserGroup) => void;
+
+                    /**
+                     * Callback as used by {@link google.marketingplatform.admin.v1alpha.MarketingplatformAdminService|updateUserGroup}.
+                     * @param error Error, if any
+                     * @param [response] UserGroup
+                     */
+                    type UpdateUserGroupCallback = (error: (Error|null), response?: google.marketingplatform.admin.v1alpha.UserGroup) => void;
+
+                    /**
+                     * Callback as used by {@link google.marketingplatform.admin.v1alpha.MarketingplatformAdminService|deleteUserGroup}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteUserGroupCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
+                     * Callback as used by {@link google.marketingplatform.admin.v1alpha.MarketingplatformAdminService|getUserGroupMember}.
+                     * @param error Error, if any
+                     * @param [response] UserGroupMember
+                     */
+                    type GetUserGroupMemberCallback = (error: (Error|null), response?: google.marketingplatform.admin.v1alpha.UserGroupMember) => void;
+
+                    /**
+                     * Callback as used by {@link google.marketingplatform.admin.v1alpha.MarketingplatformAdminService|listUserGroupMembers}.
+                     * @param error Error, if any
+                     * @param [response] ListUserGroupMembersResponse
+                     */
+                    type ListUserGroupMembersCallback = (error: (Error|null), response?: google.marketingplatform.admin.v1alpha.ListUserGroupMembersResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.marketingplatform.admin.v1alpha.MarketingplatformAdminService|createUserGroupMember}.
+                     * @param error Error, if any
+                     * @param [response] UserGroupMember
+                     */
+                    type CreateUserGroupMemberCallback = (error: (Error|null), response?: google.marketingplatform.admin.v1alpha.UserGroupMember) => void;
+
+                    /**
+                     * Callback as used by {@link google.marketingplatform.admin.v1alpha.MarketingplatformAdminService|updateUserGroupMember}.
+                     * @param error Error, if any
+                     * @param [response] UserGroupMember
+                     */
+                    type UpdateUserGroupMemberCallback = (error: (Error|null), response?: google.marketingplatform.admin.v1alpha.UserGroupMember) => void;
+
+                    /**
+                     * Callback as used by {@link google.marketingplatform.admin.v1alpha.MarketingplatformAdminService|deleteUserGroupMember}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteUserGroupMemberCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
+                     * Callback as used by {@link google.marketingplatform.admin.v1alpha.MarketingplatformAdminService|getAdminAccessBinding}.
+                     * @param error Error, if any
+                     * @param [response] AdminAccessBinding
+                     */
+                    type GetAdminAccessBindingCallback = (error: (Error|null), response?: google.marketingplatform.admin.v1alpha.AdminAccessBinding) => void;
+
+                    /**
+                     * Callback as used by {@link google.marketingplatform.admin.v1alpha.MarketingplatformAdminService|listAdminAccessBindings}.
+                     * @param error Error, if any
+                     * @param [response] ListAdminAccessBindingsResponse
+                     */
+                    type ListAdminAccessBindingsCallback = (error: (Error|null), response?: google.marketingplatform.admin.v1alpha.ListAdminAccessBindingsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.marketingplatform.admin.v1alpha.MarketingplatformAdminService|createAdminAccessBinding}.
+                     * @param error Error, if any
+                     * @param [response] AdminAccessBinding
+                     */
+                    type CreateAdminAccessBindingCallback = (error: (Error|null), response?: google.marketingplatform.admin.v1alpha.AdminAccessBinding) => void;
+
+                    /**
+                     * Callback as used by {@link google.marketingplatform.admin.v1alpha.MarketingplatformAdminService|updateAdminAccessBinding}.
+                     * @param error Error, if any
+                     * @param [response] AdminAccessBinding
+                     */
+                    type UpdateAdminAccessBindingCallback = (error: (Error|null), response?: google.marketingplatform.admin.v1alpha.AdminAccessBinding) => void;
                 }
 
                 /** Properties of a GetOrganizationRequest. */
@@ -1902,6 +2196,1745 @@ export namespace google {
                     }
                 }
 
+                /** Properties of a GetUserGroupRequest. */
+                interface IGetUserGroupRequest {
+
+                    /** GetUserGroupRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetUserGroupRequest. */
+                class GetUserGroupRequest implements IGetUserGroupRequest {
+
+                    /**
+                     * Constructs a new GetUserGroupRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.marketingplatform.admin.v1alpha.IGetUserGroupRequest);
+
+                    /** GetUserGroupRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetUserGroupRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetUserGroupRequest instance
+                     */
+                    public static create(properties?: google.marketingplatform.admin.v1alpha.IGetUserGroupRequest): google.marketingplatform.admin.v1alpha.GetUserGroupRequest;
+
+                    /**
+                     * Encodes the specified GetUserGroupRequest message. Does not implicitly {@link google.marketingplatform.admin.v1alpha.GetUserGroupRequest.verify|verify} messages.
+                     * @param message GetUserGroupRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.marketingplatform.admin.v1alpha.IGetUserGroupRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetUserGroupRequest message, length delimited. Does not implicitly {@link google.marketingplatform.admin.v1alpha.GetUserGroupRequest.verify|verify} messages.
+                     * @param message GetUserGroupRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.marketingplatform.admin.v1alpha.IGetUserGroupRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetUserGroupRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetUserGroupRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.marketingplatform.admin.v1alpha.GetUserGroupRequest;
+
+                    /**
+                     * Decodes a GetUserGroupRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetUserGroupRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.marketingplatform.admin.v1alpha.GetUserGroupRequest;
+
+                    /**
+                     * Verifies a GetUserGroupRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetUserGroupRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetUserGroupRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.marketingplatform.admin.v1alpha.GetUserGroupRequest;
+
+                    /**
+                     * Creates a plain object from a GetUserGroupRequest message. Also converts values to other types if specified.
+                     * @param message GetUserGroupRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.marketingplatform.admin.v1alpha.GetUserGroupRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetUserGroupRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetUserGroupRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListUserGroupsRequest. */
+                interface IListUserGroupsRequest {
+
+                    /** ListUserGroupsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListUserGroupsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListUserGroupsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListUserGroupsRequest. */
+                class ListUserGroupsRequest implements IListUserGroupsRequest {
+
+                    /**
+                     * Constructs a new ListUserGroupsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.marketingplatform.admin.v1alpha.IListUserGroupsRequest);
+
+                    /** ListUserGroupsRequest parent. */
+                    public parent: string;
+
+                    /** ListUserGroupsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListUserGroupsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListUserGroupsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListUserGroupsRequest instance
+                     */
+                    public static create(properties?: google.marketingplatform.admin.v1alpha.IListUserGroupsRequest): google.marketingplatform.admin.v1alpha.ListUserGroupsRequest;
+
+                    /**
+                     * Encodes the specified ListUserGroupsRequest message. Does not implicitly {@link google.marketingplatform.admin.v1alpha.ListUserGroupsRequest.verify|verify} messages.
+                     * @param message ListUserGroupsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.marketingplatform.admin.v1alpha.IListUserGroupsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListUserGroupsRequest message, length delimited. Does not implicitly {@link google.marketingplatform.admin.v1alpha.ListUserGroupsRequest.verify|verify} messages.
+                     * @param message ListUserGroupsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.marketingplatform.admin.v1alpha.IListUserGroupsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListUserGroupsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListUserGroupsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.marketingplatform.admin.v1alpha.ListUserGroupsRequest;
+
+                    /**
+                     * Decodes a ListUserGroupsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListUserGroupsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.marketingplatform.admin.v1alpha.ListUserGroupsRequest;
+
+                    /**
+                     * Verifies a ListUserGroupsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListUserGroupsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListUserGroupsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.marketingplatform.admin.v1alpha.ListUserGroupsRequest;
+
+                    /**
+                     * Creates a plain object from a ListUserGroupsRequest message. Also converts values to other types if specified.
+                     * @param message ListUserGroupsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.marketingplatform.admin.v1alpha.ListUserGroupsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListUserGroupsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListUserGroupsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListUserGroupsResponse. */
+                interface IListUserGroupsResponse {
+
+                    /** ListUserGroupsResponse userGroups */
+                    userGroups?: (google.marketingplatform.admin.v1alpha.IUserGroup[]|null);
+
+                    /** ListUserGroupsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListUserGroupsResponse. */
+                class ListUserGroupsResponse implements IListUserGroupsResponse {
+
+                    /**
+                     * Constructs a new ListUserGroupsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.marketingplatform.admin.v1alpha.IListUserGroupsResponse);
+
+                    /** ListUserGroupsResponse userGroups. */
+                    public userGroups: google.marketingplatform.admin.v1alpha.IUserGroup[];
+
+                    /** ListUserGroupsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListUserGroupsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListUserGroupsResponse instance
+                     */
+                    public static create(properties?: google.marketingplatform.admin.v1alpha.IListUserGroupsResponse): google.marketingplatform.admin.v1alpha.ListUserGroupsResponse;
+
+                    /**
+                     * Encodes the specified ListUserGroupsResponse message. Does not implicitly {@link google.marketingplatform.admin.v1alpha.ListUserGroupsResponse.verify|verify} messages.
+                     * @param message ListUserGroupsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.marketingplatform.admin.v1alpha.IListUserGroupsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListUserGroupsResponse message, length delimited. Does not implicitly {@link google.marketingplatform.admin.v1alpha.ListUserGroupsResponse.verify|verify} messages.
+                     * @param message ListUserGroupsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.marketingplatform.admin.v1alpha.IListUserGroupsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListUserGroupsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListUserGroupsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.marketingplatform.admin.v1alpha.ListUserGroupsResponse;
+
+                    /**
+                     * Decodes a ListUserGroupsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListUserGroupsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.marketingplatform.admin.v1alpha.ListUserGroupsResponse;
+
+                    /**
+                     * Verifies a ListUserGroupsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListUserGroupsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListUserGroupsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.marketingplatform.admin.v1alpha.ListUserGroupsResponse;
+
+                    /**
+                     * Creates a plain object from a ListUserGroupsResponse message. Also converts values to other types if specified.
+                     * @param message ListUserGroupsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.marketingplatform.admin.v1alpha.ListUserGroupsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListUserGroupsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListUserGroupsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateUserGroupRequest. */
+                interface ICreateUserGroupRequest {
+
+                    /** CreateUserGroupRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateUserGroupRequest userGroup */
+                    userGroup?: (google.marketingplatform.admin.v1alpha.IUserGroup|null);
+                }
+
+                /** Represents a CreateUserGroupRequest. */
+                class CreateUserGroupRequest implements ICreateUserGroupRequest {
+
+                    /**
+                     * Constructs a new CreateUserGroupRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.marketingplatform.admin.v1alpha.ICreateUserGroupRequest);
+
+                    /** CreateUserGroupRequest parent. */
+                    public parent: string;
+
+                    /** CreateUserGroupRequest userGroup. */
+                    public userGroup?: (google.marketingplatform.admin.v1alpha.IUserGroup|null);
+
+                    /**
+                     * Creates a new CreateUserGroupRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateUserGroupRequest instance
+                     */
+                    public static create(properties?: google.marketingplatform.admin.v1alpha.ICreateUserGroupRequest): google.marketingplatform.admin.v1alpha.CreateUserGroupRequest;
+
+                    /**
+                     * Encodes the specified CreateUserGroupRequest message. Does not implicitly {@link google.marketingplatform.admin.v1alpha.CreateUserGroupRequest.verify|verify} messages.
+                     * @param message CreateUserGroupRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.marketingplatform.admin.v1alpha.ICreateUserGroupRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateUserGroupRequest message, length delimited. Does not implicitly {@link google.marketingplatform.admin.v1alpha.CreateUserGroupRequest.verify|verify} messages.
+                     * @param message CreateUserGroupRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.marketingplatform.admin.v1alpha.ICreateUserGroupRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateUserGroupRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateUserGroupRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.marketingplatform.admin.v1alpha.CreateUserGroupRequest;
+
+                    /**
+                     * Decodes a CreateUserGroupRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateUserGroupRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.marketingplatform.admin.v1alpha.CreateUserGroupRequest;
+
+                    /**
+                     * Verifies a CreateUserGroupRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateUserGroupRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateUserGroupRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.marketingplatform.admin.v1alpha.CreateUserGroupRequest;
+
+                    /**
+                     * Creates a plain object from a CreateUserGroupRequest message. Also converts values to other types if specified.
+                     * @param message CreateUserGroupRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.marketingplatform.admin.v1alpha.CreateUserGroupRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateUserGroupRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateUserGroupRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateUserGroupRequest. */
+                interface IUpdateUserGroupRequest {
+
+                    /** UpdateUserGroupRequest userGroup */
+                    userGroup?: (google.marketingplatform.admin.v1alpha.IUserGroup|null);
+
+                    /** UpdateUserGroupRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateUserGroupRequest. */
+                class UpdateUserGroupRequest implements IUpdateUserGroupRequest {
+
+                    /**
+                     * Constructs a new UpdateUserGroupRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.marketingplatform.admin.v1alpha.IUpdateUserGroupRequest);
+
+                    /** UpdateUserGroupRequest userGroup. */
+                    public userGroup?: (google.marketingplatform.admin.v1alpha.IUserGroup|null);
+
+                    /** UpdateUserGroupRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateUserGroupRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateUserGroupRequest instance
+                     */
+                    public static create(properties?: google.marketingplatform.admin.v1alpha.IUpdateUserGroupRequest): google.marketingplatform.admin.v1alpha.UpdateUserGroupRequest;
+
+                    /**
+                     * Encodes the specified UpdateUserGroupRequest message. Does not implicitly {@link google.marketingplatform.admin.v1alpha.UpdateUserGroupRequest.verify|verify} messages.
+                     * @param message UpdateUserGroupRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.marketingplatform.admin.v1alpha.IUpdateUserGroupRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateUserGroupRequest message, length delimited. Does not implicitly {@link google.marketingplatform.admin.v1alpha.UpdateUserGroupRequest.verify|verify} messages.
+                     * @param message UpdateUserGroupRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.marketingplatform.admin.v1alpha.IUpdateUserGroupRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateUserGroupRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateUserGroupRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.marketingplatform.admin.v1alpha.UpdateUserGroupRequest;
+
+                    /**
+                     * Decodes an UpdateUserGroupRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateUserGroupRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.marketingplatform.admin.v1alpha.UpdateUserGroupRequest;
+
+                    /**
+                     * Verifies an UpdateUserGroupRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateUserGroupRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateUserGroupRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.marketingplatform.admin.v1alpha.UpdateUserGroupRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateUserGroupRequest message. Also converts values to other types if specified.
+                     * @param message UpdateUserGroupRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.marketingplatform.admin.v1alpha.UpdateUserGroupRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateUserGroupRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateUserGroupRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteUserGroupRequest. */
+                interface IDeleteUserGroupRequest {
+
+                    /** DeleteUserGroupRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteUserGroupRequest. */
+                class DeleteUserGroupRequest implements IDeleteUserGroupRequest {
+
+                    /**
+                     * Constructs a new DeleteUserGroupRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.marketingplatform.admin.v1alpha.IDeleteUserGroupRequest);
+
+                    /** DeleteUserGroupRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteUserGroupRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteUserGroupRequest instance
+                     */
+                    public static create(properties?: google.marketingplatform.admin.v1alpha.IDeleteUserGroupRequest): google.marketingplatform.admin.v1alpha.DeleteUserGroupRequest;
+
+                    /**
+                     * Encodes the specified DeleteUserGroupRequest message. Does not implicitly {@link google.marketingplatform.admin.v1alpha.DeleteUserGroupRequest.verify|verify} messages.
+                     * @param message DeleteUserGroupRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.marketingplatform.admin.v1alpha.IDeleteUserGroupRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteUserGroupRequest message, length delimited. Does not implicitly {@link google.marketingplatform.admin.v1alpha.DeleteUserGroupRequest.verify|verify} messages.
+                     * @param message DeleteUserGroupRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.marketingplatform.admin.v1alpha.IDeleteUserGroupRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteUserGroupRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteUserGroupRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.marketingplatform.admin.v1alpha.DeleteUserGroupRequest;
+
+                    /**
+                     * Decodes a DeleteUserGroupRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteUserGroupRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.marketingplatform.admin.v1alpha.DeleteUserGroupRequest;
+
+                    /**
+                     * Verifies a DeleteUserGroupRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteUserGroupRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteUserGroupRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.marketingplatform.admin.v1alpha.DeleteUserGroupRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteUserGroupRequest message. Also converts values to other types if specified.
+                     * @param message DeleteUserGroupRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.marketingplatform.admin.v1alpha.DeleteUserGroupRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteUserGroupRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteUserGroupRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetUserGroupMemberRequest. */
+                interface IGetUserGroupMemberRequest {
+
+                    /** GetUserGroupMemberRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetUserGroupMemberRequest. */
+                class GetUserGroupMemberRequest implements IGetUserGroupMemberRequest {
+
+                    /**
+                     * Constructs a new GetUserGroupMemberRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.marketingplatform.admin.v1alpha.IGetUserGroupMemberRequest);
+
+                    /** GetUserGroupMemberRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetUserGroupMemberRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetUserGroupMemberRequest instance
+                     */
+                    public static create(properties?: google.marketingplatform.admin.v1alpha.IGetUserGroupMemberRequest): google.marketingplatform.admin.v1alpha.GetUserGroupMemberRequest;
+
+                    /**
+                     * Encodes the specified GetUserGroupMemberRequest message. Does not implicitly {@link google.marketingplatform.admin.v1alpha.GetUserGroupMemberRequest.verify|verify} messages.
+                     * @param message GetUserGroupMemberRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.marketingplatform.admin.v1alpha.IGetUserGroupMemberRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetUserGroupMemberRequest message, length delimited. Does not implicitly {@link google.marketingplatform.admin.v1alpha.GetUserGroupMemberRequest.verify|verify} messages.
+                     * @param message GetUserGroupMemberRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.marketingplatform.admin.v1alpha.IGetUserGroupMemberRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetUserGroupMemberRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetUserGroupMemberRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.marketingplatform.admin.v1alpha.GetUserGroupMemberRequest;
+
+                    /**
+                     * Decodes a GetUserGroupMemberRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetUserGroupMemberRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.marketingplatform.admin.v1alpha.GetUserGroupMemberRequest;
+
+                    /**
+                     * Verifies a GetUserGroupMemberRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetUserGroupMemberRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetUserGroupMemberRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.marketingplatform.admin.v1alpha.GetUserGroupMemberRequest;
+
+                    /**
+                     * Creates a plain object from a GetUserGroupMemberRequest message. Also converts values to other types if specified.
+                     * @param message GetUserGroupMemberRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.marketingplatform.admin.v1alpha.GetUserGroupMemberRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetUserGroupMemberRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetUserGroupMemberRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListUserGroupMembersRequest. */
+                interface IListUserGroupMembersRequest {
+
+                    /** ListUserGroupMembersRequest parent */
+                    parent?: (string|null);
+
+                    /** ListUserGroupMembersRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListUserGroupMembersRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListUserGroupMembersRequest. */
+                class ListUserGroupMembersRequest implements IListUserGroupMembersRequest {
+
+                    /**
+                     * Constructs a new ListUserGroupMembersRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.marketingplatform.admin.v1alpha.IListUserGroupMembersRequest);
+
+                    /** ListUserGroupMembersRequest parent. */
+                    public parent: string;
+
+                    /** ListUserGroupMembersRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListUserGroupMembersRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListUserGroupMembersRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListUserGroupMembersRequest instance
+                     */
+                    public static create(properties?: google.marketingplatform.admin.v1alpha.IListUserGroupMembersRequest): google.marketingplatform.admin.v1alpha.ListUserGroupMembersRequest;
+
+                    /**
+                     * Encodes the specified ListUserGroupMembersRequest message. Does not implicitly {@link google.marketingplatform.admin.v1alpha.ListUserGroupMembersRequest.verify|verify} messages.
+                     * @param message ListUserGroupMembersRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.marketingplatform.admin.v1alpha.IListUserGroupMembersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListUserGroupMembersRequest message, length delimited. Does not implicitly {@link google.marketingplatform.admin.v1alpha.ListUserGroupMembersRequest.verify|verify} messages.
+                     * @param message ListUserGroupMembersRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.marketingplatform.admin.v1alpha.IListUserGroupMembersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListUserGroupMembersRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListUserGroupMembersRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.marketingplatform.admin.v1alpha.ListUserGroupMembersRequest;
+
+                    /**
+                     * Decodes a ListUserGroupMembersRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListUserGroupMembersRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.marketingplatform.admin.v1alpha.ListUserGroupMembersRequest;
+
+                    /**
+                     * Verifies a ListUserGroupMembersRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListUserGroupMembersRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListUserGroupMembersRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.marketingplatform.admin.v1alpha.ListUserGroupMembersRequest;
+
+                    /**
+                     * Creates a plain object from a ListUserGroupMembersRequest message. Also converts values to other types if specified.
+                     * @param message ListUserGroupMembersRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.marketingplatform.admin.v1alpha.ListUserGroupMembersRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListUserGroupMembersRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListUserGroupMembersRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListUserGroupMembersResponse. */
+                interface IListUserGroupMembersResponse {
+
+                    /** ListUserGroupMembersResponse userGroupMembers */
+                    userGroupMembers?: (google.marketingplatform.admin.v1alpha.IUserGroupMember[]|null);
+
+                    /** ListUserGroupMembersResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListUserGroupMembersResponse. */
+                class ListUserGroupMembersResponse implements IListUserGroupMembersResponse {
+
+                    /**
+                     * Constructs a new ListUserGroupMembersResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.marketingplatform.admin.v1alpha.IListUserGroupMembersResponse);
+
+                    /** ListUserGroupMembersResponse userGroupMembers. */
+                    public userGroupMembers: google.marketingplatform.admin.v1alpha.IUserGroupMember[];
+
+                    /** ListUserGroupMembersResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListUserGroupMembersResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListUserGroupMembersResponse instance
+                     */
+                    public static create(properties?: google.marketingplatform.admin.v1alpha.IListUserGroupMembersResponse): google.marketingplatform.admin.v1alpha.ListUserGroupMembersResponse;
+
+                    /**
+                     * Encodes the specified ListUserGroupMembersResponse message. Does not implicitly {@link google.marketingplatform.admin.v1alpha.ListUserGroupMembersResponse.verify|verify} messages.
+                     * @param message ListUserGroupMembersResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.marketingplatform.admin.v1alpha.IListUserGroupMembersResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListUserGroupMembersResponse message, length delimited. Does not implicitly {@link google.marketingplatform.admin.v1alpha.ListUserGroupMembersResponse.verify|verify} messages.
+                     * @param message ListUserGroupMembersResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.marketingplatform.admin.v1alpha.IListUserGroupMembersResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListUserGroupMembersResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListUserGroupMembersResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.marketingplatform.admin.v1alpha.ListUserGroupMembersResponse;
+
+                    /**
+                     * Decodes a ListUserGroupMembersResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListUserGroupMembersResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.marketingplatform.admin.v1alpha.ListUserGroupMembersResponse;
+
+                    /**
+                     * Verifies a ListUserGroupMembersResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListUserGroupMembersResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListUserGroupMembersResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.marketingplatform.admin.v1alpha.ListUserGroupMembersResponse;
+
+                    /**
+                     * Creates a plain object from a ListUserGroupMembersResponse message. Also converts values to other types if specified.
+                     * @param message ListUserGroupMembersResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.marketingplatform.admin.v1alpha.ListUserGroupMembersResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListUserGroupMembersResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListUserGroupMembersResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateUserGroupMemberRequest. */
+                interface ICreateUserGroupMemberRequest {
+
+                    /** CreateUserGroupMemberRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateUserGroupMemberRequest userGroupMember */
+                    userGroupMember?: (google.marketingplatform.admin.v1alpha.IUserGroupMember|null);
+                }
+
+                /** Represents a CreateUserGroupMemberRequest. */
+                class CreateUserGroupMemberRequest implements ICreateUserGroupMemberRequest {
+
+                    /**
+                     * Constructs a new CreateUserGroupMemberRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.marketingplatform.admin.v1alpha.ICreateUserGroupMemberRequest);
+
+                    /** CreateUserGroupMemberRequest parent. */
+                    public parent: string;
+
+                    /** CreateUserGroupMemberRequest userGroupMember. */
+                    public userGroupMember?: (google.marketingplatform.admin.v1alpha.IUserGroupMember|null);
+
+                    /**
+                     * Creates a new CreateUserGroupMemberRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateUserGroupMemberRequest instance
+                     */
+                    public static create(properties?: google.marketingplatform.admin.v1alpha.ICreateUserGroupMemberRequest): google.marketingplatform.admin.v1alpha.CreateUserGroupMemberRequest;
+
+                    /**
+                     * Encodes the specified CreateUserGroupMemberRequest message. Does not implicitly {@link google.marketingplatform.admin.v1alpha.CreateUserGroupMemberRequest.verify|verify} messages.
+                     * @param message CreateUserGroupMemberRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.marketingplatform.admin.v1alpha.ICreateUserGroupMemberRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateUserGroupMemberRequest message, length delimited. Does not implicitly {@link google.marketingplatform.admin.v1alpha.CreateUserGroupMemberRequest.verify|verify} messages.
+                     * @param message CreateUserGroupMemberRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.marketingplatform.admin.v1alpha.ICreateUserGroupMemberRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateUserGroupMemberRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateUserGroupMemberRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.marketingplatform.admin.v1alpha.CreateUserGroupMemberRequest;
+
+                    /**
+                     * Decodes a CreateUserGroupMemberRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateUserGroupMemberRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.marketingplatform.admin.v1alpha.CreateUserGroupMemberRequest;
+
+                    /**
+                     * Verifies a CreateUserGroupMemberRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateUserGroupMemberRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateUserGroupMemberRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.marketingplatform.admin.v1alpha.CreateUserGroupMemberRequest;
+
+                    /**
+                     * Creates a plain object from a CreateUserGroupMemberRequest message. Also converts values to other types if specified.
+                     * @param message CreateUserGroupMemberRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.marketingplatform.admin.v1alpha.CreateUserGroupMemberRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateUserGroupMemberRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateUserGroupMemberRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateUserGroupMemberRequest. */
+                interface IUpdateUserGroupMemberRequest {
+
+                    /** UpdateUserGroupMemberRequest userGroupMember */
+                    userGroupMember?: (google.marketingplatform.admin.v1alpha.IUserGroupMember|null);
+
+                    /** UpdateUserGroupMemberRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateUserGroupMemberRequest. */
+                class UpdateUserGroupMemberRequest implements IUpdateUserGroupMemberRequest {
+
+                    /**
+                     * Constructs a new UpdateUserGroupMemberRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.marketingplatform.admin.v1alpha.IUpdateUserGroupMemberRequest);
+
+                    /** UpdateUserGroupMemberRequest userGroupMember. */
+                    public userGroupMember?: (google.marketingplatform.admin.v1alpha.IUserGroupMember|null);
+
+                    /** UpdateUserGroupMemberRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateUserGroupMemberRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateUserGroupMemberRequest instance
+                     */
+                    public static create(properties?: google.marketingplatform.admin.v1alpha.IUpdateUserGroupMemberRequest): google.marketingplatform.admin.v1alpha.UpdateUserGroupMemberRequest;
+
+                    /**
+                     * Encodes the specified UpdateUserGroupMemberRequest message. Does not implicitly {@link google.marketingplatform.admin.v1alpha.UpdateUserGroupMemberRequest.verify|verify} messages.
+                     * @param message UpdateUserGroupMemberRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.marketingplatform.admin.v1alpha.IUpdateUserGroupMemberRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateUserGroupMemberRequest message, length delimited. Does not implicitly {@link google.marketingplatform.admin.v1alpha.UpdateUserGroupMemberRequest.verify|verify} messages.
+                     * @param message UpdateUserGroupMemberRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.marketingplatform.admin.v1alpha.IUpdateUserGroupMemberRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateUserGroupMemberRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateUserGroupMemberRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.marketingplatform.admin.v1alpha.UpdateUserGroupMemberRequest;
+
+                    /**
+                     * Decodes an UpdateUserGroupMemberRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateUserGroupMemberRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.marketingplatform.admin.v1alpha.UpdateUserGroupMemberRequest;
+
+                    /**
+                     * Verifies an UpdateUserGroupMemberRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateUserGroupMemberRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateUserGroupMemberRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.marketingplatform.admin.v1alpha.UpdateUserGroupMemberRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateUserGroupMemberRequest message. Also converts values to other types if specified.
+                     * @param message UpdateUserGroupMemberRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.marketingplatform.admin.v1alpha.UpdateUserGroupMemberRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateUserGroupMemberRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateUserGroupMemberRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteUserGroupMemberRequest. */
+                interface IDeleteUserGroupMemberRequest {
+
+                    /** DeleteUserGroupMemberRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteUserGroupMemberRequest. */
+                class DeleteUserGroupMemberRequest implements IDeleteUserGroupMemberRequest {
+
+                    /**
+                     * Constructs a new DeleteUserGroupMemberRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.marketingplatform.admin.v1alpha.IDeleteUserGroupMemberRequest);
+
+                    /** DeleteUserGroupMemberRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteUserGroupMemberRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteUserGroupMemberRequest instance
+                     */
+                    public static create(properties?: google.marketingplatform.admin.v1alpha.IDeleteUserGroupMemberRequest): google.marketingplatform.admin.v1alpha.DeleteUserGroupMemberRequest;
+
+                    /**
+                     * Encodes the specified DeleteUserGroupMemberRequest message. Does not implicitly {@link google.marketingplatform.admin.v1alpha.DeleteUserGroupMemberRequest.verify|verify} messages.
+                     * @param message DeleteUserGroupMemberRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.marketingplatform.admin.v1alpha.IDeleteUserGroupMemberRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteUserGroupMemberRequest message, length delimited. Does not implicitly {@link google.marketingplatform.admin.v1alpha.DeleteUserGroupMemberRequest.verify|verify} messages.
+                     * @param message DeleteUserGroupMemberRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.marketingplatform.admin.v1alpha.IDeleteUserGroupMemberRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteUserGroupMemberRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteUserGroupMemberRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.marketingplatform.admin.v1alpha.DeleteUserGroupMemberRequest;
+
+                    /**
+                     * Decodes a DeleteUserGroupMemberRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteUserGroupMemberRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.marketingplatform.admin.v1alpha.DeleteUserGroupMemberRequest;
+
+                    /**
+                     * Verifies a DeleteUserGroupMemberRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteUserGroupMemberRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteUserGroupMemberRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.marketingplatform.admin.v1alpha.DeleteUserGroupMemberRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteUserGroupMemberRequest message. Also converts values to other types if specified.
+                     * @param message DeleteUserGroupMemberRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.marketingplatform.admin.v1alpha.DeleteUserGroupMemberRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteUserGroupMemberRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteUserGroupMemberRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetAdminAccessBindingRequest. */
+                interface IGetAdminAccessBindingRequest {
+
+                    /** GetAdminAccessBindingRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetAdminAccessBindingRequest. */
+                class GetAdminAccessBindingRequest implements IGetAdminAccessBindingRequest {
+
+                    /**
+                     * Constructs a new GetAdminAccessBindingRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.marketingplatform.admin.v1alpha.IGetAdminAccessBindingRequest);
+
+                    /** GetAdminAccessBindingRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetAdminAccessBindingRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetAdminAccessBindingRequest instance
+                     */
+                    public static create(properties?: google.marketingplatform.admin.v1alpha.IGetAdminAccessBindingRequest): google.marketingplatform.admin.v1alpha.GetAdminAccessBindingRequest;
+
+                    /**
+                     * Encodes the specified GetAdminAccessBindingRequest message. Does not implicitly {@link google.marketingplatform.admin.v1alpha.GetAdminAccessBindingRequest.verify|verify} messages.
+                     * @param message GetAdminAccessBindingRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.marketingplatform.admin.v1alpha.IGetAdminAccessBindingRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetAdminAccessBindingRequest message, length delimited. Does not implicitly {@link google.marketingplatform.admin.v1alpha.GetAdminAccessBindingRequest.verify|verify} messages.
+                     * @param message GetAdminAccessBindingRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.marketingplatform.admin.v1alpha.IGetAdminAccessBindingRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetAdminAccessBindingRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetAdminAccessBindingRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.marketingplatform.admin.v1alpha.GetAdminAccessBindingRequest;
+
+                    /**
+                     * Decodes a GetAdminAccessBindingRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetAdminAccessBindingRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.marketingplatform.admin.v1alpha.GetAdminAccessBindingRequest;
+
+                    /**
+                     * Verifies a GetAdminAccessBindingRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetAdminAccessBindingRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetAdminAccessBindingRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.marketingplatform.admin.v1alpha.GetAdminAccessBindingRequest;
+
+                    /**
+                     * Creates a plain object from a GetAdminAccessBindingRequest message. Also converts values to other types if specified.
+                     * @param message GetAdminAccessBindingRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.marketingplatform.admin.v1alpha.GetAdminAccessBindingRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetAdminAccessBindingRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetAdminAccessBindingRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListAdminAccessBindingsRequest. */
+                interface IListAdminAccessBindingsRequest {
+
+                    /** ListAdminAccessBindingsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListAdminAccessBindingsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListAdminAccessBindingsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListAdminAccessBindingsRequest. */
+                class ListAdminAccessBindingsRequest implements IListAdminAccessBindingsRequest {
+
+                    /**
+                     * Constructs a new ListAdminAccessBindingsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.marketingplatform.admin.v1alpha.IListAdminAccessBindingsRequest);
+
+                    /** ListAdminAccessBindingsRequest parent. */
+                    public parent: string;
+
+                    /** ListAdminAccessBindingsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListAdminAccessBindingsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListAdminAccessBindingsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListAdminAccessBindingsRequest instance
+                     */
+                    public static create(properties?: google.marketingplatform.admin.v1alpha.IListAdminAccessBindingsRequest): google.marketingplatform.admin.v1alpha.ListAdminAccessBindingsRequest;
+
+                    /**
+                     * Encodes the specified ListAdminAccessBindingsRequest message. Does not implicitly {@link google.marketingplatform.admin.v1alpha.ListAdminAccessBindingsRequest.verify|verify} messages.
+                     * @param message ListAdminAccessBindingsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.marketingplatform.admin.v1alpha.IListAdminAccessBindingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListAdminAccessBindingsRequest message, length delimited. Does not implicitly {@link google.marketingplatform.admin.v1alpha.ListAdminAccessBindingsRequest.verify|verify} messages.
+                     * @param message ListAdminAccessBindingsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.marketingplatform.admin.v1alpha.IListAdminAccessBindingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListAdminAccessBindingsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListAdminAccessBindingsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.marketingplatform.admin.v1alpha.ListAdminAccessBindingsRequest;
+
+                    /**
+                     * Decodes a ListAdminAccessBindingsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListAdminAccessBindingsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.marketingplatform.admin.v1alpha.ListAdminAccessBindingsRequest;
+
+                    /**
+                     * Verifies a ListAdminAccessBindingsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListAdminAccessBindingsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListAdminAccessBindingsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.marketingplatform.admin.v1alpha.ListAdminAccessBindingsRequest;
+
+                    /**
+                     * Creates a plain object from a ListAdminAccessBindingsRequest message. Also converts values to other types if specified.
+                     * @param message ListAdminAccessBindingsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.marketingplatform.admin.v1alpha.ListAdminAccessBindingsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListAdminAccessBindingsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListAdminAccessBindingsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListAdminAccessBindingsResponse. */
+                interface IListAdminAccessBindingsResponse {
+
+                    /** ListAdminAccessBindingsResponse adminAccessBindings */
+                    adminAccessBindings?: (google.marketingplatform.admin.v1alpha.IAdminAccessBinding[]|null);
+
+                    /** ListAdminAccessBindingsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListAdminAccessBindingsResponse. */
+                class ListAdminAccessBindingsResponse implements IListAdminAccessBindingsResponse {
+
+                    /**
+                     * Constructs a new ListAdminAccessBindingsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.marketingplatform.admin.v1alpha.IListAdminAccessBindingsResponse);
+
+                    /** ListAdminAccessBindingsResponse adminAccessBindings. */
+                    public adminAccessBindings: google.marketingplatform.admin.v1alpha.IAdminAccessBinding[];
+
+                    /** ListAdminAccessBindingsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListAdminAccessBindingsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListAdminAccessBindingsResponse instance
+                     */
+                    public static create(properties?: google.marketingplatform.admin.v1alpha.IListAdminAccessBindingsResponse): google.marketingplatform.admin.v1alpha.ListAdminAccessBindingsResponse;
+
+                    /**
+                     * Encodes the specified ListAdminAccessBindingsResponse message. Does not implicitly {@link google.marketingplatform.admin.v1alpha.ListAdminAccessBindingsResponse.verify|verify} messages.
+                     * @param message ListAdminAccessBindingsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.marketingplatform.admin.v1alpha.IListAdminAccessBindingsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListAdminAccessBindingsResponse message, length delimited. Does not implicitly {@link google.marketingplatform.admin.v1alpha.ListAdminAccessBindingsResponse.verify|verify} messages.
+                     * @param message ListAdminAccessBindingsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.marketingplatform.admin.v1alpha.IListAdminAccessBindingsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListAdminAccessBindingsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListAdminAccessBindingsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.marketingplatform.admin.v1alpha.ListAdminAccessBindingsResponse;
+
+                    /**
+                     * Decodes a ListAdminAccessBindingsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListAdminAccessBindingsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.marketingplatform.admin.v1alpha.ListAdminAccessBindingsResponse;
+
+                    /**
+                     * Verifies a ListAdminAccessBindingsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListAdminAccessBindingsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListAdminAccessBindingsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.marketingplatform.admin.v1alpha.ListAdminAccessBindingsResponse;
+
+                    /**
+                     * Creates a plain object from a ListAdminAccessBindingsResponse message. Also converts values to other types if specified.
+                     * @param message ListAdminAccessBindingsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.marketingplatform.admin.v1alpha.ListAdminAccessBindingsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListAdminAccessBindingsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListAdminAccessBindingsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateAdminAccessBindingRequest. */
+                interface ICreateAdminAccessBindingRequest {
+
+                    /** CreateAdminAccessBindingRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateAdminAccessBindingRequest adminAccessBinding */
+                    adminAccessBinding?: (google.marketingplatform.admin.v1alpha.IAdminAccessBinding|null);
+                }
+
+                /** Represents a CreateAdminAccessBindingRequest. */
+                class CreateAdminAccessBindingRequest implements ICreateAdminAccessBindingRequest {
+
+                    /**
+                     * Constructs a new CreateAdminAccessBindingRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.marketingplatform.admin.v1alpha.ICreateAdminAccessBindingRequest);
+
+                    /** CreateAdminAccessBindingRequest parent. */
+                    public parent: string;
+
+                    /** CreateAdminAccessBindingRequest adminAccessBinding. */
+                    public adminAccessBinding?: (google.marketingplatform.admin.v1alpha.IAdminAccessBinding|null);
+
+                    /**
+                     * Creates a new CreateAdminAccessBindingRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateAdminAccessBindingRequest instance
+                     */
+                    public static create(properties?: google.marketingplatform.admin.v1alpha.ICreateAdminAccessBindingRequest): google.marketingplatform.admin.v1alpha.CreateAdminAccessBindingRequest;
+
+                    /**
+                     * Encodes the specified CreateAdminAccessBindingRequest message. Does not implicitly {@link google.marketingplatform.admin.v1alpha.CreateAdminAccessBindingRequest.verify|verify} messages.
+                     * @param message CreateAdminAccessBindingRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.marketingplatform.admin.v1alpha.ICreateAdminAccessBindingRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateAdminAccessBindingRequest message, length delimited. Does not implicitly {@link google.marketingplatform.admin.v1alpha.CreateAdminAccessBindingRequest.verify|verify} messages.
+                     * @param message CreateAdminAccessBindingRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.marketingplatform.admin.v1alpha.ICreateAdminAccessBindingRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateAdminAccessBindingRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateAdminAccessBindingRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.marketingplatform.admin.v1alpha.CreateAdminAccessBindingRequest;
+
+                    /**
+                     * Decodes a CreateAdminAccessBindingRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateAdminAccessBindingRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.marketingplatform.admin.v1alpha.CreateAdminAccessBindingRequest;
+
+                    /**
+                     * Verifies a CreateAdminAccessBindingRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateAdminAccessBindingRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateAdminAccessBindingRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.marketingplatform.admin.v1alpha.CreateAdminAccessBindingRequest;
+
+                    /**
+                     * Creates a plain object from a CreateAdminAccessBindingRequest message. Also converts values to other types if specified.
+                     * @param message CreateAdminAccessBindingRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.marketingplatform.admin.v1alpha.CreateAdminAccessBindingRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateAdminAccessBindingRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateAdminAccessBindingRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateAdminAccessBindingRequest. */
+                interface IUpdateAdminAccessBindingRequest {
+
+                    /** UpdateAdminAccessBindingRequest adminAccessBinding */
+                    adminAccessBinding?: (google.marketingplatform.admin.v1alpha.IAdminAccessBinding|null);
+
+                    /** UpdateAdminAccessBindingRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateAdminAccessBindingRequest. */
+                class UpdateAdminAccessBindingRequest implements IUpdateAdminAccessBindingRequest {
+
+                    /**
+                     * Constructs a new UpdateAdminAccessBindingRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.marketingplatform.admin.v1alpha.IUpdateAdminAccessBindingRequest);
+
+                    /** UpdateAdminAccessBindingRequest adminAccessBinding. */
+                    public adminAccessBinding?: (google.marketingplatform.admin.v1alpha.IAdminAccessBinding|null);
+
+                    /** UpdateAdminAccessBindingRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateAdminAccessBindingRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateAdminAccessBindingRequest instance
+                     */
+                    public static create(properties?: google.marketingplatform.admin.v1alpha.IUpdateAdminAccessBindingRequest): google.marketingplatform.admin.v1alpha.UpdateAdminAccessBindingRequest;
+
+                    /**
+                     * Encodes the specified UpdateAdminAccessBindingRequest message. Does not implicitly {@link google.marketingplatform.admin.v1alpha.UpdateAdminAccessBindingRequest.verify|verify} messages.
+                     * @param message UpdateAdminAccessBindingRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.marketingplatform.admin.v1alpha.IUpdateAdminAccessBindingRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateAdminAccessBindingRequest message, length delimited. Does not implicitly {@link google.marketingplatform.admin.v1alpha.UpdateAdminAccessBindingRequest.verify|verify} messages.
+                     * @param message UpdateAdminAccessBindingRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.marketingplatform.admin.v1alpha.IUpdateAdminAccessBindingRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateAdminAccessBindingRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateAdminAccessBindingRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.marketingplatform.admin.v1alpha.UpdateAdminAccessBindingRequest;
+
+                    /**
+                     * Decodes an UpdateAdminAccessBindingRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateAdminAccessBindingRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.marketingplatform.admin.v1alpha.UpdateAdminAccessBindingRequest;
+
+                    /**
+                     * Verifies an UpdateAdminAccessBindingRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateAdminAccessBindingRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateAdminAccessBindingRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.marketingplatform.admin.v1alpha.UpdateAdminAccessBindingRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateAdminAccessBindingRequest message. Also converts values to other types if specified.
+                     * @param message UpdateAdminAccessBindingRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.marketingplatform.admin.v1alpha.UpdateAdminAccessBindingRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateAdminAccessBindingRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateAdminAccessBindingRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** LinkVerificationState enum. */
                 enum LinkVerificationState {
                     LINK_VERIFICATION_STATE_UNSPECIFIED = 0,
@@ -1922,6 +3955,14 @@ export namespace google {
                     ANALYTICS_PROPERTY_TYPE_ORDINARY = 1,
                     ANALYTICS_PROPERTY_TYPE_SUBPROPERTY = 2,
                     ANALYTICS_PROPERTY_TYPE_ROLLUP = 3
+                }
+
+                /** OrganizationRole enum. */
+                enum OrganizationRole {
+                    ORGANIZATION_ROLE_UNSPECIFIED = 0,
+                    ORG_ADMIN_ROLE = 1,
+                    USER_ADMIN_ROLE = 2,
+                    BILLING_ADMIN_ROLE = 3
                 }
 
                 /** Properties of an Organization. */
@@ -2136,6 +4177,361 @@ export namespace google {
 
                     /**
                      * Gets the default type url for AnalyticsAccountLink
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a UserGroup. */
+                interface IUserGroup {
+
+                    /** UserGroup name */
+                    name?: (string|null);
+
+                    /** UserGroup displayName */
+                    displayName?: (string|null);
+
+                    /** UserGroup description */
+                    description?: (string|null);
+                }
+
+                /** Represents a UserGroup. */
+                class UserGroup implements IUserGroup {
+
+                    /**
+                     * Constructs a new UserGroup.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.marketingplatform.admin.v1alpha.IUserGroup);
+
+                    /** UserGroup name. */
+                    public name: string;
+
+                    /** UserGroup displayName. */
+                    public displayName: string;
+
+                    /** UserGroup description. */
+                    public description: string;
+
+                    /**
+                     * Creates a new UserGroup instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UserGroup instance
+                     */
+                    public static create(properties?: google.marketingplatform.admin.v1alpha.IUserGroup): google.marketingplatform.admin.v1alpha.UserGroup;
+
+                    /**
+                     * Encodes the specified UserGroup message. Does not implicitly {@link google.marketingplatform.admin.v1alpha.UserGroup.verify|verify} messages.
+                     * @param message UserGroup message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.marketingplatform.admin.v1alpha.IUserGroup, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UserGroup message, length delimited. Does not implicitly {@link google.marketingplatform.admin.v1alpha.UserGroup.verify|verify} messages.
+                     * @param message UserGroup message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.marketingplatform.admin.v1alpha.IUserGroup, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a UserGroup message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UserGroup
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.marketingplatform.admin.v1alpha.UserGroup;
+
+                    /**
+                     * Decodes a UserGroup message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UserGroup
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.marketingplatform.admin.v1alpha.UserGroup;
+
+                    /**
+                     * Verifies a UserGroup message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a UserGroup message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UserGroup
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.marketingplatform.admin.v1alpha.UserGroup;
+
+                    /**
+                     * Creates a plain object from a UserGroup message. Also converts values to other types if specified.
+                     * @param message UserGroup
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.marketingplatform.admin.v1alpha.UserGroup, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UserGroup to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UserGroup
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a UserGroupMember. */
+                interface IUserGroupMember {
+
+                    /** UserGroupMember userEmail */
+                    userEmail?: (string|null);
+
+                    /** UserGroupMember userGroup */
+                    userGroup?: (string|null);
+
+                    /** UserGroupMember name */
+                    name?: (string|null);
+
+                    /** UserGroupMember membershipRole */
+                    membershipRole?: (google.marketingplatform.admin.v1alpha.UserGroupMember.MembershipRole|keyof typeof google.marketingplatform.admin.v1alpha.UserGroupMember.MembershipRole|null);
+                }
+
+                /** Represents a UserGroupMember. */
+                class UserGroupMember implements IUserGroupMember {
+
+                    /**
+                     * Constructs a new UserGroupMember.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.marketingplatform.admin.v1alpha.IUserGroupMember);
+
+                    /** UserGroupMember userEmail. */
+                    public userEmail?: (string|null);
+
+                    /** UserGroupMember userGroup. */
+                    public userGroup?: (string|null);
+
+                    /** UserGroupMember name. */
+                    public name: string;
+
+                    /** UserGroupMember membershipRole. */
+                    public membershipRole: (google.marketingplatform.admin.v1alpha.UserGroupMember.MembershipRole|keyof typeof google.marketingplatform.admin.v1alpha.UserGroupMember.MembershipRole);
+
+                    /** UserGroupMember member. */
+                    public member?: ("userEmail"|"userGroup");
+
+                    /**
+                     * Creates a new UserGroupMember instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UserGroupMember instance
+                     */
+                    public static create(properties?: google.marketingplatform.admin.v1alpha.IUserGroupMember): google.marketingplatform.admin.v1alpha.UserGroupMember;
+
+                    /**
+                     * Encodes the specified UserGroupMember message. Does not implicitly {@link google.marketingplatform.admin.v1alpha.UserGroupMember.verify|verify} messages.
+                     * @param message UserGroupMember message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.marketingplatform.admin.v1alpha.IUserGroupMember, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UserGroupMember message, length delimited. Does not implicitly {@link google.marketingplatform.admin.v1alpha.UserGroupMember.verify|verify} messages.
+                     * @param message UserGroupMember message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.marketingplatform.admin.v1alpha.IUserGroupMember, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a UserGroupMember message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UserGroupMember
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.marketingplatform.admin.v1alpha.UserGroupMember;
+
+                    /**
+                     * Decodes a UserGroupMember message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UserGroupMember
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.marketingplatform.admin.v1alpha.UserGroupMember;
+
+                    /**
+                     * Verifies a UserGroupMember message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a UserGroupMember message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UserGroupMember
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.marketingplatform.admin.v1alpha.UserGroupMember;
+
+                    /**
+                     * Creates a plain object from a UserGroupMember message. Also converts values to other types if specified.
+                     * @param message UserGroupMember
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.marketingplatform.admin.v1alpha.UserGroupMember, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UserGroupMember to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UserGroupMember
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace UserGroupMember {
+
+                    /** MembershipRole enum. */
+                    enum MembershipRole {
+                        MEMBERSHIP_ROLE_UNSPECIFIED = 0,
+                        MEMBERSHIP_ROLE_OWNER = 1,
+                        MEMBERSHIP_ROLE_MEMBER = 2
+                    }
+                }
+
+                /** Properties of an AdminAccessBinding. */
+                interface IAdminAccessBinding {
+
+                    /** AdminAccessBinding userEmail */
+                    userEmail?: (string|null);
+
+                    /** AdminAccessBinding userGroup */
+                    userGroup?: (string|null);
+
+                    /** AdminAccessBinding name */
+                    name?: (string|null);
+
+                    /** AdminAccessBinding organizationRoles */
+                    organizationRoles?: (google.marketingplatform.admin.v1alpha.OrganizationRole[]|null);
+                }
+
+                /** Represents an AdminAccessBinding. */
+                class AdminAccessBinding implements IAdminAccessBinding {
+
+                    /**
+                     * Constructs a new AdminAccessBinding.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.marketingplatform.admin.v1alpha.IAdminAccessBinding);
+
+                    /** AdminAccessBinding userEmail. */
+                    public userEmail?: (string|null);
+
+                    /** AdminAccessBinding userGroup. */
+                    public userGroup?: (string|null);
+
+                    /** AdminAccessBinding name. */
+                    public name: string;
+
+                    /** AdminAccessBinding organizationRoles. */
+                    public organizationRoles: google.marketingplatform.admin.v1alpha.OrganizationRole[];
+
+                    /** AdminAccessBinding accessTarget. */
+                    public accessTarget?: ("userEmail"|"userGroup");
+
+                    /**
+                     * Creates a new AdminAccessBinding instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AdminAccessBinding instance
+                     */
+                    public static create(properties?: google.marketingplatform.admin.v1alpha.IAdminAccessBinding): google.marketingplatform.admin.v1alpha.AdminAccessBinding;
+
+                    /**
+                     * Encodes the specified AdminAccessBinding message. Does not implicitly {@link google.marketingplatform.admin.v1alpha.AdminAccessBinding.verify|verify} messages.
+                     * @param message AdminAccessBinding message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.marketingplatform.admin.v1alpha.IAdminAccessBinding, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AdminAccessBinding message, length delimited. Does not implicitly {@link google.marketingplatform.admin.v1alpha.AdminAccessBinding.verify|verify} messages.
+                     * @param message AdminAccessBinding message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.marketingplatform.admin.v1alpha.IAdminAccessBinding, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AdminAccessBinding message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AdminAccessBinding
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.marketingplatform.admin.v1alpha.AdminAccessBinding;
+
+                    /**
+                     * Decodes an AdminAccessBinding message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AdminAccessBinding
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.marketingplatform.admin.v1alpha.AdminAccessBinding;
+
+                    /**
+                     * Verifies an AdminAccessBinding message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AdminAccessBinding message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AdminAccessBinding
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.marketingplatform.admin.v1alpha.AdminAccessBinding;
+
+                    /**
+                     * Creates a plain object from an AdminAccessBinding message. Also converts values to other types if specified.
+                     * @param message AdminAccessBinding
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.marketingplatform.admin.v1alpha.AdminAccessBinding, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AdminAccessBinding to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AdminAccessBinding
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -9564,6 +11960,103 @@ export namespace google {
 
             /**
              * Gets the default type url for Empty
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a FieldMask. */
+        interface IFieldMask {
+
+            /** FieldMask paths */
+            paths?: (string[]|null);
+        }
+
+        /** Represents a FieldMask. */
+        class FieldMask implements IFieldMask {
+
+            /**
+             * Constructs a new FieldMask.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IFieldMask);
+
+            /** FieldMask paths. */
+            public paths: string[];
+
+            /**
+             * Creates a new FieldMask instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns FieldMask instance
+             */
+            public static create(properties?: google.protobuf.IFieldMask): google.protobuf.FieldMask;
+
+            /**
+             * Encodes the specified FieldMask message. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
+             * @param message FieldMask message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IFieldMask, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified FieldMask message, length delimited. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
+             * @param message FieldMask message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IFieldMask, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a FieldMask message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns FieldMask
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FieldMask;
+
+            /**
+             * Decodes a FieldMask message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns FieldMask
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FieldMask;
+
+            /**
+             * Verifies a FieldMask message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a FieldMask message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns FieldMask
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.FieldMask;
+
+            /**
+             * Creates a plain object from a FieldMask message. Also converts values to other types if specified.
+             * @param message FieldMask
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.FieldMask, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this FieldMask to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FieldMask
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */

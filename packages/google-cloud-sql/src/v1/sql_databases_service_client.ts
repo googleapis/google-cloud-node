@@ -396,6 +396,8 @@ export class SqlDatabasesServiceClient {
    *   Database instance ID. This does not include the project ID.
    * @param {string} request.project
    *   Project ID of the project that contains the instance.
+   * @param {string} [request.location]
+   *   Optional. Region of the Cloud SQL instance.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -531,6 +533,8 @@ export class SqlDatabasesServiceClient {
    *   Database instance ID. This does not include the project ID.
    * @param {string} request.project
    *   Project ID of the project that contains the instance.
+   * @param {string} [request.location]
+   *   Optional. Region of the Cloud SQL instance.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -663,6 +667,8 @@ export class SqlDatabasesServiceClient {
    * @param {string} request.project
    *   Project ID of the project that contains the instance.
    * @param {google.cloud.sql.v1.Database} request.body
+   * @param {string} [request.location]
+   *   Optional. Region of the Cloud SQL instance.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -794,6 +800,8 @@ export class SqlDatabasesServiceClient {
    *   Cloud SQL instance ID. This does not include the project ID.
    * @param {string} request.project
    *   Project ID of the project that contains the instance.
+   * @param {string} [request.location]
+   *   Optional. Region of the Cloud SQL instance.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -929,6 +937,8 @@ export class SqlDatabasesServiceClient {
    * @param {string} request.project
    *   Project ID of the project that contains the instance.
    * @param {google.cloud.sql.v1.Database} request.body
+   * @param {string} [request.location]
+   *   Optional. Region of the Cloud SQL instance.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1065,6 +1075,8 @@ export class SqlDatabasesServiceClient {
    * @param {string} request.project
    *   Project ID of the project that contains the instance.
    * @param {google.cloud.sql.v1.Database} request.body
+   * @param {string} [request.location]
+   *   Optional. Region of the Cloud SQL instance.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

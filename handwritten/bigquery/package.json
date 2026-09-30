@@ -1,7 +1,7 @@
 {
   "name": "@google-cloud/bigquery",
   "description": "Google BigQuery Client Library for Node.js",
-  "version": "9.0.3",
+  "version": "9.1.0",
   "license": "Apache-2.0",
   "author": "Google LLC",
   "engines": {
@@ -36,8 +36,8 @@
     "docs": "jsdoc -c .jsdoc.js",
     "lint": "gts check",
     "samples-test": "cd samples/ && pnpm link ../ && pnpm test && cd ../",
-    "test": "c8 mocha build/test",
-    "system-test": "mocha build/system-test --timeout 600000",
+    "test": "node ../../bin/run-test.cjs build/test",
+    "system-test": "node ../../bin/run-test.cjs build/system-test --timeout 600000",
     "presystem-test": "pnpm run compile",
     "clean": "gts clean",
     "compile": "tsc -p . && cp src/types.d.ts build/src/",

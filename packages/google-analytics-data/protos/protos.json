@@ -1577,7 +1577,7 @@
                     "AlphaAnalyticsData": {
                       "options": {
                         "(google.api.default_host)": "analyticsdata.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/analytics,https://www.googleapis.com/auth/analytics.readonly"
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/analytics,https://www.googleapis.com/auth/analytics.chatbot.read,https://www.googleapis.com/auth/analytics.readonly"
                       },
                       "methods": {
                         "RunFunnelReport": {
@@ -1835,6 +1835,22 @@
                             },
                             {
                               "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "Chat": {
+                          "requestType": "ChatRequest",
+                          "responseType": "ChatResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1alpha/{property=properties/*}:chat",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha/{property=properties/*}:chat",
+                                "body": "*"
+                              }
                             }
                           ]
                         },
@@ -2913,6 +2929,64 @@
                         }
                       }
                     },
+                    "ChatRequest": {
+                      "oneofs": {
+                        "_sessionId": {
+                          "oneof": [
+                            "sessionId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "property": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "analyticsadmin.googleapis.com/Property"
+                          }
+                        },
+                        "userQuery": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "sessionId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "returnPropertyQuota": {
+                          "type": "bool",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ChatResponse": {
+                      "fields": {
+                        "sessionId": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "blocks": {
+                          "rule": "repeated",
+                          "type": "ResponseBlock",
+                          "id": 2
+                        },
+                        "propertyQuota": {
+                          "type": "PropertyChatQuota",
+                          "id": 3
+                        }
+                      }
+                    },
                     "RunReportRequest": {
                       "fields": {
                         "property": {
@@ -3652,6 +3726,11 @@
                         "section": {
                           "type": "Section",
                           "id": 10
+                        },
+                        "dataTruncationReasons": {
+                          "rule": "repeated",
+                          "type": "DataTruncationReason",
+                          "id": 11
                         }
                       },
                       "nested": {
@@ -3684,6 +3763,100 @@
                                   "rule": "repeated",
                                   "type": "RestrictedMetricType",
                                   "id": 2
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "DataTruncationReason": {
+                          "oneofs": {
+                            "_dataTruncationType": {
+                              "oneof": [
+                                "dataTruncationType"
+                              ]
+                            },
+                            "_dataTruncationMessage": {
+                              "oneof": [
+                                "dataTruncationMessage"
+                              ]
+                            },
+                            "_dataTruncationDate": {
+                              "oneof": [
+                                "dataTruncationDate"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "dataTruncationType": {
+                              "type": "DataTruncationType",
+                              "id": 1,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "dataTruncationMessage": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "dataTruncationDate": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "dataTruncationDateRanges": {
+                              "rule": "repeated",
+                              "type": "DataTruncationDateRange",
+                              "id": 4
+                            }
+                          },
+                          "nested": {
+                            "DataTruncationType": {
+                              "values": {
+                                "DATA_TRUNCATION_TYPE_UNSPECIFIED": 0,
+                                "DATA_TRUNCATION_TYPE_RULES_BASED_MODELS": 1,
+                                "DATA_TRUNCATION_TYPE_DATA_DRIVEN_ATTRIBUTION": 2,
+                                "DATA_TRUNCATION_TYPE_DV360": 3,
+                                "DATA_TRUNCATION_TYPE_CM360": 4,
+                                "DATA_TRUNCATION_TYPE_ITEM_SCOPED_ECOMMERCE_METRICS": 5,
+                                "DATA_TRUNCATION_TYPE_EVENT_SCOPED_ECOMMERCE_METRICS": 6,
+                                "DATA_TRUNCATION_TYPE_DATE_RANGE": 7,
+                                "DATA_TRUNCATION_TYPE_PROPERTY": 8,
+                                "DATA_TRUNCATION_TYPE_CONVERSIONS": 9,
+                                "DATA_TRUNCATION_TYPE_GOOGLE_ADS": 10
+                              }
+                            },
+                            "DataTruncationDateRange": {
+                              "oneofs": {
+                                "_startDate": {
+                                  "oneof": [
+                                    "startDate"
+                                  ]
+                                },
+                                "_endDate": {
+                                  "oneof": [
+                                    "endDate"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "startDate": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "endDate": {
+                                  "type": "string",
+                                  "id": 2,
+                                  "options": {
+                                    "proto3_optional": true
+                                  }
                                 }
                               }
                             }
@@ -3902,6 +4075,71 @@
                         "metadata": {
                           "type": "FunnelResponseMetadata",
                           "id": 4
+                        }
+                      }
+                    },
+                    "ResponseBlock": {
+                      "oneofs": {
+                        "block": {
+                          "oneof": [
+                            "text",
+                            "table"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "text": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "table": {
+                          "type": "DataTable",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "DataTableCell": {
+                          "fields": {
+                            "value": {
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "DataTableHeader": {
+                          "fields": {
+                            "header": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "dataType": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "DataTableRow": {
+                          "fields": {
+                            "columns": {
+                              "rule": "repeated",
+                              "type": "DataTableCell",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "DataTable": {
+                          "fields": {
+                            "headers": {
+                              "rule": "repeated",
+                              "type": "DataTableHeader",
+                              "id": 1
+                            },
+                            "rows": {
+                              "rule": "repeated",
+                              "type": "DataTableRow",
+                              "id": 2
+                            }
+                          }
                         }
                       }
                     },
@@ -4772,6 +5010,18 @@
                         },
                         "displayName": {
                           "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "PropertyChatQuota": {
+                      "fields": {
+                        "tokensPerDay": {
+                          "type": "QuotaStatus",
+                          "id": 1
+                        },
+                        "tokensPerHour": {
+                          "type": "QuotaStatus",
                           "id": 2
                         }
                       }
@@ -6322,6 +6572,11 @@
                           "rule": "repeated",
                           "type": "SamplingMetadata",
                           "id": 9
+                        },
+                        "dataTruncationReasons": {
+                          "rule": "repeated",
+                          "type": "DataTruncationReason",
+                          "id": 10
                         }
                       },
                       "nested": {
@@ -6354,6 +6609,100 @@
                                   "rule": "repeated",
                                   "type": "RestrictedMetricType",
                                   "id": 2
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "DataTruncationReason": {
+                          "oneofs": {
+                            "_dataTruncationType": {
+                              "oneof": [
+                                "dataTruncationType"
+                              ]
+                            },
+                            "_dataTruncationMessage": {
+                              "oneof": [
+                                "dataTruncationMessage"
+                              ]
+                            },
+                            "_dataTruncationDate": {
+                              "oneof": [
+                                "dataTruncationDate"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "dataTruncationType": {
+                              "type": "DataTruncationType",
+                              "id": 1,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "dataTruncationMessage": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "dataTruncationDate": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "dataTruncationDateRanges": {
+                              "rule": "repeated",
+                              "type": "DataTruncationDateRange",
+                              "id": 4
+                            }
+                          },
+                          "nested": {
+                            "DataTruncationType": {
+                              "values": {
+                                "DATA_TRUNCATION_TYPE_UNSPECIFIED": 0,
+                                "DATA_TRUNCATION_TYPE_RULES_BASED_MODELS": 1,
+                                "DATA_TRUNCATION_TYPE_DATA_DRIVEN_ATTRIBUTION": 2,
+                                "DATA_TRUNCATION_TYPE_DV360": 3,
+                                "DATA_TRUNCATION_TYPE_CM360": 4,
+                                "DATA_TRUNCATION_TYPE_ITEM_SCOPED_ECOMMERCE_METRICS": 5,
+                                "DATA_TRUNCATION_TYPE_EVENT_SCOPED_ECOMMERCE_METRICS": 6,
+                                "DATA_TRUNCATION_TYPE_DATE_RANGE": 7,
+                                "DATA_TRUNCATION_TYPE_PROPERTY": 8,
+                                "DATA_TRUNCATION_TYPE_CONVERSIONS": 9,
+                                "DATA_TRUNCATION_TYPE_GOOGLE_ADS": 10
+                              }
+                            },
+                            "DataTruncationDateRange": {
+                              "oneofs": {
+                                "_startDate": {
+                                  "oneof": [
+                                    "startDate"
+                                  ]
+                                },
+                                "_endDate": {
+                                  "oneof": [
+                                    "endDate"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "startDate": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "endDate": {
+                                  "type": "string",
+                                  "id": 2,
+                                  "options": {
+                                    "proto3_optional": true
+                                  }
                                 }
                               }
                             }

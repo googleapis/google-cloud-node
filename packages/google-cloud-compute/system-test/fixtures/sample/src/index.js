@@ -77,6 +77,7 @@ function main() {
   const packetMirroringsClient = new compute.PacketMirroringsClient();
   const previewFeaturesClient = new compute.PreviewFeaturesClient();
   const projectsClient = new compute.ProjectsClient();
+  const projectViewsClient = new compute.ProjectViewsClient();
   const publicAdvertisedPrefixesClient = new compute.PublicAdvertisedPrefixesClient();
   const publicDelegatedPrefixesClient = new compute.PublicDelegatedPrefixesClient();
   const regionAutoscalersClient = new compute.RegionAutoscalersClient();

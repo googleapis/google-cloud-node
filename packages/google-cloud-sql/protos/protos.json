@@ -3644,13 +3644,28 @@
                           "responseType": "Operation",
                           "options": {
                             "(google.api.http).post": "/v1/projects/{project}/instances",
-                            "(google.api.http).body": "body"
+                            "(google.api.http).body": "body",
+                            "(google.api.routing).routing_parameters.field": "body.region",
+                            "(google.api.routing).routing_parameters.path_template": "{region=**}"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
                                 "post": "/v1/projects/{project}/instances",
                                 "body": "body"
+                              }
+                            },
+                            {
+                              "(google.api.routing)": {
+                                "routing_parameters": [
+                                  {
+                                    "field": "project"
+                                  },
+                                  {
+                                    "field": "body.region",
+                                    "path_template": "{region=**}"
+                                  }
+                                ]
                               }
                             }
                           ]
@@ -4120,6 +4135,13 @@
                         "project": {
                           "type": "string",
                           "id": 2
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -4132,6 +4154,13 @@
                         "project": {
                           "type": "string",
                           "id": 2
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -4149,6 +4178,13 @@
                           "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -4174,6 +4210,13 @@
                           "id": 100,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -4228,6 +4271,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -4244,6 +4294,13 @@
                         "body": {
                           "type": "InstancesDemoteMasterRequest",
                           "id": 100
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -4269,6 +4326,13 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -4285,6 +4349,13 @@
                         "body": {
                           "type": "InstancesExportRequest",
                           "id": 100
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -4301,6 +4372,13 @@
                         "body": {
                           "type": "InstancesFailoverRequest",
                           "id": 100
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -4319,6 +4397,13 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -4335,6 +4420,13 @@
                         "body": {
                           "type": "InstancesImportRequest",
                           "id": 100
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -4347,6 +4439,13 @@
                         "body": {
                           "type": "DatabaseInstance",
                           "id": 100
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -4367,6 +4466,13 @@
                         "project": {
                           "type": "string",
                           "id": 4
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -4379,6 +4485,13 @@
                         "project": {
                           "type": "string",
                           "id": 2
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -4397,6 +4510,13 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -4414,6 +4534,13 @@
                           "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -4459,6 +4586,13 @@
                         "body": {
                           "type": "DatabaseInstance",
                           "id": 100
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -4475,6 +4609,13 @@
                         "failover": {
                           "type": "bool",
                           "id": 3
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -4494,6 +4635,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -4510,6 +4658,13 @@
                         "mode": {
                           "type": "ResetSslMode",
                           "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 4,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -4534,6 +4689,13 @@
                         "project": {
                           "type": "string",
                           "id": 2
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -4550,6 +4712,13 @@
                         "body": {
                           "type": "InstancesRestoreBackupRequest",
                           "id": 100
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -4566,6 +4735,13 @@
                         "body": {
                           "type": "InstancesRotateServerCaRequest",
                           "id": 100
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -4588,6 +4764,13 @@
                         "body": {
                           "type": "InstancesRotateServerCertificateRequest",
                           "id": 100,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 3,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -4616,6 +4799,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -4628,6 +4818,13 @@
                         "project": {
                           "type": "string",
                           "id": 2
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -4640,6 +4837,13 @@
                         "project": {
                           "type": "string",
                           "id": 2
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -4656,6 +4860,13 @@
                         "body": {
                           "type": "InstancesTruncateLogRequest",
                           "id": 100
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -4672,6 +4883,13 @@
                         "body": {
                           "type": "PerformDiskShrinkContext",
                           "id": 100
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -4688,6 +4906,13 @@
                         "body": {
                           "type": "DatabaseInstance",
                           "id": 100
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -4704,6 +4929,13 @@
                         "body": {
                           "type": "SqlInstancesRescheduleMaintenanceRequestBody",
                           "id": 100
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -4720,6 +4952,13 @@
                         "body": {
                           "type": "InstancesReencryptRequest",
                           "id": 3
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -4805,6 +5044,13 @@
                         "project": {
                           "type": "string",
                           "id": 2
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -4865,6 +5111,13 @@
                           "rule": "repeated",
                           "type": "ExternalSyncSelectedObject",
                           "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 10,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -4936,6 +5189,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -4948,6 +5208,13 @@
                         "project": {
                           "type": "string",
                           "id": 2
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -4964,6 +5231,13 @@
                         "body": {
                           "type": "SslCertsCreateEphemeralRequest",
                           "id": 100
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -5233,6 +5507,13 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -5292,6 +5573,13 @@
                           "id": 3,
                           "options": {
                             "proto3_optional": true
+                          }
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -5599,6 +5887,11 @@
                           "oneof": [
                             "nodeCount"
                           ]
+                        },
+                        "_databaseCenterIntegration": {
+                          "oneof": [
+                            "databaseCenterIntegration"
+                          ]
                         }
                       },
                       "fields": {
@@ -5893,6 +6186,14 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "databaseCenterIntegration": {
+                          "type": "DatabaseCenterIntegration",
+                          "id": 76,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
                         }
                       },
                       "nested": {
@@ -6098,6 +6399,13 @@
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
                               }
                             }
+                          }
+                        },
+                        "DatabaseCenterIntegration": {
+                          "values": {
+                            "DATABASE_CENTER_INTEGRATION_UNSPECIFIED": 0,
+                            "ENABLED": 1,
+                            "DISABLED": 2
                           }
                         }
                       }
@@ -6620,6 +6928,13 @@
                         "body": {
                           "type": "ExecuteSqlPayload",
                           "id": 100
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -6844,6 +7159,13 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -6869,6 +7191,13 @@
                           "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -7322,6 +7651,13 @@
                         "project": {
                           "type": "string",
                           "id": 3
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -7338,6 +7674,13 @@
                         "project": {
                           "type": "string",
                           "id": 3
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -7354,6 +7697,13 @@
                         "body": {
                           "type": "Database",
                           "id": 100
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -7366,6 +7716,13 @@
                         "project": {
                           "type": "string",
                           "id": 2
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -7386,6 +7743,13 @@
                         "body": {
                           "type": "Database",
                           "id": 100
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -8054,6 +8418,13 @@
                         "project": {
                           "type": "string",
                           "id": 4
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -8074,6 +8445,13 @@
                         "host": {
                           "type": "string",
                           "id": 4
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -8090,6 +8468,13 @@
                         "body": {
                           "type": "User",
                           "id": 100
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -8102,6 +8487,13 @@
                         "project": {
                           "type": "string",
                           "id": 2
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -8173,6 +8565,13 @@
                         "body": {
                           "type": "User",
                           "id": 100
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -8769,13 +9168,28 @@
                           "responseType": "Operation",
                           "options": {
                             "(google.api.http).post": "/sql/v1beta4/projects/{project}/instances",
-                            "(google.api.http).body": "body"
+                            "(google.api.http).body": "body",
+                            "(google.api.routing).routing_parameters.field": "body.region",
+                            "(google.api.routing).routing_parameters.path_template": "{region=**}"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
                                 "post": "/sql/v1beta4/projects/{project}/instances",
                                 "body": "body"
+                              }
+                            },
+                            {
+                              "(google.api.routing)": {
+                                "routing_parameters": [
+                                  {
+                                    "field": "project"
+                                  },
+                                  {
+                                    "field": "body.region",
+                                    "path_template": "{region=**}"
+                                  }
+                                ]
                               }
                             }
                           ]
@@ -9635,6 +10049,13 @@
                         "project": {
                           "type": "string",
                           "id": 3
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -9651,6 +10072,13 @@
                         "project": {
                           "type": "string",
                           "id": 3
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -9667,6 +10095,13 @@
                         "body": {
                           "type": "Database",
                           "id": 100
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -9679,6 +10114,13 @@
                         "project": {
                           "type": "string",
                           "id": 2
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -9699,6 +10141,13 @@
                         "body": {
                           "type": "Database",
                           "id": 100
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -9734,6 +10183,13 @@
                         "project": {
                           "type": "string",
                           "id": 2
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -9751,6 +10207,13 @@
                           "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -9770,6 +10233,13 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -9786,6 +10256,13 @@
                         "body": {
                           "type": "InstancesCloneRequest",
                           "id": 100
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -9839,6 +10316,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -9855,6 +10339,13 @@
                         "body": {
                           "type": "InstancesDemoteMasterRequest",
                           "id": 100
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -9877,6 +10368,13 @@
                         "body": {
                           "type": "InstancesDemoteRequest",
                           "id": 100
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -9893,6 +10391,13 @@
                         "body": {
                           "type": "InstancesExportRequest",
                           "id": 100
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -9909,6 +10414,13 @@
                         "body": {
                           "type": "InstancesFailoverRequest",
                           "id": 100
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -9921,6 +10433,13 @@
                         "project": {
                           "type": "string",
                           "id": 2
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -9937,6 +10456,13 @@
                         "body": {
                           "type": "InstancesImportRequest",
                           "id": 100
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -9949,6 +10475,13 @@
                         "body": {
                           "type": "DatabaseInstance",
                           "id": 100
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -9969,6 +10502,13 @@
                         "project": {
                           "type": "string",
                           "id": 4
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -9981,6 +10521,13 @@
                         "project": {
                           "type": "string",
                           "id": 2
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -9999,6 +10546,13 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -10016,6 +10570,13 @@
                           "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -10061,6 +10622,13 @@
                         "body": {
                           "type": "DatabaseInstance",
                           "id": 100
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -10077,6 +10645,13 @@
                         "failover": {
                           "type": "bool",
                           "id": 3
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -10096,6 +10671,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -10112,6 +10694,13 @@
                         "mode": {
                           "type": "ResetSslMode",
                           "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 4,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -10136,6 +10725,13 @@
                         "project": {
                           "type": "string",
                           "id": 2
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -10152,6 +10748,13 @@
                         "body": {
                           "type": "InstancesRestoreBackupRequest",
                           "id": 100
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -10168,6 +10771,13 @@
                         "body": {
                           "type": "InstancesRotateServerCaRequest",
                           "id": 100
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -10192,6 +10802,13 @@
                           "id": 100,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -10218,6 +10835,13 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -10230,6 +10854,13 @@
                         "project": {
                           "type": "string",
                           "id": 2
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -10242,6 +10873,13 @@
                         "project": {
                           "type": "string",
                           "id": 2
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -10258,6 +10896,13 @@
                         "body": {
                           "type": "InstancesTruncateLogRequest",
                           "id": 100
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -10274,6 +10919,13 @@
                         "body": {
                           "type": "DatabaseInstance",
                           "id": 100
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -10290,6 +10942,13 @@
                         "body": {
                           "type": "InstancesReencryptRequest",
                           "id": 3
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -10363,6 +11022,13 @@
                         "body": {
                           "type": "SqlInstancesRescheduleMaintenanceRequestBody",
                           "id": 100
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -10379,6 +11045,13 @@
                         "body": {
                           "type": "PerformDiskShrinkContext",
                           "id": 100
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -10458,6 +11131,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -10526,6 +11206,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -10538,6 +11225,13 @@
                         "project": {
                           "type": "string",
                           "id": 2
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -10619,6 +11313,13 @@
                         "body": {
                           "type": "SslCertsCreateEphemeralRequest",
                           "id": 100
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -10691,6 +11392,13 @@
                         "project": {
                           "type": "string",
                           "id": 2
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -10716,6 +11424,13 @@
                           "id": 3,
                           "options": {
                             "proto3_optional": true
+                          }
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -10755,6 +11470,13 @@
                         "body": {
                           "type": "ExecuteSqlPayload",
                           "id": 100
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -10772,6 +11494,13 @@
                           "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -11002,6 +11731,13 @@
                         "body": {
                           "type": "InstancesAcquireSsrsLeaseRequest",
                           "id": 100
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -11026,6 +11762,13 @@
                           "id": 3,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -11822,6 +12565,11 @@
                           "oneof": [
                             "nodeCount"
                           ]
+                        },
+                        "_databaseCenterIntegration": {
+                          "oneof": [
+                            "databaseCenterIntegration"
+                          ]
                         }
                       },
                       "fields": {
@@ -12116,6 +12864,14 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "databaseCenterIntegration": {
+                          "type": "DatabaseCenterIntegration",
+                          "id": 76,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
                         }
                       },
                       "nested": {
@@ -12321,6 +13077,13 @@
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
                               }
                             }
+                          }
+                        },
+                        "DatabaseCenterIntegration": {
+                          "values": {
+                            "DATABASE_CENTER_INTEGRATION_UNSPECIFIED": 0,
+                            "ENABLED": 1,
+                            "DISABLED": 2
                           }
                         }
                       }
@@ -16605,6 +17368,13 @@
                         "project": {
                           "type": "string",
                           "id": 4
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -16625,6 +17395,13 @@
                         "host": {
                           "type": "string",
                           "id": 4
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -16641,6 +17418,13 @@
                         "body": {
                           "type": "User",
                           "id": 100
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -16653,6 +17437,13 @@
                         "project": {
                           "type": "string",
                           "id": 2
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -16724,6 +17515,13 @@
                         "body": {
                           "type": "User",
                           "id": 100
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -16939,7 +17737,7 @@
           "options": {
             "go_package": "google.golang.org/genproto/googleapis/api/annotations;annotations",
             "java_multiple_files": true,
-            "java_outer_classname": "FieldInfoProto",
+            "java_outer_classname": "RoutingProto",
             "java_package": "com.google.api",
             "objc_class_prefix": "GAPI"
           },
@@ -17593,6 +18391,32 @@
                 "typeName": {
                   "type": "string",
                   "id": 1
+                }
+              }
+            },
+            "routing": {
+              "type": "google.api.RoutingRule",
+              "id": 72295729,
+              "extend": "google.protobuf.MethodOptions"
+            },
+            "RoutingRule": {
+              "fields": {
+                "routingParameters": {
+                  "rule": "repeated",
+                  "type": "RoutingParameter",
+                  "id": 2
+                }
+              }
+            },
+            "RoutingParameter": {
+              "fields": {
+                "field": {
+                  "type": "string",
+                  "id": 1
+                },
+                "pathTemplate": {
+                  "type": "string",
+                  "id": 2
                 }
               }
             }

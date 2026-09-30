@@ -127,6 +127,9 @@ export namespace google {
 
                     /** FindClosestBuildingInsightsRequest experiments */
                     experiments?: (google.maps.solar.v1.Experiment[]|null);
+
+                    /** FindClosestBuildingInsightsRequest additionalInsights */
+                    additionalInsights?: (google.maps.solar.v1.AdditionalInsights[]|null);
                 }
 
                 /** Represents a FindClosestBuildingInsightsRequest. */
@@ -149,6 +152,9 @@ export namespace google {
 
                     /** FindClosestBuildingInsightsRequest experiments. */
                     public experiments: google.maps.solar.v1.Experiment[];
+
+                    /** FindClosestBuildingInsightsRequest additionalInsights. */
+                    public additionalInsights: google.maps.solar.v1.AdditionalInsights[];
 
                     /**
                      * Creates a new FindClosestBuildingInsightsRequest instance using the specified properties.
@@ -366,6 +372,9 @@ export namespace google {
 
                     /** BuildingInsights imageryQuality */
                     imageryQuality?: (google.maps.solar.v1.ImageryQuality|keyof typeof google.maps.solar.v1.ImageryQuality|null);
+
+                    /** BuildingInsights detectedArrays */
+                    detectedArrays?: (google.maps.solar.v1.BuildingInsights.IDetectedArrays|null);
                 }
 
                 /** Represents a BuildingInsights. */
@@ -409,6 +418,9 @@ export namespace google {
 
                     /** BuildingInsights imageryQuality. */
                     public imageryQuality: (google.maps.solar.v1.ImageryQuality|keyof typeof google.maps.solar.v1.ImageryQuality);
+
+                    /** BuildingInsights detectedArrays. */
+                    public detectedArrays?: (google.maps.solar.v1.BuildingInsights.IDetectedArrays|null);
 
                     /**
                      * Creates a new BuildingInsights instance using the specified properties.
@@ -486,6 +498,123 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace BuildingInsights {
+
+                    /** Properties of a DetectedArrays. */
+                    interface IDetectedArrays {
+
+                        /** DetectedArrays detectionStatus */
+                        detectionStatus?: (google.maps.solar.v1.BuildingInsights.DetectedArrays.DetectionStatus|keyof typeof google.maps.solar.v1.BuildingInsights.DetectedArrays.DetectionStatus|null);
+
+                        /** DetectedArrays latestCaptureDate */
+                        latestCaptureDate?: (google.type.IDate|null);
+                    }
+
+                    /** Represents a DetectedArrays. */
+                    class DetectedArrays implements IDetectedArrays {
+
+                        /**
+                         * Constructs a new DetectedArrays.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.maps.solar.v1.BuildingInsights.IDetectedArrays);
+
+                        /** DetectedArrays detectionStatus. */
+                        public detectionStatus: (google.maps.solar.v1.BuildingInsights.DetectedArrays.DetectionStatus|keyof typeof google.maps.solar.v1.BuildingInsights.DetectedArrays.DetectionStatus);
+
+                        /** DetectedArrays latestCaptureDate. */
+                        public latestCaptureDate?: (google.type.IDate|null);
+
+                        /**
+                         * Creates a new DetectedArrays instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DetectedArrays instance
+                         */
+                        public static create(properties?: google.maps.solar.v1.BuildingInsights.IDetectedArrays): google.maps.solar.v1.BuildingInsights.DetectedArrays;
+
+                        /**
+                         * Encodes the specified DetectedArrays message. Does not implicitly {@link google.maps.solar.v1.BuildingInsights.DetectedArrays.verify|verify} messages.
+                         * @param message DetectedArrays message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.maps.solar.v1.BuildingInsights.IDetectedArrays, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DetectedArrays message, length delimited. Does not implicitly {@link google.maps.solar.v1.BuildingInsights.DetectedArrays.verify|verify} messages.
+                         * @param message DetectedArrays message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.maps.solar.v1.BuildingInsights.IDetectedArrays, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DetectedArrays message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DetectedArrays
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.solar.v1.BuildingInsights.DetectedArrays;
+
+                        /**
+                         * Decodes a DetectedArrays message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DetectedArrays
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.solar.v1.BuildingInsights.DetectedArrays;
+
+                        /**
+                         * Verifies a DetectedArrays message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DetectedArrays message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DetectedArrays
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.maps.solar.v1.BuildingInsights.DetectedArrays;
+
+                        /**
+                         * Creates a plain object from a DetectedArrays message. Also converts values to other types if specified.
+                         * @param message DetectedArrays
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.maps.solar.v1.BuildingInsights.DetectedArrays, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DetectedArrays to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DetectedArrays
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace DetectedArrays {
+
+                        /** DetectionStatus enum. */
+                        enum DetectionStatus {
+                            DETECTION_STATUS_UNSPECIFIED = 0,
+                            DETECTION_STATUS_DATA_UNAVAILABLE = 1,
+                            DETECTION_STATUS_ARRAYS_DETECTED = 2,
+                            DETECTION_STATUS_NO_ARRAYS_DETECTED = 3
+                        }
+                    }
                 }
 
                 /** Properties of a SolarPotential. */
@@ -2385,6 +2514,12 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** AdditionalInsights enum. */
+                enum AdditionalInsights {
+                    ADDITIONAL_INSIGHTS_UNSPECIFIED = 0,
+                    DETECTED_ARRAYS = 2
                 }
 
                 /** DataLayerView enum. */

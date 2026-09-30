@@ -22,9 +22,18 @@ import {
   QueryDocumentSnapshot,
   setLogFunction,
   Timestamp,
+  GeoPoint,
+  DocumentReference,
+  Bytes,
+  BsonObjectId,
+  BsonTimestamp,
+  Decimal128Value,
+  Int32Value,
+  MaxKey,
+  MinKey,
+  RegexValue,
 } from '../src';
-import {GeoPoint} from '../src';
-import {DocumentReference} from '../src';
+import {RESERVED_BSON_BINARY_KEY} from '../src/map-type';
 import * as order from '../src/order';
 import {QualifiedResourcePath} from '../src/path';
 import {createInstance, InvalidApiUsage, verifyInstance} from './util/helpers';
@@ -52,6 +61,19 @@ describe('Order', () => {
 
   function blob(data: number[]): api.IValue {
     return wrap(Buffer.from(data));
+  }
+
+  function bsonBinaryBase64(subtype: number, data: number[]): api.IValue {
+    const bytes = Buffer.concat([Buffer.from([subtype]), Buffer.from(data)]);
+    return {
+      mapValue: {
+        fields: {
+          [RESERVED_BSON_BINARY_KEY]: {
+            bytesValue: bytes.toString('base64') as unknown as Uint8Array,
+          },
+        },
+      },
+    };
   }
 
   function resource(pathString: string): api.IValue {
@@ -146,7 +168,10 @@ describe('Order', () => {
   it('is correct', () => {
     const groups = [
       // null first
-      [wrap(null)],
+      [wrap(null), wrap(null)],
+
+      // MinKey is after null
+      [wrap(MinKey.instance()), wrap(MinKey.instance())],
 
       // booleans
       [wrap(false)],
@@ -154,28 +179,88 @@ describe('Order', () => {
 
       // numbers
       [double(NaN), double(NaN)],
-      [double(-Infinity)],
+      [double(-Infinity), wrap(new Decimal128Value('-Infinity'))],
       [double(-Number.MAX_VALUE)],
-      [int(Number.MIN_SAFE_INTEGER - 1)],
-      [int(Number.MIN_SAFE_INTEGER)],
-      [double(-1.1)],
-      // Integers and Doubles order the same.
-      [int(-1), double(-1.0)],
+      [
+        int(Number.MIN_SAFE_INTEGER - 1),
+        wrap(new Decimal128Value('-9007199254740992')),
+      ],
+      [
+        int(Number.MIN_SAFE_INTEGER),
+        wrap(new Decimal128Value('-9007199254740991')),
+      ],
+      // 64-bit and 32-bit integers order together numerically.
+      [
+        int(-2147483648),
+        wrap(new Int32Value(-2147483648)),
+        wrap(new Decimal128Value('-2147483648')),
+      ],
+      [double(-1.5), wrap(new Decimal128Value('-1.5'))],
+      // Integers and Doubles and int32 order together numerically.
+      [
+        int(-1),
+        double(-1.0),
+        wrap(new Int32Value(-1)),
+        wrap(new Decimal128Value('-1')),
+        wrap(new Decimal128Value('-1.0')),
+      ],
       [double(-Number.MIN_VALUE)],
       // zeros all compare the same.
-      [int(0), double(0.0), double(-0)],
+      [
+        int(0),
+        double(0.0),
+        double(-0),
+        wrap(new Int32Value(0)),
+        wrap(new Decimal128Value('0')),
+        wrap(new Decimal128Value('-0')),
+      ],
       [double(Number.MIN_VALUE)],
-      [int(1), double(1.0)],
-      [double(1.1)],
-      [int(2)],
-      [int(10)],
-      [int(Number.MAX_SAFE_INTEGER)],
-      [int(Number.MAX_SAFE_INTEGER + 1)],
-      [double(Infinity)],
+      [
+        int(1),
+        double(1.0),
+        wrap(new Int32Value(1)),
+        wrap(new Decimal128Value('1')),
+        wrap(new Decimal128Value('1.0')),
+      ],
+      [double(1.5), wrap(new Decimal128Value('1.5'))],
+      [
+        int(2),
+        wrap(new Decimal128Value('2')),
+        wrap(new Decimal128Value('2.0')),
+      ],
+      [
+        int(10),
+        wrap(new Decimal128Value('10')),
+        wrap(new Decimal128Value('10.0')),
+      ],
+      [
+        wrap(new Int32Value(11)),
+        wrap(new Decimal128Value('11')),
+        wrap(new Decimal128Value('11.0')),
+      ],
+      [wrap(new Int32Value(12)), wrap(new Decimal128Value('12.0'))],
+      [
+        wrap(new Int32Value(2147483647)),
+        wrap(new Decimal128Value('2147483647')),
+      ],
+      [
+        int(Number.MAX_SAFE_INTEGER),
+        wrap(new Decimal128Value('9007199254740991')),
+      ],
+      [
+        int(Number.MAX_SAFE_INTEGER + 1),
+        wrap(new Decimal128Value('9007199254740992')),
+      ],
+      [double(Infinity), wrap(new Decimal128Value('Infinity'))],
 
       // timestamps
       [wrap(new Date(2016, 5, 20, 10, 20))],
       [wrap(new Date(2016, 10, 21, 15, 32))],
+
+      // request timestamp
+      [wrap(new BsonTimestamp(123, 4))],
+      [wrap(new BsonTimestamp(123, 5))],
+      [wrap(new BsonTimestamp(124, 0))],
 
       // strings
       [wrap('')],
@@ -192,9 +277,26 @@ describe('Order', () => {
       // blobs
       [blob([])],
       [blob([0])],
-      [blob([0, 1, 2, 3, 4])],
+      [
+        blob([0, 1, 2, 3, 4]),
+        wrap(Bytes.fromUint8Array(Buffer.from([0, 1, 2, 3, 4]), 0)),
+      ],
       [blob([0, 1, 2, 4, 3])],
       [blob([255])],
+
+      [
+        wrap(Bytes.fromUint8Array(Buffer.from([1, 2, 3]), 5)),
+        wrap(Bytes.fromUint8Array(new Uint8Array([1, 2, 3]), 5)),
+        bsonBinaryBase64(5, [1, 2, 3]),
+      ],
+      [
+        wrap(Bytes.fromUint8Array(Buffer.from([1]), 7)),
+        bsonBinaryBase64(7, [1]),
+      ],
+      [
+        wrap(Bytes.fromUint8Array(Buffer.from([2]), 7)),
+        bsonBinaryBase64(7, [2]),
+      ],
 
       // resource names
       [resource('projects/p1/databases/d1/documents/c1/doc1')],
@@ -206,6 +308,12 @@ describe('Order', () => {
       [resource('projects/p2/databases/d2/documents/c1/doc1')],
       [resource('projects/p2/databases/d2/documents/c1-/doc1')],
       [resource('projects/p2/databases/d3/documents/c1-/doc1')],
+
+      // ObjectId
+      [wrap(new BsonObjectId('foo')), wrap(new BsonObjectId('foo'))],
+      [wrap(new BsonObjectId('foo\u0301'))], // with combining acute accent
+      [wrap(new BsonObjectId('xyz'))],
+      [wrap(new BsonObjectId('Ḟoo'))], // with latin capital letter f with dot above
 
       // geo points
       [geopoint(-90, -180)],
@@ -221,6 +329,12 @@ describe('Order', () => {
       [geopoint(90, 0)],
       [geopoint(90, 180)],
 
+      // regular expressions
+      [wrap(new RegexValue('a', 'bar1'))],
+      [wrap(new RegexValue('foo', 'bar1'))],
+      [wrap(new RegexValue('foo', 'bar2'))],
+      [wrap(new RegexValue('go', 'bar1'))],
+
       // arrays
       [wrap([])],
       [wrap(['bar'])],
@@ -235,6 +349,9 @@ describe('Order', () => {
       [wrap({foo: 1})],
       [wrap({foo: 2})],
       [wrap({foo: '0'})],
+
+      // MaxKey
+      [wrap(MaxKey.instance()), wrap(MaxKey.instance())],
     ];
 
     for (let i = 0; i < groups.length; i++) {
@@ -280,6 +397,31 @@ describe('Order', () => {
         }
       }
     }
+  });
+
+  it('correctly compares BSON binary blobs when bytesValue is represented as Base64 string', () => {
+    const b64Blob1 = bsonBinaryBase64(5, [1, 2, 3]);
+    const b64Blob1Copy = bsonBinaryBase64(5, [1, 2, 3]);
+    const uint8Blob1 = wrap(Bytes.fromUint8Array(new Uint8Array([1, 2, 3]), 5));
+
+    // Equality between Base64 and Base64, and between Base64 and Uint8Array
+    expect(order.compare(b64Blob1, b64Blob1Copy)).to.equal(0);
+    expect(order.compare(b64Blob1, uint8Blob1)).to.equal(0);
+    expect(order.compare(uint8Blob1, b64Blob1)).to.equal(0);
+
+    // Subtype ordering: subtype 5 < subtype 7
+    const b64BlobSubtype7 = bsonBinaryBase64(7, [1]);
+    expect(order.compare(b64Blob1, b64BlobSubtype7)).to.be.lessThan(0);
+    expect(order.compare(b64BlobSubtype7, b64Blob1)).to.be.greaterThan(0);
+
+    // Same subtype, different data ordering
+    const b64BlobSubtype7Larger = bsonBinaryBase64(7, [2]);
+    expect(
+      order.compare(b64BlobSubtype7, b64BlobSubtype7Larger),
+    ).to.be.lessThan(0);
+    expect(
+      order.compare(b64BlobSubtype7Larger, b64BlobSubtype7),
+    ).to.be.greaterThan(0);
   });
 });
 

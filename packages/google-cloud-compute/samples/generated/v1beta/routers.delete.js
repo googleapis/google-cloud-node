@@ -29,6 +29,13 @@ function main(project, region, router) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
+   *  ETag for optimistic concurrency control as described by AIP 154. Used to
+   *  prevent conflicting updates. If provided, the request will succeed only if
+   *  the etag matches the current etag of the router; otherwise, the request
+   *  fails with an ABORTED error.
+   */
+  // const etag = 'abc123'
+  /**
    *  Project ID for this request.
    */
   // const project = 'my-project'

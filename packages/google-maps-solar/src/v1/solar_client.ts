@@ -384,7 +384,17 @@ export class SolarClient {
    *   is interpreted as the exact required quality and only `MEDIUM` quality
    *   imagery is returned if `required_quality` is set to `MEDIUM`.
    * @param {number[]} [request.experiments]
-   *   Optional. Specifies the pre-GA features to enable.
+   *   Optional. Specifies the pre-GA experiments to enable. Requests using this
+   *   field are classified as a pre-GA offering under the [Google Maps Platform
+   *   Service Specific
+   *   Terms](https://cloud.google.com/maps-platform/terms/maps-service-terms).
+   *   See [launch stage
+   *   descriptions](https://cloud.google.com/maps-platform/terms/launch-stages)
+   *   for more details.
+   * @param {number[]} [request.additionalInsights]
+   *   Optional. A list of
+   *   {@link protos.google.maps.solar.v1.FindClosestBuildingInsightsRequest.additional_insights|additional_insights}
+   *   to be included in the response.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -559,7 +569,13 @@ export class SolarClient {
    *   is interpreted as the exact required quality and only `MEDIUM` quality
    *   imagery is returned if `required_quality` is set to `MEDIUM`.
    * @param {number[]} [request.experiments]
-   *   Optional. Specifies the pre-GA experiments to enable.
+   *   Optional. Specifies the pre-GA experiments to enable. Requests using this
+   *   field are classified as a pre-GA offering under the [Google Maps Platform
+   *   Service Specific
+   *   Terms](https://cloud.google.com/maps-platform/terms/maps-service-terms).
+   *   See [launch stage descriptions](
+   *   https://cloud.google.com/maps-platform/terms/launch-stages) for more
+   *   details.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

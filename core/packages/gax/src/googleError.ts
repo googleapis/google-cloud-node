@@ -32,6 +32,19 @@ const NUM_OF_PARTS_IN_PROTO_TYPE_NAME = 2;
 
 export class GoogleError extends Error {
   code?: Status;
+  /**
+   * The HTTP response status received by the REST fallback transport.
+   *
+   * `code` holds the gRPC status the response was mapped to, which is lossy:
+   * `rpcCodeFromHttpStatusCode` collapses whole ranges (every unmapped 5xx
+   * becomes INTERNAL), so the original status cannot be recovered from it.
+   * Telemetry reports the two separately, so the received status is kept here
+   * as well.
+   *
+   * Undefined for gRPC calls, and for fallback failures that never produced a
+   * response at all, such as an expired deadline or a connection error.
+   */
+  httpStatusCode?: number;
   note?: string;
   metadata?: Metadata;
   statusDetails?: string | protobuf.Message<{}>[];

@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.12.1](https://github.com/googleapis/google-cloud-node/compare/storage-control-v0.12.0...storage-control-v0.12.1) (2026-09-28)
+
+
+### Bug Fixes
+
+* Update package.json and .gitignore across packages ([#9378](https://github.com/googleapis/google-cloud-node/issues/9378)) ([9c54cec](https://github.com/googleapis/google-cloud-node/commit/9c54cece565b5cbcae63a9856c1ef3448307d46e))
+
+## [0.12.0](https://github.com/googleapis/google-cloud-node/compare/storage-control-v0.11.0...storage-control-v0.12.0) (2026-09-15)
+
+
+### Features
+
+* PNPM workspace ([#8973](https://github.com/googleapis/google-cloud-node/issues/8973)) ([1ea27c9](https://github.com/googleapis/google-cloud-node/commit/1ea27c9c9bf4e4cbf79381321dcb9bce7951a76f))
+
 ## [0.11.0](https://github.com/googleapis/google-cloud-node/compare/storage-control-v0.10.0...storage-control-v0.11.0) (2026-08-04)
 
 

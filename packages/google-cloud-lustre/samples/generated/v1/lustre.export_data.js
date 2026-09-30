@@ -52,6 +52,10 @@ function main(name) {
   /**
    *  Optional. User-specified service account used to perform the transfer.
    *  If unspecified, the Managed Lustre service agent is used.
+   *  Use one of the following formats:
+   *  * `{EMAIL_ADDRESS_OR_UNIQUE_ID}`
+   *  * `projects/{PROJECT_ID}/serviceAccounts/{EMAIL_ADDRESS_OR_UNIQUE_ID}`
+   *  * `projects/-/serviceAccounts/{EMAIL_ADDRESS_OR_UNIQUE_ID}`
    */
   // const serviceAccount = 'abc123'
 

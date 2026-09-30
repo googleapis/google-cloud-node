@@ -5236,6 +5236,9 @@ export namespace google {
                     /** SearchRequest dataStoreSpecs */
                     dataStoreSpecs?: (google.cloud.discoveryengine.v1.SearchRequest.IDataStoreSpec[]|null);
 
+                    /** SearchRequest numResultsPerDataStore */
+                    numResultsPerDataStore?: (number|null);
+
                     /** SearchRequest filter */
                     filter?: (string|null);
 
@@ -5310,6 +5313,15 @@ export namespace google {
 
                     /** SearchRequest relevanceScoreSpec */
                     relevanceScoreSpec?: (google.cloud.discoveryengine.v1.SearchRequest.IRelevanceScoreSpec|null);
+
+                    /** SearchRequest searchAddonSpec */
+                    searchAddonSpec?: (google.cloud.discoveryengine.v1.SearchRequest.ISearchAddonSpec|null);
+
+                    /** SearchRequest customRankingParams */
+                    customRankingParams?: (google.cloud.discoveryengine.v1.SearchRequest.ICustomRankingParams|null);
+
+                    /** SearchRequest entity */
+                    entity?: (string|null);
                 }
 
                 /** Represents a SearchRequest. */
@@ -5350,6 +5362,9 @@ export namespace google {
 
                     /** SearchRequest dataStoreSpecs. */
                     public dataStoreSpecs: google.cloud.discoveryengine.v1.SearchRequest.IDataStoreSpec[];
+
+                    /** SearchRequest numResultsPerDataStore. */
+                    public numResultsPerDataStore: number;
 
                     /** SearchRequest filter. */
                     public filter: string;
@@ -5425,6 +5440,15 @@ export namespace google {
 
                     /** SearchRequest relevanceScoreSpec. */
                     public relevanceScoreSpec?: (google.cloud.discoveryengine.v1.SearchRequest.IRelevanceScoreSpec|null);
+
+                    /** SearchRequest searchAddonSpec. */
+                    public searchAddonSpec?: (google.cloud.discoveryengine.v1.SearchRequest.ISearchAddonSpec|null);
+
+                    /** SearchRequest customRankingParams. */
+                    public customRankingParams?: (google.cloud.discoveryengine.v1.SearchRequest.ICustomRankingParams|null);
+
+                    /** SearchRequest entity. */
+                    public entity: string;
 
                     /**
                      * Creates a new SearchRequest instance using the specified properties.
@@ -5620,6 +5644,9 @@ export namespace google {
 
                         /** DataStoreSpec customSearchOperators */
                         customSearchOperators?: (string|null);
+
+                        /** DataStoreSpec numResults */
+                        numResults?: (number|null);
                     }
 
                     /** Represents a DataStoreSpec. */
@@ -5642,6 +5669,9 @@ export namespace google {
 
                         /** DataStoreSpec customSearchOperators. */
                         public customSearchOperators: string;
+
+                        /** DataStoreSpec numResults. */
+                        public numResults: number;
 
                         /**
                          * Creates a new DataStoreSpec instance using the specified properties.
@@ -7587,6 +7617,12 @@ export namespace google {
 
                         /** SearchAsYouTypeSpec condition */
                         condition?: (google.cloud.discoveryengine.v1.SearchRequest.SearchAsYouTypeSpec.Condition|keyof typeof google.cloud.discoveryengine.v1.SearchRequest.SearchAsYouTypeSpec.Condition|null);
+
+                        /** SearchAsYouTypeSpec fields */
+                        fields?: (google.cloud.discoveryengine.v1.SearchRequest.SearchAsYouTypeSpec.IField[]|null);
+
+                        /** SearchAsYouTypeSpec scoreThreshold */
+                        scoreThreshold?: (number|null);
                     }
 
                     /** Represents a SearchAsYouTypeSpec. */
@@ -7600,6 +7636,12 @@ export namespace google {
 
                         /** SearchAsYouTypeSpec condition. */
                         public condition: (google.cloud.discoveryengine.v1.SearchRequest.SearchAsYouTypeSpec.Condition|keyof typeof google.cloud.discoveryengine.v1.SearchRequest.SearchAsYouTypeSpec.Condition);
+
+                        /** SearchAsYouTypeSpec fields. */
+                        public fields: google.cloud.discoveryengine.v1.SearchRequest.SearchAsYouTypeSpec.IField[];
+
+                        /** SearchAsYouTypeSpec scoreThreshold. */
+                        public scoreThreshold?: (number|null);
 
                         /**
                          * Creates a new SearchAsYouTypeSpec instance using the specified properties.
@@ -7680,6 +7722,109 @@ export namespace google {
                     }
 
                     namespace SearchAsYouTypeSpec {
+
+                        /** Properties of a Field. */
+                        interface IField {
+
+                            /** Field key */
+                            key?: (string|null);
+
+                            /** Field weight */
+                            weight?: (number|null);
+                        }
+
+                        /** Represents a Field. */
+                        class Field implements IField {
+
+                            /**
+                             * Constructs a new Field.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.discoveryengine.v1.SearchRequest.SearchAsYouTypeSpec.IField);
+
+                            /** Field key. */
+                            public key: string;
+
+                            /** Field weight. */
+                            public weight?: (number|null);
+
+                            /**
+                             * Creates a new Field instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns Field instance
+                             */
+                            public static create(properties?: google.cloud.discoveryengine.v1.SearchRequest.SearchAsYouTypeSpec.IField): google.cloud.discoveryengine.v1.SearchRequest.SearchAsYouTypeSpec.Field;
+
+                            /**
+                             * Encodes the specified Field message. Does not implicitly {@link google.cloud.discoveryengine.v1.SearchRequest.SearchAsYouTypeSpec.Field.verify|verify} messages.
+                             * @param message Field message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.discoveryengine.v1.SearchRequest.SearchAsYouTypeSpec.IField, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified Field message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1.SearchRequest.SearchAsYouTypeSpec.Field.verify|verify} messages.
+                             * @param message Field message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.discoveryengine.v1.SearchRequest.SearchAsYouTypeSpec.IField, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a Field message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns Field
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1.SearchRequest.SearchAsYouTypeSpec.Field;
+
+                            /**
+                             * Decodes a Field message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns Field
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1.SearchRequest.SearchAsYouTypeSpec.Field;
+
+                            /**
+                             * Verifies a Field message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a Field message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns Field
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1.SearchRequest.SearchAsYouTypeSpec.Field;
+
+                            /**
+                             * Creates a plain object from a Field message. Also converts values to other types if specified.
+                             * @param message Field
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.discoveryengine.v1.SearchRequest.SearchAsYouTypeSpec.Field, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this Field to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for Field
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
 
                         /** Condition enum. */
                         enum Condition {
@@ -8019,103 +8164,6 @@ export namespace google {
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
-                    /** Properties of a RelevanceScoreSpec. */
-                    interface IRelevanceScoreSpec {
-
-                        /** RelevanceScoreSpec returnRelevanceScore */
-                        returnRelevanceScore?: (boolean|null);
-                    }
-
-                    /** Represents a RelevanceScoreSpec. */
-                    class RelevanceScoreSpec implements IRelevanceScoreSpec {
-
-                        /**
-                         * Constructs a new RelevanceScoreSpec.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.discoveryengine.v1.SearchRequest.IRelevanceScoreSpec);
-
-                        /** RelevanceScoreSpec returnRelevanceScore. */
-                        public returnRelevanceScore: boolean;
-
-                        /**
-                         * Creates a new RelevanceScoreSpec instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns RelevanceScoreSpec instance
-                         */
-                        public static create(properties?: google.cloud.discoveryengine.v1.SearchRequest.IRelevanceScoreSpec): google.cloud.discoveryengine.v1.SearchRequest.RelevanceScoreSpec;
-
-                        /**
-                         * Encodes the specified RelevanceScoreSpec message. Does not implicitly {@link google.cloud.discoveryengine.v1.SearchRequest.RelevanceScoreSpec.verify|verify} messages.
-                         * @param message RelevanceScoreSpec message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.discoveryengine.v1.SearchRequest.IRelevanceScoreSpec, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified RelevanceScoreSpec message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1.SearchRequest.RelevanceScoreSpec.verify|verify} messages.
-                         * @param message RelevanceScoreSpec message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.discoveryengine.v1.SearchRequest.IRelevanceScoreSpec, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a RelevanceScoreSpec message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns RelevanceScoreSpec
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1.SearchRequest.RelevanceScoreSpec;
-
-                        /**
-                         * Decodes a RelevanceScoreSpec message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns RelevanceScoreSpec
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1.SearchRequest.RelevanceScoreSpec;
-
-                        /**
-                         * Verifies a RelevanceScoreSpec message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a RelevanceScoreSpec message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns RelevanceScoreSpec
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1.SearchRequest.RelevanceScoreSpec;
-
-                        /**
-                         * Creates a plain object from a RelevanceScoreSpec message. Also converts values to other types if specified.
-                         * @param message RelevanceScoreSpec
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.discoveryengine.v1.SearchRequest.RelevanceScoreSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this RelevanceScoreSpec to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-
-                        /**
-                         * Gets the default type url for RelevanceScoreSpec
-                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns The default type url
-                         */
-                        public static getTypeUrl(typeUrlPrefix?: string): string;
-                    }
-
                     /** Properties of a RelevanceFilterSpec. */
                     interface IRelevanceFilterSpec {
 
@@ -8328,6 +8376,309 @@ export namespace google {
                         }
                     }
 
+                    /** Properties of a RelevanceScoreSpec. */
+                    interface IRelevanceScoreSpec {
+
+                        /** RelevanceScoreSpec returnRelevanceScore */
+                        returnRelevanceScore?: (boolean|null);
+                    }
+
+                    /** Represents a RelevanceScoreSpec. */
+                    class RelevanceScoreSpec implements IRelevanceScoreSpec {
+
+                        /**
+                         * Constructs a new RelevanceScoreSpec.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.discoveryengine.v1.SearchRequest.IRelevanceScoreSpec);
+
+                        /** RelevanceScoreSpec returnRelevanceScore. */
+                        public returnRelevanceScore: boolean;
+
+                        /**
+                         * Creates a new RelevanceScoreSpec instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns RelevanceScoreSpec instance
+                         */
+                        public static create(properties?: google.cloud.discoveryengine.v1.SearchRequest.IRelevanceScoreSpec): google.cloud.discoveryengine.v1.SearchRequest.RelevanceScoreSpec;
+
+                        /**
+                         * Encodes the specified RelevanceScoreSpec message. Does not implicitly {@link google.cloud.discoveryengine.v1.SearchRequest.RelevanceScoreSpec.verify|verify} messages.
+                         * @param message RelevanceScoreSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.discoveryengine.v1.SearchRequest.IRelevanceScoreSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified RelevanceScoreSpec message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1.SearchRequest.RelevanceScoreSpec.verify|verify} messages.
+                         * @param message RelevanceScoreSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.discoveryengine.v1.SearchRequest.IRelevanceScoreSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a RelevanceScoreSpec message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns RelevanceScoreSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1.SearchRequest.RelevanceScoreSpec;
+
+                        /**
+                         * Decodes a RelevanceScoreSpec message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns RelevanceScoreSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1.SearchRequest.RelevanceScoreSpec;
+
+                        /**
+                         * Verifies a RelevanceScoreSpec message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a RelevanceScoreSpec message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns RelevanceScoreSpec
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1.SearchRequest.RelevanceScoreSpec;
+
+                        /**
+                         * Creates a plain object from a RelevanceScoreSpec message. Also converts values to other types if specified.
+                         * @param message RelevanceScoreSpec
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.discoveryengine.v1.SearchRequest.RelevanceScoreSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this RelevanceScoreSpec to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for RelevanceScoreSpec
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a SearchAddonSpec. */
+                    interface ISearchAddonSpec {
+
+                        /** SearchAddonSpec disableSemanticAddOn */
+                        disableSemanticAddOn?: (boolean|null);
+
+                        /** SearchAddonSpec disableKpiPersonalizationAddOn */
+                        disableKpiPersonalizationAddOn?: (boolean|null);
+
+                        /** SearchAddonSpec disableGenerativeAnswerAddOn */
+                        disableGenerativeAnswerAddOn?: (boolean|null);
+                    }
+
+                    /** Represents a SearchAddonSpec. */
+                    class SearchAddonSpec implements ISearchAddonSpec {
+
+                        /**
+                         * Constructs a new SearchAddonSpec.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.discoveryengine.v1.SearchRequest.ISearchAddonSpec);
+
+                        /** SearchAddonSpec disableSemanticAddOn. */
+                        public disableSemanticAddOn: boolean;
+
+                        /** SearchAddonSpec disableKpiPersonalizationAddOn. */
+                        public disableKpiPersonalizationAddOn: boolean;
+
+                        /** SearchAddonSpec disableGenerativeAnswerAddOn. */
+                        public disableGenerativeAnswerAddOn: boolean;
+
+                        /**
+                         * Creates a new SearchAddonSpec instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SearchAddonSpec instance
+                         */
+                        public static create(properties?: google.cloud.discoveryengine.v1.SearchRequest.ISearchAddonSpec): google.cloud.discoveryengine.v1.SearchRequest.SearchAddonSpec;
+
+                        /**
+                         * Encodes the specified SearchAddonSpec message. Does not implicitly {@link google.cloud.discoveryengine.v1.SearchRequest.SearchAddonSpec.verify|verify} messages.
+                         * @param message SearchAddonSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.discoveryengine.v1.SearchRequest.ISearchAddonSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SearchAddonSpec message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1.SearchRequest.SearchAddonSpec.verify|verify} messages.
+                         * @param message SearchAddonSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.discoveryengine.v1.SearchRequest.ISearchAddonSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SearchAddonSpec message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SearchAddonSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1.SearchRequest.SearchAddonSpec;
+
+                        /**
+                         * Decodes a SearchAddonSpec message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SearchAddonSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1.SearchRequest.SearchAddonSpec;
+
+                        /**
+                         * Verifies a SearchAddonSpec message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SearchAddonSpec message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SearchAddonSpec
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1.SearchRequest.SearchAddonSpec;
+
+                        /**
+                         * Creates a plain object from a SearchAddonSpec message. Also converts values to other types if specified.
+                         * @param message SearchAddonSpec
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.discoveryengine.v1.SearchRequest.SearchAddonSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SearchAddonSpec to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SearchAddonSpec
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a CustomRankingParams. */
+                    interface ICustomRankingParams {
+
+                        /** CustomRankingParams expressionsToPrecompute */
+                        expressionsToPrecompute?: (string[]|null);
+                    }
+
+                    /** Represents a CustomRankingParams. */
+                    class CustomRankingParams implements ICustomRankingParams {
+
+                        /**
+                         * Constructs a new CustomRankingParams.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.discoveryengine.v1.SearchRequest.ICustomRankingParams);
+
+                        /** CustomRankingParams expressionsToPrecompute. */
+                        public expressionsToPrecompute: string[];
+
+                        /**
+                         * Creates a new CustomRankingParams instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CustomRankingParams instance
+                         */
+                        public static create(properties?: google.cloud.discoveryengine.v1.SearchRequest.ICustomRankingParams): google.cloud.discoveryengine.v1.SearchRequest.CustomRankingParams;
+
+                        /**
+                         * Encodes the specified CustomRankingParams message. Does not implicitly {@link google.cloud.discoveryengine.v1.SearchRequest.CustomRankingParams.verify|verify} messages.
+                         * @param message CustomRankingParams message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.discoveryengine.v1.SearchRequest.ICustomRankingParams, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CustomRankingParams message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1.SearchRequest.CustomRankingParams.verify|verify} messages.
+                         * @param message CustomRankingParams message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.discoveryengine.v1.SearchRequest.ICustomRankingParams, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CustomRankingParams message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CustomRankingParams
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1.SearchRequest.CustomRankingParams;
+
+                        /**
+                         * Decodes a CustomRankingParams message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CustomRankingParams
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1.SearchRequest.CustomRankingParams;
+
+                        /**
+                         * Verifies a CustomRankingParams message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CustomRankingParams message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CustomRankingParams
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1.SearchRequest.CustomRankingParams;
+
+                        /**
+                         * Creates a plain object from a CustomRankingParams message. Also converts values to other types if specified.
+                         * @param message CustomRankingParams
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.discoveryengine.v1.SearchRequest.CustomRankingParams, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CustomRankingParams to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CustomRankingParams
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
                     /** RankingExpressionBackend enum. */
                     enum RankingExpressionBackend {
                         RANKING_EXPRESSION_BACKEND_UNSPECIFIED = 0,
@@ -8373,6 +8724,9 @@ export namespace google {
 
                     /** SearchResponse summary */
                     summary?: (google.cloud.discoveryengine.v1.SearchResponse.ISummary|null);
+
+                    /** SearchResponse appliedControls */
+                    appliedControls?: (string[]|null);
 
                     /** SearchResponse queryExpansionInfo */
                     queryExpansionInfo?: (google.cloud.discoveryengine.v1.SearchResponse.IQueryExpansionInfo|null);
@@ -8422,6 +8776,9 @@ export namespace google {
 
                     /** SearchResponse summary. */
                     public summary?: (google.cloud.discoveryengine.v1.SearchResponse.ISummary|null);
+
+                    /** SearchResponse appliedControls. */
+                    public appliedControls: string[];
 
                     /** SearchResponse queryExpansionInfo. */
                     public queryExpansionInfo?: (google.cloud.discoveryengine.v1.SearchResponse.IQueryExpansionInfo|null);
@@ -8535,6 +8892,9 @@ export namespace google {
 
                         /** SearchResult rankSignals */
                         rankSignals?: (google.cloud.discoveryengine.v1.SearchResponse.SearchResult.IRankSignals|null);
+
+                        /** SearchResult retrievalSignals */
+                        retrievalSignals?: (google.cloud.discoveryengine.v1.SearchResponse.SearchResult.IRetrievalSignals|null);
                     }
 
                     /** Represents a SearchResult. */
@@ -8560,6 +8920,9 @@ export namespace google {
 
                         /** SearchResult rankSignals. */
                         public rankSignals?: (google.cloud.discoveryengine.v1.SearchResponse.SearchResult.IRankSignals|null);
+
+                        /** SearchResult retrievalSignals. */
+                        public retrievalSignals?: (google.cloud.discoveryengine.v1.SearchResponse.SearchResult.IRetrievalSignals|null);
 
                         /**
                          * Creates a new SearchResult instance using the specified properties.
@@ -8670,6 +9033,9 @@ export namespace google {
 
                             /** RankSignals customSignals */
                             customSignals?: (google.cloud.discoveryengine.v1.SearchResponse.SearchResult.RankSignals.ICustomSignal[]|null);
+
+                            /** RankSignals precomputedExpressionValues */
+                            precomputedExpressionValues?: (number[]|null);
                         }
 
                         /** Represents a RankSignals. */
@@ -8707,6 +9073,9 @@ export namespace google {
 
                             /** RankSignals customSignals. */
                             public customSignals: google.cloud.discoveryengine.v1.SearchResponse.SearchResult.RankSignals.ICustomSignal[];
+
+                            /** RankSignals precomputedExpressionValues. */
+                            public precomputedExpressionValues: number[];
 
                             /**
                              * Creates a new RankSignals instance using the specified properties.
@@ -8889,6 +9258,119 @@ export namespace google {
                                  * @returns The default type url
                                  */
                                 public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+                        }
+
+                        /** Properties of a RetrievalSignals. */
+                        interface IRetrievalSignals {
+
+                            /** RetrievalSignals retrievalSources */
+                            retrievalSources?: (google.cloud.discoveryengine.v1.SearchResponse.SearchResult.RetrievalSignals.RetrievalSource[]|null);
+
+                            /** RetrievalSignals semanticRelevanceScore */
+                            semanticRelevanceScore?: (number|null);
+                        }
+
+                        /** Represents a RetrievalSignals. */
+                        class RetrievalSignals implements IRetrievalSignals {
+
+                            /**
+                             * Constructs a new RetrievalSignals.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.discoveryengine.v1.SearchResponse.SearchResult.IRetrievalSignals);
+
+                            /** RetrievalSignals retrievalSources. */
+                            public retrievalSources: google.cloud.discoveryengine.v1.SearchResponse.SearchResult.RetrievalSignals.RetrievalSource[];
+
+                            /** RetrievalSignals semanticRelevanceScore. */
+                            public semanticRelevanceScore: number;
+
+                            /**
+                             * Creates a new RetrievalSignals instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns RetrievalSignals instance
+                             */
+                            public static create(properties?: google.cloud.discoveryengine.v1.SearchResponse.SearchResult.IRetrievalSignals): google.cloud.discoveryengine.v1.SearchResponse.SearchResult.RetrievalSignals;
+
+                            /**
+                             * Encodes the specified RetrievalSignals message. Does not implicitly {@link google.cloud.discoveryengine.v1.SearchResponse.SearchResult.RetrievalSignals.verify|verify} messages.
+                             * @param message RetrievalSignals message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.discoveryengine.v1.SearchResponse.SearchResult.IRetrievalSignals, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified RetrievalSignals message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1.SearchResponse.SearchResult.RetrievalSignals.verify|verify} messages.
+                             * @param message RetrievalSignals message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.discoveryengine.v1.SearchResponse.SearchResult.IRetrievalSignals, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a RetrievalSignals message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns RetrievalSignals
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1.SearchResponse.SearchResult.RetrievalSignals;
+
+                            /**
+                             * Decodes a RetrievalSignals message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns RetrievalSignals
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1.SearchResponse.SearchResult.RetrievalSignals;
+
+                            /**
+                             * Verifies a RetrievalSignals message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a RetrievalSignals message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns RetrievalSignals
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1.SearchResponse.SearchResult.RetrievalSignals;
+
+                            /**
+                             * Creates a plain object from a RetrievalSignals message. Also converts values to other types if specified.
+                             * @param message RetrievalSignals
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.discoveryengine.v1.SearchResponse.SearchResult.RetrievalSignals, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this RetrievalSignals to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for RetrievalSignals
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace RetrievalSignals {
+
+                            /** RetrievalSource enum. */
+                            enum RetrievalSource {
+                                RETRIEVAL_SOURCE_UNSPECIFIED = 0,
+                                KEYWORD_SEARCH = 1,
+                                SEMANTIC_SEARCH = 2
                             }
                         }
                     }

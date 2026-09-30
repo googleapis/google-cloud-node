@@ -1,6 +1,45 @@
 # Changelog
 
 
+## [5.6.0](https://github.com/googleapis/google-cloud-node/compare/gapic-generator-v5.5.0...gapic-generator-v5.6.0) (2026-09-28)
+
+
+### Features
+
+* **generator:** Generate resumable upload client methods ([#9285](https://github.com/googleapis/google-cloud-node/issues/9285)) ([7333216](https://github.com/googleapis/google-cloud-node/commit/733321662eb9b832df1b80227292465814ace10e))
+* **generator:** Select resumable upload methods ([#9284](https://github.com/googleapis/google-cloud-node/issues/9284)) ([a9d7cab](https://github.com/googleapis/google-cloud-node/commit/a9d7cab354d75107296197310fc0cd50c965a148))
+
+
+### Bug Fixes
+
+* Update package.json and .gitignore across packages ([#9378](https://github.com/googleapis/google-cloud-node/issues/9378)) ([9c54cec](https://github.com/googleapis/google-cloud-node/commit/9c54cece565b5cbcae63a9856c1ef3448307d46e))
+
+## [5.5.0](https://github.com/googleapis/google-cloud-node/compare/gapic-generator-v5.4.0...gapic-generator-v5.5.0) (2026-09-23)
+
+
+### Features
+
+* **generator:** Use runtime-agnostic test runner in GAPIC package templates ([0722a34](https://github.com/googleapis/google-cloud-node/commit/0722a3415190ce725537091d67b49dbaccb5cd2a))
+
+
+### Bug Fixes
+
+* **gax:** Move gapic-generator-typescript into the root pnpm workspace ([#9418](https://github.com/googleapis/google-cloud-node/issues/9418)) ([d2c4b08](https://github.com/googleapis/google-cloud-node/commit/d2c4b08ae8f3a18c252a09a09e1ae1e49d4cd822))
+
+## [5.4.0](https://github.com/googleapis/google-cloud-node/compare/gapic-generator-v5.3.0...gapic-generator-v5.4.0) (2026-09-22)
+
+
+### Features
+
+* **o11y:** Wire enable_telemetry_tracing through the generator CLI ([#9373](https://github.com/googleapis/google-cloud-node/issues/9373)) ([3533155](https://github.com/googleapis/google-cloud-node/commit/353315572a16fb6bf34bfec4b96acea5917e1bf8))
+
+## [5.3.0](https://github.com/googleapis/google-cloud-node/compare/gapic-generator-v5.2.0...gapic-generator-v5.3.0) (2026-09-15)
+
+
+### Features
+
+* PNPM workspace ([#8973](https://github.com/googleapis/google-cloud-node/issues/8973)) ([1ea27c9](https://github.com/googleapis/google-cloud-node/commit/1ea27c9c9bf4e4cbf79381321dcb9bce7951a76f))
+
 ## [5.2.0](https://github.com/googleapis/google-cloud-node/compare/gapic-generator-v5.1.1...gapic-generator-v5.2.0) (2026-09-03)
 
 
