@@ -15,7 +15,7 @@
  */
 
 import * as assert from 'assert';
-import {before, beforeEach, afterEach, describe, it} from 'mocha';
+import {after, before, beforeEach, afterEach, describe, it} from 'mocha';
 import * as events from 'events';
 import PQueue from 'p-queue';
 import * as proxyquire from 'proxyquire';
@@ -1380,11 +1380,20 @@ describe('SessionPool', () => {
   });
 
   describe('trace annotations on active span', () => {
-    const traceExporter = new InMemorySpanExporter();
-    const provider = new NodeTracerProvider({
-      sampler: new AlwaysOnSampler(),
-      exporter: traceExporter,
-      spanProcessors: [new SimpleSpanProcessor(traceExporter)],
+    let traceExporter: InstanceType<typeof InMemorySpanExporter>;
+    let provider: InstanceType<typeof NodeTracerProvider>;
+
+    before(() => {
+      traceExporter = new InMemorySpanExporter();
+      provider = new NodeTracerProvider({
+        sampler: new AlwaysOnSampler(),
+        exporter: traceExporter,
+        spanProcessors: [new SimpleSpanProcessor(traceExporter)],
+      });
+    });
+
+    after(async () => {
+      await provider.shutdown();
     });
 
     beforeEach(() => {

@@ -2033,16 +2033,23 @@ describe('End to end tracing headers', () => {
   let spannerMock: mock.MockSpanner;
   let observabilityOptions: typeof ObservabilityOptions;
 
-  let provider: typeof NodeTracerProvider;
+  let provider: InstanceType<typeof NodeTracerProvider>;
 
-  beforeEach(async () => {
-    sandbox = sinon.createSandbox();
+  before(() => {
     const traceExporter = new InMemorySpanExporter();
     provider = new NodeTracerProvider({
       sampler: new AlwaysOnSampler(),
       exporter: traceExporter,
       spanProcessors: [new SimpleSpanProcessor(traceExporter)],
     });
+  });
+
+  after(async () => {
+    await provider.shutdown();
+  });
+
+  beforeEach(async () => {
+    sandbox = sinon.createSandbox();
     observabilityOptions = {
       tracerProvider: provider,
       enableEndToEndTracing: true,
