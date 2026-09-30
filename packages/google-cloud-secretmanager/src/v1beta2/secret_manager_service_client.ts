@@ -258,12 +258,21 @@ export class SecretManagerServiceClient {
       ),
     };
 
+    const internalTelemetryInfo = {
+      gcpClientService: 'secret-manager',
+      gcpVersion: 'v1beta2',
+      gcpRepo: 'googleapis/google-cloud-node',
+      gcpArtifact: '@google-cloud/secret-manager',
+    };
+
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
       'google.cloud.secretmanager.v1beta2.SecretManagerService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
       {'x-goog-api-client': clientHeader.join(' ')},
+      opts.enableTelemetryTracing,
+      internalTelemetryInfo,
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
