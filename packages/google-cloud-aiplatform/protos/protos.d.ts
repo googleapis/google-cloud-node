@@ -265914,6 +265914,13 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** MemoryType enum. */
+                enum MemoryType {
+                    MEMORY_TYPE_UNSPECIFIED = 0,
+                    NATURAL_LANGUAGE_COLLECTION = 1,
+                    STRUCTURED_PROFILE = 3
+                }
+
                 /** Properties of a Memory. */
                 interface IMemory {
 
@@ -265922,6 +265929,15 @@ export namespace google {
 
                     /** Memory ttl */
                     ttl?: (google.protobuf.IDuration|null);
+
+                    /** Memory revisionExpireTime */
+                    revisionExpireTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Memory revisionTtl */
+                    revisionTtl?: (google.protobuf.IDuration|null);
+
+                    /** Memory disableMemoryRevisions */
+                    disableMemoryRevisions?: (boolean|null);
 
                     /** Memory name */
                     name?: (string|null);
@@ -265943,6 +265959,24 @@ export namespace google {
 
                     /** Memory scope */
                     scope?: ({ [k: string]: string }|null);
+
+                    /** Memory topics */
+                    topics?: (google.cloud.aiplatform.v1beta1.IMemoryTopicId[]|null);
+
+                    /** Memory revisionLabels */
+                    revisionLabels?: ({ [k: string]: string }|null);
+
+                    /** Memory metadata */
+                    metadata?: ({ [k: string]: google.cloud.aiplatform.v1beta1.IMemoryMetadataValue }|null);
+
+                    /** Memory memoryType */
+                    memoryType?: (google.cloud.aiplatform.v1beta1.MemoryType|keyof typeof google.cloud.aiplatform.v1beta1.MemoryType|null);
+
+                    /** Memory structuredContent */
+                    structuredContent?: (google.cloud.aiplatform.v1beta1.Memory.IStructuredContent|null);
+
+                    /** Memory context */
+                    context?: (string|null);
                 }
 
                 /** Represents a Memory. */
@@ -265959,6 +265993,15 @@ export namespace google {
 
                     /** Memory ttl. */
                     public ttl?: (google.protobuf.IDuration|null);
+
+                    /** Memory revisionExpireTime. */
+                    public revisionExpireTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Memory revisionTtl. */
+                    public revisionTtl?: (google.protobuf.IDuration|null);
+
+                    /** Memory disableMemoryRevisions. */
+                    public disableMemoryRevisions?: (boolean|null);
 
                     /** Memory name. */
                     public name: string;
@@ -265981,8 +266024,29 @@ export namespace google {
                     /** Memory scope. */
                     public scope: { [k: string]: string };
 
+                    /** Memory topics. */
+                    public topics: google.cloud.aiplatform.v1beta1.IMemoryTopicId[];
+
+                    /** Memory revisionLabels. */
+                    public revisionLabels: { [k: string]: string };
+
+                    /** Memory metadata. */
+                    public metadata: { [k: string]: google.cloud.aiplatform.v1beta1.IMemoryMetadataValue };
+
+                    /** Memory memoryType. */
+                    public memoryType: (google.cloud.aiplatform.v1beta1.MemoryType|keyof typeof google.cloud.aiplatform.v1beta1.MemoryType);
+
+                    /** Memory structuredContent. */
+                    public structuredContent?: (google.cloud.aiplatform.v1beta1.Memory.IStructuredContent|null);
+
+                    /** Memory context. */
+                    public context: string;
+
                     /** Memory expiration. */
                     public expiration?: ("expireTime"|"ttl");
+
+                    /** Memory revisionExpiration. */
+                    public revisionExpiration?: ("revisionExpireTime"|"revisionTtl"|"disableMemoryRevisions");
 
                     /**
                      * Creates a new Memory instance using the specified properties.
@@ -266056,6 +266120,2309 @@ export namespace google {
 
                     /**
                      * Gets the default type url for Memory
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace Memory {
+
+                    /** Properties of a StructuredContent. */
+                    interface IStructuredContent {
+
+                        /** StructuredContent data */
+                        data?: (google.protobuf.IStruct|null);
+
+                        /** StructuredContent schemaId */
+                        schemaId?: (string|null);
+                    }
+
+                    /** Represents a StructuredContent. */
+                    class StructuredContent implements IStructuredContent {
+
+                        /**
+                         * Constructs a new StructuredContent.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.aiplatform.v1beta1.Memory.IStructuredContent);
+
+                        /** StructuredContent data. */
+                        public data?: (google.protobuf.IStruct|null);
+
+                        /** StructuredContent schemaId. */
+                        public schemaId: string;
+
+                        /**
+                         * Creates a new StructuredContent instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns StructuredContent instance
+                         */
+                        public static create(properties?: google.cloud.aiplatform.v1beta1.Memory.IStructuredContent): google.cloud.aiplatform.v1beta1.Memory.StructuredContent;
+
+                        /**
+                         * Encodes the specified StructuredContent message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.Memory.StructuredContent.verify|verify} messages.
+                         * @param message StructuredContent message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.aiplatform.v1beta1.Memory.IStructuredContent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified StructuredContent message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.Memory.StructuredContent.verify|verify} messages.
+                         * @param message StructuredContent message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.Memory.IStructuredContent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a StructuredContent message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns StructuredContent
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.Memory.StructuredContent;
+
+                        /**
+                         * Decodes a StructuredContent message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns StructuredContent
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.Memory.StructuredContent;
+
+                        /**
+                         * Verifies a StructuredContent message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a StructuredContent message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns StructuredContent
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.Memory.StructuredContent;
+
+                        /**
+                         * Creates a plain object from a StructuredContent message. Also converts values to other types if specified.
+                         * @param message StructuredContent
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.aiplatform.v1beta1.Memory.StructuredContent, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this StructuredContent to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for StructuredContent
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of a MemoryTopicId. */
+                interface IMemoryTopicId {
+
+                    /** MemoryTopicId customMemoryTopicLabel */
+                    customMemoryTopicLabel?: (string|null);
+
+                    /** MemoryTopicId managedMemoryTopic */
+                    managedMemoryTopic?: (google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.MemoryTopic.ManagedMemoryTopic.ManagedTopicEnum|keyof typeof google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.MemoryTopic.ManagedMemoryTopic.ManagedTopicEnum|null);
+                }
+
+                /** Represents a MemoryTopicId. */
+                class MemoryTopicId implements IMemoryTopicId {
+
+                    /**
+                     * Constructs a new MemoryTopicId.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1beta1.IMemoryTopicId);
+
+                    /** MemoryTopicId customMemoryTopicLabel. */
+                    public customMemoryTopicLabel?: (string|null);
+
+                    /** MemoryTopicId managedMemoryTopic. */
+                    public managedMemoryTopic?: (google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.MemoryTopic.ManagedMemoryTopic.ManagedTopicEnum|keyof typeof google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.MemoryTopic.ManagedMemoryTopic.ManagedTopicEnum|null);
+
+                    /** MemoryTopicId topicId. */
+                    public topicId?: ("customMemoryTopicLabel"|"managedMemoryTopic");
+
+                    /**
+                     * Creates a new MemoryTopicId instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MemoryTopicId instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1beta1.IMemoryTopicId): google.cloud.aiplatform.v1beta1.MemoryTopicId;
+
+                    /**
+                     * Encodes the specified MemoryTopicId message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.MemoryTopicId.verify|verify} messages.
+                     * @param message MemoryTopicId message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1beta1.IMemoryTopicId, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MemoryTopicId message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.MemoryTopicId.verify|verify} messages.
+                     * @param message MemoryTopicId message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.IMemoryTopicId, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MemoryTopicId message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MemoryTopicId
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.MemoryTopicId;
+
+                    /**
+                     * Decodes a MemoryTopicId message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MemoryTopicId
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.MemoryTopicId;
+
+                    /**
+                     * Verifies a MemoryTopicId message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MemoryTopicId message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MemoryTopicId
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.MemoryTopicId;
+
+                    /**
+                     * Creates a plain object from a MemoryTopicId message. Also converts values to other types if specified.
+                     * @param message MemoryTopicId
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1beta1.MemoryTopicId, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MemoryTopicId to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for MemoryTopicId
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a MemoryBankCustomizationConfig. */
+                interface IMemoryBankCustomizationConfig {
+
+                    /** MemoryBankCustomizationConfig scopeKeys */
+                    scopeKeys?: (string[]|null);
+
+                    /** MemoryBankCustomizationConfig memoryTopics */
+                    memoryTopics?: (google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.IMemoryTopic[]|null);
+
+                    /** MemoryBankCustomizationConfig generateMemoriesExamples */
+                    generateMemoriesExamples?: (google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.IGenerateMemoriesExample[]|null);
+
+                    /** MemoryBankCustomizationConfig enableThirdPersonMemories */
+                    enableThirdPersonMemories?: (boolean|null);
+
+                    /** MemoryBankCustomizationConfig consolidationConfig */
+                    consolidationConfig?: (google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.IConsolidationConfig|null);
+
+                    /** MemoryBankCustomizationConfig disableNaturalLanguageMemories */
+                    disableNaturalLanguageMemories?: (boolean|null);
+                }
+
+                /** Represents a MemoryBankCustomizationConfig. */
+                class MemoryBankCustomizationConfig implements IMemoryBankCustomizationConfig {
+
+                    /**
+                     * Constructs a new MemoryBankCustomizationConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1beta1.IMemoryBankCustomizationConfig);
+
+                    /** MemoryBankCustomizationConfig scopeKeys. */
+                    public scopeKeys: string[];
+
+                    /** MemoryBankCustomizationConfig memoryTopics. */
+                    public memoryTopics: google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.IMemoryTopic[];
+
+                    /** MemoryBankCustomizationConfig generateMemoriesExamples. */
+                    public generateMemoriesExamples: google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.IGenerateMemoriesExample[];
+
+                    /** MemoryBankCustomizationConfig enableThirdPersonMemories. */
+                    public enableThirdPersonMemories: boolean;
+
+                    /** MemoryBankCustomizationConfig consolidationConfig. */
+                    public consolidationConfig?: (google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.IConsolidationConfig|null);
+
+                    /** MemoryBankCustomizationConfig disableNaturalLanguageMemories. */
+                    public disableNaturalLanguageMemories: boolean;
+
+                    /**
+                     * Creates a new MemoryBankCustomizationConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MemoryBankCustomizationConfig instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1beta1.IMemoryBankCustomizationConfig): google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig;
+
+                    /**
+                     * Encodes the specified MemoryBankCustomizationConfig message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.verify|verify} messages.
+                     * @param message MemoryBankCustomizationConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1beta1.IMemoryBankCustomizationConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MemoryBankCustomizationConfig message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.verify|verify} messages.
+                     * @param message MemoryBankCustomizationConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.IMemoryBankCustomizationConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MemoryBankCustomizationConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MemoryBankCustomizationConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig;
+
+                    /**
+                     * Decodes a MemoryBankCustomizationConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MemoryBankCustomizationConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig;
+
+                    /**
+                     * Verifies a MemoryBankCustomizationConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MemoryBankCustomizationConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MemoryBankCustomizationConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig;
+
+                    /**
+                     * Creates a plain object from a MemoryBankCustomizationConfig message. Also converts values to other types if specified.
+                     * @param message MemoryBankCustomizationConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MemoryBankCustomizationConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for MemoryBankCustomizationConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace MemoryBankCustomizationConfig {
+
+                    /** Properties of a MemoryTopic. */
+                    interface IMemoryTopic {
+
+                        /** MemoryTopic customMemoryTopic */
+                        customMemoryTopic?: (google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.MemoryTopic.ICustomMemoryTopic|null);
+
+                        /** MemoryTopic managedMemoryTopic */
+                        managedMemoryTopic?: (google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.MemoryTopic.IManagedMemoryTopic|null);
+                    }
+
+                    /** Represents a MemoryTopic. */
+                    class MemoryTopic implements IMemoryTopic {
+
+                        /**
+                         * Constructs a new MemoryTopic.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.IMemoryTopic);
+
+                        /** MemoryTopic customMemoryTopic. */
+                        public customMemoryTopic?: (google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.MemoryTopic.ICustomMemoryTopic|null);
+
+                        /** MemoryTopic managedMemoryTopic. */
+                        public managedMemoryTopic?: (google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.MemoryTopic.IManagedMemoryTopic|null);
+
+                        /** MemoryTopic topicType. */
+                        public topicType?: ("customMemoryTopic"|"managedMemoryTopic");
+
+                        /**
+                         * Creates a new MemoryTopic instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns MemoryTopic instance
+                         */
+                        public static create(properties?: google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.IMemoryTopic): google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.MemoryTopic;
+
+                        /**
+                         * Encodes the specified MemoryTopic message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.MemoryTopic.verify|verify} messages.
+                         * @param message MemoryTopic message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.IMemoryTopic, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified MemoryTopic message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.MemoryTopic.verify|verify} messages.
+                         * @param message MemoryTopic message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.IMemoryTopic, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a MemoryTopic message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns MemoryTopic
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.MemoryTopic;
+
+                        /**
+                         * Decodes a MemoryTopic message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns MemoryTopic
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.MemoryTopic;
+
+                        /**
+                         * Verifies a MemoryTopic message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a MemoryTopic message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns MemoryTopic
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.MemoryTopic;
+
+                        /**
+                         * Creates a plain object from a MemoryTopic message. Also converts values to other types if specified.
+                         * @param message MemoryTopic
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.MemoryTopic, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this MemoryTopic to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for MemoryTopic
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace MemoryTopic {
+
+                        /** Properties of a CustomMemoryTopic. */
+                        interface ICustomMemoryTopic {
+
+                            /** CustomMemoryTopic label */
+                            label?: (string|null);
+
+                            /** CustomMemoryTopic description */
+                            description?: (string|null);
+                        }
+
+                        /** Represents a CustomMemoryTopic. */
+                        class CustomMemoryTopic implements ICustomMemoryTopic {
+
+                            /**
+                             * Constructs a new CustomMemoryTopic.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.MemoryTopic.ICustomMemoryTopic);
+
+                            /** CustomMemoryTopic label. */
+                            public label: string;
+
+                            /** CustomMemoryTopic description. */
+                            public description: string;
+
+                            /**
+                             * Creates a new CustomMemoryTopic instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns CustomMemoryTopic instance
+                             */
+                            public static create(properties?: google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.MemoryTopic.ICustomMemoryTopic): google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.MemoryTopic.CustomMemoryTopic;
+
+                            /**
+                             * Encodes the specified CustomMemoryTopic message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.MemoryTopic.CustomMemoryTopic.verify|verify} messages.
+                             * @param message CustomMemoryTopic message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.MemoryTopic.ICustomMemoryTopic, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified CustomMemoryTopic message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.MemoryTopic.CustomMemoryTopic.verify|verify} messages.
+                             * @param message CustomMemoryTopic message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.MemoryTopic.ICustomMemoryTopic, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a CustomMemoryTopic message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns CustomMemoryTopic
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.MemoryTopic.CustomMemoryTopic;
+
+                            /**
+                             * Decodes a CustomMemoryTopic message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns CustomMemoryTopic
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.MemoryTopic.CustomMemoryTopic;
+
+                            /**
+                             * Verifies a CustomMemoryTopic message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a CustomMemoryTopic message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns CustomMemoryTopic
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.MemoryTopic.CustomMemoryTopic;
+
+                            /**
+                             * Creates a plain object from a CustomMemoryTopic message. Also converts values to other types if specified.
+                             * @param message CustomMemoryTopic
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.MemoryTopic.CustomMemoryTopic, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this CustomMemoryTopic to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for CustomMemoryTopic
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a ManagedMemoryTopic. */
+                        interface IManagedMemoryTopic {
+
+                            /** ManagedMemoryTopic managedTopicEnum */
+                            managedTopicEnum?: (google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.MemoryTopic.ManagedMemoryTopic.ManagedTopicEnum|keyof typeof google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.MemoryTopic.ManagedMemoryTopic.ManagedTopicEnum|null);
+                        }
+
+                        /** Represents a ManagedMemoryTopic. */
+                        class ManagedMemoryTopic implements IManagedMemoryTopic {
+
+                            /**
+                             * Constructs a new ManagedMemoryTopic.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.MemoryTopic.IManagedMemoryTopic);
+
+                            /** ManagedMemoryTopic managedTopicEnum. */
+                            public managedTopicEnum: (google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.MemoryTopic.ManagedMemoryTopic.ManagedTopicEnum|keyof typeof google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.MemoryTopic.ManagedMemoryTopic.ManagedTopicEnum);
+
+                            /**
+                             * Creates a new ManagedMemoryTopic instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns ManagedMemoryTopic instance
+                             */
+                            public static create(properties?: google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.MemoryTopic.IManagedMemoryTopic): google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.MemoryTopic.ManagedMemoryTopic;
+
+                            /**
+                             * Encodes the specified ManagedMemoryTopic message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.MemoryTopic.ManagedMemoryTopic.verify|verify} messages.
+                             * @param message ManagedMemoryTopic message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.MemoryTopic.IManagedMemoryTopic, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified ManagedMemoryTopic message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.MemoryTopic.ManagedMemoryTopic.verify|verify} messages.
+                             * @param message ManagedMemoryTopic message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.MemoryTopic.IManagedMemoryTopic, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a ManagedMemoryTopic message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns ManagedMemoryTopic
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.MemoryTopic.ManagedMemoryTopic;
+
+                            /**
+                             * Decodes a ManagedMemoryTopic message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns ManagedMemoryTopic
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.MemoryTopic.ManagedMemoryTopic;
+
+                            /**
+                             * Verifies a ManagedMemoryTopic message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a ManagedMemoryTopic message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns ManagedMemoryTopic
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.MemoryTopic.ManagedMemoryTopic;
+
+                            /**
+                             * Creates a plain object from a ManagedMemoryTopic message. Also converts values to other types if specified.
+                             * @param message ManagedMemoryTopic
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.MemoryTopic.ManagedMemoryTopic, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this ManagedMemoryTopic to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for ManagedMemoryTopic
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace ManagedMemoryTopic {
+
+                            /** ManagedTopicEnum enum. */
+                            enum ManagedTopicEnum {
+                                MANAGED_TOPIC_ENUM_UNSPECIFIED = 0,
+                                USER_PERSONAL_INFO = 1,
+                                USER_PREFERENCES = 2,
+                                KEY_CONVERSATION_DETAILS = 3,
+                                EXPLICIT_INSTRUCTIONS = 4
+                            }
+                        }
+                    }
+
+                    /** Properties of a GenerateMemoriesExample. */
+                    interface IGenerateMemoriesExample {
+
+                        /** GenerateMemoriesExample conversationSource */
+                        conversationSource?: (google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.GenerateMemoriesExample.IConversationSource|null);
+
+                        /** GenerateMemoriesExample generatedMemories */
+                        generatedMemories?: (google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.GenerateMemoriesExample.IGeneratedMemory[]|null);
+                    }
+
+                    /** Represents a GenerateMemoriesExample. */
+                    class GenerateMemoriesExample implements IGenerateMemoriesExample {
+
+                        /**
+                         * Constructs a new GenerateMemoriesExample.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.IGenerateMemoriesExample);
+
+                        /** GenerateMemoriesExample conversationSource. */
+                        public conversationSource?: (google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.GenerateMemoriesExample.IConversationSource|null);
+
+                        /** GenerateMemoriesExample generatedMemories. */
+                        public generatedMemories: google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.GenerateMemoriesExample.IGeneratedMemory[];
+
+                        /** GenerateMemoriesExample source. */
+                        public source?: "conversationSource";
+
+                        /**
+                         * Creates a new GenerateMemoriesExample instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GenerateMemoriesExample instance
+                         */
+                        public static create(properties?: google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.IGenerateMemoriesExample): google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.GenerateMemoriesExample;
+
+                        /**
+                         * Encodes the specified GenerateMemoriesExample message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.GenerateMemoriesExample.verify|verify} messages.
+                         * @param message GenerateMemoriesExample message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.IGenerateMemoriesExample, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GenerateMemoriesExample message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.GenerateMemoriesExample.verify|verify} messages.
+                         * @param message GenerateMemoriesExample message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.IGenerateMemoriesExample, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GenerateMemoriesExample message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GenerateMemoriesExample
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.GenerateMemoriesExample;
+
+                        /**
+                         * Decodes a GenerateMemoriesExample message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GenerateMemoriesExample
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.GenerateMemoriesExample;
+
+                        /**
+                         * Verifies a GenerateMemoriesExample message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GenerateMemoriesExample message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GenerateMemoriesExample
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.GenerateMemoriesExample;
+
+                        /**
+                         * Creates a plain object from a GenerateMemoriesExample message. Also converts values to other types if specified.
+                         * @param message GenerateMemoriesExample
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.GenerateMemoriesExample, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GenerateMemoriesExample to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GenerateMemoriesExample
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace GenerateMemoriesExample {
+
+                        /** Properties of a ConversationSource. */
+                        interface IConversationSource {
+
+                            /** ConversationSource events */
+                            events?: (google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.GenerateMemoriesExample.ConversationSource.IEvent[]|null);
+                        }
+
+                        /** Represents a ConversationSource. */
+                        class ConversationSource implements IConversationSource {
+
+                            /**
+                             * Constructs a new ConversationSource.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.GenerateMemoriesExample.IConversationSource);
+
+                            /** ConversationSource events. */
+                            public events: google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.GenerateMemoriesExample.ConversationSource.IEvent[];
+
+                            /**
+                             * Creates a new ConversationSource instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns ConversationSource instance
+                             */
+                            public static create(properties?: google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.GenerateMemoriesExample.IConversationSource): google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.GenerateMemoriesExample.ConversationSource;
+
+                            /**
+                             * Encodes the specified ConversationSource message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.GenerateMemoriesExample.ConversationSource.verify|verify} messages.
+                             * @param message ConversationSource message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.GenerateMemoriesExample.IConversationSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified ConversationSource message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.GenerateMemoriesExample.ConversationSource.verify|verify} messages.
+                             * @param message ConversationSource message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.GenerateMemoriesExample.IConversationSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a ConversationSource message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns ConversationSource
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.GenerateMemoriesExample.ConversationSource;
+
+                            /**
+                             * Decodes a ConversationSource message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns ConversationSource
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.GenerateMemoriesExample.ConversationSource;
+
+                            /**
+                             * Verifies a ConversationSource message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a ConversationSource message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns ConversationSource
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.GenerateMemoriesExample.ConversationSource;
+
+                            /**
+                             * Creates a plain object from a ConversationSource message. Also converts values to other types if specified.
+                             * @param message ConversationSource
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.GenerateMemoriesExample.ConversationSource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this ConversationSource to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for ConversationSource
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace ConversationSource {
+
+                            /** Properties of an Event. */
+                            interface IEvent {
+
+                                /** Event content */
+                                content?: (google.cloud.aiplatform.v1beta1.IContent|null);
+                            }
+
+                            /** Represents an Event. */
+                            class Event implements IEvent {
+
+                                /**
+                                 * Constructs a new Event.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.GenerateMemoriesExample.ConversationSource.IEvent);
+
+                                /** Event content. */
+                                public content?: (google.cloud.aiplatform.v1beta1.IContent|null);
+
+                                /**
+                                 * Creates a new Event instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns Event instance
+                                 */
+                                public static create(properties?: google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.GenerateMemoriesExample.ConversationSource.IEvent): google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.GenerateMemoriesExample.ConversationSource.Event;
+
+                                /**
+                                 * Encodes the specified Event message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.GenerateMemoriesExample.ConversationSource.Event.verify|verify} messages.
+                                 * @param message Event message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.GenerateMemoriesExample.ConversationSource.IEvent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified Event message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.GenerateMemoriesExample.ConversationSource.Event.verify|verify} messages.
+                                 * @param message Event message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.GenerateMemoriesExample.ConversationSource.IEvent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes an Event message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns Event
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.GenerateMemoriesExample.ConversationSource.Event;
+
+                                /**
+                                 * Decodes an Event message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns Event
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.GenerateMemoriesExample.ConversationSource.Event;
+
+                                /**
+                                 * Verifies an Event message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates an Event message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns Event
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.GenerateMemoriesExample.ConversationSource.Event;
+
+                                /**
+                                 * Creates a plain object from an Event message. Also converts values to other types if specified.
+                                 * @param message Event
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.GenerateMemoriesExample.ConversationSource.Event, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this Event to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for Event
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+                        }
+
+                        /** Properties of a GeneratedMemory. */
+                        interface IGeneratedMemory {
+
+                            /** GeneratedMemory fact */
+                            fact?: (string|null);
+
+                            /** GeneratedMemory topics */
+                            topics?: (google.cloud.aiplatform.v1beta1.IMemoryTopicId[]|null);
+                        }
+
+                        /** Represents a GeneratedMemory. */
+                        class GeneratedMemory implements IGeneratedMemory {
+
+                            /**
+                             * Constructs a new GeneratedMemory.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.GenerateMemoriesExample.IGeneratedMemory);
+
+                            /** GeneratedMemory fact. */
+                            public fact: string;
+
+                            /** GeneratedMemory topics. */
+                            public topics: google.cloud.aiplatform.v1beta1.IMemoryTopicId[];
+
+                            /**
+                             * Creates a new GeneratedMemory instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns GeneratedMemory instance
+                             */
+                            public static create(properties?: google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.GenerateMemoriesExample.IGeneratedMemory): google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.GenerateMemoriesExample.GeneratedMemory;
+
+                            /**
+                             * Encodes the specified GeneratedMemory message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.GenerateMemoriesExample.GeneratedMemory.verify|verify} messages.
+                             * @param message GeneratedMemory message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.GenerateMemoriesExample.IGeneratedMemory, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified GeneratedMemory message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.GenerateMemoriesExample.GeneratedMemory.verify|verify} messages.
+                             * @param message GeneratedMemory message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.GenerateMemoriesExample.IGeneratedMemory, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a GeneratedMemory message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns GeneratedMemory
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.GenerateMemoriesExample.GeneratedMemory;
+
+                            /**
+                             * Decodes a GeneratedMemory message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns GeneratedMemory
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.GenerateMemoriesExample.GeneratedMemory;
+
+                            /**
+                             * Verifies a GeneratedMemory message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a GeneratedMemory message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns GeneratedMemory
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.GenerateMemoriesExample.GeneratedMemory;
+
+                            /**
+                             * Creates a plain object from a GeneratedMemory message. Also converts values to other types if specified.
+                             * @param message GeneratedMemory
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.GenerateMemoriesExample.GeneratedMemory, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this GeneratedMemory to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for GeneratedMemory
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
+
+                    /** Properties of a ConsolidationConfig. */
+                    interface IConsolidationConfig {
+
+                        /** ConsolidationConfig revisionsPerCandidateCount */
+                        revisionsPerCandidateCount?: (number|null);
+                    }
+
+                    /** Represents a ConsolidationConfig. */
+                    class ConsolidationConfig implements IConsolidationConfig {
+
+                        /**
+                         * Constructs a new ConsolidationConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.IConsolidationConfig);
+
+                        /** ConsolidationConfig revisionsPerCandidateCount. */
+                        public revisionsPerCandidateCount: number;
+
+                        /**
+                         * Creates a new ConsolidationConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ConsolidationConfig instance
+                         */
+                        public static create(properties?: google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.IConsolidationConfig): google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.ConsolidationConfig;
+
+                        /**
+                         * Encodes the specified ConsolidationConfig message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.ConsolidationConfig.verify|verify} messages.
+                         * @param message ConsolidationConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.IConsolidationConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ConsolidationConfig message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.ConsolidationConfig.verify|verify} messages.
+                         * @param message ConsolidationConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.IConsolidationConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ConsolidationConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ConsolidationConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.ConsolidationConfig;
+
+                        /**
+                         * Decodes a ConsolidationConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ConsolidationConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.ConsolidationConfig;
+
+                        /**
+                         * Verifies a ConsolidationConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ConsolidationConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ConsolidationConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.ConsolidationConfig;
+
+                        /**
+                         * Creates a plain object from a ConsolidationConfig message. Also converts values to other types if specified.
+                         * @param message ConsolidationConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.aiplatform.v1beta1.MemoryBankCustomizationConfig.ConsolidationConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ConsolidationConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ConsolidationConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of a StructuredMemoryConfig. */
+                interface IStructuredMemoryConfig {
+
+                    /** StructuredMemoryConfig scopeKeys */
+                    scopeKeys?: (string[]|null);
+
+                    /** StructuredMemoryConfig schemaConfigs */
+                    schemaConfigs?: (google.cloud.aiplatform.v1beta1.StructuredMemoryConfig.ISchemaConfig[]|null);
+                }
+
+                /** Represents a StructuredMemoryConfig. */
+                class StructuredMemoryConfig implements IStructuredMemoryConfig {
+
+                    /**
+                     * Constructs a new StructuredMemoryConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1beta1.IStructuredMemoryConfig);
+
+                    /** StructuredMemoryConfig scopeKeys. */
+                    public scopeKeys: string[];
+
+                    /** StructuredMemoryConfig schemaConfigs. */
+                    public schemaConfigs: google.cloud.aiplatform.v1beta1.StructuredMemoryConfig.ISchemaConfig[];
+
+                    /**
+                     * Creates a new StructuredMemoryConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns StructuredMemoryConfig instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1beta1.IStructuredMemoryConfig): google.cloud.aiplatform.v1beta1.StructuredMemoryConfig;
+
+                    /**
+                     * Encodes the specified StructuredMemoryConfig message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.StructuredMemoryConfig.verify|verify} messages.
+                     * @param message StructuredMemoryConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1beta1.IStructuredMemoryConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified StructuredMemoryConfig message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.StructuredMemoryConfig.verify|verify} messages.
+                     * @param message StructuredMemoryConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.IStructuredMemoryConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a StructuredMemoryConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns StructuredMemoryConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.StructuredMemoryConfig;
+
+                    /**
+                     * Decodes a StructuredMemoryConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns StructuredMemoryConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.StructuredMemoryConfig;
+
+                    /**
+                     * Verifies a StructuredMemoryConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a StructuredMemoryConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns StructuredMemoryConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.StructuredMemoryConfig;
+
+                    /**
+                     * Creates a plain object from a StructuredMemoryConfig message. Also converts values to other types if specified.
+                     * @param message StructuredMemoryConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1beta1.StructuredMemoryConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this StructuredMemoryConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for StructuredMemoryConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace StructuredMemoryConfig {
+
+                    /** Properties of a SchemaConfig. */
+                    interface ISchemaConfig {
+
+                        /** SchemaConfig id */
+                        id?: (string|null);
+
+                        /** SchemaConfig schema */
+                        schema?: (google.cloud.aiplatform.v1beta1.ISchema|null);
+
+                        /** SchemaConfig memoryType */
+                        memoryType?: (google.cloud.aiplatform.v1beta1.MemoryType|keyof typeof google.cloud.aiplatform.v1beta1.MemoryType|null);
+
+                        /** SchemaConfig jsonSchema */
+                        jsonSchema?: (google.protobuf.IValue|null);
+                    }
+
+                    /** Represents a SchemaConfig. */
+                    class SchemaConfig implements ISchemaConfig {
+
+                        /**
+                         * Constructs a new SchemaConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.aiplatform.v1beta1.StructuredMemoryConfig.ISchemaConfig);
+
+                        /** SchemaConfig id. */
+                        public id: string;
+
+                        /** SchemaConfig schema. */
+                        public schema?: (google.cloud.aiplatform.v1beta1.ISchema|null);
+
+                        /** SchemaConfig memoryType. */
+                        public memoryType: (google.cloud.aiplatform.v1beta1.MemoryType|keyof typeof google.cloud.aiplatform.v1beta1.MemoryType);
+
+                        /** SchemaConfig jsonSchema. */
+                        public jsonSchema?: (google.protobuf.IValue|null);
+
+                        /**
+                         * Creates a new SchemaConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SchemaConfig instance
+                         */
+                        public static create(properties?: google.cloud.aiplatform.v1beta1.StructuredMemoryConfig.ISchemaConfig): google.cloud.aiplatform.v1beta1.StructuredMemoryConfig.SchemaConfig;
+
+                        /**
+                         * Encodes the specified SchemaConfig message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.StructuredMemoryConfig.SchemaConfig.verify|verify} messages.
+                         * @param message SchemaConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.aiplatform.v1beta1.StructuredMemoryConfig.ISchemaConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SchemaConfig message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.StructuredMemoryConfig.SchemaConfig.verify|verify} messages.
+                         * @param message SchemaConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.StructuredMemoryConfig.ISchemaConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SchemaConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SchemaConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.StructuredMemoryConfig.SchemaConfig;
+
+                        /**
+                         * Decodes a SchemaConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SchemaConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.StructuredMemoryConfig.SchemaConfig;
+
+                        /**
+                         * Verifies a SchemaConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SchemaConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SchemaConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.StructuredMemoryConfig.SchemaConfig;
+
+                        /**
+                         * Creates a plain object from a SchemaConfig message. Also converts values to other types if specified.
+                         * @param message SchemaConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.aiplatform.v1beta1.StructuredMemoryConfig.SchemaConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SchemaConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SchemaConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of a MemoryRevision. */
+                interface IMemoryRevision {
+
+                    /** MemoryRevision name */
+                    name?: (string|null);
+
+                    /** MemoryRevision createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** MemoryRevision expireTime */
+                    expireTime?: (google.protobuf.ITimestamp|null);
+
+                    /** MemoryRevision fact */
+                    fact?: (string|null);
+
+                    /** MemoryRevision labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** MemoryRevision extractedMemories */
+                    extractedMemories?: (google.cloud.aiplatform.v1beta1.IIntermediateExtractedMemory[]|null);
+
+                    /** MemoryRevision structuredData */
+                    structuredData?: (google.protobuf.IStruct|null);
+
+                    /** MemoryRevision context */
+                    context?: (string|null);
+                }
+
+                /** Represents a MemoryRevision. */
+                class MemoryRevision implements IMemoryRevision {
+
+                    /**
+                     * Constructs a new MemoryRevision.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1beta1.IMemoryRevision);
+
+                    /** MemoryRevision name. */
+                    public name: string;
+
+                    /** MemoryRevision createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** MemoryRevision expireTime. */
+                    public expireTime?: (google.protobuf.ITimestamp|null);
+
+                    /** MemoryRevision fact. */
+                    public fact: string;
+
+                    /** MemoryRevision labels. */
+                    public labels: { [k: string]: string };
+
+                    /** MemoryRevision extractedMemories. */
+                    public extractedMemories: google.cloud.aiplatform.v1beta1.IIntermediateExtractedMemory[];
+
+                    /** MemoryRevision structuredData. */
+                    public structuredData?: (google.protobuf.IStruct|null);
+
+                    /** MemoryRevision context. */
+                    public context: string;
+
+                    /**
+                     * Creates a new MemoryRevision instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MemoryRevision instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1beta1.IMemoryRevision): google.cloud.aiplatform.v1beta1.MemoryRevision;
+
+                    /**
+                     * Encodes the specified MemoryRevision message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.MemoryRevision.verify|verify} messages.
+                     * @param message MemoryRevision message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1beta1.IMemoryRevision, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MemoryRevision message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.MemoryRevision.verify|verify} messages.
+                     * @param message MemoryRevision message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.IMemoryRevision, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MemoryRevision message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MemoryRevision
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.MemoryRevision;
+
+                    /**
+                     * Decodes a MemoryRevision message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MemoryRevision
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.MemoryRevision;
+
+                    /**
+                     * Verifies a MemoryRevision message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MemoryRevision message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MemoryRevision
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.MemoryRevision;
+
+                    /**
+                     * Creates a plain object from a MemoryRevision message. Also converts values to other types if specified.
+                     * @param message MemoryRevision
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1beta1.MemoryRevision, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MemoryRevision to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for MemoryRevision
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an IntermediateExtractedMemory. */
+                interface IIntermediateExtractedMemory {
+
+                    /** IntermediateExtractedMemory fact */
+                    fact?: (string|null);
+
+                    /** IntermediateExtractedMemory structuredData */
+                    structuredData?: (google.protobuf.IStruct|null);
+
+                    /** IntermediateExtractedMemory context */
+                    context?: (string|null);
+                }
+
+                /** Represents an IntermediateExtractedMemory. */
+                class IntermediateExtractedMemory implements IIntermediateExtractedMemory {
+
+                    /**
+                     * Constructs a new IntermediateExtractedMemory.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1beta1.IIntermediateExtractedMemory);
+
+                    /** IntermediateExtractedMemory fact. */
+                    public fact: string;
+
+                    /** IntermediateExtractedMemory structuredData. */
+                    public structuredData?: (google.protobuf.IStruct|null);
+
+                    /** IntermediateExtractedMemory context. */
+                    public context: string;
+
+                    /**
+                     * Creates a new IntermediateExtractedMemory instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns IntermediateExtractedMemory instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1beta1.IIntermediateExtractedMemory): google.cloud.aiplatform.v1beta1.IntermediateExtractedMemory;
+
+                    /**
+                     * Encodes the specified IntermediateExtractedMemory message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.IntermediateExtractedMemory.verify|verify} messages.
+                     * @param message IntermediateExtractedMemory message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1beta1.IIntermediateExtractedMemory, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified IntermediateExtractedMemory message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.IntermediateExtractedMemory.verify|verify} messages.
+                     * @param message IntermediateExtractedMemory message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.IIntermediateExtractedMemory, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an IntermediateExtractedMemory message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns IntermediateExtractedMemory
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.IntermediateExtractedMemory;
+
+                    /**
+                     * Decodes an IntermediateExtractedMemory message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns IntermediateExtractedMemory
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.IntermediateExtractedMemory;
+
+                    /**
+                     * Verifies an IntermediateExtractedMemory message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an IntermediateExtractedMemory message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns IntermediateExtractedMemory
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.IntermediateExtractedMemory;
+
+                    /**
+                     * Creates a plain object from an IntermediateExtractedMemory message. Also converts values to other types if specified.
+                     * @param message IntermediateExtractedMemory
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1beta1.IntermediateExtractedMemory, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this IntermediateExtractedMemory to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for IntermediateExtractedMemory
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a MemoryMetadataValue. */
+                interface IMemoryMetadataValue {
+
+                    /** MemoryMetadataValue stringValue */
+                    stringValue?: (string|null);
+
+                    /** MemoryMetadataValue doubleValue */
+                    doubleValue?: (number|null);
+
+                    /** MemoryMetadataValue boolValue */
+                    boolValue?: (boolean|null);
+
+                    /** MemoryMetadataValue timestampValue */
+                    timestampValue?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a MemoryMetadataValue. */
+                class MemoryMetadataValue implements IMemoryMetadataValue {
+
+                    /**
+                     * Constructs a new MemoryMetadataValue.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1beta1.IMemoryMetadataValue);
+
+                    /** MemoryMetadataValue stringValue. */
+                    public stringValue?: (string|null);
+
+                    /** MemoryMetadataValue doubleValue. */
+                    public doubleValue?: (number|null);
+
+                    /** MemoryMetadataValue boolValue. */
+                    public boolValue?: (boolean|null);
+
+                    /** MemoryMetadataValue timestampValue. */
+                    public timestampValue?: (google.protobuf.ITimestamp|null);
+
+                    /** MemoryMetadataValue value. */
+                    public value?: ("stringValue"|"doubleValue"|"boolValue"|"timestampValue");
+
+                    /**
+                     * Creates a new MemoryMetadataValue instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MemoryMetadataValue instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1beta1.IMemoryMetadataValue): google.cloud.aiplatform.v1beta1.MemoryMetadataValue;
+
+                    /**
+                     * Encodes the specified MemoryMetadataValue message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.MemoryMetadataValue.verify|verify} messages.
+                     * @param message MemoryMetadataValue message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1beta1.IMemoryMetadataValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MemoryMetadataValue message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.MemoryMetadataValue.verify|verify} messages.
+                     * @param message MemoryMetadataValue message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.IMemoryMetadataValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MemoryMetadataValue message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MemoryMetadataValue
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.MemoryMetadataValue;
+
+                    /**
+                     * Decodes a MemoryMetadataValue message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MemoryMetadataValue
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.MemoryMetadataValue;
+
+                    /**
+                     * Verifies a MemoryMetadataValue message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MemoryMetadataValue message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MemoryMetadataValue
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.MemoryMetadataValue;
+
+                    /**
+                     * Creates a plain object from a MemoryMetadataValue message. Also converts values to other types if specified.
+                     * @param message MemoryMetadataValue
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1beta1.MemoryMetadataValue, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MemoryMetadataValue to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for MemoryMetadataValue
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a MemoryConjunctionFilter. */
+                interface IMemoryConjunctionFilter {
+
+                    /** MemoryConjunctionFilter filters */
+                    filters?: (google.cloud.aiplatform.v1beta1.IMemoryFilter[]|null);
+                }
+
+                /** Represents a MemoryConjunctionFilter. */
+                class MemoryConjunctionFilter implements IMemoryConjunctionFilter {
+
+                    /**
+                     * Constructs a new MemoryConjunctionFilter.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1beta1.IMemoryConjunctionFilter);
+
+                    /** MemoryConjunctionFilter filters. */
+                    public filters: google.cloud.aiplatform.v1beta1.IMemoryFilter[];
+
+                    /**
+                     * Creates a new MemoryConjunctionFilter instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MemoryConjunctionFilter instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1beta1.IMemoryConjunctionFilter): google.cloud.aiplatform.v1beta1.MemoryConjunctionFilter;
+
+                    /**
+                     * Encodes the specified MemoryConjunctionFilter message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.MemoryConjunctionFilter.verify|verify} messages.
+                     * @param message MemoryConjunctionFilter message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1beta1.IMemoryConjunctionFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MemoryConjunctionFilter message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.MemoryConjunctionFilter.verify|verify} messages.
+                     * @param message MemoryConjunctionFilter message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.IMemoryConjunctionFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MemoryConjunctionFilter message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MemoryConjunctionFilter
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.MemoryConjunctionFilter;
+
+                    /**
+                     * Decodes a MemoryConjunctionFilter message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MemoryConjunctionFilter
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.MemoryConjunctionFilter;
+
+                    /**
+                     * Verifies a MemoryConjunctionFilter message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MemoryConjunctionFilter message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MemoryConjunctionFilter
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.MemoryConjunctionFilter;
+
+                    /**
+                     * Creates a plain object from a MemoryConjunctionFilter message. Also converts values to other types if specified.
+                     * @param message MemoryConjunctionFilter
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1beta1.MemoryConjunctionFilter, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MemoryConjunctionFilter to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for MemoryConjunctionFilter
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a MemoryFilter. */
+                interface IMemoryFilter {
+
+                    /** MemoryFilter key */
+                    key?: (string|null);
+
+                    /** MemoryFilter op */
+                    op?: (google.cloud.aiplatform.v1beta1.MemoryFilter.Operator|keyof typeof google.cloud.aiplatform.v1beta1.MemoryFilter.Operator|null);
+
+                    /** MemoryFilter value */
+                    value?: (google.cloud.aiplatform.v1beta1.IMemoryMetadataValue|null);
+
+                    /** MemoryFilter negate */
+                    negate?: (boolean|null);
+                }
+
+                /** Represents a MemoryFilter. */
+                class MemoryFilter implements IMemoryFilter {
+
+                    /**
+                     * Constructs a new MemoryFilter.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1beta1.IMemoryFilter);
+
+                    /** MemoryFilter key. */
+                    public key: string;
+
+                    /** MemoryFilter op. */
+                    public op: (google.cloud.aiplatform.v1beta1.MemoryFilter.Operator|keyof typeof google.cloud.aiplatform.v1beta1.MemoryFilter.Operator);
+
+                    /** MemoryFilter value. */
+                    public value?: (google.cloud.aiplatform.v1beta1.IMemoryMetadataValue|null);
+
+                    /** MemoryFilter negate. */
+                    public negate: boolean;
+
+                    /**
+                     * Creates a new MemoryFilter instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MemoryFilter instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1beta1.IMemoryFilter): google.cloud.aiplatform.v1beta1.MemoryFilter;
+
+                    /**
+                     * Encodes the specified MemoryFilter message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.MemoryFilter.verify|verify} messages.
+                     * @param message MemoryFilter message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1beta1.IMemoryFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MemoryFilter message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.MemoryFilter.verify|verify} messages.
+                     * @param message MemoryFilter message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.IMemoryFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MemoryFilter message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MemoryFilter
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.MemoryFilter;
+
+                    /**
+                     * Decodes a MemoryFilter message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MemoryFilter
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.MemoryFilter;
+
+                    /**
+                     * Verifies a MemoryFilter message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MemoryFilter message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MemoryFilter
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.MemoryFilter;
+
+                    /**
+                     * Creates a plain object from a MemoryFilter message. Also converts values to other types if specified.
+                     * @param message MemoryFilter
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1beta1.MemoryFilter, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MemoryFilter to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for MemoryFilter
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace MemoryFilter {
+
+                    /** Operator enum. */
+                    enum Operator {
+                        OPERATOR_UNSPECIFIED = 0,
+                        EQUAL = 1,
+                        GREATER_THAN = 2,
+                        LESS_THAN = 3
+                    }
+                }
+
+                /** Properties of a MemoryGenerationTriggerConfig. */
+                interface IMemoryGenerationTriggerConfig {
+
+                    /** MemoryGenerationTriggerConfig generationRule */
+                    generationRule?: (google.cloud.aiplatform.v1beta1.MemoryGenerationTriggerConfig.IGenerationTriggerRule|null);
+                }
+
+                /** Represents a MemoryGenerationTriggerConfig. */
+                class MemoryGenerationTriggerConfig implements IMemoryGenerationTriggerConfig {
+
+                    /**
+                     * Constructs a new MemoryGenerationTriggerConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1beta1.IMemoryGenerationTriggerConfig);
+
+                    /** MemoryGenerationTriggerConfig generationRule. */
+                    public generationRule?: (google.cloud.aiplatform.v1beta1.MemoryGenerationTriggerConfig.IGenerationTriggerRule|null);
+
+                    /**
+                     * Creates a new MemoryGenerationTriggerConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MemoryGenerationTriggerConfig instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1beta1.IMemoryGenerationTriggerConfig): google.cloud.aiplatform.v1beta1.MemoryGenerationTriggerConfig;
+
+                    /**
+                     * Encodes the specified MemoryGenerationTriggerConfig message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.MemoryGenerationTriggerConfig.verify|verify} messages.
+                     * @param message MemoryGenerationTriggerConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1beta1.IMemoryGenerationTriggerConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MemoryGenerationTriggerConfig message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.MemoryGenerationTriggerConfig.verify|verify} messages.
+                     * @param message MemoryGenerationTriggerConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.IMemoryGenerationTriggerConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MemoryGenerationTriggerConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MemoryGenerationTriggerConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.MemoryGenerationTriggerConfig;
+
+                    /**
+                     * Decodes a MemoryGenerationTriggerConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MemoryGenerationTriggerConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.MemoryGenerationTriggerConfig;
+
+                    /**
+                     * Verifies a MemoryGenerationTriggerConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MemoryGenerationTriggerConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MemoryGenerationTriggerConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.MemoryGenerationTriggerConfig;
+
+                    /**
+                     * Creates a plain object from a MemoryGenerationTriggerConfig message. Also converts values to other types if specified.
+                     * @param message MemoryGenerationTriggerConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1beta1.MemoryGenerationTriggerConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MemoryGenerationTriggerConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for MemoryGenerationTriggerConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace MemoryGenerationTriggerConfig {
+
+                    /** Properties of a GenerationTriggerRule. */
+                    interface IGenerationTriggerRule {
+
+                        /** GenerationTriggerRule idleDuration */
+                        idleDuration?: (google.protobuf.IDuration|null);
+
+                        /** GenerationTriggerRule fixedInterval */
+                        fixedInterval?: (google.protobuf.IDuration|null);
+
+                        /** GenerationTriggerRule overlapEventCount */
+                        overlapEventCount?: (number|null);
+
+                        /** GenerationTriggerRule eventCount */
+                        eventCount?: (number|null);
+                    }
+
+                    /** Represents a GenerationTriggerRule. */
+                    class GenerationTriggerRule implements IGenerationTriggerRule {
+
+                        /**
+                         * Constructs a new GenerationTriggerRule.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.aiplatform.v1beta1.MemoryGenerationTriggerConfig.IGenerationTriggerRule);
+
+                        /** GenerationTriggerRule idleDuration. */
+                        public idleDuration?: (google.protobuf.IDuration|null);
+
+                        /** GenerationTriggerRule fixedInterval. */
+                        public fixedInterval?: (google.protobuf.IDuration|null);
+
+                        /** GenerationTriggerRule overlapEventCount. */
+                        public overlapEventCount?: (number|null);
+
+                        /** GenerationTriggerRule eventCount. */
+                        public eventCount: number;
+
+                        /** GenerationTriggerRule timeBasedCondition. */
+                        public timeBasedCondition?: ("idleDuration"|"fixedInterval");
+
+                        /** GenerationTriggerRule overlapWindow. */
+                        public overlapWindow?: "overlapEventCount";
+
+                        /**
+                         * Creates a new GenerationTriggerRule instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GenerationTriggerRule instance
+                         */
+                        public static create(properties?: google.cloud.aiplatform.v1beta1.MemoryGenerationTriggerConfig.IGenerationTriggerRule): google.cloud.aiplatform.v1beta1.MemoryGenerationTriggerConfig.GenerationTriggerRule;
+
+                        /**
+                         * Encodes the specified GenerationTriggerRule message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.MemoryGenerationTriggerConfig.GenerationTriggerRule.verify|verify} messages.
+                         * @param message GenerationTriggerRule message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.aiplatform.v1beta1.MemoryGenerationTriggerConfig.IGenerationTriggerRule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GenerationTriggerRule message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.MemoryGenerationTriggerConfig.GenerationTriggerRule.verify|verify} messages.
+                         * @param message GenerationTriggerRule message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.MemoryGenerationTriggerConfig.IGenerationTriggerRule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GenerationTriggerRule message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GenerationTriggerRule
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.MemoryGenerationTriggerConfig.GenerationTriggerRule;
+
+                        /**
+                         * Decodes a GenerationTriggerRule message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GenerationTriggerRule
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.MemoryGenerationTriggerConfig.GenerationTriggerRule;
+
+                        /**
+                         * Verifies a GenerationTriggerRule message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GenerationTriggerRule message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GenerationTriggerRule
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.MemoryGenerationTriggerConfig.GenerationTriggerRule;
+
+                        /**
+                         * Creates a plain object from a GenerationTriggerRule message. Also converts values to other types if specified.
+                         * @param message GenerationTriggerRule
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.aiplatform.v1beta1.MemoryGenerationTriggerConfig.GenerationTriggerRule, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GenerationTriggerRule to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GenerationTriggerRule
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of a MemoryProfile. */
+                interface IMemoryProfile {
+
+                    /** MemoryProfile schemaId */
+                    schemaId?: (string|null);
+
+                    /** MemoryProfile profile */
+                    profile?: (google.protobuf.IStruct|null);
+                }
+
+                /** Represents a MemoryProfile. */
+                class MemoryProfile implements IMemoryProfile {
+
+                    /**
+                     * Constructs a new MemoryProfile.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1beta1.IMemoryProfile);
+
+                    /** MemoryProfile schemaId. */
+                    public schemaId: string;
+
+                    /** MemoryProfile profile. */
+                    public profile?: (google.protobuf.IStruct|null);
+
+                    /**
+                     * Creates a new MemoryProfile instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MemoryProfile instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1beta1.IMemoryProfile): google.cloud.aiplatform.v1beta1.MemoryProfile;
+
+                    /**
+                     * Encodes the specified MemoryProfile message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.MemoryProfile.verify|verify} messages.
+                     * @param message MemoryProfile message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1beta1.IMemoryProfile, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MemoryProfile message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.MemoryProfile.verify|verify} messages.
+                     * @param message MemoryProfile message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.IMemoryProfile, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MemoryProfile message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MemoryProfile
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.MemoryProfile;
+
+                    /**
+                     * Decodes a MemoryProfile message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MemoryProfile
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.MemoryProfile;
+
+                    /**
+                     * Verifies a MemoryProfile message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MemoryProfile message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MemoryProfile
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.MemoryProfile;
+
+                    /**
+                     * Creates a plain object from a MemoryProfile message. Also converts values to other types if specified.
+                     * @param message MemoryProfile
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1beta1.MemoryProfile, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MemoryProfile to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for MemoryProfile
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */

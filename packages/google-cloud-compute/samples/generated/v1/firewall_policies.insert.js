@@ -20,7 +20,7 @@
 
 'use strict';
 
-function main(firewallPolicyResource, parentId) {
+function main(firewallPolicyResource) {
   // [START compute_v1_generated_FirewallPolicies_Insert_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -63,7 +63,6 @@ function main(firewallPolicyResource, parentId) {
     // Construct request
     const request = {
       firewallPolicyResource,
-      parentId,
     };
 
     // Run request
