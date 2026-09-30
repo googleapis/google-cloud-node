@@ -1125,7 +1125,7 @@ export class ResumableUploadSession {
             throw createGoogleError(
               `Exceeded the maximum number of recovery retries (${retry.maxRetries}) ` +
                 `without forward progress at byte offset ${currentOffset}: ` +
-                `${(err as Error).message}`,
+                `${err instanceof Error ? err.message : String(err)}`,
               Status.DEADLINE_EXCEEDED,
             );
           }
@@ -1263,7 +1263,7 @@ export class ResumableUploadSession {
               throw createGoogleError(
                 `Exceeded the maximum number of recovery retries (${retry.maxRetries}) ` +
                   `while finalizing at byte offset ${currentOffset}: ` +
-                  `${(err as Error).message}`,
+                  `${err instanceof Error ? err.message : String(err)}`,
                 Status.DEADLINE_EXCEEDED,
               );
             }
@@ -1345,7 +1345,7 @@ export class ResumableUploadSession {
           throw createGoogleError(
             `Exceeded the maximum number of retries (${retry.maxRetries}) ` +
               `while sending the resumable upload command "${command}": ` +
-              `${err.message}`,
+              `${err instanceof Error ? err.message : String(err)}`,
             Status.DEADLINE_EXCEEDED,
           );
         }
