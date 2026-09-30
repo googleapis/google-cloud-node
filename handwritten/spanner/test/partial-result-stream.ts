@@ -196,7 +196,10 @@ describe('PartialResultStream', () => {
         // Node 18's assert.deepStrictEqual strictly requires prototype equality,
         // which fails when comparing RowImpl (an Array subclass) with a plain Array literal.
         // Node 20+ relaxed this for Array subclasses with constructor = Array.
-        if (parseInt(process.versions.node.split('.')[0], 10) < 20) {
+        if (
+          parseInt(process.versions.node.split('.')[0], 10) < 20 ||
+          process.versions.bun
+        ) {
           assert.deepStrictEqual([...row], EXPECTED_ROW);
         } else {
           assert.deepStrictEqual(row, EXPECTED_ROW);
@@ -260,7 +263,10 @@ describe('PartialResultStream', () => {
         // Node 18's assert.deepStrictEqual strictly requires prototype equality,
         // which fails when comparing RowImpl (an Array subclass) with a plain Array literal.
         // Node 20+ relaxed this for Array subclasses with constructor = Array.
-        if (parseInt(process.versions.node.split('.')[0], 10) < 20) {
+        if (
+          parseInt(process.versions.node.split('.')[0], 10) < 20 ||
+          process.versions.bun
+        ) {
           assert.deepStrictEqual([...row], EXPECTED_ROW);
         } else {
           assert.deepStrictEqual(row, EXPECTED_ROW);

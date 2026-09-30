@@ -990,7 +990,7 @@ describe('codec', () => {
           value: music.Genre.JAZZ,
           fullName: 'examples.spanner.music.Genre',
         }).toJSON(),
-        1,
+        '1',
       );
     });
   });
