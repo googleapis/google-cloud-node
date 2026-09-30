@@ -330,13 +330,10 @@ if (( ${#shard_dirs[@]} > 0 )); then
     done
     echo "Compiling ${#shard_dirs[@]} package(s) assigned to this shard..."
     run_turbo() {
-        npm_config_enable_pre_post_scripts=true TURBO_DAEMON=false TURBO_NO_UPDATE_NOTIFIER=1 \
-            pnpm --dir "${PROJECT_ROOT}" exec turbo run compile --no-daemon --env-mode=loose "${turbo_filters[@]}" "$@"
+        pnpm --dir "${PROJECT_ROOT}" exec turbo run compile "${turbo_filters[@]}" "$@"
     }
     # Run turbo with fallback concurrency
     run_turbo --concurrency=4 || run_turbo --concurrency=2
-    # Signal to ci/run_single_test.sh that shard packages are already compiled.
-    export SHARD_COMPILED=true
 fi
 
 for d in "${shard_dirs[@]}"; do

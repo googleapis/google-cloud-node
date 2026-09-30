@@ -60,7 +60,7 @@ jobs:
         run: |
           # Skip pnpm run compile in the lint job when no .ts files changed
           if [ -n "$(git diff --name-only --diff-filter=ACMRT HEAD^1...HEAD -- '*.ts')" ]; then
-            TURBO_DAEMON=false pnpm run compile
+            pnpm run compile
           else
             echo "No TypeScript files changed in HEAD^1...HEAD; skipping workspace compile for linter."
           fi
