@@ -377,29 +377,6 @@ if (
     // ignore
   }
 
-  // In V8 (Node.js), comparison functions returning boolean, undefined, or NaN
-  // do not swap elements and leave their relative order unchanged.
-  // In JSC (Bun), non-standard comparator return values trigger different
-  // partitioning/sorting behavior. Normalize to return 0 so existing tests
-  // expecting V8's stable behavior retain their export ordering.
-  const origSort = Array.prototype.sort;
-  Array.prototype.sort = function (compareFn) {
-    if (typeof compareFn === 'function') {
-      const wrapped = (a, b) => {
-        const res = compareFn(a, b);
-        if (
-          typeof res === 'boolean' ||
-          res === undefined ||
-          Number.isNaN(res)
-        ) {
-          return 0;
-        }
-        return res;
-      };
-      return origSort.call(this, wrapped);
-    }
-    return origSort.call(this, compareFn);
-  };
 
   const fs = require('fs');
   const {Readable, PassThrough} = require('stream');
