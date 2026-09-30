@@ -12,10 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import {execFileSync, execFile} from 'child_process';
-import {existsSync} from 'fs';
-import path from 'path';
-import {promisify} from 'util';
+import {execFileSync, execFile} from 'node:child_process';
+import {existsSync} from 'node:fs';
+import path from 'node:path';
+import {promisify} from 'node:util';
 import {ESLint} from 'eslint';
 
 const execFileAsync = promisify(execFile);
@@ -24,13 +24,10 @@ const tsconfigCache = new Map();
 // --- Main Runner (Entry Point) ---
 async function run() {
   try {
-    const isStrict = Boolean(process.argv.includes('--strict'));
-    let changedTsFiles;
-    if (isStrict) {
-      changedTsFiles = getChangedFilesStrict();
-    } else {
-      changedTsFiles = getChangedFiles();
-    }
+    const isStrict = process.argv.includes('--strict');
+    const changedTsFiles = isStrict
+      ? getChangedFilesStrict()
+      : getChangedFiles();
 
     if (changedTsFiles.length === 0) {
       console.log('No TypeScript files changed. Skipping checks.');
@@ -74,17 +71,40 @@ function runGit(args, options = {}) {
   });
 }
 
-function getChangedFilesStrict() {
-  let gitDiffArg = process.env.GIT_DIFF_ARG;
+/**
+ * Runs `git diff --name-only` for the given revision and pathspec arguments,
+ * returning existing changed TypeScript files (excluding test fixtures).
+ */
+function getGitDiffTsFiles(revArgs, pathspecArgs = []) {
+  if (revArgs.length === 0 || revArgs.some(arg => arg.startsWith('-'))) {
+    throw new Error(`Invalid git revision argument: ${revArgs.join(' ')}`);
+  }
+  const output = runGit([
+    'diff',
+    '--name-only',
+    '--diff-filter=ACMRT',
+    ...revArgs,
+    '--',
+    '*.ts',
+    ...pathspecArgs,
+  ]);
+  return output
+    .split('\n')
+    .map(f => f.trim())
+    .filter(f => f.length > 0 && existsSync(f) && !f.includes('/fixtures/'));
+}
 
-  if (!gitDiffArg) {
+function getChangedFilesStrict() {
+  const rawDiffArg = process.env.GIT_DIFF_ARG?.trim();
+
+  if (!rawDiffArg) {
     throw new Error(
-      'Strict mode is enabled, but GIT_DIFF_ARG environment variable or --git-diff-arg flag was not provided. ' +
-        'Please set the GIT_DIFF_ARG environment variable or provide --git-diff-arg <arg>.',
+      'Strict mode is enabled, but GIT_DIFF_ARG environment variable was not provided. ' +
+        'Please set the GIT_DIFF_ARG environment variable.',
     );
   }
 
-  const rawArgs = gitDiffArg.trim().split(/\s+/);
+  const rawArgs = rawDiffArg.split(/\s+/);
   const dashDashIndex = rawArgs.indexOf('--');
   const revArgs =
     dashDashIndex === -1 ? rawArgs : rawArgs.slice(0, dashDashIndex);
@@ -93,41 +113,31 @@ function getChangedFilesStrict() {
 
   // If a single ref is provided (e.g. "HEAD^1" or "origin/main"), convert to three-dot diff ("ref...HEAD")
   // to compare against the merge-base and avoid listing files modified on the base branch.
-  if (revArgs.length === 1 && !revArgs[0].includes('..')) {
+  if (
+    revArgs.length === 1 &&
+    revArgs[0] !== 'HEAD' &&
+    !revArgs[0].includes('..')
+  ) {
     revArgs[0] = `${revArgs[0]}...HEAD`;
   }
 
-  gitDiffArg =
+  const formattedDiffArg =
     pathspecArgs.length > 0
       ? `${revArgs.join(' ')} -- ${pathspecArgs.join(' ')}`
       : revArgs.join(' ');
 
   console.log(
-    `Strict mode enabled. Comparing using GIT_DIFF_ARG: ${gitDiffArg}`,
+    `Strict mode enabled. Comparing using GIT_DIFF_ARG: ${formattedDiffArg}`,
   );
 
   try {
-    const output = runGit([
-      'diff',
-      '--name-only',
-      '--diff-filter=ACMRT',
-      ...revArgs,
-      '--',
-      '*.ts',
-      ...pathspecArgs,
-    ]);
-    return output
-      .split('\n')
-      .map(f => f.trim())
-      .filter(f => f.length > 0 && existsSync(f));
+    return getGitDiffTsFiles(revArgs, pathspecArgs);
   } catch (err) {
-    if (err.status !== 1) {
-      throw new Error(
-        `Strict mode error: git diff ${gitDiffArg} failed with exit code ${err.status}.\n` +
-          `Ensure that the git reference '${gitDiffArg}' exists locally and that you have fetched the required commits/branches.\n` +
-          `Details: ${String(err.stderr || err.message || '').trim()}`,
-      );
-    }
+    throw new Error(
+      `Strict mode error: git diff ${formattedDiffArg} failed${err.status !== undefined ? ` with exit code ${err.status}` : ''}.\n` +
+        `Ensure that the git reference '${revArgs.join(' ')}' exists locally and that you have fetched the required commits/branches.\n` +
+        `Details: ${String(err.stderr || err.message || '').trim()}`,
+    );
   }
 }
 
@@ -135,59 +145,33 @@ function getChangedFilesStrict() {
  * Returns a list of changed TypeScript files comparing against target branches/references.
  */
 function getChangedFiles() {
-  const base = process.env.GITHUB_BASE_REF || 'main';
+  const base = process.env.GITHUB_BASE_REF?.trim() || 'main';
   const refsToTry = [
-    base,
-    `upstream/${base}`,
-    `origin/${base}`,
-    'FETCH_HEAD',
-    'HEAD~1',
-    'HEAD^',
+    `${base}...HEAD`,
+    `upstream/${base}...HEAD`,
+    `origin/${base}...HEAD`,
+    'FETCH_HEAD...HEAD',
+    'HEAD~1...HEAD',
+    'HEAD^...HEAD',
+    // Fallback to checking uncommitted working tree changes against HEAD if all specific refs fail
+    'HEAD',
   ];
 
   for (const ref of refsToTry) {
     try {
-      const diffRef = ref.includes('..') ? ref : `${ref}...HEAD`;
-      const output = runGit([
-        'diff',
-        '--name-only',
-        '--diff-filter=ACMRT',
-        diffRef,
-        '--',
-        '*.ts',
-      ]);
-      return output
-        .split('\n')
-        .map(f => f.trim())
-        .filter(f => f.length > 0 && existsSync(f) && !f.includes('/fixtures/'));
+      return getGitDiffTsFiles([ref]);
     } catch {
       // Continue to the next fallback ref
     }
   }
 
-  // Fallback to checking uncommitted working tree changes against HEAD if all specific refs fail
-  try {
-    const output = runGit([
-      'diff',
-      '--name-only',
-      '--diff-filter=ACMRT',
-      'HEAD',
-      '--',
-      '*.ts',
-    ]);
-    return output
-      .split('\n')
-      .map(f => f.trim())
-      .filter(f => f.length > 0 && existsSync(f) && !f.includes('/fixtures/'));
-  } catch {
-    return [];
-  }
+  return [];
 }
 
 // --- ESLint Checker ---
 
 // LINT.IfChange(ignored_path_segments)
-const IGNORED_PATH_SEGMENTS = [
+const IGNORED_PATH_SEGMENTS = new Set([
   'node_modules',
   'build',
   'dist',
@@ -201,7 +185,7 @@ const IGNORED_PATH_SEGMENTS = [
   'coverage',
   '.nyc_output',
   'protos',
-];
+]);
 // LINT.ThenChange(.eslintrc.json:ignorePatterns)
 
 /**
@@ -213,7 +197,7 @@ function shouldLintFile(filePath) {
     return false;
   }
   const segments = filePath.split(/[\\/]/);
-  return !segments.some(seg => IGNORED_PATH_SEGMENTS.includes(seg));
+  return !segments.some(seg => IGNORED_PATH_SEGMENTS.has(seg));
 }
 
 /**
@@ -228,48 +212,47 @@ async function checkEslint(filesToCheck) {
     return true;
   }
 
+  const repoRoot = process.cwd();
+
   // Group files by package directory to set tsconfigRootDir properly for typescript-eslint
   const filesByPkg = new Map();
   for (const file of filesToProcess) {
-    const pkgDir = findTsconfigDir(file) || process.cwd();
-    if (!filesByPkg.has(pkgDir)) {
-      filesByPkg.set(pkgDir, []);
+    const pkgDir = findTsconfigDir(file) || repoRoot;
+    let group = filesByPkg.get(pkgDir);
+    if (!group) {
+      group = [];
+      filesByPkg.set(pkgDir, group);
     }
-    filesByPkg.get(pkgDir).push(file);
+    group.push(file);
   }
 
   let hasBlockingErrors = false;
 
-  for (const [pkgDir, files] of filesByPkg.entries()) {
+  for (const [pkgDir, files] of filesByPkg) {
     try {
-      const absPkgDir = path.resolve(pkgDir);
       const eslint = new ESLint({
-        cwd: absPkgDir,
-        resolvePluginsRelativeTo: process.cwd(),
+        cwd: pkgDir,
+        resolvePluginsRelativeTo: repoRoot,
         overrideConfig: {
           parserOptions: {
-            tsconfigRootDir: absPkgDir,
+            tsconfigRootDir: pkgDir,
           },
         },
       });
 
       const relativeFiles = files.map(f =>
-        path.relative(absPkgDir, path.resolve(f)),
+        path.relative(pkgDir, path.resolve(f)),
       );
       const results = await eslint.lintFiles(relativeFiles);
       const formatter = await eslint.loadFormatter('stylish');
-      const resultText = formatter.format(results);
+      const resultText = await formatter.format(results);
 
       if (resultText) {
         console.log(resultText);
       }
 
-      for (const fileResult of results) {
-        for (const message of fileResult.messages) {
-          if (message.severity === 2) {
-            hasBlockingErrors = true;
-          }
-        }
+      if (results.some(r => r.errorCount > 0)) {
+        hasBlockingErrors = true;
       }
     } catch (err) {
       console.error(
@@ -292,25 +275,41 @@ async function checkEslint(filesToCheck) {
 
 /**
  * Finds the nearest package directory containing a tsconfig.json by walking up the path.
- * Caches directories to avoid redundant disk operations.
+ * Stops at the repository root and caches traversed directories to avoid redundant disk operations.
  */
 function findTsconfigDir(filePath) {
+  const repoRoot = path.resolve(process.cwd());
   let currentDir = path.resolve(path.dirname(filePath));
-  const root = path.parse(currentDir).root;
+  const visited = [];
 
-  while (currentDir && currentDir !== root) {
+  while (
+    currentDir === repoRoot ||
+    currentDir.startsWith(`${repoRoot}${path.sep}`)
+  ) {
     if (tsconfigCache.has(currentDir)) {
-      return tsconfigCache.get(currentDir);
+      const cached = tsconfigCache.get(currentDir);
+      for (const dir of visited) {
+        tsconfigCache.set(dir, cached);
+      }
+      return cached;
     }
-    const candidate = path.join(currentDir, 'tsconfig.json');
-    if (existsSync(candidate)) {
-      tsconfigCache.set(path.dirname(filePath), currentDir);
+    visited.push(currentDir);
+    if (existsSync(path.join(currentDir, 'tsconfig.json'))) {
+      for (const dir of visited) {
+        tsconfigCache.set(dir, currentDir);
+      }
       return currentDir;
     }
-    currentDir = path.dirname(currentDir);
+    const parentDir = path.dirname(currentDir);
+    if (parentDir === currentDir) {
+      break;
+    }
+    currentDir = parentDir;
   }
 
-  tsconfigCache.set(path.dirname(filePath), null);
+  for (const dir of visited) {
+    tsconfigCache.set(dir, null);
+  }
   return null;
 }
 
@@ -332,33 +331,32 @@ function getPackageDirs(files) {
  * Ensures all changed packages have node_modules installed before running linting or type checking.
  */
 async function ensurePackageDependencies(packages) {
-  const installs = Array.from(packages).map(async pkg => {
-    const packageJsonPath = path.join(pkg, 'package.json');
-    const nodeModulesPath = path.join(pkg, 'node_modules');
-    if (existsSync(packageJsonPath) && !existsSync(nodeModulesPath)) {
-      console.log(`  Installing dependencies in ${pkg}...`);
-      if (existsSync(path.join(pkg, 'pnpm-lock.yaml'))) {
-        const pnpmCmd = process.platform === 'win32' ? 'pnpm.cmd' : 'pnpm';
-        await execFileAsync(
-          pnpmCmd,
-          ['install', '--ignore-workspace', '--ignore-scripts'],
-          {
-            cwd: pkg,
-          },
-        );
-      } else {
-        const npmCmd = process.platform === 'win32' ? 'npm.cmd' : 'npm';
-        await execFileAsync(
-          npmCmd,
-          ['install', '--no-audit', '--no-fund', '--ignore-scripts'],
-          {
-            cwd: pkg,
-          },
-        );
+  const isWin = process.platform === 'win32';
+  await Promise.all(
+    Array.from(packages, async pkg => {
+      const packageJsonPath = path.join(pkg, 'package.json');
+      const nodeModulesPath = path.join(pkg, 'node_modules');
+      if (!existsSync(packageJsonPath) || existsSync(nodeModulesPath)) {
+        return;
       }
-    }
-  });
-  await Promise.all(installs);
+      console.log(`  Installing dependencies in ${pkg}...`);
+      const usePnpm = existsSync(path.join(pkg, 'pnpm-lock.yaml'));
+      const cmd = usePnpm
+        ? isWin
+          ? 'pnpm.cmd'
+          : 'pnpm'
+        : isWin
+          ? 'npm.cmd'
+          : 'npm';
+      const args = usePnpm
+        ? ['install', '--ignore-workspace', '--ignore-scripts']
+        : ['install', '--no-audit', '--no-fund', '--ignore-scripts'];
+      await execFileAsync(cmd, args, {
+        cwd: pkg,
+        shell: isWin,
+      });
+    }),
+  );
 }
 
 /**
@@ -373,31 +371,32 @@ async function checkTypeSafety(packagesToCheck) {
     `\nRunning TypeScript type checks for ${packagesToCheck.size} package(s)...`,
   );
 
-  const checks = Array.from(packagesToCheck).map(async pkg => {
-    try {
-      console.log(`  Type checking ${pkg}...`);
-      await execFileAsync('node', [
-        'node_modules/typescript/bin/tsc',
-        '--noEmit',
-        '--project',
-        path.join(pkg, 'tsconfig.json'),
-      ]);
-      return {pkg, passed: true};
-    } catch (err) {
-      console.error(`\n[ERROR] TypeScript type check failed in ${pkg}`);
-      if (err.stdout) {
-        console.error(err.stdout);
+  const tscBin = path.resolve('node_modules/typescript/bin/tsc');
+  const results = await Promise.all(
+    Array.from(packagesToCheck, async pkg => {
+      try {
+        console.log(`  Type checking ${pkg}...`);
+        await execFileAsync(
+          process.execPath,
+          [tscBin, '--noEmit', '--project', path.join(pkg, 'tsconfig.json')],
+          {maxBuffer: 10 * 1024 * 1024},
+        );
+        return true;
+      } catch (err) {
+        console.error(`\n[ERROR] TypeScript type check failed in ${pkg}`);
+        if (err.stdout) {
+          console.error(err.stdout);
+        }
+        if (err.stderr) {
+          console.error(err.stderr);
+        }
+        return false;
       }
-      if (err.stderr) {
-        console.error(err.stderr);
-      }
-      return {pkg, passed: false};
-    }
-  });
+    }),
+  );
 
-  const results = await Promise.all(checks);
-  return results.every(r => r.passed);
+  return results.every(Boolean);
 }
 
 // --- Execution ---
-run();
+await run();
