@@ -30,6 +30,16 @@
                 "ingestEvents"
               ]
             },
+            "IngestUsers": {
+              "methods": [
+                "ingestUsers"
+              ]
+            },
+            "RemoveUsers": {
+              "methods": [
+                "removeUsers"
+              ]
+            },
             "IngestAdEvents": {
               "methods": [
                 "ingestAdEvents"
@@ -63,6 +73,16 @@
             "IngestEvents": {
               "methods": [
                 "ingestEvents"
+              ]
+            },
+            "IngestUsers": {
+              "methods": [
+                "ingestUsers"
+              ]
+            },
+            "RemoveUsers": {
+              "methods": [
+                "removeUsers"
               ]
             },
             "IngestAdEvents": {

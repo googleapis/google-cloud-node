@@ -18,7 +18,7 @@
     "compile": "tsc -p .",
     "prepare": "npm run compile",
     "pretest": "npm run compile",
-    "test": "c8 mocha build/test --recursive",
+    "test": "node ../../../bin/run-test.cjs build/test --recursive",
     "snapshots-update": "SNAPSHOT_UPDATE=1 npm test",
     "samples-test": "echo no system tests yet \ud83d\ude40",
     "system-test": "echo no system tests yet \ud83d\ude40",
