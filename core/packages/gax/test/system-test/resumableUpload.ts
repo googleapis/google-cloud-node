@@ -299,16 +299,13 @@ describe('resumable upload (system)', () => {
     server.commands = [];
 
     const session1 = new gax.ResumableUploadSession(context);
-    let pausedHandle: {uploadUrl: string; chunkSize: number} | null = null;
+    let pausedUrl = '';
     await session1.start({
       uploadSource: gax.resumableSourceFromFile(file),
       chunkSize: GRANULARITY / 2,
       onProgress: status => {
-        if (status.bytesUploaded >= GRANULARITY && !pausedHandle) {
-          pausedHandle = {
-            uploadUrl: status.uploadUrl,
-            chunkSize: session1.chunkSize!,
-          };
+        if (status.bytesUploaded >= GRANULARITY && !pausedUrl) {
+          pausedUrl = status.uploadUrl;
           throw new Error('user pause after first aligned chunk');
         }
       },
@@ -317,14 +314,13 @@ describe('resumable upload (system)', () => {
       session1.finished(),
       /user pause after first aligned chunk/,
     );
-    assert.ok(pausedHandle);
-    const handle = pausedHandle as {uploadUrl: string; chunkSize: number};
-    assert.strictEqual(handle.chunkSize, GRANULARITY);
+    assert.ok(pausedUrl);
+    assert.strictEqual(session1.chunkSize, GRANULARITY);
 
     const session2 = new gax.ResumableUploadSession(context);
     await session2.start({
       uploadSource: gax.resumableSourceFromFile(file),
-      resumeUrl: handle.uploadUrl,
+      resumeUrl: pausedUrl,
       chunkSize: GRANULARITY / 2,
     });
     assert.strictEqual(session2.chunkSize, GRANULARITY);

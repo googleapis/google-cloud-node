@@ -327,6 +327,11 @@ function parseHeaderInt(value: string | null): number | null {
   return Number.isNaN(parsed) || parsed < 0 ? null : parsed;
 }
 
+function parsePositiveHeaderInt(value: string | null): number | null {
+  const parsed = parseHeaderInt(value);
+  return parsed === null || parsed <= 0 ? null : parsed;
+}
+
 /**
  * Descriptor that identifies a method as a resumable upload method and
  * provides the caller that constructs the {@link ResumableUploadSession}
@@ -439,6 +444,7 @@ export class ResumableUploadSession {
   private startTimeMs = 0;
   private globalDeadlineMs = DEFAULT_GLOBAL_DEADLINE_MS;
   private effectiveChunkSize_ = DEFAULT_CHUNK_SIZE;
+  private negotiatedGranularity_: number | null = null;
   private activeAbortController: AbortController | null = null;
   private activeStream_: NodeJS.ReadableStream | ReadableStream | null = null;
   private activeIterator_: AsyncIterator<unknown> | null = null;
@@ -548,7 +554,6 @@ export class ResumableUploadSession {
     this.armDeadlineTimer();
 
     let sessionUrl: string;
-    let granularity: number | null = null;
     let finalResponse: {} | undefined;
 
     try {
@@ -557,10 +562,9 @@ export class ResumableUploadSession {
         const queried = await this.queryOffset(params.resumeUrl);
         this.uploadUrl_ = params.resumeUrl;
         this.committedBytes_ = queried.offset;
-        granularity = queried.granularity;
         this.effectiveChunkSize_ = this.computeEffectiveChunkSize(
           params.chunkSize,
-          granularity,
+          queried.granularity,
         );
         this.reportProgress();
         sessionUrl = params.resumeUrl;
@@ -569,11 +573,10 @@ export class ResumableUploadSession {
         this.state_ = ResumableUploadState.STARTING;
         const started = await this.sendStart();
         sessionUrl = started.uploadUrl;
-        granularity = started.granularity;
         this.uploadUrl_ = sessionUrl;
         this.effectiveChunkSize_ = this.computeEffectiveChunkSize(
           params.chunkSize,
-          granularity,
+          started.granularity,
         );
         if (started.committedOffset !== undefined) {
           this.committedBytes_ = started.committedOffset;
@@ -641,6 +644,7 @@ export class ResumableUploadSession {
     if (!granularity || granularity <= 0) {
       return requested;
     }
+    this.negotiatedGranularity_ = granularity;
     const effective = Math.floor(requested / granularity) * granularity;
     // Non-final chunks must be a multiple of the server granularity. If the
     // user's requested chunk size rounds down to zero, fall back to the
@@ -725,7 +729,7 @@ export class ResumableUploadSession {
           `${UPLOAD_URL_HEADER} header.`,
       );
     }
-    const granularity = parseHeaderInt(
+    const granularity = parsePositiveHeaderInt(
       response.headers.get(UPLOAD_CHUNK_GRANULARITY_HEADER),
     );
     // A successful start normally includes X-Goog-Upload-Status. If it is
@@ -779,7 +783,7 @@ export class ResumableUploadSession {
     const size = parseHeaderInt(
       response.headers.get(UPLOAD_SIZE_RECEIVED_HEADER),
     );
-    const granularity = parseHeaderInt(
+    const granularity = parsePositiveHeaderInt(
       response.headers.get(UPLOAD_CHUNK_GRANULARITY_HEADER),
     );
     if (uploadStatus === 'final') {
@@ -867,7 +871,6 @@ export class ResumableUploadSession {
         // buffer. Re-open the source at the committed offset and continue.
         try {
           this.committedBytes_ = err.offset;
-          this.reportProgress();
           this.state_ = ResumableUploadState.TRANSMISSION;
           // Restart the transmission loop from the new offset.
           await this.runTransmission(sessionUrl);
@@ -1084,13 +1087,16 @@ export class ResumableUploadSession {
         // Outer recovery: query the server for the exact committed offset,
         // align the local state, and re-enter the transmission phase.
         this.state_ = ResumableUploadState.RECOVERY;
+        const prevEffectiveChunkSize = this.effectiveChunkSize_;
         const queried = await this.queryOffset(sessionUrl);
-        if (queried.granularity !== null) {
+        if (queried.granularity !== null && queried.granularity > 0) {
           this.effectiveChunkSize_ = this.computeEffectiveChunkSize(
             this.params?.chunkSize,
             queried.granularity,
           );
         }
+        const chunkSizeChanged =
+          this.effectiveChunkSize_ !== prevEffectiveChunkSize;
         const serverOffset = queried.offset;
         this.committedBytes_ = serverOffset;
         this.reportProgress();
@@ -1113,9 +1119,15 @@ export class ResumableUploadSession {
         }
         if (serverOffset === currentOffset) {
           // If the recovery query negotiated a different effective chunk size
-          // than the chunk currently in flight, restart from the server offset
-          // so the source is re-read with the aligned chunk size.
-          if (!isFinal && currentChunk.length !== this.effectiveChunkSize_) {
+          // or the chunk currently in flight is not a multiple of the
+          // negotiated granularity, restart from the server offset so the
+          // source is re-read with an aligned chunk size.
+          if (
+            !isFinal &&
+            (chunkSizeChanged ||
+              (this.negotiatedGranularity_ !== null &&
+                currentChunk.length % this.negotiatedGranularity_ !== 0))
+          ) {
             throw new RestartUploadError(serverOffset);
           }
           // Nothing was committed; apply retry limit and backoff before
@@ -1125,7 +1137,7 @@ export class ResumableUploadSession {
             throw createGoogleError(
               `Exceeded the maximum number of recovery retries (${retry.maxRetries}) ` +
                 `without forward progress at byte offset ${currentOffset}: ` +
-                `${err instanceof Error ? err.message : String(err)}`,
+                `${err.message}`,
               Status.DEADLINE_EXCEEDED,
             );
           }
@@ -1184,8 +1196,19 @@ export class ResumableUploadSession {
               skipAhead: serverOffset - (currentOffset + currentChunk.length),
             };
           }
-          // The server committed part of this chunk; retransmit the tail.
-          currentChunk = currentChunk.subarray(serverOffset - currentOffset);
+          // The server committed part of this chunk; retransmit the tail if
+          // it remains aligned to the negotiated granularity, or restart from
+          // the server offset otherwise.
+          const tail = currentChunk.subarray(serverOffset - currentOffset);
+          if (
+            !isFinal &&
+            (chunkSizeChanged ||
+              (this.negotiatedGranularity_ !== null &&
+                tail.length % this.negotiatedGranularity_ !== 0))
+          ) {
+            throw new RestartUploadError(serverOffset);
+          }
+          currentChunk = tail;
           currentOffset = serverOffset;
           sameOffsetAttempts = 0;
           sameOffsetDelay = retry.initialDelayMs;
@@ -1240,7 +1263,7 @@ export class ResumableUploadSession {
         }
         this.state_ = ResumableUploadState.RECOVERY;
         const queried = await this.queryOffset(sessionUrl);
-        if (queried.granularity !== null) {
+        if (queried.granularity !== null && queried.granularity > 0) {
           this.effectiveChunkSize_ = this.computeEffectiveChunkSize(
             this.params?.chunkSize,
             queried.granularity,
@@ -1263,7 +1286,7 @@ export class ResumableUploadSession {
               throw createGoogleError(
                 `Exceeded the maximum number of recovery retries (${retry.maxRetries}) ` +
                   `while finalizing at byte offset ${currentOffset}: ` +
-                  `${err instanceof Error ? err.message : String(err)}`,
+                  `${err.message}`,
                 Status.DEADLINE_EXCEEDED,
               );
             }
@@ -1345,7 +1368,7 @@ export class ResumableUploadSession {
           throw createGoogleError(
             `Exceeded the maximum number of retries (${retry.maxRetries}) ` +
               `while sending the resumable upload command "${command}": ` +
-              `${err instanceof Error ? err.message : String(err)}`,
+              `${err.message}`,
             Status.DEADLINE_EXCEEDED,
           );
         }
@@ -1452,8 +1475,7 @@ export class ResumableUploadSession {
         throw err;
       }
       throw new TransientError(
-        'Transient failure while sending the resumable upload command ' +
-          `"${command}": ${(err as Error).message}`,
+        err instanceof Error ? err.message : String(err),
       );
     } finally {
       this.clearStallTimer();
@@ -1484,7 +1506,7 @@ export class ResumableUploadSession {
           );
         }
         if (command === COMMAND_START) {
-          if (response.headers.get(UPLOAD_URL_HEADER) !== null) {
+          if (response.headers.get(UPLOAD_URL_HEADER)) {
             // The start handler reconciles via the returned session URL.
             return;
           }
