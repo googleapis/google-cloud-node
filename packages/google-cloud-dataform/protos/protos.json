@@ -1514,6 +1514,13 @@
                             "(google.api.field_behavior)": "OUTPUT_ONLY",
                             "proto3_optional": true
                           }
+                        },
+                        "endUserAuthConfig": {
+                          "type": "EndUserAuthConfig",
+                          "id": 28,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -1633,6 +1640,29 @@
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
                             }
+                          }
+                        },
+                        "EndUserAuthConfig": {
+                          "fields": {
+                            "oauthConfig": {
+                              "type": "OAuthConfig",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "OAuthConfig": {
+                      "fields": {
+                        "additionalOauthScopes": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -4270,6 +4300,13 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "endUserAuthConfig": {
+                          "type": "EndUserAuthenticationConfig",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "queryPriority": {
                           "type": "QueryPriority",
                           "id": 9,
@@ -4280,6 +4317,24 @@
                         }
                       },
                       "nested": {
+                        "EndUserAuthenticationConfig": {
+                          "fields": {
+                            "userEmail": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "oauthConfig": {
+                              "type": "OAuthConfig",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
                         "QueryPriority": {
                           "values": {
                             "QUERY_PRIORITY_UNSPECIFIED": 0,
@@ -7368,6 +7423,13 @@
                             "(google.api.field_behavior)": "OUTPUT_ONLY",
                             "proto3_optional": true
                           }
+                        },
+                        "endUserAuthConfig": {
+                          "type": "EndUserAuthConfig",
+                          "id": 28,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -7487,6 +7549,29 @@
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
                             }
+                          }
+                        },
+                        "EndUserAuthConfig": {
+                          "fields": {
+                            "oauthConfig": {
+                              "type": "OAuthConfig",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "OAuthConfig": {
+                      "fields": {
+                        "additionalOauthScopes": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -10395,6 +10480,13 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "endUserAuthConfig": {
+                          "type": "EndUserAuthenticationConfig",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "queryPriority": {
                           "type": "QueryPriority",
                           "id": 9,
@@ -10405,6 +10497,24 @@
                         }
                       },
                       "nested": {
+                        "EndUserAuthenticationConfig": {
+                          "fields": {
+                            "userEmail": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "oauthConfig": {
+                              "type": "OAuthConfig",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
                         "QueryPriority": {
                           "values": {
                             "QUERY_PRIORITY_UNSPECIFIED": 0,

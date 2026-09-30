@@ -23,6 +23,8 @@ const AgentsClient = v2.AgentsClient;
 type AgentsClient = v2.AgentsClient;
 const AnswerRecordsClient = v2.AnswerRecordsClient;
 type AnswerRecordsClient = v2.AnswerRecordsClient;
+const CompanionAgentsClient = v2.CompanionAgentsClient;
+type CompanionAgentsClient = v2.CompanionAgentsClient;
 const ContextsClient = v2.ContextsClient;
 type ContextsClient = v2.ContextsClient;
 const ConversationDatasetsClient = v2.ConversationDatasetsClient;
@@ -64,7 +66,7 @@ type ToolsClient = v2.ToolsClient;
 const VersionsClient = v2.VersionsClient;
 type VersionsClient = v2.VersionsClient;
 
-export {v2, v2beta1, AgentsClient, AnswerRecordsClient, ContextsClient, ConversationDatasetsClient, ConversationModelsClient, ConversationProfilesClient, ConversationsClient, DocumentsClient, EncryptionSpecServiceClient, EntityTypesClient, EnvironmentsClient, FulfillmentsClient, GeneratorEvaluationsClient, GeneratorsClient, IntentsClient, KnowledgeBasesClient, ParticipantsClient, SessionEntityTypesClient, SessionsClient, SipTrunksClient, ToolsClient, VersionsClient};
-export default {v2, v2beta1, AgentsClient, AnswerRecordsClient, ContextsClient, ConversationDatasetsClient, ConversationModelsClient, ConversationProfilesClient, ConversationsClient, DocumentsClient, EncryptionSpecServiceClient, EntityTypesClient, EnvironmentsClient, FulfillmentsClient, GeneratorEvaluationsClient, GeneratorsClient, IntentsClient, KnowledgeBasesClient, ParticipantsClient, SessionEntityTypesClient, SessionsClient, SipTrunksClient, ToolsClient, VersionsClient};
+export {v2, v2beta1, AgentsClient, AnswerRecordsClient, CompanionAgentsClient, ContextsClient, ConversationDatasetsClient, ConversationModelsClient, ConversationProfilesClient, ConversationsClient, DocumentsClient, EncryptionSpecServiceClient, EntityTypesClient, EnvironmentsClient, FulfillmentsClient, GeneratorEvaluationsClient, GeneratorsClient, IntentsClient, KnowledgeBasesClient, ParticipantsClient, SessionEntityTypesClient, SessionsClient, SipTrunksClient, ToolsClient, VersionsClient};
+export default {v2, v2beta1, AgentsClient, AnswerRecordsClient, CompanionAgentsClient, ContextsClient, ConversationDatasetsClient, ConversationModelsClient, ConversationProfilesClient, ConversationsClient, DocumentsClient, EncryptionSpecServiceClient, EntityTypesClient, EnvironmentsClient, FulfillmentsClient, GeneratorEvaluationsClient, GeneratorsClient, IntentsClient, KnowledgeBasesClient, ParticipantsClient, SessionEntityTypesClient, SessionsClient, SipTrunksClient, ToolsClient, VersionsClient};
 import * as protos from '../protos/protos';
 export {protos};
