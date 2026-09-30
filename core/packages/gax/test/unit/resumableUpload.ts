@@ -1664,4 +1664,271 @@ describe('resumable upload', () => {
       /did not include a x-goog-upload-size-received header/i,
     );
   });
+
+  it('applies x-goog-upload-chunk-granularity from a recovery query when resuming', async () => {
+    const requests: MockRequestOptions[] = [];
+    const observedChunkSizes: Array<number | null> = [];
+    const auth = mockAuth(async opts => {
+      requests.push(opts);
+      const command = commandOf(opts);
+      if (command === 'query') {
+        return resumableUploadResponse(200, {
+          'x-goog-upload-status': 'active',
+          'x-goog-upload-size-received': String(GRANULARITY),
+          'x-goog-upload-chunk-granularity': String(GRANULARITY),
+        });
+      }
+      if (command === 'upload') {
+        if (bodyLength(opts) % GRANULARITY !== 0) {
+          return resumableUploadResponse(400, {
+            'x-goog-upload-status': 'active',
+          });
+        }
+        return resumableUploadResponse(200, {'x-goog-upload-status': 'active'});
+      }
+      if (command === 'upload, finalize') {
+        return resumableUploadResponse(
+          200,
+          {'x-goog-upload-status': 'final'},
+          JSON.stringify({name: 'complete'}),
+        );
+      }
+      throw new Error(`Unexpected command: ${command}`);
+    });
+
+    const payload = Buffer.alloc(2 * GRANULARITY + 128, 0x5a);
+    const helper = new gax.ResumableUploadSession(buildContext(auth));
+    await helper.start({
+      uploadSource: bufferSource(payload).source,
+      chunkSize: GRANULARITY / 2,
+      resumeUrl: SESSION_URL,
+      onProgress: () => {
+        observedChunkSizes.push(helper.chunkSize);
+      },
+    });
+    assert.strictEqual(helper.chunkSize, GRANULARITY);
+    const response = await helper.finished();
+    assert.deepStrictEqual(response, {name: 'complete'});
+    assert.ok(
+      observedChunkSizes.every(size => size === GRANULARITY),
+      `expected all onProgress calls to observe chunkSize=${GRANULARITY}, got ${JSON.stringify(observedChunkSizes)}`,
+    );
+    assert.deepStrictEqual(
+      requests.map(r => commandOf(r)),
+      ['query', 'upload', 'upload, finalize'],
+    );
+    assert.strictEqual(offsetOf(requests[1]), GRANULARITY);
+    assert.strictEqual(bodyLength(requests[1]), GRANULARITY);
+    assert.strictEqual(offsetOf(requests[2]), 2 * GRANULARITY);
+    assert.strictEqual(bodyLength(requests[2]), 128);
+  });
+
+  it('resumes across sessions using the negotiated chunkSize when query omits granularity', async () => {
+    const requests: MockRequestOptions[] = [];
+    let committed = 0;
+    const payload = Buffer.alloc(2 * GRANULARITY + 64, 0x3c);
+
+    const auth = mockAuth(async opts => {
+      requests.push(opts);
+      const command = commandOf(opts);
+      if (command === 'start') {
+        return resumableUploadResponse(200, {
+          'x-goog-upload-url': SESSION_URL,
+          'x-goog-upload-status': 'active',
+          'x-goog-upload-chunk-granularity': String(GRANULARITY),
+        });
+      }
+      if (command === 'query') {
+        // Server does not repeat x-goog-upload-chunk-granularity on query.
+        return resumableUploadResponse(200, {
+          'x-goog-upload-status': 'active',
+          'x-goog-upload-size-received': String(committed),
+        });
+      }
+      if (command === 'upload') {
+        const len = bodyLength(opts);
+        if (len % GRANULARITY !== 0) {
+          return resumableUploadResponse(400, {
+            'x-goog-upload-status': 'active',
+          });
+        }
+        committed += len;
+        return resumableUploadResponse(200, {'x-goog-upload-status': 'active'});
+      }
+      if (command === 'upload, finalize') {
+        committed += bodyLength(opts);
+        return resumableUploadResponse(
+          200,
+          {'x-goog-upload-status': 'final'},
+          JSON.stringify({name: 'complete'}),
+        );
+      }
+      throw new Error(`Unexpected command: ${command}`);
+    });
+
+    const session1 = new gax.ResumableUploadSession(buildContext(auth));
+    let pausedHandle: {uploadUrl: string; chunkSize: number} | null = null;
+    await session1.start({
+      uploadSource: bufferSource(payload).source,
+      chunkSize: GRANULARITY / 2,
+      onProgress: progress => {
+        if (progress.bytesUploaded >= GRANULARITY && !pausedHandle) {
+          pausedHandle = {
+            uploadUrl: progress.uploadUrl,
+            chunkSize: session1.chunkSize!,
+          };
+          throw new Error('user pause');
+        }
+      },
+    });
+    await assert.rejects(session1.finished(), /user pause/);
+    assert.ok(pausedHandle);
+    const handle = pausedHandle as {uploadUrl: string; chunkSize: number};
+    assert.strictEqual(handle.chunkSize, GRANULARITY);
+
+    const session2 = new gax.ResumableUploadSession(buildContext(auth));
+    await session2.start({
+      uploadSource: bufferSource(payload).source,
+      resumeUrl: handle.uploadUrl,
+      chunkSize: handle.chunkSize,
+    });
+    const response = await session2.finished();
+    assert.deepStrictEqual(response, {name: 'complete'});
+    assert.strictEqual(committed, payload.length);
+  });
+
+  it('restarts chunk transmission with the aligned chunk size when a mid-transfer recovery query returns granularity', async () => {
+    const requests: MockRequestOptions[] = [];
+    let firstUploadFailed = false;
+    const auth = mockAuth(async opts => {
+      requests.push(opts);
+      const command = commandOf(opts);
+      if (command === 'start') {
+        return resumableUploadResponse(200, {
+          'x-goog-upload-url': SESSION_URL,
+          'x-goog-upload-status': 'active',
+        });
+      }
+      if (command === 'upload') {
+        if (!firstUploadFailed && bodyLength(opts) < GRANULARITY) {
+          firstUploadFailed = true;
+          return resumableUploadResponse(400, {
+            'x-goog-upload-status': 'active',
+          });
+        }
+        return resumableUploadResponse(200, {'x-goog-upload-status': 'active'});
+      }
+      if (command === 'query') {
+        return resumableUploadResponse(200, {
+          'x-goog-upload-status': 'active',
+          'x-goog-upload-size-received': '0',
+          'x-goog-upload-chunk-granularity': String(GRANULARITY),
+        });
+      }
+      if (command === 'upload, finalize') {
+        return resumableUploadResponse(
+          200,
+          {'x-goog-upload-status': 'final'},
+          JSON.stringify({name: 'complete'}),
+        );
+      }
+      throw new Error(`Unexpected command: ${command}`);
+    });
+
+    const payload = Buffer.alloc(GRANULARITY + 32, 0x77);
+    const helper = new gax.ResumableUploadSession(buildContext(auth));
+    await helper.start({
+      uploadSource: bufferSource(payload).source,
+      chunkSize: GRANULARITY / 2,
+    });
+    const response = await helper.finished();
+    assert.deepStrictEqual(response, {name: 'complete'});
+    assert.strictEqual(helper.chunkSize, GRANULARITY);
+    assert.deepStrictEqual(
+      requests.map(r => commandOf(r)),
+      ['start', 'upload', 'query', 'upload', 'upload, finalize'],
+    );
+    assert.strictEqual(bodyLength(requests[1]), GRANULARITY / 2);
+    assert.strictEqual(bodyLength(requests[3]), GRANULARITY);
+    assert.strictEqual(bodyLength(requests[4]), 32);
+  });
+
+  it('retries the start command when the response is missing both status and url headers', async () => {
+    const requests: MockRequestOptions[] = [];
+    let startAttempts = 0;
+    const auth = mockAuth(async opts => {
+      requests.push(opts);
+      const command = commandOf(opts);
+      if (command === 'start') {
+        startAttempts += 1;
+        if (startAttempts === 1) {
+          return resumableUploadResponse(200, {});
+        }
+        return resumableUploadResponse(200, {
+          'x-goog-upload-url': SESSION_URL,
+          'x-goog-upload-status': 'active',
+        });
+      }
+      if (command === 'upload, finalize') {
+        return resumableUploadResponse(
+          200,
+          {'x-goog-upload-status': 'final'},
+          JSON.stringify({name: 'complete'}),
+        );
+      }
+      throw new Error(`Unexpected command: ${command}`);
+    });
+
+    const helper = new gax.ResumableUploadSession(buildContext(auth));
+    await helper.start({
+      uploadSource: bufferSource(Buffer.alloc(64)).source,
+      chunkSize: GRANULARITY,
+      retry: {
+        backoffSettings: {
+          maxRetries: 2,
+          initialRetryDelayMillis: 1,
+          retryDelayMultiplier: 1.0,
+          maxRetryDelayMillis: 5,
+          initialRpcTimeoutMillis: 1000,
+          rpcTimeoutMultiplier: 1.0,
+          maxRpcTimeoutMillis: 1000,
+          totalTimeoutMillis: 10000,
+        },
+      },
+    });
+    const response = await helper.finished();
+    assert.deepStrictEqual(response, {name: 'complete'});
+    assert.strictEqual(startAttempts, 2);
+    assert.deepStrictEqual(
+      requests.map(r => commandOf(r)),
+      ['start', 'start', 'upload, finalize'],
+    );
+  });
+
+  it('includes the underlying failure message when retries are exhausted', async () => {
+    const auth = mockAuth(async () => {
+      throw new Error('Could not load the default credentials');
+    });
+
+    const helper = new gax.ResumableUploadSession(buildContext(auth));
+    await assert.rejects(
+      helper.start({
+        uploadSource: bufferSource(Buffer.alloc(64)).source,
+        chunkSize: GRANULARITY,
+        retry: {
+          backoffSettings: {
+            maxRetries: 1,
+            initialRetryDelayMillis: 1,
+            retryDelayMultiplier: 1.0,
+            maxRetryDelayMillis: 1,
+            initialRpcTimeoutMillis: 1000,
+            rpcTimeoutMultiplier: 1.0,
+            maxRpcTimeoutMillis: 1000,
+            totalTimeoutMillis: 10000,
+          },
+        },
+      }),
+      /Exceeded the maximum number of retries \(1\) while sending the resumable upload command "start".*Could not load the default credentials/,
+    );
+  });
 });

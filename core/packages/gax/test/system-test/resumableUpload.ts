@@ -84,6 +84,7 @@ class MockResumableUploadServer {
     const active = (extra: {[name: string]: string} = {}) => ({
       'x-goog-upload-status': 'active',
       'x-goog-upload-size-received': String(this.received.length),
+      'x-goog-upload-chunk-granularity': String(GRANULARITY),
       ...extra,
     });
 
@@ -107,6 +108,9 @@ class MockResumableUploadServer {
     if (command === 'upload' || command === 'upload, finalize') {
       if (offset !== this.received.length) {
         return send(416, active(), 'offset mismatch');
+      }
+      if (command === 'upload' && body.length % GRANULARITY !== 0) {
+        return send(400, active(), 'chunk size not aligned to granularity');
       }
       this.received = Buffer.concat([this.received, body]);
       if (command === 'upload, finalize') {
@@ -288,5 +292,45 @@ describe('resumable upload (system)', () => {
     assert.strictEqual(response.status, 'done');
     assert.ok(server.received.equals(data));
     assert.strictEqual(resumedProgress[0].bytesUploaded, committed);
+  });
+
+  it('resumes with a sub-granularity chunkSize and aligns chunks to server granularity', async () => {
+    server.received = Buffer.alloc(0);
+    server.commands = [];
+
+    const session1 = new gax.ResumableUploadSession(context);
+    let pausedHandle: {uploadUrl: string; chunkSize: number} | null = null;
+    await session1.start({
+      uploadSource: gax.resumableSourceFromFile(file),
+      chunkSize: GRANULARITY / 2,
+      onProgress: status => {
+        if (status.bytesUploaded >= GRANULARITY && !pausedHandle) {
+          pausedHandle = {
+            uploadUrl: status.uploadUrl,
+            chunkSize: session1.chunkSize!,
+          };
+          throw new Error('user pause after first aligned chunk');
+        }
+      },
+    });
+    await assert.rejects(
+      session1.finished(),
+      /user pause after first aligned chunk/,
+    );
+    assert.ok(pausedHandle);
+    const handle = pausedHandle as {uploadUrl: string; chunkSize: number};
+    assert.strictEqual(handle.chunkSize, GRANULARITY);
+
+    const session2 = new gax.ResumableUploadSession(context);
+    await session2.start({
+      uploadSource: gax.resumableSourceFromFile(file),
+      resumeUrl: handle.uploadUrl,
+      chunkSize: GRANULARITY / 2,
+    });
+    assert.strictEqual(session2.chunkSize, GRANULARITY);
+    const response = (await session2.finished()) as {status: string};
+
+    assert.strictEqual(response.status, 'done');
+    assert.ok(server.received.equals(data));
   });
 });
