@@ -13,7 +13,7 @@
 // limitations under the License.
 
 import {execFileSync, execFile} from 'child_process';
-import {existsSync} from 'fs';
+import {existsSync, readFileSync} from 'fs';
 import path from 'path';
 import {promisify} from 'util';
 import {ESLint} from 'eslint';
@@ -31,6 +31,8 @@ async function run() {
     } else {
       changedTsFiles = getChangedFiles();
     }
+
+    changedTsFiles = changedTsFiles.filter(shouldLintFile);
 
     if (changedTsFiles.length === 0) {
       console.log('No TypeScript files changed. Skipping checks.');
@@ -190,6 +192,10 @@ const IGNORED_PATH_SEGMENTS = [
   'coverage',
   '.nyc_output',
   'protos',
+  'showcase-echo-client',
+  'test-application',
+  'showcase-server',
+  'browser-test',
 ];
 // LINT.ThenChange(.eslintrc.json:ignorePatterns)
 
@@ -321,10 +327,31 @@ function getPackageDirs(files) {
  * Ensures all changed packages have node_modules installed before running linting or type checking.
  */
 async function ensurePackageDependencies(packages) {
-  const installs = Array.from(packages).map(async pkg => {
+  for (const pkg of packages) {
     const packageJsonPath = path.join(pkg, 'package.json');
     const nodeModulesPath = path.join(pkg, 'node_modules');
     if (existsSync(packageJsonPath) && !existsSync(nodeModulesPath)) {
+      try {
+        const pkgJson = JSON.parse(readFileSync(packageJsonPath, 'utf8'));
+        const allDeps = {
+          ...pkgJson.dependencies,
+          ...pkgJson.devDependencies,
+        };
+        const hasMissingTarball = Object.values(allDeps).some(
+          dep =>
+            typeof dep === 'string' &&
+            dep.includes('.tgz') &&
+            !existsSync(path.resolve(pkg, dep.replace(/^(file:|\.\/)/, ''))),
+        );
+        if (hasMissingTarball || pkgJson.scripts?.prefetch) {
+          console.log(
+            `  Skipping dependency installation in ${pkg} (requires prefetch/local tarballs)`,
+          );
+          continue;
+        }
+      } catch {
+        // proceed if package.json cannot be read/parsed
+      }
       console.log(`  Installing dependencies in ${pkg}...`);
       if (existsSync(path.join(pkg, 'pnpm-lock.yaml'))) {
         const pnpmCmd = process.platform === 'win32' ? 'pnpm.cmd' : 'pnpm';
@@ -346,8 +373,7 @@ async function ensurePackageDependencies(packages) {
         );
       }
     }
-  });
-  await Promise.all(installs);
+  }
 }
 
 /**

@@ -15,11 +15,16 @@
  */
 
 'use strict';
+
+process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
+process.env.GOOGLE_SDK_NODE_ENABLE_TRACING = 'true';
+
 import {EchoClient, SequenceServiceClient, protos} from 'showcase-echo-client';
 import {ShowcaseServer} from 'showcase-server';
 import * as assert from 'assert';
 import {promises as fsp} from 'fs';
 import {runPqcComplianceTests} from './pqc-test';
+import {runTelemetryTests} from './telemetry-test';
 import * as path from 'path';
 import {
   protobuf,
@@ -2908,6 +2913,8 @@ async function main() {
   try {
     await showcaseServer.start();
     await testShowcase();
+    await runTelemetryTests('basic');
+    await runTelemetryTests('node');
   } finally {
     showcaseServer.stop();
   }
