@@ -41,6 +41,8 @@ const version = require('../../../package.json').version;
 
 /**
  *  The ZoneOperations API.
+ *
+ *  This client uses ZoneOperations version 2026-09-01.
  * @class
  * @memberof v1
  */
@@ -213,7 +215,10 @@ export class ZoneOperationsClient {
       'google.cloud.compute.v1.ZoneOperations',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')},
+      {
+        'x-goog-api-client': clientHeader.join(' '),
+        'x-goog-api-version': '2026-09-01',
+      },
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -904,13 +909,6 @@ export class ZoneOperationsClient {
    *   the next page of results.
    * @param {string} request.project
    *   Project ID for this request.
-   * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case
-   *   of failure. The default value is false.
-   *
-   *   For example, when partial success behavior is enabled, aggregatedList for a
-   *   single zone scope either returns all resources in the zone or no resources,
-   *   with an error code.
    * @param {string} request.zone
    *   Name of the zone for request.
    * @param {object} [options]
@@ -1106,13 +1104,6 @@ export class ZoneOperationsClient {
    *   the next page of results.
    * @param {string} request.project
    *   Project ID for this request.
-   * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case
-   *   of failure. The default value is false.
-   *
-   *   For example, when partial success behavior is enabled, aggregatedList for a
-   *   single zone scope either returns all resources in the zone or no resources,
-   *   with an error code.
    * @param {string} request.zone
    *   Name of the zone for request.
    * @param {object} [options]
@@ -1241,13 +1232,6 @@ export class ZoneOperationsClient {
    *   the next page of results.
    * @param {string} request.project
    *   Project ID for this request.
-   * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case
-   *   of failure. The default value is false.
-   *
-   *   For example, when partial success behavior is enabled, aggregatedList for a
-   *   single zone scope either returns all resources in the zone or no resources,
-   *   with an error code.
    * @param {string} request.zone
    *   Name of the zone for request.
    * @param {object} [options]
