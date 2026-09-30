@@ -35620,6 +35620,9 @@ export namespace google {
 
                 /** TableRequest mutateRow */
                 mutateRow?: (google.bigtable.v2.ISessionMutateRowRequest|null);
+
+                /** TableRequest checkAndMutateRow */
+                checkAndMutateRow?: (google.bigtable.v2.ISessionCheckAndMutateRowRequest|null);
             }
 
             /** Represents a TableRequest. */
@@ -35637,8 +35640,11 @@ export namespace google {
                 /** TableRequest mutateRow. */
                 public mutateRow?: (google.bigtable.v2.ISessionMutateRowRequest|null);
 
+                /** TableRequest checkAndMutateRow. */
+                public checkAndMutateRow?: (google.bigtable.v2.ISessionCheckAndMutateRowRequest|null);
+
                 /** TableRequest payload. */
-                public payload?: ("readRow"|"mutateRow");
+                public payload?: ("readRow"|"mutateRow"|"checkAndMutateRow");
 
                 /**
                  * Creates a new TableRequest instance using the specified properties.
@@ -35726,6 +35732,9 @@ export namespace google {
 
                 /** TableResponse mutateRow */
                 mutateRow?: (google.bigtable.v2.ISessionMutateRowResponse|null);
+
+                /** TableResponse checkAndMutateRow */
+                checkAndMutateRow?: (google.bigtable.v2.ISessionCheckAndMutateRowResponse|null);
             }
 
             /** Represents a TableResponse. */
@@ -35743,8 +35752,11 @@ export namespace google {
                 /** TableResponse mutateRow. */
                 public mutateRow?: (google.bigtable.v2.ISessionMutateRowResponse|null);
 
+                /** TableResponse checkAndMutateRow. */
+                public checkAndMutateRow?: (google.bigtable.v2.ISessionCheckAndMutateRowResponse|null);
+
                 /** TableResponse payload. */
-                public payload?: ("readRow"|"mutateRow");
+                public payload?: ("readRow"|"mutateRow"|"checkAndMutateRow");
 
                 /**
                  * Creates a new TableResponse instance using the specified properties.
@@ -35832,6 +35844,9 @@ export namespace google {
 
                 /** AuthorizedViewRequest mutateRow */
                 mutateRow?: (google.bigtable.v2.ISessionMutateRowRequest|null);
+
+                /** AuthorizedViewRequest checkAndMutateRow */
+                checkAndMutateRow?: (google.bigtable.v2.ISessionCheckAndMutateRowRequest|null);
             }
 
             /** Represents an AuthorizedViewRequest. */
@@ -35849,8 +35864,11 @@ export namespace google {
                 /** AuthorizedViewRequest mutateRow. */
                 public mutateRow?: (google.bigtable.v2.ISessionMutateRowRequest|null);
 
+                /** AuthorizedViewRequest checkAndMutateRow. */
+                public checkAndMutateRow?: (google.bigtable.v2.ISessionCheckAndMutateRowRequest|null);
+
                 /** AuthorizedViewRequest payload. */
-                public payload?: ("readRow"|"mutateRow");
+                public payload?: ("readRow"|"mutateRow"|"checkAndMutateRow");
 
                 /**
                  * Creates a new AuthorizedViewRequest instance using the specified properties.
@@ -35938,6 +35956,9 @@ export namespace google {
 
                 /** AuthorizedViewResponse mutateRow */
                 mutateRow?: (google.bigtable.v2.ISessionMutateRowResponse|null);
+
+                /** AuthorizedViewResponse checkAndMutateRow */
+                checkAndMutateRow?: (google.bigtable.v2.ISessionCheckAndMutateRowResponse|null);
             }
 
             /** Represents an AuthorizedViewResponse. */
@@ -35955,8 +35976,11 @@ export namespace google {
                 /** AuthorizedViewResponse mutateRow. */
                 public mutateRow?: (google.bigtable.v2.ISessionMutateRowResponse|null);
 
+                /** AuthorizedViewResponse checkAndMutateRow. */
+                public checkAndMutateRow?: (google.bigtable.v2.ISessionCheckAndMutateRowResponse|null);
+
                 /** AuthorizedViewResponse payload. */
-                public payload?: ("readRow"|"mutateRow");
+                public payload?: ("readRow"|"mutateRow"|"checkAndMutateRow");
 
                 /**
                  * Creates a new AuthorizedViewResponse instance using the specified properties.
@@ -36630,6 +36654,218 @@ export namespace google {
 
                 /**
                  * Gets the default type url for SessionMutateRowResponse
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a SessionCheckAndMutateRowRequest. */
+            interface ISessionCheckAndMutateRowRequest {
+
+                /** SessionCheckAndMutateRowRequest key */
+                key?: (Uint8Array|Buffer|string|null);
+
+                /** SessionCheckAndMutateRowRequest predicateFilter */
+                predicateFilter?: (google.bigtable.v2.IRowFilter|null);
+
+                /** SessionCheckAndMutateRowRequest trueMutations */
+                trueMutations?: (google.bigtable.v2.IMutation[]|null);
+
+                /** SessionCheckAndMutateRowRequest falseMutations */
+                falseMutations?: (google.bigtable.v2.IMutation[]|null);
+            }
+
+            /** Represents a SessionCheckAndMutateRowRequest. */
+            class SessionCheckAndMutateRowRequest implements ISessionCheckAndMutateRowRequest {
+
+                /**
+                 * Constructs a new SessionCheckAndMutateRowRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.bigtable.v2.ISessionCheckAndMutateRowRequest);
+
+                /** SessionCheckAndMutateRowRequest key. */
+                public key: (Uint8Array|Buffer|string);
+
+                /** SessionCheckAndMutateRowRequest predicateFilter. */
+                public predicateFilter?: (google.bigtable.v2.IRowFilter|null);
+
+                /** SessionCheckAndMutateRowRequest trueMutations. */
+                public trueMutations: google.bigtable.v2.IMutation[];
+
+                /** SessionCheckAndMutateRowRequest falseMutations. */
+                public falseMutations: google.bigtable.v2.IMutation[];
+
+                /**
+                 * Creates a new SessionCheckAndMutateRowRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns SessionCheckAndMutateRowRequest instance
+                 */
+                public static create(properties?: google.bigtable.v2.ISessionCheckAndMutateRowRequest): google.bigtable.v2.SessionCheckAndMutateRowRequest;
+
+                /**
+                 * Encodes the specified SessionCheckAndMutateRowRequest message. Does not implicitly {@link google.bigtable.v2.SessionCheckAndMutateRowRequest.verify|verify} messages.
+                 * @param message SessionCheckAndMutateRowRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.bigtable.v2.ISessionCheckAndMutateRowRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified SessionCheckAndMutateRowRequest message, length delimited. Does not implicitly {@link google.bigtable.v2.SessionCheckAndMutateRowRequest.verify|verify} messages.
+                 * @param message SessionCheckAndMutateRowRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.bigtable.v2.ISessionCheckAndMutateRowRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a SessionCheckAndMutateRowRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns SessionCheckAndMutateRowRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.bigtable.v2.SessionCheckAndMutateRowRequest;
+
+                /**
+                 * Decodes a SessionCheckAndMutateRowRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns SessionCheckAndMutateRowRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.bigtable.v2.SessionCheckAndMutateRowRequest;
+
+                /**
+                 * Verifies a SessionCheckAndMutateRowRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a SessionCheckAndMutateRowRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns SessionCheckAndMutateRowRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): google.bigtable.v2.SessionCheckAndMutateRowRequest;
+
+                /**
+                 * Creates a plain object from a SessionCheckAndMutateRowRequest message. Also converts values to other types if specified.
+                 * @param message SessionCheckAndMutateRowRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.bigtable.v2.SessionCheckAndMutateRowRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this SessionCheckAndMutateRowRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for SessionCheckAndMutateRowRequest
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a SessionCheckAndMutateRowResponse. */
+            interface ISessionCheckAndMutateRowResponse {
+
+                /** SessionCheckAndMutateRowResponse predicateMatched */
+                predicateMatched?: (boolean|null);
+            }
+
+            /** Represents a SessionCheckAndMutateRowResponse. */
+            class SessionCheckAndMutateRowResponse implements ISessionCheckAndMutateRowResponse {
+
+                /**
+                 * Constructs a new SessionCheckAndMutateRowResponse.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.bigtable.v2.ISessionCheckAndMutateRowResponse);
+
+                /** SessionCheckAndMutateRowResponse predicateMatched. */
+                public predicateMatched: boolean;
+
+                /**
+                 * Creates a new SessionCheckAndMutateRowResponse instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns SessionCheckAndMutateRowResponse instance
+                 */
+                public static create(properties?: google.bigtable.v2.ISessionCheckAndMutateRowResponse): google.bigtable.v2.SessionCheckAndMutateRowResponse;
+
+                /**
+                 * Encodes the specified SessionCheckAndMutateRowResponse message. Does not implicitly {@link google.bigtable.v2.SessionCheckAndMutateRowResponse.verify|verify} messages.
+                 * @param message SessionCheckAndMutateRowResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.bigtable.v2.ISessionCheckAndMutateRowResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified SessionCheckAndMutateRowResponse message, length delimited. Does not implicitly {@link google.bigtable.v2.SessionCheckAndMutateRowResponse.verify|verify} messages.
+                 * @param message SessionCheckAndMutateRowResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.bigtable.v2.ISessionCheckAndMutateRowResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a SessionCheckAndMutateRowResponse message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns SessionCheckAndMutateRowResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.bigtable.v2.SessionCheckAndMutateRowResponse;
+
+                /**
+                 * Decodes a SessionCheckAndMutateRowResponse message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns SessionCheckAndMutateRowResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.bigtable.v2.SessionCheckAndMutateRowResponse;
+
+                /**
+                 * Verifies a SessionCheckAndMutateRowResponse message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a SessionCheckAndMutateRowResponse message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns SessionCheckAndMutateRowResponse
+                 */
+                public static fromObject(object: { [k: string]: any }): google.bigtable.v2.SessionCheckAndMutateRowResponse;
+
+                /**
+                 * Creates a plain object from a SessionCheckAndMutateRowResponse message. Also converts values to other types if specified.
+                 * @param message SessionCheckAndMutateRowResponse
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.bigtable.v2.SessionCheckAndMutateRowResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this SessionCheckAndMutateRowResponse to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for SessionCheckAndMutateRowResponse
                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                  * @returns The default type url
                  */

@@ -149611,9 +149611,24 @@
                     },
                     "CacheInvalidationRule": {
                       "oneofs": {
+                        "_backendService": {
+                          "oneof": [
+                            "backendService"
+                          ]
+                        },
+                        "_contentType": {
+                          "oneof": [
+                            "contentType"
+                          ]
+                        },
                         "_host": {
                           "oneof": [
                             "host"
+                          ]
+                        },
+                        "_httpStatus": {
+                          "oneof": [
+                            "httpStatus"
                           ]
                         },
                         "_path": {
@@ -149623,14 +149638,35 @@
                         }
                       },
                       "fields": {
+                        "backendService": {
+                          "type": "string",
+                          "id": 306946058,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "cacheTags": {
                           "rule": "repeated",
                           "type": "string",
                           "id": 29073078
                         },
+                        "contentType": {
+                          "type": "string",
+                          "id": 294975296,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "host": {
                           "type": "string",
                           "id": 3208616,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "httpStatus": {
+                          "type": "int32",
+                          "id": 468949897,
                           "options": {
                             "proto3_optional": true
                           }
@@ -156704,6 +156740,11 @@
                     },
                     "DeleteRouterRequest": {
                       "oneofs": {
+                        "_etag": {
+                          "oneof": [
+                            "etag"
+                          ]
+                        },
                         "_requestId": {
                           "oneof": [
                             "requestId"
@@ -156711,6 +156752,13 @@
                         }
                       },
                       "fields": {
+                        "etag": {
+                          "type": "string",
+                          "id": 3123477,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "project": {
                           "type": "string",
                           "id": 227560217,
@@ -159969,6 +160017,11 @@
                     },
                     "DistributionPolicyZoneConfiguration": {
                       "oneofs": {
+                        "_maxSize": {
+                          "oneof": [
+                            "maxSize"
+                          ]
+                        },
                         "_zone": {
                           "oneof": [
                             "zone"
@@ -159976,6 +160029,13 @@
                         }
                       },
                       "fields": {
+                        "maxSize": {
+                          "type": "FixedOrPercent",
+                          "id": 408072700,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "zone": {
                           "type": "string",
                           "id": 3744684,
@@ -162913,6 +162973,11 @@
                             "autoDeleteAutoCreatedReservations"
                           ]
                         },
+                        "_colocationResource": {
+                          "oneof": [
+                            "colocationResource"
+                          ]
+                        },
                         "_commitmentInfo": {
                           "oneof": [
                             "commitmentInfo"
@@ -163076,6 +163141,13 @@
                         "autoDeleteAutoCreatedReservations": {
                           "type": "bool",
                           "id": 491352490,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "colocationResource": {
+                          "type": "string",
+                          "id": 32901740,
                           "options": {
                             "proto3_optional": true
                           }
@@ -175948,6 +176020,94 @@
                         }
                       }
                     },
+                    "ImageViewsListResponse": {
+                      "oneofs": {
+                        "_etag": {
+                          "oneof": [
+                            "etag"
+                          ]
+                        },
+                        "_id": {
+                          "oneof": [
+                            "id"
+                          ]
+                        },
+                        "_kind": {
+                          "oneof": [
+                            "kind"
+                          ]
+                        },
+                        "_nextPageToken": {
+                          "oneof": [
+                            "nextPageToken"
+                          ]
+                        },
+                        "_selfLink": {
+                          "oneof": [
+                            "selfLink"
+                          ]
+                        },
+                        "_warning": {
+                          "oneof": [
+                            "warning"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "etag": {
+                          "type": "string",
+                          "id": 3123477,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "id": {
+                          "type": "string",
+                          "id": 3355,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "items": {
+                          "rule": "repeated",
+                          "type": "ImageView",
+                          "id": 100526016
+                        },
+                        "kind": {
+                          "type": "string",
+                          "id": 3292052,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 79797525,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "selfLink": {
+                          "type": "string",
+                          "id": 456214797,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "unreachables": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 243372063
+                        },
+                        "warning": {
+                          "type": "Warning",
+                          "id": 50704284,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
                     "InitialStateConfig": {
                       "oneofs": {
                         "_pk": {
@@ -181800,6 +181960,11 @@
                     },
                     "InstanceGroupManagerInstanceFlexibilityPolicy": {
                       "oneofs": {
+                        "_constraints": {
+                          "oneof": [
+                            "constraints"
+                          ]
+                        },
                         "_provisioningModelMix": {
                           "oneof": [
                             "provisioningModelMix"
@@ -181807,6 +181972,13 @@
                         }
                       },
                       "fields": {
+                        "constraints": {
+                          "type": "InstanceGroupManagerInstanceFlexibilityPolicyConstraints",
+                          "id": 3909174,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "instanceSelections": {
                           "keyType": "string",
                           "type": "InstanceGroupManagerInstanceFlexibilityPolicyInstanceSelection",
@@ -181815,6 +181987,24 @@
                         "provisioningModelMix": {
                           "type": "InstanceGroupManagerInstanceFlexibilityPolicyProvisioningModelMix",
                           "id": 272686452,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "InstanceGroupManagerInstanceFlexibilityPolicyConstraints": {
+                      "oneofs": {
+                        "_singleMachineType": {
+                          "oneof": [
+                            "singleMachineType"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "singleMachineType": {
+                          "type": "bool",
+                          "id": 55620297,
                           "options": {
                             "proto3_optional": true
                           }
@@ -194190,6 +194380,86 @@
                           "id": 3744684,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "ListImageViewsRequest": {
+                      "oneofs": {
+                        "_filter": {
+                          "oneof": [
+                            "filter"
+                          ]
+                        },
+                        "_maxResults": {
+                          "oneof": [
+                            "maxResults"
+                          ]
+                        },
+                        "_orderBy": {
+                          "oneof": [
+                            "orderBy"
+                          ]
+                        },
+                        "_pageToken": {
+                          "oneof": [
+                            "pageToken"
+                          ]
+                        },
+                        "_returnPartialSuccess": {
+                          "oneof": [
+                            "returnPartialSuccess"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "filter": {
+                          "type": "string",
+                          "id": 336120696,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "maxResults": {
+                          "type": "uint32",
+                          "id": 54715419,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 160562920,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 19994697,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "returnPartialSuccess": {
+                          "type": "bool",
+                          "id": 517198390,
+                          "options": {
+                            "proto3_optional": true
                           }
                         }
                       }
@@ -227492,6 +227762,9 @@
                             "UNDEFINED_BEHAVIOR": 0,
                             "FAULT_BEHAVIOR_UNSPECIFIED": 447660743,
                             "GPU_ERROR": 198817909,
+                            "NVSWITCH_FAULT_CONTROLLER_ERROR": 250941637,
+                            "NVSWITCH_FAULT_DEGRADED_BANDWIDTH": 202741248,
+                            "NVSWITCH_FAULT_SWITCH_ERROR": 287636061,
                             "PERFORMANCE": 135701520,
                             "SILENT_DATA_CORRUPTION": 111360678,
                             "SWITCH_FAILURE": 254909279
@@ -231489,6 +231762,11 @@
                             "encryptedInterconnectRouter"
                           ]
                         },
+                        "_etag": {
+                          "oneof": [
+                            "etag"
+                          ]
+                        },
                         "_id": {
                           "oneof": [
                             "id"
@@ -231560,6 +231838,13 @@
                         "encryptedInterconnectRouter": {
                           "type": "bool",
                           "id": 297996575,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 3123477,
                           "options": {
                             "proto3_optional": true
                           }
@@ -232802,6 +233087,11 @@
                           "options": {
                             "proto3_optional": true
                           }
+                        },
+                        "sourceWorkloadIdentities": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 297835904
                         }
                       }
                     },
@@ -263890,6 +264180,24 @@
                             },
                             {
                               "(google.api.method_signature)": "project,region,resource_id"
+                            }
+                          ]
+                        },
+                        "List": {
+                          "requestType": "ListImageViewsRequest",
+                          "responseType": "ImageViewsListResponse",
+                          "options": {
+                            "(google.api.http).get": "/compute/beta/projects/{project}/regions/{region}/imageViews",
+                            "(google.api.method_signature)": "project,region"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/compute/beta/projects/{project}/regions/{region}/imageViews"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,region"
                             }
                           ]
                         }

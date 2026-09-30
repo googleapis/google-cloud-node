@@ -27,36 +27,32 @@ const PROCESS_PREFIX = `${REQUEST_HEADER_VERSION}.${randIdForProcess}.`;
 const X_GOOG_SPANNER_REQUEST_ID_HEADER = 'x-goog-spanner-request-id';
 
 class AtomicCounter {
-  private readonly backingBuffer: Uint32Array;
+  private _value: number;
 
   constructor(initialValue?: number) {
-    this.backingBuffer = new Uint32Array(
-      new SharedArrayBuffer(Uint32Array.BYTES_PER_ELEMENT),
-    );
-    if (initialValue) {
-      this.increment(initialValue);
-    }
+    this._value = (initialValue ?? 0) >>> 0;
   }
 
-  public increment(n?: number): number {
-    if (!n) {
-      n = 1;
-    }
-    Atomics.add(this.backingBuffer, 0, n);
-    return this.value();
+  public increment(amount?: number): number {
+    const step = amount ?? 1;
+    return (this._value = (this._value + step) >>> 0);
   }
 
   public value(): number {
-    return Atomics.load(this.backingBuffer, 0);
+    return this._value;
   }
 
   public toString(): string {
-    return `${this.value()}`;
+    return `${this._value}`;
   }
 
-  public reset() {
-    Atomics.store(this.backingBuffer, 0, 0);
+  public reset(): void {
+    this._value = 0;
   }
+}
+
+function getRequestIdPrefix(clientId = 1, channelId = 1): string {
+  return `${PROCESS_PREFIX}${clientId ?? 1}.${channelId ?? 1}.`;
 }
 
 function craftRequestId(
@@ -65,7 +61,7 @@ function craftRequestId(
   nthRequest: number,
   attempt: number,
 ) {
-  return `${PROCESS_PREFIX}${nthClientId}.${channelId}.${nthRequest}.${attempt}`;
+  return `${PROCESS_PREFIX}${nthClientId ?? 1}.${channelId ?? 1}.${nthRequest ?? 1}.${attempt ?? 1}`;
 }
 
 const nthClientId = new AtomicCounter();
@@ -81,12 +77,11 @@ export function resetNthClientId() {
  * with x-goog-spanner-request-id.
  */
 function nextSpannerClientId(): number {
-  nthClientId.increment(1);
-  return nthClientId.value();
+  return nthClientId.increment(1);
 }
 
-function newAtomicCounter(n?: number): AtomicCounter {
-  return new AtomicCounter(n);
+function newAtomicCounter(initialValue?: number): AtomicCounter {
+  return new AtomicCounter(initialValue);
 }
 
 interface withHeaders {
@@ -128,22 +123,24 @@ function injectRequestIDIntoHeaders(
     return headers;
   }
   const database = session.parent;
-  if (!nthRequest) {
+  if (nthRequest === undefined || nthRequest === null) {
     if (!database || typeof database._nextNthRequest !== 'function') {
       return headers;
     }
     nthRequest = database._nextNthRequest();
   }
-  const clientId = database ? database._nthClientId || 1 : 1;
-  const channelId = database ? database._channelId || 1 : 1;
+  const requestCount = nthRequest ?? 1;
+  const attemptCount = attempt ?? 1;
 
   const withReqId = {...headers};
-  withReqId[X_GOOG_SPANNER_REQUEST_ID_HEADER] = craftRequestId(
-    clientId,
-    channelId,
-    nthRequest || 1,
-    attempt || 1,
-  );
+  withReqId[X_GOOG_SPANNER_REQUEST_ID_HEADER] = database?._requestIdPrefix
+    ? `${database._requestIdPrefix}${requestCount}.${attemptCount}`
+    : craftRequestId(
+        database?._clientId ?? database?._nthClientId ?? 1,
+        database?._channelId ?? 1,
+        requestCount,
+        attemptCount,
+      );
   return withReqId;
 }
 
@@ -179,11 +176,13 @@ const X_GOOG_REQ_ID_REGEX = /^1\.[0-9A-Fa-f]{8}(\.\d+){3}\.\d+/;
 
 export {
   AtomicCounter,
+  PROCESS_PREFIX,
   X_GOOG_REQ_ID_REGEX,
   X_GOOG_SPANNER_REQUEST_ID_HEADER,
   X_GOOG_SPANNER_REQUEST_ID_SPAN_ATTR,
   attributeXGoogSpannerRequestIdToActiveSpan,
   craftRequestId,
+  getRequestIdPrefix,
   injectRequestIDIntoError,
   injectRequestIDIntoHeaders,
   nextNthRequest,

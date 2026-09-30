@@ -10,7 +10,7 @@
   ],
   "scripts": {
     "pretest": "npm run prepare",
-    "test": "c8 mocha build/test",
+    "test": "node ../../../bin/run-test.cjs build/test",
     "lint": "gts check test src",
     "clean": "gts clean",
     "compile": "tsc -p . && cp -r test/fixtures build/test",
