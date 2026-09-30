@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.4.0](https://github.com/googleapis/google-cloud-node/compare/retail-v5.3.1...retail-v5.4.0) (2026-09-29)
+
+
+### Features
+
+* Update API sources and regenerate ([#9472](https://github.com/googleapis/google-cloud-node/issues/9472)) ([514e2f6](https://github.com/googleapis/google-cloud-node/commit/514e2f64ba67ad3ab956fbe3eeafa507d44ca597))
+
 ## [5.3.1](https://github.com/googleapis/google-cloud-node/compare/retail-v5.3.0...retail-v5.3.1) (2026-09-28)
 
 

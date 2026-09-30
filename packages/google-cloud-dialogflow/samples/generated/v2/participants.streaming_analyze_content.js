@@ -70,6 +70,10 @@ function main(participant) {
    */
   // const inputDtmf = {}
   /**
+   *  Optional. Input for confirming, revising, or canceling a suggestion.
+   */
+  // const suggestionInput = {}
+  /**
    *  Parameters for a Dialogflow virtual-agent query.
    */
   // const queryParams = {}

@@ -369,6 +369,7 @@ export class GlobalFrontendSettingsServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.project
+   *   Required. Project ID for this request.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -513,9 +514,11 @@ export class GlobalFrontendSettingsServiceClient {
    * @param {google.cloud.compute.v1beta.GlobalFrontendSettings} request.globalFrontendSettingsResource
    *   The body resource for this request
    * @param {string} request.project
+   *   Required. Project ID for this request.
    * @param {string} request.requestId
+   *   An optional request ID to identify requests.
    * @param {string} request.updateMask
-   *   e.g., "type"
+   *   Field mask to support patch. E.g., "type".
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
