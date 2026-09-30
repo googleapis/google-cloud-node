@@ -357,6 +357,7 @@ describe('Spanner with mock server', () => {
     // process.env.SPANNER_EMULATOR_HOST = `localhost:${port}`;
     process.env.GOOGLE_CLOUD_PROJECT = 'test-project';
     await disableMetrics(sandbox);
+    resetNthClientId();
     spanner = new Spanner({
       servicePath: 'localhost',
       port,
