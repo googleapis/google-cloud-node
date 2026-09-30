@@ -486,7 +486,7 @@ if (
             expected.constructor === Array
           ) {
             try {
-              const copyA = new Array(actual.length);
+              const copyA = new Array(actual.length >>> 0);
               for (const k of Reflect.ownKeys(actual)) {
                 if (k !== 'length') {
                   Object.defineProperty(
@@ -496,7 +496,7 @@ if (
                   );
                 }
               }
-              const copyB = new Array(expected.length);
+              const copyB = new Array(expected.length >>> 0);
               for (const k of Reflect.ownKeys(expected)) {
                 if (k !== 'length') {
                   Object.defineProperty(
