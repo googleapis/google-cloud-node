@@ -429,6 +429,11 @@ export class RoutersClient {
    *
    * @param {Object} request
    *   The request object that will be sent.
+   * @param {string} request.etag
+   *   ETag for optimistic concurrency control as described by AIP 154. Used to
+   *   prevent conflicting updates. If provided, the request will succeed only if
+   *   the etag matches the current etag of the router; otherwise, the request
+   *   fails with an ABORTED error.
    * @param {string} request.project
    *   Project ID for this request.
    * @param {string} request.region
