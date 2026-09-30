@@ -54,22 +54,7 @@ fi
 # In CI, .github/actions/pnpm-lockfile-check already installs the workspace once per job;
 # skipping redundant per-package installs avoids re-linking all 280+ workspace packages on every test.
 if [ ! -d "${PROJECT_ROOT}/node_modules/.pnpm" ]; then
-    echo "pnpm --dir \"${PROJECT_ROOT}\" install --frozen-lockfile --ignore-scripts"
-    if ! pnpm --dir "${PROJECT_ROOT}" install --frozen-lockfile --ignore-scripts; then
-        echo "::error title=PNPM Install Failed::pnpm install failed in ${PROJECT_ROOT}."
-        echo ""
-        echo "===================================================================================================="
-        echo "❌ PNPM Install Failed"
-        echo ""
-        echo "If this failure is caused by an outdated lockfile or changed package.json dependencies, run:"
-        echo "    pnpm install --lockfile-only"
-        echo "    git add pnpm-lock.yaml"
-        echo "    git commit -m \"chore: update pnpm-lock.yaml\""
-        echo "    git push"
-        echo "===================================================================================================="
-        echo ""
-        exit 1
-    fi
+    pnpm --dir "${PROJECT_ROOT}" install --frozen-lockfile --ignore-scripts
 fi
 
 retval=0
