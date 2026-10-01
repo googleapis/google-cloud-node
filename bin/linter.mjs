@@ -14,12 +14,14 @@
 
 import {execFileSync, execFile} from 'node:child_process';
 import {existsSync} from 'node:fs';
+import {availableParallelism} from 'node:os';
 import path from 'node:path';
 import {promisify} from 'node:util';
 import {ESLint} from 'eslint';
 
 const execFileAsync = promisify(execFile);
 const tsconfigCache = new Map();
+const MAX_CONCURRENCY = Math.min(4, availableParallelism());
 
 // --- Main Runner (Entry Point) ---
 async function run() {
@@ -328,35 +330,58 @@ function getPackageDirs(files) {
 }
 
 /**
+ * Executes an async callback over an iterable with bounded concurrency using Promise.all,
+ * preventing unbounded child-process spawning and OOM crashes on CI runners.
+ */
+async function mapConcurrent(
+  items,
+  fn,
+  concurrency = MAX_CONCURRENCY,
+) {
+  const iterator = items[Symbol.iterator]();
+  const size = items.size ?? items.length ?? concurrency;
+  const workerCount = Math.min(concurrency, size);
+  const results = [];
+
+  await Promise.all(
+    Array.from({length: workerCount}, async () => {
+      for (const item of iterator) {
+        results.push(await fn(item));
+      }
+    }),
+  );
+
+  return results;
+}
+
+/**
  * Ensures all changed packages have node_modules installed before running linting or type checking.
  */
 async function ensurePackageDependencies(packages) {
   const isWin = process.platform === 'win32';
-  await Promise.all(
-    Array.from(packages, async pkg => {
-      const packageJsonPath = path.join(pkg, 'package.json');
-      const nodeModulesPath = path.join(pkg, 'node_modules');
-      if (!existsSync(packageJsonPath) || existsSync(nodeModulesPath)) {
-        return;
-      }
-      console.log(`  Installing dependencies in ${pkg}...`);
-      const usePnpm = existsSync(path.join(pkg, 'pnpm-lock.yaml'));
-      const cmd = usePnpm
-        ? isWin
-          ? 'pnpm.cmd'
-          : 'pnpm'
-        : isWin
-          ? 'npm.cmd'
-          : 'npm';
-      const args = usePnpm
-        ? ['install', '--ignore-workspace', '--ignore-scripts']
-        : ['install', '--no-audit', '--no-fund', '--ignore-scripts'];
-      await execFileAsync(cmd, args, {
-        cwd: pkg,
-        shell: isWin,
-      });
-    }),
-  );
+  await mapConcurrent(packages, async pkg => {
+    const packageJsonPath = path.join(pkg, 'package.json');
+    const nodeModulesPath = path.join(pkg, 'node_modules');
+    if (!existsSync(packageJsonPath) || existsSync(nodeModulesPath)) {
+      return;
+    }
+    console.log(`  Installing dependencies in ${pkg}...`);
+    const usePnpm = existsSync(path.join(pkg, 'pnpm-lock.yaml'));
+    const cmd = usePnpm
+      ? isWin
+        ? 'pnpm.cmd'
+        : 'pnpm'
+      : isWin
+        ? 'npm.cmd'
+        : 'npm';
+    const args = usePnpm
+      ? ['install', '--ignore-workspace', '--ignore-scripts']
+      : ['install', '--no-audit', '--no-fund', '--ignore-scripts'];
+    await execFileAsync(cmd, args, {
+      cwd: pkg,
+      shell: isWin,
+    });
+  });
 }
 
 /**
@@ -372,28 +397,26 @@ async function checkTypeSafety(packagesToCheck) {
   );
 
   const tscBin = path.resolve('node_modules/typescript/bin/tsc');
-  const results = await Promise.all(
-    Array.from(packagesToCheck, async pkg => {
-      try {
-        console.log(`  Type checking ${pkg}...`);
-        await execFileAsync(
-          process.execPath,
-          [tscBin, '--noEmit', '--project', path.join(pkg, 'tsconfig.json')],
-          {maxBuffer: 10 * 1024 * 1024},
-        );
-        return true;
-      } catch (err) {
-        console.error(`\n[ERROR] TypeScript type check failed in ${pkg}`);
-        if (err.stdout) {
-          console.error(err.stdout);
-        }
-        if (err.stderr) {
-          console.error(err.stderr);
-        }
-        return false;
+  const results = await mapConcurrent(packagesToCheck, async pkg => {
+    try {
+      console.log(`  Type checking ${pkg}...`);
+      await execFileAsync(
+        process.execPath,
+        [tscBin, '--noEmit', '--project', path.join(pkg, 'tsconfig.json')],
+        {maxBuffer: 10 * 1024 * 1024},
+      );
+      return true;
+    } catch (err) {
+      console.error(`\n[ERROR] TypeScript type check failed in ${pkg}`);
+      if (err.stdout) {
+        console.error(err.stdout);
       }
-    }),
-  );
+      if (err.stderr) {
+        console.error(err.stderr);
+      }
+      return false;
+    }
+  });
 
   return results.every(Boolean);
 }
