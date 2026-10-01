@@ -222,7 +222,7 @@ if (
       } catch {
         real = undefined;
       }
-      if (real && typeof real === 'object') {
+      if (real && (typeof real === 'object' || typeof real === 'function')) {
         for (const k of Object.keys(real)) {
           if (!(k in stub)) stub[k] = real[k];
         }
