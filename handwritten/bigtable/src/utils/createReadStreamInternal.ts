@@ -120,25 +120,14 @@ export function createReadStreamInternal(
   let chunkTransformer: ChunkTransformer;
   let rowStream: Duplex;
 
-  // The key of the last row that was emitted by the per attempt pipeline
-  // Note: this must be updated from the operation level userStream to avoid referencing buffered rows that will be
-  // discarded in the per attempt subpipeline (rowStream)
-  let lastRowKey = '';
   let rowsRead = 0;
   const userStream = new TimedStream({
     transformHook(event, _encoding, callback) {
       if (event.eventType === DataEvent.LAST_ROW_KEY_UPDATE) {
-        lastRowKey = event.lastScannedRowKey;
         callback();
         return;
       }
       const row = event;
-      if (TableUtils.lessThanOrEqualTo(row.id, lastRowKey)) {
-        callback();
-        return;
-      }
-      lastRowKey = row.id;
-      rowsRead++;
       callback(null, row);
     },
   });
@@ -162,6 +151,7 @@ export function createReadStreamInternal(
     // cancelled the stream in the middle of a retry
     retryTimer = null;
 
+    const lastRowKey = chunkTransformer ? chunkTransformer.lastRowKey : '';
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     chunkTransformer = new ChunkTransformer({
       decode: options.decode,
@@ -303,6 +293,7 @@ export function createReadStreamInternal(
         } else {
           const row = table.row((rowData as Row).key as string);
           row.data = (rowData as Row).data;
+          rowsRead++;
           next(null, row);
         }
       },
