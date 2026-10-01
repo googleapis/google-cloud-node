@@ -1,0 +1,9 @@
+# Build outputs. These are produced by spanner-native/install.js at install
+# time and must never be committed or published: a shared library built on a
+# developer machine links against that machine's glibc and will fail to load on
+# a different base image.
+*.so
+*.dylib
+*.node
+spanner-go/libspanner_go.*
+spanner-go/spanner_go.h

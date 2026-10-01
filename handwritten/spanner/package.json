@@ -17,7 +17,16 @@
   "files": [
     "build/protos",
     "build/src",
-    "!build/src/**/*.map"
+    "!build/src/**/*.map",
+    "spanner-native/install.js",
+    "spanner-native/README.md",
+    "spanner-native/spanner_go_napi.cc",
+    "spanner-native/spanner-go/build.sh",
+    "spanner-native/spanner-go/go.mod",
+    "spanner-native/spanner-go/go.sum",
+    "spanner-native/spanner-go/client.go",
+    "spanner-native/spanner-go/decode.go",
+    "spanner-native/spanner-go/main.go"
   ],
   "keywords": [
     "google apis client",
@@ -48,7 +57,8 @@
     "preobservability-test": "pnpm run compile",
     "benchwrapper": "node bin/benchwrapper.js",
     "precompile": "gts clean",
-    "coverage": "c8 mocha build/test build/test/common && c8 report --check-coverage"
+    "coverage": "c8 mocha build/test build/test/common && c8 report --check-coverage",
+    "postinstall": "node spanner-native/install.js"
   },
   "dependencies": {
     "@babel/core": "7.27.7",
