@@ -41,3 +41,34 @@ For each invocation of the benchmark, write a new object of random size between 
 | Status | completion state of the operation [OK, FAIL] |
 | AppBufferSize | N/A |
 | CpuTimeUs | N/A |
+
+---
+
+## Comparative Latency & Memory Benchmarking (`benchmark.ts`)
+
+This benchmark compares the current codebase build against a specified baseline NPM version of `@google-cloud/storage` (e.g. comparing Gaxios migration vs baseline `7.19.0`). It measures latency and throughput metrics for standard upload, stream upload, metadata lookup, standard download, stream download, bucket file listing, file existence checks (Exists), updating metadata (Set Metadata), copying files (Copy File), and deleting files (Delete File) scenarios, while tracking heap memory footprint changes.
+
+### Run Example:
+
+1. **Compile the codebase:**
+   ```bash
+   cd handwritten/storage
+   npm run compile
+   ```
+
+2. **Execute the benchmark comparison:**
+   *(Note: `--experimental-specifier-resolution=node` is recommended for ESM-compiled specifiers in node).*
+   ```bash
+   node --experimental-specifier-resolution=node build/esm/internal-tooling/benchmark.js --projectid <YOUR_PROJECT_ID> --bucket <YOUR_BUCKET_NAME> --iterations 100 --baseline 7.19.0 --fileSize 10485760 --resumable
+   ```
+
+### CLI Parameters:
+
+| Parameter | Description | Requirement | Default |
+| --------- | ----------- | :---: | :---: |
+| `--projectid` | Google Cloud Project ID | **Required** | - |
+| `--bucket` | Cloud Storage Bucket Name to upload/download files | **Required** | - |
+| `--iterations` | Number of iterations for each workload scenario | Optional | `100` |
+| `--baseline` | Stable baseline NPM version of `@google-cloud/storage` to compare against | Optional | - |
+| `--fileSize` | File size in bytes for benchmark uploads/downloads | Optional | `1024` (1KB) |
+| `--resumable` | Force resumable upload for the upload scenarios | Optional | - (default behavior) |
