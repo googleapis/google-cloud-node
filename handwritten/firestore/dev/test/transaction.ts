@@ -12,9 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import {describe, it} from 'mocha';
-import {expect, use} from 'chai';
-import * as chaiAsPromised from 'chai-as-promised';
+import {describe, it, expect} from 'vitest';
 import * as extend from 'extend';
 import {GoogleError, Status} from 'google-gax';
 import {Duplex} from 'stream';
@@ -39,8 +37,6 @@ import {
   ReadOnlyTransactionOptions,
   ReadWriteTransactionOptions,
 } from '@google-cloud/firestore';
-
-use(chaiAsPromised);
 
 const PROJECT_ID = 'test-project';
 const DATABASE_ROOT = `projects/${PROJECT_ID}/databases/(default)`;
@@ -68,9 +64,7 @@ interface TransactionStep {
   type: 'begin' | 'getDocument' | 'query' | 'commit' | 'rollback' | 'backoff';
   delay?: 'exponential' | 'max';
   request?:
-    | api.ICommitRequest
-    | api.IBeginTransactionRequest
-    | api.IRunQueryRequest;
+    api.ICommitRequest | api.IBeginTransactionRequest | api.IRunQueryRequest;
   error?: Error;
   response?: api.ICommitResponse | api.IBeginTransactionResponse;
   stream?: Duplex;
@@ -373,11 +367,11 @@ function runTransaction<T>(
     commit: (actual, options) => {
       // Ensure that we do not specify custom retry behavior for transactional
       // commits.
-      expect(options!.retry).to.be.undefined;
+      expect(options!.retry).toBeUndefined();
 
       const request = expectedRequests.shift()!;
-      expect(request.type).to.equal('commit');
-      expect(actual).to.deep.eq(request.request);
+      expect(request.type).toBe('commit');
+      expect(actual).toEqual(request.request);
       if (request.error) {
         return Promise.reject(request.error);
       } else {
@@ -386,8 +380,8 @@ function runTransaction<T>(
     },
     rollback: actual => {
       const request = expectedRequests.shift()!;
-      expect(request.type).to.equal('rollback');
-      expect(actual).to.deep.eq(request.request);
+      expect(request.type).toBe('rollback');
+      expect(actual).toEqual(request.request);
       if (request.error) {
         return Promise.reject(request.error);
       } else {
@@ -396,15 +390,15 @@ function runTransaction<T>(
     },
     batchGetDocuments: actual => {
       const request = expectedRequests.shift()!;
-      expect(request.type).to.equal('getDocument');
-      expect(actual).to.deep.eq(request.request);
+      expect(request.type).toBe('getDocument');
+      expect(actual).toEqual(request.request);
       return request.stream!;
     },
     runQuery: actual => {
       const request = expectedRequests.shift()!;
-      expect(request.type).to.equal('query');
+      expect(request.type).toBe('query');
       actual = extend(true, {}, actual); // Remove undefined properties
-      expect(actual).to.deep.eq(request.request);
+      expect(actual).toEqual(request.request);
       return request.stream!;
     },
   };
@@ -414,11 +408,11 @@ function runTransaction<T>(
       setTimeoutHandler((callback, timeout) => {
         if (timeout > 0) {
           const request = expectedRequests.shift()!;
-          expect(request.type).to.equal('backoff');
+          expect(request.type).toBe('backoff');
           if (request.delay === 'max') {
             // Make sure that the delay is at least 30 seconds, which is based
             // on the maximum delay of 60 seconds and a jitter factor of 50%.
-            expect(timeout).to.not.be.lessThan(30 * 1000);
+            expect(timeout).not.toBeLessThan(30 * 1000);
           }
         }
         callback();
@@ -430,10 +424,10 @@ function runTransaction<T>(
       }, transactionOptions);
     } finally {
       setTimeoutHandler(setTimeout);
-      expect(expectedRequests.length).to.equal(
-        0,
+      expect(
+        expectedRequests.length,
         'Missing requests: ' + expectedRequests.map(r => r.type).join(', '),
-      );
+      ).toBe(0);
     }
   });
 }
@@ -449,7 +443,7 @@ describe('successful transactions', () => {
     return runTransaction(/* transactionOptions= */ {}, () => {
       return Promise.resolve('bar');
     }).then(val => {
-      expect(val).to.equal('bar');
+      expect(val).toBe('bar');
     });
   });
 });
@@ -509,7 +503,7 @@ describe('failed transactions', () => {
             commit('foo1', undefined, serverError),
             rollback('foo1'),
           ),
-        ).to.eventually.be.rejected;
+        ).rejects.toThrow();
       }
     }
   });
@@ -572,7 +566,7 @@ describe('failed transactions', () => {
             query({newTransaction: {readWrite: {}}, error: serverError}),
             // No rollback because the lazy-start operation failed
           ),
-        ).to.eventually.be.rejected;
+        ).rejects.toThrow();
       }
     }
   });
@@ -607,7 +601,7 @@ describe('failed transactions', () => {
             getDocument({newTransaction: {readWrite: {}}, error: serverError}),
             // No rollback because the lazy-start operation failed
           ),
-        ).to.eventually.be.rejected;
+        ).rejects.toThrow();
       }
     }
   });
@@ -646,7 +640,7 @@ describe('failed transactions', () => {
             commit('foo1', /* writes=*/ undefined, serverError),
             rollback('foo1', serverError),
           ),
-        ).to.eventually.be.rejected;
+        ).rejects.toThrow();
       }
     }
   });
@@ -657,7 +651,7 @@ describe('failed transactions', () => {
     };
 
     return createInstance(overrides).then(firestore => {
-      expect(() => (firestore as InvalidApiUsage).runTransaction()).to.throw(
+      expect(() => (firestore as InvalidApiUsage).runTransaction()).toThrow(
         'Value for argument "updateFunction" is not a valid function.',
       );
     });
@@ -673,13 +667,13 @@ describe('failed transactions', () => {
         firestore.runTransaction(() => Promise.resolve(), {
           maxAttempts: 'foo' as InvalidApiUsage,
         }),
-      ).to.throw(
+      ).toThrow(
         'Value for argument "transactionOptions.maxAttempts" is not a valid integer.',
       );
 
       expect(() =>
         firestore.runTransaction(() => Promise.resolve(), {maxAttempts: 0}),
-      ).to.throw(
+      ).toThrow(
         'Value for argument "transactionOptions.maxAttempts" must be within [1, Infinity] inclusive, but was: 0',
       );
     });
@@ -691,7 +685,7 @@ describe('failed transactions', () => {
         /* transactionOptions= */ {},
         (() => {}) as InvalidApiUsage,
       ),
-    ).to.eventually.be.rejectedWith(
+    ).rejects.toThrow(
       'You must return a Promise in your transaction()-callback.',
     );
   });
@@ -708,7 +702,7 @@ describe('failed transactions', () => {
           // with zero requests
           await trans.get(firestore.doc('collectionId/documentId'));
         }),
-      ).to.eventually.be.rejectedWith('Expected exception');
+      ).rejects.toThrow('Expected exception');
     });
   });
 
@@ -717,7 +711,7 @@ describe('failed transactions', () => {
       runTransaction(/* transactionOptions= */ {}, () => {
         return Promise.reject('request exception');
       }),
-    ).to.eventually.be.rejectedWith('request exception');
+    ).rejects.toThrow('request exception');
   });
 
   it('limits the retry attempts', () => {
@@ -748,7 +742,7 @@ describe('failed transactions', () => {
         commit('foo5', [], new Error('Final exception')),
         rollback('foo5'),
       ),
-    ).to.eventually.be.rejectedWith('Final exception');
+    ).rejects.toThrow('Final exception');
   });
 
   it('uses maximum backoff for RESOURCE_EXHAUSTED', () => {
@@ -774,7 +768,7 @@ describe('transaction operations', () => {
       /* transactionOptions= */ {},
       (transaction, docRef) => {
         return transaction.get(docRef).then(doc => {
-          expect(doc.id).to.equal('documentId');
+          expect(doc.id).toBe('documentId');
         });
       },
       getDocument({newTransaction: {readWrite: {}}}),
@@ -786,11 +780,11 @@ describe('transaction operations', () => {
     return runTransaction(
       /* transactionOptions= */ {},
       (transaction: InvalidApiUsage) => {
-        expect(() => transaction.get()).to.throw(
+        expect(() => transaction.get()).toThrow(
           'Value for argument "refOrQuery" must be a DocumentReference, Query, or AggregateQuery.',
         );
 
-        expect(() => transaction.get('foo')).to.throw(
+        expect(() => transaction.get('foo')).toThrow(
           'Value for argument "refOrQuery" must be a DocumentReference, Query, or AggregateQuery.',
         );
 
@@ -805,7 +799,7 @@ describe('transaction operations', () => {
         transaction.set(docRef, {foo: 'bar'});
         return transaction.get(docRef);
       }),
-    ).to.eventually.be.rejectedWith(
+    ).rejects.toThrow(
       'Firestore transactions require all reads to be executed before all writes.',
     );
   });
@@ -818,7 +812,7 @@ describe('transaction operations', () => {
           transaction.set(docRef, {foo: 'bar'});
         },
       ),
-    ).to.eventually.be.rejectedWith(
+    ).rejects.toThrow(
       'Firestore read-only transactions cannot execute writes.',
     );
   });
@@ -834,7 +828,7 @@ describe('transaction operations', () => {
           transaction.set(docRef, {foo: 'bar'});
         },
       ),
-    ).to.eventually.be.rejectedWith(
+    ).rejects.toThrow(
       'Firestore read-only transactions cannot execute writes.',
     );
   });
@@ -845,7 +839,7 @@ describe('transaction operations', () => {
       (transaction, docRef) => {
         const query = docRef.parent.where('foo', '==', 'bar');
         return transaction.get(query).then(results => {
-          expect(results.docs[0].id).to.equal('documentId');
+          expect(results.docs[0].id).toBe('documentId');
         });
       },
       query({newTransaction: {readWrite: {}}}),
@@ -881,7 +875,7 @@ describe('transaction operations', () => {
       (transaction, docRef) => {
         const query = docRef.parent.where('foo', '==', 'bar');
         return transaction.get(query).then(results => {
-          expect(results.docs[0].id).to.equal('documentId');
+          expect(results.docs[0].id).toBe('documentId');
         });
       },
       query({readTime: Timestamp.fromMillis(2)}),
@@ -896,9 +890,9 @@ describe('transaction operations', () => {
         const secondDoc = docRef.parent.doc('secondDocument');
 
         return transaction.getAll(firstDoc, secondDoc).then(docs => {
-          expect(docs.length).to.equal(2);
-          expect(docs[0].id).to.equal('firstDocument');
-          expect(docs[1].id).to.equal('secondDocument');
+          expect(docs.length).toBe(2);
+          expect(docs[0].id).toBe('firstDocument');
+          expect(docs[1].id).toBe('secondDocument');
         });
       },
       getAll(['firstDocument', 'secondDocument'], {
@@ -932,7 +926,7 @@ describe('transaction operations', () => {
         transaction.set(docRef, {foo: 'bar'});
         return transaction.getAll(docRef);
       }),
-    ).to.eventually.be.rejectedWith(
+    ).rejects.toThrow(
       'Firestore transactions require all reads to be executed before all writes.',
     );
   });
@@ -948,23 +942,23 @@ describe('transaction operations', () => {
         // Reads in parallel
         await Promise.all([
           transaction.get(firstDoc).then(doc => {
-            expect(doc.id).to.equal('firstDocument');
+            expect(doc.id).toBe('firstDocument');
           }),
           transaction.get(secondDoc).then(doc => {
-            expect(doc.id).to.equal('secondDocument');
+            expect(doc.id).toBe('secondDocument');
           }),
           transaction.get(query).then(results => {
-            expect(results.docs[0].id).to.equal('documentId');
+            expect(results.docs[0].id).toBe('documentId');
           }),
         ]);
 
         // Sequential reads
         const thirdDoc = docRef.parent.doc('thirdDocument');
         const doc = await transaction.get(thirdDoc);
-        expect(doc.id).to.equal('thirdDocument');
+        expect(doc.id).toBe('thirdDocument');
 
         await transaction.get(query).then(results => {
-          expect(results.docs[0].id).to.equal('documentId');
+          expect(results.docs[0].id).toBe('documentId');
         });
       },
       getDocument({newTransaction: {readWrite: {}}, document: 'firstDocument'}),
@@ -987,23 +981,23 @@ describe('transaction operations', () => {
         // Reads in parallel
         await Promise.all([
           transaction.get(firstDoc).then(doc => {
-            expect(doc.id).to.equal('firstDocument');
+            expect(doc.id).toBe('firstDocument');
           }),
           transaction.get(secondDoc).then(doc => {
-            expect(doc.id).to.equal('secondDocument');
+            expect(doc.id).toBe('secondDocument');
           }),
           transaction.get(query).then(results => {
-            expect(results.docs[0].id).to.equal('documentId');
+            expect(results.docs[0].id).toBe('documentId');
           }),
         ]);
 
         // Sequential reads
         const thirdDoc = docRef.parent.doc('thirdDocument');
         const doc = await transaction.get(thirdDoc);
-        expect(doc.id).to.equal('thirdDocument');
+        expect(doc.id).toBe('thirdDocument');
 
         await transaction.get(query).then(results => {
-          expect(results.docs[0].id).to.equal('documentId');
+          expect(results.docs[0].id).toBe('documentId');
         });
       },
       getDocument({newTransaction: {readOnly: {}}, document: 'firstDocument'}),

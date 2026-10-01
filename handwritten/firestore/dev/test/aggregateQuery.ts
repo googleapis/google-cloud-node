@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import {afterEach, beforeEach, it} from 'mocha';
+import {afterEach, beforeEach, it, expect} from 'vitest';
 import {
   ApiOverride,
   createInstance,
@@ -20,14 +20,10 @@ import {
   verifyInstance,
 } from './util/helpers';
 import {Firestore, Query, Timestamp} from '../src';
-import {expect, use} from 'chai';
 import {google} from '../protos/firestore_v1_proto_api';
 import api = google.firestore.v1;
-import * as chaiAsPromised from 'chai-as-promised';
 import {setTimeoutHandler} from '../src/backoff';
 import * as extend from 'extend';
-
-use(chaiAsPromised);
 
 describe('aggregate query interface', () => {
   let firestore: Firestore;
@@ -53,14 +49,14 @@ describe('aggregate query interface', () => {
         const equal1count = equal1.count();
         for (const equal2 of equals) {
           const equal2count = equal2.count();
-          expect(equal1count.isEqual(equal2count)).to.be.true;
-          expect(equal2count.isEqual(equal1count)).to.be.true;
+          expect(equal1count.isEqual(equal2count)).toBe(true);
+          expect(equal2count.isEqual(equal1count)).toBe(true);
         }
 
         for (const notEqual of notEquals) {
           const notEqual2count = notEqual.count();
-          expect(equal1count.isEqual(notEqual2count)).to.be.false;
-          expect(notEqual2count.isEqual(equal1count)).to.be.false;
+          expect(equal1count.isEqual(notEqual2count)).toBe(false);
+          expect(notEqual2count.isEqual(equal1count)).toBe(false);
         }
       }
     };
@@ -96,9 +92,9 @@ describe('aggregate query interface', () => {
 
     const query = firestore.collection('collectionId').count();
     return query.get().then(results => {
-      expect(results.data().count).to.be.equal(99);
-      expect(results.readTime.isEqual(new Timestamp(5, 6))).to.be.true;
-      expect(results.query).to.be.equal(query);
+      expect(results.data().count).toBe(99);
+      expect(results.readTime.isEqual(new Timestamp(5, 6))).toBe(true);
+      expect(results.query).toBe(query);
     });
   });
 
@@ -116,7 +112,7 @@ describe('aggregate query interface', () => {
         let actualStructuredQuery =
           request!.structuredAggregationQuery?.structuredQuery;
         actualStructuredQuery = extend(true, {}, actualStructuredQuery);
-        expect(actualStructuredQuery).to.deep.equal({
+        expect(actualStructuredQuery).toEqual({
           from: [{collectionId: 'collectionId'}],
           where: {
             fieldFilter: {
@@ -149,7 +145,7 @@ describe('aggregate query interface', () => {
       .where('foo', '>', 'bar')
       .count();
     return query.get().then(results => {
-      expect(results.data().count).to.be.equal(99);
+      expect(results.data().count).toBe(99);
     });
   });
 
@@ -168,8 +164,8 @@ describe('aggregate query interface', () => {
         throw new Error('Unexpected success in Promise');
       })
       .catch(err => {
-        expect(err.message).to.equal('Expected error');
-        expect(attempts).to.equal(1);
+        expect(err.message).toBe('Expected error');
+        expect(attempts).toBe(1);
       });
   });
 
@@ -190,8 +186,8 @@ describe('aggregate query interface', () => {
         throw new Error('Unexpected success in Promise');
       })
       .catch(err => {
-        expect(err.message).to.equal('Expected error');
-        expect(attempts).to.equal(5);
+        expect(err.message).toBe('Expected error');
+        expect(attempts).toBe(5);
       });
   });
 
@@ -212,8 +208,8 @@ describe('aggregate query interface', () => {
         throw new Error('Unexpected success in Promise');
       })
       .catch(err => {
-        expect(err.message).to.equal('No AggregateQuery results');
-        expect(attempts).to.equal(1);
+        expect(err.message).toBe('No AggregateQuery results');
+        expect(attempts).toBe(1);
       });
   });
 });

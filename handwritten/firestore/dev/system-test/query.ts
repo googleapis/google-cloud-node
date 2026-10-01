@@ -18,8 +18,7 @@ import {
   VectorValue,
 } from '@google-cloud/firestore';
 
-import {expect} from 'chai';
-import {afterEach, beforeEach, describe, it} from 'mocha';
+import {afterEach, beforeEach, describe, expect, it} from 'vitest';
 import '../test/util/mocha_extensions';
 import {
   CollectionReference,
@@ -36,7 +35,7 @@ import {
   setLogFunction,
 } from '../src';
 import {verifyInstance} from '../test/util/helpers';
-import {DeferredPromise, getTestRoot} from './firestore';
+import {DeferredPromise, getTestRoot} from './util/firestore_helpers';
 import {IndexTestHelper} from './index_test_helper';
 
 describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
@@ -101,15 +100,15 @@ describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
     result: QuerySnapshot,
     ...data: DocumentData[] | string[]
   ): void {
-    expect(result.size).to.equal(data.length);
+    expect(result.size).toBe(data.length);
 
     if (data.length > 0) {
       if (typeof data[0] === 'string') {
         const actualIds = result.docs.map(docSnapshot => docSnapshot.id);
-        expect(actualIds).to.deep.equal(data);
+        expect(actualIds).toEqual(data);
       } else {
         result.forEach(doc => {
-          expect(doc.data()).to.deep.equal(data.shift());
+          expect(doc.data()).toEqual(data.shift());
         });
       }
     }
@@ -120,7 +119,7 @@ describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
     const pipeline = query.firestore.pipeline().createFrom(query);
     const pipelineResults = await pipeline.execute();
 
-    expect(pipelineResults.results.map(r => r._fieldsProto)).to.deep.equal(
+    expect(pipelineResults.results.map(r => r._fieldsProto)).toEqual(
       queryResults.docs.map(s => s._fieldsProto),
     );
     return queryResults;
@@ -133,7 +132,7 @@ describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
     const pipeline = query.query.firestore.pipeline().createFrom(query);
     const pipelineResults = await pipeline.execute();
 
-    expect(pipelineResults.results.map(r => r._fieldsProto)).to.deep.equal(
+    expect(pipelineResults.results.map(r => r._fieldsProto)).toEqual(
       queryResults.docs.map(s => s._fieldsProto),
     );
     return queryResults;
@@ -148,7 +147,7 @@ describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
 
   it('has firestore property', () => {
     const ref = randomCol.limit(0);
-    expect(ref.firestore).to.be.an.instanceOf(Firestore);
+    expect(ref.firestore).toBeInstanceOf(Firestore);
   });
 
   it('has select() method', () => {
@@ -159,7 +158,7 @@ describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
         return randomCol.select('foo').get();
       })
       .then(res => {
-        expect(res.docs[0].data()).to.deep.equal({foo: 'bar'});
+        expect(res.docs[0].data()).toEqual({foo: 'bar'});
       });
   });
 
@@ -171,8 +170,8 @@ describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
         return randomCol.select().get();
       })
       .then(res => {
-        expect(res.docs[0].ref.id).to.deep.equal('doc');
-        expect(res.docs[0].data()).to.deep.equal({});
+        expect(res.docs[0].ref.id).toEqual('doc');
+        expect(res.docs[0].data()).toEqual({});
       });
   });
 
@@ -184,7 +183,7 @@ describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
         return compareQueryAndPipeline(randomCol.where('foo', '==', 'bar'));
       })
       .then(res => {
-        expect(res.docs[0].data()).to.deep.equal({foo: 'bar'});
+        expect(res.docs[0].data()).toEqual({foo: 'bar'});
       });
   });
 
@@ -201,8 +200,8 @@ describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
         expect(
           typeof res.docs[0].get('foo') === 'number' &&
             isNaN(res.docs[0].get('foo')),
-        );
-        expect(res.docs[0].get('bar')).to.equal(null);
+        ).toBe(true);
+        expect(res.docs[0].get('bar')).toBe(null);
       });
   });
 
@@ -217,8 +216,8 @@ describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
         ),
       )
       .then(res => {
-        expect(res.size).to.equal(1);
-        expect(res.docs[0].get('foo')).to.deep.equal(['bar']);
+        expect(res.size).toBe(1);
+        expect(res.docs[0].get('foo')).toEqual(['bar']);
       });
   });
 
@@ -243,13 +242,16 @@ describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
       });
 
     const res = await compareVectorQueryAndPipeline(vectorQuery);
-    expect(res.size).to.equal(3);
-    expect(res.docs[0].get('embedding').isEqual(FieldValue.vector([10, 0]))).to
-      .be.true;
-    expect(res.docs[1].get('embedding').isEqual(FieldValue.vector([1, 1]))).to
-      .be.true;
-    expect(res.docs[2].get('embedding').isEqual(FieldValue.vector([20, 0]))).to
-      .be.true;
+    expect(res.size).toBe(3);
+    expect(
+      res.docs[0].get('embedding').isEqual(FieldValue.vector([10, 0])),
+    ).toBe(true);
+    expect(
+      res.docs[1].get('embedding').isEqual(FieldValue.vector([1, 1])),
+    ).toBe(true);
+    expect(
+      res.docs[2].get('embedding').isEqual(FieldValue.vector([20, 0])),
+    ).toBe(true);
   });
 
   it('supports findNearest by COSINE distance', async () => {
@@ -274,24 +276,25 @@ describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
 
     const res = await compareVectorQueryAndPipeline(vectorQuery);
 
-    expect(res.size).to.equal(3);
+    expect(res.size).toBe(3);
 
     if (res.docs[0].get('embedding').isEqual(FieldValue.vector([1, 1]))) {
       expect(
         res.docs[1].get('embedding').isEqual(FieldValue.vector([100, 100])),
-      ).to.be.true;
+      ).toBe(true);
     } else {
       expect(
         res.docs[0].get('embedding').isEqual(FieldValue.vector([100, 100])),
-      ).to.be.true;
-      expect(res.docs[1].get('embedding').isEqual(FieldValue.vector([1, 1]))).to
-        .be.true;
+      ).toBe(true);
+      expect(
+        res.docs[1].get('embedding').isEqual(FieldValue.vector([1, 1])),
+      ).toBe(true);
     }
 
     expect(
       res.docs[2].get('embedding').isEqual(FieldValue.vector([20, 0])) ||
         res.docs[2].get('embedding').isEqual(FieldValue.vector([10, 0])),
-    ).to.be.true;
+    ).toBe(true);
   });
 
   it('supports findNearest by DOT_PRODUCT distance', async () => {
@@ -315,13 +318,16 @@ describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
       });
 
     const res = await compareVectorQueryAndPipeline(vectorQuery);
-    expect(res.size).to.equal(3);
-    expect(res.docs[0].get('embedding').isEqual(FieldValue.vector([100, 100])))
-      .to.be.true;
-    expect(res.docs[1].get('embedding').isEqual(FieldValue.vector([20, 0]))).to
-      .be.true;
-    expect(res.docs[2].get('embedding').isEqual(FieldValue.vector([10, 0]))).to
-      .be.true;
+    expect(res.size).toBe(3);
+    expect(
+      res.docs[0].get('embedding').isEqual(FieldValue.vector([100, 100])),
+    ).toBe(true);
+    expect(
+      res.docs[1].get('embedding').isEqual(FieldValue.vector([20, 0])),
+    ).toBe(true);
+    expect(
+      res.docs[2].get('embedding').isEqual(FieldValue.vector([10, 0])),
+    ).toBe(true);
   });
 
   it('findNearest works with converters', async () => {
@@ -359,9 +365,9 @@ describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
 
     const res = await compareVectorQueryAndPipeline(vectorQuery);
 
-    expect(res.size).to.equal(1);
-    expect(res.docs[0].data().foo).to.equal('bar');
-    expect(res.docs[0].data().embedding).to.deep.equal([5, 5]);
+    expect(res.size).toBe(1);
+    expect(res.docs[0].data().foo).toBe('bar');
+    expect(res.docs[0].data().embedding).toEqual([5, 5]);
   });
 
   it('supports findNearest skipping fields of wrong types', async () => {
@@ -390,13 +396,16 @@ describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
       });
 
     const res = await compareVectorQueryAndPipeline(vectorQuery);
-    expect(res.size).to.equal(3);
-    expect(res.docs[0].get('embedding').isEqual(FieldValue.vector([9, 9]))).to
-      .be.true;
-    expect(res.docs[1].get('embedding').isEqual(FieldValue.vector([50, 50]))).to
-      .be.true;
-    expect(res.docs[2].get('embedding').isEqual(FieldValue.vector([100, 100])))
-      .to.be.true;
+    expect(res.size).toBe(3);
+    expect(
+      res.docs[0].get('embedding').isEqual(FieldValue.vector([9, 9])),
+    ).toBe(true);
+    expect(
+      res.docs[1].get('embedding').isEqual(FieldValue.vector([50, 50])),
+    ).toBe(true);
+    expect(
+      res.docs[2].get('embedding').isEqual(FieldValue.vector([100, 100])),
+    ).toBe(true);
   });
 
   it('findNearest ignores mismatching dimensions', async () => {
@@ -422,11 +431,13 @@ describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
       });
 
     const res = await compareVectorQueryAndPipeline(vectorQuery);
-    expect(res.size).to.equal(2);
-    expect(res.docs[0].get('embedding').isEqual(FieldValue.vector([9, 9]))).to
-      .be.true;
-    expect(res.docs[1].get('embedding').isEqual(FieldValue.vector([50, 50]))).to
-      .be.true;
+    expect(res.size).toBe(2);
+    expect(
+      res.docs[0].get('embedding').isEqual(FieldValue.vector([9, 9])),
+    ).toBe(true);
+    expect(
+      res.docs[1].get('embedding').isEqual(FieldValue.vector([50, 50])),
+    ).toBe(true);
   });
 
   it('supports findNearest on non-existent field', async () => {
@@ -449,7 +460,7 @@ describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
 
     const res = await compareVectorQueryAndPipeline(vectorQuery);
 
-    expect(res.size).to.equal(0);
+    expect(res.size).toBe(0);
   });
 
   it('supports findNearest on vector nested in a map', async () => {
@@ -472,16 +483,16 @@ describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
       });
 
     const res = await compareVectorQueryAndPipeline(vectorQuery);
-    expect(res.size).to.equal(3);
+    expect(res.size).toBe(3);
     expect(
       res.docs[0].get('nested.embedding').isEqual(FieldValue.vector([10, 10])),
-    ).to.be.true;
+    ).toBe(true);
     expect(
       res.docs[1].get('nested.embedding').isEqual(FieldValue.vector([10, 0])),
-    ).to.be.true;
+    ).toBe(true);
     expect(
       res.docs[2].get('nested.embedding').isEqual(FieldValue.vector([1, 1])),
-    ).to.be.true;
+    ).toBe(true);
   });
 
   it('supports findNearest with select to exclude vector data in response', async () => {
@@ -506,14 +517,14 @@ describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
       });
 
     const res = await vectorQuery.get();
-    expect(res.size).to.equal(5);
-    expect(res.docs[0].get('foo')).to.equal(2);
-    expect(res.docs[1].get('foo')).to.equal(4);
-    expect(res.docs[2].get('foo')).to.equal(3);
-    expect(res.docs[3].get('foo')).to.equal(5);
-    expect(res.docs[4].get('foo')).to.equal(6);
+    expect(res.size).toBe(5);
+    expect(res.docs[0].get('foo')).toBe(2);
+    expect(res.docs[1].get('foo')).toBe(4);
+    expect(res.docs[2].get('foo')).toBe(3);
+    expect(res.docs[3].get('foo')).toBe(5);
+    expect(res.docs[4].get('foo')).toBe(6);
 
-    res.docs.forEach(ds => expect(ds.get('embedding')).to.be.undefined);
+    res.docs.forEach(ds => expect(ds.get('embedding')).toBeUndefined());
   });
 
   it('supports findNearest limits', async () => {
@@ -538,10 +549,10 @@ describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
       });
 
     const res = await compareVectorQueryAndPipeline(vectorQuery);
-    expect(res.size).to.equal(1);
-    expect(
-      (res.docs[0].get('embedding') as VectorValue).toArray(),
-    ).to.deep.equal(embeddingVector);
+    expect(res.size).toBe(1);
+    expect((res.docs[0].get('embedding') as VectorValue).toArray()).toEqual(
+      embeddingVector,
+    );
   });
 
   // TODO waiting on implicit sort order decision
@@ -726,7 +737,7 @@ describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
         );
       })
       .then(res => {
-        expect(res.docs.length).to.equal(1);
+        expect(res.docs.length).toBe(1);
       });
   });
 
@@ -751,14 +762,14 @@ describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
         );
       })
       .then(res => {
-        expect(res.docs[0].data()).to.deep.equal({foo: 'a'});
-        expect(res.docs[1].data()).to.deep.equal({foo: 'b'});
+        expect(res.docs[0].data()).toEqual({foo: 'a'});
+        expect(res.docs[1].data()).toEqual({foo: 'b'});
       });
   });
 
   it('can run get() on empty collection', async () => {
     return compareQueryAndPipeline(randomCol).then(res => {
-      return expect(res.empty);
+      expect(res.empty).toBe(true);
     });
   });
 
@@ -767,11 +778,11 @@ describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
     const stream = randomCol.stream();
 
     for await (const doc of stream) {
-      expect(doc).to.be.an.instanceOf(QueryDocumentSnapshot);
+      expect(doc).toBeInstanceOf(QueryDocumentSnapshot);
       ++received;
     }
 
-    expect(received).to.equal(0);
+    expect(received).toBe(0);
   });
 
   it('has limit() method on get()', async () => {
@@ -788,11 +799,11 @@ describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
 
     const stream = randomCol.orderBy('foo').limit(1).stream();
     for await (const doc of stream) {
-      expect(doc).to.be.an.instanceOf(QueryDocumentSnapshot);
+      expect(doc).toBeInstanceOf(QueryDocumentSnapshot);
       ++received;
     }
 
-    expect(received).to.equal(1);
+    expect(received).toBe(1);
   });
 
   it('can run limit(num), where num is larger than the collection size on get()', async () => {
@@ -809,11 +820,11 @@ describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
 
     const stream = randomCol.orderBy('foo').limit(3).stream();
     for await (const doc of stream) {
-      expect(doc).to.be.an.instanceOf(QueryDocumentSnapshot);
+      expect(doc).toBeInstanceOf(QueryDocumentSnapshot);
       ++received;
     }
 
-    expect(received).to.equal(2);
+    expect(received).toBe(2);
   });
 
   it('has limitToLast() method', async () => {
@@ -849,11 +860,11 @@ describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
 
     const stream = randomCol.orderBy('foo').offset(1).stream();
     for await (const doc of stream) {
-      expect(doc).to.be.an.instanceOf(QueryDocumentSnapshot);
+      expect(doc).toBeInstanceOf(QueryDocumentSnapshot);
       ++received;
     }
 
-    expect(received).to.equal(1);
+    expect(received).toBe(1);
   });
 
   it('can run offset(num), where num is larger than the collection size on get()', async () => {
@@ -861,7 +872,7 @@ describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
     const res = await compareQueryAndPipeline(
       randomCol.orderBy('foo').offset(3),
     );
-    expect(res.empty);
+    expect(res.empty).toBe(true);
   });
 
   it('can run offset(num), where num is larger than the collection size on stream()', async () => {
@@ -869,17 +880,17 @@ describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
     await addDocs({foo: 'a'}, {foo: 'b'});
     const stream = randomCol.orderBy('foo').offset(3).stream();
     for await (const doc of stream) {
-      expect(doc).to.be.an.instanceOf(QueryDocumentSnapshot);
+      expect(doc).toBeInstanceOf(QueryDocumentSnapshot);
       ++received;
     }
-    expect(received).to.equal(0);
+    expect(received).toBe(0);
   });
 
   it('supports Unicode in document names', async () => {
     const collRef = randomCol.doc('доброеутро').collection('coll');
     await collRef.add({});
     const snapshot = await compareQueryAndPipeline(collRef);
-    expect(snapshot.size).to.equal(1);
+    expect(snapshot.size).toBe(1);
   });
 
   it('supports pagination', () => {
@@ -895,8 +906,8 @@ describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
       .commit()
       .then(() => paginateResults(query))
       .then(results => {
-        expect(results.pages).to.equal(4);
-        expect(results.docs).to.have.length(10);
+        expect(results.pages).toBe(4);
+        expect(results.docs).toHaveLength(10);
       });
   });
 
@@ -918,8 +929,8 @@ describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
       .commit()
       .then(() => paginateResults(query))
       .then(results => {
-        expect(results.pages).to.equal(3);
-        expect(results.docs).to.have.length(9);
+        expect(results.pages).toBe(3);
+        expect(results.docs).toHaveLength(9);
       });
   });
 
@@ -936,8 +947,8 @@ describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
       .commit()
       .then(() => paginateResults(query))
       .then(results => {
-        expect(results.pages).to.equal(4);
-        expect(results.docs).to.have.length(10);
+        expect(results.pages).toBe(4);
+        expect(results.docs).toHaveLength(10);
       });
   });
 
@@ -972,21 +983,31 @@ describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
     expectDocs(res, {foo: 'a'});
   });
 
-  it('has stream() method', done => {
+  it('has stream() method', async () => {
     let received = 0;
     const ref1 = randomCol.doc('doc1');
     const ref2 = randomCol.doc('doc2');
 
-    void Promise.all([ref1.set({foo: 'a'}), ref2.set({foo: 'b'})]).then(() => {
-      return randomCol
+    await Promise.all([ref1.set({foo: 'a'}), ref2.set({foo: 'b'})]);
+    await new Promise<void>((resolve, reject) => {
+      randomCol
         .stream()
         .on('data', d => {
-          expect(d).to.be.an.instanceOf(DocumentSnapshot);
-          ++received;
+          try {
+            expect(d).toBeInstanceOf(DocumentSnapshot);
+            ++received;
+          } catch (e) {
+            reject(e);
+          }
         })
+        .on('error', reject)
         .on('end', () => {
-          expect(received).to.equal(2);
-          done();
+          try {
+            expect(received).toBe(2);
+            resolve();
+          } catch (e) {
+            reject(e);
+          }
         });
     });
   });
@@ -998,11 +1019,11 @@ describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
 
     const stream = randomCol.stream();
     for await (const doc of stream) {
-      expect(doc).to.be.an.instanceOf(QueryDocumentSnapshot);
+      expect(doc).toBeInstanceOf(QueryDocumentSnapshot);
       ++received;
     }
 
-    expect(received).to.equal(2);
+    expect(received).toBe(2);
   });
 
   // TODO (enterprise) waiting on implicit sor order decision
@@ -1033,7 +1054,7 @@ describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
     const querySnapshot = await compareQueryAndPipeline(
       firestore.collectionGroup(collectionGroup),
     );
-    expect(querySnapshot.docs.map(d => d.id)).to.deep.equal([
+    expect(querySnapshot.docs.map(d => d.id)).toEqual([
       'cg-doc1',
       'cg-doc2',
       'cg-doc3',
@@ -1071,7 +1092,7 @@ describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
         .startAt('a/b')
         .endAt('a/b0')
         .get();
-      expect(querySnapshot.docs.map(d => d.id)).to.deep.equal([
+      expect(querySnapshot.docs.map(d => d.id)).toEqual([
         'cg-doc2',
         'cg-doc3',
         'cg-doc4',
@@ -1083,7 +1104,7 @@ describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
         .startAfter('a/b')
         .endBefore(`a/b/${collectionGroup}/cg-doc3`)
         .get();
-      expect(querySnapshot.docs.map(d => d.id)).to.deep.equal(['cg-doc2']);
+      expect(querySnapshot.docs.map(d => d.id)).toEqual(['cg-doc2']);
     },
   );
 
@@ -1116,7 +1137,7 @@ describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
           .where(FieldPath.documentId(), '>=', 'a/b')
           .where(FieldPath.documentId(), '<=', 'a/b0'),
       );
-      expect(querySnapshot.docs.map(d => d.id)).to.deep.equal([
+      expect(querySnapshot.docs.map(d => d.id)).toEqual([
         'cg-doc2',
         'cg-doc3',
         'cg-doc4',
@@ -1128,7 +1149,7 @@ describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
           .where(FieldPath.documentId(), '>', 'a/b')
           .where(FieldPath.documentId(), '<', `a/b/${collectionGroup}/cg-doc3`),
       );
-      expect(querySnapshot.docs.map(d => d.id)).to.deep.equal(['cg-doc2']);
+      expect(querySnapshot.docs.map(d => d.id)).toEqual(['cg-doc2']);
     },
   );
 
@@ -1142,7 +1163,7 @@ describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
     await batch.commit();
 
     const snapshot = await compareQueryAndPipeline(randomCol);
-    expect(snapshot.size).to.equal(100);
+    expect(snapshot.size).toBe(100);
   });
 
   // TODO (enterprise) wait for implicit sort order support
@@ -1563,26 +1584,26 @@ describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
       expected: {docs: DocumentSnapshot[]; docChanges: ExpectedChange[]},
     ) {
       let i;
-      expect(actual.size).to.equal(expected.docs.length);
+      expect(actual.size).toBe(expected.docs.length);
       for (i = 0; i < expected.docs.length && i < actual.size; i++) {
-        expect(actual.docs[i].ref.id).to.equal(expected.docs[i].ref.id);
-        expect(actual.docs[i].data()).to.deep.equal(expected.docs[i].data());
+        expect(actual.docs[i].ref.id).toBe(expected.docs[i].ref.id);
+        expect(actual.docs[i].data()).toEqual(expected.docs[i].data());
       }
       const actualDocChanges = actual.docChanges();
-      expect(actualDocChanges.length).to.equal(expected.docChanges.length);
+      expect(actualDocChanges.length).toBe(expected.docChanges.length);
       for (i = 0; i < expected.docChanges.length; i++) {
-        expect(actualDocChanges[i].type).to.equal(expected.docChanges[i].type);
-        expect(actualDocChanges[i].doc.ref.id).to.equal(
+        expect(actualDocChanges[i].type).toBe(expected.docChanges[i].type);
+        expect(actualDocChanges[i].doc.ref.id).toBe(
           expected.docChanges[i].doc.ref.id,
         );
-        expect(actualDocChanges[i].doc.data()).to.deep.equal(
+        expect(actualDocChanges[i].doc.data()).toEqual(
           expected.docChanges[i].doc.data(),
         );
-        expect(actualDocChanges[i].doc.readTime).to.exist;
-        expect(actualDocChanges[i].doc.createTime).to.exist;
-        expect(actualDocChanges[i].doc.updateTime).to.exist;
+        expect(actualDocChanges[i].doc.readTime).toBeDefined();
+        expect(actualDocChanges[i].doc.createTime).toBeDefined();
+        expect(actualDocChanges[i].doc.updateTime).toBeDefined();
       }
-      expect(actual.readTime).to.exist;
+      expect(actual.readTime).toBeDefined();
     }
 
     beforeEach(() => resetPromise());
@@ -2251,7 +2272,7 @@ describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
         .orderBy('v')
         .count()
         .get();
-      expect(results.data().count).to.be.equal(4);
+      expect(results.data().count).toBe(4);
       //TODO(MIEQ): Add sum and average when they are public.
     });
 
@@ -2344,7 +2365,7 @@ describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
       const result = snapshot.docs.map(d => d.id);
 
       // since alwaysUseImplicitOrderBy is true, we expect strict ordering.
-      expect(result).to.deep.equal(expectedOrder);
+      expect(result).toEqual(expectedOrder);
     });
   });
 });

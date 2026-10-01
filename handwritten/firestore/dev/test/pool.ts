@@ -12,16 +12,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import {describe, it} from 'mocha';
-import {expect, use} from 'chai';
+import {describe, it, expect} from 'vitest';
 import {GoogleError} from 'google-gax';
-import * as chaiAsPromised from 'chai-as-promised';
 
 import {ClientPool, CLIENT_TERMINATED_ERROR_MSG} from '../src/pool';
 import {Deferred} from '../src/util';
 import {setLogFunction, setLibVersion} from '../src/logger';
-
-use(chaiAsPromised);
 
 const REQUEST_TAG = 'tag';
 const USE_REST = false;
@@ -51,8 +47,8 @@ function assertOpCount<T extends object>(
     }
   });
 
-  expect(actualGrpcClientOpCount).to.equal(grpcClientOpCount);
-  expect(actualRestClientOpCount).to.equal(restClientOpCount);
+  expect(actualGrpcClientOpCount).toBe(grpcClientOpCount);
+  expect(actualRestClientOpCount).toBe(restClientOpCount);
 }
 
 describe('Client pool', () => {
@@ -61,7 +57,7 @@ describe('Client pool', () => {
       return {};
     });
 
-    expect(clientPool.size).to.equal(0);
+    expect(clientPool.size).toBe(0);
 
     const operationPromises = deferredPromises(4);
 
@@ -70,26 +66,26 @@ describe('Client pool', () => {
       USE_REST,
       () => operationPromises[0].promise,
     );
-    expect(clientPool.size).to.equal(1);
+    expect(clientPool.size).toBe(1);
     void clientPool.run(
       REQUEST_TAG,
       USE_REST,
       () => operationPromises[1].promise,
     );
-    expect(clientPool.size).to.equal(1);
+    expect(clientPool.size).toBe(1);
     void clientPool.run(
       REQUEST_TAG,
       USE_REST,
       () => operationPromises[2].promise,
     );
-    expect(clientPool.size).to.equal(1);
+    expect(clientPool.size).toBe(1);
 
     void clientPool.run(
       REQUEST_TAG,
       USE_REST,
       () => operationPromises[3].promise,
     );
-    expect(clientPool.size).to.equal(2);
+    expect(clientPool.size).toBe(2);
   });
 
   it('re-uses instances with remaining capacity', async () => {
@@ -97,7 +93,7 @@ describe('Client pool', () => {
       return {};
     });
 
-    expect(clientPool.size).to.equal(0);
+    expect(clientPool.size).toBe(0);
 
     const operationPromises = deferredPromises(5);
 
@@ -106,25 +102,25 @@ describe('Client pool', () => {
       USE_REST,
       () => operationPromises[0].promise,
     );
-    expect(clientPool.size).to.equal(1);
+    expect(clientPool.size).toBe(1);
     void clientPool.run(
       REQUEST_TAG,
       USE_REST,
       () => operationPromises[1].promise,
     );
-    expect(clientPool.size).to.equal(1);
+    expect(clientPool.size).toBe(1);
     void clientPool.run(
       REQUEST_TAG,
       USE_REST,
       () => operationPromises[2].promise,
     );
-    expect(clientPool.size).to.equal(2);
+    expect(clientPool.size).toBe(2);
     void clientPool.run(
       REQUEST_TAG,
       USE_REST,
       () => operationPromises[3].promise,
     );
-    expect(clientPool.size).to.equal(2);
+    expect(clientPool.size).toBe(2);
 
     operationPromises[0].resolve();
 
@@ -134,7 +130,7 @@ describe('Client pool', () => {
       USE_REST,
       () => operationPromises[4].promise,
     );
-    expect(clientPool.size).to.equal(2);
+    expect(clientPool.size).toBe(2);
   });
 
   it('re-uses idle instances', async () => {
@@ -151,7 +147,7 @@ describe('Client pool', () => {
       USE_REST,
       () => operationPromises[0].promise,
     );
-    expect(clientPool.size).to.equal(1);
+    expect(clientPool.size).toBe(1);
     operationPromises[0].resolve();
     await completionPromise;
 
@@ -160,11 +156,11 @@ describe('Client pool', () => {
       USE_REST,
       () => operationPromises[1].promise,
     );
-    expect(clientPool.size).to.equal(1);
+    expect(clientPool.size).toBe(1);
     operationPromises[1].resolve();
     await completionPromise;
 
-    expect(instanceCount).to.equal(1);
+    expect(instanceCount).toBe(1);
   });
 
   it('does not re-use rest instance for grpc call', async () => {
@@ -184,7 +180,7 @@ describe('Client pool', () => {
       USE_GRPC,
       () => operationPromises[1].promise,
     );
-    expect(clientPool.size).to.equal(2);
+    expect(clientPool.size).toBe(2);
     assertOpCount(clientPool, 1, 1);
 
     operationPromises[0].resolve();
@@ -208,7 +204,7 @@ describe('Client pool', () => {
       USE_REST,
       () => operationPromises[1].promise,
     );
-    expect(clientPool.size).to.equal(1);
+    expect(clientPool.size).toBe(1);
     assertOpCount(clientPool, 2, 0);
 
     operationPromises[0].resolve();
@@ -238,7 +234,7 @@ describe('Client pool', () => {
       () => operationPromises[2].promise,
     );
 
-    expect(clientPool.size).to.equal(2);
+    expect(clientPool.size).toBe(2);
     assertOpCount(clientPool, 2, 1);
 
     operationPromises[0].resolve();
@@ -267,7 +263,7 @@ describe('Client pool', () => {
     // resolve rest operation
     operationPromises[0].resolve();
     await restOperation;
-    expect(clientPool.opCount).to.equal(1);
+    expect(clientPool.opCount).toBe(1);
 
     // Run new rest operation
     void clientPool.run(
@@ -277,7 +273,7 @@ describe('Client pool', () => {
     );
 
     // Assert client pool status
-    expect(clientPool.size).to.equal(1);
+    expect(clientPool.size).toBe(1);
     assertOpCount(clientPool, 2, 0);
 
     operationPromises[1].resolve();
@@ -302,8 +298,8 @@ describe('Client pool', () => {
     restPromises.forEach(restPromise => {
       void clientPool.run(REQUEST_TAG, USE_REST, () => restPromise.promise);
     });
-    expect(clientPool.opCount).to.equal(11);
-    expect(clientPool.size).to.equal(2);
+    expect(clientPool.opCount).toBe(11);
+    expect(clientPool.size).toBe(2);
     assertOpCount(clientPool, 11, 0);
 
     grpcPromises.forEach(grpcPromise => grpcPromise.resolve());
@@ -324,8 +320,8 @@ describe('Client pool', () => {
     restPromises.forEach(restPromise => {
       void clientPool.run(REQUEST_TAG, USE_REST, () => restPromise.promise);
     });
-    expect(clientPool.opCount).to.equal(15);
-    expect(clientPool.size).to.equal(2);
+    expect(clientPool.opCount).toBe(15);
+    expect(clientPool.size).toBe(2);
     assertOpCount(clientPool, 0, 15);
 
     // Next 5 operations alternate between gRPC and REST, this will create a new client using gRPC
@@ -334,8 +330,8 @@ describe('Client pool', () => {
       void clientPool.run(REQUEST_TAG, transport, () => grpcPromise.promise);
       transport = !transport;
     });
-    expect(clientPool.opCount).to.equal(20);
-    expect(clientPool.size).to.equal(3);
+    expect(clientPool.opCount).toBe(20);
+    expect(clientPool.size).toBe(3);
     assertOpCount(clientPool, 5, 15);
 
     grpcPromises.forEach(grpcPromise => grpcPromise.resolve());
@@ -365,7 +361,7 @@ describe('Client pool', () => {
     );
 
     // Assert client pool status
-    expect(clientPool.size).to.equal(1);
+    expect(clientPool.size).toBe(1);
     assertOpCount(clientPool, 1, 0);
 
     operationPromises[0].resolve();
@@ -377,29 +373,29 @@ describe('Client pool', () => {
       return {count: ++clientCount};
     });
 
-    expect(clientPool.size).to.equal(0);
+    expect(clientPool.size).toBe(0);
 
     // Create 5 operations, which should schedule 2 operations on the first
     // client, 2 on the second and 1 on the third.
     const operationPromises = deferredPromises(7);
     void clientPool.run(REQUEST_TAG, USE_REST, client => {
-      expect(client.count).to.be.equal(1);
+      expect(client.count).toBe(1);
       return operationPromises[0].promise;
     });
     void clientPool.run(REQUEST_TAG, USE_REST, client => {
-      expect(client.count).to.be.equal(1);
+      expect(client.count).toBe(1);
       return operationPromises[1].promise;
     });
     const thirdOperation = clientPool.run(REQUEST_TAG, USE_REST, client => {
-      expect(client.count).to.be.equal(2);
+      expect(client.count).toBe(2);
       return operationPromises[2].promise;
     });
     void clientPool.run(REQUEST_TAG, USE_REST, client => {
-      expect(client.count).to.be.equal(2);
+      expect(client.count).toBe(2);
       return operationPromises[3].promise;
     });
     void clientPool.run(REQUEST_TAG, USE_REST, client => {
-      expect(client.count).to.be.equal(3);
+      expect(client.count).toBe(3);
       return operationPromises[4].promise;
     });
 
@@ -410,7 +406,7 @@ describe('Client pool', () => {
     // A newly scheduled operation should use the first client that has a free
     // slot.
     void clientPool.run(REQUEST_TAG, USE_REST, async client => {
-      expect(client.count).to.be.equal(2);
+      expect(client.count).toBe(2);
     });
   });
 
@@ -419,7 +415,7 @@ describe('Client pool', () => {
       return {};
     });
 
-    expect(clientPool.size).to.equal(0);
+    expect(clientPool.size).toBe(0);
 
     const operationPromises = deferredPromises(4);
     const completionPromises: Array<Promise<void>> = [];
@@ -427,24 +423,24 @@ describe('Client pool', () => {
     completionPromises.push(
       clientPool.run(REQUEST_TAG, USE_REST, () => operationPromises[0].promise),
     );
-    expect(clientPool.size).to.equal(1);
+    expect(clientPool.size).toBe(1);
     completionPromises.push(
       clientPool.run(REQUEST_TAG, USE_REST, () => operationPromises[1].promise),
     );
-    expect(clientPool.size).to.equal(1);
+    expect(clientPool.size).toBe(1);
     completionPromises.push(
       clientPool.run(REQUEST_TAG, USE_REST, () => operationPromises[2].promise),
     );
-    expect(clientPool.size).to.equal(2);
+    expect(clientPool.size).toBe(2);
     completionPromises.push(
       clientPool.run(REQUEST_TAG, USE_REST, () => operationPromises[3].promise),
     );
-    expect(clientPool.size).to.equal(2);
+    expect(clientPool.size).toBe(2);
 
     operationPromises.forEach(deferred => deferred.resolve());
 
     await Promise.all(completionPromises);
-    expect(clientPool.size).to.equal(0);
+    expect(clientPool.size).toBe(0);
   });
 
   it('garbage collects after error', async () => {
@@ -452,7 +448,7 @@ describe('Client pool', () => {
       return {};
     });
 
-    expect(clientPool.size).to.equal(0);
+    expect(clientPool.size).toBe(0);
 
     const operationPromises = deferredPromises(4);
     const completionPromises: Array<Promise<void>> = [];
@@ -460,24 +456,24 @@ describe('Client pool', () => {
     completionPromises.push(
       clientPool.run(REQUEST_TAG, USE_REST, () => operationPromises[0].promise),
     );
-    expect(clientPool.size).to.equal(1);
+    expect(clientPool.size).toBe(1);
     completionPromises.push(
       clientPool.run(REQUEST_TAG, USE_REST, () => operationPromises[1].promise),
     );
-    expect(clientPool.size).to.equal(1);
+    expect(clientPool.size).toBe(1);
     completionPromises.push(
       clientPool.run(REQUEST_TAG, USE_REST, () => operationPromises[2].promise),
     );
-    expect(clientPool.size).to.equal(2);
+    expect(clientPool.size).toBe(2);
     completionPromises.push(
       clientPool.run(REQUEST_TAG, USE_REST, () => operationPromises[3].promise),
     );
-    expect(clientPool.size).to.equal(2);
+    expect(clientPool.size).toBe(2);
 
     operationPromises.forEach(deferred => deferred.reject(new Error()));
 
     await Promise.all(completionPromises.map(p => p.catch(() => {})));
-    expect(clientPool.size).to.equal(0);
+    expect(clientPool.size).toBe(0);
   });
 
   it('garbage collection calls destructor', () => {
@@ -517,7 +513,7 @@ describe('Client pool', () => {
     const op = clientPool.run(REQUEST_TAG, USE_REST, () =>
       Promise.resolve('Success'),
     );
-    return expect(op).to.become('Success');
+    return expect(op).resolves.toEqual('Success');
   });
 
   it('forwards failure', () => {
@@ -528,7 +524,7 @@ describe('Client pool', () => {
     const op = clientPool.run(REQUEST_TAG, USE_REST, () =>
       Promise.reject('Generated error'),
     );
-    return expect(op).to.eventually.be.rejectedWith('Generated error');
+    return expect(op).rejects.toThrow('Generated error');
   });
 
   it('does not re-use clients after RST_STREAM', async () => {
@@ -547,7 +543,7 @@ describe('Client pool', () => {
 
     await clientPool.run(REQUEST_TAG, USE_REST, async () => {});
 
-    expect(instanceCount).to.equal(2);
+    expect(instanceCount).toBe(2);
   });
 
   it('garbage collects after RST_STREAM', async () => {
@@ -562,7 +558,7 @@ describe('Client pool', () => {
     );
     await op.catch(() => {});
 
-    expect(clientPool.size).to.equal(0);
+    expect(clientPool.size).toBe(0);
   });
 
   it('garbage collects rest clients after GRPC', async () => {
@@ -573,7 +569,7 @@ describe('Client pool', () => {
     await clientPool.run(REQUEST_TAG, USE_REST, () => Promise.resolve());
     await clientPool.run(REQUEST_TAG, USE_GRPC, () => Promise.resolve());
 
-    expect(clientPool.size).to.equal(1);
+    expect(clientPool.size).toBe(1);
   });
 
   it('garbage collects idle REST clients upon gRPC transition and reuses gRPC client', async () => {
@@ -585,11 +581,11 @@ describe('Client pool', () => {
 
     // Run REST operation
     await clientPool.run(REQUEST_TAG, USE_REST, () => Promise.resolve());
-    expect(clientCount).to.equal(1);
+    expect(clientCount).toBe(1);
 
     // Run gRPC operation
     await clientPool.run(REQUEST_TAG, USE_GRPC, () => Promise.resolve());
-    expect(clientCount).to.equal(2);
+    expect(clientCount).toBe(2);
 
     // Run subsequent operations.
     await clientPool.run(REQUEST_TAG, USE_REST, () => Promise.resolve());
@@ -599,18 +595,18 @@ describe('Client pool', () => {
     expect(
       clientPool.size,
       'Pool size should equal 1 after eager eviction of REST client',
-    ).to.equal(1);
+    ).toBe(1);
     const activeClientMetadata = Array.from(clientPool._activeClients.values());
     const gRPCClientRemaining = activeClientMetadata.some(m => m.grpcEnabled);
 
     expect(
       gRPCClientRemaining,
       'The active client in pool must be gRPC-enabled',
-    ).to.be.true;
+    ).toBe(true);
     expect(
       clientCount,
       'Subsequent operations should reuse the gRPC client without creating new clients',
-    ).to.equal(2);
+    ).toBe(2);
   });
 
   it('garbage collects active REST clients upon release after gRPC transition', async () => {
@@ -637,26 +633,26 @@ describe('Client pool', () => {
       USE_REST,
       () => restDeferred.promise,
     );
-    expect(createdCount).to.equal(1);
-    expect(clientPool.size).to.equal(1);
+    expect(createdCount).toBe(1);
+    expect(clientPool.size).toBe(1);
 
     // Run gRPC operation (transitions pool to gRPC, creates client-2)
     // client-1 is active so it is NOT eagerly evicted during transition.
     await clientPool.run(REQUEST_TAG, USE_GRPC, () => Promise.resolve());
-    expect(createdCount).to.equal(2);
-    expect(clientPool.size).to.equal(2);
+    expect(createdCount).toBe(2);
+    expect(clientPool.size).toBe(2);
 
     // Resolve the active REST operation (triggers release for client-1)
     restDeferred.resolve();
     await restOpPromise;
 
     // Assert that client-1 (REST client) is destroyed immediately upon completion
-    expect(destroyedClientIds).to.include('client-1');
-    expect(clientPool.size).to.equal(1);
+    expect(destroyedClientIds).toContain('client-1');
+    expect(clientPool.size).toBe(1);
 
     const activeClients = Array.from(clientPool._activeClients.keys());
-    expect(activeClients.map(c => c.id)).to.not.include('client-1');
-    expect(activeClients.map(c => c.id)).to.include('client-2');
+    expect(activeClients.map(c => c.id)).not.toContain('client-1');
+    expect(activeClients.map(c => c.id)).toContain('client-2');
   });
 
   it('logs transition to gRPC', async () => {
@@ -669,8 +665,9 @@ describe('Client pool', () => {
       await clientPool.run('op-rest', USE_REST, () => Promise.resolve());
       await clientPool.run('op-grpc', USE_GRPC, () => Promise.resolve());
 
-      expect(logs.some(l => l.includes('Transitioning pool to gRPC'))).to.be
-        .true;
+      expect(logs.some(l => l.includes('Transitioning pool to gRPC'))).toBe(
+        true,
+      );
     } finally {
       setLogFunction(null);
     }
@@ -706,13 +703,13 @@ describe('Client pool', () => {
       USE_REST,
       () => operationPromises[3].promise,
     );
-    expect(clientPool.size).to.equal(4);
+    expect(clientPool.size).toBe(4);
 
     // Resolve all pending operations. Note that one client is removed, while
     // 3 are kept for further usage.
     operationPromises.forEach(deferred => deferred.resolve());
     await lastOp;
-    expect(clientPool.size).to.equal(3);
+    expect(clientPool.size).toBe(3);
   });
 
   it('default setting keeps at least one idle client', async () => {
@@ -735,12 +732,12 @@ describe('Client pool', () => {
       USE_REST,
       () => operationPromises[1].promise,
     );
-    expect(clientPool.size).to.equal(2);
+    expect(clientPool.size).toBe(2);
 
     operationPromises[0].resolve();
     operationPromises[1].resolve();
     await completionPromise;
-    expect(clientPool.size).to.equal(1);
+    expect(clientPool.size).toBe(1);
   });
 
   it('rejects subsequent operations after being terminated', async () => {
@@ -753,7 +750,7 @@ describe('Client pool', () => {
       clientPool.run(REQUEST_TAG, USE_REST, () =>
         Promise.reject('Call to run() should have failed'),
       ),
-    ).to.be.rejectedWith(CLIENT_TERMINATED_ERROR_MSG);
+    ).rejects.toThrow(CLIENT_TERMINATED_ERROR_MSG);
   });
 
   it('waits for existing operations to complete before releasing clients', async () => {
@@ -771,10 +768,10 @@ describe('Client pool', () => {
       terminated = true;
     });
 
-    expect(terminated).to.be.false;
+    expect(terminated).toBe(false);
     // Mark the mock operation as "complete".
     deferred.resolve();
     await terminateOp;
-    expect(terminated).to.be.true;
+    expect(terminated).toBe(true);
   });
 });
