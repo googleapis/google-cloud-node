@@ -14,12 +14,14 @@
  * limitations under the License.
  */
 
-import {
+import {context, propagation} from '@opentelemetry/api';
+import type {
   GRPCCall,
   GRPCCallOtherArgs,
   SimpleCallbackFunction,
   UnaryCall,
 } from '../apitypes';
+import {checkTelemetryEnabled, isMetadata} from '../util';
 
 /**
  * Updates func so that it gets called with the timeout as its final arg.
@@ -48,9 +50,21 @@ export function addTimeoutArg(
     const now = new Date();
     const options = otherArgs.options || {};
     options.deadline = new Date(now.getTime() + timeout);
-    const metadata = otherArgs.metadataBuilder
+    let metadata = otherArgs.metadataBuilder
       ? otherArgs.metadataBuilder(abTests, otherArgs.headers || {})
       : null;
+    if (checkTelemetryEnabled() && isMetadata(metadata)) {
+      const targetMetadata =
+        typeof metadata.clone === 'function' ? metadata.clone() : metadata;
+      propagation.inject(context.active(), targetMetadata, {
+        set(carrier, key, value) {
+          carrier.set(key, value);
+        },
+      });
+      metadata = targetMetadata;
+    } else if (checkTelemetryEnabled() && metadata && typeof metadata === 'object') {
+      propagation.inject(context.active(), metadata);
+    }
     return (func as UnaryCall)(argument, metadata!, options, callback);
   };
 }

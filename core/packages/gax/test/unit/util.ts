@@ -25,6 +25,7 @@ import {
   decodeProtobufAny,
   decodeAnyProtosInArray,
   checkTelemetryEnabled,
+  isMetadata,
   connectionCodes,
   requestCodes,
   requestBodyCodes,
@@ -35,6 +36,7 @@ import {
   ignoredClientHeaderTokens,
   DEPTH_TO_CHECK,
 } from '../../src/util';
+import {GrpcClient} from '../../src/grpc';
 import {StaticTraceContext} from '../../src/observability/TracerHelper';
 import {CallSettings} from '../../src/gax';
 import * as protobuf from 'protobufjs';
@@ -364,6 +366,25 @@ describe('util.ts', () => {
       }
       assert.strictEqual(thrown, undefined);
       assert.strictEqual(result, true);
+    });
+  });
+
+  describe('isMetadata', () => {
+    it('returns true for gRPC Metadata instances', () => {
+      const grpcClient = new GrpcClient();
+      const metadata = grpcClient.metadataBuilder({'x-goog-api-client': 'test'})();
+      assert.strictEqual(isMetadata(metadata), true);
+    });
+
+    it('returns false for plain HTTP/REST header objects, null, and primitives', () => {
+      assert.strictEqual(
+        isMetadata({'x-goog-api-client': ['grpc-web/1.0']}),
+        false,
+      );
+      assert.strictEqual(isMetadata({set: 'not-a-function'}), false);
+      assert.strictEqual(isMetadata(null), false);
+      assert.strictEqual(isMetadata(undefined), false);
+      assert.strictEqual(isMetadata('string'), false);
     });
   });
 
