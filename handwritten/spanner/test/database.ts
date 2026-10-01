@@ -27,6 +27,7 @@ import {Transform, Duplex} from 'stream';
 import * as through from 'through2';
 import * as pfy from '@google-cloud/promisify';
 import {grpc} from 'google-gax';
+import {isNullOrUndefinedPropertyError} from 'google-test-utils';
 import * as db from '../src/database';
 import {Spanner, Instance, MutationGroup} from '../src';
 import {MockError} from './mockserver/mockspanner';
@@ -971,15 +972,7 @@ describe('Database', () => {
       try {
         database.writeAtLeastOnce(null, () => {});
       } catch (err) {
-        const errorMessage = (err as grpc.ServiceError).message;
-        assert.ok(
-          errorMessage.includes(
-            "Cannot read properties of null (reading 'proto')",
-          ) ||
-            errorMessage.includes("Cannot read property 'proto' of null") ||
-            (errorMessage.includes('null is not an object') &&
-              errorMessage.includes('proto')),
-        );
+        assert.ok(isNullOrUndefinedPropertyError(err, 'proto'));
 
         done();
       }
