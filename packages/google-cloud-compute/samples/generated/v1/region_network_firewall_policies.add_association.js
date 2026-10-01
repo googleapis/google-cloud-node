@@ -29,6 +29,12 @@ function main(firewallPolicy, firewallPolicyAssociationResource, project, region
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
+   *  Name of the firewall policy associated with the target network to swap
+   *  association with. This field is mutually exclusive with
+   *  'replace_existing_association'.
+   */
+  // const associatedPolicyToBeReplaced = 'abc123'
+  /**
    *  Name of the firewall policy to update.
    */
   // const firewallPolicy = 'abc123'
