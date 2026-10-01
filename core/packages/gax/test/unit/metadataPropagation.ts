@@ -265,6 +265,85 @@ describe('metadata propagation (gRPC and HTTP)', () => {
     });
   });
 
+  it('does not mutate shared HTTP/REST plain object metadata across calls', done => {
+    const sharedMetadata: Record<string, unknown> = {
+      'x-goog-api-client': ['grpc-web/1.0'],
+    };
+
+    const tracer = trace.getTracer('test-tracer');
+    const span1 = tracer.startSpan('http-rpc-1');
+    const span2 = tracer.startSpan('http-rpc-2');
+
+    let metadataCall1: Record<string, unknown> | null = null;
+    let metadataCall2: Record<string, unknown> | null = null;
+
+    const stub1 = (
+      arg: {},
+      meta: {},
+      opt: {},
+      cb: Function,
+    ): GRPCCallResult => {
+      metadataCall1 = meta as Record<string, unknown>;
+      cb(null, {});
+      return {} as GRPCCallResult;
+    };
+
+    const stub2 = (
+      arg: {},
+      meta: {},
+      opt: {},
+      cb: Function,
+    ): GRPCCallResult => {
+      metadataCall2 = meta as Record<string, unknown>;
+      cb(null, {});
+      return {} as GRPCCallResult;
+    };
+
+    const otherArgs: GRPCCallOtherArgs = {
+      metadataBuilder: () => sharedMetadata,
+    };
+
+    const handler1 = addTimeoutArg(
+      stub1 as unknown as GRPCCall,
+      1000,
+      otherArgs,
+    );
+    const handler2 = addTimeoutArg(
+      stub2 as unknown as GRPCCall,
+      1000,
+      otherArgs,
+    );
+
+    context.with(trace.setSpan(context.active(), span1), () => {
+      handler1({}, () => {
+        span1.end();
+
+        context.with(trace.setSpan(context.active(), span2), () => {
+          handler2({}, () => {
+            span2.end();
+
+            const spanCtx1 = span1.spanContext();
+            assert.strictEqual(
+              metadataCall1!['traceparent'],
+              `00-${spanCtx1.traceId}-${spanCtx1.spanId}-0${spanCtx1.traceFlags}`,
+            );
+
+            const spanCtx2 = span2.spanContext();
+            assert.strictEqual(
+              metadataCall2!['traceparent'],
+              `00-${spanCtx2.traceId}-${spanCtx2.spanId}-0${spanCtx2.traceFlags}`,
+            );
+
+            assert.notStrictEqual(metadataCall1, sharedMetadata);
+            assert.notStrictEqual(metadataCall2, sharedMetadata);
+            assert.strictEqual(sharedMetadata['traceparent'], undefined);
+            done();
+          });
+        });
+      });
+    });
+  });
+
   it('does not inject into gRPC or HTTP metadata when telemetry is disabled', done => {
     delete process.env.GOOGLE_SDK_NODE_ENABLE_TRACING;
 

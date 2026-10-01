@@ -67,7 +67,9 @@ export function addTimeoutArg(
       metadata &&
       typeof metadata === 'object'
     ) {
-      propagation.inject(context.active(), metadata);
+      const targetMetadata = {...metadata};
+      propagation.inject(context.active(), targetMetadata);
+      metadata = targetMetadata;
     }
     return (func as UnaryCall)(argument, metadata!, options, callback);
   };
