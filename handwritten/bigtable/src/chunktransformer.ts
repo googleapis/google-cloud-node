@@ -158,7 +158,6 @@ export class ChunkTransformer extends Transform {
           break;
       }
       if (this._destroyed) {
-        next();
         return;
       }
     }
@@ -250,16 +249,7 @@ export class ChunkTransformer extends Transform {
       chunk.familyName ||
       chunk.qualifier ||
       (chunk.value && chunk.value.length !== 0) ||
-      // timestampMicros is an int64 in the protobuf definition,
-      // which can be either a number or an instance of Long.
-      // If it's a number...
-      (typeof chunk.timestampMicros === 'number' &&
-        chunk.timestampMicros! > 0) ||
-      // If it's an instance of Long...
-      (typeof chunk.timestampMicros === 'object' &&
-        'compare' in chunk.timestampMicros &&
-        typeof chunk.timestampMicros.compare === 'function' &&
-        chunk.timestampMicros.compare(0) === 1);
+      (chunk.timestampMicros as number) > 0;
     if (chunk.resetRow && containsData) {
       this.destroy(
         new TransformError({

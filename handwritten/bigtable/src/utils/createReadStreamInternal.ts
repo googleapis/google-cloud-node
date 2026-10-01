@@ -120,7 +120,6 @@ export function createReadStreamInternal(
   let chunkTransformer: ChunkTransformer;
   let rowStream: Duplex;
 
-  let userCanceled = false;
   // The key of the last row that was emitted by the per attempt pipeline
   // Note: this must be updated from the operation level userStream to avoid referencing buffered rows that will be
   // discarded in the per attempt subpipeline (rowStream)
@@ -128,36 +127,13 @@ export function createReadStreamInternal(
   let rowsRead = 0;
   const userStream = new TimedStream({
     transformHook(event, _encoding, callback) {
-      if (userCanceled) {
-        callback();
-        return;
-      }
       if (event.eventType === DataEvent.LAST_ROW_KEY_UPDATE) {
-        /**
-         * This code will run when receiving an event containing
-         * lastScannedRowKey data that the chunk transformer sent. When the
-         * chunk transformer gets lastScannedRowKey data, this code
-         * updates the lastRowKey to ensure row ids with the lastScannedRowKey
-         * aren't re-requested in retries. The lastRowKey needs to be updated
-         * here and not in the chunk transformer to ensure the update is
-         * queued behind all events that deliver data to the user stream
-         * first.
-         */
         lastRowKey = event.lastScannedRowKey;
         callback();
         return;
       }
       const row = event;
       if (TableUtils.lessThanOrEqualTo(row.id, lastRowKey)) {
-        /*
-        Sometimes duplicate rows reach this point. To avoid delivering
-        duplicate rows to the user, rows are thrown away if they don't exceed
-        the last row key. We can expect each row to reach this point and rows
-        are delivered in order so if the last row key equals or exceeds the
-        row id then we know data for this row has already reached this point
-        and been delivered to the user. In this case we want to throw the row
-        away and we do not want to deliver this row to the user again.
-         */
         callback();
         return;
       }
@@ -167,34 +143,16 @@ export function createReadStreamInternal(
     },
   });
 
-  // The caller should be able to call userStream.end() to stop receiving
-  // more rows and cancel the stream prematurely. But also, the 'end' event
-  // will be emitted if the stream ended normally. To tell these two
-  // situations apart, we'll save the "original" end() function, and
-  // will call it on rowStream.on('end').
-  const originalEnd = userStream.end.bind(userStream);
-
-  // Taking care of this extra listener when piping and unpiping userStream:
-  const rowStreamPipe = (rowStream: Duplex, userStream: PassThrough) => {
-    rowStream.pipe(userStream, {end: false});
-    rowStream.on('end', originalEnd);
-  };
-  const rowStreamUnpipe = (rowStream: Duplex, userStream: PassThrough) => {
+  const end = userStream.end.bind(userStream);
+  userStream.end = () => {
     rowStream?.unpipe(userStream);
-    rowStream?.removeListener('end', originalEnd);
-  };
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  userStream.end = (chunk?: any, encoding?: any, cb?: () => void) => {
-    rowStreamUnpipe(rowStream, userStream);
-    userCanceled = true;
     if (activeRequestStream) {
       activeRequestStream.abort();
     }
     if (retryTimer) {
       clearTimeout(retryTimer);
     }
-    return originalEnd(chunk, encoding, cb);
+    return end();
   };
   metricsCollector.onOperationStart();
   const makeNewRequest = () => {
@@ -331,7 +289,7 @@ export function createReadStreamInternal(
     const toRowStream = new Transform({
       transform: (rowData: ChunkPushData, _, next) => {
         if (
-          userCanceled ||
+          chunkTransformer._destroyed ||
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (userStream as any)._writableState.ended
         ) {
@@ -341,18 +299,8 @@ export function createReadStreamInternal(
           (rowData as ChunkPushLastScannedRowData).eventType ===
           DataEvent.LAST_ROW_KEY_UPDATE
         ) {
-          /**
-           * If the data is the chunk transformer communicating that the
-           * lastScannedRow was received then this message is passed along
-           * to the user stream to update the lastRowKey.
-           */
           next(null, rowData);
         } else {
-          /**
-           * If the data is just regular rows being pushed from the
-           * chunk transformer then the rows are encoded so that they
-           * can be consumed by the user stream.
-           */
           const row = table.row((rowData as Row).key as string);
           row.data = (rowData as Row).data;
           next(null, row);
@@ -366,7 +314,7 @@ export function createReadStreamInternal(
     metricsCollector.wrapRequest(requestStream);
     rowStream
       .on('error', (error: ServiceError) => {
-        rowStreamUnpipe(rowStream, userStream);
+        rowStream.unpipe(userStream);
         activeRequestStream = null;
         if (IGNORED_STATUS_CODES.has(error.code)) {
           // We ignore the `cancelled` "error", since we are the ones who cause
@@ -399,12 +347,6 @@ export function createReadStreamInternal(
             !error.code &&
             error.message === 'The client has already been closed.'
           ) {
-            //
-            // The TestReadRows_Generic_CloseClient conformance test requires
-            // a grpc code to be present when the client is closed. The
-            // appropriate code for a closed client is CANCELLED since the
-            // user actually cancelled the call by closing the client.
-            //
             error.code = grpc.status.CANCELLED;
           }
           metricsCollector.onOperationComplete(
@@ -426,7 +368,7 @@ export function createReadStreamInternal(
           userStream.getTotalDurationMs(),
         );
       });
-    rowStreamPipe(rowStream, userStream);
+    rowStream.pipe(userStream);
   };
 
   makeNewRequest();
