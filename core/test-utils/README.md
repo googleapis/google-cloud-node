@@ -39,16 +39,14 @@ import {
   TestResources,
   assertArraySubclassStrictEqual,
   isBun,
-  isDeno,
   isNode,
-  isNullOrUndefinedPropertyError,
   isReadOnlyPropertyError,
 } from 'google-test-utils';
 
 const testResources = new TestResources('my-test-suite');
 const resourceName = testResources.generateName('my-test');
 
-// Runtime-agnostic frozen object mutation check (V8 / Node.js / Deno & JSC / Bun)
+// Runtime-agnostic frozen object mutation check (V8 / Node.js & JSC / Bun)
 const frozen = Object.freeze({name: 'value'});
 assert.throws(() => {
   (frozen as {name: string}).name = 'updated';

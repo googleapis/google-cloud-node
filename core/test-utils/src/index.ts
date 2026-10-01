@@ -20,15 +20,11 @@ export {
 } from './testResources';
 export {
   READONLY_PROPERTY_ERROR_REGEX,
-  RuntimeEnvironment,
   RuntimeVersions,
   assertArraySubclassStrictEqual,
   getNodeMajorVersion,
-  getRuntime,
   isBun,
-  isDeno,
   isNode,
-  isNullOrUndefinedPropertyError,
   isReadOnlyPropertyError,
   requiresStrictArrayPrototypeEquality,
 } from './runtime';
