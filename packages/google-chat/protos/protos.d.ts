@@ -14504,6 +14504,12 @@ export namespace google {
                 /** User displayName */
                 displayName?: (string|null);
 
+                /** User avatarUrl */
+                avatarUrl?: (string|null);
+
+                /** User email */
+                email?: (string|null);
+
                 /** User domainId */
                 domainId?: (string|null);
 
@@ -14528,6 +14534,12 @@ export namespace google {
 
                 /** User displayName. */
                 public displayName: string;
+
+                /** User avatarUrl. */
+                public avatarUrl: string;
+
+                /** User email. */
+                public email: string;
 
                 /** User domainId. */
                 public domainId: string;

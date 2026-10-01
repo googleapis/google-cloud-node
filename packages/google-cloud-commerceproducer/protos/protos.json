@@ -1827,6 +1827,63 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "documentRequirement": {
+                          "type": "DocumentRequirement",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "productType": {
+                          "type": "ProductType",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "DocumentRequirement": {
+                          "fields": {
+                            "documentTypeRequirements": {
+                              "rule": "repeated",
+                              "type": "DocumentTypeRequirement",
+                              "id": 1
+                            }
+                          },
+                          "nested": {
+                            "DocumentTypeRequirement": {
+                              "fields": {
+                                "documentType": {
+                                  "type": "PrivateOfferDocument.DocumentType",
+                                  "id": 1
+                                },
+                                "requirementLevel": {
+                                  "type": "RequirementLevel",
+                                  "id": 2
+                                }
+                              },
+                              "nested": {
+                                "RequirementLevel": {
+                                  "values": {
+                                    "REQUIREMENT_LEVEL_UNSPECIFIED": 0,
+                                    "REQUIRED": 1,
+                                    "OPTIONAL": 2,
+                                    "NOT_ALLOWED": 3
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "ProductType": {
+                          "values": {
+                            "PRODUCT_TYPE_UNSPECIFIED": 0,
+                            "SOFTWARE_AS_A_SERVICE": 1,
+                            "ANALYTICS_HUB_LISTING": 2,
+                            "PROFESSIONAL_SERVICES": 3
+                          }
                         }
                       }
                     },
