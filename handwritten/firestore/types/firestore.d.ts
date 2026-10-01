@@ -6110,10 +6110,6 @@ declare namespace FirebaseFirestore {
        * over the window frame defined by the enclosing
        * {@link Pipeline.addWindowFields} stage.
        *
-       * The backend only accepts a frame (`documents` or `range`) here, and
-       * rejects `partition` and `sort`, which must be specified on the enclosing
-       * `addWindowFields()` stage.
-       *
        * @example
        * ```typescript
        * firestore.pipeline().collection("sales")
@@ -6128,12 +6124,15 @@ declare namespace FirebaseFirestore {
        *   );
        * ```
        *
-       * @param window - A {@link WindowSpec} containing the
-       *     `documents` or `range` frame to evaluate this aggregate over. If omitted, the
-       *     enclosing stage's frame is used.
+       * @param frame - The `documents` or `range` frame to evaluate this aggregate over.
        * @returns A new {@link WindowFunction}.
        */
-      over(window?: WindowSpec): WindowFunction;
+      over(
+        frame: OneOf<{
+          documents: DocumentWindowFrame;
+          range: RangeWindowFrame;
+        }>,
+      ): WindowFunction;
     }
 
     /**
@@ -6172,16 +6171,15 @@ declare namespace FirebaseFirestore {
        * over the window frame defined by the enclosing
        * {@link Pipeline.addWindowFields} stage.
        *
-       * The backend only accepts a frame (`documents` or `range`) here, and
-       * rejects `partition` and `sort`, which must be specified on the enclosing
-       * `addWindowFields()` stage.
-       *
-       * @param window - A {@link WindowSpec} containing
-       *     the `documents` or `range` frame to evaluate this function over. If
-       *     omitted, the enclosing stage's frame is used.
+       * @param frame - The `documents` or `range` frame to evaluate this function over.
        * @returns A new {@link WindowFunction}.
        */
-      over(window?: WindowSpec): WindowFunction;
+      over(
+        frame: OneOf<{
+          documents: DocumentWindowFrame;
+          range: RangeWindowFrame;
+        }>,
+      ): WindowFunction;
 
       /**
        * Assigns an alias to this `WindowFunction`. The alias specifies the name that
@@ -6197,17 +6195,14 @@ declare namespace FirebaseFirestore {
      * A {@link WindowFunction} with an alias.
      */
     export class AliasedWindowFunction {
-      constructor(windowFunction: WindowFunction, alias: string);
-
-      readonly windowFunction: WindowFunction;
-      readonly alias: string;
-
       /**
+       * The underlying `WindowFunction` that this aliased window function wraps.
        * @internal
        */
       readonly _windowFunction: WindowFunction;
 
       /**
+       * Specifies the name of the property that will contain the window function result in the output document.
        * @internal
        */
       readonly _alias: string;
@@ -12313,43 +12308,6 @@ declare namespace FirebaseFirestore {
      */
     export function rank(): WindowFunction;
 
-    /**
-     * Creates a window function that computes the rank of the current document
-     * within its window frame, without gaps in the ranking sequence. Documents that
-     * compare equal in the window sort order receive the same rank, and the next
-     * rank is always incremented by one.
-     *
-     * @example
-     * ```typescript
-     * firestore.pipeline().collection("employees")
-     *   .addWindowFields(
-     *     { partition: ['department'], sort: descending('salary') },
-     *     denseRank().as('salaryRank')
-     *   );
-     * ```
-     *
-     * @returns A new {@link WindowFunction}.
-     */
-    export function denseRank(): WindowFunction;
-
-    /**
-     * Creates a window function that computes the sequential position of the
-     * current document within its window frame, starting at 1. Documents that
-     * compare equal in the window sort order receive distinct row numbers.
-     *
-     * @example
-     * ```typescript
-     * firestore.pipeline().collection("employees")
-     *   .addWindowFields(
-     *     { partition: ['department'], sort: descending('salary') },
-     *     rowNumber().as('salaryRowNumber')
-     *   );
-     * ```
-     *
-     * @returns A new {@link WindowFunction}.
-     */
-    export function rowNumber(): WindowFunction;
-
     // TODO(search) enable when supported by the backend
     // /**
     //  * Evaluates if the value in the field specified by `fieldName` is between
@@ -12742,7 +12700,7 @@ declare namespace FirebaseFirestore {
        *     average(field('amount')).as('movingAverageAmount')
        *   );
        *
-       * // 3. Document-based running total using default boundaries (unbounded preceding to current row).
+       * // 3. Document-based running total ('unbounded' preceding to 'current' document position, excluding later ties).
        * // Note: Offsets are physical document counts, so no time unit is required or used even when sorting on 'date'.
        * firestore.pipeline().collection("sales")
        *   .addWindowFields(
@@ -12753,7 +12711,7 @@ declare namespace FirebaseFirestore {
        *     sum(field('amount')).as('runningTotal')
        *   );
        *
-       * // 4. Range-based running average using default boundaries (unbounded preceding to current value)
+       * // 4. Range-based running average using default boundaries ('unbounded' preceding to 'current', including all peers with tied sort values)
        * firestore.pipeline().collection("products")
        *   .addWindowFields(
        *     {
@@ -14020,13 +13978,18 @@ declare namespace FirebaseFirestore {
       fields: Selectable[];
     };
 
+    /**
+     * Defines a document-count based window frame relative to the position of the current document in the group.
+     *
+     * Specifying `sort` on the enclosing {@link WindowSpec} is optional for `documents` window frames; if no `sort` expressions are specified, documents are processed in incoming stream (fetch) order.
+     */
     export interface DocumentWindowFrame {
       /**
        * The lower bound (inclusive) of the window frame, relative to the current document's position.
        *
        * Can be:
        * - A number specifying the number of documents preceding the current document.
-       * - `'current'` to represent the current document itself.
+       * - `'current'` to represent the current document's position (documents with tied sort values are not automatically included).
        * - `'unbounded'` to include all documents from the first document in the group.
        */
       preceding: number | 'current' | 'unbounded' | Expression;
@@ -14036,29 +13999,37 @@ declare namespace FirebaseFirestore {
        *
        * Can be:
        * - A number specifying the number of documents following the current document.
-       * - `'current'` to represent the current document itself.
+       * - `'current'` to represent the current document's position (documents with tied sort values are not automatically included).
        * - `'unbounded'` to include all documents to the last document in the group.
        */
       following: number | 'current' | 'unbounded' | Expression;
     }
 
+    /**
+     * Defines a range-value based window frame relative to the sort value(s) of the current document.
+     *
+     * Sort requirements on the enclosing {@link WindowSpec}:
+     * - One or more `sort` expressions are required when specifying a `range` window frame.
+     * - If `preceding` and `following` use only `'current'` or `'unbounded'` (no numeric or time offsets), multiple `sort` expressions and non-numeric sort values (such as strings or booleans) are supported.
+     * - If `preceding` or `following` specifies a numeric offset (or a `unit` is specified for a time-based offset), exactly one `sort` expression is required and it must evaluate to a numeric or timestamp value.
+     */
     export interface RangeWindowFrame {
       /**
-       * The lower bound (inclusive) of the window frame, relative to the sort value of the current document.
+       * The lower bound (inclusive) of the window frame, relative to the sort value(s) of the current document.
        *
        * Can be:
-       * - A number specifying the value-based offset from the current document's sort value.
-       * - `'current'` to represent only documents with the same sort value as the current document.
+       * - A number specifying the value-based offset from the current document's sort value (requires a single numeric or timestamp `sort` expression).
+       * - `'current'` to include all documents with the same sort value(s) as the current document (peers/ties, equivalent to an offset of `0`).
        * - `'unbounded'` to include all documents from the start of the group.
        */
       preceding: number | 'current' | 'unbounded' | Expression;
 
       /**
-       * The upper bound (inclusive) of the window frame, relative to the sort value of the current document.
+       * The upper bound (inclusive) of the window frame, relative to the sort value(s) of the current document.
        *
        * Can be:
-       * - A number specifying the value-based offset from the current document's sort value.
-       * - `'current'` to represent only documents with the same sort value as the current document.
+       * - A number specifying the value-based offset from the current document's sort value (requires a single numeric or timestamp `sort` expression).
+       * - `'current'` to include all documents with the same sort value(s) as the current document (peers/ties, equivalent to an offset of `0`).
        * - `'unbounded'` to include all documents to the end of the group.
        */
       following: number | 'current' | 'unbounded' | Expression;
@@ -14074,14 +14045,6 @@ declare namespace FirebaseFirestore {
         | 'hour'
         | 'day'
         | 'week'
-        | 'week(monday)'
-        | 'week(tuesday)'
-        | 'week(wednesday)'
-        | 'week(thursday)'
-        | 'week(friday)'
-        | 'week(saturday)'
-        | 'week(sunday)'
-        | 'isoweek'
         | 'month'
         | 'quarter'
         | 'year'
@@ -14093,7 +14056,7 @@ declare namespace FirebaseFirestore {
      *
      * Default frame behavior:
      * - If `sort` is not specified, the default frame is `documents` from `'unbounded'` preceding to `'unbounded'` following (the entire partition/group).
-     * - If `sort` is specified, the default frame is `range` from `'unbounded'` preceding to `'current'` row value.
+     * - If `sort` is specified, the default frame is `range` from `'unbounded'` preceding to `'current'` (which includes all documents with the same sort value(s) as the current document).
      */
     export type WindowSpec = {
       /**
@@ -14104,7 +14067,11 @@ declare namespace FirebaseFirestore {
       /**
        * The sort order of the documents in each group.
        *
-       * Setting a value for `sort` changes the default window frame behavior.
+       * - For `documents` window frames, `sort` is optional. If no `sort` expressions are specified, documents are processed in incoming stream (fetch) order.
+       * - For `range` window frames whose bounds use only `'current'` or `'unbounded'`, one or more `sort` expressions are required (and non-numeric sort values such as strings or booleans are supported).
+       * - For `range` window frames with numeric or time-based offsets, exactly one `sort` expression (numeric or timestamp) is required.
+       *
+       * Setting a value for `sort` also changes the default window frame behavior when neither `documents` nor `range` is specified.
        * See {@link WindowSpec} for default frame specifications.
        *
        * See {@link Ordering}.
@@ -14112,14 +14079,18 @@ declare namespace FirebaseFirestore {
       sort?: Ordering | Ordering[];
     } & OneOf<{
       /**
-       * Defines a document-count based window frame relative to the position of the current document in the sorted group.
+       * Defines a document-count based window frame relative to the position of the current document in the group.
+       *
+       * Specifying `sort` is optional for `documents` window frames; if no `sort` expressions are specified, documents are processed in incoming stream (fetch) order.
        *
        * See {@link WindowSpec} for default frame specifications if `documents` or `range` is not set.
        */
       documents?: DocumentWindowFrame;
 
       /**
-       * Defines a range-value based window frame relative to the sort value of the current document.
+       * Defines a range-value based window frame relative to the sort value(s) of the current document.
+       *
+       * One or more `sort` expressions are required when specifying a `range` window frame (and numeric or time-based offsets require a single numeric or timestamp `sort` expression).
        *
        * See {@link WindowSpec} for default frame specifications if `documents` or `range` is not set.
        */

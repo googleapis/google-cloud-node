@@ -3380,10 +3380,6 @@ export class AggregateFunction implements AggregateFunction, HasUserData {
    * over the window frame defined by the enclosing
    * `Pipeline.addWindowFields()` stage.
    *
-   * The backend only accepts a frame (`documents` or `range`) here, and
-   * rejects `partition` and `sort`, which must be specified on the enclosing
-   * `addWindowFields()` stage.
-   *
    * @example
    * ```typescript
    * firestore.pipeline().collection("sales")
@@ -3398,16 +3394,19 @@ export class AggregateFunction implements AggregateFunction, HasUserData {
    *   );
    * ```
    *
-   * @param window - A `WindowSpec` containing the
-   *     `documents` or `range` frame to evaluate this aggregate over. If omitted, the
-   *     enclosing stage's frame is used.
+   * @param frame - The `documents` or `range` frame to evaluate this aggregate over.
    * @returns A new `WindowFunction`.
    */
-  over(window?: firestore.Pipelines.WindowSpec): WindowFunction {
+  over(
+    frame: firestore.OneOf<{
+      documents: firestore.Pipelines.DocumentWindowFrame;
+      range: firestore.Pipelines.RangeWindowFrame;
+    }>,
+  ): WindowFunction {
     return new WindowFunction(
       this.name,
       this.params,
-      window === undefined ? undefined : new WindowSpecInternal(window),
+      new WindowSpecInternal(frame),
     );
   }
 
@@ -11474,20 +11473,19 @@ export class WindowFunction
    * over the window frame defined by the enclosing
    * `Pipeline.addWindowFields()` stage.
    *
-   * The backend only accepts a frame (`documents` or `range`) here, and
-   * rejects `partition` and `sort`, which must be specified on the enclosing
-   * `addWindowFields()` stage.
-   *
-   * @param window - A `WindowSpec` containing
-   *     the `documents` or `range` frame to evaluate this function over. If
-   *     omitted, the enclosing stage's frame is used.
+   * @param frame - The `documents` or `range` frame to evaluate this function over.
    * @returns A new `WindowFunction`.
    */
-  over(window?: firestore.Pipelines.WindowSpec): WindowFunction {
+  over(
+    frame: firestore.OneOf<{
+      documents: firestore.Pipelines.DocumentWindowFrame;
+      range: firestore.Pipelines.RangeWindowFrame;
+    }>,
+  ): WindowFunction {
     return new WindowFunction(
       this.name,
       this.params,
-      window === undefined ? undefined : new WindowSpecInternal(window),
+      new WindowSpecInternal(frame),
     );
   }
 
@@ -11546,23 +11544,10 @@ export class WindowFunction
 export class AliasedWindowFunction
   implements firestore.Pipelines.AliasedWindowFunction, HasUserData
 {
-  /**
-   * @internal
-   */
-  readonly _windowFunction: WindowFunction;
-
-  /**
-   * @internal
-   */
-  readonly _alias: string;
-
   constructor(
-    readonly windowFunction: WindowFunction,
-    readonly alias: string,
-  ) {
-    this._windowFunction = windowFunction;
-    this._alias = alias;
-  }
+    readonly _windowFunction: WindowFunction,
+    readonly _alias: string,
+  ) {}
 
   /**
    * @internal
@@ -11577,7 +11562,7 @@ export class AliasedWindowFunction
    * @internal
    */
   _validateUserData(ignoreUndefinedProperties: boolean): void {
-    this.windowFunction._validateUserData(ignoreUndefinedProperties);
+    this._windowFunction._validateUserData(ignoreUndefinedProperties);
   }
 }
 
@@ -11600,45 +11585,4 @@ export class AliasedWindowFunction
  */
 export function rank(): WindowFunction {
   return new WindowFunction('rank', []);
-}
-
-/**
- * Creates a window function that computes the rank of the current document
- * within its window frame, without gaps in the ranking sequence. Documents that
- * compare equal in the window sort order receive the same rank, and the next
- * rank is always incremented by one.
- *
- * @example
- * ```typescript
- * firestore.pipeline().collection("employees")
- *   .addWindowFields(
- *     { partition: ['department'], sort: descending('salary') },
- *     denseRank().as('salaryRank')
- *   );
- * ```
- *
- * @returns A new `WindowFunction`.
- */
-export function denseRank(): WindowFunction {
-  return new WindowFunction('dense_rank', []);
-}
-
-/**
- * Creates a window function that computes the sequential position of the
- * current document within its window frame, starting at 1. Documents that
- * compare equal in the window sort order receive distinct row numbers.
- *
- * @example
- * ```typescript
- * firestore.pipeline().collection("employees")
- *   .addWindowFields(
- *     { partition: ['department'], sort: descending('salary') },
- *     rowNumber().as('salaryRowNumber')
- *   );
- * ```
- *
- * @returns A new `WindowFunction`.
- */
-export function rowNumber(): WindowFunction {
-  return new WindowFunction('row_number', []);
 }

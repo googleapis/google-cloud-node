@@ -35,7 +35,6 @@ const {
   countAll,
   countDistinct,
   countIf,
-  denseRank,
   descending,
   field,
   first,
@@ -43,7 +42,6 @@ const {
   maximum,
   minimum,
   rank,
-  rowNumber,
   sum,
   toLower,
 } = Pipelines;
@@ -592,21 +590,17 @@ describe('addWindowFields() serialization', () => {
       );
     });
 
-    it('serializes the ranking window functions', () => {
+    it('serializes the rank window function', () => {
       expect(
         fieldsArg(
           basePipeline().addWindowFields(
             {sort: descending('salesPrice')},
             rank().as('rank'),
-            denseRank().as('denseRank'),
-            rowNumber().as('rowNumber'),
           ),
         ),
       ).to.deep.equal(
         map({
           rank: fn('rank'),
-          denseRank: fn('dense_rank'),
-          rowNumber: fn('row_number'),
         }),
       );
     });
@@ -711,17 +705,6 @@ describe('addWindowFields() serialization', () => {
       );
     });
 
-    it('does not wrap in over() when no frame is provided', () => {
-      expect(
-        fieldsArg(
-          basePipeline().addWindowFields(
-            {sort: ascending('date')},
-            sum('salesPrice').over().as('total'),
-          ),
-        ),
-      ).to.deep.equal(map({total: fn('sum', fieldRef('salesPrice'))}));
-    });
-
     it('supports over() on a ranking window function', () => {
       expect(
         fieldsArg(
@@ -750,11 +733,11 @@ describe('addWindowFields() serialization', () => {
       );
     });
 
-    // The SDK does not reject `partition`/`sort` in `over()`. They are encoded
-    // into the same window spec map as the frame, and the backend responds with
-    // `Window frame has unexpected fields: [partition]`. Leaving this to the
-    // backend means accumulator level partitioning starts working without an
-    // SDK change if the backend ever supports it.
+    // The SDK does not reject `partition`/`sort` in `over()` at runtime. They
+    // are encoded into the same window spec map as the frame, and the backend
+    // responds with `Window frame has unexpected fields: [partition]`. Leaving
+    // this to the backend means accumulator level partitioning starts working
+    // without a runtime SDK change if the backend ever supports it.
     it('encodes a partition supplied to over()', () => {
       const fields = fieldsArg(
         basePipeline().addWindowFields(
@@ -763,7 +746,8 @@ describe('addWindowFields() serialization', () => {
             .over({
               partition: ['product'],
               documents: {preceding: 1, following: 1},
-            })
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            } as any)
             .as('total'),
         ),
       );
@@ -790,7 +774,8 @@ describe('addWindowFields() serialization', () => {
             .over({
               sort: ascending('date'),
               documents: {preceding: 1, following: 1},
-            })
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            } as any)
             .as('total'),
         ),
       );

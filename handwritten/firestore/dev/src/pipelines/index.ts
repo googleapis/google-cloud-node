@@ -175,7 +175,5 @@ export {
   WindowFunction,
   AliasedWindowFunction,
   rank,
-  denseRank,
-  rowNumber,
   // TODO(new-expression): Add new expression exports above this line
 } from './expression';

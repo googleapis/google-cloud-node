@@ -482,7 +482,7 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
    *     average(field('amount')).as('movingAverageAmount')
    *   );
    *
-   * // 3. Document-based running total using default boundaries (unbounded preceding to current row).
+   * // 3. Document-based running total ('unbounded' preceding to 'current' document position, excluding later ties).
    * // Note: Offsets are physical document counts, so no time unit is required or used even when sorting on 'date'.
    * firestore.pipeline().collection("sales")
    *   .addWindowFields(
@@ -493,7 +493,7 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
    *     sum(field('amount')).as('runningTotal')
    *   );
    *
-   * // 4. Range-based running average using default boundaries (unbounded preceding to current value)
+   * // 4. Range-based running average using default boundaries ('unbounded' preceding to 'current', including all peers with tied sort values)
    * firestore.pipeline().collection("products")
    *   .addWindowFields(
    *     {
