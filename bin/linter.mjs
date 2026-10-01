@@ -84,26 +84,37 @@ function getChangedFilesStrict() {
     );
   }
 
+  const rawArgs = gitDiffArg.trim().split(/\s+/);
+  const dashDashIndex = rawArgs.indexOf('--');
+  const revArgs =
+    dashDashIndex === -1 ? rawArgs : rawArgs.slice(0, dashDashIndex);
+  const pathspecArgs =
+    dashDashIndex === -1 ? [] : rawArgs.slice(dashDashIndex + 1);
+
   // If a single ref is provided (e.g. "HEAD^1" or "origin/main"), convert to three-dot diff ("ref...HEAD")
   // to compare against the merge-base and avoid listing files modified on the base branch.
-  if (!gitDiffArg.includes('..')) {
-    gitDiffArg = `${gitDiffArg}...HEAD`;
+  if (revArgs.length === 1 && !revArgs[0].includes('..')) {
+    revArgs[0] = `${revArgs[0]}...HEAD`;
   }
+
+  gitDiffArg =
+    pathspecArgs.length > 0
+      ? `${revArgs.join(' ')} -- ${pathspecArgs.join(' ')}`
+      : revArgs.join(' ');
 
   console.log(
     `Strict mode enabled. Comparing using GIT_DIFF_ARG: ${gitDiffArg}`,
   );
-
-  const args = gitDiffArg.trim().split(/\s+/);
 
   try {
     const output = runGit([
       'diff',
       '--name-only',
       '--diff-filter=ACMRT',
-      ...args,
+      ...revArgs,
       '--',
       '*.ts',
+      ...pathspecArgs,
     ]);
     return output
       .split('\n')
