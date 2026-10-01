@@ -12,11 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import {describe, it} from 'mocha';
 import {createInstance} from './util/helpers';
-import {expect} from 'chai';
 import {DisabledTraceUtil} from '../src/telemetry/disabled-trace-util';
 import {EnabledTraceUtil} from '../src/telemetry/enabled-trace-util';
+import {Span} from '../src/telemetry/span';
 import {NodeTracerProvider} from '@opentelemetry/sdk-trace-node';
 import {ProxyTracerProvider, trace} from '@opentelemetry/api';
 
@@ -39,7 +38,7 @@ describe('Firestore Tracing Controls', () => {
 
   it('default firestore settings, no env var', async () => {
     const firestore = await createInstance();
-    expect(firestore._traceUtil instanceof EnabledTraceUtil).to.be.true;
+    expect(firestore._traceUtil instanceof EnabledTraceUtil).toBe(true);
   });
 
   /// Tests to make sure environment variable can override settings.
@@ -47,27 +46,27 @@ describe('Firestore Tracing Controls', () => {
   it('default firestore settings, env var disabled', async () => {
     process.env.FIRESTORE_ENABLE_TRACING = 'OFF';
     const firestore = await createInstance();
-    expect(firestore._traceUtil instanceof DisabledTraceUtil).to.be.true;
+    expect(firestore._traceUtil instanceof DisabledTraceUtil).toBe(true);
   });
 
   it('default firestore settings, env var enabled', async () => {
     process.env.FIRESTORE_ENABLE_TRACING = 'ON';
     const firestore = await createInstance();
-    expect(firestore._traceUtil instanceof EnabledTraceUtil).to.be.true;
+    expect(firestore._traceUtil instanceof EnabledTraceUtil).toBe(true);
   });
 
   it('no openTelemetry settings, no env var', async () => {
     const firestore = await createInstance(undefined, {
       openTelemetry: undefined,
     });
-    expect(firestore._traceUtil instanceof EnabledTraceUtil).to.be.true;
+    expect(firestore._traceUtil instanceof EnabledTraceUtil).toBe(true);
 
     const firestore2 = await createInstance(undefined, {
       openTelemetry: {
         tracerProvider: undefined,
       },
     });
-    expect(firestore2._traceUtil instanceof EnabledTraceUtil).to.be.true;
+    expect(firestore2._traceUtil instanceof EnabledTraceUtil).toBe(true);
   });
 
   it('no openTelemetry settings, env var disabled', async () => {
@@ -75,14 +74,14 @@ describe('Firestore Tracing Controls', () => {
     const firestore = await createInstance(undefined, {
       openTelemetry: undefined,
     });
-    expect(firestore._traceUtil instanceof DisabledTraceUtil).to.be.true;
+    expect(firestore._traceUtil instanceof DisabledTraceUtil).toBe(true);
 
     const firestore2 = await createInstance(undefined, {
       openTelemetry: {
         tracerProvider: undefined,
       },
     });
-    expect(firestore2._traceUtil instanceof DisabledTraceUtil).to.be.true;
+    expect(firestore2._traceUtil instanceof DisabledTraceUtil).toBe(true);
   });
 
   it('no openTelemetry settings, env var enabled', async () => {
@@ -90,14 +89,14 @@ describe('Firestore Tracing Controls', () => {
     const firestore = await createInstance(undefined, {
       openTelemetry: undefined,
     });
-    expect(firestore._traceUtil instanceof EnabledTraceUtil).to.be.true;
+    expect(firestore._traceUtil instanceof EnabledTraceUtil).toBe(true);
 
     const firestore2 = await createInstance(undefined, {
       openTelemetry: {
         tracerProvider: undefined,
       },
     });
-    expect(firestore2._traceUtil instanceof EnabledTraceUtil).to.be.true;
+    expect(firestore2._traceUtil instanceof EnabledTraceUtil).toBe(true);
   });
 
   it('valid tracerProvider, no env var', async () => {
@@ -106,7 +105,7 @@ describe('Firestore Tracing Controls', () => {
         tracerProvider: new NodeTracerProvider(),
       },
     });
-    expect(firestore._traceUtil instanceof EnabledTraceUtil).to.be.true;
+    expect(firestore._traceUtil instanceof EnabledTraceUtil).toBe(true);
   });
 
   it('valid tracerProvider, env var disabled', async () => {
@@ -116,7 +115,7 @@ describe('Firestore Tracing Controls', () => {
         tracerProvider: new NodeTracerProvider(),
       },
     });
-    expect(firestore._traceUtil instanceof DisabledTraceUtil).to.be.true;
+    expect(firestore._traceUtil instanceof DisabledTraceUtil).toBe(true);
   });
 
   it('valid tracerProvider, env var enabled', async () => {
@@ -126,7 +125,7 @@ describe('Firestore Tracing Controls', () => {
         tracerProvider: new NodeTracerProvider(),
       },
     });
-    expect(firestore._traceUtil instanceof EnabledTraceUtil).to.be.true;
+    expect(firestore._traceUtil instanceof EnabledTraceUtil).toBe(true);
   });
 
   it('uses the tracerProvider passed to it', async () => {
@@ -142,16 +141,16 @@ describe('Firestore Tracing Controls', () => {
       },
     });
 
-    expect(firestore._traceUtil instanceof EnabledTraceUtil).to.be.true;
+    expect(firestore._traceUtil instanceof EnabledTraceUtil).toBe(true);
     // Make sure the SDK uses the one that was given to it, not the global one.
     expect(
       (firestore._traceUtil as EnabledTraceUtil).tracerProvider ===
         myTracerProvider,
-    ).to.be.true;
+    ).toBe(true);
     expect(
       (firestore._traceUtil as EnabledTraceUtil).tracerProvider !==
         globalTracerProvider,
-    ).to.be.true;
+    ).toBe(true);
   });
 
   it('uses the global tracerProvider if nothing was passed to it', async () => {
@@ -161,7 +160,7 @@ describe('Firestore Tracing Controls', () => {
 
     const firestore = await createInstance();
 
-    expect(firestore._traceUtil instanceof EnabledTraceUtil).to.be.true;
+    expect(firestore._traceUtil instanceof EnabledTraceUtil).toBe(true);
     const enabledTraceUtil: EnabledTraceUtil =
       firestore._traceUtil as EnabledTraceUtil;
     // Since a TracerProvider is not provided to the SDK directly, the SDK obtains
@@ -170,7 +169,7 @@ describe('Firestore Tracing Controls', () => {
     // `globalTracerProvider` with the proxy's delegate.
     const tracerProviderUsed = enabledTraceUtil.tracerProvider;
     const actual = (tracerProviderUsed as ProxyTracerProvider).getDelegate();
-    expect(actual === globalTracerProvider).to.be.true;
+    expect(actual === globalTracerProvider).toBe(true);
   });
 
   it('Generates an error if the given tracerProvider is not valid', async () => {
@@ -179,9 +178,8 @@ describe('Firestore Tracing Controls', () => {
         openTelemetry: {tracerProvider: 123},
       });
     } catch (e) {
-      expect(
-        e.toString() ===
-          "The object provided for 'tracerProvider' does not conform to the TracerProvider interface.",
+      expect((e as Error).message).toBe(
+        "The object provided for 'tracerProvider' does not conform to the TracerProvider interface.",
       );
     }
   });
@@ -190,11 +188,11 @@ describe('Firestore Tracing Controls', () => {
     const tracerProvider = new NodeTracerProvider();
     const tracer = tracerProvider.getTracer('test-tracer');
     const otelSpan = tracer.startSpan('test-span');
-    const span = new (require('../src/telemetry/span').Span)(otelSpan);
+    const span = new Span(otelSpan);
 
     span.end();
     expect(() => {
       span.addEvent('late-event', {key: 'value'});
-    }).to.not.throw();
+    }).not.toThrow();
   });
 });

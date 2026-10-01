@@ -14,8 +14,7 @@
 
 import {DocumentData} from '@google-cloud/firestore';
 
-import {describe, it, beforeEach, afterEach} from 'mocha';
-import {expect} from 'chai';
+import {describe, it, beforeEach, afterEach, expect} from 'vitest';
 
 import {Status} from 'google-gax';
 import {
@@ -57,7 +56,7 @@ describe('set() method', () => {
   afterEach(() => verifyInstance(firestore));
 
   it('requires document name', () => {
-    expect(() => (writeBatch as InvalidApiUsage).set()).to.throw(
+    expect(() => (writeBatch as InvalidApiUsage).set()).toThrow(
       'Value for argument "documentRef" is not a valid DocumentReference.',
     );
   });
@@ -65,7 +64,7 @@ describe('set() method', () => {
   it('requires object', () => {
     expect(() =>
       (writeBatch as InvalidApiUsage).set(firestore.doc('sub/doc')),
-    ).to.throw(
+    ).toThrow(
       'Value for argument "data" is not a valid Firestore document. Input is not a plain JavaScript object.',
     );
   });
@@ -93,7 +92,7 @@ describe('set() method', () => {
     const ref = firestore.doc('sub/doc').withConverter(converter);
     expect(() =>
       writeBatch.set(ref, {title: 'foo'} as Partial<Post>, {merge: true}),
-    ).to.throw(
+    ).toThrow(
       'Value for argument "data" is not a valid Firestore document. Cannot use "undefined" as a Firestore value (found in field "author").',
     );
   });
@@ -113,7 +112,7 @@ describe('delete() method', () => {
   afterEach(() => verifyInstance(firestore));
 
   it('requires document name', () => {
-    expect(() => (writeBatch as InvalidApiUsage).delete()).to.throw(
+    expect(() => (writeBatch as InvalidApiUsage).delete()).toThrow(
       'Value for argument "documentRef" is not a valid DocumentReference.',
     );
   });
@@ -139,7 +138,7 @@ describe('update() method', () => {
   afterEach(() => verifyInstance(firestore));
 
   it('requires document name', () => {
-    expect(() => writeBatch.update({} as InvalidApiUsage, {})).to.throw(
+    expect(() => writeBatch.update({} as InvalidApiUsage, {})).toThrow(
       'Value for argument "documentRef" is not a valid DocumentReference.',
     );
   });
@@ -150,7 +149,7 @@ describe('update() method', () => {
         firestore.doc('sub/doc'),
         firestore.doc('sub/doc') as InvalidApiUsage,
       );
-    }).to.throw(
+    }).toThrow(
       'Update() requires either a single JavaScript object or an alternating list of field/value pairs that can be followed by an optional precondition. Value for argument "dataOrField" is not a valid Firestore document. Detected an object of type "DocumentReference" that doesn\'t match the expected instance. Please ensure that the Firestore types you are using are from the same NPM package.',
     );
   });
@@ -184,7 +183,7 @@ describe('create() method', () => {
   afterEach(() => verifyInstance(firestore));
 
   it('requires document name', () => {
-    expect(() => (writeBatch as InvalidApiUsage).create()).to.throw(
+    expect(() => (writeBatch as InvalidApiUsage).create()).toThrow(
       'Value for argument "documentRef" is not a valid DocumentReference.',
     );
   });
@@ -192,7 +191,7 @@ describe('create() method', () => {
   it('requires object', () => {
     expect(() => {
       (writeBatch as InvalidApiUsage).create(firestore.doc('sub/doc'));
-    }).to.throw(
+    }).toThrow(
       'Value for argument "data" is not a valid Firestore document. Input is not a plain JavaScript object.',
     );
   });
@@ -213,9 +212,9 @@ describe('batch support', () => {
   beforeEach(() => {
     const overrides: ApiOverride = {
       commit: (request, options) => {
-        expect(options!.retry!.retryCodes).contains(Status.ABORTED);
+        expect(options!.retry!.retryCodes).toContain(Status.ABORTED);
 
-        expect(request).to.deep.eq({
+        expect(request).toEqual({
           database: `projects/${PROJECT_ID}/databases/(default)`,
           writes: [
             {
@@ -303,10 +302,10 @@ describe('batch support', () => {
   afterEach(() => verifyInstance(firestore));
 
   function verifyResponse(writeResults: WriteResult[]) {
-    expect(writeResults[0].writeTime.isEqual(new Timestamp(0, 0))).to.be.true;
-    expect(writeResults[1].writeTime.isEqual(new Timestamp(1, 1))).to.be.true;
-    expect(writeResults[2].writeTime.isEqual(new Timestamp(2, 2))).to.be.true;
-    expect(writeResults[3].writeTime.isEqual(new Timestamp(3, 3))).to.be.true;
+    expect(writeResults[0].writeTime.isEqual(new Timestamp(0, 0))).toBe(true);
+    expect(writeResults[1].writeTime.isEqual(new Timestamp(1, 1))).toBe(true);
+    expect(writeResults[2].writeTime.isEqual(new Timestamp(2, 2))).toBe(true);
+    expect(writeResults[3].writeTime.isEqual(new Timestamp(3, 3))).toBe(true);
   }
 
   it('accepts multiple operations', () => {
@@ -348,7 +347,7 @@ describe('batch support', () => {
         throw new Error('Unexpected success in Promise');
       })
       .catch(err => {
-        expect(err.message).to.equal('Expected exception');
+        expect(err.message).toBe('Expected exception');
       });
   });
 
@@ -364,7 +363,7 @@ describe('batch support', () => {
 
     expect(() => {
       batch.set(documentName, {});
-    }).to.throw('Cannot modify a WriteBatch that has been committed.');
+    }).toThrow('Cannot modify a WriteBatch that has been committed.');
 
     return promise;
   });
@@ -430,7 +429,7 @@ describe('batch support', () => {
       batch.set(documentName, {});
 
       return batch.commit().then(results => {
-        expect(results[0].isEqual(results[1])).to.be.true;
+        expect(results[0].isEqual(results[1])).toBe(true);
       });
     });
   });

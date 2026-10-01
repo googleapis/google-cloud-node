@@ -11,11 +11,9 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-import {afterEach, beforeEach, describe, it} from 'mocha';
+import {afterEach, beforeEach, describe, expect, it, vi} from 'vitest';
 import {fail} from 'assert';
-import {expect} from 'chai';
 import {GoogleError, Status} from 'google-gax';
-import sinon = require('sinon');
 
 import {google} from '../protos/firestore_v1_proto_api';
 
@@ -39,14 +37,14 @@ import {
   result,
   select,
   startAt as queryStartAt,
-} from './query';
+} from './util/query_helpers';
 import {
   createRequest,
   deleteOp,
   failedResponse,
   mergeResponses,
   successResponse,
-} from './bulk-writer';
+} from './util/bulk_writer_helpers';
 import {MAX_REQUEST_RETRIES} from '../src';
 
 import api = google.firestore.v1;
@@ -72,8 +70,10 @@ describe('recursiveDelete() method:', () => {
   afterEach(async () => {
     await verifyInstance(firestore);
     setTimeoutHandler(setTimeout);
-    expect(batchWriteError, 'batchWrite should not have errored').to.be
-      .undefined;
+    expect(
+      batchWriteError,
+      'batchWrite should not have errored',
+    ).toBeUndefined();
   });
 
   function instantiateInstance(
@@ -92,7 +92,7 @@ describe('recursiveDelete() method:', () => {
         }
         const expected = createRequest(documents.map(docId => deleteOp(docId)));
         try {
-          expect(request.writes).to.deep.equal(expected.writes);
+          expect(request.writes).toEqual(expected.writes);
         } catch (e) {
           batchWriteError = e;
         }
@@ -353,7 +353,7 @@ describe('recursiveDelete() method:', () => {
         minPendingOps,
         bulkWriter,
       );
-      expect(called).to.deep.equal([1, 2]);
+      expect(called).toEqual([1, 2]);
     });
   });
 
@@ -397,8 +397,8 @@ describe('recursiveDelete() method:', () => {
         );
         fail('recursiveDelete should have failed');
       } catch (err) {
-        expect(err.code).to.equal(Status.PERMISSION_DENIED);
-        expect(err.message).to.contain('2 deletes failed');
+        expect(err.code).toBe(Status.PERMISSION_DENIED);
+        expect(err.message).toContain('2 deletes failed');
       }
     });
 
@@ -417,8 +417,8 @@ describe('recursiveDelete() method:', () => {
         );
         fail('recursiveDelete() should have failed');
       } catch (err) {
-        expect(err.message).to.contain('2 deletes failed');
-        expect(err.stack).to.contain('User provided result callback failed');
+        expect(err.message).toContain('2 deletes failed');
+        expect(err.stack).toContain('User provided result callback failed');
       }
     });
 
@@ -444,8 +444,8 @@ describe('recursiveDelete() method:', () => {
         firestore.collection('collectionId').doc('bob'),
         bulkWriter,
       );
-      expect(results).to.deep.equal([1, 2, 3]);
-      expect(refs).to.deep.equal([
+      expect(results).toEqual([1, 2, 3]);
+      expect(refs).toEqual([
         'collectionId/bob/children/brian',
         'collectionId/bob/children/charlie',
         'collectionId/bob',
@@ -478,12 +478,12 @@ describe('recursiveDelete() method:', () => {
         );
         fail('recursiveDelete() should have failed');
       } catch (err) {
-        expect(codes).to.deep.equal([
+        expect(codes).toEqual([
           Status.PERMISSION_DENIED,
           Status.UNAVAILABLE,
           Status.INTERNAL,
         ]);
-        expect(refs).to.deep.equal([
+        expect(refs).toEqual([
           'collectionId/bob/children/brian',
           'collectionId/bob/children/charlie',
           'collectionId/bob',
@@ -502,7 +502,7 @@ describe('recursiveDelete() method:', () => {
       try {
         await firestore.recursiveDelete(firestore.doc('root/doc'));
       } catch (err) {
-        expect(err.stack).to.contain('batchWrite() failed in test');
+        expect(err.stack).toContain('batchWrite() failed in test');
       }
     });
 
@@ -520,10 +520,10 @@ describe('recursiveDelete() method:', () => {
         await firestore.recursiveDelete(firestore.doc('coll/foo'));
         fail('recursiveDelete() should have failed');
       } catch (err) {
-        expect(err.code).to.equal(Status.UNAVAILABLE);
-        expect(err.stack).to.contain('Failed to fetch children documents');
-        expect(err.stack).to.contain('runQuery() error in test');
-        expect(attempts).to.equal(MAX_REQUEST_RETRIES);
+        expect(err.code).toBe(Status.UNAVAILABLE);
+        expect(err.stack).toContain('Failed to fetch children documents');
+        expect(err.stack).toContain('runQuery() error in test');
+        expect(attempts).toBe(MAX_REQUEST_RETRIES);
       }
     });
 
@@ -550,7 +550,7 @@ describe('recursiveDelete() method:', () => {
             deleteOp('d'),
           ]);
           try {
-            expect(request.writes).to.deep.equal(expected.writes);
+            expect(request.writes).toEqual(expected.writes);
           } catch (e) {
             batchWriteError = e;
           }
@@ -576,9 +576,7 @@ describe('recursiveDelete() method:', () => {
         },
         batchWrite: request => {
           try {
-            expect(request.writes).to.deep.equal(
-              expected[requestCounter]!.writes,
-            );
+            expect(request.writes).toEqual(expected[requestCounter]!.writes);
           } catch (e) {
             batchWriteError = e;
           }
@@ -618,7 +616,7 @@ describe('recursiveDelete() method:', () => {
         callbackCount++;
       });
       await firestore.recursiveDelete(firestore.collection('foo'), bulkWriter);
-      expect(callbackCount).to.equal(3);
+      expect(callbackCount).toBe(3);
     });
 
     it('default: uses the same BulkWriter instance across calls', async () => {
@@ -626,7 +624,7 @@ describe('recursiveDelete() method:', () => {
         runQuery: () => stream(),
       };
       firestore = await createInstance(overrides);
-      const spy = sinon.spy(firestore, 'bulkWriter');
+      const spy = vi.spyOn(firestore, 'bulkWriter');
 
       await firestore.recursiveDelete(firestore.collection('foo'));
       await firestore.recursiveDelete(firestore.collection('boo'));
@@ -634,17 +632,16 @@ describe('recursiveDelete() method:', () => {
 
       // Only the first recursiveDelete() call should have called the
       // constructor. Subsequent calls should have used the same bulkWriter.
-      expect(spy.callCount).to.equal(1);
+      expect(spy).toHaveBeenCalledTimes(1);
     });
 
     it('throws error if BulkWriter instance is closed', async () => {
       firestore = await createInstance();
       const bulkWriter = firestore.bulkWriter();
       await bulkWriter.close();
-      await expect(
-        () => () =>
-          firestore.recursiveDelete(firestore.collection('foo'), bulkWriter),
-      ).to.throw;
+      expect(() =>
+        firestore.recursiveDelete(firestore.collection('foo'), bulkWriter),
+      ).toThrow('BulkWriter has already been closed.');
     });
   });
 });

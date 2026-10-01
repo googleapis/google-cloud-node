@@ -12,16 +12,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import {it} from 'mocha';
-import {expect} from 'chai';
-import * as sinon from 'sinon';
 import {
   validateUserInput,
   Serializer,
   isTemporalInstant,
 } from '../src/serializer';
 import {DocumentReference, Firestore} from '../src';
-import {SinonStubbedInstance} from 'sinon';
 
 describe('validateUserInput', () => {
   it('validates the depth of nested objects and arrays - 20', () => {
@@ -174,7 +170,7 @@ describe('validateUserInput', () => {
         allowTransforms: false,
         allowUndefined: false,
       }),
-    ).to.throw(/Input object is deeper than 20 levels/i);
+    ).toThrow(/Input object is deeper than 20 levels/i);
   });
 
   it('validates the depth of nested objects - 20', () => {
@@ -248,7 +244,7 @@ describe('validateUserInput', () => {
         allowTransforms: false,
         allowUndefined: false,
       }),
-    ).to.throw(/Input object is deeper than 20 levels/i);
+    ).toThrow(/Input object is deeper than 20 levels/i);
   });
 
   it('accepts Temporal.Instant', () => {
@@ -280,18 +276,16 @@ describe('serializer', () => {
   const DATABASE_ROOT = `projects/${PROJECT_ID}/databases/(default)`;
 
   let serializer: Serializer | undefined;
-  let firestoreStub: SinonStubbedInstance<Firestore> | undefined;
+  let docStub: ReturnType<typeof vi.fn>;
 
   const mockResult = {};
 
   beforeEach(() => {
-    firestoreStub = sinon.stub({
-      doc: (_: string) => {
-        return mockResult;
-      },
+    docStub = vi.fn().mockReturnValue(mockResult as DocumentReference);
+    const firestoreStub = {
+      doc: docStub,
       _settings: {},
-    } as Firestore);
-    firestoreStub.doc.returns(mockResult as DocumentReference);
+    } as unknown as Firestore;
 
     serializer = new Serializer(firestoreStub);
   });
@@ -305,7 +299,7 @@ describe('serializer', () => {
       const instant =
         Temporal.Instant.fromEpochNanoseconds(1488872578916123456n);
       const encoded = serializer!.encodeValue(instant);
-      expect(encoded).to.deep.equal({
+      expect(encoded).toEqual({
         timestampValue: {
           seconds: '1488872578',
           nanos: 916123456,
@@ -322,7 +316,7 @@ describe('serializer', () => {
       // seconds: -2, nanos: 750000123
       const instant = Temporal.Instant.fromEpochNanoseconds(-1249999877n);
       const encoded = serializer!.encodeValue(instant);
-      expect(encoded).to.deep.equal({
+      expect(encoded).toEqual({
         timestampValue: {
           seconds: '-2',
           nanos: 750000123,
@@ -338,21 +332,21 @@ describe('serializer', () => {
         // eslint-disable-next-line @typescript-eslint/no-require-imports
         require('@js-temporal/polyfill').Temporal;
       const instant = Temporal.Instant.fromEpochNanoseconds(1000n);
-      expect(isTemporalInstant(instant)).to.be.true;
+      expect(isTemporalInstant(instant)).toBe(true);
 
       // duck typed object
       const duckInstant = {
         [Symbol.toStringTag]: 'Temporal.Instant',
         epochNanoseconds: 1000n,
       };
-      expect(isTemporalInstant(duckInstant)).to.be.true;
+      expect(isTemporalInstant(duckInstant)).toBe(true);
 
-      expect(isTemporalInstant(null)).to.be.false;
-      expect(isTemporalInstant(undefined)).to.be.false;
-      expect(isTemporalInstant({})).to.be.false;
-      expect(isTemporalInstant(new Date())).to.be.false;
-      expect(isTemporalInstant('string')).to.be.false;
-      expect(isTemporalInstant(123)).to.be.false;
+      expect(isTemporalInstant(null)).toBe(false);
+      expect(isTemporalInstant(undefined)).toBe(false);
+      expect(isTemporalInstant({})).toBe(false);
+      expect(isTemporalInstant(new Date())).toBe(false);
+      expect(isTemporalInstant('string')).toBe(false);
+      expect(isTemporalInstant(123)).toBe(false);
     });
   });
 
@@ -362,8 +356,9 @@ describe('serializer', () => {
         referenceValue: `${DATABASE_ROOT}/documents/foo/bar`,
       }) as DocumentReference;
 
-      expect(result).to.equal(mockResult);
-      expect(firestoreStub!.doc.calledOnceWith('foo/bar')).to.be.true;
+      expect(result).toBe(mockResult);
+      expect(docStub).toHaveBeenCalledTimes(1);
+      expect(docStub).toHaveBeenCalledWith('foo/bar');
     });
 
     it('throws when given a reference to collection', () => {
@@ -371,7 +366,7 @@ describe('serializer', () => {
         serializer!.decodeValue({
           referenceValue: `${DATABASE_ROOT}/documents/foo`,
         }) as DocumentReference;
-      }).to.throw(
+      }).toThrow(
         'The SDK does not currently support decoding referenceValues for collections or partitions.',
       );
     });
@@ -381,7 +376,7 @@ describe('serializer', () => {
         serializer!.decodeValue({
           referenceValue: `${DATABASE_ROOT}/documents`,
         }) as DocumentReference;
-      }).to.throw(
+      }).toThrow(
         'The SDK does not currently support decoding referenceValues for collections or partitions.',
       );
     });

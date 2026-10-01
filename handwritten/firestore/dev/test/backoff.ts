@@ -12,20 +12,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import {describe, it, beforeEach, before, after} from 'mocha';
-import {expect, use} from 'chai';
-import * as chaiAsPromised from 'chai-as-promised';
-
 import {ExponentialBackoff, setTimeoutHandler} from '../src/backoff';
-
-use(chaiAsPromised);
 
 const nop = () => {};
 
 describe('ExponentialBackoff', () => {
   let observedDelays: number[] = [];
 
-  before(() => {
+  beforeAll(() => {
     setTimeoutHandler((callback, timeout) => {
       observedDelays.push(timeout);
       callback();
@@ -36,16 +30,16 @@ describe('ExponentialBackoff', () => {
     observedDelays = [];
   });
 
-  after(() => setTimeoutHandler(setTimeout));
+  afterAll(() => setTimeoutHandler(setTimeout));
 
   function assertDelayEquals(expected: number) {
-    expect(observedDelays.shift()).to.equal(expected);
+    expect(observedDelays.shift()).toBe(expected);
   }
 
   function assertDelayBetween(low: number, high: number) {
     const actual = observedDelays.shift()!;
-    expect(actual).to.be.at.least(low);
-    expect(actual).to.be.at.most(high);
+    expect(actual).toBeGreaterThanOrEqual(low);
+    expect(actual).toBeLessThanOrEqual(high);
   }
 
   it("doesn't delay first attempt", async () => {
@@ -151,13 +145,13 @@ describe('ExponentialBackoff', () => {
       backoffFactor: 2,
       jitterFactor: 0.1,
     });
-    expect(backoff.retryCount).to.equal(0);
+    expect(backoff.retryCount).toBe(0);
     await backoff.backoffAndWait().then(nop);
-    expect(backoff.retryCount).to.equal(1);
+    expect(backoff.retryCount).toBe(1);
     await backoff.backoffAndWait().then(nop);
-    expect(backoff.retryCount).to.equal(2);
+    expect(backoff.retryCount).toBe(2);
     backoff.reset();
-    expect(backoff.retryCount).to.equal(0);
+    expect(backoff.retryCount).toBe(0);
   });
 
   it('cannot queue two backoffAndWait() operations simultaneously', async () => {
@@ -167,7 +161,7 @@ describe('ExponentialBackoff', () => {
     setTimeoutHandler(() => {});
 
     void backoff.backoffAndWait().then(nop);
-    await expect(backoff.backoffAndWait()).to.eventually.be.rejectedWith(
+    await expect(backoff.backoffAndWait()).rejects.toThrow(
       'A backoff operation is already in progress.',
     );
   });

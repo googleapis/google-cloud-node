@@ -12,36 +12,40 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import {expect, use} from 'chai';
-import * as chaiAsPromised from 'chai-as-promised';
+import {expect} from 'vitest';
 import {AggregateField} from '../src/aggregate';
-
-use(chaiAsPromised);
 
 describe('aggregate field equality checks', () => {
   it('equates two equal aggregate fields', () => {
-    expect(AggregateField.count().isEqual(AggregateField.count())).to.be.true;
-    expect(AggregateField.sum('foo').isEqual(AggregateField.sum('foo'))).to.be
-      .true;
-    expect(AggregateField.average('bar').isEqual(AggregateField.average('bar')))
-      .to.be.true;
-    expect(AggregateField.sum('foo.bar').isEqual(AggregateField.sum('foo.bar')))
-      .to.be.true;
+    expect(AggregateField.count().isEqual(AggregateField.count())).toBe(true);
+    expect(AggregateField.sum('foo').isEqual(AggregateField.sum('foo'))).toBe(
+      true,
+    );
+    expect(
+      AggregateField.average('bar').isEqual(AggregateField.average('bar')),
+    ).toBe(true);
+    expect(
+      AggregateField.sum('foo.bar').isEqual(AggregateField.sum('foo.bar')),
+    ).toBe(true);
     expect(
       AggregateField.average('bar.baz').isEqual(
         AggregateField.average('bar.baz'),
       ),
-    ).to.be.true;
+    ).toBe(true);
   });
 
   it('differentiates two different aggregate fields', () => {
-    expect(AggregateField.sum('foo').isEqual(AggregateField.sum('bar'))).to.be
-      .false;
-    expect(AggregateField.average('foo').isEqual(AggregateField.average('bar')))
-      .to.be.false;
-    expect(AggregateField.average('foo').isEqual(AggregateField.sum('foo'))).to
-      .be.false;
-    expect(AggregateField.sum('foo').isEqual(AggregateField.average('foo'))).to
-      .be.false;
+    expect(AggregateField.sum('foo').isEqual(AggregateField.sum('bar'))).toBe(
+      false,
+    );
+    expect(
+      AggregateField.average('foo').isEqual(AggregateField.average('bar')),
+    ).toBe(false);
+    expect(
+      AggregateField.average('foo').isEqual(AggregateField.sum('foo')),
+    ).toBe(false);
+    expect(
+      AggregateField.sum('foo').isEqual(AggregateField.average('foo')),
+    ).toBe(false);
   });
 });

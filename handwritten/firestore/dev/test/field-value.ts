@@ -12,8 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import {describe, it} from 'mocha';
-import {expect} from 'chai';
+import {describe, it, expect} from 'vitest';
 
 import {
   MaxKey,
@@ -51,21 +50,21 @@ function genericFieldValueTests(methodName: string, sentinel: FieldValue) {
       const expectedErr = new RegExp(
         `${methodName}\\(\\) cannot be used inside of an array`,
       );
-      expect(() => docRef.set({a: [sentinel]})).to.throw(expectedErr);
-      expect(() => docRef.set({a: {b: [sentinel]}})).to.throw(expectedErr);
+      expect(() => docRef.set({a: [sentinel]})).toThrow(expectedErr);
+      expect(() => docRef.set({a: {b: [sentinel]}})).toThrow(expectedErr);
       expect(() =>
         docRef.set({
           a: [{b: sentinel}],
         }),
-      ).to.throw(expectedErr);
-      expect(() => docRef.set({a: {b: {c: [sentinel]}}})).to.throw(expectedErr);
+      ).toThrow(expectedErr);
+      expect(() => docRef.set({a: {b: {c: [sentinel]}}})).toThrow(expectedErr);
     });
   });
 
   it("can't be used inside arrayUnion()", () => {
     return createInstance().then(firestore => {
       const docRef = firestore.doc('collectionId/documentId');
-      expect(() => docRef.set({foo: FieldValue.arrayUnion(sentinel)})).to.throw(
+      expect(() => docRef.set({foo: FieldValue.arrayUnion(sentinel)})).toThrow(
         `Element at index 0 is not a valid array element. ${methodName}() cannot be used inside of an array.`,
       );
     });
@@ -74,9 +73,7 @@ function genericFieldValueTests(methodName: string, sentinel: FieldValue) {
   it("can't be used inside arrayRemove()", () => {
     return createInstance().then(firestore => {
       const docRef = firestore.doc('collectionId/documentId');
-      expect(() =>
-        docRef.set({foo: FieldValue.arrayRemove(sentinel)}),
-      ).to.throw(
+      expect(() => docRef.set({foo: FieldValue.arrayRemove(sentinel)})).toThrow(
         `Element at index 0 is not a valid array element. ${methodName}() cannot be used inside of an array.`,
       );
     });
@@ -85,10 +82,10 @@ function genericFieldValueTests(methodName: string, sentinel: FieldValue) {
   it("can't be used with queries", () => {
     return createInstance().then(firestore => {
       const collRef = firestore.collection('coll');
-      expect(() => collRef.where('a', '==', sentinel)).to.throw(
+      expect(() => collRef.where('a', '==', sentinel)).toThrow(
         `Value for argument "value" is not a valid query constraint. ${methodName}() can only be used in set(), create() or update().`,
       );
-      expect(() => collRef.orderBy('a').startAt(sentinel)).to.throw(
+      expect(() => collRef.orderBy('a').startAt(sentinel)).toThrow(
         `Element at index 0 is not a valid query constraint. ${methodName}() can only be used in set(), create() or update().`,
       );
     });
@@ -97,7 +94,7 @@ function genericFieldValueTests(methodName: string, sentinel: FieldValue) {
 
 describe('FieldValue.arrayUnion()', () => {
   it('requires one argument', () => {
-    expect(() => FieldValue.arrayUnion()).to.throw(
+    expect(() => FieldValue.arrayUnion()).toThrow(
       'Function "FieldValue.arrayUnion()" requires at least 1 argument.',
     );
   });
@@ -106,8 +103,8 @@ describe('FieldValue.arrayUnion()', () => {
     const arrayUnionFoo1 = FieldValue.arrayUnion('foo');
     const arrayUnionFoo2 = FieldValue.arrayUnion('foo');
     const arrayUnionBar = FieldValue.arrayUnion('bar');
-    expect(arrayUnionFoo1.isEqual(arrayUnionFoo2)).to.be.true;
-    expect(arrayUnionFoo1.isEqual(arrayUnionBar)).to.be.false;
+    expect(arrayUnionFoo1.isEqual(arrayUnionFoo2)).toBe(true);
+    expect(arrayUnionFoo1.isEqual(arrayUnionBar)).toBe(false);
   });
 
   it('can be used with set()', () => {
@@ -139,7 +136,7 @@ describe('FieldValue.arrayUnion()', () => {
   it('must not contain directly nested arrays', () => {
     return createInstance().then(firestore => {
       const docRef = firestore.doc('collectionId/documentId');
-      expect(() => docRef.set({foo: FieldValue.arrayUnion([])})).to.throw(
+      expect(() => docRef.set({foo: FieldValue.arrayUnion([])})).toThrow(
         'Element at index 0 is not a valid array element. Nested arrays are ' +
           'not supported.',
       );
@@ -151,7 +148,7 @@ describe('FieldValue.arrayUnion()', () => {
 
 describe('FieldValue.increment()', () => {
   it('requires one argument', () => {
-    expect(() => (FieldValue as InvalidApiUsage).increment()).to.throw(
+    expect(() => (FieldValue as InvalidApiUsage).increment()).toThrow(
       'Function "FieldValue.increment()" requires at least 1 argument.',
     );
   });
@@ -162,7 +159,7 @@ describe('FieldValue.increment()', () => {
         return firestore.doc('collectionId/documentId').set({
           foo: FieldValue.increment('foo' as InvalidApiUsage),
         });
-      }).to.throw(
+      }).toThrow(
         'Value for argument "FieldValue.increment()" is not a valid number',
       );
     });
@@ -174,9 +171,9 @@ describe('FieldValue.increment()', () => {
     const arrayUnionC = FieldValue.increment(42);
     const arrayUnionD = FieldValue.maximum(NaN);
     const arrayUnionE = FieldValue.maximum(NaN);
-    expect(arrayUnionA.isEqual(arrayUnionB)).to.be.true;
-    expect(arrayUnionC.isEqual(arrayUnionB)).to.be.false;
-    expect(arrayUnionD.isEqual(arrayUnionE)).to.be.true;
+    expect(arrayUnionA.isEqual(arrayUnionB)).toBe(true);
+    expect(arrayUnionC.isEqual(arrayUnionB)).toBe(false);
+    expect(arrayUnionD.isEqual(arrayUnionE)).toBe(true);
   });
 
   it('can be used with set()', () => {
@@ -208,7 +205,7 @@ describe('FieldValue.increment()', () => {
 
 describe('FieldValue.minimum()', () => {
   it('requires one argument', () => {
-    expect(() => (FieldValue as InvalidApiUsage).minimum()).to.throw(
+    expect(() => (FieldValue as InvalidApiUsage).minimum()).toThrow(
       'Function "FieldValue.minimum()" requires at least 1 argument.',
     );
   });
@@ -219,7 +216,7 @@ describe('FieldValue.minimum()', () => {
         return firestore.doc('collectionId/documentId').set({
           foo: FieldValue.minimum('foo' as InvalidApiUsage),
         });
-      }).to.throw(
+      }).toThrow(
         'Value for argument "FieldValue.minimum()" is not a valid number',
       );
     });
@@ -231,9 +228,9 @@ describe('FieldValue.minimum()', () => {
     const arrayUnionC = FieldValue.minimum(42);
     const arrayUnionD = FieldValue.maximum(NaN);
     const arrayUnionE = FieldValue.maximum(NaN);
-    expect(arrayUnionA.isEqual(arrayUnionB)).to.be.true;
-    expect(arrayUnionC.isEqual(arrayUnionB)).to.be.false;
-    expect(arrayUnionD.isEqual(arrayUnionE)).to.be.true;
+    expect(arrayUnionA.isEqual(arrayUnionB)).toBe(true);
+    expect(arrayUnionC.isEqual(arrayUnionB)).toBe(false);
+    expect(arrayUnionD.isEqual(arrayUnionE)).toBe(true);
   });
 
   it('can be used with set()', () => {
@@ -265,7 +262,7 @@ describe('FieldValue.minimum()', () => {
 
 describe('FieldValue.maximum()', () => {
   it('requires one argument', () => {
-    expect(() => (FieldValue as InvalidApiUsage).maximum()).to.throw(
+    expect(() => (FieldValue as InvalidApiUsage).maximum()).toThrow(
       'Function "FieldValue.maximum()" requires at least 1 argument.',
     );
   });
@@ -276,7 +273,7 @@ describe('FieldValue.maximum()', () => {
         return firestore.doc('collectionId/documentId').set({
           foo: FieldValue.maximum('foo' as InvalidApiUsage),
         });
-      }).to.throw(
+      }).toThrow(
         'Value for argument "FieldValue.maximum()" is not a valid number',
       );
     });
@@ -288,9 +285,9 @@ describe('FieldValue.maximum()', () => {
     const arrayUnionC = FieldValue.maximum(42);
     const arrayUnionD = FieldValue.maximum(NaN);
     const arrayUnionE = FieldValue.maximum(NaN);
-    expect(arrayUnionA.isEqual(arrayUnionB)).to.be.true;
-    expect(arrayUnionC.isEqual(arrayUnionB)).to.be.false;
-    expect(arrayUnionD.isEqual(arrayUnionE)).to.be.true;
+    expect(arrayUnionA.isEqual(arrayUnionB)).toBe(true);
+    expect(arrayUnionC.isEqual(arrayUnionB)).toBe(false);
+    expect(arrayUnionD.isEqual(arrayUnionE)).toBe(true);
   });
 
   it('can be used with set()', () => {
@@ -322,7 +319,7 @@ describe('FieldValue.maximum()', () => {
 
 describe('FieldValue.arrayRemove()', () => {
   it('requires one argument', () => {
-    expect(() => FieldValue.arrayRemove()).to.throw(
+    expect(() => FieldValue.arrayRemove()).toThrow(
       'Function "FieldValue.arrayRemove()" requires at least 1 argument.',
     );
   });
@@ -331,8 +328,8 @@ describe('FieldValue.arrayRemove()', () => {
     const arrayRemoveFoo1 = FieldValue.arrayUnion('foo');
     const arrayRemoveFoo2 = FieldValue.arrayUnion('foo');
     const arrayRemoveBar = FieldValue.arrayUnion('bar');
-    expect(arrayRemoveFoo1.isEqual(arrayRemoveFoo2)).to.be.true;
-    expect(arrayRemoveFoo1.isEqual(arrayRemoveBar)).to.be.false;
+    expect(arrayRemoveFoo1.isEqual(arrayRemoveFoo2)).toBe(true);
+    expect(arrayRemoveFoo1.isEqual(arrayRemoveBar)).toBe(false);
   });
 
   it('can be used with set()', () => {
@@ -363,7 +360,7 @@ describe('FieldValue.arrayRemove()', () => {
   it('must not contain directly nested arrays', () => {
     return createInstance().then(firestore => {
       const docRef = firestore.doc('collectionId/documentId');
-      expect(() => docRef.set({foo: FieldValue.arrayRemove([])})).to.throw(
+      expect(() => docRef.set({foo: FieldValue.arrayRemove([])})).toThrow(
         'Element at index 0 is not a valid array element. Nested arrays are ' +
           'not supported.',
       );
@@ -380,7 +377,7 @@ describe('FieldValue.serverTimestamp()', () => {
   it('supports isEqual()', () => {
     const firstTimestamp = FieldValue.serverTimestamp();
     const secondTimestamp = FieldValue.serverTimestamp();
-    expect(firstTimestamp.isEqual(secondTimestamp)).to.be.true;
+    expect(firstTimestamp.isEqual(secondTimestamp)).toBe(true);
   });
 
   it('can be used with set()', () => {
@@ -414,29 +411,29 @@ describe('FieldValue.serverTimestamp()', () => {
 describe('non-native types', () => {
   it('BSON timestamp members', () => {
     const value = new BsonTimestamp(57, 4);
-    expect(value.seconds).to.equal(57);
-    expect(value.increment).to.equal(4);
+    expect(value.seconds).toBe(57);
+    expect(value.increment).toBe(4);
   });
 
   it('BSON object id', () => {
     const bsonObjectId = new BsonObjectId('foobar');
-    expect(bsonObjectId.value).to.equal('foobar');
+    expect(bsonObjectId.value).toBe('foobar');
   });
 
   it('regular expression', () => {
     const regex = new RegexValue('^foo', 'i');
-    expect(regex.pattern).to.equal('^foo');
-    expect(regex.options).to.equal('i');
+    expect(regex.pattern).toBe('^foo');
+    expect(regex.options).toBe('i');
   });
 
   it('32-bit int', () => {
     const intValue = new Int32Value(255);
-    expect(intValue.value).to.equal(255);
+    expect(intValue.value).toBe(255);
   });
 
   it('128-bit decimal', () => {
     const decimal = new Decimal128Value('-1.2e-3');
-    expect(decimal.value).to.equal('-1.2e-3');
+    expect(decimal.value).toBe('-1.2e-3');
   });
 
   it('min key', () => {
@@ -444,10 +441,10 @@ describe('non-native types', () => {
     const value2 = MinKey.instance();
     const other = MaxKey.instance();
     // All MinKeys are equal.
-    expect(value1).to.equal(value2);
+    expect(value1).toBe(value2);
 
     // MinKey and MaxKey are not equal.
-    expect(value1).to.not.equal(other);
+    expect(value1).not.toBe(other);
 
     // Two MinKey values are equal.
     expect(
@@ -471,7 +468,7 @@ describe('non-native types', () => {
           },
         },
       ),
-    ).to.equal(0);
+    ).toBe(0);
 
     // Null comes before MinKey.
     expect(
@@ -489,21 +486,21 @@ describe('non-native types', () => {
           },
         },
       ),
-    ).to.equal(-1);
+    ).toBe(-1);
   });
 
   it('max key', () => {
     const value1 = MaxKey.instance();
     const value2 = MaxKey.instance();
     const other = MinKey.instance();
-    expect(value1).to.equal(value2);
-    expect(value1).to.not.equal(other);
+    expect(value1).toBe(value2);
+    expect(value1).not.toBe(other);
   });
 
   it('Bytes with subtype', () => {
     const value = Bytes.fromUint8Array(Uint8Array.from([7, 8, 9]), 128);
-    expect(value.subtype).to.equal(128);
-    expect(value.data).to.deep.equal(Uint8Array.from([7, 8, 9]));
+    expect(value.subtype).toBe(128);
+    expect(value.data).toEqual(Uint8Array.from([7, 8, 9]));
   });
 
   it('Bytes can have empty data', () => {
@@ -516,10 +513,11 @@ describe('non-native types', () => {
         },
       },
     });
-    expect(value.subtype).to.equal(128);
-    expect(value.data).to.deep.equal(Uint8Array.from([]));
-    expect(value.isEqual(Bytes.fromUint8Array(Uint8Array.from([]), 128))).to.be
-      .true;
+    expect(value.subtype).toBe(128);
+    expect(value.data).toEqual(Uint8Array.from([]));
+    expect(value.isEqual(Bytes.fromUint8Array(Uint8Array.from([]), 128))).toBe(
+      true,
+    );
   });
 
   it('Bytes with subtype 0 acts as native bytes', () => {
@@ -527,12 +525,12 @@ describe('non-native types', () => {
     const native = Uint8Array.from([1, 2, 3]);
     const otherNative = Uint8Array.from([1, 2, 4]);
 
-    expect(bson.isEqual(native)).to.be.true;
-    expect(bson.isEqual(otherNative)).to.be.false;
+    expect(bson.isEqual(native)).toBe(true);
+    expect(bson.isEqual(otherNative)).toBe(false);
 
     // Serializing Bytes with subtype 0 returns bytesValue
     const proto = (bson as any)._toProto(null as any);
-    expect(proto).to.deep.equal({
+    expect(proto).toEqual({
       bytesValue: Uint8Array.from([1, 2, 3]),
     });
   });
@@ -541,14 +539,14 @@ describe('non-native types', () => {
     const bson = Bytes.fromUint8Array(Uint8Array.from([1, 2, 3]), 1);
     const native = Uint8Array.from([1, 2, 3]);
 
-    expect(bson.isEqual(native)).to.be.false;
+    expect(bson.isEqual(native)).toBe(false);
   });
 
   it('can create BSON timestamp using new', () => {
     const value1 = new BsonTimestamp(57, 4);
     const value2 = new BsonTimestamp(57, 4);
-    expect(value1.isEqual(value2)).to.be.true;
-    expect(value2.isEqual(value1)).to.be.true;
+    expect(value1.isEqual(value2)).toBe(true);
+    expect(value2.isEqual(value1)).toBe(true);
   });
 
   it('cannot create BSON timestamp with out-of-range values', () => {
@@ -559,8 +557,8 @@ describe('non-native types', () => {
     } catch (e) {
       error1 = e as Error;
     }
-    expect(error1).to.not.be.null;
-    expect(error1!.message!).to.equal(
+    expect(error1).not.toBeNull();
+    expect(error1!.message!).toBe(
       "BsonTimestamp 'seconds' must be in the range of a 32-bit unsigned integer (0-4294967295).",
     );
 
@@ -571,8 +569,8 @@ describe('non-native types', () => {
     } catch (e) {
       error2 = e as Error;
     }
-    expect(error2).to.not.be.null;
-    expect(error2!.message!).to.equal(
+    expect(error2).not.toBeNull();
+    expect(error2!.message!).toBe(
       "BsonTimestamp 'seconds' must be in the range of a 32-bit unsigned integer (0-4294967295).",
     );
 
@@ -583,8 +581,8 @@ describe('non-native types', () => {
     } catch (e) {
       error3 = e as Error;
     }
-    expect(error3).to.not.be.null;
-    expect(error3!.message!).to.equal(
+    expect(error3).not.toBeNull();
+    expect(error3!.message!).toBe(
       "BsonTimestamp 'increment' must be in the range of a 32-bit unsigned integer (0-4294967295).",
     );
 
@@ -595,24 +593,24 @@ describe('non-native types', () => {
     } catch (e) {
       error4 = e as Error;
     }
-    expect(error4).to.not.be.null;
-    expect(error4!.message!).to.equal(
+    expect(error4).not.toBeNull();
+    expect(error4!.message!).toBe(
       "BsonTimestamp 'increment' must be in the range of a 32-bit unsigned integer (0-4294967295).",
     );
 
     // Non-integer and NaN seconds
-    expect(() => new BsonTimestamp(NaN, 1)).to.throw(
+    expect(() => new BsonTimestamp(NaN, 1)).toThrow(
       "BsonTimestamp 'seconds' must be in the range of a 32-bit unsigned integer (0-4294967295).",
     );
-    expect(() => new BsonTimestamp(1.5, 1)).to.throw(
+    expect(() => new BsonTimestamp(1.5, 1)).toThrow(
       "BsonTimestamp 'seconds' must be in the range of a 32-bit unsigned integer (0-4294967295).",
     );
 
     // Non-integer and NaN increment
-    expect(() => new BsonTimestamp(1, NaN)).to.throw(
+    expect(() => new BsonTimestamp(1, NaN)).toThrow(
       "BsonTimestamp 'increment' must be in the range of a 32-bit unsigned integer (0-4294967295).",
     );
-    expect(() => new BsonTimestamp(1, 1.5)).to.throw(
+    expect(() => new BsonTimestamp(1, 1.5)).toThrow(
       "BsonTimestamp 'increment' must be in the range of a 32-bit unsigned integer (0-4294967295).",
     );
   });
@@ -620,22 +618,22 @@ describe('non-native types', () => {
   it('can create BSON object id using new', () => {
     const bsonObjectId1 = new BsonObjectId('foobar');
     const bsonObjectId2 = new BsonObjectId('foobar');
-    expect(bsonObjectId1.isEqual(bsonObjectId2)).to.be.true;
-    expect(bsonObjectId2.isEqual(bsonObjectId1)).to.be.true;
+    expect(bsonObjectId1.isEqual(bsonObjectId2)).toBe(true);
+    expect(bsonObjectId2.isEqual(bsonObjectId1)).toBe(true);
   });
 
   it('can create regular expression using new', () => {
     const regex1 = new RegexValue('^foo', 'i');
     const regex2 = new RegexValue('^foo', 'i');
-    expect(regex1.isEqual(regex2)).to.be.true;
-    expect(regex2.isEqual(regex1)).to.be.true;
+    expect(regex1.isEqual(regex2)).toBe(true);
+    expect(regex2.isEqual(regex1)).toBe(true);
   });
 
   it('can create 32-bit int using new', () => {
     const intValue1 = new Int32Value(255);
     const intValue2 = new Int32Value(255);
-    expect(intValue1.isEqual(intValue2)).to.be.true;
-    expect(intValue2.isEqual(intValue1)).to.be.true;
+    expect(intValue1.isEqual(intValue2)).toBe(true);
+    expect(intValue2.isEqual(intValue1)).toBe(true);
   });
 
   it('can create 128-bit decimal using new', () => {
@@ -653,26 +651,26 @@ describe('non-native types', () => {
     const v12 = new Decimal128Value('0.0');
     const v13 = new Decimal128Value('0');
 
-    expect(v1.isEqual(v2)).to.be.true;
-    expect(v1.isEqual(v3)).to.be.true;
-    expect(v1.isEqual(v4)).to.be.true;
-    expect(v1.isEqual(v5)).to.be.false;
-    expect(v1.isEqual(v6)).to.be.false;
-    expect(v1.isEqual(v7)).to.be.false;
-    expect(v1.isEqual(v8)).to.be.false;
-    expect(v1.isEqual(v9)).to.be.false;
+    expect(v1.isEqual(v2)).toBe(true);
+    expect(v1.isEqual(v3)).toBe(true);
+    expect(v1.isEqual(v4)).toBe(true);
+    expect(v1.isEqual(v5)).toBe(false);
+    expect(v1.isEqual(v6)).toBe(false);
+    expect(v1.isEqual(v7)).toBe(false);
+    expect(v1.isEqual(v8)).toBe(false);
+    expect(v1.isEqual(v9)).toBe(false);
 
-    expect(v6.isEqual(v7)).to.be.true;
-    expect(v10.isEqual(v11)).to.be.true;
-    expect(v10.isEqual(v12)).to.be.true;
-    expect(v10.isEqual(v13)).to.be.true;
+    expect(v6.isEqual(v7)).toBe(true);
+    expect(v10.isEqual(v11)).toBe(true);
+    expect(v10.isEqual(v12)).toBe(true);
+    expect(v10.isEqual(v13)).toBe(true);
   });
 
   it('can create Bytes using static factories', () => {
     const value1 = Bytes.fromUint8Array(Uint8Array.from([7, 8, 9]), 128);
     const value2 = Bytes.fromUint8Array(Uint8Array.from([7, 8, 9]), 128);
-    expect(value1.isEqual(value2)).to.be.true;
-    expect(value2.isEqual(value1)).to.be.true;
+    expect(value1.isEqual(value2)).toBe(true);
+    expect(value2.isEqual(value1)).toBe(true);
   });
 
   it('isEqual returns false for null, undefined, and non-matching objects', () => {
@@ -688,60 +686,61 @@ describe('non-native types', () => {
     ];
 
     const regex = new RegexValue('^foo', 'i');
-    expect(regex.isEqual(regex)).to.be.true;
+    expect(regex.isEqual(regex)).toBe(true);
     for (const other of nonMatching) {
-      expect(regex.isEqual(other)).to.be.false;
+      expect(regex.isEqual(other)).toBe(false);
     }
-    expect(regex.isEqual(new RegexValue('^bar', 'i'))).to.be.false;
-    expect(regex.isEqual(new RegexValue('^foo', 'g'))).to.be.false;
+    expect(regex.isEqual(new RegexValue('^bar', 'i'))).toBe(false);
+    expect(regex.isEqual(new RegexValue('^foo', 'g'))).toBe(false);
 
     const oid = new BsonObjectId('507f1f77bcf86cd799439011');
-    expect(oid.isEqual(oid)).to.be.true;
+    expect(oid.isEqual(oid)).toBe(true);
     for (const other of nonMatching) {
-      expect(oid.isEqual(other)).to.be.false;
+      expect(oid.isEqual(other)).toBe(false);
     }
-    expect(oid.isEqual(new BsonObjectId('507f1f77bcf86cd799439012'))).to.be
-      .false;
+    expect(oid.isEqual(new BsonObjectId('507f1f77bcf86cd799439012'))).toBe(
+      false,
+    );
 
     const int32 = new Int32Value(42);
-    expect(int32.isEqual(int32)).to.be.true;
+    expect(int32.isEqual(int32)).toBe(true);
     for (const other of nonMatching) {
-      expect(int32.isEqual(other)).to.be.false;
+      expect(int32.isEqual(other)).toBe(false);
     }
-    expect(int32.isEqual(new Int32Value(43))).to.be.false;
+    expect(int32.isEqual(new Int32Value(43))).toBe(false);
 
     const decimal = new Decimal128Value('123.456');
-    expect(decimal.isEqual(decimal)).to.be.true;
+    expect(decimal.isEqual(decimal)).toBe(true);
     for (const other of nonMatching) {
-      expect(decimal.isEqual(other)).to.be.false;
+      expect(decimal.isEqual(other)).toBe(false);
     }
-    expect(decimal.isEqual(new Decimal128Value('123.457'))).to.be.false;
+    expect(decimal.isEqual(new Decimal128Value('123.457'))).toBe(false);
 
     const timestamp = new BsonTimestamp(100, 200);
-    expect(timestamp.isEqual(timestamp)).to.be.true;
+    expect(timestamp.isEqual(timestamp)).toBe(true);
     for (const other of nonMatching) {
-      expect(timestamp.isEqual(other)).to.be.false;
+      expect(timestamp.isEqual(other)).toBe(false);
     }
-    expect(timestamp.isEqual(new BsonTimestamp(100, 201))).to.be.false;
-    expect(timestamp.isEqual(new BsonTimestamp(101, 200))).to.be.false;
+    expect(timestamp.isEqual(new BsonTimestamp(100, 201))).toBe(false);
+    expect(timestamp.isEqual(new BsonTimestamp(101, 200))).toBe(false);
 
     // Cross-type comparisons
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    expect(regex.isEqual(oid as any)).to.be.false;
+    expect(regex.isEqual(oid as any)).toBe(false);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    expect(oid.isEqual(int32 as any)).to.be.false;
+    expect(oid.isEqual(int32 as any)).toBe(false);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    expect(int32.isEqual(decimal as any)).to.be.false;
+    expect(int32.isEqual(decimal as any)).toBe(false);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    expect(decimal.isEqual(timestamp as any)).to.be.false;
+    expect(decimal.isEqual(timestamp as any)).toBe(false);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    expect(timestamp.isEqual(regex as any)).to.be.false;
+    expect(timestamp.isEqual(regex as any)).toBe(false);
   });
 
   it('Bytes.fromBase64String and Bytes._fromProto do not leak Buffer pool slab memory', () => {
     const base64 = Buffer.from([1, 2, 3, 4]).toString('base64');
     const b1 = Bytes.fromBase64String(base64, 5);
-    expect(b1.data.buffer.byteLength).to.equal(b1.data.byteLength);
+    expect(b1.data.buffer.byteLength).toBe(b1.data.byteLength);
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const b2 = (Bytes as any)._fromProto({
@@ -753,7 +752,7 @@ describe('non-native types', () => {
         },
       },
     });
-    expect(b2.data.buffer.byteLength).to.equal(b2.data.byteLength);
+    expect(b2.data.buffer.byteLength).toBe(b2.data.byteLength);
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const b3 = (Bytes as any)._fromProto({
@@ -765,6 +764,6 @@ describe('non-native types', () => {
         },
       },
     });
-    expect(b3.data.buffer.byteLength).to.equal(b3.data.byteLength);
+    expect(b3.data.buffer.byteLength).toBe(b3.data.byteLength);
   });
 });

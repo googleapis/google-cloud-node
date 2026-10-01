@@ -12,8 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import {describe, it, beforeEach, afterEach} from 'mocha';
-import {expect} from 'chai';
 import * as through2 from 'through2';
 
 import {DocumentReference, Firestore, setLogFunction} from '../src';
@@ -48,51 +46,51 @@ describe('Collection interface', () => {
 
   it('has doc() method', () => {
     const collectionRef = firestore.collection('colId');
-    expect(collectionRef.doc);
+    expect(collectionRef.doc).toBeDefined();
 
     let documentRef = collectionRef.doc('docId');
-    expect(documentRef).to.be.an.instanceOf(DocumentReference);
-    expect(collectionRef.id).to.equal('colId');
-    expect(documentRef.id).to.equal('docId');
+    expect(documentRef).toBeInstanceOf(DocumentReference);
+    expect(collectionRef.id).toBe('colId');
+    expect(documentRef.id).toBe('docId');
 
-    expect(() => collectionRef.doc(false as InvalidApiUsage)).to.throw(
+    expect(() => collectionRef.doc(false as InvalidApiUsage)).toThrow(
       'Value for argument "documentPath" is not a valid resource path. Path must be a non-empty string.',
     );
-    expect(() => collectionRef.doc(null as InvalidApiUsage)).to.throw(
+    expect(() => collectionRef.doc(null as InvalidApiUsage)).toThrow(
       'Value for argument "documentPath" is not a valid resource path. Path must be a non-empty string.',
     );
-    expect(() => collectionRef.doc('')).to.throw(
+    expect(() => collectionRef.doc('')).toThrow(
       'Value for argument "documentPath" is not a valid resource path. Path must be a non-empty string.',
     );
-    expect(() => (collectionRef as InvalidApiUsage).doc(undefined)).to.throw(
+    expect(() => (collectionRef as InvalidApiUsage).doc(undefined)).toThrow(
       'Value for argument "documentPath" is not a valid resource path. Path must be a non-empty string.',
     );
-    expect(() => collectionRef.doc('doc/coll')).to.throw(
+    expect(() => collectionRef.doc('doc/coll')).toThrow(
       'Value for argument "documentPath" must point to a document, but was "doc/coll". Your path does not contain an even number of components.',
     );
 
     documentRef = collectionRef.doc('docId/colId/docId');
-    expect(documentRef).to.be.an.instanceOf(DocumentReference);
+    expect(documentRef).toBeInstanceOf(DocumentReference);
   });
 
   it('has parent() method', () => {
     const collection = firestore.collection('col1/doc/col2');
-    expect(collection.path).to.equal('col1/doc/col2');
+    expect(collection.path).toBe('col1/doc/col2');
     const document = collection.parent;
-    expect(document!.path).to.equal('col1/doc');
+    expect(document!.path).toBe('col1/doc');
   });
 
   it('parent() returns null for root', () => {
     const collection = firestore.collection('col1');
-    expect(collection.parent).to.equal(null);
+    expect(collection.parent).toBeNull();
   });
 
   it('supports auto-generated ids', () => {
     const collectionRef = firestore.collection('collectionId');
     const documentRef = collectionRef.doc();
-    expect(documentRef).to.be.an.instanceOf(DocumentReference);
-    expect(collectionRef.id).to.equal('collectionId');
-    expect(documentRef.id).to.have.length(20);
+    expect(documentRef).toBeInstanceOf(DocumentReference);
+    expect(collectionRef.id).toBe('collectionId');
+    expect(documentRef.id).toHaveLength(20);
   });
 
   it('has add() method', () => {
@@ -101,11 +99,11 @@ describe('Collection interface', () => {
         // Verify that the document name uses an auto-generated id.
         const docIdRe =
           /^projects\/test-project\/databases\/\(default\)\/documents\/collectionId\/[a-zA-Z0-9]{20}$/;
-        expect(request.writes![0].update!.name).to.match(docIdRe);
+        expect(request.writes![0].update!.name).toMatch(docIdRe);
         delete request.writes![0].update!.name;
 
         // Verify that the rest of the protobuf matches.
-        expect(request).to.deep.equal({
+        expect(request).toEqual({
           database: DATABASE_ROOT,
           writes: [
             {
@@ -139,12 +137,12 @@ describe('Collection interface', () => {
     return createInstance(overrides).then(firestore => {
       const collectionRef = firestore.collection('collectionId');
       const promise = collectionRef.add({});
-      expect(promise).to.be.an.instanceOf(Promise);
+      expect(promise).toBeInstanceOf(Promise);
 
       return promise.then(documentRef => {
-        expect(documentRef).to.be.an.instanceOf(DocumentReference);
-        expect(collectionRef.id).to.equal('collectionId');
-        expect(documentRef.id).to.have.length(20);
+        expect(documentRef).toBeInstanceOf(DocumentReference);
+        expect(collectionRef.id).toBe('collectionId');
+        expect(documentRef.id).toHaveLength(20);
       });
     });
   });
@@ -152,7 +150,7 @@ describe('Collection interface', () => {
   it('has list() method', () => {
     const overrides: ApiOverride = {
       listDocuments: request => {
-        expect(request).to.deep.eq({
+        expect(request).toEqual({
           parent: `${DATABASE_ROOT}/documents/a/b`,
           collectionId: 'c',
           showMissing: true,
@@ -168,8 +166,8 @@ describe('Collection interface', () => {
         .collection('a/b/c')
         .listDocuments()
         .then(documentRefs => {
-          expect(documentRefs[0].id).to.equal('first');
-          expect(documentRefs[1].id).to.equal('second');
+          expect(documentRefs[0].id).toBe('first');
+          expect(documentRefs[1].id).toBe('second');
         });
     });
   });
@@ -178,8 +176,8 @@ describe('Collection interface', () => {
     const coll1 = firestore.collection('coll1');
     const coll1Equals = firestore.collection('coll1');
     const coll2 = firestore.collection('coll2');
-    expect(coll1.isEqual(coll1Equals)).to.be.ok;
-    expect(coll1.isEqual(coll2)).to.not.be.ok;
+    expect(coll1.isEqual(coll1Equals)).toBeTruthy();
+    expect(coll1.isEqual(coll2)).toBeFalsy();
   });
 
   it('for CollectionReference.withConverter().doc()', async () => {
@@ -212,8 +210,8 @@ describe('Collection interface', () => {
       await docRef.set(new Post('post', 'author'));
       const postData = await docRef.get();
       const post = postData.data();
-      expect(post).to.not.be.undefined;
-      expect(post!.toString()).to.equal('post, by author');
+      expect(post).not.toBeUndefined();
+      expect(post!.toString()).toBe('post, by author');
     });
   });
 
@@ -231,7 +229,7 @@ describe('Collection interface', () => {
           'title',
           'post',
         );
-        expect(request).to.deep.equal({
+        expect(request).toEqual({
           database: DATABASE_ROOT,
           writes: [
             {
@@ -272,8 +270,8 @@ describe('Collection interface', () => {
         .add(new Post('post', 'author'));
       const postData = await docRef.get();
       const post = postData.data();
-      expect(post).to.not.be.undefined;
-      expect(post!.toString()).to.equal('post, by author');
+      expect(post).not.toBeUndefined();
+      expect(post!.toString()).toBe('post, by author');
     });
   });
 
@@ -284,7 +282,7 @@ describe('Collection interface', () => {
         .withConverter(postConverter)
         .withConverter(null)
         .doc('documentId');
-      expect(() => docRef.set(new Post('post', 'author'))).to.throw();
+      expect(() => docRef.set(new Post('post', 'author'))).toThrow();
     });
   });
 
@@ -295,7 +293,7 @@ describe('Collection interface', () => {
         .withConverter(postConverter);
 
       const usersCollection = postsCollection.parent;
-      expect(usersCollection!.isEqual(firestore.doc('users/user1'))).to.be.true;
+      expect(usersCollection!.isEqual(firestore.doc('users/user1'))).toBe(true);
     });
   });
 });
