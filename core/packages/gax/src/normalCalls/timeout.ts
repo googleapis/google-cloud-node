@@ -62,7 +62,11 @@ export function addTimeoutArg(
         },
       });
       metadata = targetMetadata;
-    } else if (checkTelemetryEnabled() && metadata && typeof metadata === 'object') {
+    } else if (
+      checkTelemetryEnabled() &&
+      metadata &&
+      typeof metadata === 'object'
+    ) {
       propagation.inject(context.active(), metadata);
     }
     return (func as UnaryCall)(argument, metadata!, options, callback);

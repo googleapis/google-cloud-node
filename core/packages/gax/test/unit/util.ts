@@ -372,7 +372,9 @@ describe('util.ts', () => {
   describe('isMetadata', () => {
     it('returns true for gRPC Metadata instances', () => {
       const grpcClient = new GrpcClient();
-      const metadata = grpcClient.metadataBuilder({'x-goog-api-client': 'test'})();
+      const metadata = grpcClient.metadataBuilder({
+        'x-goog-api-client': 'test',
+      })();
       assert.strictEqual(isMetadata(metadata), true);
     });
 

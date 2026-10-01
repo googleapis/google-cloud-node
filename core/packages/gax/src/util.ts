@@ -17,7 +17,6 @@
 import type {CallSettings} from './gax';
 import type {Metadata} from './grpc';
 
-
 const PROTO_TYPE_PREFIX = 'type.googleapis.com/';
 const NUM_OF_PARTS_IN_PROTO_TYPE_NAME = 2;
 

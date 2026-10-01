@@ -195,9 +195,7 @@ describe('metadata propagation (gRPC and HTTP)', () => {
 
             // Check metadata from Call 1
             const spanCtx1 = span1.spanContext();
-            const traceparent1 = metadataCall1!.get(
-              'traceparent',
-            ) as unknown[];
+            const traceparent1 = metadataCall1!.get('traceparent') as unknown[];
             assert.strictEqual(
               traceparent1[0],
               `00-${spanCtx1.traceId}-${spanCtx1.spanId}-0${spanCtx1.traceFlags}`,
@@ -205,9 +203,7 @@ describe('metadata propagation (gRPC and HTTP)', () => {
 
             // Check metadata from Call 2
             const spanCtx2 = span2.spanContext();
-            const traceparent2 = metadataCall2!.get(
-              'traceparent',
-            ) as unknown[];
+            const traceparent2 = metadataCall2!.get('traceparent') as unknown[];
             assert.strictEqual(
               traceparent2[0],
               `00-${spanCtx2.traceId}-${spanCtx2.spanId}-0${spanCtx2.traceFlags}`,
@@ -346,7 +342,8 @@ describe('metadata propagation (gRPC and HTTP)', () => {
     };
 
     const otherArgs: GRPCCallOtherArgs = {
-      metadataBuilder: (() => null) as unknown as GRPCCallOtherArgs['metadataBuilder'],
+      metadataBuilder: (() =>
+        null) as unknown as GRPCCallOtherArgs['metadataBuilder'],
     };
 
     const handler = addTimeoutArg(
