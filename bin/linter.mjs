@@ -74,17 +74,40 @@ function runGit(args, options = {}) {
   });
 }
 
-function getChangedFilesStrict() {
-  let gitDiffArg = process.env.GIT_DIFF_ARG;
+/**
+ * Runs `git diff --name-only` for the given revision and pathspec arguments,
+ * returning existing changed TypeScript files (excluding test fixtures).
+ */
+function getGitDiffTsFiles(revArgs, pathspecArgs = []) {
+  if (revArgs.length === 0 || revArgs.some(arg => arg.startsWith('-'))) {
+    throw new Error(`Invalid git revision argument: ${revArgs.join(' ')}`);
+  }
+  const output = runGit([
+    'diff',
+    '--name-only',
+    '--diff-filter=ACMRT',
+    ...revArgs,
+    '--',
+    '*.ts',
+    ...pathspecArgs,
+  ]);
+  return output
+    .split('\n')
+    .map(f => f.trim())
+    .filter(f => f.length > 0 && existsSync(f) && !f.includes('/fixtures/'));
+}
 
-  if (!gitDiffArg) {
+function getChangedFilesStrict() {
+  const rawDiffArg = process.env.GIT_DIFF_ARG?.trim();
+
+  if (!rawDiffArg) {
     throw new Error(
-      'Strict mode is enabled, but GIT_DIFF_ARG environment variable or --git-diff-arg flag was not provided. ' +
-        'Please set the GIT_DIFF_ARG environment variable or provide --git-diff-arg <arg>.',
+      'Strict mode is enabled, but GIT_DIFF_ARG environment variable was not provided. ' +
+        'Please set the GIT_DIFF_ARG environment variable.',
     );
   }
 
-  const rawArgs = gitDiffArg.trim().split(/\s+/);
+  const rawArgs = rawDiffArg.split(/\s+/);
   const dashDashIndex = rawArgs.indexOf('--');
   const revArgs =
     dashDashIndex === -1 ? rawArgs : rawArgs.slice(0, dashDashIndex);
@@ -93,41 +116,31 @@ function getChangedFilesStrict() {
 
   // If a single ref is provided (e.g. "HEAD^1" or "origin/main"), convert to three-dot diff ("ref...HEAD")
   // to compare against the merge-base and avoid listing files modified on the base branch.
-  if (revArgs.length === 1 && !revArgs[0].includes('..')) {
+  if (
+    revArgs.length === 1 &&
+    revArgs[0] !== 'HEAD' &&
+    !revArgs[0].includes('..')
+  ) {
     revArgs[0] = `${revArgs[0]}...HEAD`;
   }
 
-  gitDiffArg =
+  const formattedDiffArg =
     pathspecArgs.length > 0
       ? `${revArgs.join(' ')} -- ${pathspecArgs.join(' ')}`
       : revArgs.join(' ');
 
   console.log(
-    `Strict mode enabled. Comparing using GIT_DIFF_ARG: ${gitDiffArg}`,
+    `Strict mode enabled. Comparing using GIT_DIFF_ARG: ${formattedDiffArg}`,
   );
 
   try {
-    const output = runGit([
-      'diff',
-      '--name-only',
-      '--diff-filter=ACMRT',
-      ...revArgs,
-      '--',
-      '*.ts',
-      ...pathspecArgs,
-    ]);
-    return output
-      .split('\n')
-      .map(f => f.trim())
-      .filter(f => f.length > 0 && existsSync(f));
+    return getGitDiffTsFiles(revArgs, pathspecArgs);
   } catch (err) {
-    if (err.status !== 1) {
-      throw new Error(
-        `Strict mode error: git diff ${gitDiffArg} failed with exit code ${err.status}.\n` +
-          `Ensure that the git reference '${gitDiffArg}' exists locally and that you have fetched the required commits/branches.\n` +
-          `Details: ${String(err.stderr || err.message || '').trim()}`,
-      );
-    }
+    throw new Error(
+      `Strict mode error: git diff ${formattedDiffArg} failed${err.status !== undefined ? ` with exit code ${err.status}` : ''}.\n` +
+        `Ensure that the git reference '${revArgs.join(' ')}' exists locally and that you have fetched the required commits/branches.\n` +
+        `Details: ${String(err.stderr || err.message || '').trim()}`,
+    );
   }
 }
 
@@ -135,53 +148,27 @@ function getChangedFilesStrict() {
  * Returns a list of changed TypeScript files comparing against target branches/references.
  */
 function getChangedFiles() {
-  const base = process.env.GITHUB_BASE_REF || 'main';
+  const base = process.env.GITHUB_BASE_REF?.trim() || 'main';
   const refsToTry = [
-    base,
-    `upstream/${base}`,
-    `origin/${base}`,
-    'FETCH_HEAD',
-    'HEAD~1',
-    'HEAD^',
+    `${base}...HEAD`,
+    `upstream/${base}...HEAD`,
+    `origin/${base}...HEAD`,
+    'FETCH_HEAD...HEAD',
+    'HEAD~1...HEAD',
+    'HEAD^...HEAD',
+    // Fallback to checking uncommitted working tree changes against HEAD if all specific refs fail
+    'HEAD',
   ];
 
   for (const ref of refsToTry) {
     try {
-      const diffRef = ref.includes('..') ? ref : `${ref}...HEAD`;
-      const output = runGit([
-        'diff',
-        '--name-only',
-        '--diff-filter=ACMRT',
-        diffRef,
-        '--',
-        '*.ts',
-      ]);
-      return output
-        .split('\n')
-        .map(f => f.trim())
-        .filter(f => f.length > 0 && existsSync(f) && !f.includes('/fixtures/'));
+      return getGitDiffTsFiles([ref]);
     } catch {
       // Continue to the next fallback ref
     }
   }
 
-  // Fallback to checking uncommitted working tree changes against HEAD if all specific refs fail
-  try {
-    const output = runGit([
-      'diff',
-      '--name-only',
-      '--diff-filter=ACMRT',
-      'HEAD',
-      '--',
-      '*.ts',
-    ]);
-    return output
-      .split('\n')
-      .map(f => f.trim())
-      .filter(f => f.length > 0 && existsSync(f) && !f.includes('/fixtures/'));
-  } catch {
-    return [];
-  }
+  return [];
 }
 
 // --- ESLint Checker ---

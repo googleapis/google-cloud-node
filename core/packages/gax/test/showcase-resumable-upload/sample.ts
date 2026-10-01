@@ -842,6 +842,55 @@ async function testQueryAndChunkGranularityScenarios(
     console.log(
       '  PASSED Part B: chunk_granularity rounded 600-byte chunkSize to 512 bytes and completed 1500-byte upload.',
     );
+
+    // --- Part C: chunk_granularity with user-style pause & resume ---
+    console.log(
+      '  --- Part C: X-Goog-Test-Scenario: chunk_granularity (pause & resume) ---',
+    );
+    const sessionC1 = await clientB.uploadMedia({
+      name: path.basename(payloadB.filePath),
+    });
+    let resumeHandle: {uploadUrl: string; chunkSize: number} | null = null;
+    await sessionC1.start({
+      uploadSource: clientB.getResumableSource(payloadB.filePath),
+      chunkSize: 128, // < 256 server granularity -> rounds up to 256
+      startHeaders: {
+        'X-Goog-Test-Scenario': 'chunk_granularity',
+      },
+      onProgress: progress => {
+        if (progress.bytesUploaded >= 256 && !resumeHandle) {
+          resumeHandle = {
+            uploadUrl: progress.uploadUrl,
+            chunkSize: sessionC1.chunkSize!,
+          };
+          throw new Error('User pause after first 256-byte chunk');
+        }
+      },
+    });
+    await assert.rejects(
+      sessionC1.finished(),
+      /User pause after first 256-byte chunk/,
+    );
+    assert.ok(resumeHandle, 'Expected resumeHandle to be captured');
+    const handle = resumeHandle as {uploadUrl: string; chunkSize: number};
+    assert.strictEqual(
+      handle.chunkSize,
+      256,
+      `Expected negotiated handle.chunkSize to be 256, got ${handle.chunkSize}`,
+    );
+
+    const sessionC2 = await clientB.uploadMedia({
+      name: path.basename(payloadB.filePath),
+    });
+    await sessionC2.start({
+      uploadSource: clientB.getResumableSource(payloadB.filePath),
+      resumeUrl: handle.uploadUrl,
+      chunkSize: handle.chunkSize,
+    });
+    assert.strictEqual(await getFinishedSize(sessionC2), sizeB);
+    console.log(
+      '  PASSED Part C: chunk_granularity pause & resume preserved negotiated 256-byte chunkSize and completed 1500-byte upload.',
+    );
   } finally {
     payloadB.cleanup();
     await clientB.close();
