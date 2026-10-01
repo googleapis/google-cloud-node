@@ -17,24 +17,42 @@
 import * as assert from 'assert';
 import {describe, it, beforeEach, afterEach} from 'mocha';
 import {
-  context,
   propagation,
   trace,
   ROOT_CONTEXT,
   TextMapPropagator,
 } from '@opentelemetry/api';
 import {status} from '@grpc/grpc-js';
-import {addTimeoutArg} from '../../src/normalCalls/timeout';
 import {createApiCall} from '../../src/createApiCall';
 import * as gax from '../../src/gax';
 import {GoogleError} from '../../src/googleError';
 import {GrpcClient, Metadata} from '../../src/grpc';
-import {StaticTraceContext} from '../../src/observability/TracerHelper';
+import {
+  traceCall,
+  DynamicTraceContext,
+  StaticTraceContext,
+} from '../../src/observability/TracerHelper';
 import {OtelHarness} from './otelHarness';
-import {GRPCCall, GRPCCallOtherArgs, GRPCCallResult} from '../../src/apitypes';
+import {GRPCCall, GRPCCallResult} from '../../src/apitypes';
 
-describe('metadata propagation (gRPC and HTTP)', () => {
+describe('metadata propagation via TracerHelper and createApiCall', () => {
   let harness: OtelHarness;
+
+  const telemetryInfo: StaticTraceContext = {
+    gcpClientService: 'echo.googleapis.com',
+    gcpVersion: '1.2.3',
+    gcpRepo: 'googleapis/google-cloud-node',
+    gcpArtifact: '@google-cloud/echo',
+  };
+
+  const grpcMetadataGetter = {
+    get(carrier: Metadata, key: string) {
+      return carrier.get(key) as string[];
+    },
+    keys() {
+      return ['traceparent'];
+    },
+  };
 
   // Custom propagator to simulate W3C traceparent injection and extraction
   const testPropagator: TextMapPropagator = {
@@ -82,278 +100,106 @@ describe('metadata propagation (gRPC and HTTP)', () => {
     harness.teardown();
   });
 
-  it('injects active span context into gRPC metadata', done => {
-    const grpcClient = new GrpcClient();
-    const builder = grpcClient.metadataBuilder({'x-goog-api-client': 'test'});
-
-    const tracer = trace.getTracer('test-tracer');
-    const span = tracer.startSpan('test-rpc');
-
-    let receivedMetadata: Metadata | null = null;
-    const stubFunc = (
-      argument: {},
-      metadata: {},
-      options: {},
-      callback: Function,
-    ): GRPCCallResult => {
-      receivedMetadata = metadata as Metadata;
-      callback(null, {success: true});
-      return {} as GRPCCallResult;
+  it('injects active span context into injectedHeaders in traceCall', async () => {
+    const dynamicArgs: DynamicTraceContext = {
+      clientName: 'EchoClient',
+      methodName: 'Echo',
+      rpcType: 'grpc',
     };
 
-    const otherArgs: GRPCCallOtherArgs = {
-      metadataBuilder: builder,
-    };
-
-    const callHandler = addTimeoutArg(
-      stubFunc as unknown as GRPCCall,
-      1000,
-      otherArgs,
+    let capturedHeaders: Record<string, string> | undefined;
+    await traceCall(
+      dynamicArgs,
+      telemetryInfo,
+      async (_tracedCallback, _recordResend, injectedHeaders) => {
+        capturedHeaders = injectedHeaders;
+        return [{echo: 'ok'}, undefined, undefined];
+      },
     );
 
-    context.with(trace.setSpan(context.active(), span), () => {
-      callHandler({}, (err: unknown) => {
-        span.end();
-        assert.ifError(err);
-        assert.ok(receivedMetadata);
-        const traceparent = (receivedMetadata as Metadata).get(
-          'traceparent',
-        ) as unknown[];
-        assert.ok(traceparent && traceparent.length > 0);
-        const spanContext = span.spanContext();
-        assert.strictEqual(
-          traceparent[0],
-          `00-${spanContext.traceId}-${spanContext.spanId}-0${spanContext.traceFlags}`,
-        );
-        done();
-      });
-    });
+    const span = harness.requireSingleSpan('google-gax');
+    const spanCtx = span.spanContext();
+    assert.ok(capturedHeaders);
+    assert.strictEqual(
+      capturedHeaders!['traceparent'],
+      `00-${spanCtx.traceId}-${spanCtx.spanId}-0${spanCtx.traceFlags}`,
+    );
   });
 
-  it('does not mutate baseMetadata across multiple gRPC calls', done => {
+  it('does not mutate baseMetadata or user headers across multiple gRPC calls', async () => {
     const grpcClient = new GrpcClient();
     const builder = grpcClient.metadataBuilder({'x-goog-api-client': 'test'});
 
-    // Capture the baseMetadata returned initially
     const baseMetadata = builder() as unknown as Metadata;
     assert.strictEqual(
       (baseMetadata.get('traceparent') as unknown[]).length,
       0,
     );
 
-    const tracer = trace.getTracer('test-tracer');
-    const span1 = tracer.startSpan('rpc-1');
-    const span2 = tracer.startSpan('rpc-2');
-
-    let metadataCall1: Metadata | null = null;
-    let metadataCall2: Metadata | null = null;
-
-    const stubFunc1 = (
-      arg: {},
-      meta: {},
-      opt: {},
-      cb: Function,
-    ): GRPCCallResult => {
-      metadataCall1 = meta as Metadata;
-      cb(null, {});
-      return {} as GRPCCallResult;
-    };
-
-    const stubFunc2 = (
-      arg: {},
-      meta: {},
-      opt: {},
-      cb: Function,
-    ): GRPCCallResult => {
-      metadataCall2 = meta as Metadata;
-      cb(null, {});
-      return {} as GRPCCallResult;
-    };
-
-    const otherArgs: GRPCCallOtherArgs = {
-      metadataBuilder: builder,
-    };
-
-    const handler1 = addTimeoutArg(
-      stubFunc1 as unknown as GRPCCall,
-      1000,
-      otherArgs,
-    );
-    const handler2 = addTimeoutArg(
-      stubFunc2 as unknown as GRPCCall,
-      1000,
-      otherArgs,
-    );
-
-    context.with(trace.setSpan(context.active(), span1), () => {
-      handler1({}, () => {
-        span1.end();
-
-        context.with(trace.setSpan(context.active(), span2), () => {
-          handler2({}, () => {
-            span2.end();
-
-            // Check metadata from Call 1
-            const spanCtx1 = span1.spanContext();
-            const traceparent1 = metadataCall1!.get('traceparent') as unknown[];
-            assert.strictEqual(
-              traceparent1[0],
-              `00-${spanCtx1.traceId}-${spanCtx1.spanId}-0${spanCtx1.traceFlags}`,
-            );
-
-            // Check metadata from Call 2
-            const spanCtx2 = span2.spanContext();
-            const traceparent2 = metadataCall2!.get('traceparent') as unknown[];
-            assert.strictEqual(
-              traceparent2[0],
-              `00-${spanCtx2.traceId}-${spanCtx2.spanId}-0${spanCtx2.traceFlags}`,
-            );
-
-            // Crucial: baseMetadata must NOT contain traceparent!
-            assert.strictEqual(
-              (baseMetadata.get('traceparent') as unknown[]).length,
-              0,
-            );
-            done();
-          });
-        });
-      });
+    const settings = new gax.CallSettings({
+      apiName: 'google.example.v1.Echo',
+      enableTelemetryTracing: true,
+      otherArgs: {
+        metadataBuilder: builder,
+        internalTelemetryInfo: telemetryInfo,
+        internalMethodName: 'Echo',
+      },
     });
-  });
 
-  it('injects active span context into HTTP/REST plain object metadata', done => {
-    const tracer = trace.getTracer('test-tracer');
-    const span = tracer.startSpan('http-rpc');
-
-    let receivedMetadata: Record<string, unknown> | null = null;
+    const receivedMetadata: Metadata[] = [];
     const stubFunc = (
-      argument: {},
-      metadata: {},
-      options: {},
-      callback: Function,
-    ): GRPCCallResult => {
-      receivedMetadata = metadata as Record<string, unknown>;
-      callback(null, {});
-      return {} as GRPCCallResult;
-    };
-
-    const otherArgs: GRPCCallOtherArgs = {
-      metadataBuilder: () => ({'x-goog-api-client': ['grpc-web/1.0']}),
-    };
-
-    const handler = addTimeoutArg(
-      stubFunc as unknown as GRPCCall,
-      1000,
-      otherArgs,
-    );
-
-    context.with(trace.setSpan(context.active(), span), () => {
-      handler({}, (err: unknown) => {
-        span.end();
-        assert.ifError(err);
-        assert.ok(receivedMetadata);
-        const spanContext = span.spanContext();
-        assert.strictEqual(
-          receivedMetadata!['traceparent'],
-          `00-${spanContext.traceId}-${spanContext.spanId}-0${spanContext.traceFlags}`,
-        );
-        assert.deepStrictEqual(receivedMetadata!['x-goog-api-client'], [
-          'grpc-web/1.0',
-        ]);
-        done();
-      });
-    });
-  });
-
-  it('does not mutate shared HTTP/REST plain object metadata across calls', done => {
-    const sharedMetadata: Record<string, unknown> = {
-      'x-goog-api-client': ['grpc-web/1.0'],
-    };
-
-    const tracer = trace.getTracer('test-tracer');
-    const span1 = tracer.startSpan('http-rpc-1');
-    const span2 = tracer.startSpan('http-rpc-2');
-
-    let metadataCall1: Record<string, unknown> | null = null;
-    let metadataCall2: Record<string, unknown> | null = null;
-
-    const stub1 = (
       arg: {},
       meta: {},
       opt: {},
       cb: Function,
     ): GRPCCallResult => {
-      metadataCall1 = meta as Record<string, unknown>;
+      receivedMetadata.push(meta as Metadata);
       cb(null, {});
-      return {} as GRPCCallResult;
+      return {cancel: () => {}};
     };
 
-    const stub2 = (
-      arg: {},
-      meta: {},
-      opt: {},
-      cb: Function,
-    ): GRPCCallResult => {
-      metadataCall2 = meta as Record<string, unknown>;
-      cb(null, {});
-      return {} as GRPCCallResult;
-    };
+    const apiCall = createApiCall(stubFunc as unknown as GRPCCall, settings);
+    const userHeaders = {'x-goog-request-params': 'parent=projects/test'};
 
-    const otherArgs: GRPCCallOtherArgs = {
-      metadataBuilder: () => sharedMetadata,
-    };
+    await apiCall({}, {otherArgs: {headers: userHeaders}});
+    await apiCall({}, {otherArgs: {headers: userHeaders}});
 
-    const handler1 = addTimeoutArg(
-      stub1 as unknown as GRPCCall,
-      1000,
-      otherArgs,
-    );
-    const handler2 = addTimeoutArg(
-      stub2 as unknown as GRPCCall,
-      1000,
-      otherArgs,
+    const spans = harness.getSpans('google-gax');
+    assert.strictEqual(spans.length, 2);
+    assert.strictEqual(receivedMetadata.length, 2);
+
+    const spanCtx1 = spans[0].spanContext();
+    const traceparent1 = receivedMetadata[0].get('traceparent') as unknown[];
+    assert.strictEqual(
+      traceparent1[0],
+      `00-${spanCtx1.traceId}-${spanCtx1.spanId}-0${spanCtx1.traceFlags}`,
     );
 
-    context.with(trace.setSpan(context.active(), span1), () => {
-      handler1({}, () => {
-        span1.end();
+    const spanCtx2 = spans[1].spanContext();
+    const traceparent2 = receivedMetadata[1].get('traceparent') as unknown[];
+    assert.strictEqual(
+      traceparent2[0],
+      `00-${spanCtx2.traceId}-${spanCtx2.spanId}-0${spanCtx2.traceFlags}`,
+    );
 
-        context.with(trace.setSpan(context.active(), span2), () => {
-          handler2({}, () => {
-            span2.end();
-
-            const spanCtx1 = span1.spanContext();
-            assert.strictEqual(
-              metadataCall1!['traceparent'],
-              `00-${spanCtx1.traceId}-${spanCtx1.spanId}-0${spanCtx1.traceFlags}`,
-            );
-
-            const spanCtx2 = span2.spanContext();
-            assert.strictEqual(
-              metadataCall2!['traceparent'],
-              `00-${spanCtx2.traceId}-${spanCtx2.spanId}-0${spanCtx2.traceFlags}`,
-            );
-
-            assert.notStrictEqual(metadataCall1, sharedMetadata);
-            assert.notStrictEqual(metadataCall2, sharedMetadata);
-            assert.strictEqual(sharedMetadata['traceparent'], undefined);
-            done();
-          });
-        });
-      });
-    });
+    // Crucial: neither baseMetadata nor userHeaders was mutated
+    assert.strictEqual(
+      (baseMetadata.get('traceparent') as unknown[]).length,
+      0,
+    );
+    assert.strictEqual(
+      (userHeaders as Record<string, unknown>)['traceparent'],
+      undefined,
+    );
   });
 
-  it('does not inject into gRPC or HTTP metadata when telemetry is disabled', done => {
+  it('does not inject into gRPC or HTTP metadata when telemetry is disabled', async () => {
     delete process.env.GOOGLE_SDK_NODE_ENABLE_TRACING;
 
     const grpcClient = new GrpcClient();
     const grpcBuilder = grpcClient.metadataBuilder({
       'x-goog-api-client': 'test',
     });
-
-    const tracer = trace.getTracer('test-tracer');
-    const span = tracer.startSpan('disabled-rpc');
 
     let receivedGrpcMetadata: Metadata | null = null;
     let receivedHttpMetadata: Record<string, unknown> | null = null;
@@ -366,7 +212,7 @@ describe('metadata propagation (gRPC and HTTP)', () => {
     ): GRPCCallResult => {
       receivedGrpcMetadata = meta as Metadata;
       cb(null, {});
-      return {} as GRPCCallResult;
+      return {cancel: () => {}};
     };
 
     const httpStub = (
@@ -377,82 +223,53 @@ describe('metadata propagation (gRPC and HTTP)', () => {
     ): GRPCCallResult => {
       receivedHttpMetadata = meta as Record<string, unknown>;
       cb(null, {});
-      return {} as GRPCCallResult;
+      return {cancel: () => {}};
     };
 
-    const grpcHandler = addTimeoutArg(grpcStub as unknown as GRPCCall, 1000, {
-      metadataBuilder: grpcBuilder,
-    });
-    const httpHandler = addTimeoutArg(httpStub as unknown as GRPCCall, 1000, {
-      metadataBuilder: () => ({'x-goog-api-client': ['grpc-web/1.0']}),
-    });
-
-    context.with(trace.setSpan(context.active(), span), () => {
-      grpcHandler({}, (err1: unknown) => {
-        assert.ifError(err1);
-        httpHandler({}, (err2: unknown) => {
-          span.end();
-          assert.ifError(err2);
-          assert.ok(receivedGrpcMetadata);
-          assert.strictEqual(
-            (receivedGrpcMetadata!.get('traceparent') as unknown[]).length,
-            0,
-          );
-          assert.ok(receivedHttpMetadata);
-          assert.strictEqual(receivedHttpMetadata!['traceparent'], undefined);
-          done();
-        });
-      });
-    });
-  });
-
-  it('handles null or missing metadata gracefully', done => {
-    let called = false;
-    const stubFunc = (
-      argument: {},
-      metadata: {},
-      options: {},
-      callback: Function,
-    ): GRPCCallResult => {
-      called = true;
-      assert.strictEqual(metadata, null);
-      callback(null, {});
-      return {} as GRPCCallResult;
-    };
-
-    const otherArgs: GRPCCallOtherArgs = {
-      metadataBuilder: (() =>
-        null) as unknown as GRPCCallOtherArgs['metadataBuilder'],
-    };
-
-    const handler = addTimeoutArg(
-      stubFunc as unknown as GRPCCall,
-      1000,
-      otherArgs,
+    const grpcCall = createApiCall(
+      grpcStub as unknown as GRPCCall,
+      new gax.CallSettings({
+        apiName: 'google.example.v1.Echo',
+        enableTelemetryTracing: false,
+        otherArgs: {
+          metadataBuilder: grpcBuilder,
+          internalTelemetryInfo: telemetryInfo,
+          internalMethodName: 'Echo',
+        },
+      }),
     );
-    handler({}, () => {
-      assert.ok(called);
-      done();
-    });
+
+    const httpCall = createApiCall(
+      httpStub as unknown as GRPCCall,
+      new gax.CallSettings({
+        apiName: 'google.example.v1.Echo',
+        enableTelemetryTracing: false,
+        otherArgs: {
+          metadataBuilder: (_abTests?: {}, moreHeaders?: {}) => ({
+            'x-goog-api-client': ['grpc-web/1.0'],
+            ...moreHeaders,
+          }),
+          internalTelemetryInfo: telemetryInfo,
+          internalMethodName: 'Echo',
+        },
+      }),
+      undefined,
+      'rest',
+    );
+
+    await grpcCall({}, undefined);
+    await httpCall({}, undefined);
+
+    assert.ok(receivedGrpcMetadata);
+    assert.strictEqual(
+      (receivedGrpcMetadata!.get('traceparent') as unknown[]).length,
+      0,
+    );
+    assert.ok(receivedHttpMetadata);
+    assert.strictEqual(receivedHttpMetadata!['traceparent'], undefined);
   });
 
   describe('T3 client request trace to low-level unary trace correlation', () => {
-    const telemetryInfo: StaticTraceContext = {
-      gcpClientService: 'echo.googleapis.com',
-      gcpVersion: '1.2.3',
-      gcpRepo: 'googleapis/google-cloud-node',
-      gcpArtifact: '@google-cloud/echo',
-    };
-
-    const grpcMetadataGetter = {
-      get(carrier: Metadata, key: string) {
-        return carrier.get(key) as string[];
-      },
-      keys() {
-        return ['traceparent'];
-      },
-    };
-
     it('ties a low-level gRPC unary trace to its parent T3 client request trace', async () => {
       const grpcClient = new GrpcClient();
       const builder = grpcClient.metadataBuilder({'x-goog-api-client': 'test'});
@@ -522,7 +339,10 @@ describe('metadata propagation (gRPC and HTTP)', () => {
         apiName: 'google.example.v1.Echo',
         enableTelemetryTracing: true,
         otherArgs: {
-          metadataBuilder: () => ({'x-goog-api-client': ['grpc-web/1.0']}),
+          metadataBuilder: (_abTests?: {}, moreHeaders?: {}) => ({
+            'x-goog-api-client': ['grpc-web/1.0'],
+            ...moreHeaders,
+          }),
           internalTelemetryInfo: telemetryInfo,
           internalMethodName: 'Echo',
         },

@@ -83,6 +83,7 @@ export function createApiCall(
     callOptions?: CallOptions,
     callback?: APICallback,
     recordResend?: ResendRecorder,
+    injectedHeaders?: Record<string, string>,
   ) => {
     let currentApiCaller = apiCaller;
 
@@ -98,6 +99,16 @@ export function createApiCall(
       thisSettings = settings.merge(convertedRetryOptions);
     } else {
       thisSettings = settings.merge(callOptions);
+    }
+
+    if (injectedHeaders && Object.keys(injectedHeaders).length > 0) {
+      thisSettings.otherArgs = {
+        ...thisSettings.otherArgs,
+        headers: {
+          ...thisSettings.otherArgs?.headers,
+          ...injectedHeaders,
+        },
+      };
     }
 
     // special case: if bundling is disabled for this one call,
@@ -211,7 +222,11 @@ export function createApiCall(
       return traceCall(
         dynamicArgs,
         staticArgs,
-        (tracedCallback?: APICallback, recordResend?: ResendRecorder) => {
+        (
+          tracedCallback?: APICallback,
+          recordResend?: ResendRecorder,
+          injectedHeaders?: Record<string, string>,
+        ) => {
           // `traceCall` wraps the user's callback whenever one was supplied,
           // for stream and non-stream calls alike, and that wrapper is what
           // closes the span. It is undefined only when there is no callback to
@@ -222,6 +237,7 @@ export function createApiCall(
             callOptions,
             tracedCallback ?? callback,
             recordResend,
+            injectedHeaders,
           );
         },
         isStreamingCall,

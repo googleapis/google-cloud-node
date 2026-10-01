@@ -14,8 +14,7 @@
  * limitations under the License.
  */
 
-import type {CallSettings} from './gax';
-import type {Metadata} from './grpc';
+import {CallSettings} from './gax';
 
 const PROTO_TYPE_PREFIX = 'type.googleapis.com/';
 const NUM_OF_PARTS_IN_PROTO_TYPE_NAME = 2;
@@ -62,15 +61,6 @@ export function checkTelemetryEnabled(settings?: CallSettings): boolean {
 
   return (
     clientOptIn && settings?.otherArgs?.internalTelemetryInfo !== undefined
-  );
-}
-
-export function isMetadata(value: unknown): value is Metadata {
-  return (
-    value !== null &&
-    typeof value === 'object' &&
-    'set' in value &&
-    typeof value.set === 'function'
   );
 }
 

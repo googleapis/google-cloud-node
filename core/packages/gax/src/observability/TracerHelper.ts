@@ -18,6 +18,7 @@ import {EventEmitter} from 'events';
 import {
   Attributes,
   context,
+  propagation,
   Span,
   SpanStatusCode,
   trace,
@@ -975,6 +976,7 @@ export function traceCall(
   fn: (
     tracedCallback?: APICallback,
     recordResend?: ResendRecorder,
+    injectedHeaders?: Record<string, string>,
   ) => GaxCallResult,
   isStreamCall?: boolean,
   callback?: APICallback,
@@ -982,14 +984,22 @@ export function traceCall(
 export function traceCall<T extends EventEmitter>(
   dynamicArgs: DynamicTraceContext,
   staticArgs: StaticTraceContext,
-  fn: (tracedCallback?: APICallback, recordResend?: ResendRecorder) => T,
+  fn: (
+    tracedCallback?: APICallback,
+    recordResend?: ResendRecorder,
+    injectedHeaders?: Record<string, string>,
+  ) => T,
   isStreamCall: true,
   callback?: APICallback,
 ): T;
 export function traceCall<T>(
   dynamicArgs: DynamicTraceContext,
   staticArgs: StaticTraceContext,
-  fn: (tracedCallback?: APICallback, recordResend?: ResendRecorder) => T,
+  fn: (
+    tracedCallback?: APICallback,
+    recordResend?: ResendRecorder,
+    injectedHeaders?: Record<string, string>,
+  ) => T,
   isStreamCall?: false,
   callback?: APICallback,
 ): T;
@@ -999,6 +1009,7 @@ export function traceCall(
   fn: (
     tracedCallback?: APICallback,
     recordResend?: ResendRecorder,
+    injectedHeaders?: Record<string, string>,
   ) => GaxCallResult,
   isStreamCall = false,
   callback?: APICallback,
@@ -1136,8 +1147,11 @@ export function traceCall(
       : undefined;
 
     try {
-      const result = context.with(trace.setSpan(context.active(), span), () =>
-        fn(tracedCallback, recordResend),
+      const activeContext = trace.setSpan(context.active(), span);
+      const injectedHeaders: Record<string, string> = {};
+      propagation.inject(activeContext, injectedHeaders);
+      const result = context.with(activeContext, () =>
+        fn(tracedCallback, recordResend, injectedHeaders),
       );
       const promiseTarget = !isStreamCall ? getPromiseTarget(result) : null;
       if (isStreamCall && result instanceof EventEmitter) {
