@@ -201,8 +201,8 @@ describe('metadata propagation via TracerHelper and createApiCall', () => {
       'x-goog-api-client': 'test',
     });
 
-    let receivedGrpcMetadata: Metadata | null = null;
-    let receivedHttpMetadata: Record<string, unknown> | null = null;
+    const receivedGrpcMetadata: Metadata[] = [];
+    const receivedHttpMetadata: Record<string, unknown>[] = [];
 
     const grpcStub = (
       arg: {},
@@ -210,7 +210,7 @@ describe('metadata propagation via TracerHelper and createApiCall', () => {
       opt: {},
       cb: Function,
     ): GRPCCallResult => {
-      receivedGrpcMetadata = meta as Metadata;
+      receivedGrpcMetadata.push(meta as Metadata);
       cb(null, {});
       return {cancel: () => {}};
     };
@@ -221,7 +221,7 @@ describe('metadata propagation via TracerHelper and createApiCall', () => {
       opt: {},
       cb: Function,
     ): GRPCCallResult => {
-      receivedHttpMetadata = meta as Record<string, unknown>;
+      receivedHttpMetadata.push(meta as Record<string, unknown>);
       cb(null, {});
       return {cancel: () => {}};
     };
@@ -260,13 +260,13 @@ describe('metadata propagation via TracerHelper and createApiCall', () => {
     await grpcCall({}, undefined);
     await httpCall({}, undefined);
 
-    assert.ok(receivedGrpcMetadata);
+    assert.strictEqual(receivedGrpcMetadata.length, 1);
     assert.strictEqual(
-      (receivedGrpcMetadata!.get('traceparent') as unknown[]).length,
+      (receivedGrpcMetadata[0].get('traceparent') as unknown[]).length,
       0,
     );
-    assert.ok(receivedHttpMetadata);
-    assert.strictEqual(receivedHttpMetadata!['traceparent'], undefined);
+    assert.strictEqual(receivedHttpMetadata.length, 1);
+    assert.strictEqual(receivedHttpMetadata[0]['traceparent'], undefined);
   });
 
   describe('T3 client request trace to low-level unary trace correlation', () => {
