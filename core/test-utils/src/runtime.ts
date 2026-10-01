@@ -142,11 +142,14 @@ export function requiresStrictArrayPrototypeEquality(
   return false;
 }
 
+function toPlainArray(val: unknown): unknown {
+  return Array.isArray(val) ? Array.from(val, toPlainArray) : val;
+}
+
 /**
  * Asserts `deepStrictEqual` between an `Array` (or `Array` subclass instance such as
- * Spanner's `RowImpl`) and an expected array, normalizing the `actual` array via
- * spread (`[...actual]`) only on runtimes that enforce strict prototype equality
- * for `Array` subclasses.
+ * Spanner's `RowImpl`) and an expected array, recursively normalizing any `Array`
+ * subclasses to plain arrays only on runtimes that enforce strict prototype equality.
  */
 export function assertArraySubclassStrictEqual<T>(
   actual: ReadonlyArray<T>,
@@ -154,10 +157,17 @@ export function assertArraySubclassStrictEqual<T>(
   message?: string | Error,
   versions?: RuntimeVersions,
 ): void {
-  if (requiresStrictArrayPrototypeEquality(versions)) {
-    assert.deepStrictEqual([...actual], expected, message);
+  const normalizedActual = requiresStrictArrayPrototypeEquality(versions)
+    ? toPlainArray(actual)
+    : actual;
+  const normalizedExpected = requiresStrictArrayPrototypeEquality(versions)
+    ? toPlainArray(expected)
+    : expected;
+
+  if (message !== undefined) {
+    assert.deepStrictEqual(normalizedActual, normalizedExpected, message);
   } else {
-    assert.deepStrictEqual(actual, expected, message);
+    assert.deepStrictEqual(normalizedActual, normalizedExpected);
   }
 }
 

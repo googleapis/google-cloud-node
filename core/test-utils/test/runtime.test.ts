@@ -144,6 +144,19 @@ describe('runtime utilities (unit)', () => {
           bun: '1.2.4',
         }),
       ).toThrow(assert.AssertionError);
+      expect(() =>
+        assertArraySubclassStrictEqual(row, ['a', 'c'], 'custom mismatch', {
+          node: '22.14.0',
+        }),
+      ).toThrow('custom mismatch');
+
+      // Test nested array subclasses (e.g., array of rows)
+      const nestedRows = [new CustomRow('a', 'b')];
+      expect(() =>
+        assertArraySubclassStrictEqual(nestedRows, [['a', 'b']], undefined, {
+          node: '18.20.0',
+        }),
+      ).not.toThrow();
     });
   });
 
