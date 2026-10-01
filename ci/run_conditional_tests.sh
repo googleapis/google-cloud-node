@@ -118,15 +118,22 @@ fi
 # Now we have a fixed list, but we can change it to autodetect if
 # necessary.
 
-subdirs=(
-    core
-    containers
-    packages
-    handwritten
-    .github/scripts
-    core/packages
-    core/dev-packages
-)
+if [[ "${JS_RUNTIME}" == "bun" || "${TEST_CMD}" == *bun* ]]; then
+    subdirs=(
+        packages
+        core/packages
+    )
+else
+    subdirs=(
+        core
+        containers
+        packages
+        handwritten
+        .github/scripts
+        core/packages
+        core/dev-packages
+    )
+fi
 
 RETVAL=0
 # These following APIs need an explicit credential file to run properly (or oAuth2, which we don't support in this repo).
@@ -144,8 +151,9 @@ windows_exempt_tests="core/ core/packages/ core/dev-packages/ .github/scripts/fi
 # Gather all test directories into an array
 test_dirs=()
 
-for subdir in ${subdirs[@]}; do
-    for d in `ls -d ${subdir}/*/`; do
+for subdir in "${subdirs[@]}"; do
+    for d in "${subdir}"/*/; do
+        [[ -d "$d" ]] || continue
         if [ -s "ignore.json" ] && jq -e ".ignored[] | select(. == \"$d\")" ignore.json > /dev/null 2>&1; then
             echo "Skipping ${d} (explicitly ignored in ignore.json)"
             continue
@@ -184,16 +192,25 @@ for subdir in ${subdirs[@]}; do
         fi
 
         # Our CI uses Git Bash on Windows to execute this script, which returns "msys" or "cygwin" for OSTYPE.
-        if [[ "$OSTYPE" == "msys" || "$OSTYPE" == "cygwin" || "$OS" == "Windows_NT" ]]; then
+        if [[ "$OSTYPE" == "msys"* || "$OSTYPE" == "cygwin"* || "$OS" == "Windows_NT" ]]; then
             is_exempt=false
             for exempt in ${windows_exempt_tests}; do
-                if [[ "${d}" == "${exempt}" || "${d}" == "${exempt}/"* ]]; then
+                if [[ "${d}" == "${exempt}" || "${d}" == "${exempt%/}/"* ]]; then
                     is_exempt=true
                     break
                 fi
             done
             if [[ "${is_exempt}" == "true" ]]; then
                 echo "Skipping ${d} on Windows (in exemption list)"
+                continue
+            fi
+        fi
+
+        # Internal codegen/JSDoc CLI tools in core/packages rely on Node-internal
+        # Module.prototype.load (via jsdoc/requizzle) and are not runtime SDKs.
+        if [[ "${JS_RUNTIME}" == "bun" || "${TEST_CMD}" == *bun* ]]; then
+            if [[ "${d%/}" == "core/packages/gapic-node-processing" || "${d%/}" == "core/packages/tools" ]]; then
+                echo "Skipping internal CLI tool ${d} on Bun runtime"
                 continue
             fi
         fi
@@ -220,6 +237,9 @@ for subdir in ${subdirs[@]}; do
                         echo "run samples tests for core/packages in ${d}"
                         should_test=true
                     fi
+                elif [[ "${d}" == core/packages/* ]] && [[ "${JS_RUNTIME}" == "bun" || "${TEST_CMD}" == *bun* ]] && [[ "${TEST_TYPE}" == "units" ]]; then
+                    echo "change detected in core package ${d} for Bun ${TEST_TYPE} test"
+                    should_test=true
                 elif [[ "${d}" == core/packages/* ]] || [[ "${d}" == core/dev-packages/* ]]; then
                     echo "skipping core package ${d} in non-core trigger"
                 elif [[ "${TEST_TYPE}" == "system" ]] || [[ "${TEST_TYPE}" == "lint" ]] || [[ "${TEST_TYPE}" == "units" ]]; then
@@ -286,15 +306,37 @@ if [[ "${RUN_TESTS_MODE}" == "CALCULATE_SHARD_MATRIX" ]]; then
 fi
 
 # If SHARD_TOTAL and SHARD_INDEX are provided, we will only run a subset of the tests.
+shard_dirs=()
 for i in "${!test_dirs[@]}"; do
-    d="${test_dirs[$i]}"
-
     if [[ -n "${SHARD_TOTAL}" && -n "${SHARD_INDEX}" ]]; then
         if (( SHARD_TOTAL > 0 && i % SHARD_TOTAL != SHARD_INDEX )); then
             continue
         fi
     fi
+    shard_dirs+=("${test_dirs[$i]}")
+done
 
+# Batch-compile only the packages assigned to this shard (plus their upstream
+# workspace dependencies via `^compile` in `turbo.json`) before running the test loop.
+if (( ${#shard_dirs[@]} > 0 )); then
+    if [ ! -d "${PROJECT_ROOT}/node_modules/.pnpm" ]; then
+        echo "Installing workspace dependencies at ${PROJECT_ROOT}..."
+        pnpm --dir "${PROJECT_ROOT}" install --frozen-lockfile --ignore-scripts
+    fi
+
+    turbo_filters=()
+    for d in "${shard_dirs[@]}"; do
+        turbo_filters+=("--filter={./${d%/}}")
+    done
+    echo "Compiling ${#shard_dirs[@]} package(s) assigned to this shard..."
+    run_turbo() {
+        pnpm --dir "${PROJECT_ROOT}" exec turbo run compile "${turbo_filters[@]}" "$@"
+    }
+    # Run turbo with fallback concurrency
+    run_turbo --concurrency=4 || run_turbo --concurrency=2
+fi
+
+for d in "${shard_dirs[@]}"; do
     echo "running test in ${d}"
     pushd "${d}" >/dev/null
     # Temporarily allow failure.

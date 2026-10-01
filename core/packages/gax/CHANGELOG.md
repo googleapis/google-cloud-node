@@ -5,6 +5,13 @@
 
 [1]: https://www.npmjs.com/package/gax-nodejs?activeTab=versions
 
+## [6.10.0](https://github.com/googleapis/google-cloud-node/compare/google-gax-v6.9.0...google-gax-v6.10.0) (2026-09-29)
+
+
+### Features
+
+* **docs:** Add o11y sample ([#9456](https://github.com/googleapis/google-cloud-node/issues/9456)) ([c0e0540](https://github.com/googleapis/google-cloud-node/commit/c0e0540ebaca4c934d3439156bef2e437a2c5e32))
+
 ## [6.9.0](https://github.com/googleapis/google-cloud-node/compare/google-gax-v6.8.0...google-gax-v6.9.0) (2026-09-28)
 
 

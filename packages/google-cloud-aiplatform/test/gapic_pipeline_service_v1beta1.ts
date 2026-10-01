@@ -5457,82 +5457,6 @@ describe('v1beta1.PipelineServiceClient', () => {
       });
     });
 
-    describe('memory', async () => {
-      const fakePath = '/rendered/path/memory';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        reasoning_engine: 'reasoningEngineValue',
-        memory: 'memoryValue',
-      };
-      const client = new pipelineserviceModule.v1beta1.PipelineServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.memoryPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.memoryPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('memoryPath', () => {
-        const result = client.memoryPath(
-          'projectValue',
-          'locationValue',
-          'reasoningEngineValue',
-          'memoryValue',
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.memoryPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters),
-        );
-      });
-
-      it('matchProjectFromMemoryName', () => {
-        const result = client.matchProjectFromMemoryName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.memoryPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath),
-        );
-      });
-
-      it('matchLocationFromMemoryName', () => {
-        const result = client.matchLocationFromMemoryName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.memoryPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath),
-        );
-      });
-
-      it('matchReasoningEngineFromMemoryName', () => {
-        const result = client.matchReasoningEngineFromMemoryName(fakePath);
-        assert.strictEqual(result, 'reasoningEngineValue');
-        assert(
-          (client.pathTemplates.memoryPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath),
-        );
-      });
-
-      it('matchMemoryFromMemoryName', () => {
-        const result = client.matchMemoryFromMemoryName(fakePath);
-        assert.strictEqual(result, 'memoryValue');
-        assert(
-          (client.pathTemplates.memoryPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath),
-        );
-      });
-    });
-
     describe('metadataSchema', async () => {
       const fakePath = '/rendered/path/metadataSchema';
       const expectedParameters = {
@@ -7078,6 +7002,231 @@ describe('v1beta1.PipelineServiceClient', () => {
       });
     });
 
+    describe('projectLocationMemoryBankMemories', async () => {
+      const fakePath = '/rendered/path/projectLocationMemoryBankMemories';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        memory_bank: 'memoryBankValue',
+        memory: 'memoryValue',
+      };
+      const client = new pipelineserviceModule.v1beta1.PipelineServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.projectLocationMemoryBankMemoriesPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationMemoryBankMemoriesPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectLocationMemoryBankMemoriesPath', () => {
+        const result = client.projectLocationMemoryBankMemoriesPath(
+          'projectValue',
+          'locationValue',
+          'memoryBankValue',
+          'memoryValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.projectLocationMemoryBankMemoriesPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromProjectLocationMemoryBankMemoriesName', () => {
+        const result =
+          client.matchProjectFromProjectLocationMemoryBankMemoriesName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationMemoryBankMemoriesPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromProjectLocationMemoryBankMemoriesName', () => {
+        const result =
+          client.matchLocationFromProjectLocationMemoryBankMemoriesName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationMemoryBankMemoriesPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchMemoryBankFromProjectLocationMemoryBankMemoriesName', () => {
+        const result =
+          client.matchMemoryBankFromProjectLocationMemoryBankMemoriesName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'memoryBankValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationMemoryBankMemoriesPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchMemoryFromProjectLocationMemoryBankMemoriesName', () => {
+        const result =
+          client.matchMemoryFromProjectLocationMemoryBankMemoriesName(fakePath);
+        assert.strictEqual(result, 'memoryValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationMemoryBankMemoriesPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('projectLocationMemoryBankMemoryMemoryRevision', async () => {
+      const fakePath =
+        '/rendered/path/projectLocationMemoryBankMemoryMemoryRevision';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        memory_bank: 'memoryBankValue',
+        memory: 'memoryValue',
+        memory_revision: 'memoryRevisionValue',
+      };
+      const client = new pipelineserviceModule.v1beta1.PipelineServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.projectLocationMemoryBankMemoryMemoryRevisionPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationMemoryBankMemoryMemoryRevisionPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectLocationMemoryBankMemoryMemoryRevisionPath', () => {
+        const result = client.projectLocationMemoryBankMemoryMemoryRevisionPath(
+          'projectValue',
+          'locationValue',
+          'memoryBankValue',
+          'memoryValue',
+          'memoryRevisionValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationMemoryBankMemoryMemoryRevisionPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromProjectLocationMemoryBankMemoryMemoryRevisionName', () => {
+        const result =
+          client.matchProjectFromProjectLocationMemoryBankMemoryMemoryRevisionName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationMemoryBankMemoryMemoryRevisionPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromProjectLocationMemoryBankMemoryMemoryRevisionName', () => {
+        const result =
+          client.matchLocationFromProjectLocationMemoryBankMemoryMemoryRevisionName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationMemoryBankMemoryMemoryRevisionPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchMemoryBankFromProjectLocationMemoryBankMemoryMemoryRevisionName', () => {
+        const result =
+          client.matchMemoryBankFromProjectLocationMemoryBankMemoryMemoryRevisionName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'memoryBankValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationMemoryBankMemoryMemoryRevisionPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchMemoryFromProjectLocationMemoryBankMemoryMemoryRevisionName', () => {
+        const result =
+          client.matchMemoryFromProjectLocationMemoryBankMemoryMemoryRevisionName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'memoryValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationMemoryBankMemoryMemoryRevisionPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchMemoryRevisionFromProjectLocationMemoryBankMemoryMemoryRevisionName', () => {
+        const result =
+          client.matchMemoryRevisionFromProjectLocationMemoryBankMemoryMemoryRevisionName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'memoryRevisionValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationMemoryBankMemoryMemoryRevisionPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('projectLocationPublisherModel', async () => {
       const fakePath = '/rendered/path/projectLocationPublisherModel';
       const expectedParameters = {
@@ -7163,6 +7312,239 @@ describe('v1beta1.PipelineServiceClient', () => {
         assert(
           (
             client.pathTemplates.projectLocationPublisherModelPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('projectLocationReasoningEngineMemories', async () => {
+      const fakePath = '/rendered/path/projectLocationReasoningEngineMemories';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        reasoning_engine: 'reasoningEngineValue',
+        memory: 'memoryValue',
+      };
+      const client = new pipelineserviceModule.v1beta1.PipelineServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.projectLocationReasoningEngineMemoriesPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationReasoningEngineMemoriesPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectLocationReasoningEngineMemoriesPath', () => {
+        const result = client.projectLocationReasoningEngineMemoriesPath(
+          'projectValue',
+          'locationValue',
+          'reasoningEngineValue',
+          'memoryValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationReasoningEngineMemoriesPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromProjectLocationReasoningEngineMemoriesName', () => {
+        const result =
+          client.matchProjectFromProjectLocationReasoningEngineMemoriesName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationReasoningEngineMemoriesPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromProjectLocationReasoningEngineMemoriesName', () => {
+        const result =
+          client.matchLocationFromProjectLocationReasoningEngineMemoriesName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationReasoningEngineMemoriesPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchReasoningEngineFromProjectLocationReasoningEngineMemoriesName', () => {
+        const result =
+          client.matchReasoningEngineFromProjectLocationReasoningEngineMemoriesName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'reasoningEngineValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationReasoningEngineMemoriesPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchMemoryFromProjectLocationReasoningEngineMemoriesName', () => {
+        const result =
+          client.matchMemoryFromProjectLocationReasoningEngineMemoriesName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'memoryValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationReasoningEngineMemoriesPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('projectLocationReasoningEngineMemoryMemoryRevision', async () => {
+      const fakePath =
+        '/rendered/path/projectLocationReasoningEngineMemoryMemoryRevision';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        reasoning_engine: 'reasoningEngineValue',
+        memory: 'memoryValue',
+        memory_revision: 'memoryRevisionValue',
+      };
+      const client = new pipelineserviceModule.v1beta1.PipelineServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.projectLocationReasoningEngineMemoryMemoryRevisionPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationReasoningEngineMemoryMemoryRevisionPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectLocationReasoningEngineMemoryMemoryRevisionPath', () => {
+        const result =
+          client.projectLocationReasoningEngineMemoryMemoryRevisionPath(
+            'projectValue',
+            'locationValue',
+            'reasoningEngineValue',
+            'memoryValue',
+            'memoryRevisionValue',
+          );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationReasoningEngineMemoryMemoryRevisionPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromProjectLocationReasoningEngineMemoryMemoryRevisionName', () => {
+        const result =
+          client.matchProjectFromProjectLocationReasoningEngineMemoryMemoryRevisionName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationReasoningEngineMemoryMemoryRevisionPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromProjectLocationReasoningEngineMemoryMemoryRevisionName', () => {
+        const result =
+          client.matchLocationFromProjectLocationReasoningEngineMemoryMemoryRevisionName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationReasoningEngineMemoryMemoryRevisionPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchReasoningEngineFromProjectLocationReasoningEngineMemoryMemoryRevisionName', () => {
+        const result =
+          client.matchReasoningEngineFromProjectLocationReasoningEngineMemoryMemoryRevisionName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'reasoningEngineValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationReasoningEngineMemoryMemoryRevisionPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchMemoryFromProjectLocationReasoningEngineMemoryMemoryRevisionName', () => {
+        const result =
+          client.matchMemoryFromProjectLocationReasoningEngineMemoryMemoryRevisionName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'memoryValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationReasoningEngineMemoryMemoryRevisionPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchMemoryRevisionFromProjectLocationReasoningEngineMemoryMemoryRevisionName', () => {
+        const result =
+          client.matchMemoryRevisionFromProjectLocationReasoningEngineMemoryMemoryRevisionName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'memoryRevisionValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationReasoningEngineMemoryMemoryRevisionPathTemplate
               .match as SinonStub
           )
             .getCall(-1)
