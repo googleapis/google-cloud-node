@@ -357,6 +357,7 @@ describe('Spanner with mock server', () => {
     // process.env.SPANNER_EMULATOR_HOST = `localhost:${port}`;
     process.env.GOOGLE_CLOUD_PROJECT = 'test-project';
     await disableMetrics(sandbox);
+    resetNthClientId();
     spanner = new Spanner({
       servicePath: 'localhost',
       port,
@@ -1084,31 +1085,33 @@ describe('Spanner with mock server', () => {
       }
     });
 
-    it('should fail on slow writer when maxResumeRetries has been exceeded', async () => {
+    it('should not fail on slow writer even when maxResumeRetries is small', async () => {
       const largeSelect = 'select * from large_table';
       spannerMock.putStatementResult(
         largeSelect,
         mock.StatementResult.resultSet(mock.createLargeResultSet()),
       );
       const database = newTestDatabase();
+      let rowCount = 0;
       try {
-        const rs = database.runStream({
+        const resultStream = database.runStream({
           sql: largeSelect,
           maxResumeRetries: 1,
         });
         const pipeline = util.promisify(stream.pipeline);
 
         await pipeline(
-          rs,
+          resultStream,
           // Create an artificially slow transformer to simulate network latency.
           new stream.Transform({
             highWaterMark: 1,
             objectMode: true,
             transform(chunk, encoding, callback) {
-              // Simulate a slow flush.
-              setTimeout(() => {
+              rowCount++;
+              // Simulate an asynchronous slow consumer using setImmediate.
+              setImmediate(() => {
                 callback(undefined, chunk);
-              }, 50);
+              });
             },
           }),
           new stream.Transform({
@@ -1118,12 +1121,7 @@ describe('Spanner with mock server', () => {
             },
           }),
         );
-        assert.fail('missing expected error');
-      } catch (err) {
-        assert.strictEqual(
-          (err as ServiceError).message,
-          'Stream is still not ready to receive data after 1 attempts to resume.',
-        );
+        assert.strictEqual(rowCount, NUM_ROWS_LARGE_RESULT_SET);
       } finally {
         await database.close();
       }
@@ -2131,6 +2129,32 @@ describe('Spanner with mock server', () => {
         });
       });
 
+      it('should not register release listener or invoke release when running query on multiplexed session', done => {
+        const query = {
+          sql: selectSql,
+        } as ExecuteSqlRequest;
+        const database = newTestDatabase();
+        const testSandbox = sinon.createSandbox();
+        const releaseSpy = testSandbox.spy(database.sessionFactory_, 'release');
+        const onceSpy = testSandbox.spy(Snapshot.prototype, 'once');
+        database.run(query, (err, resp) => {
+          assert.ifError(err);
+          assert.strictEqual(resp.length, 3);
+          assert.strictEqual(
+            onceSpy.withArgs('end', sinon.match.func).callCount,
+            0,
+          );
+          setImmediate(() => {
+            try {
+              assert.strictEqual(releaseSpy.callCount, 0);
+              done();
+            } finally {
+              testSandbox.restore();
+            }
+          });
+        });
+      });
+
       it('should execute the transaction(database.getSnapshot) successfully using multiplexed session', done => {
         const database = newTestDatabase();
         const pool = (database.sessionFactory_ as SessionFactory)
@@ -2265,6 +2289,32 @@ describe('Spanner with mock server', () => {
           assert.notEqual(multiplexedSession._multiplexedSession, null);
           assert.strictEqual(resp.length, 3);
           done();
+        });
+      });
+
+      it('should release regular session on snapshot end when multiplexed session is disabled', done => {
+        const query = {
+          sql: selectSql,
+        } as ExecuteSqlRequest;
+        const database = newTestDatabase({min: 1, max: 1});
+        const testSandbox = sinon.createSandbox();
+        const releaseSpy = testSandbox.spy(database.sessionFactory_, 'release');
+        const onceSpy = testSandbox.spy(Snapshot.prototype, 'once');
+        database.run(query, (err, resp) => {
+          assert.ifError(err);
+          assert.strictEqual(resp.length, 3);
+          assert.strictEqual(
+            onceSpy.withArgs('end', sinon.match.func).callCount,
+            1,
+          );
+          setImmediate(() => {
+            try {
+              assert.strictEqual(releaseSpy.callCount, 1);
+              done();
+            } finally {
+              testSandbox.restore();
+            }
+          });
         });
       });
 

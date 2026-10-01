@@ -1,6 +1,6 @@
 {
   "name": "@google-ai/generativelanguage",
-  "version": "4.1.0",
+  "version": "4.1.1",
   "description": "Generative Language API client for Node.js",
   "repository": {
     "type": "git",
@@ -36,8 +36,8 @@
     "fix": "gts fix",
     "lint": "gts check",
     "prepare": "npm run compile",
-    "system-test": "npm run compile && c8 mocha --config ../../.mocharc.cjs --no-parallel build/system-test",
-    "test": "c8 mocha --config ../../.mocharc.cjs build/test",
+    "system-test": "npm run compile && node ../../bin/run-test.cjs --config ../../.mocharc.cjs --no-parallel build/system-test",
+    "test": "node ../../bin/run-test.cjs --config ../../.mocharc.cjs build/test",
     "samples-test": "npm run compile && cd samples/ && npm link ../ && npm i && npm test",
     "prelint": "cd samples; npm link ../; npm i"
   },
@@ -65,10 +65,5 @@
   },
   "overrides": {
     "@sinonjs/fake-timers": "15.2.1"
-  },
-  "pnpm": {
-    "overrides": {
-      "@sinonjs/fake-timers": "15.2.1"
-    }
   }
 }

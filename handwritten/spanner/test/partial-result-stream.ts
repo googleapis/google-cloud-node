@@ -196,7 +196,10 @@ describe('PartialResultStream', () => {
         // Node 18's assert.deepStrictEqual strictly requires prototype equality,
         // which fails when comparing RowImpl (an Array subclass) with a plain Array literal.
         // Node 20+ relaxed this for Array subclasses with constructor = Array.
-        if (parseInt(process.versions.node.split('.')[0], 10) < 20) {
+        if (
+          parseInt(process.versions.node.split('.')[0], 10) < 20 ||
+          process.versions.bun
+        ) {
           assert.deepStrictEqual([...row], EXPECTED_ROW);
         } else {
           assert.deepStrictEqual(row, EXPECTED_ROW);
@@ -260,7 +263,10 @@ describe('PartialResultStream', () => {
         // Node 18's assert.deepStrictEqual strictly requires prototype equality,
         // which fails when comparing RowImpl (an Array subclass) with a plain Array literal.
         // Node 20+ relaxed this for Array subclasses with constructor = Array.
-        if (parseInt(process.versions.node.split('.')[0], 10) < 20) {
+        if (
+          parseInt(process.versions.node.split('.')[0], 10) < 20 ||
+          process.versions.bun
+        ) {
           assert.deepStrictEqual([...row], EXPECTED_ROW);
         } else {
           assert.deepStrictEqual(row, EXPECTED_ROW);
@@ -654,6 +660,146 @@ describe('PartialResultStream', () => {
       done();
     });
 
+    it('should emit paused event exactly once when downstream backpressure is triggered during multi-chunk streaming', done => {
+      const stream = new PartialResultStream({});
+      let pausedCount = 0;
+      stream.on('paused', () => {
+        pausedCount++;
+      });
+
+      sandbox.stub(stream, 'push').callsFake(data => {
+        if (data === undefined || data === null) {
+          return true;
+        }
+        return false;
+      });
+
+      const fields = [
+        {name: 'col1', type: {code: 'STRING'}},
+        {name: 'col2', type: {code: 'STRING'}},
+      ];
+      // First chunk establishes stream and metadata, not last
+      stream.write({
+        metadata: {rowType: {fields}},
+        values: [convertToIValue('val1'), convertToIValue('val2')],
+      });
+      // Second chunk emits multiple rows while push() returns false
+      stream.write({
+        values: [
+          convertToIValue('val3'),
+          convertToIValue('val4'),
+          convertToIValue('val5'),
+          convertToIValue('val6'),
+        ],
+        last: true,
+      });
+
+      assert.strictEqual(pausedCount, 1);
+      done();
+    });
+
+    it('should handle multi-chunk streaming where an intermediate chunk has a single value that remains chunked', done => {
+      const stream = new PartialResultStream({});
+      const rows: prs.Row[] = [];
+      stream
+        .on('data', row => rows.push(row))
+        .on('end', () => {
+          try {
+            assert.strictEqual(rows.length, 2);
+            assert.deepStrictEqual(rows[0].toJSON(), {
+              id: 'id1',
+              text: 'hello-world-again',
+            });
+            assert.deepStrictEqual(rows[1].toJSON(), {
+              id: 'id2',
+              text: 'text2',
+            });
+            done();
+          } catch (err) {
+            done(err);
+          }
+        })
+        .on('error', done);
+
+      const fields = [
+        {name: 'id', type: {code: 'STRING'}},
+        {name: 'text', type: {code: 'STRING'}},
+      ];
+      // Chunk 1: starts row 1, ends with partial text 'hello-'
+      stream.write({
+        metadata: {rowType: {fields}},
+        values: [convertToIValue('id1'), convertToIValue('hello-')],
+        chunkedValue: true,
+      });
+      // Chunk 2: only has 1 value, and is still chunked ('world-')
+      stream.write({
+        values: [convertToIValue('world-')],
+        chunkedValue: true,
+      });
+      // Chunk 3: completes row 1 and provides complete row 2
+      stream.write({
+        values: [
+          convertToIValue('again'),
+          convertToIValue('id2'),
+          convertToIValue('text2'),
+        ],
+        last: true,
+      });
+      stream.end();
+    });
+
+    it('should reuse pre-allocated row buffer across multiple rows and chunks without cross-row contamination', done => {
+      const stream = new PartialResultStream({});
+      const rows: prs.Row[] = [];
+      stream
+        .on('data', row => rows.push(row))
+        .on('end', () => {
+          try {
+            assert.strictEqual(rows.length, 3);
+            assert.deepStrictEqual(
+              rows.map(row => row.toJSON()),
+              [
+                {a: '1', b: '2', c: '3'},
+                {a: '4', b: '5', c: '6'},
+                {a: '7', b: '8', c: '9'},
+              ],
+            );
+            done();
+          } catch (err) {
+            done(err);
+          }
+        })
+        .on('error', done);
+
+      const fields = [
+        {name: 'a', type: {code: 'STRING'}},
+        {name: 'b', type: {code: 'STRING'}},
+        {name: 'c', type: {code: 'STRING'}},
+      ];
+      // Chunk 1: completes row 1, starts row 2
+      stream.write({
+        metadata: {rowType: {fields}},
+        values: [
+          convertToIValue('1'),
+          convertToIValue('2'),
+          convertToIValue('3'),
+          convertToIValue('4'),
+        ],
+      });
+      // Chunk 2: completes row 2, completes row 3
+      stream.write({
+        values: [
+          convertToIValue('5'),
+          convertToIValue('6'),
+          convertToIValue('7'),
+          convertToIValue('8'),
+          convertToIValue('9'),
+        ],
+        last: true,
+      });
+      stream.end();
+    });
+
     it('should route first chunk with last=true to _addSingleChunk', done => {
       const stream = new PartialResultStream({});
       const addSingleChunkSpy = sandbox.spy(stream as any, '_addSingleChunk');
@@ -710,6 +856,424 @@ describe('PartialResultStream', () => {
         last: true,
       });
       stream.end();
+    });
+
+    describe('event-driven backpressure', () => {
+      it('should hold completion callback and emit paused when downstream push returns false', done => {
+        const stream = new PartialResultStream({});
+        let pausedEmitted = false;
+        stream.on('paused', () => {
+          pausedEmitted = true;
+        });
+
+        // Stub push to simulate downstream backpressure on rows.
+        const pushStub = sandbox.stub(stream, 'push');
+        // Accept first row, reject second row to trigger backpressure.
+        pushStub.onFirstCall().returns(true);
+        pushStub.onSecondCall().returns(false);
+
+        const fields = [{name: NAME, type: {code: 'STRING'}}];
+        let writeCallbackCalled = false;
+
+        stream.write(
+          {
+            metadata: {rowType: {fields}},
+            values: [convertToIValue('row1'), convertToIValue('row2')],
+          },
+          () => {
+            writeCallbackCalled = true;
+          },
+        );
+
+        // The write callback should NOT have been called because the stream is paused.
+        assert.strictEqual(writeCallbackCalled, false);
+        assert.strictEqual(pausedEmitted, true);
+        assert.strictEqual(
+          typeof (stream as unknown as {_resumeCallback?: Function})
+            ._resumeCallback,
+          'function',
+        );
+        done();
+      });
+
+      it('should resume and invoke held callback when _read is called', done => {
+        const stream = new PartialResultStream({});
+        let resumedEmitted = false;
+        stream.on('resumed', () => {
+          resumedEmitted = true;
+        });
+
+        const pushStub = sandbox.stub(stream, 'push');
+        pushStub.returns(false);
+
+        const fields = [{name: NAME, type: {code: 'STRING'}}];
+        let writeCallbackCalled = false;
+
+        stream.write(
+          {
+            metadata: {rowType: {fields}},
+            values: [convertToIValue('row1')],
+          },
+          () => {
+            writeCallbackCalled = true;
+          },
+        );
+
+        assert.strictEqual(writeCallbackCalled, false);
+
+        // Simulate Node readable machinery calling _read when readable buffer drains.
+        (stream as unknown as {_read: (size: number) => void})._read(1);
+
+        assert.strictEqual(writeCallbackCalled, true);
+        assert.strictEqual(resumedEmitted, true);
+        assert.strictEqual(
+          (stream as unknown as {_resumeCallback?: Function})._resumeCallback,
+          undefined,
+        );
+        done();
+      });
+
+      it('should clear _resumeCallback when stream is destroyed while paused', done => {
+        const stream = new PartialResultStream({});
+        const pushStub = sandbox.stub(stream, 'push');
+        pushStub.returns(false);
+
+        const fields = [{name: NAME, type: {code: 'STRING'}}];
+        stream.write({
+          metadata: {rowType: {fields}},
+          values: [convertToIValue('row1')],
+        });
+
+        assert.strictEqual(
+          typeof (stream as unknown as {_resumeCallback?: Function})
+            ._resumeCallback,
+          'function',
+        );
+
+        stream.destroy();
+
+        assert.strictEqual(
+          (stream as unknown as {_resumeCallback?: Function})._resumeCallback,
+          undefined,
+        );
+        done();
+      });
+
+      it('should stream all rows to a slow writable stream with backpressure', done => {
+        const stream = new PartialResultStream({});
+        const rows: Row[] = [];
+        let pausedCount = 0;
+        let resumedCount = 0;
+
+        stream.on('paused', () => {
+          pausedCount++;
+        });
+        stream.on('resumed', () => {
+          resumedCount++;
+        });
+
+        const slowSink = new Transform({
+          objectMode: true,
+          highWaterMark: 1,
+          transform(chunk, encoding, callback) {
+            rows.push(chunk);
+            setImmediate(callback);
+          },
+        });
+
+        stream.pipe(slowSink);
+
+        const totalRows = 25;
+        slowSink.on('finish', () => {
+          try {
+            assert.strictEqual(rows.length, totalRows);
+            assert.ok(pausedCount > 0, 'should have paused at least once');
+            assert.ok(resumedCount > 0, 'should have resumed at least once');
+            done();
+          } catch (err) {
+            done(err);
+          }
+        });
+
+        const fields = [{name: NAME, type: {code: 'STRING'}}];
+        const values1: Array<ReturnType<typeof convertToIValue>> = [];
+        for (let i = 0; i < 20; i++) {
+          values1.push(convertToIValue(`row${i}`));
+        }
+        const values2: Array<ReturnType<typeof convertToIValue>> = [];
+        for (let i = 20; i < totalRows; i++) {
+          values2.push(convertToIValue(`row${i}`));
+        }
+
+        stream.write({
+          metadata: {rowType: {fields}},
+          values: values1,
+          last: false,
+        });
+        stream.write({
+          values: values2,
+          last: true,
+        });
+        stream.end();
+      });
+
+      it('should emit paused only once per transition even with multiple unaccepted rows in a chunk', done => {
+        const stream = new PartialResultStream({});
+        let pausedCount = 0;
+        stream.on('paused', () => {
+          pausedCount++;
+        });
+
+        const pushStub = sandbox.stub(stream, 'push');
+        // Accept first row, reject all subsequent rows
+        pushStub.onFirstCall().returns(true);
+        pushStub.returns(false);
+
+        const fields = [{name: NAME, type: {code: 'STRING'}}];
+        const values = [
+          convertToIValue('row1'),
+          convertToIValue('row2'),
+          convertToIValue('row3'),
+          convertToIValue('row4'),
+          convertToIValue('row5'),
+        ];
+
+        stream.write(
+          {
+            metadata: {rowType: {fields}},
+            values,
+          },
+          () => {},
+        );
+
+        // Even though rows 2..5 were rejected by push(), paused should only be emitted ONCE
+        assert.strictEqual(pausedCount, 1);
+        done();
+      });
+
+      it('should handle backpressure cleanly during single-chunk optimization', done => {
+        const stream = new PartialResultStream({});
+        let pausedCount = 0;
+        stream.on('paused', () => pausedCount++);
+
+        const rows: Row[] = [];
+        const slowSink = new Transform({
+          objectMode: true,
+          highWaterMark: 1,
+          transform(chunk, encoding, callback) {
+            rows.push(chunk);
+            setImmediate(callback);
+          },
+        });
+
+        stream.pipe(slowSink);
+
+        const totalRows = 25;
+        slowSink.on('finish', () => {
+          try {
+            assert.strictEqual(rows.length, totalRows);
+            assert.ok(pausedCount > 0, 'should emit paused on backpressure');
+            done();
+          } catch (err) {
+            done(err);
+          }
+        });
+
+        const fields = [{name: NAME, type: {code: 'STRING'}}];
+        const values: Array<ReturnType<typeof convertToIValue>> = [];
+        for (let i = 0; i < totalRows; i++) {
+          values.push(convertToIValue(`single_chunk_row_${i}`));
+        }
+
+        // First chunk with last=true triggers _addSingleChunk
+        stream.write({
+          metadata: {rowType: {fields}},
+          values,
+          last: true,
+        });
+        stream.end();
+      });
+
+      it('should handle multiple sequential pause and resume cycles across chunks', done => {
+        const stream = new PartialResultStream({});
+        let pausedCount = 0;
+        let resumedCount = 0;
+        stream.on('paused', () => pausedCount++);
+        stream.on('resumed', () => resumedCount++);
+
+        const rows: Row[] = [];
+        const slowSink = new Transform({
+          objectMode: true,
+          highWaterMark: 1,
+          transform(chunk, encoding, callback) {
+            rows.push(chunk);
+            setImmediate(callback);
+          },
+        });
+
+        stream.pipe(slowSink);
+
+        const totalRows = 45;
+        slowSink.on('finish', () => {
+          try {
+            assert.strictEqual(rows.length, totalRows);
+            for (let i = 0; i < totalRows; i++) {
+              assert.strictEqual(rows[i][0].value, `val_${i}`);
+            }
+            assert.ok(
+              pausedCount >= 2,
+              `expected at least 2 pauses, got ${pausedCount}`,
+            );
+            assert.ok(
+              resumedCount >= 2,
+              `expected at least 2 resumes, got ${resumedCount}`,
+            );
+            done();
+          } catch (err) {
+            done(err);
+          }
+        });
+
+        const fields = [{name: NAME, type: {code: 'STRING'}}];
+        const chunkSizes = [20, 20, 5];
+        let offset = 0;
+        for (let chunkIndex = 0; chunkIndex < chunkSizes.length; chunkIndex++) {
+          const count = chunkSizes[chunkIndex];
+          const values: Array<ReturnType<typeof convertToIValue>> = [];
+          for (let i = 0; i < count; i++) {
+            values.push(convertToIValue(`val_${offset + i}`));
+          }
+          offset += count;
+          stream.write({
+            ...(chunkIndex === 0 ? {metadata: {rowType: {fields}}} : {}),
+            values,
+            last: chunkIndex === chunkSizes.length - 1,
+          });
+        }
+        stream.end();
+      });
+
+      it('should preserve row assembly when backpressure occurs across chunked values', done => {
+        const stream = new PartialResultStream({});
+        const rows: Row[] = [];
+
+        const slowSink = new Transform({
+          objectMode: true,
+          highWaterMark: 1,
+          transform(chunk, encoding, callback) {
+            rows.push(chunk);
+            setImmediate(callback);
+          },
+        });
+
+        stream.pipe(slowSink);
+
+        slowSink.on('finish', () => {
+          try {
+            assert.strictEqual(rows.length, 2);
+            assert.strictEqual(rows[0][0].value, 'first_row');
+            assert.strictEqual(rows[1][0].value, 'chunked_part1_part2');
+            done();
+          } catch (err) {
+            done(err);
+          }
+        });
+
+        const fields = [{name: NAME, type: {code: 'STRING'}}];
+
+        // Chunk 1: first complete row + start of chunked row
+        stream.write({
+          metadata: {rowType: {fields}},
+          values: [
+            convertToIValue('first_row'),
+            convertToIValue('chunked_part1_'),
+          ],
+          chunkedValue: true,
+          last: false,
+        });
+
+        // Chunk 2: continuation of chunked row
+        stream.write({
+          values: [convertToIValue('part2')],
+          chunkedValue: false,
+          last: true,
+        });
+        stream.end();
+      });
+
+      it('should propagate error and clean up held callback when destroyed with error while paused', done => {
+        const stream = new PartialResultStream({});
+        const pushStub = sandbox.stub(stream, 'push');
+        pushStub.returns(false);
+
+        const fields = [{name: NAME, type: {code: 'STRING'}}];
+        stream.write({
+          metadata: {rowType: {fields}},
+          values: [convertToIValue('row1')],
+        });
+
+        assert.strictEqual(
+          typeof (stream as unknown as {_resumeCallback?: Function})
+            ._resumeCallback,
+          'function',
+        );
+
+        const testError = new Error('simulated failure');
+        stream.on('error', err => {
+          try {
+            assert.strictEqual(err, testError);
+            assert.strictEqual(
+              (stream as unknown as {_resumeCallback?: Function})
+                ._resumeCallback,
+              undefined,
+            );
+            done();
+          } catch (assertionErr) {
+            done(assertionErr);
+          }
+        });
+
+        stream.destroy(testError);
+      });
+
+      it('should not emit paused or resumed when consumer is fast', done => {
+        const stream = new PartialResultStream({});
+        let pausedEmitted = false;
+        let resumedEmitted = false;
+
+        stream.on('paused', () => {
+          pausedEmitted = true;
+        });
+        stream.on('resumed', () => {
+          resumedEmitted = true;
+        });
+
+        const rows: Row[] = [];
+        stream.on('data', row => rows.push(row));
+        stream.on('end', () => {
+          try {
+            assert.strictEqual(rows.length, 10);
+            assert.strictEqual(pausedEmitted, false);
+            assert.strictEqual(resumedEmitted, false);
+            done();
+          } catch (err) {
+            done(err);
+          }
+        });
+
+        const fields = [{name: NAME, type: {code: 'STRING'}}];
+        const values: Array<ReturnType<typeof convertToIValue>> = [];
+        for (let i = 0; i < 10; i++) {
+          values.push(convertToIValue(`row_${i}`));
+        }
+
+        stream.write({
+          metadata: {rowType: {fields}},
+          values,
+          last: true,
+        });
+        stream.end();
+      });
     });
   });
 
@@ -890,6 +1454,72 @@ describe('PartialResultStream', () => {
             done();
           }),
         );
+    });
+
+    it('should correctly resume and preserve incomplete row state when resumed stream first chunk contains metadata', done => {
+      const firstStream = through.obj();
+      const secondStream = through.obj();
+      const requestFnStub = sandbox.stub();
+
+      const metadata = {
+        rowType: {
+          fields: [
+            {name: 'col1', type: {code: 'STRING'}},
+            {name: 'col2', type: {code: 'STRING'}},
+          ],
+        },
+      };
+
+      requestFnStub.onCall(0).callsFake(() => {
+        setImmediate(() => {
+          firstStream.push({
+            metadata,
+            values: [convertToIValue('val1')],
+            resumeToken: 'checkpoint-token',
+          });
+
+          setImmediate(() => {
+            firstStream.emit('error', {
+              code: grpc.status.UNAVAILABLE,
+              message: 'Unavailable',
+            } as grpc.ServiceError);
+          });
+        });
+
+        return firstStream;
+      });
+
+      requestFnStub.onCall(1).callsFake(resumeToken => {
+        assert.strictEqual(resumeToken, 'checkpoint-token');
+
+        setImmediate(() => {
+          secondStream.push({
+            metadata,
+            values: [convertToIValue('val2')],
+            last: true,
+          });
+          secondStream.end();
+        });
+
+        return secondStream;
+      });
+
+      const rows: Row[] = [];
+      partialResultStream(requestFnStub)
+        .on('data', row => rows.push(row))
+        .on('end', () => {
+          try {
+            assert.strictEqual(rows.length, 1);
+            assert.deepStrictEqual(rows[0].toJSON(), {
+              col1: 'val1',
+              col2: 'val2',
+            });
+            done();
+          } catch (err) {
+            done(err);
+          }
+        })
+        .on('error', done);
     });
 
     it('should emit non-retryable error', done => {
@@ -1083,6 +1713,38 @@ describe('PartialResultStream', () => {
             done(e);
           }
         });
+    });
+
+    it('should not attempt to write queued chunks in flushAndDestroy if userStream is already destroyed or not writable', done => {
+      const fakeStream = through.obj();
+      fakeStream.on('error', () => {}); // Prevent unhandled error on underlying emitter
+      const requestFnStub = sandbox.stub().returns(fakeStream);
+
+      const stream = partialResultStream(requestFnStub);
+      stream.on('data', () => {});
+      stream.on('error', () => {});
+
+      // Trigger reading so makeRequest initializes lastRequestStream
+      stream.resume();
+      stream.pause();
+
+      fakeStream.push(RESULT_WITH_TOKEN);
+
+      // End userStream so writable becomes false
+      stream.end();
+
+      setImmediate(() => {
+        // Emit non-retryable error to invoke flushAndDestroy
+        fakeStream.emit('error', {
+          code: grpc.status.PERMISSION_DENIED,
+          message: 'Permission denied',
+        } as grpc.ServiceError);
+
+        setImmediate(() => {
+          assert.strictEqual(stream.writable, false);
+          done();
+        });
+      });
     });
 
     it('should destroy the underlying request stream when the user destroys the returned stream', done => {
@@ -1576,6 +2238,2279 @@ describe('PartialResultStream', () => {
         },
         values: [convertToIValue('9223372036854775807')],
         last: true,
+      });
+    });
+
+    it('should handle downstream backpressure through the full pipeline without dropping rows', done => {
+      const rows: Row[] = [];
+      let pausedCount = 0;
+      let resumedCount = 0;
+
+      stream.on('paused', () => pausedCount++);
+      stream.on('resumed', () => resumedCount++);
+
+      const slowSink = new Transform({
+        objectMode: true,
+        highWaterMark: 1,
+        transform(chunk, encoding, callback) {
+          rows.push(chunk);
+          setImmediate(callback);
+        },
+      });
+
+      stream.pipe(slowSink);
+
+      const totalRows = 25;
+      slowSink.on('finish', () => {
+        try {
+          assert.strictEqual(rows.length, totalRows);
+          assert.ok(pausedCount > 0, 'pipeline should pause on backpressure');
+          assert.ok(resumedCount > 0, 'pipeline should resume on drain');
+          done();
+        } catch (err) {
+          done(err);
+        }
+      });
+
+      const fields = [{name: NAME, type: {code: 'STRING'}}];
+      const values1: Array<ReturnType<typeof convertToIValue>> = [];
+      for (let i = 0; i < 20; i++) {
+        values1.push(convertToIValue(`pipeline_row_${i}`));
+      }
+      const values2: Array<ReturnType<typeof convertToIValue>> = [];
+      for (let i = 20; i < totalRows; i++) {
+        values2.push(convertToIValue(`pipeline_row_${i}`));
+      }
+
+      fakeRequestStream.push({
+        metadata: {rowType: {fields}},
+        values: values1,
+        resumeToken: 'token1',
+        last: false,
+      });
+      fakeRequestStream.push({
+        values: values2,
+        resumeToken: 'token2',
+        last: true,
+      });
+      fakeRequestStream.push(null);
+    });
+
+    it('should not suffer from column shift or row loss when retrying under backpressure', done => {
+      const firstStream = through.obj();
+      const secondStream = through.obj();
+      const requestFnStub = sandbox.stub();
+
+      const fields = [
+        {name: 'a', type: {code: 'STRING'}},
+        {name: 'b', type: {code: 'STRING'}},
+        {name: 'c', type: {code: 'STRING'}},
+      ];
+      const rowValues = (i: number) => [`a${i}`, `b${i}`, `c${i}`];
+      const middleRows: Array<ReturnType<typeof convertToIValue>> = [];
+      for (let i = 2; i <= 21; i++) {
+        middleRows.push(...rowValues(i).map(convertToIValue));
+      }
+
+      requestFnStub.onCall(0).callsFake(() => {
+        setImmediate(() => {
+          firstStream.push({
+            metadata: {rowType: {fields}},
+            values: [convertToIValue('a1')],
+            resumeToken: 'token-1',
+          });
+          setImmediate(() => {
+            firstStream.push({
+              values: middleRows,
+            });
+            setImmediate(() => {
+              firstStream.emit('error', {
+                code: grpc.status.UNAVAILABLE,
+                message: 'Unavailable',
+              } as grpc.ServiceError);
+            });
+          });
+        });
+        return firstStream;
+      });
+
+      requestFnStub.onCall(1).callsFake(resumeToken => {
+        assert.strictEqual(resumeToken, 'token-1');
+        setImmediate(() => {
+          secondStream.push({
+            metadata: {rowType: {fields}},
+            values: [
+              convertToIValue('b1'),
+              convertToIValue('c1'),
+              ...middleRows,
+              ...rowValues(22).map(convertToIValue),
+            ],
+            last: true,
+          });
+          secondStream.end();
+        });
+        return secondStream;
+      });
+
+      const rows: Row[] = [];
+      const slowSink = new Transform({
+        objectMode: true,
+        highWaterMark: 1,
+        transform(chunk, encoding, callback) {
+          rows.push(chunk);
+          setImmediate(callback);
+        },
+      });
+
+      const resultStream = partialResultStream(requestFnStub);
+      resultStream.pipe(slowSink);
+
+      slowSink.on('finish', () => {
+        try {
+          assert.strictEqual(rows.length, 22);
+          for (let i = 0; i < 22; i++) {
+            const rowIndex = i + 1;
+            assert.deepStrictEqual(rows[i].toJSON(), {
+              a: `a${rowIndex}`,
+              b: `b${rowIndex}`,
+              c: `c${rowIndex}`,
+            });
+          }
+          done();
+        } catch (err) {
+          done(err);
+        }
+      });
+      resultStream.on('error', done);
+    });
+
+    it('should preserve incomplete chunked value across backpressured retry', done => {
+      const firstStream = through.obj();
+      const secondStream = through.obj();
+      const requestFnStub = sandbox.stub();
+
+      const fields = [
+        {name: 'id', type: {code: 'STRING'}},
+        {name: 'text', type: {code: 'STRING'}},
+      ];
+
+      requestFnStub.onCall(0).callsFake(() => {
+        setImmediate(() => {
+          firstStream.push({
+            metadata: {rowType: {fields}},
+            values: [convertToIValue('row1'), convertToIValue('part1-')],
+            chunkedValue: true,
+            resumeToken: 'token-1',
+          });
+          setImmediate(() => {
+            firstStream.push({
+              values: [convertToIValue('part2-tentative')],
+              chunkedValue: true,
+            });
+            setImmediate(() => {
+              firstStream.emit('error', {
+                code: grpc.status.UNAVAILABLE,
+                message: 'Unavailable',
+              } as grpc.ServiceError);
+            });
+          });
+        });
+        return firstStream;
+      });
+
+      requestFnStub.onCall(1).callsFake(resumeToken => {
+        assert.strictEqual(resumeToken, 'token-1');
+        setImmediate(() => {
+          secondStream.push({
+            values: [
+              convertToIValue('part2-actual'),
+              convertToIValue('row2'),
+              convertToIValue('text2'),
+            ],
+            last: true,
+          });
+          secondStream.end();
+        });
+        return secondStream;
+      });
+
+      const rows: Row[] = [];
+      const slowSink = new Transform({
+        objectMode: true,
+        highWaterMark: 1,
+        transform(chunk, encoding, callback) {
+          rows.push(chunk);
+          setImmediate(callback);
+        },
+      });
+
+      const resultStream = partialResultStream(requestFnStub);
+      resultStream.pipe(slowSink);
+
+      slowSink.on('finish', () => {
+        try {
+          assert.strictEqual(rows.length, 2);
+          assert.deepStrictEqual(rows[0].toJSON(), {
+            id: 'row1',
+            text: 'part1-part2-actual',
+          });
+          assert.deepStrictEqual(rows[1].toJSON(), {
+            id: 'row2',
+            text: 'text2',
+          });
+          done();
+        } catch (err) {
+          done(err);
+        }
+      });
+      resultStream.on('error', done);
+    });
+
+    it('should not produce duplicate rows when retrying under backpressure', done => {
+      const firstStream = through.obj();
+      const secondStream = through.obj();
+      const requestFnStub = sandbox.stub();
+
+      const fields = [{name: 'id', type: {code: 'STRING'}}];
+      const middleRows: Array<ReturnType<typeof convertToIValue>> = [];
+      for (let i = 2; i <= 21; i++) {
+        middleRows.push(convertToIValue(`row-${i}`));
+      }
+
+      requestFnStub.onCall(0).callsFake(() => {
+        setImmediate(() => {
+          firstStream.push({
+            metadata: {rowType: {fields}},
+            values: [convertToIValue('row-1')],
+            resumeToken: 'token-1',
+          });
+          setImmediate(() => {
+            firstStream.push({
+              values: middleRows,
+            });
+            setImmediate(() => {
+              firstStream.emit('error', {
+                code: grpc.status.UNAVAILABLE,
+                message: 'Unavailable',
+              } as grpc.ServiceError);
+            });
+          });
+        });
+        return firstStream;
+      });
+
+      requestFnStub.onCall(1).callsFake(resumeToken => {
+        assert.strictEqual(resumeToken, 'token-1');
+        setImmediate(() => {
+          secondStream.push({
+            metadata: {rowType: {fields}},
+            values: middleRows,
+            last: true,
+          });
+          secondStream.end();
+        });
+        return secondStream;
+      });
+
+      const rows: Row[] = [];
+      const slowSink = new Transform({
+        objectMode: true,
+        highWaterMark: 1,
+        transform(chunk, encoding, callback) {
+          rows.push(chunk);
+          setImmediate(callback);
+        },
+      });
+
+      const resultStream = partialResultStream(requestFnStub);
+      resultStream.pipe(slowSink);
+
+      slowSink.on('finish', () => {
+        try {
+          assert.strictEqual(rows.length, 21);
+          for (let i = 0; i < 21; i++) {
+            assert.deepStrictEqual(rows[i].toJSON(), {
+              id: `row-${i + 1}`,
+            });
+          }
+          done();
+        } catch (err) {
+          done(err);
+        }
+      });
+      resultStream.on('error', done);
+    });
+
+    it('should hold back uncheckpointed chunks and truncate them on retry (Java: restartWithHoldBack)', done => {
+      const firstStream = through.obj();
+      const secondStream = through.obj();
+      const requestFnStub = sandbox.stub();
+
+      const fields = [{name: 'val', type: {code: 'STRING'}}];
+
+      requestFnStub.onCall(0).callsFake(() => {
+        setImmediate(() => {
+          firstStream.push({
+            metadata: {rowType: {fields}},
+            values: [convertToIValue('a')],
+            resumeToken: 'r1',
+          });
+          firstStream.push({
+            values: [convertToIValue('b')],
+            resumeToken: 'r2',
+          });
+          firstStream.push({
+            values: [convertToIValue('X1')],
+          });
+          firstStream.push({
+            values: [convertToIValue('X2')],
+          });
+          setImmediate(() => {
+            firstStream.emit('error', {
+              code: grpc.status.UNAVAILABLE,
+              message: 'Unavailable',
+            } as grpc.ServiceError);
+          });
+        });
+        return firstStream;
+      });
+
+      requestFnStub.onCall(1).callsFake(resumeToken => {
+        assert.strictEqual(resumeToken, 'r2');
+        setImmediate(() => {
+          secondStream.push({
+            values: [convertToIValue('c')],
+            resumeToken: 'r3',
+          });
+          secondStream.push({
+            values: [convertToIValue('d')],
+            resumeToken: 'r4',
+            last: true,
+          });
+          secondStream.end();
+        });
+        return secondStream;
+      });
+
+      const rows: Row[] = [];
+      partialResultStream(requestFnStub)
+        .on('data', row => rows.push(row))
+        .on('error', done)
+        .on('end', () => {
+          try {
+            assert.strictEqual(rows.length, 4);
+            assert.deepStrictEqual(
+              rows.map(row => row.toJSON()),
+              [{val: 'a'}, {val: 'b'}, {val: 'c'}, {val: 'd'}],
+            );
+            done();
+          } catch (err) {
+            done(err);
+          }
+        });
+    });
+
+    it('should hold back chunks mid-stream and resume cleanly across tokens (Java: restartWithHoldBackMidStream)', done => {
+      const firstStream = through.obj();
+      const secondStream = through.obj();
+      const requestFnStub = sandbox.stub();
+
+      const fields = [{name: 'val', type: {code: 'STRING'}}];
+
+      requestFnStub.onCall(0).callsFake(() => {
+        setImmediate(() => {
+          firstStream.push({
+            metadata: {rowType: {fields}},
+            values: [convertToIValue('a')],
+            resumeToken: 'r1',
+          });
+          firstStream.push({
+            values: [convertToIValue('b')],
+          });
+          firstStream.push({
+            values: [convertToIValue('c')],
+          });
+          firstStream.push({
+            values: [convertToIValue('d')],
+            resumeToken: 'r2',
+          });
+          setImmediate(() => {
+            firstStream.emit('error', {
+              code: grpc.status.UNAVAILABLE,
+              message: 'Unavailable',
+            } as grpc.ServiceError);
+          });
+        });
+        return firstStream;
+      });
+
+      requestFnStub.onCall(1).callsFake(resumeToken => {
+        assert.strictEqual(resumeToken, 'r2');
+        setImmediate(() => {
+          secondStream.push({
+            values: [convertToIValue('e')],
+            resumeToken: 'r3',
+          });
+          secondStream.push({
+            values: [convertToIValue('f')],
+            last: true,
+          });
+          secondStream.end();
+        });
+        return secondStream;
+      });
+
+      const rows: Row[] = [];
+      partialResultStream(requestFnStub)
+        .on('data', row => rows.push(row))
+        .on('error', done)
+        .on('end', () => {
+          try {
+            assert.strictEqual(rows.length, 6);
+            assert.deepStrictEqual(
+              rows.map(row => row.toJSON()),
+              [
+                {val: 'a'},
+                {val: 'b'},
+                {val: 'c'},
+                {val: 'd'},
+                {val: 'e'},
+                {val: 'f'},
+              ],
+            );
+            done();
+          } catch (err) {
+            done(err);
+          }
+        });
+    });
+
+    it('should treat error as unsafe to retry when buffer limit is exceeded without resume tokens (Java: bufferLimitMissingTokensUnsafeToRetry)', done => {
+      const firstStream = through.obj();
+      const requestFnStub = sandbox.stub();
+
+      const fields = [{name: 'val', type: {code: 'STRING'}}];
+
+      requestFnStub.onCall(0).callsFake(() => {
+        setImmediate(() => {
+          firstStream.push({
+            metadata: {rowType: {fields}},
+            values: [convertToIValue('a')],
+            resumeToken: 'r1',
+          });
+          // Push 11 chunks without resume token (exceeding maxQueued of 10)
+          for (let i = 1; i <= 11; i++) {
+            firstStream.push({
+              values: [convertToIValue(`row_${i}`)],
+            });
+          }
+          setImmediate(() => {
+            firstStream.emit('error', {
+              code: grpc.status.UNAVAILABLE,
+              message: 'Unavailable after buffer overflow',
+            } as grpc.ServiceError);
+          });
+        });
+        return firstStream;
+      });
+
+      const rows: Row[] = [];
+      partialResultStream(requestFnStub)
+        .on('data', row => rows.push(row))
+        .on('error', err => {
+          try {
+            assert.strictEqual(
+              requestFnStub.callCount,
+              1,
+              'Must not retry after buffer limit without token is exceeded',
+            );
+            assert.strictEqual(err.code, grpc.status.UNAVAILABLE);
+            assert.strictEqual(rows.length, 12);
+            done();
+          } catch (assertionErr) {
+            done(assertionErr);
+          }
+        })
+        .on('end', () => {
+          done(new Error('Stream should have failed with error'));
+        });
+    });
+
+    it('should safely recover retryability when a new resume token arrives after buffer limit was exceeded (Java: bufferLimitMissingTokensSafeToRetry)', done => {
+      const firstStream = through.obj();
+      const secondStream = through.obj();
+      const requestFnStub = sandbox.stub();
+
+      const fields = [{name: 'val', type: {code: 'STRING'}}];
+
+      requestFnStub.onCall(0).callsFake(() => {
+        setImmediate(() => {
+          firstStream.push({
+            metadata: {rowType: {fields}},
+            values: [convertToIValue('a')],
+            resumeToken: 'r1',
+          });
+          // Push 11 chunks without resume token (exceeding maxQueued of 10 so safeToRetry becomes false)
+          for (let i = 1; i <= 11; i++) {
+            firstStream.push({
+              values: [convertToIValue(`b${i}`)],
+            });
+          }
+          // Now push a chunk with a resume token, recovering safeToRetry = true
+          firstStream.push({
+            values: [convertToIValue('c')],
+            resumeToken: 'r3',
+          });
+          setImmediate(() => {
+            firstStream.emit('error', {
+              code: grpc.status.UNAVAILABLE,
+              message: 'Unavailable',
+            } as grpc.ServiceError);
+          });
+        });
+        return firstStream;
+      });
+
+      requestFnStub.onCall(1).callsFake(resumeToken => {
+        assert.strictEqual(resumeToken, 'r3');
+        setImmediate(() => {
+          secondStream.push({
+            values: [convertToIValue('d')],
+            last: true,
+          });
+          secondStream.end();
+        });
+        return secondStream;
+      });
+
+      const rows: Row[] = [];
+      partialResultStream(requestFnStub)
+        .on('data', row => rows.push(row))
+        .on('error', done)
+        .on('end', () => {
+          try {
+            assert.strictEqual(rows.length, 14);
+            const expected = [
+              {val: 'a'},
+              ...Array.from({length: 11}, (_, index) => ({
+                val: `b${index + 1}`,
+              })),
+              {val: 'c'},
+              {val: 'd'},
+            ];
+            assert.deepStrictEqual(
+              rows.map(row => row.toJSON()),
+              expected,
+            );
+            done();
+          } catch (err) {
+            done(err);
+          }
+        });
+    });
+
+    it('should handle multiple consecutive retries with progressive resume tokens (Go: read_test.go)', done => {
+      const stream1 = through.obj();
+      const stream2 = through.obj();
+      const stream3 = through.obj();
+      const requestFnStub = sandbox.stub();
+
+      const fields = [{name: 'id', type: {code: 'STRING'}}];
+
+      // Call 1: delivers row 1 with token1, then fails
+      requestFnStub.onCall(0).callsFake(() => {
+        setImmediate(() => {
+          stream1.push({
+            metadata: {rowType: {fields}},
+            values: [convertToIValue('row1')],
+            resumeToken: 'token1',
+          });
+          setImmediate(() => {
+            stream1.emit('error', {
+              code: grpc.status.UNAVAILABLE,
+              message: 'First blip',
+            } as grpc.ServiceError);
+          });
+        });
+        return stream1;
+      });
+
+      // Call 2: resumes from token1, delivers row 2 with token2, then fails
+      requestFnStub.onCall(1).callsFake(resumeToken => {
+        assert.strictEqual(resumeToken, 'token1');
+        setImmediate(() => {
+          stream2.push({
+            values: [convertToIValue('row2')],
+            resumeToken: 'token2',
+          });
+          setImmediate(() => {
+            stream2.emit('error', {
+              code: grpc.status.UNAVAILABLE,
+              message: 'Second blip',
+            } as grpc.ServiceError);
+          });
+        });
+        return stream2;
+      });
+
+      // Call 3: resumes from token2, delivers row 3 with last: true
+      requestFnStub.onCall(2).callsFake(resumeToken => {
+        assert.strictEqual(resumeToken, 'token2');
+        setImmediate(() => {
+          stream3.push({
+            values: [convertToIValue('row3')],
+            last: true,
+          });
+          stream3.end();
+        });
+        return stream3;
+      });
+
+      const rows: Row[] = [];
+      partialResultStream(requestFnStub)
+        .on('data', row => rows.push(row))
+        .on('error', done)
+        .on('end', () => {
+          try {
+            assert.strictEqual(requestFnStub.callCount, 3);
+            assert.strictEqual(rows.length, 3);
+            assert.deepStrictEqual(
+              rows.map(row => row.toJSON()),
+              [{id: 'row1'}, {id: 'row2'}, {id: 'row3'}],
+            );
+            done();
+          } catch (err) {
+            done(err);
+          }
+        });
+    });
+
+    it('should retry after chunked value with resume token and merge continuation correctly (Go: read_test.go)', done => {
+      const stream1 = through.obj();
+      const stream2 = through.obj();
+      const requestFnStub = sandbox.stub();
+
+      const fields = [
+        {name: 'id', type: {code: 'STRING'}},
+        {name: 'data', type: {code: 'STRING'}},
+      ];
+
+      requestFnStub.onCall(0).callsFake(() => {
+        setImmediate(() => {
+          stream1.push({
+            metadata: {rowType: {fields}},
+            values: [convertToIValue('id1'), convertToIValue('chunk-head-')],
+            chunkedValue: true,
+            resumeToken: 'token-chunked',
+          });
+          setImmediate(() => {
+            stream1.emit('error', {
+              code: grpc.status.UNAVAILABLE,
+              message: 'Unavailable during chunking',
+            } as grpc.ServiceError);
+          });
+        });
+        return stream1;
+      });
+
+      requestFnStub.onCall(1).callsFake(resumeToken => {
+        assert.strictEqual(resumeToken, 'token-chunked');
+        setImmediate(() => {
+          stream2.push({
+            values: [convertToIValue('chunk-tail')],
+            last: true,
+          });
+          stream2.end();
+        });
+        return stream2;
+      });
+
+      const rows: Row[] = [];
+      partialResultStream(requestFnStub)
+        .on('data', row => rows.push(row))
+        .on('error', done)
+        .on('end', () => {
+          try {
+            assert.strictEqual(requestFnStub.callCount, 2);
+            assert.strictEqual(rows.length, 1);
+            assert.deepStrictEqual(rows[0].toJSON(), {
+              id: 'id1',
+              data: 'chunk-head-chunk-tail',
+            });
+            done();
+          } catch (err) {
+            done(err);
+          }
+        });
+    });
+
+    it('should handle value chunked across multiple consecutive PartialResultSets with intermediate chunks, pause, and retry', done => {
+      const stream1 = through.obj();
+      const stream2 = through.obj();
+      const requestFnStub = sandbox.stub();
+
+      const fields = [
+        {name: 'id', type: {code: 'STRING'}},
+        {name: 'data', type: {code: 'STRING'}},
+      ];
+
+      // Stream 1 delivers chunk 1 (token-1), chunk 2 (still chunked, no token), then blips
+      requestFnStub.onCall(0).callsFake(() => {
+        setImmediate(() => {
+          stream1.push({
+            metadata: {rowType: {fields}},
+            values: [convertToIValue('id1'), convertToIValue('part1-')],
+            chunkedValue: true,
+            resumeToken: 'token-1',
+          });
+          setImmediate(() => {
+            stream1.push({
+              values: [convertToIValue('part2-tentative-')],
+              chunkedValue: true,
+            });
+            setImmediate(() => {
+              stream1.emit('error', {
+                code: grpc.status.UNAVAILABLE,
+                message: 'Unavailable during multi-chunk',
+              } as grpc.ServiceError);
+            });
+          });
+        });
+        return stream1;
+      });
+
+      // Stream 2 resumes from token-1, sends part2 with token-2, part3 (intermediate chunked), and part4 (completion)
+      requestFnStub.onCall(1).callsFake(resumeToken => {
+        assert.strictEqual(resumeToken, 'token-1');
+        setImmediate(() => {
+          stream2.push({
+            metadata: {rowType: {fields}},
+            values: [convertToIValue('part2-actual-')],
+            chunkedValue: true,
+            resumeToken: 'token-2',
+          });
+          setImmediate(() => {
+            // Intermediate chunk with single value, still chunked
+            stream2.push({
+              values: [convertToIValue('part3-')],
+              chunkedValue: true,
+            });
+            setImmediate(() => {
+              stream2.push({
+                values: [
+                  convertToIValue('part4'),
+                  convertToIValue('id2'),
+                  convertToIValue('data2'),
+                ],
+                last: true,
+              });
+              stream2.end();
+            });
+          });
+        });
+        return stream2;
+      });
+
+      const rows: Row[] = [];
+      const slowSink = new Transform({
+        objectMode: true,
+        highWaterMark: 1,
+        transform(chunk, encoding, callback) {
+          rows.push(chunk);
+          setImmediate(callback);
+        },
+      });
+
+      const resultStream = partialResultStream(requestFnStub);
+      resultStream.pipe(slowSink);
+
+      slowSink.on('finish', () => {
+        try {
+          assert.strictEqual(requestFnStub.callCount, 2);
+          assert.strictEqual(rows.length, 2);
+          assert.deepStrictEqual(rows[0].toJSON(), {
+            id: 'id1',
+            data: 'part1-part2-actual-part3-part4',
+          });
+          assert.deepStrictEqual(rows[1].toJSON(), {
+            id: 'id2',
+            data: 'data2',
+          });
+          done();
+        } catch (err) {
+          done(err);
+        }
+      });
+      resultStream.on('error', done);
+    });
+
+    it('should retry after chunked array value with resume token and merge continuation correctly', done => {
+      const stream1 = through.obj();
+      const stream2 = through.obj();
+      const requestFnStub = sandbox.stub();
+
+      const fields = [
+        {name: 'id', type: {code: 'STRING'}},
+        {
+          name: 'tags',
+          type: {
+            code: 'ARRAY',
+            arrayElementType: {code: 'STRING'},
+          },
+        },
+      ];
+
+      requestFnStub.onCall(0).callsFake(() => {
+        setImmediate(() => {
+          stream1.push({
+            metadata: {rowType: {fields}},
+            values: [
+              convertToIValue('id1'),
+              convertToIValue(['tag1', 'tag2-']),
+            ],
+            chunkedValue: true,
+            resumeToken: 'token-array',
+          });
+          setImmediate(() => {
+            stream1.emit('error', {
+              code: grpc.status.UNAVAILABLE,
+              message: 'Unavailable during array chunk',
+            } as grpc.ServiceError);
+          });
+        });
+        return stream1;
+      });
+
+      requestFnStub.onCall(1).callsFake(resumeToken => {
+        assert.strictEqual(resumeToken, 'token-array');
+        setImmediate(() => {
+          stream2.push({
+            values: [convertToIValue(['tag2-tail', 'tag3'])],
+            last: true,
+          });
+          stream2.end();
+        });
+        return stream2;
+      });
+
+      const rows: Row[] = [];
+      partialResultStream(requestFnStub)
+        .on('data', row => rows.push(row))
+        .on('error', done)
+        .on('end', () => {
+          try {
+            assert.strictEqual(requestFnStub.callCount, 2);
+            assert.strictEqual(rows.length, 1);
+            assert.deepStrictEqual(rows[0].toJSON(), {
+              id: 'id1',
+              tags: ['tag1', 'tag2-tag2-tail', 'tag3'],
+            });
+            done();
+          } catch (err) {
+            done(err);
+          }
+        });
+    });
+
+    it('should restart from beginning when initial stream fails before any resume token is received (Java: bufferLimitRestartWithinLimitAtStartOfResults)', done => {
+      const stream1 = through.obj();
+      const stream2 = through.obj();
+      const requestFnStub = sandbox.stub();
+
+      const fields = [{name: 'id', type: {code: 'STRING'}}];
+
+      // Stream 1 delivers a chunk without token, then fails
+      requestFnStub.onCall(0).callsFake(resumeToken => {
+        assert.strictEqual(resumeToken, undefined);
+        setImmediate(() => {
+          stream1.push({
+            metadata: {rowType: {fields}},
+            values: [convertToIValue('tentative-row')],
+          });
+          setImmediate(() => {
+            stream1.emit('error', {
+              code: grpc.status.UNAVAILABLE,
+              message: 'Initial failure',
+            } as grpc.ServiceError);
+          });
+        });
+        return stream1;
+      });
+
+      // Stream 2 must restart with undefined resumeToken
+      requestFnStub.onCall(1).callsFake(resumeToken => {
+        assert.strictEqual(
+          resumeToken,
+          undefined,
+          'Must restart from beginning with undefined resumeToken',
+        );
+        setImmediate(() => {
+          stream2.push({
+            metadata: {rowType: {fields}},
+            values: [convertToIValue('actual-row-1')],
+            resumeToken: 'token-1',
+          });
+          stream2.push({
+            values: [convertToIValue('actual-row-2')],
+            last: true,
+          });
+          stream2.end();
+        });
+        return stream2;
+      });
+
+      const rows: Row[] = [];
+      partialResultStream(requestFnStub)
+        .on('data', row => rows.push(row))
+        .on('error', done)
+        .on('end', () => {
+          try {
+            assert.strictEqual(requestFnStub.callCount, 2);
+            assert.strictEqual(rows.length, 2);
+            assert.deepStrictEqual(
+              rows.map(row => row.toJSON()),
+              [{id: 'actual-row-1'}, {id: 'actual-row-2'}],
+            );
+            done();
+          } catch (err) {
+            done(err);
+          }
+        });
+    });
+
+    it('should correctly preserve all buffered checkpointed chunks when multiple tokens arrive while paused before error', done => {
+      const stream1 = through.obj();
+      const stream2 = through.obj();
+      const requestFnStub = sandbox.stub();
+      const resultStream = partialResultStream(requestFnStub);
+
+      const fields = [{name: 'id', type: {code: 'STRING'}}];
+
+      requestFnStub.onCall(0).callsFake(() => {
+        setImmediate(() => {
+          stream1.push({
+            metadata: {rowType: {fields}},
+            values: [convertToIValue('row-1')],
+            resumeToken: 'token-1',
+          });
+        });
+        return stream1;
+      });
+
+      requestFnStub.onCall(1).callsFake(resumeToken => {
+        assert.strictEqual(
+          resumeToken,
+          'token-3',
+          'Must resume from latest valid token token-3',
+        );
+        setImmediate(() => {
+          stream2.push({
+            values: [
+              convertToIValue('row-4-resumed'),
+              convertToIValue('row-5'),
+            ],
+            last: true,
+          });
+          stream2.end();
+          resultStream.resume();
+        });
+        return stream2;
+      });
+
+      const rows: Row[] = [];
+      resultStream
+        .on('data', row => {
+          rows.push(row);
+          if (rows.length === 1) {
+            resultStream.pause();
+            setImmediate(() => {
+              // Push chunk 2 and 3 with tokens, chunk 4 without token, then fail
+              stream1.push({
+                values: [convertToIValue('row-2')],
+                resumeToken: 'token-2',
+              });
+              stream1.push({
+                values: [convertToIValue('row-3')],
+                resumeToken: 'token-3',
+              });
+              stream1.push({
+                values: [convertToIValue('row-4-discarded')],
+              });
+              setImmediate(() => {
+                stream1.emit('error', {
+                  code: grpc.status.UNAVAILABLE,
+                  message: 'Unavailable',
+                } as grpc.ServiceError);
+              });
+            });
+          }
+        })
+        .on('end', () => {
+          try {
+            assert.strictEqual(requestFnStub.callCount, 2);
+            assert.strictEqual(rows.length, 5);
+            assert.deepStrictEqual(
+              rows.map(row => row.toJSON()),
+              [
+                {id: 'row-1'},
+                {id: 'row-2'},
+                {id: 'row-3'},
+                {id: 'row-4-resumed'},
+                {id: 'row-5'},
+              ],
+            );
+            done();
+          } catch (err) {
+            done(err);
+          }
+        })
+        .on('error', done);
+    });
+
+    it('should not shift row values when retrying while the stream is paused by backpressure and a checkpointed chunk is still queued', done => {
+      const firstStream = through.obj();
+      const secondStream = through.obj();
+      const requestFnStub = sandbox.stub();
+
+      const fields = [
+        {name: 'a', type: {code: 'STRING'}},
+        {name: 'b', type: {code: 'STRING'}},
+        {name: 'c', type: {code: 'STRING'}},
+      ];
+      const rowValues = (index: number) => [
+        `a${index}`,
+        `b${index}`,
+        `c${index}`,
+      ];
+      const middleRows: Array<ReturnType<typeof convertToIValue>> = [];
+      for (let i = 2; i <= 21; i++) {
+        middleRows.push(...rowValues(i).map(convertToIValue));
+      }
+
+      requestFnStub.onCall(0).callsFake(() => {
+        setImmediate(() => {
+          firstStream.push({
+            metadata: {rowType: {fields}},
+            values: [convertToIValue('a1')],
+            resumeToken: 'token-1',
+          });
+          firstStream.push({
+            values: [
+              convertToIValue('b1'),
+              convertToIValue('c1'),
+              ...middleRows,
+              convertToIValue('a22'),
+              convertToIValue('b22'),
+            ],
+          });
+          firstStream.push({
+            values: [convertToIValue('c22'), convertToIValue('a23')],
+            resumeToken: 'token-2',
+          });
+        });
+        return firstStream;
+      });
+
+      const resultStream = partialResultStream(requestFnStub);
+      const rows: Row[] = [];
+
+      requestFnStub.onCall(1).callsFake(resumeToken => {
+        assert.strictEqual(resumeToken, 'token-2');
+        setImmediate(() => {
+          resultStream.resume();
+          secondStream.push({
+            metadata: {rowType: {fields}},
+            values: [convertToIValue('b23'), convertToIValue('c23')],
+            last: true,
+          });
+          secondStream.end();
+        });
+        return secondStream;
+      });
+
+      resultStream.once('paused', () => {
+        firstStream.emit('error', {
+          code: grpc.status.UNAVAILABLE,
+          message: 'Unavailable',
+        } as grpc.ServiceError);
+      });
+
+      resultStream
+        .on('data', row => {
+          rows.push(row);
+          if (rows.length === 1) {
+            resultStream.pause();
+          }
+        })
+        .on('error', done)
+        .on('end', () => {
+          try {
+            assert.strictEqual(rows.length, 23);
+            for (let i = 1; i <= 23; i++) {
+              assert.deepStrictEqual(rows[i - 1].toJSON(), {
+                a: `a${i}`,
+                b: `b${i}`,
+                c: `c${i}`,
+              });
+            }
+            done();
+          } catch (err) {
+            done(err);
+          }
+        });
+    });
+
+    it('should not lose a chunked value when retrying while the stream is paused by backpressure and a checkpointed chunked value is queued', done => {
+      const firstStream = through.obj();
+      const secondStream = through.obj();
+      const requestFnStub = sandbox.stub();
+
+      const fields = [
+        {name: 'id', type: {code: 'STRING'}},
+        {name: 'text', type: {code: 'STRING'}},
+      ];
+      const middleRows: Array<ReturnType<typeof convertToIValue>> = [];
+      for (let i = 2; i <= 21; i++) {
+        middleRows.push(
+          convertToIValue(`row-${i}`),
+          convertToIValue(`text-${i}`),
+        );
+      }
+
+      requestFnStub.onCall(0).callsFake(() => {
+        setImmediate(() => {
+          firstStream.push({
+            metadata: {rowType: {fields}},
+            values: [convertToIValue('row-1'), convertToIValue('head-1-')],
+            chunkedValue: true,
+            resumeToken: 'token-1',
+          });
+          firstStream.push({
+            values: [convertToIValue('tail-1'), ...middleRows],
+          });
+          firstStream.push({
+            values: [convertToIValue('row-22'), convertToIValue('head-22-')],
+            chunkedValue: true,
+            resumeToken: 'token-2',
+          });
+        });
+        return firstStream;
+      });
+
+      const resultStream = partialResultStream(requestFnStub);
+      const rows: Row[] = [];
+
+      requestFnStub.onCall(1).callsFake(resumeToken => {
+        assert.strictEqual(resumeToken, 'token-2');
+        setImmediate(() => {
+          resultStream.resume();
+          secondStream.push({
+            metadata: {rowType: {fields}},
+            values: [convertToIValue('tail-22')],
+            last: true,
+          });
+          secondStream.end();
+        });
+        return secondStream;
+      });
+
+      resultStream.once('paused', () => {
+        firstStream.emit('error', {
+          code: grpc.status.UNAVAILABLE,
+          message: 'Unavailable',
+        } as grpc.ServiceError);
+      });
+
+      resultStream
+        .on('data', row => {
+          rows.push(row);
+          if (rows.length === 1) {
+            resultStream.pause();
+          }
+        })
+        .on('error', done)
+        .on('end', () => {
+          try {
+            assert.strictEqual(rows.length, 22);
+            assert.deepStrictEqual(rows[0].toJSON(), {
+              id: 'row-1',
+              text: 'head-1-tail-1',
+            });
+            for (let i = 2; i <= 21; i++) {
+              assert.deepStrictEqual(rows[i - 1].toJSON(), {
+                id: `row-${i}`,
+                text: `text-${i}`,
+              });
+            }
+            assert.deepStrictEqual(rows[21].toJSON(), {
+              id: 'row-22',
+              text: 'head-22-tail-22',
+            });
+            done();
+          } catch (err) {
+            done(err);
+          }
+        });
+    });
+
+    it('should not return rows twice when retrying while explicitly paused via pause() and once(paused)', done => {
+      const firstStream = through.obj();
+      const secondStream = through.obj();
+      const requestFnStub = sandbox.stub();
+
+      const fields = [{name: 'id', type: {code: 'STRING'}}];
+      const middleRows: Array<ReturnType<typeof convertToIValue>> = [];
+      for (let i = 2; i <= 21; i++) {
+        middleRows.push(convertToIValue(`row-${i}`));
+      }
+
+      requestFnStub.onCall(0).callsFake(() => {
+        setImmediate(() => {
+          firstStream.push({
+            metadata: {rowType: {fields}},
+            values: [convertToIValue('row-1'), ...middleRows],
+            resumeToken: 'token-1',
+          });
+        });
+        return firstStream;
+      });
+
+      const resultStream = partialResultStream(requestFnStub);
+      const rows: Row[] = [];
+
+      requestFnStub.onCall(1).callsFake(resumeToken => {
+        assert.strictEqual(resumeToken, 'token-1');
+        setImmediate(() => {
+          resultStream.resume();
+          secondStream.push({
+            metadata: {rowType: {fields}},
+            values: [convertToIValue('row-22')],
+            last: true,
+          });
+          secondStream.end();
+        });
+        return secondStream;
+      });
+
+      resultStream.once('paused', () => {
+        firstStream.emit('error', {
+          code: grpc.status.UNAVAILABLE,
+          message: 'Unavailable',
+        } as grpc.ServiceError);
+      });
+
+      resultStream
+        .on('data', row => {
+          rows.push(row);
+          if (rows.length === 1) {
+            resultStream.pause();
+          }
+        })
+        .on('error', done)
+        .on('end', () => {
+          try {
+            assert.strictEqual(rows.length, 22);
+            for (let i = 1; i <= 22; i++) {
+              assert.deepStrictEqual(rows[i - 1].toJSON(), {
+                id: `row-${i}`,
+              });
+            }
+            done();
+          } catch (err) {
+            done(err);
+          }
+        });
+    });
+
+    it('should not return rows twice when retrying while paused and a second resume token arrives while paused', done => {
+      const firstStream = through.obj();
+      const secondStream = through.obj();
+      const requestFnStub = sandbox.stub();
+      const resultStream = prs.partialResultStream(requestFnStub);
+      const fields = [
+        {name: 'a', type: {code: 'STRING'}},
+        {name: 'b', type: {code: 'STRING'}},
+        {name: 'c', type: {code: 'STRING'}},
+      ];
+      const rowValues = (from: number, to: number) => {
+        const values: Array<ReturnType<typeof convertToIValue>> = [];
+        for (let i = from; i <= to; i++) {
+          values.push(
+            convertToIValue(`a${i}`),
+            convertToIValue(`b${i}`),
+            convertToIValue(`c${i}`),
+          );
+        }
+        return values;
+      };
+      requestFnStub.onCall(0).callsFake(() => {
+        setImmediate(() => {
+          firstStream.push({
+            metadata: {rowType: {fields}},
+            values: rowValues(1, 20),
+            resumeToken: 'token-1',
+          });
+        });
+        return firstStream;
+      });
+      const valuesAfterToken: Record<
+        string,
+        Array<ReturnType<typeof convertToIValue>>
+      > = {
+        'token-1': rowValues(21, 22),
+        'token-2': rowValues(22, 22),
+      };
+      requestFnStub.onCall(1).callsFake(resumeToken => {
+        assert.ok(
+          valuesAfterToken[resumeToken],
+          `Unexpected resume token: ${resumeToken}`,
+        );
+        setImmediate(() => {
+          secondStream.push({
+            values: valuesAfterToken[resumeToken],
+            last: true,
+          });
+          secondStream.end();
+          resultStream.resume();
+        });
+        return secondStream;
+      });
+      const rows: Array<Record<string, string>> = [];
+      resultStream
+        .once('paused', () => {
+          setImmediate(() => {
+            firstStream.push({
+              values: rowValues(21, 21),
+              resumeToken: 'token-2',
+            });
+            setImmediate(() =>
+              firstStream.emit('error', {
+                code: grpc.status.UNAVAILABLE,
+                message: 'Unavailable',
+              } as grpc.ServiceError),
+            );
+          });
+        })
+        .on('data', row => {
+          if (row === undefined || row === null) return;
+          rows.push(row.toJSON());
+          if (rows.length === 1) resultStream.pause();
+        })
+        .on('end', () => {
+          try {
+            assert.strictEqual(requestFnStub.callCount, 2);
+            assert.deepStrictEqual(
+              rows,
+              Array.from({length: 22}, (_, index) => {
+                const i = index + 1;
+                return {a: `a${i}`, b: `b${i}`, c: `c${i}`};
+              }),
+            );
+            done();
+          } catch (err) {
+            done(err);
+          }
+        })
+        .on('error', done);
+    });
+
+    it('should error when stream ends in the middle of a row (Java/Go parity)', done => {
+      const s = through.obj();
+      const rows: any[] = [];
+      const fields = [
+        {name: 'a', type: {code: 'STRING'}},
+        {name: 'b', type: {code: 'STRING'}},
+      ];
+      prs
+        .partialResultStream(() => s)
+        .on('data', r => rows.push(r.toJSON()))
+        .on('error', (err: Error) => {
+          try {
+            assert.strictEqual(
+              err.message,
+              'Stream ended prematurely before row or chunked value was complete.',
+            );
+            done();
+          } catch (e) {
+            done(e);
+          }
+        })
+        .on('end', () =>
+          done(new Error(`ended silently with rows=${JSON.stringify(rows)}`)),
+        );
+      s.push({
+        metadata: {rowType: {fields}},
+        values: ['a1', 'b1', 'a2'].map(convertToIValue),
+        resumeToken: 't1',
+      });
+      s.push(null);
+    });
+
+    it('should error when stream ends in the middle of a chunked value (Java parity)', done => {
+      const s = through.obj();
+      const rows: any[] = [];
+      const fields = [
+        {name: 'a', type: {code: 'STRING'}},
+        {name: 'b', type: {code: 'STRING'}},
+      ];
+      prs
+        .partialResultStream(() => s)
+        .on('data', r => rows.push(r.toJSON()))
+        .on('error', (err: Error) => {
+          try {
+            assert.strictEqual(
+              err.message,
+              'Stream ended prematurely before row or chunked value was complete.',
+            );
+            done();
+          } catch (e) {
+            done(e);
+          }
+        })
+        .on('end', () =>
+          done(new Error(`ended silently with rows=${JSON.stringify(rows)}`)),
+        );
+      s.push({
+        metadata: {rowType: {fields}},
+        values: ['a1', 'b1-head'].map(convertToIValue),
+        chunkedValue: true,
+        resumeToken: 't1',
+      });
+      s.push(null);
+    });
+
+    it('should error when a single-chunk response with last=true contains a partial row', done => {
+      const s = through.obj();
+      const rows: any[] = [];
+      const fields = [
+        {name: 'a', type: {code: 'STRING'}},
+        {name: 'b', type: {code: 'STRING'}},
+      ];
+      prs
+        .partialResultStream(() => s)
+        .on('data', r => rows.push(r.toJSON()))
+        .on('error', (err: Error) => {
+          try {
+            assert.strictEqual(
+              err.message,
+              'Stream received chunk.last=true before row or chunked value was complete.',
+            );
+            done();
+          } catch (e) {
+            done(e);
+          }
+        })
+        .on('end', () =>
+          done(new Error(`ended silently with rows=${JSON.stringify(rows)}`)),
+        );
+      s.push({
+        metadata: {rowType: {fields}},
+        values: ['a1', 'b1', 'a2'].map(convertToIValue),
+        last: true,
+      });
+    });
+
+    it('should error when a subsequent chunk with last=true contains a partial row in multi-chunk mode', done => {
+      const s = through.obj();
+      const rows: any[] = [];
+      const fields = [
+        {name: 'a', type: {code: 'STRING'}},
+        {name: 'b', type: {code: 'STRING'}},
+      ];
+      prs
+        .partialResultStream(() => s)
+        .on('data', r => rows.push(r.toJSON()))
+        .on('error', (err: Error) => {
+          try {
+            assert.strictEqual(
+              err.message,
+              'Stream received chunk.last=true before row or chunked value was complete.',
+            );
+            done();
+          } catch (e) {
+            done(e);
+          }
+        })
+        .on('end', () =>
+          done(new Error(`ended silently with rows=${JSON.stringify(rows)}`)),
+        );
+      s.push({
+        metadata: {rowType: {fields}},
+        values: ['a1', 'b1'].map(convertToIValue),
+      });
+      s.push({
+        values: ['a2'].map(convertToIValue),
+        last: true,
+      });
+    });
+
+    it('should not emit rows after destroy() is called', done => {
+      const s = through.obj();
+      const rows: any[] = [];
+      const fields = [
+        {name: 'a', type: {code: 'STRING'}},
+        {name: 'b', type: {code: 'STRING'}},
+      ];
+      const stream = prs.partialResultStream(() => s);
+      stream.on('data', r => {
+        rows.push(r.toJSON());
+        if (rows.length === 1) stream.destroy();
+      });
+      stream.on('close', () => {
+        setImmediate(() => {
+          try {
+            assert.strictEqual(
+              rows.length,
+              1,
+              `rows after destroy: ${rows.length}`,
+            );
+            done();
+          } catch (e) {
+            done(e);
+          }
+        });
+      });
+      const values: Array<ReturnType<typeof convertToIValue>> = [];
+      for (let i = 0; i < 10; i++) {
+        values.push(convertToIValue(`a${i}`), convertToIValue(`b${i}`));
+      }
+      s.push({
+        metadata: {rowType: {fields}},
+        values,
+        resumeToken: 't1',
+      });
+    });
+
+    it('should correctly merge falsy pending values (empty string) across chunk boundaries', done => {
+      const streamInstance = new PartialResultStream({});
+      const rows: Row[] = [];
+      const fields = [
+        {name: 'col1', type: {code: 'STRING'}},
+        {name: 'col2', type: {code: 'STRING'}},
+      ];
+
+      streamInstance
+        .on('data', row => rows.push(row))
+        .on('error', done)
+        .on('end', () => {
+          try {
+            assert.strictEqual(rows.length, 2);
+            assert.deepStrictEqual(rows[0].toJSON(), {
+              col1: 'tail-after-empty',
+              col2: 'val2',
+            });
+            assert.deepStrictEqual(rows[1].toJSON(), {
+              col1: 'val3',
+              col2: 'tail-2',
+            });
+            done();
+          } catch (err) {
+            done(err);
+          }
+        });
+
+      // Row 1: col1 starts with empty string "" (falsy) and chunkedValue: true
+      streamInstance.write({
+        metadata: {rowType: {fields}},
+        values: [convertToIValue('')],
+        chunkedValue: true,
+      });
+      // Continuation of Row 1 col1 + Row 1 col2 + Row 2 col1 + Row 2 col2 (starts with "")
+      streamInstance.write({
+        values: [
+          convertToIValue('tail-after-empty'),
+          convertToIValue('val2'),
+          convertToIValue('val3'),
+          convertToIValue(''),
+        ],
+        chunkedValue: true,
+      });
+      // Continuation of Row 2 col2
+      streamInstance.write({
+        values: [convertToIValue('tail-2')],
+        last: true,
+      });
+      streamInstance.end();
+    });
+
+    it('should correctly merge chunked ARRAY and STRUCT values when head or tail list is empty (Java/Go/Rust parity)', done => {
+      const streamInstance = new PartialResultStream({});
+      const rows: Row[] = [];
+      const fields = [
+        {
+          name: 'arr',
+          type: {
+            code: 'ARRAY',
+            arrayElementType: {code: 'STRING'},
+          },
+        },
+        {
+          name: 'structCol',
+          type: {
+            code: 'STRUCT',
+            structType: {
+              fields: [
+                {name: 's1', type: {code: 'STRING'}},
+                {name: 's2', type: {code: 'STRING'}},
+              ],
+            },
+          },
+        },
+      ];
+
+      streamInstance
+        .on('data', row => rows.push(row))
+        .on('error', done)
+        .on('end', () => {
+          try {
+            assert.strictEqual(rows.length, 3);
+            assert.deepStrictEqual(rows[0].toJSON(), {
+              arr: ['a', 'b'],
+              structCol: {s1: 'v1', s2: 'v2'},
+            });
+            assert.deepStrictEqual(rows[1].toJSON(), {
+              arr: ['x', 'y'],
+              structCol: {s1: 'w1', s2: 'w2'},
+            });
+            assert.deepStrictEqual(rows[2].toJSON(), {
+              arr: [],
+              structCol: {s1: 'z1', s2: 'z2'},
+            });
+            done();
+          } catch (err) {
+            done(err);
+          }
+        });
+
+      // Row 1: arr starts with empty array [] and chunkedValue: true
+      streamInstance.write({
+        metadata: {rowType: {fields}},
+        values: [convertToIValue([])],
+        chunkedValue: true,
+      });
+      // Row 1: arr continues with ['a', 'b'], structCol starts with [] and chunkedValue: true
+      streamInstance.write({
+        values: [convertToIValue(['a', 'b']), convertToIValue([])],
+        chunkedValue: true,
+      });
+      // Row 1: structCol continues with ['v1', 'v2']; Row 2: arr starts with ['x', 'y'] and chunkedValue: true
+      streamInstance.write({
+        values: [convertToIValue(['v1', 'v2']), convertToIValue(['x', 'y'])],
+        chunkedValue: true,
+      });
+      // Row 2: arr continues with [], structCol starts with ['w1', 'w2'] and chunkedValue: true
+      streamInstance.write({
+        values: [convertToIValue([]), convertToIValue(['w1', 'w2'])],
+        chunkedValue: true,
+      });
+      // Row 2: structCol continues with []; Row 3: arr starts with [] and chunkedValue: true
+      streamInstance.write({
+        values: [convertToIValue([]), convertToIValue([])],
+        chunkedValue: true,
+      });
+      // Row 3: arr continues with [], structCol is ['z1', 'z2']
+      streamInstance.write({
+        values: [convertToIValue([]), convertToIValue(['z1', 'z2'])],
+        last: true,
+      });
+      streamInstance.end();
+    });
+
+    it('should correctly merge chunked BYTES and ARRAY<BYTES> across multiple PartialResultSets (Java: multiResponseChunkingBytesArray)', done => {
+      const streamInstance = new PartialResultStream({});
+      const rows: Row[] = [];
+      const fields = [
+        {name: 'rawBytes', type: {code: 'BYTES'}},
+        {
+          name: 'bytesArray',
+          type: {
+            code: 'ARRAY',
+            arrayElementType: {code: 'BYTES'},
+          },
+        },
+      ];
+
+      const fullBytes = Buffer.from('hello-chunked-bytes-world');
+      const fullBase64 = fullBytes.toString('base64');
+      const base64Part1 = fullBase64.slice(0, 10);
+      const base64Part2 = fullBase64.slice(10);
+
+      const elem1 = Buffer.from('first-elem');
+      const elem2 = Buffer.from('second-chunked-element');
+      const elem2Base64 = elem2.toString('base64');
+      const elem2Part1 = elem2Base64.slice(0, 8);
+      const elem2Part2 = elem2Base64.slice(8);
+      const elem3 = Buffer.from('third-elem');
+
+      streamInstance
+        .on('data', row => rows.push(row))
+        .on('error', done)
+        .on('end', () => {
+          try {
+            assert.strictEqual(rows.length, 1);
+            const json = rows[0].toJSON();
+            assert.deepStrictEqual(json.rawBytes, fullBytes);
+            assert.deepStrictEqual(json.bytesArray, [
+              elem1,
+              null,
+              elem2,
+              elem3,
+            ]);
+            done();
+          } catch (err) {
+            done(err);
+          }
+        });
+
+      streamInstance.write({
+        metadata: {rowType: {fields}},
+        values: [convertToIValue(base64Part1)],
+        chunkedValue: true,
+      });
+      streamInstance.write({
+        values: [
+          convertToIValue(base64Part2),
+          convertToIValue([elem1.toString('base64'), null, elem2Part1]),
+        ],
+        chunkedValue: true,
+      });
+      streamInstance.write({
+        values: [convertToIValue([elem2Part2, elem3.toString('base64')])],
+        last: true,
+      });
+      streamInstance.end();
+    });
+
+    it('should handle empty heartbeat PartialResultSets with resume tokens mid-row and mid-chunked-value (Rust: empty_partial_result_sets_with_resume_tokens)', done => {
+      const stream1 = through.obj();
+      const stream2 = through.obj();
+      const requestFnStub = sandbox.stub();
+
+      const fields = [
+        {name: 'id', type: {code: 'STRING'}},
+        {name: 'payload', type: {code: 'STRING'}},
+      ];
+
+      requestFnStub.onCall(0).callsFake(() => {
+        setImmediate(() => {
+          // Chunk 1: partial row + chunked value, NO resume token
+          stream1.push({
+            metadata: {rowType: {fields}},
+            values: [convertToIValue('row-1'), convertToIValue('part1-')],
+            chunkedValue: true,
+          });
+          // Chunk 2: empty heartbeat PartialResultSet with resume token
+          stream1.push({
+            values: [],
+            resumeToken: 'heartbeat-token-1',
+          });
+          // Chunk 3: uncheckpointed continuation that will be discarded on error
+          stream1.push({
+            values: [convertToIValue('discarded-tail')],
+          });
+          setImmediate(() => {
+            stream1.emit('error', {
+              code: grpc.status.UNAVAILABLE,
+              message: 'Unavailable after heartbeat',
+            } as grpc.ServiceError);
+          });
+        });
+        return stream1;
+      });
+
+      requestFnStub.onCall(1).callsFake(resumeToken => {
+        assert.strictEqual(resumeToken, 'heartbeat-token-1');
+        setImmediate(() => {
+          stream2.push({
+            values: [convertToIValue('actual-tail')],
+            last: true,
+          });
+          stream2.end();
+        });
+        return stream2;
+      });
+
+      const rows: Row[] = [];
+      partialResultStream(requestFnStub)
+        .on('data', row => rows.push(row))
+        .on('error', done)
+        .on('end', () => {
+          try {
+            assert.strictEqual(requestFnStub.callCount, 2);
+            assert.strictEqual(rows.length, 1);
+            assert.deepStrictEqual(rows[0].toJSON(), {
+              id: 'row-1',
+              payload: 'part1-actual-tail',
+            });
+            done();
+          } catch (err) {
+            done(err);
+          }
+        });
+    });
+
+    it('should retry on retryable INTERNAL RST_STREAM error and reset withoutCheckpointCount across multiple retries', done => {
+      const stream1 = through.obj();
+      const stream2 = through.obj();
+      const stream3 = through.obj();
+      const requestFnStub = sandbox.stub();
+
+      const fields = [{name: 'val', type: {code: 'STRING'}}];
+
+      // Attempt 1: 1 checkpointed chunk + 6 uncheckpointed chunks, then INTERNAL RST_STREAM
+      requestFnStub.onCall(0).callsFake(() => {
+        setImmediate(() => {
+          stream1.push({
+            metadata: {rowType: {fields}},
+            values: [convertToIValue('committed-1')],
+            resumeToken: 'token-1',
+          });
+          for (let i = 1; i <= 6; i++) {
+            stream1.push({
+              values: [convertToIValue(`attempt1-discarded-${i}`)],
+            });
+          }
+          setImmediate(() => {
+            stream1.emit('error', {
+              code: grpc.status.INTERNAL,
+              message: 'INTERNAL: HTTP/2 error code: NO_ERROR\nRST_STREAM',
+            } as grpc.ServiceError);
+          });
+        });
+        return stream1;
+      });
+
+      // Attempt 2: 6 more uncheckpointed chunks (total 12 > maxQueued across attempts, but only 6 in this attempt), then UNAVAILABLE
+      requestFnStub.onCall(1).callsFake(resumeToken => {
+        assert.strictEqual(resumeToken, 'token-1');
+        setImmediate(() => {
+          for (let i = 1; i <= 6; i++) {
+            stream2.push({
+              values: [convertToIValue(`attempt2-discarded-${i}`)],
+            });
+          }
+          setImmediate(() => {
+            stream2.emit('error', {
+              code: grpc.status.UNAVAILABLE,
+              message: 'Unavailable on second attempt',
+            } as grpc.ServiceError);
+          });
+        });
+        return stream2;
+      });
+
+      // Attempt 3: succeeds from token-1
+      requestFnStub.onCall(2).callsFake(resumeToken => {
+        assert.strictEqual(resumeToken, 'token-1');
+        setImmediate(() => {
+          stream3.push({
+            values: [convertToIValue('committed-2')],
+            last: true,
+          });
+          stream3.end();
+        });
+        return stream3;
+      });
+
+      const rows: Row[] = [];
+      partialResultStream(requestFnStub)
+        .on('data', row => rows.push(row))
+        .on('error', done)
+        .on('end', () => {
+          try {
+            assert.strictEqual(requestFnStub.callCount, 3);
+            assert.strictEqual(rows.length, 2);
+            assert.deepStrictEqual(
+              rows.map(row => row.toJSON()),
+              [{val: 'committed-1'}, {val: 'committed-2'}],
+            );
+            done();
+          } catch (err) {
+            done(err);
+          }
+        });
+    });
+
+    it('should remain safe to retry when > maxQueued uncheckpointed chunks arrive while stream is paused by backpressure and have not been emitted', done => {
+      const firstStream = through.obj();
+      const secondStream = through.obj();
+      const requestFnStub = sandbox.stub();
+
+      const fields = [{name: 'id', type: {code: 'STRING'}}];
+      const initialRows: Array<ReturnType<typeof convertToIValue>> = [];
+      for (let i = 1; i <= 20; i++) {
+        initialRows.push(convertToIValue(`row-${i}`));
+      }
+
+      requestFnStub.onCall(0).callsFake(() => {
+        setImmediate(() => {
+          // Chunk 1 has 20 rows and token-1, triggering backpressure pause
+          firstStream.push({
+            metadata: {rowType: {fields}},
+            values: initialRows,
+            resumeToken: 'token-1',
+          });
+          // Push 12 uncheckpointed chunks (> maxQueued) while userStream is paused
+          for (let i = 1; i <= 12; i++) {
+            firstStream.push({
+              values: [convertToIValue(`uncheckpointed-${i}`)],
+            });
+          }
+          setImmediate(() => {
+            firstStream.emit('error', {
+              code: grpc.status.UNAVAILABLE,
+              message:
+                'Unavailable while paused with queued uncheckpointed chunks',
+            } as grpc.ServiceError);
+          });
+        });
+        return firstStream;
+      });
+
+      const resultStream = partialResultStream(requestFnStub);
+      const rows: Row[] = [];
+
+      requestFnStub.onCall(1).callsFake(resumeToken => {
+        assert.strictEqual(resumeToken, 'token-1');
+        setImmediate(() => {
+          resultStream.resume();
+          secondStream.push({
+            values: [convertToIValue('row-21')],
+            last: true,
+          });
+          secondStream.end();
+        });
+        return secondStream;
+      });
+
+      resultStream
+        .on('data', row => {
+          rows.push(row);
+          if (rows.length === 1) {
+            resultStream.pause();
+          }
+        })
+        .on('error', done)
+        .on('end', () => {
+          try {
+            assert.strictEqual(requestFnStub.callCount, 2);
+            assert.strictEqual(rows.length, 21);
+            for (let i = 1; i <= 21; i++) {
+              assert.deepStrictEqual(rows[i - 1].toJSON(), {
+                id: `row-${i}`,
+              });
+            }
+            done();
+          } catch (err) {
+            done(err);
+          }
+        });
+    });
+
+    describe('randomized chunking, resumption, and backpressure stress tests', function () {
+      this.timeout(10000);
+
+      function mulberry32(a: number) {
+        return function () {
+          a |= 0;
+          a = (a + 0x6d2b79f5) | 0;
+          let t = Math.imul(a ^ (a >>> 15), 1 | a);
+          t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+          return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+        };
+      }
+
+      function stringValue(s: string) {
+        return {kind: 'stringValue', stringValue: s};
+      }
+      function listValue(items: string[]) {
+        return {kind: 'listValue', listValue: {values: items.map(stringValue)}};
+      }
+
+      function split(
+        value: {type: string; v: any},
+        random: () => number,
+      ): Array<{type: string; v: any}> {
+        if (value.type === 'STRING') {
+          const at = 1 + Math.floor(random() * (value.v.length - 1));
+          return [
+            {type: 'STRING', v: value.v.slice(0, at)},
+            {type: 'STRING', v: value.v.slice(at)},
+          ];
+        }
+        const arr = value.v;
+        const at = Math.floor(random() * arr.length);
+        const head = arr.slice(0, at + 1);
+        const rest = arr.slice(at + 1);
+        const boundary = head[head.length - 1];
+        const cut = Math.floor(random() * (boundary.length + 1));
+        head[head.length - 1] = boundary.slice(0, cut);
+        rest.unshift(boundary.slice(cut));
+        return [
+          {type: 'ARRAY', v: head},
+          {type: 'ARRAY', v: rest},
+        ];
+      }
+
+      function encode(value: {type: string; v: any}) {
+        return value.type === 'ARRAY'
+          ? listValue(value.v)
+          : stringValue(value.v);
+      }
+
+      function generate(seed: number) {
+        const random = mulberry32(seed);
+        const int = (lo: number, hi: number) =>
+          lo + Math.floor(random() * (hi - lo + 1));
+        const numColumns = int(1, 4);
+        const columnTypes: string[] = [];
+        for (let c = 0; c < numColumns; c++) {
+          columnTypes.push(random() < 0.3 ? 'ARRAY' : 'STRING');
+        }
+        const fields = columnTypes.map((t, i) => ({
+          name: `c${i}`,
+          type:
+            t === 'ARRAY'
+              ? {code: 'ARRAY', arrayElementType: {code: 'STRING'}}
+              : {code: 'STRING'},
+        }));
+        const numRows = int(0, 40);
+        const rows: Array<Record<string, any>> = [];
+        for (let r = 0; r < numRows; r++) {
+          const row: Record<string, any> = {};
+          for (let c = 0; c < numColumns; c++) {
+            if (columnTypes[c] === 'ARRAY') {
+              const n = int(0, 4);
+              const arr: string[] = [];
+              for (let k = 0; k < n; k++) {
+                arr.push(`r${r}c${c}e${k}-` + 'x'.repeat(int(0, 6)));
+              }
+              row[`c${c}`] = arr;
+            } else {
+              row[`c${c}`] = `r${r}c${c}-` + 'y'.repeat(int(0, 10));
+            }
+          }
+          rows.push(row);
+        }
+        const values: Array<{type: string; v: any}> = [];
+        for (const row of rows) {
+          for (let c = 0; c < numColumns; c++) {
+            const v = row[`c${c}`];
+            values.push(
+              columnTypes[c] === 'ARRAY'
+                ? {type: 'ARRAY', v: (v as string[]).slice()}
+                : {type: 'STRING', v},
+            );
+          }
+        }
+        const sets: any[] = [];
+        let pendingTail: {type: string; v: any} | null = null;
+        let i = 0;
+        let sinceToken = 0;
+        const finish = (set: any) => {
+          sinceToken++;
+          if (random() < 0.35 || sinceToken >= 9) {
+            set.resumeToken = Buffer.from(`t${sets.length}`);
+            sinceToken = 0;
+          }
+          sets.push(set);
+        };
+        while (i < values.length || pendingTail) {
+          const set: any = {values: []};
+          if (random() < 0.08) {
+            sets.push({
+              values: [],
+              resumeToken: Buffer.from(`t${sets.length}`),
+            });
+            sinceToken = 0;
+            continue;
+          }
+          if (pendingTail) {
+            const tail = pendingTail;
+            pendingTail = null;
+            const splittable =
+              tail.type === 'STRING' ? tail.v.length >= 2 : tail.v.length >= 1;
+            if (splittable && random() < 0.3) {
+              const [head, rest] = split(tail, random);
+              set.values.push(encode(head));
+              set.chunkedValue = true;
+              pendingTail = rest;
+              finish(set);
+              continue;
+            }
+            set.values.push(encode(tail));
+          }
+          const count = int(0, 8);
+          for (let k = 0; k < count && i < values.length; k++) {
+            set.values.push(encode(values[i++]));
+          }
+          if (i < values.length && random() < 0.4) {
+            const value = values[i];
+            const splittable =
+              value.type === 'STRING'
+                ? value.v.length >= 2
+                : value.v.length >= 1;
+            if (splittable) {
+              i++;
+              const [head, rest] = split(value, random);
+              set.values.push(encode(head));
+              set.chunkedValue = true;
+              pendingTail = rest;
+            }
+          }
+          finish(set);
+        }
+        if (sets.length === 0) {
+          sets.push({values: []});
+        }
+        sets[0].metadata = {rowType: {fields}};
+        const endWithLast = random() < 0.6;
+        if (endWithLast) {
+          sets[sets.length - 1].last = true;
+        }
+        return {fields, rows, sets, random, int};
+      }
+
+      function runScenario(seed: number): Promise<void> {
+        return new Promise((resolve, reject) => {
+          const {fields, rows, sets, random, int} = generate(seed);
+          let attempts = 0;
+          const maxErrors = int(0, 3);
+          let errorsInjected = 0;
+          const requestFn = (resumeToken?: prs.ResumeToken) => {
+            attempts++;
+            const stream = through.obj();
+            let start = 0;
+            if (resumeToken) {
+              const tokenBuffer = Buffer.isBuffer(resumeToken)
+                ? resumeToken
+                : Buffer.from(resumeToken);
+              const idx = sets.findIndex(
+                s =>
+                  s.resumeToken &&
+                  tokenBuffer.equals(Buffer.from(s.resumeToken)),
+              );
+              if (idx < 0) {
+                reject(
+                  new Error(
+                    `seed ${seed}: unknown resume token ${resumeToken}`,
+                  ),
+                );
+                return stream;
+              }
+              start = idx + 1;
+            }
+            let failAt = -1;
+            if (errorsInjected < maxErrors && random() < 0.7) {
+              failAt = int(start, sets.length);
+              errorsInjected++;
+            }
+            let index = start;
+            const pump = () => {
+              while (index < sets.length) {
+                if (index === failAt) {
+                  setImmediate(() =>
+                    stream.emit('error', {
+                      code: grpc.status.UNAVAILABLE,
+                      message: `injected ${seed}`,
+                    } as grpc.ServiceError),
+                  );
+                  return;
+                }
+                const set = sets[index++];
+                const toSend = Object.assign({}, set);
+                if (index - 1 === start && start > 0) {
+                  toSend.metadata = {rowType: {fields}};
+                }
+                stream.push(toSend);
+                if (random() < 0.5) {
+                  setImmediate(pump);
+                  return;
+                }
+              }
+              if (failAt === sets.length) {
+                setImmediate(() =>
+                  stream.emit('error', {
+                    code: grpc.status.UNAVAILABLE,
+                    message: `injected ${seed}`,
+                  } as grpc.ServiceError),
+                );
+                return;
+              }
+              stream.push(null);
+            };
+            setImmediate(pump);
+            return stream;
+          };
+
+          const received: any[] = [];
+          const resultStream = prs.partialResultStream(requestFn);
+          const consumerMode = int(0, 2);
+          const finishCheck = () => {
+            try {
+              assert.deepStrictEqual(
+                received,
+                rows,
+                `seed ${seed}: rows mismatch (attempts=${attempts})`,
+              );
+              resolve();
+            } catch (e) {
+              reject(e);
+            }
+          };
+
+          resultStream.on('error', err => {
+            reject(new Error(`seed ${seed}: unexpected error ${err.message}`));
+          });
+
+          if (consumerMode === 0) {
+            const sink = new Transform({
+              objectMode: true,
+              highWaterMark: 1,
+              transform(row, _enc, cb) {
+                if (row !== null && row !== undefined) {
+                  received.push(row.toJSON());
+                }
+                let n = int(0, 2);
+                const next = () => (n-- > 0 ? setImmediate(next) : cb());
+                next();
+              },
+            });
+            resultStream.pipe(sink);
+            sink.resume();
+            sink.on('finish', finishCheck);
+          } else if (consumerMode === 1) {
+            resultStream.on('data', row => {
+              if (row !== null && row !== undefined) {
+                received.push(row.toJSON());
+              }
+              if (random() < 0.2) {
+                resultStream.pause();
+                let n = int(1, 3);
+                const next = () =>
+                  n-- > 0 ? setImmediate(next) : resultStream.resume();
+                next();
+              }
+            });
+            resultStream.on('end', finishCheck);
+          } else {
+            resultStream.on('readable', () => {
+              let row;
+              while ((row = resultStream.read()) !== null) {
+                if (row !== undefined) {
+                  received.push(row.toJSON());
+                }
+              }
+            });
+            resultStream.on('end', finishCheck);
+          }
+        });
+      }
+
+      it('should return all rows exactly once for 50 random scenarios', async () => {
+        for (let seed = 1; seed <= 50; seed++) {
+          await runScenario(seed);
+        }
       });
     });
   });

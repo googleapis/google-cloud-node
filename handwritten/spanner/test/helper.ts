@@ -125,7 +125,7 @@ describe('helper', () => {
 
       assert.throws(() => {
         replaceProjectIdToken(frozenObj, projectId);
-      }, /Cannot assign to read only property/);
+      }, /Cannot assign to read only property|Attempted to assign to readonly property/);
     });
 
     it('should replace more than one {{projectId}}', () => {

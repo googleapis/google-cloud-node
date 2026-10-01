@@ -5717,6 +5717,9 @@ export namespace google {
 
                     /** HeartRateVariability standardDeviationMilliseconds */
                     standardDeviationMilliseconds?: (number|null);
+
+                    /** HeartRateVariability metadata */
+                    metadata?: (google.devicesandservices.health.v4.HeartRateVariability.IHeartRateVariabilityMetadata|null);
                 }
 
                 /** Represents a HeartRateVariability. */
@@ -5736,6 +5739,9 @@ export namespace google {
 
                     /** HeartRateVariability standardDeviationMilliseconds. */
                     public standardDeviationMilliseconds?: (number|null);
+
+                    /** HeartRateVariability metadata. */
+                    public metadata?: (google.devicesandservices.health.v4.HeartRateVariability.IHeartRateVariabilityMetadata|null);
 
                     /**
                      * Creates a new HeartRateVariability instance using the specified properties.
@@ -5813,6 +5819,112 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace HeartRateVariability {
+
+                    /** Properties of a HeartRateVariabilityMetadata. */
+                    interface IHeartRateVariabilityMetadata {
+
+                        /** HeartRateVariabilityMetadata highFrequencyPower */
+                        highFrequencyPower?: (number|null);
+
+                        /** HeartRateVariabilityMetadata lowFrequencyPower */
+                        lowFrequencyPower?: (number|null);
+                    }
+
+                    /** Represents a HeartRateVariabilityMetadata. */
+                    class HeartRateVariabilityMetadata implements IHeartRateVariabilityMetadata {
+
+                        /**
+                         * Constructs a new HeartRateVariabilityMetadata.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.devicesandservices.health.v4.HeartRateVariability.IHeartRateVariabilityMetadata);
+
+                        /** HeartRateVariabilityMetadata highFrequencyPower. */
+                        public highFrequencyPower: number;
+
+                        /** HeartRateVariabilityMetadata lowFrequencyPower. */
+                        public lowFrequencyPower: number;
+
+                        /**
+                         * Creates a new HeartRateVariabilityMetadata instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns HeartRateVariabilityMetadata instance
+                         */
+                        public static create(properties?: google.devicesandservices.health.v4.HeartRateVariability.IHeartRateVariabilityMetadata): google.devicesandservices.health.v4.HeartRateVariability.HeartRateVariabilityMetadata;
+
+                        /**
+                         * Encodes the specified HeartRateVariabilityMetadata message. Does not implicitly {@link google.devicesandservices.health.v4.HeartRateVariability.HeartRateVariabilityMetadata.verify|verify} messages.
+                         * @param message HeartRateVariabilityMetadata message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.devicesandservices.health.v4.HeartRateVariability.IHeartRateVariabilityMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified HeartRateVariabilityMetadata message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.HeartRateVariability.HeartRateVariabilityMetadata.verify|verify} messages.
+                         * @param message HeartRateVariabilityMetadata message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.devicesandservices.health.v4.HeartRateVariability.IHeartRateVariabilityMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a HeartRateVariabilityMetadata message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns HeartRateVariabilityMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devicesandservices.health.v4.HeartRateVariability.HeartRateVariabilityMetadata;
+
+                        /**
+                         * Decodes a HeartRateVariabilityMetadata message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns HeartRateVariabilityMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devicesandservices.health.v4.HeartRateVariability.HeartRateVariabilityMetadata;
+
+                        /**
+                         * Verifies a HeartRateVariabilityMetadata message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a HeartRateVariabilityMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns HeartRateVariabilityMetadata
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.devicesandservices.health.v4.HeartRateVariability.HeartRateVariabilityMetadata;
+
+                        /**
+                         * Creates a plain object from a HeartRateVariabilityMetadata message. Also converts values to other types if specified.
+                         * @param message HeartRateVariabilityMetadata
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.devicesandservices.health.v4.HeartRateVariability.HeartRateVariabilityMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this HeartRateVariabilityMetadata to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for HeartRateVariabilityMetadata
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
                 }
 
                 /** Properties of a VolumeQuantity. */
@@ -12013,7 +12125,19 @@ export namespace google {
                         LONGING = 53,
                         ACCOMPLISHED = 54,
                         LOVING = 55,
-                        COMPASSIONATE = 56
+                        COMPASSIONATE = 56,
+                        DEPRESSED = 57,
+                        GOOD = 58,
+                        LOW_ENERGY = 59,
+                        OBSESSIVE_THOUGHTS = 60,
+                        PANIC = 61,
+                        PLAYFUL = 62,
+                        PLEASED = 63,
+                        SENSITIVE = 64,
+                        SLEEPY = 65,
+                        SWINGS = 66,
+                        UNHAPPY = 67,
+                        VERY_SELF_CRITICAL = 68
                     }
 
                     /** Valence enum. */

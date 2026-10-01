@@ -117,9 +117,11 @@ describe('Table', () => {
     );
 
     // Sort the spans by duration.
-    spans.sort((spanA, spanB) => {
-      spanA.duration < spanB.duration;
-    });
+    spans.sort(
+      (spanA, spanB) =>
+        spanA.duration[0] - spanB.duration[0] ||
+        spanA.duration[1] - spanB.duration[1],
+    );
 
     return spans;
   }

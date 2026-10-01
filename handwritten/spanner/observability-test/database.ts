@@ -1229,7 +1229,10 @@ describe('Database', () => {
         assert.ok(
           errorMessage.includes(
             "Cannot read properties of null (reading 'proto')",
-          ) || errorMessage.includes("Cannot read property 'proto' of null"),
+          ) ||
+            errorMessage.includes("Cannot read property 'proto' of null") ||
+            (errorMessage.includes('null is not an object') &&
+              errorMessage.includes('proto')),
         );
 
         // We expect an exception to have been caught as well as a Session event.

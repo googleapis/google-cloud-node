@@ -47,6 +47,7 @@ const {
   cacheSessionEvents,
 } = require('./helper');
 const {
+  AsyncLocalStorageContextManager,
   AsyncHooksContextManager,
 } = require('@opentelemetry/context-async-hooks');
 
@@ -146,12 +147,10 @@ async function setup(
 
 describe('EndToEnd', async () => {
   const sandbox = sinon.createSandbox();
-  const contextManager = new AsyncHooksContextManager();
+  const contextManager = new (
+    AsyncLocalStorageContextManager || AsyncHooksContextManager
+  )();
   setGlobalContextManager(contextManager);
-  afterEach(async () => {
-    disableContextAndManager(contextManager);
-  });
-
   const traceExporter = new InMemorySpanExporter();
   const sampler = new AlwaysOnSampler();
   const tracerProvider = new NodeTracerProvider({
@@ -177,6 +176,7 @@ describe('EndToEnd', async () => {
     await spanner.close();
     await server.tryShutdown(() => {});
     sandbox.restore();
+    disableContextAndManager(contextManager);
   });
 
   afterEach(async () => {
@@ -2033,9 +2033,25 @@ describe('End to end tracing headers', () => {
   let spannerMock: mock.MockSpanner;
   let observabilityOptions: typeof ObservabilityOptions;
 
+  let provider: InstanceType<typeof NodeTracerProvider>;
+
+  before(() => {
+    const traceExporter = new InMemorySpanExporter();
+    provider = new NodeTracerProvider({
+      sampler: new AlwaysOnSampler(),
+      exporter: traceExporter,
+      spanProcessors: [new SimpleSpanProcessor(traceExporter)],
+    });
+  });
+
+  after(async () => {
+    await provider.shutdown();
+  });
+
   beforeEach(async () => {
     sandbox = sinon.createSandbox();
     observabilityOptions = {
+      tracerProvider: provider,
       enableEndToEndTracing: true,
     };
 

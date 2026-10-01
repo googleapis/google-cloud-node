@@ -40,6 +40,7 @@ import {
   DynamicTraceContext,
   ResendRecorder,
 } from './observability/TracerHelper';
+import {resolveStaticTraceContext} from './observability/metadataResolver';
 import {checkTelemetryEnabled} from './util';
 
 /**
@@ -192,13 +193,7 @@ export function createApiCall(
   };
 
   if (tracingEnabled) {
-    const staticArgs: StaticTraceContext = {
-      gcpClientService:
-        settings.otherArgs?.internalTelemetryInfo?.gcpClientService,
-      gcpVersion: settings.otherArgs?.internalTelemetryInfo?.gcpVersion,
-      gcpRepo: settings.otherArgs?.internalTelemetryInfo?.gcpRepo,
-      gcpArtifact: settings.otherArgs?.internalTelemetryInfo?.gcpArtifact,
-    };
+    const staticArgs: StaticTraceContext = resolveStaticTraceContext(settings);
 
     const serviceName = settings.apiName?.split('.').pop() ?? '';
     const isFallback = Boolean(_fallback);

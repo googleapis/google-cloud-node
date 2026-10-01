@@ -106,6 +106,7 @@ function fakePartialResultStream(this: Function & {calledWith_: IArguments}) {
 export class FakeSession {
   calledWith_: IArguments;
   formattedName_: any;
+  metadata?: google.spanner.v1.ISession | null;
   constructor() {
     this.calledWith_ = arguments;
   }
@@ -495,12 +496,39 @@ describe('Database', () => {
         headers,
         Object.assign(
           {
-            [LEADER_AWARE_ROUTING_HEADER]: true,
+            [LEADER_AWARE_ROUTING_HEADER]: 'true',
             [X_GOOG_SPANNER_REQUEST_ID_HEADER]: craftRequestId(1, 1, 1, 1),
           },
           database.commonHeaders_,
         ),
       );
+    });
+
+    it('should not mutate commonHeaders_', () => {
+      sandbox.stub(database, 'request');
+      const expectedCommonHeaders = Object.assign({}, database.commonHeaders_);
+
+      database.batchCreateSessions({count: 10}, assert.ifError);
+
+      assert.deepStrictEqual(database.commonHeaders_, expectedCommonHeaders);
+      assert.strictEqual(
+        database.commonHeaders_[LEADER_AWARE_ROUTING_HEADER],
+        undefined,
+      );
+    });
+
+    it('should not include leader-aware routing header when routeToLeaderEnabled is false', () => {
+      const stub = sandbox.stub(database, 'request');
+      database.instance = {
+        parent: {
+          routeToLeaderEnabled: false,
+        },
+      } as {} as Instance;
+
+      database.batchCreateSessions({count: 10}, assert.ifError);
+
+      const {headers} = stub.lastCall.args[0];
+      assert.strictEqual(headers[LEADER_AWARE_ROUTING_HEADER], undefined);
     });
 
     it('should accept just a count number', () => {
@@ -947,7 +975,10 @@ describe('Database', () => {
         assert.ok(
           errorMessage.includes(
             "Cannot read properties of null (reading 'proto')",
-          ) || errorMessage.includes("Cannot read property 'proto' of null"),
+          ) ||
+            errorMessage.includes("Cannot read property 'proto' of null") ||
+            (errorMessage.includes('null is not an object') &&
+              errorMessage.includes('proto')),
         );
 
         done();
@@ -2068,6 +2099,23 @@ describe('Database', () => {
         fakeSnapshot.emit('end');
         assert.strictEqual(releaseStub.callCount, 1);
         assert.strictEqual(releaseStub.lastCall.args[0], fakeSession);
+        done();
+      });
+    });
+
+    it('should not register release listener on snapshot end when using multiplexed session', done => {
+      fakeSession.metadata = {multiplexed: true};
+      const releaseStub = sandbox.stub(
+        fakeSessionFactory,
+        'release',
+      ) as sinon.SinonStub;
+
+      database.run(QUERY, (err, rows) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(rows, [{id: 1}]);
+        assert.strictEqual(fakeSnapshot.listenerCount('end'), 0);
+        fakeSnapshot.emit('end');
+        assert.strictEqual(releaseStub.callCount, 0);
         done();
       });
     });

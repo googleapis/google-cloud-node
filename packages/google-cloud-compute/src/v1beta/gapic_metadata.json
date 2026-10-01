@@ -2632,6 +2632,13 @@
               "methods": [
                 "get"
               ]
+            },
+            "List": {
+              "methods": [
+                "list",
+                "listStream",
+                "listAsync"
+              ]
             }
           }
         },
@@ -2641,6 +2648,13 @@
             "Get": {
               "methods": [
                 "get"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list",
+                "listStream",
+                "listAsync"
               ]
             }
           }

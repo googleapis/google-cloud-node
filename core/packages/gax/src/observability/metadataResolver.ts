@@ -1,0 +1,275 @@
+/**
+ * Copyright 2026 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+import {StaticTraceContext} from './TracerHelper';
+import {CallSettings} from '../gax';
+import {ignoredClientHeaderTokens} from '../util';
+
+export const DEFAULT_GCP_REPO = 'googleapis/google-cloud-node';
+
+/**
+ * Derives the GCP client service name from an NPM package name.
+ */
+export function extractClientServiceFromPackageName(name: string): string {
+  const scopedMatch = name.match(/^@[^/]+\/(?:google-cloud-)?(.*)$/);
+  if (scopedMatch && scopedMatch[1]) {
+    return scopedMatch[1];
+  }
+  const unscopedMatch = name.match(/^google-cloud-(.*)$/);
+  if (unscopedMatch && unscopedMatch[1]) {
+    return unscopedMatch[1];
+  }
+  return name;
+}
+
+/**
+ * Derives the GCP service name from a protobuf apiName (e.g. google.cloud.redis.v1.CloudRedis).
+ */
+export function extractServiceFromApiName(apiName: string): string | undefined {
+  if (!apiName) {
+    return undefined;
+  }
+  const parts = apiName.split('.');
+  const versionIndex = parts.findIndex(p => /^v\d+(?:[a-z\d_]+)?$/i.test(p));
+  if (versionIndex > 0) {
+    return parts[versionIndex - 1];
+  }
+  if (parts.length >= 2) {
+    const candidate = parts[parts.length - 2];
+    if (candidate && candidate !== 'google' && candidate !== 'cloud') {
+      return candidate;
+    }
+    const last = parts[parts.length - 1];
+    if (last) {
+      return last[0].toLowerCase() + last.slice(1);
+    }
+  }
+  return undefined;
+}
+
+let fallbackVersion: string | undefined;
+try {
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  fallbackVersion = require('../../package.json').version;
+} catch {
+  try {
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    fallbackVersion = require('../../../package.json').version;
+  } catch {
+    // Ignore fallback failure
+  }
+}
+
+/**
+ * Extracts static metadata from CallSettings headers or apiName.
+ */
+export function extractFromSettings(
+  settings?: CallSettings,
+): StaticTraceContext {
+  const result: StaticTraceContext = {};
+  if (!settings) {
+    return result;
+  }
+
+  // Extract artifact and version from x-goog-api-client header.
+  const headers = (
+    settings.otherArgs as {headers?: Record<string, string>} | undefined
+  )?.headers;
+  const clientHeader = headers?.['x-goog-api-client'];
+  if (typeof clientHeader === 'string') {
+    const tokens = clientHeader.trim().split(/\s+/);
+    for (const token of tokens) {
+      const match = token.match(/^([^/]+(?:\/[^/]+)?)\/([^\s]+)$/);
+      if (match) {
+        const [, name, ver] = match;
+        if (name === 'gapic') {
+          result.gcpVersion = ver;
+        } else if (name === 'gccl') {
+          if (!result.gcpVersion) {
+            result.gcpVersion = ver;
+          }
+        } else if (!ignoredClientHeaderTokens.includes(name)) {
+          result.gcpArtifact = name;
+          if (!result.gcpVersion) {
+            result.gcpVersion = ver;
+          }
+        }
+      }
+    }
+  }
+
+  // Resolve service name and default artifact from apiName.
+  if (typeof settings.apiName === 'string' && settings.apiName) {
+    const serviceFromApi = extractServiceFromApiName(settings.apiName);
+    if (serviceFromApi) {
+      result.gcpClientService = serviceFromApi;
+      if (!result.gcpArtifact) {
+        result.gcpArtifact =
+          serviceFromApi === 'gax'
+            ? 'google-gax'
+            : `@google-cloud/${serviceFromApi}`;
+      }
+    }
+  }
+
+  // Fall back to package.json version if missing.
+  if (!result.gcpVersion && fallbackVersion) {
+    result.gcpVersion = fallbackVersion;
+  }
+
+  // Extract server address and port from endpoint settings.
+  const otherArgs = settings.otherArgs as
+    | {
+        servicePath?: string;
+        apiEndpoint?: string;
+        port?: number;
+        servicePort?: number;
+      }
+    | undefined;
+  const endpoint =
+    (settings as {servicePath?: string; apiEndpoint?: string}).servicePath ||
+    (settings as {servicePath?: string; apiEndpoint?: string}).apiEndpoint ||
+    otherArgs?.servicePath ||
+    otherArgs?.apiEndpoint;
+  if (endpoint && typeof endpoint === 'string') {
+    const match = endpoint.match(/^(\[[^\]]+\]|[^:]+):(\d+)$/);
+    if (match) {
+      result.serverAddress = match[1];
+      result.serverPort = Number(match[2]);
+    } else {
+      result.serverAddress = endpoint;
+    }
+  }
+
+  // Resolve server port if not already parsed from endpoint.
+  const port =
+    (settings as {port?: number; servicePort?: number}).port ||
+    (settings as {port?: number; servicePort?: number}).servicePort ||
+    otherArgs?.port ||
+    otherArgs?.servicePort;
+  if (port && typeof port === 'number' && !result.serverPort) {
+    result.serverPort = port;
+  }
+
+  return result;
+}
+
+/**
+ * Extracts static metadata from process environment variables.
+ */
+export function extractFromEnvironment(): StaticTraceContext {
+  const env: Record<string, string | undefined> =
+    typeof process === 'object' && typeof process.env === 'object'
+      ? process.env
+      : {};
+
+  const result: StaticTraceContext = {};
+
+  const service = env.GOOGLE_SDK_NODE_CLIENT_SERVICE || env.GCP_CLIENT_SERVICE;
+  if (service?.trim()) {
+    result.gcpClientService = service.trim();
+  }
+
+  const version = env.GOOGLE_SDK_NODE_CLIENT_VERSION || env.GCP_CLIENT_VERSION;
+  if (version?.trim()) {
+    result.gcpVersion = version.trim();
+  }
+
+  const artifact = env.GOOGLE_SDK_NODE_ARTIFACT || env.GCP_ARTIFACT;
+  if (artifact?.trim()) {
+    result.gcpArtifact = artifact.trim();
+  }
+
+  const serverAddress =
+    env.GOOGLE_SDK_NODE_SERVER_ADDRESS || env.SERVER_ADDRESS;
+  if (serverAddress?.trim()) {
+    result.serverAddress = serverAddress.trim();
+  }
+
+  const serverPort = env.GOOGLE_SDK_NODE_SERVER_PORT || env.SERVER_PORT;
+  if (serverPort && !isNaN(Number(serverPort))) {
+    result.serverPort = Number(serverPort);
+  }
+
+  return result;
+}
+
+const metadataCache = new Map<string, StaticTraceContext>();
+
+/**
+ * Clears the cached static metadata. Used primarily in unit tests.
+ */
+export function clearMetadataCache(): void {
+  metadataCache.clear();
+}
+
+/**
+ * Resolves static trace context dynamically at runtime by inspecting CallSettings,
+ * environment variables, and standard defaults.
+ *
+ * Precedence: environment variables > compile-time internalTelemetryInfo > dynamic resolution from settings.
+ *
+ * @param {CallSettings} [settings] - Call settings for the RPC invocation.
+ * @param {string} [_callerFilePath] - Optional explicit path to the caller source file (deprecated).
+ * @returns {StaticTraceContext} The resolved static trace context.
+ */
+export function resolveStaticTraceContext(
+  settings?: CallSettings,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _callerFilePath?: string,
+): StaticTraceContext {
+  const envMeta = extractFromEnvironment();
+  const explicit = settings?.otherArgs?.internalTelemetryInfo as
+    StaticTraceContext | undefined;
+
+  let dynamic: StaticTraceContext;
+  if (settings?.apiName) {
+    let cached = metadataCache.get(settings.apiName);
+    if (!cached) {
+      cached = extractFromSettings(settings);
+      metadataCache.set(settings.apiName, cached);
+    }
+    dynamic = cached;
+  } else {
+    dynamic = extractFromSettings(settings);
+  }
+
+  const context: StaticTraceContext = {
+    gcpClientService:
+      envMeta.gcpClientService ??
+      explicit?.gcpClientService ??
+      dynamic.gcpClientService,
+    gcpVersion:
+      envMeta.gcpVersion ?? explicit?.gcpVersion ?? dynamic.gcpVersion,
+    gcpRepo: DEFAULT_GCP_REPO,
+    gcpArtifact:
+      envMeta.gcpArtifact ?? explicit?.gcpArtifact ?? dynamic.gcpArtifact,
+  };
+
+  const serverAddress =
+    envMeta.serverAddress ?? explicit?.serverAddress ?? dynamic.serverAddress;
+  if (serverAddress !== undefined) {
+    context.serverAddress = serverAddress;
+  }
+
+  const serverPort =
+    envMeta.serverPort ?? explicit?.serverPort ?? dynamic.serverPort;
+  if (serverPort !== undefined) {
+    context.serverPort = serverPort;
+  }
+
+  return context;
+}

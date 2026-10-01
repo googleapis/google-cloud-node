@@ -130,9 +130,11 @@ describe('Transaction', () => {
     const spans = traceExporter.getFinishedSpans();
 
     // Sort the spans by startTime.
-    spans.sort((spanA, spanB) => {
-      spanA.startTime < spanB.startTime;
-    });
+    spans.sort(
+      (spanA, spanB) =>
+        spanA.startTime[0] - spanB.startTime[0] ||
+        spanA.startTime[1] - spanB.startTime[1],
+    );
 
     const spanNames: string[] = [];
     const eventNames: string[] = [];
