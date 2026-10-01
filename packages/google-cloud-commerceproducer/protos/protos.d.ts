@@ -5961,6 +5961,12 @@ export namespace google {
 
                     /** Service title */
                     title?: (string|null);
+
+                    /** Service documentRequirement */
+                    documentRequirement?: (google.cloud.commerceproducer.v1beta.Service.IDocumentRequirement|null);
+
+                    /** Service productType */
+                    productType?: (google.cloud.commerceproducer.v1beta.Service.ProductType|keyof typeof google.cloud.commerceproducer.v1beta.Service.ProductType|null);
                 }
 
                 /** Represents a Service. */
@@ -5977,6 +5983,12 @@ export namespace google {
 
                     /** Service title. */
                     public title: string;
+
+                    /** Service documentRequirement. */
+                    public documentRequirement?: (google.cloud.commerceproducer.v1beta.Service.IDocumentRequirement|null);
+
+                    /** Service productType. */
+                    public productType: (google.cloud.commerceproducer.v1beta.Service.ProductType|keyof typeof google.cloud.commerceproducer.v1beta.Service.ProductType);
 
                     /**
                      * Creates a new Service instance using the specified properties.
@@ -6054,6 +6066,231 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace Service {
+
+                    /** Properties of a DocumentRequirement. */
+                    interface IDocumentRequirement {
+
+                        /** DocumentRequirement documentTypeRequirements */
+                        documentTypeRequirements?: (google.cloud.commerceproducer.v1beta.Service.DocumentRequirement.IDocumentTypeRequirement[]|null);
+                    }
+
+                    /** Represents a DocumentRequirement. */
+                    class DocumentRequirement implements IDocumentRequirement {
+
+                        /**
+                         * Constructs a new DocumentRequirement.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.commerceproducer.v1beta.Service.IDocumentRequirement);
+
+                        /** DocumentRequirement documentTypeRequirements. */
+                        public documentTypeRequirements: google.cloud.commerceproducer.v1beta.Service.DocumentRequirement.IDocumentTypeRequirement[];
+
+                        /**
+                         * Creates a new DocumentRequirement instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DocumentRequirement instance
+                         */
+                        public static create(properties?: google.cloud.commerceproducer.v1beta.Service.IDocumentRequirement): google.cloud.commerceproducer.v1beta.Service.DocumentRequirement;
+
+                        /**
+                         * Encodes the specified DocumentRequirement message. Does not implicitly {@link google.cloud.commerceproducer.v1beta.Service.DocumentRequirement.verify|verify} messages.
+                         * @param message DocumentRequirement message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.commerceproducer.v1beta.Service.IDocumentRequirement, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DocumentRequirement message, length delimited. Does not implicitly {@link google.cloud.commerceproducer.v1beta.Service.DocumentRequirement.verify|verify} messages.
+                         * @param message DocumentRequirement message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.commerceproducer.v1beta.Service.IDocumentRequirement, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DocumentRequirement message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DocumentRequirement
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.commerceproducer.v1beta.Service.DocumentRequirement;
+
+                        /**
+                         * Decodes a DocumentRequirement message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DocumentRequirement
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.commerceproducer.v1beta.Service.DocumentRequirement;
+
+                        /**
+                         * Verifies a DocumentRequirement message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DocumentRequirement message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DocumentRequirement
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.commerceproducer.v1beta.Service.DocumentRequirement;
+
+                        /**
+                         * Creates a plain object from a DocumentRequirement message. Also converts values to other types if specified.
+                         * @param message DocumentRequirement
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.commerceproducer.v1beta.Service.DocumentRequirement, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DocumentRequirement to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DocumentRequirement
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace DocumentRequirement {
+
+                        /** Properties of a DocumentTypeRequirement. */
+                        interface IDocumentTypeRequirement {
+
+                            /** DocumentTypeRequirement documentType */
+                            documentType?: (google.cloud.commerceproducer.v1beta.PrivateOfferDocument.DocumentType|keyof typeof google.cloud.commerceproducer.v1beta.PrivateOfferDocument.DocumentType|null);
+
+                            /** DocumentTypeRequirement requirementLevel */
+                            requirementLevel?: (google.cloud.commerceproducer.v1beta.Service.DocumentRequirement.DocumentTypeRequirement.RequirementLevel|keyof typeof google.cloud.commerceproducer.v1beta.Service.DocumentRequirement.DocumentTypeRequirement.RequirementLevel|null);
+                        }
+
+                        /** Represents a DocumentTypeRequirement. */
+                        class DocumentTypeRequirement implements IDocumentTypeRequirement {
+
+                            /**
+                             * Constructs a new DocumentTypeRequirement.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.commerceproducer.v1beta.Service.DocumentRequirement.IDocumentTypeRequirement);
+
+                            /** DocumentTypeRequirement documentType. */
+                            public documentType: (google.cloud.commerceproducer.v1beta.PrivateOfferDocument.DocumentType|keyof typeof google.cloud.commerceproducer.v1beta.PrivateOfferDocument.DocumentType);
+
+                            /** DocumentTypeRequirement requirementLevel. */
+                            public requirementLevel: (google.cloud.commerceproducer.v1beta.Service.DocumentRequirement.DocumentTypeRequirement.RequirementLevel|keyof typeof google.cloud.commerceproducer.v1beta.Service.DocumentRequirement.DocumentTypeRequirement.RequirementLevel);
+
+                            /**
+                             * Creates a new DocumentTypeRequirement instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns DocumentTypeRequirement instance
+                             */
+                            public static create(properties?: google.cloud.commerceproducer.v1beta.Service.DocumentRequirement.IDocumentTypeRequirement): google.cloud.commerceproducer.v1beta.Service.DocumentRequirement.DocumentTypeRequirement;
+
+                            /**
+                             * Encodes the specified DocumentTypeRequirement message. Does not implicitly {@link google.cloud.commerceproducer.v1beta.Service.DocumentRequirement.DocumentTypeRequirement.verify|verify} messages.
+                             * @param message DocumentTypeRequirement message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.commerceproducer.v1beta.Service.DocumentRequirement.IDocumentTypeRequirement, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified DocumentTypeRequirement message, length delimited. Does not implicitly {@link google.cloud.commerceproducer.v1beta.Service.DocumentRequirement.DocumentTypeRequirement.verify|verify} messages.
+                             * @param message DocumentTypeRequirement message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.commerceproducer.v1beta.Service.DocumentRequirement.IDocumentTypeRequirement, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a DocumentTypeRequirement message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns DocumentTypeRequirement
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.commerceproducer.v1beta.Service.DocumentRequirement.DocumentTypeRequirement;
+
+                            /**
+                             * Decodes a DocumentTypeRequirement message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns DocumentTypeRequirement
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.commerceproducer.v1beta.Service.DocumentRequirement.DocumentTypeRequirement;
+
+                            /**
+                             * Verifies a DocumentTypeRequirement message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a DocumentTypeRequirement message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns DocumentTypeRequirement
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.commerceproducer.v1beta.Service.DocumentRequirement.DocumentTypeRequirement;
+
+                            /**
+                             * Creates a plain object from a DocumentTypeRequirement message. Also converts values to other types if specified.
+                             * @param message DocumentTypeRequirement
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.commerceproducer.v1beta.Service.DocumentRequirement.DocumentTypeRequirement, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this DocumentTypeRequirement to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for DocumentTypeRequirement
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace DocumentTypeRequirement {
+
+                            /** RequirementLevel enum. */
+                            enum RequirementLevel {
+                                REQUIREMENT_LEVEL_UNSPECIFIED = 0,
+                                REQUIRED = 1,
+                                OPTIONAL = 2,
+                                NOT_ALLOWED = 3
+                            }
+                        }
+                    }
+
+                    /** ProductType enum. */
+                    enum ProductType {
+                        PRODUCT_TYPE_UNSPECIFIED = 0,
+                        SOFTWARE_AS_A_SERVICE = 1,
+                        ANALYTICS_HUB_LISTING = 2,
+                        PROFESSIONAL_SERVICES = 3
+                    }
                 }
 
                 /** Properties of a Sku. */

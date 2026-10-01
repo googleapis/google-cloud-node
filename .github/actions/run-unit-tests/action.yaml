@@ -22,12 +22,10 @@ runs:
       uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
       with:
         path: .turbo
-        key: ${{ runner.os }}-turbo-${{ github.sha }}
+        key: ${{ runner.os }}-turbo-shard-${{ inputs.shard-index }}-${{ github.sha }}
         restore-keys: |
+          ${{ runner.os }}-turbo-shard-${{ inputs.shard-index }}-
           ${{ runner.os }}-turbo-
-    - name: Compile Workspace (Turborepo Caching)
-      run: pnpm run compile || pnpm run compile
-      shell: bash
     - run: node --version
       shell: bash
     - name: Run unit tests
