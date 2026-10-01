@@ -58,7 +58,7 @@
     "lint": "gts check",
     "clean": "gts clean",
     "compile": "tsc -p .",
-    "postcompile": "node scripts/init-directories.js && cp -r dev/protos build && cp dev/conformance/test-definition.proto build/conformance && cp dev/conformance/conformance-tests/*.json build/conformance/conformance-tests && minifyProtoJson",
+    "postcompile": "node scripts/init-directories.js && cp -r dev/protos build && cp dev/protos/*.d.ts build/types/protos && cp dev/conformance/test-definition.proto build/conformance && cp dev/conformance/conformance-tests/*.json build/conformance/conformance-tests && minifyProtoJson",
     "fix": "gts fix",
     "prepare": "npm run compile",
     "precompile": "gts clean"

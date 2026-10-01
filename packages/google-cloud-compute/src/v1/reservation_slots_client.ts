@@ -42,6 +42,8 @@ const version = require('../../../package.json').version;
 
 /**
  *  The ReservationSlots API.
+ *
+ *  This client uses ReservationSlots version 2026-09-01.
  * @class
  * @memberof v1
  */
@@ -214,7 +216,10 @@ export class ReservationSlotsClient {
       'google.cloud.compute.v1.ReservationSlots',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')},
+      {
+        'x-goog-api-client': clientHeader.join(' '),
+        'x-goog-api-version': '2026-09-01',
+      },
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -1116,13 +1121,6 @@ export class ReservationSlotsClient {
    *   reservations/{reservation_name}/reservationBlocks/{reservation_block_name}/reservationSubBlocks/{reservation_sub_block_name}
    * @param {string} request.project
    *   The project ID for this request.
-   * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case
-   *   of failure. The default value is false.
-   *
-   *   For example, when partial success behavior is enabled, aggregatedList for a
-   *   single zone scope either returns all resources in the zone or no resources,
-   *   with an error code.
    * @param {string} request.zone
    *   The name of the zone for this request, formatted as RFC1035.
    * @param {object} [options]
@@ -1332,13 +1330,6 @@ export class ReservationSlotsClient {
    *   reservations/{reservation_name}/reservationBlocks/{reservation_block_name}/reservationSubBlocks/{reservation_sub_block_name}
    * @param {string} request.project
    *   The project ID for this request.
-   * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case
-   *   of failure. The default value is false.
-   *
-   *   For example, when partial success behavior is enabled, aggregatedList for a
-   *   single zone scope either returns all resources in the zone or no resources,
-   *   with an error code.
    * @param {string} request.zone
    *   The name of the zone for this request, formatted as RFC1035.
    * @param {object} [options]
@@ -1471,13 +1462,6 @@ export class ReservationSlotsClient {
    *   reservations/{reservation_name}/reservationBlocks/{reservation_block_name}/reservationSubBlocks/{reservation_sub_block_name}
    * @param {string} request.project
    *   The project ID for this request.
-   * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case
-   *   of failure. The default value is false.
-   *
-   *   For example, when partial success behavior is enabled, aggregatedList for a
-   *   single zone scope either returns all resources in the zone or no resources,
-   *   with an error code.
    * @param {string} request.zone
    *   The name of the zone for this request, formatted as RFC1035.
    * @param {object} [options]

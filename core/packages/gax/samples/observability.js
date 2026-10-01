@@ -38,7 +38,7 @@ const provider = new NodeTracerProvider({
 });
 provider.register();
 
-// 3. ENABLE T4 TRACING SPANS USING INSTRUMENTATION LIBRARIES
+// 3. ENABLE LOW-LEVEL NETWORK TRACING SPANS USING INSTRUMENTATION LIBRARIES
 registerInstrumentations({
   instrumentations: [
     new HttpInstrumentation(),
@@ -46,7 +46,7 @@ registerInstrumentations({
   ],
 });
 
-// 4. ENABLE T3 TRACING SPANS WITH ENV VARIABLE
+// 4. ENABLE CLIENT REQUEST TRACING SPANS WITH ENV VARIABLE
 // Sets the flag before client libraries or RPC callers initialize
 process.env.GOOGLE_SDK_NODE_ENABLE_TRACING = 'true';
 
