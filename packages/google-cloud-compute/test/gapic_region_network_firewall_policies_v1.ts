@@ -2323,6 +2323,190 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
     });
   });
 
+  describe('patchAssociation', () => {
+    it('invokes patchAssociation without error', async () => {
+      const client =
+        new regionnetworkfirewallpoliciesModule.v1.RegionNetworkFirewallPoliciesClient(
+          {
+            auth: googleAuth,
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.PatchAssociationRegionNetworkFirewallPolicyRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchAssociationRegionNetworkFirewallPolicyRequest',
+        ['project'],
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchAssociationRegionNetworkFirewallPolicyRequest',
+        ['region'],
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchAssociationRegionNetworkFirewallPolicyRequest',
+        ['firewallPolicy'],
+      );
+      request.firewallPolicy = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&firewall_policy=${defaultValue3 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Operation(),
+      );
+      client.innerApiCalls.patchAssociation = stubSimpleCall(expectedResponse);
+      const [response] = await client.patchAssociation(request);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.patchAssociation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.patchAssociation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes patchAssociation without error using callback', async () => {
+      const client =
+        new regionnetworkfirewallpoliciesModule.v1.RegionNetworkFirewallPoliciesClient(
+          {
+            auth: googleAuth,
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.PatchAssociationRegionNetworkFirewallPolicyRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchAssociationRegionNetworkFirewallPolicyRequest',
+        ['project'],
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchAssociationRegionNetworkFirewallPolicyRequest',
+        ['region'],
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchAssociationRegionNetworkFirewallPolicyRequest',
+        ['firewallPolicy'],
+      );
+      request.firewallPolicy = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&firewall_policy=${defaultValue3 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Operation(),
+      );
+      client.innerApiCalls.patchAssociation =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.patchAssociation(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.compute.v1.IOperation | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.patchAssociation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.patchAssociation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes patchAssociation with error', async () => {
+      const client =
+        new regionnetworkfirewallpoliciesModule.v1.RegionNetworkFirewallPoliciesClient(
+          {
+            auth: googleAuth,
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.PatchAssociationRegionNetworkFirewallPolicyRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchAssociationRegionNetworkFirewallPolicyRequest',
+        ['project'],
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchAssociationRegionNetworkFirewallPolicyRequest',
+        ['region'],
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchAssociationRegionNetworkFirewallPolicyRequest',
+        ['firewallPolicy'],
+      );
+      request.firewallPolicy = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&firewall_policy=${defaultValue3 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.patchAssociation = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.patchAssociation(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.patchAssociation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.patchAssociation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes patchAssociation with closed client', async () => {
+      const client =
+        new regionnetworkfirewallpoliciesModule.v1.RegionNetworkFirewallPoliciesClient(
+          {
+            auth: googleAuth,
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.PatchAssociationRegionNetworkFirewallPolicyRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchAssociationRegionNetworkFirewallPolicyRequest',
+        ['project'],
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchAssociationRegionNetworkFirewallPolicyRequest',
+        ['region'],
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchAssociationRegionNetworkFirewallPolicyRequest',
+        ['firewallPolicy'],
+      );
+      request.firewallPolicy = defaultValue3;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(client.patchAssociation(request), expectedError);
+    });
+  });
+
   describe('patchRule', () => {
     it('invokes patchRule without error', async () => {
       const client =

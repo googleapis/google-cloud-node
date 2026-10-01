@@ -1329,6 +1329,10 @@
                               "type": "ProductMinimumOrderValue",
                               "id": 146
                             },
+                            "warranty": {
+                              "type": "Warranty",
+                              "id": 168
+                            },
                             "vin": {
                               "type": "string",
                               "id": 147
@@ -1409,9 +1413,13 @@
                               "type": "google.shopping.type.Price",
                               "id": 167
                             },
-                            "warranty": {
-                              "type": "Warranty",
-                              "id": 168
+                            "returns": {
+                              "rule": "repeated",
+                              "type": "Returns",
+                              "id": 171,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             },
                             "displayAddress": {
                               "type": "DisplayAddress",
@@ -1497,6 +1505,10 @@
                               "options": {
                                 "proto3_optional": true
                               }
+                            },
+                            "leaseTerm": {
+                              "type": "LeaseTerm",
+                              "id": 195
                             },
                             "questionsAndAnswers": {
                               "rule": "repeated",
@@ -1869,6 +1881,19 @@
                                 "mileage": {
                                   "type": "Mileage",
                                   "id": 2
+                                },
+                                "durationUnit": {
+                                  "type": "WarrantyDurationUnit",
+                                  "id": 3
+                                }
+                              },
+                              "nested": {
+                                "WarrantyDurationUnit": {
+                                  "values": {
+                                    "WARRANTY_DURATION_UNIT_UNSPECIFIED": 0,
+                                    "MONTH": 1,
+                                    "YEAR": 2
+                                  }
                                 }
                               }
                             },
@@ -1968,6 +1993,190 @@
                                     "CATS": 1,
                                     "LARGE_DOGS": 2,
                                     "SMALL_DOGS": 3
+                                  }
+                                }
+                              }
+                            },
+                            "LeaseTerm": {
+                              "oneofs": {
+                                "_durationValue": {
+                                  "oneof": [
+                                    "durationValue"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "type": {
+                                  "type": "LeaseTermType",
+                                  "id": 1
+                                },
+                                "durationValue": {
+                                  "type": "int64",
+                                  "id": 2,
+                                  "options": {
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "durationUnit": {
+                                  "type": "DurationUnit",
+                                  "id": 3
+                                }
+                              },
+                              "nested": {
+                                "LeaseTermType": {
+                                  "values": {
+                                    "LEASE_TERM_TYPE_UNSPECIFIED": 0,
+                                    "FIXED_TERM": 1
+                                  }
+                                },
+                                "DurationUnit": {
+                                  "values": {
+                                    "DURATION_UNIT_UNSPECIFIED": 0,
+                                    "MONTHS": 1,
+                                    "WEEKS": 2
+                                  }
+                                }
+                              }
+                            },
+                            "Returns": {
+                              "oneofs": {
+                                "restockingFeeOneof": {
+                                  "oneof": [
+                                    "restockingFee",
+                                    "restockingPercentageFee"
+                                  ]
+                                },
+                                "_windowDays": {
+                                  "oneof": [
+                                    "windowDays"
+                                  ]
+                                },
+                                "_windowType": {
+                                  "oneof": [
+                                    "windowType"
+                                  ]
+                                },
+                                "_shippingFee": {
+                                  "oneof": [
+                                    "shippingFee"
+                                  ]
+                                },
+                                "_shippingFeeType": {
+                                  "oneof": [
+                                    "shippingFeeType"
+                                  ]
+                                },
+                                "_policyUrl": {
+                                  "oneof": [
+                                    "policyUrl"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "restockingFee": {
+                                  "type": "google.shopping.type.Price",
+                                  "id": 9
+                                },
+                                "restockingPercentageFee": {
+                                  "type": "double",
+                                  "id": 10
+                                },
+                                "countries": {
+                                  "rule": "repeated",
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "windowDays": {
+                                  "type": "int64",
+                                  "id": 2,
+                                  "options": {
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "windowType": {
+                                  "type": "ReturnWindowType",
+                                  "id": 3,
+                                  "options": {
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "itemConditions": {
+                                  "rule": "repeated",
+                                  "type": "ItemCondition",
+                                  "id": 4
+                                },
+                                "methods": {
+                                  "rule": "repeated",
+                                  "type": "ReturnMethod",
+                                  "id": 5
+                                },
+                                "outcomes": {
+                                  "rule": "repeated",
+                                  "type": "ReturnOutcome",
+                                  "id": 6
+                                },
+                                "shippingFee": {
+                                  "type": "google.shopping.type.Price",
+                                  "id": 7,
+                                  "options": {
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "shippingFeeType": {
+                                  "type": "ReturnShippingFeeType",
+                                  "id": 8,
+                                  "options": {
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "policyUrl": {
+                                  "type": "string",
+                                  "id": 11,
+                                  "options": {
+                                    "proto3_optional": true
+                                  }
+                                }
+                              },
+                              "nested": {
+                                "ReturnWindowType": {
+                                  "values": {
+                                    "RETURN_WINDOW_TYPE_UNSPECIFIED": 0,
+                                    "FINITE_RETURN_WINDOW": 1,
+                                    "NO_RETURNS": 2,
+                                    "LIFETIME": 3
+                                  }
+                                },
+                                "ReturnMethod": {
+                                  "values": {
+                                    "RETURN_METHOD_UNSPECIFIED": 0,
+                                    "BY_MAIL": 1,
+                                    "IN_STORE": 2,
+                                    "AT_A_KIOSK": 3,
+                                    "DROP_OFF_LOCATION": 4
+                                  }
+                                },
+                                "ItemCondition": {
+                                  "values": {
+                                    "ITEM_CONDITION_UNSPECIFIED": 0,
+                                    "NEW": 1,
+                                    "LIKE_NEW": 2,
+                                    "USED": 3,
+                                    "DEFECTIVE_ONLY": 4
+                                  }
+                                },
+                                "ReturnOutcome": {
+                                  "values": {
+                                    "RETURN_OUTCOME_UNSPECIFIED": 0,
+                                    "REFUND": 1,
+                                    "EXCHANGE": 2,
+                                    "STORE_CREDIT": 3
+                                  }
+                                },
+                                "ReturnShippingFeeType": {
+                                  "values": {
+                                    "RETURN_SHIPPING_FEE_TYPE_UNSPECIFIED": 0,
+                                    "CUSTOMER_RESPONSIBILITY": 1,
+                                    "DEDUCTED_FROM_REFUND": 2
                                   }
                                 }
                               }
@@ -2357,6 +2566,11 @@
                               "oneof": [
                                 "totalAmount"
                               ]
+                            },
+                            "_mileageAllowance": {
+                              "oneof": [
+                                "mileageAllowance"
+                              ]
                             }
                           },
                           "fields": {
@@ -2393,6 +2607,14 @@
                             "totalAmount": {
                               "type": "google.shopping.type.Price",
                               "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
+                              }
+                            },
+                            "mileageAllowance": {
+                              "type": "ProductAttributes.Mileage",
+                              "id": 7,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL",
                                 "proto3_optional": true
@@ -2693,6 +2915,16 @@
                               "oneof": [
                                 "certificationValue"
                               ]
+                            },
+                            "_certificationDocumentLink": {
+                              "oneof": [
+                                "certificationDocumentLink"
+                              ]
+                            },
+                            "_certificationLabelLink": {
+                              "oneof": [
+                                "certificationLabelLink"
+                              ]
                             }
                           },
                           "fields": {
@@ -2721,6 +2953,22 @@
                               "type": "string",
                               "id": 4,
                               "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "certificationDocumentLink": {
+                              "type": "string",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
+                              }
+                            },
+                            "certificationLabelLink": {
+                              "type": "string",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
                                 "proto3_optional": true
                               }
                             }
