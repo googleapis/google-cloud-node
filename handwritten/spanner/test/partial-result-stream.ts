@@ -28,6 +28,7 @@ import {codec} from '../src/codec';
 import {PreciseDate} from '@google-cloud/precise-date';
 import * as prs from '../src/partial-result-stream';
 import {grpc} from 'google-gax';
+import {assertArraySubclassStrictEqual} from 'google-test-utils';
 import {Row} from '../src/partial-result-stream';
 
 function toRawValue(value: any): any {
@@ -193,17 +194,7 @@ describe('PartialResultStream', () => {
 
     it('should emit rows', done => {
       stream.on('error', done).on('data', row => {
-        // Node 18's assert.deepStrictEqual strictly requires prototype equality,
-        // which fails when comparing RowImpl (an Array subclass) with a plain Array literal.
-        // Node 20+ relaxed this for Array subclasses with constructor = Array.
-        if (
-          parseInt(process.versions.node.split('.')[0], 10) < 20 ||
-          process.versions.bun
-        ) {
-          assert.deepStrictEqual([...row], EXPECTED_ROW);
-        } else {
-          assert.deepStrictEqual(row, EXPECTED_ROW);
-        }
+        assertArraySubclassStrictEqual(row, EXPECTED_ROW);
         done();
       });
 
@@ -260,17 +251,7 @@ describe('PartialResultStream', () => {
         assert.deepStrictEqual(json, fakeJson);
 
         const [row, options] = stub.lastCall.args;
-        // Node 18's assert.deepStrictEqual strictly requires prototype equality,
-        // which fails when comparing RowImpl (an Array subclass) with a plain Array literal.
-        // Node 20+ relaxed this for Array subclasses with constructor = Array.
-        if (
-          parseInt(process.versions.node.split('.')[0], 10) < 20 ||
-          process.versions.bun
-        ) {
-          assert.deepStrictEqual([...row], EXPECTED_ROW);
-        } else {
-          assert.deepStrictEqual(row, EXPECTED_ROW);
-        }
+        assertArraySubclassStrictEqual(row, EXPECTED_ROW);
         assert.strictEqual(options, jsonOptions);
         done();
       });

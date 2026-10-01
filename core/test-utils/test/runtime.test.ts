@@ -1,0 +1,158 @@
+// Copyright 2026 Google LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     https://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+import * as assert from 'node:assert';
+import {
+  READONLY_PROPERTY_ERROR_REGEX,
+  assertArraySubclassStrictEqual,
+  getNodeMajorVersion,
+  isBun,
+  isNode,
+  isReadOnlyPropertyError,
+  requiresStrictArrayPrototypeEquality,
+} from '../src';
+
+describe('runtime utilities (unit)', () => {
+  describe('runtime detection', () => {
+    it('detects Node.js runtime', () => {
+      const versions = {node: '22.14.0'};
+      expect(isNode(versions)).toBe(true);
+      expect(isBun(versions)).toBe(false);
+      expect(getNodeMajorVersion(versions)).toBe(22);
+    });
+
+    it('detects Bun runtime (even when process.versions.node is present)', () => {
+      const versions = {node: '22.6.0', bun: '1.2.4'};
+      expect(isBun(versions)).toBe(true);
+      expect(isNode(versions)).toBe(false);
+    });
+
+    it('returns false / undefined when no runtime versions are present', () => {
+      const versions = {};
+      expect(isNode(versions)).toBe(false);
+      expect(isBun(versions)).toBe(false);
+      expect(getNodeMajorVersion(versions)).toBeUndefined();
+    });
+
+    it('returns undefined for unparseable Node version', () => {
+      expect(getNodeMajorVersion({node: 'invalid'})).toBeUndefined();
+    });
+
+    it('resolves default process.versions when called without arguments', () => {
+      expect(isNode() || isBun()).toBe(true);
+      expect(getNodeMajorVersion()).toBeGreaterThanOrEqual(18);
+    });
+  });
+
+  describe('requiresStrictArrayPrototypeEquality & assertArraySubclassStrictEqual', () => {
+    class CustomRow extends Array<string> {
+      toJSON() {
+        return [...this];
+      }
+    }
+    Object.defineProperty(CustomRow.prototype, 'constructor', {
+      value: Array,
+      writable: true,
+      configurable: true,
+      enumerable: false,
+    });
+
+    it('identifies runtimes requiring strict array prototype equality', () => {
+      expect(requiresStrictArrayPrototypeEquality({node: '18.20.0'})).toBe(
+        true,
+      );
+      expect(
+        requiresStrictArrayPrototypeEquality({node: '22.6.0', bun: '1.2.4'}),
+      ).toBe(true);
+      expect(requiresStrictArrayPrototypeEquality({node: '20.11.0'})).toBe(
+        false,
+      );
+      expect(requiresStrictArrayPrototypeEquality({node: '22.14.0'})).toBe(
+        false,
+      );
+    });
+
+    it('compares Array subclass instances across runtimes using assertArraySubclassStrictEqual', () => {
+      const row = new CustomRow('a', 'b');
+      expect(() =>
+        assertArraySubclassStrictEqual(row, ['a', 'b'], undefined, {
+          node: '18.20.0',
+        }),
+      ).not.toThrow();
+      expect(() =>
+        assertArraySubclassStrictEqual(row, ['a', 'b'], undefined, {
+          node: '22.14.0',
+        }),
+      ).not.toThrow();
+      expect(() =>
+        assertArraySubclassStrictEqual(row, ['a', 'c'], undefined, {
+          node: '22.6.0',
+          bun: '1.2.4',
+        }),
+      ).toThrow(assert.AssertionError);
+      expect(() =>
+        assertArraySubclassStrictEqual(row, ['a', 'c'], 'custom mismatch', {
+          node: '22.14.0',
+        }),
+      ).toThrow('custom mismatch');
+
+      // Test nested array subclasses (e.g., array of rows)
+      const nestedRows = [new CustomRow('a', 'b')];
+      expect(() =>
+        assertArraySubclassStrictEqual(nestedRows, [['a', 'b']], undefined, {
+          node: '18.20.0',
+        }),
+      ).not.toThrow();
+    });
+  });
+
+  describe('isReadOnlyPropertyError & READONLY_PROPERTY_ERROR_REGEX', () => {
+    it('matches real frozen object mutation TypeError via assert.throws', () => {
+      const frozen = Object.freeze({name: 'projects/{{projectId}}'});
+      assert.throws(
+        () => {
+          (frozen as {name: string}).name = 'projects/my-project';
+        },
+        err => isReadOnlyPropertyError(err, 'name'),
+      );
+      assert.throws(() => {
+        (frozen as {name: string}).name = 'projects/my-project';
+      }, READONLY_PROPERTY_ERROR_REGEX);
+    });
+
+    it('matches both V8 and JavaScriptCore read-only TypeError messages', () => {
+      const v8Err = new TypeError(
+        "Cannot assign to read only property 'name' of object '#<Object>'",
+      );
+      const jscErr = new TypeError('Attempted to assign to readonly property.');
+
+      expect(isReadOnlyPropertyError(v8Err)).toBe(true);
+      expect(isReadOnlyPropertyError(v8Err, 'name')).toBe(true);
+      expect(isReadOnlyPropertyError(v8Err, 'other')).toBe(false);
+
+      expect(isReadOnlyPropertyError(jscErr)).toBe(true);
+      expect(isReadOnlyPropertyError(jscErr, 'name')).toBe(true);
+    });
+
+    it('rejects non-TypeError or unrelated TypeError values', () => {
+      expect(isReadOnlyPropertyError(new Error('some error'))).toBe(false);
+      expect(
+        isReadOnlyPropertyError(new TypeError('unrelated type error')),
+      ).toBe(false);
+      expect(
+        isReadOnlyPropertyError('Cannot assign to read only property'),
+      ).toBe(false);
+    });
+  });
+});
