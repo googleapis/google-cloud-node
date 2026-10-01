@@ -18,6 +18,7 @@
  * Provides function wrappers that implement page streaming and retrying.
  */
 
+import {context} from '@opentelemetry/api';
 import {createAPICaller} from './apiCaller';
 import {
   APICallback,
@@ -26,6 +27,7 @@ import {
   GRPCCallOtherArgs,
   RequestType,
   SimpleCallbackFunction,
+  UnaryCall,
 } from './apitypes';
 import {Descriptor} from './descriptor';
 import {CallOptions, CallSettings, convertRetryOptions} from './gax';
@@ -36,8 +38,10 @@ import {StreamProxy} from './streamingCalls/streaming';
 import {warn} from './warnings';
 import {
   traceCall,
+  traceAttempt,
   StaticTraceContext,
   DynamicTraceContext,
+  AttemptTraceContext,
   ResendRecorder,
 } from './observability/TracerHelper';
 import {resolveStaticTraceContext} from './observability/metadataResolver';
@@ -77,14 +81,33 @@ export function createApiCall(
   const apiCaller = createAPICaller(settings, descriptor);
 
   const tracingEnabled = checkTelemetryEnabled(settings);
+  const staticArgs: StaticTraceContext | undefined = tracingEnabled
+    ? resolveStaticTraceContext(settings)
+    : undefined;
+  const serviceName = settings.apiName?.split('.').pop() ?? '';
+  const isFallback = Boolean(_fallback);
+  const dynamicArgs: DynamicTraceContext | undefined = tracingEnabled
+    ? {
+        clientName: serviceName ? `${serviceName}Client` : '',
+        methodName: settings.otherArgs?.internalMethodName ?? '',
+        rpcType: isFallback ? 'http' : 'grpc',
+      }
+    : undefined;
+  const attemptDynamicArgs: AttemptTraceContext | undefined =
+    tracingEnabled && dynamicArgs
+      ? {
+          ...dynamicArgs,
+          apiName: settings.apiName ?? '',
+        }
+      : undefined;
 
   const invokeCall = (
     request: RequestType,
     callOptions?: CallOptions,
     callback?: APICallback,
     recordResend?: ResendRecorder,
-    injectedHeaders?: Record<string, string>,
   ) => {
+    const parentContext = tracingEnabled ? context.active() : undefined;
     let currentApiCaller = apiCaller;
 
     let thisSettings: CallSettings;
@@ -99,16 +122,6 @@ export function createApiCall(
       thisSettings = settings.merge(convertedRetryOptions);
     } else {
       thisSettings = settings.merge(callOptions);
-    }
-
-    if (injectedHeaders && Object.keys(injectedHeaders).length > 0) {
-      thisSettings.otherArgs = {
-        ...thisSettings.otherArgs,
-        headers: {
-          ...thisSettings.otherArgs?.headers,
-          ...injectedHeaders,
-        },
-      };
     }
 
     // special case: if bundling is disabled for this one call,
@@ -134,6 +147,31 @@ export function createApiCall(
 
         const streaming = (currentApiCaller as StreamingApiCaller).descriptor
           ?.streaming;
+
+        if (tracingEnabled && attemptDynamicArgs && staticArgs) {
+          const wrappedFunc = func;
+          func = ((
+            argument: {},
+            metadata: {},
+            options: {},
+            attemptCallback: APICallback,
+          ) => {
+            return traceAttempt(
+              attemptDynamicArgs,
+              staticArgs,
+              tracedAttemptCallback =>
+                (wrappedFunc as UnaryCall)(
+                  argument,
+                  metadata,
+                  options,
+                  tracedAttemptCallback ?? attemptCallback,
+                ),
+              Boolean(streaming),
+              attemptCallback,
+              parentContext,
+            );
+          }) as GRPCCall;
+        }
 
         const retry = thisSettings.retry;
 
@@ -204,15 +242,6 @@ export function createApiCall(
   };
 
   if (tracingEnabled) {
-    const staticArgs: StaticTraceContext = resolveStaticTraceContext(settings);
-
-    const serviceName = settings.apiName?.split('.').pop() ?? '';
-    const isFallback = Boolean(_fallback);
-    const dynamicArgs: DynamicTraceContext = {
-      clientName: serviceName ? `${serviceName}Client` : '',
-      methodName: settings.otherArgs?.internalMethodName ?? '',
-      rpcType: isFallback ? 'http' : 'grpc',
-    };
     const isStreamingCall = apiCaller instanceof StreamingApiCaller;
     return (
       request: RequestType,
@@ -220,13 +249,9 @@ export function createApiCall(
       callback?: APICallback,
     ) => {
       return traceCall(
-        dynamicArgs,
-        staticArgs,
-        (
-          tracedCallback?: APICallback,
-          recordResend?: ResendRecorder,
-          injectedHeaders?: Record<string, string>,
-        ) => {
+        dynamicArgs!,
+        staticArgs!,
+        (tracedCallback?: APICallback, recordResend?: ResendRecorder) => {
           // `traceCall` wraps the user's callback whenever one was supplied,
           // for stream and non-stream calls alike, and that wrapper is what
           // closes the span. It is undefined only when there is no callback to
@@ -237,7 +262,6 @@ export function createApiCall(
             callOptions,
             tracedCallback ?? callback,
             recordResend,
-            injectedHeaders,
           );
         },
         isStreamingCall,

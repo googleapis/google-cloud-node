@@ -16,26 +16,24 @@
 
 import * as assert from 'assert';
 import {describe, it, beforeEach, afterEach} from 'mocha';
-import {
-  propagation,
-  trace,
-  ROOT_CONTEXT,
-  TextMapPropagator,
-} from '@opentelemetry/api';
+import {SpanKind, SpanStatusCode} from '@opentelemetry/api';
 import {status} from '@grpc/grpc-js';
 import {createApiCall} from '../../src/createApiCall';
 import * as gax from '../../src/gax';
 import {GoogleError} from '../../src/googleError';
 import {GrpcClient, Metadata} from '../../src/grpc';
+import {GrpcClient as FallbackGrpcClient} from '../../src/fallback';
 import {
   traceCall,
-  DynamicTraceContext,
+  traceAttempt,
+  AttemptTraceContext,
   StaticTraceContext,
 } from '../../src/observability/TracerHelper';
+import {clearMetadataCache} from '../../src/observability/metadataResolver';
 import {OtelHarness} from './otelHarness';
 import {GRPCCall, GRPCCallResult} from '../../src/apitypes';
 
-describe('metadata propagation via TracerHelper and createApiCall', () => {
+describe('T4 per-attempt spans via TracerHelper and createApiCall', () => {
   let harness: OtelHarness;
 
   const telemetryInfo: StaticTraceContext = {
@@ -45,157 +43,76 @@ describe('metadata propagation via TracerHelper and createApiCall', () => {
     gcpArtifact: '@google-cloud/echo',
   };
 
-  const grpcMetadataGetter = {
-    get(carrier: Metadata, key: string) {
-      return carrier.get(key) as string[];
-    },
-    keys() {
-      return ['traceparent'];
-    },
-  };
-
-  // Custom propagator to simulate W3C traceparent injection and extraction
-  const testPropagator: TextMapPropagator = {
-    inject(ctx, carrier, setter) {
-      const spanContext = trace.getSpanContext(ctx);
-      if (spanContext && trace.isSpanContextValid(spanContext)) {
-        setter.set(
-          carrier,
-          'traceparent',
-          `00-${spanContext.traceId}-${spanContext.spanId}-0${spanContext.traceFlags}`,
-        );
-      }
-    },
-    extract(ctx, carrier, getter) {
-      const raw = getter.get(carrier, 'traceparent');
-      const value = Array.isArray(raw) ? raw[0] : raw;
-      if (typeof value === 'string') {
-        const parts = value.split('-');
-        if (parts.length === 4) {
-          return trace.setSpanContext(ctx, {
-            traceId: parts[1],
-            spanId: parts[2],
-            traceFlags: parseInt(parts[3], 16),
-            isRemote: true,
-          });
-        }
-      }
-      return ctx;
-    },
-    fields() {
-      return ['traceparent'];
-    },
-  };
-
   beforeEach(() => {
+    clearMetadataCache();
     process.env.GOOGLE_SDK_NODE_ENABLE_TRACING = 'true';
     harness = new OtelHarness();
     harness.setup();
-    propagation.setGlobalPropagator(testPropagator);
   });
 
   afterEach(() => {
+    clearMetadataCache();
     delete process.env.GOOGLE_SDK_NODE_ENABLE_TRACING;
-    propagation.disable();
     harness.teardown();
   });
 
-  it('injects active span context into injectedHeaders in traceCall', async () => {
-    const dynamicArgs: DynamicTraceContext = {
+  it('creates a CLIENT T4 span in traceAttempt with url.domain, server.address, server.port, and status_code', async () => {
+    const attemptArgs: AttemptTraceContext = {
+      apiName: 'google.example.v1.Echo',
       clientName: 'EchoClient',
       methodName: 'Echo',
       rpcType: 'grpc',
     };
 
-    let capturedHeaders: Record<string, string> | undefined;
-    await traceCall(
-      dynamicArgs,
-      telemetryInfo,
-      async (_tracedCallback, _recordResend, injectedHeaders) => {
-        capturedHeaders = injectedHeaders;
-        return [{echo: 'ok'}, undefined, undefined];
-      },
-    );
-
-    const span = harness.requireSingleSpan('google-gax');
-    const spanCtx = span.spanContext();
-    assert.ok(capturedHeaders);
-    assert.strictEqual(
-      capturedHeaders!['traceparent'],
-      `00-${spanCtx.traceId}-${spanCtx.spanId}-0${spanCtx.traceFlags}`,
-    );
-  });
-
-  it('does not mutate baseMetadata or user headers across multiple gRPC calls', async () => {
-    const grpcClient = new GrpcClient();
-    const builder = grpcClient.metadataBuilder({'x-goog-api-client': 'test'});
-
-    const baseMetadata = builder() as unknown as Metadata;
-    assert.strictEqual(
-      (baseMetadata.get('traceparent') as unknown[]).length,
-      0,
-    );
-
-    const settings = new gax.CallSettings({
-      apiName: 'google.example.v1.Echo',
-      enableTelemetryTracing: true,
-      otherArgs: {
-        metadataBuilder: builder,
-        internalTelemetryInfo: telemetryInfo,
-        internalMethodName: 'Echo',
-      },
+    await traceAttempt(attemptArgs, telemetryInfo, async () => {
+      return [{echo: 'ok'}, undefined, undefined];
     });
 
-    const receivedMetadata: Metadata[] = [];
-    const stubFunc = (
-      arg: {},
-      meta: {},
-      opt: {},
-      cb: Function,
-    ): GRPCCallResult => {
-      receivedMetadata.push(meta as Metadata);
-      cb(null, {});
-      return {cancel: () => {}};
+    const span = harness.requireSingleSpan('google-gax');
+    assert.strictEqual(span.name, 'google.example.v1.Echo/Echo');
+    assert.strictEqual(span.kind, SpanKind.CLIENT);
+    assert.strictEqual(span.attributes['url.domain'], 'echo.googleapis.com');
+    assert.strictEqual(
+      span.attributes['server.address'],
+      'echo.googleapis.com',
+    );
+    assert.strictEqual(span.attributes['server.port'], 443);
+    assert.strictEqual(span.attributes['rpc.system'], 'grpc');
+    assert.strictEqual(span.attributes['rpc.response.status_code'], 'OK');
+    assert.strictEqual(span.attributes['grpc.response.status_code'], 'OK');
+  });
+
+  it('omits server.address and server.port on T4 span for pre-connection failures while preserving url.domain', async () => {
+    const attemptArgs: AttemptTraceContext = {
+      apiName: 'google.example.v1.Echo',
+      clientName: 'EchoClient',
+      methodName: 'Echo',
+      rpcType: 'grpc',
     };
 
-    const apiCall = createApiCall(stubFunc as unknown as GRPCCall, settings);
-    const userHeaders = {'x-goog-request-params': 'parent=projects/test'};
+    const dnsError = Object.assign(new Error('getaddrinfo ENOTFOUND'), {
+      code: 'ENOTFOUND',
+    });
 
-    await apiCall({}, {otherArgs: {headers: userHeaders}});
-    await apiCall({}, {otherArgs: {headers: userHeaders}});
+    await assert.rejects(async () => {
+      await traceAttempt(attemptArgs, telemetryInfo, async () => {
+        throw dnsError;
+      });
+    });
 
-    const spans = harness.getSpans('google-gax');
-    assert.strictEqual(spans.length, 2);
-    assert.strictEqual(receivedMetadata.length, 2);
-
-    const spanCtx1 = spans[0].spanContext();
-    const traceparent1 = receivedMetadata[0].get('traceparent') as unknown[];
+    const span = harness.requireSingleSpan('google-gax');
+    assert.strictEqual(span.name, 'google.example.v1.Echo/Echo');
+    assert.strictEqual(span.kind, SpanKind.CLIENT);
+    assert.strictEqual(span.attributes['url.domain'], 'echo.googleapis.com');
+    assert.strictEqual(span.attributes['server.address'], undefined);
+    assert.strictEqual(span.attributes['server.port'], undefined);
     assert.strictEqual(
-      traceparent1[0],
-      `00-${spanCtx1.traceId}-${spanCtx1.spanId}-0${spanCtx1.traceFlags}`,
-    );
-
-    const spanCtx2 = spans[1].spanContext();
-    const traceparent2 = receivedMetadata[1].get('traceparent') as unknown[];
-    assert.strictEqual(
-      traceparent2[0],
-      `00-${spanCtx2.traceId}-${spanCtx2.spanId}-0${spanCtx2.traceFlags}`,
-    );
-
-    // Crucial: neither baseMetadata nor userHeaders was mutated
-    assert.strictEqual(
-      (baseMetadata.get('traceparent') as unknown[]).length,
-      0,
-    );
-    assert.strictEqual(
-      (userHeaders as Record<string, unknown>)['traceparent'],
-      undefined,
+      span.attributes['error.type'],
+      'CLIENT_CONNECTION_ERROR',
     );
   });
 
-  it('does not inject into gRPC or HTTP metadata when telemetry is disabled', async () => {
-    delete process.env.GOOGLE_SDK_NODE_ENABLE_TRACING;
-
+  it('does not inject traceparent headers into gRPC or HTTP metadata', async () => {
     const grpcClient = new GrpcClient();
     const grpcBuilder = grpcClient.metadataBuilder({
       'x-goog-api-client': 'test',
@@ -230,7 +147,7 @@ describe('metadata propagation via TracerHelper and createApiCall', () => {
       grpcStub as unknown as GRPCCall,
       new gax.CallSettings({
         apiName: 'google.example.v1.Echo',
-        enableTelemetryTracing: false,
+        enableTelemetryTracing: true,
         otherArgs: {
           metadataBuilder: grpcBuilder,
           internalTelemetryInfo: telemetryInfo,
@@ -243,7 +160,7 @@ describe('metadata propagation via TracerHelper and createApiCall', () => {
       httpStub as unknown as GRPCCall,
       new gax.CallSettings({
         apiName: 'google.example.v1.Echo',
-        enableTelemetryTracing: false,
+        enableTelemetryTracing: true,
         otherArgs: {
           metadataBuilder: (_abTests?: {}, moreHeaders?: {}) => ({
             'x-goog-api-client': ['grpc-web/1.0'],
@@ -269,144 +186,152 @@ describe('metadata propagation via TracerHelper and createApiCall', () => {
     assert.strictEqual(receivedHttpMetadata[0]['traceparent'], undefined);
   });
 
-  describe('T3 client request trace to low-level unary trace correlation', () => {
-    it('ties a low-level gRPC unary trace to its parent T3 client request trace', async () => {
-      const grpcClient = new GrpcClient();
-      const builder = grpcClient.metadataBuilder({'x-goog-api-client': 'test'});
-
-      const settings = new gax.CallSettings({
-        apiName: 'google.example.v1.Echo',
-        enableTelemetryTracing: true,
-        otherArgs: {
-          metadataBuilder: builder,
-          internalTelemetryInfo: telemetryInfo,
-          internalMethodName: 'Echo',
-        },
+  describe('T3 client request span to T4 per-attempt span correlation', () => {
+    it('emits a T4 gRPC attempt span parented to its T3 client request span', async () => {
+      const grpcClient = new GrpcClient({
+        servicePath: 'echo.googleapis.com',
+        port: 443,
       });
+      const defaults = grpcClient.constructSettings(
+        'google.example.v1.Echo',
+        {
+          interfaces: {
+            'google.example.v1.Echo': {
+              methods: {
+                Echo: {timeout_millis: 5000},
+              },
+            },
+          },
+        },
+        {},
+        {'x-goog-api-client': 'test'},
+        true,
+        telemetryInfo,
+      );
 
-      let extractedTraceparent: string | undefined;
       const stubFunc = (
         argument: {},
         metadata: {},
         options: {},
         callback: Function,
       ): GRPCCallResult => {
-        const grpcMeta = metadata as Metadata;
-        const tp = grpcMeta.get('traceparent') as string[];
-        extractedTraceparent = tp?.[0];
-
-        // Simulate low-level unary gRPC span started using the propagated context
-        const parentCtx = propagation.extract(
-          ROOT_CONTEXT,
-          grpcMeta,
-          grpcMetadataGetter,
-        );
-        const unaryTracer = trace.getTracer('grpc-unary-transport');
-        const unarySpan = unaryTracer.startSpan(
-          'grpc.google.example.v1.Echo/Echo',
-          undefined,
-          parentCtx,
-        );
-        unarySpan.end();
-
-        callback(null, {echo: 'ok'});
-        return {cancel: () => {}};
-      };
-
-      const apiCall = createApiCall(stubFunc as unknown as GRPCCall, settings);
-      await apiCall({message: 'hello'}, undefined);
-
-      const t3Span = harness.requireSingleSpan('google-gax');
-      const unarySpan = harness.requireSingleSpan('grpc-unary-transport');
-
-      assert.strictEqual(t3Span.name, 'EchoClient.Echo');
-      assert.strictEqual(
-        extractedTraceparent,
-        `00-${t3Span.spanContext().traceId}-${t3Span.spanContext().spanId}-0${t3Span.spanContext().traceFlags}`,
-      );
-      assert.strictEqual(
-        unarySpan.spanContext().traceId,
-        t3Span.spanContext().traceId,
-      );
-      assert.strictEqual(
-        unarySpan.parentSpanContext?.spanId,
-        t3Span.spanContext().spanId,
-      );
-    });
-
-    it('ties a low-level HTTP/REST unary trace to its parent T3 client request trace', async () => {
-      const settings = new gax.CallSettings({
-        apiName: 'google.example.v1.Echo',
-        enableTelemetryTracing: true,
-        otherArgs: {
-          metadataBuilder: (_abTests?: {}, moreHeaders?: {}) => ({
-            'x-goog-api-client': ['grpc-web/1.0'],
-            ...moreHeaders,
-          }),
-          internalTelemetryInfo: telemetryInfo,
-          internalMethodName: 'Echo',
-        },
-      });
-
-      let extractedTraceparent: string | undefined;
-      const stubFunc = (
-        argument: {},
-        metadata: {},
-        options: {},
-        callback: Function,
-      ): GRPCCallResult => {
-        const httpMeta = metadata as Record<string, string>;
-        extractedTraceparent = httpMeta['traceparent'];
-
-        // Simulate low-level unary HTTP span started using the propagated headers
-        const parentCtx = propagation.extract(ROOT_CONTEXT, httpMeta);
-        const unaryTracer = trace.getTracer('http-unary-transport');
-        const unarySpan = unaryTracer.startSpan(
-          'HTTP POST /v1/echo',
-          undefined,
-          parentCtx,
-        );
-        unarySpan.end();
-
         callback(null, {echo: 'ok'});
         return {cancel: () => {}};
       };
 
       const apiCall = createApiCall(
         stubFunc as unknown as GRPCCall,
-        settings,
+        defaults.echo,
+      );
+      await apiCall({message: 'hello'}, undefined);
+
+      const spans = harness.getSpans('google-gax');
+      assert.strictEqual(spans.length, 2);
+
+      const t4Span = spans.find(s => s.name === 'google.example.v1.Echo/Echo')!;
+      const t3Span = spans.find(s => s.name === 'EchoClient.Echo')!;
+      assert.ok(t4Span);
+      assert.ok(t3Span);
+
+      assert.strictEqual(t3Span.kind, SpanKind.INTERNAL);
+      assert.strictEqual(t4Span.kind, SpanKind.CLIENT);
+      assert.strictEqual(
+        t4Span.spanContext().traceId,
+        t3Span.spanContext().traceId,
+      );
+      assert.strictEqual(
+        t4Span.parentSpanContext?.spanId,
+        t3Span.spanContext().spanId,
+      );
+      assert.strictEqual(
+        t4Span.attributes['url.domain'],
+        'echo.googleapis.com',
+      );
+      assert.strictEqual(
+        t4Span.attributes['server.address'],
+        'echo.googleapis.com',
+      );
+      assert.strictEqual(t4Span.attributes['server.port'], 443);
+      assert.strictEqual(t4Span.attributes['rpc.response.status_code'], 'OK');
+      assert.strictEqual(t4Span.attributes['grpc.response.status_code'], 'OK');
+    });
+
+    it('emits a T4 HTTP/REST attempt span parented to its T3 client request span', async () => {
+      const fallbackClient = new FallbackGrpcClient({
+        servicePath: 'echo.googleapis.com',
+        port: 443,
+      });
+      const defaults = fallbackClient.constructSettings(
+        'google.example.v1.Echo',
+        {
+          interfaces: {
+            'google.example.v1.Echo': {
+              methods: {
+                Echo: {timeout_millis: 5000},
+              },
+            },
+          },
+        },
+        {},
+        {'x-goog-api-client': 'test'},
+        true,
+        telemetryInfo,
+      );
+
+      const stubFunc = (
+        argument: {},
+        metadata: {},
+        options: {},
+        callback: Function,
+      ): GRPCCallResult => {
+        callback(null, {echo: 'ok'});
+        return {cancel: () => {}};
+      };
+
+      const apiCall = createApiCall(
+        stubFunc as unknown as GRPCCall,
+        defaults.echo,
         undefined,
         'rest',
       );
       await apiCall({message: 'hello'}, undefined);
 
-      const t3Span = harness.requireSingleSpan('google-gax');
-      const unarySpan = harness.requireSingleSpan('http-unary-transport');
+      const spans = harness.getSpans('google-gax');
+      assert.strictEqual(spans.length, 2);
 
-      assert.strictEqual(t3Span.name, 'EchoClient.Echo');
+      const t4Span = spans.find(s => s.name === 'google.example.v1.Echo/Echo')!;
+      const t3Span = spans.find(s => s.name === 'EchoClient.Echo')!;
+      assert.ok(t4Span);
+      assert.ok(t3Span);
+
+      assert.strictEqual(t3Span.kind, SpanKind.INTERNAL);
+      assert.strictEqual(t4Span.kind, SpanKind.CLIENT);
       assert.strictEqual(
-        extractedTraceparent,
-        `00-${t3Span.spanContext().traceId}-${t3Span.spanContext().spanId}-0${t3Span.spanContext().traceFlags}`,
-      );
-      assert.strictEqual(
-        unarySpan.spanContext().traceId,
+        t4Span.spanContext().traceId,
         t3Span.spanContext().traceId,
       );
       assert.strictEqual(
-        unarySpan.parentSpanContext?.spanId,
+        t4Span.parentSpanContext?.spanId,
         t3Span.spanContext().spanId,
       );
+      assert.strictEqual(
+        t4Span.attributes['url.domain'],
+        'echo.googleapis.com',
+      );
+      assert.strictEqual(
+        t4Span.attributes['server.address'],
+        'echo.googleapis.com',
+      );
+      assert.strictEqual(t4Span.attributes['server.port'], 443);
+      assert.strictEqual(t4Span.attributes['rpc.response.status_code'], 'OK');
+      assert.strictEqual(t4Span.attributes['http.response.status_code'], 200);
     });
 
-    it('ties concurrent low-level unary traces to their respective T3 client request traces without cross-talk', async () => {
-      const grpcClient = new GrpcClient();
-      const builder = grpcClient.metadataBuilder({'x-goog-api-client': 'test'});
-
+    it('ties concurrent T4 attempt spans to their respective T3 client request spans without cross-talk', async () => {
       const echoSettings = new gax.CallSettings({
         apiName: 'google.example.v1.Echo',
         enableTelemetryTracing: true,
         otherArgs: {
-          metadataBuilder: builder,
           internalTelemetryInfo: telemetryInfo,
           internalMethodName: 'Echo',
         },
@@ -416,91 +341,69 @@ describe('metadata propagation via TracerHelper and createApiCall', () => {
         apiName: 'google.example.v1.Echo',
         enableTelemetryTracing: true,
         otherArgs: {
-          metadataBuilder: builder,
           internalTelemetryInfo: telemetryInfo,
           internalMethodName: 'Expand',
         },
       });
 
-      const makeStub = (unarySpanName: string, delayMs: number): GRPCCall => {
+      const makeStub = (delayMs: number): GRPCCall => {
         return ((
           argument: {},
           metadata: {},
           options: {},
           callback: Function,
         ): GRPCCallResult => {
-          const grpcMeta = metadata as Metadata;
-          const parentCtx = propagation.extract(
-            ROOT_CONTEXT,
-            grpcMeta,
-            grpcMetadataGetter,
-          );
-          const unaryTracer = trace.getTracer('grpc-unary-transport');
-          const unarySpan = unaryTracer.startSpan(
-            unarySpanName,
-            undefined,
-            parentCtx,
-          );
           setTimeout(() => {
-            unarySpan.end();
             callback(null, {ok: true});
           }, delayMs);
           return {cancel: () => {}};
         }) as unknown as GRPCCall;
       };
 
-      const echoCall = createApiCall(makeStub('unary.Echo', 15), echoSettings);
-      const expandCall = createApiCall(
-        makeStub('unary.Expand', 5),
-        expandSettings,
-      );
+      const echoCall = createApiCall(makeStub(15), echoSettings);
+      const expandCall = createApiCall(makeStub(5), expandSettings);
 
       await Promise.all([
         echoCall({id: 1}, undefined),
         expandCall({id: 2}, undefined),
       ]);
 
-      const t3Spans = harness.getSpans('google-gax');
-      const unarySpans = harness.getSpans('grpc-unary-transport');
-      assert.strictEqual(t3Spans.length, 2);
-      assert.strictEqual(unarySpans.length, 2);
+      const spans = harness.getSpans('google-gax');
+      assert.strictEqual(spans.length, 4);
 
-      const t3Echo = t3Spans.find(s => s.name === 'EchoClient.Echo')!;
-      const t3Expand = t3Spans.find(s => s.name === 'EchoClient.Expand')!;
-      const unaryEcho = unarySpans.find(s => s.name === 'unary.Echo')!;
-      const unaryExpand = unarySpans.find(s => s.name === 'unary.Expand')!;
+      const t3Echo = spans.find(s => s.name === 'EchoClient.Echo')!;
+      const t3Expand = spans.find(s => s.name === 'EchoClient.Expand')!;
+      const t4Echo = spans.find(s => s.name === 'google.example.v1.Echo/Echo')!;
+      const t4Expand = spans.find(
+        s => s.name === 'google.example.v1.Echo/Expand',
+      )!;
 
-      assert.ok(t3Echo && t3Expand && unaryEcho && unaryExpand);
+      assert.ok(t3Echo && t3Expand && t4Echo && t4Expand);
       assert.notStrictEqual(
         t3Echo.spanContext().spanId,
         t3Expand.spanContext().spanId,
       );
 
-      // unary.Echo must be tied to EchoClient.Echo
       assert.strictEqual(
-        unaryEcho.spanContext().traceId,
+        t4Echo.spanContext().traceId,
         t3Echo.spanContext().traceId,
       );
       assert.strictEqual(
-        unaryEcho.parentSpanContext?.spanId,
+        t4Echo.parentSpanContext?.spanId,
         t3Echo.spanContext().spanId,
       );
 
-      // unary.Expand must be tied to EchoClient.Expand
       assert.strictEqual(
-        unaryExpand.spanContext().traceId,
+        t4Expand.spanContext().traceId,
         t3Expand.spanContext().traceId,
       );
       assert.strictEqual(
-        unaryExpand.parentSpanContext?.spanId,
+        t4Expand.parentSpanContext?.spanId,
         t3Expand.spanContext().spanId,
       );
     });
 
-    it('ties all retried low-level unary attempt traces to the single parent T3 client request trace', async () => {
-      const grpcClient = new GrpcClient();
-      const builder = grpcClient.metadataBuilder({'x-goog-api-client': 'test'});
-
+    it('emits one T4 attempt span per retry attempt, all parented to the single T3 client request span', async () => {
       const retryOptions = gax.createRetryOptions(
         [status.UNAVAILABLE],
         gax.createBackoffSettings(1, 1.1, 5, 100, 1.0, 100, 1000),
@@ -511,7 +414,6 @@ describe('metadata propagation via TracerHelper and createApiCall', () => {
         retry: retryOptions,
         enableTelemetryTracing: true,
         otherArgs: {
-          metadataBuilder: builder,
           internalTelemetryInfo: telemetryInfo,
           internalMethodName: 'Echo',
         },
@@ -525,20 +427,6 @@ describe('metadata propagation via TracerHelper and createApiCall', () => {
         callback: Function,
       ): GRPCCallResult => {
         attempt++;
-        const grpcMeta = metadata as Metadata;
-        const parentCtx = propagation.extract(
-          ROOT_CONTEXT,
-          grpcMeta,
-          grpcMetadataGetter,
-        );
-        const unaryTracer = trace.getTracer('grpc-unary-transport');
-        const unarySpan = unaryTracer.startSpan(
-          `unary.Echo.attempt.${attempt}`,
-          undefined,
-          parentCtx,
-        );
-        unarySpan.end();
-
         if (attempt === 1) {
           const err = new GoogleError('transient failure');
           err.code = status.UNAVAILABLE;
@@ -552,20 +440,56 @@ describe('metadata propagation via TracerHelper and createApiCall', () => {
       const apiCall = createApiCall(stubFunc as unknown as GRPCCall, settings);
       await apiCall({message: 'retry-me'}, undefined);
 
-      const t3Span = harness.requireSingleSpan('google-gax');
-      const unarySpans = harness.getSpans('grpc-unary-transport');
-      assert.strictEqual(unarySpans.length, 2);
+      const spans = harness.getSpans('google-gax');
+      assert.strictEqual(spans.length, 3);
 
-      for (const unarySpan of unarySpans) {
-        assert.strictEqual(
-          unarySpan.spanContext().traceId,
-          t3Span.spanContext().traceId,
-        );
-        assert.strictEqual(
-          unarySpan.parentSpanContext?.spanId,
-          t3Span.spanContext().spanId,
-        );
-      }
+      const t3Span = spans.find(s => s.name === 'EchoClient.Echo')!;
+      const t4Spans = spans.filter(
+        s => s.name === 'google.example.v1.Echo/Echo',
+      );
+      assert.ok(t3Span);
+      assert.strictEqual(t4Spans.length, 2);
+
+      // First attempt failed with UNAVAILABLE
+      assert.strictEqual(t4Spans[0].kind, SpanKind.CLIENT);
+      assert.strictEqual(t4Spans[0].status.code, SpanStatusCode.ERROR);
+      assert.strictEqual(
+        t4Spans[0].attributes['rpc.response.status_code'],
+        'UNAVAILABLE',
+      );
+      assert.strictEqual(
+        t4Spans[0].attributes['grpc.response.status_code'],
+        'UNAVAILABLE',
+      );
+      assert.strictEqual(
+        t4Spans[0].parentSpanContext?.spanId,
+        t3Span.spanContext().spanId,
+      );
+
+      // Second attempt succeeded with OK
+      assert.strictEqual(t4Spans[1].kind, SpanKind.CLIENT);
+      assert.strictEqual(t4Spans[1].status.code, SpanStatusCode.UNSET);
+      assert.strictEqual(
+        t4Spans[1].attributes['rpc.response.status_code'],
+        'OK',
+      );
+      assert.strictEqual(
+        t4Spans[1].attributes['grpc.response.status_code'],
+        'OK',
+      );
+      assert.strictEqual(
+        t4Spans[1].parentSpanContext?.spanId,
+        t3Span.spanContext().spanId,
+      );
+
+      // Overall T3 call span succeeded with resend_count = 1
+      assert.strictEqual(t3Span.kind, SpanKind.INTERNAL);
+      assert.strictEqual(t3Span.status.code, SpanStatusCode.UNSET);
+      assert.strictEqual(t3Span.attributes['gcp.grpc.resend_count'], 1);
+      assert.strictEqual(t3Span.attributes['rpc.response.status_code'], 'OK');
+
+      // traceCall export remains exercised
+      assert.strictEqual(typeof traceCall, 'function');
     });
   });
 });

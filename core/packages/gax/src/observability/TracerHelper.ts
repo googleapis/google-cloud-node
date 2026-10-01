@@ -18,8 +18,9 @@ import {EventEmitter} from 'events';
 import {
   Attributes,
   context,
-  propagation,
+  Context,
   Span,
+  SpanKind,
   SpanStatusCode,
   trace,
   Tracer,
@@ -67,6 +68,10 @@ export interface StaticTraceContext {
    * Server port number for the RPC call.
    */
   serverPort?: number;
+  /**
+   * Target service domain (e.g. 'cloudkms.googleapis.com').
+   */
+  urlDomain?: string;
 }
 
 /**
@@ -94,6 +99,20 @@ export interface DynamicTraceContext {
    * Server port number for the RPC call.
    */
   serverPort?: number;
+  /**
+   * Target service domain (e.g. 'cloudkms.googleapis.com').
+   */
+  urlDomain?: string;
+}
+
+/**
+ * Dynamic metadata specific to an individual RPC transport attempt (T4 span).
+ */
+export interface AttemptTraceContext extends DynamicTraceContext {
+  /**
+   * The fully-qualified protobuf service name (e.g. 'google.cloud.kms.v1.KeyManagementService').
+   */
+  apiName?: string;
 }
 
 /**
@@ -954,6 +973,30 @@ export function handleStream(
 }
 
 /**
+ * Resolves the target service domain (`url.domain`) from dynamic and static trace contexts.
+ */
+function resolveUrlDomain(
+  dynamicArgs: DynamicTraceContext,
+  staticArgs: StaticTraceContext,
+): string | undefined {
+  const explicit = dynamicArgs.urlDomain ?? staticArgs.urlDomain;
+  if (explicit) {
+    return explicit;
+  }
+  const rawAddress = dynamicArgs.serverAddress ?? staticArgs.serverAddress;
+  if (rawAddress) {
+    const match = rawAddress.match(/^(\[[^\]]+\]|[^:]+):(\d+)$/);
+    return match ? match[1] : rawAddress;
+  }
+  if (staticArgs.gcpClientService) {
+    return staticArgs.gcpClientService.includes('.')
+      ? staticArgs.gcpClientService
+      : `${staticArgs.gcpClientService}.googleapis.com`;
+  }
+  return undefined;
+}
+
+/**
  * Executes a function within an active OpenTelemetry span, populating standard
  * GCP telemetry attributes and recording errors/exceptions if thrown.
  *
@@ -976,7 +1019,6 @@ export function traceCall(
   fn: (
     tracedCallback?: APICallback,
     recordResend?: ResendRecorder,
-    injectedHeaders?: Record<string, string>,
   ) => GaxCallResult,
   isStreamCall?: boolean,
   callback?: APICallback,
@@ -984,22 +1026,14 @@ export function traceCall(
 export function traceCall<T extends EventEmitter>(
   dynamicArgs: DynamicTraceContext,
   staticArgs: StaticTraceContext,
-  fn: (
-    tracedCallback?: APICallback,
-    recordResend?: ResendRecorder,
-    injectedHeaders?: Record<string, string>,
-  ) => T,
+  fn: (tracedCallback?: APICallback, recordResend?: ResendRecorder) => T,
   isStreamCall: true,
   callback?: APICallback,
 ): T;
 export function traceCall<T>(
   dynamicArgs: DynamicTraceContext,
   staticArgs: StaticTraceContext,
-  fn: (
-    tracedCallback?: APICallback,
-    recordResend?: ResendRecorder,
-    injectedHeaders?: Record<string, string>,
-  ) => T,
+  fn: (tracedCallback?: APICallback, recordResend?: ResendRecorder) => T,
   isStreamCall?: false,
   callback?: APICallback,
 ): T;
@@ -1009,7 +1043,6 @@ export function traceCall(
   fn: (
     tracedCallback?: APICallback,
     recordResend?: ResendRecorder,
-    injectedHeaders?: Record<string, string>,
   ) => GaxCallResult,
   isStreamCall = false,
   callback?: APICallback,
@@ -1148,10 +1181,8 @@ export function traceCall(
 
     try {
       const activeContext = trace.setSpan(context.active(), span);
-      const injectedHeaders: Record<string, string> = {};
-      propagation.inject(activeContext, injectedHeaders);
       const result = context.with(activeContext, () =>
-        fn(tracedCallback, recordResend, injectedHeaders),
+        fn(tracedCallback, recordResend),
       );
       const promiseTarget = !isStreamCall ? getPromiseTarget(result) : null;
       if (isStreamCall && result instanceof EventEmitter) {
@@ -1171,4 +1202,156 @@ export function traceCall(
       throw e;
     }
   });
+}
+
+/**
+ * Executes an individual RPC transport attempt within an active OpenTelemetry
+ * CLIENT span (T4 span), parenting it to the active T3 client request span
+ * and recording per-attempt network, status, and error attributes without
+ * injecting span context into outgoing headers.
+ *
+ * @param {AttemptTraceContext} dynamicArgs - Dynamic trace context for the RPC attempt.
+ * @param {StaticTraceContext} staticArgs - Static trace context for the client library.
+ * @param {function} fn - The transport attempt operation to trace.
+ * @param {boolean} [isStreamCall=false] - Whether the operation is a stream call.
+ * @param {APICallback} [callback] - The attempt callback.
+ * @param {Context} [parentContext] - Optional parent OpenTelemetry context (e.g. T3 span context).
+ * @returns {GaxCallResult} The result of the traced attempt.
+ */
+export function traceAttempt<T = GaxCallResult>(
+  dynamicArgs: AttemptTraceContext,
+  staticArgs: StaticTraceContext,
+  fn: (tracedCallback?: APICallback) => T,
+  isStreamCall = false,
+  callback?: APICallback,
+  parentContext?: Context,
+): T {
+  const spanName = dynamicArgs.apiName
+    ? `${dynamicArgs.apiName}/${dynamicArgs.methodName}`
+    : dynamicArgs.methodName;
+  const baseContext = parentContext ?? context.active();
+  return getGaxTracer().startActiveSpan(
+    spanName,
+    {kind: SpanKind.CLIENT},
+    baseContext,
+    (span: Span) => {
+      const urlDomain = resolveUrlDomain(dynamicArgs, staticArgs);
+      const initialAttributes: Attributes = {
+        'gcp.client.service': staticArgs.gcpClientService,
+        'gcp.client.version': staticArgs.gcpVersion,
+        'gcp.repo': staticArgs.gcpRepo,
+        'gcp.artifact': staticArgs.gcpArtifact,
+        'gcp.method.name': dynamicArgs.methodName,
+        'gcp.method.type': dynamicArgs.rpcType,
+        'rpc.system': dynamicArgs.rpcType,
+      };
+      if (urlDomain !== undefined) {
+        initialAttributes['url.domain'] = urlDomain;
+      }
+      span.setAttributes(initialAttributes);
+
+      let rawAddress =
+        dynamicArgs.serverAddress ?? staticArgs.serverAddress ?? urlDomain;
+      let rawPort = dynamicArgs.serverPort ?? staticArgs.serverPort;
+      if (rawAddress) {
+        const match = rawAddress.match(/^(\[[^\]]+\]|[^:]+):(\d+)$/);
+        if (match) {
+          rawAddress = match[1];
+          rawPort = rawPort ?? Number(match[2]);
+        }
+        rawPort = rawPort ?? 443;
+      }
+
+      let spanEnded = false;
+      let errorRecorded = false;
+      let recordedError: unknown;
+      let rpcStatusName: string | undefined;
+      let httpStatusCode: number | undefined;
+
+      const setErrorStatus = (message: string) => {
+        errorRecorded = true;
+        span.setStatus({code: SpanStatusCode.ERROR, message});
+      };
+
+      const setStatusAttributes = () => {
+        const attributes: Attributes = {};
+        if (rpcStatusName !== undefined) {
+          attributes['rpc.response.status_code'] = rpcStatusName;
+          if (dynamicArgs.rpcType === 'grpc') {
+            attributes['grpc.response.status_code'] = rpcStatusName;
+          }
+        }
+        if (dynamicArgs.rpcType === 'http' && httpStatusCode !== undefined) {
+          attributes['http.response.status_code'] = httpStatusCode;
+        }
+        if (
+          rawAddress !== undefined &&
+          (!errorRecorded || !isPreConnectionFailure(recordedError))
+        ) {
+          attributes['server.address'] = rawAddress;
+          if (rawPort !== undefined) {
+            attributes['server.port'] = rawPort;
+          }
+        }
+        span.setAttributes(attributes);
+      };
+
+      const endSpan = () => {
+        if (!spanEnded) {
+          spanEnded = true;
+          if (!errorRecorded) {
+            rpcStatusName = Status[Status.OK];
+            httpStatusCode = 200;
+          }
+          setStatusAttributes();
+          span.end();
+        }
+      };
+
+      const recordError = (e: unknown) => {
+        recordedError = e;
+        rpcStatusName = resolveRpcStatusName(e);
+        httpStatusCode = resolveHttpStatusCode(e);
+        span.setAttributes({
+          'error.type': resolveErrorType(e, dynamicArgs.rpcType),
+        });
+        if (e instanceof Error) {
+          recordExceptionEvent(span, e, dynamicArgs.rpcType);
+          setErrorStatus(e.message);
+        } else {
+          setErrorStatus(resolveErrorMessage(e));
+        }
+      };
+
+      const tracedCallback: APICallback | undefined = callback
+        ? function (this: unknown, ...args: Parameters<APICallback>) {
+            const err = args[0];
+            if (err) {
+              recordError(err);
+            }
+            endSpan();
+            callback.apply(this, args);
+          }
+        : undefined;
+
+      try {
+        const result = fn(tracedCallback);
+        const promiseTarget = !isStreamCall ? getPromiseTarget(result) : null;
+        if (isStreamCall && result instanceof EventEmitter) {
+          handleStream(result, recordError, endSpan, !!callback);
+        } else if (promiseTarget) {
+          handlePromise(promiseTarget, recordError, endSpan);
+        } else if (tracedCallback) {
+          // Span stays open; tracedCallback ends it when the attempt completes.
+        } else {
+          endSpan();
+        }
+        return result;
+      } catch (e) {
+        recordError(e);
+        endSpan();
+        throw e;
+      }
+    },
+  );
 }

@@ -53,6 +53,9 @@ export interface GrpcClientOptions extends GoogleAuthOptions {
   httpRules?: Array<google.api.IHttpRule>;
   numericEnums?: boolean;
   universeDomain?: string;
+  servicePath?: string;
+  apiEndpoint?: string;
+  port?: number;
 }
 
 export interface MetadataValue {
@@ -121,6 +124,8 @@ export class GrpcClient {
   fallback: boolean | 'rest' | 'proto';
   private static protoCache = new Map<string, grpc.GrpcObject>();
   httpRules?: Array<google.api.IHttpRule>;
+  private _servicePath?: string;
+  private _port?: number;
   /**
    * Base directory for resolving client certificates.
    *
@@ -174,6 +179,8 @@ export class GrpcClient {
   constructor(options: GrpcClientOptions = {}) {
     this.auth = options.auth || new GoogleAuth(options);
     this.fallback = false;
+    this._servicePath = options.servicePath || options.apiEndpoint;
+    this._port = options.port;
 
     const minimumVersion = 10;
     const major = Number(process.version.match(/^v(\d+)/)?.[1]);
@@ -388,12 +395,21 @@ export class GrpcClient {
     enableTelemetryTracing?: boolean,
     internalTelemetryInfo?: StaticTraceContext,
   ) {
+    const otherArgs: Record<string, unknown> = {
+      metadataBuilder: this.metadataBuilder(headers),
+    };
+    if (this._servicePath) {
+      otherArgs.servicePath = this._servicePath;
+    }
+    if (this._port !== undefined) {
+      otherArgs.port = this._port;
+    }
     return gax.constructSettings(
       serviceName,
       clientConfig,
       configOverrides,
       this.grpc.status,
-      {metadataBuilder: this.metadataBuilder(headers)},
+      otherArgs,
       enableTelemetryTracing,
       internalTelemetryInfo,
     );
