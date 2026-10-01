@@ -34,11 +34,30 @@ It's unlikely you will need to install this package directly, as it is intended 
 ### Using the library
 
 ```typescript
-import {TestResources} from 'google-test-utils';
+import * as assert from 'node:assert';
+import {
+  TestResources,
+  assertArraySubclassStrictEqual,
+  isBun,
+  isDeno,
+  isNode,
+  isNullOrUndefinedPropertyError,
+  isReadOnlyPropertyError,
+} from 'google-test-utils';
 
 const testResources = new TestResources('my-test-suite');
 const resourceName = testResources.generateName('my-test');
+
+// Runtime-agnostic frozen object mutation check (V8 / Node.js / Deno & JSC / Bun)
+const frozen = Object.freeze({name: 'value'});
+assert.throws(() => {
+  (frozen as {name: string}).name = 'updated';
+}, err => isReadOnlyPropertyError(err, 'name'));
+
+// Runtime-agnostic Array subclass strict equality check
+assertArraySubclassStrictEqual(rowInstance, expectedRow);
 ```
+
 
 ## Supported Node.js Versions
 
