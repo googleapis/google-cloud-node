@@ -91,7 +91,7 @@
     "@babel/cli": "^7.22.10",
     "@babel/core": "^7.22.11",
     "@google-cloud/pubsub": "^6.0.0",
-    "@grpc/grpc-js": "^1.0.3",
+    "@grpc/grpc-js": "^1.14.5",
     "@grpc/proto-loader": "^0.8.0",
     "@types/async-retry": "^1.4.3",
     "@types/duplexify": "^3.6.4",
