@@ -112,7 +112,6 @@ import {
   InsertStage,
   InternalInsertStageOptions,
   UpsertStage,
-  InternalUpsertStageOptions,
   LiteralsSource,
   InternalLiteralsStageOptions,
 } from './stage';
@@ -142,13 +141,10 @@ export class PipelineSource implements firestore.Pipelines.PipelineSource {
     documents: Array<Record<string, unknown>>,
     options?: firestore.Pipelines.LiteralsStageOptions,
   ): Pipeline;
-  literals(
-    options: firestore.Pipelines.LiteralsStageOptions,
-  ): Pipeline;
+  literals(options: firestore.Pipelines.LiteralsStageOptions): Pipeline;
   literals(
     docsOrOptions:
-      | Array<Record<string, unknown>>
-      | firestore.Pipelines.LiteralsStageOptions,
+      Array<Record<string, unknown>> | firestore.Pipelines.LiteralsStageOptions,
     options?: firestore.Pipelines.LiteralsStageOptions,
   ): Pipeline {
     let documents: Array<Record<string, unknown>> = [];
@@ -1781,7 +1777,6 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
   }
 
   /**
-   * @beta
    * Performs a delete operation on documents from previous stages.
    *
    * @example
@@ -1798,14 +1793,12 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
   }
 
   /**
-   * @beta
    * Performs an update operation using documents from previous stages.
    *
    * @return A new {@code Pipeline} object with this stage appended to the stage list.
    */
   update(): Pipeline;
   /**
-   * @beta
    * Performs an update operation using documents from previous stages.
    *
    * @param transformedField - The first field transformation to apply.
@@ -1817,7 +1810,6 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
     ...additionalFields: AliasedExpression[]
   ): Pipeline;
   /**
-   * @beta
    * Performs an update operation using documents from previous stages.
    *
    * @param transformedFields - The list of transformations to apply.
@@ -1825,7 +1817,6 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
    */
   update(transformedFields: AliasedExpression[]): Pipeline;
   /**
-   * @beta
    * Performs an update operation using documents from previous stages.
    *
    * @param fieldsMap - Map of field transformations to apply.
@@ -1851,7 +1842,10 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
       Array.isArray(transformedFieldsOrMap)
     ) {
       return this._addStage(new UpdateStage(transformedFieldsOrMap));
-    } else if (transformedFieldsOrMap && isPlainObject(transformedFieldsOrMap)) {
+    } else if (
+      transformedFieldsOrMap &&
+      isPlainObject(transformedFieldsOrMap)
+    ) {
       const map = new Map<string, Expression>(
         Object.entries(transformedFieldsOrMap as Record<string, Expression>),
       );
@@ -1861,7 +1855,6 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
   }
 
   /**
-   * @beta
    * Performs an insert operation on documents from previous stages.
    *
    * @param options - Options defining how this Insert stage is evaluated.
@@ -1874,14 +1867,12 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
   }
 
   /**
-   * @beta
    * Performs an upsert operation on documents from previous stages.
    *
    * @return A new {@code Pipeline} object with this stage appended to the stage list.
    */
   upsert(): Pipeline;
   /**
-   * @beta
    * Performs an upsert operation on documents from previous stages.
    *
    * @param options - Options defining how this Upsert stage is evaluated.
@@ -1889,7 +1880,6 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
    */
   upsert(options: firestore.Pipelines.UpsertStageOptions): Pipeline;
   /**
-   * @beta
    * Performs an upsert operation on documents from previous stages.
    *
    * @param additionalField - The first additional field to apply on upsert.
@@ -1901,7 +1891,6 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
     ...additionalFields: AliasedExpression[]
   ): Pipeline;
   /**
-   * @beta
    * Performs an upsert operation on documents from previous stages.
    *
    * @param additionalFields - Additional fields to apply on upsert.
@@ -1931,8 +1920,7 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
     } else if (Array.isArray(additionalFieldsOrOptions)) {
       additionalFields = additionalFieldsOrOptions;
       options = restArgs[0] as
-        | firestore.Pipelines.UpsertStageOptions
-        | undefined;
+        firestore.Pipelines.UpsertStageOptions | undefined;
     } else {
       additionalFields = undefined;
       options = additionalFieldsOrOptions;
@@ -1957,13 +1945,10 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
     documents: Array<Record<string, unknown>>,
     options?: firestore.Pipelines.LiteralsStageOptions,
   ): Pipeline;
-  literals(
-    options: firestore.Pipelines.LiteralsStageOptions,
-  ): Pipeline;
+  literals(options: firestore.Pipelines.LiteralsStageOptions): Pipeline;
   literals(
     docsOrOptions:
-      | Array<Record<string, unknown>>
-      | firestore.Pipelines.LiteralsStageOptions,
+      Array<Record<string, unknown>> | firestore.Pipelines.LiteralsStageOptions,
     options?: firestore.Pipelines.LiteralsStageOptions,
   ): Pipeline {
     let documents: Array<Record<string, unknown>> = [];

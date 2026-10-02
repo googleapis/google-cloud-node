@@ -12881,21 +12881,18 @@ declare namespace FirebaseFirestore {
        */
       select(options: SelectStageOptions): Pipeline;
       /**
-       * @beta
        * Performs a delete operation on documents from previous stages.
        *
        * @return A new {@link Pipeline} object with this stage appended to the stage list.
        */
       delete(): Pipeline;
       /**
-       * @beta
        * Performs an update operation using documents from previous stages.
        *
        * @return A new {@link Pipeline} object with this stage appended to the stage list.
        */
       update(): Pipeline;
       /**
-       * @beta
        * Performs an update operation using documents from previous stages.
        *
        * @param transformedField - The first field transformation to apply.
@@ -12907,7 +12904,6 @@ declare namespace FirebaseFirestore {
         ...additionalFields: AliasedExpression[]
       ): Pipeline;
       /**
-       * @beta
        * Performs an update operation using documents from previous stages.
        *
        * @param transformedFields - The list of transformations to apply.
@@ -12915,7 +12911,6 @@ declare namespace FirebaseFirestore {
        */
       update(transformedFields: AliasedExpression[]): Pipeline;
       /**
-       * @beta
        * Performs an update operation using documents from previous stages.
        *
        * @param fieldsMap - Map of field transformations to apply.
@@ -12925,7 +12920,6 @@ declare namespace FirebaseFirestore {
         fieldsMap: Record<string, Expression> | Map<string, Expression>,
       ): Pipeline;
       /**
-       * @beta
        * Performs an insert operation on documents from previous stages.
        *
        * @param options - Options defining how this Insert stage is evaluated.
@@ -12933,14 +12927,12 @@ declare namespace FirebaseFirestore {
        */
       insert(options?: InsertStageOptions): Pipeline;
       /**
-       * @beta
        * Performs an upsert operation on documents from previous stages.
        *
        * @return A new {@link Pipeline} object with this stage appended to the stage list.
        */
       upsert(): Pipeline;
       /**
-       * @beta
        * Performs an upsert operation on documents from previous stages.
        *
        * @param options - Options defining how this Upsert stage is evaluated.
@@ -12948,7 +12940,6 @@ declare namespace FirebaseFirestore {
        */
       upsert(options: UpsertStageOptions): Pipeline;
       /**
-       * @beta
        * Performs an upsert operation on documents from previous stages.
        *
        * @param additionalField - The first additional field to apply on upsert.
@@ -12960,7 +12951,6 @@ declare namespace FirebaseFirestore {
         ...additionalFields: AliasedExpression[]
       ): Pipeline;
       /**
-       * @beta
        * Performs an upsert operation on documents from previous stages.
        *
        * @param additionalFields - Additional fields to apply on upsert.
