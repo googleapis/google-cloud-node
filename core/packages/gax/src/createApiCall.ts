@@ -145,16 +145,16 @@ export function createApiCall(
     funcPromise
       .then((func: GRPCCall) => {
         // Initially, the function is just what gRPC server stub contains.
-        func = currentApiCaller.wrap(func);
+        let wrappedFunc = currentApiCaller.wrap(func);
 
         const streaming = (currentApiCaller as StreamingApiCaller).descriptor
           ?.streaming;
 
         // Wrap the transport call so each attempt (initial send and retries) emits a T4 CLIENT span.
         if (tracingEnabled && attemptDynamicArgs && staticArgs) {
-          const wrappedFunc = func;
+          const callerWrappedFunc = wrappedFunc;
           let attemptCount = 0;
-          func = ((
+          wrappedFunc = ((
             argument: {},
             metadata: {},
             options: {},
@@ -165,7 +165,7 @@ export function createApiCall(
               {...attemptDynamicArgs, resendCount},
               staticArgs,
               tracedAttemptCallback =>
-                (wrappedFunc as UnaryCall)(
+                (callerWrappedFunc as UnaryCall)(
                   argument,
                   metadata,
                   options,
@@ -213,7 +213,7 @@ export function createApiCall(
             retry.backoffSettings.initialRpcTimeoutMillis ??=
               thisSettings.timeout;
             return retryable(
-              func,
+              wrappedFunc,
               thisSettings.retry!,
               thisSettings.otherArgs as GRPCCallOtherArgs,
               thisSettings.apiName,
@@ -222,7 +222,7 @@ export function createApiCall(
           }
         }
         return addTimeoutArg(
-          func,
+          wrappedFunc,
           thisSettings.timeout,
           thisSettings.otherArgs as GRPCCallOtherArgs,
         );
