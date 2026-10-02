@@ -1158,14 +1158,20 @@ export function encodeAbsoluteURI(uri: string): string {
  * Trims slashes, encodes path segments to prevent path traversal, and joins
  * URI components into a single relative path.
  *
+ * DEFAULT_PROJECT_ID_TOKEN is an internal constant set by the library, never
+ * user input, so bypassing encodeURIPath for it does not open a traversal
+ * path. Encoding it would produce '%7B%7BprojectId%7D%7D' in the URI, which
+ * replaceProjectIdToken() cannot match — causing 404s for clients that rely
+ * on lazy / ADC project-ID resolution (regression introduced by #9188).
+ *
  * @param {string[]} components - URI components to encode and join.
  * @return {string} The formatted and joined URI path.
  */
 export function joinURIComponents(components: string[]): string {
   return components
     .map(uriComponent => {
-      const trimSlashesRegex = /^\/*|\/*$/g;
-      const trimmed = uriComponent.replace(trimSlashesRegex, '');
+      const trimmed = uriComponent.replace(/^\/*|\/*$/g, '');
+      if (trimmed === DEFAULT_PROJECT_ID_TOKEN) return trimmed;
       return encodeURIPath(trimmed); // Encode and prevent path traversal.
     })
     .join('/');
