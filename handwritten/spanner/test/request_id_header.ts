@@ -17,7 +17,8 @@
 /* eslint-disable prefer-rest-params */
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import {grpc} from 'google-gax';
+// eslint-disable-next-line n/no-extraneous-import
+import * as grpc from '@grpc/grpc-js';
 import {Spanner} from '../src';
 import {Database} from '../src/database';
 import {MultiplexedSession} from '../src/multiplexed-session';
@@ -28,6 +29,8 @@ import {
   X_GOOG_SPANNER_REQUEST_ID_SPAN_ATTR,
   attributeXGoogSpannerRequestIdToActiveSpan,
   craftRequestId,
+  createRequestIdInterceptor,
+  getProcessId,
   getRequestIdPrefix,
   injectRequestIDIntoError,
   injectRequestIDIntoHeaders,
@@ -112,7 +115,7 @@ describe('RequestId', () => {
 
   describe('getRequestIdPrefix', () => {
     it('with default arguments', done => {
-      assert.strictEqual(getRequestIdPrefix(), `1.${randIdForProcess}.1.1.`);
+      assert.strictEqual(getRequestIdPrefix(), `1.${randIdForProcess}.1.0.`);
       done();
     });
 
@@ -135,19 +138,20 @@ describe('RequestId', () => {
     it('with null as client and channel ids', done => {
       assert.strictEqual(
         getRequestIdPrefix(null as any, null as any),
-        `1.${randIdForProcess}.1.1.`,
+        `1.${randIdForProcess}.1.0.`,
       );
       done();
     });
   });
 
   describe('craftRequestId', () => {
-    it('has a 32-bit hex-formatted process-id', done => {
+    it('has a 64-bit hex-formatted process-id', done => {
       assert.match(
         randIdForProcess,
-        /^[0-9A-Fa-f]{8}$/,
-        `process-id should be a 32-bit hexadecimal number, but was ${randIdForProcess}`,
+        /^[0-9A-Fa-f]{16}$/,
+        `process-id should be a 64-bit hexadecimal number, but was ${randIdForProcess}`,
       );
+      assert.strictEqual(randIdForProcess.length, 16);
       done();
     });
 
@@ -170,8 +174,35 @@ describe('RequestId', () => {
     it('with null values', done => {
       assert.strictEqual(
         craftRequestId(null as any, null as any, null as any, null as any),
-        `1.${randIdForProcess}.1.1.1.1`,
+        `1.${randIdForProcess}.1.0.1.1`,
       );
+      done();
+    });
+
+    it('respects SPANNER_PROCESS_ID environment variable override', done => {
+      process.env.SPANNER_PROCESS_ID = 'customproc123';
+      try {
+        assert.strictEqual(getProcessId(), 'customproc123');
+        assert.strictEqual(
+          craftRequestId(1, 0, 1, 1),
+          '1.customproc123.1.0.1.1',
+        );
+      } finally {
+        delete process.env.SPANNER_PROCESS_ID;
+      }
+      assert.strictEqual(getProcessId(), randIdForProcess);
+      done();
+    });
+
+    it('respects GOOGLE_CLOUD_SPANNER_PROCESS_ID environment variable override', done => {
+      process.env.GOOGLE_CLOUD_SPANNER_PROCESS_ID = 'proc9876';
+      try {
+        assert.strictEqual(getProcessId(), 'proc9876');
+        assert.strictEqual(craftRequestId(2, 0, 3, 1), '1.proc9876.2.0.3.1');
+      } finally {
+        delete process.env.GOOGLE_CLOUD_SPANNER_PROCESS_ID;
+      }
+      assert.strictEqual(getProcessId(), randIdForProcess);
       done();
     });
   });
@@ -188,6 +219,10 @@ describe('RequestId', () => {
       config.headers[X_GOOG_SPANNER_REQUEST_ID_HEADER] = '1.2.3.4.5.6';
       injectRequestIDIntoError(config, err);
       assert.strictEqual((err as RequestIDError).requestID, '1.2.3.4.5.6');
+      assert.strictEqual(
+        err.message,
+        'this one (x-goog-spanner-request-id: 1.2.3.4.5.6)',
+      );
       done();
     });
   });
@@ -210,7 +245,7 @@ describe('RequestId', () => {
       };
       const got = injectRequestIDIntoHeaders({}, session, 2, 5);
       const want = {
-        'x-goog-spanner-request-id': `1.${randIdForProcess}.1.1.2.5`,
+        'x-goog-spanner-request-id': `1.${randIdForProcess}.1.0.2.5`,
       };
       assert.deepStrictEqual(got, want);
       done();
@@ -228,7 +263,7 @@ describe('RequestId', () => {
       const inputHeaders: {[k: string]: string} = {};
       const got = injectRequestIDIntoHeaders(inputHeaders, session);
       const want = {
-        'x-goog-spanner-request-id': `1.${randIdForProcess}.1.1.5.1`,
+        'x-goog-spanner-request-id': `1.${randIdForProcess}.1.0.5.1`,
       };
       assert.deepStrictEqual(got, want);
       done();
@@ -272,7 +307,7 @@ describe('RequestId', () => {
 
       const got = injectRequestIDIntoHeaders({}, session, 3, 1);
       const want = {
-        'x-goog-spanner-request-id': `1.${randIdForProcess}.42.1.3.1`,
+        'x-goog-spanner-request-id': `1.${randIdForProcess}.42.0.3.1`,
       };
       assert.deepStrictEqual(got, want);
       done();
@@ -290,7 +325,7 @@ describe('RequestId', () => {
 
       const got = injectRequestIDIntoHeaders({}, session, 3, 1);
       const want = {
-        'x-goog-spanner-request-id': `1.${randIdForProcess}.42.1.3.1`,
+        'x-goog-spanner-request-id': `1.${randIdForProcess}.42.0.3.1`,
       };
       assert.deepStrictEqual(got, want);
       done();
@@ -299,13 +334,13 @@ describe('RequestId', () => {
     it('handles nthRequest = 0 and attempt = 0 without defaulting to 1', done => {
       const session = {
         parent: {
-          _requestIdPrefix: `1.${randIdForProcess}.1.1.`,
+          _requestIdPrefix: `1.${randIdForProcess}.1.0.`,
           _nextNthRequest: () => 0,
         },
       };
       const gotExplicitZero = injectRequestIDIntoHeaders({}, session, 0, 0);
       assert.deepStrictEqual(gotExplicitZero, {
-        'x-goog-spanner-request-id': `1.${randIdForProcess}.1.1.0.0`,
+        'x-goog-spanner-request-id': `1.${randIdForProcess}.1.0.0.0`,
       });
 
       const gotInferredZero = injectRequestIDIntoHeaders(
@@ -315,7 +350,7 @@ describe('RequestId', () => {
         1,
       );
       assert.deepStrictEqual(gotInferredZero, {
-        'x-goog-spanner-request-id': `1.${randIdForProcess}.1.1.0.1`,
+        'x-goog-spanner-request-id': `1.${randIdForProcess}.1.0.0.1`,
       });
       done();
     });
@@ -324,7 +359,7 @@ describe('RequestId', () => {
       const session = {};
       const got = injectRequestIDIntoHeaders({}, session, 1, 1);
       assert.deepStrictEqual(got, {
-        'x-goog-spanner-request-id': `1.${randIdForProcess}.1.1.1.1`,
+        'x-goog-spanner-request-id': `1.${randIdForProcess}.1.0.1.1`,
       });
       done();
     });
@@ -362,7 +397,7 @@ describe('RequestId', () => {
     it('returns headers unchanged when nthRequest is null and database has no _nextNthRequest', done => {
       const session = {
         parent: {
-          _requestIdPrefix: `1.${randIdForProcess}.1.1.`,
+          _requestIdPrefix: `1.${randIdForProcess}.1.0.`,
         },
       };
       const headers = {foo: 'bar'};
@@ -374,13 +409,13 @@ describe('RequestId', () => {
     it('infers nthRequest from database when nthRequest is null', done => {
       const session = {
         parent: {
-          _requestIdPrefix: `1.${randIdForProcess}.1.1.`,
+          _requestIdPrefix: `1.${randIdForProcess}.1.0.`,
           _nextNthRequest: () => 7,
         },
       };
       const got = injectRequestIDIntoHeaders({}, session, null as any, 1);
       assert.deepStrictEqual(got, {
-        'x-goog-spanner-request-id': `1.${randIdForProcess}.1.1.7.1`,
+        'x-goog-spanner-request-id': `1.${randIdForProcess}.1.0.7.1`,
       });
       done();
     });
@@ -475,36 +510,36 @@ describe('RequestId', () => {
       assert.strictEqual(database2._clientId, 2);
       assert.strictEqual(
         database1._requestIdPrefix,
-        `1.${randIdForProcess}.1.1.`,
+        `1.${randIdForProcess}.1.0.`,
       );
       assert.strictEqual(
         database2._requestIdPrefix,
-        `1.${randIdForProcess}.2.1.`,
+        `1.${randIdForProcess}.2.0.`,
       );
 
       const metadata = database2._metadataWithRequestId(5, 2);
       assert.strictEqual(
         metadata[X_GOOG_SPANNER_REQUEST_ID_HEADER],
-        `1.${randIdForProcess}.2.1.5.2`,
+        `1.${randIdForProcess}.2.0.5.2`,
       );
 
       const session = {parent: database2};
       const headers = injectRequestIDIntoHeaders({}, session, 5, 2);
       assert.strictEqual(
         headers[X_GOOG_SPANNER_REQUEST_ID_HEADER],
-        `1.${randIdForProcess}.2.1.5.2`,
+        `1.${randIdForProcess}.2.0.5.2`,
       );
 
       // Verify that mutating _clientId updates the prefix
       database2._clientId = 7;
       assert.strictEqual(
         database2._requestIdPrefix,
-        `1.${randIdForProcess}.7.1.`,
+        `1.${randIdForProcess}.7.0.`,
       );
       const updated = injectRequestIDIntoHeaders({}, session, 1, 1);
       assert.strictEqual(
         updated[X_GOOG_SPANNER_REQUEST_ID_HEADER],
-        `1.${randIdForProcess}.7.1.1.1`,
+        `1.${randIdForProcess}.7.0.1.1`,
       );
 
       // Verify that mutating _channelId updates the prefix
@@ -540,14 +575,14 @@ describe('RequestId', () => {
         `1.${randIdForProcess}.0.0.0.0`,
       );
 
-      // Verify that setting _clientId or _channelId to null defaults back to 1
+      // Verify that setting _clientId or _channelId to null defaults back to 1 and 0
       database2._clientId = null as any;
       database2._channelId = null as any;
       assert.strictEqual(database2._clientId, 1);
-      assert.strictEqual(database2._channelId, 1);
+      assert.strictEqual(database2._channelId, 0);
       assert.strictEqual(
         database2._requestIdPrefix,
-        `1.${randIdForProcess}.1.1.`,
+        `1.${randIdForProcess}.1.0.`,
       );
 
       await Promise.all([spanner1.close(), spanner2.close()]);
@@ -566,7 +601,7 @@ describe('RequestId', () => {
       assert.strictEqual(database._clientId, 99);
       assert.strictEqual(
         database._requestIdPrefix,
-        `1.${randIdForProcess}.99.1.`,
+        `1.${randIdForProcess}.99.0.`,
       );
     });
 
@@ -582,8 +617,71 @@ describe('RequestId', () => {
       assert.strictEqual(database._clientId, 1);
       assert.strictEqual(
         database._requestIdPrefix,
-        `1.${randIdForProcess}.1.1.`,
+        `1.${randIdForProcess}.1.0.`,
       );
+    });
+  });
+
+  describe('createRequestIdInterceptor', () => {
+    it('increments attempt number on each call attempt', done => {
+      const config = {
+        headers: {
+          [X_GOOG_SPANNER_REQUEST_ID_HEADER]: '1.abcde123.1.1.5.1',
+        },
+      };
+      const interceptor = createRequestIdInterceptor(config);
+
+      let lastReceivedMetadata: grpc.Metadata | null = null;
+      const fakeNextCall = (options: any) => {
+        return {
+          start: (metadata: grpc.Metadata, listener: any) => {
+            lastReceivedMetadata = metadata;
+          },
+        };
+      };
+
+      // 1st attempt
+      const call1 = interceptor({}, fakeNextCall);
+      const metadata1 = new grpc.Metadata();
+      metadata1.set(X_GOOG_SPANNER_REQUEST_ID_HEADER, '1.abcde123.1.1.5.1');
+      call1.start(metadata1, {});
+      assert.strictEqual(
+        lastReceivedMetadata!.get(X_GOOG_SPANNER_REQUEST_ID_HEADER)[0],
+        '1.abcde123.1.1.5.1',
+      );
+      assert.strictEqual(
+        config.headers[X_GOOG_SPANNER_REQUEST_ID_HEADER],
+        '1.abcde123.1.1.5.1',
+      );
+
+      // 2nd attempt (retry)
+      const call2 = interceptor({}, fakeNextCall);
+      const metadata2 = new grpc.Metadata();
+      metadata2.set(X_GOOG_SPANNER_REQUEST_ID_HEADER, '1.abcde123.1.1.5.1');
+      call2.start(metadata2, {});
+      assert.strictEqual(
+        lastReceivedMetadata!.get(X_GOOG_SPANNER_REQUEST_ID_HEADER)[0],
+        '1.abcde123.1.1.5.2',
+      );
+      assert.strictEqual(
+        config.headers[X_GOOG_SPANNER_REQUEST_ID_HEADER],
+        '1.abcde123.1.1.5.2',
+      );
+
+      // 3rd attempt (retry)
+      const call3 = interceptor({}, fakeNextCall);
+      const metadata3 = new grpc.Metadata();
+      metadata3.set(X_GOOG_SPANNER_REQUEST_ID_HEADER, '1.abcde123.1.1.5.1');
+      call3.start(metadata3, {});
+      assert.strictEqual(
+        lastReceivedMetadata!.get(X_GOOG_SPANNER_REQUEST_ID_HEADER)[0],
+        '1.abcde123.1.1.5.3',
+      );
+      assert.strictEqual(
+        config.headers[X_GOOG_SPANNER_REQUEST_ID_HEADER],
+        '1.abcde123.1.1.5.3',
+      );
+      done();
     });
   });
 });

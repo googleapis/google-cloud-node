@@ -99,6 +99,7 @@ import {
 } from './instrument';
 import {
   attributeXGoogSpannerRequestIdToActiveSpan,
+  createRequestIdInterceptor,
   injectRequestIDIntoError,
   nextSpannerClientId,
 } from './request_id_header';
@@ -383,7 +384,8 @@ class Spanner extends GrpcService {
    * Gets the configured Spanner emulator host from an environment variable.
    */
   static getSpannerEmulatorHost():
-    {endpoint: string; port?: number} | undefined {
+    | {endpoint: string; port?: number}
+    | undefined {
     const endpointWithPort = process.env.SPANNER_EMULATOR_HOST;
     if (endpointWithPort) {
       if (
@@ -1572,7 +1574,8 @@ class Spanner extends GrpcService {
   ): void;
   getInstanceConfigOperations(
     optionsOrCallback?:
-      GetInstanceConfigOperationsOptions | GetInstanceConfigOperationsCallback,
+      | GetInstanceConfigOperationsOptions
+      | GetInstanceConfigOperationsCallback,
     cb?: GetInstanceConfigOperationsCallback,
   ): void | Promise<GetInstanceConfigOperationsResponse> {
     const callback =
@@ -1885,9 +1888,11 @@ class Spanner extends GrpcService {
       const shouldIntercept =
         this._metricsEnabled &&
         (config.client === 'SpannerClient' || config.metricsTracer);
-      const interceptors = shouldIntercept
-        ? [...customInterceptors, MetricInterceptor]
-        : customInterceptors;
+      const interceptors = [
+        ...customInterceptors,
+        createRequestIdInterceptor(config),
+        ...(shouldIntercept ? [MetricInterceptor] : []),
+      ];
       const headers = Object.assign(
         {},
         config.gaxOpts?.otherArgs?.headers,
