@@ -315,6 +315,79 @@ describe('execute(Pipeline|PipelineExecuteOptions)', () => {
     expect(stages[4].name).to.equal('delete');
   });
 
+  it('serializes insert stage with auto-generated ID (collection only)', async () => {
+    const spy = sinon.fake.returns(stream());
+    const firestore = await createInstance({
+      executePipeline: spy,
+    });
+
+    await firestore
+      .pipeline()
+      .collection('foo')
+      .insert({collection: 'users'})
+      .execute();
+
+    const stages =
+      spy.args[FIRST_CALL][EXECUTE_PIPELINE_REQUEST]['structuredPipeline'][
+        'pipeline'
+      ]['stages'];
+
+    expect(stages[1].name).to.equal('insert');
+    expect(stages[1].options).to.deep.equal({
+      collection: {referenceValue: '/users'},
+    });
+    expect(stages[1].args).to.deep.equal([]);
+  });
+
+  it('serializes literals stage containing expressions and nested maps', async () => {
+    const spy = sinon.fake.returns(stream());
+    const firestore = await createInstance({
+      executePipeline: spy,
+    });
+
+    await firestore
+      .pipeline()
+      .literals([
+        {
+          base: 10,
+          doubled: Pipelines.multiply(constant(10), constant(2)),
+          nested: {
+            val: constant('hello'),
+          },
+        },
+      ])
+      .execute();
+
+    const stages =
+      spy.args[FIRST_CALL][EXECUTE_PIPELINE_REQUEST]['structuredPipeline'][
+        'pipeline'
+      ]['stages'];
+
+    expect(stages[0].name).to.equal('literals');
+    expect(stages[0].args).to.deep.equal([
+      {
+        mapValue: {
+          fields: {
+            base: {integerValue: 10},
+            doubled: {
+              functionValue: {
+                name: 'multiply',
+                args: [{integerValue: 10}, {integerValue: 2}],
+              },
+            },
+            nested: {
+              mapValue: {
+                fields: {
+                  val: {stringValue: 'hello'},
+                },
+              },
+            },
+          },
+        },
+      },
+    ]);
+  });
+
   describe('update stage overloads', () => {
     it('serializes 0-arg update()', async () => {
       const spy = sinon.fake.returns(stream());
