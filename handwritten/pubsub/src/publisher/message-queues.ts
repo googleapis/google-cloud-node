@@ -33,6 +33,7 @@ import {logs as baseLogs, LoggingFunction} from '../logs';
  */
 export const logs = {
   publishBatch: baseLogs.pubsub.sublog('publish-batch') as LoggingFunction,
+  publishHedged: baseLogs.pubsub.sublog('publish-hedged') as LoggingFunction,
 };
 
 /**

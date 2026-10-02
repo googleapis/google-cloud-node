@@ -676,6 +676,14 @@ export class PubsubEvents {
     PubsubEvents.addEvent('publish end', message);
   }
 
+  static publishStartHedged(message: MessageWithAttributes) {
+    PubsubEvents.addEvent('publish start (hedged)', message);
+  }
+
+  static publishEndHedged(message: MessageWithAttributes) {
+    PubsubEvents.addEvent('publish end (hedged)', message);
+  }
+
   static ackStart(message: MessageWithAttributes) {
     PubsubEvents.addEvent('ack start', message);
   }
