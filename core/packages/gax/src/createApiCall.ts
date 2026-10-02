@@ -243,7 +243,7 @@ export function createApiCall(
     return currentApiCaller.result(ongoingCall);
   };
 
-  if (tracingEnabled) {
+  if (tracingEnabled && dynamicArgs && staticArgs) {
     const isStreamingCall = apiCaller instanceof StreamingApiCaller;
     return (
       request: RequestType,
@@ -251,8 +251,8 @@ export function createApiCall(
       callback?: APICallback,
     ) => {
       return traceCall(
-        dynamicArgs!,
-        staticArgs!,
+        dynamicArgs,
+        staticArgs,
         (tracedCallback?: APICallback, recordResend?: ResendRecorder) => {
           // `traceCall` wraps the user's callback whenever one was supplied,
           // for stream and non-stream calls alike, and that wrapper is what
