@@ -1045,11 +1045,8 @@ export type InternalUpsertStageOptions = Omit<
   'additionalFields' | 'transforms' | 'collection' | 'documentIdExpression'
 > & {
   additionalFields?:
-    | AliasedExpression[]
-    | firestore.Pipelines.AliasedExpression[];
-  transforms?:
-    | AliasedExpression[]
-    | firestore.Pipelines.AliasedExpression[];
+    AliasedExpression[] | firestore.Pipelines.AliasedExpression[];
+  transforms?: AliasedExpression[] | firestore.Pipelines.AliasedExpression[];
   collection?: string | CollectionReference | firestore.CollectionReference;
   documentIdExpression?: string | Expression | firestore.Pipelines.Expression;
 };
@@ -1068,8 +1065,7 @@ export class UpsertStage implements Stage {
 
   constructor(
     additionalFieldsOrOptions?:
-      | AliasedExpression[]
-      | InternalUpsertStageOptions,
+      AliasedExpression[] | InternalUpsertStageOptions,
     options?: InternalUpsertStageOptions,
   ) {
     let fields: AliasedExpression[] = [];
@@ -1085,10 +1081,9 @@ export class UpsertStage implements Stage {
     }
     this.options = opts;
 
-    const resolvedFields =
-      (opts.additionalFields ??
-        opts.transforms ??
-        fields) as AliasedExpression[];
+    const resolvedFields = (opts.additionalFields ??
+      opts.transforms ??
+      fields) as AliasedExpression[];
     this.additionalFields = selectablesToMap(resolvedFields);
     if (opts.collection) {
       this.collectionPath =
@@ -1158,8 +1153,8 @@ export class LiteralsSource implements Stage {
   ) {}
 
   _toProto(serializer: Serializer): api.Pipeline.IStage {
-    const args: api.IValue[] = this.documents.map(
-      doc => serializer.encodeValue(doc)!,
+    const args: api.IValue[] = this.documents.map(doc =>
+      serializer.encodeValue(doc)!,
     );
     return {
       name: this.name,
@@ -1182,4 +1177,3 @@ export class LiteralsSource implements Stage {
     });
   }
 }
-

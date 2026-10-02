@@ -41,9 +41,7 @@ export type StructuredPipelineOptions = {
  * StructuredPipeline encapsulates the Pipeline and PipelineOptions and supports
  * serialization of this data to a StructuredPipeline proto.
  */
-export class StructuredPipeline
-  implements ProtoSerializable<IStructuredPipeline>
-{
+export class StructuredPipeline implements ProtoSerializable<IStructuredPipeline> {
   /**
    * OptionsUtil which defines the known StructuredPipelineOptions.
    * This maps client side options to their server names and structure.
