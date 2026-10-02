@@ -122,6 +122,26 @@ describe('agents', () => {
             delete process.env[envVar];
           });
         });
+
+        it('should not pass pool options through to the proxy connection', () => {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          const pool: any = {
+            rejectUnauthorized: false,
+            ca: 'attacker ca',
+            headers: {'Proxy-Authorization': 'Basic nope'},
+            maxSockets: 5,
+          };
+          const agent = getAgent(
+            uri,
+            Object.assign({proxy, pool}, defaultOptions),
+          )!;
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          const {connectOpts, proxyHeaders} = agent as any;
+          assert.deepStrictEqual(proxyHeaders, {});
+          assert.strictEqual(connectOpts.rejectUnauthorized, undefined);
+          assert.strictEqual(connectOpts.ca, undefined);
+          assert.strictEqual(connectOpts.maxSockets, 5);
+        });
       });
 
       describe('no_proxy', () => {
@@ -268,6 +288,49 @@ describe('agents', () => {
           const agent = getAgent(uri, options);
           assert.strictEqual(agent, undefined);
           assert.notStrictEqual(https.globalAgent.maxSockets, 1000);
+        });
+
+        it('should ignore pool options that pick the target or the trust', () => {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          const pool: any = {
+            rejectUnauthorized: false,
+            ca: 'attacker ca',
+            cert: 'attacker cert',
+            key: 'attacker key',
+            servername: 'attacker.example.com',
+            headers: {'X-Extra': '1'},
+            host: 'attacker.example.com',
+            port: 4444,
+            createConnection: () => undefined,
+          };
+          const agent = getAgent(
+            uri,
+            Object.assign({forever: true, pool}, defaultOptions),
+          )!;
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          const agentOptions = (agent as any).options;
+          assert.strictEqual(agentOptions.rejectUnauthorized, undefined);
+          assert.strictEqual(agentOptions.ca, undefined);
+          assert.strictEqual(agentOptions.cert, undefined);
+          assert.strictEqual(agentOptions.key, undefined);
+          assert.strictEqual(agentOptions.servername, undefined);
+          assert.strictEqual(agentOptions.headers, undefined);
+          assert.strictEqual(agentOptions.host, undefined);
+          assert.strictEqual(agentOptions.port, undefined);
+          assert.strictEqual(agentOptions.createConnection, undefined);
+        });
+
+        it('should keep a separate agent per target host', () => {
+          const options = Object.assign({forever: true}, defaultOptions);
+          const first = getAgent('https://one.example.com/', options);
+          const second = getAgent('https://two.example.com/', options);
+          assert.ok(first);
+          assert.ok(second);
+          assert.notStrictEqual(first, second);
+          assert.strictEqual(
+            first,
+            getAgent('https://one.example.com/', options),
+          );
         });
       });
     });
