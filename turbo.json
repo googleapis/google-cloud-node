@@ -8,6 +8,8 @@
         "test/**",
         "system-test/**",
         "protos/**",
+        "dev/**",
+        "types/**",
         "tsconfig.json"
       ],
       "outputs": ["build/**", "esm/**"]
