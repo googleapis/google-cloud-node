@@ -44,7 +44,7 @@
     "storage.notifications.list": [
         "getNotifications"
     ],
-    "storage.buckets.lockRententionPolicy": [
+    "storage.buckets.lockRetentionPolicy": [
         "lock"
     ],
     "storage.objects.patch": [
@@ -134,6 +134,7 @@
         "getMetadataHMAC"
     ],
     "storage.hmacKey.update": [
+        "setMetadataHMAC"
     ],
     "storage.hmacKey.create": [
         "createHMACKey"

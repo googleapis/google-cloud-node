@@ -12,7 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import {ApiError, Service, ServiceOptions} from './nodejs-common/index.js';
 import {paginator} from '@google-cloud/paginator';
 import {promisifyAll} from '@google-cloud/promisify';
 import {Readable} from 'stream';
@@ -29,7 +28,23 @@ import {
   CRC32CValidatorGenerator,
   CRC32C_DEFAULT_VALIDATOR_GENERATOR,
 } from './crc32c.js';
-import {DEFAULT_UNIVERSE} from 'google-auth-library';
+import {
+  AuthClient,
+  DEFAULT_UNIVERSE,
+  GoogleAuth,
+  GoogleAuthOptions,
+} from 'google-auth-library';
+import {
+  StorageQueryParameters,
+  StorageRequestOptions,
+  StorageTransport,
+} from './storage-transport.js';
+import {
+  GaxiosError,
+  GaxiosInterceptor,
+  GaxiosOptions,
+  GaxiosOptionsPrepared,
+} from 'gaxios';
 
 export interface GetServiceAccountOptions {
   userProject?: string;
@@ -37,13 +52,15 @@ export interface GetServiceAccountOptions {
 }
 export interface ServiceAccount {
   emailAddress?: string;
+  kind?: string;
+  [key: string]: string | undefined;
 }
 export type GetServiceAccountResponse = [ServiceAccount, unknown];
 export interface GetServiceAccountCallback {
   (
     err: Error | null,
     serviceAccount?: ServiceAccount,
-    apiResponse?: unknown
+    apiResponse?: unknown,
   ): void;
 }
 
@@ -79,7 +96,7 @@ export interface RetryOptions {
   maxRetryDelay?: number;
   autoRetry?: boolean;
   maxRetries?: number;
-  retryableErrorFn?: (err: ApiError) => boolean;
+  retryableErrorFn?: (err: GaxiosError) => boolean;
   idempotencyStrategy?: IdempotencyStrategy;
 }
 
@@ -90,7 +107,7 @@ export interface PreconditionOptions {
   ifMetagenerationNotMatch?: number | string;
 }
 
-export interface StorageOptions extends ServiceOptions {
+export interface StorageOptions extends Omit<GoogleAuthOptions, 'authClient'> {
   /**
    * The API endpoint of the service used to make requests.
    * Defaults to `storage.googleapis.com`.
@@ -98,6 +115,13 @@ export interface StorageOptions extends ServiceOptions {
   apiEndpoint?: string;
   crc32cGenerator?: CRC32CValidatorGenerator;
   retryOptions?: RetryOptions;
+  authClient?: AuthClient | GoogleAuth;
+  interceptors_?: GaxiosInterceptor<GaxiosOptionsPrepared>[];
+  email?: string;
+  token?: string;
+  timeout?: number; // http.request.options.timeout
+  userAgent?: string;
+  useAuthWithCustomEndpoint?: boolean;
 }
 
 export interface BucketOptions {
@@ -170,13 +194,13 @@ export interface BucketCallback {
   (err: Error | null, bucket?: Bucket | null, apiResponse?: unknown): void;
 }
 
-export type GetBucketsResponse = [Bucket[], {}, unknown];
+export type GetBucketsResponse = [Bucket[], unknown];
 export interface GetBucketsCallback {
   (
     err: Error | null,
     buckets: Bucket[],
     nextQuery?: {},
-    apiResponse?: unknown
+    apiResponse?: unknown,
   ): void;
 }
 export interface GetBucketsRequest {
@@ -195,6 +219,7 @@ export interface GetBucketsRequest {
 export interface HmacKeyResourceResponse {
   metadata: HmacKeyMetadata;
   secret: string;
+  kind: string;
 }
 
 export type CreateHmacKeyResponse = [HmacKey, string, HmacKeyResourceResponse];
@@ -209,7 +234,7 @@ export interface CreateHmacKeyCallback {
     err: Error | null,
     hmacKey?: HmacKey | null,
     secret?: string | null,
-    apiResponse?: HmacKeyResourceResponse
+    apiResponse?: HmacKeyResourceResponse,
   ): void;
 }
 
@@ -229,7 +254,7 @@ export interface GetHmacKeysCallback {
     err: Error | null,
     hmacKeys: HmacKey[] | null,
     nextQuery?: {},
-    apiResponse?: unknown
+    apiResponse?: unknown,
   ): void;
 }
 
@@ -300,42 +325,136 @@ const IDEMPOTENCY_STRATEGY_DEFAULT = IdempotencyStrategy.RetryConditional;
  * @param {error} err - The API error to check if it is appropriate to retry.
  * @return {boolean} True if the API request should be retried, false otherwise.
  */
-export const RETRYABLE_ERR_FN_DEFAULT = function (err?: ApiError) {
-  const isConnectionProblem = (reason: string) => {
-    return (
-      reason.includes('eai_again') || // DNS lookup error
-      reason === 'econnreset' ||
-      reason === 'unexpected connection closure' ||
-      reason === 'epipe' ||
-      reason === 'socket connection timeout'
-    );
-  };
+/**
+ * Checks if the error represents a transient network, status code, or stream closure error.
+ * @private
+ */
+export function isTransientError(err: GaxiosError): boolean {
+  const status = err.response?.status;
+  const errCode = err.code?.toString().toUpperCase() || '';
+  const rawMessage =
+    typeof err.message === 'string'
+      ? err.message
+      : typeof err.message === 'object' && err.message !== null
+        ? (err.message as {error?: {message?: string}; message?: string}).error
+            ?.message ||
+          (err.message as {error?: {message?: string}; message?: string})
+            .message ||
+          JSON.stringify(err.message)
+        : String(err.message || '');
+  const message = rawMessage.toLowerCase();
 
-  if (err) {
-    if ([408, 429, 500, 502, 503, 504].indexOf(err.code!) !== -1) {
-      return true;
-    }
+  // Immediate exit for non-retryable status codes
+  if (status && [401, 405, 412].includes(status)) return false;
 
-    if (typeof err.code === 'string') {
-      if (['408', '429', '500', '502', '503', '504'].indexOf(err.code) !== -1) {
-        return true;
+  const gcsErrors =
+    (
+      err.response?.data as {
+        error?: {errors?: Array<{reason?: string}>};
       }
-      const reason = (err.code as string).toLowerCase();
-      if (isConnectionProblem(reason)) {
-        return true;
-      }
-    }
+    )?.error?.errors || [];
+  const hasRateLimitReason = gcsErrors.some(
+    e =>
+      e?.reason &&
+      ['rateLimitExceeded', 'userRateLimitExceeded'].includes(e.reason),
+  );
+  if (hasRateLimitReason) return true;
 
-    if (err.errors) {
-      for (const e of err.errors) {
-        const reason = e?.reason?.toString().toLowerCase();
-        if (reason && isConnectionProblem(reason)) {
-          return true;
-        }
-      }
-    }
+  // Unified HTTP Status Codes
+  const retryableCodes = [408, 429, 500, 502, 503, 504];
+  if (status && retryableCodes.includes(status)) return true;
+  if (retryableCodes.includes(Number(errCode))) return true;
+
+  // Standard Node.js Connection / DNS Errors
+  const connectionErrors = [
+    'ECONNRESET',
+    'EPIPE',
+    'ETIMEDOUT',
+    'EADDRINUSE',
+    'ECONNREFUSED',
+    'ENOTFOUND',
+    'ENETUNREACH',
+    'EAI_AGAIN',
+  ];
+  if (
+    connectionErrors.includes(errCode) ||
+    message.includes('socket hang up')
+  ) {
+    return true;
   }
+
+  // Handle malformed responses, stream closures, or cancellations
+  if (
+    message.includes('unexpected end of json input') ||
+    message.includes('unexpected token') ||
+    message.includes('operation was aborted') ||
+    message.includes('unexpected connection closure')
+  ) {
+    return true;
+  }
+
   return false;
+}
+
+/**
+ * Evaluates request configurations to determine if the request is idempotent and safe to retry.
+ * @private
+ */
+export function isRequestIdempotent(
+  config: GaxiosOptions | StorageRequestOptions | Record<string, unknown>,
+): boolean {
+  const method = ((config.method as string) || 'GET').toUpperCase();
+  const url = config.url ? config.url.toString() : '';
+  const params = (config.params || {}) as Record<string, unknown>;
+
+  const data =
+    (config as {data?: unknown; body?: unknown}).data ||
+    (config as {body?: unknown}).body;
+  let hasEtag = false;
+  if (typeof data === 'string') {
+    try {
+      hasEtag = !!JSON.parse(data).etag;
+    } catch {
+      // ignore
+    }
+  } else if (typeof data === 'object' && data !== null) {
+    hasEtag = !!(data as {etag?: unknown}).etag;
+  }
+
+  // Optimized Precondition Check
+  const hasPrecondition = !!(
+    params.ifGenerationMatch !== undefined ||
+    params.ifMetagenerationMatch !== undefined ||
+    params.ifSourceGenerationMatch !== undefined ||
+    hasEtag ||
+    (config as {hasPrecondition?: boolean}).hasPrecondition
+  );
+
+  if (['GET', 'HEAD'].includes(method) || hasPrecondition) {
+    return true;
+  }
+
+  if (method === 'PUT') {
+    const isResumable = url.includes('upload_id=');
+    const isSpecialMutation =
+      /\/iam($|\?)/.test(url) || /\/hmacKeys\//.test(url);
+    return isResumable || !isSpecialMutation;
+  }
+
+  if (method === 'DELETE') {
+    return !url.includes('/o/');
+  }
+
+  if (method === 'POST') {
+    return /\/v1\/b(\?|$)/.test(url);
+  }
+
+  return false;
+}
+
+export const RETRYABLE_ERR_FN_DEFAULT = function (err?: GaxiosError) {
+  if (!err || !err.config) return false;
+  return isRequestIdempotent(err.config) && isTransientError(err);
 };
 
 /*! Developer Documentation
@@ -477,7 +596,7 @@ export const RETRYABLE_ERR_FN_DEFAULT = function (err?: ApiError) {
  *
  * @class
  */
-export class Storage extends Service {
+export class Storage {
   /**
    * {@link Bucket} class.
    *
@@ -529,6 +648,15 @@ export class Storage extends Service {
   acl: typeof Storage.acl;
 
   crc32cGenerator: CRC32CValidatorGenerator;
+
+  projectId?: string;
+  apiEndpoint: string;
+  storageTransport: StorageTransport;
+  interceptors: GaxiosInterceptor<GaxiosOptionsPrepared>[];
+  universeDomain: string;
+  customEndpoint = false;
+  name = '';
+  baseUrl = '';
 
   getBucketsStream(): Readable {
     // placeholder body, overwritten in constructor
@@ -726,24 +854,24 @@ export class Storage extends Service {
     const universe = options.universeDomain || DEFAULT_UNIVERSE;
 
     let apiEndpoint = `https://storage.${universe}`;
-    let customEndpoint = false;
+    this.projectId = options.projectId;
 
     // Note: EMULATOR_HOST is an experimental configuration variable. Use apiEndpoint instead.
     const EMULATOR_HOST = process.env.STORAGE_EMULATOR_HOST;
     if (typeof EMULATOR_HOST === 'string') {
       apiEndpoint = Storage.sanitizeEndpoint(EMULATOR_HOST);
-      customEndpoint = true;
+      this.customEndpoint = true;
     }
 
     if (options.apiEndpoint && options.apiEndpoint !== apiEndpoint) {
       apiEndpoint = Storage.sanitizeEndpoint(options.apiEndpoint);
-      customEndpoint = true;
+      this.customEndpoint = true;
     }
 
     options = Object.assign({}, options, {apiEndpoint});
 
     // Note: EMULATOR_HOST is an experimental configuration variable. Use apiEndpoint instead.
-    const baseUrl = EMULATOR_HOST || `${options.apiEndpoint}/storage/v1`;
+    this.baseUrl = EMULATOR_HOST || `${options.apiEndpoint}/storage/v1`;
 
     const config = {
       apiEndpoint: options.apiEndpoint!,
@@ -772,10 +900,9 @@ export class Storage extends Service {
             ? options.retryOptions?.idempotencyStrategy
             : IDEMPOTENCY_STRATEGY_DEFAULT,
       },
-      baseUrl,
-      customEndpoint,
+      baseUrl: this.baseUrl,
+      customEndpoint: this.customEndpoint,
       useAuthWithCustomEndpoint: options?.useAuthWithCustomEndpoint,
-      projectIdRequired: false,
       scopes: [
         'https://www.googleapis.com/auth/iam',
         'https://www.googleapis.com/auth/cloud-platform',
@@ -784,7 +911,7 @@ export class Storage extends Service {
       packageJson: getPackageJSON(),
     };
 
-    super(config, options);
+    this.apiEndpoint = options.apiEndpoint!;
 
     /**
      * Reference to {@link Storage.acl}.
@@ -797,6 +924,14 @@ export class Storage extends Service {
       options.crc32cGenerator || CRC32C_DEFAULT_VALIDATOR_GENERATOR;
 
     this.retryOptions = config.retryOptions;
+
+    this.interceptors = options.interceptors_ || [];
+    this.storageTransport = new StorageTransport({
+      ...config,
+      ...options,
+      interceptors: this.interceptors,
+    });
+    this.universeDomain = options.universeDomain || DEFAULT_UNIVERSE;
 
     this.getBucketsStream = paginator.streamify('getBuckets');
     this.getHmacKeysStream = paginator.streamify('getHmacKeys');
@@ -858,18 +993,18 @@ export class Storage extends Service {
 
   createBucket(
     name: string,
-    metadata?: CreateBucketRequest
+    metadata?: CreateBucketRequest,
   ): Promise<CreateBucketResponse>;
   createBucket(name: string, callback: BucketCallback): void;
   createBucket(
     name: string,
     metadata: CreateBucketRequest,
-    callback: BucketCallback
+    callback: BucketCallback,
   ): void;
   createBucket(
     name: string,
     metadata: CreateBucketRequest,
-    callback: BucketCallback
+    callback: BucketCallback,
   ): void;
   /**
    * @typedef {array} CreateBucketResponse
@@ -999,7 +1134,7 @@ export class Storage extends Service {
   createBucket(
     name: string,
     metadataOrCallback?: BucketCallback | CreateBucketRequest,
-    callback?: BucketCallback
+    callback?: BucketCallback,
   ): Promise<CreateBucketResponse> | void {
     if (!name) {
       throw new Error(StorageExceptionMessages.BUCKET_NAME_REQUIRED_CREATE);
@@ -1028,14 +1163,14 @@ export class Storage extends Service {
       standard: 'STANDARD',
     } as const;
     const storageClassKeys = Object.keys(
-      storageClasses
+      storageClasses,
     ) as (keyof typeof storageClasses)[];
 
     for (const storageClass of storageClassKeys) {
       if (body[storageClass]) {
         if (metadata.storageClass && metadata.storageClass !== storageClass) {
           throw new Error(
-            `Both \`${storageClass}\` and \`storageClass\` were provided.`
+            `Both \`${storageClass}\` and \`storageClass\` were provided.`,
           );
         }
         body.storageClass = storageClasses[storageClass];
@@ -1050,9 +1185,9 @@ export class Storage extends Service {
       delete body.requesterPays;
     }
 
-    const query = {
+    const query: StorageQueryParameters = {
       project: this.projectId,
-    } as CreateBucketQuery;
+    };
 
     if (body.userProject) {
       query.userProject = body.userProject as string;
@@ -1079,39 +1214,44 @@ export class Storage extends Service {
       delete body.projection;
     }
 
-    this.request(
-      {
-        method: 'POST',
-        uri: '/b',
-        qs: query,
-        json: body,
-      },
-      (err, resp) => {
-        if (err) {
-          callback!(err, null, resp);
-          return;
-        }
+    this.storageTransport
+      .makeRequest<BucketMetadata>(
+        {
+          method: 'POST',
+          queryParameters: query,
+          body: JSON.stringify(body),
+          url: '/storage/v1/b',
+          responseType: 'json',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        },
+        (err, data) => {
+          if (err) {
+            callback(err);
+            return;
+          }
+          const bucket = this.bucket(name);
+          bucket.metadata = data!;
 
-        const bucket = this.bucket(name);
-        bucket.metadata = resp;
-
-        callback!(null, bucket, resp);
-      }
-    );
+          callback(null, bucket, data);
+        },
+      )
+      .catch(err => callback!(err));
   }
 
   createHmacKey(
     serviceAccountEmail: string,
-    options?: CreateHmacKeyOptions
+    options?: CreateHmacKeyOptions,
   ): Promise<CreateHmacKeyResponse>;
   createHmacKey(
     serviceAccountEmail: string,
-    callback: CreateHmacKeyCallback
+    callback: CreateHmacKeyCallback,
   ): void;
   createHmacKey(
     serviceAccountEmail: string,
     options: CreateHmacKeyOptions,
-    callback: CreateHmacKeyCallback
+    callback: CreateHmacKeyCallback,
   ): void;
   /**
    * @typedef {object} CreateHmacKeyOptions
@@ -1189,7 +1329,7 @@ export class Storage extends Service {
   createHmacKey(
     serviceAccountEmail: string,
     optionsOrCb?: CreateHmacKeyOptions | CreateHmacKeyCallback,
-    cb?: CreateHmacKeyCallback
+    cb?: CreateHmacKeyCallback,
   ): Promise<CreateHmacKeyResponse> | void {
     if (typeof serviceAccountEmail !== 'string') {
       throw new Error(StorageExceptionMessages.HMAC_SERVICE_ACCOUNT);
@@ -1203,28 +1343,36 @@ export class Storage extends Service {
     const projectId = query.projectId || this.projectId;
     delete query.projectId;
 
-    this.request(
-      {
-        method: 'POST',
-        uri: `/projects/${projectId}/hmacKeys`,
-        qs: query,
-        maxRetries: 0, //explicitly set this value since this is a non-idempotent function
-      },
-      (err, resp: HmacKeyResourceResponse) => {
-        if (err) {
-          callback!(err, null, null, resp);
-          return;
-        }
+    this.storageTransport
+      .makeRequest<HmacKeyResourceResponse>(
+        {
+          method: 'POST',
+          url: `/storage/v1/projects/${projectId}/hmacKeys`,
+          queryParameters: query as unknown as StorageQueryParameters,
+          retry: false,
+          responseType: 'json',
+        },
+        (err, data) => {
+          if (err) {
+            callback(err);
+            return;
+          }
+          const hmacMetadata = data!.metadata;
+          const hmacKey = this.hmacKey(hmacMetadata.accessId!, {
+            projectId: hmacMetadata?.projectId,
+          });
+          hmacKey.metadata = hmacMetadata;
+          hmacKey.secret = data?.secret;
 
-        const metadata = resp.metadata;
-        const hmacKey = this.hmacKey(metadata.accessId!, {
-          projectId: metadata.projectId,
-        });
-        hmacKey.metadata = resp.metadata;
-
-        callback!(null, hmacKey, resp.secret, resp);
-      }
-    );
+          callback(
+            null,
+            hmacKey,
+            hmacKey.secret,
+            data as HmacKeyResourceResponse,
+          );
+        },
+      )
+      .catch(err => callback!(err));
   }
 
   getBuckets(options?: GetBucketsRequest): Promise<GetBucketsResponse>;
@@ -1319,54 +1467,59 @@ export class Storage extends Service {
    */
   getBuckets(
     optionsOrCallback?: GetBucketsRequest | GetBucketsCallback,
-    cb?: GetBucketsCallback
+    cb?: GetBucketsCallback,
   ): void | Promise<GetBucketsResponse> {
     const {options, callback} = normalize<GetBucketsRequest>(
       optionsOrCallback,
-      cb
+      cb,
     );
     options.project = options.project || this.projectId;
 
-    this.request(
-      {
-        uri: '/b',
-        qs: options,
-      },
-      (err, resp) => {
-        if (err) {
-          callback(err, null, null, resp);
-          return;
-        }
+    this.storageTransport
+      .makeRequest<{
+        kind: string;
+        nextPageToken?: string;
+        items: BucketMetadata[];
+        unreachable?: [];
+      }>(
+        {
+          url: '/storage/v1/b',
+          method: 'GET',
+          queryParameters: options as unknown as StorageQueryParameters,
+          responseType: 'json',
+        },
+        (err, data, resp) => {
+          if (err) {
+            callback(err, null, null, resp);
+            return;
+          }
+          const itemsArray = data?.items ? data?.items : [];
+          const unreachableArray = data?.unreachable ? data.unreachable : [];
 
-        const itemsArray = resp.items ? resp.items : [];
-        const unreachableArray = resp.unreachable ? resp.unreachable : [];
-
-        const buckets = itemsArray.map((bucket: BucketMetadata) => {
-          const bucketInstance = this.bucket(bucket.id!);
-          bucketInstance.metadata = bucket;
-
-          return bucketInstance;
-        });
-
-        if (unreachableArray.length > 0) {
-          unreachableArray.forEach((fullPath: string) => {
-            const name = fullPath.split('/').pop();
-            if (name) {
-              const placeholder = this.bucket(name);
-              placeholder.unreachable = true;
-              placeholder.metadata = {};
-              buckets.push(placeholder);
-            }
+          const buckets = itemsArray.map((bucket: BucketMetadata) => {
+            const bucketInstance = this.bucket(bucket.id!);
+            bucketInstance.metadata = bucket;
+            return bucketInstance;
           });
-        }
+          if (unreachableArray.length > 0) {
+            unreachableArray.forEach((fullPath: string) => {
+              const name = fullPath.split('/').pop();
+              if (name) {
+                const placeholder = this.bucket(name);
+                placeholder.unreachable = true;
+                placeholder.metadata = {};
+                buckets.push(placeholder);
+              }
+            });
+          }
+          const nextQuery = data?.nextPageToken
+            ? Object.assign({}, options, {pageToken: data.nextPageToken})
+            : null;
 
-        const nextQuery = resp.nextPageToken
-          ? Object.assign({}, options, {pageToken: resp.nextPageToken})
-          : null;
-
-        callback(null, buckets, nextQuery, resp);
-      }
-    );
+          callback(null, buckets, nextQuery, resp);
+        },
+      )
+      .catch(err => callback!(err));
   }
 
   /**
@@ -1457,51 +1610,58 @@ export class Storage extends Service {
   getHmacKeys(options: GetHmacKeysOptions, callback: GetHmacKeysCallback): void;
   getHmacKeys(
     optionsOrCb?: GetHmacKeysOptions | GetHmacKeysCallback,
-    cb?: GetHmacKeysCallback
+    cb?: GetHmacKeysCallback,
   ): Promise<GetHmacKeysResponse> | void {
     const {options, callback} = normalize<GetHmacKeysOptions>(optionsOrCb, cb);
     const query = Object.assign({}, options);
     const projectId = query.projectId || this.projectId;
     delete query.projectId;
 
-    this.request(
-      {
-        uri: `/projects/${projectId}/hmacKeys`,
-        qs: query,
-      },
-      (err, resp) => {
-        if (err) {
-          callback(err, null, null, resp);
-          return;
-        }
-
-        const itemsArray = resp.items ? resp.items : [];
-        const hmacKeys = itemsArray.map((hmacKey: HmacKeyMetadata) => {
-          const hmacKeyInstance = this.hmacKey(hmacKey.accessId!, {
-            projectId: hmacKey.projectId,
+    this.storageTransport
+      .makeRequest<{
+        kind: string;
+        nextPageToken?: string;
+        items: HmacKeyMetadata[];
+      }>(
+        {
+          url: `/storage/v1/projects/${projectId}/hmacKeys`,
+          responseType: 'json',
+          queryParameters: query as unknown as StorageQueryParameters,
+          method: 'GET',
+        },
+        (err, data, resp) => {
+          if (err) {
+            callback(err, null, null, resp);
+            return;
+          }
+          const itemsArray = data?.items ? data.items : [];
+          const hmacKeys = itemsArray.map((hmacKey: HmacKeyMetadata) => {
+            const hmacKeyInstance = this.hmacKey(hmacKey.accessId!, {
+              projectId: hmacKey.projectId,
+            });
+            hmacKeyInstance.metadata = hmacKey;
+            return hmacKeyInstance;
           });
-          hmacKeyInstance.metadata = hmacKey;
-          return hmacKeyInstance;
-        });
 
-        const nextQuery = resp.nextPageToken
-          ? Object.assign({}, options, {pageToken: resp.nextPageToken})
-          : null;
+          const nextQuery = data?.nextPageToken
+            ? Object.assign({}, options, {pageToken: data.nextPageToken})
+            : null;
 
-        callback(null, hmacKeys, nextQuery, resp);
-      }
-    );
+          callback(null, hmacKeys, nextQuery, resp);
+        },
+      )
+      .catch(err => callback!(err));
   }
 
   getServiceAccount(
-    options?: GetServiceAccountOptions
+    options?: GetServiceAccountOptions,
   ): Promise<GetServiceAccountResponse>;
   getServiceAccount(
-    options?: GetServiceAccountOptions
+    options?: GetServiceAccountOptions,
   ): Promise<GetServiceAccountResponse>;
   getServiceAccount(
     options: GetServiceAccountOptions,
-    callback: GetServiceAccountCallback
+    callback: GetServiceAccountCallback,
   ): void;
   getServiceAccount(callback: GetServiceAccountCallback): void;
   /**
@@ -1554,38 +1714,42 @@ export class Storage extends Service {
    */
   getServiceAccount(
     optionsOrCallback?: GetServiceAccountOptions | GetServiceAccountCallback,
-    cb?: GetServiceAccountCallback
+    cb?: GetServiceAccountCallback,
   ): void | Promise<GetServiceAccountResponse> {
     const {options, callback} = normalize<GetServiceAccountOptions>(
       optionsOrCallback,
-      cb
+      cb,
     );
-    this.request(
-      {
-        uri: `/projects/${this.projectId}/serviceAccount`,
-        qs: options,
-      },
-      (err, resp) => {
-        if (err) {
-          callback(err, null, resp);
-          return;
-        }
 
-        const camelCaseResponse = {} as {[index: string]: string};
-
-        for (const prop in resp) {
-          // eslint-disable-next-line no-prototype-builtins
-          if (resp.hasOwnProperty(prop)) {
-            const camelCaseProp = prop.replace(/_(\w)/g, (_, match) =>
-              match.toUpperCase()
-            );
-            camelCaseResponse[camelCaseProp] = resp[prop];
+    this.storageTransport
+      .makeRequest<ServiceAccount>(
+        {
+          method: 'GET',
+          url: `/storage/v1/projects/${this.projectId}/serviceAccount`,
+          queryParameters: (options || {}) as StorageQueryParameters,
+          responseType: 'json',
+        },
+        (err, data, resp) => {
+          if (err) {
+            callback(err, null, resp);
+            return;
           }
-        }
+          const camelCaseResponse = {} as {[index: string]: string};
 
-        callback(null, camelCaseResponse, resp);
-      }
-    );
+          for (const prop in data) {
+            // eslint-disable-next-line no-prototype-builtins
+            if (data.hasOwnProperty(prop)) {
+              const camelCaseProp = prop.replace(/_(\w)/g, (_, match) =>
+                match.toUpperCase(),
+              );
+              camelCaseResponse[camelCaseProp] = data![prop]!;
+            }
+          }
+
+          callback(null, camelCaseResponse, resp);
+        },
+      )
+      .catch(err => callback!(err));
   }
 
   /**

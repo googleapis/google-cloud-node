@@ -15,11 +15,12 @@
         "src/**/*.ts",
         "src/*.cjs",
         "test/*.ts",
-        "test/**/*.ts",
-        "conformance-test/*.ts",
-        "conformance-test/**/*.ts",
         "internal-tooling/*.ts",
         "system-test/*.ts",
-        "system-test/**/*.ts"
+        "src/nodejs-common/*.ts",
+        "test/nodejs-common/*.ts",
+        "conformance-test/*.ts",
+        "conformance-test/scenarios/*.ts",
+        "conformance-test/test-data/*.json"
     ]
 }
