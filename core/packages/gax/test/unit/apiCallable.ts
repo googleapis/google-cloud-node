@@ -1959,7 +1959,9 @@ describe('createApiCall', () => {
         const networkSpan = spans.find(
           s => s.name === 'google.example.v1.Echo/Echo',
         )!;
-        const clientRequestSpan = spans.find(s => s.name === 'EchoClient.Echo')!;
+        const clientRequestSpan = spans.find(
+          s => s.name === 'EchoClient.Echo',
+        )!;
         assert.ok(networkSpan);
         assert.ok(clientRequestSpan);
 
@@ -2050,7 +2052,9 @@ describe('createApiCall', () => {
         const networkSpan = spans.find(
           s => s.name === 'google.example.v1.Echo/Echo',
         )!;
-        const clientRequestSpan = spans.find(s => s.name === 'EchoClient.Echo')!;
+        const clientRequestSpan = spans.find(
+          s => s.name === 'EchoClient.Echo',
+        )!;
         assert.ok(networkSpan);
         assert.ok(clientRequestSpan);
 
@@ -2073,7 +2077,10 @@ describe('createApiCall', () => {
           'echo.googleapis.com',
         );
         assert.strictEqual(networkSpan.attributes['server.port'], 443);
-        assert.strictEqual(networkSpan.attributes['http.request.method'], 'POST');
+        assert.strictEqual(
+          networkSpan.attributes['http.request.method'],
+          'POST',
+        );
         assert.strictEqual(networkSpan.attributes['rpc.method'], undefined);
         assert.strictEqual(
           networkSpan.attributes['rpc.response.status_code'],
@@ -2137,7 +2144,9 @@ describe('createApiCall', () => {
         const spans = harness.getSpans('google-gax');
         assert.strictEqual(spans.length, 4);
 
-        const clientRequestEcho = spans.find(s => s.name === 'EchoClient.Echo')!;
+        const clientRequestEcho = spans.find(
+          s => s.name === 'EchoClient.Echo',
+        )!;
         const clientRequestExpand = spans.find(
           s => s.name === 'EchoClient.Expand',
         )!;
@@ -2221,7 +2230,9 @@ describe('createApiCall', () => {
         const spans = harness.getSpans('google-gax');
         assert.strictEqual(spans.length, 3);
 
-        const clientRequestSpan = spans.find(s => s.name === 'EchoClient.Echo')!;
+        const clientRequestSpan = spans.find(
+          s => s.name === 'EchoClient.Echo',
+        )!;
         const networkSpans = spans.filter(
           s => s.name === 'google.example.v1.Echo/Echo',
         );
