@@ -15,17 +15,23 @@
  */
 
 import * as assert from 'assert';
-import {describe, it} from 'mocha';
+import {describe, it, beforeEach, afterEach} from 'mocha';
+import * as sinon from 'sinon';
+import * as defer from 'p-defer';
+import {google} from '../../protos/protos';
 import {Duration} from '../../src/temporal';
 import {
+  CancellationSharer,
   DEFAULT_HEDGE_DELAY,
   DEFAULT_MAX_TOKENS,
   DEFAULT_REFILL_RATIO,
+  HedgingScheduler,
   HedgingTokenBucket,
   validateAndResolveHedgingOptions,
 } from '../../src/publisher/hedging';
+import {TestUtils} from '../test-utils';
 
-describe('Publisher Hedging (Options & Token Bucket)', () => {
+describe('Publisher Hedging', () => {
   describe('validateAndResolveHedgingOptions', () => {
     it('returns undefined when hedging options are not provided', () => {
       assert.strictEqual(
@@ -229,6 +235,250 @@ describe('Publisher Hedging (Options & Token Bucket)', () => {
       assert.strictEqual(bucket.getTokenBalance(), 1.0);
       assert.strictEqual(bucket.tryAcquireHedgeToken(), true);
       assert.strictEqual(bucket.getTokenBalance(), 0);
+    });
+  });
+
+  describe('CancellationSharer', () => {
+    const deadline = Duration.from({seconds: 100});
+
+    it('resolves when original attempt succeeds and aborts hedged attempts', async () => {
+      let successCalled = 0;
+      const coordinator = new CancellationSharer(deadline, () => {
+        successCalled++;
+      });
+
+      const attempt0 = defer<google.pubsub.v1.IPublishResponse>();
+      const attempt1 = defer<google.pubsub.v1.IPublishResponse>();
+      const controller0 = new AbortController();
+      const controller1 = new AbortController();
+
+      coordinator.addAttempt(0, controller0, attempt0.promise);
+      coordinator.addAttempt(1, controller1, attempt1.promise);
+
+      attempt0.resolve({messageIds: ['msg-0']});
+
+      const result = await coordinator.promise;
+      assert.deepStrictEqual(result.response, {messageIds: ['msg-0']});
+      assert.strictEqual(result.wasHedged, false);
+      assert.strictEqual(result.successfulAttempt, 0);
+      assert.strictEqual(successCalled, 1);
+      assert.strictEqual(controller0.signal.aborted, false);
+      assert.strictEqual(controller1.signal.aborted, true);
+    });
+
+    it('resolves when hedged attempt succeeds first and aborts original attempt', async () => {
+      let successCalled = 0;
+      const coordinator = new CancellationSharer(deadline, () => {
+        successCalled++;
+      });
+
+      const attempt0 = defer<google.pubsub.v1.IPublishResponse>();
+      const attempt1 = defer<google.pubsub.v1.IPublishResponse>();
+      const controller0 = new AbortController();
+      const controller1 = new AbortController();
+
+      coordinator.addAttempt(0, controller0, attempt0.promise);
+      coordinator.addAttempt(1, controller1, attempt1.promise);
+
+      attempt1.resolve({messageIds: ['msg-1']});
+
+      const result = await coordinator.promise;
+      assert.deepStrictEqual(result.response, {messageIds: ['msg-1']});
+      assert.strictEqual(result.wasHedged, true);
+      assert.strictEqual(result.successfulAttempt, 1);
+      assert.strictEqual(successCalled, 1);
+      assert.strictEqual(controller0.signal.aborted, true);
+      assert.strictEqual(controller1.signal.aborted, false);
+    });
+
+    it('discards hedged attempt failure while original attempt is still running', async () => {
+      const coordinator = new CancellationSharer(deadline, () => {});
+
+      const attempt0 = defer<google.pubsub.v1.IPublishResponse>();
+      const attempt1 = defer<google.pubsub.v1.IPublishResponse>();
+      const controller0 = new AbortController();
+      const controller1 = new AbortController();
+
+      coordinator.addAttempt(0, controller0, attempt0.promise);
+      coordinator.addAttempt(1, controller1, attempt1.promise);
+
+      attempt1.reject(new Error('hedged failure'));
+      await Promise.resolve();
+      assert.strictEqual(coordinator.isDone(), false);
+
+      attempt0.resolve({messageIds: ['msg-0']});
+      const result = await coordinator.promise;
+      assert.deepStrictEqual(result.response, {messageIds: ['msg-0']});
+      assert.strictEqual(result.wasHedged, false);
+    });
+
+    it('immediately rejects and aborts running hedged attempts when original attempt fails', async () => {
+      const coordinator = new CancellationSharer(deadline, () => {});
+
+      const attempt0 = defer<google.pubsub.v1.IPublishResponse>();
+      const attempt1 = defer<google.pubsub.v1.IPublishResponse>();
+      const controller0 = new AbortController();
+      const controller1 = new AbortController();
+
+      coordinator.addAttempt(0, controller0, attempt0.promise);
+      coordinator.addAttempt(1, controller1, attempt1.promise);
+
+      const originalError = new Error('original permanent failure');
+      attempt0.reject(originalError);
+
+      await assert.rejects(coordinator.promise, originalError);
+      assert.strictEqual(controller1.signal.aborted, true);
+    });
+
+    it('immediately aborts an attempt added after coordinator is already done', async () => {
+      const coordinator = new CancellationSharer(deadline, () => {});
+      const controller0 = new AbortController();
+      coordinator.addAttempt(
+        0,
+        controller0,
+        Promise.resolve({messageIds: ['1']}),
+      );
+      await coordinator.promise;
+
+      const lateController = new AbortController();
+      const lateAttempt = defer<google.pubsub.v1.IPublishResponse>();
+      coordinator.addAttempt(1, lateController, lateAttempt.promise);
+      assert.strictEqual(lateController.signal.aborted, true);
+    });
+  });
+
+  describe('HedgingScheduler', () => {
+    interface RecordedAttempt {
+      attempt: number;
+      timeoutMs: number;
+    }
+
+    let sandbox: sinon.SinonSandbox;
+    let clock: sinon.SinonFakeTimers;
+
+    beforeEach(() => {
+      sandbox = sinon.createSandbox();
+      clock = TestUtils.useFakeTimers(sandbox, 10000);
+    });
+
+    afterEach(() => {
+      clock.restore();
+      sandbox.restore();
+    });
+
+    it('fires hedged attempts at hedgeDelay intervals (multiple hedging) while tokens are available', () => {
+      const options = validateAndResolveHedgingOptions({
+        hedgeDelay: Duration.from({milliseconds: 200}),
+        maxTokens: 10,
+        refillRatio: 0.2,
+      });
+      assert.ok(options);
+      const bucket = new HedgingTokenBucket(options);
+      for (let i = 0; i < 10; i++) {
+        bucket.refillTokenBucket();
+      }
+      assert.strictEqual(bucket.getTokenBalance(), 2.0);
+
+      let rateLimitedCount = 0;
+      const scheduler = new HedgingScheduler(options, bucket, () => {
+        rateLimitedCount++;
+      });
+
+      const absoluteDeadline = scheduler
+        .nowDuration()
+        .add(Duration.from({seconds: 25}));
+      const coordinator = new CancellationSharer(absoluteDeadline, () => {});
+
+      const startedAttempts: RecordedAttempt[] = [];
+      scheduler.scheduleFirstHedge(
+        coordinator,
+        (attemptNumber, attemptTimeout) => {
+          startedAttempts.push({
+            attempt: attemptNumber,
+            timeoutMs: attemptTimeout.milliseconds,
+          });
+        },
+      );
+
+      clock.tick(199);
+      assert.strictEqual(startedAttempts.length, 0);
+
+      // At +200ms, attempt 1 fires (timeout capped at 10000ms)
+      clock.tick(1);
+      assert.deepStrictEqual(startedAttempts, [{attempt: 1, timeoutMs: 10000}]);
+      assert.strictEqual(bucket.getTokenBalance(), 1.0);
+
+      // At +400ms, attempt 2 fires (consuming the second token)
+      clock.tick(200);
+      assert.deepStrictEqual(startedAttempts, [
+        {attempt: 1, timeoutMs: 10000},
+        {attempt: 2, timeoutMs: 10000},
+      ]);
+      assert.strictEqual(bucket.getTokenBalance(), 0);
+
+      // At +600ms, bucket is empty so attempt 3 is rate-limited and not re-queued
+      clock.tick(200);
+      assert.strictEqual(startedAttempts.length, 2);
+      assert.strictEqual(rateLimitedCount, 1);
+
+      scheduler.clear();
+    });
+
+    it('caps hedged attempt timeout at remainingTimeout when less than 10s', () => {
+      const options = validateAndResolveHedgingOptions({
+        hedgeDelay: Duration.from({milliseconds: 500}),
+        maxTokens: 10,
+        refillRatio: 0.2,
+      });
+      assert.ok(options);
+      const bucket = new HedgingTokenBucket(options);
+      for (let i = 0; i < 5; i++) {
+        bucket.refillTokenBucket();
+      }
+
+      const scheduler = new HedgingScheduler(options, bucket);
+      const absoluteDeadline = scheduler
+        .nowDuration()
+        .add(Duration.from({milliseconds: 3000}));
+      const coordinator = new CancellationSharer(absoluteDeadline, () => {});
+
+      let observedTimeout: Duration | undefined;
+      scheduler.scheduleFirstHedge(coordinator, (_attempt, attemptTimeout) => {
+        observedTimeout = attemptTimeout;
+      });
+
+      clock.tick(500);
+      assert.ok(observedTimeout);
+      assert.strictEqual(observedTimeout.milliseconds, 2500);
+    });
+
+    it('skips hedging if coordinator completes before hedgeDelay', () => {
+      const options = validateAndResolveHedgingOptions({
+        hedgeDelay: Duration.from({milliseconds: 500}),
+        maxTokens: 10,
+        refillRatio: 0.2,
+      });
+      assert.ok(options);
+      const bucket = new HedgingTokenBucket(options);
+      for (let i = 0; i < 5; i++) {
+        bucket.refillTokenBucket();
+      }
+
+      const scheduler = new HedgingScheduler(options, bucket);
+      const absoluteDeadline = scheduler
+        .nowDuration()
+        .add(Duration.from({seconds: 60}));
+      const coordinator = new CancellationSharer(absoluteDeadline, () => {});
+
+      let hedgeFired = false;
+      scheduler.scheduleFirstHedge(coordinator, () => {
+        hedgeFired = true;
+      });
+
+      coordinator.cancel();
+      clock.tick(500);
+      assert.strictEqual(hedgeFired, false);
+      assert.strictEqual(bucket.getTokenBalance(), 1.0);
     });
   });
 });
