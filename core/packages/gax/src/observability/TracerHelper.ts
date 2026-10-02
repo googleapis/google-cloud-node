@@ -107,7 +107,7 @@ export interface DynamicTraceContext {
 }
 
 /**
- * Dynamic metadata specific to an individual RPC transport attempt (T4 span).
+ * Dynamic metadata specific to an individual RPC transport attempt (low level network span).
  */
 export interface AttemptTraceContext extends DynamicTraceContext {
   /**
@@ -128,7 +128,7 @@ export interface AttemptTraceContext extends DynamicTraceContext {
 const ATTEMPT_SPAN_KEY = createContextKey('google-gax-attempt-span');
 
 /**
- * Updates the `http.request.method` attribute on the currently active T4 attempt span, if any.
+ * Updates the `http.request.method` attribute on the currently active low level network attempt span, if any.
  */
 export function setAttemptHttpMethod(httpMethod: string): void {
   const attemptSpan = context.active().getValue(ATTEMPT_SPAN_KEY) as
@@ -1233,7 +1233,7 @@ export function traceCall(
 
 /**
  * Executes an individual RPC transport attempt within an active OpenTelemetry
- * CLIENT span (T4 span), parenting it to the active T3 client request span
+ * CLIENT span (low level network span), parenting it to the active client request span
  * and recording per-attempt network, status, and error attributes without
  * injecting span context into outgoing headers.
  *
@@ -1242,7 +1242,7 @@ export function traceCall(
  * @param {function} fn - The transport attempt operation to trace.
  * @param {boolean} [isStreamCall=false] - Whether the operation is a stream call.
  * @param {APICallback} [callback] - The attempt callback.
- * @param {Context} [parentContext] - Optional parent OpenTelemetry context (e.g. T3 span context).
+ * @param {Context} [parentContext] - Optional parent OpenTelemetry context (e.g. client request span context).
  * @returns {GaxCallResult} The result of the traced attempt.
  */
 export function traceAttempt<T = GaxCallResult>(

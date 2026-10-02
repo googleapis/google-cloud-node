@@ -133,8 +133,8 @@ describe('TracerHelper', () => {
       assert.strictEqual(span.events.length, 0);
     });
 
-    describe('child span propagation and hierarchy (T3 -> T4)', () => {
-      it('tags synchronous child spans with the T3 parent span id', async () => {
+    describe('child span propagation and hierarchy (client request tracing -> low level network tracing)', () => {
+      it('tags synchronous child spans with the client request parent span id', async () => {
         const childTracer = trace.getTracer('child-tracer');
         let childParentSpanId: string | undefined;
 
@@ -148,30 +148,34 @@ describe('TracerHelper', () => {
         });
 
         const allSpans = harness.exporter.getFinishedSpans();
-        assert.strictEqual(allSpans.length, 2, 'Expected 2 spans (T3 + T4)');
+        assert.strictEqual(
+          allSpans.length,
+          2,
+          'Expected 2 spans (client request + low level network)',
+        );
 
-        const t3Span = harness.requireSingleSpan('google-gax');
-        const t4Span = allSpans.find(s => s.name === 'ChildOperation');
-        assert.ok(t4Span, 'T4 child span must exist');
+        const clientRequestSpan = harness.requireSingleSpan('google-gax');
+        const networkSpan = allSpans.find(s => s.name === 'ChildOperation');
+        assert.ok(networkSpan, 'low level network child span must exist');
 
         assert.strictEqual(
           childParentSpanId,
-          t3Span.spanContext().spanId,
-          'T4.parentSpanId should be T3.spanId',
+          clientRequestSpan.spanContext().spanId,
+          'low level network parentSpanId should be client request spanId',
         );
         assert.strictEqual(
-          t4Span?.parentSpanContext?.spanId,
-          t3Span.spanContext().spanId,
-          'Finished T4 span parentSpanId should match T3 spanId',
+          networkSpan?.parentSpanContext?.spanId,
+          clientRequestSpan.spanContext().spanId,
+          'Finished low level network span parentSpanId should match client request spanId',
         );
         assert.strictEqual(
-          t4Span?.spanContext().traceId,
-          t3Span.spanContext().traceId,
-          'T4 span should share traceId with T3 parent',
+          networkSpan?.spanContext().traceId,
+          clientRequestSpan.spanContext().traceId,
+          'low level network span should share traceId with client request parent',
         );
       });
 
-      it('tags asynchronous promise child spans with the T3 parent span id', async () => {
+      it('tags asynchronous promise child spans with the client request parent span id', async () => {
         const childTracer = trace.getTracer('child-tracer');
         let childParentSpanId: string | undefined;
 
@@ -186,28 +190,34 @@ describe('TracerHelper', () => {
         });
 
         const allSpans = harness.exporter.getFinishedSpans();
-        assert.strictEqual(allSpans.length, 2, 'Expected 2 spans (T3 + T4)');
+        assert.strictEqual(
+          allSpans.length,
+          2,
+          'Expected 2 spans (client request + low level network)',
+        );
 
-        const t3Span = harness.requireSingleSpan('google-gax');
-        const t4Span = allSpans.find(s => s.name === 'AsyncChildOperation');
-        assert.ok(t4Span, 'T4 child span must exist');
+        const clientRequestSpan = harness.requireSingleSpan('google-gax');
+        const networkSpan = allSpans.find(
+          s => s.name === 'AsyncChildOperation',
+        );
+        assert.ok(networkSpan, 'low level network child span must exist');
 
         assert.strictEqual(
           childParentSpanId,
-          t3Span.spanContext().spanId,
-          'T4.parentSpanId should be T3.spanId for async calls',
+          clientRequestSpan.spanContext().spanId,
+          'low level network parentSpanId should be client request spanId for async calls',
         );
         assert.strictEqual(
-          t4Span?.parentSpanContext?.spanId,
-          t3Span.spanContext().spanId,
+          networkSpan?.parentSpanContext?.spanId,
+          clientRequestSpan.spanContext().spanId,
         );
         assert.strictEqual(
-          t4Span?.spanContext().traceId,
-          t3Span.spanContext().traceId,
+          networkSpan?.spanContext().traceId,
+          clientRequestSpan.spanContext().traceId,
         );
       });
 
-      it('tags child spans in stream calls with the T3 parent span id', async () => {
+      it('tags child spans in stream calls with the client request parent span id', async () => {
         const childTracer = trace.getTracer('child-tracer');
         const stream = new EventEmitter();
         let childParentSpanId: string | undefined;
@@ -230,24 +240,30 @@ describe('TracerHelper', () => {
         stream.emit('end');
 
         const allSpans = harness.exporter.getFinishedSpans();
-        assert.strictEqual(allSpans.length, 2, 'Expected 2 spans (T3 + T4)');
+        assert.strictEqual(
+          allSpans.length,
+          2,
+          'Expected 2 spans (client request + low level network)',
+        );
 
-        const t3Span = harness.requireSingleSpan('google-gax');
-        const t4Span = allSpans.find(s => s.name === 'StreamChildOperation');
-        assert.ok(t4Span, 'T4 child span must exist');
+        const clientRequestSpan = harness.requireSingleSpan('google-gax');
+        const networkSpan = allSpans.find(
+          s => s.name === 'StreamChildOperation',
+        );
+        assert.ok(networkSpan, 'low level network child span must exist');
 
         assert.strictEqual(
           childParentSpanId,
-          t3Span.spanContext().spanId,
-          'T4.parentSpanId should be T3.spanId in stream calls',
+          clientRequestSpan.spanContext().spanId,
+          'low level network parentSpanId should be client request spanId in stream calls',
         );
         assert.strictEqual(
-          t4Span?.parentSpanContext?.spanId,
-          t3Span.spanContext().spanId,
+          networkSpan?.parentSpanContext?.spanId,
+          clientRequestSpan.spanContext().spanId,
         );
       });
 
-      it('tags child spans with T3 parent span id for HTTP rpcType', async () => {
+      it('tags child spans with client request parent span id for HTTP rpcType', async () => {
         const httpDynamicArgs: DynamicTraceContext = {
           clientName: 'EchoClient',
           methodName: 'Echo',
@@ -268,18 +284,18 @@ describe('TracerHelper', () => {
         const allSpans = harness.exporter.getFinishedSpans();
         assert.strictEqual(allSpans.length, 2);
 
-        const t3Span = harness.requireSingleSpan('google-gax');
-        const t4Span = allSpans.find(s => s.name === 'HttpClientCall');
-        assert.ok(t4Span);
+        const clientRequestSpan = harness.requireSingleSpan('google-gax');
+        const networkSpan = allSpans.find(s => s.name === 'HttpClientCall');
+        assert.ok(networkSpan);
 
         assert.strictEqual(
           childParentSpanId,
-          t3Span.spanContext().spanId,
-          'T4.parentSpanId should be T3.spanId for HTTP calls',
+          clientRequestSpan.spanContext().spanId,
+          'low level network parentSpanId should be client request spanId for HTTP calls',
         );
         assert.strictEqual(
-          t4Span?.parentSpanContext?.spanId,
-          t3Span.spanContext().spanId,
+          networkSpan?.parentSpanContext?.spanId,
+          clientRequestSpan.spanContext().spanId,
         );
       });
     });
@@ -3840,7 +3856,7 @@ describe('TracerHelper', () => {
       gcpArtifact: '@google-cloud/echo',
     };
 
-    it('creates a CLIENT T4 span in traceAttempt with url.domain, server.address, server.port, and status_code', async () => {
+    it('creates a CLIENT low level network span in traceAttempt with url.domain, server.address, server.port, and status_code', async () => {
       const attemptArgs: AttemptTraceContext = {
         apiName: 'google.example.v1.Echo',
         clientName: 'EchoClient',
@@ -3879,7 +3895,7 @@ describe('TracerHelper', () => {
       assert.strictEqual(span.attributes['gcp.artifact'], undefined);
     });
 
-    it('sets http.request.method on HTTP T4 spans and allows setAttemptHttpMethod to update it', async () => {
+    it('sets http.request.method on HTTP low level network spans and allows setAttemptHttpMethod to update it', async () => {
       await traceAttempt(
         {
           apiName: 'google.example.v1.Echo',
@@ -3923,7 +3939,7 @@ describe('TracerHelper', () => {
       );
     });
 
-    it('omits server.address and server.port on T4 span for pre-connection failures while preserving url.domain', async () => {
+    it('omits server.address and server.port on low level network span for pre-connection failures while preserving url.domain', async () => {
       const attemptArgs: AttemptTraceContext = {
         apiName: 'google.example.v1.Echo',
         clientName: 'EchoClient',
@@ -3961,7 +3977,7 @@ describe('TracerHelper', () => {
       );
     });
 
-    it('sets gcp.grpc.resend_count and http.request.resend_count on T4 spans when resendCount > 0', async () => {
+    it('sets gcp.grpc.resend_count and http.request.resend_count on low level network spans when resendCount > 0', async () => {
       await traceAttempt(
         {
           apiName: 'google.example.v1.Echo',

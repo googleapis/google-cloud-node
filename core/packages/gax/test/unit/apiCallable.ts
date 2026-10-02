@@ -1798,8 +1798,8 @@ describe('createApiCall', () => {
       });
     });
 
-    describe('T3 client request span to T4 per-attempt span correlation', () => {
-      it('emits a T4 gRPC attempt span parented to its T3 client request span', async () => {
+    describe('client request span to low level network per-attempt span correlation', () => {
+      it('emits a low level network gRPC attempt span parented to its client request span', async () => {
         const grpcClient = new GrpcClient({
           servicePath: 'echo.googleapis.com',
           port: 443,
@@ -1840,49 +1840,55 @@ describe('createApiCall', () => {
         const spans = harness.getSpans('google-gax');
         assert.strictEqual(spans.length, 2);
 
-        const t4Span = spans.find(
+        const networkSpan = spans.find(
           s => s.name === 'google.example.v1.Echo/Echo',
         )!;
-        const t3Span = spans.find(s => s.name === 'EchoClient.Echo')!;
-        assert.ok(t4Span);
-        assert.ok(t3Span);
+        const clientRequestSpan = spans.find(s => s.name === 'EchoClient.Echo')!;
+        assert.ok(networkSpan);
+        assert.ok(clientRequestSpan);
 
-        assert.strictEqual(t3Span.kind, SpanKind.INTERNAL);
-        assert.strictEqual(t4Span.kind, SpanKind.CLIENT);
+        assert.strictEqual(clientRequestSpan.kind, SpanKind.INTERNAL);
+        assert.strictEqual(networkSpan.kind, SpanKind.CLIENT);
         assert.strictEqual(
-          t4Span.spanContext().traceId,
-          t3Span.spanContext().traceId,
+          networkSpan.spanContext().traceId,
+          clientRequestSpan.spanContext().traceId,
         );
         assert.strictEqual(
-          t4Span.parentSpanContext?.spanId,
-          t3Span.spanContext().spanId,
+          networkSpan.parentSpanContext?.spanId,
+          clientRequestSpan.spanContext().spanId,
         );
         assert.strictEqual(
-          t4Span.attributes['url.domain'],
+          networkSpan.attributes['url.domain'],
           'echo.googleapis.com',
         );
         assert.strictEqual(
-          t4Span.attributes['server.address'],
+          networkSpan.attributes['server.address'],
           'echo.googleapis.com',
         );
-        assert.strictEqual(t4Span.attributes['server.port'], 443);
+        assert.strictEqual(networkSpan.attributes['server.port'], 443);
         assert.strictEqual(
-          t4Span.attributes['rpc.method'],
+          networkSpan.attributes['rpc.method'],
           'google.example.v1.Echo/Echo',
         );
-        assert.strictEqual(t4Span.attributes['http.request.method'], undefined);
-        assert.strictEqual(t4Span.attributes['rpc.response.status_code'], 'OK');
         assert.strictEqual(
-          t4Span.attributes['grpc.response.status_code'],
+          networkSpan.attributes['http.request.method'],
           undefined,
         );
         assert.strictEqual(
-          t4Span.attributes['http.response.status_code'],
+          networkSpan.attributes['rpc.response.status_code'],
+          'OK',
+        );
+        assert.strictEqual(
+          networkSpan.attributes['grpc.response.status_code'],
+          undefined,
+        );
+        assert.strictEqual(
+          networkSpan.attributes['http.response.status_code'],
           undefined,
         );
       });
 
-      it('emits a T4 HTTP/REST attempt span parented to its T3 client request span', async () => {
+      it('emits a low level network HTTP/REST attempt span parented to its client request span', async () => {
         const fallbackClient = new FallbackGrpcClient({
           servicePath: 'echo.googleapis.com',
           port: 443,
@@ -1925,47 +1931,53 @@ describe('createApiCall', () => {
         const spans = harness.getSpans('google-gax');
         assert.strictEqual(spans.length, 2);
 
-        const t4Span = spans.find(
+        const networkSpan = spans.find(
           s => s.name === 'google.example.v1.Echo/Echo',
         )!;
-        const t3Span = spans.find(s => s.name === 'EchoClient.Echo')!;
-        assert.ok(t4Span);
-        assert.ok(t3Span);
+        const clientRequestSpan = spans.find(s => s.name === 'EchoClient.Echo')!;
+        assert.ok(networkSpan);
+        assert.ok(clientRequestSpan);
 
-        assert.strictEqual(t3Span.kind, SpanKind.INTERNAL);
-        assert.strictEqual(t4Span.kind, SpanKind.CLIENT);
+        assert.strictEqual(clientRequestSpan.kind, SpanKind.INTERNAL);
+        assert.strictEqual(networkSpan.kind, SpanKind.CLIENT);
         assert.strictEqual(
-          t4Span.spanContext().traceId,
-          t3Span.spanContext().traceId,
+          networkSpan.spanContext().traceId,
+          clientRequestSpan.spanContext().traceId,
         );
         assert.strictEqual(
-          t4Span.parentSpanContext?.spanId,
-          t3Span.spanContext().spanId,
+          networkSpan.parentSpanContext?.spanId,
+          clientRequestSpan.spanContext().spanId,
         );
         assert.strictEqual(
-          t4Span.attributes['url.domain'],
+          networkSpan.attributes['url.domain'],
           'echo.googleapis.com',
         );
         assert.strictEqual(
-          t4Span.attributes['server.address'],
+          networkSpan.attributes['server.address'],
           'echo.googleapis.com',
         );
-        assert.strictEqual(t4Span.attributes['server.port'], 443);
-        assert.strictEqual(t4Span.attributes['http.request.method'], 'POST');
-        assert.strictEqual(t4Span.attributes['rpc.method'], undefined);
+        assert.strictEqual(networkSpan.attributes['server.port'], 443);
+        assert.strictEqual(networkSpan.attributes['http.request.method'], 'POST');
+        assert.strictEqual(networkSpan.attributes['rpc.method'], undefined);
         assert.strictEqual(
-          t4Span.attributes['rpc.response.status_code'],
+          networkSpan.attributes['rpc.response.status_code'],
           undefined,
         );
-        assert.strictEqual(t4Span.attributes['http.response.status_code'], 200);
         assert.strictEqual(
-          t3Span.attributes['rpc.response.status_code'],
+          networkSpan.attributes['http.response.status_code'],
+          200,
+        );
+        assert.strictEqual(
+          clientRequestSpan.attributes['rpc.response.status_code'],
           undefined,
         );
-        assert.strictEqual(t3Span.attributes['http.response.status_code'], 200);
+        assert.strictEqual(
+          clientRequestSpan.attributes['http.response.status_code'],
+          200,
+        );
       });
 
-      it('ties concurrent T4 attempt spans to their respective T3 client request spans without cross-talk', async () => {
+      it('ties concurrent low level network attempt spans to their respective client request spans without cross-talk', async () => {
         const echoSettings = new gax.CallSettings({
           apiName: 'google.example.v1.Echo',
           enableTelemetryTracing: true,
@@ -2009,41 +2021,48 @@ describe('createApiCall', () => {
         const spans = harness.getSpans('google-gax');
         assert.strictEqual(spans.length, 4);
 
-        const t3Echo = spans.find(s => s.name === 'EchoClient.Echo')!;
-        const t3Expand = spans.find(s => s.name === 'EchoClient.Expand')!;
-        const t4Echo = spans.find(
+        const clientRequestEcho = spans.find(s => s.name === 'EchoClient.Echo')!;
+        const clientRequestExpand = spans.find(
+          s => s.name === 'EchoClient.Expand',
+        )!;
+        const networkEcho = spans.find(
           s => s.name === 'google.example.v1.Echo/Echo',
         )!;
-        const t4Expand = spans.find(
+        const networkExpand = spans.find(
           s => s.name === 'google.example.v1.Echo/Expand',
         )!;
 
-        assert.ok(t3Echo && t3Expand && t4Echo && t4Expand);
+        assert.ok(
+          clientRequestEcho &&
+            clientRequestExpand &&
+            networkEcho &&
+            networkExpand,
+        );
         assert.notStrictEqual(
-          t3Echo.spanContext().spanId,
-          t3Expand.spanContext().spanId,
+          clientRequestEcho.spanContext().spanId,
+          clientRequestExpand.spanContext().spanId,
         );
 
         assert.strictEqual(
-          t4Echo.spanContext().traceId,
-          t3Echo.spanContext().traceId,
+          networkEcho.spanContext().traceId,
+          clientRequestEcho.spanContext().traceId,
         );
         assert.strictEqual(
-          t4Echo.parentSpanContext?.spanId,
-          t3Echo.spanContext().spanId,
+          networkEcho.parentSpanContext?.spanId,
+          clientRequestEcho.spanContext().spanId,
         );
 
         assert.strictEqual(
-          t4Expand.spanContext().traceId,
-          t3Expand.spanContext().traceId,
+          networkExpand.spanContext().traceId,
+          clientRequestExpand.spanContext().traceId,
         );
         assert.strictEqual(
-          t4Expand.parentSpanContext?.spanId,
-          t3Expand.spanContext().spanId,
+          networkExpand.parentSpanContext?.spanId,
+          clientRequestExpand.spanContext().spanId,
         );
       });
 
-      it('emits one T4 attempt span per retry attempt, all parented to the single T3 client request span', async () => {
+      it('emits one low level network attempt span per retry attempt, all parented to the single client request span', async () => {
         const retryOptions = gax.createRetryOptions(
           [status.UNAVAILABLE],
           gax.createBackoffSettings(1, 1.1, 5, 100, 1.0, 100, 1000),
@@ -2086,65 +2105,77 @@ describe('createApiCall', () => {
         const spans = harness.getSpans('google-gax');
         assert.strictEqual(spans.length, 3);
 
-        const t3Span = spans.find(s => s.name === 'EchoClient.Echo')!;
-        const t4Spans = spans.filter(
+        const clientRequestSpan = spans.find(s => s.name === 'EchoClient.Echo')!;
+        const networkSpans = spans.filter(
           s => s.name === 'google.example.v1.Echo/Echo',
         );
-        assert.ok(t3Span);
-        assert.strictEqual(t4Spans.length, 2);
+        assert.ok(clientRequestSpan);
+        assert.strictEqual(networkSpans.length, 2);
 
         // First attempt failed with UNAVAILABLE (resend_count omitted on initial attempt)
-        assert.strictEqual(t4Spans[0].kind, SpanKind.CLIENT);
-        assert.strictEqual(t4Spans[0].status.code, SpanStatusCode.ERROR);
-        assert.strictEqual(t4Spans[0].status.message, 'transient failure');
+        assert.strictEqual(networkSpans[0].kind, SpanKind.CLIENT);
+        assert.strictEqual(networkSpans[0].status.code, SpanStatusCode.ERROR);
+        assert.strictEqual(networkSpans[0].status.message, 'transient failure');
         assert.strictEqual(
-          t4Spans[0].attributes['gcp.grpc.resend_count'],
+          networkSpans[0].attributes['gcp.grpc.resend_count'],
           undefined,
         );
-        assert.strictEqual(t4Spans[0].attributes['error.type'], 'UNAVAILABLE');
         assert.strictEqual(
-          t4Spans[0].attributes['rpc.response.status_code'],
+          networkSpans[0].attributes['error.type'],
           'UNAVAILABLE',
         );
         assert.strictEqual(
-          t4Spans[0].attributes['grpc.response.status_code'],
+          networkSpans[0].attributes['rpc.response.status_code'],
+          'UNAVAILABLE',
+        );
+        assert.strictEqual(
+          networkSpans[0].attributes['grpc.response.status_code'],
           undefined,
         );
-        assert.strictEqual(t4Spans[0].events.length, 1);
-        assert.strictEqual(t4Spans[0].events[0].name, 'exception');
+        assert.strictEqual(networkSpans[0].events.length, 1);
+        assert.strictEqual(networkSpans[0].events[0].name, 'exception');
         assert.strictEqual(
-          t4Spans[0].events[0].attributes?.['exception.type'],
+          networkSpans[0].events[0].attributes?.['exception.type'],
           'GoogleError',
         );
         assert.strictEqual(
-          t4Spans[0].parentSpanContext?.spanId,
-          t3Span.spanContext().spanId,
+          networkSpans[0].parentSpanContext?.spanId,
+          clientRequestSpan.spanContext().spanId,
         );
 
         // Second attempt succeeded with OK (resend_count = 1)
-        assert.strictEqual(t4Spans[1].kind, SpanKind.CLIENT);
-        assert.strictEqual(t4Spans[1].status.code, SpanStatusCode.UNSET);
-        assert.strictEqual(t4Spans[1].attributes['gcp.grpc.resend_count'], 1);
+        assert.strictEqual(networkSpans[1].kind, SpanKind.CLIENT);
+        assert.strictEqual(networkSpans[1].status.code, SpanStatusCode.UNSET);
         assert.strictEqual(
-          t4Spans[1].attributes['rpc.response.status_code'],
+          networkSpans[1].attributes['gcp.grpc.resend_count'],
+          1,
+        );
+        assert.strictEqual(
+          networkSpans[1].attributes['rpc.response.status_code'],
           'OK',
         );
         assert.strictEqual(
-          t4Spans[1].attributes['grpc.response.status_code'],
+          networkSpans[1].attributes['grpc.response.status_code'],
           undefined,
         );
         assert.strictEqual(
-          t4Spans[1].parentSpanContext?.spanId,
-          t3Span.spanContext().spanId,
+          networkSpans[1].parentSpanContext?.spanId,
+          clientRequestSpan.spanContext().spanId,
         );
 
-        // Overall T3 call span succeeded with resend_count = 1
-        assert.strictEqual(t3Span.kind, SpanKind.INTERNAL);
-        assert.strictEqual(t3Span.status.code, SpanStatusCode.UNSET);
-        assert.strictEqual(t3Span.attributes['gcp.grpc.resend_count'], 1);
-        assert.strictEqual(t3Span.attributes['rpc.response.status_code'], 'OK');
+        // Overall client request span succeeded with resend_count = 1
+        assert.strictEqual(clientRequestSpan.kind, SpanKind.INTERNAL);
+        assert.strictEqual(clientRequestSpan.status.code, SpanStatusCode.UNSET);
         assert.strictEqual(
-          t3Span.attributes['grpc.response.status_code'],
+          clientRequestSpan.attributes['gcp.grpc.resend_count'],
+          1,
+        );
+        assert.strictEqual(
+          clientRequestSpan.attributes['rpc.response.status_code'],
+          'OK',
+        );
+        assert.strictEqual(
+          clientRequestSpan.attributes['grpc.response.status_code'],
           undefined,
         );
       });
