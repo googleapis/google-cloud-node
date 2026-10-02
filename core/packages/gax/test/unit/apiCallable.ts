@@ -738,7 +738,8 @@ describe('createApiCall', () => {
       const span = spans[1];
       assert.strictEqual(attemptSpan.name, 'google.example.v1.Echo/Echo');
       assert.strictEqual(attemptSpan.kind, SpanKind.CLIENT);
-      assert.strictEqual(attemptSpan.attributes['gcp.method.type'], 'http');
+      assert.strictEqual(attemptSpan.attributes['rpc.system'], 'http');
+      assert.strictEqual(attemptSpan.attributes['gcp.method.type'], undefined);
       assert.strictEqual(span.name, 'EchoClient.Echo');
       assert.strictEqual(span.ended, true);
       assert.strictEqual(span.attributes['gcp.method.type'], 'http');
@@ -780,7 +781,7 @@ describe('createApiCall', () => {
       const attemptSpan = spans[0];
       const span = spans[1];
       assert.strictEqual(attemptSpan.name, 'google.example.v1.Echo/Echo');
-      assert.strictEqual(attemptSpan.attributes['gcp.method.type'], 'http');
+      assert.strictEqual(attemptSpan.attributes['rpc.system'], 'http');
       assert.strictEqual(span.name, 'EchoClient.Echo');
       assert.strictEqual(span.ended, true);
       assert.strictEqual(span.attributes['gcp.method.type'], 'http');
@@ -877,16 +878,21 @@ describe('createApiCall', () => {
 
       const spans = harness.getSpans('google-gax');
       assert.strictEqual(spans.length, 2);
+      assert.strictEqual(spans[0].attributes['rpc.system'], 'http');
+      assert.strictEqual(spans[1].attributes['gcp.method.type'], 'http');
       for (const span of spans) {
         assert.strictEqual(span.ended, true);
-        assert.strictEqual(span.attributes['gcp.method.type'], 'http');
         // On the fallback transport error.type reports the HTTP status the
         // server sent. A deadline expires before any response arrives, so there
         // is none, and the attribute resolves to CLIENT_TIMEOUT per Tier 3.
         assert.strictEqual(span.attributes['error.type'], 'CLIENT_TIMEOUT');
         assert.strictEqual(
           span.attributes['rpc.response.status_code'],
-          'DEADLINE_EXCEEDED',
+          undefined,
+        );
+        assert.strictEqual(
+          span.attributes['http.response.status_code'],
+          undefined,
         );
         assert.strictEqual(span.events.length, 1);
         assert.strictEqual(span.events[0].name, 'exception');
@@ -939,16 +945,17 @@ describe('createApiCall', () => {
 
       const spans = harness.getSpans('google-gax');
       assert.strictEqual(spans.length, 2);
+      assert.strictEqual(spans[0].attributes['rpc.system'], 'http');
+      assert.strictEqual(spans[1].attributes['gcp.method.type'], 'http');
       for (const span of spans) {
         assert.strictEqual(span.ended, true);
-        assert.strictEqual(span.attributes['gcp.method.type'], 'http');
         assert.strictEqual(
           span.attributes['error.type'],
           'CLIENT_CONNECTION_ERROR',
         );
         assert.strictEqual(
           span.attributes['rpc.response.status_code'],
-          'UNAVAILABLE',
+          undefined,
         );
         assert.strictEqual(
           span.attributes['http.response.status_code'],
@@ -1021,7 +1028,7 @@ describe('createApiCall', () => {
 
       const spans = harness.getSpans('google-gax');
       assert.strictEqual(spans.length, 2);
-      assert.strictEqual(spans[0].attributes['gcp.method.type'], 'grpc');
+      assert.strictEqual(spans[0].attributes['rpc.system'], 'grpc');
       assert.strictEqual(spans[1].attributes['gcp.method.type'], 'grpc');
     });
 
@@ -1052,7 +1059,7 @@ describe('createApiCall', () => {
 
       const spans = harness.getSpans('google-gax');
       assert.strictEqual(spans.length, 2);
-      assert.strictEqual(spans[0].attributes['gcp.method.type'], 'http');
+      assert.strictEqual(spans[0].attributes['rpc.system'], 'http');
       assert.strictEqual(spans[1].attributes['gcp.method.type'], 'http');
     });
 
@@ -1083,7 +1090,7 @@ describe('createApiCall', () => {
 
       const spans = harness.getSpans('google-gax');
       assert.strictEqual(spans.length, 2);
-      assert.strictEqual(spans[0].attributes['gcp.method.type'], 'http');
+      assert.strictEqual(spans[0].attributes['rpc.system'], 'http');
       assert.strictEqual(spans[1].attributes['gcp.method.type'], 'http');
     });
 
@@ -1521,10 +1528,9 @@ describe('createApiCall', () => {
               harness.assertResendCount(idx, {span: attemptSpan});
             });
             harness.assertResponseStatus(
-              {
-                rpcStatus: 'OK',
-                ...(transport.rpcType === 'http' ? {httpStatus: 200} : {}),
-              },
+              transport.rpcType === 'http'
+                ? {httpStatus: 200}
+                : {rpcStatus: 'OK'},
               {span},
             );
           });
@@ -1859,10 +1865,19 @@ describe('createApiCall', () => {
           'echo.googleapis.com',
         );
         assert.strictEqual(t4Span.attributes['server.port'], 443);
+        assert.strictEqual(
+          t4Span.attributes['rpc.method'],
+          'google.example.v1.Echo/Echo',
+        );
+        assert.strictEqual(t4Span.attributes['http.request.method'], undefined);
         assert.strictEqual(t4Span.attributes['rpc.response.status_code'], 'OK');
         assert.strictEqual(
           t4Span.attributes['grpc.response.status_code'],
-          'OK',
+          undefined,
+        );
+        assert.strictEqual(
+          t4Span.attributes['http.response.status_code'],
+          undefined,
         );
       });
 
@@ -1935,8 +1950,18 @@ describe('createApiCall', () => {
           'echo.googleapis.com',
         );
         assert.strictEqual(t4Span.attributes['server.port'], 443);
-        assert.strictEqual(t4Span.attributes['rpc.response.status_code'], 'OK');
+        assert.strictEqual(t4Span.attributes['http.request.method'], 'POST');
+        assert.strictEqual(t4Span.attributes['rpc.method'], undefined);
+        assert.strictEqual(
+          t4Span.attributes['rpc.response.status_code'],
+          undefined,
+        );
         assert.strictEqual(t4Span.attributes['http.response.status_code'], 200);
+        assert.strictEqual(
+          t3Span.attributes['rpc.response.status_code'],
+          undefined,
+        );
+        assert.strictEqual(t3Span.attributes['http.response.status_code'], 200);
       });
 
       it('ties concurrent T4 attempt spans to their respective T3 client request spans without cross-talk', async () => {
@@ -2082,7 +2107,7 @@ describe('createApiCall', () => {
         );
         assert.strictEqual(
           t4Spans[0].attributes['grpc.response.status_code'],
-          'UNAVAILABLE',
+          undefined,
         );
         assert.strictEqual(t4Spans[0].events.length, 1);
         assert.strictEqual(t4Spans[0].events[0].name, 'exception');
@@ -2105,7 +2130,7 @@ describe('createApiCall', () => {
         );
         assert.strictEqual(
           t4Spans[1].attributes['grpc.response.status_code'],
-          'OK',
+          undefined,
         );
         assert.strictEqual(
           t4Spans[1].parentSpanContext?.spanId,
@@ -2117,6 +2142,10 @@ describe('createApiCall', () => {
         assert.strictEqual(t3Span.status.code, SpanStatusCode.UNSET);
         assert.strictEqual(t3Span.attributes['gcp.grpc.resend_count'], 1);
         assert.strictEqual(t3Span.attributes['rpc.response.status_code'], 'OK');
+        assert.strictEqual(
+          t3Span.attributes['grpc.response.status_code'],
+          undefined,
+        );
       });
     });
   });

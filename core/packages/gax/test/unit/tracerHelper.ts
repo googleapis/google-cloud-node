@@ -25,6 +25,7 @@ import {
   getGaxTracer,
   traceCall,
   traceAttempt,
+  setAttemptHttpMethod,
   handlePromise,
   handleStream,
   AttemptTraceContext,
@@ -417,7 +418,7 @@ describe('TracerHelper', () => {
           await errorTypeOf(error, httpDynamicArgs),
           'CLIENT_TIMEOUT',
         );
-        harness.assertResponseStatus({rpcStatus: 'DEADLINE_EXCEEDED'});
+        harness.assertResponseStatus({});
       });
 
       it('prefers a system error code to the class on either transport', async () => {
@@ -450,7 +451,7 @@ describe('TracerHelper', () => {
           await errorTypeOf(error, httpDynamicArgs),
           'CLIENT_CONNECTION_ERROR',
         );
-        harness.assertResponseStatus({rpcStatus: 'UNAVAILABLE'});
+        harness.assertResponseStatus({});
       });
 
       it('checks e.cause when the outer error is a GoogleError', async () => {
@@ -1994,10 +1995,10 @@ describe('TracerHelper', () => {
         harness.assertResponseStatus({rpcStatus: 'OK'});
       });
 
-      it('reports OK and 200 on a successful http call', async () => {
+      it('reports 200 on a successful http call', async () => {
         await traceCall(httpDynamicArgs, staticArgs, async () => 'ok');
 
-        harness.assertResponseStatus({rpcStatus: 'OK', httpStatus: 200});
+        harness.assertResponseStatus({httpStatus: 200});
       });
 
       it('reports the gRPC status name on a failed grpc call', async () => {
@@ -2015,7 +2016,7 @@ describe('TracerHelper', () => {
         assert.strictEqual(spans[0].status.message, '5 NOT_FOUND');
       });
 
-      it('reports the received http status alongside the mapped gRPC status', async () => {
+      it('reports the received http status on a failed http call', async () => {
         // 418 is unmapped, so rpcCodeFromHttpStatusCode collapses it to
         // FAILED_PRECONDITION. The received status is therefore not
         // recoverable from `code`, which is why it is carried separately.
@@ -2030,7 +2031,6 @@ describe('TracerHelper', () => {
         });
 
         harness.assertResponseStatus({
-          rpcStatus: 'FAILED_PRECONDITION',
           httpStatus: 418,
         });
         const spans = harness.getSpans('google-gax');
@@ -2050,7 +2050,7 @@ describe('TracerHelper', () => {
           });
         });
 
-        harness.assertResponseStatus({rpcStatus: 'DEADLINE_EXCEEDED'});
+        harness.assertResponseStatus({});
         const spans = harness.getSpans('google-gax');
         assert.strictEqual(spans[0].status.message, 'Deadline exceeded');
       });
@@ -2145,7 +2145,7 @@ describe('TracerHelper', () => {
           });
         });
 
-        harness.assertResponseStatus({rpcStatus: undefined});
+        harness.assertResponseStatus({});
         const span = harness.requireSingleSpan('google-gax');
         assert.strictEqual(span.status.message, 'client-side http error');
         assert.strictEqual(
@@ -2255,7 +2255,7 @@ describe('TracerHelper', () => {
         const span = harness.requireSingleSpan('google-gax');
         assert.strictEqual(span.attributes['error.type'], 'NOT_FOUND');
         assert.strictEqual(
-          span.attributes['grpc.response.status_code'],
+          span.attributes['rpc.response.status_code'],
           'NOT_FOUND',
         );
       });
@@ -3858,8 +3858,65 @@ describe('TracerHelper', () => {
       );
       assert.strictEqual(span.attributes['server.port'], 443);
       assert.strictEqual(span.attributes['rpc.system'], 'grpc');
+      assert.strictEqual(
+        span.attributes['rpc.method'],
+        'google.example.v1.Echo/Echo',
+      );
+      assert.strictEqual(span.attributes['http.request.method'], undefined);
       assert.strictEqual(span.attributes['rpc.response.status_code'], 'OK');
-      assert.strictEqual(span.attributes['grpc.response.status_code'], 'OK');
+      assert.strictEqual(
+        span.attributes['grpc.response.status_code'],
+        undefined,
+      );
+      assert.strictEqual(span.attributes['gcp.repo'], undefined);
+      assert.strictEqual(span.attributes['gcp.method.type'], undefined);
+      assert.strictEqual(span.attributes['gcp.method.name'], undefined);
+      assert.strictEqual(span.attributes['gcp.client.version'], undefined);
+      assert.strictEqual(span.attributes['gcp.artifact'], undefined);
+    });
+
+    it('sets http.request.method on HTTP T4 spans and allows setAttemptHttpMethod to update it', async () => {
+      await traceAttempt(
+        {
+          apiName: 'google.example.v1.Echo',
+          clientName: 'EchoClient',
+          methodName: 'Echo',
+          rpcType: 'http',
+        },
+        telemetryInfo,
+        async () => [{echo: 'ok'}, undefined, undefined],
+      );
+
+      await traceAttempt(
+        {
+          apiName: 'google.example.v1.Echo',
+          clientName: 'EchoClient',
+          methodName: 'Echo',
+          rpcType: 'http',
+        },
+        telemetryInfo,
+        async () => {
+          setAttemptHttpMethod('GET');
+          return [{echo: 'ok'}, undefined, undefined];
+        },
+      );
+
+      const spans = harness.getSpans('google-gax');
+      assert.strictEqual(spans.length, 2);
+      assert.strictEqual(spans[0].attributes['http.request.method'], 'POST');
+      assert.strictEqual(spans[0].attributes['rpc.method'], undefined);
+      assert.strictEqual(spans[0].attributes['http.response.status_code'], 200);
+      assert.strictEqual(
+        spans[0].attributes['rpc.response.status_code'],
+        undefined,
+      );
+      assert.strictEqual(spans[1].attributes['http.request.method'], 'GET');
+      assert.strictEqual(spans[1].attributes['rpc.method'], undefined);
+      assert.strictEqual(spans[1].attributes['http.response.status_code'], 200);
+      assert.strictEqual(
+        spans[1].attributes['rpc.response.status_code'],
+        undefined,
+      );
     });
 
     it('omits server.address and server.port on T4 span for pre-connection failures while preserving url.domain', async () => {
@@ -3897,6 +3954,45 @@ describe('TracerHelper', () => {
       assert.strictEqual(
         span.events[0].attributes?.['exception.type'],
         'Error',
+      );
+    });
+
+    it('sets gcp.grpc.resend_count and http.request.resend_count on T4 spans when resendCount > 0', async () => {
+      await traceAttempt(
+        {
+          apiName: 'google.example.v1.Echo',
+          clientName: 'EchoClient',
+          methodName: 'Echo',
+          rpcType: 'grpc',
+          resendCount: 2,
+        },
+        telemetryInfo,
+        async () => [{echo: 'ok'}, undefined, undefined],
+      );
+
+      await traceAttempt(
+        {
+          apiName: 'google.example.v1.Echo',
+          clientName: 'EchoClient',
+          methodName: 'Echo',
+          rpcType: 'http',
+          resendCount: 3,
+        },
+        telemetryInfo,
+        async () => [{echo: 'ok'}, undefined, undefined],
+      );
+
+      const spans = harness.getSpans('google-gax');
+      assert.strictEqual(spans.length, 2);
+      assert.strictEqual(spans[0].attributes['gcp.grpc.resend_count'], 2);
+      assert.strictEqual(
+        spans[0].attributes['http.request.resend_count'],
+        undefined,
+      );
+      assert.strictEqual(spans[1].attributes['http.request.resend_count'], 3);
+      assert.strictEqual(
+        spans[1].attributes['gcp.grpc.resend_count'],
+        undefined,
       );
     });
   });

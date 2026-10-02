@@ -19,6 +19,7 @@ import {
   Attributes,
   context,
   Context,
+  createContextKey,
   Span,
   SpanKind,
   SpanStatusCode,
@@ -118,6 +119,23 @@ export interface AttemptTraceContext extends DynamicTraceContext {
    * Omitted from span attributes when 0 or undefined.
    */
   resendCount?: number;
+  /**
+   * The HTTP request method for REST fallback attempts (e.g. 'GET', 'POST', 'PUT', 'PATCH', 'DELETE').
+   */
+  httpMethod?: string;
+}
+
+const ATTEMPT_SPAN_KEY = createContextKey('google-gax-attempt-span');
+
+/**
+ * Updates the `http.request.method` attribute on the currently active T4 attempt span, if any.
+ */
+export function setAttemptHttpMethod(httpMethod: string): void {
+  const attemptSpan = context.active().getValue(ATTEMPT_SPAN_KEY) as
+    Span | undefined;
+  if (attemptSpan) {
+    attemptSpan.setAttribute('http.request.method', httpMethod);
+  }
 }
 
 /**
@@ -1119,11 +1137,8 @@ export function traceCall(
 
     const setStatusAttributes = () => {
       const attributes: Attributes = {};
-      if (rpcStatusName !== undefined) {
+      if (dynamicArgs.rpcType === 'grpc' && rpcStatusName !== undefined) {
         attributes['rpc.response.status_code'] = rpcStatusName;
-        if (dynamicArgs.rpcType === 'grpc') {
-          attributes['grpc.response.status_code'] = rpcStatusName;
-        }
       }
       if (dynamicArgs.rpcType === 'http' && httpStatusCode !== undefined) {
         attributes['http.response.status_code'] = httpStatusCode;
@@ -1245,13 +1260,14 @@ export function traceAttempt<T = GaxCallResult>(
       const urlDomain = resolveUrlDomain(dynamicArgs, staticArgs);
       const initialAttributes: Attributes = {
         'gcp.client.service': staticArgs.gcpClientService,
-        'gcp.client.version': staticArgs.gcpVersion,
-        'gcp.repo': staticArgs.gcpRepo,
-        'gcp.artifact': staticArgs.gcpArtifact,
-        'gcp.method.name': dynamicArgs.methodName,
-        'gcp.method.type': dynamicArgs.rpcType,
         'rpc.system': dynamicArgs.rpcType,
       };
+      if (dynamicArgs.rpcType === 'grpc') {
+        initialAttributes['rpc.method'] = spanName;
+      } else {
+        initialAttributes['http.request.method'] =
+          dynamicArgs.httpMethod ?? 'POST';
+      }
       if (urlDomain !== undefined) {
         initialAttributes['url.domain'] = urlDomain;
       }
@@ -1292,11 +1308,8 @@ export function traceAttempt<T = GaxCallResult>(
 
       const setStatusAttributes = () => {
         const attributes: Attributes = {};
-        if (rpcStatusName !== undefined) {
+        if (dynamicArgs.rpcType === 'grpc' && rpcStatusName !== undefined) {
           attributes['rpc.response.status_code'] = rpcStatusName;
-          if (dynamicArgs.rpcType === 'grpc') {
-            attributes['grpc.response.status_code'] = rpcStatusName;
-          }
         }
         if (dynamicArgs.rpcType === 'http' && httpStatusCode !== undefined) {
           attributes['http.response.status_code'] = httpStatusCode;
@@ -1352,7 +1365,10 @@ export function traceAttempt<T = GaxCallResult>(
         : undefined;
 
       try {
-        const result = fn(tracedCallback);
+        const attemptContext = context
+          .active()
+          .setValue(ATTEMPT_SPAN_KEY, span);
+        const result = context.with(attemptContext, () => fn(tracedCallback));
         const promiseTarget = !isStreamCall ? getPromiseTarget(result) : null;
         if (isStreamCall && result instanceof EventEmitter) {
           handleStream(result, recordError, endSpan, !!callback);
