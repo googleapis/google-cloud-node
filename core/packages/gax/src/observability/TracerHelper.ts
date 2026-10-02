@@ -1257,6 +1257,7 @@ export function traceAttempt<T = GaxCallResult>(
     {kind: SpanKind.CLIENT},
     baseContext,
     (span: Span) => {
+      // Populate initial transport, method, domain, and retry attributes.
       const urlDomain = resolveUrlDomain(dynamicArgs, staticArgs);
       const initialAttributes: Attributes = {
         'gcp.client.service': staticArgs.gcpClientService,
@@ -1283,6 +1284,7 @@ export function traceAttempt<T = GaxCallResult>(
       }
       span.setAttributes(initialAttributes);
 
+      // Parse server address and port, defaulting to port 443.
       let rawAddress =
         dynamicArgs.serverAddress ?? staticArgs.serverAddress ?? urlDomain;
       let rawPort = dynamicArgs.serverPort ?? staticArgs.serverPort;
@@ -1306,6 +1308,7 @@ export function traceAttempt<T = GaxCallResult>(
         span.setStatus({code: SpanStatusCode.ERROR, message});
       };
 
+      // Record response status and server endpoint (omitted on pre-connection failures).
       const setStatusAttributes = () => {
         const attributes: Attributes = {};
         if (dynamicArgs.rpcType === 'grpc' && rpcStatusName !== undefined) {
@@ -1326,6 +1329,7 @@ export function traceAttempt<T = GaxCallResult>(
         span.setAttributes(attributes);
       };
 
+      // Finalize status attributes and end the span once.
       const endSpan = () => {
         if (!spanEnded) {
           spanEnded = true;
@@ -1338,6 +1342,7 @@ export function traceAttempt<T = GaxCallResult>(
         }
       };
 
+      // Capture error type, exception event, and span error status on failure.
       const recordError = (e: unknown) => {
         recordedError = e;
         rpcStatusName = resolveRpcStatusName(e);
@@ -1365,6 +1370,7 @@ export function traceAttempt<T = GaxCallResult>(
         : undefined;
 
       try {
+        // Expose the attempt span in context so the HTTP transport can update http.request.method.
         const attemptContext = context
           .active()
           .setValue(ATTEMPT_SPAN_KEY, span);

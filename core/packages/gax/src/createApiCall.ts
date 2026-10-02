@@ -93,6 +93,7 @@ export function createApiCall(
         rpcType: isFallback ? 'http' : 'grpc',
       }
     : undefined;
+  // Context for per-attempt T4 CLIENT spans.
   const attemptDynamicArgs: AttemptTraceContext | undefined =
     tracingEnabled && dynamicArgs
       ? {
@@ -107,6 +108,7 @@ export function createApiCall(
     callback?: APICallback,
     recordResend?: ResendRecorder,
   ) => {
+    // Capture the active T3 call span context to parent async T4 attempt spans.
     const parentContext = tracingEnabled ? context.active() : undefined;
     let currentApiCaller = apiCaller;
 
@@ -148,6 +150,7 @@ export function createApiCall(
         const streaming = (currentApiCaller as StreamingApiCaller).descriptor
           ?.streaming;
 
+        // Wrap the transport call so each attempt (initial send and retries) emits a T4 CLIENT span.
         if (tracingEnabled && attemptDynamicArgs && staticArgs) {
           const wrappedFunc = func;
           let attemptCount = 0;
