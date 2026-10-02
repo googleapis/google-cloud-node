@@ -289,13 +289,19 @@ function lintPackageInWorker(pkgDir, relativeFiles) {
       workerData: {pkgDir, relativeFiles},
     });
     let result;
+    let error;
     worker.once('message', data => {
       result = data;
       void worker.terminate();
     });
-    worker.once('error', reject);
+    worker.once('error', err => {
+      error = err;
+      void worker.terminate();
+    });
     worker.once('exit', code => {
-      if (result) {
+      if (error) {
+        reject(error);
+      } else if (result) {
         resolve(result);
       } else {
         reject(new Error(`ESLint worker exited with code ${code}`));
