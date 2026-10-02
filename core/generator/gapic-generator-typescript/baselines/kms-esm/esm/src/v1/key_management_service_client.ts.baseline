@@ -4174,6 +4174,7 @@ export class KeyManagementServiceClient {
         this.iamClient.close().catch(err => {
           throw err;
         });
+        return;
       });
     }
     return Promise.resolve();

@@ -1036,6 +1036,7 @@ export class DuplicateMethodsTestServiceClient {
         this.locationsClient.close().catch(err => {
           throw err;
         });
+        return;
       });
     }
     return Promise.resolve();

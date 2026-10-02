@@ -463,7 +463,7 @@ export class TestServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    let routingParameter = {};
+    const routingParameter = {};
     {
       const fieldValue = request.name;
       if (fieldValue !== undefined && fieldValue !== null) {
@@ -606,7 +606,7 @@ export class TestServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    let routingParameter = {};
+    const routingParameter = {};
     {
       const fieldValue = request.name;
       if (fieldValue !== undefined && fieldValue !== null) {
@@ -757,7 +757,7 @@ export class TestServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    let routingParameter = {};
+    const routingParameter = {};
     {
       const fieldValue = request.parentId;
       if (fieldValue !== undefined && fieldValue !== null) {
@@ -858,6 +858,7 @@ export class TestServiceClient {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
+        return;
       });
     }
     return Promise.resolve();

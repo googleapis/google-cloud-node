@@ -273,6 +273,7 @@ describe('v2.RowAccessPolicyServiceClient', () => {
         .close()
         .then(() => {
           done();
+          return;
         })
         .catch(err => {
           throw err;
@@ -290,6 +291,7 @@ describe('v2.RowAccessPolicyServiceClient', () => {
         .close()
         .then(() => {
           done();
+          return;
         })
         .catch(err => {
           throw err;

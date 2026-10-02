@@ -599,7 +599,7 @@ export class EchoClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    let routingParameter = {};
+    const routingParameter = {};
     {
       const fieldValue = request.header;
       if (fieldValue !== undefined && fieldValue !== null) {
@@ -2068,6 +2068,7 @@ export class EchoClient {
         this._terminated = true;
         stub.close();
         void this.operationsClient.close();
+        return;
       });
     }
     return Promise.resolve();

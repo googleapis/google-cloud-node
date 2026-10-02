@@ -303,6 +303,7 @@ describe('v2alpha.ModelServiceClient', () => {
         .close()
         .then(() => {
           done();
+          return;
         })
         .catch(err => {
           throw err;
@@ -319,6 +320,7 @@ describe('v2alpha.ModelServiceClient', () => {
         .close()
         .then(() => {
           done();
+          return;
         })
         .catch(err => {
           throw err;

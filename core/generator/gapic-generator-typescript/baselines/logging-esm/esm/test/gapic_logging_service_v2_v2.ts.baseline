@@ -285,6 +285,7 @@ describe('v2.LoggingServiceV2Client', () => {
         .close()
         .then(() => {
           done();
+          return;
         })
         .catch(err => {
           throw err;
@@ -301,6 +302,7 @@ describe('v2.LoggingServiceV2Client', () => {
         .close()
         .then(() => {
           done();
+          return;
         })
         .catch(err => {
           throw err;

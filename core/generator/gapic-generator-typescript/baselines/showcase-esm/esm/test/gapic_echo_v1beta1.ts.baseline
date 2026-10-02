@@ -304,6 +304,7 @@ describe('v1beta1.EchoClient', () => {
         .close()
         .then(() => {
           done();
+          return;
         })
         .catch(err => {
           throw err;
@@ -320,6 +321,7 @@ describe('v1beta1.EchoClient', () => {
         .close()
         .then(() => {
           done();
+          return;
         })
         .catch(err => {
           throw err;

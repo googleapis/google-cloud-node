@@ -211,6 +211,7 @@ describe('v1beta1.IdentityClient', () => {
         .close()
         .then(() => {
           done();
+          return;
         })
         .catch(err => {
           throw err;
@@ -227,6 +228,7 @@ describe('v1beta1.IdentityClient', () => {
         .close()
         .then(() => {
           done();
+          return;
         })
         .catch(err => {
           throw err;

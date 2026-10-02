@@ -333,6 +333,7 @@ describe('{{ api.naming.version }}.{{ service.name }}Client', () => {
             assert(client.{{ service.name.toCamelCase() }}Stub);
             client.{{ id.get("close") }}().then(() => {
                 done();
+                return;
             }).catch(err => {throw err});
         });
 
@@ -341,6 +342,7 @@ describe('{{ api.naming.version }}.{{ service.name }}Client', () => {
             assert.strictEqual(client.{{ service.name.toCamelCase() }}Stub, undefined);
             client.{{ id.get("close") }}().then(() => {
                 done();
+                return;
             }).catch(err => {throw err});
         });
 
@@ -1173,7 +1175,7 @@ describe('{{ api.naming.version }}.{{ service.name }}Client', () => {
                         } else {
                             resolve(result);
                         }
-                    }).catch(err => {throw err});
+                    }).catch(reject);
             });
             const response = await promise;
             {%- if method.options and method.options.deprecated %}
@@ -1285,7 +1287,7 @@ describe('{{ api.naming.version }}.{{ service.name }}Client', () => {
                         } else {
                             resolve(result);
                         }
-                    });
+                    }).catch(reject);
             });
             const response = await promise;
             {%- if method.options and method.options.deprecated %}
@@ -1474,7 +1476,7 @@ describe('{{ api.naming.version }}.{{ service.name }}Client', () => {
                         } else {
                             resolve(result);
                         }
-                    }).catch(err => {throw err});
+                    }).catch(reject);
             });
             const response = await promise;
             {%- if method.options and method.options.deprecated %}

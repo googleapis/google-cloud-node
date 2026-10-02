@@ -236,6 +236,7 @@ describe('v1beta1.BigQueryStorageClient', () => {
         .close()
         .then(() => {
           done();
+          return;
         })
         .catch(err => {
           throw err;
@@ -252,6 +253,7 @@ describe('v1beta1.BigQueryStorageClient', () => {
         .close()
         .then(() => {
           done();
+          return;
         })
         .catch(err => {
           throw err;

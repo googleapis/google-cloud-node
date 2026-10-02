@@ -224,6 +224,7 @@ describe('v2alpha.ConversationalSearchServiceClient', () => {
         .close()
         .then(() => {
           done();
+          return;
         })
         .catch(err => {
           throw err;
@@ -243,6 +244,7 @@ describe('v2alpha.ConversationalSearchServiceClient', () => {
         .close()
         .then(() => {
           done();
+          return;
         })
         .catch(err => {
           throw err;

@@ -284,6 +284,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
         .close()
         .then(() => {
           done();
+          return;
         })
         .catch(err => {
           throw err;
@@ -301,6 +302,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
         .close()
         .then(() => {
           done();
+          return;
         })
         .catch(err => {
           throw err;
