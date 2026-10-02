@@ -15,13 +15,31 @@
  * limitations under the License.
  */
 
-import {Agent as HTTPAgent} from 'http';
-import {Agent as HTTPSAgent} from 'https';
+import {
+  Agent,
+  Dispatcher,
+  ProxyAgent,
+  getGlobalDispatcher,
+  interceptors,
+} from 'undici';
 import {Options} from './';
 
-export const pool = new Map<string, HTTPAgent>();
+export const pool = new Map<string, Dispatcher>();
 
-export type HttpAnyAgent = HTTPAgent | HTTPSAgent;
+// undici only follows redirects through an interceptor; node-fetch
+// followed up to 20, so preserve that
+const redirect = interceptors.redirect({maxRedirections: 20});
+
+const composed = new WeakMap<Dispatcher, Dispatcher>();
+
+function withRedirects(dispatcher: Dispatcher): Dispatcher {
+  let dispatcherWithRedirects = composed.get(dispatcher);
+  if (!dispatcherWithRedirects) {
+    dispatcherWithRedirects = dispatcher.compose(redirect);
+    composed.set(dispatcher, dispatcherWithRedirects);
+  }
+  return dispatcherWithRedirects;
+}
 
 /**
  * Determines if a proxy should be considered based on the environment.
@@ -55,18 +73,16 @@ function shouldUseProxyForURI(uri: string): boolean {
 }
 
 /**
- * Returns a custom request Agent if one is found, otherwise returns undefined
- * which will result in the global http(s) Agent being used.
+ * Returns a dispatcher for the given request. Proxied requests and requests
+ * with a socket limit get a cached dedicated dispatcher; everything else
+ * uses undici's global dispatcher, which pools and keeps connections alive
+ * by default.
  * @private
  * @param {string} uri The request uri
  * @param {Options} reqOpts The request options
- * @returns {HttpAnyAgent|undefined}
+ * @returns {Dispatcher}
  */
-export function getAgent(
-  uri: string,
-  reqOpts: Options,
-): HttpAnyAgent | undefined {
-  const isHttp = uri.startsWith('http://');
+export function getDispatcher(uri: string, reqOpts: Options): Dispatcher {
   const proxy =
     reqOpts.proxy ||
     process.env.HTTP_PROXY ||
@@ -74,31 +90,36 @@ export function getAgent(
     process.env.HTTPS_PROXY ||
     process.env.https_proxy;
 
-  const poolOptions = Object.assign({}, reqOpts.pool);
-
   const manuallyProvidedProxy = !!reqOpts.proxy;
   const shouldUseProxy = manuallyProvidedProxy || shouldUseProxyForURI(uri);
 
+  // `pool.maxSockets` historically only took effect for proxied requests
+  // and keep-alive (`forever`) agents; other agent options have no undici
+  // equivalent and are ignored
+  const maxSockets = reqOpts.pool?.maxSockets;
+  const connections =
+    typeof maxSockets === 'number' && Number.isFinite(maxSockets)
+      ? maxSockets
+      : null;
+
   if (proxy && shouldUseProxy) {
-    // tslint:disable-next-line variable-name
-    const {HttpProxyAgent} = require('http-proxy-agent');
-    const {HttpsProxyAgent} = require('https-proxy-agent');
-
-    const Agent = isHttp ? HttpProxyAgent : HttpsProxyAgent;
-    return new Agent(proxy, poolOptions);
-  }
-
-  let key = isHttp ? 'http' : 'https';
-
-  if (reqOpts.forever) {
-    key += ':forever';
-
+    const key = `proxy:${proxy}:${connections}`;
     if (!pool.has(key)) {
-      // tslint:disable-next-line variable-name
-      const Agent = isHttp ? HTTPAgent : HTTPSAgent;
-      pool.set(key, new Agent({...poolOptions, keepAlive: true}));
+      pool.set(
+        key,
+        new ProxyAgent({uri: proxy, ...(connections !== null && {connections})})
+      );
     }
+    return withRedirects(pool.get(key)!);
   }
 
-  return pool.get(key);
+  if (reqOpts.forever && connections !== null) {
+    const key = `agent:${connections}`;
+    if (!pool.has(key)) {
+      pool.set(key, new Agent({connections}));
+    }
+    return withRedirects(pool.get(key)!);
+  }
+
+  return withRedirects(getGlobalDispatcher());
 }
