@@ -92,8 +92,7 @@ export type PagedRequest<P> = P & {
 };
 
 export type QueryResultsResponse =
-  | bigquery.IGetQueryResultsResponse
-  | bigquery.IQueryResponse;
+  bigquery.IGetQueryResultsResponse | bigquery.IQueryResponse;
 
 export type QueryRowsResponse = PagedResponse<
   RowMetadata,
@@ -135,16 +134,10 @@ export type Query = JobRequest<bigquery.IJobConfigurationQuery> & {
 
 export type QueryParamTypeStruct = {
   [type: string]:
-    | string
-    | string[]
-    | QueryParamTypeStruct
-    | QueryParamTypeStruct[];
+    string | string[] | QueryParamTypeStruct | QueryParamTypeStruct[];
 };
 export type QueryParamTypes =
-  | string[]
-  | string[][]
-  | QueryParamTypeStruct
-  | QueryParamTypeStruct[];
+  string[] | string[][] | QueryParamTypeStruct | QueryParamTypeStruct[];
 
 export type QueryOptions = QueryResultsOptions;
 export type QueryStreamOptions = {
@@ -598,8 +591,7 @@ export class BigQuery extends Service {
       selectedFields?: string[];
       parseJSON?: boolean;
       listParams?:
-        | bigquery.tabledata.IListParams
-        | bigquery.jobs.IGetQueryResultsParams;
+        bigquery.tabledata.IListParams | bigquery.jobs.IGetQueryResultsParams;
     },
   ) {
     // deep copy schema fields to avoid mutation
@@ -2208,9 +2200,7 @@ export class BigQuery extends Service {
   query(
     query: string | Query,
     optionsOrCallback?:
-      | QueryOptions
-      | SimpleQueryRowsCallback
-      | QueryRowsCallback,
+      QueryOptions | SimpleQueryRowsCallback | QueryRowsCallback,
     cb?: SimpleQueryRowsCallback | QueryRowsCallback,
   ): void | Promise<SimpleQueryRowsResponse> | Promise<QueryRowsResponse> {
     let options =
@@ -2523,8 +2513,7 @@ function convertSchemaFieldValue(
     selectedFields?: string[];
     parseJSON?: boolean;
     listParams?:
-      | bigquery.tabledata.IListParams
-      | bigquery.jobs.IGetQueryResultsParams;
+      bigquery.tabledata.IListParams | bigquery.jobs.IGetQueryResultsParams;
   },
 ) {
   if (value === null) {
@@ -2753,8 +2742,7 @@ export class BigQueryRange {
     value: string,
     elementType: string,
     listParams?:
-      | bigquery.tabledata.IListParams
-      | bigquery.jobs.IGetQueryResultsParams,
+      bigquery.tabledata.IListParams | bigquery.jobs.IGetQueryResultsParams,
   ): BigQueryRange {
     const [start, end] = BigQueryRange.fromStringValue_(value);
     const convertRangeSchemaValue = (value: string) => {
