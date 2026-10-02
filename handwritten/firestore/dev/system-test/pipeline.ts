@@ -9603,8 +9603,15 @@ describe.skipClassic(
             .select('product', 'allPrices', 'distinctPrices'),
         );
 
-        expectResults(
-          snapshot,
+        const actual = snapshot.results.map(r => {
+          const data = r.data();
+          data['distinctPrices'] = [...data['distinctPrices']].sort(
+            (a: number, b: number) => a - b,
+          );
+          return data;
+        });
+
+        expect(actual).to.deep.equal([
           {
             product: 'phone',
             allPrices: [12, 30],
@@ -9618,19 +9625,19 @@ describe.skipClassic(
           {
             product: 'tablet',
             allPrices: [30, 60, 60],
-            distinctPrices: [60, 30],
+            distinctPrices: [30, 60],
           },
           {
             product: 'tablet',
             allPrices: [30, 60, 60],
-            distinctPrices: [60, 30],
+            distinctPrices: [30, 60],
           },
           {
             product: 'tablet',
             allPrices: [30, 60, 60],
-            distinctPrices: [60, 30],
+            distinctPrices: [30, 60],
           },
-        );
+        ]);
       });
 
       it('computes a running total', async () => {
