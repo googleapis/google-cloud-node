@@ -293,6 +293,12 @@ function teenyRequest(
         teenyRequest.stats.requestFinished();
         responseStream = res.body;
 
+        // node-fetch v3's internal pipeline listeners plus the wiring below
+        // legitimately exceed the default limit of 10, warning on every
+        // streamed response
+        // see: https://github.com/googleapis/google-cloud-node/issues/9185
+        responseStream.setMaxListeners(0);
+
         responseStream.on('error', (err: Error) => {
           requestStream.emit('error', err);
         });
