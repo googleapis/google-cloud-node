@@ -17,11 +17,47 @@ import {existsSync} from 'node:fs';
 import {availableParallelism} from 'node:os';
 import path from 'node:path';
 import {promisify} from 'node:util';
+import {
+  Worker,
+  isMainThread,
+  parentPort,
+  workerData,
+} from 'node:worker_threads';
 import {ESLint} from 'eslint';
 
 const execFileAsync = promisify(execFile);
 const tsconfigCache = new Map();
+const REPO_ROOT = path.resolve(process.cwd());
 const MAX_CONCURRENCY = Math.min(4, availableParallelism());
+
+let activeTasks = 0;
+const taskQueue = [];
+
+/**
+ * Acquires a concurrency slot before executing `fn`, bounding total active
+ * heavy tasks (ESLint workers and tsc child processes) across the process.
+ */
+async function withConcurrencyLimit(fn) {
+  while (activeTasks >= MAX_CONCURRENCY) {
+    await new Promise(resolve => taskQueue.push(resolve));
+  }
+  activeTasks++;
+  try {
+    return await fn();
+  } finally {
+    activeTasks--;
+    taskQueue.shift()?.();
+  }
+}
+
+/**
+ * Executes an async callback over an iterable with bounded concurrency.
+ */
+function mapConcurrent(items, fn) {
+  return Promise.all(
+    Array.from(items, item => withConcurrencyLimit(() => fn(item))),
+  );
+}
 
 // --- Main Runner (Entry Point) ---
 async function run() {
@@ -41,9 +77,9 @@ async function run() {
     // Install missing package dependencies upfront before running linters or type checkers
     await ensurePackageDependencies(packagesToCheck);
 
-    // Run ESLint and Type checks in parallel to optimize CPU utilization
+    // Run ESLint and Type checks concurrently through the shared concurrency pool
     const [eslintPassed, typeSafetyPassed] = await Promise.all([
-      checkEslint(changedTsFiles),
+      checkEslint(changedTsFiles, packagesToCheck),
       checkTypeSafety(packagesToCheck),
     ]);
 
@@ -75,25 +111,32 @@ function runGit(args, options = {}) {
 
 /**
  * Runs `git diff --name-only` for the given revision and pathspec arguments,
- * returning existing changed TypeScript files (excluding test fixtures).
+ * returning existing changed TypeScript files (excluding ignored directories).
  */
 function getGitDiffTsFiles(revArgs, pathspecArgs = []) {
   if (revArgs.length === 0 || revArgs.some(arg => arg.startsWith('-'))) {
     throw new Error(`Invalid git revision argument: ${revArgs.join(' ')}`);
   }
+  const hasPositivePathspec = pathspecArgs.some(
+    p =>
+      !p.startsWith(':!') && !p.startsWith(':^') && !p.startsWith(':(exclude)'),
+  );
+  const gitPathspecs = hasPositivePathspec
+    ? pathspecArgs
+    : ['*.ts', ...pathspecArgs];
+
   const output = runGit([
     'diff',
     '--name-only',
     '--diff-filter=ACMRT',
     ...revArgs,
     '--',
-    '*.ts',
-    ...pathspecArgs,
+    ...gitPathspecs,
   ]);
   return output
     .split('\n')
     .map(f => f.trim())
-    .filter(f => f.length > 0 && existsSync(f) && !f.includes('/fixtures/'));
+    .filter(f => f.endsWith('.ts') && !isIgnoredPath(f) && existsSync(f));
 }
 
 function getChangedFilesStrict() {
@@ -191,22 +234,81 @@ const IGNORED_PATH_SEGMENTS = new Set([
 // LINT.ThenChange(.eslintrc.json:ignorePatterns)
 
 /**
+ * Returns true if the file path contains any ignored directory segment.
+ */
+function isIgnoredPath(filePath) {
+  const segments = filePath.split(/[\\/]/);
+  return segments.some(seg => IGNORED_PATH_SEGMENTS.has(seg));
+}
+
+/**
  * Determines whether a file should undergo ESLint checks.
  * Excludes declaration files (*.d.ts), auto-generated artifacts, and test baselines/fixtures.
  */
 function shouldLintFile(filePath) {
-  if (filePath.endsWith('.d.ts')) {
-    return false;
-  }
-  const segments = filePath.split(/[\\/]/);
-  return !segments.some(seg => IGNORED_PATH_SEGMENTS.has(seg));
+  return (
+    filePath.endsWith('.ts') &&
+    !filePath.endsWith('.d.ts') &&
+    !isIgnoredPath(filePath)
+  );
 }
 
 /**
- * Runs ESLint programmatically.
+ * Runs ESLint for a single package inside an isolated Worker thread.
+ * Isolating each package in its own V8 Isolate ensures @typescript-eslint
+ * and eslint-plugin-import caches are reclaimed upon worker termination.
+ */
+async function runEslintWorker({pkgDir, relativeFiles}) {
+  const eslint = new ESLint({
+    cwd: pkgDir,
+    resolvePluginsRelativeTo: REPO_ROOT,
+    overrideConfig: {
+      parserOptions: {
+        tsconfigRootDir: pkgDir,
+      },
+    },
+  });
+
+  const results = await eslint.lintFiles(relativeFiles);
+  const formatter = await eslint.loadFormatter('stylish');
+  const resultText = await formatter.format(results);
+
+  parentPort.postMessage({
+    resultText,
+    hasErrors: results.some(r => r.errorCount > 0),
+  });
+}
+
+/**
+ * Spawns a short-lived Worker thread to lint a single package's files,
+ * terminating the worker and waiting for V8 Isolate teardown before resolving.
+ */
+function lintPackageInWorker(pkgDir, relativeFiles) {
+  return new Promise((resolve, reject) => {
+    const worker = new Worker(new URL(import.meta.url), {
+      workerData: {pkgDir, relativeFiles},
+    });
+    let result;
+    worker.once('message', data => {
+      result = data;
+      void worker.terminate();
+    });
+    worker.once('error', reject);
+    worker.once('exit', code => {
+      if (result) {
+        resolve(result);
+      } else {
+        reject(new Error(`ESLint worker exited with code ${code}`));
+      }
+    });
+  });
+}
+
+/**
+ * Runs ESLint programmatically across changed packages using isolated worker threads.
  * Blocks the PR if any rule configured as "error" (severity 2) fails.
  */
-async function checkEslint(filesToCheck) {
+async function checkEslint(filesToCheck, packagesToCheck) {
   // Exclude declaration files (*.d.ts), auto-generated proto/sample files, and fixtures from ESLint
   const filesToProcess = filesToCheck.filter(shouldLintFile);
 
@@ -214,12 +316,13 @@ async function checkEslint(filesToCheck) {
     return true;
   }
 
-  const repoRoot = process.cwd();
-
   // Group files by package directory to set tsconfigRootDir properly for typescript-eslint
   const filesByPkg = new Map();
   for (const file of filesToProcess) {
-    const pkgDir = findTsconfigDir(file) || repoRoot;
+    const pkgDir = findTsconfigDir(file) || REPO_ROOT;
+    if (pkgDir !== REPO_ROOT && !packagesToCheck.has(pkgDir)) {
+      continue;
+    }
     let group = filesByPkg.get(pkgDir);
     if (!group) {
       group = [];
@@ -228,44 +331,31 @@ async function checkEslint(filesToCheck) {
     group.push(file);
   }
 
-  let hasBlockingErrors = false;
-
-  for (const [pkgDir, files] of filesByPkg) {
+  const results = await mapConcurrent(filesByPkg, async ([pkgDir, files]) => {
     try {
-      const eslint = new ESLint({
-        cwd: pkgDir,
-        resolvePluginsRelativeTo: repoRoot,
-        overrideConfig: {
-          parserOptions: {
-            tsconfigRootDir: pkgDir,
-          },
-        },
-      });
-
       const relativeFiles = files.map(f =>
         path.relative(pkgDir, path.resolve(f)),
       );
-      const results = await eslint.lintFiles(relativeFiles);
-      const formatter = await eslint.loadFormatter('stylish');
-      const resultText = await formatter.format(results);
+      const {resultText, hasErrors} = await lintPackageInWorker(
+        pkgDir,
+        relativeFiles,
+      );
 
       if (resultText) {
         console.log(resultText);
       }
 
-      if (results.some(r => r.errorCount > 0)) {
-        hasBlockingErrors = true;
-      }
+      return !hasErrors;
     } catch (err) {
       console.error(
         `\n[ERROR] Failed running ESLint in ${pkgDir}:`,
         err.message,
       );
-      hasBlockingErrors = true;
+      return false;
     }
-  }
+  });
 
-  if (hasBlockingErrors) {
+  if (!results.every(Boolean)) {
     console.error('\n[ERROR] ESLint violations were detected.');
     return false;
   }
@@ -280,13 +370,12 @@ async function checkEslint(filesToCheck) {
  * Stops at the repository root and caches traversed directories to avoid redundant disk operations.
  */
 function findTsconfigDir(filePath) {
-  const repoRoot = path.resolve(process.cwd());
   let currentDir = path.resolve(path.dirname(filePath));
   const visited = [];
 
   while (
-    currentDir === repoRoot ||
-    currentDir.startsWith(`${repoRoot}${path.sep}`)
+    currentDir === REPO_ROOT ||
+    currentDir.startsWith(`${REPO_ROOT}${path.sep}`)
   ) {
     if (tsconfigCache.has(currentDir)) {
       const cached = tsconfigCache.get(currentDir);
@@ -330,58 +419,73 @@ function getPackageDirs(files) {
 }
 
 /**
- * Executes an async callback over an iterable with bounded concurrency using Promise.all,
- * preventing unbounded child-process spawning and OOM crashes on CI runners.
- */
-async function mapConcurrent(
-  items,
-  fn,
-  concurrency = MAX_CONCURRENCY,
-) {
-  const iterator = items[Symbol.iterator]();
-  const size = items.size ?? items.length ?? concurrency;
-  const workerCount = Math.min(concurrency, size);
-  const results = [];
-
-  await Promise.all(
-    Array.from({length: workerCount}, async () => {
-      for (const item of iterator) {
-        results.push(await fn(item));
-      }
-    }),
-  );
-
-  return results;
-}
-
-/**
- * Ensures all changed packages have node_modules installed before running linting or type checking.
+ * Ensures all changed packages have node_modules installed using pnpm before
+ * running linting or type checking.
  */
 async function ensurePackageDependencies(packages) {
+  const missing = Array.from(packages).filter(
+    pkg =>
+      existsSync(path.join(pkg, 'package.json')) &&
+      !existsSync(path.join(pkg, 'node_modules')),
+  );
+
+  if (missing.length === 0) {
+    return;
+  }
+
   const isWin = process.platform === 'win32';
-  await mapConcurrent(packages, async pkg => {
-    const packageJsonPath = path.join(pkg, 'package.json');
-    const nodeModulesPath = path.join(pkg, 'node_modules');
-    if (!existsSync(packageJsonPath) || existsSync(nodeModulesPath)) {
-      return;
+  const pnpmCmd = isWin ? 'pnpm.cmd' : 'pnpm';
+
+  const standalonePackages = [];
+  const workspaceFilterArgs = [];
+
+  for (const pkg of missing) {
+    if (pkg !== REPO_ROOT && existsSync(path.join(pkg, 'pnpm-lock.yaml'))) {
+      standalonePackages.push(pkg);
+    } else {
+      const relPkg = path.relative(REPO_ROOT, pkg).split(path.sep).join('/');
+      const selector = relPkg ? `./${relPkg}` : '.';
+      workspaceFilterArgs.push('--filter', selector);
     }
-    console.log(`  Installing dependencies in ${pkg}...`);
-    const usePnpm = existsSync(path.join(pkg, 'pnpm-lock.yaml'));
-    const cmd = usePnpm
-      ? isWin
-        ? 'pnpm.cmd'
-        : 'pnpm'
-      : isWin
-        ? 'npm.cmd'
-        : 'npm';
-    const args = usePnpm
-      ? ['install', '--ignore-workspace', '--ignore-scripts']
-      : ['install', '--no-audit', '--no-fund', '--ignore-scripts'];
-    await execFileAsync(cmd, args, {
-      cwd: pkg,
-      shell: isWin,
-    });
+  }
+
+  if (workspaceFilterArgs.length > 0) {
+    console.log(
+      `  Installing workspace dependencies for ${workspaceFilterArgs.length / 2} package(s)...`,
+    );
+    await execFileAsync(
+      pnpmCmd,
+      [
+        'install',
+        '--ignore-scripts',
+        '--prefer-offline',
+        ...workspaceFilterArgs,
+      ],
+      {
+        cwd: REPO_ROOT,
+        shell: isWin,
+      },
+    );
+  }
+
+  await mapConcurrent(standalonePackages, async pkg => {
+    console.log(`  Installing standalone dependencies in ${pkg}...`);
+    await execFileAsync(
+      pnpmCmd,
+      ['install', '--ignore-workspace', '--ignore-scripts', '--prefer-offline'],
+      {
+        cwd: pkg,
+        shell: isWin,
+      },
+    );
   });
+
+  // Prune non-workspace test sub-packages that still do not have node_modules
+  for (const pkg of missing) {
+    if (!existsSync(path.join(pkg, 'node_modules'))) {
+      packages.delete(pkg);
+    }
+  }
 }
 
 /**
@@ -422,4 +526,8 @@ async function checkTypeSafety(packagesToCheck) {
 }
 
 // --- Execution ---
-await run();
+if (isMainThread) {
+  await run();
+} else {
+  await runEslintWorker(workerData);
+}
