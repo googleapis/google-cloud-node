@@ -1074,14 +1074,19 @@ export function traceCall(
 ): GaxCallResult {
   const spanName = `${dynamicArgs.clientName}.${dynamicArgs.methodName}`;
   return getGaxTracer().startActiveSpan(spanName, {}, (span: Span) => {
-    span.setAttributes({
+    const urlDomain = resolveUrlDomain(dynamicArgs, staticArgs);
+    const initialAttributes: Attributes = {
       'gcp.client.service': staticArgs.gcpClientService,
       'gcp.client.version': staticArgs.gcpVersion,
       'gcp.repo': staticArgs.gcpRepo,
       'gcp.artifact': staticArgs.gcpArtifact,
       'gcp.method.name': dynamicArgs.methodName,
       'gcp.method.type': dynamicArgs.rpcType,
-    });
+    };
+    if (urlDomain !== undefined) {
+      initialAttributes['url.domain'] = urlDomain;
+    }
+    span.setAttributes(initialAttributes);
 
     let rawAddress = dynamicArgs.serverAddress ?? staticArgs.serverAddress;
     let rawPort = dynamicArgs.serverPort ?? staticArgs.serverPort;

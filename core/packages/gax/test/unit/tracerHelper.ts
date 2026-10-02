@@ -122,6 +122,10 @@ describe('TracerHelper', () => {
       );
       assert.strictEqual(span.attributes['gcp.method.name'], 'GetObject');
       assert.strictEqual(span.attributes['gcp.method.type'], 'grpc');
+      assert.strictEqual(
+        span.attributes['url.domain'],
+        'storage.googleapis.com',
+      );
       // A successful call reports no error.type, and leaves the status unset
       // rather than claiming OK on the application's behalf.
       assert.strictEqual(span.attributes['error.type'], undefined);

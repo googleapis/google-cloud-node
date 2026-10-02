@@ -617,6 +617,7 @@ describe('createApiCall', () => {
       assert.strictEqual(span.attributes['gcp.artifact'], '@google-cloud/echo');
       assert.strictEqual(span.attributes['gcp.method.name'], 'Echo');
       assert.strictEqual(span.attributes['gcp.method.type'], 'grpc');
+      assert.strictEqual(span.attributes['url.domain'], 'echo.googleapis.com');
     });
 
     it('enables tracing purely through GOOGLE_SDK_NODE_ENABLE_TRACING and resolves static metadata dynamically at runtime', async () => {
