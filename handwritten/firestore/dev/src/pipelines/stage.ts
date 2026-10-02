@@ -27,6 +27,8 @@ import {
   Field,
   field,
   Ordering,
+  WindowFunction,
+  WindowSpecInternal,
 } from './expression';
 import {OptionsUtil} from './options-util';
 import {CollectionReference} from '../reference/collection-reference';
@@ -684,6 +686,55 @@ export class AddFields implements Stage {
   }
 
   _validateUserData(ignoreUndefinedProperties: boolean): void {
+    validateUserDataHelper(this.options.fields, ignoreUndefinedProperties);
+  }
+}
+
+/**
+ * Internal options for AddWindowFields stage.
+ */
+export type InternalAddWindowFieldsStageOptions = Omit<
+  firestore.Pipelines.AddWindowFieldsStageOptions,
+  'window' | 'fields'
+> & {
+  window: WindowSpecInternal;
+  fields: Map<string, AggregateFunction | WindowFunction>;
+};
+
+/**
+ * Implementation of the `add_window_fields` stage.
+ *
+ * Serializes to a stage with exactly two arguments:
+ * 1. The `window_spec` map, containing the optional `partition` array, the
+ *    optional `sort` array, and at most one of the `documents` or `range`
+ *    frame maps.
+ * 2. The `fields` map, mapping each output field name to either a bare
+ *    aggregate function value (stage level or default framing), or an
+ *    `over(aggregate, frame)` function value (accumulator level framing).
+ */
+export class AddWindowFields implements Stage {
+  name = 'add_window_fields';
+  readonly optionsUtil = new OptionsUtil({});
+
+  constructor(private options: InternalAddWindowFieldsStageOptions) {}
+
+  _toProto(serializer: Serializer): api.Pipeline.IStage {
+    return {
+      name: this.name,
+      args: [
+        this.options.window._toProto(serializer),
+        serializer.encodeValue(this.options.fields)!,
+      ],
+      options: this.optionsUtil.getOptionsProto(
+        serializer,
+        this.options,
+        this.options.rawOptions,
+      ),
+    };
+  }
+
+  _validateUserData(ignoreUndefinedProperties: boolean): void {
+    this.options.window._validateUserData(ignoreUndefinedProperties);
     validateUserDataHelper(this.options.fields, ignoreUndefinedProperties);
   }
 }

@@ -172,5 +172,8 @@ export {
   documentMatches,
   score,
   geoDistance,
+  WindowFunction,
+  AliasedWindowFunction,
+  rank,
   // TODO(new-expression): Add new expression exports above this line
 } from './expression';

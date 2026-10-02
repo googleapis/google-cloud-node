@@ -157,6 +157,19 @@ describe('stage option serialization', () => {
       stageIndex: 1,
     },
     {
+      name: 'addWindowFields stage',
+      pipeline: firestore =>
+        firestore
+          .pipeline()
+          .database()
+          .addWindowFields({
+            window: {partition: ['foo']},
+            fields: [sum('foo').as('fooSum')],
+            rawOptions,
+          }),
+      stageIndex: 1,
+    },
+    {
       name: 'aggregate stage',
       pipeline: firestore =>
         firestore
@@ -394,6 +407,48 @@ describe('stage _validateUserData', () => {
         query: 'foo',
         addFields: [constant({foo: undefined}).as('bar')],
       })
+      .execute();
+  });
+
+  it('addWindowFields stage validation', async () => {
+    const firestore = await createInstance();
+
+    // Should throw when ignoreUndefinedProperties is false (default)
+    expect(() => {
+      void firestore
+        .pipeline()
+        .collection('foo')
+        .addWindowFields(
+          {
+            partition: [constant({foo: undefined})],
+          },
+          sum('amount').as('total'),
+        )
+        .execute();
+    }).to.throw(
+      'Value for argument "value" is not a valid constant value. Cannot use "undefined" as a Firestore value',
+    );
+
+    // Should not throw when ignoreUndefinedProperties is true
+    const spy = sinon.fake.returns(stream());
+    const firestoreWithIgnore = await createInstance(
+      {
+        executePipeline: spy,
+      },
+      {
+        ignoreUndefinedProperties: true,
+      },
+    );
+
+    await firestoreWithIgnore
+      .pipeline()
+      .collection('foo')
+      .addWindowFields(
+        {
+          partition: [constant({foo: undefined})],
+        },
+        sum('amount').as('total'),
+      )
       .execute();
   });
 });
