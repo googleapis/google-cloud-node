@@ -17,6 +17,8 @@ import {describe, it, beforeEach, afterEach} from 'mocha';
 import * as fs from 'fs';
 import * as jws from 'jws';
 import * as nock from 'nock';
+import * as os from 'os';
+import * as path from 'path';
 import * as sinon from 'sinon';
 
 import {GoogleAuth, JWT} from '../src';
@@ -116,6 +118,33 @@ describe('jwt', () => {
       assert.strictEqual('foo@serviceaccount.com', jwt.email);
       done();
     });
+  });
+
+  it('should sign with the email from a JSON keyFile', async () => {
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'jwt-'));
+    const keyFile = path.join(dir, 'key.json');
+    try {
+      fs.writeFileSync(
+        keyFile,
+        JSON.stringify({...createJSON(), private_key: PEM_CONTENTS}),
+      );
+      const jwt = new JWT({keyFile, scopes: ['http://foo']});
+      let assertion = '';
+      const scope = nock('https://oauth2.googleapis.com')
+        .post('/token', body => {
+          assertion = new URLSearchParams(body).get('assertion') ?? '';
+          return true;
+        })
+        .reply(200, {access_token: 'initial-access-token'});
+
+      await jwt.authorize();
+      scope.done();
+      const payload = JSON.parse(jws.decode(assertion)!.payload as string);
+      assert.strictEqual(payload.iss, 'hello@youarecool.com');
+      assert.strictEqual(jwt.email, 'hello@youarecool.com');
+    } finally {
+      fs.rmSync(dir, {recursive: true, force: true});
+    }
   });
 
   it('should accept scope as string', done => {
