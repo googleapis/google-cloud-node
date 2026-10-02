@@ -127,12 +127,10 @@ type GetAllSubscriptionsResponse = PagedResponse<
 >;
 
 export type GetSubscriptionsCallback =
-  | GetAllSubscriptionsCallback
-  | GetTopicSubscriptionsCallback;
+  GetAllSubscriptionsCallback | GetTopicSubscriptionsCallback;
 
 export type GetSubscriptionsResponse =
-  | GetAllSubscriptionsResponse
-  | GetTopicSubscriptionsResponse;
+  GetAllSubscriptionsResponse | GetTopicSubscriptionsResponse;
 
 export type GetTopicsCallback = RequestCallback<
   Topic,
@@ -189,8 +187,7 @@ export interface PagedCallback<Item, Response> {
 }
 
 export type PagedResponse<Item, Response> =
-  | [Item[]]
-  | [Item[], {} | null, Response];
+  [Item[]] | [Item[], {} | null, Response];
 
 export type ObjectStream<O> = {
   addListener(event: 'data', listener: (data: O) => void): ObjectStream<O>;
@@ -391,6 +388,7 @@ export class PubSub {
         .then(() => this.schemaClient?.close())
         .then(() => {
           definedCallback(null);
+          return undefined;
         })
         .catch(definedCallback);
     } else {
@@ -1262,7 +1260,7 @@ export class PubSub {
    */
   async getSchemaClient(): Promise<SchemaServiceClient> {
     if (!this.schemaClient) {
-      const options = await this.getClientConfig() as gax.ClientOptions;
+      const options = (await this.getClientConfig()) as gax.ClientOptions;
       this.schemaClient = new v1.SchemaServiceClient(options);
     }
 
@@ -1289,10 +1287,12 @@ export class PubSub {
    * @param {function} [callback] The callback function.
    */
   getClient_(config: GetClientConfig, callback: GetClientCallback) {
-    this.getClientAsync_(config).then(
-      client => callback(null, client),
-      callback,
-    );
+    this.getClientAsync_(config)
+      .then(client => {
+        callback(null, client);
+        return undefined;
+      })
+      .catch(callback);
   }
   /**
    * Get the PubSub client object.
@@ -1307,7 +1307,7 @@ export class PubSub {
    */
   async getClientAsync_(config: GetClientConfig): Promise<gax.ClientStub> {
     // Make sure we've got a fully created config with projectId and such.
-    const options = await this.getClientConfig() as gax.ClientOptions;
+    const options = (await this.getClientConfig()) as gax.ClientOptions;
 
     let gaxClient = this.api[config.client];
 
@@ -1336,6 +1336,16 @@ export class PubSub {
 
     await Promise.all(promises);
   }
+  private createCancelledError_(): gax.grpc.ServiceError {
+    const statusObject = {
+      code: gax.Status.CANCELLED,
+      details: 'Call cancelled.',
+      metadata: new gax.grpc.Metadata(),
+    };
+    const err = new Error(statusObject.details);
+    return Object.assign(err, statusObject) as gax.grpc.ServiceError;
+  }
+
   /**
    * Funnel all API requests through this method, to be sure we have a project
    * ID.
@@ -1362,14 +1372,23 @@ export class PubSub {
       return;
     }
 
+    if (config.gaxOpts?.signal?.aborted) {
+      callback(this.createCancelledError_());
+      return;
+    }
+
     this.getClient_(config, (err, client) => {
       if (err) {
         callback(err as gax.grpc.ServiceError);
         return;
       }
+      if (config.gaxOpts?.signal?.aborted) {
+        callback(this.createCancelledError_());
+        return;
+      }
       let reqOpts = extend(true, {}, config.reqOpts);
       reqOpts = replaceProjectIdToken(reqOpts, this.projectId);
-      client![config.method](reqOpts, config.gaxOpts, callback);
+      client?.[config.method](reqOpts, config.gaxOpts, callback);
     });
   }
 

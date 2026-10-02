@@ -18,6 +18,15 @@ import {CallOptions} from 'google-gax';
 import {google} from '../../protos/protos';
 import {Duration, atLeast, atMost} from '../temporal';
 
+declare module 'google-gax' {
+  interface CallOptions {
+    signal?: AbortSignal;
+  }
+  interface CallSettings {
+    signal?: AbortSignal;
+  }
+}
+
 /**
  * Default hedging delay (1000ms).
  */
