@@ -141,3 +141,8 @@ export function mixinSkipImplementations(obj: unknown): void {
   globalThis.describe,
   globalThis.describe?.skip,
 ].forEach(mixinSkipImplementations);
+
+// Export modified it and describe.
+const it = globalThis.it;
+const describe = globalThis.describe;
+export {it, describe};

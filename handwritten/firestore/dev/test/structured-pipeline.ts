@@ -36,9 +36,8 @@ describe('StructuredPipeline', () => {
   });
 
   it('should serialize the pipeline argument', async () => {
-    const toProtoSpy = vi.fn().mockReturnValue({} as IPipeline);
     const pipeline: ProtoSerializable<IPipeline> = {
-      _toProto: toProtoSpy,
+      _toProto: vi.fn().mockReturnValue({} as IPipeline),
     };
     const structuredPipeline = new StructuredPipeline(pipeline, {}, {});
 
@@ -49,13 +48,12 @@ describe('StructuredPipeline', () => {
       options: {},
     });
 
-    expect(toProtoSpy).toHaveBeenCalledTimes(1);
+    expect(pipeline._toProto).toHaveBeenCalledTimes(1);
   });
 
   it('should support known options', () => {
-    const toProtoSpy = vi.fn().mockReturnValue({} as IPipeline);
     const pipeline: ProtoSerializable<IPipeline> = {
-      _toProto: toProtoSpy,
+      _toProto: vi.fn().mockReturnValue({} as IPipeline),
     };
     const structuredPipeline = new StructuredPipeline(
       pipeline,
@@ -92,13 +90,12 @@ describe('StructuredPipeline', () => {
       },
     });
 
-    expect(toProtoSpy).toHaveBeenCalledTimes(1);
+    expect(pipeline._toProto).toHaveBeenCalledTimes(1);
   });
 
   it('should support unknown options', () => {
-    const toProtoSpy = vi.fn().mockReturnValue({} as IPipeline);
     const pipeline: ProtoSerializable<IPipeline> = {
-      _toProto: toProtoSpy,
+      _toProto: vi.fn().mockReturnValue({} as IPipeline),
     };
     const structuredPipeline = new StructuredPipeline(
       pipeline,
@@ -119,13 +116,12 @@ describe('StructuredPipeline', () => {
       },
     });
 
-    expect(toProtoSpy).toHaveBeenCalledTimes(1);
+    expect(pipeline._toProto).toHaveBeenCalledTimes(1);
   });
 
   it('should support unknown nested options', () => {
-    const toProtoSpy = vi.fn().mockReturnValue({} as IPipeline);
     const pipeline: ProtoSerializable<IPipeline> = {
-      _toProto: toProtoSpy,
+      _toProto: vi.fn().mockReturnValue({} as IPipeline),
     };
     const structuredPipeline = new StructuredPipeline(
       pipeline,
@@ -150,13 +146,12 @@ describe('StructuredPipeline', () => {
       },
     });
 
-    expect(toProtoSpy).toHaveBeenCalledTimes(1);
+    expect(pipeline._toProto).toHaveBeenCalledTimes(1);
   });
 
   it('should support options override', () => {
-    const toProtoSpy = vi.fn().mockReturnValue({} as IPipeline);
     const pipeline: ProtoSerializable<IPipeline> = {
-      _toProto: toProtoSpy,
+      _toProto: vi.fn().mockReturnValue({} as IPipeline),
     };
     const structuredPipeline = new StructuredPipeline(
       pipeline,
@@ -179,6 +174,6 @@ describe('StructuredPipeline', () => {
       },
     });
 
-    expect(toProtoSpy).toHaveBeenCalledTimes(1);
+    expect(pipeline._toProto).toHaveBeenCalledTimes(1);
   });
 });
