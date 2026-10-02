@@ -13988,7 +13988,7 @@ declare namespace FirebaseFirestore {
        * The lower bound (inclusive) of the window frame, relative to the current document's position.
        *
        * Can be:
-       * - A number specifying the number of documents preceding the current document.
+       * - A number specifying a document offset relative to the current document. A positive integer (e.g. `2`) includes up to that many documents before the current document. A negative integer (e.g. `-1`) indicates a boundary following the current document, enabling frames that start after the current document.
        * - `'current'` to represent the current document's position (documents with tied sort values are not automatically included).
        * - `'unbounded'` to include all documents from the first document in the group.
        */
@@ -13998,7 +13998,7 @@ declare namespace FirebaseFirestore {
        * The upper bound (inclusive) of the window frame, relative to the current document's position.
        *
        * Can be:
-       * - A number specifying the number of documents following the current document.
+       * - A number specifying a document offset relative to the current document. A positive integer (e.g. `2`) includes up to that many documents after the current document. A negative integer (e.g. `-1`) indicates a boundary preceding the current document, enabling frames that end before the current document (e.g. excluding the current document).
        * - `'current'` to represent the current document's position (documents with tied sort values are not automatically included).
        * - `'unbounded'` to include all documents to the last document in the group.
        */
@@ -14018,7 +14018,7 @@ declare namespace FirebaseFirestore {
        * The lower bound (inclusive) of the window frame, relative to the sort value(s) of the current document.
        *
        * Can be:
-       * - A number specifying the value-based offset from the current document's sort value (requires a single numeric or timestamp `sort` expression).
+       * - A number specifying the value-based offset from the current document's sort value (requires a single numeric or timestamp `sort` expression). A positive offset subtracts from the current document's sort value (looking into the past). A negative offset adds to the current document's sort value (shifting the lower boundary past the current document).
        * - `'current'` to include all documents with the same sort value(s) as the current document (peers/ties, equivalent to an offset of `0`).
        * - `'unbounded'` to include all documents from the start of the group.
        */
@@ -14028,7 +14028,7 @@ declare namespace FirebaseFirestore {
        * The upper bound (inclusive) of the window frame, relative to the sort value(s) of the current document.
        *
        * Can be:
-       * - A number specifying the value-based offset from the current document's sort value (requires a single numeric or timestamp `sort` expression).
+       * - A number specifying the value-based offset from the current document's sort value (requires a single numeric or timestamp `sort` expression). A positive offset adds to the current document's sort value (looking into the future). A negative offset subtracts from the current document's sort value (shifting the upper boundary before the current document).
        * - `'current'` to include all documents with the same sort value(s) as the current document (peers/ties, equivalent to an offset of `0`).
        * - `'unbounded'` to include all documents to the end of the group.
        */
