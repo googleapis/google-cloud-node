@@ -1265,7 +1265,6 @@ export function traceAttempt<T = GaxCallResult>(
       // Populate initial transport, method, domain, and retry attributes.
       const urlDomain = resolveUrlDomain(dynamicArgs, staticArgs);
       const initialAttributes: Attributes = {
-        'gcp.client.service': staticArgs.gcpClientService,
         'rpc.system': dynamicArgs.rpcType,
       };
       if (dynamicArgs.rpcType === 'grpc') {
