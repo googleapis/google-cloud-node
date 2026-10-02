@@ -5,4 +5,4 @@ build/
 docs/
 protos/
 samples/generated/
-vitest.config.ts
+vitest.config.mts
