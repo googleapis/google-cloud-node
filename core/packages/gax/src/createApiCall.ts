@@ -150,14 +150,16 @@ export function createApiCall(
 
         if (tracingEnabled && attemptDynamicArgs && staticArgs) {
           const wrappedFunc = func;
+          let attemptCount = 0;
           func = ((
             argument: {},
             metadata: {},
             options: {},
             attemptCallback: APICallback,
           ) => {
+            const resendCount = attemptCount++;
             return traceAttempt(
-              attemptDynamicArgs,
+              {...attemptDynamicArgs, resendCount},
               staticArgs,
               tracedAttemptCallback =>
                 (wrappedFunc as UnaryCall)(

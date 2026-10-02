@@ -17,13 +17,22 @@
 import assert from 'assert';
 import {PassThrough} from 'stream';
 import {status} from '@grpc/grpc-js';
-import {SpanKind} from '@opentelemetry/api';
+import {SpanKind, SpanStatusCode} from '@opentelemetry/api';
 import {afterEach, beforeEach, describe, it} from 'mocha';
 import * as sinon from 'sinon';
 
-import {CancellableStream, GRPCCall, RequestType} from '../../src/apitypes';
+import {
+  CancellableStream,
+  GRPCCall,
+  GRPCCallResult,
+  RequestType,
+} from '../../src/apitypes';
 import {createApiCall as gaxCreateApiCall} from '../../src/createApiCall';
-import {createApiCall as fallbackCreateApiCall} from '../../src/fallback';
+import {
+  createApiCall as fallbackCreateApiCall,
+  GrpcClient as FallbackGrpcClient,
+} from '../../src/fallback';
+import {GrpcClient} from '../../src/grpc';
 import {StreamDescriptor} from '../../src/descriptor';
 import {StreamType} from '../../src/streamingCalls/streaming';
 import * as gax from '../../src/gax';
@@ -1461,6 +1470,11 @@ describe('createApiCall', () => {
               transport.rpcType,
             );
             harness.assertResendCount(0, {span});
+            const attemptSpans = spans.filter(
+              s => s.name === 'google.example.v1.Echo/Echo',
+            );
+            assert.strictEqual(attemptSpans.length, attempts);
+            harness.assertResendCount(0, {span: attemptSpans[0]});
           });
 
           it('reports one resend per retry', async () => {
@@ -1499,6 +1513,13 @@ describe('createApiCall', () => {
             // off-by-one between the two is exactly what the attribute
             // defines.
             harness.assertResendCount(attempts - 1, {span});
+            const attemptSpans = spans.filter(
+              s => s.name === 'google.example.v1.Echo/Echo',
+            );
+            assert.strictEqual(attemptSpans.length, attempts);
+            attemptSpans.forEach((attemptSpan, idx) => {
+              harness.assertResendCount(idx, {span: attemptSpan});
+            });
             harness.assertResponseStatus(
               {
                 rpcStatus: 'OK',
@@ -1559,6 +1580,13 @@ describe('createApiCall', () => {
             );
             // 2 attempts made: initial send + 1 resend. The 2nd retry was not sent because maxRetries was reached.
             harness.assertResendCount(1, {span});
+            const attemptSpans = spans.filter(
+              s => s.name === 'google.example.v1.Echo/Echo',
+            );
+            assert.strictEqual(attemptSpans.length, attempts);
+            attemptSpans.forEach((attemptSpan, idx) => {
+              harness.assertResendCount(idx, {span: attemptSpan});
+            });
           });
 
           it('reports resends correctly when retries are exhausted by totalTimeoutMillis', async () => {
@@ -1612,6 +1640,13 @@ describe('createApiCall', () => {
             // resend count should match the number of retries actually made
             // (attempts - 1), without counting the attempt aborted by the deadline.
             harness.assertResendCount(attempts - 1, {span});
+            const attemptSpans = spans.filter(
+              s => s.name === 'google.example.v1.Echo/Echo',
+            );
+            assert.strictEqual(attemptSpans.length, attempts);
+            attemptSpans.forEach((attemptSpan, idx) => {
+              harness.assertResendCount(idx, {span: attemptSpan});
+            });
           });
         });
       }
@@ -1678,6 +1713,13 @@ describe('createApiCall', () => {
             assert.ok(span);
             assert.strictEqual(span.attributes['gcp.method.type'], 'grpc');
             harness.assertResendCount(2, {span});
+            const attemptSpans = spans.filter(
+              s => s.name === 'google.example.v1.Echo/Echo',
+            );
+            assert.strictEqual(attemptSpans.length, attempts);
+            attemptSpans.forEach((attemptSpan, idx) => {
+              harness.assertResendCount(idx, {span: attemptSpan});
+            });
             done();
           } catch (e) {
             done(e);
@@ -1734,11 +1776,347 @@ describe('createApiCall', () => {
             assert.ok(span);
             assert.strictEqual(span.attributes['gcp.method.type'], 'grpc');
             harness.assertResendCount(2, {span});
+            const attemptSpans = spans.filter(
+              s => s.name === 'google.example.v1.Echo/Echo',
+            );
+            assert.strictEqual(attemptSpans.length, attempts);
+            attemptSpans.forEach((attemptSpan, idx) => {
+              harness.assertResendCount(idx, {span: attemptSpan});
+            });
             done();
           } catch (e) {
             done(e);
           }
         });
+      });
+    });
+
+    describe('T3 client request span to T4 per-attempt span correlation', () => {
+      it('emits a T4 gRPC attempt span parented to its T3 client request span', async () => {
+        const grpcClient = new GrpcClient({
+          servicePath: 'echo.googleapis.com',
+          port: 443,
+        });
+        const defaults = grpcClient.constructSettings(
+          'google.example.v1.Echo',
+          {
+            interfaces: {
+              'google.example.v1.Echo': {
+                methods: {
+                  Echo: {timeout_millis: 5000},
+                },
+              },
+            },
+          },
+          {},
+          {'x-goog-api-client': 'test'},
+          true,
+          telemetryInfo,
+        );
+
+        const stubFunc = (
+          argument: {},
+          metadata: {},
+          options: {},
+          callback: Function,
+        ): GRPCCallResult => {
+          callback(null, {echo: 'ok'});
+          return {cancel: () => {}};
+        };
+
+        const apiCall = gaxCreateApiCall(
+          stubFunc as unknown as GRPCCall,
+          defaults.echo,
+        );
+        await apiCall({message: 'hello'}, undefined);
+
+        const spans = harness.getSpans('google-gax');
+        assert.strictEqual(spans.length, 2);
+
+        const t4Span = spans.find(
+          s => s.name === 'google.example.v1.Echo/Echo',
+        )!;
+        const t3Span = spans.find(s => s.name === 'EchoClient.Echo')!;
+        assert.ok(t4Span);
+        assert.ok(t3Span);
+
+        assert.strictEqual(t3Span.kind, SpanKind.INTERNAL);
+        assert.strictEqual(t4Span.kind, SpanKind.CLIENT);
+        assert.strictEqual(
+          t4Span.spanContext().traceId,
+          t3Span.spanContext().traceId,
+        );
+        assert.strictEqual(
+          t4Span.parentSpanContext?.spanId,
+          t3Span.spanContext().spanId,
+        );
+        assert.strictEqual(
+          t4Span.attributes['url.domain'],
+          'echo.googleapis.com',
+        );
+        assert.strictEqual(
+          t4Span.attributes['server.address'],
+          'echo.googleapis.com',
+        );
+        assert.strictEqual(t4Span.attributes['server.port'], 443);
+        assert.strictEqual(t4Span.attributes['rpc.response.status_code'], 'OK');
+        assert.strictEqual(
+          t4Span.attributes['grpc.response.status_code'],
+          'OK',
+        );
+      });
+
+      it('emits a T4 HTTP/REST attempt span parented to its T3 client request span', async () => {
+        const fallbackClient = new FallbackGrpcClient({
+          servicePath: 'echo.googleapis.com',
+          port: 443,
+        });
+        const defaults = fallbackClient.constructSettings(
+          'google.example.v1.Echo',
+          {
+            interfaces: {
+              'google.example.v1.Echo': {
+                methods: {
+                  Echo: {timeout_millis: 5000},
+                },
+              },
+            },
+          },
+          {},
+          {'x-goog-api-client': 'test'},
+          true,
+          telemetryInfo,
+        );
+
+        const stubFunc = (
+          argument: {},
+          metadata: {},
+          options: {},
+          callback: Function,
+        ): GRPCCallResult => {
+          callback(null, {echo: 'ok'});
+          return {cancel: () => {}};
+        };
+
+        const apiCall = gaxCreateApiCall(
+          stubFunc as unknown as GRPCCall,
+          defaults.echo,
+          undefined,
+          'rest',
+        );
+        await apiCall({message: 'hello'}, undefined);
+
+        const spans = harness.getSpans('google-gax');
+        assert.strictEqual(spans.length, 2);
+
+        const t4Span = spans.find(
+          s => s.name === 'google.example.v1.Echo/Echo',
+        )!;
+        const t3Span = spans.find(s => s.name === 'EchoClient.Echo')!;
+        assert.ok(t4Span);
+        assert.ok(t3Span);
+
+        assert.strictEqual(t3Span.kind, SpanKind.INTERNAL);
+        assert.strictEqual(t4Span.kind, SpanKind.CLIENT);
+        assert.strictEqual(
+          t4Span.spanContext().traceId,
+          t3Span.spanContext().traceId,
+        );
+        assert.strictEqual(
+          t4Span.parentSpanContext?.spanId,
+          t3Span.spanContext().spanId,
+        );
+        assert.strictEqual(
+          t4Span.attributes['url.domain'],
+          'echo.googleapis.com',
+        );
+        assert.strictEqual(
+          t4Span.attributes['server.address'],
+          'echo.googleapis.com',
+        );
+        assert.strictEqual(t4Span.attributes['server.port'], 443);
+        assert.strictEqual(t4Span.attributes['rpc.response.status_code'], 'OK');
+        assert.strictEqual(t4Span.attributes['http.response.status_code'], 200);
+      });
+
+      it('ties concurrent T4 attempt spans to their respective T3 client request spans without cross-talk', async () => {
+        const echoSettings = new gax.CallSettings({
+          apiName: 'google.example.v1.Echo',
+          enableTelemetryTracing: true,
+          otherArgs: {
+            internalTelemetryInfo: telemetryInfo,
+            internalMethodName: 'Echo',
+          },
+        });
+
+        const expandSettings = new gax.CallSettings({
+          apiName: 'google.example.v1.Echo',
+          enableTelemetryTracing: true,
+          otherArgs: {
+            internalTelemetryInfo: telemetryInfo,
+            internalMethodName: 'Expand',
+          },
+        });
+
+        const makeStub = (delayMs: number): GRPCCall => {
+          return ((
+            argument: {},
+            metadata: {},
+            options: {},
+            callback: Function,
+          ): GRPCCallResult => {
+            setTimeout(() => {
+              callback(null, {ok: true});
+            }, delayMs);
+            return {cancel: () => {}};
+          }) as unknown as GRPCCall;
+        };
+
+        const echoCall = gaxCreateApiCall(makeStub(15), echoSettings);
+        const expandCall = gaxCreateApiCall(makeStub(5), expandSettings);
+
+        await Promise.all([
+          echoCall({id: 1}, undefined),
+          expandCall({id: 2}, undefined),
+        ]);
+
+        const spans = harness.getSpans('google-gax');
+        assert.strictEqual(spans.length, 4);
+
+        const t3Echo = spans.find(s => s.name === 'EchoClient.Echo')!;
+        const t3Expand = spans.find(s => s.name === 'EchoClient.Expand')!;
+        const t4Echo = spans.find(
+          s => s.name === 'google.example.v1.Echo/Echo',
+        )!;
+        const t4Expand = spans.find(
+          s => s.name === 'google.example.v1.Echo/Expand',
+        )!;
+
+        assert.ok(t3Echo && t3Expand && t4Echo && t4Expand);
+        assert.notStrictEqual(
+          t3Echo.spanContext().spanId,
+          t3Expand.spanContext().spanId,
+        );
+
+        assert.strictEqual(
+          t4Echo.spanContext().traceId,
+          t3Echo.spanContext().traceId,
+        );
+        assert.strictEqual(
+          t4Echo.parentSpanContext?.spanId,
+          t3Echo.spanContext().spanId,
+        );
+
+        assert.strictEqual(
+          t4Expand.spanContext().traceId,
+          t3Expand.spanContext().traceId,
+        );
+        assert.strictEqual(
+          t4Expand.parentSpanContext?.spanId,
+          t3Expand.spanContext().spanId,
+        );
+      });
+
+      it('emits one T4 attempt span per retry attempt, all parented to the single T3 client request span', async () => {
+        const retryOptions = gax.createRetryOptions(
+          [status.UNAVAILABLE],
+          gax.createBackoffSettings(1, 1.1, 5, 100, 1.0, 100, 1000),
+        );
+
+        const settings = new gax.CallSettings({
+          apiName: 'google.example.v1.Echo',
+          retry: retryOptions,
+          enableTelemetryTracing: true,
+          otherArgs: {
+            internalTelemetryInfo: telemetryInfo,
+            internalMethodName: 'Echo',
+          },
+        });
+
+        let attempt = 0;
+        const stubFunc = (
+          argument: {},
+          metadata: {},
+          options: {},
+          callback: Function,
+        ): GRPCCallResult => {
+          attempt++;
+          if (attempt === 1) {
+            const err = new GoogleError('transient failure');
+            err.code = status.UNAVAILABLE;
+            callback(err);
+          } else {
+            callback(null, {echo: 'recovered'});
+          }
+          return {cancel: () => {}};
+        };
+
+        const apiCall = gaxCreateApiCall(
+          stubFunc as unknown as GRPCCall,
+          settings,
+        );
+        await apiCall({message: 'retry-me'}, undefined);
+
+        const spans = harness.getSpans('google-gax');
+        assert.strictEqual(spans.length, 3);
+
+        const t3Span = spans.find(s => s.name === 'EchoClient.Echo')!;
+        const t4Spans = spans.filter(
+          s => s.name === 'google.example.v1.Echo/Echo',
+        );
+        assert.ok(t3Span);
+        assert.strictEqual(t4Spans.length, 2);
+
+        // First attempt failed with UNAVAILABLE (resend_count omitted on initial attempt)
+        assert.strictEqual(t4Spans[0].kind, SpanKind.CLIENT);
+        assert.strictEqual(t4Spans[0].status.code, SpanStatusCode.ERROR);
+        assert.strictEqual(t4Spans[0].status.message, 'transient failure');
+        assert.strictEqual(
+          t4Spans[0].attributes['gcp.grpc.resend_count'],
+          undefined,
+        );
+        assert.strictEqual(t4Spans[0].attributes['error.type'], 'UNAVAILABLE');
+        assert.strictEqual(
+          t4Spans[0].attributes['rpc.response.status_code'],
+          'UNAVAILABLE',
+        );
+        assert.strictEqual(
+          t4Spans[0].attributes['grpc.response.status_code'],
+          'UNAVAILABLE',
+        );
+        assert.strictEqual(t4Spans[0].events.length, 1);
+        assert.strictEqual(t4Spans[0].events[0].name, 'exception');
+        assert.strictEqual(
+          t4Spans[0].events[0].attributes?.['exception.type'],
+          'GoogleError',
+        );
+        assert.strictEqual(
+          t4Spans[0].parentSpanContext?.spanId,
+          t3Span.spanContext().spanId,
+        );
+
+        // Second attempt succeeded with OK (resend_count = 1)
+        assert.strictEqual(t4Spans[1].kind, SpanKind.CLIENT);
+        assert.strictEqual(t4Spans[1].status.code, SpanStatusCode.UNSET);
+        assert.strictEqual(t4Spans[1].attributes['gcp.grpc.resend_count'], 1);
+        assert.strictEqual(
+          t4Spans[1].attributes['rpc.response.status_code'],
+          'OK',
+        );
+        assert.strictEqual(
+          t4Spans[1].attributes['grpc.response.status_code'],
+          'OK',
+        );
+        assert.strictEqual(
+          t4Spans[1].parentSpanContext?.spanId,
+          t3Span.spanContext().spanId,
+        );
+
+        // Overall T3 call span succeeded with resend_count = 1
+        assert.strictEqual(t3Span.kind, SpanKind.INTERNAL);
+        assert.strictEqual(t3Span.status.code, SpanStatusCode.UNSET);
+        assert.strictEqual(t3Span.attributes['gcp.grpc.resend_count'], 1);
+        assert.strictEqual(t3Span.attributes['rpc.response.status_code'], 'OK');
       });
     });
   });

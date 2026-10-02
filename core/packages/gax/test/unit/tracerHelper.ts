@@ -18,14 +18,16 @@ import * as assert from 'assert';
 import * as vm from 'vm';
 import {EventEmitter} from 'events';
 import {Duplex, Writable} from 'stream';
-import {SpanStatusCode, trace} from '@opentelemetry/api';
+import {SpanKind, SpanStatusCode, trace} from '@opentelemetry/api';
 import {describe, it, beforeEach, afterEach} from 'mocha';
 import * as grpc from '@grpc/grpc-js';
 import {
   getGaxTracer,
   traceCall,
+  traceAttempt,
   handlePromise,
   handleStream,
+  AttemptTraceContext,
   DynamicTraceContext,
   StaticTraceContext,
   resolveErrorInfoReason,
@@ -3823,6 +3825,79 @@ describe('TracerHelper', () => {
 
       harness.assertSpanCount(1, 'google-gax');
       assertListenersRestored(baseline, 'after stream end');
+    });
+  });
+
+  describe('traceAttempt', () => {
+    const telemetryInfo: StaticTraceContext = {
+      gcpClientService: 'echo.googleapis.com',
+      gcpVersion: '1.2.3',
+      gcpRepo: 'googleapis/google-cloud-node',
+      gcpArtifact: '@google-cloud/echo',
+    };
+
+    it('creates a CLIENT T4 span in traceAttempt with url.domain, server.address, server.port, and status_code', async () => {
+      const attemptArgs: AttemptTraceContext = {
+        apiName: 'google.example.v1.Echo',
+        clientName: 'EchoClient',
+        methodName: 'Echo',
+        rpcType: 'grpc',
+      };
+
+      await traceAttempt(attemptArgs, telemetryInfo, async () => {
+        return [{echo: 'ok'}, undefined, undefined];
+      });
+
+      const span = harness.requireSingleSpan('google-gax');
+      assert.strictEqual(span.name, 'google.example.v1.Echo/Echo');
+      assert.strictEqual(span.kind, SpanKind.CLIENT);
+      assert.strictEqual(span.attributes['url.domain'], 'echo.googleapis.com');
+      assert.strictEqual(
+        span.attributes['server.address'],
+        'echo.googleapis.com',
+      );
+      assert.strictEqual(span.attributes['server.port'], 443);
+      assert.strictEqual(span.attributes['rpc.system'], 'grpc');
+      assert.strictEqual(span.attributes['rpc.response.status_code'], 'OK');
+      assert.strictEqual(span.attributes['grpc.response.status_code'], 'OK');
+    });
+
+    it('omits server.address and server.port on T4 span for pre-connection failures while preserving url.domain', async () => {
+      const attemptArgs: AttemptTraceContext = {
+        apiName: 'google.example.v1.Echo',
+        clientName: 'EchoClient',
+        methodName: 'Echo',
+        rpcType: 'grpc',
+      };
+
+      const dnsError = Object.assign(new Error('getaddrinfo ENOTFOUND'), {
+        code: 'ENOTFOUND',
+      });
+
+      await assert.rejects(async () => {
+        await traceAttempt(attemptArgs, telemetryInfo, async () => {
+          throw dnsError;
+        });
+      });
+
+      const span = harness.requireSingleSpan('google-gax');
+      assert.strictEqual(span.name, 'google.example.v1.Echo/Echo');
+      assert.strictEqual(span.kind, SpanKind.CLIENT);
+      assert.strictEqual(span.attributes['url.domain'], 'echo.googleapis.com');
+      assert.strictEqual(span.attributes['server.address'], undefined);
+      assert.strictEqual(span.attributes['server.port'], undefined);
+      assert.strictEqual(
+        span.attributes['error.type'],
+        'CLIENT_CONNECTION_ERROR',
+      );
+      assert.strictEqual(span.status.code, SpanStatusCode.ERROR);
+      assert.strictEqual(span.status.message, 'getaddrinfo ENOTFOUND');
+      assert.strictEqual(span.events.length, 1);
+      assert.strictEqual(span.events[0].name, 'exception');
+      assert.strictEqual(
+        span.events[0].attributes?.['exception.type'],
+        'Error',
+      );
     });
   });
 });

@@ -113,6 +113,11 @@ export interface AttemptTraceContext extends DynamicTraceContext {
    * The fully-qualified protobuf service name (e.g. 'google.cloud.kms.v1.KeyManagementService').
    */
   apiName?: string;
+  /**
+   * The ordinal resend count for this attempt (0 for the initial attempt, 1 for the first retry, etc.).
+   * Omitted from span attributes when 0 or undefined.
+   */
+  resendCount?: number;
 }
 
 /**
@@ -144,15 +149,16 @@ export function resolveErrorInfoReason(e: unknown): string | undefined {
   }
 
   // Decode binary gRPC status details if present and not yet parsed.
+  const errWithMeta = e as GoogleError;
   if (
-    e instanceof GoogleError &&
-    e.metadata &&
-    typeof e.metadata.get === 'function' &&
-    (e.metadata.get('grpc-status-details-bin') as unknown[])?.length > 0 &&
-    !e.reason
+    errWithMeta.metadata &&
+    typeof errWithMeta.metadata.get === 'function' &&
+    (errWithMeta.metadata.get('grpc-status-details-bin') as unknown[])?.length >
+      0 &&
+    !errWithMeta.reason
   ) {
     try {
-      GoogleError.parseGRPCStatusDetails(e);
+      GoogleError.parseGRPCStatusDetails(errWithMeta);
     } catch {
       // Ignore decoding errors.
     }
@@ -716,16 +722,17 @@ export function resolveServerExceptionDetails(e: Error): {
         })
       : undefined;
 
-  // If e is a GoogleError with gRPC metadata that hasn't decoded statusDetails yet, parse it:
+  // If e has gRPC metadata that hasn't decoded statusDetails yet, parse it:
+  const errWithMeta = e as GoogleError;
   if (
     !errObj.statusDetails &&
-    e instanceof GoogleError &&
-    e.metadata &&
-    typeof e.metadata.get === 'function' &&
-    (e.metadata.get('grpc-status-details-bin') as unknown[])?.length > 0
+    errWithMeta.metadata &&
+    typeof errWithMeta.metadata.get === 'function' &&
+    (errWithMeta.metadata.get('grpc-status-details-bin') as unknown[])?.length >
+      0
   ) {
     try {
-      GoogleError.parseGRPCStatusDetails(e);
+      GoogleError.parseGRPCStatusDetails(errWithMeta);
     } catch {
       // Ignore decoding errors
     }
@@ -1247,6 +1254,16 @@ export function traceAttempt<T = GaxCallResult>(
       };
       if (urlDomain !== undefined) {
         initialAttributes['url.domain'] = urlDomain;
+      }
+      if (
+        dynamicArgs.resendCount !== undefined &&
+        dynamicArgs.resendCount > 0
+      ) {
+        const resendCountAttribute =
+          dynamicArgs.rpcType === 'grpc'
+            ? 'gcp.grpc.resend_count'
+            : 'http.request.resend_count';
+        initialAttributes[resendCountAttribute] = dynamicArgs.resendCount;
       }
       span.setAttributes(initialAttributes);
 
