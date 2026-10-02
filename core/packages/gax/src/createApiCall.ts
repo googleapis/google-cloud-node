@@ -25,9 +25,9 @@ import {
   GaxCall,
   GRPCCall,
   GRPCCallOtherArgs,
+  GRPCCallResult,
   RequestType,
   SimpleCallbackFunction,
-  UnaryCall,
 } from './apitypes';
 import {Descriptor} from './descriptor';
 import {CallOptions, CallSettings, convertRetryOptions} from './gax';
@@ -154,28 +154,28 @@ export function createApiCall(
         if (tracingEnabled && attemptDynamicArgs && staticArgs) {
           const callerWrappedFunc = wrappedFunc;
           let attemptCount = 0;
-          wrappedFunc = ((
+          wrappedFunc = (
             argument: {},
             metadata: {},
             options: {},
             attemptCallback: APICallback,
-          ) => {
+          ): GRPCCallResult => {
             const resendCount = attemptCount++;
             return traceAttempt(
               {...attemptDynamicArgs, resendCount},
               staticArgs,
               tracedAttemptCallback =>
-                (callerWrappedFunc as UnaryCall)(
+                Reflect.apply(callerWrappedFunc, undefined, [
                   argument,
                   metadata,
                   options,
                   tracedAttemptCallback ?? attemptCallback,
-                ),
+                ]),
               Boolean(streaming),
               attemptCallback,
               parentContext,
             );
-          }) as GRPCCall;
+          };
         }
 
         const retry = thisSettings.retry;
