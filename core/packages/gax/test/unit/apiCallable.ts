@@ -26,6 +26,7 @@ import {
   GRPCCall,
   GRPCCallResult,
   RequestType,
+  ResultTuple,
 } from '../../src/apitypes';
 import {createApiCall as gaxCreateApiCall} from '../../src/createApiCall';
 import {
@@ -33,7 +34,7 @@ import {
   GrpcClient as FallbackGrpcClient,
 } from '../../src/fallback';
 import {GrpcClient} from '../../src/grpc';
-import {StreamDescriptor} from '../../src/descriptor';
+import {PageDescriptor, StreamDescriptor} from '../../src/descriptor';
 import {StreamType} from '../../src/streamingCalls/streaming';
 import * as gax from '../../src/gax';
 import {GoogleError} from '../../src/googleError';
@@ -1654,6 +1655,121 @@ describe('createApiCall', () => {
             attemptSpans.forEach((attemptSpan, idx) => {
               harness.assertResendCount(idx, {span: attemptSpan});
             });
+          });
+
+          it('omits resend count across multiple pages of an auto-paginated call when no retries occur', async () => {
+            const pageDescriptor = new PageDescriptor(
+              'pageToken',
+              'nextPageToken',
+              'secrets',
+            );
+            let pageRequests = 0;
+            function func(
+              argument: {pageToken?: string},
+              metadata: {},
+              options: {},
+              callback: (err: GoogleError | null, resp?: unknown) => void,
+            ) {
+              pageRequests++;
+              if (!argument.pageToken) {
+                callback(null, {
+                  secrets: [{name: 's1'}],
+                  nextPageToken: 'page-2',
+                });
+              } else if (argument.pageToken === 'page-2') {
+                callback(null, {
+                  secrets: [{name: 's2'}],
+                  nextPageToken: 'page-3',
+                });
+              } else {
+                callback(null, {
+                  secrets: [{name: 's3'}],
+                  nextPageToken: '',
+                });
+              }
+              return {cancel: () => {}};
+            }
+
+            const apiCall = transport.createApiCall(
+              func,
+              retryingSettings(),
+              pageDescriptor,
+            );
+            const [resources] = (await apiCall({}, undefined)) as ResultTuple;
+
+            assert.strictEqual(pageRequests, 3);
+            assert.deepStrictEqual(resources, [
+              {name: 's1'},
+              {name: 's2'},
+              {name: 's3'},
+            ]);
+            const spans = harness.getSpans('google-gax');
+            assert.strictEqual(spans.length, 1 + pageRequests);
+            const span = spans.find(s => s.name === 'EchoClient.Echo')!;
+            assert.ok(span);
+            harness.assertResendCount(0, {span});
+            const attemptSpans = spans.filter(
+              s => s.name === 'google.example.v1.Echo/Echo',
+            );
+            assert.strictEqual(attemptSpans.length, pageRequests);
+            for (const attemptSpan of attemptSpans) {
+              harness.assertResendCount(0, {span: attemptSpan});
+            }
+          });
+
+          it('resets per-attempt resend count on subsequent pages after an earlier page retries', async () => {
+            const pageDescriptor = new PageDescriptor(
+              'pageToken',
+              'nextPageToken',
+              'secrets',
+            );
+            let totalCalls = 0;
+            function func(
+              argument: {pageToken?: string},
+              metadata: {},
+              options: {},
+              callback: (err: GoogleError | null, resp?: unknown) => void,
+            ) {
+              totalCalls++;
+              if (!argument.pageToken && totalCalls === 1) {
+                const error = new GoogleError('transient');
+                error.code = FAKE_STATUS_CODE_1;
+                callback(error);
+              } else if (!argument.pageToken) {
+                callback(null, {
+                  secrets: [{name: 's1'}],
+                  nextPageToken: 'page-2',
+                });
+              } else {
+                callback(null, {
+                  secrets: [{name: 's2'}],
+                  nextPageToken: '',
+                });
+              }
+              return {cancel: () => {}};
+            }
+
+            const apiCall = transport.createApiCall(
+              func,
+              retryingSettings(),
+              pageDescriptor,
+            );
+            await apiCall({}, undefined);
+
+            assert.strictEqual(totalCalls, 3);
+            const spans = harness.getSpans('google-gax');
+            assert.strictEqual(spans.length, 1 + totalCalls);
+            const span = spans.find(s => s.name === 'EchoClient.Echo')!;
+            assert.ok(span);
+            harness.assertResendCount(1, {span});
+            const attemptSpans = spans.filter(
+              s => s.name === 'google.example.v1.Echo/Echo',
+            );
+            assert.strictEqual(attemptSpans.length, 3);
+            // Page 1 initial attempt: 0, Page 1 retry: 1, Page 2 initial attempt: 0
+            harness.assertResendCount(0, {span: attemptSpans[0]});
+            harness.assertResendCount(1, {span: attemptSpans[1]});
+            harness.assertResendCount(0, {span: attemptSpans[2]});
           });
         });
       }

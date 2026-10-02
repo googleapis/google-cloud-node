@@ -134,6 +134,19 @@ export function createApiCall(
 
     const ongoingCall = currentApiCaller.init(callback);
 
+    // Track resends per logical request so auto-paginated subsequent page
+    // requests start at resendCount = 0 instead of being counted as retries.
+    let attemptResendCount = 0;
+    let isRetryAttempt = false;
+    const originalRecordResend = recordResend;
+    if (tracingEnabled) {
+      recordResend = () => {
+        originalRecordResend?.();
+        attemptResendCount++;
+        isRetryAttempt = true;
+      };
+    }
+
     // Server-streaming calls retry inside the stream rather than through
     // `retryable`, so the recorder is handed to the stream itself. It is the
     // same span either way: the proxy outlives its resumptions, so the call
@@ -153,14 +166,17 @@ export function createApiCall(
         // Wrap the transport call so each attempt (initial send and retries) emits a low level network CLIENT span.
         if (tracingEnabled && attemptDynamicArgs && staticArgs) {
           const callerWrappedFunc = wrappedFunc;
-          let attemptCount = 0;
           wrappedFunc = (
             argument: {},
             metadata: {},
             options: {},
             attemptCallback: APICallback,
           ): GRPCCallResult => {
-            const resendCount = attemptCount++;
+            if (!isRetryAttempt) {
+              attemptResendCount = 0;
+            }
+            isRetryAttempt = false;
+            const resendCount = attemptResendCount;
             return traceAttempt(
               {...attemptDynamicArgs, resendCount},
               staticArgs,
