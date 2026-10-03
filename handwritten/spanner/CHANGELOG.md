@@ -5,6 +5,31 @@
 
 [1]: https://www.npmjs.com/package/nodejs-spanner?activeTab=versions
 
+## [9.1.0](https://github.com/googleapis/google-cloud-node/compare/spanner-v9.0.0...spanner-v9.1.0) (2026-10-03)
+
+
+### Features
+
+* **test-utils:** Add runtime detection predicates and cross-engine assertion helpers ([#9492](https://github.com/googleapis/google-cloud-node/issues/9492)) ([f971bb5](https://github.com/googleapis/google-cloud-node/commit/f971bb559f3033441d4d20648fa4827b2c0f95d0))
+
+
+### Bug Fixes
+
+* **spanner:** Preserve query immutability and optimize trace config handling ([#9264](https://github.com/googleapis/google-cloud-node/issues/9264)) ([db1b7ed](https://github.com/googleapis/google-cloud-node/commit/db1b7ed3ab00b586cce6cab39875ff1f5a3ee1b4))
+
+
+### Performance Improvements
+
+* **spanner:** Cache OTel attribute objects in metrics tracer ([#9309](https://github.com/googleapis/google-cloud-node/issues/9309)) ([244dc8a](https://github.com/googleapis/google-cloud-node/commit/244dc8ad723b0bd522ee73d1227cdbe6fe13eda1))
+* **spanner:** Carry MetricsTracer on call context instead of global registry ([#9310](https://github.com/googleapis/google-cloud-node/issues/9310)) ([cadb10a](https://github.com/googleapis/google-cloud-node/commit/cadb10a6342e192a9aae4277efa1c67428c1e7f2))
+* **spanner:** Eliminate per-RPC regex operations in metrics layer ([#9308](https://github.com/googleapis/google-cloud-node/issues/9308)) ([25b0486](https://github.com/googleapis/google-cloud-node/commit/25b04860d27af606b15219e6744f83e10b9a0caa))
+* **spanner:** Hoist AFE timing check to skip AFE metrics ([#9313](https://github.com/googleapis/google-cloud-node/issues/9313)) ([4f56e9d](https://github.com/googleapis/google-cloud-node/commit/4f56e9d0697558f4c6e48bb8e6400402745094ee))
+* **spanner:** Optimize chunk processing, adopt resumable chunk queue, and add event-driven backpressure ([#9336](https://github.com/googleapis/google-cloud-node/issues/9336)) ([3efbf66](https://github.com/googleapis/google-cloud-node/commit/3efbf665d696a48abd6182e433d107bdb10d24a6))
+* **spanner:** Optimize prepareGapicRequest dispatch and eliminate deep cloning ([#9271](https://github.com/googleapis/google-cloud-node/issues/9271)) ([9491cf2](https://github.com/googleapis/google-cloud-node/commit/9491cf2ae38c7e6001fce796ab601eb0cc8d6f01))
+* **spanner:** Optimize request ID generation and counter management ([#9447](https://github.com/googleapis/google-cloud-node/issues/9447)) ([7c87954](https://github.com/googleapis/google-cloud-node/commit/7c8795424fe5bacc7e27b415bcfefca795877d0d))
+* **spanner:** Single-pass protobuf value encoding in codec ([#9350](https://github.com/googleapis/google-cloud-node/issues/9350)) ([5aab70c](https://github.com/googleapis/google-cloud-node/commit/5aab70cd9d0904e4f3e280689da904cd0c63153a))
+* **spanner:** Skip no-op release listener for queries on multiplexed sessions ([#9445](https://github.com/googleapis/google-cloud-node/issues/9445)) ([bfa6bd9](https://github.com/googleapis/google-cloud-node/commit/bfa6bd98c1a2306a222a12d8f99740172b55f1f5))
+
 ## [9.0.0](https://github.com/googleapis/google-cloud-node/compare/spanner-v8.13.0...spanner-v9.0.0) (2026-09-18)
 
 
