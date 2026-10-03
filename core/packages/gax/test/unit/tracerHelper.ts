@@ -129,6 +129,7 @@ describe('TracerHelper', () => {
       // A successful call reports no error.type, and leaves the status unset
       // rather than claiming OK on the application's behalf.
       assert.strictEqual(span.attributes['error.type'], undefined);
+      assert.strictEqual(span.attributes['status.message'], undefined);
       assert.strictEqual(span.status.code, SpanStatusCode.UNSET);
       assert.strictEqual(span.events.length, 0);
     });
@@ -322,9 +323,10 @@ describe('TracerHelper', () => {
       const span = spans[0];
       assert.strictEqual(span.name, 'StorageClient.GetObject');
       assert.strictEqual(span.ended, true);
-      // The message is carried by the status description. `error.message` is
-      // deprecated and NOT RECOMMENDED on spans, so it must not appear.
+      // The message is carried by the status description and status.message.
+      // `error.message` is deprecated and NOT RECOMMENDED on spans, so it must not appear.
       assert.strictEqual(span.status.message, 'RPC Failed');
+      assert.strictEqual(span.attributes['status.message'], 'RPC Failed');
       assert.strictEqual(span.attributes['error.message'], undefined);
       // No status code on this error, so error.type falls back to the class.
       // The class is the bare `Error`, which says nothing, so the name the
@@ -1381,8 +1383,12 @@ describe('TracerHelper', () => {
       assert.strictEqual(span.attributes['error.type'], 'INTERNAL');
       assert.strictEqual(span.attributes['exception.type'], undefined);
       assert.strictEqual(span.status.code, SpanStatusCode.ERROR);
-      // The thrown value survives as the status description.
+      // The thrown value survives as the status description and status.message.
       assert.strictEqual(span.status.message, 'plain string failure');
+      assert.strictEqual(
+        span.attributes['status.message'],
+        'plain string failure',
+      );
       // No exception event: recordException on a bare string yields one with
       // no type and no stacktrace, which adds nothing to the status above.
       assert.strictEqual(span.events.length, 0);
@@ -1414,6 +1420,10 @@ describe('TracerHelper', () => {
         // Error information: the outcome, on the span itself.
         assert.strictEqual(span.status.code, SpanStatusCode.ERROR);
         assert.strictEqual(span.status.message, 'object does not exist');
+        assert.strictEqual(
+          span.attributes['status.message'],
+          'object does not exist',
+        );
         assert.strictEqual(span.attributes['error.type'], 'NOT_FOUND');
 
         // Exception information: the detail, on the event.
@@ -1446,6 +1456,7 @@ describe('TracerHelper', () => {
         const span = await failWith(new Error('quota exceeded'));
 
         assert.strictEqual(span.attributes['error.message'], undefined);
+        assert.strictEqual(span.attributes['status.message'], 'quota exceeded');
         assert.strictEqual(span.status.message, 'quota exceeded');
         assert.strictEqual(
           span.events[0].attributes?.['exception.message'],

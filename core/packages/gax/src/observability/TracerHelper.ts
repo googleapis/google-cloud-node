@@ -1143,25 +1143,21 @@ function setFinalStatusAttributes(
 }
 
 /**
- * Records error attributes (`error.type`, optional `status.message`), exception event,
+ * Records error attributes (`error.type`, `status.message`), exception event,
  * and `ERROR` status on a span, returning the resolved transport status codes.
  */
 function recordSpanError(
   span: Span,
   e: unknown,
   rpcType: 'grpc' | 'http',
-  includeStatusMessage = false,
 ): {rpcStatusName?: string; httpStatusCode?: number} {
   const rpcStatusName = resolveRpcStatusName(e);
   const httpStatusCode = resolveHttpStatusCode(e);
   const message = e instanceof Error ? e.message : resolveErrorMessage(e);
-  const errorAttributes: Attributes = {
+  span.setAttributes({
     'error.type': resolveErrorType(e, rpcType),
-  };
-  if (includeStatusMessage) {
-    errorAttributes['status.message'] = message;
-  }
-  span.setAttributes(errorAttributes);
+    'status.message': message,
+  });
   if (e instanceof Error) {
     recordExceptionEvent(span, e, rpcType);
   }
@@ -1174,7 +1170,6 @@ interface SpanCompletionOptions {
   rpcType: 'grpc' | 'http';
   rawAddress?: string;
   rawPort?: number;
-  includeStatusMessage?: boolean;
   onBeforeEnd?: () => void;
 }
 
@@ -1191,14 +1186,7 @@ function createSpanCompletionHandlers(
   endSpan: () => void;
   tracedCallback?: APICallback;
 } {
-  const {
-    span,
-    rpcType,
-    rawAddress,
-    rawPort,
-    includeStatusMessage = false,
-    onBeforeEnd,
-  } = options;
+  const {span, rpcType, rawAddress, rawPort, onBeforeEnd} = options;
   let spanEnded = false;
   let errorRecorded = false;
   let recordedError: unknown;
@@ -1208,12 +1196,7 @@ function createSpanCompletionHandlers(
   const recordError = (e: unknown) => {
     recordedError = e;
     errorRecorded = true;
-    ({rpcStatusName, httpStatusCode} = recordSpanError(
-      span,
-      e,
-      rpcType,
-      includeStatusMessage,
-    ));
+    ({rpcStatusName, httpStatusCode} = recordSpanError(span, e, rpcType));
   };
 
   const endSpan = () => {
@@ -1484,7 +1467,6 @@ export function traceAttempt<T = GaxCallResult>(
             rpcType: dynamicArgs.rpcType,
             rawAddress,
             rawPort,
-            includeStatusMessage: true,
           },
           callback,
         );

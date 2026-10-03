@@ -1199,6 +1199,10 @@ describe('createApiCall', () => {
       for (const span of spans) {
         assert.strictEqual(span.ended, true);
         assert.strictEqual(span.status.message, 'RPC test failure');
+        assert.strictEqual(
+          span.attributes['status.message'],
+          'RPC test failure',
+        );
         assert.strictEqual(span.events.length, 1);
         assert.strictEqual(span.events[0].name, 'exception');
       }
@@ -1410,6 +1414,10 @@ describe('createApiCall', () => {
           for (const span of spans) {
             assert.strictEqual(span.ended, true);
             assert.strictEqual(span.status.message, 'streaming test failure');
+            assert.strictEqual(
+              span.attributes['status.message'],
+              'streaming test failure',
+            );
             assert.strictEqual(span.events.length, 1);
             assert.strictEqual(span.events[0].name, 'exception');
           }
