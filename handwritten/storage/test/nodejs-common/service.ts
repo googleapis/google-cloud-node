@@ -148,8 +148,8 @@ describe('Service', () => {
           return {token: '', res: undefined};
         }
 
-        async getRequestHeaders(): Promise<any> {
-          return {};
+        async getRequestHeaders() {
+          return new Headers();
         }
 
         request = OAuth2Client.prototype.request.bind(this);

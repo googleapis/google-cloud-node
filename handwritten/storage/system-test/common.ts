@@ -123,10 +123,17 @@ describe('Common', () => {
           uri: 'http://localhost:1/mock-endpoint-no-response',
         },
         err => {
-          assert(err?.message.includes('ECONNREFUSED'));
-          const timeResponse = Date.now();
-          assert(timeResponse - timeRequest > minExpectedResponseTime);
-          done();
+          try {
+            assert(
+              err?.message.includes('ECONNREFUSED') ||
+                (err as {code?: string})?.code === 'ECONNREFUSED'
+            );
+            const timeResponse = Date.now();
+            assert(timeResponse - timeRequest > minExpectedResponseTime);
+            done();
+          } catch (e) {
+            done(e);
+          }
         },
       );
     });
