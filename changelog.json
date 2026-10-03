@@ -4,6 +4,39 @@
     {
       "changes": [
         {
+          "type": "feat",
+          "sha": "514e2f64ba67ad3ab956fbe3eeafa507d44ca597",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9472"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "07ae774a8e52185a3598c878513377e7a019f127",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9293"
+          ]
+        }
+      ],
+      "version": "1.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-ads/datamanager",
+      "id": "7ecb3c2a-cd36-47bf-aff2-c06f28368e03",
+      "createTime": "2026-10-03T05:41:15.387Z"
+    },
+    {
+      "changes": [
+        {
           "type": "fix",
           "sha": "102b3f6d0eb80b3b8814d71d53e50b5240556340",
           "message": "Deduplicate pnpm install in run_single_test and refine turbo compile inputs",
@@ -99729,5 +99762,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-10-01T08:15:34.079Z"
+  "updateTime": "2026-10-03T05:41:15.387Z"
 }
