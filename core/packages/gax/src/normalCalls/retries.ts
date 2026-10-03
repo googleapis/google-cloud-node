@@ -74,6 +74,10 @@ export function retryable(
   return (argument: RequestType, callback: APICallback) => {
     let canceller: GRPCCallResult | null;
     let timeoutId: ReturnType<typeof setTimeout> | null;
+    // Set by `cancel()` below. The retry decision is made purely on the error
+    // code, which cannot distinguish a transport failure from the abort this
+    // call issued itself, so the caller's intent has to be recorded.
+    let cancelled = false;
     let now = new Date();
     let deadline: number;
     if (retry.backoffSettings.totalTimeoutMillis) {
@@ -161,6 +165,32 @@ export function retryable(
           return;
         }
         canceller = null;
+        // The caller cancelled, so this error is the consequence of the abort
+        // issued just above, whatever the transport chose to report it as.
+        //
+        // Without this, the decision below is made on the error code alone. A
+        // transport that reports an aborted request as a retryable code — the
+        // REST fallback reports transport failures as UNAVAILABLE — schedules
+        // another attempt, which discards the cancellation. Worse, `cancel()`
+        // has already run: `canceller` is null and the timer it would have
+        // cleared has not been created yet, so nothing remains that can stop
+        // the new attempt. It runs unbounded and the caller's callback is
+        // never invoked.
+        if (cancelled) {
+          // A transport that already reported the abort as CANCELLED has said
+          // everything worth saying; re-wrapping would only bury it.
+          if (err.code === Status.CANCELLED) {
+            callback(err);
+            return;
+          }
+          const error = new GoogleError(
+            'cancelled' + errorDetailsSuffix(errorsEncountered),
+            {cause: err},
+          );
+          error.code = Status.CANCELLED;
+          callback(error);
+          return;
+        }
         if (
           retry.retryCodes.length > 0 &&
           retry.retryCodes.indexOf(err!.code!) < 0
@@ -203,6 +233,10 @@ export function retryable(
 
     return {
       cancel() {
+        // Recorded before aborting: `canceller.cancel()` can drive the
+        // transport's callback synchronously, and the guard there has to see
+        // this already set.
+        cancelled = true;
         if (timeoutId) {
           clearTimeout(timeoutId);
         }
