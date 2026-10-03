@@ -4172,5 +4172,98 @@ describe('TracerHelper', () => {
         undefined,
       );
     });
+
+    it('sets rpc.method on both gRPC and HTTP client request spans based on the last low level network child span', async () => {
+      await traceCall(
+        {
+          clientName: 'EchoClient',
+          methodName: 'Echo',
+          rpcType: 'grpc',
+        },
+        telemetryInfo,
+        async () => {
+          await traceAttempt(
+            {
+              apiName: 'google.example.v1.Echo',
+              clientName: 'EchoClient',
+              methodName: 'FirstEcho',
+              rpcType: 'grpc',
+            },
+            telemetryInfo,
+            async () => [{echo: 'first'}, undefined, undefined],
+          );
+          return traceAttempt(
+            {
+              apiName: 'google.example.v1.Echo',
+              clientName: 'EchoClient',
+              methodName: 'FinalEcho',
+              rpcType: 'grpc',
+            },
+            telemetryInfo,
+            async () => [{echo: 'final'}, undefined, undefined],
+          );
+        },
+      );
+
+      await traceCall(
+        {
+          clientName: 'EchoClient',
+          methodName: 'Echo',
+          rpcType: 'http',
+        },
+        telemetryInfo,
+        async () => {
+          await traceAttempt(
+            {
+              apiName: 'google.example.v1.Echo',
+              clientName: 'EchoClient',
+              methodName: 'FirstHttpEcho',
+              rpcType: 'http',
+              httpMethod: 'GET',
+              urlTemplate: '/v1/echo:first',
+            },
+            telemetryInfo,
+            async () => [{echo: 'first'}, undefined, undefined],
+          );
+          return traceAttempt(
+            {
+              apiName: 'google.example.v1.Echo',
+              clientName: 'EchoClient',
+              methodName: 'FinalHttpEcho',
+              rpcType: 'http',
+              httpMethod: 'POST',
+              urlTemplate: '/v1/echo:final',
+            },
+            telemetryInfo,
+            async () => [{echo: 'final'}, undefined, undefined],
+          );
+        },
+      );
+
+      const spans = harness.getSpans('google-gax');
+      assert.strictEqual(spans.length, 6);
+
+      const grpcClientRequestSpan = spans.find(
+        s =>
+          s.name === 'EchoClient.Echo' &&
+          s.attributes['gcp.method.type'] === 'grpc',
+      )!;
+      const httpClientRequestSpan = spans.find(
+        s =>
+          s.name === 'EchoClient.Echo' &&
+          s.attributes['gcp.method.type'] === 'http',
+      )!;
+      assert.ok(grpcClientRequestSpan);
+      assert.ok(httpClientRequestSpan);
+
+      assert.strictEqual(
+        grpcClientRequestSpan.attributes['rpc.method'],
+        'google.example.v1.Echo/FinalEcho',
+      );
+      assert.strictEqual(
+        httpClientRequestSpan.attributes['rpc.method'],
+        'google.example.v1.Echo/FinalHttpEcho',
+      );
+    });
   });
 });

@@ -129,6 +129,9 @@ export interface AttemptTraceContext extends DynamicTraceContext {
   urlTemplate?: string;
 }
 
+const CLIENT_REQUEST_SPAN_KEY = createContextKey(
+  'google-gax-client-request-span',
+);
 const ATTEMPT_SPAN_KEY = createContextKey('google-gax-attempt-span');
 const attemptUrlTemplates = new WeakMap<Span, string>();
 
@@ -1364,7 +1367,9 @@ export function traceCall(
 
     try {
       // Run operation with active client request span in context.
-      const activeContext = trace.setSpan(context.active(), span);
+      const activeContext = trace
+        .setSpan(context.active(), span)
+        .setValue(CLIENT_REQUEST_SPAN_KEY, span);
       const result = context.with(activeContext, () =>
         fn(tracedCallback, recordResend),
       );
@@ -1391,7 +1396,8 @@ export function traceCall(
  *
  * HTTP attempt spans are named `"{http.request.method} {url.template}"` when a URL
  * template is available or `"{http.request.method}"` otherwise; gRPC attempt spans
- * are named `"{apiName}/{methodName}"` or `"{methodName}"`.
+ * are named `"{apiName}/{methodName}"` or `"{methodName}"`. Also updates `rpc.method`
+ * on the parent client request span to `"{apiName}/{methodName}"` for both transports.
  *
  * @param {AttemptTraceContext} dynamicArgs - Dynamic trace context for the RPC attempt.
  * @param {StaticTraceContext} staticArgs - Static trace context for the client library.
@@ -1409,7 +1415,10 @@ export function traceAttempt<T = GaxCallResult>(
   callback?: APICallback,
   parentContext?: Context,
 ): T {
-  // Resolve transport-specific span name.
+  // Resolve RPC method and transport-specific span name.
+  const rpcMethod = dynamicArgs.apiName
+    ? `${dynamicArgs.apiName}/${dynamicArgs.methodName}`
+    : dynamicArgs.methodName;
   const httpMethod = dynamicArgs.httpMethod ?? 'POST';
   const urlTemplate =
     dynamicArgs.urlTemplate ??
@@ -1417,22 +1426,27 @@ export function traceAttempt<T = GaxCallResult>(
   const spanName =
     dynamicArgs.rpcType === 'http'
       ? formatHttpAttemptSpanName(httpMethod, urlTemplate)
-      : dynamicArgs.apiName
-        ? `${dynamicArgs.apiName}/${dynamicArgs.methodName}`
-        : dynamicArgs.methodName;
+      : rpcMethod;
   const baseContext = parentContext ?? context.active();
+  const clientRequestSpan = baseContext.getValue(CLIENT_REQUEST_SPAN_KEY) as
+    Span | undefined;
   return getGaxTracer().startActiveSpan(
     spanName,
     {kind: SpanKind.CLIENT},
     baseContext,
     (span: Span) => {
+      // Update parent client request span rpc.method from this child attempt.
+      if (clientRequestSpan && rpcMethod) {
+        clientRequestSpan.setAttribute('rpc.method', rpcMethod);
+      }
+
       // Populate initial transport, method, domain, and retry attributes.
       const urlDomain = resolveUrlDomain(dynamicArgs, staticArgs);
       const initialAttributes: Attributes = {
         'rpc.system': dynamicArgs.rpcType,
       };
       if (dynamicArgs.rpcType === 'grpc') {
-        initialAttributes['rpc.method'] = spanName;
+        initialAttributes['rpc.method'] = rpcMethod;
       } else {
         initialAttributes['http.request.method'] = httpMethod;
         if (urlTemplate) {
@@ -1467,6 +1481,11 @@ export function traceAttempt<T = GaxCallResult>(
             rpcType: dynamicArgs.rpcType,
             rawAddress,
             rawPort,
+            onBeforeEnd: () => {
+              if (clientRequestSpan && rpcMethod) {
+                clientRequestSpan.setAttribute('rpc.method', rpcMethod);
+              }
+            },
           },
           callback,
         );

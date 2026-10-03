@@ -2001,6 +2001,10 @@ describe('createApiCall', () => {
           'google.example.v1.Echo/Echo',
         );
         assert.strictEqual(
+          clientRequestSpan.attributes['rpc.method'],
+          'google.example.v1.Echo/Echo',
+        );
+        assert.strictEqual(
           networkSpan.attributes['http.request.method'],
           undefined,
         );
@@ -2092,6 +2096,10 @@ describe('createApiCall', () => {
           'POST',
         );
         assert.strictEqual(networkSpan.attributes['rpc.method'], undefined);
+        assert.strictEqual(
+          clientRequestSpan.attributes['rpc.method'],
+          'google.example.v1.Echo/Echo',
+        );
         assert.strictEqual(
           networkSpan.attributes['rpc.response.status_code'],
           undefined,
