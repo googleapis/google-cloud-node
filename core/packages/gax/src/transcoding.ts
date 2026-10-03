@@ -29,6 +29,10 @@ export interface TranscodedRequest {
   data: string | {};
 }
 
+export interface TranscodedRequestWithTemplate extends TranscodedRequest {
+  urlTemplate: string;
+}
+
 const httpOptionName = '(google.api.http)';
 const proto3OptionalName = 'proto3_optional';
 
@@ -137,7 +141,9 @@ function validateUriPath(propertyName: string, value: string): void {
     // valid domain-scoped resource segments (e.g. projects/example.com:project-id).
     const segments = value.split('/');
     if (segments.some(segment => segment === '.' || segment === '..')) {
-      throw new Error(`Value for ${propertyName} must not contain segments that are exactly . or ..`);
+      throw new Error(
+        `Value for ${propertyName} must not contain segments that are exactly . or ..`,
+      );
     }
   }
 }
@@ -164,7 +170,9 @@ export function buildQueryStringComponents(
     } else {
       resultList.push(
         `${prefix}${encodeWithoutSlashes(key)}=${encodeWithoutSlashes(
-          requestValue === null || requestValue === undefined ? 'null' : requestValue.toString(),
+          requestValue === null || requestValue === undefined
+            ? 'null'
+            : requestValue.toString(),
         )}`,
       );
     }
@@ -187,7 +195,7 @@ export function buildQueryStringComponents(
 export function encodeWithSlashes(str: string): string {
   return encodeURIComponent(str).replace(
     /[!'()*]/g, // Characters preserved by encodeURIComponent
-    character => '%' + character.charCodeAt(0).toString(16).toUpperCase()
+    character => '%' + character.charCodeAt(0).toString(16).toUpperCase(),
   );
 }
 
@@ -328,10 +336,10 @@ export function isProto3OptionalField(field: Field) {
   return field && field.options && field.options![proto3OptionalName];
 }
 
-export function transcode(
+export function transcodeWithTemplate(
   request: JSONObject,
   parsedOptions: ParsedOptionsType,
-): TranscodedRequest | undefined {
+): TranscodedRequestWithTemplate | undefined {
   const httpRules = [];
   for (const option of parsedOptions) {
     if (!(httpOptionName in option)) {
@@ -366,7 +374,13 @@ export function transcode(
       let data: JSONObject | JSONValue | undefined =
         deepCopyWithoutMatchedFields(request, new Set(matchedFields));
       if (httpRule.body === '*') {
-        return {httpMethod, url, queryString: '', data};
+        return {
+          httpMethod,
+          url,
+          queryString: '',
+          data,
+          urlTemplate: pathTemplate,
+        };
       }
 
       // one field possibly goes to request data, others go to query string
@@ -390,10 +404,28 @@ export function transcode(
       ) {
         data = '';
       }
-      return {httpMethod, url, queryString, data};
+      return {
+        httpMethod,
+        url,
+        queryString,
+        data,
+        urlTemplate: pathTemplate,
+      };
     }
   }
   return undefined;
+}
+
+export function transcode(
+  request: JSONObject,
+  parsedOptions: ParsedOptionsType,
+): TranscodedRequest | undefined {
+  const result = transcodeWithTemplate(request, parsedOptions);
+  if (!result) {
+    return undefined;
+  }
+  const {httpMethod, url, queryString, data} = result;
+  return {httpMethod, url, queryString, data};
 }
 
 // Override the protobuf json's the http rules.

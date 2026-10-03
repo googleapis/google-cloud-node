@@ -18,8 +18,10 @@ import assert from 'assert';
 import {PassThrough} from 'stream';
 import {status} from '@grpc/grpc-js';
 import {SpanKind, SpanStatusCode} from '@opentelemetry/api';
+import {GoogleAuth, PassThroughClient} from 'google-auth-library';
 import {afterEach, beforeEach, describe, it} from 'mocha';
 import * as sinon from 'sinon';
+import echoProtoJson = require('../fixtures/echo.json');
 
 import {
   CancellableStream,
@@ -2097,6 +2099,68 @@ describe('createApiCall', () => {
         assert.strictEqual(
           clientRequestSpan.attributes['http.response.status_code'],
           200,
+        );
+      });
+
+      it('populates url.template and updates low level network span name when using a real REST fallback stub', async () => {
+        const authClient = new PassThroughClient();
+        const fallbackClient = new FallbackGrpcClient({
+          auth: new GoogleAuth({authClient}),
+          servicePath: 'echo.googleapis.com',
+          port: 443,
+        });
+        const protos = fallbackClient.loadProto(echoProtoJson);
+        const echoService = protos.lookupService('Echo');
+        utils.setMockFallbackResponse(
+          fallbackClient,
+          new Response(Buffer.from(JSON.stringify({content: 'hello'}))),
+        );
+
+        const defaults = fallbackClient.constructSettings(
+          'google.showcase.v1beta1.Echo',
+          {
+            interfaces: {
+              'google.showcase.v1beta1.Echo': {
+                methods: {
+                  Echo: {timeout_millis: 5000},
+                },
+              },
+            },
+          },
+          {},
+          {'x-goog-api-client': 'test'},
+          true,
+          telemetryInfo,
+        );
+
+        const stubPromise = fallbackClient
+          .createStub(echoService, {
+            servicePath: 'echo.googleapis.com',
+            port: 443,
+          })
+          .then(stub => stub.echo.bind(stub) as unknown as GRPCCall);
+
+        const apiCall = fallbackCreateApiCall(stubPromise, defaults.echo);
+        await apiCall({content: 'hello'}, undefined);
+
+        const spans = harness.getSpans('google-gax');
+        assert.strictEqual(spans.length, 2);
+
+        const networkSpan = spans.find(
+          s => s.name === 'POST /v1beta1/echo:echo',
+        )!;
+        const clientRequestSpan = spans.find(
+          s => s.name === 'EchoClient.Echo',
+        )!;
+        assert.ok(networkSpan);
+        assert.ok(clientRequestSpan);
+        assert.strictEqual(
+          networkSpan.attributes['http.request.method'],
+          'POST',
+        );
+        assert.strictEqual(
+          networkSpan.attributes['url.template'],
+          '/v1beta1/echo:echo',
         );
       });
 

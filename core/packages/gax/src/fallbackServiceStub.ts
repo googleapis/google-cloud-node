@@ -69,6 +69,7 @@ export interface FetchParameters {
   body: Buffer | Uint8Array | string;
   method: FetchParametersMethod;
   url: string;
+  urlTemplate?: string;
 }
 
 // helper function used to properly format empty responses
@@ -303,7 +304,7 @@ export function generateServiceStub(
         };
       }
 
-      setAttemptHttpMethod(fetchParameters.method);
+      setAttemptHttpMethod(fetchParameters.method, fetchParameters.urlTemplate);
 
       const cancelController = new AbortController();
       const cancelSignal = cancelController.signal as AbortSignal;
