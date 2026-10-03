@@ -4,6 +4,216 @@
     {
       "changes": [
         {
+          "type": "feat",
+          "sha": "35a2b9a4ff3b075124f6905c423acd8d11bdfa68",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9481"
+          ]
+        }
+      ],
+      "version": "0.12.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/products",
+      "id": "a8a2c8e1-bccc-4426-84f7-3309dffd8295",
+      "createTime": "2026-10-03T05:40:00.977Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "02e3361248bed2d4993fd737ac753311391e9203",
+          "message": "Update Compute v1 API to version 2026-09-01",
+          "issues": [
+            "9503"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "02e3361248bed2d4993fd737ac753311391e9203",
+          "message": "All AggregatedList RPCs return_partial_success fields removed",
+          "issues": []
+        },
+        {
+          "type": "fix",
+          "sha": "02e3361248bed2d4993fd737ac753311391e9203",
+          "message": "All AggregatedList RPCs behavior is now return_partial_success=true",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "35a2b9a4ff3b075124f6905c423acd8d11bdfa68",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9481"
+          ]
+        }
+      ],
+      "version": "7.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/compute",
+      "id": "c10b6a11-a81a-4715-81b5-f9e951a4c651",
+      "createTime": "2026-10-03T05:40:00.942Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "35a2b9a4ff3b075124f6905c423acd8d11bdfa68",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9481"
+          ]
+        }
+      ],
+      "version": "0.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/commerceproducer",
+      "id": "1ff01c60-fe1f-4c89-a2fd-df57be0c4e84",
+      "createTime": "2026-10-03T05:40:00.907Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "35a2b9a4ff3b075124f6905c423acd8d11bdfa68",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9481"
+          ]
+        }
+      ],
+      "version": "0.10.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/procurement",
+      "id": "97f5f420-e9cd-4ce9-9e10-10416dbdb42a",
+      "createTime": "2026-10-03T05:40:00.875Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "514e2f64ba67ad3ab956fbe3eeafa507d44ca597",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9472"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "5cd945de7f4fd96878c1956d68bcf505e48686ce",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9427"
+          ]
+        }
+      ],
+      "version": "0.10.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigtable-api",
+      "id": "b4fbbd97-4993-4eff-834b-e75deaf30ae4",
+      "createTime": "2026-10-03T05:40:00.836Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "35a2b9a4ff3b075124f6905c423acd8d11bdfa68",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9481"
+          ]
+        }
+      ],
+      "version": "7.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "18c56024-1f89-4f6c-8fe5-0a95b7b44e38",
+      "createTime": "2026-10-03T05:40:00.802Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "35a2b9a4ff3b075124f6905c423acd8d11bdfa68",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9481"
+          ]
+        }
+      ],
+      "version": "0.34.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-apps/chat",
+      "id": "b117f948-2a9e-4527-a17d-1e93e41451af",
+      "createTime": "2026-10-03T05:40:00.768Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "f971bb559f3033441d4d20648fa4827b2c0f95d0",
+          "message": "Add runtime detection predicates and cross-engine assertion helpers",
+          "issues": [
+            "9492"
+          ],
+          "scope": "test-utils"
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "google-test-utils",
+      "id": "fff55dd8-1a57-40f8-be4d-7bd2bd12fb27",
+      "createTime": "2026-10-03T05:40:00.718Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "068fe528e659fd37e8876f6fa7ea5c249bda4091",
+          "message": "Move teeny-request to devDependencies",
+          "issues": [
+            "9500"
+          ],
+          "scope": "retry-request"
+        }
+      ],
+      "version": "9.0.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "retry-request",
+      "id": "131706c4-d04c-49f1-8c4e-657eed4a780d",
+      "createTime": "2026-10-03T05:40:00.662Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "51aedceb77684ff6a14825c5916836c6e71060b4",
+          "message": "Emit T4 attempt spans",
+          "issues": [
+            "9496"
+          ],
+          "scope": "gax"
+        },
+        {
+          "type": "fix",
+          "sha": "02b94781828d50b91a255187f89a168f8b1e3b84",
+          "message": "Propagate chunk granularity on resume and preserve retry error details",
+          "issues": [
+            "9480"
+          ],
+          "scope": "gax"
+        }
+      ],
+      "version": "6.11.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "google-gax",
+      "id": "713fdfd0-76eb-41c1-9575-c15ef45606ec",
+      "createTime": "2026-10-03T05:40:00.620Z"
+    },
+    {
+      "changes": [
+        {
           "type": "fix",
           "sha": "102b3f6d0eb80b3b8814d71d53e50b5240556340",
           "message": "Deduplicate pnpm install in run_single_test and refine turbo compile inputs",
@@ -99729,5 +99939,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-10-01T08:15:34.079Z"
+  "updateTime": "2026-10-03T05:40:00.977Z"
 }

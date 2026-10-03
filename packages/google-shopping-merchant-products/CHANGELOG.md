@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.12.0](https://github.com/googleapis/google-cloud-node/compare/products-v0.11.1...products-v0.12.0) (2026-10-03)
+
+
+### Features
+
+* Update API sources and regenerate ([#9481](https://github.com/googleapis/google-cloud-node/issues/9481)) ([35a2b9a](https://github.com/googleapis/google-cloud-node/commit/35a2b9a4ff3b075124f6905c423acd8d11bdfa68))
+
 ## [0.11.1](https://github.com/googleapis/google-cloud-node/compare/products-v0.11.0...products-v0.11.1) (2026-09-28)
 
 
