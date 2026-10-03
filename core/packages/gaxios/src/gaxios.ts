@@ -556,6 +556,10 @@ export class Gaxios implements FetchCompliance {
       (opts as {duplex: string}).duplex = 'half';
     }
 
+    if (opts.retryConfig && !opts.retryConfig.timeOfFirstRequest) {
+      opts.retryConfig.timeOfFirstRequest = Date.now();
+    }
+
     this.#appendTimeoutToSignal(opts);
 
     return Object.assign(opts, {
