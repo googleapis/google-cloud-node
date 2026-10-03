@@ -29,8 +29,15 @@ export interface TranscodedRequest {
   data: string | {};
 }
 
-export interface TranscodedRequestWithTemplate extends TranscodedRequest {
-  urlTemplate: string;
+const matchedUrlTemplates = new WeakMap<TranscodedRequest, string>();
+
+/**
+ * Returns the matched `(google.api.http)` URL path template for a transcoded request, if available.
+ */
+export function getMatchedUrlTemplate(
+  transcoded: TranscodedRequest,
+): string | undefined {
+  return matchedUrlTemplates.get(transcoded);
 }
 
 const httpOptionName = '(google.api.http)';
@@ -336,10 +343,10 @@ export function isProto3OptionalField(field: Field) {
   return field && field.options && field.options![proto3OptionalName];
 }
 
-export function transcodeWithTemplate(
+export function transcode(
   request: JSONObject,
   parsedOptions: ParsedOptionsType,
-): TranscodedRequestWithTemplate | undefined {
+): TranscodedRequest | undefined {
   const httpRules = [];
   for (const option of parsedOptions) {
     if (!(httpOptionName in option)) {
@@ -374,13 +381,14 @@ export function transcodeWithTemplate(
       let data: JSONObject | JSONValue | undefined =
         deepCopyWithoutMatchedFields(request, new Set(matchedFields));
       if (httpRule.body === '*') {
-        return {
+        const result: TranscodedRequest = {
           httpMethod,
           url,
           queryString: '',
           data,
-          urlTemplate: pathTemplate,
         };
+        matchedUrlTemplates.set(result, pathTemplate);
+        return result;
       }
 
       // one field possibly goes to request data, others go to query string
@@ -404,28 +412,12 @@ export function transcodeWithTemplate(
       ) {
         data = '';
       }
-      return {
-        httpMethod,
-        url,
-        queryString,
-        data,
-        urlTemplate: pathTemplate,
-      };
+      const result: TranscodedRequest = {httpMethod, url, queryString, data};
+      matchedUrlTemplates.set(result, pathTemplate);
+      return result;
     }
   }
   return undefined;
-}
-
-export function transcode(
-  request: JSONObject,
-  parsedOptions: ParsedOptionsType,
-): TranscodedRequest | undefined {
-  const result = transcodeWithTemplate(request, parsedOptions);
-  if (!result) {
-    return undefined;
-  }
-  const {httpMethod, url, queryString, data} = result;
-  return {httpMethod, url, queryString, data};
 }
 
 // Override the protobuf json's the http rules.

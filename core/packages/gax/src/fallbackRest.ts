@@ -21,7 +21,7 @@ import {defaultToObjectOptions} from './fallback';
 import {FetchParameters, FetchParametersMethod} from './fallbackServiceStub';
 import {GoogleError} from './googleError';
 import {rpcCodeFromHttpStatusCode} from './status';
-import {transcodeWithTemplate} from './transcoding';
+import {getMatchedUrlTemplate, transcode} from './transcoding';
 
 export function encodeRequest(
   rpc: protobuf.Method,
@@ -46,7 +46,7 @@ export function encodeRequest(
     throw new Error(`Request to RPC ${rpc.name} must be an object.`);
   }
 
-  const transcoded = transcodeWithTemplate(json, rpc.parsedOptions);
+  const transcoded = transcode(json, rpc.parsedOptions);
 
   if (!transcoded) {
     throw new Error(
@@ -82,7 +82,7 @@ export function encodeRequest(
   return {
     method,
     url,
-    urlTemplate: transcoded.urlTemplate,
+    urlTemplate: getMatchedUrlTemplate(transcoded),
     headers,
     body,
   };
