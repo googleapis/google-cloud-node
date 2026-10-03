@@ -738,7 +738,7 @@ describe('createApiCall', () => {
       assert.strictEqual(spans.length, 2);
       const attemptSpan = spans[0];
       const span = spans[1];
-      assert.strictEqual(attemptSpan.name, 'google.example.v1.Echo/Echo');
+      assert.strictEqual(attemptSpan.name, 'POST');
       assert.strictEqual(attemptSpan.kind, SpanKind.CLIENT);
       assert.strictEqual(attemptSpan.attributes['rpc.system'], 'http');
       assert.strictEqual(attemptSpan.attributes['gcp.method.type'], undefined);
@@ -782,7 +782,7 @@ describe('createApiCall', () => {
       assert.strictEqual(spans.length, 2);
       const attemptSpan = spans[0];
       const span = spans[1];
-      assert.strictEqual(attemptSpan.name, 'google.example.v1.Echo/Echo');
+      assert.strictEqual(attemptSpan.name, 'POST');
       assert.strictEqual(attemptSpan.attributes['rpc.system'], 'http');
       assert.strictEqual(span.name, 'EchoClient.Echo');
       assert.strictEqual(span.ended, true);
@@ -1450,6 +1450,8 @@ describe('createApiCall', () => {
         });
 
       for (const transport of transports) {
+        const expectedAttemptSpanName =
+          transport.rpcType === 'http' ? 'POST' : 'google.example.v1.Echo/Echo';
         describe(`over ${transport.name}`, () => {
           it('omits resend count when the call succeeds on the first attempt', async () => {
             let attempts = 0;
@@ -1480,7 +1482,7 @@ describe('createApiCall', () => {
             );
             harness.assertResendCount(0, {span});
             const attemptSpans = spans.filter(
-              s => s.name === 'google.example.v1.Echo/Echo',
+              s => s.name === expectedAttemptSpanName,
             );
             assert.strictEqual(attemptSpans.length, attempts);
             harness.assertResendCount(0, {span: attemptSpans[0]});
@@ -1523,7 +1525,7 @@ describe('createApiCall', () => {
             // defines.
             harness.assertResendCount(attempts - 1, {span});
             const attemptSpans = spans.filter(
-              s => s.name === 'google.example.v1.Echo/Echo',
+              s => s.name === expectedAttemptSpanName,
             );
             assert.strictEqual(attemptSpans.length, attempts);
             attemptSpans.forEach((attemptSpan, idx) => {
@@ -1589,7 +1591,7 @@ describe('createApiCall', () => {
             // 2 attempts made: initial send + 1 resend. The 2nd retry was not sent because maxRetries was reached.
             harness.assertResendCount(1, {span});
             const attemptSpans = spans.filter(
-              s => s.name === 'google.example.v1.Echo/Echo',
+              s => s.name === expectedAttemptSpanName,
             );
             assert.strictEqual(attemptSpans.length, attempts);
             attemptSpans.forEach((attemptSpan, idx) => {
@@ -1649,7 +1651,7 @@ describe('createApiCall', () => {
             // (attempts - 1), without counting the attempt aborted by the deadline.
             harness.assertResendCount(attempts - 1, {span});
             const attemptSpans = spans.filter(
-              s => s.name === 'google.example.v1.Echo/Echo',
+              s => s.name === expectedAttemptSpanName,
             );
             assert.strictEqual(attemptSpans.length, attempts);
             attemptSpans.forEach((attemptSpan, idx) => {
@@ -1709,7 +1711,7 @@ describe('createApiCall', () => {
             assert.ok(span);
             harness.assertResendCount(0, {span});
             const attemptSpans = spans.filter(
-              s => s.name === 'google.example.v1.Echo/Echo',
+              s => s.name === expectedAttemptSpanName,
             );
             assert.strictEqual(attemptSpans.length, pageRequests);
             for (const attemptSpan of attemptSpans) {
@@ -1763,7 +1765,7 @@ describe('createApiCall', () => {
             assert.ok(span);
             harness.assertResendCount(1, {span});
             const attemptSpans = spans.filter(
-              s => s.name === 'google.example.v1.Echo/Echo',
+              s => s.name === expectedAttemptSpanName,
             );
             assert.strictEqual(attemptSpans.length, 3);
             // Page 1 initial attempt: 0, Page 1 retry: 1, Page 2 initial attempt: 0
@@ -2049,9 +2051,7 @@ describe('createApiCall', () => {
         const spans = harness.getSpans('google-gax');
         assert.strictEqual(spans.length, 2);
 
-        const networkSpan = spans.find(
-          s => s.name === 'google.example.v1.Echo/Echo',
-        )!;
+        const networkSpan = spans.find(s => s.name === 'POST')!;
         const clientRequestSpan = spans.find(
           s => s.name === 'EchoClient.Echo',
         )!;
@@ -2243,6 +2243,10 @@ describe('createApiCall', () => {
         assert.strictEqual(networkSpans[0].kind, SpanKind.CLIENT);
         assert.strictEqual(networkSpans[0].status.code, SpanStatusCode.ERROR);
         assert.strictEqual(networkSpans[0].status.message, 'transient failure');
+        assert.strictEqual(
+          networkSpans[0].attributes['status.message'],
+          'transient failure',
+        );
         assert.strictEqual(
           networkSpans[0].attributes['gcp.grpc.resend_count'],
           undefined,

@@ -123,18 +123,49 @@ export interface AttemptTraceContext extends DynamicTraceContext {
    * The HTTP request method for REST fallback attempts (e.g. 'GET', 'POST', 'PUT', 'PATCH', 'DELETE').
    */
   httpMethod?: string;
+  /**
+   * The URL path template for REST fallback attempts (e.g. '/v1/{name}:access').
+   */
+  urlTemplate?: string;
 }
 
 const ATTEMPT_SPAN_KEY = createContextKey('google-gax-attempt-span');
+const attemptUrlTemplates = new WeakMap<Span, string>();
 
 /**
- * Updates the `http.request.method` attribute on the currently active low level network attempt span, if any.
+ * Formats the span name for an HTTP low level network attempt span as
+ * `"{http.request.method} {url.template}"` when a URL template is available,
+ * or `"{http.request.method}"` otherwise.
  */
-export function setAttemptHttpMethod(httpMethod: string): void {
+function formatHttpAttemptSpanName(
+  httpMethod: string,
+  urlTemplate?: string,
+): string {
+  return urlTemplate ? `${httpMethod} ${urlTemplate}` : httpMethod;
+}
+
+/**
+ * Updates the `http.request.method` attribute, optional `url.template` attribute,
+ * and span name on the currently active low level network attempt span, if any.
+ */
+export function setAttemptHttpMethod(
+  httpMethod: string,
+  urlTemplate?: string,
+): void {
   const attemptSpan = context.active().getValue(ATTEMPT_SPAN_KEY) as
     Span | undefined;
   if (attemptSpan) {
     attemptSpan.setAttribute('http.request.method', httpMethod);
+    if (urlTemplate) {
+      attemptUrlTemplates.set(attemptSpan, urlTemplate);
+      attemptSpan.setAttribute('url.template', urlTemplate);
+    }
+    // Preserve any previously recorded URL template when updating the span name.
+    const resolvedUrlTemplate =
+      urlTemplate || attemptUrlTemplates.get(attemptSpan);
+    attemptSpan.updateName(
+      formatHttpAttemptSpanName(httpMethod, resolvedUrlTemplate),
+    );
   }
 }
 
@@ -629,7 +660,8 @@ function resolveErrorMessage(e: unknown): string {
 }
 
 /**
- * Determines whether a failure is a server-side error (i.e. a server response arrived).
+ * Determines whether a failure is a server-side error (i.e. a server response arrived),
+ * excluding pre-connection failures, client network/operational errors, and aborts/timeouts.
  */
 export function isServerSideError(
   e: unknown,
@@ -647,6 +679,7 @@ export function isServerSideError(
   if (resolveClientNetworkOrOperationalError(e) !== undefined) {
     return false;
   }
+  // Exclude client-side aborts and timeouts across the cause chain.
   let current: unknown = e;
   const seen = new Set<unknown>();
   for (let depth = 0; depth < DEPTH_TO_CHECK; depth++) {
@@ -669,6 +702,9 @@ export function isServerSideError(
   return false;
 }
 
+/**
+ * Checks whether a value is a Node.js Buffer instance.
+ */
 function isBuffer(val: unknown): val is Buffer {
   return typeof Buffer !== 'undefined' && Buffer.isBuffer(val);
 }
@@ -692,6 +728,7 @@ export function safeJsonStringify(value: unknown): string | undefined {
         if (typeof val !== 'object' || val === null) {
           return val;
         }
+        // Track object ancestry to replace circular references.
         if (ancestors.includes(this)) {
           while (
             ancestors.length > 0 &&
@@ -740,7 +777,7 @@ export function resolveServerExceptionDetails(e: Error): {
         })
       : undefined;
 
-  // If e has gRPC metadata that hasn't decoded statusDetails yet, parse it:
+  // Decode binary gRPC status details if not yet parsed.
   const errWithMeta = e as GoogleError;
   if (
     !errObj.statusDetails &&
@@ -752,18 +789,18 @@ export function resolveServerExceptionDetails(e: Error): {
     try {
       GoogleError.parseGRPCStatusDetails(errWithMeta);
     } catch {
-      // Ignore decoding errors
+      // Ignore decoding errors.
     }
   }
 
-  // Server error details: prefer details if non-empty string, else message
+  // Prefer server error details over generic error message.
   const serverDetails = errObj.details ?? causeObj?.details;
   const message =
     typeof serverDetails === 'string' && serverDetails.length > 0
       ? serverDetails
       : e.message;
 
-  // Status details
+  // Serialize status details if present.
   const rawStatusDetails = errObj.statusDetails ?? causeObj?.statusDetails;
   let statusDetailsStr: string | undefined;
   if (rawStatusDetails !== undefined && rawStatusDetails !== null) {
@@ -773,7 +810,7 @@ export function resolveServerExceptionDetails(e: Error): {
         : safeJsonStringify(rawStatusDetails);
   }
 
-  // Metadata attached by GFE / backend
+  // Serialize backend metadata, encoding Buffer values as base64.
   const rawMetadata = errObj.metadata ?? causeObj?.metadata;
   let metadataStr: string | undefined;
   if (rawMetadata && typeof rawMetadata === 'object') {
@@ -802,7 +839,7 @@ export function resolveServerExceptionDetails(e: Error): {
     }
   }
 
-  // Format status details and metadata as exception.stacktrace (replacing the local client stack trace)
+  // Combine status details and metadata into exception.stacktrace.
   const stacktraceParts: string[] = [];
   if (statusDetailsStr) {
     stacktraceParts.push(`status_details: ${statusDetailsStr}`);
@@ -833,6 +870,7 @@ function recordExceptionEvent(
   const exceptionType = resolveExceptionType(e);
 
   if (isServerSideError(e, rpcType)) {
+    // Record server error details and metadata instead of local stack trace.
     const {message, stacktrace} = resolveServerExceptionDetails(e);
 
     const attributes: Attributes = {
@@ -844,7 +882,7 @@ function recordExceptionEvent(
     }
     span.addEvent('exception', attributes);
   } else {
-    // Client-side error: records local client stack trace & client error message
+    // Record local client error message and stack trace.
     const attributes: Attributes = {
       'exception.type': exceptionType,
       'exception.message': e.message,
@@ -884,6 +922,7 @@ function getPromiseTarget<T = unknown>(value: unknown): PromiseLike<T> | null {
   if (isPromiseLike<T>(value)) {
     return value;
   }
+  // Unwrap `.promise` property on wrappers like OngoingCallPromise.
   if (
     value !== null &&
     (typeof value === 'object' || typeof value === 'function') &&
@@ -896,7 +935,8 @@ function getPromiseTarget<T = unknown>(value: unknown): PromiseLike<T> | null {
 }
 
 /**
- * Manages span lifecycle for Promise-based operations.
+ * Manages span lifecycle for Promise-based operations, ending the span on
+ * resolution or recording the error and ending the span on rejection.
  *
  * @template T
  * @param {T} promise - The promise returned from the traced operation.
@@ -932,6 +972,8 @@ export function handlePromise<T>(
 
 /**
  * Manages span lifecycle for Stream-based operations and cleans up event listeners.
+ * For client-streaming calls without a callback, `'finish'` is used as the completion
+ * signal because readable events (`'end'`) never fire on write-only streams.
  *
  * @param {EventEmitter} stream - The stream returned from the traced operation.
  * @param {function} recordError - Callback to record errors on the span.
@@ -947,8 +989,7 @@ export function handleStream(
 ): void {
   let spanEnded = false;
 
-  // For client-streaming calls without a callback, 'finish' signals completion
-  // because readable events ('end') never fire on write-only streams.
+  // Use 'finish' only for write-only streams without a callback.
   const isWriteOnly =
     'writable' in stream &&
     stream.writable === true &&
@@ -998,7 +1039,36 @@ export function handleStream(
 }
 
 /**
- * Resolves the target service domain (`url.domain`) from dynamic and static trace contexts.
+ * Resolves and parses the server address and port from dynamic and static trace contexts,
+ * splitting `"host:port"` or `"[ipv6]:port"` strings and applying an optional fallback
+ * address and default port.
+ */
+function resolveServerAddressAndPort(
+  dynamicArgs: DynamicTraceContext,
+  staticArgs: StaticTraceContext,
+  fallbackAddress?: string,
+  defaultPort?: number,
+): {rawAddress?: string; rawPort?: number} {
+  let rawAddress =
+    dynamicArgs.serverAddress ?? staticArgs.serverAddress ?? fallbackAddress;
+  let rawPort = dynamicArgs.serverPort ?? staticArgs.serverPort;
+  if (rawAddress) {
+    // Split embedded port from "host:port" or "[ipv6]:port" if present.
+    const match = rawAddress.match(/^(\[[^\]]+\]|[^:]+):(\d+)$/);
+    if (match) {
+      rawAddress = match[1];
+      rawPort = rawPort ?? Number(match[2]);
+    }
+    if (defaultPort !== undefined) {
+      rawPort = rawPort ?? defaultPort;
+    }
+  }
+  return {rawAddress, rawPort};
+}
+
+/**
+ * Resolves the target service domain (`url.domain`) from dynamic and static trace contexts,
+ * checking explicit `urlDomain` values first, then `serverAddress`, and finally `gcpClientService`.
  */
 function resolveUrlDomain(
   dynamicArgs: DynamicTraceContext,
@@ -1008,11 +1078,11 @@ function resolveUrlDomain(
   if (explicit) {
     return explicit;
   }
-  const rawAddress = dynamicArgs.serverAddress ?? staticArgs.serverAddress;
+  const {rawAddress} = resolveServerAddressAndPort(dynamicArgs, staticArgs);
   if (rawAddress) {
-    const match = rawAddress.match(/^(\[[^\]]+\]|[^:]+):(\d+)$/);
-    return match ? match[1] : rawAddress;
+    return rawAddress;
   }
+  // Append ".googleapis.com" when gcpClientService is a short service name.
   if (staticArgs.gcpClientService) {
     return staticArgs.gcpClientService.includes('.')
       ? staticArgs.gcpClientService
@@ -1022,11 +1092,201 @@ function resolveUrlDomain(
 }
 
 /**
- * Executes a function within an active OpenTelemetry span, populating standard
- * GCP telemetry attributes and recording errors/exceptions if thrown.
+ * Returns the transport-specific resend count attribute key.
  *
- * For callback-style invocations, pass the user's `callback` as the fifth
- * argument so the span stays open until the callback or stream events finish.
+ * Named per transport, the same way the status attributes are.
+ * `http.request.resend_count` is the stable OpenTelemetry attribute for
+ * exactly this quantity, so the fallback uses it rather than inventing a
+ * parallel name. gRPC has no standard equivalent, so it takes the gcp.*
+ * name instead of borrowing the http.* one, which would claim a protocol
+ * the call never spoke.
+ */
+function resolveResendCountAttribute(rpcType: 'grpc' | 'http'): string {
+  return rpcType === 'grpc'
+    ? 'gcp.grpc.resend_count'
+    : 'http.request.resend_count';
+}
+
+/**
+ * Sets final response status code and server endpoint attributes on a span.
+ * `server.address` and `server.port` are present on server-side errors and successful calls,
+ * but omitted on client-side failures that occur before DNS resolution or connection establishment.
+ */
+function setFinalStatusAttributes(
+  span: Span,
+  rpcType: 'grpc' | 'http',
+  rpcStatusName: string | undefined,
+  httpStatusCode: number | undefined,
+  rawAddress: string | undefined,
+  rawPort: number | undefined,
+  errorRecorded: boolean,
+  recordedError: unknown,
+): void {
+  const attributes: Attributes = {};
+  if (rpcType === 'grpc' && rpcStatusName !== undefined) {
+    attributes['rpc.response.status_code'] = rpcStatusName;
+  }
+  if (rpcType === 'http' && httpStatusCode !== undefined) {
+    attributes['http.response.status_code'] = httpStatusCode;
+  }
+  // Omit server endpoint on client-side pre-connection failures.
+  if (
+    rawAddress !== undefined &&
+    (!errorRecorded || !isPreConnectionFailure(recordedError))
+  ) {
+    attributes['server.address'] = rawAddress;
+    if (rawPort !== undefined) {
+      attributes['server.port'] = rawPort;
+    }
+  }
+  span.setAttributes(attributes);
+}
+
+/**
+ * Records error attributes (`error.type`, optional `status.message`), exception event,
+ * and `ERROR` status on a span, returning the resolved transport status codes.
+ */
+function recordSpanError(
+  span: Span,
+  e: unknown,
+  rpcType: 'grpc' | 'http',
+  includeStatusMessage = false,
+): {rpcStatusName?: string; httpStatusCode?: number} {
+  const rpcStatusName = resolveRpcStatusName(e);
+  const httpStatusCode = resolveHttpStatusCode(e);
+  const message = e instanceof Error ? e.message : resolveErrorMessage(e);
+  const errorAttributes: Attributes = {
+    'error.type': resolveErrorType(e, rpcType),
+  };
+  if (includeStatusMessage) {
+    errorAttributes['status.message'] = message;
+  }
+  span.setAttributes(errorAttributes);
+  if (e instanceof Error) {
+    recordExceptionEvent(span, e, rpcType);
+  }
+  span.setStatus({code: SpanStatusCode.ERROR, message});
+  return {rpcStatusName, httpStatusCode};
+}
+
+interface SpanCompletionOptions {
+  span: Span;
+  rpcType: 'grpc' | 'http';
+  rawAddress?: string;
+  rawPort?: number;
+  includeStatusMessage?: boolean;
+  onBeforeEnd?: () => void;
+}
+
+/**
+ * Creates `recordError`, `endSpan`, and `tracedCallback` handlers for a traced call or attempt.
+ * Leaves span status unset on success per OpenTelemetry semantic conventions, and ends the span
+ * before invoking the user callback so user callback errors are not attributed to the RPC.
+ */
+function createSpanCompletionHandlers(
+  options: SpanCompletionOptions,
+  callback?: APICallback,
+): {
+  recordError: (e: unknown) => void;
+  endSpan: () => void;
+  tracedCallback?: APICallback;
+} {
+  const {
+    span,
+    rpcType,
+    rawAddress,
+    rawPort,
+    includeStatusMessage = false,
+    onBeforeEnd,
+  } = options;
+  let spanEnded = false;
+  let errorRecorded = false;
+  let recordedError: unknown;
+  let rpcStatusName: string | undefined;
+  let httpStatusCode: number | undefined;
+
+  const recordError = (e: unknown) => {
+    recordedError = e;
+    errorRecorded = true;
+    ({rpcStatusName, httpStatusCode} = recordSpanError(
+      span,
+      e,
+      rpcType,
+      includeStatusMessage,
+    ));
+  };
+
+  const endSpan = () => {
+    if (!spanEnded) {
+      spanEnded = true;
+      // Default to OK / 200 when no error was recorded.
+      if (!errorRecorded) {
+        rpcStatusName = Status[Status.OK];
+        httpStatusCode = 200;
+      }
+      setFinalStatusAttributes(
+        span,
+        rpcType,
+        rpcStatusName,
+        httpStatusCode,
+        rawAddress,
+        rawPort,
+        errorRecorded,
+        recordedError,
+      );
+      onBeforeEnd?.();
+      span.end();
+    }
+  };
+
+  // End span before invoking user callback so callback errors are not recorded.
+  const tracedCallback: APICallback | undefined = callback
+    ? function (this: unknown, ...args: Parameters<APICallback>) {
+        const err = args[0];
+        if (err) {
+          recordError(err);
+        }
+        endSpan();
+        callback.apply(this, args);
+      }
+    : undefined;
+
+  return {recordError, endSpan, tracedCallback};
+}
+
+/**
+ * Attaches stream, promise, or synchronous completion handlers to a traced operation's result.
+ * When a callback is supplied without a stream or promise, the span stays open until
+ * `tracedCallback` completes.
+ */
+function handleCallResult<T>(
+  result: T,
+  isStreamCall: boolean,
+  hasCallback: boolean,
+  recordError: (e: unknown) => void,
+  endSpan: () => void,
+): T {
+  const promiseTarget = !isStreamCall ? getPromiseTarget(result) : null;
+  if (isStreamCall && result instanceof EventEmitter) {
+    handleStream(result, recordError, endSpan, hasCallback);
+  } else if (promiseTarget) {
+    handlePromise(promiseTarget, recordError, endSpan);
+  } else if (hasCallback) {
+    // Span remains open until tracedCallback is invoked.
+  } else {
+    endSpan();
+  }
+  return result;
+}
+
+/**
+ * Executes a function within an active OpenTelemetry client request span, populating
+ * standard GCP telemetry attributes and recording errors/exceptions if thrown.
+ *
+ * Counts retry resends (not initial attempts) via {@link ResendRecorder} and records
+ * the total resend count on span completion when greater than 0. For callback-style
+ * invocations, pass the user's `callback` as the fifth argument so the span stays
+ * open until the callback or stream events finish.
  *
  * @template T
  * @param {DynamicTraceContext} dynamicArgs - Dynamic trace context for the RPC call.
@@ -1074,6 +1334,7 @@ export function traceCall(
 ): GaxCallResult {
   const spanName = `${dynamicArgs.clientName}.${dynamicArgs.methodName}`;
   return getGaxTracer().startActiveSpan(spanName, {}, (span: Span) => {
+    // Populate initial client, method, and domain attributes.
     const urlDomain = resolveUrlDomain(dynamicArgs, staticArgs);
     const initialAttributes: Attributes = {
       'gcp.client.service': staticArgs.gcpClientService,
@@ -1088,141 +1349,49 @@ export function traceCall(
     }
     span.setAttributes(initialAttributes);
 
-    let rawAddress = dynamicArgs.serverAddress ?? staticArgs.serverAddress;
-    let rawPort = dynamicArgs.serverPort ?? staticArgs.serverPort;
-    if (rawAddress) {
-      const match = rawAddress.match(/^(\[[^\]]+\]|[^:]+):(\d+)$/);
-      if (match) {
-        rawAddress = match[1];
-        rawPort = rawPort ?? Number(match[2]);
-      }
-    }
+    // Parse server address and port.
+    const {rawAddress, rawPort} = resolveServerAddressAndPort(
+      dynamicArgs,
+      staticArgs,
+    );
 
-    let spanEnded = false;
-    let errorRecorded = false;
-    let recordedError: unknown;
-    let rpcStatusName: string | undefined;
-    let httpStatusCode: number | undefined;
-
-    // Counts resends, not attempts. The initial send is not a resend, so a
-    // call that succeeded first time is 0 and the first retry is 1.
-    //
-    // Omitted when the call was never resent (resendCount is 0), per
-    // OpenTelemetry semantic conventions.
-    //
-    // Reported on the call span rather than per attempt because gax opens one
-    // span for the whole call, retries included. OpenTelemetry's HTTP
-    // convention instead expects one span per attempt, each carrying the
-    // ordinal of that attempt. The two agree on the value that matters: the
-    // ordinal on the last attempt's span equals the total number of resends,
-    // and gax's single span is the one that ends the call.
+    // Track retry resends; omitted when 0.
     let resendCount = 0;
     const recordResend: ResendRecorder = () => {
       resendCount++;
     };
+    const resendCountAttribute = resolveResendCountAttribute(
+      dynamicArgs.rpcType,
+    );
 
-    // Named per transport, the same way the status attributes below are.
-    // `http.request.resend_count` is the stable OpenTelemetry attribute for
-    // exactly this quantity, so the fallback uses it rather than inventing a
-    // parallel name. gRPC has no standard equivalent, so it takes the gcp.*
-    // name instead of borrowing the http.* one, which would claim a protocol
-    // the call never spoke.
-    const resendCountAttribute =
-      dynamicArgs.rpcType === 'grpc'
-        ? 'gcp.grpc.resend_count'
-        : 'http.request.resend_count';
-
-    // Marks the span failed. Kept separate from recordError so paths that are
-    // failures but not exceptions can set the status without emitting a
-    // misleading exception event.
-    const setErrorStatus = (message: string) => {
-      errorRecorded = true;
-      span.setStatus({code: SpanStatusCode.ERROR, message});
-    };
-
-    const setStatusAttributes = () => {
-      const attributes: Attributes = {};
-      if (dynamicArgs.rpcType === 'grpc' && rpcStatusName !== undefined) {
-        attributes['rpc.response.status_code'] = rpcStatusName;
-      }
-      if (dynamicArgs.rpcType === 'http' && httpStatusCode !== undefined) {
-        attributes['http.response.status_code'] = httpStatusCode;
-      }
-      // server.address and server.port are present on server-side errors and successful calls,
-      // but absent on client-side failures that occur before DNS resolution or connection establishment.
-      if (
-        rawAddress !== undefined &&
-        (!errorRecorded || !isPreConnectionFailure(recordedError))
-      ) {
-        attributes['server.address'] = rawAddress;
-        if (rawPort !== undefined) {
-          attributes['server.port'] = rawPort;
-        }
-      }
-      span.setAttributes(attributes);
-    };
-
-    // Span status is left unset on success per OpenTelemetry semantic conventions.
-    const endSpan = () => {
-      if (!spanEnded) {
-        spanEnded = true;
-        if (!errorRecorded) {
-          rpcStatusName = Status[Status.OK];
-          httpStatusCode = 200;
-        }
-        setStatusAttributes();
-        if (resendCount > 0) {
-          span.setAttribute(resendCountAttribute, resendCount);
-        }
-        span.end();
-      }
-    };
-
-    const recordError = (e: unknown) => {
-      recordedError = e;
-      rpcStatusName = resolveRpcStatusName(e);
-      httpStatusCode = resolveHttpStatusCode(e);
-      span.setAttributes({
-        'error.type': resolveErrorType(e, dynamicArgs.rpcType),
-      });
-      if (e instanceof Error) {
-        recordExceptionEvent(span, e, dynamicArgs.rpcType);
-        setErrorStatus(e.message);
-      } else {
-        setErrorStatus(resolveErrorMessage(e));
-      }
-    };
-
-    // End the span before executing the user callback so user errors are not
-    // attributed to the RPC and cannot leak the span.
-    const tracedCallback: APICallback | undefined = callback
-      ? function (this: unknown, ...args: Parameters<APICallback>) {
-          const err = args[0];
-          if (err) {
-            recordError(err);
+    const {recordError, endSpan, tracedCallback} = createSpanCompletionHandlers(
+      {
+        span,
+        rpcType: dynamicArgs.rpcType,
+        rawAddress,
+        rawPort,
+        onBeforeEnd: () => {
+          if (resendCount > 0) {
+            span.setAttribute(resendCountAttribute, resendCount);
           }
-          endSpan();
-          callback.apply(this, args);
-        }
-      : undefined;
+        },
+      },
+      callback,
+    );
 
     try {
+      // Run operation with active client request span in context.
       const activeContext = trace.setSpan(context.active(), span);
       const result = context.with(activeContext, () =>
         fn(tracedCallback, recordResend),
       );
-      const promiseTarget = !isStreamCall ? getPromiseTarget(result) : null;
-      if (isStreamCall && result instanceof EventEmitter) {
-        handleStream(result, recordError, endSpan, !!callback);
-      } else if (promiseTarget) {
-        handlePromise(promiseTarget, recordError, endSpan);
-      } else if (tracedCallback) {
-        // Span stays open; tracedCallback ends it when the RPC completes.
-        // Ending it here would close the span before the RPC is even sent.
-      } else {
-        endSpan();
-      }
-      return result;
+      return handleCallResult(
+        result,
+        isStreamCall,
+        !!tracedCallback,
+        recordError,
+        endSpan,
+      );
     } catch (e) {
       recordError(e);
       endSpan();
@@ -1236,6 +1405,10 @@ export function traceCall(
  * CLIENT span (low level network span), parenting it to the active client request span
  * and recording per-attempt network, status, and error attributes without
  * injecting span context into outgoing headers.
+ *
+ * HTTP attempt spans are named `"{http.request.method} {url.template}"` when a URL
+ * template is available or `"{http.request.method}"` otherwise; gRPC attempt spans
+ * are named `"{apiName}/{methodName}"` or `"{methodName}"`.
  *
  * @param {AttemptTraceContext} dynamicArgs - Dynamic trace context for the RPC attempt.
  * @param {StaticTraceContext} staticArgs - Static trace context for the client library.
@@ -1253,9 +1426,17 @@ export function traceAttempt<T = GaxCallResult>(
   callback?: APICallback,
   parentContext?: Context,
 ): T {
-  const spanName = dynamicArgs.apiName
-    ? `${dynamicArgs.apiName}/${dynamicArgs.methodName}`
-    : dynamicArgs.methodName;
+  // Resolve transport-specific span name.
+  const httpMethod = dynamicArgs.httpMethod ?? 'POST';
+  const urlTemplate =
+    dynamicArgs.urlTemplate ??
+    (dynamicArgs as {'url.template'?: string})['url.template'];
+  const spanName =
+    dynamicArgs.rpcType === 'http'
+      ? formatHttpAttemptSpanName(httpMethod, urlTemplate)
+      : dynamicArgs.apiName
+        ? `${dynamicArgs.apiName}/${dynamicArgs.methodName}`
+        : dynamicArgs.methodName;
   const baseContext = parentContext ?? context.active();
   return getGaxTracer().startActiveSpan(
     spanName,
@@ -1270,8 +1451,11 @@ export function traceAttempt<T = GaxCallResult>(
       if (dynamicArgs.rpcType === 'grpc') {
         initialAttributes['rpc.method'] = spanName;
       } else {
-        initialAttributes['http.request.method'] =
-          dynamicArgs.httpMethod ?? 'POST';
+        initialAttributes['http.request.method'] = httpMethod;
+        if (urlTemplate) {
+          attemptUrlTemplates.set(span, urlTemplate);
+          initialAttributes['url.template'] = urlTemplate;
+        }
       }
       if (urlDomain !== undefined) {
         initialAttributes['url.domain'] = urlDomain;
@@ -1280,116 +1464,44 @@ export function traceAttempt<T = GaxCallResult>(
         dynamicArgs.resendCount !== undefined &&
         dynamicArgs.resendCount > 0
       ) {
-        const resendCountAttribute =
-          dynamicArgs.rpcType === 'grpc'
-            ? 'gcp.grpc.resend_count'
-            : 'http.request.resend_count';
-        initialAttributes[resendCountAttribute] = dynamicArgs.resendCount;
+        initialAttributes[resolveResendCountAttribute(dynamicArgs.rpcType)] =
+          dynamicArgs.resendCount;
       }
       span.setAttributes(initialAttributes);
 
       // Parse server address and port, defaulting to port 443.
-      let rawAddress =
-        dynamicArgs.serverAddress ?? staticArgs.serverAddress ?? urlDomain;
-      let rawPort = dynamicArgs.serverPort ?? staticArgs.serverPort;
-      if (rawAddress) {
-        const match = rawAddress.match(/^(\[[^\]]+\]|[^:]+):(\d+)$/);
-        if (match) {
-          rawAddress = match[1];
-          rawPort = rawPort ?? Number(match[2]);
-        }
-        rawPort = rawPort ?? 443;
-      }
+      const {rawAddress, rawPort} = resolveServerAddressAndPort(
+        dynamicArgs,
+        staticArgs,
+        urlDomain,
+        443,
+      );
 
-      let spanEnded = false;
-      let errorRecorded = false;
-      let recordedError: unknown;
-      let rpcStatusName: string | undefined;
-      let httpStatusCode: number | undefined;
-
-      const setErrorStatus = (message: string) => {
-        errorRecorded = true;
-        span.setStatus({code: SpanStatusCode.ERROR, message});
-      };
-
-      // Record response status and server endpoint (omitted on pre-connection failures).
-      const setStatusAttributes = () => {
-        const attributes: Attributes = {};
-        if (dynamicArgs.rpcType === 'grpc' && rpcStatusName !== undefined) {
-          attributes['rpc.response.status_code'] = rpcStatusName;
-        }
-        if (dynamicArgs.rpcType === 'http' && httpStatusCode !== undefined) {
-          attributes['http.response.status_code'] = httpStatusCode;
-        }
-        if (
-          rawAddress !== undefined &&
-          (!errorRecorded || !isPreConnectionFailure(recordedError))
-        ) {
-          attributes['server.address'] = rawAddress;
-          if (rawPort !== undefined) {
-            attributes['server.port'] = rawPort;
-          }
-        }
-        span.setAttributes(attributes);
-      };
-
-      // Finalize status attributes and end the span once.
-      const endSpan = () => {
-        if (!spanEnded) {
-          spanEnded = true;
-          if (!errorRecorded) {
-            rpcStatusName = Status[Status.OK];
-            httpStatusCode = 200;
-          }
-          setStatusAttributes();
-          span.end();
-        }
-      };
-
-      // Capture error type, exception event, and span error status on failure.
-      const recordError = (e: unknown) => {
-        recordedError = e;
-        rpcStatusName = resolveRpcStatusName(e);
-        httpStatusCode = resolveHttpStatusCode(e);
-        span.setAttributes({
-          'error.type': resolveErrorType(e, dynamicArgs.rpcType),
-        });
-        if (e instanceof Error) {
-          recordExceptionEvent(span, e, dynamicArgs.rpcType);
-          setErrorStatus(e.message);
-        } else {
-          setErrorStatus(resolveErrorMessage(e));
-        }
-      };
-
-      const tracedCallback: APICallback | undefined = callback
-        ? function (this: unknown, ...args: Parameters<APICallback>) {
-            const err = args[0];
-            if (err) {
-              recordError(err);
-            }
-            endSpan();
-            callback.apply(this, args);
-          }
-        : undefined;
+      const {recordError, endSpan, tracedCallback} =
+        createSpanCompletionHandlers(
+          {
+            span,
+            rpcType: dynamicArgs.rpcType,
+            rawAddress,
+            rawPort,
+            includeStatusMessage: true,
+          },
+          callback,
+        );
 
       try {
-        // Expose the attempt span in context so the HTTP transport can update http.request.method.
+        // Expose attempt span in context so HTTP transport can update method and URL template.
         const attemptContext = context
           .active()
           .setValue(ATTEMPT_SPAN_KEY, span);
         const result = context.with(attemptContext, () => fn(tracedCallback));
-        const promiseTarget = !isStreamCall ? getPromiseTarget(result) : null;
-        if (isStreamCall && result instanceof EventEmitter) {
-          handleStream(result, recordError, endSpan, !!callback);
-        } else if (promiseTarget) {
-          handlePromise(promiseTarget, recordError, endSpan);
-        } else if (tracedCallback) {
-          // Span stays open; tracedCallback ends it when the attempt completes.
-        } else {
-          endSpan();
-        }
-        return result;
+        return handleCallResult(
+          result,
+          isStreamCall,
+          !!tracedCallback,
+          recordError,
+          endSpan,
+        );
       } catch (e) {
         recordError(e);
         endSpan();

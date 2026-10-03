@@ -3893,6 +3893,7 @@ describe('TracerHelper', () => {
       assert.strictEqual(span.attributes['gcp.method.name'], undefined);
       assert.strictEqual(span.attributes['gcp.client.version'], undefined);
       assert.strictEqual(span.attributes['gcp.artifact'], undefined);
+      assert.strictEqual(span.attributes['status.message'], undefined);
     });
 
     it('sets http.request.method on HTTP low level network spans and allows setAttemptHttpMethod to update it', async () => {
@@ -3923,6 +3924,7 @@ describe('TracerHelper', () => {
 
       const spans = harness.getSpans('google-gax');
       assert.strictEqual(spans.length, 2);
+      assert.strictEqual(spans[0].name, 'POST');
       assert.strictEqual(spans[0].attributes['http.request.method'], 'POST');
       assert.strictEqual(spans[0].attributes['rpc.method'], undefined);
       assert.strictEqual(spans[0].attributes['http.response.status_code'], 200);
@@ -3930,12 +3932,94 @@ describe('TracerHelper', () => {
         spans[0].attributes['rpc.response.status_code'],
         undefined,
       );
+      assert.strictEqual(spans[0].attributes['status.message'], undefined);
+      assert.strictEqual(spans[1].name, 'GET');
       assert.strictEqual(spans[1].attributes['http.request.method'], 'GET');
       assert.strictEqual(spans[1].attributes['rpc.method'], undefined);
       assert.strictEqual(spans[1].attributes['http.response.status_code'], 200);
       assert.strictEqual(
         spans[1].attributes['rpc.response.status_code'],
         undefined,
+      );
+      assert.strictEqual(spans[1].attributes['status.message'], undefined);
+    });
+
+    it('names HTTP low level network spans "{http.request.method} {url.template}" when url.template is available, otherwise "{http.request.method}"', async () => {
+      await traceAttempt(
+        {
+          apiName: 'google.cloud.secretmanager.v1.SecretManagerService',
+          clientName: 'SecretManagerServiceClient',
+          methodName: 'AccessSecretVersion',
+          rpcType: 'http',
+          httpMethod: 'GET',
+          urlTemplate: '/v1/{name}:access',
+        },
+        telemetryInfo,
+        async () => [{payload: 'secret'}, undefined, undefined],
+      );
+
+      await traceAttempt(
+        {
+          apiName: 'google.cloud.secretmanager.v1.SecretManagerService',
+          clientName: 'SecretManagerServiceClient',
+          methodName: 'CreateSecret',
+          rpcType: 'http',
+        },
+        telemetryInfo,
+        async () => [{name: 'secret'}, undefined, undefined],
+      );
+
+      await traceAttempt(
+        {
+          apiName: 'google.cloud.secretmanager.v1.SecretManagerService',
+          clientName: 'SecretManagerServiceClient',
+          methodName: 'AccessSecretVersion',
+          rpcType: 'http',
+          urlTemplate: '/v1/{name}:access',
+        },
+        telemetryInfo,
+        async () => {
+          setAttemptHttpMethod('GET');
+          return [{payload: 'secret'}, undefined, undefined];
+        },
+      );
+
+      await traceAttempt(
+        {
+          apiName: 'google.cloud.secretmanager.v1.SecretManagerService',
+          clientName: 'SecretManagerServiceClient',
+          methodName: 'AccessSecretVersion',
+          rpcType: 'http',
+        },
+        telemetryInfo,
+        async () => {
+          setAttemptHttpMethod('GET', '/v1/{name}:access');
+          return [{payload: 'secret'}, undefined, undefined];
+        },
+      );
+
+      const spans = harness.getSpans('google-gax');
+      assert.strictEqual(spans.length, 4);
+      assert.strictEqual(spans[0].name, 'GET /v1/{name}:access');
+      assert.strictEqual(spans[0].attributes['http.request.method'], 'GET');
+      assert.strictEqual(
+        spans[0].attributes['url.template'],
+        '/v1/{name}:access',
+      );
+      assert.strictEqual(spans[1].name, 'POST');
+      assert.strictEqual(spans[1].attributes['http.request.method'], 'POST');
+      assert.strictEqual(spans[1].attributes['url.template'], undefined);
+      assert.strictEqual(spans[2].name, 'GET /v1/{name}:access');
+      assert.strictEqual(spans[2].attributes['http.request.method'], 'GET');
+      assert.strictEqual(
+        spans[2].attributes['url.template'],
+        '/v1/{name}:access',
+      );
+      assert.strictEqual(spans[3].name, 'GET /v1/{name}:access');
+      assert.strictEqual(spans[3].attributes['http.request.method'], 'GET');
+      assert.strictEqual(
+        spans[3].attributes['url.template'],
+        '/v1/{name}:access',
       );
     });
 
@@ -3967,6 +4051,10 @@ describe('TracerHelper', () => {
         span.attributes['error.type'],
         'CLIENT_CONNECTION_ERROR',
       );
+      assert.strictEqual(
+        span.attributes['status.message'],
+        'getaddrinfo ENOTFOUND',
+      );
       assert.strictEqual(span.status.code, SpanStatusCode.ERROR);
       assert.strictEqual(span.status.message, 'getaddrinfo ENOTFOUND');
       assert.strictEqual(span.events.length, 1);
@@ -3975,6 +4063,64 @@ describe('TracerHelper', () => {
         span.events[0].attributes?.['exception.type'],
         'Error',
       );
+    });
+
+    it('sets status.message attribute on both gRPC and HTTP low level network spans when an error occurs', async () => {
+      const grpcError = Object.assign(new GoogleError('5 NOT_FOUND: missing'), {
+        code: Status.NOT_FOUND,
+      });
+      await assert.rejects(async () => {
+        await traceAttempt(
+          {
+            apiName: 'google.example.v1.Echo',
+            clientName: 'EchoClient',
+            methodName: 'Echo',
+            rpcType: 'grpc',
+          },
+          telemetryInfo,
+          async () => {
+            throw grpcError;
+          },
+        );
+      });
+
+      const httpError = Object.assign(new GoogleError('404 Not Found'), {
+        code: Status.NOT_FOUND,
+        httpStatusCode: 404,
+      });
+      await assert.rejects(async () => {
+        await traceAttempt(
+          {
+            apiName: 'google.example.v1.Echo',
+            clientName: 'EchoClient',
+            methodName: 'Echo',
+            rpcType: 'http',
+            httpMethod: 'GET',
+            urlTemplate: '/v1/{name}:access',
+          },
+          telemetryInfo,
+          async () => {
+            throw httpError;
+          },
+        );
+      });
+
+      const spans = harness.getSpans('google-gax');
+      assert.strictEqual(spans.length, 2);
+
+      assert.strictEqual(spans[0].name, 'google.example.v1.Echo/Echo');
+      assert.strictEqual(
+        spans[0].attributes['status.message'],
+        '5 NOT_FOUND: missing',
+      );
+      assert.strictEqual(spans[0].status.message, '5 NOT_FOUND: missing');
+
+      assert.strictEqual(spans[1].name, 'GET /v1/{name}:access');
+      assert.strictEqual(
+        spans[1].attributes['status.message'],
+        '404 Not Found',
+      );
+      assert.strictEqual(spans[1].status.message, '404 Not Found');
     });
 
     it('sets gcp.grpc.resend_count and http.request.resend_count on low level network spans when resendCount > 0', async () => {
