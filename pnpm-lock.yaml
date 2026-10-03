@@ -258,7 +258,7 @@ importers:
         version: 4.0.9
       js-yaml:
         specifier: ^4.3.0
-        version: 4.3.0
+        version: 4.3.2
       long:
         specifier: ^5.3.2
         version: 5.3.2
@@ -334,7 +334,7 @@ importers:
         version: 20.1.2
       js-yaml:
         specifier: ^4.1.0
-        version: 4.3.0
+        version: 4.3.2
       nunjucks:
         specifier: ^3.2.4
         version: 3.2.4(chokidar@3.6.0)
@@ -2173,7 +2173,7 @@ importers:
         version: 6.0.2(typescript@5.9.3)
       js-yaml:
         specifier: ^4.1.0
-        version: 4.3.0
+        version: 4.3.2
       jsdoc:
         specifier: ^4.0.4
         version: 4.0.5
@@ -21585,12 +21585,16 @@ packages:
     resolution: {integrity: sha512-okMH7OXXJ7YrN9Ok3/SXrnu4iX9yOk+25nqX4imS2npuvTYDmo/QEZoqwZkYaIDk3jVvBOTOIEgEhaLOynBS9g==}
     hasBin: true
 
-  js-yaml@3.15.0:
-    resolution: {integrity: sha512-ttBQIIQPDeLjpPOohtUdXuXUVoA2uIB6fEH9HyJ7234s5mBJ5wTx20njxplLZQgLaOfpmPQA7X2t5AX6tIPbog==}
+  js-yaml@3.15.2:
+    resolution: {integrity: sha512-6EuL879VkRA+1Cz578mKMiKvjPNEuk6+r1JaFzoSWejZmtf7xWbIyw1e3KkxlkzTIt9Taw6JBhEppG7utc1P+w==}
     hasBin: true
 
   js-yaml@4.3.0:
     resolution: {integrity: sha512-1td788aAnnZ5qs7V2QIRl1owjtYpbKt749Y3xauqQgwIIGF/xXWz1wMTEBx5O3LK3lXLVuqXPdPxj2BoFHaW9Q==}
+    hasBin: true
+
+  js-yaml@4.3.2:
+    resolution: {integrity: sha512-SFNOvSJ+Dgf/9An904Yx+CgSlIPCkIpao4qo51lpee25TIRejdH3rhR4EZMGoNx3/TP3O+wzWuiTFl4sqbltzA==}
     hasBin: true
 
   js2xmlparser@4.0.2:
@@ -25907,7 +25911,7 @@ snapshots:
       globals: 13.24.0
       ignore: 5.3.2
       import-fresh: 3.3.1
-      js-yaml: 4.3.0
+      js-yaml: 4.3.2
       minimatch: 3.1.5
       strip-json-comments: 3.1.1
     transitivePeerDependencies:
@@ -25980,7 +25984,7 @@ snapshots:
       execa: 7.2.0
       fs-extra: 11.4.0
       glob: 10.5.0
-      js-yaml: 4.3.0
+      js-yaml: 4.3.2
       minimatch: 9.0.9
     transitivePeerDependencies:
       - '@types/node'
@@ -26618,7 +26622,7 @@ snapshots:
       camelcase: 5.3.1
       find-up: 4.1.0
       get-package-type: 0.1.0
-      js-yaml: 3.15.0
+      js-yaml: 3.15.2
       resolve-from: 5.0.0
 
   '@istanbuljs/schema@0.1.6': {}
@@ -29863,7 +29867,7 @@ snapshots:
     dependencies:
       env-paths: 2.2.1
       import-fresh: 3.3.1
-      js-yaml: 4.3.0
+      js-yaml: 4.3.2
       parse-json: 5.2.0
     optionalDependencies:
       typescript: 5.8.3
@@ -29872,7 +29876,7 @@ snapshots:
     dependencies:
       env-paths: 2.2.1
       import-fresh: 3.3.1
-      js-yaml: 4.3.0
+      js-yaml: 4.3.2
       parse-json: 5.2.0
     optionalDependencies:
       typescript: 5.9.3
@@ -30840,7 +30844,7 @@ snapshots:
       imurmurhash: 0.1.4
       is-glob: 4.0.3
       is-path-inside: 3.0.3
-      js-yaml: 4.3.0
+      js-yaml: 4.3.2
       json-stable-stringify-without-jsonify: 1.0.1
       levn: 0.4.1
       lodash.merge: 4.6.2
@@ -30883,7 +30887,7 @@ snapshots:
       imurmurhash: 0.1.4
       is-glob: 4.0.3
       is-path-inside: 3.0.3
-      js-yaml: 4.3.0
+      js-yaml: 4.3.2
       json-stable-stringify-without-jsonify: 1.0.1
       levn: 0.4.1
       lodash.merge: 4.6.2
@@ -31465,7 +31469,7 @@ snapshots:
     dependencies:
       '@google-cloud/storage': 7.21.0(encoding@0.1.13)
       '@octokit/rest': 20.1.2
-      js-yaml: 4.3.0
+      js-yaml: 4.3.2
       nunjucks: 3.2.4(chokidar@3.6.0)
       typescript: 5.9.3
       yargs: 17.7.3
@@ -31558,7 +31562,7 @@ snapshots:
       chalk: 4.1.2
       globby: 11.1.0
       googleapis: 66.0.0(encoding@0.1.13)
-      js-yaml: 3.15.0
+      js-yaml: 3.15.2
       meow: 8.1.2
       ora: 5.4.1
       tar: 6.2.1
@@ -32756,7 +32760,7 @@ snapshots:
       esprima: 2.7.3
       glob: 5.0.15
       handlebars: 4.7.9
-      js-yaml: 3.15.0
+      js-yaml: 3.15.2
       mkdirp: 0.5.6
       nopt: 3.0.6
       once: 1.4.0
@@ -33126,12 +33130,16 @@ snapshots:
       argparse: 1.0.10
       esprima: 4.0.1
 
-  js-yaml@3.15.0:
+  js-yaml@3.15.2:
     dependencies:
       argparse: 1.0.10
       esprima: 4.0.1
 
   js-yaml@4.3.0:
+    dependencies:
+      argparse: 2.0.1
+
+  js-yaml@4.3.2:
     dependencies:
       argparse: 2.0.1
 
@@ -33918,7 +33926,7 @@ snapshots:
       glob: 10.5.0
       he: 1.2.0
       is-path-inside: 3.0.3
-      js-yaml: 4.3.0
+      js-yaml: 4.3.2
       log-symbols: 4.1.0
       minimatch: 9.0.9
       ms: 2.1.3
