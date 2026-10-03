@@ -1,5 +1,12 @@
 # Changelog
 
+## [7.5.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v7.4.1...aiplatform-v7.5.0) (2026-10-03)
+
+
+### Features
+
+* Update API sources and regenerate ([#9481](https://github.com/googleapis/google-cloud-node/issues/9481)) ([35a2b9a](https://github.com/googleapis/google-cloud-node/commit/35a2b9a4ff3b075124f6905c423acd8d11bdfa68))
+
 ## [7.4.1](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v7.4.0...aiplatform-v7.4.1) (2026-09-28)
 
 
