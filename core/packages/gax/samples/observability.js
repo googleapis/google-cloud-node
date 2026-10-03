@@ -17,17 +17,12 @@
 // [START gax_observability]
 'use strict';
 
-// 1. INITIALIZE OPENTELEMETRY BEFORE IMPORTING ANY CLIENT LIBRARIES
-// In Node.js, instrumentations must patch the networking modules (http, grpc)
-// before any Google Cloud client libraries are loaded into the module cache.
+// 1. IMPORT OPENTELEMETRY MODULES
 const {NodeTracerProvider} = require('@opentelemetry/sdk-trace-node');
 const {BatchSpanProcessor} = require('@opentelemetry/sdk-trace-base');
 const {
   TraceExporter,
 } = require('@google-cloud/opentelemetry-cloud-trace-exporter');
-const {registerInstrumentations} = require('@opentelemetry/instrumentation');
-const {HttpInstrumentation} = require('@opentelemetry/instrumentation-http');
-const {GrpcInstrumentation} = require('@opentelemetry/instrumentation-grpc');
 
 // 2. CONFIGURE TRACING: SET UP A TRACER PROVIDER AND EXPORTER
 const cloudTraceExporter = new TraceExporter();
@@ -38,19 +33,11 @@ const provider = new NodeTracerProvider({
 });
 provider.register();
 
-// 3. ENABLE LOW-LEVEL NETWORK TRACING SPANS USING INSTRUMENTATION LIBRARIES
-registerInstrumentations({
-  instrumentations: [
-    new HttpInstrumentation(),
-    new GrpcInstrumentation(),
-  ],
-});
-
-// 4. ENABLE CLIENT REQUEST TRACING SPANS WITH ENV VARIABLE
+// 3. ENABLE TRACING SPANS WITH ENV VARIABLE
 // Sets the flag before client libraries or RPC callers initialize
 process.env.GOOGLE_SDK_NODE_ENABLE_TRACING = 'true';
 
-// 5. IMPORT CLIENT LIBRARIES AFTER OPENTELEMETRY SETUP
+// 4. IMPORT CLIENT LIBRARIES AFTER OPENTELEMETRY SETUP
 // Replace with your Google Cloud client library, for example:
 // const { SecretManagerServiceClient } = require('@google-cloud/secret-manager');
 
@@ -58,7 +45,7 @@ async function main() {
   // const client = new SecretManagerServiceClient();
   // await client.listSecrets({parent: 'projects/my-project'});
 
-  // 6. FLUSH SPANS BEFORE PROCESS EXIT
+  // 5. FLUSH SPANS BEFORE PROCESS EXIT
   // Ensures all buffered spans in BatchSpanProcessor are exported to Cloud Trace
   await provider.forceFlush();
   console.log('Tracing initialized successfully.');
