@@ -546,12 +546,6 @@ export interface OAuth2ClientOptions
   clientAuthentication?: ClientAuthentication;
 }
 
-// Re-exporting here for backwards compatibility
-export type RefreshOptions = Pick<
-  AuthClientOptions,
-  'eagerRefreshThresholdMillis' | 'forceRefreshOnFailure'
->;
-
 export class OAuth2Client extends AuthClient {
   private redirectUri?: string;
   private certificateCache: Certificates = {};
