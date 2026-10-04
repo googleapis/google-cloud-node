@@ -15,8 +15,6 @@
  * limitations under the License.
  */
 
-import {expect} from 'chai';
-import * as sinon from 'sinon';
 import {ProtoSerializable, Serializer} from '../src/serializer';
 import {google} from '../protos/firestore_v1_proto_api';
 import IPipeline = google.firestore.v1.IPipeline;
@@ -39,23 +37,23 @@ describe('StructuredPipeline', () => {
 
   it('should serialize the pipeline argument', async () => {
     const pipeline: ProtoSerializable<IPipeline> = {
-      _toProto: sinon.fake.returns({} as IPipeline),
+      _toProto: vi.fn().mockReturnValue({} as IPipeline),
     };
     const structuredPipeline = new StructuredPipeline(pipeline, {}, {});
 
     const proto = structuredPipeline._toProto(new Serializer(db!));
 
-    expect(proto).to.deep.equal({
+    expect(proto).toEqual({
       pipeline: {},
       options: {},
     });
 
-    expect((pipeline._toProto as sinon.SinonSpy).calledOnce).to.be.true;
+    expect(pipeline._toProto).toHaveBeenCalledTimes(1);
   });
 
   it('should support known options', () => {
     const pipeline: ProtoSerializable<IPipeline> = {
-      _toProto: sinon.fake.returns({} as IPipeline),
+      _toProto: vi.fn().mockReturnValue({} as IPipeline),
     };
     const structuredPipeline = new StructuredPipeline(
       pipeline,
@@ -71,7 +69,7 @@ describe('StructuredPipeline', () => {
 
     const proto = structuredPipeline._toProto(new Serializer(db!));
 
-    expect(proto).deep.equal({
+    expect(proto).toEqual({
       pipeline: {},
       options: {
         index_mode: {
@@ -92,12 +90,12 @@ describe('StructuredPipeline', () => {
       },
     });
 
-    expect((pipeline._toProto as sinon.SinonSpy).calledOnce).to.be.true;
+    expect(pipeline._toProto).toHaveBeenCalledTimes(1);
   });
 
   it('should support unknown options', () => {
     const pipeline: ProtoSerializable<IPipeline> = {
-      _toProto: sinon.fake.returns({} as IPipeline),
+      _toProto: vi.fn().mockReturnValue({} as IPipeline),
     };
     const structuredPipeline = new StructuredPipeline(
       pipeline,
@@ -109,7 +107,7 @@ describe('StructuredPipeline', () => {
 
     const proto = structuredPipeline._toProto(new Serializer(db!));
 
-    expect(proto).to.deep.equal({
+    expect(proto).toEqual({
       pipeline: {},
       options: {
         foo_bar: {
@@ -118,12 +116,12 @@ describe('StructuredPipeline', () => {
       },
     });
 
-    expect((pipeline._toProto as sinon.SinonSpy).calledOnce).to.be.true;
+    expect(pipeline._toProto).toHaveBeenCalledTimes(1);
   });
 
   it('should support unknown nested options', () => {
     const pipeline: ProtoSerializable<IPipeline> = {
-      _toProto: sinon.fake.returns({} as IPipeline),
+      _toProto: vi.fn().mockReturnValue({} as IPipeline),
     };
     const structuredPipeline = new StructuredPipeline(
       pipeline,
@@ -135,7 +133,7 @@ describe('StructuredPipeline', () => {
 
     const proto = structuredPipeline._toProto(new Serializer(db!));
 
-    expect(proto).to.deep.equal({
+    expect(proto).toEqual({
       pipeline: {},
       options: {
         foo: {
@@ -148,12 +146,12 @@ describe('StructuredPipeline', () => {
       },
     });
 
-    expect((pipeline._toProto as sinon.SinonSpy).calledOnce).to.be.true;
+    expect(pipeline._toProto).toHaveBeenCalledTimes(1);
   });
 
   it('should support options override', () => {
     const pipeline: ProtoSerializable<IPipeline> = {
-      _toProto: sinon.fake.returns({} as IPipeline),
+      _toProto: vi.fn().mockReturnValue({} as IPipeline),
     };
     const structuredPipeline = new StructuredPipeline(
       pipeline,
@@ -167,7 +165,7 @@ describe('StructuredPipeline', () => {
 
     const proto = structuredPipeline._toProto(new Serializer(db!));
 
-    expect(proto).to.deep.equal({
+    expect(proto).toEqual({
       pipeline: {},
       options: {
         index_mode: {
@@ -176,6 +174,6 @@ describe('StructuredPipeline', () => {
       },
     });
 
-    expect((pipeline._toProto as sinon.SinonSpy).calledOnce).to.be.true;
+    expect(pipeline._toProto).toHaveBeenCalledTimes(1);
   });
 });

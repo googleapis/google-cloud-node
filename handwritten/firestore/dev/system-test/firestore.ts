@@ -23,10 +23,8 @@ import {
   WithFieldValue,
 } from '@google-cloud/firestore';
 
-import {afterEach, before, beforeEach, describe, it} from 'mocha';
+import {afterEach, beforeAll, beforeEach, describe, expect, it} from 'vitest';
 import '../test/util/mocha_extensions';
-import {expect, use} from 'chai';
-import * as chaiAsPromised from 'chai-as-promised';
 import * as extend from 'extend';
 import {firestore} from '../protos/firestore_v1_proto_api';
 
@@ -54,7 +52,7 @@ import {
   WriteResult,
 } from '../src';
 import {autoId, Deferred} from '../src/util';
-import {TEST_BUNDLE_ID, verifyMetadata} from '../test/bundle';
+import {TEST_BUNDLE_ID, verifyMetadata} from '../test/util/bundle_helpers';
 import {
   bundleToElementArray,
   isEnterprise,
@@ -71,83 +69,15 @@ import IBundleElement = firestore.IBundleElement;
 import {Filter} from '../src/filter';
 import {IndexTestHelper} from './index_test_helper';
 import {addEqualityMatcher} from './euqality_matcher';
-
-use(chaiAsPromised);
+import {
+  DeferredPromise,
+  getTestDb,
+  getTestRoot,
+} from './util/firestore_helpers';
 
 const version = require('../../package.json').version;
 
-export class DeferredPromise<T> {
-  resolve: Function;
-  reject: Function;
-  promise: Promise<T> | null;
-
-  constructor() {
-    this.resolve = () => {
-      throw new Error('DeferredPromise.resolve has not been initialized');
-    };
-    this.reject = () => {
-      throw new Error('DeferredPromise.reject has not been initialized');
-    };
-    this.promise = null;
-  }
-}
-
-const firestoreEnv: {
-  [key: string]: string | undefined;
-} = {};
-for (const key in process.env) {
-  if (key.startsWith('FIRESTORE')) {
-    firestoreEnv[key] = process.env[key];
-  }
-}
-console.log(
-  `Running system tests with environment variables:\n ${JSON.stringify(
-    firestoreEnv,
-    null,
-    2,
-  )}`,
-);
-
-if (process.env.NODE_ENV === 'DEBUG') {
-  setLogFunction(console.log);
-}
-
-export function getTestDb(settings: Settings = {}): Firestore {
-  const internalSettings: Settings = {};
-  if (process.env.FIRESTORE_DATABASE_ID) {
-    internalSettings.databaseId = process.env.FIRESTORE_DATABASE_ID;
-  } else if (!process.env.FIRESTORE_EMULATOR_HOST) {
-    internalSettings.databaseId = 'firestore-standard';
-  }
-
-  if (process.env.FIRESTORE_TARGET_BACKEND) {
-    switch (process.env.FIRESTORE_TARGET_BACKEND.toUpperCase()) {
-      case 'PROD': {
-        break;
-      }
-      case 'QA': {
-        internalSettings.host = 'staging-firestore.sandbox.googleapis.com';
-        break;
-      }
-      case 'NIGHTLY': {
-        internalSettings.host = 'test-firestore.sandbox.googleapis.com';
-        break;
-      }
-      default: {
-        break;
-      }
-    }
-  }
-
-  return new Firestore({
-    ...internalSettings,
-    ...settings, // caller settings take precedent over internal settings
-  });
-}
-
-export function getTestRoot(settings: Settings = {}): CollectionReference {
-  return getTestDb(settings).collection(`node_${version}_${autoId()}`);
-}
+export {DeferredPromise, getTestDb, getTestRoot};
 
 describe('Firestore class', () => {
   let firestore: Firestore;
@@ -162,12 +92,12 @@ describe('Firestore class', () => {
 
   it('has collection() method', () => {
     const ref = firestore.collection('col');
-    expect(ref.id).to.equal('col');
+    expect(ref.id).toBe('col');
   });
 
   it('has doc() method', () => {
     const ref = firestore.doc('col/doc');
-    expect(ref.id).to.equal('doc');
+    expect(ref.id).toBe('doc');
   });
 
   it('has getAll() method', () => {
@@ -178,7 +108,7 @@ describe('Firestore class', () => {
         return firestore.getAll(ref1, ref2);
       })
       .then(docs => {
-        expect(docs.length).to.equal(2);
+        expect(docs.length).toBe(2);
       });
   });
 
@@ -190,16 +120,16 @@ describe('Firestore class', () => {
 
     // Should have metrics.
     const metrics = explainResults.metrics;
-    expect(metrics).to.not.be.null;
+    expect(metrics).not.toBeNull();
 
     // Should have query plan.
     const plan = metrics.planSummary;
-    expect(plan).to.not.be.null;
-    expect(Object.keys(plan.indexesUsed).length).to.be.greaterThan(0);
+    expect(plan).not.toBeNull();
+    expect(Object.keys(plan.indexesUsed).length).toBeGreaterThan(0);
 
     // No execution stats and no snapshot.
-    expect(metrics.executionStats).to.be.null;
-    expect(explainResults.snapshot).to.be.null;
+    expect(metrics.executionStats).toBeNull();
+    expect(explainResults.snapshot).toBeNull();
   });
 
   it.skipEnterprise('can plan a query', async () => {
@@ -212,16 +142,16 @@ describe('Firestore class', () => {
 
     // Should have metrics.
     const metrics = explainResults.metrics;
-    expect(metrics).to.not.be.null;
+    expect(metrics).not.toBeNull();
 
     // Should have query plan.
     const plan = metrics.planSummary;
-    expect(plan).to.not.be.null;
-    expect(Object.keys(plan.indexesUsed).length).to.be.greaterThan(0);
+    expect(plan).not.toBeNull();
+    expect(Object.keys(plan.indexesUsed).length).toBeGreaterThan(0);
 
     // No execution stats and no snapshot.
-    expect(metrics.executionStats).to.be.null;
-    expect(explainResults.snapshot).to.be.null;
+    expect(metrics.executionStats).toBeNull();
+    expect(explainResults.snapshot).toBeNull();
   });
 
   it.skipEnterprise('can profile a query', async () => {
@@ -234,24 +164,24 @@ describe('Firestore class', () => {
 
     const metrics = explainResults.metrics;
 
-    expect(metrics.planSummary).to.not.be.null;
-    expect(metrics.executionStats).to.not.be.null;
-    expect(explainResults.snapshot).to.not.be.null;
+    expect(metrics.planSummary).not.toBeNull();
+    expect(metrics.executionStats).not.toBeNull();
+    expect(explainResults.snapshot).not.toBeNull();
 
-    expect(
-      Object.keys(metrics.planSummary.indexesUsed).length,
-    ).to.be.greaterThan(0);
+    expect(Object.keys(metrics.planSummary.indexesUsed).length).toBeGreaterThan(
+      0,
+    );
 
     const stats = metrics.executionStats!;
-    expect(stats.readOperations).to.be.greaterThan(0);
-    expect(stats.resultsReturned).to.be.equal(2);
+    expect(stats.readOperations).toBeGreaterThan(0);
+    expect(stats.resultsReturned).toBe(2);
     expect(
       stats.executionDuration.nanoseconds > 0 ||
         stats.executionDuration.seconds > 0,
-    ).to.be.true;
-    expect(Object.keys(stats.debugStats).length).to.be.greaterThan(0);
+    ).toBe(true);
+    expect(Object.keys(stats.debugStats).length).toBeGreaterThan(0);
 
-    expect(explainResults.snapshot!.size).to.equal(2);
+    expect(explainResults.snapshot!.size).toBe(2);
   });
 
   it.skipEnterprise(
@@ -261,9 +191,9 @@ describe('Firestore class', () => {
       await randomCol.doc('doc2').set({foo: 2, bar: 1});
       await randomCol.doc('doc3').set({foo: 1, bar: 2});
       const results = await randomCol.where('foo', '==', 12345).get();
-      expect(results.empty).to.be.true;
-      expect(results.docs.length).to.equal(0);
-      expect(results.readTime.toMillis()).to.be.greaterThan(0);
+      expect(results.empty).toBe(true);
+      expect(results.docs.length).toBe(0);
+      expect(results.readTime.toMillis()).toBeGreaterThan(0);
 
       const explainResults = await randomCol
         .where('foo', '==', 12345)
@@ -271,24 +201,24 @@ describe('Firestore class', () => {
 
       const metrics = explainResults.metrics;
 
-      expect(metrics.planSummary).to.not.be.null;
-      expect(metrics.executionStats).to.not.be.null;
-      expect(explainResults.snapshot).to.not.be.null;
+      expect(metrics.planSummary).not.toBeNull();
+      expect(metrics.executionStats).not.toBeNull();
+      expect(explainResults.snapshot).not.toBeNull();
 
       expect(
         Object.keys(metrics.planSummary.indexesUsed).length,
-      ).to.be.greaterThan(0);
+      ).toBeGreaterThan(0);
 
       const stats = metrics.executionStats!;
-      expect(stats.readOperations).to.be.greaterThan(0);
-      expect(stats.resultsReturned).to.be.equal(0);
+      expect(stats.readOperations).toBeGreaterThan(0);
+      expect(stats.resultsReturned).toBe(0);
       expect(
         stats.executionDuration.nanoseconds > 0 ||
           stats.executionDuration.seconds > 0,
-      ).to.be.true;
-      expect(Object.keys(stats.debugStats).length).to.be.greaterThan(0);
+      ).toBe(true);
+      expect(Object.keys(stats.debugStats).length).toBeGreaterThan(0);
 
-      expect(explainResults.snapshot!.size).to.equal(0);
+      expect(explainResults.snapshot!.size).toBe(0);
     },
   );
 
@@ -313,11 +243,11 @@ describe('Firestore class', () => {
           }
         });
         stream.on('end', () => {
-          expect(totalResponses).to.equal(1);
-          expect(totalDocuments).to.equal(0);
-          expect(metrics).to.not.be.null;
-          expect(metrics!.planSummary.indexesUsed.length).to.be.greaterThan(0);
-          expect(metrics!.executionStats).to.be.null;
+          expect(totalResponses).toBe(1);
+          expect(totalDocuments).toBe(0);
+          expect(metrics).not.toBeNull();
+          expect(metrics!.planSummary.indexesUsed.length).toBeGreaterThan(0);
+          expect(metrics!.executionStats).toBeNull();
           resolve(true);
         });
         stream.on('error', (error: Error) => {
@@ -326,7 +256,7 @@ describe('Firestore class', () => {
       });
 
       const success: boolean = await promise;
-      expect(success).to.be.true;
+      expect(success).toBe(true);
     },
   );
 
@@ -349,11 +279,11 @@ describe('Firestore class', () => {
         }
       });
       stream.on('end', () => {
-        expect(totalResponses).to.equal(1);
-        expect(totalDocuments).to.equal(0);
-        expect(metrics).to.not.be.null;
-        expect(metrics!.planSummary.indexesUsed.length).to.be.greaterThan(0);
-        expect(metrics!.executionStats).to.be.null;
+        expect(totalResponses).toBe(1);
+        expect(totalDocuments).toBe(0);
+        expect(metrics).not.toBeNull();
+        expect(metrics!.planSummary.indexesUsed.length).toBeGreaterThan(0);
+        expect(metrics!.executionStats).toBeNull();
         resolve(true);
       });
       stream.on('error', (error: Error) => {
@@ -362,7 +292,7 @@ describe('Firestore class', () => {
     });
 
     const success: boolean = await promise;
-    expect(success).to.be.true;
+    expect(success).toBe(true);
   });
 
   it.skipEnterprise('can stream explain results with analyze', async () => {
@@ -386,12 +316,12 @@ describe('Firestore class', () => {
         }
       });
       stream.on('end', () => {
-        expect(totalResponses).to.equal(2);
-        expect(totalDocuments).to.equal(2);
-        expect(metrics).to.not.be.null;
-        expect(metrics!.planSummary.indexesUsed.length).to.be.greaterThan(0);
-        expect(metrics!.executionStats).to.not.be.null;
-        expect(metrics!.executionStats!.resultsReturned).to.equal(2);
+        expect(totalResponses).toBe(2);
+        expect(totalDocuments).toBe(2);
+        expect(metrics).not.toBeNull();
+        expect(metrics!.planSummary.indexesUsed.length).toBeGreaterThan(0);
+        expect(metrics!.executionStats).not.toBeNull();
+        expect(metrics!.executionStats!.resultsReturned).toBe(2);
         resolve(true);
       });
       stream.on('error', (error: Error) => {
@@ -400,7 +330,7 @@ describe('Firestore class', () => {
     });
 
     const success: boolean = await promise;
-    expect(success).to.be.true;
+    expect(success).toBe(true);
   });
 
   it.skipEnterprise(
@@ -417,11 +347,11 @@ describe('Firestore class', () => {
       const metrics = explainResults.metrics;
 
       const plan = metrics.planSummary;
-      expect(plan).to.not.be.null;
-      expect(Object.keys(plan.indexesUsed).length).to.be.greaterThan(0);
+      expect(plan).not.toBeNull();
+      expect(Object.keys(plan.indexesUsed).length).toBeGreaterThan(0);
 
-      expect(metrics.executionStats).to.be.null;
-      expect(explainResults.snapshot).to.be.null;
+      expect(metrics.executionStats).toBeNull();
+      expect(explainResults.snapshot).toBeNull();
     },
   );
 
@@ -437,11 +367,11 @@ describe('Firestore class', () => {
     const metrics = explainResults.metrics;
 
     const plan = metrics.planSummary;
-    expect(plan).to.not.be.null;
-    expect(Object.keys(plan.indexesUsed).length).to.be.greaterThan(0);
+    expect(plan).not.toBeNull();
+    expect(Object.keys(plan.indexesUsed).length).toBeGreaterThan(0);
 
-    expect(metrics.executionStats).to.be.null;
-    expect(explainResults.snapshot).to.be.null;
+    expect(metrics.executionStats).toBeNull();
+    expect(explainResults.snapshot).toBeNull();
   });
 
   it.skipEnterprise('can profile an aggregate query', async () => {
@@ -454,23 +384,23 @@ describe('Firestore class', () => {
       .explain({analyze: true});
 
     const metrics = explainResults.metrics;
-    expect(metrics.planSummary).to.not.be.null;
-    expect(
-      Object.keys(metrics.planSummary.indexesUsed).length,
-    ).to.be.greaterThan(0);
+    expect(metrics.planSummary).not.toBeNull();
+    expect(Object.keys(metrics.planSummary.indexesUsed).length).toBeGreaterThan(
+      0,
+    );
 
-    expect(metrics.executionStats).to.not.be.null;
+    expect(metrics.executionStats).not.toBeNull();
     const stats = metrics.executionStats!;
-    expect(stats.readOperations).to.be.greaterThan(0);
-    expect(stats.resultsReturned).to.be.equal(1);
+    expect(stats.readOperations).toBeGreaterThan(0);
+    expect(stats.resultsReturned).toBe(1);
     expect(
       stats.executionDuration.nanoseconds > 0 ||
         stats.executionDuration.seconds > 0,
-    ).to.be.true;
-    expect(Object.keys(stats.debugStats).length).to.be.greaterThan(0);
+    ).toBe(true);
+    expect(Object.keys(stats.debugStats).length).toBeGreaterThan(0);
 
-    expect(explainResults.snapshot).to.not.be.null;
-    expect(explainResults.snapshot!.data().count).to.equal(3);
+    expect(explainResults.snapshot).not.toBeNull();
+    expect(explainResults.snapshot!.data().count).toBe(3);
   });
 
   it.skipEnterprise('can plan a vector query', async () => {
@@ -498,11 +428,11 @@ describe('Firestore class', () => {
     const metrics = explainResults.metrics;
 
     const plan = metrics.planSummary;
-    expect(plan).to.not.be.null;
-    expect(Object.keys(plan.indexesUsed).length).to.be.greaterThan(0);
+    expect(plan).not.toBeNull();
+    expect(Object.keys(plan.indexesUsed).length).toBeGreaterThan(0);
 
-    expect(metrics.executionStats).to.be.null;
-    expect(explainResults.snapshot).to.be.null;
+    expect(metrics.executionStats).toBeNull();
+    expect(explainResults.snapshot).toBeNull();
   });
 
   it.skipEnterprise('can profile a vector query', async () => {
@@ -528,24 +458,24 @@ describe('Firestore class', () => {
       .explain({analyze: true});
 
     const metrics = explainResults.metrics;
-    expect(metrics.planSummary).to.not.be.null;
-    expect(
-      Object.keys(metrics.planSummary.indexesUsed).length,
-    ).to.be.greaterThan(0);
+    expect(metrics.planSummary).not.toBeNull();
+    expect(Object.keys(metrics.planSummary.indexesUsed).length).toBeGreaterThan(
+      0,
+    );
 
-    expect(metrics.executionStats).to.not.be.null;
+    expect(metrics.executionStats).not.toBeNull();
     const stats = metrics.executionStats!;
 
-    expect(stats.readOperations).to.be.greaterThan(0);
-    expect(stats.resultsReturned).to.be.equal(5);
+    expect(stats.readOperations).toBeGreaterThan(0);
+    expect(stats.resultsReturned).toBe(5);
     expect(
       stats.executionDuration.nanoseconds > 0 ||
         stats.executionDuration.seconds > 0,
-    ).to.be.true;
-    expect(Object.keys(stats.debugStats).length).to.be.greaterThan(0);
+    ).toBe(true);
+    expect(Object.keys(stats.debugStats).length).toBeGreaterThan(0);
 
-    expect(explainResults.snapshot).to.not.be.null;
-    expect(explainResults.snapshot!.docs.length).to.equal(5);
+    expect(explainResults.snapshot).not.toBeNull();
+    expect(explainResults.snapshot!.docs.length).toBe(5);
   });
 
   it('getAll() supports array destructuring', () => {
@@ -556,7 +486,7 @@ describe('Firestore class', () => {
         return firestore.getAll(...[ref1, ref2]);
       })
       .then(docs => {
-        expect(docs.length).to.equal(2);
+        expect(docs.length).toBe(2);
       });
   });
 
@@ -568,7 +498,7 @@ describe('Firestore class', () => {
         return firestore.getAll(ref1, {fieldMask: ['foo']});
       })
       .then(docs => {
-        expect(docs[0].data()).to.deep.equal({foo: 'a'});
+        expect(docs[0].data()).toEqual({foo: 'a'});
       });
   });
 
@@ -580,8 +510,8 @@ describe('Firestore class', () => {
         return firestore.getAll(...[ref1, ref2], {fieldMask: ['f']});
       })
       .then(docs => {
-        expect(docs[0].data()).to.deep.equal({f: 'a'});
-        expect(docs[1].data()).to.deep.equal({f: 'a'});
+        expect(docs[0].data()).toEqual({f: 'a'});
+        expect(docs[1].data()).toEqual({f: 'a'});
       });
   });
 
@@ -592,14 +522,14 @@ describe('Firestore class', () => {
     await ref2.set(new Post('post2', 'author2'));
 
     const docs = await firestore.getAll(ref1, ref2);
-    expect(docs[0].data()!.toString()).to.deep.equal('post1, by author1');
-    expect(docs[1].data()!.toString()).to.deep.equal('post2, by author2');
+    expect(docs[0].data()!.toString()).toEqual('post1, by author1');
+    expect(docs[1].data()!.toString()).toEqual('post2, by author2');
   });
 
   it('cannot make calls after the client has been terminated', async () => {
     const ref1 = randomCol.doc('doc1');
     await firestore.terminate();
-    return expect(ref1.set({foo: 100})).to.eventually.be.rejectedWith(
+    return expect(ref1.set({foo: 100})).rejects.toThrow(
       'The client has already been terminated',
     );
   });
@@ -610,7 +540,7 @@ describe('Firestore class', () => {
       // No-op
     });
 
-    await expect(firestore.terminate()).to.eventually.be.rejectedWith(
+    await expect(firestore.terminate()).rejects.toThrow(
       'All onSnapshot() listeners must be unsubscribed, and all BulkWriter ' +
         'instances must be closed before terminating the client. There are 1 ' +
         'active listeners and 0 open BulkWriter instances.',
@@ -622,7 +552,7 @@ describe('Firestore class', () => {
     const writer = firestore.bulkWriter();
     const ref = randomCol.doc('doc-1');
     void writer.set(ref, {foo: 'bar'});
-    await expect(firestore.terminate()).to.eventually.be.rejectedWith(
+    await expect(firestore.terminate()).rejects.toThrow(
       'All onSnapshot() listeners must be unsubscribed, and all BulkWriter ' +
         'instances must be closed before terminating the client. There are 0 ' +
         'active listeners and 1 open BulkWriter instances.',
@@ -640,7 +570,7 @@ describe.skipEmulator.skipEnterprise('CollectionGroup class', () => {
   let randomColl: CollectionReference;
   let collectionGroup: CollectionGroup;
 
-  before(async () => {
+  beforeAll(async () => {
     randomColl = getTestRoot();
     firestore = randomColl.firestore;
     collectionGroup = firestore.collectionGroup(randomColl.id);
@@ -668,25 +598,25 @@ describe.skipEmulator.skipEnterprise('CollectionGroup class', () => {
   async function verifyPartitions<T>(
     partitions: QueryPartition<T>[],
   ): Promise<QueryDocumentSnapshot<T>[]> {
-    expect(partitions.length).to.not.be.greaterThan(desiredPartitionCount);
+    expect(partitions.length).toBeLessThanOrEqual(desiredPartitionCount);
 
-    expect(partitions[0].startAt).to.be.undefined;
+    expect(partitions[0].startAt).toBeUndefined();
     for (let i = 0; i < partitions.length - 1; ++i) {
       // The cursor value is a single DocumentReference
       expect(
         (partitions[i].endBefore![0] as DocumentReference<T>).isEqual(
           partitions[i + 1].startAt![0] as DocumentReference<T>,
         ),
-      ).to.be.true;
+      ).toBe(true);
     }
-    expect(partitions[partitions.length - 1].endBefore).to.be.undefined;
+    expect(partitions[partitions.length - 1].endBefore).toBeUndefined();
 
     // Validate that we can use the partitions to read the original documents.
     const documents: QueryDocumentSnapshot<T>[] = [];
     for (const partition of partitions) {
       documents.push(...(await partition.toQuery().get()).docs);
     }
-    expect(documents.length).to.equal(documentCount);
+    expect(documents.length).toBe(documentCount);
 
     return documents;
   }
@@ -719,7 +649,7 @@ describe.skipEmulator.skipEnterprise('CollectionGroup class', () => {
       documents.push(...(await partitionedQuery.get()).docs);
     }
 
-    expect(documents.length).to.equal(documentCount);
+    expect(documents.length).toBe(documentCount);
   });
 
   it('partition query with converter', async () => {
@@ -732,7 +662,7 @@ describe.skipEmulator.skipEnterprise('CollectionGroup class', () => {
     const documents = await verifyPartitions(partitions);
 
     for (const document of documents) {
-      expect(document.data()).to.be.an.instanceOf(Post);
+      expect(document.data()).toBeInstanceOf(Post);
     }
   });
 
@@ -746,9 +676,9 @@ describe.skipEmulator.skipEnterprise('CollectionGroup class', () => {
       desiredPartitionCount,
     );
 
-    expect(partitions.length).to.equal(1);
-    expect(partitions[0].startAt).to.be.undefined;
-    expect(partitions[0].endBefore).to.be.undefined;
+    expect(partitions.length).toBe(1);
+    expect(partitions[0].startAt).toBeUndefined();
+    expect(partitions[0].endBefore).toBeUndefined();
   });
 });
 
@@ -765,29 +695,29 @@ describe('CollectionReference class', () => {
 
   it('has firestore property', () => {
     const ref = firestore.collection('col');
-    expect(ref.firestore).to.be.an.instanceOf(Firestore);
+    expect(ref.firestore).toBeInstanceOf(Firestore);
   });
 
   it('has id property', () => {
     const ref = firestore.collection('col');
-    expect(ref.id).to.equal('col');
+    expect(ref.id).toBe('col');
   });
 
   it('has parent property', () => {
     const ref = firestore.collection('col/doc/col');
-    expect(ref.parent!.id).to.equal('doc');
+    expect(ref.parent!.id).toBe('doc');
   });
 
   it('has path property', () => {
     const ref = firestore.collection('col/doc/col');
-    expect(ref.path).to.equal('col/doc/col');
+    expect(ref.path).toBe('col/doc/col');
   });
 
   it('has doc() method', () => {
     let ref = firestore.collection('col').doc('doc');
-    expect(ref.id).to.equal('doc');
+    expect(ref.id).toBe('doc');
     ref = firestore.collection('col').doc();
-    expect(ref.id).to.have.length(20);
+    expect(ref.id).toHaveLength(20);
   });
 
   it('has add() method', () => {
@@ -797,7 +727,7 @@ describe('CollectionReference class', () => {
         return ref.get();
       })
       .then(doc => {
-        expect(doc.get('foo')).to.equal('a');
+        expect(doc.get('foo')).toBe('a');
       });
   });
 
@@ -816,8 +746,14 @@ describe('CollectionReference class', () => {
     const existingDocs = documents.filter(doc => doc.exists);
     const missingDocs = documents.filter(doc => !doc.exists);
 
-    expect(existingDocs.map(doc => doc.id)).to.have.members(['a', 'c']);
-    expect(missingDocs.map(doc => doc.id)).to.have.members(['b']);
+    expect(existingDocs.map(doc => doc.id)).toEqual(
+      expect.arrayContaining(['a', 'c']),
+    );
+    expect(existingDocs.map(doc => doc.id)).toHaveLength(2);
+    expect(missingDocs.map(doc => doc.id)).toEqual(
+      expect.arrayContaining(['b']),
+    );
+    expect(missingDocs.map(doc => doc.id)).toHaveLength(1);
   });
 
   // showMissing is not supported in Enterprise
@@ -839,7 +775,7 @@ describe('CollectionReference class', () => {
         .map(dr => dr.id)
         .sort((a, b) => a.localeCompare(b));
 
-      expect(actualDocIds).to.deep.equal(expectedResults);
+      expect(actualDocIds).toEqual(expectedResults);
     },
   );
 
@@ -850,8 +786,8 @@ describe('CollectionReference class', () => {
       .add(new Post('post', 'author'));
     const postData = await ref.get();
     const post = postData.data();
-    expect(post).to.not.be.undefined;
-    expect(post!.toString()).to.equal('post, by author');
+    expect(post).toBeDefined();
+    expect(post!.toString()).toBe('post, by author');
   });
 });
 
@@ -868,27 +804,27 @@ describe('DocumentReference class', () => {
 
   it('has firestore property', () => {
     const ref = firestore.doc('col/doc');
-    expect(ref.firestore).to.be.an.instanceOf(Firestore);
+    expect(ref.firestore).toBeInstanceOf(Firestore);
   });
 
   it('has id property', () => {
     const ref = firestore.doc('col/doc');
-    expect(ref.id).to.equal('doc');
+    expect(ref.id).toBe('doc');
   });
 
   it('has parent property', () => {
     const ref = firestore.doc('col/doc');
-    expect(ref.parent.id).to.equal('col');
+    expect(ref.parent.id).toBe('col');
   });
 
   it('has path property', () => {
     const ref = firestore.doc('col/doc');
-    expect(ref.path).to.equal('col/doc');
+    expect(ref.path).toBe('col/doc');
   });
 
   it('has collection() method', () => {
     const ref = firestore.doc('col/doc').collection('subcol');
-    expect(ref.id).to.equal('subcol');
+    expect(ref.id).toBe('subcol');
   });
 
   it('has create()/get() method', () => {
@@ -899,7 +835,7 @@ describe('DocumentReference class', () => {
         return ref.get();
       })
       .then(doc => {
-        expect(doc.get('foo')).to.equal('a');
+        expect(doc.get('foo')).toBe('a');
       });
   });
 
@@ -933,12 +869,12 @@ describe('DocumentReference class', () => {
       })
       .then(doc => {
         const data = doc.data()!;
-        expect(data.pathValue.path).to.equal(
+        expect(data.pathValue.path).toBe(
           (allSupportedTypesObject.pathValue as DocumentReference).path,
         );
         delete data.pathValue;
         delete allSupportedTypesObject.pathValue;
-        expect(data).to.deep.equal(allSupportedTypesObject);
+        expect(data).toEqual(allSupportedTypesObject);
       });
   });
 
@@ -954,8 +890,8 @@ describe('DocumentReference class', () => {
       })
       .then(doc => {
         const actualValue = doc.data()!.nanValue;
-        expect(actualValue).to.be.a('number');
-        expect(actualValue).to.be.NaN;
+        expect(typeof actualValue).toBe('number');
+        expect(actualValue).toBeNaN();
       });
   });
 
@@ -971,8 +907,8 @@ describe('DocumentReference class', () => {
       .then(() => ref.get())
       .then(doc => {
         const actualValue = doc.data()!.bigIntValue;
-        expect(actualValue).to.be.a('bigint');
-        expect(actualValue).to.equal(bigIntValue);
+        expect(typeof actualValue).toBe('bigint');
+        expect(actualValue).toBe(bigIntValue);
       });
   });
 
@@ -999,8 +935,8 @@ describe('DocumentReference class', () => {
       })
       .then(doc => {
         setTimestamp = doc.get('f');
-        expect(setTimestamp).to.be.an.instanceOf(Timestamp);
-        expect(doc.data()).to.deep.equal({
+        expect(setTimestamp).toBeInstanceOf(Timestamp);
+        expect(doc.data()).toEqual({
           a: 'bar',
           b: {remove: 'bar'},
           d: {keep: 'bar'},
@@ -1013,8 +949,8 @@ describe('DocumentReference class', () => {
       })
       .then(doc => {
         const updateTimestamp = doc.get('a');
-        expect(setTimestamp).to.be.an.instanceOf(Timestamp);
-        expect(doc.data()).to.deep.equal({
+        expect(setTimestamp).toBeInstanceOf(Timestamp);
+        expect(doc.data()).toEqual({
           a: updateTimestamp,
           b: {c: updateTimestamp},
           d: {e: updateTimestamp, keep: 'bar'},
@@ -1034,7 +970,7 @@ describe('DocumentReference class', () => {
       .then(() => ref.update(updateData))
       .then(() => ref.get())
       .then(doc => {
-        expect(doc.data()).to.deep.equal(expectedData);
+        expect(doc.data()).toEqual(expectedData);
       });
   });
 
@@ -1049,7 +985,7 @@ describe('DocumentReference class', () => {
       .then(() => ref.set(updateData, {merge: true}))
       .then(() => ref.get())
       .then(doc => {
-        expect(doc.data()).to.deep.equal(expectedData);
+        expect(doc.data()).toEqual(expectedData);
       });
   });
 
@@ -1064,7 +1000,7 @@ describe('DocumentReference class', () => {
       .then(() => ref.update(updateData))
       .then(() => ref.get())
       .then(doc => {
-        expect(doc.data()).to.deep.equal(expectedData);
+        expect(doc.data()).toEqual(expectedData);
       });
   });
 
@@ -1081,7 +1017,7 @@ describe('DocumentReference class', () => {
       .then(() => ref.update(updateData))
       .then(() => ref.get())
       .then(doc => {
-        expect(doc.data()).to.deep.equal(expectedData);
+        expect(doc.data()).toEqual(expectedData);
       });
   });
 
@@ -1096,7 +1032,7 @@ describe('DocumentReference class', () => {
       .then(() => ref.set(updateData, {merge: true}))
       .then(() => ref.get())
       .then(doc => {
-        expect(doc.data()).to.deep.equal(expectedData);
+        expect(doc.data()).toEqual(expectedData);
       });
   });
 
@@ -1113,7 +1049,7 @@ describe('DocumentReference class', () => {
       .then(() => ref.update(updateData))
       .then(() => ref.get())
       .then(doc => {
-        expect(doc.data()).to.deep.equal(expectedData);
+        expect(doc.data()).toEqual(expectedData);
       });
   });
 
@@ -1128,7 +1064,7 @@ describe('DocumentReference class', () => {
       .then(() => ref.update(updateData))
       .then(() => ref.get())
       .then(doc => {
-        expect(doc.data()).to.deep.equal(expectedData);
+        expect(doc.data()).toEqual(expectedData);
       });
   });
 
@@ -1143,7 +1079,7 @@ describe('DocumentReference class', () => {
       .then(() => ref.set(updateData, {merge: true}))
       .then(() => ref.get())
       .then(doc => {
-        expect(doc.data()).to.deep.equal(expectedData);
+        expect(doc.data()).toEqual(expectedData);
       });
   });
 
@@ -1171,7 +1107,7 @@ describe('DocumentReference class', () => {
       .then(() => ref.update(updateObject))
       .then(() => ref.get())
       .then(doc => {
-        expect(doc.data()).to.deep.equal(expectedObject);
+        expect(doc.data()).toEqual(expectedObject);
       });
   });
 
@@ -1199,7 +1135,7 @@ describe('DocumentReference class', () => {
       .then(() => ref.update(updateObject))
       .then(() => ref.get())
       .then(doc => {
-        expect(doc.data()).to.deep.equal(expectedObject);
+        expect(doc.data()).toEqual(expectedObject);
       });
   });
 
@@ -1213,7 +1149,7 @@ describe('DocumentReference class', () => {
       .then(() => ref.get())
       .then(doc => {
         const data = doc.data();
-        expect(data).to.deep.equal({
+        expect(data).toEqual({
           'a.1': 'foo',
           'a.2': 'foo',
           nested: {
@@ -1232,8 +1168,8 @@ describe('DocumentReference class', () => {
       .then(() => ref.get())
       .then(doc => {
         const updateTimestamp = doc.get('c');
-        expect(updateTimestamp).to.be.an.instanceOf(Timestamp);
-        expect(doc.data()).to.deep.equal({
+        expect(updateTimestamp).toBeInstanceOf(Timestamp);
+        expect(doc.data()).toEqual({
           a: 'b',
           c: updateTimestamp,
         });
@@ -1251,7 +1187,7 @@ describe('DocumentReference class', () => {
         return ref.get();
       })
       .then(doc => {
-        expect(doc.get('foo')).to.equal('b');
+        expect(doc.get('foo')).toBe('b');
       });
   });
 
@@ -1261,12 +1197,10 @@ describe('DocumentReference class', () => {
 
     // Validate the error message when testing against the firestore backend.
     if (process.env.FIRESTORE_EMULATOR_HOST === undefined) {
-      await expect(promise).to.eventually.be.rejectedWith(
-        /No document to update/,
-      );
+      await expect(promise).rejects.toThrow(/No document to update/);
     } else {
       // The emulator generates a different error message, do not validate the error message.
-      await expect(promise).to.eventually.be.rejected;
+      await expect(promise).rejects.toThrow();
     }
   });
 
@@ -1284,8 +1218,8 @@ describe('DocumentReference class', () => {
         return ref.get();
       })
       .then(result => {
-        expect(deleted).to.be.true;
-        expect(result.exists).to.be.false;
+        expect(deleted).toBe(true);
+        expect(result.exists).toBe(false);
       });
   });
 
@@ -1303,12 +1237,10 @@ describe('DocumentReference class', () => {
 
     // Validate the error message when testing against the firestore backend.
     if (process.env.FIRESTORE_EMULATOR_HOST === undefined) {
-      await expect(promise).to.eventually.be.rejectedWith(
-        /No document to update/,
-      );
+      await expect(promise).rejects.toThrow(/No document to update/);
     } else {
       // The emulator generates a different error message, do not validate the error message.
-      await expect(promise).to.eventually.be.rejected;
+      await expect(promise).rejects.toThrow();
     }
   });
 
@@ -1320,14 +1252,14 @@ describe('DocumentReference class', () => {
         return ref.get();
       })
       .then(doc => {
-        expect(doc.data()).to.deep.equal({'!.\\`': {'!.\\`': 'value'}});
+        expect(doc.data()).toEqual({'!.\\`': {'!.\\`': 'value'}});
         return ref.update(new FieldPath('!.\\`', '!.\\`'), 'new-value');
       })
       .then(() => {
         return ref.get();
       })
       .then(doc => {
-        expect(doc.data()).to.deep.equal({'!.\\`': {'!.\\`': 'new-value'}});
+        expect(doc.data()).toEqual({'!.\\`': {'!.\\`': 'new-value'}});
       });
   });
 
@@ -1349,195 +1281,197 @@ describe('DocumentReference class', () => {
         return randomCol.doc('doc').listCollections();
       })
       .then(response => {
-        expect(response).to.have.length(collections.length);
+        expect(response).toHaveLength(collections.length);
         for (let i = 0; i < response.length; ++i) {
-          expect(response[i].id).to.equal(collections[i]);
+          expect(response[i].id).toBe(collections[i]);
         }
       });
   });
 
-  // tslint:disable-next-line:only-arrow-function
-  it('can add and delete fields sequentially', async function () {
-    this.timeout(30 * 1000);
+  it(
+    'can add and delete fields sequentially',
+    async () => {
+      const ref = randomCol.doc('doc');
 
-    const ref = randomCol.doc('doc');
+      const actions = [
+        () => ref.create({}),
+        () => ref.delete(),
+        () => ref.create({a: {b: 'c'}}),
+        () => ref.set({}, {merge: true}),
+        () => ref.set({}),
+        () => ref.set({a: {b: 'c'}}),
+        () => ref.set({a: {d: 'e'}}, {merge: true}),
+        () => ref.set({a: {d: FieldValue.delete()}}, {merge: true}),
+        () => ref.set({a: {b: FieldValue.delete()}}, {merge: true}),
+        () => ref.set({a: {e: 'foo'}}, {merge: true}),
+        () => ref.set({f: 'foo'}, {merge: true}),
+        () => ref.set({f: {g: 'foo'}}, {merge: true}),
+        () => ref.update({'f.h': 'foo'}),
+        () => ref.update({'f.g': FieldValue.delete()}),
+        () => ref.update({'f.h': FieldValue.delete()}),
+        () => ref.update({f: FieldValue.delete()}),
+        () => ref.update({'i.j': {}}),
+        () => ref.update({'i.j': {k: 'foo'}}),
+        () => ref.update({'i.j': {l: {}}}),
+        () => ref.update({i: FieldValue.delete()}),
+        () => ref.update({a: FieldValue.delete()}),
+      ];
 
-    const actions = [
-      () => ref.create({}),
-      () => ref.delete(),
-      () => ref.create({a: {b: 'c'}}),
-      () => ref.set({}, {merge: true}),
-      () => ref.set({}),
-      () => ref.set({a: {b: 'c'}}),
-      () => ref.set({a: {d: 'e'}}, {merge: true}),
-      () => ref.set({a: {d: FieldValue.delete()}}, {merge: true}),
-      () => ref.set({a: {b: FieldValue.delete()}}, {merge: true}),
-      () => ref.set({a: {e: 'foo'}}, {merge: true}),
-      () => ref.set({f: 'foo'}, {merge: true}),
-      () => ref.set({f: {g: 'foo'}}, {merge: true}),
-      () => ref.update({'f.h': 'foo'}),
-      () => ref.update({'f.g': FieldValue.delete()}),
-      () => ref.update({'f.h': FieldValue.delete()}),
-      () => ref.update({f: FieldValue.delete()}),
-      () => ref.update({'i.j': {}}),
-      () => ref.update({'i.j': {k: 'foo'}}),
-      () => ref.update({'i.j': {l: {}}}),
-      () => ref.update({i: FieldValue.delete()}),
-      () => ref.update({a: FieldValue.delete()}),
-    ];
+      const expectedState = [
+        {},
+        null,
+        {a: {b: 'c'}},
+        {a: {b: 'c'}},
+        {},
+        {a: {b: 'c'}},
+        {a: {b: 'c', d: 'e'}},
+        {a: {b: 'c'}},
+        {a: {}},
+        {a: {e: 'foo'}},
+        {a: {e: 'foo'}, f: 'foo'},
+        {a: {e: 'foo'}, f: {g: 'foo'}},
+        {a: {e: 'foo'}, f: {g: 'foo', h: 'foo'}},
+        {a: {e: 'foo'}, f: {h: 'foo'}},
+        {a: {e: 'foo'}, f: {}},
+        {a: {e: 'foo'}},
+        {a: {e: 'foo'}, i: {j: {}}},
+        {a: {e: 'foo'}, i: {j: {k: 'foo'}}},
+        {a: {e: 'foo'}, i: {j: {l: {}}}},
+        {a: {e: 'foo'}},
+        {},
+      ];
 
-    const expectedState = [
-      {},
-      null,
-      {a: {b: 'c'}},
-      {a: {b: 'c'}},
-      {},
-      {a: {b: 'c'}},
-      {a: {b: 'c', d: 'e'}},
-      {a: {b: 'c'}},
-      {a: {}},
-      {a: {e: 'foo'}},
-      {a: {e: 'foo'}, f: 'foo'},
-      {a: {e: 'foo'}, f: {g: 'foo'}},
-      {a: {e: 'foo'}, f: {g: 'foo', h: 'foo'}},
-      {a: {e: 'foo'}, f: {h: 'foo'}},
-      {a: {e: 'foo'}, f: {}},
-      {a: {e: 'foo'}},
-      {a: {e: 'foo'}, i: {j: {}}},
-      {a: {e: 'foo'}, i: {j: {k: 'foo'}}},
-      {a: {e: 'foo'}, i: {j: {l: {}}}},
-      {a: {e: 'foo'}},
-      {},
-    ];
+      let promise = Promise.resolve();
 
-    let promise = Promise.resolve();
+      for (let i = 0; i < actions.length; ++i) {
+        promise = promise
+          .then(() => actions[i]())
+          .then(() => {
+            return ref.get();
+          })
+          .then(snap => {
+            if (!snap.exists) {
+              expect(expectedState[i]).toBeNull();
+            } else {
+              expect(snap.data()).toEqual(expectedState[i]);
+            }
+          });
+      }
 
-    for (let i = 0; i < actions.length; ++i) {
-      promise = promise
-        .then(() => actions[i]())
-        .then(() => {
-          return ref.get();
-        })
-        .then(snap => {
-          if (!snap.exists) {
-            expect(expectedState[i]).to.be.null;
-          } else {
-            expect(snap.data()).to.deep.equal(expectedState[i]);
-          }
-        });
-    }
+      await promise;
+    },
+    30 * 1000,
+  );
 
-    await promise;
-  });
+  it(
+    'can add and delete fields with server timestamps',
+    () => {
+      const ref = randomCol.doc('doc');
 
-  // tslint:disable-next-line:only-arrow-function
-  it('can add and delete fields with server timestamps', function () {
-    this.timeout(10 * 1000);
-
-    const ref = randomCol.doc('doc');
-
-    const actions = [
-      () =>
-        ref.create({
-          time: FieldValue.serverTimestamp(),
-          a: {b: FieldValue.serverTimestamp()},
-        }),
-      () =>
-        ref.set({
-          time: FieldValue.serverTimestamp(),
-          a: {c: FieldValue.serverTimestamp()},
-        }),
-      () =>
-        ref.set(
-          {
+      const actions = [
+        () =>
+          ref.create({
             time: FieldValue.serverTimestamp(),
-            a: {d: FieldValue.serverTimestamp()},
-          },
-          {merge: true},
-        ),
-      () =>
-        ref.set(
-          {
+            a: {b: FieldValue.serverTimestamp()},
+          }),
+        () =>
+          ref.set({
             time: FieldValue.serverTimestamp(),
-            e: FieldValue.serverTimestamp(),
-          },
-          {merge: true},
-        ),
-      () =>
-        ref.set(
-          {
+            a: {c: FieldValue.serverTimestamp()},
+          }),
+        () =>
+          ref.set(
+            {
+              time: FieldValue.serverTimestamp(),
+              a: {d: FieldValue.serverTimestamp()},
+            },
+            {merge: true},
+          ),
+        () =>
+          ref.set(
+            {
+              time: FieldValue.serverTimestamp(),
+              e: FieldValue.serverTimestamp(),
+            },
+            {merge: true},
+          ),
+        () =>
+          ref.set(
+            {
+              time: FieldValue.serverTimestamp(),
+              e: {f: FieldValue.serverTimestamp()},
+            },
+            {merge: true},
+          ),
+        () =>
+          ref.update({
             time: FieldValue.serverTimestamp(),
-            e: {f: FieldValue.serverTimestamp()},
-          },
-          {merge: true},
-        ),
-      () =>
-        ref.update({
-          time: FieldValue.serverTimestamp(),
-          'g.h': FieldValue.serverTimestamp(),
-        }),
-      () =>
-        ref.update({
-          time: FieldValue.serverTimestamp(),
-          'g.j': {k: FieldValue.serverTimestamp()},
-        }),
-    ];
+            'g.h': FieldValue.serverTimestamp(),
+          }),
+        () =>
+          ref.update({
+            time: FieldValue.serverTimestamp(),
+            'g.j': {k: FieldValue.serverTimestamp()},
+          }),
+      ];
 
-    const expectedState = [
-      (times: number[]) => {
-        return {time: times[0], a: {b: times[0]}};
-      },
-      (times: number[]) => {
-        return {time: times[1], a: {c: times[1]}};
-      },
-      (times: number[]) => {
-        return {time: times[2], a: {c: times[1], d: times[2]}};
-      },
-      (times: number[]) => {
-        return {time: times[3], a: {c: times[1], d: times[2]}, e: times[3]};
-      },
-      (times: number[]) => {
-        return {
-          time: times[4],
-          a: {c: times[1], d: times[2]},
-          e: {f: times[4]},
-        };
-      },
-      (times: number[]) => {
-        return {
-          time: times[5],
-          a: {c: times[1], d: times[2]},
-          e: {f: times[4]},
-          g: {h: times[5]},
-        };
-      },
-      (times: number[]) => {
-        return {
-          time: times[6],
-          a: {c: times[1], d: times[2]},
-          e: {f: times[4]},
-          g: {h: times[5], j: {k: times[6]}},
-        };
-      },
-    ];
+      const expectedState = [
+        (times: number[]) => {
+          return {time: times[0], a: {b: times[0]}};
+        },
+        (times: number[]) => {
+          return {time: times[1], a: {c: times[1]}};
+        },
+        (times: number[]) => {
+          return {time: times[2], a: {c: times[1], d: times[2]}};
+        },
+        (times: number[]) => {
+          return {time: times[3], a: {c: times[1], d: times[2]}, e: times[3]};
+        },
+        (times: number[]) => {
+          return {
+            time: times[4],
+            a: {c: times[1], d: times[2]},
+            e: {f: times[4]},
+          };
+        },
+        (times: number[]) => {
+          return {
+            time: times[5],
+            a: {c: times[1], d: times[2]},
+            e: {f: times[4]},
+            g: {h: times[5]},
+          };
+        },
+        (times: number[]) => {
+          return {
+            time: times[6],
+            a: {c: times[1], d: times[2]},
+            e: {f: times[4]},
+            g: {h: times[5], j: {k: times[6]}},
+          };
+        },
+      ];
 
-    let promise = Promise.resolve();
-    const times: number[] = [];
+      let promise = Promise.resolve();
+      const times: number[] = [];
 
-    for (let i = 0; i < actions.length; ++i) {
-      promise = promise
-        .then(() => actions[i]())
-        .then(() => {
-          return ref.get();
-        })
-        .then(snap => {
-          times.push(snap.get('time'));
-          expect(snap.data()).to.deep.equal(expectedState[i](times));
-        });
-    }
+      for (let i = 0; i < actions.length; ++i) {
+        promise = promise
+          .then(() => actions[i]())
+          .then(() => {
+            return ref.get();
+          })
+          .then(snap => {
+            times.push(snap.get('time'));
+            expect(snap.data()).toEqual(expectedState[i](times));
+          });
+      }
 
-    return promise;
-  });
+      return promise;
+    },
+    10 * 1000,
+  );
 
   it('can write and read vector embeddings', async () => {
     const ref = randomCol.doc();
@@ -1555,13 +1489,16 @@ describe('DocumentReference class', () => {
     });
 
     const snap1 = await ref.get();
-    expect(snap1.get('vector0').isEqual(FieldValue.vector([0.0]))).to.be.true;
-    expect(snap1.get('vector1').isEqual(FieldValue.vector([1, 2, 3.99]))).to.be
-      .true;
-    expect(snap1.get('vector2').isEqual(FieldValue.vector([0, 0, 0]))).to.be
-      .true;
-    expect(snap1.get('vector3').isEqual(FieldValue.vector([-1, -200, -999]))).to
-      .be.true;
+    expect(snap1.get('vector0').isEqual(FieldValue.vector([0.0]))).toBe(true);
+    expect(snap1.get('vector1').isEqual(FieldValue.vector([1, 2, 3.99]))).toBe(
+      true,
+    );
+    expect(snap1.get('vector2').isEqual(FieldValue.vector([0, 0, 0]))).toBe(
+      true,
+    );
+    expect(
+      snap1.get('vector3').isEqual(FieldValue.vector([-1, -200, -999])),
+    ).toBe(true);
   });
 
   describe('watch', () => {
@@ -1601,7 +1538,7 @@ describe('DocumentReference class', () => {
 
       return waitForSnapshot()
         .then(snapshot => {
-          expect(snapshot.exists).to.be.false;
+          expect(snapshot.exists).toBe(false);
 
           // Add the document.
           return ref.set({foo: 'a'});
@@ -1610,8 +1547,8 @@ describe('DocumentReference class', () => {
           return waitForSnapshot();
         })
         .then(snapshot => {
-          expect(snapshot.exists).to.be.true;
-          expect(snapshot.get('foo')).to.equal('a');
+          expect(snapshot.exists).toBe(true);
+          expect(snapshot.get('foo')).toBe('a');
           readTime = snapshot.readTime;
           createTime = snapshot.createTime!;
           updateTime = snapshot.updateTime!;
@@ -1623,13 +1560,13 @@ describe('DocumentReference class', () => {
           return waitForSnapshot();
         })
         .then(snapshot => {
-          expect(snapshot.exists).to.be.true;
-          expect(snapshot.get('foo')).to.equal('b');
-          expect(snapshot.createTime!.isEqual(createTime)).to.be.true;
-          expect(snapshot.readTime.toMillis()).to.be.greaterThan(
+          expect(snapshot.exists).toBe(true);
+          expect(snapshot.get('foo')).toBe('b');
+          expect(snapshot.createTime!.isEqual(createTime)).toBe(true);
+          expect(snapshot.readTime.toMillis()).toBeGreaterThan(
             readTime.toMillis(),
           );
-          expect(snapshot.updateTime!.toMillis()).to.be.greaterThan(
+          expect(snapshot.updateTime!.toMillis()).toBeGreaterThan(
             updateTime.toMillis(),
           );
           unsubscribe();
@@ -1651,7 +1588,7 @@ describe('DocumentReference class', () => {
 
       return waitForSnapshot()
         .then(snapshot => {
-          expect(snapshot.exists).to.be.false;
+          expect(snapshot.exists).toBe(false);
 
           // Add the document.
           return ref.set({foo: 'a'});
@@ -1660,7 +1597,7 @@ describe('DocumentReference class', () => {
           return waitForSnapshot();
         })
         .then(snapshot => {
-          expect(snapshot.exists).to.be.true;
+          expect(snapshot.exists).toBe(true);
 
           // Delete the document.
           return ref.delete();
@@ -1669,94 +1606,98 @@ describe('DocumentReference class', () => {
           return waitForSnapshot();
         })
         .then(snapshot => {
-          expect(snapshot.exists).to.be.false;
+          expect(snapshot.exists).toBe(false);
           unsubscribe();
         });
     });
 
     // skipped test was due to the kokoro to GCB migration
-    it.skip('handles multiple docs', done => {
-      const doc1 = randomCol.doc();
-      const doc2 = randomCol.doc();
+    it.skip('handles multiple docs', () => {
+      return new Promise<void>((resolve, reject) => {
+        const doc1 = randomCol.doc();
+        const doc2 = randomCol.doc();
 
-      // Documents transition from non-existent to existent to non-existent.
-      const exists1 = [false, true, false];
-      const exists2 = [false, true, false];
+        // Documents transition from non-existent to existent to non-existent.
+        const exists1 = [false, true, false];
+        const exists2 = [false, true, false];
 
-      const promises: Array<Promise<WriteResult>> = [];
+        const promises: Array<Promise<WriteResult>> = [];
 
-      // Code blocks to run after each step.
-      const run = [
-        () => {
-          promises.push(doc1.set({foo: 'foo'}));
-          promises.push(doc2.set({foo: 'foo'}));
-        },
-        () => {
-          promises.push(doc1.delete());
-          promises.push(doc2.delete());
-        },
-        () => {
-          unsubscribe1();
-          unsubscribe2();
-          void Promise.all(promises).then(() => done());
-        },
-      ];
+        // Code blocks to run after each step.
+        const run = [
+          () => {
+            promises.push(doc1.set({foo: 'foo'}));
+            promises.push(doc2.set({foo: 'foo'}));
+          },
+          () => {
+            promises.push(doc1.delete());
+            promises.push(doc2.delete());
+          },
+          () => {
+            unsubscribe1();
+            unsubscribe2();
+            void Promise.all(promises).then(() => resolve(), reject);
+          },
+        ];
 
-      const maybeRun = () => {
-        if (exists1.length === exists2.length) {
-          run.shift()!();
-        }
-      };
-      const unsubscribe1 = doc1.onSnapshot(snapshot => {
-        expect(snapshot.exists).to.equal(exists1.shift());
-        maybeRun();
-      });
+        const maybeRun = () => {
+          if (exists1.length === exists2.length) {
+            run.shift()!();
+          }
+        };
+        const unsubscribe1 = doc1.onSnapshot(snapshot => {
+          expect(snapshot.exists).toBe(exists1.shift());
+          maybeRun();
+        });
 
-      const unsubscribe2 = doc2.onSnapshot(snapshot => {
-        expect(snapshot.exists).to.equal(exists2.shift());
-        maybeRun();
+        const unsubscribe2 = doc2.onSnapshot(snapshot => {
+          expect(snapshot.exists).toBe(exists2.shift());
+          maybeRun();
+        });
       });
     });
 
     // skipped test was due to the kokoro to GCB migration
-    it.skip('handles multiple streams on same doc', done => {
-      const doc = randomCol.doc();
+    it.skip('handles multiple streams on same doc', () => {
+      return new Promise<void>((resolve, reject) => {
+        const doc = randomCol.doc();
 
-      // Document transitions from non-existent to existent to non-existent.
-      const exists1 = [false, true, false];
-      const exists2 = [false, true, false];
+        // Document transitions from non-existent to existent to non-existent.
+        const exists1 = [false, true, false];
+        const exists2 = [false, true, false];
 
-      const promises: Array<Promise<WriteResult>> = [];
+        const promises: Array<Promise<WriteResult>> = [];
 
-      // Code blocks to run after each step.
-      const run = [
-        () => {
-          promises.push(doc.set({foo: 'foo'}));
-        },
-        () => {
-          promises.push(doc.delete());
-        },
-        () => {
-          unsubscribe1();
-          unsubscribe2();
-          void Promise.all(promises).then(() => done());
-        },
-      ];
+        // Code blocks to run after each step.
+        const run = [
+          () => {
+            promises.push(doc.set({foo: 'foo'}));
+          },
+          () => {
+            promises.push(doc.delete());
+          },
+          () => {
+            unsubscribe1();
+            unsubscribe2();
+            void Promise.all(promises).then(() => resolve(), reject);
+          },
+        ];
 
-      const maybeRun = () => {
-        if (exists1.length === exists2.length) {
-          run.shift()!();
-        }
-      };
+        const maybeRun = () => {
+          if (exists1.length === exists2.length) {
+            run.shift()!();
+          }
+        };
 
-      const unsubscribe1 = doc.onSnapshot(snapshot => {
-        expect(snapshot.exists).to.equal(exists1.shift());
-        maybeRun();
-      });
+        const unsubscribe1 = doc.onSnapshot(snapshot => {
+          expect(snapshot.exists).toBe(exists1.shift());
+          maybeRun();
+        });
 
-      const unsubscribe2 = doc.onSnapshot(snapshot => {
-        expect(snapshot.exists).to.equal(exists2.shift());
-        maybeRun();
+        const unsubscribe2 = doc.onSnapshot(snapshot => {
+          expect(snapshot.exists).toBe(exists2.shift());
+          maybeRun();
+        });
       });
     });
 
@@ -1812,7 +1753,7 @@ describe('DocumentReference class', () => {
       await setupDeferred.promise;
       await ref.set(new Post('post', 'author'));
       const snapshot = await resultsDeferred.promise;
-      expect(snapshot.docs[0].data().toString()).to.equal('post, by author');
+      expect(snapshot.docs[0].data().toString()).toBe('post, by author');
       unsubscribe();
     });
   });
@@ -1825,8 +1766,8 @@ describe('DocumentReference class', () => {
     await ref.set(new Post('post', 'author'));
     const postData = await ref.get();
     const post = postData.data();
-    expect(post).to.not.be.undefined;
-    expect(post!.toString()).to.equal('post, by author');
+    expect(post).toBeDefined();
+    expect(post!.toString()).toBe('post, by author');
   });
 
   it('supports primitive types with valid converter', async () => {
@@ -1857,12 +1798,12 @@ describe('DocumentReference class', () => {
     const ref = coll.doc('number').withConverter(primitiveConverter);
     await ref.set(3);
     const result = await ref.get();
-    expect(result.data()).to.equal(3);
+    expect(result.data()).toBe(3);
 
     const ref2 = coll.doc('array').withConverter(arrayConverter);
     await ref2.set([1, 2, 3]);
     const result2 = await ref2.get();
-    expect(result2.data()).to.deep.equal([1, 2, 3]);
+    expect(result2.data()).toEqual([1, 2, 3]);
   });
 
   // skipped test was due to the kokoro to GCB migration
@@ -1897,7 +1838,7 @@ describe('DocumentReference class', () => {
       });
 
     await initialDeferred.promise;
-    expect(document).to.be.null;
+    expect(document).toBeNull();
 
     await ref.create({
       purpose: 'vector tests',
@@ -1906,11 +1847,13 @@ describe('DocumentReference class', () => {
     });
 
     await createDeferred.promise;
-    expect(document).to.be.not.null;
-    expect(document!.get('vector0').isEqual(FieldValue.vector([0.0]))).to.be
-      .true;
-    expect(document!.get('vector1').isEqual(FieldValue.vector([1, 2, 3.99]))).to
-      .be.true;
+    expect(document).not.toBeNull();
+    expect(document!.get('vector0').isEqual(FieldValue.vector([0.0]))).toBe(
+      true,
+    );
+    expect(
+      document!.get('vector1').isEqual(FieldValue.vector([1, 2, 3.99])),
+    ).toBe(true);
 
     await ref.set({
       purpose: 'vector tests',
@@ -1919,32 +1862,38 @@ describe('DocumentReference class', () => {
       vector2: FieldValue.vector([0, 0, 0]),
     });
     await setDeferred.promise;
-    expect(document).to.be.not.null;
-    expect(document!.get('vector0').isEqual(FieldValue.vector([0.0]))).to.be
-      .true;
-    expect(document!.get('vector1').isEqual(FieldValue.vector([1, 2, 3.99]))).to
-      .be.true;
-    expect(document!.get('vector2').isEqual(FieldValue.vector([0, 0, 0]))).to.be
-      .true;
+    expect(document).not.toBeNull();
+    expect(document!.get('vector0').isEqual(FieldValue.vector([0.0]))).toBe(
+      true,
+    );
+    expect(
+      document!.get('vector1').isEqual(FieldValue.vector([1, 2, 3.99])),
+    ).toBe(true);
+    expect(document!.get('vector2').isEqual(FieldValue.vector([0, 0, 0]))).toBe(
+      true,
+    );
 
     await ref.update({
       vector3: FieldValue.vector([-1, -200, -999]),
     });
     await updateDeferred.promise;
-    expect(document).to.be.not.null;
-    expect(document!.get('vector0').isEqual(FieldValue.vector([0.0]))).to.be
-      .true;
-    expect(document!.get('vector1').isEqual(FieldValue.vector([1, 2, 3.99]))).to
-      .be.true;
-    expect(document!.get('vector2').isEqual(FieldValue.vector([0, 0, 0]))).to.be
-      .true;
+    expect(document).not.toBeNull();
+    expect(document!.get('vector0').isEqual(FieldValue.vector([0.0]))).toBe(
+      true,
+    );
+    expect(
+      document!.get('vector1').isEqual(FieldValue.vector([1, 2, 3.99])),
+    ).toBe(true);
+    expect(document!.get('vector2').isEqual(FieldValue.vector([0, 0, 0]))).toBe(
+      true,
+    );
     expect(
       document!.get('vector3').isEqual(FieldValue.vector([-1, -200, -999])),
-    ).to.be.true;
+    ).toBe(true);
 
     await ref.delete();
     await deleteDeferred.promise;
-    expect(document).to.be.null;
+    expect(document).toBeNull();
 
     unlisten();
   });
@@ -1969,7 +1918,7 @@ describe('runs query on a large collection', () => {
 
   it('can get()', () => {
     return randomCol.get().then(res => {
-      expect(res.size).to.equal(1000);
+      expect(res.size).toBe(1000);
     });
   });
 
@@ -1978,11 +1927,11 @@ describe('runs query on a large collection', () => {
     const stream = randomCol.stream();
 
     for await (const doc of stream) {
-      expect(doc).to.be.an.instanceOf(QueryDocumentSnapshot);
+      expect(doc).toBeInstanceOf(QueryDocumentSnapshot);
       ++received;
     }
 
-    expect(received).to.equal(1000);
+    expect(received).toBe(1000);
   });
 });
 
@@ -2048,15 +1997,15 @@ describe.skipEnterprise('Query class - Standard DB', () => {
     result: QuerySnapshot,
     ...data: DocumentData[] | string[]
   ): void {
-    expect(result.size).to.equal(data.length);
+    expect(result.size).toBe(data.length);
 
     if (data.length > 0) {
       if (typeof data[0] === 'string') {
         const actualIds = result.docs.map(docSnapshot => docSnapshot.id);
-        expect(actualIds).to.deep.equal(data);
+        expect(actualIds).toEqual(data);
       } else {
         result.forEach(doc => {
-          expect(doc.data()).to.deep.equal(data.shift());
+          expect(doc.data()).toEqual(data.shift());
         });
       }
     }
@@ -2071,7 +2020,7 @@ describe.skipEnterprise('Query class - Standard DB', () => {
 
   it('has firestore property', () => {
     const ref = randomCol.limit(0);
-    expect(ref.firestore).to.be.an.instanceOf(Firestore);
+    expect(ref.firestore).toBeInstanceOf(Firestore);
   });
 
   it('has select() method', () => {
@@ -2082,7 +2031,7 @@ describe.skipEnterprise('Query class - Standard DB', () => {
         return randomCol.select('foo').get();
       })
       .then(res => {
-        expect(res.docs[0].data()).to.deep.equal({foo: 'bar'});
+        expect(res.docs[0].data()).toEqual({foo: 'bar'});
       });
   });
 
@@ -2094,8 +2043,8 @@ describe.skipEnterprise('Query class - Standard DB', () => {
         return randomCol.select().get();
       })
       .then(res => {
-        expect(res.docs[0].ref.id).to.deep.equal('doc');
-        expect(res.docs[0].data()).to.deep.equal({});
+        expect(res.docs[0].ref.id).toEqual('doc');
+        expect(res.docs[0].data()).toEqual({});
       });
   });
 
@@ -2107,7 +2056,7 @@ describe.skipEnterprise('Query class - Standard DB', () => {
         return randomCol.where('foo', '==', 'bar').get();
       })
       .then(res => {
-        expect(res.docs[0].data()).to.deep.equal({foo: 'bar'});
+        expect(res.docs[0].data()).toEqual({foo: 'bar'});
       });
   });
 
@@ -2122,8 +2071,8 @@ describe.skipEnterprise('Query class - Standard DB', () => {
         expect(
           typeof res.docs[0].get('foo') === 'number' &&
             isNaN(res.docs[0].get('foo')),
-        );
-        expect(res.docs[0].get('bar')).to.equal(null);
+        ).toBe(true);
+        expect(res.docs[0].get('bar')).toBe(null);
       });
   });
 
@@ -2134,8 +2083,8 @@ describe.skipEnterprise('Query class - Standard DB', () => {
     ])
       .then(() => randomCol.where('foo', 'array-contains', 'bar').get())
       .then(res => {
-        expect(res.size).to.equal(1);
-        expect(res.docs[0].get('foo')).to.deep.equal(['bar']);
+        expect(res.size).toBe(1);
+        expect(res.docs[0].get('foo')).toEqual(['bar']);
       });
   });
 
@@ -2163,13 +2112,16 @@ describe.skipEnterprise('Query class - Standard DB', () => {
         });
 
       const res = await vectorQuery.get();
-      expect(res.size).to.equal(3);
-      expect(res.docs[0].get('embedding').isEqual(FieldValue.vector([10, 0])))
-        .to.be.true;
-      expect(res.docs[1].get('embedding').isEqual(FieldValue.vector([1, 1]))).to
-        .be.true;
-      expect(res.docs[2].get('embedding').isEqual(FieldValue.vector([20, 0])))
-        .to.be.true;
+      expect(res.size).toBe(3);
+      expect(
+        res.docs[0].get('embedding').isEqual(FieldValue.vector([10, 0])),
+      ).toBe(true);
+      expect(
+        res.docs[1].get('embedding').isEqual(FieldValue.vector([1, 1])),
+      ).toBe(true);
+      expect(
+        res.docs[2].get('embedding').isEqual(FieldValue.vector([20, 0])),
+      ).toBe(true);
     });
 
     it('supports findNearest by COSINE distance', async () => {
@@ -2196,24 +2148,25 @@ describe.skipEnterprise('Query class - Standard DB', () => {
 
       const res = await vectorQuery.get();
 
-      expect(res.size).to.equal(3);
+      expect(res.size).toBe(3);
 
       if (res.docs[0].get('embedding').isEqual(FieldValue.vector([1, 1]))) {
         expect(
           res.docs[1].get('embedding').isEqual(FieldValue.vector([100, 100])),
-        ).to.be.true;
+        ).toBe(true);
       } else {
         expect(
           res.docs[0].get('embedding').isEqual(FieldValue.vector([100, 100])),
-        ).to.be.true;
-        expect(res.docs[1].get('embedding').isEqual(FieldValue.vector([1, 1])))
-          .to.be.true;
+        ).toBe(true);
+        expect(
+          res.docs[1].get('embedding').isEqual(FieldValue.vector([1, 1])),
+        ).toBe(true);
       }
 
       expect(
         res.docs[2].get('embedding').isEqual(FieldValue.vector([20, 0])) ||
           res.docs[2].get('embedding').isEqual(FieldValue.vector([10, 0])),
-      ).to.be.true;
+      ).toBe(true);
     });
 
     it('supports findNearest by DOT_PRODUCT distance', async () => {
@@ -2239,14 +2192,16 @@ describe.skipEnterprise('Query class - Standard DB', () => {
         });
 
       const res = await vectorQuery.get();
-      expect(res.size).to.equal(3);
+      expect(res.size).toBe(3);
       expect(
         res.docs[0].get('embedding').isEqual(FieldValue.vector([100, 100])),
-      ).to.be.true;
-      expect(res.docs[1].get('embedding').isEqual(FieldValue.vector([20, 0])))
-        .to.be.true;
-      expect(res.docs[2].get('embedding').isEqual(FieldValue.vector([10, 0])))
-        .to.be.true;
+      ).toBe(true);
+      expect(
+        res.docs[1].get('embedding').isEqual(FieldValue.vector([20, 0])),
+      ).toBe(true);
+      expect(
+        res.docs[2].get('embedding').isEqual(FieldValue.vector([10, 0])),
+      ).toBe(true);
     });
 
     it('findNearest works with converters', async () => {
@@ -2286,9 +2241,9 @@ describe.skipEnterprise('Query class - Standard DB', () => {
 
       const res = await vectorQuery.get();
 
-      expect(res.size).to.equal(1);
-      expect(res.docs[0].data().foo).to.equal('bar');
-      expect(res.docs[0].data().embedding).to.deep.equal([5, 5]);
+      expect(res.size).toBe(1);
+      expect(res.docs[0].data().foo).toBe('bar');
+      expect(res.docs[0].data().embedding).toEqual([5, 5]);
     });
 
     it('supports findNearest skipping fields of wrong types', async () => {
@@ -2319,14 +2274,16 @@ describe.skipEnterprise('Query class - Standard DB', () => {
         });
 
       const res = await vectorQuery.get();
-      expect(res.size).to.equal(3);
-      expect(res.docs[0].get('embedding').isEqual(FieldValue.vector([9, 9]))).to
-        .be.true;
-      expect(res.docs[1].get('embedding').isEqual(FieldValue.vector([50, 50])))
-        .to.be.true;
+      expect(res.size).toBe(3);
+      expect(
+        res.docs[0].get('embedding').isEqual(FieldValue.vector([9, 9])),
+      ).toBe(true);
+      expect(
+        res.docs[1].get('embedding').isEqual(FieldValue.vector([50, 50])),
+      ).toBe(true);
       expect(
         res.docs[2].get('embedding').isEqual(FieldValue.vector([100, 100])),
-      ).to.be.true;
+      ).toBe(true);
     });
 
     it('findNearest ignores mismatching dimensions', async () => {
@@ -2354,11 +2311,13 @@ describe.skipEnterprise('Query class - Standard DB', () => {
         });
 
       const res = await vectorQuery.get();
-      expect(res.size).to.equal(2);
-      expect(res.docs[0].get('embedding').isEqual(FieldValue.vector([9, 9]))).to
-        .be.true;
-      expect(res.docs[1].get('embedding').isEqual(FieldValue.vector([50, 50])))
-        .to.be.true;
+      expect(res.size).toBe(2);
+      expect(
+        res.docs[0].get('embedding').isEqual(FieldValue.vector([9, 9])),
+      ).toBe(true);
+      expect(
+        res.docs[1].get('embedding').isEqual(FieldValue.vector([50, 50])),
+      ).toBe(true);
     });
 
     it('supports findNearest on non-existent field', async () => {
@@ -2383,7 +2342,7 @@ describe.skipEnterprise('Query class - Standard DB', () => {
 
       const res = await vectorQuery.get();
 
-      expect(res.size).to.equal(0);
+      expect(res.size).toBe(0);
     });
 
     it('supports findNearest on vector nested in a map', async () => {
@@ -2408,18 +2367,18 @@ describe.skipEnterprise('Query class - Standard DB', () => {
         });
 
       const res = await vectorQuery.get();
-      expect(res.size).to.equal(3);
+      expect(res.size).toBe(3);
       expect(
         res.docs[0]
           .get('nested.embedding')
           .isEqual(FieldValue.vector([10, 10])),
-      ).to.be.true;
+      ).toBe(true);
       expect(
         res.docs[1].get('nested.embedding').isEqual(FieldValue.vector([10, 0])),
-      ).to.be.true;
+      ).toBe(true);
       expect(
         res.docs[2].get('nested.embedding').isEqual(FieldValue.vector([1, 1])),
-      ).to.be.true;
+      ).toBe(true);
     });
 
     it('supports findNearest with select to exclude vector data in response', async () => {
@@ -2446,14 +2405,14 @@ describe.skipEnterprise('Query class - Standard DB', () => {
         });
 
       const res = await vectorQuery.get();
-      expect(res.size).to.equal(5);
-      expect(res.docs[0].get('foo')).to.equal(2);
-      expect(res.docs[1].get('foo')).to.equal(4);
-      expect(res.docs[2].get('foo')).to.equal(3);
-      expect(res.docs[3].get('foo')).to.equal(5);
-      expect(res.docs[4].get('foo')).to.equal(6);
+      expect(res.size).toBe(5);
+      expect(res.docs[0].get('foo')).toBe(2);
+      expect(res.docs[1].get('foo')).toBe(4);
+      expect(res.docs[2].get('foo')).toBe(3);
+      expect(res.docs[3].get('foo')).toBe(5);
+      expect(res.docs[4].get('foo')).toBe(6);
 
-      res.docs.forEach(ds => expect(ds.get('embedding')).to.be.undefined);
+      res.docs.forEach(ds => expect(ds.get('embedding')).toBeUndefined());
     });
 
     it('supports findNearest limits', async () => {
@@ -2480,10 +2439,10 @@ describe.skipEnterprise('Query class - Standard DB', () => {
         });
 
       const res = await vectorQuery.get();
-      expect(res.size).to.equal(1);
-      expect(
-        (res.docs[0].get('embedding') as VectorValue).toArray(),
-      ).to.deep.equal(embeddingVector);
+      expect(res.size).toBe(1);
+      expect((res.docs[0].get('embedding') as VectorValue).toArray()).toEqual(
+        embeddingVector,
+      );
     });
 
     describe('preview API (deprecated)', () => {
@@ -2508,15 +2467,16 @@ describe.skipEnterprise('Query class - Standard DB', () => {
           });
 
         const res = await vectorQuery.get();
-        expect(res.size).to.equal(3);
+        expect(res.size).toBe(3);
         expect(
           res.docs[0].get('embedding').isEqual(FieldValue.vector([1, 1.1])),
-        ).to.be.true;
-        expect(res.docs[1].get('embedding').isEqual(FieldValue.vector([10, 0])))
-          .to.be.true;
+        ).toBe(true);
+        expect(
+          res.docs[1].get('embedding').isEqual(FieldValue.vector([10, 0])),
+        ).toBe(true);
         expect(
           res.docs[2].get('embedding').isEqual(FieldValue.vector([10, 10])),
-        ).to.be.true;
+        ).toBe(true);
       });
 
       it('supports findNearest with COSINE', async () => {
@@ -2540,15 +2500,16 @@ describe.skipEnterprise('Query class - Standard DB', () => {
           });
 
         const res = await vectorQuery.get();
-        expect(res.size).to.equal(3);
+        expect(res.size).toBe(3);
         expect(
           res.docs[0].get('embedding').isEqual(FieldValue.vector([10, 10])),
-        ).to.be.true;
+        ).toBe(true);
         expect(
           res.docs[1].get('embedding').isEqual(FieldValue.vector([1, 1.1])),
-        ).to.be.true;
-        expect(res.docs[2].get('embedding').isEqual(FieldValue.vector([10, 0])))
-          .to.be.true;
+        ).toBe(true);
+        expect(
+          res.docs[2].get('embedding').isEqual(FieldValue.vector([10, 0])),
+        ).toBe(true);
       });
     });
 
@@ -2576,18 +2537,20 @@ describe.skipEnterprise('Query class - Standard DB', () => {
 
         const res = await vectorQuery.get();
 
-        expect(res.size).to.equal(4);
+        expect(res.size).toBe(4);
 
-        expect(res.docs[0].get('embedding').isEqual(FieldValue.vector([1, 0])))
-          .to.be.true;
-        expect(res.docs[0].get('distance')).to.equal(0);
+        expect(
+          res.docs[0].get('embedding').isEqual(FieldValue.vector([1, 0])),
+        ).toBe(true);
+        expect(res.docs[0].get('distance')).toBe(0);
 
-        expect(res.docs[1].get('distance')).to.equal(1);
-        expect(res.docs[2].get('distance')).to.equal(1);
+        expect(res.docs[1].get('distance')).toBe(1);
+        expect(res.docs[2].get('distance')).toBe(1);
 
-        expect(res.docs[3].get('embedding').isEqual(FieldValue.vector([-1, 0])))
-          .to.be.true;
-        expect(res.docs[3].get('distance')).to.equal(2);
+        expect(
+          res.docs[3].get('embedding').isEqual(FieldValue.vector([-1, 0])),
+        ).toBe(true);
+        expect(res.docs[3].get('distance')).toBe(2);
       });
 
       it('supports requesting computed EUCLIDEAN distance', async () => {
@@ -2613,25 +2576,27 @@ describe.skipEnterprise('Query class - Standard DB', () => {
 
         const res = await vectorQuery.get();
 
-        expect(res.size).to.equal(4);
+        expect(res.size).toBe(4);
 
         expect(
           res.docs[0].get('embedding').isEqual(FieldValue.vector([1, -0.1])),
-        ).to.be.true;
-        expect(res.docs[0].get('distance')).to.equal(0.1);
+        ).toBe(true);
+        expect(res.docs[0].get('distance')).toBe(0.1);
 
-        expect(res.docs[1].get('embedding').isEqual(FieldValue.vector([2, 0])))
-          .to.be.true;
-        expect(res.docs[1].get('distance')).to.equal(1);
+        expect(
+          res.docs[1].get('embedding').isEqual(FieldValue.vector([2, 0])),
+        ).toBe(true);
+        expect(res.docs[1].get('distance')).toBe(1);
 
-        expect(res.docs[2].get('embedding').isEqual(FieldValue.vector([4, 4])))
-          .to.be.true;
-        expect(res.docs[2].get('distance')).to.equal(5);
+        expect(
+          res.docs[2].get('embedding').isEqual(FieldValue.vector([4, 4])),
+        ).toBe(true);
+        expect(res.docs[2].get('distance')).toBe(5);
 
         expect(
           res.docs[3].get('embedding').isEqual(FieldValue.vector([1, 100])),
-        ).to.be.true;
-        expect(res.docs[3].get('distance')).to.equal(100);
+        ).toBe(true);
+        expect(res.docs[3].get('distance')).toBe(100);
       });
 
       it('supports requesting computed DOT_PRODUCT distance', async () => {
@@ -2657,26 +2622,27 @@ describe.skipEnterprise('Query class - Standard DB', () => {
 
         const res = await vectorQuery.get();
 
-        expect(res.size).to.equal(4);
+        expect(res.size).toBe(4);
 
-        expect(res.docs[0].get('distance')).to.equal(2);
-        expect(res.docs[0].get('embedding').isEqual(FieldValue.vector([2, 0])))
-          .to.be.true;
+        expect(res.docs[0].get('distance')).toBe(2);
+        expect(
+          res.docs[0].get('embedding').isEqual(FieldValue.vector([2, 0])),
+        ).toBe(true);
 
-        expect(res.docs[1].get('distance')).to.equal(1);
+        expect(res.docs[1].get('distance')).toBe(1);
         expect(
           res.docs[1].get('embedding').isEqual(FieldValue.vector([1, 100])),
-        ).to.be.true;
+        ).toBe(true);
 
-        expect(res.docs[2].get('distance')).to.equal(0.1);
+        expect(res.docs[2].get('distance')).toBe(0.1);
         expect(
           res.docs[2].get('embedding').isEqual(FieldValue.vector([0.1, 4])),
-        ).to.be.true;
+        ).toBe(true);
 
-        expect(res.docs[3].get('distance')).to.equal(-20);
+        expect(res.docs[3].get('distance')).toBe(-20);
         expect(
           res.docs[3].get('embedding').isEqual(FieldValue.vector([-20, 0])),
-        ).to.be.true;
+        ).toBe(true);
       });
 
       it('overwrites distance result field on conflict', async () => {
@@ -2702,11 +2668,12 @@ describe.skipEnterprise('Query class - Standard DB', () => {
 
         const res = await vectorQuery.get();
 
-        expect(res.size).to.equal(1);
+        expect(res.size).toBe(1);
 
-        expect(res.docs[0].get('embedding').isEqual(FieldValue.vector([0, 1])))
-          .to.be.true;
-        expect(res.docs[0].get('distance')).to.equal(1);
+        expect(
+          res.docs[0].get('embedding').isEqual(FieldValue.vector([0, 1])),
+        ).toBe(true);
+        expect(res.docs[0].get('distance')).toBe(1);
       });
 
       it('supports requesting computed distance in select queries', async () => {
@@ -2734,18 +2701,20 @@ describe.skipEnterprise('Query class - Standard DB', () => {
 
         const res = await vectorQuery.get();
 
-        expect(res.size).to.equal(4);
+        expect(res.size).toBe(4);
 
-        expect(res.docs[0].get('embedding').isEqual(FieldValue.vector([1, 0])))
-          .to.be.true;
-        expect(res.docs[0].get('distance')).to.equal(0);
+        expect(
+          res.docs[0].get('embedding').isEqual(FieldValue.vector([1, 0])),
+        ).toBe(true);
+        expect(res.docs[0].get('distance')).toBe(0);
 
-        expect(res.docs[1].get('distance')).to.equal(1);
-        expect(res.docs[2].get('distance')).to.equal(1);
+        expect(res.docs[1].get('distance')).toBe(1);
+        expect(res.docs[2].get('distance')).toBe(1);
 
-        expect(res.docs[3].get('embedding').isEqual(FieldValue.vector([-1, 0])))
-          .to.be.true;
-        expect(res.docs[3].get('distance')).to.equal(2);
+        expect(
+          res.docs[3].get('embedding').isEqual(FieldValue.vector([-1, 0])),
+        ).toBe(true);
+        expect(res.docs[3].get('distance')).toBe(2);
       });
     });
 
@@ -2773,15 +2742,17 @@ describe.skipEnterprise('Query class - Standard DB', () => {
 
         const res = await vectorQuery.get();
 
-        expect(res.size).to.equal(3);
+        expect(res.size).toBe(3);
 
-        expect(res.docs[0].get('embedding').isEqual(FieldValue.vector([1, 0])))
-          .to.be.true;
-        expect(res.docs[1].get('embedding').isEqual(FieldValue.vector([1, 1])))
-          .to.be.true;
+        expect(
+          res.docs[0].get('embedding').isEqual(FieldValue.vector([1, 0])),
+        ).toBe(true);
+        expect(
+          res.docs[1].get('embedding').isEqual(FieldValue.vector([1, 1])),
+        ).toBe(true);
         expect(
           res.docs[2].get('embedding').isEqual(FieldValue.vector([0, -0.1])),
-        ).to.be.true;
+        ).toBe(true);
       });
 
       it('supports querying with distance threshold using EUCLIDEAN distance', async () => {
@@ -2807,15 +2778,17 @@ describe.skipEnterprise('Query class - Standard DB', () => {
 
         const res = await vectorQuery.get();
 
-        expect(res.size).to.equal(3);
+        expect(res.size).toBe(3);
 
         expect(
           res.docs[0].get('embedding').isEqual(FieldValue.vector([1, -0.1])),
-        ).to.be.true;
-        expect(res.docs[1].get('embedding').isEqual(FieldValue.vector([2, 0])))
-          .to.be.true;
-        expect(res.docs[2].get('embedding').isEqual(FieldValue.vector([4, 4])))
-          .to.be.true;
+        ).toBe(true);
+        expect(
+          res.docs[1].get('embedding').isEqual(FieldValue.vector([2, 0])),
+        ).toBe(true);
+        expect(
+          res.docs[2].get('embedding').isEqual(FieldValue.vector([4, 4])),
+        ).toBe(true);
       });
 
       it('supports querying with distance threshold using DOT_PRODUCT distance', async () => {
@@ -2841,14 +2814,15 @@ describe.skipEnterprise('Query class - Standard DB', () => {
 
         const res = await vectorQuery.get();
 
-        expect(res.size).to.equal(2);
+        expect(res.size).toBe(2);
 
-        expect(res.docs[0].get('embedding').isEqual(FieldValue.vector([2, 0])))
-          .to.be.true;
+        expect(
+          res.docs[0].get('embedding').isEqual(FieldValue.vector([2, 0])),
+        ).toBe(true);
 
         expect(
           res.docs[1].get('embedding').isEqual(FieldValue.vector([1, 100])),
-        ).to.be.true;
+        ).toBe(true);
       });
 
       it('works with distance result field', async () => {
@@ -2875,16 +2849,17 @@ describe.skipEnterprise('Query class - Standard DB', () => {
 
         const res = await vectorQuery.get();
 
-        expect(res.size).to.equal(2);
+        expect(res.size).toBe(2);
 
-        expect(res.docs[0].get('foo')).to.equal(2);
-        expect(res.docs[0].get('embedding').isEqual(FieldValue.vector([2, 0])))
-          .to.be.true;
+        expect(res.docs[0].get('foo')).toBe(2);
+        expect(
+          res.docs[0].get('embedding').isEqual(FieldValue.vector([2, 0])),
+        ).toBe(true);
 
-        expect(res.docs[1].get('foo')).to.equal(1);
+        expect(res.docs[1].get('foo')).toBe(1);
         expect(
           res.docs[1].get('embedding').isEqual(FieldValue.vector([1, 100])),
-        ).to.be.true;
+        ).toBe(true);
       });
 
       it('will not exceed limit even if there are more results more similar than distanceThreshold', async () => {
@@ -2910,14 +2885,15 @@ describe.skipEnterprise('Query class - Standard DB', () => {
 
         const res = await vectorQuery.get();
 
-        expect(res.size).to.equal(2);
+        expect(res.size).toBe(2);
 
-        expect(res.docs[0].get('embedding').isEqual(FieldValue.vector([2, 0])))
-          .to.be.true;
+        expect(
+          res.docs[0].get('embedding').isEqual(FieldValue.vector([2, 0])),
+        ).toBe(true);
 
         expect(
           res.docs[1].get('embedding').isEqual(FieldValue.vector([1, 100])),
-        ).to.be.true;
+        ).toBe(true);
       });
     });
   });
@@ -3014,7 +2990,7 @@ describe.skipEnterprise('Query class - Standard DB', () => {
 
     res = await randomCol.where('zip', 'not-in', [null]).get();
 
-    expect(res.size).to.equal(0);
+    expect(res.size).toBe(0);
   });
 
   it('supports not-in with document ID array', async () => {
@@ -3085,7 +3061,7 @@ describe.skipEnterprise('Query class - Standard DB', () => {
         return randomCol.where(FieldPath.documentId(), '>=', 'bar').get();
       })
       .then(res => {
-        expect(res.docs.length).to.equal(1);
+        expect(res.docs.length).toBe(1);
       });
   });
 
@@ -3108,14 +3084,14 @@ describe.skipEnterprise('Query class - Standard DB', () => {
         return randomCol.orderBy(FieldPath.documentId()).get();
       })
       .then(res => {
-        expect(res.docs[0].data()).to.deep.equal({foo: 'a'});
-        expect(res.docs[1].data()).to.deep.equal({foo: 'b'});
+        expect(res.docs[0].data()).toEqual({foo: 'a'});
+        expect(res.docs[1].data()).toEqual({foo: 'b'});
       });
   });
 
   it('can run get() on empty collection', async () => {
     return randomCol.get().then(res => {
-      return expect(res.empty);
+      expect(res.empty).toBe(true);
     });
   });
 
@@ -3124,11 +3100,11 @@ describe.skipEnterprise('Query class - Standard DB', () => {
     const stream = randomCol.stream();
 
     for await (const doc of stream) {
-      expect(doc).to.be.an.instanceOf(QueryDocumentSnapshot);
+      expect(doc).toBeInstanceOf(QueryDocumentSnapshot);
       ++received;
     }
 
-    expect(received).to.equal(0);
+    expect(received).toBe(0);
   });
 
   it('has limit() method on get()', async () => {
@@ -3143,11 +3119,11 @@ describe.skipEnterprise('Query class - Standard DB', () => {
 
     const stream = randomCol.orderBy('foo').limit(1).stream();
     for await (const doc of stream) {
-      expect(doc).to.be.an.instanceOf(QueryDocumentSnapshot);
+      expect(doc).toBeInstanceOf(QueryDocumentSnapshot);
       ++received;
     }
 
-    expect(received).to.equal(1);
+    expect(received).toBe(1);
   });
 
   it('can run limit(num), where num is larger than the collection size on get()', async () => {
@@ -3162,11 +3138,11 @@ describe.skipEnterprise('Query class - Standard DB', () => {
 
     const stream = randomCol.orderBy('foo').limit(3).stream();
     for await (const doc of stream) {
-      expect(doc).to.be.an.instanceOf(QueryDocumentSnapshot);
+      expect(doc).toBeInstanceOf(QueryDocumentSnapshot);
       ++received;
     }
 
-    expect(received).to.equal(2);
+    expect(received).toBe(2);
   });
 
   it('has limitToLast() method', async () => {
@@ -3198,17 +3174,17 @@ describe.skipEnterprise('Query class - Standard DB', () => {
 
     const stream = randomCol.orderBy('foo').offset(1).stream();
     for await (const doc of stream) {
-      expect(doc).to.be.an.instanceOf(QueryDocumentSnapshot);
+      expect(doc).toBeInstanceOf(QueryDocumentSnapshot);
       ++received;
     }
 
-    expect(received).to.equal(1);
+    expect(received).toBe(1);
   });
 
   it('can run offset(num), where num is larger than the collection size on get()', async () => {
     await addDocs({foo: 'a'}, {foo: 'b'});
     const res = await randomCol.orderBy('foo').offset(3).get();
-    expect(res.empty);
+    expect(res.empty).toBe(true);
   });
 
   it('can run offset(num), where num is larger than the collection size on stream()', async () => {
@@ -3216,17 +3192,17 @@ describe.skipEnterprise('Query class - Standard DB', () => {
     await addDocs({foo: 'a'}, {foo: 'b'});
     const stream = randomCol.orderBy('foo').offset(3).stream();
     for await (const doc of stream) {
-      expect(doc).to.be.an.instanceOf(QueryDocumentSnapshot);
+      expect(doc).toBeInstanceOf(QueryDocumentSnapshot);
       ++received;
     }
-    expect(received).to.equal(0);
+    expect(received).toBe(0);
   });
 
   it('supports Unicode in document names', async () => {
     const collRef = randomCol.doc('доброеутро').collection('coll');
     await collRef.add({});
     const snapshot = await collRef.get();
-    expect(snapshot.size).to.equal(1);
+    expect(snapshot.size).toBe(1);
   });
 
   it('supports pagination', () => {
@@ -3242,8 +3218,8 @@ describe.skipEnterprise('Query class - Standard DB', () => {
       .commit()
       .then(() => paginateResults(query))
       .then(results => {
-        expect(results.pages).to.equal(4);
-        expect(results.docs).to.have.length(10);
+        expect(results.pages).toBe(4);
+        expect(results.docs).toHaveLength(10);
       });
   });
 
@@ -3260,8 +3236,8 @@ describe.skipEnterprise('Query class - Standard DB', () => {
       .commit()
       .then(() => paginateResults(query))
       .then(results => {
-        expect(results.pages).to.equal(3);
-        expect(results.docs).to.have.length(9);
+        expect(results.pages).toBe(3);
+        expect(results.docs).toHaveLength(9);
       });
   });
 
@@ -3278,8 +3254,8 @@ describe.skipEnterprise('Query class - Standard DB', () => {
       .commit()
       .then(() => paginateResults(query))
       .then(results => {
-        expect(results.pages).to.equal(4);
-        expect(results.docs).to.have.length(10);
+        expect(results.pages).toBe(4);
+        expect(results.docs).toHaveLength(10);
       });
   });
 
@@ -3314,21 +3290,31 @@ describe.skipEnterprise('Query class - Standard DB', () => {
     expectDocs(res, {foo: 'a'});
   });
 
-  it('has stream() method', done => {
+  it('has stream() method', async () => {
     let received = 0;
     const ref1 = randomCol.doc('doc1');
     const ref2 = randomCol.doc('doc2');
 
-    void Promise.all([ref1.set({foo: 'a'}), ref2.set({foo: 'b'})]).then(() => {
-      return randomCol
+    await Promise.all([ref1.set({foo: 'a'}), ref2.set({foo: 'b'})]);
+    await new Promise<void>((resolve, reject) => {
+      randomCol
         .stream()
         .on('data', d => {
-          expect(d).to.be.an.instanceOf(DocumentSnapshot);
-          ++received;
+          try {
+            expect(d).toBeInstanceOf(DocumentSnapshot);
+            ++received;
+          } catch (e) {
+            reject(e);
+          }
         })
+        .on('error', reject)
         .on('end', () => {
-          expect(received).to.equal(2);
-          done();
+          try {
+            expect(received).toBe(2);
+            resolve();
+          } catch (e) {
+            reject(e);
+          }
         });
     });
   });
@@ -3340,11 +3326,11 @@ describe.skipEnterprise('Query class - Standard DB', () => {
 
     const stream = randomCol.stream();
     for await (const doc of stream) {
-      expect(doc).to.be.an.instanceOf(QueryDocumentSnapshot);
+      expect(doc).toBeInstanceOf(QueryDocumentSnapshot);
       ++received;
     }
 
-    expect(received).to.equal(2);
+    expect(received).toBe(2);
   });
 
   it('can query collection groups', async () => {
@@ -3375,7 +3361,7 @@ describe.skipEnterprise('Query class - Standard DB', () => {
       .collectionGroup(collectionGroup)
       .orderBy(FieldPath.documentId())
       .get();
-    expect(querySnapshot.docs.map(d => d.id)).to.deep.equal([
+    expect(querySnapshot.docs.map(d => d.id)).toEqual([
       'cg-doc1',
       'cg-doc2',
       'cg-doc3',
@@ -3410,7 +3396,7 @@ describe.skipEnterprise('Query class - Standard DB', () => {
       .startAt('a/b')
       .endAt('a/b0')
       .get();
-    expect(querySnapshot.docs.map(d => d.id)).to.deep.equal([
+    expect(querySnapshot.docs.map(d => d.id)).toEqual([
       'cg-doc2',
       'cg-doc3',
       'cg-doc4',
@@ -3422,7 +3408,7 @@ describe.skipEnterprise('Query class - Standard DB', () => {
       .startAfter('a/b')
       .endBefore(`a/b/${collectionGroup}/cg-doc3`)
       .get();
-    expect(querySnapshot.docs.map(d => d.id)).to.deep.equal(['cg-doc2']);
+    expect(querySnapshot.docs.map(d => d.id)).toEqual(['cg-doc2']);
   });
 
   it('can query collection groups with where filters on arbitrary documentId', async () => {
@@ -3451,7 +3437,7 @@ describe.skipEnterprise('Query class - Standard DB', () => {
       .where(FieldPath.documentId(), '<=', 'a/b0')
       .orderBy(FieldPath.documentId())
       .get();
-    expect(querySnapshot.docs.map(d => d.id)).to.deep.equal([
+    expect(querySnapshot.docs.map(d => d.id)).toEqual([
       'cg-doc2',
       'cg-doc3',
       'cg-doc4',
@@ -3462,7 +3448,7 @@ describe.skipEnterprise('Query class - Standard DB', () => {
       .where(FieldPath.documentId(), '>', 'a/b')
       .where(FieldPath.documentId(), '<', `a/b/${collectionGroup}/cg-doc3`)
       .get();
-    expect(querySnapshot.docs.map(d => d.id)).to.deep.equal(['cg-doc2']);
+    expect(querySnapshot.docs.map(d => d.id)).toEqual(['cg-doc2']);
   });
 
   it('can query large collections', async () => {
@@ -3475,7 +3461,7 @@ describe.skipEnterprise('Query class - Standard DB', () => {
     await batch.commit();
 
     const snapshot = await randomCol.get();
-    expect(snapshot.size).to.equal(100);
+    expect(snapshot.size).toBe(100);
   });
 
   it('supports OR queries', async () => {
@@ -3888,26 +3874,26 @@ describe.skipEnterprise('Query class - Standard DB', () => {
       expected: {docs: DocumentSnapshot[]; docChanges: ExpectedChange[]},
     ) {
       let i;
-      expect(actual.size).to.equal(expected.docs.length);
+      expect(actual.size).toBe(expected.docs.length);
       for (i = 0; i < expected.docs.length && i < actual.size; i++) {
-        expect(actual.docs[i].ref.id).to.equal(expected.docs[i].ref.id);
-        expect(actual.docs[i].data()).to.deep.equal(expected.docs[i].data());
+        expect(actual.docs[i].ref.id).toBe(expected.docs[i].ref.id);
+        expect(actual.docs[i].data()).toEqual(expected.docs[i].data());
       }
       const actualDocChanges = actual.docChanges();
-      expect(actualDocChanges.length).to.equal(expected.docChanges.length);
+      expect(actualDocChanges.length).toBe(expected.docChanges.length);
       for (i = 0; i < expected.docChanges.length; i++) {
-        expect(actualDocChanges[i].type).to.equal(expected.docChanges[i].type);
-        expect(actualDocChanges[i].doc.ref.id).to.equal(
+        expect(actualDocChanges[i].type).toBe(expected.docChanges[i].type);
+        expect(actualDocChanges[i].doc.ref.id).toBe(
           expected.docChanges[i].doc.ref.id,
         );
-        expect(actualDocChanges[i].doc.data()).to.deep.equal(
+        expect(actualDocChanges[i].doc.data()).toEqual(
           expected.docChanges[i].doc.data(),
         );
-        expect(actualDocChanges[i].doc.readTime).to.exist;
-        expect(actualDocChanges[i].doc.createTime).to.exist;
-        expect(actualDocChanges[i].doc.updateTime).to.exist;
+        expect(actualDocChanges[i].doc.readTime).toBeDefined();
+        expect(actualDocChanges[i].doc.createTime).toBeDefined();
+        expect(actualDocChanges[i].doc.updateTime).toBeDefined();
       }
-      expect(actual.readTime).to.exist;
+      expect(actual.readTime).toBeDefined();
     }
 
     beforeEach(() => resetPromise());
@@ -4162,7 +4148,7 @@ describe.skipEnterprise('Query class - Standard DB', () => {
             ];
 
         const getSnapshot = await query.get();
-        expect(getSnapshot.docs.map(d => d.id)).to.deep.equal(expectedDocs);
+        expect(getSnapshot.docs.map(d => d.id)).toEqual(expectedDocs);
 
         const unsubscribe = query.onSnapshot(snapshot =>
           currentDeferred.resolve(snapshot),
@@ -4215,7 +4201,7 @@ describe.skipEnterprise('Query class - Standard DB', () => {
         ];
 
         const getSnapshot = await query.get();
-        expect(getSnapshot.docs.map(d => d.id)).to.deep.equal(expectedDocs);
+        expect(getSnapshot.docs.map(d => d.id)).toEqual(expectedDocs);
 
         const unsubscribe = query.onSnapshot(snapshot =>
           currentDeferred.resolve(snapshot),
@@ -4330,7 +4316,7 @@ describe.skipEnterprise('Query class - Standard DB', () => {
         const query = collection.orderBy('value');
 
         const getSnapshot = await query.get();
-        expect(getSnapshot.docs.map(d => d.id)).to.deep.equal(expectedDocs);
+        expect(getSnapshot.docs.map(d => d.id)).toEqual(expectedDocs);
 
         const unsubscribe = query.onSnapshot(snapshot =>
           currentDeferred.resolve(snapshot),
@@ -4361,7 +4347,7 @@ describe.skipEnterprise('Query class - Standard DB', () => {
         const query = collection.orderBy('value');
 
         const getSnapshot = await query.get();
-        expect(getSnapshot.docs.map(d => d.id)).to.deep.equal(expectedDocs);
+        expect(getSnapshot.docs.map(d => d.id)).toEqual(expectedDocs);
 
         const unsubscribe = query.onSnapshot(snapshot =>
           currentDeferred.resolve(snapshot),
@@ -4392,7 +4378,7 @@ describe.skipEnterprise('Query class - Standard DB', () => {
         const query = collection.orderBy('value');
 
         const getSnapshot = await query.get();
-        expect(getSnapshot.docs.map(d => d.id)).to.deep.equal(expectedDocs);
+        expect(getSnapshot.docs.map(d => d.id)).toEqual(expectedDocs);
 
         const unsubscribe = query.onSnapshot(snapshot =>
           currentDeferred.resolve(snapshot),
@@ -4423,7 +4409,7 @@ describe.skipEnterprise('Query class - Standard DB', () => {
         const query = collection.orderBy('value');
 
         const getSnapshot = await query.get();
-        expect(getSnapshot.docs.map(d => d.id)).to.deep.equal(expectedDocs);
+        expect(getSnapshot.docs.map(d => d.id)).toEqual(expectedDocs);
 
         const unsubscribe = query.onSnapshot(snapshot =>
           currentDeferred.resolve(snapshot),
@@ -4467,7 +4453,7 @@ describe.skipEnterprise('Query class - Standard DB', () => {
         ];
 
         const getSnapshot = await query.get();
-        expect(getSnapshot.docs.map(d => d.id)).to.deep.equal(expectedDocs);
+        expect(getSnapshot.docs.map(d => d.id)).toEqual(expectedDocs);
 
         const unsubscribe = query.onSnapshot(snapshot =>
           currentDeferred.resolve(snapshot),
@@ -4828,7 +4814,7 @@ describe.skipEnterprise('Query class - Standard DB', () => {
         .orderBy('v')
         .count()
         .get();
-      expect(results.data().count).to.be.equal(4);
+      expect(results.data().count).toBe(4);
       //TODO(MIEQ): Add sum and average when they are public.
     });
 
@@ -4890,14 +4876,14 @@ describe('count queries', () => {
   describe('Run outside Transaction', () => {
     countTests(async (q, n) => {
       const res = await q.get();
-      expect(res.data().count).to.equal(n);
+      expect(res.data().count).toBe(n);
     });
   });
 
   describe('Run within Transaction', () => {
     countTests(async (q, n) => {
       const res = await firestore.runTransaction(f => f.get(q));
-      expect(res.data().count).to.equal(n);
+      expect(res.data().count).toBe(n);
     });
   });
 
@@ -5019,11 +5005,11 @@ describe('count queries', () => {
       // TODO(b/316359394) Remove this check for the default databases once
       //  cl/582465034 is rolled out to production.
       if (databaseId === '(default)') {
-        return expect(countQuery.get()).to.be.eventually.rejectedWith(
+        return expect(countQuery.get()).rejects.toThrow(
           /index.*https:\/\/console\.firebase\.google\.com/,
         );
       } else {
-        return expect(countQuery.get()).to.be.eventually.rejectedWith(/index/);
+        return expect(countQuery.get()).rejects.toThrow(/index/);
       }
     },
   );
@@ -5043,14 +5029,14 @@ describe('count queries using aggregate api', () => {
   describe('Run outside Transaction', () => {
     countTests(async (q, n) => {
       const res = await q.get();
-      expect(res.data().count).to.equal(n);
+      expect(res.data().count).toBe(n);
     });
   });
 
   describe('Run within Transaction', () => {
     countTests(async (q, n) => {
       const res = await firestore.runTransaction(f => f.get(q));
-      expect(res.data().count).to.equal(n);
+      expect(res.data().count).toBe(n);
     });
   });
 
@@ -5234,7 +5220,7 @@ describe('Aggregation queries', () => {
       readOnly: true,
       readTime: writeResult.writeTime,
     });
-    expect(count.data().count).to.equal(1);
+    expect(count.data().count).toBe(1);
 
     const countBefore = await firestore.runTransaction(
       t => t.get(col.count()),
@@ -5243,7 +5229,7 @@ describe('Aggregation queries', () => {
         readTime: Timestamp.fromMillis(writeResult.writeTime.toMillis() - 1),
       },
     );
-    expect(countBefore.data().count).to.equal(0);
+    expect(countBefore.data().count).toBe(0);
   });
 
   it('can run count query using aggregate api', async () => {
@@ -5257,7 +5243,7 @@ describe('Aggregation queries', () => {
         count: AggregateField.count(),
       })
       .get();
-    expect(snapshot.data().count).to.equal(2);
+    expect(snapshot.data().count).toBe(2);
   });
 
   it('can alias aggregations using aggregate api', async () => {
@@ -5272,8 +5258,8 @@ describe('Aggregation queries', () => {
         'with.dots': AggregateField.count(),
       })
       .get();
-    expect(snapshot.data().foo).to.equal(2);
-    expect(snapshot.data()['with.dots']).to.equal(2);
+    expect(snapshot.data().foo).toBe(2);
+    expect(snapshot.data()['with.dots']).toBe(2);
   });
 
   it('allows special chars in aliases when using aggregate api', async () => {
@@ -5288,7 +5274,7 @@ describe('Aggregation queries', () => {
       })
       .get();
 
-    expect(snapshot.data()['with-un/su+pp[or]ted']).to.equal(2);
+    expect(snapshot.data()['with-un/su+pp[or]ted']).toBe(2);
   });
 
   it('allows backticks in aliases when using aggregate api', async () => {
@@ -5303,7 +5289,7 @@ describe('Aggregation queries', () => {
       })
       .get();
 
-    expect(snapshot.data()['`with-un/su+pp[or]ted`']).to.equal(2);
+    expect(snapshot.data()['`with-un/su+pp[or]ted`']).toBe(2);
   });
 
   it('allows backslash in aliases when using aggregate api', async () => {
@@ -5318,7 +5304,7 @@ describe('Aggregation queries', () => {
       })
       .get();
 
-    expect(snapshot.data()['with\\backshash\\es']).to.equal(2);
+    expect(snapshot.data()['with\\backshash\\es']).toBe(2);
   });
 
   it('can get duplicate aggregations using aggregate api', async () => {
@@ -5333,8 +5319,8 @@ describe('Aggregation queries', () => {
         foo: AggregateField.count(),
       })
       .get();
-    expect(snapshot.data().foo).to.equal(2);
-    expect(snapshot.data().count).to.equal(2);
+    expect(snapshot.data().foo).toBe(2);
+    expect(snapshot.data().count).toBe(2);
   });
 
   it("aggregate() doesn't use converter", async () => {
@@ -5361,7 +5347,7 @@ describe('Aggregation queries', () => {
         count: AggregateField.count(),
       })
       .get();
-    expect(snapshot.data().count).to.equal(1);
+    expect(snapshot.data().count).toBe(1);
   });
 
   it('aggregate query supports collection groups', async () => {
@@ -5384,14 +5370,14 @@ describe('Aggregation queries', () => {
         count: AggregateField.count(),
       })
       .get();
-    expect(snapshot.data().count).to.equal(2);
+    expect(snapshot.data().count).toBe(2);
   });
 
   it('aggregate() fails if firestore is terminated', async () => {
     await firestore.terminate();
     await expect(
       col.aggregate({count: AggregateField.count()}).get(),
-    ).to.eventually.be.rejectedWith('The client has already been terminated');
+    ).rejects.toThrow('The client has already been terminated');
   });
 
   it("terminate doesn't crash when there is aggregate query in flight", async () => {
@@ -5417,13 +5403,11 @@ describe('Aggregation queries', () => {
       // TODO(b/316359394) Remove this check for the default databases once
       //  cl/582465034 is rolled out to production.
       if (databaseId === '(default)') {
-        return expect(aggregateQuery.get()).to.be.eventually.rejectedWith(
+        return expect(aggregateQuery.get()).rejects.toThrow(
           /index.*https:\/\/console\.firebase\.google\.com/,
         );
       } else {
-        return expect(aggregateQuery.get()).to.be.eventually.rejectedWith(
-          /index/,
-        );
+        return expect(aggregateQuery.get()).rejects.toThrow(/index/);
       }
     },
   );
@@ -5438,7 +5422,7 @@ describe('Aggregation queries', () => {
       const snapshot = await col
         .aggregate({totalPages: AggregateField.sum('pages')})
         .get();
-      expect(snapshot.data().totalPages).to.equal(150);
+      expect(snapshot.data().totalPages).toBe(150);
     });
 
     it('can run average query', async () => {
@@ -5450,7 +5434,7 @@ describe('Aggregation queries', () => {
       const snapshot = await col
         .aggregate({averagePages: AggregateField.average('pages')})
         .get();
-      expect(snapshot.data().averagePages).to.equal(75);
+      expect(snapshot.data().averagePages).toBe(75);
     });
 
     it('can get multiple aggregations', async () => {
@@ -5466,9 +5450,9 @@ describe('Aggregation queries', () => {
           count: AggregateField.count(),
         })
         .get();
-      expect(snapshot.data().totalPages).to.equal(150);
-      expect(snapshot.data().averagePages).to.equal(75);
-      expect(snapshot.data().count).to.equal(2);
+      expect(snapshot.data().totalPages).toBe(150);
+      expect(snapshot.data().averagePages).toBe(75);
+      expect(snapshot.data().count).toBe(2);
     });
 
     it('can get duplicate aggregations', async () => {
@@ -5485,10 +5469,10 @@ describe('Aggregation queries', () => {
           averagePagesY: AggregateField.average('pages'),
         })
         .get();
-      expect(snapshot.data().totalPages).to.equal(150);
-      expect(snapshot.data().averagePages).to.equal(75);
-      expect(snapshot.data().totalPagesX).to.equal(150);
-      expect(snapshot.data().averagePagesY).to.equal(75);
+      expect(snapshot.data().totalPages).toBe(150);
+      expect(snapshot.data().averagePages).toBe(75);
+      expect(snapshot.data().totalPagesX).toBe(150);
+      expect(snapshot.data().averagePagesY).toBe(75);
     });
 
     it('can perform max (5) aggregations', async () => {
@@ -5506,11 +5490,11 @@ describe('Aggregation queries', () => {
           averagePagesY: AggregateField.average('pages'),
         })
         .get();
-      expect(snapshot.data().totalPages).to.equal(150);
-      expect(snapshot.data().averagePages).to.equal(75);
-      expect(snapshot.data().count).to.equal(2);
-      expect(snapshot.data().totalPagesX).to.equal(150);
-      expect(snapshot.data().averagePagesY).to.equal(75);
+      expect(snapshot.data().totalPages).toBe(150);
+      expect(snapshot.data().averagePages).toBe(75);
+      expect(snapshot.data().count).toBe(2);
+      expect(snapshot.data().totalPagesX).toBe(150);
+      expect(snapshot.data().averagePagesY).toBe(75);
     });
 
     // TODO (b/429419330) re-enable test when this bug is fixed
@@ -5528,7 +5512,7 @@ describe('Aggregation queries', () => {
         averagePagesY: AggregateField.average('pages'),
         countZ: AggregateField.count(),
       });
-      await expect(aggregateQuery.get()).to.eventually.be.rejectedWith(
+      await expect(aggregateQuery.get()).rejects.toThrow(
         /maximum number of aggregations/,
       );
     });
@@ -5573,7 +5557,7 @@ describe('Aggregation queries', () => {
         .get();
       // @ts-expect-error expected error as 'totalPages' is not in the AggregateSpec.
       const totalPages = snapshot.data().totalPages;
-      expect(totalPages).to.equal(undefined);
+      expect(totalPages).toBe(undefined);
     });
 
     it('performs sum that results in float', async () => {
@@ -5606,7 +5590,7 @@ describe('Aggregation queries', () => {
           totalRating: AggregateField.sum('rating'),
         })
         .get();
-      expect(snapshot.data().totalRating).to.equal(12.5);
+      expect(snapshot.data().totalRating).toBe(12.5);
     });
 
     it('performs sum of ints and floats that results in an int', async () => {
@@ -5639,7 +5623,7 @@ describe('Aggregation queries', () => {
           totalRating: AggregateField.sum('rating'),
         })
         .get();
-      expect(snapshot.data().totalRating).to.equal(13);
+      expect(snapshot.data().totalRating).toBe(13);
     });
 
     it('performs sum that overflows max int', async () => {
@@ -5670,7 +5654,7 @@ describe('Aggregation queries', () => {
           totalRating: AggregateField.sum('rating'),
         })
         .get();
-      expect(snapshot.data().totalRating).to.equal(maxLong + maxLong);
+      expect(snapshot.data().totalRating).toBe(maxLong + maxLong);
     });
 
     it('performs sum that can overflow integer values during accumulation', async () => {
@@ -5703,9 +5687,7 @@ describe('Aggregation queries', () => {
           totalRating: AggregateField.sum('rating'),
         })
         .get();
-      expect(snapshot.data().totalRating).to.equal(
-        Number.MAX_SAFE_INTEGER - 100,
-      );
+      expect(snapshot.data().totalRating).toBe(Number.MAX_SAFE_INTEGER - 100);
     });
 
     it('performs sum that is negative', async () => {
@@ -5745,7 +5727,7 @@ describe('Aggregation queries', () => {
           totalRating: AggregateField.sum('rating'),
         })
         .get();
-      expect(snapshot.data().totalRating).to.equal(-10101);
+      expect(snapshot.data().totalRating).toBe(-10101);
     });
 
     it('performs sum that is positive infinity', async () => {
@@ -5771,7 +5753,7 @@ describe('Aggregation queries', () => {
           totalRating: AggregateField.sum('rating'),
         })
         .get();
-      expect(snapshot.data().totalRating).to.equal(Number.POSITIVE_INFINITY);
+      expect(snapshot.data().totalRating).toBe(Number.POSITIVE_INFINITY);
     });
 
     it('performs sum that is positive infinity v2', async () => {
@@ -5797,7 +5779,7 @@ describe('Aggregation queries', () => {
           totalRating: AggregateField.sum('rating'),
         })
         .get();
-      expect(snapshot.data().totalRating).to.equal(Number.POSITIVE_INFINITY);
+      expect(snapshot.data().totalRating).toBe(Number.POSITIVE_INFINITY);
     });
 
     it('performs sum that is negative infinity', async () => {
@@ -5823,7 +5805,7 @@ describe('Aggregation queries', () => {
           totalRating: AggregateField.sum('rating'),
         })
         .get();
-      expect(snapshot.data().totalRating).to.equal(Number.NEGATIVE_INFINITY);
+      expect(snapshot.data().totalRating).toBe(Number.NEGATIVE_INFINITY);
     });
 
     it('performs sum that is valid but could overflow during aggregation', async () => {
@@ -5891,11 +5873,9 @@ describe('Aggregation queries', () => {
           totalRating: AggregateField.sum('rating'),
         })
         .get();
-      expect(snapshot.data().totalRating).to.oneOf([
-        0,
-        Number.NEGATIVE_INFINITY,
-        Number.POSITIVE_INFINITY,
-      ]);
+      expect([0, Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY]).toContain(
+        snapshot.data().totalRating,
+      );
     });
 
     it('performs sum that includes NaN', async () => {
@@ -5935,7 +5915,7 @@ describe('Aggregation queries', () => {
           totalRating: AggregateField.sum('rating'),
         })
         .get();
-      expect(snapshot.data().totalRating).to.be.NaN;
+      expect(snapshot.data().totalRating).toBeNaN();
     });
 
     it('performs sum over a result set of zero documents', async () => {
@@ -5977,9 +5957,9 @@ describe('Aggregation queries', () => {
         })
         .get();
       if (isEnterprise()) {
-        expect(snapshot.data().totalRating).to.equal(null);
+        expect(snapshot.data().totalRating).toBe(null);
       } else {
-        expect(snapshot.data().totalRating).to.equal(0);
+        expect(snapshot.data().totalRating).toBe(0);
       }
     });
 
@@ -6021,8 +6001,8 @@ describe('Aggregation queries', () => {
           countOfDocs: AggregateField.count(),
         })
         .get();
-      expect(snapshot.data().totalRating).to.equal(10);
-      expect(snapshot.data().countOfDocs).to.equal(4);
+      expect(snapshot.data().totalRating).toBe(10);
+      expect(snapshot.data().countOfDocs).toBe(4);
     });
 
     it('performs sum of min IEEE754', async () => {
@@ -6041,7 +6021,7 @@ describe('Aggregation queries', () => {
           totalRating: AggregateField.sum('rating'),
         })
         .get();
-      expect(snapshot.data().totalRating).to.equal(Number.MIN_VALUE);
+      expect(snapshot.data().totalRating).toBe(Number.MIN_VALUE);
     });
 
     it('performs average of ints that results in an int', async () => {
@@ -6074,7 +6054,7 @@ describe('Aggregation queries', () => {
           averageRating: AggregateField.average('rating'),
         })
         .get();
-      expect(snapshot.data().averageRating).to.equal(5);
+      expect(snapshot.data().averageRating).toBe(5);
     });
 
     it('performs average of floats that results in an int', async () => {
@@ -6100,7 +6080,7 @@ describe('Aggregation queries', () => {
           averageRating: AggregateField.average('rating'),
         })
         .get();
-      expect(snapshot.data().averageRating).to.equal(10);
+      expect(snapshot.data().averageRating).toBe(10);
     });
 
     it('performs average of floats and ints that results in an int', async () => {
@@ -6133,7 +6113,7 @@ describe('Aggregation queries', () => {
           averageRating: AggregateField.average('rating'),
         })
         .get();
-      expect(snapshot.data().averageRating).to.equal(10);
+      expect(snapshot.data().averageRating).toBe(10);
     });
 
     it('performs average of float that results in float', async () => {
@@ -6166,7 +6146,7 @@ describe('Aggregation queries', () => {
           averageRating: AggregateField.average('rating'),
         })
         .get();
-      expect(snapshot.data().averageRating).to.equal(4.5);
+      expect(snapshot.data().averageRating).toBe(4.5);
     });
 
     it('performs average of floats and ints that results in a float', async () => {
@@ -6199,7 +6179,7 @@ describe('Aggregation queries', () => {
           averageRating: AggregateField.average('rating'),
         })
         .get();
-      expect(snapshot.data().averageRating).to.be.approximately(9.2, 0.0000001);
+      expect(snapshot.data().averageRating).toBeCloseTo(9.2, 7);
     });
 
     it('performs average of ints that results in a float', async () => {
@@ -6225,7 +6205,7 @@ describe('Aggregation queries', () => {
           averageRating: AggregateField.average('rating'),
         })
         .get();
-      expect(snapshot.data().averageRating).to.equal(9.5);
+      expect(snapshot.data().averageRating).toBe(9.5);
     });
 
     it('performs average causing underflow', async () => {
@@ -6251,7 +6231,7 @@ describe('Aggregation queries', () => {
           averageRating: AggregateField.average('rating'),
         })
         .get();
-      expect(snapshot.data().averageRating).to.equal(0);
+      expect(snapshot.data().averageRating).toBe(0);
     });
 
     it('performs average of min IEEE754', async () => {
@@ -6270,7 +6250,7 @@ describe('Aggregation queries', () => {
           averageRating: AggregateField.average('rating'),
         })
         .get();
-      expect(snapshot.data().averageRating).to.equal(Number.MIN_VALUE);
+      expect(snapshot.data().averageRating).toBe(Number.MIN_VALUE);
     });
 
     it('performs average that overflows IEEE754 during accumulation', async () => {
@@ -6296,7 +6276,7 @@ describe('Aggregation queries', () => {
           averageRating: AggregateField.average('rating'),
         })
         .get();
-      expect(snapshot.data().averageRating).to.equal(Number.POSITIVE_INFINITY);
+      expect(snapshot.data().averageRating).toBe(Number.POSITIVE_INFINITY);
     });
 
     it('performs average that includes NaN', async () => {
@@ -6336,7 +6316,7 @@ describe('Aggregation queries', () => {
           averageRating: AggregateField.average('rating'),
         })
         .get();
-      expect(snapshot.data().averageRating).to.be.NaN;
+      expect(snapshot.data().averageRating).toBeNaN();
     });
 
     it('performs average over a result set of zero documents', async () => {
@@ -6377,7 +6357,7 @@ describe('Aggregation queries', () => {
           averageRating: AggregateField.average('rating'),
         })
         .get();
-      expect(snapshot.data().averageRating).to.be.null;
+      expect(snapshot.data().averageRating).toBeNull();
     });
 
     it('performs average only on numeric fields', async () => {
@@ -6418,8 +6398,8 @@ describe('Aggregation queries', () => {
           countOfDocs: AggregateField.count(),
         })
         .get();
-      expect(snapshot.data().averageRating).to.equal(5);
-      expect(snapshot.data().countOfDocs).to.equal(4);
+      expect(snapshot.data().averageRating).toBe(5);
+      expect(snapshot.data().countOfDocs).toBe(4);
     });
 
     it('allows aliases with length greater than 1500 bytes', async () => {
@@ -6442,8 +6422,8 @@ describe('Aggregation queries', () => {
           [longerAlias]: AggregateField.count(),
         })
         .get();
-      expect(snapshot.data()[longAlias]).to.equal(2);
-      expect(snapshot.data()[longerAlias]).to.equal(2);
+      expect(snapshot.data()[longAlias]).toBe(2);
+      expect(snapshot.data()[longerAlias]).toBe(2);
     });
 
     it('performs aggregations on nested map values', async () => {
@@ -6467,9 +6447,9 @@ describe('Aggregation queries', () => {
           count: AggregateField.count(),
         })
         .get();
-      expect(snapshot.data().totalPages).to.equal(150);
-      expect(snapshot.data().averagePages).to.equal(75);
-      expect(snapshot.data().count).to.equal(2);
+      expect(snapshot.data().totalPages).toBe(150);
+      expect(snapshot.data().averagePages).toBe(75);
+      expect(snapshot.data().count).toBe(2);
     });
 
     it('performs aggregates when using `in` operator', async () => {
@@ -6512,9 +6492,9 @@ describe('Aggregation queries', () => {
           countOfDocs: AggregateField.count(),
         })
         .get();
-      expect(snapshot.data().totalRating).to.equal(8);
-      expect(snapshot.data().averageRating).to.equal(4);
-      expect(snapshot.data().countOfDocs).to.equal(2);
+      expect(snapshot.data().totalRating).toBe(8);
+      expect(snapshot.data().averageRating).toBe(4);
+      expect(snapshot.data().countOfDocs).toBe(2);
     });
   });
 
@@ -6545,9 +6525,9 @@ describe('Aggregation queries', () => {
             avg: AggregateField.average('x'),
           })
           .get();
-        expect(snapshot.data().count).to.equal(2);
-        expect(snapshot.data().sum).to.equal(4);
-        expect(snapshot.data().avg).to.equal(2);
+        expect(snapshot.data().count).toBe(2);
+        expect(snapshot.data().sum).toBe(4);
+        expect(snapshot.data().avg).toBe(2);
       });
 
       it('performs aggregations on documents with all aggregated fields', async () => {
@@ -6566,10 +6546,10 @@ describe('Aggregation queries', () => {
             count: AggregateField.count(),
           })
           .get();
-        expect(snapshot.data().totalPages).to.equal(300);
-        expect(snapshot.data().averagePages).to.equal(100);
-        expect(snapshot.data().averageYear).to.equal(2007);
-        expect(snapshot.data().count).to.equal(3);
+        expect(snapshot.data().totalPages).toBe(300);
+        expect(snapshot.data().averagePages).toBe(100);
+        expect(snapshot.data().averageYear).toBe(2007);
+        expect(snapshot.data().count).toBe(3);
       });
 
       it('performs aggregates on multiple fields where one aggregate could cause short-circuit due to NaN', async () => {
@@ -6611,9 +6591,9 @@ describe('Aggregation queries', () => {
             averageYear: AggregateField.average('year'),
           })
           .get();
-        expect(snapshot.data().totalRating).to.be.NaN;
-        expect(snapshot.data().totalPages).to.equal(300);
-        expect(snapshot.data().averageYear).to.equal(2000);
+        expect(snapshot.data().totalRating).toBeNaN();
+        expect(snapshot.data().totalPages).toBe(300);
+        expect(snapshot.data().averageYear).toBe(2000);
       });
 
       it('performs aggregates when using `array-contains-any` operator', async () => {
@@ -6658,11 +6638,11 @@ describe('Aggregation queries', () => {
             countOfDocs: AggregateField.count(),
           })
           .get();
-        expect(snapshot.data().totalRating).to.equal(0);
-        expect(snapshot.data().averageRating).to.be.null;
-        expect(snapshot.data().totalPages).to.equal(200);
-        expect(snapshot.data().averagePages).to.equal(100);
-        expect(snapshot.data().countOfDocs).to.equal(2);
+        expect(snapshot.data().totalRating).toBe(0);
+        expect(snapshot.data().averageRating).toBeNull();
+        expect(snapshot.data().totalPages).toBe(200);
+        expect(snapshot.data().averagePages).toBe(100);
+        expect(snapshot.data().countOfDocs).toBe(2);
       });
     },
   );
@@ -6681,7 +6661,7 @@ describe('Aggregation queries', () => {
       const snapshot = await col
         .aggregate({sum: AggregateField.sum('num')})
         .get();
-      expect(snapshot.data().sum).to.equal(12);
+      expect(snapshot.data().sum).toBe(12);
     });
 
     it('equality filter, no orderBy, no cursor', async () => {
@@ -6690,7 +6670,7 @@ describe('Aggregation queries', () => {
         .where('num', '==', 5)
         .aggregate({sum: AggregateField.sum('num')})
         .get();
-      expect(snapshot.data().sum).to.equal(5);
+      expect(snapshot.data().sum).toBe(5);
     });
 
     it('inequality filter, no orderBy, no cursor', async () => {
@@ -6699,7 +6679,7 @@ describe('Aggregation queries', () => {
         .where('num', '>', 5)
         .aggregate({sum: AggregateField.sum('num')})
         .get();
-      expect(snapshot.data().sum).to.equal(7);
+      expect(snapshot.data().sum).toBe(7);
     });
 
     it('no filter, explicit orderBy, no cursor', async () => {
@@ -6708,7 +6688,7 @@ describe('Aggregation queries', () => {
         .orderBy('num')
         .aggregate({sum: AggregateField.sum('num')})
         .get();
-      expect(snapshot.data().sum).to.equal(12);
+      expect(snapshot.data().sum).toBe(12);
     });
 
     it('equality filter, explicit orderBy, no cursor', async () => {
@@ -6718,7 +6698,7 @@ describe('Aggregation queries', () => {
         .orderBy('num')
         .aggregate({sum: AggregateField.sum('num')})
         .get();
-      expect(snapshot.data().sum).to.equal(5);
+      expect(snapshot.data().sum).toBe(5);
     });
 
     it('inequality filter, explicit orderBy, no cursor', async () => {
@@ -6728,7 +6708,7 @@ describe('Aggregation queries', () => {
         .orderBy('num')
         .aggregate({sum: AggregateField.sum('num')})
         .get();
-      expect(snapshot.data().sum).to.equal(7);
+      expect(snapshot.data().sum).toBe(7);
     });
 
     it('no filter, explicit orderBy, field value cursor', async () => {
@@ -6738,7 +6718,7 @@ describe('Aggregation queries', () => {
         .startAfter(5)
         .aggregate({sum: AggregateField.sum('num')})
         .get();
-      expect(snapshot.data().sum).to.equal(7);
+      expect(snapshot.data().sum).toBe(7);
     });
 
     // This is expected to fail because it requires the `__name__, num` index.
@@ -6750,7 +6730,7 @@ describe('Aggregation queries', () => {
         .startAfter(col.doc('a'))
         .aggregate({sum: AggregateField.sum('num')})
         .get();
-      expect(snapshot.data().sum).to.equal(7);
+      expect(snapshot.data().sum).toBe(7);
     });
 
     // This is expected to fail because it requires the `__name__, num` index.
@@ -6762,7 +6742,7 @@ describe('Aggregation queries', () => {
         .startAfter(docSnap)
         .aggregate({sum: AggregateField.sum('num')})
         .get();
-      expect(snapshot.data().sum).to.equal(7);
+      expect(snapshot.data().sum).toBe(7);
     });
 
     // This is expected to fail because it requires the `foo, __name__, num` index.
@@ -6775,7 +6755,7 @@ describe('Aggregation queries', () => {
         .startAfter(docSnap)
         .aggregate({sum: AggregateField.sum('num')})
         .get();
-      expect(snapshot.data().sum).to.equal(7);
+      expect(snapshot.data().sum).toBe(7);
     });
 
     // This just happens to work because the orderBy field matches the aggregation field.
@@ -6788,7 +6768,7 @@ describe('Aggregation queries', () => {
         .startAfter(docSnap)
         .aggregate({sum: AggregateField.sum('num')})
         .get();
-      expect(snapshot.data().sum).to.equal(7);
+      expect(snapshot.data().sum).toBe(7);
     });
 
     it('equality filter, explicit orderBy, field value cursor', async () => {
@@ -6799,7 +6779,7 @@ describe('Aggregation queries', () => {
         .startAt(5)
         .aggregate({sum: AggregateField.sum('num')})
         .get();
-      expect(snapshot.data().sum).to.equal(5);
+      expect(snapshot.data().sum).toBe(5);
     });
 
     it('inequality filter, explicit orderBy, field value cursor', async () => {
@@ -6810,7 +6790,7 @@ describe('Aggregation queries', () => {
         .startAt(5)
         .aggregate({sum: AggregateField.sum('num')})
         .get();
-      expect(snapshot.data().sum).to.equal(7);
+      expect(snapshot.data().sum).toBe(7);
     });
 
     // This is expected to fail because it requires the `__name__, num` index.
@@ -6823,7 +6803,7 @@ describe('Aggregation queries', () => {
         .startAfter(col.doc('a'))
         .aggregate({sum: AggregateField.sum('num')})
         .get();
-      expect(snapshot.data().sum).to.equal(7);
+      expect(snapshot.data().sum).toBe(7);
     });
 
     // Full orderBy is provided.
@@ -6837,7 +6817,7 @@ describe('Aggregation queries', () => {
         .startAfter(5, col.doc('a'))
         .aggregate({sum: AggregateField.sum('num')})
         .get();
-      expect(snapshot.data().sum).to.equal(7);
+      expect(snapshot.data().sum).toBe(7);
     });
 
     // This is expected to fail because it requires the `__name__, num` index.
@@ -6850,7 +6830,7 @@ describe('Aggregation queries', () => {
         .startAfter(docSnap)
         .aggregate({sum: AggregateField.sum('num')})
         .get();
-      expect(snapshot.data().sum).to.equal(7);
+      expect(snapshot.data().sum).toBe(7);
     });
 
     // This just happens to work because the orderBy field matches the aggregation field.
@@ -6863,7 +6843,7 @@ describe('Aggregation queries', () => {
         .startAfter(docSnap)
         .aggregate({sum: AggregateField.sum('num')})
         .get();
-      expect(snapshot.data().sum).to.equal(7);
+      expect(snapshot.data().sum).toBe(7);
     });
 
     // This is expected to fail because it requires the `foo, __name__, num` index.
@@ -6876,7 +6856,7 @@ describe('Aggregation queries', () => {
         .startAfter(docSnap)
         .aggregate({sum: AggregateField.sum('num')})
         .get();
-      expect(snapshot.data().sum).to.equal(7);
+      expect(snapshot.data().sum).toBe(7);
     });
   });
 });
@@ -6904,7 +6884,7 @@ describe('Transaction class', () => {
         });
       })
       .then(res => {
-        expect(res).to.equal('bar');
+        expect(res).toBe('bar');
       });
   });
 
@@ -6920,7 +6900,7 @@ describe('Transaction class', () => {
         });
       })
       .then(res => {
-        expect(res).to.equal(2);
+        expect(res).toBe(2);
       });
   });
 
@@ -6936,7 +6916,7 @@ describe('Transaction class', () => {
         });
       })
       .then(res => {
-        expect(res).to.equal(2);
+        expect(res).toBe(2);
       });
   });
 
@@ -6950,7 +6930,7 @@ describe('Transaction class', () => {
             .then(([doc]) => doc);
         })
         .then(doc => {
-          expect(doc.data()).to.deep.equal({foo: 'a'});
+          expect(doc.data()).toEqual({foo: 'a'});
         });
     });
   });
@@ -6969,8 +6949,8 @@ describe('Transaction class', () => {
             .then(docs => docs);
         })
         .then(docs => {
-          expect(docs[0].data()).to.deep.equal({f: 'a'});
-          expect(docs[1].data()).to.deep.equal({f: 'a'});
+          expect(docs[0].data()).toEqual({f: 'a'});
+          expect(docs[1].data()).toEqual({f: 'a'});
         });
     });
   });
@@ -6985,8 +6965,8 @@ describe('Transaction class', () => {
       return updateFunction.getAll(ref1, ref2);
     });
 
-    expect(docs[0].data()!.toString()).to.equal('post1, by author1');
-    expect(docs[1].data()!.toString()).to.equal('post2, by author2');
+    expect(docs[0].data()!.toString()).toBe('post1, by author1');
+    expect(docs[1].data()!.toString()).toBe('post2, by author2');
   });
 
   it('set() and get() support withConverter()', async () => {
@@ -6997,7 +6977,7 @@ describe('Transaction class', () => {
       await txn.set(ref, new Post('new post', 'author'));
     });
     const doc = await ref.get();
-    expect(doc.data()!.toString()).to.equal('new post, by author');
+    expect(doc.data()!.toString()).toBe('new post, by author');
   });
 
   it('has get() with query', () => {
@@ -7013,7 +6993,7 @@ describe('Transaction class', () => {
         });
       })
       .then(res => {
-        expect(res).to.equal('bar');
+        expect(res).toBe('bar');
       });
   });
 
@@ -7028,7 +7008,7 @@ describe('Transaction class', () => {
         return ref.get();
       })
       .then(doc => {
-        expect(doc.get('foo')).to.equal('foobar');
+        expect(doc.get('foo')).toBe('foobar');
       });
   });
 
@@ -7053,7 +7033,7 @@ describe('Transaction class', () => {
         return ref.get();
       })
       .then(doc => {
-        expect(doc.data()).to.deep.equal({
+        expect(doc.data()).toEqual({
           boo: ['ghost'],
           moo: 'cow',
         });
@@ -7076,8 +7056,8 @@ describe('Transaction class', () => {
         return ref.get();
       })
       .then(result => {
-        expect(success).to.be.true;
-        expect(result.exists).to.be.false;
+        expect(success).toBe(true);
+        expect(result.exists).toBe(false);
       });
   });
 
@@ -7094,15 +7074,13 @@ describe('Transaction class', () => {
 
     // Validate the error message when testing against the firestore backend.
     if (process.env.FIRESTORE_EMULATOR_HOST === undefined) {
-      await expect(promise).to.eventually.be.rejectedWith(
-        /No document to update/,
-      );
+      await expect(promise).rejects.toThrow(/No document to update/);
     } else {
       // The emulator generates a different error message, do not validate the error message.
-      await expect(promise).to.eventually.be.rejected;
+      await expect(promise).rejects.toThrow();
     }
 
-    expect(attempts).to.equal(1);
+    expect(attempts).toBe(1);
   });
 
   // Skip this test when running against the emulator because it does not work
@@ -7139,10 +7117,10 @@ describe('Transaction class', () => {
       await firstTransaction;
       await secondTransaction;
 
-      expect(attempts).to.equal(3);
+      expect(attempts).toBe(3);
 
       const finalSnapshot = await ref.get();
-      expect(finalSnapshot.data()).to.deep.equal({first: true, second: true});
+      expect(finalSnapshot.data()).toEqual({first: true, second: true});
     },
   );
 
@@ -7153,7 +7131,7 @@ describe('Transaction class', () => {
       updateFunction => updateFunction.get(ref),
       {readOnly: true},
     );
-    expect(snapshot.exists).to.be.true;
+    expect(snapshot.exists).toBe(true);
   });
 
   it('supports read-only transactions with custom read-time', async () => {
@@ -7164,8 +7142,8 @@ describe('Transaction class', () => {
       updateFunction => updateFunction.get(ref),
       {readOnly: true, readTime: writeResult.writeTime},
     );
-    expect(snapshot.exists).to.be.true;
-    expect(snapshot.get('foo')).to.equal(1);
+    expect(snapshot.exists).toBe(true);
+    expect(snapshot.get('foo')).toBe(1);
   });
 });
 
@@ -7194,7 +7172,7 @@ describe('WriteBatch class', () => {
         return ref.get();
       })
       .then(doc => {
-        expect(doc.get('foo')).to.equal('a');
+        expect(doc.get('foo')).toBe('a');
       });
   });
 
@@ -7208,7 +7186,7 @@ describe('WriteBatch class', () => {
         return ref.get();
       })
       .then(doc => {
-        expect(doc.get('foo')).to.equal('a');
+        expect(doc.get('foo')).toBe('a');
       });
   });
 
@@ -7223,8 +7201,8 @@ describe('WriteBatch class', () => {
         return ref.get();
       })
       .then(doc => {
-        expect(doc.get('title')).to.equal('olive');
-        expect(doc.get('author')).to.equal('author');
+        expect(doc.get('title')).toBe('olive');
+        expect(doc.get('author')).toBe('author');
       });
   });
 
@@ -7238,7 +7216,7 @@ describe('WriteBatch class', () => {
         return ref.get();
       })
       .then(doc => {
-        expect(doc.get('foo')).to.equal('a');
+        expect(doc.get('foo')).toBe('a');
       });
   });
 
@@ -7251,7 +7229,7 @@ describe('WriteBatch class', () => {
       .commit()
       .then(() => Promise.reject('commit() should have failed'))
       .catch((err: Error) => {
-        expect(err.stack).to.contain('WriteBatch.commit');
+        expect(err.stack).toContain('WriteBatch.commit');
       });
   });
 
@@ -7266,7 +7244,7 @@ describe('WriteBatch class', () => {
         return ref.get();
       })
       .then(doc => {
-        expect(doc.get('foo')).to.equal('b');
+        expect(doc.get('foo')).toBe('b');
       });
   });
 
@@ -7275,7 +7253,7 @@ describe('WriteBatch class', () => {
     batch.set(randomCol.doc(), {foo: 'a'});
     batch.set(randomCol.doc(), {foo: FieldValue.serverTimestamp()});
     return batch.commit().then(writeResults => {
-      expect(writeResults).to.have.length(2);
+      expect(writeResults).toHaveLength(2);
     });
   });
 
@@ -7289,7 +7267,7 @@ describe('WriteBatch class', () => {
         expect.fail();
       })
       .catch(err => {
-        expect(err.message.match(/No document to update/));
+        expect(err.message).toMatch(/No document to update/);
       });
   });
 
@@ -7307,8 +7285,8 @@ describe('WriteBatch class', () => {
         return ref.get();
       })
       .then(result => {
-        expect(success).to.be.true;
-        expect(result.exists).to.be.false;
+        expect(success).toBe(true);
+        expect(result.exists).toBe(false);
       });
   });
 });
@@ -7340,33 +7318,33 @@ describe('QuerySnapshot class', () => {
         return snapshot.query.get();
       })
       .then(snapshot => {
-        expect(snapshot.size).to.equal(2);
+        expect(snapshot.size).toBe(2);
       });
   });
 
   it('has empty property', () => {
     return querySnapshot
       .then(snapshot => {
-        expect(snapshot.empty).to.be.false;
-        expect(snapshot.readTime).to.exist;
+        expect(snapshot.empty).toBe(false);
+        expect(snapshot.readTime).toBeDefined();
         return snapshot.query.where('foo', '==', 'bar').get();
       })
       .then(snapshot => {
-        expect(snapshot.empty).to.be.true;
-        expect(snapshot.readTime).to.exist;
+        expect(snapshot.empty).toBe(true);
+        expect(snapshot.readTime).toBeDefined();
       });
   });
 
   it('has size property', () => {
     return querySnapshot.then(snapshot => {
-      expect(snapshot.size).to.equal(2);
+      expect(snapshot.size).toBe(2);
     });
   });
 
   it('has docs property', () => {
     return querySnapshot.then(snapshot => {
-      expect(snapshot.docs).to.have.length(2);
-      expect(snapshot.docs[0].get('foo')).to.equal('a');
+      expect(snapshot.docs).toHaveLength(2);
+      expect(snapshot.docs[0].get('foo')).toBe('a');
     });
   });
 
@@ -7375,10 +7353,10 @@ describe('QuerySnapshot class', () => {
 
     return querySnapshot.then(snapshot => {
       snapshot.forEach(doc => {
-        expect(doc.get('foo')).to.equal('a');
+        expect(doc.get('foo')).toBe('a');
         ++count;
       });
-      expect(count).to.equal(2);
+      expect(count).toBe(2);
     });
   });
 });
@@ -7405,9 +7383,9 @@ describe('BulkWriter class', () => {
     const singleOp = writer.create(ref, {foo: 'bar'});
     await writer.close();
     const result = await ref.get();
-    expect(result.data()).to.deep.equal({foo: 'bar'});
+    expect(result.data()).toEqual({foo: 'bar'});
     const writeTime = (await singleOp).writeTime;
-    expect(writeTime).to.not.be.null;
+    expect(writeTime).not.toBeNull();
   });
 
   it('has set() method', async () => {
@@ -7415,9 +7393,9 @@ describe('BulkWriter class', () => {
     const singleOp = writer.set(ref, {foo: 'bar'});
     await writer.close();
     const result = await ref.get();
-    expect(result.data()).to.deep.equal({foo: 'bar'});
+    expect(result.data()).toEqual({foo: 'bar'});
     const writeTime = (await singleOp).writeTime;
-    expect(writeTime).to.not.be.null;
+    expect(writeTime).not.toBeNull();
   });
 
   it('has update() method', async () => {
@@ -7426,9 +7404,9 @@ describe('BulkWriter class', () => {
     const singleOp = writer.update(ref, {foo: 'bar2'});
     await writer.close();
     const result = await ref.get();
-    expect(result.data()).to.deep.equal({foo: 'bar2'});
+    expect(result.data()).toEqual({foo: 'bar2'});
     const writeTime = (await singleOp).writeTime;
-    expect(writeTime).to.not.be.null;
+    expect(writeTime).not.toBeNull();
   });
 
   it('has delete() method', async () => {
@@ -7437,10 +7415,10 @@ describe('BulkWriter class', () => {
     const singleOp = writer.delete(ref);
     await writer.close();
     const result = await ref.get();
-    expect(result.exists).to.be.false;
+    expect(result.exists).toBe(false);
     // TODO(b/158502664): Remove this check once we can get write times.
     const deleteResult = await singleOp;
-    expect(deleteResult.writeTime).to.deep.equal(new Timestamp(0, 0));
+    expect(deleteResult.writeTime).toEqual(new Timestamp(0, 0));
   });
 
   it('can write to the same document twice', async () => {
@@ -7450,11 +7428,11 @@ describe('BulkWriter class', () => {
     await writer.close();
     const result = await ref.get();
     // The order of writes is not guaranteed.
-    expect(result.get('foo')).to.not.be.undefined;
+    expect(result.get('foo')).toBeDefined();
     const writeTime1 = (await op1).writeTime;
     const writeTime2 = (await op2).writeTime;
-    expect(writeTime1).to.not.be.null;
-    expect(writeTime2).to.not.be.null;
+    expect(writeTime1).not.toBeNull();
+    expect(writeTime2).not.toBeNull();
   });
 
   it('can terminate once BulkWriter is closed', async () => {
@@ -7514,15 +7492,15 @@ describe('BulkWriter class', () => {
 
     it.skipEnterprise('on top-level collection', async () => {
       await firestore.recursiveDelete(randomCol);
-      expect(await countCollectionChildren(randomCol)).to.equal(0);
+      expect(await countCollectionChildren(randomCol)).toBe(0);
     });
 
     it.skipEnterprise('on nested collection', async () => {
       const coll = randomCol.doc('bob').collection('parentsCol');
       await firestore.recursiveDelete(coll);
 
-      expect(await countCollectionChildren(coll)).to.equal(0);
-      expect(await countCollectionChildren(randomCol)).to.equal(2);
+      expect(await countCollectionChildren(coll)).toBe(0);
+      expect(await countCollectionChildren(randomCol)).toBe(2);
     });
 
     // TODO enterprise waiting on b/469490062
@@ -7531,9 +7509,9 @@ describe('BulkWriter class', () => {
       await firestore.recursiveDelete(doc);
 
       const docSnap = await doc.get();
-      expect(docSnap.exists).to.be.false;
-      expect(await countDocumentChildren(randomCol.doc('bob'))).to.equal(1);
-      expect(await countCollectionChildren(randomCol)).to.equal(3);
+      expect(docSnap.exists).toBe(false);
+      expect(await countDocumentChildren(randomCol.doc('bob'))).toBe(1);
+      expect(await countCollectionChildren(randomCol)).toBe(3);
     });
 
     // TODO enterprise b/469490062
@@ -7542,8 +7520,8 @@ describe('BulkWriter class', () => {
       await firestore.recursiveDelete(doc);
 
       const docSnap = await doc.get();
-      expect(docSnap.exists).to.be.false;
-      expect(await countCollectionChildren(randomCol)).to.equal(5);
+      expect(docSnap.exists).toBe(false);
+      expect(await countCollectionChildren(randomCol)).toBe(5);
     });
 
     // TODO enterprise b/469490062
@@ -7554,8 +7532,8 @@ describe('BulkWriter class', () => {
       await collB.doc('doggo').set({name: 'goodboi'});
 
       await firestore.recursiveDelete(collB);
-      expect(await countCollectionChildren(randomCol)).to.equal(6);
-      expect(await countCollectionChildren(collB)).to.equal(0);
+      expect(await countCollectionChildren(randomCol)).toBe(6);
+      expect(await countCollectionChildren(collB)).toBe(0);
     });
 
     it('with custom BulkWriter instance', async () => {
@@ -7565,7 +7543,7 @@ describe('BulkWriter class', () => {
         callbackCount++;
       });
       await firestore.recursiveDelete(randomCol, bulkWriter);
-      expect(callbackCount).to.equal(6);
+      expect(callbackCount).toBe(6);
       await bulkWriter.close();
     });
   });
@@ -7584,11 +7562,11 @@ describe('BulkWriter class', () => {
       code = err.code;
     });
     await writer.close();
-    expect(retryCount).to.equal(3);
+    expect(retryCount).toBe(3);
     if (firestore._settings.preferRest) {
-      expect(code).to.equal(400);
+      expect(code).toBe(400);
     } else {
-      expect(code).to.equal(Status.INVALID_ARGUMENT);
+      expect(code).toBe(Status.INVALID_ARGUMENT);
     }
   });
 });
@@ -7646,12 +7624,12 @@ describe('Client initialization', () => {
         // Emulator gives different error message.
         // TODO (b/429419330) re-enable assertion when this bug is fixed
         if (process.env.FIRESTORE_EMULATOR_HOST === undefined) {
-          // await expect(update).to.eventually.be.rejectedWith(
+          // await expect(update).rejects.toThrow(
           //   'No document to update',
           // );
-          await expect(update).to.eventually.be.rejected;
+          await expect(update).rejects.toThrow();
         } else {
-          await expect(update).to.eventually.be.rejected;
+          await expect(update).rejects.toThrow();
         }
       },
     ],
@@ -7754,7 +7732,7 @@ describe('Bundle building', () => {
 
     const namedQuery = (elements[1] as IBundleElement).namedQuery;
     // Verify saved query.
-    expect(namedQuery).to.deep.equal({
+    expect(namedQuery).toEqual({
       name: 'query',
       readTime: snap.readTime.toProto().timestampValue,
       // TODO(wuandy): Fix query.toProto to skip undefined fields, so we can stop using `extend` here.
@@ -7776,13 +7754,13 @@ describe('Bundle building', () => {
     bundle.add(snap);
     // `elements` is expected to be [bundleMeta, docMeta].
     const elements = await bundleToElementArray(bundle.build());
-    expect(elements.length).to.equal(2);
+    expect(elements.length).toBe(2);
 
     const meta = (elements[0] as IBundleElement).metadata;
     verifyMetadata(meta!, snap.readTime.toProto().timestampValue!, 1);
 
     const docMeta = (elements[1] as IBundleElement).documentMetadata;
-    expect(docMeta).to.deep.equal({
+    expect(docMeta).toEqual({
       name: snap.toDocumentProto().name,
       readTime: snap.readTime.toProto().timestampValue,
       exists: false,
@@ -7818,7 +7796,7 @@ describe('Bundle building', () => {
     }
 
     // Verify saved limit query.
-    expect(namedQuery1).to.deep.equal({
+    expect(namedQuery1).toEqual({
       name: 'limitQuery',
       readTime: limitSnap.readTime.toProto().timestampValue,
       bundledQuery: extend(
@@ -7836,7 +7814,7 @@ describe('Bundle building', () => {
     // `limitType` can re-construct a limitToLast client query by client SDKs.
     const q = testCol.orderBy('sort', 'asc').limit(1);
     // Verify saved limitToLast query.
-    expect(namedQuery2).to.deep.equal({
+    expect(namedQuery2).toEqual({
       name: 'limitToLastQuery',
       readTime: limitToLastSnap.readTime.toProto().timestampValue,
       bundledQuery: extend(
@@ -7852,7 +7830,7 @@ describe('Bundle building', () => {
 
     // Verify bundled document
     const docMeta = (elements[3] as IBundleElement).documentMetadata;
-    expect(docMeta).to.deep.equal({
+    expect(docMeta).toEqual({
       name: limitToLastSnap.docs[0].toDocumentProto().name,
       readTime: limitToLastSnap.readTime.toProto().timestampValue,
       exists: true,
@@ -7868,7 +7846,7 @@ describe('Bundle building', () => {
     delete (expected.fields!.sort as any).valueType;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     delete (expected.fields!.value as any).valueType;
-    expect(bundledDoc).to.deep.equal(expected);
+    expect(bundledDoc).toEqual(expected);
   });
 });
 
@@ -7934,9 +7912,9 @@ describe('Types test', () => {
         options?: SetOptions,
       ) {
         if (options) {
-          expect(testObj).to.not.be.an.instanceOf(TestObject);
+          expect(testObj).not.toBeInstanceOf(TestObject);
         } else {
-          expect(testObj).to.be.an.instanceOf(TestObject);
+          expect(testObj).toBeInstanceOf(TestObject);
         }
         return {...testObj};
       },
@@ -8084,9 +8062,9 @@ describe('Types test', () => {
         options?: SetOptions,
       ) {
         if (options) {
-          expect(testObj).to.not.be.an.instanceOf(TestObject);
+          expect(testObj).not.toBeInstanceOf(TestObject);
         } else {
-          expect(testObj).to.be.an.instanceOf(TestObject);
+          expect(testObj).toBeInstanceOf(TestObject);
         }
         return {...testObj};
       },
@@ -8768,27 +8746,27 @@ describe.skipClassic('non-native Firestore types', () => {
   async function checkRoundTrip<T extends TypeWithEquality>(originalValue: T) {
     await doc.set({key: originalValue});
     const getResult = await doc.get();
-    expect(getResult.data()).to.not.be.undefined;
+    expect(getResult.data()).toBeDefined();
     const roundTripValue: T = getResult.data()!['key'];
-    expect(roundTripValue.isEqual(originalValue)).to.be.true;
+    expect(roundTripValue.isEqual(originalValue)).toBe(true);
   }
 
   it('round trip a min key value', async () => {
     await doc.set({key: MinKey.instance()});
     const getResult = await doc.get();
-    expect(getResult.data()).to.not.be.undefined;
+    expect(getResult.data()).toBeDefined();
     const roundTripValue = getResult.data()!['key'];
-    expect(roundTripValue === MinKey.instance()).to.be.true;
-    expect(roundTripValue === MaxKey.instance()).to.be.false;
+    expect(roundTripValue === MinKey.instance()).toBe(true);
+    expect(roundTripValue === MaxKey.instance()).toBe(false);
   });
 
   it('round trip a max key value', async () => {
     await doc.set({key: MaxKey.instance()});
     const getResult = await doc.get();
-    expect(getResult.data()).to.not.be.undefined;
+    expect(getResult.data()).toBeDefined();
     const roundTripValue = getResult.data()!['key'];
-    expect(roundTripValue === MinKey.instance()).to.be.false;
-    expect(roundTripValue === MaxKey.instance()).to.be.true;
+    expect(roundTripValue === MinKey.instance()).toBe(false);
+    expect(roundTripValue === MaxKey.instance()).toBe(true);
   });
 
   it('round trip an object id value', async () => {
@@ -8845,7 +8823,7 @@ describe.skipClassic('non-native Firestore types', () => {
     } catch (err) {
       errorMessage = err?.message;
     }
-    expect(errorMessage).to.contains('Invalid decimal128 string');
+    expect(errorMessage).toContain('Invalid decimal128 string');
 
     try {
       errorMessage = '';
@@ -8853,7 +8831,7 @@ describe.skipClassic('non-native Firestore types', () => {
     } catch (err) {
       errorMessage = err?.message;
     }
-    expect(errorMessage).to.contains('Invalid decimal128 string');
+    expect(errorMessage).toContain('Invalid decimal128 string');
 
     try {
       errorMessage = '';
@@ -8861,7 +8839,7 @@ describe.skipClassic('non-native Firestore types', () => {
     } catch (err) {
       errorMessage = err?.message;
     }
-    expect(errorMessage).to.contains('Invalid decimal128 string');
+    expect(errorMessage).toContain('Invalid decimal128 string');
   });
 
   it('round trip a BSON timestamp', async () => {
@@ -8880,8 +8858,8 @@ describe.skipClassic('non-native Firestore types', () => {
       error1 = e;
     }
 
-    expect(error1).to.not.be.null;
-    expect(error1!.message).to.contain(
+    expect(error1).not.toBeNull();
+    expect(error1!.message).toContain(
       "The field '__int__' value (2,147,483,648) is too large to be converted to a 32-bit integer",
     );
 
@@ -8891,8 +8869,8 @@ describe.skipClassic('non-native Firestore types', () => {
     } catch (e) {
       error2 = e;
     }
-    expect(error2).to.not.be.null;
-    expect(error2!.message).to.contain(
+    expect(error2).not.toBeNull();
+    expect(error2!.message).toContain(
       "The field '__int__' value (-2,147,483,650) is too large to be converted to a 32-bit integer.",
     );
   });
@@ -8905,8 +8883,8 @@ describe.skipClassic('non-native Firestore types', () => {
       error = e;
     }
 
-    expect(error).to.not.be.null;
-    expect(error!.message).to.contain(
+    expect(error).not.toBeNull();
+    expect(error!.message).toContain(
       "BsonTimestamp 'seconds' must be in the range of a 32-bit unsigned integer (0-4294967295).",
     );
 
@@ -8917,8 +8895,8 @@ describe.skipClassic('non-native Firestore types', () => {
       error = e;
     }
 
-    expect(error).to.not.be.null;
-    expect(error!.message).to.contain(
+    expect(error).not.toBeNull();
+    expect(error!.message).toContain(
       "BsonTimestamp 'increment' must be in the range of a 32-bit unsigned integer (0-4294967295).",
     );
   });
@@ -8931,8 +8909,8 @@ describe.skipClassic('non-native Firestore types', () => {
       error = e;
     }
 
-    expect(error).to.not.be.null;
-    expect(error!.message).to.contain(
+    expect(error).not.toBeNull();
+    expect(error!.message).toContain(
       "BsonTimestamp 'seconds' must be in the range of a 32-bit unsigned integer (0-4294967295).",
     );
 
@@ -8943,8 +8921,8 @@ describe.skipClassic('non-native Firestore types', () => {
       error = e;
     }
 
-    expect(error).to.not.be.null;
-    expect(error!.message).to.contain(
+    expect(error).not.toBeNull();
+    expect(error!.message).toContain(
       "BsonTimestamp 'increment' must be in the range of a 32-bit unsigned integer (0-4294967295).",
     );
   });
@@ -8957,8 +8935,8 @@ describe.skipClassic('non-native Firestore types', () => {
       error = e;
     }
 
-    expect(error).to.not.be.null;
-    expect(error!.message).to.contain(
+    expect(error).not.toBeNull();
+    expect(error!.message).toContain(
       "Invalid regex option 'a'. Supported options are 'i', 'm', 's', 'u', and 'x'.",
     );
   });
@@ -8971,8 +8949,8 @@ describe.skipClassic('non-native Firestore types', () => {
       error = e;
     }
 
-    expect(error).to.not.be.null;
-    expect(error!.message).to.contain(
+    expect(error).not.toBeNull();
+    expect(error!.message).toContain(
       'Object ID hex string has incorrect length.',
     );
   });
@@ -8987,8 +8965,8 @@ describe.skipClassic('non-native Firestore types', () => {
       error = e;
     }
 
-    expect(error).to.not.be.null;
-    expect(error!.message).to.contain(
+    expect(error).not.toBeNull();
+    expect(error!.message).toContain(
       'The subtype for Bytes must be a value in the inclusive [0, 255] range.',
     );
   });
@@ -9006,7 +8984,7 @@ describe.skipClassic('non-native Firestore types', () => {
       .orderBy('key', 'desc');
 
     let snapshot = await getFirstSnapshot(orderedQuery);
-    expect(toDataArray(snapshot)).to.deep.equal([testDocs['c'], testDocs['b']]);
+    expect(toDataArray(snapshot)).toEqual([testDocs['c'], testDocs['b']]);
 
     orderedQuery = randomCol
       .where('key', 'in', [
@@ -9016,7 +8994,7 @@ describe.skipClassic('non-native Firestore types', () => {
       .orderBy('key', 'desc');
 
     snapshot = await getFirstSnapshot(orderedQuery);
-    expect(toDataArray(snapshot)).to.deep.equal([testDocs['b'], testDocs['a']]);
+    expect(toDataArray(snapshot)).toEqual([testDocs['b'], testDocs['a']]);
   });
 
   it('can filter and order Int32 values', async () => {
@@ -9031,14 +9009,14 @@ describe.skipClassic('non-native Firestore types', () => {
       .orderBy('key', 'desc');
 
     let snapshot = await getFirstSnapshot(orderedQuery);
-    expect(toDataArray(snapshot)).to.deep.equal([testDocs['c'], testDocs['b']]);
+    expect(toDataArray(snapshot)).toEqual([testDocs['c'], testDocs['b']]);
 
     orderedQuery = randomCol
       .where('key', 'not-in', [new Int32Value(1)])
       .orderBy('key', 'desc');
 
     snapshot = await getFirstSnapshot(orderedQuery);
-    expect(toDataArray(snapshot)).to.deep.equal([testDocs['c'], testDocs['a']]);
+    expect(toDataArray(snapshot)).toEqual([testDocs['c'], testDocs['a']]);
   });
 
   it('can filter and order Decimal128 values', async () => {
@@ -9056,7 +9034,7 @@ describe.skipClassic('non-native Firestore types', () => {
       .orderBy('key', 'desc');
 
     let snapshot = await getFirstSnapshot(orderedQuery);
-    expect(toDataArray(snapshot)).to.deep.equal([
+    expect(toDataArray(snapshot)).toEqual([
       testDocs['f'],
       testDocs['c'],
       testDocs['b'],
@@ -9066,7 +9044,7 @@ describe.skipClassic('non-native Firestore types', () => {
       .where('key', '!=', new Decimal128Value('0.0'))
       .orderBy('key', 'desc');
     snapshot = await getFirstSnapshot(orderedQuery);
-    expect(toDataArray(snapshot)).to.deep.equal([
+    expect(toDataArray(snapshot)).toEqual([
       testDocs['f'],
       testDocs['c'],
       testDocs['a'],
@@ -9078,7 +9056,7 @@ describe.skipClassic('non-native Firestore types', () => {
       .where('key', '>', new Decimal128Value('-1.2e-3'))
       .orderBy('key', 'desc');
     snapshot = await getFirstSnapshot(orderedQuery);
-    expect(toDataArray(snapshot)).to.deep.equal([
+    expect(toDataArray(snapshot)).toEqual([
       testDocs['f'],
       testDocs['c'],
       testDocs['b'],
@@ -9088,7 +9066,7 @@ describe.skipClassic('non-native Firestore types', () => {
       .where('key', '!=', new Decimal128Value('NaN'))
       .orderBy('key');
     snapshot = await getFirstSnapshot(orderedQuery);
-    expect(toDataArray(snapshot)).to.deep.equal([
+    expect(toDataArray(snapshot)).toEqual([
       testDocs['e'],
       testDocs['a'],
       testDocs['b'],
@@ -9103,7 +9081,7 @@ describe.skipClassic('non-native Firestore types', () => {
       ])
       .orderBy('key', 'desc');
     snapshot = await getFirstSnapshot(orderedQuery);
-    expect(toDataArray(snapshot)).to.deep.equal([
+    expect(toDataArray(snapshot)).toEqual([
       testDocs['b'],
       testDocs['a'],
       testDocs['e'],
@@ -9130,7 +9108,7 @@ describe.skipClassic('non-native Firestore types', () => {
     await addDocs(testDocs);
     let orderedQuery = randomCol.orderBy('key', 'desc');
     let snapshot = await getFirstSnapshot(orderedQuery);
-    expect(toIds(snapshot)).to.deep.equal([
+    expect(toIds(snapshot)).toEqual([
       'l', // Infinity
       'h', // 2
       'c', // 1 (Decimal128)
@@ -9149,20 +9127,11 @@ describe.skipClassic('non-native Firestore types', () => {
       .where('key', '!=', new Decimal128Value('1.0'))
       .orderBy('key', 'desc');
     snapshot = await getFirstSnapshot(orderedQuery);
-    expect(toIds(snapshot)).to.deep.equal([
-      'l',
-      'h',
-      'g',
-      'b',
-      'a',
-      'j',
-      'k',
-      'i',
-    ]);
+    expect(toIds(snapshot)).toEqual(['l', 'h', 'g', 'b', 'a', 'j', 'k', 'i']);
 
     orderedQuery = randomCol.where('key', '==', 1).orderBy('key', 'desc');
     snapshot = await getFirstSnapshot(orderedQuery);
-    expect(toIds(snapshot)).to.deep.equal(['c', 'f', 'd', 'e']);
+    expect(toIds(snapshot)).toEqual(['c', 'f', 'd', 'e']);
   });
 
   it('decimal128 values with no 2s complement representation', async () => {
@@ -9177,21 +9146,21 @@ describe.skipClassic('non-native Firestore types', () => {
     await addDocs(testDocs);
     let orderedQuery = randomCol.where('key', '==', new Decimal128Value('1.1'));
     let snapshot = await getFirstSnapshot(orderedQuery);
-    expect(toIds(snapshot)).to.deep.equal(['b']);
+    expect(toIds(snapshot)).toEqual(['b']);
 
     orderedQuery = randomCol
       .where('key', '!=', new Decimal128Value('1.1'))
       .orderBy('key');
     snapshot = await getFirstSnapshot(orderedQuery);
-    expect(toIds(snapshot)).to.deep.equal(['a', 'e', 'd', 'c']);
+    expect(toIds(snapshot)).toEqual(['a', 'e', 'd', 'c']);
 
     orderedQuery = randomCol.where('key', '==', 1.1);
     snapshot = await getFirstSnapshot(orderedQuery);
-    expect(toIds(snapshot)).to.deep.equal(['c']);
+    expect(toIds(snapshot)).toEqual(['c']);
 
     orderedQuery = randomCol.where('key', '!=', 1.1).orderBy('key');
     snapshot = await getFirstSnapshot(orderedQuery);
-    expect(toIds(snapshot)).to.deep.equal(['a', 'e', 'd', 'b']);
+    expect(toIds(snapshot)).toEqual(['a', 'e', 'd', 'b']);
   });
 
   it('can filter and order Timestamp values', async () => {
@@ -9207,14 +9176,14 @@ describe.skipClassic('non-native Firestore types', () => {
       .orderBy('key', 'desc');
 
     let snapshot = await getFirstSnapshot(orderedQuery);
-    expect(toDataArray(snapshot)).to.deep.equal([testDocs['c'], testDocs['b']]);
+    expect(toDataArray(snapshot)).toEqual([testDocs['c'], testDocs['b']]);
 
     orderedQuery = randomCol
       .where('key', '!=', new BsonTimestamp(1, 1))
       .orderBy('key', 'desc');
 
     snapshot = await getFirstSnapshot(orderedQuery);
-    expect(toDataArray(snapshot)).to.deep.equal([testDocs['c'], testDocs['b']]);
+    expect(toDataArray(snapshot)).toEqual([testDocs['c'], testDocs['b']]);
   });
 
   it('can filter and order Binary values', async () => {
@@ -9230,7 +9199,7 @@ describe.skipClassic('non-native Firestore types', () => {
       .orderBy('key', 'desc');
 
     let snapshot = await getFirstSnapshot(orderedQuery);
-    expect(toDataArray(snapshot)).to.deep.equal([testDocs['c'], testDocs['b']]);
+    expect(toDataArray(snapshot)).toEqual([testDocs['c'], testDocs['b']]);
 
     orderedQuery = randomCol
       .where('key', '>=', Bytes.fromUint8Array(new Uint8Array([1, 2, 3]), 1))
@@ -9238,7 +9207,7 @@ describe.skipClassic('non-native Firestore types', () => {
       .orderBy('key', 'desc');
 
     snapshot = await getFirstSnapshot(orderedQuery);
-    expect(toDataArray(snapshot)).to.deep.equal([testDocs['b'], testDocs['a']]);
+    expect(toDataArray(snapshot)).toEqual([testDocs['b'], testDocs['a']]);
   });
 
   it('can filter and order Regex values', async () => {
@@ -9259,7 +9228,7 @@ describe.skipClassic('non-native Firestore types', () => {
       .orderBy('key', 'desc');
 
     const snapshot = await getFirstSnapshot(orderedQuery);
-    expect(toDataArray(snapshot)).to.deep.equal([testDocs['c'], testDocs['a']]);
+    expect(toDataArray(snapshot)).toEqual([testDocs['c'], testDocs['a']]);
   });
 
   it('can filter and order minKey values', async () => {
@@ -9276,7 +9245,7 @@ describe.skipClassic('non-native Firestore types', () => {
       .orderBy('key', 'desc'); // minKeys are equal, would sort by documentId as secondary order
 
     const snapshot = await getFirstSnapshot(orderedQuery);
-    expect(toDataArray(snapshot)).to.deep.equal([testDocs['b'], testDocs['a']]);
+    expect(toDataArray(snapshot)).toEqual([testDocs['b'], testDocs['a']]);
   });
 
   it('can filter and order maxKey values', async () => {
@@ -9290,7 +9259,7 @@ describe.skipClassic('non-native Firestore types', () => {
       .where('key', '==', MaxKey.instance())
       .orderBy('key', 'desc'); // maxKeys are equal, would sort by documentId as secondary order
     const snapshot = await getFirstSnapshot(orderedQuery);
-    expect(toDataArray(snapshot)).to.deep.equal([testDocs['c'], testDocs['b']]);
+    expect(toDataArray(snapshot)).toEqual([testDocs['c'], testDocs['b']]);
   });
 
   it('cross-type order', async () => {
@@ -9343,11 +9312,11 @@ describe.skipClassic('non-native Firestore types', () => {
     ];
 
     const result = await getFirstSnapshot(randomCol.orderBy('key', 'desc'));
-    expect(result.docs.map(e => e.id)).to.deep.equal(expectedResult);
+    expect(result.docs.map(e => e.id)).toEqual(expectedResult);
 
     const listenerResult = await getFirstSnapshot(
       randomCol.orderBy('key', 'desc'),
     );
-    expect(listenerResult.docs.map(e => e.id)).to.deep.equal(expectedResult);
+    expect(listenerResult.docs.map(e => e.id)).toEqual(expectedResult);
   });
 });

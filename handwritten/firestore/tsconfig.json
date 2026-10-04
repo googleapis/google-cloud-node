@@ -14,6 +14,10 @@
     "declaration": true,
     "declarationDir": "build/types",
     "stripInternal": false,
+    "baseUrl": ".",
+    "paths": {
+      "vitest": ["./dev/test/util/vitest_globals.d.ts"]
+    }
   },
   "include": [
     "dev/src/*.d.ts",
@@ -25,6 +29,7 @@
     "dev/test/*.ts",
     "dev/test/**/*.ts",
     "dev/system-test/*.ts",
+    "dev/system-test/**/*.ts",
     "dev/conformance/*.ts",
     "types/*.d.ts"
   ]

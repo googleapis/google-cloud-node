@@ -12,47 +12,42 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import {describe, it} from 'mocha';
-import {expect} from 'chai';
 import {
   isPlainObject,
   tryGetPreferRestEnvironmentVariable,
   wrapError,
 } from '../src/util';
-import * as sinon from 'sinon';
 
 describe('isPlainObject()', () => {
   it('allows Object.create()', () => {
-    expect(isPlainObject(Object.create({}))).to.be.true;
-    expect(isPlainObject(Object.create(Object.prototype))).to.be.true;
-    expect(isPlainObject(Object.create(null))).to.be.true;
+    expect(isPlainObject(Object.create({}))).toBe(true);
+    expect(isPlainObject(Object.create(Object.prototype))).toBe(true);
+    expect(isPlainObject(Object.create(null))).toBe(true);
   });
 
   it(' allows plain types', () => {
-    expect(isPlainObject({foo: 'bar'})).to.be.true;
-    expect(isPlainObject({})).to.be.true;
+    expect(isPlainObject({foo: 'bar'})).toBe(true);
+    expect(isPlainObject({})).toBe(true);
   });
 
   it('rejects custom types', () => {
     class Foo {}
-    expect(isPlainObject(new Foo())).to.be.false;
-    expect(isPlainObject(Object.create(new Foo()))).to.be.false;
+    expect(isPlainObject(new Foo())).toBe(false);
+    expect(isPlainObject(Object.create(new Foo()))).toBe(false);
   });
 
   describe('tryGetPreferRestEnvironmentVariable', () => {
-    const sandbox = sinon.createSandbox();
-
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let warnSpy: any;
     let originalValue: string | undefined;
 
     beforeEach(() => {
-      warnSpy = sandbox.spy(console, 'warn');
+      warnSpy = vi.spyOn(console, 'warn');
       originalValue = process.env.FIRESTORE_PREFER_REST;
     });
 
     afterEach(() => {
-      sandbox.restore();
+      warnSpy.mockRestore();
       if (originalValue === undefined) {
         delete process.env.FIRESTORE_PREFER_REST;
       } else {
@@ -62,45 +57,45 @@ describe('isPlainObject()', () => {
 
     it('reads true', async () => {
       process.env.FIRESTORE_PREFER_REST = 'true';
-      expect(tryGetPreferRestEnvironmentVariable()).to.be.true;
+      expect(tryGetPreferRestEnvironmentVariable()).toBe(true);
     });
 
     it('reads 1', async () => {
       process.env.FIRESTORE_PREFER_REST = '1';
-      expect(tryGetPreferRestEnvironmentVariable()).to.be.true;
+      expect(tryGetPreferRestEnvironmentVariable()).toBe(true);
     });
 
     it('reads false', async () => {
       process.env.FIRESTORE_PREFER_REST = 'false';
-      expect(tryGetPreferRestEnvironmentVariable()).to.be.false;
+      expect(tryGetPreferRestEnvironmentVariable()).toBe(false);
     });
 
     it('reads 0', async () => {
       process.env.FIRESTORE_PREFER_REST = '0';
-      expect(tryGetPreferRestEnvironmentVariable()).to.be.false;
+      expect(tryGetPreferRestEnvironmentVariable()).toBe(false);
     });
 
     it('ignores case', async () => {
       process.env.FIRESTORE_PREFER_REST = 'True';
-      expect(tryGetPreferRestEnvironmentVariable()).to.be.true;
+      expect(tryGetPreferRestEnvironmentVariable()).toBe(true);
     });
 
     it('trims whitespace', async () => {
       process.env.FIRESTORE_PREFER_REST = '  true  ';
-      expect(tryGetPreferRestEnvironmentVariable()).to.be.true;
+      expect(tryGetPreferRestEnvironmentVariable()).toBe(true);
     });
 
     it('returns undefined when the environment variable is not set', async () => {
       delete process.env.FIRESTORE_PREFER_REST;
-      expect(tryGetPreferRestEnvironmentVariable()).to.be.undefined;
-      expect(warnSpy.calledOnce).to.be.false;
+      expect(tryGetPreferRestEnvironmentVariable()).toBeUndefined();
+      expect(warnSpy).toHaveBeenCalledTimes(0);
     });
 
     it('returns undefined and warns when the environment variable is set to an unsupported value', async () => {
       process.env.FIRESTORE_PREFER_REST = 'enable';
-      expect(tryGetPreferRestEnvironmentVariable()).to.be.undefined;
-      expect(warnSpy.calledOnce).to.be.true;
-      expect(warnSpy.getCall(0).args[0]).to.match(
+      expect(tryGetPreferRestEnvironmentVariable()).toBeUndefined();
+      expect(warnSpy).toHaveBeenCalledTimes(1);
+      expect(warnSpy.mock.calls[0][0]).toMatch(
         /unsupported value.*FIRESTORE_PREFER_REST/,
       );
     });
@@ -112,8 +107,8 @@ describe('wrapError()', () => {
     const err = new Error('Expected error');
     const wrapped = wrapError(err, 'Error\n    at callsite');
 
-    expect(wrapped).to.equal(err);
-    expect(wrapped.stack).to.contain('Caused by: Error\n    at callsite');
+    expect(wrapped).toBe(err);
+    expect(wrapped.stack).toContain('Caused by: Error\n    at callsite');
   });
 
   it('appends the callsite stack when the error stack is not writable', () => {
@@ -128,8 +123,8 @@ describe('wrapError()', () => {
 
     const wrapped = wrapError(err, 'Error\n    at callsite');
 
-    expect(wrapped).to.equal(err);
-    expect(wrapped.stack).to.equal(
+    expect(wrapped).toBe(err);
+    expect(wrapped.stack).toBe(
       'Error: Expected error\n    at origin\nCaused by: Error\n    at callsite',
     );
   });
@@ -148,8 +143,8 @@ describe('wrapError()', () => {
 
     const wrapped = wrapError(err, 'Error\n    at callsite');
 
-    expect(wrapped).to.equal(err);
-    expect(wrapped.stack).to.equal(
+    expect(wrapped).toBe(err);
+    expect(wrapped.stack).toBe(
       'Error: Expected error\n    at origin\nCaused by: Error\n    at callsite',
     );
   });
@@ -165,16 +160,16 @@ describe('wrapError()', () => {
 
     const wrapped = wrapError(err, 'Error\n    at callsite');
 
-    expect(wrapped).to.equal(err);
-    expect(wrapped.message).to.equal('Expected error');
-    expect(wrapped.stack).to.equal('Error: Expected error\n    at origin');
+    expect(wrapped).toBe(err);
+    expect(wrapped.message).toBe('Expected error');
+    expect(wrapped.stack).toBe('Error: Expected error\n    at origin');
   });
 
   it('returns the original error when the error object is frozen', () => {
     const err = Object.freeze(new Error('Frozen error'));
     const wrapped = wrapError(err, 'Error\n    at callsite');
 
-    expect(wrapped).to.equal(err);
-    expect(wrapped.message).to.equal('Frozen error');
+    expect(wrapped).toBe(err);
+    expect(wrapped.message).toBe('Frozen error');
   });
 });

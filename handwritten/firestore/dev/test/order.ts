@@ -12,8 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import {describe, it, beforeEach, afterEach} from 'mocha';
-import {expect} from 'chai';
+import {describe, it, beforeEach, afterEach, expect} from 'vitest';
 
 import {google} from '../protos/firestore_v1_proto_api';
 
@@ -55,7 +54,7 @@ describe('Order', () => {
   /** Converts a value into its proto representation. */
   function wrap(value: unknown): api.IValue {
     const val = firestore._serializer!.encodeValue(value);
-    expect(val).to.not.be.null;
+    expect(val).not.toBeNull();
     return val!;
   }
 
@@ -107,7 +106,7 @@ describe('Order', () => {
         {valueType: 'foo'} as InvalidApiUsage,
         {valueType: 'foo'} as InvalidApiUsage,
       );
-    }).to.throw('Unexpected value type: foo');
+    }).toThrow('Unexpected value type: foo');
   });
 
   it('throws on invalid blob', () => {
@@ -120,7 +119,7 @@ describe('Order', () => {
           bytesValue: new Uint8Array([1, 2, 3]),
         },
       );
-    }).to.throw('Blobs can only be compared if they are Buffers');
+    }).toThrow('Blobs can only be compared if they are Buffers');
   });
 
   it('compares document snapshots by name', () => {
@@ -157,12 +156,7 @@ describe('Order', () => {
 
     docs.sort(firestore.collection('col').comparator());
 
-    expect(docs.map(doc => doc.id)).to.deep.eq([
-      'doc1',
-      'doc2',
-      'doc2',
-      'doc3',
-    ]);
+    expect(docs.map(doc => doc.id)).toEqual(['doc1', 'doc2', 'doc2', 'doc3']);
   });
 
   it('is correct', () => {
@@ -359,8 +353,8 @@ describe('Order', () => {
         for (let j = 0; j < groups.length; j++) {
           for (const right of groups[j]) {
             let expected = order.primitiveComparator(i, j);
-            expect(order.compare(left, right)).to.equal(
-              expected,
+            expect(
+              order.compare(left, right),
               'comparing ' +
                 left +
                 ' (' +
@@ -374,11 +368,11 @@ describe('Order', () => {
                 ', ' +
                 j +
                 ')',
-            );
+            ).toBe(expected);
 
             expected = order.primitiveComparator(j, i);
-            expect(order.compare(right, left)).to.equal(
-              expected,
+            expect(
+              order.compare(right, left),
               'comparing ' +
                 right +
                 ' (' +
@@ -392,7 +386,7 @@ describe('Order', () => {
                 ', ' +
                 i +
                 ')',
-            );
+            ).toBe(expected);
           }
         }
       }
@@ -405,23 +399,23 @@ describe('Order', () => {
     const uint8Blob1 = wrap(Bytes.fromUint8Array(new Uint8Array([1, 2, 3]), 5));
 
     // Equality between Base64 and Base64, and between Base64 and Uint8Array
-    expect(order.compare(b64Blob1, b64Blob1Copy)).to.equal(0);
-    expect(order.compare(b64Blob1, uint8Blob1)).to.equal(0);
-    expect(order.compare(uint8Blob1, b64Blob1)).to.equal(0);
+    expect(order.compare(b64Blob1, b64Blob1Copy)).toBe(0);
+    expect(order.compare(b64Blob1, uint8Blob1)).toBe(0);
+    expect(order.compare(uint8Blob1, b64Blob1)).toBe(0);
 
     // Subtype ordering: subtype 5 < subtype 7
     const b64BlobSubtype7 = bsonBinaryBase64(7, [1]);
-    expect(order.compare(b64Blob1, b64BlobSubtype7)).to.be.lessThan(0);
-    expect(order.compare(b64BlobSubtype7, b64Blob1)).to.be.greaterThan(0);
+    expect(order.compare(b64Blob1, b64BlobSubtype7)).toBeLessThan(0);
+    expect(order.compare(b64BlobSubtype7, b64Blob1)).toBeGreaterThan(0);
 
     // Same subtype, different data ordering
     const b64BlobSubtype7Larger = bsonBinaryBase64(7, [2]);
-    expect(
-      order.compare(b64BlobSubtype7, b64BlobSubtype7Larger),
-    ).to.be.lessThan(0);
+    expect(order.compare(b64BlobSubtype7, b64BlobSubtype7Larger)).toBeLessThan(
+      0,
+    );
     expect(
       order.compare(b64BlobSubtype7Larger, b64BlobSubtype7),
-    ).to.be.greaterThan(0);
+    ).toBeGreaterThan(0);
   });
 });
 
@@ -638,5 +632,5 @@ describe('CompareUtf8Strings', () => {
       );
       throw new Error('Test failed');
     }
-  }).timeout(30000);
+  }, 30000);
 });

@@ -12,9 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import {describe, it} from 'mocha';
-import {expect} from 'chai';
-
 function isModuleLoaded(moduleName: string) {
   return !!Object.keys(require.cache).find(
     path => path.indexOf(`node_modules/${moduleName}`) !== -1,
@@ -24,17 +21,17 @@ function isModuleLoaded(moduleName: string) {
 describe('Index.js', () => {
   (isModuleLoaded('google-gax') ? it.skip : it)(
     'does not load google-gax',
-    () => {
-      require('../src/index');
-      expect(isModuleLoaded('google-gax')).to.be.false;
+    async () => {
+      await import('../src/index');
+      expect(isModuleLoaded('google-gax')).toBe(false);
     },
   );
 
   (isModuleLoaded('protobufjs') ? it.skip : it)(
     'does not load protobufjs',
-    () => {
-      require('../src/index');
-      expect(isModuleLoaded('protobufjs')).to.be.false;
+    async () => {
+      await import('../src/index');
+      expect(isModuleLoaded('protobufjs')).toBe(false);
     },
   );
 });

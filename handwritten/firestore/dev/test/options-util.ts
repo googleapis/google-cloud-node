@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-import {expect} from 'chai';
+import {expect} from 'vitest';
 import {Serializer} from '../src/serializer';
 import {createInstance} from './util/helpers';
 import {Firestore} from '../src';
@@ -44,7 +44,7 @@ describe('OptionsUtil', () => {
       fooBar: 'recommended',
     });
 
-    expect(proto).deep.equal({
+    expect(proto).toEqual({
       foo_bar: {
         stringValue: 'recommended',
       },
@@ -59,7 +59,7 @@ describe('OptionsUtil', () => {
       {baz: 'foo'},
     );
 
-    expect(proto).to.deep.equal({
+    expect(proto).toEqual({
       baz: {
         stringValue: 'foo',
       },
@@ -74,7 +74,7 @@ describe('OptionsUtil', () => {
       {'foo.bar': 'baz'},
     );
 
-    expect(proto).to.deep.equal({
+    expect(proto).toEqual({
       foo: {
         mapValue: {
           fields: {
@@ -101,7 +101,7 @@ describe('OptionsUtil', () => {
       },
     );
 
-    expect(proto).to.deep.equal({
+    expect(proto).toEqual({
       index_mode: {
         stringValue: 'baz',
       },
@@ -133,7 +133,7 @@ describe('OptionsUtil', () => {
       },
     );
 
-    expect(proto).to.deep.equal({
+    expect(proto).toEqual({
       foo: {
         mapValue: {
           fields: {
@@ -178,7 +178,7 @@ describe('OptionsUtil', () => {
       },
     );
 
-    expect(proto).to.deep.equal({
+    expect(proto).toEqual({
       foo: {
         mapValue: {
           fields: {
@@ -209,7 +209,7 @@ describe('OptionsUtil', () => {
       },
     );
 
-    expect(proto).to.deep.equal({
+    expect(proto).toEqual({
       foo: {
         mapValue: {
           fields: {

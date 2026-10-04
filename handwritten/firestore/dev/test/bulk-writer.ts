@@ -14,8 +14,7 @@
 
 import {BulkWriterOptions, DocumentData} from '@google-cloud/firestore';
 
-import {afterEach, beforeEach, describe, it} from 'mocha';
-import {expect} from 'chai';
+import {afterEach, beforeEach, describe, it, expect} from 'vitest';
 import {GoogleError, Status} from 'google-gax';
 
 import * as proto from '../protos/firestore_v1_proto_api';
@@ -54,6 +53,16 @@ import {
   updateMask,
   verifyInstance,
 } from './util/helpers';
+import {
+  createOp,
+  createRequest,
+  deleteOp,
+  failedResponse,
+  mergeResponses,
+  setOp,
+  successResponse,
+  updateOp,
+} from './util/bulk_writer_helpers';
 import api = proto.google.firestore.v1;
 
 // Change the argument to 'console.log' to enable debug output.
@@ -64,73 +73,6 @@ const PROJECT_ID = 'test-project';
 interface RequestResponse {
   request: api.IBatchWriteRequest;
   response: api.IBatchWriteResponse;
-}
-
-export function createRequest(requests: api.IWrite[]): api.IBatchWriteRequest {
-  return {
-    writes: requests,
-  };
-}
-
-export function successResponse(
-  updateTimeSeconds: number,
-): api.IBatchWriteResponse {
-  return {
-    writeResults: [
-      {
-        updateTime: {
-          nanos: 0,
-          seconds: updateTimeSeconds,
-        },
-      },
-    ],
-    status: [{code: Status.OK}],
-  };
-}
-
-export function failedResponse(
-  code = Status.DEADLINE_EXCEEDED,
-): api.IBatchWriteResponse {
-  return {
-    writeResults: [
-      {
-        updateTime: null,
-      },
-    ],
-    status: [{code}],
-  };
-}
-
-export function mergeResponses(
-  responses: api.IBatchWriteResponse[],
-): api.IBatchWriteResponse {
-  return {
-    writeResults: responses.map(v => v.writeResults![0]),
-    status: responses.map(v => v.status![0]),
-  };
-}
-
-export function setOp(doc: string, value: string): api.IWrite {
-  return set({
-    document: document(doc, 'foo', value),
-  }).writes![0];
-}
-
-export function updateOp(doc: string, value: string): api.IWrite {
-  return update({
-    document: document(doc, 'foo', value),
-    mask: updateMask('foo'),
-  }).writes![0];
-}
-
-export function createOp(doc: string, value: string): api.IWrite {
-  return create({
-    document: document(doc, 'foo', value),
-  }).writes![0];
-}
-
-export function deleteOp(doc: string): api.IWrite {
-  return remove(doc).writes![0];
 }
 
 describe.skip('BulkWriter', () => {
@@ -159,7 +101,7 @@ describe.skip('BulkWriter', () => {
   }
 
   function verifyOpCount(expected: number): void {
-    expect(opCount).to.equal(expected);
+    expect(opCount).toBe(expected);
   }
 
   /**
@@ -168,9 +110,9 @@ describe.skip('BulkWriter', () => {
   function instantiateInstance(mock: RequestResponse[]): Promise<BulkWriter> {
     const overrides: ApiOverride = {
       batchWrite: async (request, options) => {
-        expect(options!.retry!.retryCodes).contains(Status.ABORTED);
+        expect(options!.retry!.retryCodes).toContain(Status.ABORTED);
 
-        expect(request).to.deep.eq({
+        expect(request).toEqual({
           database: `projects/${PROJECT_ID}/databases/(default)`,
           writes: mock[requestCounter].request.writes,
         });
@@ -196,7 +138,7 @@ describe.skip('BulkWriter', () => {
   describe('options', () => {
     it('requires object', async () => {
       const firestore = await createInstance();
-      expect(() => firestore.bulkWriter(42 as InvalidApiUsage)).to.throw(
+      expect(() => firestore.bulkWriter(42 as InvalidApiUsage)).toThrow(
         'Value for argument "options" is not a valid bulkWriter() options argument. Input is not an object.',
       );
     });
@@ -205,13 +147,13 @@ describe.skip('BulkWriter', () => {
       const firestore = await createInstance();
       expect(() =>
         firestore.bulkWriter({throttling: {initialOpsPerSecond: -1}}),
-      ).to.throw(
+      ).toThrow(
         'Value for argument "initialOpsPerSecond" must be within [1, Infinity] inclusive, but was: -1',
       );
 
       expect(() =>
         firestore.bulkWriter({throttling: {initialOpsPerSecond: 500.5}}),
-      ).to.throw(
+      ).toThrow(
         'Value for argument "initialOpsPerSecond" is not a valid integer.',
       );
     });
@@ -220,15 +162,13 @@ describe.skip('BulkWriter', () => {
       const firestore = await createInstance();
       expect(() =>
         firestore.bulkWriter({throttling: {maxOpsPerSecond: -1}}),
-      ).to.throw(
+      ).toThrow(
         'Value for argument "maxOpsPerSecond" must be within [1, Infinity] inclusive, but was: -1',
       );
 
       expect(() =>
         firestore.bulkWriter({throttling: {maxOpsPerSecond: 500.5}}),
-      ).to.throw(
-        'Value for argument "maxOpsPerSecond" is not a valid integer.',
-      );
+      ).toThrow('Value for argument "maxOpsPerSecond" is not a valid integer.');
     });
 
     it('maxOpsPerSecond must be greater than initial ops per second', async () => {
@@ -238,7 +178,7 @@ describe.skip('BulkWriter', () => {
         firestore.bulkWriter({
           throttling: {initialOpsPerSecond: 550, maxOpsPerSecond: 500},
         }),
-      ).to.throw(
+      ).toThrow(
         'Value for argument "options" is not a valid bulkWriter() options argument. "maxOpsPerSecond" cannot be less than "initialOpsPerSecond".',
       );
     });
@@ -249,50 +189,50 @@ describe.skip('BulkWriter', () => {
       let bulkWriter = firestore.bulkWriter({
         throttling: {initialOpsPerSecond: 500, maxOpsPerSecond: 550},
       });
-      expect(bulkWriter._rateLimiter.availableTokens).to.equal(500);
-      expect(bulkWriter._rateLimiter.maximumCapacity).to.equal(550);
+      expect(bulkWriter._rateLimiter.availableTokens).toBe(500);
+      expect(bulkWriter._rateLimiter.maximumCapacity).toBe(550);
 
       bulkWriter = firestore.bulkWriter({
         throttling: {maxOpsPerSecond: 1000},
       });
-      expect(bulkWriter._rateLimiter.availableTokens).to.equal(500);
-      expect(bulkWriter._rateLimiter.maximumCapacity).to.equal(1000);
+      expect(bulkWriter._rateLimiter.availableTokens).toBe(500);
+      expect(bulkWriter._rateLimiter.maximumCapacity).toBe(1000);
 
       bulkWriter = firestore.bulkWriter({
         throttling: {initialOpsPerSecond: 100},
       });
-      expect(bulkWriter._rateLimiter.availableTokens).to.equal(100);
-      expect(bulkWriter._rateLimiter.maximumCapacity).to.equal(
+      expect(bulkWriter._rateLimiter.availableTokens).toBe(100);
+      expect(bulkWriter._rateLimiter.maximumCapacity).toBe(
         DEFAULT_MAXIMUM_OPS_PER_SECOND_LIMIT,
       );
 
       bulkWriter = firestore.bulkWriter({
         throttling: {maxOpsPerSecond: 100},
       });
-      expect(bulkWriter._rateLimiter.availableTokens).to.equal(100);
-      expect(bulkWriter._rateLimiter.maximumCapacity).to.equal(100);
+      expect(bulkWriter._rateLimiter.availableTokens).toBe(100);
+      expect(bulkWriter._rateLimiter.maximumCapacity).toBe(100);
 
       bulkWriter = firestore.bulkWriter();
-      expect(bulkWriter._rateLimiter.availableTokens).to.equal(
+      expect(bulkWriter._rateLimiter.availableTokens).toBe(
         DEFAULT_INITIAL_OPS_PER_SECOND_LIMIT,
       );
-      expect(bulkWriter._rateLimiter.maximumCapacity).to.equal(
+      expect(bulkWriter._rateLimiter.maximumCapacity).toBe(
         DEFAULT_MAXIMUM_OPS_PER_SECOND_LIMIT,
       );
 
       bulkWriter = firestore.bulkWriter({throttling: true});
-      expect(bulkWriter._rateLimiter.availableTokens).to.equal(
+      expect(bulkWriter._rateLimiter.availableTokens).toBe(
         DEFAULT_INITIAL_OPS_PER_SECOND_LIMIT,
       );
-      expect(bulkWriter._rateLimiter.maximumCapacity).to.equal(
+      expect(bulkWriter._rateLimiter.maximumCapacity).toBe(
         DEFAULT_MAXIMUM_OPS_PER_SECOND_LIMIT,
       );
 
       bulkWriter = firestore.bulkWriter({throttling: false});
-      expect(bulkWriter._rateLimiter.availableTokens).to.equal(
+      expect(bulkWriter._rateLimiter.availableTokens).toBe(
         Number.POSITIVE_INFINITY,
       );
-      expect(bulkWriter._rateLimiter.maximumCapacity).to.equal(
+      expect(bulkWriter._rateLimiter.maximumCapacity).toBe(
         Number.POSITIVE_INFINITY,
       );
     });
@@ -310,7 +250,7 @@ describe.skip('BulkWriter', () => {
     incrementOpCount();
     await bulkWriter.close();
     verifyOpCount(1);
-    expect(writeResult.writeTime.isEqual(new Timestamp(2, 0))).to.be.true;
+    expect(writeResult.writeTime.isEqual(new Timestamp(2, 0))).toBe(true);
   });
 
   it('has an update() method', async () => {
@@ -325,7 +265,7 @@ describe.skip('BulkWriter', () => {
     incrementOpCount();
     await bulkWriter.close();
     verifyOpCount(1);
-    expect(writeResult.writeTime.isEqual(new Timestamp(2, 0))).to.be.true;
+    expect(writeResult.writeTime.isEqual(new Timestamp(2, 0))).toBe(true);
   });
 
   it('has a delete() method', async () => {
@@ -340,7 +280,7 @@ describe.skip('BulkWriter', () => {
     incrementOpCount();
     await bulkWriter.close();
     verifyOpCount(1);
-    expect(writeResult.writeTime.isEqual(new Timestamp(2, 0))).to.be.true;
+    expect(writeResult.writeTime.isEqual(new Timestamp(2, 0))).toBe(true);
   });
 
   it('has a create() method', async () => {
@@ -355,7 +295,7 @@ describe.skip('BulkWriter', () => {
     incrementOpCount();
     await bulkWriter.close();
     verifyOpCount(1);
-    expect(writeResult.writeTime.isEqual(new Timestamp(2, 0))).to.be.true;
+    expect(writeResult.writeTime.isEqual(new Timestamp(2, 0))).toBe(true);
   });
 
   it('surfaces errors', async () => {
@@ -369,8 +309,8 @@ describe.skip('BulkWriter', () => {
     const doc = firestore.doc('collectionId/doc');
     void bulkWriter.set(doc, {foo: 'bar'}).catch(err => {
       incrementOpCount();
-      expect(err instanceof BulkWriterError).to.be.true;
-      expect(err.code).to.equal(Status.DEADLINE_EXCEEDED);
+      expect(err instanceof BulkWriterError).toBe(true);
+      expect(err.code).toBe(Status.DEADLINE_EXCEEDED);
     });
 
     await bulkWriter.close();
@@ -397,7 +337,7 @@ describe.skip('BulkWriter', () => {
 
     await bulkWriter.close();
     await unhandledDeferred.promise;
-    expect(errorThrown).to.be.true;
+    expect(errorThrown).toBe(true);
   });
 
   it('swallows UnhandledPromiseRejections if an error handler is passed in', async () => {
@@ -467,10 +407,10 @@ describe.skip('BulkWriter', () => {
     const expected = 'BulkWriter has already been closed.';
     const doc = firestore.doc('collectionId/doc');
     await bulkWriter.close();
-    expect(() => bulkWriter.set(doc, {})).to.throw(expected);
-    expect(() => bulkWriter.create(doc, {})).to.throw(expected);
-    expect(() => bulkWriter.update(doc, {})).to.throw(expected);
-    expect(() => bulkWriter.flush()).to.throw(expected);
+    expect(() => bulkWriter.set(doc, {})).toThrow(expected);
+    expect(() => bulkWriter.create(doc, {})).toThrow(expected);
+    expect(() => bulkWriter.update(doc, {})).toThrow(expected);
+    expect(() => bulkWriter.flush()).toThrow(expected);
 
     // Calling close() multiple times is allowed.
     await bulkWriter.close();
@@ -545,11 +485,11 @@ describe.skip('BulkWriter', () => {
     void bulkWriter
       .set(firestore.doc('collectionId/doc4'), {foo: 'bar'})
       .then(incrementOpCount);
-    expect(bulkWriter._getBufferedOperationsCount()).to.equal(1);
+    expect(bulkWriter._getBufferedOperationsCount()).toBe(1);
     void bulkWriter
       .set(firestore.doc('collectionId/doc5'), {foo: 'bar'})
       .then(incrementOpCount);
-    expect(bulkWriter._getBufferedOperationsCount()).to.equal(2);
+    expect(bulkWriter._getBufferedOperationsCount()).toBe(2);
     await bulkWriter.close();
     verifyOpCount(5);
   });
@@ -641,7 +581,7 @@ describe.skip('BulkWriter', () => {
     void bulkWriter.update(firestore.doc('collectionId/doc3'), {foo: 'bar'});
     void bulkWriter.delete(firestore.doc('collectionId/doc4'));
     return bulkWriter.close().then(() => {
-      expect(writeResults).to.deep.equal([1, 2, 3, 4]);
+      expect(writeResults).toEqual([1, 2, 3, 4]);
     });
   });
 
@@ -689,7 +629,7 @@ describe.skip('BulkWriter', () => {
     void bulkWriter.update(firestore.doc('collectionId/doc2'), {foo: 'bar'});
     void bulkWriter.delete(firestore.doc('collectionId/doc3'));
     return bulkWriter.close().then(() => {
-      expect(ops).to.deep.equal([
+      expect(ops).toEqual([
         'success',
         'set',
         'update',
@@ -698,8 +638,8 @@ describe.skip('BulkWriter', () => {
         'success',
         'success',
       ]);
-      expect(writeResults).to.deep.equal([1, 2, 3, 4]);
-      expect(timeoutHandlerCounter).to.equal(1);
+      expect(writeResults).toEqual([1, 2, 3, 4]);
+      expect(timeoutHandlerCounter).toBe(1);
     });
   });
 
@@ -719,12 +659,12 @@ describe.skip('BulkWriter', () => {
     bulkWriter
       .set(firestore.doc('collectionId/doc'), {foo: 'bar'})
       .catch(err => {
-        expect(err.code).to.equal(Status.INTERNAL);
+        expect(err.code).toBe(Status.INTERNAL);
         catchCalled = true;
       });
     await bulkWriter.flush();
-    expect(catchCalled).to.be.true;
-    expect(onWriteErrorCalled).to.be.true;
+    expect(catchCalled).toBe(true);
+    expect(onWriteErrorCalled).toBe(true);
   });
 
   it('retries INTERNAL errors for deletes', async () => {
@@ -752,8 +692,8 @@ describe.skip('BulkWriter', () => {
       });
     const del = bulkWriter.delete(firestore.doc('collectionId/doc2'));
     await bulkWriter.close();
-    expect((await del).writeTime).to.deep.equal(new Timestamp(2, 0));
-    expect(errorCaught).to.be.true;
+    expect((await del).writeTime).toEqual(new Timestamp(2, 0));
+    expect(errorCaught).toBe(true);
   });
 
   it('surfaces errors thrown by user-provided error callback', async () => {
@@ -770,11 +710,11 @@ describe.skip('BulkWriter', () => {
     void bulkWriter
       .set(firestore.doc('collectionId/doc'), {foo: 'bar'})
       .catch(err => {
-        expect(err.message).to.equal('User provided error callback failed');
+        expect(err.message).toBe('User provided error callback failed');
         errorCaught = true;
       });
     await bulkWriter.flush();
-    expect(errorCaught).to.be.true;
+    expect(errorCaught).toBe(true);
   });
 
   it('write fails if user-provided success callback fails', async () => {
@@ -791,11 +731,11 @@ describe.skip('BulkWriter', () => {
     void bulkWriter
       .set(firestore.doc('collectionId/doc'), {foo: 'bar'})
       .catch(err => {
-        expect(err.message).to.equal('User provided success callback failed');
+        expect(err.message).toBe('User provided success callback failed');
         errorCaught = true;
       });
     await bulkWriter.flush();
-    expect(errorCaught).to.be.true;
+    expect(errorCaught).toBe(true);
   });
 
   it('retries multiple times', async () => {
@@ -827,8 +767,8 @@ describe.skip('BulkWriter', () => {
         writeResult = res.writeTime.seconds;
       });
     await bulkWriter.close();
-    expect(writeResult).to.equal(1);
-    expect(timeoutHandlerCounter).to.equal(3);
+    expect(writeResult).toBe(1);
+    expect(timeoutHandlerCounter).toBe(3);
   });
 
   it('retries with smaller batch size', async () => {
@@ -871,7 +811,7 @@ describe.skip('BulkWriter', () => {
     }
 
     await bulkWriter.close();
-    expect(opCount).to.equal(15);
+    expect(opCount).toBe(15);
   });
 
   it('retries maintain correct write resolution ordering', async () => {
@@ -907,9 +847,9 @@ describe.skip('BulkWriter', () => {
         ops.push('after_flush');
       });
 
-    expect(ops).to.deep.equal(['before_flush', 'flush']);
+    expect(ops).toEqual(['before_flush', 'flush']);
     await bulkWriter.close();
-    expect(ops).to.deep.equal(['before_flush', 'flush', 'after_flush']);
+    expect(ops).toEqual(['before_flush', 'flush', 'after_flush']);
   });
 
   it('returns the error if no retry is specified', async () => {
@@ -941,7 +881,7 @@ describe.skip('BulkWriter', () => {
         code = err.code;
       });
     await bulkWriter.close();
-    expect(code).to.equal(Status.INTERNAL);
+    expect(code).toBe(Status.INTERNAL);
   });
 
   it('splits into multiple batches after exceeding maximum batch size', async () => {
@@ -1097,8 +1037,8 @@ describe.skip('BulkWriter', () => {
       foo: 'bar',
     });
     await bulkWriter.close();
-    expect((await set2).writeTime).to.deep.equal(new Timestamp(2, 0));
-    expect((await set3).writeTime).to.deep.equal(new Timestamp(3, 0));
+    expect((await set2).writeTime).toEqual(new Timestamp(2, 0));
+    expect((await set3).writeTime).toEqual(new Timestamp(3, 0));
 
     // Check that set1 was not retried
     verifyOpCount(1);
@@ -1127,28 +1067,30 @@ describe.skip('BulkWriter', () => {
       });
     }
 
-    it('does not send batches if doing so exceeds the rate limit', done => {
-      void instantiateInstance({throttling: {maxOpsPerSecond: 5}}).then(
-        bulkWriter => {
-          let timeoutCalled = false;
-          setTimeoutHandler((_, timeout) => {
-            if (!timeoutCalled && timeout > 0) {
-              timeoutCalled = true;
-              done();
-            }
-          });
-          for (let i = 0; i < 500; i++) {
-            void bulkWriter.set(firestore.doc('collectionId/doc' + i), {
-              foo: 'bar',
+    it('does not send batches if doing so exceeds the rate limit', () => {
+      return new Promise<void>(resolve => {
+        void instantiateInstance({throttling: {maxOpsPerSecond: 5}}).then(
+          bulkWriter => {
+            let timeoutCalled = false;
+            setTimeoutHandler((_, timeout) => {
+              if (!timeoutCalled && timeout > 0) {
+                timeoutCalled = true;
+                resolve();
+              }
             });
-          }
-          // The close() promise will never resolve. Since we do not call the
-          // callback function in the overridden handler, subsequent requests
-          // after the timeout will not be made. The close() call is used to
-          // ensure that the final batch is sent.
-          void bulkWriter.close();
-        },
-      );
+            for (let i = 0; i < 500; i++) {
+              void bulkWriter.set(firestore.doc('collectionId/doc' + i), {
+                foo: 'bar',
+              });
+            }
+            // The close() promise will never resolve. Since we do not call the
+            // callback function in the overridden handler, subsequent requests
+            // after the timeout will not be made. The close() call is used to
+            // ensure that the final batch is sent.
+            void bulkWriter.close();
+          },
+        );
+      });
     });
   });
 
@@ -1188,7 +1130,7 @@ describe.skip('BulkWriter', () => {
         writeResult = result;
       });
     return bulkWriter.close().then(async () => {
-      expect(writeResult.writeTime.isEqual(new Timestamp(1, 0))).to.be.true;
+      expect(writeResult.writeTime.isEqual(new Timestamp(1, 0))).toBe(true);
     });
   });
 
@@ -1196,8 +1138,10 @@ describe.skip('BulkWriter', () => {
     setTimeoutHandler((fn, timeout) => {
       const expected =
         DEFAULT_BACKOFF_INITIAL_DELAY_MS * Math.pow(1.5, timeoutHandlerCounter);
-      expect(timeout).to.be.within(
+      expect(timeout).toBeGreaterThanOrEqual(
         (1 - DEFAULT_JITTER_FACTOR) * expected,
+      );
+      expect(timeout).toBeLessThanOrEqual(
         (1 + DEFAULT_JITTER_FACTOR) * expected,
       );
       timeoutHandlerCounter++;
@@ -1222,21 +1166,23 @@ describe.skip('BulkWriter', () => {
         foo: 'bar',
       })
       .catch(err => {
-        expect(err instanceof BulkWriterError).to.be.true;
-        expect(err.code).to.equal(Status.ABORTED);
+        expect(err instanceof BulkWriterError).toBe(true);
+        expect(err.code).toBe(Status.ABORTED);
         incrementOpCount();
       });
     return bulkWriter.close().then(() => {
       verifyOpCount(1);
-      expect(timeoutHandlerCounter).to.equal(MAX_RETRY_ATTEMPTS - 1);
+      expect(timeoutHandlerCounter).toBe(MAX_RETRY_ATTEMPTS - 1);
     });
   });
 
   it('applies maximum backoff on retries for RESOURCE_EXHAUSTED', async () => {
     setTimeoutHandler((fn, timeout) => {
       timeoutHandlerCounter++;
-      expect(timeout).to.be.within(
+      expect(timeout).toBeGreaterThanOrEqual(
         (1 - DEFAULT_JITTER_FACTOR) * DEFAULT_BACKOFF_MAX_DELAY_MS,
+      );
+      expect(timeout).toBeLessThanOrEqual(
         (1 + DEFAULT_JITTER_FACTOR) * DEFAULT_BACKOFF_MAX_DELAY_MS,
       );
       fn();
@@ -1261,13 +1207,13 @@ describe.skip('BulkWriter', () => {
         foo: 'bar',
       })
       .catch(err => {
-        expect(err instanceof BulkWriterError).to.be.true;
-        expect(err.code).to.equal(Status.RESOURCE_EXHAUSTED);
+        expect(err instanceof BulkWriterError).toBe(true);
+        expect(err.code).toBe(Status.RESOURCE_EXHAUSTED);
         incrementOpCount();
       });
     return bulkWriter.close().then(() => {
       verifyOpCount(1);
-      expect(timeoutHandlerCounter).to.equal(4);
+      expect(timeoutHandlerCounter).toBe(4);
     });
   });
 
@@ -1279,8 +1225,10 @@ describe.skip('BulkWriter', () => {
     setTimeoutHandler((fn, timeout) => {
       // 1st batch should have max backoff. 2nd batch should have 1 round
       // of backoff applied.
-      expect(timeout).to.be.within(
+      expect(timeout).toBeGreaterThanOrEqual(
         (1 - DEFAULT_JITTER_FACTOR) * expected[timeoutHandlerCounter],
+      );
+      expect(timeout).toBeLessThanOrEqual(
         (1 + DEFAULT_JITTER_FACTOR) * expected[timeoutHandlerCounter],
       );
       timeoutHandlerCounter++;
@@ -1315,7 +1263,7 @@ describe.skip('BulkWriter', () => {
       foo: 'bar',
     });
     return bulkWriter.close().then(() => {
-      expect(timeoutHandlerCounter).to.equal(2);
+      expect(timeoutHandlerCounter).toBe(2);
     });
   });
 
@@ -1391,14 +1339,14 @@ describe.skip('BulkWriter', () => {
       void bulkWriter
         .create(firestore.doc('collectionId/doc'), {foo: 'bar'})
         .catch(err => {
-          expect(err.message).to.equal('Mock batchWrite failed in test');
+          expect(err.message).toBe('Mock batchWrite failed in test');
           incrementOpCount();
         });
 
       void bulkWriter
         .set(firestore.doc('collectionId/doc2'), {foo: 'bar'})
         .catch(err => {
-          expect(err.message).to.equal('Mock batchWrite failed in test');
+          expect(err.message).toBe('Mock batchWrite failed in test');
           incrementOpCount();
         });
 

@@ -15,8 +15,6 @@
  * limitations under the License.
  */
 
-import {expect} from 'chai';
-import * as sinon from 'sinon';
 import {createInstance, stream} from '../util/helpers';
 import {google} from '../../protos/firestore_v1_proto_api';
 import {Firestore, Timestamp} from '../../src';
@@ -45,15 +43,15 @@ describe('execute(Pipeline|PipelineExecuteOptions)', () => {
       .collection('foo')
       .execute();
 
-    expect(pipelineSnapshot.results.length).to.equal(0);
+    expect(pipelineSnapshot.results.length).toBe(0);
 
-    expect(pipelineSnapshot.executionTime.toProto()).to.deep.equal(
+    expect(pipelineSnapshot.executionTime.toProto()).toEqual(
       executeTime.toProto(),
     );
   });
 
   it('serializes the pipeline', async () => {
-    const spy = sinon.fake.returns(stream());
+    const spy = vi.fn().mockReturnValue(stream());
     const firestore = await createInstance({
       executePipeline: spy,
     });
@@ -79,13 +77,13 @@ describe('execute(Pipeline|PipelineExecuteOptions)', () => {
         },
       },
     };
-    expect(spy.args[FIRST_CALL][EXECUTE_PIPELINE_REQUEST]).to.deep.equal(
+    expect(spy.mock.calls[FIRST_CALL][EXECUTE_PIPELINE_REQUEST]).toEqual(
       executePipelineRequest,
     );
   });
 
   it('serializes the pipeline options', async () => {
-    const spy = sinon.fake.returns(stream());
+    const spy = vi.fn().mockReturnValue(stream());
     const firestore = await createInstance({
       executePipeline: spy,
     });
@@ -132,13 +130,13 @@ describe('execute(Pipeline|PipelineExecuteOptions)', () => {
         },
       },
     };
-    expect(spy.args[FIRST_CALL][EXECUTE_PIPELINE_REQUEST]).to.deep.equal(
+    expect(spy.mock.calls[FIRST_CALL][EXECUTE_PIPELINE_REQUEST]).toEqual(
       executePipelineRequest,
     );
   });
 
   it('serializes the pipeline raw options', async () => {
-    const spy = sinon.fake.returns(stream());
+    const spy = vi.fn().mockReturnValue(stream());
     const firestore = await createInstance({
       executePipeline: spy,
     });
@@ -175,7 +173,7 @@ describe('execute(Pipeline|PipelineExecuteOptions)', () => {
         },
       },
     };
-    expect(spy.args[FIRST_CALL][EXECUTE_PIPELINE_REQUEST]).to.deep.equal(
+    expect(spy.mock.calls[FIRST_CALL][EXECUTE_PIPELINE_REQUEST]).toEqual(
       executePipelineRequest,
     );
   });
@@ -187,11 +185,11 @@ describe('execute(Pipeline|PipelineExecuteOptions)', () => {
 
       expect(() => {
         firestore.pipeline().documents([docRef]);
-      }).not.to.throw();
+      }).not.toThrow();
 
       expect(() => {
         firestore.pipeline().documents({docs: [docRef]});
-      }).not.to.throw();
+      }).not.toThrow();
     });
 
     it('accepts mixed string paths and DocumentReferences on uninitialized client', () => {
@@ -200,7 +198,7 @@ describe('execute(Pipeline|PipelineExecuteOptions)', () => {
 
       expect(() => {
         firestore.pipeline().documents(['users/bob', docRef]);
-      }).not.to.throw();
+      }).not.toThrow();
     });
 
     it('accepts CollectionReference when Firestore projectId is uninitialized', () => {
@@ -209,11 +207,11 @@ describe('execute(Pipeline|PipelineExecuteOptions)', () => {
 
       expect(() => {
         firestore.pipeline().collection(colRef);
-      }).not.to.throw();
+      }).not.toThrow();
 
       expect(() => {
         firestore.pipeline().collection({collection: colRef});
-      }).not.to.throw();
+      }).not.toThrow();
     });
 
     it('rejects DocumentReference from another database when target is uninitialized', () => {
@@ -226,7 +224,7 @@ describe('execute(Pipeline|PipelineExecuteOptions)', () => {
 
       expect(() => {
         firestore.pipeline().documents([otherDocRef]);
-      }).to.throw(/Invalid DocumentReference.*database name/);
+      }).toThrow(/Invalid DocumentReference.*database name/);
     });
 
     it('rejects CollectionReference from another database when target is uninitialized', () => {
@@ -239,7 +237,7 @@ describe('execute(Pipeline|PipelineExecuteOptions)', () => {
 
       expect(() => {
         firestore.pipeline().collection(otherColRef);
-      }).to.throw(/Invalid CollectionReference.*database name/);
+      }).toThrow(/Invalid CollectionReference.*database name/);
     });
   });
 });
