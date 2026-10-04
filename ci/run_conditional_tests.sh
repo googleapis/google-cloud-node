@@ -121,6 +121,7 @@ fi
 if [[ "${JS_RUNTIME}" == "bun" || "${TEST_CMD}" == *bun* ]]; then
     subdirs=(
         packages
+        handwritten
         core/packages
     )
 else
