@@ -26,7 +26,7 @@
   },
   "scripts": {
     "lint": "gts check --no-inline-config",
-    "test": "node ../../../bin/run-test.cjs build/esm/test",
+    "test": "node ../../../bin/run-test.cjs --fetch-shim build/esm/test",
     "presystem-test": "npm run compile",
     "system-test": "mocha build/esm/system-test --timeout 80000",
     "compile": "tsc -b ./tsconfig.json ./tsconfig.cjs.json && node utils/enable-esm.mjs",

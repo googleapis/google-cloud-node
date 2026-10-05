@@ -17,7 +17,7 @@
     "prebenchmark": "npm run compile",
     "benchmark": "node build/benchmark/bench.js",
     "compile": "tsc -p .",
-    "test": "node ../../../bin/run-test.cjs build/test",
+    "test": "node ../../../bin/run-test.cjs --fetch-shim build/test",
     "system-test": "node ../../../bin/run-test.cjs build/system-test --timeout 600000",
     "presystem-test": "npm run compile",
     "fix": "gts fix",
