@@ -43,14 +43,6 @@ import {FileExceptionMessages} from '../src/file.js';
 
 nock.disableNetConnect();
 
-class AbortController {
-  aborted = false;
-  signal = this;
-  abort() {
-    this.aborted = true;
-  }
-}
-
 const RESUMABLE_INCOMPLETE_STATUS_CODE = 308;
 /** 256 KiB */
 const CHUNK_SIZE_MULTIPLE = 2 ** 18;
@@ -103,7 +95,6 @@ describe('resumable-upload', () => {
   const keyFile = path.join(getDirName(), '../../../test/fixtures/keys.json');
 
   before(() => {
-    mockery.registerMock('abort-controller', AbortController);
     mockery.enable({useCleanCache: true, warnOnUnregistered: false});
     upload = require('../src/resumable-upload').upload;
   });
