@@ -4,6 +4,33 @@
     {
       "changes": [
         {
+          "type": "fix",
+          "sha": "102b3f6d0eb80b3b8814d71d53e50b5240556340",
+          "message": "Deduplicate pnpm install in run_single_test and refine turbo compile inputs",
+          "issues": [
+            "9439"
+          ],
+          "scope": "ci"
+        },
+        {
+          "type": "fix",
+          "sha": "5f580f0f6a457c32c613dfbeffe3dbd151b4e8fd",
+          "message": "Unblock Cloud RAD docs generation",
+          "issues": [
+            "9474"
+          ],
+          "scope": "firestore"
+        }
+      ],
+      "version": "9.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/firestore",
+      "id": "8bc8135b-1e55-4bfd-b6f4-6f97156ed225",
+      "createTime": "2026-10-01T08:15:34.079Z"
+    },
+    {
+      "changes": [
+        {
           "type": "feat",
           "sha": "514e2f64ba67ad3ab956fbe3eeafa507d44ca597",
           "message": "Update API sources and regenerate",
@@ -99702,5 +99729,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-09-29T18:18:07.698Z"
+  "updateTime": "2026-10-01T08:15:34.079Z"
 }

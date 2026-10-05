@@ -108,6 +108,8 @@ export class GrpcClient {
   httpRules?: Array<google.api.IHttpRule>;
   numericEnums: boolean;
   minifyJson: boolean;
+  private _servicePath?: string;
+  private _port?: number;
 
   /**
    * In rare cases users might need to deallocate all memory consumed by loaded protos.
@@ -156,6 +158,10 @@ export class GrpcClient {
     this.httpRules = (options as GrpcClientOptions).httpRules;
     this.numericEnums = (options as GrpcClientOptions).numericEnums ?? false;
     this.minifyJson = (options as GrpcClientOptions).minifyJson ?? false;
+    this._servicePath =
+      (options as GrpcClientOptions).servicePath ||
+      (options as GrpcClientOptions).apiEndpoint;
+    this._port = (options as GrpcClientOptions).port;
   }
 
   /**
@@ -279,12 +285,21 @@ export class GrpcClient {
       }
       return metadata;
     }
+    const otherArgs: Record<string, unknown> = {
+      metadataBuilder: buildMetadata,
+    };
+    if (this._servicePath) {
+      otherArgs.servicePath = this._servicePath;
+    }
+    if (this._port !== undefined) {
+      otherArgs.port = this._port;
+    }
     return gax.constructSettings(
       serviceName,
       clientConfig,
       configOverrides,
       Status,
-      {metadataBuilder: buildMetadata},
+      otherArgs,
       enableTelemetryTracing,
       internalTelemetryInfo,
     );

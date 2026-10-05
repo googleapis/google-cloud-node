@@ -296,7 +296,8 @@ export class OtelHarness {
   ): void {
     const target = options.span ?? this.requireSingleSpan(options.tracerName);
     const actual = this.responseStatus(target);
-    const transport = target.attributes['gcp.method.type'];
+    const transport =
+      target.attributes['gcp.method.type'] ?? target.attributes['rpc.system'];
     const where = `span '${target.name}'`;
 
     if ('serverAddress' in expected || 'serverPort' in expected) {
@@ -314,26 +315,21 @@ export class OtelHarness {
     );
 
     assert.strictEqual(
-      actual.rpc,
-      expected.rpcStatus,
-      expected.rpcStatus === undefined
-        ? `expected ${where} to report no rpc.response.status_code, got ` +
-            `${JSON.stringify(actual.rpc)}. Response status is omitted when there is no server response.`
-        : `expected ${where} to report rpc.response.status_code ` +
-            `${JSON.stringify(expected.rpcStatus)}, got ${JSON.stringify(actual.rpc)}. ` +
-            'This attribute is reported on every call with a server response, on both transports.',
+      actual.grpc,
+      undefined,
+      `${where} reported grpc.response.status_code ${JSON.stringify(actual.grpc)}; ` +
+        'only rpc.response.status_code or http.response.status_code should be set.',
     );
 
     if (transport === 'grpc') {
       assert.strictEqual(
-        actual.grpc,
+        actual.rpc,
         expected.rpcStatus,
         expected.rpcStatus === undefined
-          ? `expected ${where} to report no grpc.response.status_code, got ` +
-              `${JSON.stringify(actual.grpc)}. Response status is omitted when there is no server response.`
-          : `expected ${where} to report grpc.response.status_code ` +
-              `${JSON.stringify(expected.rpcStatus)}, got ${JSON.stringify(actual.grpc)}. ` +
-              'On a gRPC span it mirrors rpc.response.status_code.',
+          ? `expected ${where} to report no rpc.response.status_code, got ` +
+              `${JSON.stringify(actual.rpc)}. Response status is omitted when there is no server response.`
+          : `expected ${where} to report rpc.response.status_code ` +
+              `${JSON.stringify(expected.rpcStatus)}, got ${JSON.stringify(actual.rpc)}.`,
       );
       assert.strictEqual(
         actual.http,
@@ -353,11 +349,16 @@ export class OtelHarness {
     }
 
     assert.strictEqual(
-      actual.grpc,
+      actual.rpc,
       undefined,
-      `${where} is a fallback span but reported grpc.response.status_code ` +
-        `${JSON.stringify(actual.grpc)}. The gRPC status is reported as ` +
-        'rpc.response.status_code there, not under the grpc.* name.',
+      `${where} is a fallback span but reported rpc.response.status_code ` +
+        `${JSON.stringify(actual.rpc)}. HTTP spans only report http.response.status_code.`,
+    );
+    assert.strictEqual(
+      expected.rpcStatus,
+      undefined,
+      'assertResponseStatus was given an expected rpcStatus for an HTTP ' +
+        'span, which can never hold one. Use httpStatus instead.',
     );
     assert.strictEqual(
       actual.http,
@@ -431,7 +432,8 @@ export class OtelHarness {
     options: {tracerName?: string; span?: ReadableSpan} = {},
   ): void {
     const target = options.span ?? this.requireSingleSpan(options.tracerName);
-    const transport = target.attributes['gcp.method.type'];
+    const transport =
+      target.attributes['gcp.method.type'] ?? target.attributes['rpc.system'];
     const where = `span '${target.name}'`;
 
     assert.ok(

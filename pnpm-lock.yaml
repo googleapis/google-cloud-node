@@ -1165,9 +1165,6 @@ importers:
       extend:
         specifier: ^3.0.2
         version: 3.0.2
-      teeny-request:
-        specifier: ^11.0.0
-        version: 11.0.1
     devDependencies:
       '@types/request':
         specifier: ^2.48.13
@@ -1193,6 +1190,9 @@ importers:
       mocha:
         specifier: ^11.1.0
         version: 11.7.6
+      teeny-request:
+        specifier: ^11.0.0
+        version: 11.0.1
       typescript:
         specifier: 5.8.3
         version: 5.8.3
