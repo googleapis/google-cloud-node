@@ -1,6 +1,13 @@
 # Changelog
 
 
+## [9.0.2](https://github.com/googleapis/google-cloud-node/compare/retry-request-v9.0.1...retry-request-v9.0.2) (2026-10-03)
+
+
+### Bug Fixes
+
+* **retry-request:** Move teeny-request to devDependencies ([#9500](https://github.com/googleapis/google-cloud-node/issues/9500)) ([068fe52](https://github.com/googleapis/google-cloud-node/commit/068fe528e659fd37e8876f6fa7ea5c249bda4091))
+
 ## [9.0.1](https://github.com/googleapis/google-cloud-node/compare/retry-request-v9.0.0...retry-request-v9.0.1) (2026-08-10)
 
 

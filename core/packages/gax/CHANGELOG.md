@@ -5,6 +5,18 @@
 
 [1]: https://www.npmjs.com/package/gax-nodejs?activeTab=versions
 
+## [6.11.0](https://github.com/googleapis/google-cloud-node/compare/google-gax-v6.10.0...google-gax-v6.11.0) (2026-10-03)
+
+
+### Features
+
+* **gax:** Emit T4 attempt spans ([#9496](https://github.com/googleapis/google-cloud-node/issues/9496)) ([51aedce](https://github.com/googleapis/google-cloud-node/commit/51aedceb77684ff6a14825c5916836c6e71060b4))
+
+
+### Bug Fixes
+
+* **gax:** Propagate chunk granularity on resume and preserve retry error details ([#9480](https://github.com/googleapis/google-cloud-node/issues/9480)) ([02b9478](https://github.com/googleapis/google-cloud-node/commit/02b94781828d50b91a255187f89a168f8b1e3b84))
+
 ## [6.10.0](https://github.com/googleapis/google-cloud-node/compare/google-gax-v6.9.0...google-gax-v6.10.0) (2026-09-29)
 
 

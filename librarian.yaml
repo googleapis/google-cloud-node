@@ -209,7 +209,7 @@ libraries:
       package_name: '@google/area120-tables'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/area120-tables/latest
   - name: google-chat
-    version: 0.33.1
+    version: 0.34.0
     apis:
       - path: google/chat/v1
     copyright_year: "2026"
@@ -246,7 +246,7 @@ libraries:
       - path: google/cloud/agentregistry/v1
     copyright_year: "2026"
   - name: google-cloud-aiplatform
-    version: 7.4.1
+    version: 7.5.0
     apis:
       - path: google/cloud/aiplatform/v1
       - path: google/cloud/aiplatform/v1beta1
@@ -507,7 +507,7 @@ libraries:
       metadata_name_override: bigquerystorage-api
       name_pretty_override: BigQuery Storage API
   - name: google-cloud-bigtable-api
-    version: 0.9.0
+    version: 0.10.0
     apis:
       - path: google/bigtable/v2
       - path: google/bigtable/admin/v2
@@ -613,7 +613,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-commerce-consumer-procurement
-    version: 0.9.1
+    version: 0.10.0
     apis:
       - path: google/cloud/commerce/consumer/procurement/v1
       - path: google/cloud/commerce/consumer/procurement/v1alpha1
@@ -622,12 +622,12 @@ libraries:
       default_version: v1
       package_name: '@google-cloud/procurement'
   - name: google-cloud-commerceproducer
-    version: 0.5.0
+    version: 0.6.0
     apis:
       - path: google/cloud/commerceproducer/v1beta
     copyright_year: "2026"
   - name: google-cloud-compute
-    version: 7.6.0
+    version: 7.7.0
     apis:
       - path: google/cloud/compute/v1
         nodejs:
@@ -2193,7 +2193,7 @@ libraries:
       package_name: '@google-shopping/ordertracking'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/merchantapi/latest
   - name: google-shopping-merchant-products
-    version: 0.11.1
+    version: 0.12.0
     apis:
       - path: google/shopping/merchant/products/v1
       - path: google/shopping/merchant/products/v1beta
