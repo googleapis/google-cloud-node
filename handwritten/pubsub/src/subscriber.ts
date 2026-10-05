@@ -1293,7 +1293,11 @@ export class Subscriber extends EventEmitter {
     }
 
     const {receivedMessages} = response;
-    for (const data of receivedMessages!) {
+    if (!receivedMessages || receivedMessages.length === 0) {
+      return;
+    }
+
+    for (const data of receivedMessages) {
       const message = new Message(this, data);
 
       this.createParentSpan(message);
