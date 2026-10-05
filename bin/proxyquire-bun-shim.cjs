@@ -405,6 +405,7 @@ if (
   // requests seamlessly while returning standard Fetch `Response` objects expected
   // by caller libraries.
   if (enableFetchShim) {
+    const origFetch = globalThis.fetch;
     globalThis.__googleCloudBunFetch = async (url, init = {}) => {
     let parsedUrl;
     try {
@@ -414,6 +415,7 @@ if (
     }
 
     if (
+      globalThis.fetch === origFetch &&
       parsedUrl &&
       (parsedUrl.protocol === 'http:' || parsedUrl.protocol === 'https:')
     ) {
