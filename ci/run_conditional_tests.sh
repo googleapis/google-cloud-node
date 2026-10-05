@@ -100,7 +100,7 @@ if [[ "${RUN_TESTS_MODE}" == "RUN_UNIT_TESTS" ]]; then
     fi
 fi
 
-# Then detect changes in the test scripts.
+# Then detect changes in the test scripts (triggers full test suite when ci/ changes).
 
 set +e
 git diff --quiet ${GIT_DIFF_ARG} ci
@@ -121,6 +121,7 @@ fi
 if [[ "${JS_RUNTIME}" == "bun" || "${TEST_CMD}" == *bun* ]]; then
     subdirs=(
         packages
+        handwritten
         core/packages
     )
 else
