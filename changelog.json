@@ -5,6 +5,39 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "514e2f64ba67ad3ab956fbe3eeafa507d44ca597",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9472"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "07ae774a8e52185a3598c878513377e7a019f127",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9293"
+          ]
+        }
+      ],
+      "version": "1.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-ads/datamanager",
+      "id": "b057740b-efc1-497c-b5d1-d3d1cc0c2a1d",
+      "createTime": "2026-10-05T16:54:32.424Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "35a2b9a4ff3b075124f6905c423acd8d11bdfa68",
           "message": "Update API sources and regenerate",
           "issues": [
@@ -99939,5 +99972,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-10-03T05:40:00.977Z"
+  "updateTime": "2026-10-05T16:54:32.424Z"
 }
