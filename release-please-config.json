@@ -70,9 +70,6 @@
     "core/promisify": {
       "component": "promisify"
     },
-    "core/test-utils": {
-      "component": "test-utils"
-    },
     "handwritten/bigquery": {
       "component": "bigquery"
     },

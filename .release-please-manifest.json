@@ -279,6 +279,5 @@
   "packages/google-storage-control": "0.12.1",
   "packages/google-storagetransfer": "5.0.1",
   "packages/google-streetview-publish": "0.5.1",
-  "packages/grafeas": "7.0.1",
-  "core/test-utils": "0.2.0"
+  "packages/grafeas": "7.0.1"
 }
