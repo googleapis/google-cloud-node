@@ -162,13 +162,8 @@ export function extractFromSettings(
       .servicePort ||
     otherArgs?.port ||
     otherArgs?.servicePort;
-  const port = typeof rawPort === 'string' ? Number(rawPort) : rawPort;
-  if (
-    port &&
-    typeof port === 'number' &&
-    !Number.isNaN(port) &&
-    !result.serverPort
-  ) {
+  const port = typeof rawPort === 'string' ? parseInt(rawPort, 10) : rawPort;
+  if (port && typeof port === 'number' && !result.serverPort) {
     result.serverPort = port;
   }
 
