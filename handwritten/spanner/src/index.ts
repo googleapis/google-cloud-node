@@ -576,7 +576,13 @@ class Spanner extends GrpcService {
     return this.clients_.get(clientName)! as v1.DatabaseAdminClient;
   }
 
-  /** Closes this Spanner client and cleans up all resources used by it. */
+  /**
+   * Closes this Spanner client and cleans up all resources used by it.
+   *
+   * This also flushes any pending built-in metrics. If your application
+   * handles `SIGINT` or `SIGTERM` itself, call this method from that handler
+   * and wait for it to finish before exiting, so that no metrics are lost.
+   */
   close(): Promise<void>;
   close(callback: (err: Error | null) => void): void;
   close(callback?: (err: Error | null) => void): void | Promise<void> {
@@ -2436,20 +2442,61 @@ class Spanner extends GrpcService {
   }
 }
 
-let cleanupCalled = false;
-const cleanup = async () => {
-  if (cleanupCalled) return;
-  cleanupCalled = true;
-  await MetricsTracerFactory.resetInstance();
+// Shuts down the shared metrics MeterProvider, which also flushes any metrics
+// that have not been exported yet. Concurrent callers share the same shutdown,
+// and the guard is cleared once it settles so that clients created later can
+// still be cleaned up.
+let cleanupPromise: Promise<void> | null = null;
+const cleanup = (): Promise<void> => {
+  if (!cleanupPromise) {
+    cleanupPromise = MetricsTracerFactory.resetInstance().finally(() => {
+      cleanupPromise = null;
+    });
+  }
+  return cleanupPromise;
 };
 
-// For signals (let process exit naturally)
-process.on('SIGINT', async () => {
-  await cleanup();
-});
-process.on('SIGTERM', async () => {
-  await cleanup();
-});
+// Flush built-in metrics when the process is asked to stop with SIGINT or
+// SIGTERM. Node.js only terminates the process on these signals while nothing
+// is listening for them, so this listener must not keep the process alive. It
+// removes itself, waits for the flush and then raises the signal again so that
+// the default behavior applies. If the application or another library also
+// listens for the signal, that listener decides when the process exits.
+// See https://github.com/googleapis/google-cloud-node/issues/9513.
+const SHUTDOWN_SIGNALS: NodeJS.Signals[] = ['SIGINT', 'SIGTERM'];
+const SHUTDOWN_FLUSH_TIMEOUT_MS = 5000;
+
+const onShutdownSignal = async (signal: NodeJS.Signals): Promise<void> => {
+  // Stop listening, so that a second signal gets the default behavior.
+  for (const s of SHUTDOWN_SIGNALS) {
+    process.removeListener(s, onShutdownSignal);
+  }
+  const flushed = cleanup().catch(err => {
+    console.error(`Cleanup error on ${signal}:`, err);
+  });
+
+  // This listener runs before any other listener for the signal (it is added
+  // with prependListener), so every other listener that is about to handle the
+  // signal is still counted here, including ones added with process.once().
+  if (process.listenerCount(signal) > 0) {
+    return;
+  }
+
+  // Nothing else handles the signal. Once the flush is done, or has taken too
+  // long, raise the signal again so that Node.js terminates the process the
+  // way it would have done without this listener.
+  let timer: NodeJS.Timeout | undefined;
+  const timeout = new Promise<void>(resolve => {
+    timer = setTimeout(resolve, SHUTDOWN_FLUSH_TIMEOUT_MS);
+  });
+  await Promise.race([flushed, timeout]);
+  clearTimeout(timer);
+  process.kill(process.pid, signal);
+};
+
+for (const signal of SHUTDOWN_SIGNALS) {
+  process.prependListener(signal, onShutdownSignal);
+}
 
 // For natural exit (Node will NOT wait for async, so we must block the event loop)
 process.on('beforeExit', () => {

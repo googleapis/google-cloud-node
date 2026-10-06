@@ -3620,5 +3620,38 @@ describe('Spanner', () => {
         assert.strictEqual(fakeClient.close.callCount, 1);
       }
     });
+
+    it('should reset the metrics on every call, not only the first one', async () => {
+      const resetInstance = sandbox
+        .stub(MetricsTracerFactory, 'resetInstance')
+        .resolves();
+
+      await spanner.close();
+      await new Spanner(OPTIONS).close();
+
+      assert.strictEqual(resetInstance.callCount, 2);
+    });
+
+    it('should make concurrent calls wait for a single shared metrics reset', async () => {
+      let finishReset = () => {};
+      const resetInstance = sandbox
+        .stub(MetricsTracerFactory, 'resetInstance')
+        .returns(new Promise<void>(resolve => (finishReset = resolve)));
+
+      const closed: string[] = [];
+      const closing = Promise.all([
+        spanner.close().then(() => closed.push('first')),
+        new Spanner(OPTIONS).close().then(() => closed.push('second')),
+      ]);
+      // Let both calls reach the metrics reset before it completes.
+      await new Promise(resolve => setImmediate(resolve));
+      // Neither call should resolve until the shared reset has finished.
+      assert.deepStrictEqual(closed, []);
+
+      finishReset();
+      await closing;
+
+      assert.strictEqual(resetInstance.callCount, 1);
+    });
   });
 });
