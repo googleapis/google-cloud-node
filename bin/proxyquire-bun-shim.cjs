@@ -399,21 +399,27 @@ if (
   //   - OAuth token failures (`invalid_grant: account not found`)
   //   - `Mocks not yet satisfied` assertions from `nock`
   //
-  // When opted into via `--fetch-shim` (`BUN_ENABLE_FETCH_SHIM=true`),
-  // `__googleCloudBunFetch` intercepts HTTP/HTTPS requests and routes them through
-  // Node's `http.request` / `https.request` stack, allowing `nock` to intercept
-  // requests seamlessly while returning standard Fetch `Response` objects expected
-  // by caller libraries.
-  if (enableFetchShim) {
-    globalThis.__googleCloudBunFetch = async (url, init = {}) => {
+  // By default under Bun, `__googleCloudBunFetch` replaces `import('node-fetch')`
+  // (which resolves to Bun's internal `node-fetch` module and bypasses `globalThis.fetch`)
+  // with `globalThis.fetch` plus Node<->Web stream adaptation so `nock` v14 (`@mswjs/interceptors`)
+  // can intercept requests while system tests still use native `globalThis.fetch`.
+  //
+  // When opted into via `--fetch-shim` (`BUN_ENABLE_FETCH_SHIM=true`, used by packages
+  // like `@google-cloud/storage` that depend on `nock` v13 which only patches Node's
+  // `http`/`https` modules), `__googleCloudBunFetch` routes HTTP/HTTPS requests through
+  // Node's `http.request` / `https.request` stack instead.
+  globalThis.__googleCloudBunFetch = async (url, init = {}) => {
     let parsedUrl;
-    try {
-      parsedUrl = new URL(String(url));
-    } catch {
-      parsedUrl = undefined;
+    if (enableFetchShim) {
+      try {
+        parsedUrl = new URL(String(url));
+      } catch {
+        parsedUrl = undefined;
+      }
     }
 
     if (
+      enableFetchShim &&
       parsedUrl &&
       (parsedUrl.protocol === 'http:' || parsedUrl.protocol === 'https:')
     ) {
@@ -697,26 +703,24 @@ if (
     });
   }
 
-    if (Module._extensions && typeof Module._extensions['.js'] === 'function') {
-      const origJsExt = Module._extensions['.js'];
-      Module._extensions['.js'] = function (mod, filename) {
-        if (/teeny-request[\\/]+build[\\/]+src[\\/]+index\.js$/.test(filename)) {
-          const code = fs
-            .readFileSync(filename, 'utf8')
-            .replaceAll(
-              "import('node-fetch')",
-              'Promise.resolve({default: globalThis.__googleCloudBunFetch})',
-            );
-          return mod._compile(code, filename);
-        }
-        return origJsExt.apply(this, arguments);
-      };
-    }
+  if (Module._extensions && typeof Module._extensions['.js'] === 'function') {
+    const origJsExt = Module._extensions['.js'];
+    Module._extensions['.js'] = function (mod, filename) {
+      if (/teeny-request[\\/]+build[\\/]+src[\\/]+index\.js$/.test(filename)) {
+        const code = fs
+          .readFileSync(filename, 'utf8')
+          .replaceAll(
+            "import('node-fetch')",
+            'Promise.resolve({default: globalThis.__googleCloudBunFetch})',
+          );
+        return mod._compile(code, filename);
+      }
+      return origJsExt.apply(this, arguments);
+    };
   }
 
   function patchGaxiosIfPresent(res) {
     if (
-      enableFetchShim &&
       res &&
       typeof res === 'object' &&
       typeof res.Gaxios === 'function' &&
