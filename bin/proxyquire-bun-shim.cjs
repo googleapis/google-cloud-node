@@ -407,178 +407,255 @@ if (
   if (enableFetchShim) {
     const origFetch = globalThis.fetch;
     globalThis.__googleCloudBunFetch = async (url, init = {}) => {
-    let parsedUrl;
-    try {
-      parsedUrl = new URL(String(url));
-    } catch {
-      parsedUrl = undefined;
-    }
-
-    if (
-      globalThis.fetch === origFetch &&
-      parsedUrl &&
-      (parsedUrl.protocol === 'http:' || parsedUrl.protocol === 'https:')
-    ) {
-      const isHttps = parsedUrl.protocol === 'https:';
-      const transport = isHttps ? https : http;
-
-      // Normalize headers from plain objects, Header instances, Arrays of tuples, or Maps.
-      let headers = {};
-      if (init.headers) {
-        if (
-          typeof Headers !== 'undefined' &&
-          init.headers instanceof Headers
-        ) {
-          for (const [k, v] of init.headers.entries()) {
-            headers[k] = v;
-          }
-        } else if (Array.isArray(init.headers)) {
-          for (const [k, v] of init.headers) {
-            headers[k] = v;
-          }
-        } else if (typeof init.headers.entries === 'function') {
-          for (const [k, v] of init.headers.entries()) {
-            headers[k] = v;
-          }
-        } else {
-          headers = {...init.headers};
-        }
+      let parsedUrl;
+      try {
+        parsedUrl = new URL(String(url));
+      } catch {
+        parsedUrl = undefined;
       }
 
-      const reqOptions = {
-        method: init.method || 'GET',
-        hostname: parsedUrl.hostname,
-        port: parsedUrl.port || (isHttps ? 443 : 80),
-        path: (parsedUrl.pathname || '/') + parsedUrl.search,
-        headers,
-        agent: init.agent,
-      };
+      if (
+        globalThis.fetch === origFetch &&
+        parsedUrl &&
+        (parsedUrl.protocol === 'http:' || parsedUrl.protocol === 'https:')
+      ) {
+        const isHttps = parsedUrl.protocol === 'https:';
+        const transport = isHttps ? https : http;
 
-      try {
-        const res = await new Promise((resolve, reject) => {
-          // Route through Node http/https transport so nock can intercept.
-          const req = transport.request(reqOptions, incoming => {
-            const responseStream = new PassThrough();
-            incoming.pipe(responseStream);
-
-            const fetchHeaders = new Headers();
-            for (const [k, v] of Object.entries(incoming.headers)) {
-              if (Array.isArray(v)) {
-                v.forEach(val => fetchHeaders.append(k, val));
-              } else if (v !== undefined) {
-                fetchHeaders.set(k, v);
-              }
+        // Normalize headers from plain objects, Header instances, Arrays of tuples, or Maps.
+        let headers = {};
+        if (init.headers) {
+          if (
+            typeof Headers !== 'undefined' &&
+            init.headers instanceof Headers
+          ) {
+            for (const [k, v] of init.headers.entries()) {
+              headers[k] = v;
             }
+          } else if (Array.isArray(init.headers)) {
+            for (const [k, v] of init.headers) {
+              headers[k] = v;
+            }
+          } else if (typeof init.headers.entries === 'function') {
+            for (const [k, v] of init.headers.entries()) {
+              headers[k] = v;
+            }
+          } else {
+            headers = {...init.headers};
+          }
+        }
 
-            const response = new Response(Readable.toWeb(responseStream), {
-              status: incoming.statusCode || 200,
-              statusText: incoming.statusMessage || '',
-              headers: fetchHeaders,
-            });
-            Object.defineProperty(response, 'url', {value: String(url)});
+        const reqOptions = {
+          method: init.method || 'GET',
+          hostname: parsedUrl.hostname,
+          port: parsedUrl.port || (isHttps ? 443 : 80),
+          path: (parsedUrl.pathname || '/') + parsedUrl.search,
+          headers,
+          agent: init.agent,
+        };
 
-            let nodeStream;
-            const rawBody = response.body;
-            const origText = response.text.bind(response);
-            const origJson = response.json.bind(response);
-            Object.defineProperty(response, 'body', {
-              get() {
-                nodeStream ||= Readable.fromWeb(rawBody);
-                return nodeStream;
-              },
-              configurable: true,
-              enumerable: true,
+        try {
+          const res = await new Promise((resolve, reject) => {
+            // Route through Node http/https transport so nock can intercept.
+            const req = transport.request(reqOptions, incoming => {
+              const responseStream = new PassThrough();
+              incoming.pipe(responseStream);
+
+              const fetchHeaders = new Headers();
+              for (const [k, v] of Object.entries(incoming.headers)) {
+                if (Array.isArray(v)) {
+                  v.forEach(val => fetchHeaders.append(k, val));
+                } else if (v !== undefined) {
+                  fetchHeaders.set(k, v);
+                }
+              }
+
+              const response = new Response(Readable.toWeb(responseStream), {
+                status: incoming.statusCode || 200,
+                statusText: incoming.statusMessage || '',
+                headers: fetchHeaders,
+              });
+              Object.defineProperty(response, 'url', {value: String(url)});
+
+              let nodeStream;
+              const rawBody = response.body;
+              const origText = response.text.bind(response);
+              const origJson = response.json.bind(response);
+              Object.defineProperty(response, 'body', {
+                get() {
+                  nodeStream ||= Readable.fromWeb(rawBody);
+                  return nodeStream;
+                },
+                configurable: true,
+                enumerable: true,
+              });
+              response.text = async () => {
+                if (!nodeStream) return origText();
+                const chunks = [];
+                for await (const chunk of nodeStream) {
+                  chunks.push(
+                    Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk),
+                  );
+                }
+                return Buffer.concat(chunks).toString('utf8');
+              };
+              response.json = async () => {
+                return JSON.parse(await response.text());
+              };
+
+              resolve(response);
             });
-            response.text = async () => {
-              if (!nodeStream) return origText();
-              const chunks = [];
-              for await (const chunk of nodeStream) {
-                chunks.push(
-                  Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk),
+
+            if (init.signal) {
+              if (init.signal.aborted) {
+                req.destroy(
+                  Object.assign(new Error('The user aborted a request.'), {
+                    name: 'AbortError',
+                  }),
+                );
+                return reject(
+                  Object.assign(new Error('The user aborted a request.'), {
+                    name: 'AbortError',
+                  }),
                 );
               }
-              return Buffer.concat(chunks).toString('utf8');
-            };
-            response.json = async () => {
-              return JSON.parse(await response.text());
-            };
-
-            resolve(response);
-          });
-
-          if (init.signal) {
-            if (init.signal.aborted) {
-              req.destroy(
-                Object.assign(new Error('The user aborted a request.'), {
-                  name: 'AbortError',
-                }),
-              );
-              return reject(
-                Object.assign(new Error('The user aborted a request.'), {
-                  name: 'AbortError',
-                }),
-              );
+              init.signal.addEventListener('abort', () => {
+                req.destroy(
+                  Object.assign(new Error('The user aborted a request.'), {
+                    name: 'AbortError',
+                  }),
+                );
+              });
             }
-            init.signal.addEventListener('abort', () => {
-              req.destroy(
-                Object.assign(new Error('The user aborted a request.'), {
-                  name: 'AbortError',
-                }),
-              );
-            });
-          }
 
-          if (init.timeout) {
-            req.setTimeout(init.timeout, () => {
-              req.destroy(
-                Object.assign(
-                  new Error('The operation was aborted due to timeout'),
-                  {name: 'AbortError', type: 'aborted', code: 'ETIMEDOUT'},
-                ),
-              );
-            });
-          }
+            if (init.timeout) {
+              req.setTimeout(init.timeout, () => {
+                req.destroy(
+                  Object.assign(
+                    new Error('The operation was aborted due to timeout'),
+                    {name: 'AbortError', type: 'aborted', code: 'ETIMEDOUT'},
+                  ),
+                );
+              });
+            }
 
-          req.on('error', reject);
+            req.on('error', reject);
 
-          if (init.body) {
-            if (typeof init.body.pipe === 'function') {
-              init.body.pipe(req);
-            } else if (
-              typeof init.body === 'string' ||
-              Buffer.isBuffer(init.body) ||
-              init.body instanceof Uint8Array ||
-              init.body instanceof ArrayBuffer ||
-              (typeof ArrayBuffer !== 'undefined' &&
-                ArrayBuffer.isView(init.body))
-            ) {
-              const chunk =
-                init.body instanceof ArrayBuffer
-                  ? new Uint8Array(init.body)
-                  : init.body instanceof Uint8Array
-                  ? init.body
-                  : ArrayBuffer.isView(init.body)
-                  ? new Uint8Array(
-                      init.body.buffer,
-                      init.body.byteOffset,
-                      init.body.byteLength,
-                    )
-                  : init.body;
-              req.write(chunk);
-              req.end();
-            } else if (
-              typeof Readable.fromWeb === 'function' &&
-              typeof ReadableStream !== 'undefined' &&
-              init.body instanceof ReadableStream
-            ) {
-              Readable.fromWeb(init.body).pipe(req);
+            if (init.body) {
+              if (typeof init.body.pipe === 'function') {
+                init.body.pipe(req);
+              } else if (
+                typeof init.body === 'string' ||
+                Buffer.isBuffer(init.body) ||
+                init.body instanceof Uint8Array ||
+                init.body instanceof ArrayBuffer ||
+                (typeof ArrayBuffer !== 'undefined' &&
+                  ArrayBuffer.isView(init.body))
+              ) {
+                const chunk =
+                  init.body instanceof ArrayBuffer
+                    ? new Uint8Array(init.body)
+                    : init.body instanceof Uint8Array
+                    ? init.body
+                    : ArrayBuffer.isView(init.body)
+                    ? new Uint8Array(
+                        init.body.buffer,
+                        init.body.byteOffset,
+                        init.body.byteLength,
+                      )
+                    : init.body;
+                req.write(chunk);
+                req.end();
+              } else if (
+                typeof Readable.fromWeb === 'function' &&
+                typeof ReadableStream !== 'undefined' &&
+                init.body instanceof ReadableStream
+              ) {
+                Readable.fromWeb(init.body).pipe(req);
+              } else {
+                req.end();
+              }
             } else {
               req.end();
             }
-          } else {
-            req.end();
+          });
+          return res;
+        } catch (err) {
+          const msg = String(err?.message || err || '');
+          if (err?.name === 'TimeoutError' || /timed out/i.test(msg)) {
+            throw Object.assign(
+              new Error('The operation was aborted due to timeout'),
+              {name: 'AbortError', type: 'aborted', code: 'ETIMEDOUT'},
+            );
           }
-        });
+          if (
+            err?.name === 'AbortError' ||
+            /aborted/i.test(msg) ||
+            init?.signal?.aborted
+          ) {
+            throw Object.assign(new Error('The user aborted a request.'), {
+              name: 'AbortError',
+              type: 'aborted',
+            });
+          }
+          if (!(err instanceof Error) && err && typeof err === 'object') {
+            throw Object.assign(
+              new Error(err.message || err.code || 'Error'),
+              err,
+            );
+          }
+          throw err;
+        }
+      }
+
+      if (
+        init &&
+        init.body &&
+        typeof init.body === 'object' &&
+        typeof init.body.pipe === 'function' &&
+        typeof Readable.toWeb === 'function' &&
+        (typeof ReadableStream === 'undefined' ||
+          !(init.body instanceof ReadableStream))
+      ) {
+        const stream =
+          init.body instanceof Readable
+            ? init.body
+            : init.body.pipe(new PassThrough());
+        init = {...init, body: Readable.toWeb(stream)};
+      }
+      try {
+        const res = await globalThis.fetch(url, init);
+        if (
+          res &&
+          res.body &&
+          typeof Readable.fromWeb === 'function' &&
+          !(res.body instanceof Readable)
+        ) {
+          let nodeStream;
+          const rawBody = res.body;
+          const origText = res.text.bind(res);
+          const origJson = res.json.bind(res);
+          Object.defineProperty(res, 'body', {
+            get() {
+              nodeStream ||= Readable.fromWeb(rawBody);
+              return nodeStream;
+            },
+            configurable: true,
+            enumerable: true,
+          });
+          res.text = async () => {
+            if (!nodeStream) return origText();
+            const chunks = [];
+            for await (const chunk of nodeStream) {
+              chunks.push(Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk));
+            }
+            return Buffer.concat(chunks).toString('utf8');
+          };
+          res.json = async () => {
+            if (!nodeStream) return origJson();
+            return JSON.parse(await res.text());
+          };
+        }
         return res;
       } catch (err) {
         const msg = String(err?.message || err || '');
@@ -599,105 +676,34 @@ if (
           });
         }
         if (!(err instanceof Error) && err && typeof err === 'object') {
-          throw Object.assign(new Error(err.message || err.code || 'Error'), err);
+          throw Object.assign(
+            new Error(err.message || err.code || 'Error'),
+            err,
+          );
         }
         throw err;
       }
-    }
+    };
 
-    if (
-      init &&
-      init.body &&
-      typeof init.body === 'object' &&
-      typeof init.body.pipe === 'function' &&
-      typeof Readable.toWeb === 'function' &&
-      (typeof ReadableStream === 'undefined' ||
-        !(init.body instanceof ReadableStream))
-    ) {
-      const stream =
-        init.body instanceof Readable
-          ? init.body
-          : init.body.pipe(new PassThrough());
-      init = {...init, body: Readable.toWeb(stream)};
+    if (typeof Bun.plugin === 'function') {
+      Bun.plugin({
+        name: 'bun-gaxios-global-fetch-esm',
+        setup(build) {
+          build.onLoad(
+            {filter: /build[\\/]+esm[\\/]+src[\\/]+gaxios\.js$/},
+            args => {
+              const code = fs
+                .readFileSync(args.path, 'utf8')
+                .replaceAll(
+                  "(await import('node-fetch')).default",
+                  '((...a) => globalThis.__googleCloudBunFetch(...a))',
+                );
+              return {contents: code, loader: 'js'};
+            },
+          );
+        },
+      });
     }
-    try {
-      const res = await globalThis.fetch(url, init);
-      if (
-        res &&
-        res.body &&
-        typeof Readable.fromWeb === 'function' &&
-        !(res.body instanceof Readable)
-      ) {
-        let nodeStream;
-        const rawBody = res.body;
-        const origText = res.text.bind(res);
-        const origJson = res.json.bind(res);
-        Object.defineProperty(res, 'body', {
-          get() {
-            nodeStream ||= Readable.fromWeb(rawBody);
-            return nodeStream;
-          },
-          configurable: true,
-          enumerable: true,
-        });
-        res.text = async () => {
-          if (!nodeStream) return origText();
-          const chunks = [];
-          for await (const chunk of nodeStream) {
-            chunks.push(Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk));
-          }
-          return Buffer.concat(chunks).toString('utf8');
-        };
-        res.json = async () => {
-          if (!nodeStream) return origJson();
-          return JSON.parse(await res.text());
-        };
-      }
-      return res;
-    } catch (err) {
-      const msg = String(err?.message || err || '');
-      if (err?.name === 'TimeoutError' || /timed out/i.test(msg)) {
-        throw Object.assign(
-          new Error('The operation was aborted due to timeout'),
-          {name: 'AbortError', type: 'aborted', code: 'ETIMEDOUT'},
-        );
-      }
-      if (
-        err?.name === 'AbortError' ||
-        /aborted/i.test(msg) ||
-        init?.signal?.aborted
-      ) {
-        throw Object.assign(new Error('The user aborted a request.'), {
-          name: 'AbortError',
-          type: 'aborted',
-        });
-      }
-      if (!(err instanceof Error) && err && typeof err === 'object') {
-        throw Object.assign(new Error(err.message || err.code || 'Error'), err);
-      }
-      throw err;
-    }
-  };
-
-  if (typeof Bun.plugin === 'function') {
-    Bun.plugin({
-      name: 'bun-gaxios-global-fetch-esm',
-      setup(build) {
-        build.onLoad(
-          {filter: /build[\\/]+esm[\\/]+src[\\/]+gaxios\.js$/},
-          args => {
-            const code = fs
-              .readFileSync(args.path, 'utf8')
-              .replaceAll(
-                "(await import('node-fetch')).default",
-                '((...a) => globalThis.__googleCloudBunFetch(...a))',
-              );
-            return {contents: code, loader: 'js'};
-          },
-        );
-      },
-    });
-  }
 
     if (Module._extensions && typeof Module._extensions['.js'] === 'function') {
       const origJsExt = Module._extensions['.js'];
