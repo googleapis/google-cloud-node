@@ -15,8 +15,7 @@
 import {DocumentData} from '@google-cloud/firestore';
 
 import * as duplexify from 'duplexify';
-import {describe, it, beforeEach, afterEach} from 'mocha';
-import {expect} from 'chai';
+import {describe, it, beforeEach, afterEach, expect} from 'vitest';
 import * as extend from 'extend';
 import {GoogleError, Status} from 'google-gax';
 import {Duplex, Transform} from 'stream';
@@ -61,12 +60,12 @@ function docsEqual(
   actual: QueryDocumentSnapshot[],
   expected: QueryDocumentSnapshot[],
 ): void {
-  expect(actual.length).to.equal(expected.length);
+  expect(actual.length).toBe(expected.length);
   for (let i = 0; i < actual.length; i++) {
-    expect(actual[i].ref.id).to.equal(expected[i].ref.id);
-    expect(actual[i].data()).to.deep.eq(expected[i].data());
-    expect(expected[i].createTime).to.be.an.instanceOf(Timestamp);
-    expect(expected[i].updateTime).to.be.an.instanceOf(Timestamp);
+    expect(actual[i].ref.id).toBe(expected[i].ref.id);
+    expect(actual[i].data()).toEqual(expected[i].data());
+    expect(expected[i].createTime).toBeInstanceOf(Timestamp);
+    expect(expected[i].updateTime).toBeInstanceOf(Timestamp);
   }
 }
 
@@ -95,25 +94,25 @@ function snapshotsEqual(
 ): TestSnapshot {
   const localDocs = ([] as QueryDocumentSnapshot[]).concat(lastSnapshot.docs);
 
-  expect(actual).to.be.an.instanceof(QuerySnapshot);
+  expect(actual).toBeInstanceOf(QuerySnapshot);
 
   const actualSnapshot = actual as QuerySnapshot;
   const actualDocChanges = actualSnapshot.docChanges();
 
-  expect(actualDocChanges.length).to.equal(expected.docChanges.length);
+  expect(actualDocChanges.length).toBe(expected.docChanges.length);
   for (let i = 0; i < expected.docChanges.length; i++) {
-    expect(actualDocChanges[i].type).to.equal(expected.docChanges[i].type);
-    expect(actualDocChanges[i].doc.ref.id).to.equal(
+    expect(actualDocChanges[i].type).toBe(expected.docChanges[i].type);
+    expect(actualDocChanges[i].doc.ref.id).toBe(
       expected.docChanges[i].doc.ref.id,
     );
-    expect(actualDocChanges[i].doc.data()).to.deep.eq(
+    expect(actualDocChanges[i].doc.data()).toEqual(
       expected.docChanges[i].doc.data(),
     );
     const readVersion =
       actualDocChanges[i].type === 'removed' ? version - 1 : version;
     expect(
       actualDocChanges[i].doc.readTime.isEqual(new Timestamp(0, readVersion)),
-    ).to.be.true;
+    ).toBe(true);
 
     if (actualDocChanges[i].oldIndex !== -1) {
       localDocs.splice(actualDocChanges[i].oldIndex, 1);
@@ -130,8 +129,8 @@ function snapshotsEqual(
 
   docsEqual(actualSnapshot.docs, expected.docs);
   docsEqual(localDocs, expected.docs);
-  expect(actualSnapshot.readTime.isEqual(new Timestamp(0, version))).to.be.true;
-  expect(actualSnapshot.size).to.equal(expected.docs.length);
+  expect(actualSnapshot.readTime.isEqual(new Timestamp(0, version))).toBe(true);
+  expect(actualSnapshot.size).toBe(expected.docs.length);
 
   return {docs: actualSnapshot.docs, docChanges: actualDocChanges};
 }
@@ -172,7 +171,7 @@ const removed = (ref: DocumentReference, data: DocumentData) =>
 function verifyRequest<T>(actual: T, expected: T): void {
   // Remove undefined value, as these are ignored by the backend.
   actual = extend(true, {}, actual);
-  expect(actual).to.deep.equal(expected);
+  expect(actual).toEqual(expected);
 }
 
 const EMPTY = {
@@ -196,11 +195,11 @@ class DeferredListener<T> {
     const listener = this.pendingListeners.shift();
 
     if (listener) {
-      expect(type).to.equal(
-        listener.type,
+      expect(
+        type,
         `Expected message of type '${listener.type}' but got '${type}' ` +
           `with '${JSON.stringify(data)}'.`,
-      );
+      ).toBe(listener.type);
       listener.resolve(data);
     } else {
       this.pendingData.push({
@@ -219,11 +218,11 @@ class DeferredListener<T> {
     const data = this.pendingData.shift();
 
     if (data) {
-      expect(data.type).to.equal(
-        expectedType,
+      expect(
+        data.type,
         `Expected message of type '${expectedType}' but got '${data.type}' ` +
           `with '${JSON.stringify(data.data)}'.`,
-      );
+      ).toBe(expectedType);
       return Promise.resolve(data.data);
     }
 
@@ -563,7 +562,7 @@ class WatchHelper<T = QuerySnapshot | DocumentSnapshot> {
         if (!(err instanceof Error)) {
           throw new Error('Expected error from Watch');
         }
-        expect(err.message).to.equal(expectedError);
+        expect(err.message).toBe(expectedError);
       });
   }
 }
@@ -745,25 +744,27 @@ describe('Query watch', () => {
   });
 
   it('with invalid callbacks', () => {
-    expect(() => colRef.onSnapshot('foo' as InvalidApiUsage)).to.throw(
+    expect(() => colRef.onSnapshot('foo' as InvalidApiUsage)).toThrow(
       'Value for argument "onNext" is not a valid function.',
     );
 
-    expect(() =>
-      colRef.onSnapshot(() => {}, 'foo' as InvalidApiUsage),
-    ).to.throw('Value for argument "onError" is not a valid function.');
+    expect(() => colRef.onSnapshot(() => {}, 'foo' as InvalidApiUsage)).toThrow(
+      'Value for argument "onError" is not a valid function.',
+    );
   });
 
-  it('without error callback', done => {
-    const unsubscribe = colRef.onSnapshot(() => {
-      unsubscribe();
-      done();
-    });
+  it('without error callback', () => {
+    return new Promise<void>(resolve => {
+      const unsubscribe = colRef.onSnapshot(() => {
+        unsubscribe();
+        resolve();
+      });
 
-    void streamHelper.awaitOpen().then(() => {
-      watchHelper.sendAddTarget();
-      watchHelper.sendCurrent();
-      watchHelper.sendSnapshot(1);
+      void streamHelper.awaitOpen().then(() => {
+        watchHelper.sendAddTarget();
+        watchHelper.sendCurrent();
+        watchHelper.sendSnapshot(1);
+      });
     });
   });
 
@@ -888,7 +889,7 @@ describe('Query watch', () => {
         await streamHelper.await('end');
         await streamHelper.awaitOpen();
 
-        expect(streamHelper.streamCount).to.equal(3);
+        expect(streamHelper.streamCount).toBe(3);
       });
     });
   });
@@ -933,7 +934,7 @@ describe('Query watch', () => {
       .then(() => {
         streamHelper.close();
         unsubscribe();
-        expect(streamHelper.streamCount).to.equal(1);
+        expect(streamHelper.streamCount).toBe(1);
       });
   });
 
@@ -993,7 +994,7 @@ describe('Query watch', () => {
         );
       }
     }
-  }).timeout(5000);
+  }, 5000);
 
   it('retries with unknown code', () => {
     return watchHelper.runTest(collQueryJSON(), () => {
@@ -1077,7 +1078,7 @@ describe('Query watch', () => {
             docs: [snapshot(doc1, {foo: 'a'})],
             docChanges: [added(doc1, {foo: 'a'})],
           });
-          expect(streamHelper.streamCount).to.equal(1);
+          expect(streamHelper.streamCount).toBe(1);
           streamHelper.destroyStream();
           return streamHelper.awaitReopen();
         })
@@ -1106,7 +1107,7 @@ describe('Query watch', () => {
           return watchHelper.await('snapshot');
         })
         .then(results => {
-          expect(streamHelper.streamCount).to.equal(3);
+          expect(streamHelper.streamCount).toBe(3);
           snapshotsEqual(lastSnapshot, 4, results, {
             docs: [
               snapshot(doc1, {foo: 'a'}),
@@ -1141,7 +1142,7 @@ describe('Query watch', () => {
             docs: [snapshot(doc1, {foo: 'a'}), snapshot(doc2, {foo: 'b'})],
             docChanges: [added(doc1, {foo: 'a'}), added(doc2, {foo: 'b'})],
           });
-          expect(streamHelper.streamCount).to.equal(1);
+          expect(streamHelper.streamCount).toBe(1);
           // This document delete will be ignored.
           watchHelper.sendDocDelete(doc1);
           streamHelper.destroyStream();
@@ -1212,7 +1213,7 @@ describe('Query watch', () => {
         })
         .then(request => {
           verifyRequest(request, resumeTokenQuery(resumeToken));
-          expect(streamHelper.streamCount).to.equal(2);
+          expect(streamHelper.streamCount).toBe(2);
         });
     });
   });
@@ -1255,10 +1256,10 @@ describe('Query watch', () => {
         'Stream Error (6)',
       )
       .then(() => {
-        expect(streamHelper.streamCount).to.equal(
-          6,
+        expect(
+          streamHelper.streamCount,
           'Expected stream to be opened once and retried five times',
-        );
+        ).toBe(6);
       });
   });
 
@@ -1835,8 +1836,8 @@ describe('Query watch', () => {
         })
         .then(() => streamHelper.awaitOpen())
         .then(request => {
-          expect(streamHelper.streamCount).to.equal(2);
-          expect(oldRequestStream).to.not.equal(streamHelper.writeStream);
+          expect(streamHelper.streamCount).toBe(2);
+          expect(oldRequestStream).not.toBe(streamHelper.writeStream);
           verifyRequest(request, collQueryJSON());
 
           watchHelper.sendAddTarget();
@@ -1881,7 +1882,7 @@ describe('Query watch', () => {
           return watchHelper.await('snapshot');
         })
         .then(results => {
-          expect(streamHelper.streamCount).to.equal(1);
+          expect(streamHelper.streamCount).toBe(1);
           snapshotsEqual(lastSnapshot, 2, results, {
             docs: [snapshot(doc1, {foo: 'a'}), snapshot(doc2, {foo: 'b'})],
             docChanges: [added(doc2, {foo: 'b'})],
@@ -1920,7 +1921,7 @@ describe('Query watch', () => {
           return watchHelper.await('snapshot');
         })
         .then(results => {
-          expect(streamHelper.streamCount).to.equal(1);
+          expect(streamHelper.streamCount).toBe(1);
           snapshotsEqual(lastSnapshot, 2, results, {
             docs: [snapshot(doc1, {foo: 'd'}), snapshot(doc2, {foo: 'e'})],
             docChanges: [added(doc2, {foo: 'e'}), modified(doc1, {foo: 'd'})],
@@ -2078,7 +2079,7 @@ describe('Query watch', () => {
       return initialSnapshot(snapshot => {
         return nextSnapshot(snapshot, snapshot => {
           firstSnapshot = snapshot;
-          expect(firstSnapshot.isEqual(firstSnapshot)).to.be.true;
+          expect(firstSnapshot.isEqual(firstSnapshot)).toBe(true);
           watchHelper.sendDoc(doc1, {foo: 'a'});
           watchHelper.sendDoc(doc2, {foo: 'b'});
           watchHelper.sendDoc(doc3, {foo: 'c'});
@@ -2086,7 +2087,7 @@ describe('Query watch', () => {
           .then(snapshot =>
             nextSnapshot(snapshot, snapshot => {
               secondSnapshot = snapshot;
-              expect(secondSnapshot.isEqual(secondSnapshot)).to.be.true;
+              expect(secondSnapshot.isEqual(secondSnapshot)).toBe(true);
               watchHelper.sendDocDelete(doc1);
               watchHelper.sendDoc(doc2, {foo: 'bar'});
               watchHelper.sendDoc(doc4, {foo: 'd'});
@@ -2094,26 +2095,26 @@ describe('Query watch', () => {
           )
           .then(snapshot => {
             thirdSnapshot = snapshot;
-            expect(thirdSnapshot.isEqual(thirdSnapshot)).to.be.true;
+            expect(thirdSnapshot.isEqual(thirdSnapshot)).toBe(true);
           });
       }).then(() =>
         initialSnapshot(snapshot => {
           return nextSnapshot(snapshot, snapshot => {
-            expect(snapshot.isEqual(firstSnapshot)).to.be.true;
+            expect(snapshot.isEqual(firstSnapshot)).toBe(true);
             watchHelper.sendDoc(doc1, {foo: 'a'});
             watchHelper.sendDoc(doc2, {foo: 'b'});
             watchHelper.sendDoc(doc3, {foo: 'c'});
           })
             .then(snapshot =>
               nextSnapshot(snapshot, snapshot => {
-                expect(snapshot.isEqual(secondSnapshot)).to.be.true;
+                expect(snapshot.isEqual(secondSnapshot)).toBe(true);
                 watchHelper.sendDocDelete(doc1);
                 watchHelper.sendDoc(doc2, {foo: 'bar'});
                 watchHelper.sendDoc(doc4, {foo: 'd'});
               }),
             )
             .then(snapshot => {
-              expect(snapshot.isEqual(thirdSnapshot)).to.be.true;
+              expect(snapshot.isEqual(thirdSnapshot)).toBe(true);
             });
         }),
       );
@@ -2138,8 +2139,8 @@ describe('Query watch', () => {
             watchHelper.sendDoc(doc3, {foo: 'c'});
           }).then(snapshot => {
             const materializedDocs = snapshot.docs;
-            expect(materializedDocs.length).to.equal(3);
-            expect(snapshot.isEqual(firstSnapshot)).to.be.true;
+            expect(materializedDocs.length).toBe(3);
+            expect(snapshot.isEqual(firstSnapshot)).toBe(true);
           });
         }),
       );
@@ -2160,7 +2161,7 @@ describe('Query watch', () => {
           return nextSnapshot(snapshot, () => {
             watchHelper.sendDoc(doc1, {foo: 'a'});
           }).then(snapshot => {
-            expect(snapshot.isEqual(firstSnapshot)).to.be.false;
+            expect(snapshot.isEqual(firstSnapshot)).toBe(false);
           });
         }),
       );
@@ -2176,17 +2177,17 @@ describe('Query watch', () => {
           firstSnapshot = snapshot;
           expect(
             snapshot.docChanges()[0].isEqual(firstSnapshot.docChanges()[0]),
-          ).to.be.true;
+          ).toBe(true);
         });
       }).then(() =>
         initialSnapshot(snapshot => {
           return nextSnapshot(snapshot, () => {
             watchHelper.sendDoc(doc1, {foo: 'b'});
           }).then(snapshot => {
-            expect(snapshot.isEqual(firstSnapshot)).to.be.false;
+            expect(snapshot.isEqual(firstSnapshot)).toBe(false);
             expect(
               snapshot.docChanges()[0].isEqual(firstSnapshot.docChanges()[0]),
-            ).to.be.false;
+            ).toBe(false);
           });
         }),
       );
@@ -2218,7 +2219,7 @@ describe('Query watch', () => {
               }),
             )
             .then(snapshot => {
-              expect(snapshot.isEqual(firstSnapshot)).to.be.false;
+              expect(snapshot.isEqual(firstSnapshot)).toBe(false);
             });
         }),
       );
@@ -2238,7 +2239,7 @@ describe('Query watch', () => {
           return nextSnapshot(snapshot, () =>
             watchHelper.sendDoc(doc1, {foo: 1}),
           ).then(snapshot => {
-            expect(snapshot.isEqual(originalSnapshot)).to.be.false;
+            expect(snapshot.isEqual(originalSnapshot)).toBe(false);
           });
         }),
       );
@@ -2256,7 +2257,7 @@ describe('Query watch', () => {
           watchHelper.sendCurrent();
           watchHelper.sendSnapshot(1);
           return watchHelper.await('snapshot').then(snapshot => {
-            expect(snapshot.isEqual(firstSnapshot)).to.be.false;
+            expect(snapshot.isEqual(firstSnapshot)).toBe(false);
           });
         });
       });
@@ -2264,10 +2265,11 @@ describe('Query watch', () => {
 
     it('for objects with different type', () => {
       return initialSnapshot(snapshot => {
-        expect(snapshot.isEqual('foo' as InvalidApiUsage)).to.be.false;
-        expect(snapshot.isEqual({} as InvalidApiUsage)).to.be.false;
-        expect(snapshot.isEqual(new GeoPoint(0, 0) as InvalidApiUsage)).to.be
-          .false;
+        expect(snapshot.isEqual('foo' as InvalidApiUsage)).toBe(false);
+        expect(snapshot.isEqual({} as InvalidApiUsage)).toBe(false);
+        expect(snapshot.isEqual(new GeoPoint(0, 0) as InvalidApiUsage)).toBe(
+          false,
+        );
       });
     });
   });
@@ -2374,25 +2376,27 @@ describe('DocumentReference watch', () => {
   });
 
   it('with invalid callbacks', () => {
-    expect(() => doc.onSnapshot('foo' as InvalidApiUsage)).to.throw(
+    expect(() => doc.onSnapshot('foo' as InvalidApiUsage)).toThrow(
       'Value for argument "onNext" is not a valid function.',
     );
 
-    expect(() => doc.onSnapshot(() => {}, 'foo' as InvalidApiUsage)).to.throw(
+    expect(() => doc.onSnapshot(() => {}, 'foo' as InvalidApiUsage)).toThrow(
       'Value for argument "onError" is not a valid function.',
     );
   });
 
-  it('without error callback', done => {
-    const unsubscribe = doc.onSnapshot(() => {
-      unsubscribe();
-      done();
-    });
+  it('without error callback', () => {
+    return new Promise<void>(resolve => {
+      const unsubscribe = doc.onSnapshot(() => {
+        unsubscribe();
+        resolve();
+      });
 
-    void streamHelper.awaitOpen().then(() => {
-      watchHelper.sendAddTarget();
-      watchHelper.sendCurrent();
-      watchHelper.sendSnapshot(1);
+      void streamHelper.awaitOpen().then(() => {
+        watchHelper.sendAddTarget();
+        watchHelper.sendCurrent();
+        watchHelper.sendSnapshot(1);
+      });
     });
   });
 
@@ -2453,7 +2457,7 @@ describe('DocumentReference watch', () => {
       return watchHelper
         .await('snapshot')
         .then(snapshot => {
-          expect(snapshot.exists).to.be.false;
+          expect(snapshot.exists).toBe(false);
 
           // Add a result.
           watchHelper.sendDoc(doc, {foo: 'a'});
@@ -2461,10 +2465,10 @@ describe('DocumentReference watch', () => {
           return watchHelper.await('snapshot');
         })
         .then(snapshot => {
-          expect(snapshot.exists).to.be.true;
-          expect(snapshot.createTime!.isEqual(new Timestamp(1, 2))).to.be.true;
-          expect(snapshot.updateTime!.isEqual(new Timestamp(3, 1))).to.be.true;
-          expect(snapshot.get('foo')).to.equal('a');
+          expect(snapshot.exists).toBe(true);
+          expect(snapshot.createTime!.isEqual(new Timestamp(1, 2))).toBe(true);
+          expect(snapshot.updateTime!.isEqual(new Timestamp(3, 1))).toBe(true);
+          expect(snapshot.get('foo')).toBe('a');
 
           // Change the document.
           watchHelper.sendDoc(doc, {foo: 'b'});
@@ -2472,8 +2476,8 @@ describe('DocumentReference watch', () => {
           return watchHelper.await('snapshot');
         })
         .then(snapshot => {
-          expect(snapshot.exists).to.be.true;
-          expect(snapshot.get('foo')).to.equal('b');
+          expect(snapshot.exists).toBe(true);
+          expect(snapshot.get('foo')).toBe('b');
         });
     });
   });
@@ -2487,7 +2491,7 @@ describe('DocumentReference watch', () => {
       return watchHelper
         .await('snapshot')
         .then(snapshot => {
-          expect(snapshot.exists).to.be.false;
+          expect(snapshot.exists).toBe(false);
 
           streamHelper.write({
             documentChange: {
@@ -2505,7 +2509,7 @@ describe('DocumentReference watch', () => {
           return watchHelper.await('snapshot');
         })
         .then(snapshot => {
-          expect(snapshot.exists).to.be.false;
+          expect(snapshot.exists).toBe(false);
         });
     });
   });
@@ -2521,7 +2525,7 @@ describe('DocumentReference watch', () => {
       return watchHelper
         .await('snapshot')
         .then(snapshot => {
-          expect(snapshot.exists).to.be.false;
+          expect(snapshot.exists).toBe(false);
 
           // Add a result.
           watchHelper.sendDoc(doc, {foo: 'a'});
@@ -2529,8 +2533,8 @@ describe('DocumentReference watch', () => {
           return watchHelper.await('snapshot');
         })
         .then(snapshot => {
-          expect(snapshot.exists).to.be.true;
-          expect(snapshot.get('foo')).to.equal('a');
+          expect(snapshot.exists).toBe(true);
+          expect(snapshot.get('foo')).toBe('a');
 
           streamHelper.destroyStream();
           return streamHelper.awaitReopen();
@@ -2543,8 +2547,8 @@ describe('DocumentReference watch', () => {
           return watchHelper.await('snapshot');
         })
         .then(snapshot => {
-          expect(snapshot.exists).to.be.true;
-          expect(snapshot.get('foo')).to.equal('b');
+          expect(snapshot.exists).toBe(true);
+          expect(snapshot.get('foo')).toBe('b');
 
           // Remove the document.
           watchHelper.sendDocDelete(doc);
@@ -2552,8 +2556,8 @@ describe('DocumentReference watch', () => {
           return watchHelper.await('snapshot');
         })
         .then(snapshot => {
-          expect(snapshot.exists).to.be.false;
-          expect(streamHelper.streamCount).to.equal(2);
+          expect(snapshot.exists).toBe(false);
+          expect(streamHelper.streamCount).toBe(2);
         });
     });
   });
@@ -2572,7 +2576,7 @@ describe('DocumentReference watch', () => {
       return watchHelper
         .await('snapshot')
         .then(snapshot => {
-          expect(snapshot.get('foo')).to.equal('b');
+          expect(snapshot.get('foo')).toBe('b');
 
           // Modify it two more times.
           watchHelper.sendDoc(doc, {foo: 'c'});
@@ -2581,7 +2585,7 @@ describe('DocumentReference watch', () => {
           return watchHelper.await('snapshot');
         })
         .then(snapshot => {
-          expect(snapshot.get('foo')).to.equal('d');
+          expect(snapshot.get('foo')).toBe('d');
 
           // Remove it, delete it, and then add it again.
           watchHelper.sendDocRemove(doc, {foo: 'e'});
@@ -2591,7 +2595,7 @@ describe('DocumentReference watch', () => {
           return watchHelper.await('snapshot');
         })
         .then(snapshot => {
-          expect(snapshot.get('foo')).to.equal('f');
+          expect(snapshot.get('foo')).toBe('f');
         });
     });
   });
@@ -2605,7 +2609,7 @@ describe('DocumentReference watch', () => {
       return watchHelper
         .await('snapshot')
         .then(snapshot => {
-          expect(snapshot.exists).to.be.false;
+          expect(snapshot.exists).toBe(false);
 
           // Add a result.
           watchHelper.sendDoc(doc, {foo: 'a'});
@@ -2613,7 +2617,7 @@ describe('DocumentReference watch', () => {
           return watchHelper.await('snapshot');
         })
         .then(snapshot => {
-          expect(snapshot.exists).to.be.true;
+          expect(snapshot.exists).toBe(true);
 
           // Delete the document.
           watchHelper.sendDocDelete(doc);
@@ -2621,7 +2625,7 @@ describe('DocumentReference watch', () => {
           return watchHelper.await('snapshot');
         })
         .then(snapshot => {
-          expect(snapshot.exists).to.be.false;
+          expect(snapshot.exists).toBe(false);
         });
     });
   });
@@ -2635,7 +2639,7 @@ describe('DocumentReference watch', () => {
       return watchHelper
         .await('snapshot')
         .then(snapshot => {
-          expect(snapshot.exists).to.be.false;
+          expect(snapshot.exists).toBe(false);
 
           // Add a result.
           watchHelper.sendDoc(doc, {foo: 'a'});
@@ -2643,7 +2647,7 @@ describe('DocumentReference watch', () => {
           return watchHelper.await('snapshot');
         })
         .then(snapshot => {
-          expect(snapshot.exists).to.be.true;
+          expect(snapshot.exists).toBe(true);
 
           // Remove the document.
           watchHelper.sendDocRemove(doc, {foo: 'c'});
@@ -2651,7 +2655,7 @@ describe('DocumentReference watch', () => {
           return watchHelper.await('snapshot');
         })
         .then(snapshot => {
-          expect(snapshot.exists).to.be.false;
+          expect(snapshot.exists).toBe(false);
         });
     });
   });
@@ -2671,7 +2675,7 @@ describe('DocumentReference watch', () => {
           return watchHelper.await('snapshot');
         })
         .then(snapshot => {
-          expect(snapshot.get('foo')).to.equal('a');
+          expect(snapshot.get('foo')).toBe('a');
 
           // Send a RESET.
           streamHelper.write({
@@ -2688,7 +2692,7 @@ describe('DocumentReference watch', () => {
           return watchHelper.await('snapshot');
         })
         .then(snapshot => {
-          expect(snapshot.get('foo')).to.equal('b');
+          expect(snapshot.get('foo')).toBe('b');
         });
     });
   });
@@ -2789,7 +2793,7 @@ describe('Query comparator', () => {
     ];
 
     const comparator = query.comparator();
-    expect(() => input.sort(comparator)).to.throw(
+    expect(() => input.sort(comparator)).toThrow(
       "Trying to compare documents on fields that don't exist",
     );
   });

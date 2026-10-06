@@ -23,7 +23,7 @@ import {
   UpdateData,
   Firestore,
 } from '@google-cloud/firestore';
-import {expect} from 'chai';
+import {expect} from 'vitest';
 
 describe('FirestoreTypeConverter', () => {
   it('converter has the minimal typing information', () => {
@@ -353,7 +353,7 @@ describe('UpdateData type', () => {
       undefinedProperty: 'string',
     };
 
-    expect(true).to.be.true;
+    expect(true).toBe(true);
   });
 
   it('Supports properties with custom types', () => {
@@ -393,7 +393,7 @@ describe('UpdateData type', () => {
       },
     };
 
-    expect(true).to.be.true;
+    expect(true).toBe(true);
   });
 
   describe('given properties with dots', () => {
@@ -411,7 +411,7 @@ describe('UpdateData type', () => {
         'property.with.dots': 1,
       };
 
-      expect(true).to.be.true;
+      expect(true).toBe(true);
     });
 
     it('does not allow matching a sub-string|path', () => {
@@ -420,7 +420,7 @@ describe('UpdateData type', () => {
         'property.with': true,
       };
 
-      expect(true).to.be.true;
+      expect(true).toBe(true);
     });
   });
 
@@ -463,7 +463,7 @@ describe('UpdateData type', () => {
         },
       };
 
-      expect(true).to.be.true;
+      expect(true).toBe(true);
     });
 
     it('errors for unexpected value types at each layer', () => {
@@ -491,7 +491,7 @@ describe('UpdateData type', () => {
         },
       };
 
-      expect(true).to.be.true;
+      expect(true).toBe(true);
     });
 
     it('does not allow properties that were not on the original type', () => {
@@ -508,7 +508,7 @@ describe('UpdateData type', () => {
         },
       };
 
-      expect(true).to.be.true;
+      expect(true).toBe(true);
     });
 
     it('preserves value types for dot notation', () => {
@@ -586,7 +586,7 @@ describe('UpdateData type', () => {
         },
       };
 
-      expect(true).to.be.true;
+      expect(true).toBe(true);
     });
   });
 
@@ -615,7 +615,7 @@ describe('UpdateData type', () => {
         },
       };
 
-      expect(true).to.be.true;
+      expect(true).toBe(true);
     });
 
     it('errors for unexpected value types at each layer', () => {
@@ -634,7 +634,7 @@ describe('UpdateData type', () => {
         },
       };
 
-      expect(true).to.be.true;
+      expect(true).toBe(true);
     });
 
     it('does not allow properties that were not on the original type', () => {
@@ -652,7 +652,7 @@ describe('UpdateData type', () => {
         },
       };
 
-      expect(true).to.be.true;
+      expect(true).toBe(true);
     });
 
     it('preserves value types for dot notation', () => {
@@ -685,7 +685,7 @@ describe('UpdateData type', () => {
         'indexed.bar': null,
       };
 
-      expect(true).to.be.true;
+      expect(true).toBe(true);
     });
   });
 
@@ -702,7 +702,7 @@ describe('UpdateData type', () => {
         numberProperty: false,
       };
 
-      expect(true).to.be.true;
+      expect(true).toBe(true);
     });
 
     it('supports object type for T', () => {
@@ -807,7 +807,7 @@ describe('UpdateData type', () => {
         },
       };
 
-      expect(true).to.be.true;
+      expect(true).toBe(true);
     });
 
     it('supports object with nested index for T', () => {
@@ -936,7 +936,7 @@ describe('UpdateData type', () => {
         },
       };
 
-      expect(true).to.be.true;
+      expect(true).toBe(true);
     });
   });
 
@@ -973,7 +973,7 @@ describe('UpdateData type', () => {
           },
         };
 
-        expect(true).to.be.true;
+        expect(true).toBe(true);
       });
 
       it('allows dot notation for nested index types', () => {
@@ -1009,7 +1009,7 @@ describe('UpdateData type', () => {
           'indexed.bar.numberProperty': 'string',
         };
 
-        expect(true).to.be.true;
+        expect(true).toBe(true);
       });
 
       it('allows dot notation for nested index types that are 2 layers deep', () => {
@@ -1032,7 +1032,7 @@ describe('UpdateData type', () => {
           'layer.indexed.bar.unknownProperty': 4,
         };
 
-        expect(true).to.be.true;
+        expect(true).toBe(true);
       });
     });
   });
@@ -1054,7 +1054,7 @@ describe('UpdateData type', () => {
         });
       }
 
-      expect(true).to.be.true;
+      expect(true).toBe(true);
     });
 
     it('fixes issues/1745#issuecomment-1804130587', () => {
@@ -1068,7 +1068,7 @@ describe('UpdateData type', () => {
 
       update.prop = value;
 
-      expect(true).to.be.true;
+      expect(true).toBe(true);
     });
 
     it('fixes issues/1890', () => {
@@ -1094,7 +1094,7 @@ describe('UpdateData type', () => {
         });
       }
 
-      expect(true).to.be.true;
+      expect(true).toBe(true);
     });
   });
 
