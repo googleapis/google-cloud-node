@@ -106,7 +106,6 @@ export function createApiCall(
     request: RequestType,
     callOptions?: CallOptions,
     callback?: APICallback,
-    recordResend?: ResendRecorder,
   ) => {
     // Capture the active client request span context to parent async low level network attempt spans.
     const parentContext = tracingEnabled ? context.active() : undefined;
@@ -138,14 +137,12 @@ export function createApiCall(
     // requests start at resendCount = 0 instead of being counted as retries.
     let attemptResendCount = 0;
     let isRetryAttempt = false;
-    const originalRecordResend = recordResend;
-    if (tracingEnabled) {
-      recordResend = () => {
-        originalRecordResend?.();
-        attemptResendCount++;
-        isRetryAttempt = true;
-      };
-    }
+    const recordResend: ResendRecorder | undefined = tracingEnabled
+      ? () => {
+          attemptResendCount++;
+          isRetryAttempt = true;
+        }
+      : undefined;
 
     // Server-streaming calls retry inside the stream rather than through
     // `retryable`, so the recorder is handed to the stream itself. It is the
@@ -272,18 +269,13 @@ export function createApiCall(
       return traceCall(
         dynamicArgs,
         staticArgs,
-        (tracedCallback?: APICallback, recordResend?: ResendRecorder) => {
+        (tracedCallback?: APICallback) => {
           // `traceCall` wraps the user's callback whenever one was supplied,
           // for stream and non-stream calls alike, and that wrapper is what
           // closes the span. It is undefined only when there is no callback to
           // wrap, in which case the span is bound to the returned promise or
           // stream instead; the fallback keeps this correct either way.
-          return invokeCall(
-            request,
-            callOptions,
-            tracedCallback ?? callback,
-            recordResend,
-          );
+          return invokeCall(request, callOptions, tracedCallback ?? callback);
         },
         isStreamingCall,
         callback,
