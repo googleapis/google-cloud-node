@@ -19,7 +19,7 @@ import {CallOptions} from 'google-gax';
 import {isSpanContextValid, Span} from '@opentelemetry/api';
 
 import {BatchPublishOptions} from './message-batch';
-import {Queue, OrderedQueue} from './message-queues';
+import {Queue, OrderedQueue, logs} from './message-queues';
 import {Topic} from '../topic';
 import {RequestCallback, EmptyCallback} from '../pubsub';
 import {defaultOptions} from '../default-options';
@@ -28,6 +28,7 @@ import * as tracing from '../telemetry-tracing';
 import {FlowControl, FlowControlOptions} from './flow-control';
 import {
   HedgingOptions,
+  HedgingScheduler,
   ResolvedHedgingOptions,
   HedgingTokenBucket,
   validateAndResolveHedgingOptions,
@@ -102,6 +103,7 @@ export class Publisher {
   flowControl: FlowControl;
   hedgingOptions?: ResolvedHedgingOptions;
   tokenBucket?: HedgingTokenBucket;
+  hedgingScheduler?: HedgingScheduler;
 
   constructor(topic: Topic, options?: PublishOptions) {
     this.flowControl = new FlowControl(
@@ -151,10 +153,14 @@ export class Publisher {
     allPublishes
       .then(() => allDrains)
       .then(() => {
+        this.hedgingScheduler?.clear();
         definedCallback(null);
         return undefined;
       })
-      .catch(definedCallback);
+      .catch(err => {
+        this.hedgingScheduler?.clear();
+        definedCallback(err);
+      });
   }
 
   /**
@@ -323,10 +329,24 @@ export class Publisher {
       messageOrdering,
       gaxOpts,
     );
+    this.hedgingScheduler?.clear();
     this.hedgingOptions = resolvedHedging;
-    this.tokenBucket = resolvedHedging
-      ? new HedgingTokenBucket(resolvedHedging)
-      : undefined;
+    if (resolvedHedging) {
+      const tokenBucket = new HedgingTokenBucket(resolvedHedging);
+      this.tokenBucket = tokenBucket;
+      this.hedgingScheduler = new HedgingScheduler(
+        resolvedHedging,
+        tokenBucket,
+        () => {
+          logs.publishHedged.debug(
+            'Hedging rate limited due to lack of tokens.',
+          );
+        },
+      );
+    } else {
+      this.tokenBucket = undefined;
+      this.hedgingScheduler = undefined;
+    }
 
     this.settings = {
       batching: {

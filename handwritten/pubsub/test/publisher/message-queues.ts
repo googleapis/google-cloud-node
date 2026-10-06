@@ -23,13 +23,26 @@ import * as sinon from 'sinon';
 
 import {RequestConfig, RequestCallback} from '../../src/pubsub';
 import * as p from '../../src/publisher';
+import {validateAndResolveHedgingOptions} from '../../src/publisher/hedging';
 import * as b from '../../src/publisher/message-batch';
 import * as q from '../../src/publisher/message-queues';
 import {PublishError} from '../../src/publisher/publish-error';
+import {Duration} from '../../src/temporal';
+import * as otel from '../../src/telemetry-tracing';
+import {exporter} from '../tracing';
 import {FakeLog, TestUtils} from '../test-utils';
+import {google} from '../../protos/protos';
+
+class FakePubSub {
+  isIdResolved = true;
+  async getClientConfig(): Promise<object> {
+    return {};
+  }
+}
 
 class FakeTopic {
   name = 'projects/foo/topics/fake-topic';
+  pubsub = new FakePubSub();
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   request<T>(config: RequestConfig, callback: RequestCallback<T>): void {}
 }
@@ -40,12 +53,35 @@ class FakePublisher {
   topic: FakeTopic;
   settings: p.PublishOptions;
   flowControl: FakeFlowControl;
+  hedgingOptions?: p.ResolvedHedgingOptions;
+  tokenBucket?: p.HedgingTokenBucket;
+  hedgingScheduler?: p.HedgingScheduler;
   constructor(topic: FakeTopic) {
     this.topic = topic;
     this.settings = {
       batching: {},
     };
     this.flowControl = new FakeFlowControl();
+  }
+  enableHedging(options: p.HedgingOptions = {}): void {
+    const resolved = validateAndResolveHedgingOptions(
+      options,
+      this.settings.messageOrdering,
+      this.settings.gaxOpts,
+    );
+    this.hedgingOptions = resolved;
+    if (resolved) {
+      const bucket = new p.HedgingTokenBucket(resolved);
+      this.tokenBucket = bucket;
+      this.hedgingScheduler = new p.HedgingScheduler(resolved, bucket, () => {
+        q.logs.publishHedged.debug(
+          'Hedging rate limited due to lack of tokens.',
+        );
+      });
+    }
+  }
+  refillTokenBucket(): void {
+    this.tokenBucket?.refillTokenBucket();
   }
 }
 
@@ -187,10 +223,7 @@ describe('Message Queues', () => {
         fakeLog.remove();
 
         assert.strictEqual(fakeLog.called, true);
-        assert.strictEqual(
-          fakeLog.fields!.severity,
-          'INFO',
-        );
+        assert.strictEqual(fakeLog.fields!.severity, 'INFO');
         assert.strictEqual(fakeLog.args![1] as string, 'test');
       });
 
@@ -399,6 +432,7 @@ describe('Message Queues', () => {
               assert.strictEqual(stub.callCount, 2);
               done();
             });
+            return undefined;
           });
         });
 
@@ -434,6 +468,7 @@ describe('Message Queues', () => {
               assert.strictEqual(spy.callCount, 1);
               done();
             });
+            return undefined;
           });
         });
       });
@@ -802,6 +837,415 @@ describe('Message Queues', () => {
         assert.ok(queue.currentBatch);
         process.nextTick(() => done());
       });
+    });
+  });
+
+  describe('Publish Hedging in Queues', () => {
+    interface CapturedPublishCall {
+      config: RequestConfig;
+      callback: RequestCallback<google.pubsub.v1.IPublishResponse>;
+    }
+
+    let clock: sinon.SinonFakeTimers;
+    let fakePub: FakePublisher;
+    let queue: q.Queue;
+
+    beforeEach(() => {
+      clock = TestUtils.useFakeTimers(sandbox, 10000);
+      fakePub = publisher as unknown as FakePublisher;
+      queue = new Queue(publisher);
+      exporter.reset();
+    });
+
+    afterEach(() => {
+      fakePub.hedgingScheduler?.clear();
+      clock.restore();
+      exporter.reset();
+      otel.setGloballyEnabled(false);
+    });
+
+    it('triggers a hedged publish with default settings once tokens are available', async () => {
+      fakePub.enableHedging({});
+      for (let i = 0; i < 10; i++) {
+        fakePub.refillTokenBucket();
+      }
+      assert.strictEqual(fakePub.tokenBucket?.getTokenBalance(), 1.0);
+
+      const calls: CapturedPublishCall[] = [];
+      sandbox
+        .stub(topic, 'request')
+        .callsFake(
+          (
+            config: RequestConfig,
+            callback: RequestCallback<google.pubsub.v1.IPublishResponse>,
+          ) => {
+            calls.push({config, callback});
+          },
+        );
+
+      const cbSpy = sandbox.spy();
+      const publishPromise = queue._publish([{}], [cbSpy], 0, 'test');
+
+      // Initial attempt is sent immediately
+      assert.strictEqual(calls.length, 1);
+      assert.ok(calls[0].config.gaxOpts?.signal);
+
+      // Advance 1000ms (default hedgeDelay) -> hedged attempt 1 is sent
+      clock.tick(1000);
+      assert.strictEqual(calls.length, 2);
+      assert.strictEqual(calls[1].config.gaxOpts?.retry, null);
+      assert.strictEqual(calls[1].config.gaxOpts?.timeout, 10000);
+
+      // Complete hedged attempt -> refills 0.1 token
+      calls[1].callback(null, {messageIds: ['hedged-msg-1']});
+      await publishPromise;
+
+      assert.strictEqual(
+        cbSpy.calledOnceWithExactly(null, 'hedged-msg-1'),
+        true,
+      );
+      assert.strictEqual(calls[0].config.gaxOpts?.signal?.aborted, true);
+      assert.strictEqual(fakePub.tokenBucket?.getTokenBalance(), 0.1);
+    });
+
+    it('cancels hedged attempt and emits standard publish end event when original attempt succeeds after hedging', async () => {
+      otel.setGloballyEnabled(true);
+      fakePub.enableHedging({
+        hedgeDelay: Duration.from({milliseconds: 300}),
+        maxTokens: 10,
+        refillRatio: 0.2,
+      });
+      for (let i = 0; i < 5; i++) {
+        fakePub.refillTokenBucket();
+      }
+
+      const calls: CapturedPublishCall[] = [];
+      sandbox
+        .stub(topic, 'request')
+        .callsFake(
+          (
+            config: RequestConfig,
+            callback: RequestCallback<google.pubsub.v1.IPublishResponse>,
+          ) => {
+            calls.push({config, callback});
+          },
+        );
+
+      const message: p.PubsubMessage = {data: Buffer.from('hello')};
+      const parentSpan = otel.PubsubSpans.createPublisherSpan(
+        message,
+        topic.name,
+        'test',
+      );
+      message.parentSpan = parentSpan;
+
+      const cbSpy = sandbox.spy();
+      const publishPromise = queue._publish([message], [cbSpy], 5, 'test');
+
+      clock.tick(300);
+      assert.strictEqual(calls.length, 2);
+
+      // Original attempt (index 0) finishes first
+      calls[0].callback(null, {messageIds: ['orig-id']});
+      await publishPromise;
+
+      assert.strictEqual(cbSpy.calledOnceWithExactly(null, 'orig-id'), true);
+      assert.strictEqual(calls[0].config.gaxOpts?.signal?.aborted, false);
+      assert.strictEqual(calls[1].config.gaxOpts?.signal?.aborted, true);
+
+      const createSpan = exporter
+        .getFinishedSpans()
+        .find(s => s.name.endsWith('create'));
+      assert.ok(createSpan);
+      const eventNames = createSpan.events.map(e => e.name);
+      assert.deepStrictEqual(eventNames, [
+        'publish start',
+        'publish start (hedged)',
+        'publish end',
+      ]);
+    });
+
+    it('cancels original attempt and emits hedged publish end event and debug log when hedged attempt succeeds first', async () => {
+      otel.setGloballyEnabled(true);
+      fakePub.enableHedging({
+        hedgeDelay: Duration.from({milliseconds: 300}),
+        maxTokens: 10,
+        refillRatio: 0.2,
+      });
+      for (let i = 0; i < 5; i++) {
+        fakePub.refillTokenBucket();
+      }
+
+      const calls: CapturedPublishCall[] = [];
+      sandbox
+        .stub(topic, 'request')
+        .callsFake(
+          (
+            config: RequestConfig,
+            callback: RequestCallback<google.pubsub.v1.IPublishResponse>,
+          ) => {
+            calls.push({config, callback});
+          },
+        );
+
+      const message: p.PubsubMessage = {data: Buffer.from('hello')};
+      const parentSpan = otel.PubsubSpans.createPublisherSpan(
+        message,
+        topic.name,
+        'test',
+      );
+      message.parentSpan = parentSpan;
+
+      const fakeLog = new FakeLog(q.logs.publishHedged);
+      const cbSpy = sandbox.spy();
+      const publishPromise = queue._publish([message], [cbSpy], 5, 'test');
+
+      clock.tick(300);
+      assert.strictEqual(calls.length, 2);
+      fakeLog.remove();
+
+      assert.strictEqual(fakeLog.called, true);
+      assert.strictEqual(fakeLog.fields?.severity, 'DEBUG');
+      assert.strictEqual(fakeLog.args?.[1], 1);
+
+      // Hedged attempt (index 1) finishes first
+      calls[1].callback(null, {messageIds: ['hedged-id']});
+      await publishPromise;
+
+      assert.strictEqual(cbSpy.calledOnceWithExactly(null, 'hedged-id'), true);
+      assert.strictEqual(calls[0].config.gaxOpts?.signal?.aborted, true);
+      assert.strictEqual(calls[1].config.gaxOpts?.signal?.aborted, false);
+
+      const createSpan = exporter
+        .getFinishedSpans()
+        .find(s => s.name.endsWith('create'));
+      assert.ok(createSpan);
+      const eventNames = createSpan.events.map(e => e.name);
+      assert.deepStrictEqual(eventNames, [
+        'publish start',
+        'publish start (hedged)',
+        'publish end (hedged)',
+      ]);
+    });
+
+    it('discards hedged request error and resolves when original request succeeds', async () => {
+      fakePub.enableHedging({
+        hedgeDelay: Duration.from({milliseconds: 250}),
+        maxTokens: 10,
+        refillRatio: 0.2,
+      });
+      for (let i = 0; i < 5; i++) {
+        fakePub.refillTokenBucket();
+      }
+
+      const calls: CapturedPublishCall[] = [];
+      sandbox
+        .stub(topic, 'request')
+        .callsFake(
+          (
+            config: RequestConfig,
+            callback: RequestCallback<google.pubsub.v1.IPublishResponse>,
+          ) => {
+            calls.push({config, callback});
+          },
+        );
+
+      const cbSpy = sandbox.spy();
+      const publishPromise = queue._publish([{}], [cbSpy], 0, 'test');
+
+      clock.tick(250);
+      assert.strictEqual(calls.length, 2);
+
+      // Hedged attempt fails while original attempt is still in flight
+      const hedgedError = new Error('hedged transient error') as ServiceError;
+      calls[1].callback(hedgedError);
+      await Promise.resolve();
+      assert.strictEqual(cbSpy.called, false);
+
+      // Original attempt succeeds
+      calls[0].callback(null, {messageIds: ['orig-after-hedge-err']});
+      await publishPromise;
+
+      assert.strictEqual(
+        cbSpy.calledOnceWithExactly(null, 'orig-after-hedge-err'),
+        true,
+      );
+    });
+
+    it('cancels hedged attempt and rejects when original request fails permanently', async () => {
+      fakePub.enableHedging({
+        hedgeDelay: Duration.from({milliseconds: 250}),
+        maxTokens: 10,
+        refillRatio: 0.2,
+      });
+      for (let i = 0; i < 5; i++) {
+        fakePub.refillTokenBucket();
+      }
+
+      const calls: CapturedPublishCall[] = [];
+      sandbox
+        .stub(topic, 'request')
+        .callsFake(
+          (
+            config: RequestConfig,
+            callback: RequestCallback<google.pubsub.v1.IPublishResponse>,
+          ) => {
+            calls.push({config, callback});
+          },
+        );
+
+      const cbSpy = sandbox.spy();
+      const publishPromise = queue._publish([{}], [cbSpy], 0, 'test');
+
+      clock.tick(250);
+      assert.strictEqual(calls.length, 2);
+
+      const permanentError = new Error('permanent failure') as ServiceError;
+      calls[0].callback(permanentError);
+
+      await assert.rejects(publishPromise, permanentError);
+      assert.strictEqual(cbSpy.calledOnceWithExactly(permanentError), true);
+      assert.strictEqual(calls[1].config.gaxOpts?.signal?.aborted, true);
+    });
+
+    it('sends multiple hedged attempts at hedgeDelay intervals and cancels all others when attempt 2 wins', async () => {
+      fakePub.enableHedging({
+        hedgeDelay: Duration.from({milliseconds: 200}),
+        maxTokens: 10,
+        refillRatio: 0.2,
+      });
+      for (let i = 0; i < 10; i++) {
+        fakePub.refillTokenBucket();
+      }
+      assert.strictEqual(fakePub.tokenBucket?.getTokenBalance(), 2.0);
+
+      const calls: CapturedPublishCall[] = [];
+      sandbox
+        .stub(topic, 'request')
+        .callsFake(
+          (
+            config: RequestConfig,
+            callback: RequestCallback<google.pubsub.v1.IPublishResponse>,
+          ) => {
+            calls.push({config, callback});
+          },
+        );
+
+      const cbSpy = sandbox.spy();
+      const publishPromise = queue._publish([{}], [cbSpy], 0, 'test');
+
+      assert.strictEqual(calls.length, 1);
+
+      clock.tick(200);
+      assert.strictEqual(calls.length, 2);
+
+      clock.tick(200);
+      assert.strictEqual(calls.length, 3);
+
+      // Second hedged attempt (calls[2]) succeeds
+      calls[2].callback(null, {messageIds: ['hedge-2-id']});
+      await publishPromise;
+
+      assert.strictEqual(cbSpy.calledOnceWithExactly(null, 'hedge-2-id'), true);
+      assert.strictEqual(calls[0].config.gaxOpts?.signal?.aborted, true);
+      assert.strictEqual(calls[1].config.gaxOpts?.signal?.aborted, true);
+      assert.strictEqual(calls[2].config.gaxOpts?.signal?.aborted, false);
+    });
+
+    it('logs rate limiting when token bucket is empty and resumes hedging after refill', async () => {
+      fakePub.enableHedging({
+        hedgeDelay: Duration.from({milliseconds: 200}),
+        maxTokens: 5,
+        refillRatio: 0.2,
+      });
+      assert.strictEqual(fakePub.tokenBucket?.getTokenBalance(), 0);
+
+      const calls: CapturedPublishCall[] = [];
+      sandbox
+        .stub(topic, 'request')
+        .callsFake(
+          (
+            config: RequestConfig,
+            callback: RequestCallback<google.pubsub.v1.IPublishResponse>,
+          ) => {
+            calls.push({config, callback});
+          },
+        );
+
+      const fakeLog = new FakeLog(q.logs.publishHedged);
+      const firstPromise = queue._publish([{}], [sandbox.spy()], 0, 'test');
+
+      clock.tick(200);
+      fakeLog.remove();
+
+      // Bucket is empty -> no hedged call was made, rate limit debug log emitted
+      assert.strictEqual(calls.length, 1);
+      assert.strictEqual(fakeLog.called, true);
+      assert.strictEqual(fakeLog.fields?.severity, 'DEBUG');
+      assert.strictEqual(
+        fakeLog.args?.[0],
+        'Hedging rate limited due to lack of tokens.',
+      );
+
+      calls[0].callback(null, {messageIds: ['first']});
+      await firstPromise;
+      assert.strictEqual(fakePub.tokenBucket?.getTokenBalance(), 0.2);
+
+      // Complete 4 more fast batches to reach 1.0 token
+      for (let i = 0; i < 4; i++) {
+        const pBatch = queue._publish([{}], [sandbox.spy()], 0, 'test');
+        calls[calls.length - 1].callback(null, {messageIds: [`fast-${i}`]});
+        await pBatch;
+      }
+      assert.strictEqual(fakePub.tokenBucket?.getTokenBalance(), 1.0);
+
+      // Next slow batch should now hedge!
+      const callsBeforeSlow = calls.length;
+      const slowPromise = queue._publish([{}], [sandbox.spy()], 0, 'test');
+      clock.tick(200);
+      assert.strictEqual(calls.length, callsBeforeSlow + 2);
+
+      calls[calls.length - 1].callback(null, {
+        messageIds: ['hedged-after-refill'],
+      });
+      await slowPromise;
+    });
+
+    it('never hedges on OrderedQueue even if hedgingScheduler is present on publisher', async () => {
+      fakePub.enableHedging({
+        hedgeDelay: Duration.from({milliseconds: 200}),
+        maxTokens: 10,
+        refillRatio: 0.2,
+      });
+      for (let i = 0; i < 5; i++) {
+        fakePub.refillTokenBucket();
+      }
+
+      const orderedQueue = new OrderedQueue(publisher, 'order-key');
+      const calls: CapturedPublishCall[] = [];
+      sandbox
+        .stub(topic, 'request')
+        .callsFake(
+          (
+            config: RequestConfig,
+            callback: RequestCallback<google.pubsub.v1.IPublishResponse>,
+          ) => {
+            calls.push({config, callback});
+          },
+        );
+
+      const publishPromise = orderedQueue._publish(
+        [{orderingKey: 'order-key'}],
+        [sandbox.spy()],
+        0,
+        'test',
+      );
+
+      clock.tick(500);
+      assert.strictEqual(calls.length, 1);
+
+      calls[0].callback(null, {messageIds: ['ordered-1']});
+      await publishPromise;
     });
   });
 });
