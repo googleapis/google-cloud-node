@@ -5,6 +5,60 @@
       "changes": [
         {
           "type": "fix",
+          "sha": "4443d6d6b171975ce9d55fe9853ea144dade09d5",
+          "message": "Align ClientConfig.port type with gax.GrpcClientOptions",
+          "issues": [
+            "9539"
+          ],
+          "scope": "pubsub"
+        },
+        {
+          "type": "fix",
+          "sha": "be25b6fa1a6c6c90337ecad8afdcbcaeb477ded2",
+          "message": "Make google-test-utils a private workspace package",
+          "issues": [
+            "9525"
+          ],
+          "scope": "test-utils"
+        }
+      ],
+      "version": "6.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/pubsub",
+      "id": "b07d27fe-cbdb-4e1e-8c75-f39f56a12fea",
+      "createTime": "2026-10-06T19:55:59.925Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "17978e7f9ef7773111c6472194f20679f6e2bd6d",
+          "message": "Widen port to number | string in GrpcClientOptions",
+          "issues": [
+            "9542"
+          ],
+          "scope": "gax"
+        },
+        {
+          "type": "fix",
+          "sha": "3b3f600a7adeb27b77df12c556e54b5f08b61325",
+          "message": "Only set resend_count on T4 attempt spans",
+          "issues": [
+            "9540"
+          ],
+          "scope": "gax"
+        }
+      ],
+      "version": "6.11.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "google-gax",
+      "id": "9d38a1e1-27c3-43a6-8fe8-d8f168fb1664",
+      "createTime": "2026-10-06T19:55:59.890Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
           "sha": "c6c946d25ffd2cba6a703f7e2c910d866a5d9694",
           "message": "Upgrade google-auth-library to v11, gaxios to v7 and align auth client types",
           "issues": [
@@ -99999,5 +100053,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-10-06T04:24:55.905Z"
+  "updateTime": "2026-10-06T19:55:59.925Z"
 }
