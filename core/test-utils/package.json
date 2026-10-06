@@ -1,7 +1,6 @@
 {
   "name": "google-test-utils",
   "version": "0.2.0",
-  "private": true,
   "description": "Testing utilities for Google Cloud client libraries",
   "main": "build/src/index.js",
   "types": "build/src/index.d.ts",
