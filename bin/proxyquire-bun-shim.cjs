@@ -744,9 +744,11 @@ if (
     return res;
   }
 
+  const enableKeypairShim = process.env.BUN_ENABLE_KEYPAIR_SHIM === 'true';
+
   Module.prototype.require = function (id) {
     if (id === 'proxyquire') return makeProxyquire(this);
-    if (id === 'keypair') {
+    if (enableKeypairShim && id === 'keypair') {
       return function (opts) {
         const bits = typeof opts === 'number' ? opts : (opts?.bits ?? 2048);
         const {publicKey, privateKey} = require('crypto').generateKeyPairSync(

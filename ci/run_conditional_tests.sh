@@ -101,6 +101,7 @@ if [[ "${RUN_TESTS_MODE}" == "RUN_UNIT_TESTS" ]]; then
 fi
 
 # Then detect changes in the test scripts (triggers full test suite when ci/ changes).
+# Trigger full unit test suite for --keypair-shim flag verification.
 
 set +e
 git diff --quiet ${GIT_DIFF_ARG} ci
