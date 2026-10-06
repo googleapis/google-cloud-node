@@ -268,10 +268,15 @@ if (
     };
   }
 
-  // Override Bun's native AbortSignal.timeout so its abort reason DOMException
+  const enableAbortSignalTimeoutShim =
+    process.env.BUN_ENABLE_ABORT_SIGNAL_TIMEOUT_SHIM === 'true';
+
+  // When opted into via `--abort-signal-timeout-shim` (`BUN_ENABLE_ABORT_SIGNAL_TIMEOUT_SHIM=true`),
+  // override Bun's native AbortSignal.timeout so its abort reason DOMException
   // uses the exact V8 message string ('The operation was aborted due to timeout')
-  // asserted by core/packages/gcp-metadata unit tests.
+  // asserted by core/packages/gaxios unit tests.
   if (
+    enableAbortSignalTimeoutShim &&
     typeof AbortSignal !== 'undefined' &&
     typeof AbortSignal.timeout === 'function' &&
     typeof DOMException !== 'undefined'
@@ -378,6 +383,7 @@ if (
   }
 
   const enableFetchShim = process.env.BUN_ENABLE_FETCH_SHIM === 'true';
+  const enableBunPluginShim = process.env.BUN_ENABLE_BUN_PLUGIN_SHIM === 'true';
 
   const fs = require('fs');
   const http = require('http');
@@ -677,9 +683,26 @@ if (
       }
       throw err;
     }
-  };
+    };
 
-  if (typeof Bun.plugin === 'function') {
+    if (Module._extensions && typeof Module._extensions['.js'] === 'function') {
+      const origJsExt = Module._extensions['.js'];
+      Module._extensions['.js'] = function (mod, filename) {
+        if (/teeny-request[\\/]+build[\\/]+src[\\/]+index\.js$/.test(filename)) {
+          const code = fs
+            .readFileSync(filename, 'utf8')
+            .replaceAll(
+              "import('node-fetch')",
+              'Promise.resolve({default: globalThis.__googleCloudBunFetch})',
+            );
+          return mod._compile(code, filename);
+        }
+        return origJsExt.apply(this, arguments);
+      };
+    }
+  }
+
+  if (enableBunPluginShim && typeof Bun.plugin === 'function') {
     Bun.plugin({
       name: 'bun-gaxios-global-fetch-esm',
       setup(build) {
@@ -697,23 +720,6 @@ if (
         );
       },
     });
-  }
-
-    if (Module._extensions && typeof Module._extensions['.js'] === 'function') {
-      const origJsExt = Module._extensions['.js'];
-      Module._extensions['.js'] = function (mod, filename) {
-        if (/teeny-request[\\/]+build[\\/]+src[\\/]+index\.js$/.test(filename)) {
-          const code = fs
-            .readFileSync(filename, 'utf8')
-            .replaceAll(
-              "import('node-fetch')",
-              'Promise.resolve({default: globalThis.__googleCloudBunFetch})',
-            );
-          return mod._compile(code, filename);
-        }
-        return origJsExt.apply(this, arguments);
-      };
-    }
   }
 
   function patchGaxiosIfPresent(res) {
