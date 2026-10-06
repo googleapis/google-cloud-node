@@ -378,6 +378,7 @@ if (
   }
 
   const enableFetchShim = process.env.BUN_ENABLE_FETCH_SHIM === 'true';
+  const enableBunPluginShim = process.env.BUN_ENABLE_BUN_PLUGIN_SHIM === 'true';
 
   const fs = require('fs');
   const http = require('http');
@@ -677,9 +678,26 @@ if (
       }
       throw err;
     }
-  };
+    };
 
-  if (typeof Bun.plugin === 'function') {
+    if (Module._extensions && typeof Module._extensions['.js'] === 'function') {
+      const origJsExt = Module._extensions['.js'];
+      Module._extensions['.js'] = function (mod, filename) {
+        if (/teeny-request[\\/]+build[\\/]+src[\\/]+index\.js$/.test(filename)) {
+          const code = fs
+            .readFileSync(filename, 'utf8')
+            .replaceAll(
+              "import('node-fetch')",
+              'Promise.resolve({default: globalThis.__googleCloudBunFetch})',
+            );
+          return mod._compile(code, filename);
+        }
+        return origJsExt.apply(this, arguments);
+      };
+    }
+  }
+
+  if (enableBunPluginShim && typeof Bun.plugin === 'function') {
     Bun.plugin({
       name: 'bun-gaxios-global-fetch-esm',
       setup(build) {
@@ -697,23 +715,6 @@ if (
         );
       },
     });
-  }
-
-    if (Module._extensions && typeof Module._extensions['.js'] === 'function') {
-      const origJsExt = Module._extensions['.js'];
-      Module._extensions['.js'] = function (mod, filename) {
-        if (/teeny-request[\\/]+build[\\/]+src[\\/]+index\.js$/.test(filename)) {
-          const code = fs
-            .readFileSync(filename, 'utf8')
-            .replaceAll(
-              "import('node-fetch')",
-              'Promise.resolve({default: globalThis.__googleCloudBunFetch})',
-            );
-          return mod._compile(code, filename);
-        }
-        return origJsExt.apply(this, arguments);
-      };
-    }
   }
 
   function patchGaxiosIfPresent(res) {
