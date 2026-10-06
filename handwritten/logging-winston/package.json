@@ -42,7 +42,7 @@
     "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
     "presystem-test": "pnpm run pretest",
     "system-test": "node ../../bin/run-test.cjs build/system-test --timeout 600000",
-    "test": "cross-env NODE_OPTIONS='--no-deprecation' node ../../bin/run-test.cjs build/test",
+    "test": "cross-env NODE_OPTIONS='--no-deprecation' node ../../bin/run-test.cjs --proxyquire-shim build/test",
     "clean": "gts clean",
     "compile": "tsc -p .",
     "fix": "gts fix",

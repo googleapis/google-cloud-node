@@ -77,114 +77,119 @@ if (
   // - `bunNativeCache` is then synchronized to match `newCache` (clearing deleted entries and
   //   repopulating new ones so Bun's native loader sees the clean or restored state).
   // - A new active generation is created and bound to both `Module._cache` and `require.cache`.
-  const bunNativeCache = require.cache;
+  const enableProxyquireShim =
+    process.env.BUN_ENABLE_PROXYQUIRE_SHIM === 'true';
 
-  function createCacheGeneration(initialEntries = {}) {
-    const map = Object.assign(Object.create(null), initialEntries);
-    let detached = false;
+  if (enableProxyquireShim) {
+    const bunNativeCache = require.cache;
 
-    const proxy = new Proxy(map, {
-      get(target, prop) {
-        if (typeof prop === 'symbol') return target[prop];
-        if (!detached && prop in bunNativeCache) return bunNativeCache[prop];
-        return target[prop];
-      },
-      set(target, prop, val) {
-        target[prop] = val;
-        if (!detached) bunNativeCache[prop] = val;
-        return true;
-      },
-      deleteProperty(target, prop) {
-        delete target[prop];
-        if (!detached) delete bunNativeCache[prop];
-        return true;
-      },
-      has(target, prop) {
-        if (typeof prop === 'symbol') return prop in target;
-        if (!detached && prop in bunNativeCache) return true;
-        return prop in target;
-      },
-      ownKeys(target) {
-        if (!detached) {
-          const keys = new Set([
-            ...Object.keys(bunNativeCache),
-            ...Object.keys(target),
-          ]);
-          return Array.from(keys);
+    function createCacheGeneration(initialEntries = {}) {
+      const map = Object.assign(Object.create(null), initialEntries);
+      let detached = false;
+
+      const proxy = new Proxy(map, {
+        get(target, prop) {
+          if (typeof prop === 'symbol') return target[prop];
+          if (!detached && prop in bunNativeCache) return bunNativeCache[prop];
+          return target[prop];
+        },
+        set(target, prop, val) {
+          target[prop] = val;
+          if (!detached) bunNativeCache[prop] = val;
+          return true;
+        },
+        deleteProperty(target, prop) {
+          delete target[prop];
+          if (!detached) delete bunNativeCache[prop];
+          return true;
+        },
+        has(target, prop) {
+          if (typeof prop === 'symbol') return prop in target;
+          if (!detached && prop in bunNativeCache) return true;
+          return prop in target;
+        },
+        ownKeys(target) {
+          if (!detached) {
+            const keys = new Set([
+              ...Object.keys(bunNativeCache),
+              ...Object.keys(target),
+            ]);
+            return Array.from(keys);
+          }
+          return Object.keys(target);
+        },
+        getOwnPropertyDescriptor(target, prop) {
+          if (
+            !detached &&
+            Object.prototype.hasOwnProperty.call(bunNativeCache, prop)
+          ) {
+            return Object.getOwnPropertyDescriptor(bunNativeCache, prop);
+          }
+          return Object.getOwnPropertyDescriptor(target, prop);
+        },
+      });
+
+      return {
+        map,
+        proxy,
+        detach() {
+          for (const k of Object.keys(bunNativeCache)) {
+            map[k] = bunNativeCache[k];
+          }
+          detached = true;
+        },
+      };
+    }
+
+    let currentGen = createCacheGeneration(bunNativeCache);
+
+    function getCache() {
+      return currentGen.proxy;
+    }
+
+    function setCache(newCache) {
+      // 1. Detach the current generation, saving all active entries before mutating native cache.
+      currentGen.detach();
+
+      // 2. Synchronize Bun's native cache to match the incoming newCache object.
+      const newKeys = new Set(
+        newCache && typeof newCache === 'object' ? Object.keys(newCache) : [],
+      );
+      for (const k of Object.keys(bunNativeCache)) {
+        if (!newKeys.has(k)) {
+          delete bunNativeCache[k];
         }
-        return Object.keys(target);
-      },
-      getOwnPropertyDescriptor(target, prop) {
-        if (
-          !detached &&
-          Object.prototype.hasOwnProperty.call(bunNativeCache, prop)
-        ) {
-          return Object.getOwnPropertyDescriptor(bunNativeCache, prop);
+      }
+      if (newCache && typeof newCache === 'object') {
+        for (const [k, v] of Object.entries(newCache)) {
+          bunNativeCache[k] = v;
         }
-        return Object.getOwnPropertyDescriptor(target, prop);
-      },
+      }
+
+      // 3. Initialize a fresh generation representing the synchronized native cache.
+      currentGen = createCacheGeneration(bunNativeCache);
+    }
+
+    Object.defineProperty(Module, '_cache', {
+      get: getCache,
+      set: setCache,
+      configurable: true,
+      enumerable: true,
     });
 
-    return {
-      map,
-      proxy,
-      detach() {
-        for (const k of Object.keys(bunNativeCache)) {
-          map[k] = bunNativeCache[k];
-        }
-        detached = true;
-      },
-    };
-  }
-
-  let currentGen = createCacheGeneration(bunNativeCache);
-
-  function getCache() {
-    return currentGen.proxy;
-  }
-
-  function setCache(newCache) {
-    // 1. Detach the current generation, saving all active entries before mutating native cache.
-    currentGen.detach();
-
-    // 2. Synchronize Bun's native cache to match the incoming newCache object.
-    const newKeys = new Set(
-      newCache && typeof newCache === 'object' ? Object.keys(newCache) : [],
-    );
-    for (const k of Object.keys(bunNativeCache)) {
-      if (!newKeys.has(k)) {
-        delete bunNativeCache[k];
+    try {
+      const proto = Object.getPrototypeOf(require);
+      if (proto) {
+        Object.defineProperty(proto, 'cache', {
+          get: getCache,
+          set: setCache,
+          configurable: true,
+          enumerable: true,
+        });
       }
+    } catch {
+      // Ignore if prototype is not configurable
     }
-    if (newCache && typeof newCache === 'object') {
-      for (const [k, v] of Object.entries(newCache)) {
-        bunNativeCache[k] = v;
-      }
-    }
-
-    // 3. Initialize a fresh generation representing the synchronized native cache.
-    currentGen = createCacheGeneration(bunNativeCache);
-  }
-
-  Object.defineProperty(Module, '_cache', {
-    get: getCache,
-    set: setCache,
-    configurable: true,
-    enumerable: true,
-  });
-
-  try {
-    const proto = Object.getPrototypeOf(require);
-    if (proto) {
-      Object.defineProperty(proto, 'cache', {
-        get: getCache,
-        set: setCache,
-        configurable: true,
-        enumerable: true,
-      });
-    }
-  } catch {
-    // Ignore if prototype is not configurable
   }
   const hasOwn = (o, k) =>
     o !== null &&
@@ -745,7 +750,7 @@ if (
   }
 
   Module.prototype.require = function (id) {
-    if (id === 'proxyquire') return makeProxyquire(this);
+    if (enableProxyquireShim && id === 'proxyquire') return makeProxyquire(this);
     if (id === 'keypair') {
       return function (opts) {
         const bits = typeof opts === 'number' ? opts : (opts?.bits ?? 2048);
@@ -760,24 +765,28 @@ if (
         return {public: publicKey, private: privateKey};
       };
     }
-    const fr = frames[frames.length - 1];
-    if (fr && this && this.filename) {
-      const isSut = this.filename === fr.sut;
-      if (isSut || fr.containsGlobal) {
-        let found = false;
-        let stub;
-        if (Object.prototype.hasOwnProperty.call(fr.stubs, id)) {
-          found = true;
-          stub = fr.stubs[id];
-        } else {
-          const resolved = resolveFrom(this.filename, id);
-          if (Object.prototype.hasOwnProperty.call(fr.resolved, resolved)) {
+    if (enableProxyquireShim) {
+      const fr = frames[frames.length - 1];
+      if (fr && this && this.filename) {
+        const isSut = this.filename === fr.sut;
+        if (isSut || fr.containsGlobal) {
+          let found = false;
+          let stub;
+          if (Object.prototype.hasOwnProperty.call(fr.stubs, id)) {
             found = true;
-            stub = fr.resolved[resolved];
+            stub = fr.stubs[id];
+          } else {
+            const resolved = resolveFrom(this.filename, id);
+            if (Object.prototype.hasOwnProperty.call(fr.resolved, resolved)) {
+              found = true;
+              stub = fr.resolved[resolved];
+            }
           }
-        }
-        if (found && (isSut || isGlobalStub(stub))) {
-          return patchGaxiosIfPresent(applyStub(this, id, stub, fr.noCallThru));
+          if (found && (isSut || isGlobalStub(stub))) {
+            return patchGaxiosIfPresent(
+              applyStub(this, id, stub, fr.noCallThru),
+            );
+          }
         }
       }
     }

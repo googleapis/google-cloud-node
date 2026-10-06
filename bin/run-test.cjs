@@ -34,7 +34,12 @@ const rawArgs = process.argv.slice(2);
 const noC8 = rawArgs.includes('--no-c8');
 const enableFetchShim =
   rawArgs.includes('--fetch-shim') || process.env.BUN_FETCH_SHIM === 'true';
-const args = rawArgs.filter(a => a !== '--no-c8' && a !== '--fetch-shim');
+const enableProxyquireShim =
+  rawArgs.includes('--proxyquire-shim') ||
+  process.env.BUN_PROXYQUIRE_SHIM === 'true';
+const args = rawArgs.filter(
+  a => a !== '--no-c8' && a !== '--fetch-shim' && a !== '--proxyquire-shim',
+);
 
 const isBunRuntime = typeof Bun !== 'undefined';
 const wantsBunRuntime = isBunRuntime || process.env.JS_RUNTIME === 'bun';
@@ -55,6 +60,9 @@ function resolveBin(pkgBin) {
 if (wantsBunRuntime) {
   process.env.MOCHA_PARALLEL = 'false';
   process.env.BUN_ENABLE_FETCH_SHIM = enableFetchShim ? 'true' : 'false';
+  process.env.BUN_ENABLE_PROXYQUIRE_SHIM = enableProxyquireShim
+    ? 'true'
+    : 'false';
 
   // If JS_RUNTIME=bun was requested but this script was launched via Node.js
   // (e.g., `pnpm test` without `bun --bun`), re-exec under the `bun` binary.
@@ -65,6 +73,7 @@ if (wantsBunRuntime) {
         ...process.env,
         MOCHA_PARALLEL: 'false',
         BUN_ENABLE_FETCH_SHIM: enableFetchShim ? 'true' : 'false',
+        BUN_ENABLE_PROXYQUIRE_SHIM: enableProxyquireShim ? 'true' : 'false',
       },
     });
     if (res.error) {

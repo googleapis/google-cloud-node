@@ -42,7 +42,7 @@
     "presystem-test": "pnpm run compile",
     "system-test": "node ../../bin/run-test.cjs build/system-test --timeout 600000 --retries 3",
     "pretest": "pnpm run compile",
-    "test": "node ../../bin/run-test.cjs build/test",
+    "test": "node ../../bin/run-test.cjs --proxyquire-shim build/test",
     "test:snap": "SNAPSHOT_UPDATE=1 pnpm test",
     "testproxy": "pnpm run compile && node build/testproxy/index.js",
     "clean": "gts clean",
