@@ -1007,8 +1007,8 @@ export class Subscriber extends EventEmitter {
     ) {
       const waitTimeout = timeout.subtract(FINAL_NACK_TIMEOUT);
 
-      const emptyPromise = new Promise<void>(r => {
-        this._inventory.on('empty', r);
+      const emptyPromise = new Promise<void>(resolve => {
+        this._inventory.on('empty', resolve);
       });
 
       await this.#awaitTimeoutAndCheck(emptyPromise, waitTimeout);
@@ -1313,15 +1313,15 @@ export class Subscriber extends EventEmitter {
           message
             .modAckWithResponse(this.ackDeadline)
             .then(() => {
+              message.subSpans.modAckEnd();
               this._inventory.add(message);
+              return;
             })
             .catch(() => {
               // Temporary failures will retry, so if an error reaches us
               // here, that means a permanent failure. Silently drop these.
-              this._discardMessage(message);
-            })
-            .finally(() => {
               message.subSpans.modAckEnd();
+              this._discardMessage(message);
             });
         } else {
           message.subSpans.modAckStart(

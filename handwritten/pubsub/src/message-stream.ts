@@ -35,7 +35,9 @@ import {logs as baseLogs, LoggingFunction} from './logs';
  * @private
  */
 export const logs = {
-  subscriberStreams: baseLogs.pubsub.sublog('subscriber-streams') as LoggingFunction,
+  subscriberStreams: baseLogs.pubsub.sublog(
+    'subscriber-streams',
+  ) as LoggingFunction,
 };
 
 /*!
@@ -47,9 +49,9 @@ const KEEP_ALIVE_INTERVAL = 30000;
  * Deadline for the stream. This will need to go away and be replaced with something
  * more graceful for pulling the config out of the pubsub-api package.
  */
-const PULL_TIMEOUT = require('./v1-old/subscriber_client_config.json').interfaces[
-  'google.pubsub.v1.Subscriber'
-].methods.StreamingPull.timeout_millis;
+const PULL_TIMEOUT = require('./v1-old/subscriber_client_config.json')
+  .interfaces['google.pubsub.v1.Subscriber'].methods.StreamingPull
+  .timeout_millis;
 
 /**
  * @typedef {object} MessageStreamOptions
