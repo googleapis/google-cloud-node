@@ -5,7 +5,7 @@ steps:
   args:
   - '-c'
   - |
-    cd ../.. && corepack enable pnpm && pnpm install --filter "...{./handwritten/spanner}..."
+    cd ../.. && corepack enable pnpm && pnpm install --filter "{./handwritten/spanner}..."
   dir: 'handwritten/spanner'
   id: 'install-dependencies'
 
