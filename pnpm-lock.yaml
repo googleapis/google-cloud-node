@@ -2962,8 +2962,8 @@ importers:
         specifier: ^2.0.0
         version: 2.0.1(protobufjs@7.5.9)
       google-test-utils:
-        specifier: ^0.1.0
-        version: 0.1.0
+        specifier: ^0.2.0
+        version: 0.2.0
       gts:
         specifier: ^6.0.0
         version: 6.0.2(typescript@5.9.3)
@@ -3200,8 +3200,8 @@ importers:
         specifier: ^2.0.0
         version: 2.0.1(protobufjs@7.5.9)
       google-test-utils:
-        specifier: workspace:^0.1.0
-        version: link:../../core/test-utils
+        specifier: ^0.2.0
+        version: 0.2.0
       grpc-health-check:
         specifier: ^2.1.0
         version: 2.1.0
@@ -20741,8 +20741,8 @@ packages:
     resolution: {integrity: sha512-fbvUWVNh3rKGlVFWwlUNF7Sk1Tah0a89q02rLTXsWjbKKHGeuURAa8tl9rvu5TyWny1YiSIo5eDqF260Tai6vQ==}
     engines: {node: '>=22'}
 
-  google-test-utils@0.1.0:
-    resolution: {integrity: sha512-4KwTSw4Xm6hz9sVxvz/xvy/0/InwbR2icIGjcyNdI2KVQ7J6sTVKatoeHwsg74kA4DaGchEgL48vc5FMtkMOLg==}
+  google-test-utils@0.2.0:
+    resolution: {integrity: sha512-OP7B5iS65EjAlRctfq3uUdGWXN5AvIGRYQSx5luCVqkfh3uaGvVzuY1y3hCyxLk6MGf5DYkJ3rZxgJ6JsMmSog==}
     engines: {node: '>=22'}
 
   googleapis-common@4.4.3:
@@ -32001,7 +32001,7 @@ snapshots:
       protobufjs: 7.5.9
       walkdir: 0.4.1
 
-  google-test-utils@0.1.0: {}
+  google-test-utils@0.2.0: {}
 
   googleapis-common@4.4.3(encoding@0.1.13):
     dependencies:
