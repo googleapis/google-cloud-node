@@ -293,16 +293,20 @@ if (
     };
   }
 
-  const origPromiseAny = Promise.any;
-  if (typeof origPromiseAny === 'function') {
-    Promise.any = function (iterable) {
-      return origPromiseAny.call(this, iterable).catch(err => {
-        if (err instanceof AggregateError && !err.message) {
-          err.message = 'All promises were rejected';
-        }
-        throw err;
-      });
-    };
+  const enablePromiseAnyShim =
+    process.env.BUN_ENABLE_PROMISE_ANY_SHIM === 'true';
+  if (enablePromiseAnyShim) {
+    const origPromiseAny = Promise.any;
+    if (typeof origPromiseAny === 'function') {
+      Promise.any = function (iterable) {
+        return origPromiseAny.call(this, iterable).catch(err => {
+          if (err instanceof AggregateError && !err.message) {
+            err.message = 'All promises were rejected';
+          }
+          throw err;
+        });
+      };
+    }
   }
 
   try {
