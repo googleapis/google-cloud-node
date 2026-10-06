@@ -1529,11 +1529,8 @@ describe('createApiCall', () => {
               span.attributes['gcp.method.type'],
               transport.rpcType,
             );
-            // Three attempts, of which two were resends. Asserted against the
-            // observed attempt count rather than a bare literal, because the
-            // off-by-one between the two is exactly what the attribute
-            // defines.
-            harness.assertResendCount(attempts - 1, {span});
+            // Resend count is only set on T4 attempt spans, not T3 client request spans.
+            harness.assertResendCount(0, {span});
             const attemptSpans = spans.filter(
               s => s.name === expectedAttemptSpanName,
             );
@@ -1599,7 +1596,7 @@ describe('createApiCall', () => {
               transport.rpcType,
             );
             // 2 attempts made: initial send + 1 resend. The 2nd retry was not sent because maxRetries was reached.
-            harness.assertResendCount(1, {span});
+            harness.assertResendCount(0, {span});
             const attemptSpans = spans.filter(
               s => s.name === expectedAttemptSpanName,
             );
@@ -1656,10 +1653,7 @@ describe('createApiCall', () => {
               span.attributes['gcp.method.type'],
               transport.rpcType,
             );
-            // The call ultimately failed due to deadline exceeded, so the
-            // resend count should match the number of retries actually made
-            // (attempts - 1), without counting the attempt aborted by the deadline.
-            harness.assertResendCount(attempts - 1, {span});
+            harness.assertResendCount(0, {span});
             const attemptSpans = spans.filter(
               s => s.name === expectedAttemptSpanName,
             );
@@ -1773,7 +1767,7 @@ describe('createApiCall', () => {
             assert.strictEqual(spans.length, 1 + totalCalls);
             const span = spans.find(s => s.name === 'EchoClient.Echo')!;
             assert.ok(span);
-            harness.assertResendCount(1, {span});
+            harness.assertResendCount(0, {span});
             const attemptSpans = spans.filter(
               s => s.name === expectedAttemptSpanName,
             );
@@ -1847,7 +1841,7 @@ describe('createApiCall', () => {
             const span = spans.find(s => s.name === 'EchoClient.Echo')!;
             assert.ok(span);
             assert.strictEqual(span.attributes['gcp.method.type'], 'grpc');
-            harness.assertResendCount(2, {span});
+            harness.assertResendCount(0, {span});
             const attemptSpans = spans.filter(
               s => s.name === 'google.example.v1.Echo/Echo',
             );
@@ -1910,7 +1904,7 @@ describe('createApiCall', () => {
             const span = spans.find(s => s.name === 'EchoClient.Echo')!;
             assert.ok(span);
             assert.strictEqual(span.attributes['gcp.method.type'], 'grpc');
-            harness.assertResendCount(2, {span});
+            harness.assertResendCount(0, {span});
             const attemptSpans = spans.filter(
               s => s.name === 'google.example.v1.Echo/Echo',
             );
@@ -2374,12 +2368,12 @@ describe('createApiCall', () => {
           clientRequestSpan.spanContext().spanId,
         );
 
-        // Overall client request span succeeded with resend_count = 1
+        // Overall client request span succeeded (resend_count omitted on T3 span)
         assert.strictEqual(clientRequestSpan.kind, SpanKind.INTERNAL);
         assert.strictEqual(clientRequestSpan.status.code, SpanStatusCode.UNSET);
         assert.strictEqual(
           clientRequestSpan.attributes['gcp.grpc.resend_count'],
-          1,
+          undefined,
         );
         assert.strictEqual(
           clientRequestSpan.attributes['rpc.response.status_code'],

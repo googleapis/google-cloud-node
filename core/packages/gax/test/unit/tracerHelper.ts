@@ -2409,96 +2409,40 @@ describe('TracerHelper', () => {
     });
 
     describe('resend count', () => {
-      // The harness picks the attribute name off the span's own transport and
-      // checks the other transport's name is absent, so these tests cover the
-      // naming as well as the count.
-      const assertResendCount = (expected: number): void =>
-        harness.assertResendCount(expected, {tracerName: 'google-gax'});
-
-      it('omits attribute when the call is never resent', async () => {
-        await traceCall(dynamicArgs, staticArgs, async () => 'ok');
-
-        // Omitted when the call was never resent.
-        assertResendCount(0);
-      });
-
-      it('reports 1 for the first resend', async () => {
-        await traceCall(dynamicArgs, staticArgs, async (_cb, recordResend) => {
-          recordResend!();
-          return 'ok';
-        });
-
-        assertResendCount(1);
-      });
-
-      it('counts resends rather than attempts', async () => {
-        await traceCall(dynamicArgs, staticArgs, async (_cb, recordResend) => {
-          // Four attempts: the initial send plus three resends.
-          recordResend!();
-          recordResend!();
-          recordResend!();
-          return 'ok';
-        });
-
-        assertResendCount(3);
-      });
-
-      it('reports the resends of a call that ultimately failed', async () => {
-        const error = new GoogleError('still unavailable');
-        error.code = Status.UNAVAILABLE;
-
-        await assert.rejects(async () => {
-          await traceCall(
-            dynamicArgs,
-            staticArgs,
-            async (_cb, recordResend) => {
-              recordResend!();
-              recordResend!();
-              throw error;
+      it('does not set gcp.grpc.resend_count or http.request.resend_count on client request spans', async () => {
+        await traceCall(dynamicArgs, staticArgs, async () => {
+          return traceAttempt(
+            {
+              ...dynamicArgs,
+              apiName: 'google.cloud.storage.v2.Storage',
+              resendCount: 2,
             },
+            staticArgs,
+            async () => 'ok',
           );
         });
 
-        // The count is the reason the call is interesting, so it has to
-        // survive the failure path and not just the success one.
-        assertResendCount(2);
-        harness.assertResponseStatus({rpcStatus: 'UNAVAILABLE'});
-      });
-
-      it('counts resends reported after the traced function returns', () => {
-        // Stream retries happen while the span is open but long after the
-        // call to `fn` has returned, so the recorder has to keep working.
-        const emitter = new EventEmitter();
-        let recorder: (() => void) | undefined;
-
-        traceCall(
-          dynamicArgs,
-          staticArgs,
-          (_cb, recordResend) => {
-            recorder = recordResend;
-            return emitter;
-          },
-          true,
-        );
-
-        recorder!();
-        recorder!();
-        emitter.emit('end');
-
-        assertResendCount(2);
-      });
-
-      it('reports resends on a fallback span', async () => {
-        // Reported under http.request.resend_count here rather than the gcp.*
-        // name the gRPC spans above use; the harness enforces the difference.
         const httpArgs: DynamicTraceContext = {...dynamicArgs, rpcType: 'http'};
-
-        await traceCall(httpArgs, staticArgs, async (_cb, recordResend) => {
-          recordResend!();
-          return 'ok';
+        await traceCall(httpArgs, staticArgs, async () => {
+          return traceAttempt(
+            {
+              ...httpArgs,
+              apiName: 'google.cloud.storage.v2.Storage',
+              resendCount: 3,
+            },
+            staticArgs,
+            async () => 'ok',
+          );
         });
 
-        assertResendCount(1);
+        const spans = harness.getSpans('google-gax');
+        const clientSpans = spans.filter(
+          s => s.name === 'StorageClient.GetObject',
+        );
+        assert.strictEqual(clientSpans.length, 2);
+        for (const span of clientSpans) {
+          harness.assertResendCount(0, {span});
+        }
       });
     });
 

@@ -135,8 +135,8 @@ export function extractFromSettings(
     | {
         servicePath?: string;
         apiEndpoint?: string;
-        port?: number;
-        servicePort?: number;
+        port?: number | string;
+        servicePort?: number | string;
       }
     | undefined;
   const endpoint =
@@ -155,11 +155,14 @@ export function extractFromSettings(
   }
 
   // Resolve server port if not already parsed from endpoint.
-  const port =
-    (settings as {port?: number; servicePort?: number}).port ||
-    (settings as {port?: number; servicePort?: number}).servicePort ||
+  const rawPort =
+    (settings as {port?: number | string; servicePort?: number | string})
+      .port ||
+    (settings as {port?: number | string; servicePort?: number | string})
+      .servicePort ||
     otherArgs?.port ||
     otherArgs?.servicePort;
+  const port = typeof rawPort === 'string' ? parseInt(rawPort, 10) : rawPort;
   if (port && typeof port === 'number' && !result.serverPort) {
     result.serverPort = port;
   }
