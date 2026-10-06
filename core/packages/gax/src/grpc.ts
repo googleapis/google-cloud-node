@@ -55,7 +55,7 @@ export interface GrpcClientOptions extends GoogleAuthOptions {
   universeDomain?: string;
   servicePath?: string;
   apiEndpoint?: string;
-  port?: number;
+  port?: number | string;
 }
 
 export interface MetadataValue {
@@ -104,7 +104,7 @@ export type GrpcModule = typeof grpc;
 export interface ClientStubOptions {
   protocol?: string;
   servicePath?: string;
-  port?: number;
+  port?: number | string;
   sslCreds?: grpc.ChannelCredentials;
   [index: string]: string | number | undefined | {};
   // For mtls:
@@ -180,7 +180,10 @@ export class GrpcClient {
     this.auth = options.auth || new GoogleAuth(options);
     this.fallback = false;
     this._servicePath = options.servicePath || options.apiEndpoint;
-    this._port = options.port;
+    this._port =
+      typeof options.port === 'string'
+        ? parseInt(options.port, 10)
+        : options.port;
 
     const minimumVersion = 10;
     const major = Number(process.version.match(/^v(\d+)/)?.[1]);

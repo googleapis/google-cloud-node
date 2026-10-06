@@ -161,7 +161,8 @@ export class GrpcClient {
     this._servicePath =
       (options as GrpcClientOptions).servicePath ||
       (options as GrpcClientOptions).apiEndpoint;
-    this._port = (options as GrpcClientOptions).port;
+    const rawPort = (options as GrpcClientOptions).port;
+    this._port = typeof rawPort === 'string' ? parseInt(rawPort, 10) : rawPort;
   }
 
   /**
@@ -371,7 +372,8 @@ export class GrpcClient {
       servicePort = parseInt(match[2]);
     }
     if (opts.port) {
-      servicePort = opts.port;
+      servicePort =
+        typeof opts.port === 'string' ? parseInt(opts.port, 10) : opts.port;
     } else if (!servicePort) {
       servicePort = 443;
     }
