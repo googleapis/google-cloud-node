@@ -352,29 +352,37 @@ if (
     // ignore
   }
 
-  try {
-    const assert = require('assert');
-    const origDeepEqual = assert.deepEqual;
-    if (typeof origDeepEqual === 'function' && typeof Headers !== 'undefined') {
-      assert.deepEqual = function (actual, expected, message) {
-        if (actual instanceof Headers && expected instanceof Headers) {
-          const actualEntries = Object.fromEntries(actual.entries());
-          const expectedEntries = Object.fromEntries(expected.entries());
-          if (Object.keys(actualEntries).length === 0) {
-            return;
+  const enableAssertDeepEqualShim =
+    process.env.BUN_ENABLE_ASSERT_DEEP_EQUAL_SHIM === 'true';
+
+  if (enableAssertDeepEqualShim) {
+    try {
+      const assert = require('assert');
+      const origDeepEqual = assert.deepEqual;
+      if (
+        typeof origDeepEqual === 'function' &&
+        typeof Headers !== 'undefined'
+      ) {
+        assert.deepEqual = function (actual, expected, message) {
+          if (actual instanceof Headers && expected instanceof Headers) {
+            const actualEntries = Object.fromEntries(actual.entries());
+            const expectedEntries = Object.fromEntries(expected.entries());
+            if (Object.keys(actualEntries).length === 0) {
+              return;
+            }
+            return origDeepEqual.call(
+              this,
+              actualEntries,
+              expectedEntries,
+              message,
+            );
           }
-          return origDeepEqual.call(
-            this,
-            actualEntries,
-            expectedEntries,
-            message,
-          );
-        }
-        return origDeepEqual.call(this, actual, expected, message);
-      };
+          return origDeepEqual.call(this, actual, expected, message);
+        };
+      }
+    } catch {
+      // ignore
     }
-  } catch {
-    // ignore
   }
 
   const enableFetchShim = process.env.BUN_ENABLE_FETCH_SHIM === 'true';
