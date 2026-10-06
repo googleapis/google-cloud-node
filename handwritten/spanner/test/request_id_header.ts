@@ -24,6 +24,7 @@ import {Database} from '../src/database';
 import {MultiplexedSession} from '../src/multiplexed-session';
 import {getActiveOrNoopSpan} from '../src/instrument';
 import {
+  PROCESS_PREFIX,
   RequestIDError,
   X_GOOG_SPANNER_REQUEST_ID_HEADER,
   X_GOOG_SPANNER_REQUEST_ID_SPAN_ATTR,
@@ -231,7 +232,10 @@ describe('RequestId', () => {
     it('with null session', done => {
       const headers = {foo: 'bar'};
       const got = injectRequestIDIntoHeaders(headers, null, 2, 1);
-      assert.strictEqual(got, headers);
+      assert.deepStrictEqual(got, headers);
+      assert.notStrictEqual(got, headers, 'must return a copy');
+      got['mutated'] = 'yes';
+      assert.deepStrictEqual(headers, {foo: 'bar'}, 'input must be untouched');
       done();
     });
 
@@ -287,11 +291,14 @@ describe('RequestId', () => {
       done();
     });
 
-    it('returns headers unchanged if database has no _nextNthRequest', done => {
+    it('returns a copy of headers if database has no _nextNthRequest', done => {
       const session = {parent: {}};
       const headers = {foo: 'bar'};
       const got = injectRequestIDIntoHeaders(headers, session);
-      assert.strictEqual(got, headers);
+      assert.deepStrictEqual(got, headers);
+      assert.notStrictEqual(got, headers, 'must return a copy');
+      got['mutated'] = 'yes';
+      assert.deepStrictEqual(headers, {foo: 'bar'}, 'input must be untouched');
       done();
     });
 
@@ -394,7 +401,7 @@ describe('RequestId', () => {
       done();
     });
 
-    it('returns headers unchanged when nthRequest is null and database has no _nextNthRequest', done => {
+    it('returns a copy of headers when nthRequest is null and database has no _nextNthRequest', done => {
       const session = {
         parent: {
           _requestIdPrefix: `1.${randIdForProcess}.1.0.`,
@@ -402,7 +409,8 @@ describe('RequestId', () => {
       };
       const headers = {foo: 'bar'};
       const got = injectRequestIDIntoHeaders(headers, session, null as any, 1);
-      assert.strictEqual(got, headers);
+      assert.deepStrictEqual(got, headers);
+      assert.notStrictEqual(got, headers, 'must return a copy');
       done();
     });
 
@@ -682,6 +690,55 @@ describe('RequestId', () => {
         '1.abcde123.1.1.5.3',
       );
       done();
+    });
+
+    it('updates the span attribute with the request ID of every attempt', () => {
+      const config = {
+        headers: {
+          [X_GOOG_SPANNER_REQUEST_ID_HEADER]: '1.abcde123.1.0.5.1',
+        },
+      };
+      const recorded: Array<[string, unknown]> = [];
+      const fakeSpan = {
+        setAttribute: (key: string, value: unknown) => {
+          recorded.push([key, value]);
+          return fakeSpan;
+        },
+      };
+      const interceptor = createRequestIdInterceptor(
+        config,
+        fakeSpan as unknown as ReturnType<typeof getActiveOrNoopSpan>,
+      );
+      const fakeNextCall = () => ({start: () => {}});
+
+      for (let i = 0; i < 3; i++) {
+        const md = new grpc.Metadata();
+        md.set(X_GOOG_SPANNER_REQUEST_ID_HEADER, '1.abcde123.1.0.5.1');
+        interceptor({}, fakeNextCall).start(md, {});
+      }
+
+      assert.deepStrictEqual(recorded, [
+        [X_GOOG_SPANNER_REQUEST_ID_SPAN_ATTR, '1.abcde123.1.0.5.1'],
+        [X_GOOG_SPANNER_REQUEST_ID_SPAN_ATTR, '1.abcde123.1.0.5.2'],
+        [X_GOOG_SPANNER_REQUEST_ID_SPAN_ATTR, '1.abcde123.1.0.5.3'],
+      ]);
+    });
+
+    it('works without a span', () => {
+      const config = {
+        headers: {[X_GOOG_SPANNER_REQUEST_ID_HEADER]: '1.abcde123.1.0.5.1'},
+      };
+      const interceptor = createRequestIdInterceptor(config);
+      const fakeNextCall = () => ({start: () => {}});
+      const md = new grpc.Metadata();
+      md.set(X_GOOG_SPANNER_REQUEST_ID_HEADER, '1.abcde123.1.0.5.1');
+      assert.doesNotThrow(() => interceptor({}, fakeNextCall).start(md, {}));
+    });
+  });
+
+  describe('PROCESS_PREFIX', () => {
+    it('is derived from getProcessId()', () => {
+      assert.strictEqual(PROCESS_PREFIX, `1.${getProcessId()}.`);
     });
   });
 });

@@ -20,7 +20,7 @@ import * as grpc from '@grpc/grpc-js';
 import {getActiveOrNoopSpan} from './instrument';
 const randIdForProcess = randomBytes(8).toString('hex');
 const REQUEST_HEADER_VERSION = 1;
-const PROCESS_PREFIX = `${REQUEST_HEADER_VERSION}.${randIdForProcess}.`;
+const PROCESS_PREFIX = `${REQUEST_HEADER_VERSION}.${getProcessId()}.`;
 
 function getProcessId(): string {
   return (
@@ -128,7 +128,9 @@ function injectRequestIDIntoHeaders(
   attempt?: number,
 ) {
   if (!session) {
-    return headers;
+    // Always return a copy so callers can never mutate shared headers
+    // (e.g. Transaction.commonHeaders_) through the returned object.
+    return {...headers};
   }
   const actualDatabase =
     session && typeof session._nextNthRequest === 'function'
@@ -139,7 +141,7 @@ function injectRequestIDIntoHeaders(
       !actualDatabase ||
       typeof actualDatabase._nextNthRequest !== 'function'
     ) {
-      return headers;
+      return {...headers};
     }
     nthRequest = actualDatabase._nextNthRequest();
   }
@@ -158,7 +160,18 @@ function injectRequestIDIntoHeaders(
   return withReqId;
 }
 
-function createRequestIdInterceptor(config: any) {
+/*
+ * createRequestIdInterceptor returns a gRPC client interceptor that bumps the
+ * <attempt> part of x-goog-spanner-request-id on every gax-level retry. When a
+ * span is given, its x_goog_spanner_request_id attribute is kept in sync with
+ * the request ID actually sent on the wire. The span must be captured when the
+ * request is prepared, because retries run asynchronously and the active span
+ * at that point is not guaranteed to be the operation's span.
+ */
+function createRequestIdInterceptor(
+  config: any,
+  span?: ReturnType<typeof getActiveOrNoopSpan>,
+) {
   let attemptCount = 0;
   let cachedBase: string | undefined;
   let cachedInitialAttempt = 1;
@@ -186,6 +199,9 @@ function createRequestIdInterceptor(config: any) {
             metadata.set(X_GOOG_SPANNER_REQUEST_ID_HEADER, newReqId);
             if (config && config.headers) {
               config.headers[X_GOOG_SPANNER_REQUEST_ID_HEADER] = newReqId;
+            }
+            if (span) {
+              span.setAttribute(X_GOOG_SPANNER_REQUEST_ID_SPAN_ATTR, newReqId);
             }
           }
         }
