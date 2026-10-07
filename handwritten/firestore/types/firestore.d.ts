@@ -14182,10 +14182,6 @@ declare namespace FirebaseFirestore {
      */
     export type UpsertStageOptions = StageOptions & {
       additionalFields?: AliasedExpression[];
-      /**
-       * @deprecated Use `additionalFields` instead.
-       */
-      transforms?: AliasedExpression[];
       collection?: string | CollectionReference;
       documentIdExpression?: string | Expression;
     };
