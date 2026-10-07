@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.1](https://github.com/googleapis/google-cloud-node/compare/test-utils-v0.2.0...test-utils-v0.2.1) (2026-10-07)
+
+
+### Bug Fixes
+
+* **test-utils:** Make google-test-utils a private workspace package ([#9525](https://github.com/googleapis/google-cloud-node/issues/9525)) ([be25b6f](https://github.com/googleapis/google-cloud-node/commit/be25b6fa1a6c6c90337ecad8afdcbcaeb477ded2))
+
 ## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/test-utils-v0.1.0...test-utils-v0.2.0) (2026-10-03)
 
 

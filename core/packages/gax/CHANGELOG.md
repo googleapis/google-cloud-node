@@ -5,6 +5,13 @@
 
 [1]: https://www.npmjs.com/package/gax-nodejs?activeTab=versions
 
+## [6.12.0](https://github.com/googleapis/google-cloud-node/compare/google-gax-v6.11.1...google-gax-v6.12.0) (2026-10-07)
+
+
+### Features
+
+* **tools:** Add individual CLI flags for Bun monkey patches ([#9533](https://github.com/googleapis/google-cloud-node/issues/9533)) ([a5eec89](https://github.com/googleapis/google-cloud-node/commit/a5eec894b054e0605fd8e79591a88393bb2697c6))
+
 ## [6.11.1](https://github.com/googleapis/google-cloud-node/compare/google-gax-v6.11.0...google-gax-v6.11.1) (2026-10-06)
 
 

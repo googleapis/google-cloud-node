@@ -5,6 +5,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/logging-winston?activeTab=versions
 
+## [7.2.0](https://github.com/googleapis/google-cloud-node/compare/logging-winston-v7.1.0...logging-winston-v7.2.0) (2026-10-07)
+
+
+### Features
+
+* **tools:** Add individual CLI flags for Bun monkey patches ([#9533](https://github.com/googleapis/google-cloud-node/issues/9533)) ([a5eec89](https://github.com/googleapis/google-cloud-node/commit/a5eec894b054e0605fd8e79591a88393bb2697c6))
+
 ## [7.1.0](https://github.com/googleapis/google-cloud-node/compare/logging-winston-v7.0.1...logging-winston-v7.1.0) (2026-09-15)
 
 
