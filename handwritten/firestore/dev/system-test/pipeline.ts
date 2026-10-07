@@ -717,15 +717,17 @@ describe.skipClassic('Pipeline class', () => {
         expect(docSnap.get('rating')).to.equal(4.7);
       });
 
-      it('can upsert (update) an existing document with array of expressions', async () => {
+      it('can upsert (update) an existing document with additionalFields option', async () => {
         const res = await firestore
           .pipeline()
           .collection(dmlCol.path)
           .where(equal(field('__name__').documentId(), 'book1'))
-          .upsert([
-            constant('Updated Genre List').as('genre'),
-            constant(5.0).as('rating'),
-          ])
+          .upsert({
+            additionalFields: [
+              constant('Updated Genre List').as('genre'),
+              constant(5.0).as('rating'),
+            ],
+          })
           .execute({atomic: true});
         expectResults(res, {documents_modified: 1});
 
@@ -797,6 +799,45 @@ describe.skipClassic('Pipeline class', () => {
         expect(snap.get('title')).to.equal('Tx Upsert Book');
       });
 
+      it('treats a string documentIdExpression as a field name', async () => {
+        const targetCol = getTestRoot();
+        const res = await firestore
+          .pipeline()
+          .collection(dmlCol.path)
+          .where(equal(field('__name__').documentId(), 'book1'))
+          .addFields(constant('id_from_field').as('customId'))
+          .insert({
+            collection: targetCol.path,
+            documentIdExpression: 'customId',
+          })
+          .execute({atomic: true});
+        expectResults(res, {documents_modified: 1});
+
+        const docSnap = await targetCol.doc('id_from_field').get();
+        expect(docSnap.exists).to.be.true;
+        expect(docSnap.get('title')).to.equal(
+          "The Hitchhiker's Guide to the Galaxy",
+        );
+        // A literal document ID 'customId' is not used.
+        expect((await targetCol.doc('customId').get()).exists).to.be.false;
+      });
+
+      it('upsert with documentIdExpression requires a collection', async () => {
+        let error: Error | undefined;
+        try {
+          await firestore
+            .pipeline()
+            .collection(dmlCol.path)
+            .upsert({documentIdExpression: constant('some_id')})
+            .execute({atomic: true});
+        } catch (e) {
+          error = e as Error;
+        }
+        expect(error?.message).to.contain(
+          "The 'upsert(...)' stage must specify a collection when a document id is provided.",
+        );
+      });
+
       it('can execute pipeline with literals stage', async () => {
         const res = await firestore
           .pipeline()
@@ -825,6 +866,44 @@ describe.skipClassic('Pipeline class', () => {
           .execute();
         expect(res.results.length).to.equal(1);
         expect(res.results[0].data()).to.deep.equal({base: 10, computed: 35});
+      });
+
+      it('can execute literals stage with nested expressions', async () => {
+        const res = await firestore
+          .pipeline()
+          .literals([
+            {
+              nested: {sum: add(constant(1), constant(2)), label: 'x'},
+              arr: [1, add(constant(3), constant(4))],
+              deep: {a: {b: [{c: add(constant(5), constant(6))}]}},
+            },
+          ])
+          .execute();
+        expect(res.results.length).to.equal(1);
+        expect(res.results[0].data()).to.deep.equal({
+          nested: {sum: 3, label: 'x'},
+          arr: [1, 7],
+          deep: {a: {b: [{c: 11}]}},
+        });
+      });
+
+      it('can execute literals stage with nested constant values', async () => {
+        const res = await firestore
+          .pipeline()
+          .literals([
+            {
+              emptyMap: {},
+              emptyArr: [],
+              nested: {a: 1, b: [true, null, 'str'], c: {d: 2.5}},
+            },
+          ])
+          .execute();
+        expect(res.results.length).to.equal(1);
+        expect(res.results[0].data()).to.deep.equal({
+          emptyMap: {},
+          emptyArr: [],
+          nested: {a: 1, b: [true, null, 'str'], c: {d: 2.5}},
+        });
       });
     });
 

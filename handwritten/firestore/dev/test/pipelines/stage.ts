@@ -19,7 +19,7 @@ import {expect} from 'chai';
 import * as sinon from 'sinon';
 import {createInstance, stream} from '../util/helpers';
 import {google} from '../../protos/firestore_v1_proto_api';
-import {Pipelines, Firestore} from '../../src';
+import {Pipelines, Firestore, FieldValue} from '../../src';
 import Pipeline = Pipelines.Pipeline;
 import field = Pipelines.field;
 import sum = Pipelines.sum;
@@ -250,6 +250,54 @@ describe('stage option serialization', () => {
       stageIndex: 1,
     },
     {
+      name: 'literals source stage',
+      pipeline: firestore =>
+        firestore.pipeline().literals({
+          documents: [{foo: 'bar'}],
+          rawOptions,
+        }),
+    },
+    {
+      name: 'delete stage',
+      pipeline: firestore =>
+        firestore.pipeline().database().delete({
+          rawOptions,
+        }),
+      stageIndex: 1,
+    },
+    {
+      name: 'update stage',
+      pipeline: firestore =>
+        firestore
+          .pipeline()
+          .database()
+          .update({
+            transformedFields: [constant(true).as('foo')],
+            rawOptions,
+          }),
+      stageIndex: 1,
+    },
+    {
+      name: 'insert stage',
+      pipeline: firestore =>
+        firestore.pipeline().database().insert({
+          rawOptions,
+        }),
+      stageIndex: 1,
+    },
+    {
+      name: 'upsert stage',
+      pipeline: firestore =>
+        firestore
+          .pipeline()
+          .database()
+          .upsert({
+            additionalFields: [constant(true).as('foo')],
+            rawOptions,
+          }),
+      stageIndex: 1,
+    },
+    {
       name: 'search stage',
       pipeline: firestore =>
         firestore
@@ -395,5 +443,107 @@ describe('stage _validateUserData', () => {
         addFields: [constant({foo: undefined}).as('bar')],
       })
       .execute();
+  });
+
+  describe('literals stage rejects FieldValue sentinels', () => {
+    const cases: Array<{
+      name: string;
+      doc: Record<string, unknown>;
+      expected: string;
+    }> = [
+      {
+        name: 'top-level serverTimestamp()',
+        doc: {a: 1, ts: FieldValue.serverTimestamp()},
+        expected:
+          'Function literals() called with invalid data. FieldValue.serverTimestamp() can only be used with update() and set() (found in field ts)',
+      },
+      {
+        name: 'increment()',
+        doc: {n: FieldValue.increment(1)},
+        expected:
+          'Function literals() called with invalid data. FieldValue.increment() can only be used with update() and set() (found in field n)',
+      },
+      {
+        name: 'arrayUnion()',
+        doc: {arr: FieldValue.arrayUnion('x')},
+        expected:
+          'Function literals() called with invalid data. FieldValue.arrayUnion() can only be used with update() and set() (found in field arr)',
+      },
+      {
+        name: 'delete()',
+        doc: {gone: FieldValue.delete()},
+        expected:
+          'Function literals() called with invalid data. FieldValue.delete() can only be used with update() and set() (found in field gone)',
+      },
+      {
+        name: 'nested in a map',
+        doc: {a: {b: FieldValue.serverTimestamp()}},
+        expected:
+          'Function literals() called with invalid data. FieldValue.serverTimestamp() can only be used with update() and set() (found in field a.b)',
+      },
+      {
+        name: 'inside an array',
+        doc: {arr: [1, FieldValue.serverTimestamp()]},
+        expected:
+          'Function literals() called with invalid data. FieldValue.serverTimestamp() can only be used with update() and set() (found in field arr)',
+      },
+    ];
+
+    cases.forEach(({name, doc, expected}) => {
+      it(name, async () => {
+        const firestore = await createInstance();
+        expect(() => {
+          void firestore.pipeline().literals([doc]).execute();
+        }).to.throw(expected);
+      });
+    });
+
+    it('accepts literals without sentinels', async () => {
+      const spy = sinon.fake.returns(stream());
+      const firestore = await createInstance({executePipeline: spy});
+      await firestore
+        .pipeline()
+        .literals([
+          {a: 1, nested: {b: [1, 2, null], n: null}, c: constant(3), d: null},
+        ])
+        .execute();
+      expect(spy.callCount).to.equal(1);
+    });
+  });
+
+  describe('literals stage rejects undefined by default', () => {
+    const cases: Array<{
+      name: string;
+      doc: Record<string, unknown>;
+      expected: string;
+    }> = [
+      {
+        name: 'top-level undefined',
+        doc: {a: 1, b: undefined},
+        expected:
+          'Function literals() called with invalid data. Cannot use "undefined" as a Firestore value (found in field b).',
+      },
+      {
+        name: 'nested undefined',
+        doc: {a: {b: undefined}},
+        expected:
+          'Function literals() called with invalid data. Cannot use "undefined" as a Firestore value (found in field a.b).',
+      },
+      {
+        name: 'undefined inside an array',
+        doc: {arr: [1, undefined]},
+        expected:
+          'Function literals() called with invalid data. Cannot use "undefined" as a Firestore value (found in field arr).',
+      },
+    ];
+
+    cases.forEach(({name, doc, expected}) => {
+      it(name, async () => {
+        const firestore = await createInstance();
+        expect(() => {
+          void firestore.pipeline().literals([doc]).execute();
+        }).to.throw(expected);
+      });
+    });
   });
 });
