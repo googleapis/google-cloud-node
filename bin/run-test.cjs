@@ -40,11 +40,6 @@ const SHIM_FLAGS = [
     envOut: 'BUN_ENABLE_FETCH_SHIM',
   },
   {
-    flag: '--bun-plugin-shim',
-    envIn: 'BUN_PLUGIN_SHIM',
-    envOut: 'BUN_ENABLE_BUN_PLUGIN_SHIM',
-  },
-  {
     flag: '--gaxios-shim',
     envIn: 'BUN_GAXIOS_SHIM',
     envOut: 'BUN_ENABLE_GAXIOS_SHIM',

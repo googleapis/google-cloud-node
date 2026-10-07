@@ -30,7 +30,6 @@ if (
   const origRequire = Module.prototype.require;
 
   const enableFetchShim = process.env.BUN_ENABLE_FETCH_SHIM === 'true';
-  const enableBunPluginShim = process.env.BUN_ENABLE_BUN_PLUGIN_SHIM === 'true';
   const enableGaxiosShim = process.env.BUN_ENABLE_GAXIOS_SHIM === 'true';
   const enableProxyquireShim =
     process.env.BUN_ENABLE_PROXYQUIRE_SHIM === 'true';
@@ -725,26 +724,6 @@ if (
         return origJsExt.apply(this, arguments);
       };
     }
-  }
-
-  if (enableBunPluginShim && typeof Bun.plugin === 'function') {
-    Bun.plugin({
-      name: 'bun-gaxios-global-fetch-esm',
-      setup(build) {
-        build.onLoad(
-          {filter: /build[\\/]+esm[\\/]+src[\\/]+gaxios\.js$/},
-          args => {
-            const code = fs
-              .readFileSync(args.path, 'utf8')
-              .replaceAll(
-                "(await import('node-fetch')).default",
-                '((...a) => globalThis.__googleCloudBunFetch(...a))',
-              );
-            return {contents: code, loader: 'js'};
-          },
-        );
-      },
-    });
   }
 
   function patchGaxiosIfPresent(res) {

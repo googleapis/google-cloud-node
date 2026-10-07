@@ -194,7 +194,9 @@ describe('🚙 error handling', () => {
       const chunks = [
         new Uint8Array(Buffer.from('{"error": {"code": 400, ')),
         new Uint8Array(Buffer.from('"message": "Invalid ')),
-        new Uint8Array(Buffer.from('argument", "status": "INVALID_ARGUMENT"}}')),
+        new Uint8Array(
+          Buffer.from('argument", "status": "INVALID_ARGUMENT"}}'),
+        ),
       ];
       const readableStream = Readable.from(chunks);
       const scope = nock(url).get('/').reply(400, readableStream);
@@ -217,7 +219,9 @@ describe('🚙 error handling', () => {
       const chunks = [
         '{"error": {"code": 400, ',
         Buffer.from('"message": "Invalid '),
-        new Uint8Array(Buffer.from('argument", "status": "INVALID_ARGUMENT"}}')),
+        new Uint8Array(
+          Buffer.from('argument", "status": "INVALID_ARGUMENT"}}'),
+        ),
       ];
       const readableStream = Readable.from(chunks);
       const scope = nock(url).get('/').reply(400, readableStream);
@@ -534,6 +538,87 @@ describe('🥁 configuration options', () => {
       assert(res.config.agent instanceof HttpsProxyAgent);
       assert.equal(res.config.agent.connectOpts.cert, cert);
       assert.equal(res.config.agent.connectOpts.key, key);
+    });
+
+    it('should pass proxy and tls options to fetchImplementation and omit proxy when noProxy matches', async () => {
+      scope.persist(false);
+      nock.cleanAll();
+      let capturedInit: Record<string, unknown> | undefined;
+      const customFetch = async (
+        _u: unknown,
+        init?: Record<string, unknown>,
+      ) => {
+        capturedInit = init;
+        return new Response(JSON.stringify(responseBody), {
+          status: 200,
+          headers: {'content-type': 'application/json'},
+        });
+      };
+
+      await request({
+        url,
+        proxy,
+        cert: 'cert',
+        key: 'key',
+        fetchImplementation:
+          customFetch as unknown as GaxiosOptions['fetchImplementation'],
+      });
+      assert.strictEqual(capturedInit?.proxy, proxy);
+      assert.deepStrictEqual(capturedInit?.tls, {cert: 'cert', key: 'key'});
+
+      await request({
+        url,
+        proxy,
+        noProxy: ['domain.example.com'],
+        fetchImplementation:
+          customFetch as unknown as GaxiosOptions['fetchImplementation'],
+      });
+      assert.strictEqual(capturedInit?.proxy, undefined);
+    });
+
+    it('should convert Node Readable request body and Web ReadableStream response body in Bun fetch path', async () => {
+      scope.persist(false);
+      nock.cleanAll();
+      const globalRecord = globalThis as Record<string, unknown>;
+      const hadBun = 'Bun' in globalRecord;
+      const origBunFetch = globalRecord.__googleCloudBunFetch;
+      const origFetch = globalThis.fetch;
+      let capturedBody: unknown;
+      try {
+        if (!hadBun) {
+          globalRecord.Bun = {};
+        }
+        delete globalRecord.__googleCloudBunFetch;
+        globalThis.fetch = (async (_u: unknown, init?: RequestInit) => {
+          capturedBody = init?.body;
+          return new Response(JSON.stringify(responseBody), {
+            status: 200,
+            headers: {'content-type': 'application/json'},
+          });
+        }) as typeof fetch;
+
+        const streamRes = await request<Readable>({
+          url,
+          method: 'POST',
+          data: Readable.from(['hello', ' ', 'world']),
+          responseType: 'stream',
+        });
+        assert(capturedBody instanceof ReadableStream);
+        assert(streamRes.data instanceof Readable);
+
+        const jsonRes = await request({url});
+        assert.deepStrictEqual(jsonRes.data, responseBody);
+      } finally {
+        globalThis.fetch = origFetch;
+        if (origBunFetch !== undefined) {
+          globalRecord.__googleCloudBunFetch = origBunFetch;
+        } else {
+          delete globalRecord.__googleCloudBunFetch;
+        }
+        if (!hadBun) {
+          delete globalRecord.Bun;
+        }
+      }
     });
 
     it('should load the proxy from the cache', async () => {
