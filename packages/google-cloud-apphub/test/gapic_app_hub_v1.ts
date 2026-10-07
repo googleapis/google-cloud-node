@@ -1716,6 +1716,277 @@ describe('v1.AppHubClient', () => {
     });
   });
 
+  describe('getBoundary', () => {
+    it('invokes getBoundary without error', async () => {
+      const client = new apphubModule.v1.AppHubClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.apphub.v1.GetBoundaryRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.apphub.v1.GetBoundaryRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.apphub.v1.Boundary(),
+      );
+      client.innerApiCalls.getBoundary = stubSimpleCall(expectedResponse);
+      const [response] = await client.getBoundary(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getBoundary as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getBoundary as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getBoundary without error using callback', async () => {
+      const client = new apphubModule.v1.AppHubClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.apphub.v1.GetBoundaryRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.apphub.v1.GetBoundaryRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.apphub.v1.Boundary(),
+      );
+      client.innerApiCalls.getBoundary =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getBoundary(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.apphub.v1.IBoundary | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getBoundary as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getBoundary as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getBoundary with error', async () => {
+      const client = new apphubModule.v1.AppHubClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.apphub.v1.GetBoundaryRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.apphub.v1.GetBoundaryRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getBoundary = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.getBoundary(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getBoundary as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getBoundary as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getBoundary with closed client', async () => {
+      const client = new apphubModule.v1.AppHubClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.apphub.v1.GetBoundaryRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.apphub.v1.GetBoundaryRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(client.getBoundary(request), expectedError);
+    });
+  });
+
+  describe('getExtendedMetadataSchema', () => {
+    it('invokes getExtendedMetadataSchema without error', async () => {
+      const client = new apphubModule.v1.AppHubClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.apphub.v1.GetExtendedMetadataSchemaRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.apphub.v1.GetExtendedMetadataSchemaRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.apphub.v1.ExtendedMetadataSchema(),
+      );
+      client.innerApiCalls.getExtendedMetadataSchema =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.getExtendedMetadataSchema(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getExtendedMetadataSchema as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getExtendedMetadataSchema as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getExtendedMetadataSchema without error using callback', async () => {
+      const client = new apphubModule.v1.AppHubClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.apphub.v1.GetExtendedMetadataSchemaRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.apphub.v1.GetExtendedMetadataSchemaRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.apphub.v1.ExtendedMetadataSchema(),
+      );
+      client.innerApiCalls.getExtendedMetadataSchema =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getExtendedMetadataSchema(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.apphub.v1.IExtendedMetadataSchema | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getExtendedMetadataSchema as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getExtendedMetadataSchema as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getExtendedMetadataSchema with error', async () => {
+      const client = new apphubModule.v1.AppHubClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.apphub.v1.GetExtendedMetadataSchemaRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.apphub.v1.GetExtendedMetadataSchemaRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getExtendedMetadataSchema = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.getExtendedMetadataSchema(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.getExtendedMetadataSchema as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getExtendedMetadataSchema as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getExtendedMetadataSchema with closed client', async () => {
+      const client = new apphubModule.v1.AppHubClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.apphub.v1.GetExtendedMetadataSchemaRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.apphub.v1.GetExtendedMetadataSchemaRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(
+        client.getExtendedMetadataSchema(request),
+        expectedError,
+      );
+    });
+  });
+
   describe('createServiceProjectAttachment', () => {
     it('invokes createServiceProjectAttachment without error', async () => {
       const client = new apphubModule.v1.AppHubClient({
@@ -3870,6 +4141,204 @@ describe('v1.AppHubClient', () => {
     });
   });
 
+  describe('updateBoundary', () => {
+    it('invokes updateBoundary without error', async () => {
+      const client = new apphubModule.v1.AppHubClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.apphub.v1.UpdateBoundaryRequest(),
+      );
+      request.boundary ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.apphub.v1.UpdateBoundaryRequest',
+        ['boundary', 'name'],
+      );
+      request.boundary.name = defaultValue1;
+      const expectedHeaderRequestParams = `boundary.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.updateBoundary =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.updateBoundary(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateBoundary as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateBoundary as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateBoundary without error using callback', async () => {
+      const client = new apphubModule.v1.AppHubClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.apphub.v1.UpdateBoundaryRequest(),
+      );
+      request.boundary ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.apphub.v1.UpdateBoundaryRequest',
+        ['boundary', 'name'],
+      );
+      request.boundary.name = defaultValue1;
+      const expectedHeaderRequestParams = `boundary.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.updateBoundary =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateBoundary(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.apphub.v1.IBoundary,
+              protos.google.cloud.apphub.v1.IOperationMetadata
+            > | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.apphub.v1.IBoundary,
+        protos.google.cloud.apphub.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateBoundary as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateBoundary as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateBoundary with call error', async () => {
+      const client = new apphubModule.v1.AppHubClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.apphub.v1.UpdateBoundaryRequest(),
+      );
+      request.boundary ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.apphub.v1.UpdateBoundaryRequest',
+        ['boundary', 'name'],
+      );
+      request.boundary.name = defaultValue1;
+      const expectedHeaderRequestParams = `boundary.name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateBoundary = stubLongRunningCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.updateBoundary(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateBoundary as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateBoundary as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateBoundary with LRO error', async () => {
+      const client = new apphubModule.v1.AppHubClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.apphub.v1.UpdateBoundaryRequest(),
+      );
+      request.boundary ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.apphub.v1.UpdateBoundaryRequest',
+        ['boundary', 'name'],
+      );
+      request.boundary.name = defaultValue1;
+      const expectedHeaderRequestParams = `boundary.name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateBoundary = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError,
+      );
+      const [operation] = await client.updateBoundary(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateBoundary as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateBoundary as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkUpdateBoundaryProgress without error', async () => {
+      const client = new apphubModule.v1.AppHubClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation(),
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkUpdateBoundaryProgress(
+        expectedResponse.name,
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkUpdateBoundaryProgress with error', async () => {
+      const client = new apphubModule.v1.AppHubClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.checkUpdateBoundaryProgress(''),
+        expectedError,
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
   describe('listServiceProjectAttachments', () => {
     it('invokes listServiceProjectAttachments without error', async () => {
       const client = new apphubModule.v1.AppHubClient({
@@ -5834,6 +6303,366 @@ describe('v1.AppHubClient', () => {
       );
     });
   });
+
+  describe('listExtendedMetadataSchemas', () => {
+    it('invokes listExtendedMetadataSchemas without error', async () => {
+      const client = new apphubModule.v1.AppHubClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.apphub.v1.ListExtendedMetadataSchemasRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.apphub.v1.ListExtendedMetadataSchemasRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.apphub.v1.ExtendedMetadataSchema(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.apphub.v1.ExtendedMetadataSchema(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.apphub.v1.ExtendedMetadataSchema(),
+        ),
+      ];
+      client.innerApiCalls.listExtendedMetadataSchemas =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listExtendedMetadataSchemas(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listExtendedMetadataSchemas as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listExtendedMetadataSchemas as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listExtendedMetadataSchemas without error using callback', async () => {
+      const client = new apphubModule.v1.AppHubClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.apphub.v1.ListExtendedMetadataSchemasRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.apphub.v1.ListExtendedMetadataSchemasRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.apphub.v1.ExtendedMetadataSchema(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.apphub.v1.ExtendedMetadataSchema(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.apphub.v1.ExtendedMetadataSchema(),
+        ),
+      ];
+      client.innerApiCalls.listExtendedMetadataSchemas =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listExtendedMetadataSchemas(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              protos.google.cloud.apphub.v1.IExtendedMetadataSchema[] | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listExtendedMetadataSchemas as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listExtendedMetadataSchemas as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listExtendedMetadataSchemas with error', async () => {
+      const client = new apphubModule.v1.AppHubClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.apphub.v1.ListExtendedMetadataSchemasRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.apphub.v1.ListExtendedMetadataSchemasRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listExtendedMetadataSchemas = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.listExtendedMetadataSchemas(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.listExtendedMetadataSchemas as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listExtendedMetadataSchemas as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listExtendedMetadataSchemasStream without error', async () => {
+      const client = new apphubModule.v1.AppHubClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.apphub.v1.ListExtendedMetadataSchemasRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.apphub.v1.ListExtendedMetadataSchemasRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.apphub.v1.ExtendedMetadataSchema(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.apphub.v1.ExtendedMetadataSchema(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.apphub.v1.ExtendedMetadataSchema(),
+        ),
+      ];
+      client.descriptors.page.listExtendedMetadataSchemas.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listExtendedMetadataSchemasStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.apphub.v1.ExtendedMetadataSchema[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.apphub.v1.ExtendedMetadataSchema) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (
+          client.descriptors.page.listExtendedMetadataSchemas
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(
+            client.innerApiCalls.listExtendedMetadataSchemas,
+            request,
+          ),
+      );
+      assert(
+        (
+          client.descriptors.page.listExtendedMetadataSchemas
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('invokes listExtendedMetadataSchemasStream with error', async () => {
+      const client = new apphubModule.v1.AppHubClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.apphub.v1.ListExtendedMetadataSchemasRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.apphub.v1.ListExtendedMetadataSchemasRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listExtendedMetadataSchemas.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listExtendedMetadataSchemasStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.apphub.v1.ExtendedMetadataSchema[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.apphub.v1.ExtendedMetadataSchema) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (
+          client.descriptors.page.listExtendedMetadataSchemas
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(
+            client.innerApiCalls.listExtendedMetadataSchemas,
+            request,
+          ),
+      );
+      assert(
+        (
+          client.descriptors.page.listExtendedMetadataSchemas
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with listExtendedMetadataSchemas without error', async () => {
+      const client = new apphubModule.v1.AppHubClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.apphub.v1.ListExtendedMetadataSchemasRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.apphub.v1.ListExtendedMetadataSchemasRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.apphub.v1.ExtendedMetadataSchema(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.apphub.v1.ExtendedMetadataSchema(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.apphub.v1.ExtendedMetadataSchema(),
+        ),
+      ];
+      client.descriptors.page.listExtendedMetadataSchemas.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.apphub.v1.IExtendedMetadataSchema[] =
+        [];
+      const iterable = client.listExtendedMetadataSchemasAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listExtendedMetadataSchemas
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (
+          client.descriptors.page.listExtendedMetadataSchemas
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with listExtendedMetadataSchemas with error', async () => {
+      const client = new apphubModule.v1.AppHubClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.apphub.v1.ListExtendedMetadataSchemasRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.apphub.v1.ListExtendedMetadataSchemasRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listExtendedMetadataSchemas.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listExtendedMetadataSchemasAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.apphub.v1.IExtendedMetadataSchema[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listExtendedMetadataSchemas
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (
+          client.descriptors.page.listExtendedMetadataSchemas
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+  });
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', async () => {
       const client = new apphubModule.v1.AppHubClient({
@@ -6749,6 +7578,55 @@ describe('v1.AppHubClient', () => {
       });
     });
 
+    describe('boundary', async () => {
+      const fakePath = '/rendered/path/boundary';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+      };
+      const client = new apphubModule.v1.AppHubClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.boundaryPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.boundaryPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('boundaryPath', () => {
+        const result = client.boundaryPath('projectValue', 'locationValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.boundaryPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromBoundaryName', () => {
+        const result = client.matchProjectFromBoundaryName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.boundaryPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromBoundaryName', () => {
+        const result = client.matchLocationFromBoundaryName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.boundaryPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('discoveredService', async () => {
       const fakePath = '/rendered/path/discoveredService';
       const expectedParameters = {
@@ -6895,6 +7773,87 @@ describe('v1.AppHubClient', () => {
         assert(
           (
             client.pathTemplates.discoveredWorkloadPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('extendedMetadataSchema', async () => {
+      const fakePath = '/rendered/path/extendedMetadataSchema';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        extended_metadata_schema: 'extendedMetadataSchemaValue',
+      };
+      const client = new apphubModule.v1.AppHubClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.extendedMetadataSchemaPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.extendedMetadataSchemaPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('extendedMetadataSchemaPath', () => {
+        const result = client.extendedMetadataSchemaPath(
+          'projectValue',
+          'locationValue',
+          'extendedMetadataSchemaValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.extendedMetadataSchemaPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromExtendedMetadataSchemaName', () => {
+        const result =
+          client.matchProjectFromExtendedMetadataSchemaName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.extendedMetadataSchemaPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromExtendedMetadataSchemaName', () => {
+        const result =
+          client.matchLocationFromExtendedMetadataSchemaName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.extendedMetadataSchemaPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchExtendedMetadataSchemaFromExtendedMetadataSchemaName', () => {
+        const result =
+          client.matchExtendedMetadataSchemaFromExtendedMetadataSchemaName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'extendedMetadataSchemaValue');
+        assert(
+          (
+            client.pathTemplates.extendedMetadataSchemaPathTemplate
               .match as SinonStub
           )
             .getCall(-1)

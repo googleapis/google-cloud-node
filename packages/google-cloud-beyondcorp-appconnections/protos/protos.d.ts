@@ -1222,6 +1222,12 @@ export namespace google {
 
                         /** AppConnection gateway */
                         gateway?: (google.cloud.beyondcorp.appconnections.v1.AppConnection.IGateway|null);
+
+                        /** AppConnection satisfiesPzs */
+                        satisfiesPzs?: (boolean|null);
+
+                        /** AppConnection satisfiesPzi */
+                        satisfiesPzi?: (boolean|null);
                     }
 
                     /** Represents an AppConnection. */
@@ -1265,6 +1271,12 @@ export namespace google {
 
                         /** AppConnection gateway. */
                         public gateway?: (google.cloud.beyondcorp.appconnections.v1.AppConnection.IGateway|null);
+
+                        /** AppConnection satisfiesPzs. */
+                        public satisfiesPzs?: (boolean|null);
+
+                        /** AppConnection satisfiesPzi. */
+                        public satisfiesPzi?: (boolean|null);
 
                         /**
                          * Creates a new AppConnection instance using the specified properties.
@@ -1463,6 +1475,9 @@ export namespace google {
 
                             /** Gateway appGateway */
                             appGateway?: (string|null);
+
+                            /** Gateway l7psc */
+                            l7psc?: (string|null);
                         }
 
                         /** Represents a Gateway. */
@@ -1485,6 +1500,9 @@ export namespace google {
 
                             /** Gateway appGateway. */
                             public appGateway: string;
+
+                            /** Gateway l7psc. */
+                            public l7psc: string;
 
                             /**
                              * Creates a new Gateway instance using the specified properties.

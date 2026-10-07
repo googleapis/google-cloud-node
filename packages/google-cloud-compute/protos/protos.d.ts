@@ -408692,6 +408692,109 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of an InterconnectsSetNameRequest. */
+                interface IInterconnectsSetNameRequest {
+
+                    /** InterconnectsSetNameRequest currentName */
+                    currentName?: (string|null);
+
+                    /** InterconnectsSetNameRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents an InterconnectsSetNameRequest. */
+                class InterconnectsSetNameRequest implements IInterconnectsSetNameRequest {
+
+                    /**
+                     * Constructs a new InterconnectsSetNameRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.compute.v1beta.IInterconnectsSetNameRequest);
+
+                    /** InterconnectsSetNameRequest currentName. */
+                    public currentName?: (string|null);
+
+                    /** InterconnectsSetNameRequest name. */
+                    public name?: (string|null);
+
+                    /**
+                     * Creates a new InterconnectsSetNameRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns InterconnectsSetNameRequest instance
+                     */
+                    public static create(properties?: google.cloud.compute.v1beta.IInterconnectsSetNameRequest): google.cloud.compute.v1beta.InterconnectsSetNameRequest;
+
+                    /**
+                     * Encodes the specified InterconnectsSetNameRequest message. Does not implicitly {@link google.cloud.compute.v1beta.InterconnectsSetNameRequest.verify|verify} messages.
+                     * @param message InterconnectsSetNameRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.compute.v1beta.IInterconnectsSetNameRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified InterconnectsSetNameRequest message, length delimited. Does not implicitly {@link google.cloud.compute.v1beta.InterconnectsSetNameRequest.verify|verify} messages.
+                     * @param message InterconnectsSetNameRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.compute.v1beta.IInterconnectsSetNameRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an InterconnectsSetNameRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns InterconnectsSetNameRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.compute.v1beta.InterconnectsSetNameRequest;
+
+                    /**
+                     * Decodes an InterconnectsSetNameRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns InterconnectsSetNameRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.compute.v1beta.InterconnectsSetNameRequest;
+
+                    /**
+                     * Verifies an InterconnectsSetNameRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an InterconnectsSetNameRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns InterconnectsSetNameRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.compute.v1beta.InterconnectsSetNameRequest;
+
+                    /**
+                     * Creates a plain object from an InterconnectsSetNameRequest message. Also converts values to other types if specified.
+                     * @param message InterconnectsSetNameRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.compute.v1beta.InterconnectsSetNameRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this InterconnectsSetNameRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for InterconnectsSetNameRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of an Interval. */
                 interface IInterval {
 
@@ -508358,6 +508461,121 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a SetNameInterconnectRequest. */
+                interface ISetNameInterconnectRequest {
+
+                    /** SetNameInterconnectRequest interconnect */
+                    interconnect?: (string|null);
+
+                    /** SetNameInterconnectRequest interconnectsSetNameRequestResource */
+                    interconnectsSetNameRequestResource?: (google.cloud.compute.v1beta.IInterconnectsSetNameRequest|null);
+
+                    /** SetNameInterconnectRequest project */
+                    project?: (string|null);
+
+                    /** SetNameInterconnectRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a SetNameInterconnectRequest. */
+                class SetNameInterconnectRequest implements ISetNameInterconnectRequest {
+
+                    /**
+                     * Constructs a new SetNameInterconnectRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.compute.v1beta.ISetNameInterconnectRequest);
+
+                    /** SetNameInterconnectRequest interconnect. */
+                    public interconnect: string;
+
+                    /** SetNameInterconnectRequest interconnectsSetNameRequestResource. */
+                    public interconnectsSetNameRequestResource?: (google.cloud.compute.v1beta.IInterconnectsSetNameRequest|null);
+
+                    /** SetNameInterconnectRequest project. */
+                    public project: string;
+
+                    /** SetNameInterconnectRequest requestId. */
+                    public requestId?: (string|null);
+
+                    /**
+                     * Creates a new SetNameInterconnectRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SetNameInterconnectRequest instance
+                     */
+                    public static create(properties?: google.cloud.compute.v1beta.ISetNameInterconnectRequest): google.cloud.compute.v1beta.SetNameInterconnectRequest;
+
+                    /**
+                     * Encodes the specified SetNameInterconnectRequest message. Does not implicitly {@link google.cloud.compute.v1beta.SetNameInterconnectRequest.verify|verify} messages.
+                     * @param message SetNameInterconnectRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.compute.v1beta.ISetNameInterconnectRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SetNameInterconnectRequest message, length delimited. Does not implicitly {@link google.cloud.compute.v1beta.SetNameInterconnectRequest.verify|verify} messages.
+                     * @param message SetNameInterconnectRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.compute.v1beta.ISetNameInterconnectRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SetNameInterconnectRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SetNameInterconnectRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.compute.v1beta.SetNameInterconnectRequest;
+
+                    /**
+                     * Decodes a SetNameInterconnectRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SetNameInterconnectRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.compute.v1beta.SetNameInterconnectRequest;
+
+                    /**
+                     * Verifies a SetNameInterconnectRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SetNameInterconnectRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SetNameInterconnectRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.compute.v1beta.SetNameInterconnectRequest;
+
+                    /**
+                     * Creates a plain object from a SetNameInterconnectRequest message. Also converts values to other types if specified.
+                     * @param message SetNameInterconnectRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.compute.v1beta.SetNameInterconnectRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SetNameInterconnectRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SetNameInterconnectRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a SetNamedPortsInstanceGroupRequest. */
                 interface ISetNamedPortsInstanceGroupRequest {
 
@@ -563547,6 +563765,20 @@ export namespace google {
                     public setLabels(request: google.cloud.compute.v1beta.ISetLabelsInterconnectRequest): Promise<google.cloud.compute.v1beta.Operation>;
 
                     /**
+                     * Calls SetName.
+                     * @param request SetNameInterconnectRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public setName(request: google.cloud.compute.v1beta.ISetNameInterconnectRequest, callback: google.cloud.compute.v1beta.Interconnects.SetNameCallback): void;
+
+                    /**
+                     * Calls SetName.
+                     * @param request SetNameInterconnectRequest message or plain object
+                     * @returns Promise
+                     */
+                    public setName(request: google.cloud.compute.v1beta.ISetNameInterconnectRequest): Promise<google.cloud.compute.v1beta.Operation>;
+
+                    /**
                      * Calls TestIamPermissions.
                      * @param request TestIamPermissionsInterconnectRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and TestPermissionsResponse
@@ -563618,6 +563850,13 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type SetLabelsCallback = (error: (Error|null), response?: google.cloud.compute.v1beta.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.compute.v1beta.Interconnects|setName}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type SetNameCallback = (error: (Error|null), response?: google.cloud.compute.v1beta.Operation) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.compute.v1beta.Interconnects|testIamPermissions}.

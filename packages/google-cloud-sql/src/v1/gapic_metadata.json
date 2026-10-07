@@ -5,6 +5,74 @@
   "protoPackage": "google.cloud.sql.v1",
   "libraryPackage": "@google-cloud/sql",
   "services": {
+    "BlueGreenDeploymentsService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "BlueGreenDeploymentsServiceClient",
+          "rpcs": {
+            "CreateBlueGreenDeployment": {
+              "methods": [
+                "createBlueGreenDeployment"
+              ]
+            },
+            "GetBlueGreenDeployment": {
+              "methods": [
+                "getBlueGreenDeployment"
+              ]
+            },
+            "SwitchoverBlueGreenDeployment": {
+              "methods": [
+                "switchoverBlueGreenDeployment"
+              ]
+            },
+            "DeleteBlueGreenDeployment": {
+              "methods": [
+                "deleteBlueGreenDeployment"
+              ]
+            },
+            "ListBlueGreenDeployments": {
+              "methods": [
+                "listBlueGreenDeployments",
+                "listBlueGreenDeploymentsStream",
+                "listBlueGreenDeploymentsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "BlueGreenDeploymentsServiceClient",
+          "rpcs": {
+            "CreateBlueGreenDeployment": {
+              "methods": [
+                "createBlueGreenDeployment"
+              ]
+            },
+            "GetBlueGreenDeployment": {
+              "methods": [
+                "getBlueGreenDeployment"
+              ]
+            },
+            "SwitchoverBlueGreenDeployment": {
+              "methods": [
+                "switchoverBlueGreenDeployment"
+              ]
+            },
+            "DeleteBlueGreenDeployment": {
+              "methods": [
+                "deleteBlueGreenDeployment"
+              ]
+            },
+            "ListBlueGreenDeployments": {
+              "methods": [
+                "listBlueGreenDeployments",
+                "listBlueGreenDeploymentsStream",
+                "listBlueGreenDeploymentsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
     "SqlAvailableDatabaseVersionsService": {
       "clients": {
         "grpc": {
@@ -965,6 +1033,70 @@
             "Update": {
               "methods": [
                 "update"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "SqlWorkloadCapturesService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "SqlWorkloadCapturesServiceClient",
+          "rpcs": {
+            "Start": {
+              "methods": [
+                "start"
+              ]
+            },
+            "Stop": {
+              "methods": [
+                "stop"
+              ]
+            },
+            "StartReplay": {
+              "methods": [
+                "startReplay"
+              ]
+            },
+            "StopReplay": {
+              "methods": [
+                "stopReplay"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "SqlWorkloadCapturesServiceClient",
+          "rpcs": {
+            "Start": {
+              "methods": [
+                "start"
+              ]
+            },
+            "Stop": {
+              "methods": [
+                "stop"
+              ]
+            },
+            "StartReplay": {
+              "methods": [
+                "startReplay"
+              ]
+            },
+            "StopReplay": {
+              "methods": [
+                "stopReplay"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
               ]
             }
           }

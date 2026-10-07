@@ -60,8 +60,13 @@ const version = require('../../../package.json').version;
  *
  *  The AppGatewaysService service provides methods to manage
  *  (create/read/update/delete) BeyondCorp AppGateways.
+ *
+ *
+ *  Deprecated: App Connector is deprecated and creation of new App Connector
+ *  resources is no longer permitted. Use Security Gateway instead.
  * @class
  * @memberof v1
+ * @deprecated AppGatewaysService is deprecated and may be removed in a future version.
  */
 export class AppGatewaysServiceClient {
   private _terminated = false;
@@ -282,10 +287,10 @@ export class AppGatewaysServiceClient {
               get: '/v1/{resource=projects/*/locations/*/appGateways/*}:getIamPolicy',
             },
             {
-              get: '/v1/{resource=projects/*/locations/*/clientConnectorServices/*}:getIamPolicy',
+              get: '/v1/{resource=projects/*/locations/*/securityGateways/*}:getIamPolicy',
             },
             {
-              get: '/v1/{resource=projects/*/locations/*/clientGateways/*}:getIamPolicy',
+              get: '/v1/{resource=projects/*/locations/*/securityGateways/*/applications/*}:getIamPolicy',
             },
           ],
         },
@@ -303,11 +308,11 @@ export class AppGatewaysServiceClient {
               body: '*',
             },
             {
-              post: '/v1/{resource=projects/*/locations/*/clientConnectorServices/*}:setIamPolicy',
+              post: '/v1/{resource=projects/*/locations/*/securityGateways/*}:setIamPolicy',
               body: '*',
             },
             {
-              post: '/v1/{resource=projects/*/locations/*/clientGateways/*}:setIamPolicy',
+              post: '/v1/{resource=projects/*/locations/*/securityGateways/*/applications/*}:setIamPolicy',
               body: '*',
             },
           ],
@@ -326,11 +331,11 @@ export class AppGatewaysServiceClient {
               body: '*',
             },
             {
-              post: '/v1/{resource=projects/*/locations/*/clientConnectorServices/*}:testIamPermissions',
+              post: '/v1/{resource=projects/*/locations/*/securityGateways/*}:testIamPermissions',
               body: '*',
             },
             {
-              post: '/v1/{resource=projects/*/locations/*/clientGateways/*}:testIamPermissions',
+              post: '/v1/{resource=projects/*/locations/*/securityGateways/*/applications/*}:testIamPermissions',
               body: '*',
             },
           ],
@@ -339,18 +344,33 @@ export class AppGatewaysServiceClient {
           selector: 'google.longrunning.Operations.CancelOperation',
           post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',
           body: '*',
+          additional_bindings: [
+            {
+              post: '/v1/{name=organizations/*/locations/*/operations/*}:cancel',
+              body: '*',
+            },
+          ],
         },
         {
           selector: 'google.longrunning.Operations.DeleteOperation',
           delete: '/v1/{name=projects/*/locations/*/operations/*}',
+          additional_bindings: [
+            {delete: '/v1/{name=organizations/*/locations/*/operations/*}'},
+          ],
         },
         {
           selector: 'google.longrunning.Operations.GetOperation',
           get: '/v1/{name=projects/*/locations/*/operations/*}',
+          additional_bindings: [
+            {get: '/v1/{name=organizations/*/locations/*/operations/*}'},
+          ],
         },
         {
           selector: 'google.longrunning.Operations.ListOperations',
           get: '/v1/{name=projects/*/locations/*}/operations',
+          additional_bindings: [
+            {get: '/v1/{name=organizations/*/locations/*}/operations'},
+          ],
         },
       ];
     }
@@ -414,6 +434,11 @@ export class AppGatewaysServiceClient {
   initialize() {
     // If the client stub promise is already initialized, return immediately.
     if (this.appGatewaysServiceStub) {
+      this.warn(
+        'DEP$AppGatewaysService',
+        'AppGatewaysService is deprecated and may be removed in a future version.',
+        'DeprecationWarning',
+      );
       return this.appGatewaysServiceStub;
     }
 
@@ -467,6 +492,11 @@ export class AppGatewaysServiceClient {
 
       this.innerApiCalls[methodName] = apiCall;
     }
+    this.warn(
+      'DEP$AppGatewaysService',
+      'AppGatewaysService is deprecated and may be removed in a future version.',
+      'DeprecationWarning',
+    );
 
     return this.appGatewaysServiceStub;
   }
@@ -571,6 +601,7 @@ export class AppGatewaysServiceClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/app_gateways_service.get_app_gateway.js</caption>
    * region_tag:beyondcorp_v1_generated_AppGatewaysService_GetAppGateway_async
+   * @deprecated GetAppGateway is deprecated and may be removed in a future version.
    */
   getAppGateway(
     request?: protos.google.cloud.beyondcorp.appgateways.v1.IGetAppGatewayRequest,
@@ -652,6 +683,11 @@ export class AppGatewaysServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
+    this.warn(
+      'DEP$AppGatewaysService-$GetAppGateway',
+      'GetAppGateway is deprecated and may be removed in a future version.',
+      'DeprecationWarning',
+    );
     this._log.info('getAppGateway request %j', request);
     const wrappedCallback:
       | Callback<
@@ -721,8 +757,8 @@ export class AppGatewaysServiceClient {
    *   ignore the request if it has already been completed. The server will
    *   guarantee that for at least 60 minutes since the first request.
    *
-   *   For example, consider a situation where you make an initial request and t
-   *   he request times out. If you make the request again with the same request
+   *   For example, consider a situation where you make an initial request and
+   *   the request times out. If you make the request again with the same request
    *   ID, the server can check if original operation with the same request ID
    *   was received, and if so, will ignore the second request. This prevents
    *   clients from accidentally creating duplicate commitments.
@@ -742,6 +778,7 @@ export class AppGatewaysServiceClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/app_gateways_service.create_app_gateway.js</caption>
    * region_tag:beyondcorp_v1_generated_AppGatewaysService_CreateAppGateway_async
+   * @deprecated CreateAppGateway is deprecated and may be removed in a future version.
    */
   createAppGateway(
     request?: protos.google.cloud.beyondcorp.appgateways.v1.ICreateAppGatewayRequest,
@@ -827,6 +864,11 @@ export class AppGatewaysServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
+    this.warn(
+      'DEP$AppGatewaysService-$CreateAppGateway',
+      'CreateAppGateway is deprecated and may be removed in a future version.',
+      'DeprecationWarning',
+    );
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -869,6 +911,7 @@ export class AppGatewaysServiceClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/app_gateways_service.create_app_gateway.js</caption>
    * region_tag:beyondcorp_v1_generated_AppGatewaysService_CreateAppGateway_async
+   * @deprecated CreateAppGateway is deprecated and may be removed in a future version.
    */
   async checkCreateAppGatewayProgress(
     name: string,
@@ -878,6 +921,11 @@ export class AppGatewaysServiceClient {
       protos.google.cloud.beyondcorp.appgateways.v1.AppGatewayOperationMetadata
     >
   > {
+    this.warn(
+      'DEP$AppGatewaysService-$checkCreateAppGatewayProgress',
+      'checkCreateAppGatewayProgress is deprecated and may be removed in a future version.',
+      'DeprecationWarning',
+    );
     this._log.info('createAppGateway long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
@@ -908,8 +956,8 @@ export class AppGatewaysServiceClient {
    *   ignore the request if it has already been completed. The server will
    *   guarantee that for at least 60 minutes after the first request.
    *
-   *   For example, consider a situation where you make an initial request and t
-   *   he request times out. If you make the request again with the same request
+   *   For example, consider a situation where you make an initial request and
+   *   the request times out. If you make the request again with the same request
    *   ID, the server can check if original operation with the same request ID
    *   was received, and if so, will ignore the second request. This prevents
    *   clients from accidentally creating duplicate commitments.
@@ -929,6 +977,7 @@ export class AppGatewaysServiceClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/app_gateways_service.delete_app_gateway.js</caption>
    * region_tag:beyondcorp_v1_generated_AppGatewaysService_DeleteAppGateway_async
+   * @deprecated DeleteAppGateway is deprecated and may be removed in a future version.
    */
   deleteAppGateway(
     request?: protos.google.cloud.beyondcorp.appgateways.v1.IDeleteAppGatewayRequest,
@@ -1014,6 +1063,11 @@ export class AppGatewaysServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
+    this.warn(
+      'DEP$AppGatewaysService-$DeleteAppGateway',
+      'DeleteAppGateway is deprecated and may be removed in a future version.',
+      'DeprecationWarning',
+    );
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1056,6 +1110,7 @@ export class AppGatewaysServiceClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/app_gateways_service.delete_app_gateway.js</caption>
    * region_tag:beyondcorp_v1_generated_AppGatewaysService_DeleteAppGateway_async
+   * @deprecated DeleteAppGateway is deprecated and may be removed in a future version.
    */
   async checkDeleteAppGatewayProgress(
     name: string,
@@ -1065,6 +1120,11 @@ export class AppGatewaysServiceClient {
       protos.google.cloud.beyondcorp.appgateways.v1.AppGatewayOperationMetadata
     >
   > {
+    this.warn(
+      'DEP$AppGatewaysService-$checkDeleteAppGatewayProgress',
+      'checkDeleteAppGatewayProgress is deprecated and may be removed in a future version.',
+      'DeprecationWarning',
+    );
     this._log.info('deleteAppGateway long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
@@ -1094,8 +1154,8 @@ export class AppGatewaysServiceClient {
    *   If not specified, a default value of 50 will be used by the service.
    *   Regardless of the page_size value, the response may include a partial list
    *   and a caller should only rely on response's
-   *   {@link protos.BeyondCorp.ListAppGatewaysResponse.next_page_token|next_page_token} to
-   *   determine if there are more instances left to be queried.
+   *   {@link protos.google.cloud.beyondcorp.appgateways.v1.ListAppGatewaysResponse.next_page_token|next_page_token}
+   *   to determine if there are more instances left to be queried.
    * @param {string} [request.pageToken]
    *   Optional. The next_page_token value returned from a previous
    *   ListAppGatewaysRequest, if any.
@@ -1117,6 +1177,7 @@ export class AppGatewaysServiceClient {
    *   method described below for async iteration which you can stop as needed.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
+   * @deprecated ListAppGateways is deprecated and may be removed in a future version.
    */
   listAppGateways(
     request?: protos.google.cloud.beyondcorp.appgateways.v1.IListAppGatewaysRequest,
@@ -1192,6 +1253,11 @@ export class AppGatewaysServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
+    this.warn(
+      'DEP$AppGatewaysService-$ListAppGateways',
+      'ListAppGateways is deprecated and may be removed in a future version.',
+      'DeprecationWarning',
+    );
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.beyondcorp.appgateways.v1.IListAppGatewaysRequest,
@@ -1233,8 +1299,8 @@ export class AppGatewaysServiceClient {
    *   If not specified, a default value of 50 will be used by the service.
    *   Regardless of the page_size value, the response may include a partial list
    *   and a caller should only rely on response's
-   *   {@link protos.BeyondCorp.ListAppGatewaysResponse.next_page_token|next_page_token} to
-   *   determine if there are more instances left to be queried.
+   *   {@link protos.google.cloud.beyondcorp.appgateways.v1.ListAppGatewaysResponse.next_page_token|next_page_token}
+   *   to determine if there are more instances left to be queried.
    * @param {string} [request.pageToken]
    *   Optional. The next_page_token value returned from a previous
    *   ListAppGatewaysRequest, if any.
@@ -1255,6 +1321,7 @@ export class AppGatewaysServiceClient {
    *   method described below for async iteration which you can stop as needed.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
+   * @deprecated ListAppGateways is deprecated and may be removed in a future version.
    */
   listAppGatewaysStream(
     request?: protos.google.cloud.beyondcorp.appgateways.v1.IListAppGatewaysRequest,
@@ -1273,6 +1340,11 @@ export class AppGatewaysServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
+    this.warn(
+      'DEP$AppGatewaysService-$ListAppGateways',
+      'ListAppGateways is deprecated and may be removed in a future version.',
+      'DeprecationWarning',
+    );
     this._log.info('listAppGateways stream %j', request);
     return this.descriptors.page.listAppGateways.createStream(
       this.innerApiCalls.listAppGateways as GaxCall,
@@ -1295,8 +1367,8 @@ export class AppGatewaysServiceClient {
    *   If not specified, a default value of 50 will be used by the service.
    *   Regardless of the page_size value, the response may include a partial list
    *   and a caller should only rely on response's
-   *   {@link protos.BeyondCorp.ListAppGatewaysResponse.next_page_token|next_page_token} to
-   *   determine if there are more instances left to be queried.
+   *   {@link protos.google.cloud.beyondcorp.appgateways.v1.ListAppGatewaysResponse.next_page_token|next_page_token}
+   *   to determine if there are more instances left to be queried.
    * @param {string} [request.pageToken]
    *   Optional. The next_page_token value returned from a previous
    *   ListAppGatewaysRequest, if any.
@@ -1318,6 +1390,7 @@ export class AppGatewaysServiceClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/app_gateways_service.list_app_gateways.js</caption>
    * region_tag:beyondcorp_v1_generated_AppGatewaysService_ListAppGateways_async
+   * @deprecated ListAppGateways is deprecated and may be removed in a future version.
    */
   listAppGatewaysAsync(
     request?: protos.google.cloud.beyondcorp.appgateways.v1.IListAppGatewaysRequest,
@@ -1336,6 +1409,11 @@ export class AppGatewaysServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
+    this.warn(
+      'DEP$AppGatewaysService-$ListAppGateways',
+      'ListAppGateways is deprecated and may be removed in a future version.',
+      'DeprecationWarning',
+    );
     this._log.info('listAppGateways iterate %j', request);
     return this.descriptors.page.listAppGateways.asyncIterate(
       this.innerApiCalls['listAppGateways'] as GaxCall,

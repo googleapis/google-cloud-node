@@ -2549,6 +2549,71 @@ describe('v2beta1.ConversationsClient', () => {
   });
 
   describe('Path templates', () => {
+    describe('companionAgent', async () => {
+      const fakePath = '/rendered/path/companionAgent';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        companion_agent: 'companionAgentValue',
+      };
+      const client = new conversationsModule.v2beta1.ConversationsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.companionAgentPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.companionAgentPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('companionAgentPath', () => {
+        const result = client.companionAgentPath(
+          'projectValue',
+          'locationValue',
+          'companionAgentValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.companionAgentPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromCompanionAgentName', () => {
+        const result = client.matchProjectFromCompanionAgentName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.companionAgentPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromCompanionAgentName', () => {
+        const result = client.matchLocationFromCompanionAgentName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.companionAgentPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchCompanionAgentFromCompanionAgentName', () => {
+        const result =
+          client.matchCompanionAgentFromCompanionAgentName(fakePath);
+        assert.strictEqual(result, 'companionAgentValue');
+        assert(
+          (client.pathTemplates.companionAgentPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('encryptionSpec', async () => {
       const fakePath = '/rendered/path/encryptionSpec';
       const expectedParameters = {
