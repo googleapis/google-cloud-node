@@ -258,18 +258,6 @@ describe('stage option serialization', () => {
         }),
     },
     {
-      name: 'literals stage',
-      pipeline: firestore =>
-        firestore
-          .pipeline()
-          .database()
-          .literals({
-            documents: [{foo: 'bar'}],
-            rawOptions,
-          }),
-      stageIndex: 1,
-    },
-    {
       name: 'delete stage',
       pipeline: firestore =>
         firestore.pipeline().database().delete({

@@ -12966,20 +12966,6 @@ declare namespace FirebaseFirestore {
        */
       upsert(options: UpsertStageOptions): Pipeline;
       /**
-       * Appends a literals stage to the pipeline.
-       *
-       * @param documents An array of objects/records specifying in-memory documents.
-       * @return A new {@link Pipeline} object with this stage appended to the stage list.
-       */
-      literals(documents: Array<Record<string, unknown>>): Pipeline;
-      /**
-       * Appends a literals stage to the pipeline.
-       *
-       * @param options Options defining how this LiteralsSource stage is evaluated.
-       * @return A new {@link Pipeline} object with this stage appended to the stage list.
-       */
-      literals(options: LiteralsStageOptions): Pipeline;
-      /**
        * Filters the documents from previous stages to only include those matching the specified {@link
        * BooleanExpression}.
        *

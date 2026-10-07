@@ -127,21 +127,6 @@ import {
 } from 'protobufjs';
 
 /**
- * Normalizes the arguments of the `literals(documents)` and
- * `literals(options)` overloads into a single options object.
- * @private
- * @internal
- */
-function toLiteralsStageOptions(
-  documentsOrOptions:
-    Array<Record<string, unknown>> | firestore.Pipelines.LiteralsStageOptions,
-): InternalLiteralsStageOptions {
-  return Array.isArray(documentsOrOptions)
-    ? {documents: documentsOrOptions}
-    : documentsOrOptions;
-}
-
-/**
  * Represents the source of a Firestore `Pipeline`.
  */
 export class PipelineSource implements firestore.Pipelines.PipelineSource {
@@ -163,9 +148,12 @@ export class PipelineSource implements firestore.Pipelines.PipelineSource {
     documentsOrOptions:
       Array<Record<string, unknown>> | firestore.Pipelines.LiteralsStageOptions,
   ): Pipeline {
-    return new Pipeline(this.db, [
-      new LiteralsSource(toLiteralsStageOptions(documentsOrOptions)),
-    ]);
+    const options: InternalLiteralsStageOptions = Array.isArray(
+      documentsOrOptions,
+    )
+      ? {documents: documentsOrOptions}
+      : documentsOrOptions;
+    return new Pipeline(this.db, [new LiteralsSource(options)]);
   }
 
   /**
@@ -1919,29 +1907,6 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
       );
     }
     return this._addStage(new UpsertStage(additionalFieldOrOptions ?? {}));
-  }
-
-  /**
-   * Appends a literals stage to the pipeline.
-   *
-   * @param documents An array of objects/records specifying in-memory documents.
-   * @return A new {@code Pipeline} object with this stage appended to the stage list.
-   */
-  literals(documents: Array<Record<string, unknown>>): Pipeline;
-  /**
-   * Appends a literals stage to the pipeline.
-   *
-   * @param options Options defining how this LiteralsSource stage is evaluated.
-   * @return A new {@code Pipeline} object with this stage appended to the stage list.
-   */
-  literals(options: firestore.Pipelines.LiteralsStageOptions): Pipeline;
-  literals(
-    documentsOrOptions:
-      Array<Record<string, unknown>> | firestore.Pipelines.LiteralsStageOptions,
-  ): Pipeline {
-    return this._addStage(
-      new LiteralsSource(toLiteralsStageOptions(documentsOrOptions)),
-    );
   }
 
   /**
