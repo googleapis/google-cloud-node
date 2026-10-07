@@ -1884,8 +1884,7 @@ class Spanner extends GrpcService {
           },
         });
         // Attach the x-goog-spanner-request-id to the currently active span.
-        attributeXGoogSpannerRequestIdToActiveSpan(config);
-        requestIdSpan = getActiveOrNoopSpan();
+        requestIdSpan = attributeXGoogSpannerRequestIdToActiveSpan(config);
       }
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const customInterceptors: any[] =

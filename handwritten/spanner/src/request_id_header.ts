@@ -20,7 +20,6 @@ import * as grpc from '@grpc/grpc-js';
 import {getActiveOrNoopSpan} from './instrument';
 const randIdForProcess = randomBytes(8).toString('hex');
 const REQUEST_HEADER_VERSION = 1;
-const PROCESS_PREFIX = `${REQUEST_HEADER_VERSION}.${getProcessId()}.`;
 
 function getProcessId(): string {
   return (
@@ -29,6 +28,7 @@ function getProcessId(): string {
     randIdForProcess
   );
 }
+const PROCESS_PREFIX = `${REQUEST_HEADER_VERSION}.${getProcessId()}.`;
 const X_GOOG_SPANNER_REQUEST_ID_HEADER = 'x-goog-spanner-request-id';
 
 class AtomicCounter {
@@ -66,7 +66,7 @@ function craftRequestId(
   nthRequest: number,
   attempt: number,
 ) {
-  return `${REQUEST_HEADER_VERSION}.${getProcessId()}.${nthClientId ?? 1}.${channelId ?? 0}.${nthRequest ?? 1}.${attempt ?? 1}`;
+  return `${getRequestIdPrefix(nthClientId, channelId)}${nthRequest ?? 1}.${attempt ?? 1}`;
 }
 
 const nthClientId = new AtomicCounter();
@@ -129,13 +129,10 @@ function injectRequestIDIntoHeaders(
 ) {
   if (!session) {
     // Always return a copy so callers can never mutate shared headers
-    // (e.g. Transaction.commonHeaders_) through the returned object.
     return {...headers};
   }
   const actualDatabase =
-    session && typeof session._nextNthRequest === 'function'
-      ? session
-      : session?.parent;
+    typeof session._nextNthRequest === 'function' ? session : session?.parent;
   if (nthRequest === undefined || nthRequest === null) {
     if (
       !actualDatabase ||
@@ -169,13 +166,13 @@ function injectRequestIDIntoHeaders(
  * at that point is not guaranteed to be the operation's span.
  */
 function createRequestIdInterceptor(
-  config: any,
+  config: Partial<withHeaders>,
   span?: ReturnType<typeof getActiveOrNoopSpan>,
 ) {
   let attemptCount = 0;
   let cachedBase: string | undefined;
   let cachedInitialAttempt = 1;
-  return (options: any, nextCall: any) => {
+  return (options: grpc.InterceptorOptions, nextCall: grpc.NextCall) => {
     return new grpc.InterceptingCall(nextCall(options), {
       start: function (metadata: grpc.Metadata, listener: any, next: any) {
         attemptCount++;
@@ -233,10 +230,11 @@ const X_GOOG_SPANNER_REQUEST_ID_SPAN_ATTR = 'x_goog_spanner_request_id';
 function attributeXGoogSpannerRequestIdToActiveSpan(config: any) {
   const reqId = extractRequestID(config);
   if (!(reqId && reqId.length > 0)) {
-    return;
+    return undefined;
   }
   const span = getActiveOrNoopSpan();
   span.setAttribute(X_GOOG_SPANNER_REQUEST_ID_SPAN_ATTR, reqId);
+  return span;
 }
 
 const X_GOOG_REQ_ID_REGEX = /^1\.[0-9A-Fa-f]{16}(\.\d+){3}\.\d+$/;

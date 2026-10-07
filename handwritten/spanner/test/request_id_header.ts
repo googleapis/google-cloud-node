@@ -631,6 +631,10 @@ describe('RequestId', () => {
   });
 
   describe('createRequestIdInterceptor', () => {
+    // Minimal stand-ins for the gRPC arguments the interceptor receives.
+    const fakeOptions = {} as grpc.InterceptorOptions;
+    const asNextCall = (fn: unknown) => fn as grpc.NextCall;
+
     it('increments attempt number on each call attempt', done => {
       const config = {
         headers: {
@@ -649,7 +653,7 @@ describe('RequestId', () => {
       };
 
       // 1st attempt
-      const call1 = interceptor({}, fakeNextCall);
+      const call1 = interceptor(fakeOptions, asNextCall(fakeNextCall));
       const metadata1 = new grpc.Metadata();
       metadata1.set(X_GOOG_SPANNER_REQUEST_ID_HEADER, '1.abcde123.1.1.5.1');
       call1.start(metadata1, {});
@@ -663,7 +667,7 @@ describe('RequestId', () => {
       );
 
       // 2nd attempt (retry)
-      const call2 = interceptor({}, fakeNextCall);
+      const call2 = interceptor(fakeOptions, asNextCall(fakeNextCall));
       const metadata2 = new grpc.Metadata();
       metadata2.set(X_GOOG_SPANNER_REQUEST_ID_HEADER, '1.abcde123.1.1.5.1');
       call2.start(metadata2, {});
@@ -677,7 +681,7 @@ describe('RequestId', () => {
       );
 
       // 3rd attempt (retry)
-      const call3 = interceptor({}, fakeNextCall);
+      const call3 = interceptor(fakeOptions, asNextCall(fakeNextCall));
       const metadata3 = new grpc.Metadata();
       metadata3.set(X_GOOG_SPANNER_REQUEST_ID_HEADER, '1.abcde123.1.1.5.1');
       call3.start(metadata3, {});
@@ -714,7 +718,7 @@ describe('RequestId', () => {
       for (let i = 0; i < 3; i++) {
         const md = new grpc.Metadata();
         md.set(X_GOOG_SPANNER_REQUEST_ID_HEADER, '1.abcde123.1.0.5.1');
-        interceptor({}, fakeNextCall).start(md, {});
+        interceptor(fakeOptions, asNextCall(fakeNextCall)).start(md, {});
       }
 
       assert.deepStrictEqual(recorded, [
@@ -732,7 +736,9 @@ describe('RequestId', () => {
       const fakeNextCall = () => ({start: () => {}});
       const md = new grpc.Metadata();
       md.set(X_GOOG_SPANNER_REQUEST_ID_HEADER, '1.abcde123.1.0.5.1');
-      assert.doesNotThrow(() => interceptor({}, fakeNextCall).start(md, {}));
+      assert.doesNotThrow(() =>
+        interceptor(fakeOptions, asNextCall(fakeNextCall)).start(md, {}),
+      );
     });
   });
 
