@@ -510,4 +510,40 @@ describe('stage _validateUserData', () => {
       expect(spy.callCount).to.equal(1);
     });
   });
+
+  describe('literals stage rejects undefined by default', () => {
+    const cases: Array<{
+      name: string;
+      doc: Record<string, unknown>;
+      expected: string;
+    }> = [
+      {
+        name: 'top-level undefined',
+        doc: {a: 1, b: undefined},
+        expected:
+          'Function literals() called with invalid data. Cannot use "undefined" as a Firestore value (found in field b).',
+      },
+      {
+        name: 'nested undefined',
+        doc: {a: {b: undefined}},
+        expected:
+          'Function literals() called with invalid data. Cannot use "undefined" as a Firestore value (found in field a.b).',
+      },
+      {
+        name: 'undefined inside an array',
+        doc: {arr: [1, undefined]},
+        expected:
+          'Function literals() called with invalid data. Cannot use "undefined" as a Firestore value (found in field arr).',
+      },
+    ];
+
+    cases.forEach(({name, doc, expected}) => {
+      it(name, async () => {
+        const firestore = await createInstance();
+        expect(() => {
+          void firestore.pipeline().literals([doc]).execute();
+        }).to.throw(expected);
+      });
+    });
+  });
 });

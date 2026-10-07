@@ -410,7 +410,9 @@ describe('execute(Pipeline|PipelineExecuteOptions)', () => {
           doubled: Pipelines.multiply(constant(10), constant(2)),
           nested: {
             val: constant('hello'),
+            sum: Pipelines.add(constant(1), constant(2)),
           },
+          arr: [1, Pipelines.add(constant(3), constant(4))],
         },
       ])
       .execute();
@@ -420,6 +422,9 @@ describe('execute(Pipeline|PipelineExecuteOptions)', () => {
         'pipeline'
       ]['stages'];
 
+    // The document itself is a mapValue, but nested objects and arrays are
+    // wrapped in map() and array() expressions, because the backend only
+    // evaluates expressions in the top-level fields of a literal document.
     expect(stages[0].name).to.equal('literals');
     expect(stages[0].args).to.deep.equal([
       {
@@ -433,10 +438,67 @@ describe('execute(Pipeline|PipelineExecuteOptions)', () => {
               },
             },
             nested: {
-              mapValue: {
-                fields: {
-                  val: {stringValue: 'hello'},
-                },
+              functionValue: {
+                name: 'map',
+                args: [
+                  {stringValue: 'val'},
+                  {stringValue: 'hello'},
+                  {stringValue: 'sum'},
+                  {
+                    functionValue: {
+                      name: 'add',
+                      args: [{integerValue: 1}, {integerValue: 2}],
+                    },
+                  },
+                ],
+              },
+            },
+            arr: {
+              functionValue: {
+                name: 'array',
+                args: [
+                  {integerValue: 1},
+                  {
+                    functionValue: {
+                      name: 'add',
+                      args: [{integerValue: 3}, {integerValue: 4}],
+                    },
+                  },
+                ],
+              },
+            },
+          },
+        },
+      },
+    ]);
+  });
+
+  it('omits undefined literal fields when ignoreUndefinedProperties is set', async () => {
+    const spy = sinon.fake.returns(stream());
+    const firestore = await createInstance(
+      {executePipeline: spy},
+      {ignoreUndefinedProperties: true},
+    );
+
+    await firestore
+      .pipeline()
+      .literals([{a: 1, b: undefined, nested: {c: undefined, d: 2}}])
+      .execute();
+
+    const stages =
+      spy.args[FIRST_CALL][EXECUTE_PIPELINE_REQUEST]['structuredPipeline'][
+        'pipeline'
+      ]['stages'];
+
+    expect(stages[0].args).to.deep.equal([
+      {
+        mapValue: {
+          fields: {
+            a: {integerValue: 1},
+            nested: {
+              functionValue: {
+                name: 'map',
+                args: [{stringValue: 'd'}, {integerValue: 2}],
               },
             },
           },
