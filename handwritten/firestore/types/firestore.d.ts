@@ -13660,7 +13660,17 @@ declare namespace FirebaseFirestore {
        */
       indexMode?: 'recommended';
       /**
-       * Indicates that the pipeline will be executed atomically.
+       * If `true`, the pipeline is executed in a new read-write transaction that
+       * is committed automatically when the pipeline completes, so all writes
+       * made by DML stages (`insert`, `upsert`, `update`, `delete`) succeed or
+       * fail together.
+       *
+       * If `false` or omitted, DML writes are applied per document without a
+       * transaction, and the pipeline may partially succeed. Some DML pipelines
+       * (e.g. an `upsert` from a `literals()` source) can only be executed
+       * atomically, and are otherwise rejected with "The non-transactional DML
+       * operation was rejected because it was impossible to guarantee
+       * document-level atomicity."
        */
       atomic?: boolean;
       /**
@@ -14157,18 +14167,74 @@ declare namespace FirebaseFirestore {
 
     /**
      * Options defining how an Insert stage is evaluated.
+     *
+     * Each input document is written as a new document; the insert fails if the
+     * target document already exists. The target is determined by `collection`
+     * and `documentIdExpression`:
+     *
+     * - Only `collection` set: the input document's ID is reused under
+     *   `collection`. If the input document has no ID (e.g. it came from
+     *   `literals()`), an ID is generated automatically.
+     * - Only `documentIdExpression` set: the evaluated ID is used under the input
+     *   document's parent collection.
+     * - Both set: the evaluated ID is used under `collection`.
+     *
+     * If neither is set, each document is written back to its input document's
+     * path, which fails for documents read from the database because they
+     * already exist.
      */
     export type InsertStageOptions = StageOptions & {
+      /**
+       * The collection to insert documents into. If omitted, each document is
+       * inserted into the parent collection of its input document.
+       */
       collection?: string | CollectionReference;
+      /**
+       * An expression that is evaluated against each input document to produce
+       * the ID of the document to insert. It must evaluate to a document ID
+       * (e.g. `'abc123'`), not a document path or `DocumentReference`.
+       *
+       * A string is treated as a field name: `'id'` is equivalent to
+       * `field('id')`, and uses the value of each input document's `id` field as
+       * its document ID. To use a fixed document ID, pass `constant('abc123')`.
+       */
       documentIdExpression?: string | Expression;
     };
 
     /**
      * Options defining how an Upsert stage is evaluated.
+     *
+     * Each input document is written to its target document. A target document
+     * that doesn't exist is created; an existing one is replaced entirely
+     * (stored fields are not merged). The target is determined by `collection`
+     * and `documentIdExpression`:
+     *
+     * - Neither set: each document is written back to its input document's path.
+     * - Only `collection` set: the input document's ID is reused under
+     *   `collection`.
+     * - Both set: the evaluated ID is used under `collection`.
      */
     export type UpsertStageOptions = StageOptions & {
+      /**
+       * Fields to add to each input document before it is written. A field with
+       * the same name as an existing input field overwrites that field.
+       */
       additionalFields?: AliasedExpression[];
+      /**
+       * The collection to upsert documents into. If omitted, each document is
+       * written to the parent collection of its input document. Required when
+       * `documentIdExpression` is set.
+       */
       collection?: string | CollectionReference;
+      /**
+       * An expression that is evaluated against each input document to produce
+       * the ID of the target document. It must evaluate to a document ID
+       * (e.g. `'abc123'`), not a document path or `DocumentReference`. Requires
+       * `collection`.
+       *
+       * A string is treated as a field name: `'id'` is equivalent to
+       * `field('id')`. To use a fixed document ID, pass `constant('abc123')`.
+       */
       documentIdExpression?: string | Expression;
     };
 
