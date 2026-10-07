@@ -5,6 +5,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/pubsub?activeTab=versions
 
+## [6.1.1](https://github.com/googleapis/google-cloud-node/compare/pubsub-v6.1.0...pubsub-v6.1.1) (2026-10-06)
+
+
+### Bug Fixes
+
+* **pubsub:** Align ClientConfig.port type with gax.GrpcClientOptions ([#9539](https://github.com/googleapis/google-cloud-node/issues/9539)) ([4443d6d](https://github.com/googleapis/google-cloud-node/commit/4443d6d6b171975ce9d55fe9853ea144dade09d5))
+* **test-utils:** Make google-test-utils a private workspace package ([#9525](https://github.com/googleapis/google-cloud-node/issues/9525)) ([be25b6f](https://github.com/googleapis/google-cloud-node/commit/be25b6fa1a6c6c90337ecad8afdcbcaeb477ded2))
+
 ## [6.1.0](https://github.com/googleapis/google-cloud-node/compare/pubsub-v6.0.1...pubsub-v6.1.0) (2026-09-15)
 
 

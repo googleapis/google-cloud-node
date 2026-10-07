@@ -44,7 +44,7 @@
     "postpack": "minifyProtoJson",
     "samples-test": "cd samples/ && npm link ../ && npm i && npm test",
     "system-test": "node ../../bin/run-test.cjs --config ../../.mocharc.cjs --no-parallel build/system-test",
-    "test": "node ../../bin/run-test.cjs --config ../../.mocharc.cjs build/test"
+    "test": "node ../../bin/run-test.cjs --proxyquire-shim --config ../../.mocharc.cjs build/test"
   },
   "dependencies": {
     "@google-cloud/common": "^8.0.1",

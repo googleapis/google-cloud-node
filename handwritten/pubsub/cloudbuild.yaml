@@ -5,7 +5,7 @@ steps:
   args:
   - '-c'
   - |
-    cd ../.. && corepack enable pnpm && pnpm install --filter "{./handwritten/pubsub}..."
+    cd ../.. && corepack enable pnpm && pnpm install --filter "...{./handwritten/pubsub}"
   dir: 'handwritten/pubsub'
   id: 'install-dependencies'
 

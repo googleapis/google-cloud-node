@@ -32,9 +32,71 @@ const fs = require('fs');
 
 const rawArgs = process.argv.slice(2);
 const noC8 = rawArgs.includes('--no-c8');
-const enableFetchShim =
-  rawArgs.includes('--fetch-shim') || process.env.BUN_FETCH_SHIM === 'true';
-const args = rawArgs.filter(a => a !== '--no-c8' && a !== '--fetch-shim');
+
+const SHIM_FLAGS = [
+  {
+    flag: '--fetch-shim',
+    envIn: 'BUN_FETCH_SHIM',
+    envOut: 'BUN_ENABLE_FETCH_SHIM',
+  },
+  {
+    flag: '--bun-plugin-shim',
+    envIn: 'BUN_PLUGIN_SHIM',
+    envOut: 'BUN_ENABLE_BUN_PLUGIN_SHIM',
+  },
+  {
+    flag: '--gaxios-shim',
+    envIn: 'BUN_GAXIOS_SHIM',
+    envOut: 'BUN_ENABLE_GAXIOS_SHIM',
+  },
+  {
+    flag: '--proxyquire-shim',
+    envIn: 'BUN_PROXYQUIRE_SHIM',
+    envOut: 'BUN_ENABLE_PROXYQUIRE_SHIM',
+  },
+  {
+    flag: '--keypair-shim',
+    envIn: 'BUN_KEYPAIR_SHIM',
+    envOut: 'BUN_ENABLE_KEYPAIR_SHIM',
+  },
+  {
+    flag: '--require-shim',
+    envIn: 'BUN_REQUIRE_SHIM',
+    envOut: 'BUN_ENABLE_REQUIRE_SHIM',
+  },
+  {
+    flag: '--abort-signal-timeout-shim',
+    envIn: 'BUN_ABORT_SIGNAL_TIMEOUT_SHIM',
+    envOut: 'BUN_ENABLE_ABORT_SIGNAL_TIMEOUT_SHIM',
+  },
+  {
+    flag: '--promise-any-shim',
+    envIn: 'BUN_PROMISE_ANY_SHIM',
+    envOut: 'BUN_ENABLE_PROMISE_ANY_SHIM',
+  },
+  {
+    flag: '--crypto-verify-shim',
+    envIn: 'BUN_CRYPTO_VERIFY_SHIM',
+    envOut: 'BUN_ENABLE_CRYPTO_VERIFY_SHIM',
+  },
+  {
+    flag: '--assert-deep-equal-shim',
+    envIn: 'BUN_ASSERT_DEEP_EQUAL_SHIM',
+    envOut: 'BUN_ENABLE_ASSERT_DEEP_EQUAL_SHIM',
+  },
+];
+
+const shimFlagSet = new Set(SHIM_FLAGS.map(s => s.flag));
+const shimEnvVars = {};
+for (const {flag, envIn, envOut} of SHIM_FLAGS) {
+  const enabled =
+    rawArgs.includes(flag) ||
+    process.env[envIn] === 'true' ||
+    process.env[envOut] === 'true';
+  shimEnvVars[envOut] = enabled ? 'true' : 'false';
+}
+
+const args = rawArgs.filter(a => a !== '--no-c8' && !shimFlagSet.has(a));
 
 const isBunRuntime = typeof Bun !== 'undefined';
 const wantsBunRuntime = isBunRuntime || process.env.JS_RUNTIME === 'bun';
@@ -54,7 +116,7 @@ function resolveBin(pkgBin) {
 
 if (wantsBunRuntime) {
   process.env.MOCHA_PARALLEL = 'false';
-  process.env.BUN_ENABLE_FETCH_SHIM = enableFetchShim ? 'true' : 'false';
+  Object.assign(process.env, shimEnvVars);
 
   // If JS_RUNTIME=bun was requested but this script was launched via Node.js
   // (e.g., `pnpm test` without `bun --bun`), re-exec under the `bun` binary.
@@ -64,7 +126,7 @@ if (wantsBunRuntime) {
       env: {
         ...process.env,
         MOCHA_PARALLEL: 'false',
-        BUN_ENABLE_FETCH_SHIM: enableFetchShim ? 'true' : 'false',
+        ...shimEnvVars,
       },
     });
     if (res.error) {

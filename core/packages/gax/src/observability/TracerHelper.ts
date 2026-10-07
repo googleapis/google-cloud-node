@@ -1269,17 +1269,14 @@ function handleCallResult<T>(
  * Executes a function within an active OpenTelemetry client request span, populating
  * standard GCP telemetry attributes and recording errors/exceptions if thrown.
  *
- * Counts retry resends (not initial attempts) via {@link ResendRecorder} and records
- * the total resend count on span completion when greater than 0. For callback-style
- * invocations, pass the user's `callback` as the fifth argument so the span stays
- * open until the callback or stream events finish.
+ * For callback-style invocations, pass the user's `callback` as the fifth
+ * argument so the span stays open until the callback or stream events finish.
  *
  * @template T
  * @param {DynamicTraceContext} dynamicArgs - Dynamic trace context for the RPC call.
  * @param {StaticTraceContext} staticArgs - Static trace context for the client library.
  * @param {function} fn - The operation to trace. Receives the traced callback
- *   when `callback` is supplied, otherwise `undefined`, and a
- *   {@link ResendRecorder} to call once for every retryable resend it makes.
+ *   when `callback` is supplied, otherwise `undefined`.
  * @param {boolean} [isStreamCall=false] - Whether the operation is a stream call (true) or promise call (false).
  * @param {APICallback} [callback] - The user callback for callback-style invocations.
  * @returns {T} The result of the traced operation.
@@ -1287,34 +1284,28 @@ function handleCallResult<T>(
 export function traceCall(
   dynamicArgs: DynamicTraceContext,
   staticArgs: StaticTraceContext,
-  fn: (
-    tracedCallback?: APICallback,
-    recordResend?: ResendRecorder,
-  ) => GaxCallResult,
+  fn: (tracedCallback?: APICallback) => GaxCallResult,
   isStreamCall?: boolean,
   callback?: APICallback,
 ): GaxCallResult;
 export function traceCall<T extends EventEmitter>(
   dynamicArgs: DynamicTraceContext,
   staticArgs: StaticTraceContext,
-  fn: (tracedCallback?: APICallback, recordResend?: ResendRecorder) => T,
+  fn: (tracedCallback?: APICallback) => T,
   isStreamCall: true,
   callback?: APICallback,
 ): T;
 export function traceCall<T>(
   dynamicArgs: DynamicTraceContext,
   staticArgs: StaticTraceContext,
-  fn: (tracedCallback?: APICallback, recordResend?: ResendRecorder) => T,
+  fn: (tracedCallback?: APICallback) => T,
   isStreamCall?: false,
   callback?: APICallback,
 ): T;
 export function traceCall(
   dynamicArgs: DynamicTraceContext,
   staticArgs: StaticTraceContext,
-  fn: (
-    tracedCallback?: APICallback,
-    recordResend?: ResendRecorder,
-  ) => GaxCallResult,
+  fn: (tracedCallback?: APICallback) => GaxCallResult,
   isStreamCall = false,
   callback?: APICallback,
 ): GaxCallResult {
@@ -1341,26 +1332,12 @@ export function traceCall(
       staticArgs,
     );
 
-    // Track retry resends; omitted when 0.
-    let resendCount = 0;
-    const recordResend: ResendRecorder = () => {
-      resendCount++;
-    };
-    const resendCountAttribute = resolveResendCountAttribute(
-      dynamicArgs.rpcType,
-    );
-
     const {recordError, endSpan, tracedCallback} = createSpanCompletionHandlers(
       {
         span,
         rpcType: dynamicArgs.rpcType,
         rawAddress,
         rawPort,
-        onBeforeEnd: () => {
-          if (resendCount > 0) {
-            span.setAttribute(resendCountAttribute, resendCount);
-          }
-        },
       },
       callback,
     );
@@ -1370,9 +1347,7 @@ export function traceCall(
       const activeContext = trace
         .setSpan(context.active(), span)
         .setValue(CLIENT_REQUEST_SPAN_KEY, span);
-      const result = context.with(activeContext, () =>
-        fn(tracedCallback, recordResend),
-      );
+      const result = context.with(activeContext, () => fn(tracedCallback));
       return handleCallResult(
         result,
         isStreamCall,

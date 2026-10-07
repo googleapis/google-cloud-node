@@ -29,6 +29,22 @@ if (
 
   const origRequire = Module.prototype.require;
 
+  const enableFetchShim = process.env.BUN_ENABLE_FETCH_SHIM === 'true';
+  const enableBunPluginShim = process.env.BUN_ENABLE_BUN_PLUGIN_SHIM === 'true';
+  const enableGaxiosShim = process.env.BUN_ENABLE_GAXIOS_SHIM === 'true';
+  const enableProxyquireShim =
+    process.env.BUN_ENABLE_PROXYQUIRE_SHIM === 'true';
+  const enableKeypairShim = process.env.BUN_ENABLE_KEYPAIR_SHIM === 'true';
+  const enableRequireShim = process.env.BUN_ENABLE_REQUIRE_SHIM === 'true';
+  const enableAbortSignalTimeoutShim =
+    process.env.BUN_ENABLE_ABORT_SIGNAL_TIMEOUT_SHIM === 'true';
+  const enablePromiseAnyShim =
+    process.env.BUN_ENABLE_PROMISE_ANY_SHIM === 'true';
+  const enableCryptoVerifyShim =
+    process.env.BUN_ENABLE_CRYPTO_VERIFY_SHIM === 'true';
+  const enableAssertDeepEqualShim =
+    process.env.BUN_ENABLE_ASSERT_DEEP_EQUAL_SHIM === 'true';
+
   // ---------------------------------------------------------------------------
   // 1. Module._load Delegation
   // ---------------------------------------------------------------------------
@@ -45,7 +61,9 @@ if (
       parent && typeof parent.require === 'function' ? parent : module;
     return origRequire.call(ctx, request);
   };
-  Module._load = defaultModuleLoad;
+  if (enableRequireShim) {
+    Module._load = defaultModuleLoad;
+  }
 
   // ---------------------------------------------------------------------------
   // 2. Generational Module Cache Snapshots (Module._cache & require.cache)
@@ -77,114 +95,116 @@ if (
   // - `bunNativeCache` is then synchronized to match `newCache` (clearing deleted entries and
   //   repopulating new ones so Bun's native loader sees the clean or restored state).
   // - A new active generation is created and bound to both `Module._cache` and `require.cache`.
-  const bunNativeCache = require.cache;
+  if (enableProxyquireShim) {
+    const bunNativeCache = require.cache;
 
-  function createCacheGeneration(initialEntries = {}) {
-    const map = Object.assign(Object.create(null), initialEntries);
-    let detached = false;
+    function createCacheGeneration(initialEntries = {}) {
+      const map = Object.assign(Object.create(null), initialEntries);
+      let detached = false;
 
-    const proxy = new Proxy(map, {
-      get(target, prop) {
-        if (typeof prop === 'symbol') return target[prop];
-        if (!detached && prop in bunNativeCache) return bunNativeCache[prop];
-        return target[prop];
-      },
-      set(target, prop, val) {
-        target[prop] = val;
-        if (!detached) bunNativeCache[prop] = val;
-        return true;
-      },
-      deleteProperty(target, prop) {
-        delete target[prop];
-        if (!detached) delete bunNativeCache[prop];
-        return true;
-      },
-      has(target, prop) {
-        if (typeof prop === 'symbol') return prop in target;
-        if (!detached && prop in bunNativeCache) return true;
-        return prop in target;
-      },
-      ownKeys(target) {
-        if (!detached) {
-          const keys = new Set([
-            ...Object.keys(bunNativeCache),
-            ...Object.keys(target),
-          ]);
-          return Array.from(keys);
+      const proxy = new Proxy(map, {
+        get(target, prop) {
+          if (typeof prop === 'symbol') return target[prop];
+          if (!detached && prop in bunNativeCache) return bunNativeCache[prop];
+          return target[prop];
+        },
+        set(target, prop, val) {
+          target[prop] = val;
+          if (!detached) bunNativeCache[prop] = val;
+          return true;
+        },
+        deleteProperty(target, prop) {
+          delete target[prop];
+          if (!detached) delete bunNativeCache[prop];
+          return true;
+        },
+        has(target, prop) {
+          if (typeof prop === 'symbol') return prop in target;
+          if (!detached && prop in bunNativeCache) return true;
+          return prop in target;
+        },
+        ownKeys(target) {
+          if (!detached) {
+            const keys = new Set([
+              ...Object.keys(bunNativeCache),
+              ...Object.keys(target),
+            ]);
+            return Array.from(keys);
+          }
+          return Object.keys(target);
+        },
+        getOwnPropertyDescriptor(target, prop) {
+          if (
+            !detached &&
+            Object.prototype.hasOwnProperty.call(bunNativeCache, prop)
+          ) {
+            return Object.getOwnPropertyDescriptor(bunNativeCache, prop);
+          }
+          return Object.getOwnPropertyDescriptor(target, prop);
+        },
+      });
+
+      return {
+        map,
+        proxy,
+        detach() {
+          for (const k of Object.keys(bunNativeCache)) {
+            map[k] = bunNativeCache[k];
+          }
+          detached = true;
+        },
+      };
+    }
+
+    let currentGen = createCacheGeneration(bunNativeCache);
+
+    function getCache() {
+      return currentGen.proxy;
+    }
+
+    function setCache(newCache) {
+      // 1. Detach the current generation, saving all active entries before mutating native cache.
+      currentGen.detach();
+
+      // 2. Synchronize Bun's native cache to match the incoming newCache object.
+      const newKeys = new Set(
+        newCache && typeof newCache === 'object' ? Object.keys(newCache) : [],
+      );
+      for (const k of Object.keys(bunNativeCache)) {
+        if (!newKeys.has(k)) {
+          delete bunNativeCache[k];
         }
-        return Object.keys(target);
-      },
-      getOwnPropertyDescriptor(target, prop) {
-        if (
-          !detached &&
-          Object.prototype.hasOwnProperty.call(bunNativeCache, prop)
-        ) {
-          return Object.getOwnPropertyDescriptor(bunNativeCache, prop);
+      }
+      if (newCache && typeof newCache === 'object') {
+        for (const [k, v] of Object.entries(newCache)) {
+          bunNativeCache[k] = v;
         }
-        return Object.getOwnPropertyDescriptor(target, prop);
-      },
+      }
+
+      // 3. Initialize a fresh generation representing the synchronized native cache.
+      currentGen = createCacheGeneration(bunNativeCache);
+    }
+
+    Object.defineProperty(Module, '_cache', {
+      get: getCache,
+      set: setCache,
+      configurable: true,
+      enumerable: true,
     });
 
-    return {
-      map,
-      proxy,
-      detach() {
-        for (const k of Object.keys(bunNativeCache)) {
-          map[k] = bunNativeCache[k];
-        }
-        detached = true;
-      },
-    };
-  }
-
-  let currentGen = createCacheGeneration(bunNativeCache);
-
-  function getCache() {
-    return currentGen.proxy;
-  }
-
-  function setCache(newCache) {
-    // 1. Detach the current generation, saving all active entries before mutating native cache.
-    currentGen.detach();
-
-    // 2. Synchronize Bun's native cache to match the incoming newCache object.
-    const newKeys = new Set(
-      newCache && typeof newCache === 'object' ? Object.keys(newCache) : [],
-    );
-    for (const k of Object.keys(bunNativeCache)) {
-      if (!newKeys.has(k)) {
-        delete bunNativeCache[k];
+    try {
+      const proto = Object.getPrototypeOf(require);
+      if (proto) {
+        Object.defineProperty(proto, 'cache', {
+          get: getCache,
+          set: setCache,
+          configurable: true,
+          enumerable: true,
+        });
       }
+    } catch {
+      // Ignore if prototype is not configurable
     }
-    if (newCache && typeof newCache === 'object') {
-      for (const [k, v] of Object.entries(newCache)) {
-        bunNativeCache[k] = v;
-      }
-    }
-
-    // 3. Initialize a fresh generation representing the synchronized native cache.
-    currentGen = createCacheGeneration(bunNativeCache);
-  }
-
-  Object.defineProperty(Module, '_cache', {
-    get: getCache,
-    set: setCache,
-    configurable: true,
-    enumerable: true,
-  });
-
-  try {
-    const proto = Object.getPrototypeOf(require);
-    if (proto) {
-      Object.defineProperty(proto, 'cache', {
-        get: getCache,
-        set: setCache,
-        configurable: true,
-        enumerable: true,
-      });
-    }
-  } catch {
-    // Ignore if prototype is not configurable
   }
   const hasOwn = (o, k) =>
     o !== null &&
@@ -272,6 +292,7 @@ if (
   // uses the exact V8 message string ('The operation was aborted due to timeout')
   // asserted by core/packages/gcp-metadata unit tests.
   if (
+    enableAbortSignalTimeoutShim &&
     typeof AbortSignal !== 'undefined' &&
     typeof AbortSignal.timeout === 'function' &&
     typeof DOMException !== 'undefined'
@@ -293,91 +314,98 @@ if (
     };
   }
 
-  const origPromiseAny = Promise.any;
-  if (typeof origPromiseAny === 'function') {
-    Promise.any = function (iterable) {
-      return origPromiseAny.call(this, iterable).catch(err => {
-        if (err instanceof AggregateError && !err.message) {
-          err.message = 'All promises were rejected';
-        }
-        throw err;
-      });
-    };
+  if (enablePromiseAnyShim) {
+    const origPromiseAny = Promise.any;
+    if (typeof origPromiseAny === 'function') {
+      Promise.any = function (iterable) {
+        return origPromiseAny.call(this, iterable).catch(err => {
+          if (err instanceof AggregateError && !err.message) {
+            err.message = 'All promises were rejected';
+          }
+          throw err;
+        });
+      };
+    }
   }
 
-  try {
-    const crypto = require('crypto');
-    const verifyProto =
-      crypto.createVerify &&
-      Object.getPrototypeOf(crypto.createVerify('RSA-SHA256'));
-    if (verifyProto && typeof verifyProto.verify === 'function') {
-      const origVerify = verifyProto.verify;
-      verifyProto.verify = function (object, signature, sigEncoding) {
-        if (
-          typeof object === 'string' &&
-          object.includes('BEGIN PUBLIC KEY')
-        ) {
-          const b64 = object.replace(/-----[^-]+-----|\s+/g, '');
-          const der = Buffer.from(b64, 'base64');
-          // Explicit-parameter P-256 SPKI keys (>150 bytes ending in 65-byte uncompressed point 0x04||X||Y)
-          // are rejected by BoringSSL; convert to named-curve P-256 SPKI OID header.
-          if (der.length > 150 && der[der.length - 65] === 0x04) {
-            const spkiHeader = Buffer.from(
-              '3059301306072a8648ce3d020106082a8648ce3d030107034200',
-              'hex',
+  if (enableCryptoVerifyShim) {
+    try {
+      const crypto = require('crypto');
+      const verifyProto =
+        crypto.createVerify &&
+        Object.getPrototypeOf(crypto.createVerify('RSA-SHA256'));
+      if (verifyProto && typeof verifyProto.verify === 'function') {
+        const origVerify = verifyProto.verify;
+        verifyProto.verify = function (object, signature, sigEncoding) {
+          if (
+            typeof object === 'string' &&
+            object.includes('BEGIN PUBLIC KEY')
+          ) {
+            const b64 = object.replace(/-----[^-]+-----|\s+/g, '');
+            const der = Buffer.from(b64, 'base64');
+            // Explicit-parameter P-256 SPKI keys (>150 bytes ending in 65-byte uncompressed point 0x04||X||Y)
+            // are rejected by BoringSSL; convert to named-curve P-256 SPKI OID header.
+            if (der.length > 150 && der[der.length - 65] === 0x04) {
+              const spkiHeader = Buffer.from(
+                '3059301306072a8648ce3d020106082a8648ce3d030107034200',
+                'hex',
+              );
+              const namedDer = Buffer.concat([
+                spkiHeader,
+                der.subarray(der.length - 65),
+              ]);
+              object =
+                '-----BEGIN PUBLIC KEY-----\n' +
+                namedDer.toString('base64') +
+                '\n-----END PUBLIC KEY-----\n';
+            }
+          } else if (
+            object &&
+            typeof object === 'object' &&
+            object.format === 'jwk'
+          ) {
+            object = crypto.createPublicKey({
+              key: object.key,
+              format: 'jwk',
+            });
+          }
+          return origVerify.call(this, object, signature, sigEncoding);
+        };
+      }
+    } catch {
+      // ignore
+    }
+  }
+
+  if (enableAssertDeepEqualShim) {
+    try {
+      const assert = require('assert');
+      const origDeepEqual = assert.deepEqual;
+      if (
+        typeof origDeepEqual === 'function' &&
+        typeof Headers !== 'undefined'
+      ) {
+        assert.deepEqual = function (actual, expected, message) {
+          if (actual instanceof Headers && expected instanceof Headers) {
+            const actualEntries = Object.fromEntries(actual.entries());
+            const expectedEntries = Object.fromEntries(expected.entries());
+            if (Object.keys(actualEntries).length === 0) {
+              return;
+            }
+            return origDeepEqual.call(
+              this,
+              actualEntries,
+              expectedEntries,
+              message,
             );
-            const namedDer = Buffer.concat([
-              spkiHeader,
-              der.subarray(der.length - 65),
-            ]);
-            object =
-              '-----BEGIN PUBLIC KEY-----\n' +
-              namedDer.toString('base64') +
-              '\n-----END PUBLIC KEY-----\n';
           }
-        } else if (
-          object &&
-          typeof object === 'object' &&
-          object.format === 'jwk'
-        ) {
-          object = crypto.createPublicKey({
-            key: object.key,
-            format: 'jwk',
-          });
-        }
-        return origVerify.call(this, object, signature, sigEncoding);
-      };
+          return origDeepEqual.call(this, actual, expected, message);
+        };
+      }
+    } catch {
+      // ignore
     }
-  } catch {
-    // ignore
   }
-
-  try {
-    const assert = require('assert');
-    const origDeepEqual = assert.deepEqual;
-    if (typeof origDeepEqual === 'function' && typeof Headers !== 'undefined') {
-      assert.deepEqual = function (actual, expected, message) {
-        if (actual instanceof Headers && expected instanceof Headers) {
-          const actualEntries = Object.fromEntries(actual.entries());
-          const expectedEntries = Object.fromEntries(expected.entries());
-          if (Object.keys(actualEntries).length === 0) {
-            return;
-          }
-          return origDeepEqual.call(
-            this,
-            actualEntries,
-            expectedEntries,
-            message,
-          );
-        }
-        return origDeepEqual.call(this, actual, expected, message);
-      };
-    }
-  } catch {
-    // ignore
-  }
-
-  const enableFetchShim = process.env.BUN_ENABLE_FETCH_SHIM === 'true';
 
   const fs = require('fs');
   const http = require('http');
@@ -677,9 +705,29 @@ if (
       }
       throw err;
     }
-  };
+    };
 
-  if (typeof Bun.plugin === 'function') {
+    if (
+      Module._extensions &&
+      typeof Module._extensions['.js'] === 'function'
+    ) {
+      const origJsExt = Module._extensions['.js'];
+      Module._extensions['.js'] = function (mod, filename) {
+        if (/teeny-request[\\/]+build[\\/]+src[\\/]+index\.js$/.test(filename)) {
+          const code = fs
+            .readFileSync(filename, 'utf8')
+            .replaceAll(
+              "import('node-fetch')",
+              'Promise.resolve({default: globalThis.__googleCloudBunFetch})',
+            );
+          return mod._compile(code, filename);
+        }
+        return origJsExt.apply(this, arguments);
+      };
+    }
+  }
+
+  if (enableBunPluginShim && typeof Bun.plugin === 'function') {
     Bun.plugin({
       name: 'bun-gaxios-global-fetch-esm',
       setup(build) {
@@ -699,26 +747,9 @@ if (
     });
   }
 
-    if (Module._extensions && typeof Module._extensions['.js'] === 'function') {
-      const origJsExt = Module._extensions['.js'];
-      Module._extensions['.js'] = function (mod, filename) {
-        if (/teeny-request[\\/]+build[\\/]+src[\\/]+index\.js$/.test(filename)) {
-          const code = fs
-            .readFileSync(filename, 'utf8')
-            .replaceAll(
-              "import('node-fetch')",
-              'Promise.resolve({default: globalThis.__googleCloudBunFetch})',
-            );
-          return mod._compile(code, filename);
-        }
-        return origJsExt.apply(this, arguments);
-      };
-    }
-  }
-
   function patchGaxiosIfPresent(res) {
     if (
-      enableFetchShim &&
+      enableGaxiosShim &&
       res &&
       typeof res === 'object' &&
       typeof res.Gaxios === 'function' &&
@@ -744,56 +775,70 @@ if (
     return res;
   }
 
-  Module.prototype.require = function (id) {
-    if (id === 'proxyquire') return makeProxyquire(this);
-    if (id === 'keypair') {
-      return function (opts) {
-        const bits = typeof opts === 'number' ? opts : (opts?.bits ?? 2048);
-        const {publicKey, privateKey} = require('crypto').generateKeyPairSync(
-          'rsa',
-          {
-            modulusLength: Math.max(bits, 512),
-            publicKeyEncoding: {type: 'pkcs1', format: 'pem'},
-            privateKeyEncoding: {type: 'pkcs1', format: 'pem'},
-          },
-        );
-        return {public: publicKey, private: privateKey};
-      };
-    }
-    const fr = frames[frames.length - 1];
-    if (fr && this && this.filename) {
-      const isSut = this.filename === fr.sut;
-      if (isSut || fr.containsGlobal) {
-        let found = false;
-        let stub;
-        if (Object.prototype.hasOwnProperty.call(fr.stubs, id)) {
-          found = true;
-          stub = fr.stubs[id];
-        } else {
-          const resolved = resolveFrom(this.filename, id);
-          if (Object.prototype.hasOwnProperty.call(fr.resolved, resolved)) {
-            found = true;
-            stub = fr.resolved[resolved];
+  if (
+    enableRequireShim ||
+    enableProxyquireShim ||
+    enableKeypairShim ||
+    enableGaxiosShim
+  ) {
+    Module.prototype.require = function (id) {
+      if (enableProxyquireShim && id === 'proxyquire') {
+        return makeProxyquire(this);
+      }
+      if (enableKeypairShim && id === 'keypair') {
+        return function (opts) {
+          const bits = typeof opts === 'number' ? opts : (opts?.bits ?? 2048);
+          const {publicKey, privateKey} = require('crypto').generateKeyPairSync(
+            'rsa',
+            {
+              modulusLength: Math.max(bits, 512),
+              publicKeyEncoding: {type: 'pkcs1', format: 'pem'},
+              privateKeyEncoding: {type: 'pkcs1', format: 'pem'},
+            },
+          );
+          return {public: publicKey, private: privateKey};
+        };
+      }
+      if (enableProxyquireShim) {
+        const fr = frames[frames.length - 1];
+        if (fr && this && this.filename) {
+          const isSut = this.filename === fr.sut;
+          if (isSut || fr.containsGlobal) {
+            let found = false;
+            let stub;
+            if (Object.prototype.hasOwnProperty.call(fr.stubs, id)) {
+              found = true;
+              stub = fr.stubs[id];
+            } else {
+              const resolved = resolveFrom(this.filename, id);
+              if (Object.prototype.hasOwnProperty.call(fr.resolved, resolved)) {
+                found = true;
+                stub = fr.resolved[resolved];
+              }
+            }
+            if (found && (isSut || isGlobalStub(stub))) {
+              return patchGaxiosIfPresent(
+                applyStub(this, id, stub, fr.noCallThru),
+              );
+            }
           }
         }
-        if (found && (isSut || isGlobalStub(stub))) {
-          return patchGaxiosIfPresent(applyStub(this, id, stub, fr.noCallThru));
-        }
       }
-    }
-    // If a test suite has monkeypatched Module._load (e.g. testing dynamic import
-    // error recovery in test/util.ts), route the require through Module._load so
-    // the monkeypatched behavior takes effect under Bun.
-    if (
-      typeof Module._load === 'function' &&
-      Module._load !== defaultModuleLoad
-    ) {
-      return patchGaxiosIfPresent(
-        Module._load(id, this, /* isMain */ false),
-      );
-    }
-    return patchGaxiosIfPresent(origRequire.apply(this, arguments));
-  };
+      // If a test suite has monkeypatched Module._load (e.g. testing dynamic import
+      // error recovery in test/util.ts), route the require through Module._load so
+      // the monkeypatched behavior takes effect under Bun.
+      if (
+        enableRequireShim &&
+        typeof Module._load === 'function' &&
+        Module._load !== defaultModuleLoad
+      ) {
+        return patchGaxiosIfPresent(
+          Module._load(id, this, /* isMain */ false),
+        );
+      }
+      return patchGaxiosIfPresent(origRequire.apply(this, arguments));
+    };
+  }
 
   function makeProxyquire(parent) {
     let noCallThru = false;

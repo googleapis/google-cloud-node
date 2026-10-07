@@ -2962,8 +2962,8 @@ importers:
         specifier: ^2.0.0
         version: 2.0.1(protobufjs@7.5.9)
       google-test-utils:
-        specifier: workspace:*
-        version: link:../../core/test-utils
+        specifier: ^0.2.0
+        version: 0.2.0
       gts:
         specifier: ^6.0.0
         version: 6.0.2(typescript@5.9.3)
@@ -3200,8 +3200,8 @@ importers:
         specifier: ^2.0.0
         version: 2.0.1(protobufjs@7.5.9)
       google-test-utils:
-        specifier: workspace:*
-        version: link:../../core/test-utils
+        specifier: ^0.2.0
+        version: 0.2.0
       grpc-health-check:
         specifier: ^2.1.0
         version: 2.1.0
@@ -20741,6 +20741,10 @@ packages:
     resolution: {integrity: sha512-fbvUWVNh3rKGlVFWwlUNF7Sk1Tah0a89q02rLTXsWjbKKHGeuURAa8tl9rvu5TyWny1YiSIo5eDqF260Tai6vQ==}
     engines: {node: '>=22'}
 
+  google-test-utils@0.2.0:
+    resolution: {integrity: sha512-OP7B5iS65EjAlRctfq3uUdGWXN5AvIGRYQSx5luCVqkfh3uaGvVzuY1y3hCyxLk6MGf5DYkJ3rZxgJ6JsMmSog==}
+    engines: {node: '>=22'}
+
   googleapis-common@4.4.3:
     resolution: {integrity: sha512-W46WKCk3QtlCCfmZyQIH5zxmDOyeV5Qj+qs7nr2ox08eRkEJMWp6iwv542R/PsokXaGUSrmif4vCC4+rGzRSsQ==}
     engines: {node: '>=10.10.0'}
@@ -28681,7 +28685,7 @@ snapshots:
 
   '@webpack-cli/configtest@3.0.1(webpack-cli@6.0.1)(webpack@5.109.0)':
     dependencies:
-      webpack: 5.109.0(webpack-cli@6.0.1)
+      webpack: 5.109.0(uglify-js@3.19.3)(webpack-cli@6.0.1)
       webpack-cli: 6.0.1(webpack@5.109.0)
 
   '@webpack-cli/info@2.0.2(webpack-cli@5.1.4)(webpack@5.109.0)':
@@ -28691,7 +28695,7 @@ snapshots:
 
   '@webpack-cli/info@3.0.1(webpack-cli@6.0.1)(webpack@5.109.0)':
     dependencies:
-      webpack: 5.109.0(webpack-cli@6.0.1)
+      webpack: 5.109.0(uglify-js@3.19.3)(webpack-cli@6.0.1)
       webpack-cli: 6.0.1(webpack@5.109.0)
 
   '@webpack-cli/serve@2.0.5(webpack-cli@5.1.4)(webpack@5.109.0)':
@@ -28701,7 +28705,7 @@ snapshots:
 
   '@webpack-cli/serve@3.0.1(webpack-cli@6.0.1)(webpack@5.109.0)':
     dependencies:
-      webpack: 5.109.0(webpack-cli@6.0.1)
+      webpack: 5.109.0(uglify-js@3.19.3)(webpack-cli@6.0.1)
       webpack-cli: 6.0.1(webpack@5.109.0)
 
   '@xtuc/ieee754@1.2.0': {}
@@ -31997,6 +32001,8 @@ snapshots:
       protobufjs: 7.5.9
       walkdir: 0.4.1
 
+  google-test-utils@0.2.0: {}
+
   googleapis-common@4.4.3(encoding@0.1.13):
     dependencies:
       extend: 3.0.2
@@ -34325,7 +34331,7 @@ snapshots:
     dependencies:
       loader-utils: 2.0.4
       schema-utils: 3.3.0
-      webpack: 5.109.0(webpack-cli@6.0.1)
+      webpack: 5.109.0(uglify-js@3.19.3)(webpack-cli@6.0.1)
 
   nunjucks@3.2.4(chokidar@3.6.0):
     dependencies:
@@ -36515,7 +36521,7 @@ snapshots:
       picomatch: 4.0.5
       source-map: 0.7.6
       typescript: 5.8.3
-      webpack: 5.109.0(webpack-cli@6.0.1)
+      webpack: 5.109.0(uglify-js@3.19.3)(webpack-cli@6.0.1)
     optionalDependencies:
       loader-utils: 2.0.4
 
@@ -37003,7 +37009,7 @@ snapshots:
       import-local: 3.2.0
       interpret: 3.1.1
       rechoir: 0.8.0
-      webpack: 5.109.0(webpack-cli@6.0.1)
+      webpack: 5.109.0(uglify-js@3.19.3)(webpack-cli@6.0.1)
       webpack-merge: 6.0.1
 
   webpack-merge@4.2.2:

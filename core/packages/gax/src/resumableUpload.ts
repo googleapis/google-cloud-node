@@ -200,7 +200,7 @@ export interface ResumableUploadContext {
   /** The hostname of the API service endpoint. */
   servicePath: string;
   /** The port of the API service endpoint. */
-  servicePort: number;
+  servicePort: number | string;
   /** The protocol (usually `https`). */
   protocol: string;
   /** The protobuf method descriptor for the resumable upload RPC. */
