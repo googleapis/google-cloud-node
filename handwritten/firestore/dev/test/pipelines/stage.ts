@@ -250,6 +250,66 @@ describe('stage option serialization', () => {
       stageIndex: 1,
     },
     {
+      name: 'literals source stage',
+      pipeline: firestore =>
+        firestore.pipeline().literals({
+          documents: [{foo: 'bar'}],
+          rawOptions,
+        }),
+    },
+    {
+      name: 'literals stage',
+      pipeline: firestore =>
+        firestore
+          .pipeline()
+          .database()
+          .literals({
+            documents: [{foo: 'bar'}],
+            rawOptions,
+          }),
+      stageIndex: 1,
+    },
+    {
+      name: 'delete stage',
+      pipeline: firestore =>
+        firestore.pipeline().database().delete({
+          rawOptions,
+        }),
+      stageIndex: 1,
+    },
+    {
+      name: 'update stage',
+      pipeline: firestore =>
+        firestore
+          .pipeline()
+          .database()
+          .update({
+            transformedFields: [constant(true).as('foo')],
+            rawOptions,
+          }),
+      stageIndex: 1,
+    },
+    {
+      name: 'insert stage',
+      pipeline: firestore =>
+        firestore.pipeline().database().insert({
+          rawOptions,
+        }),
+      stageIndex: 1,
+    },
+    {
+      name: 'upsert stage',
+      pipeline: firestore =>
+        firestore
+          .pipeline()
+          .database()
+          .upsert({
+            additionalFields: [constant(true).as('foo')],
+            rawOptions,
+          }),
+      stageIndex: 1,
+    },
+    {
       name: 'search stage',
       pipeline: firestore =>
         firestore

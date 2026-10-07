@@ -107,6 +107,7 @@ import {
   InternalDefineStageOptions,
   InternalSubcollectionStageOptions,
   UpdateStage,
+  InternalUpdateStageOptions,
   Search,
   InternalSearchStageOptions,
   InsertStage,
@@ -126,6 +127,21 @@ import {
 } from 'protobufjs';
 
 /**
+ * Normalizes the arguments of the `literals(documents)` and
+ * `literals(options)` overloads into a single options object.
+ * @private
+ * @internal
+ */
+function toLiteralsStageOptions(
+  documentsOrOptions:
+    Array<Record<string, unknown>> | firestore.Pipelines.LiteralsStageOptions,
+): InternalLiteralsStageOptions {
+  return Array.isArray(documentsOrOptions)
+    ? {documents: documentsOrOptions}
+    : documentsOrOptions;
+}
+
+/**
  * Represents the source of a Firestore `Pipeline`.
  */
 export class PipelineSource implements firestore.Pipelines.PipelineSource {
@@ -135,37 +151,21 @@ export class PipelineSource implements firestore.Pipelines.PipelineSource {
    * Set the pipeline's source to the in-memory documents specified by the given records.
    *
    * @param documents An array of objects/records specifying the in-memory documents.
+   */
+  literals(documents: Array<Record<string, unknown>>): Pipeline;
+  /**
+   * Set the pipeline's source to the in-memory documents specified by the given records.
+   *
    * @param options Options defining how this LiteralsSource stage is evaluated.
    */
-  literals(
-    documents: Array<Record<string, unknown>>,
-    options?: firestore.Pipelines.LiteralsStageOptions,
-  ): Pipeline;
   literals(options: firestore.Pipelines.LiteralsStageOptions): Pipeline;
   literals(
-    docsOrOptions:
+    documentsOrOptions:
       Array<Record<string, unknown>> | firestore.Pipelines.LiteralsStageOptions,
-    options?: firestore.Pipelines.LiteralsStageOptions,
   ): Pipeline {
-    let documents: Array<Record<string, unknown>> = [];
-    let opts: InternalLiteralsStageOptions = {};
-
-    if (Array.isArray(docsOrOptions)) {
-      documents = docsOrOptions;
-      opts = options ?? {};
-    } else if (
-      docsOrOptions &&
-      Array.isArray(
-        (docsOrOptions as firestore.Pipelines.LiteralsStageOptions).documents,
-      )
-    ) {
-      const {documents: docs, ...rest} =
-        docsOrOptions as firestore.Pipelines.LiteralsStageOptions;
-      documents = docs ?? [];
-      opts = rest;
-    }
-
-    return new Pipeline(this.db, [new LiteralsSource(documents, opts)]);
+    return new Pipeline(this.db, [
+      new LiteralsSource(toLiteralsStageOptions(documentsOrOptions)),
+    ]);
   }
 
   /**
@@ -1788,8 +1788,16 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
    *
    * @return A new {@code Pipeline} object with this stage appended to the stage list.
    */
-  delete(): Pipeline {
-    return this._addStage(new DeleteStage());
+  delete(): Pipeline;
+  /**
+   * Performs a delete operation on documents from previous stages.
+   *
+   * @param options - Options defining how this Delete stage is evaluated.
+   * @return A new {@code Pipeline} object with this stage appended to the stage list.
+   */
+  delete(options: firestore.Pipelines.DeleteStageOptions): Pipeline;
+  delete(options?: firestore.Pipelines.DeleteStageOptions): Pipeline {
+    return this._addStage(new DeleteStage(options ?? {}));
   }
 
   /**
@@ -1819,39 +1827,40 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
   /**
    * Performs an update operation using documents from previous stages.
    *
-   * @param fieldsMap - Map of field transformations to apply.
+   * @param options - Options defining how this Update stage is evaluated.
    * @return A new {@code Pipeline} object with this stage appended to the stage list.
    */
+  update(options: firestore.Pipelines.UpdateStageOptions): Pipeline;
   update(
-    fieldsMap: Record<string, Expression> | Map<string, Expression>,
-  ): Pipeline;
-  update(
-    transformedFieldsOrMap?:
+    transformedFieldOrOptions?:
       | AliasedExpression
       | AliasedExpression[]
-      | Map<string, Expression>
-      | Record<string, Expression>,
+      | firestore.Pipelines.UpdateStageOptions,
     ...additionalFields: AliasedExpression[]
   ): Pipeline {
-    if (isAliasedExpr(transformedFieldsOrMap)) {
-      return this._addStage(
-        new UpdateStage([transformedFieldsOrMap, ...additionalFields]),
-      );
-    } else if (
-      transformedFieldsOrMap instanceof Map ||
-      Array.isArray(transformedFieldsOrMap)
-    ) {
-      return this._addStage(new UpdateStage(transformedFieldsOrMap));
-    } else if (
-      transformedFieldsOrMap &&
-      isPlainObject(transformedFieldsOrMap)
-    ) {
-      const map = new Map<string, Expression>(
-        Object.entries(transformedFieldsOrMap as Record<string, Expression>),
-      );
-      return this._addStage(new UpdateStage(map));
+    let options: firestore.Pipelines.UpdateStageOptions;
+    if (isAliasedExpr(transformedFieldOrOptions)) {
+      options = {
+        transformedFields: [transformedFieldOrOptions, ...additionalFields],
+      };
+    } else if (Array.isArray(transformedFieldOrOptions)) {
+      options = {transformedFields: transformedFieldOrOptions};
+    } else {
+      options = transformedFieldOrOptions ?? {};
     }
-    return this._addStage(new UpdateStage());
+
+    const {transformedFields, ...rest} = options;
+    const internalOptions: InternalUpdateStageOptions = {
+      ...rest,
+      ...(transformedFields
+        ? {
+            transformedFields: selectablesToMap(
+              transformedFields as AliasedExpression[],
+            ),
+          }
+        : {}),
+    };
+    return this._addStage(new UpdateStage(internalOptions));
   }
 
   /**
@@ -1875,13 +1884,6 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
   /**
    * Performs an upsert operation on documents from previous stages.
    *
-   * @param options - Options defining how this Upsert stage is evaluated.
-   * @return A new {@code Pipeline} object with this stage appended to the stage list.
-   */
-  upsert(options: firestore.Pipelines.UpsertStageOptions): Pipeline;
-  /**
-   * Performs an upsert operation on documents from previous stages.
-   *
    * @param additionalField - The first additional field to apply on upsert.
    * @param additionalFields - Additional fields to apply on upsert.
    * @return A new {@code Pipeline} object with this stage appended to the stage list.
@@ -1893,83 +1895,46 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
   /**
    * Performs an upsert operation on documents from previous stages.
    *
-   * @param additionalFields - Additional fields to apply on upsert.
    * @param options - Options defining how this Upsert stage is evaluated.
    * @return A new {@code Pipeline} object with this stage appended to the stage list.
    */
+  upsert(options: firestore.Pipelines.UpsertStageOptions): Pipeline;
   upsert(
-    additionalFields: AliasedExpression[],
-    options?: firestore.Pipelines.UpsertStageOptions,
-  ): Pipeline;
-  upsert(
-    additionalFieldsOrOptions?:
-      | AliasedExpression
-      | AliasedExpression[]
-      | firestore.Pipelines.UpsertStageOptions,
-    ...restArgs: unknown[]
+    additionalFieldOrOptions?:
+      AliasedExpression | firestore.Pipelines.UpsertStageOptions,
+    ...additionalFields: AliasedExpression[]
   ): Pipeline {
-    let additionalFields: AliasedExpression[] | undefined;
-    let options: firestore.Pipelines.UpsertStageOptions | undefined;
-
-    if (isAliasedExpr(additionalFieldsOrOptions)) {
-      additionalFields = [
-        additionalFieldsOrOptions,
-        ...(restArgs as AliasedExpression[]),
-      ];
-      options = undefined;
-    } else if (Array.isArray(additionalFieldsOrOptions)) {
-      additionalFields = additionalFieldsOrOptions;
-      options = restArgs[0] as
-        firestore.Pipelines.UpsertStageOptions | undefined;
-    } else {
-      additionalFields = undefined;
-      options = additionalFieldsOrOptions;
+    if (isAliasedExpr(additionalFieldOrOptions)) {
+      return this._addStage(
+        new UpsertStage({
+          additionalFields: [additionalFieldOrOptions, ...additionalFields],
+        }),
+      );
     }
-
-    return this._addStage(
-      new UpsertStage({
-        ...options,
-        ...(additionalFields ? {additionalFields} : {}),
-      }),
-    );
+    return this._addStage(new UpsertStage(additionalFieldOrOptions ?? {}));
   }
 
   /**
    * Appends a literals stage to the pipeline.
    *
    * @param documents An array of objects/records specifying in-memory documents.
+   * @return A new {@code Pipeline} object with this stage appended to the stage list.
+   */
+  literals(documents: Array<Record<string, unknown>>): Pipeline;
+  /**
+   * Appends a literals stage to the pipeline.
+   *
    * @param options Options defining how this LiteralsSource stage is evaluated.
    * @return A new {@code Pipeline} object with this stage appended to the stage list.
    */
-  literals(
-    documents: Array<Record<string, unknown>>,
-    options?: firestore.Pipelines.LiteralsStageOptions,
-  ): Pipeline;
   literals(options: firestore.Pipelines.LiteralsStageOptions): Pipeline;
   literals(
-    docsOrOptions:
+    documentsOrOptions:
       Array<Record<string, unknown>> | firestore.Pipelines.LiteralsStageOptions,
-    options?: firestore.Pipelines.LiteralsStageOptions,
   ): Pipeline {
-    let documents: Array<Record<string, unknown>> = [];
-    let opts: InternalLiteralsStageOptions = {};
-
-    if (Array.isArray(docsOrOptions)) {
-      documents = docsOrOptions;
-      opts = options ?? {};
-    } else if (
-      docsOrOptions &&
-      Array.isArray(
-        (docsOrOptions as firestore.Pipelines.LiteralsStageOptions).documents,
-      )
-    ) {
-      const {documents: docs, ...rest} =
-        docsOrOptions as firestore.Pipelines.LiteralsStageOptions;
-      documents = docs ?? [];
-      opts = rest;
-    }
-
-    return this._addStage(new LiteralsSource(documents, opts));
+    return this._addStage(
+      new LiteralsSource(toLiteralsStageOptions(documentsOrOptions)),
+    );
   }
 
   /**

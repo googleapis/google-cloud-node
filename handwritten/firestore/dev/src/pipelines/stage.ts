@@ -908,13 +908,18 @@ export class RawStage implements Stage {
 }
 
 /**
+ * Internal options for Delete stage.
+ */
+export type InternalDeleteStageOptions = firestore.Pipelines.DeleteStageOptions;
+
+/**
  * Delete stage.
  */
 export class DeleteStage implements Stage {
   name = 'delete';
   readonly optionsUtil = new OptionsUtil({});
 
-  constructor() {}
+  constructor(private options: InternalDeleteStageOptions = {}) {}
 
   _toProto(serializer: Serializer): api.Pipeline.IStage {
     const args: api.IValue[] = [];
@@ -922,7 +927,11 @@ export class DeleteStage implements Stage {
     return {
       name: this.name,
       args,
-      options: this.optionsUtil.getOptionsProto(serializer, {}, {}),
+      options: this.optionsUtil.getOptionsProto(
+        serializer,
+        this.options,
+        this.options.rawOptions,
+      ),
     };
   }
 
@@ -930,42 +939,46 @@ export class DeleteStage implements Stage {
 }
 
 /**
+ * Internal options for Update stage.
+ */
+export type InternalUpdateStageOptions = Omit<
+  firestore.Pipelines.UpdateStageOptions,
+  'transformedFields'
+> & {
+  transformedFields?: Map<string, Expression>;
+};
+
+/**
  * Update stage.
  */
 export class UpdateStage implements Stage {
   name = 'update';
   readonly optionsUtil = new OptionsUtil({});
-  private readonly transformedMap?: Map<string, Expression>;
 
-  constructor(
-    transformedFields?: AliasedExpression[] | Map<string, Expression>,
-  ) {
-    if (transformedFields instanceof Map) {
-      this.transformedMap = transformedFields;
-    } else if (transformedFields && transformedFields.length > 0) {
-      this.transformedMap = selectablesToMap(transformedFields);
-    }
-  }
+  constructor(private options: InternalUpdateStageOptions = {}) {}
 
   _toProto(serializer: Serializer): api.Pipeline.IStage {
-    const args: api.IValue[] = [];
-
-    if (this.transformedMap && this.transformedMap.size > 0) {
-      args.push(serializer.encodeValue(this.transformedMap)!);
-    } else {
-      args.push(serializer.encodeValue(new Map())!);
-    }
+    const args: api.IValue[] = [
+      serializer.encodeValue(this.options.transformedFields ?? new Map())!,
+    ];
 
     return {
       name: this.name,
       args,
-      options: this.optionsUtil.getOptionsProto(serializer, {}, {}),
+      options: this.optionsUtil.getOptionsProto(
+        serializer,
+        this.options,
+        this.options.rawOptions,
+      ),
     };
   }
 
   _validateUserData(ignoreUndefinedProperties: boolean): void {
-    if (this.transformedMap) {
-      validateUserDataHelper(this.transformedMap, ignoreUndefinedProperties);
+    if (this.options.transformedFields) {
+      validateUserDataHelper(
+        this.options.transformedFields,
+        ignoreUndefinedProperties,
+      );
     }
   }
 }
@@ -1061,29 +1074,12 @@ export class UpsertStage implements Stage {
   private readonly documentIdExpr?: Expression;
   private readonly additionalFields: Map<string, Expression>;
 
-  private readonly options: InternalUpsertStageOptions;
-
-  constructor(
-    additionalFieldsOrOptions?:
-      AliasedExpression[] | InternalUpsertStageOptions,
-    options?: InternalUpsertStageOptions,
-  ) {
-    let fields: AliasedExpression[] = [];
-    let opts: InternalUpsertStageOptions = {};
-
-    if (Array.isArray(additionalFieldsOrOptions)) {
-      fields = additionalFieldsOrOptions;
-      opts = options ?? {};
-    } else if (additionalFieldsOrOptions) {
-      opts = additionalFieldsOrOptions;
-    } else if (options) {
-      opts = options;
-    }
-    this.options = opts;
+  constructor(private readonly options: InternalUpsertStageOptions = {}) {
+    const opts = options;
 
     const resolvedFields = (opts.additionalFields ??
       opts.transforms ??
-      fields) as AliasedExpression[];
+      []) as AliasedExpression[];
     this.additionalFields = selectablesToMap(resolvedFields);
     if (opts.collection) {
       this.collectionPath =
@@ -1147,13 +1143,10 @@ export class LiteralsSource implements Stage {
   name = 'literals';
   readonly optionsUtil = new OptionsUtil({});
 
-  constructor(
-    readonly documents: Array<Record<string, unknown>>,
-    private options: InternalLiteralsStageOptions = {},
-  ) {}
+  constructor(private options: InternalLiteralsStageOptions) {}
 
   _toProto(serializer: Serializer): api.Pipeline.IStage {
-    const args: api.IValue[] = this.documents.map(doc =>
+    const args: api.IValue[] = this.options.documents.map(doc =>
       serializer.encodeValue(doc)!,
     );
     return {
@@ -1168,7 +1161,7 @@ export class LiteralsSource implements Stage {
   }
 
   _validateUserData(ignoreUndefinedProperties: boolean): void {
-    this.documents.forEach(doc => {
+    this.options.documents.forEach(doc => {
       Object.values(doc).forEach(val => {
         if (hasUserData(val)) {
           val._validateUserData(ignoreUndefinedProperties);

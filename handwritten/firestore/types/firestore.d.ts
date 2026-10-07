@@ -12457,11 +12457,15 @@ declare namespace FirebaseFirestore {
       createFrom(query: Query): Pipeline;
       /**
        * Set the pipeline's source to the in-memory documents specified by the given records.
+       *
+       * @param documents An array of objects/records specifying the in-memory documents.
        */
-      literals(
-        documents: Array<Record<string, unknown>>,
-        options?: LiteralsStageOptions,
-      ): Pipeline;
+      literals(documents: Array<Record<string, unknown>>): Pipeline;
+      /**
+       * Set the pipeline's source to the in-memory documents specified by the given records.
+       *
+       * @param options Options defining how this LiteralsSource stage is evaluated.
+       */
       literals(options: LiteralsStageOptions): Pipeline;
     }
 
@@ -12887,6 +12891,13 @@ declare namespace FirebaseFirestore {
        */
       delete(): Pipeline;
       /**
+       * Performs a delete operation on documents from previous stages.
+       *
+       * @param options - Options defining how this Delete stage is evaluated.
+       * @return A new {@link Pipeline} object with this stage appended to the stage list.
+       */
+      delete(options: DeleteStageOptions): Pipeline;
+      /**
        * Performs an update operation using documents from previous stages.
        *
        * @return A new {@link Pipeline} object with this stage appended to the stage list.
@@ -12913,12 +12924,10 @@ declare namespace FirebaseFirestore {
       /**
        * Performs an update operation using documents from previous stages.
        *
-       * @param fieldsMap - Map of field transformations to apply.
+       * @param options - Options defining how this Update stage is evaluated.
        * @return A new {@link Pipeline} object with this stage appended to the stage list.
        */
-      update(
-        fieldsMap: Record<string, Expression> | Map<string, Expression>,
-      ): Pipeline;
+      update(options: UpdateStageOptions): Pipeline;
       /**
        * Performs an insert operation on documents from previous stages.
        *
@@ -12935,13 +12944,6 @@ declare namespace FirebaseFirestore {
       /**
        * Performs an upsert operation on documents from previous stages.
        *
-       * @param options - Options defining how this Upsert stage is evaluated.
-       * @return A new {@link Pipeline} object with this stage appended to the stage list.
-       */
-      upsert(options: UpsertStageOptions): Pipeline;
-      /**
-       * Performs an upsert operation on documents from previous stages.
-       *
        * @param additionalField - The first additional field to apply on upsert.
        * @param additionalFields - Additional fields to apply on upsert.
        * @return A new {@link Pipeline} object with this stage appended to the stage list.
@@ -12953,25 +12955,23 @@ declare namespace FirebaseFirestore {
       /**
        * Performs an upsert operation on documents from previous stages.
        *
-       * @param additionalFields - Additional fields to apply on upsert.
        * @param options - Options defining how this Upsert stage is evaluated.
        * @return A new {@link Pipeline} object with this stage appended to the stage list.
        */
-      upsert(
-        additionalFields: AliasedExpression[],
-        options?: UpsertStageOptions,
-      ): Pipeline;
+      upsert(options: UpsertStageOptions): Pipeline;
       /**
        * Appends a literals stage to the pipeline.
        *
        * @param documents An array of objects/records specifying in-memory documents.
-       * @param options Options defining how this LiteralsSource stage is evaluated.
-       * @return A new {@code Pipeline} object with this stage appended to the stage list.
+       * @return A new {@link Pipeline} object with this stage appended to the stage list.
        */
-      literals(
-        documents: Array<Record<string, unknown>>,
-        options?: LiteralsStageOptions,
-      ): Pipeline;
+      literals(documents: Array<Record<string, unknown>>): Pipeline;
+      /**
+       * Appends a literals stage to the pipeline.
+       *
+       * @param options Options defining how this LiteralsSource stage is evaluated.
+       * @return A new {@link Pipeline} object with this stage appended to the stage list.
+       */
       literals(options: LiteralsStageOptions): Pipeline;
       /**
        * Filters the documents from previous stages to only include those matching the specified {@link
@@ -14155,6 +14155,21 @@ declare namespace FirebaseFirestore {
     // };
 
     /**
+     * Options defining how a Delete stage is evaluated.
+     */
+    export type DeleteStageOptions = StageOptions;
+
+    /**
+     * Options defining how an Update stage is evaluated.
+     */
+    export type UpdateStageOptions = StageOptions & {
+      /**
+       * The field transformations to apply to each document being updated.
+       */
+      transformedFields?: AliasedExpression[];
+    };
+
+    /**
      * Options defining how an Insert stage is evaluated.
      */
     export type InsertStageOptions = StageOptions & {
@@ -14179,7 +14194,10 @@ declare namespace FirebaseFirestore {
      * Options defining how a LiteralsSource stage is evaluated.
      */
     export type LiteralsStageOptions = StageOptions & {
-      documents?: Array<Record<string, unknown>>;
+      /**
+       * An array of objects specifying the in-memory documents that will be the source of this pipeline.
+       */
+      documents: Array<Record<string, unknown>>;
     };
 
     /**

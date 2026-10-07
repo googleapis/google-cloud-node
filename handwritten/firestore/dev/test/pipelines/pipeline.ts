@@ -556,6 +556,35 @@ describe('execute(Pipeline|PipelineExecuteOptions)', () => {
         },
       ]);
     });
+
+    it('serializes options update({transformedFields})', async () => {
+      const spy = sinon.fake.returns(stream());
+      const firestore = await createInstance({
+        executePipeline: spy,
+      });
+
+      await firestore
+        .pipeline()
+        .collection('foo')
+        .update({transformedFields: [constant(true).as('active')]})
+        .execute();
+
+      const stages =
+        spy.args[FIRST_CALL][EXECUTE_PIPELINE_REQUEST]['structuredPipeline'][
+          'pipeline'
+        ]['stages'];
+
+      expect(stages[1].name).to.equal('update');
+      expect(stages[1].args).to.deep.equal([
+        {
+          mapValue: {
+            fields: {
+              active: {booleanValue: true},
+            },
+          },
+        },
+      ]);
+    });
   });
 
   describe('upsert stage overloads', () => {
@@ -678,7 +707,7 @@ describe('execute(Pipeline|PipelineExecuteOptions)', () => {
       expect(stages[1].options).to.be.undefined;
     });
 
-    it('serializes array of expressions without options upsert([expr])', async () => {
+    it('serializes additionalFields option upsert({additionalFields})', async () => {
       const spy = sinon.fake.returns(stream());
       const firestore = await createInstance({
         executePipeline: spy,
@@ -687,7 +716,7 @@ describe('execute(Pipeline|PipelineExecuteOptions)', () => {
       await firestore
         .pipeline()
         .collection('foo')
-        .upsert([constant(true).as('active')])
+        .upsert({additionalFields: [constant(true).as('active')]})
         .execute();
 
       const stages =
@@ -708,7 +737,7 @@ describe('execute(Pipeline|PipelineExecuteOptions)', () => {
       expect(stages[1].options).to.be.undefined;
     });
 
-    it('serializes array of expressions with options upsert([expr], options)', async () => {
+    it('serializes additionalFields with other options upsert({additionalFields, collection})', async () => {
       const spy = sinon.fake.returns(stream());
       const firestore = await createInstance({
         executePipeline: spy,
@@ -717,7 +746,10 @@ describe('execute(Pipeline|PipelineExecuteOptions)', () => {
       await firestore
         .pipeline()
         .collection('foo')
-        .upsert([constant(true).as('active')], {collection: 'users'})
+        .upsert({
+          additionalFields: [constant(true).as('active')],
+          collection: 'users',
+        })
         .execute();
 
       const stages =
