@@ -1055,11 +1055,10 @@ export class InsertStage implements Stage {
  */
 export type InternalUpsertStageOptions = Omit<
   firestore.Pipelines.UpsertStageOptions,
-  'additionalFields' | 'transforms' | 'collection' | 'documentIdExpression'
+  'additionalFields' | 'collection' | 'documentIdExpression'
 > & {
   additionalFields?:
     AliasedExpression[] | firestore.Pipelines.AliasedExpression[];
-  transforms?: AliasedExpression[] | firestore.Pipelines.AliasedExpression[];
   collection?: string | CollectionReference | firestore.CollectionReference;
   documentIdExpression?: string | Expression | firestore.Pipelines.Expression;
 };
@@ -1077,10 +1076,9 @@ export class UpsertStage implements Stage {
   constructor(private readonly options: InternalUpsertStageOptions = {}) {
     const opts = options;
 
-    const resolvedFields = (opts.additionalFields ??
-      opts.transforms ??
-      []) as AliasedExpression[];
-    this.additionalFields = selectablesToMap(resolvedFields);
+    this.additionalFields = selectablesToMap(
+      (opts.additionalFields ?? []) as AliasedExpression[],
+    );
     if (opts.collection) {
       this.collectionPath =
         typeof opts.collection === 'string'
