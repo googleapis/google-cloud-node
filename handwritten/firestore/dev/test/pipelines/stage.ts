@@ -503,7 +503,9 @@ describe('stage _validateUserData', () => {
       const firestore = await createInstance({executePipeline: spy});
       await firestore
         .pipeline()
-        .literals([{a: 1, nested: {b: [1, 2]}, c: constant(3)}])
+        .literals([
+          {a: 1, nested: {b: [1, 2, null], n: null}, c: constant(3), d: null},
+        ])
         .execute();
       expect(spy.callCount).to.equal(1);
     });

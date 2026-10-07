@@ -1172,6 +1172,8 @@ export class LiteralsSource implements Stage {
           `Function literals() called with invalid data. ${value.methodName}() ` +
             `can only be used with update() and set()${location}`,
         );
+      } else if (value === null) {
+        // null is a valid literal value.
       } else if (hasUserData(value)) {
         value._validateUserData(ignoreUndefinedProperties);
       } else if (Array.isArray(value)) {
