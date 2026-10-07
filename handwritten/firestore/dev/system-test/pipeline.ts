@@ -717,15 +717,17 @@ describe.skipClassic('Pipeline class', () => {
         expect(docSnap.get('rating')).to.equal(4.7);
       });
 
-      it('can upsert (update) an existing document with array of expressions', async () => {
+      it('can upsert (update) an existing document with additionalFields option', async () => {
         const res = await firestore
           .pipeline()
           .collection(dmlCol.path)
           .where(equal(field('__name__').documentId(), 'book1'))
-          .upsert([
-            constant('Updated Genre List').as('genre'),
-            constant(5.0).as('rating'),
-          ])
+          .upsert({
+            additionalFields: [
+              constant('Updated Genre List').as('genre'),
+              constant(5.0).as('rating'),
+            ],
+          })
           .execute({atomic: true});
         expectResults(res, {documents_modified: 1});
 
