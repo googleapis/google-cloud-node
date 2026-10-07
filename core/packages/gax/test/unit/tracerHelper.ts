@@ -342,7 +342,11 @@ describe('TracerHelper', () => {
       );
       assert.strictEqual(
         span.events[0].attributes?.['exception.message'],
-        'RPC Failed',
+        undefined,
+      );
+      assert.strictEqual(
+        span.events[0].attributes?.['exception.stacktrace'],
+        undefined,
       );
     });
 
@@ -1435,9 +1439,10 @@ describe('TracerHelper', () => {
         // at all; error.type above is where the status belongs, and it says
         // 'NOT_FOUND' rather than a bare number.
         assert.strictEqual(event.attributes?.['exception.type'], 'GoogleError');
+        assert.strictEqual(event.attributes?.['exception.message'], undefined);
         assert.strictEqual(
-          event.attributes?.['exception.message'],
-          'object does not exist',
+          event.attributes?.['exception.stacktrace'],
+          undefined,
         );
 
         // Neither may leak into the other. exception.* on the span would
@@ -1460,22 +1465,20 @@ describe('TracerHelper', () => {
         assert.strictEqual(span.status.message, 'quota exceeded');
         assert.strictEqual(
           span.events[0].attributes?.['exception.message'],
-          'quota exceeded',
+          undefined,
         );
       });
 
-      it('carries the stacktrace on the exception event', async () => {
-        // The stacktrace is the reason the event exists at all: it is the one
-        // piece of detail no span attribute is allowed to hold.
+      it('does not set exception.message or exception.stacktrace on the exception event', async () => {
         const span = await failWith(new Error('boom'));
 
-        const stacktrace = span.events[0].attributes?.['exception.stacktrace'];
-        assert.strictEqual(typeof stacktrace, 'string');
-        assert.ok(
-          (stacktrace as string).includes('boom'),
-          `expected a stacktrace mentioning the failure, got ${JSON.stringify(
-            stacktrace,
-          )}`,
+        assert.strictEqual(
+          span.events[0].attributes?.['exception.message'],
+          undefined,
+        );
+        assert.strictEqual(
+          span.events[0].attributes?.['exception.stacktrace'],
+          undefined,
         );
       });
 
@@ -1541,42 +1544,28 @@ describe('TracerHelper', () => {
           assert.strictEqual(await exceptionTypeOf(new Error('boom')), 'Error');
         });
 
-        it('records local client stack trace & client error message for client-side errors', async () => {
+        it('omits exception.message and exception.stacktrace for client-side errors', async () => {
           const error = new GoogleError('client validation failure');
 
           const span = await failWith(error);
           const attributes = span.events[0].attributes;
 
-          assert.strictEqual(
-            attributes?.['exception.message'],
-            'client validation failure',
-          );
-          assert.strictEqual(
-            attributes?.['exception.stacktrace'],
-            error.stack,
-            'the stack must be forwarded verbatim from the original error for client-side errors',
-          );
+          assert.strictEqual(attributes?.['exception.message'], undefined);
+          assert.strictEqual(attributes?.['exception.stacktrace'], undefined);
         });
 
-        it('records server error details and omits client stacktrace when no statusDetails or metadata exist', async () => {
+        it('omits exception.message and exception.stacktrace for server-side errors', async () => {
           const error = new GoogleError('object does not exist');
           error.code = Status.NOT_FOUND;
 
           const span = await failWith(error);
           const attributes = span.events[0].attributes;
 
-          assert.strictEqual(
-            attributes?.['exception.message'],
-            'object does not exist',
-          );
-          assert.strictEqual(
-            attributes?.['exception.stacktrace'],
-            undefined,
-            'server-side error must not record the local client stack trace',
-          );
+          assert.strictEqual(attributes?.['exception.message'], undefined);
+          assert.strictEqual(attributes?.['exception.stacktrace'], undefined);
         });
 
-        it('records server error details and formats status details and metadata as exception.stacktrace for gRPC server errors', async () => {
+        it('formats status details and metadata in resolveServerExceptionDetails and omits them from span exception event for gRPC server errors', async () => {
           const metadata = new grpc.Metadata();
           metadata.set('x-goog-request-id', 'req-123');
           const error = Object.assign(
@@ -1594,26 +1583,40 @@ describe('TracerHelper', () => {
             },
           );
 
+          const details = resolveServerExceptionDetails(error);
+          assert.strictEqual(details.message, 'Field name is invalid');
+          assert.strictEqual(
+            details.stacktrace,
+            'status_details: [{"field":"name","description":"must be non-empty"}]\n' +
+              'metadata: {"x-goog-request-id":"req-123"}',
+          );
+
           const span = await failWith(error);
           harness.assertExceptionEvent(
             {
               type: 'GoogleError',
-              message: 'Field name is invalid',
-              stacktrace:
-                'status_details: [{"field":"name","description":"must be non-empty"}]\n' +
-                'metadata: {"x-goog-request-id":"req-123"}',
+              message: null,
+              stacktrace: null,
             },
             {span},
           );
         });
 
-        it('records server error details and formats status details and metadata as exception.stacktrace for HTTP fallback server errors', async () => {
+        it('formats status details and metadata in resolveServerExceptionDetails and omits them from span exception event for HTTP fallback server errors', async () => {
           const error = Object.assign(new GoogleError('HTTP server error'), {
             httpStatusCode: 400,
             details: 'Bad HTTP Request',
             statusDetails: 'Quota exceeded',
             metadata: {'content-type': 'application/json'},
           });
+
+          const details = resolveServerExceptionDetails(error);
+          assert.strictEqual(details.message, 'Bad HTTP Request');
+          assert.strictEqual(
+            details.stacktrace,
+            'status_details: Quota exceeded\n' +
+              'metadata: {"content-type":"application/json"}',
+          );
 
           await assert.rejects(async () => {
             await traceCall(
@@ -1629,10 +1632,8 @@ describe('TracerHelper', () => {
           harness.assertExceptionEvent(
             {
               type: 'GoogleError',
-              message: 'Bad HTTP Request',
-              stacktrace:
-                'status_details: Quota exceeded\n' +
-                'metadata: {"content-type":"application/json"}',
+              message: null,
+              stacktrace: null,
             },
             {span},
           );
@@ -1698,10 +1699,8 @@ describe('TracerHelper', () => {
             harness.assertExceptionEvent(
               {
                 type: 'GoogleError',
-                message: 'Internal Server Error',
-                stacktrace:
-                  'status_details: Service unavailable\n' +
-                  'metadata: {"content-type":"application/json"}',
+                message: null,
+                stacktrace: null,
               },
               {span},
             );
@@ -1811,10 +1810,8 @@ describe('TracerHelper', () => {
           harness.assertExceptionEvent(
             {
               type: 'GoogleError',
-              message: 'Quota exhausted on backend',
-              stacktrace:
-                'status_details: [{"code":429,"cycle":"[Circular]"}]\n' +
-                'metadata: {"big-count":"9999999999999"}',
+              message: null,
+              stacktrace: null,
             },
             {span},
           );
@@ -4018,6 +4015,14 @@ describe('TracerHelper', () => {
         span.events[0].attributes?.['exception.type'],
         'Error',
       );
+      assert.strictEqual(
+        span.events[0].attributes?.['exception.message'],
+        undefined,
+      );
+      assert.strictEqual(
+        span.events[0].attributes?.['exception.stacktrace'],
+        undefined,
+      );
     });
 
     it('sets status.message attribute on both gRPC and HTTP low level network spans when an error occurs', async () => {
@@ -4205,8 +4210,84 @@ describe('TracerHelper', () => {
         'google.example.v1.Echo/FinalEcho',
       );
       assert.strictEqual(
+        grpcClientRequestSpan.attributes['url.template'],
+        undefined,
+      );
+      assert.strictEqual(
         httpClientRequestSpan.attributes['rpc.method'],
         'google.example.v1.Echo/FinalHttpEcho',
+      );
+      assert.strictEqual(
+        httpClientRequestSpan.attributes['url.template'],
+        '/v1/echo:first',
+      );
+    });
+
+    it('sets url.template on T3 client request span based on its first T4 child span when setAttemptHttpMethod is called', async () => {
+      await traceCall(
+        {
+          clientName: 'SecretManagerServiceClient',
+          methodName: 'AccessSecretVersion',
+          rpcType: 'http',
+        },
+        telemetryInfo,
+        async () => {
+          await traceAttempt(
+            {
+              apiName: 'google.cloud.secretmanager.v1.SecretManagerService',
+              clientName: 'SecretManagerServiceClient',
+              methodName: 'AccessSecretVersion',
+              rpcType: 'http',
+            },
+            telemetryInfo,
+            async () => {
+              setAttemptHttpMethod('GET', '/v1/{name}:access');
+              return [{payload: 'secret-1'}, undefined, undefined];
+            },
+          );
+          return traceAttempt(
+            {
+              apiName: 'google.cloud.secretmanager.v1.SecretManagerService',
+              clientName: 'SecretManagerServiceClient',
+              methodName: 'AccessSecretVersion',
+              rpcType: 'http',
+            },
+            telemetryInfo,
+            async () => {
+              setAttemptHttpMethod('POST', '/v1/{name}:other');
+              return [{payload: 'secret-2'}, undefined, undefined];
+            },
+          );
+        },
+      );
+
+      const spans = harness.getSpans('google-gax');
+      assert.strictEqual(spans.length, 3);
+
+      const firstAttemptSpan = spans.find(
+        s => s.name === 'GET /v1/{name}:access',
+      )!;
+      const secondAttemptSpan = spans.find(
+        s => s.name === 'POST /v1/{name}:other',
+      )!;
+      const clientRequestSpan = spans.find(
+        s => s.name === 'SecretManagerServiceClient.AccessSecretVersion',
+      )!;
+      assert.ok(firstAttemptSpan);
+      assert.ok(secondAttemptSpan);
+      assert.ok(clientRequestSpan);
+
+      assert.strictEqual(
+        firstAttemptSpan.attributes['url.template'],
+        '/v1/{name}:access',
+      );
+      assert.strictEqual(
+        secondAttemptSpan.attributes['url.template'],
+        '/v1/{name}:other',
+      );
+      assert.strictEqual(
+        clientRequestSpan.attributes['url.template'],
+        '/v1/{name}:access',
       );
     });
   });

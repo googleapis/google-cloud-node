@@ -487,7 +487,7 @@ export class OtelHarness {
   assertExceptionEvent(
     expected: {
       type?: string;
-      message?: string;
+      message?: string | null;
       stacktrace?: string | null;
     },
     options: {tracerName?: string; span?: ReadableSpan} = {},
@@ -506,7 +506,13 @@ export class OtelHarness {
         `expected exception.type to be ${expected.type}, got ${attrs['exception.type']}`,
       );
     }
-    if (expected.message !== undefined) {
+    if (expected.message === null) {
+      assert.strictEqual(
+        attrs['exception.message'],
+        undefined,
+        `expected exception.message to be absent, got ${attrs['exception.message']}`,
+      );
+    } else if (expected.message !== undefined) {
       assert.strictEqual(
         attrs['exception.message'],
         expected.message,

@@ -2172,6 +2172,10 @@ describe('createApiCall', () => {
           networkSpan.attributes['url.template'],
           '/v1beta1/echo:echo',
         );
+        assert.strictEqual(
+          clientRequestSpan.attributes['url.template'],
+          '/v1beta1/echo:echo',
+        );
       });
 
       it('ties concurrent low level network attempt spans to their respective client request spans without cross-talk', async () => {

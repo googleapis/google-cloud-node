@@ -134,6 +134,7 @@ const CLIENT_REQUEST_SPAN_KEY = createContextKey(
 );
 const ATTEMPT_SPAN_KEY = createContextKey('google-gax-attempt-span');
 const attemptUrlTemplates = new WeakMap<Span, string>();
+const clientRequestFirstAttempt = new WeakMap<Span, Span>();
 
 /**
  * Formats the span name for an HTTP low level network attempt span as
@@ -149,13 +150,17 @@ function formatHttpAttemptSpanName(
 
 /**
  * Updates the `http.request.method` attribute, optional `url.template` attribute,
- * and span name on the currently active low level network attempt span, if any.
+ * and span name on the currently active low level network attempt span, and
+ * propagates `url.template` to the active client request span if this is its first attempt span.
  */
 export function setAttemptHttpMethod(
   httpMethod: string,
   urlTemplate?: string,
 ): void {
-  const attemptSpan = context.active().getValue(ATTEMPT_SPAN_KEY) as
+  const activeContext = context.active();
+  const attemptSpan = activeContext.getValue(ATTEMPT_SPAN_KEY) as
+    Span | undefined;
+  const clientRequestSpan = activeContext.getValue(CLIENT_REQUEST_SPAN_KEY) as
     Span | undefined;
   if (attemptSpan) {
     attemptSpan.setAttribute('http.request.method', httpMethod);
@@ -166,6 +171,13 @@ export function setAttemptHttpMethod(
     // Preserve any previously recorded URL template when updating the span name.
     const resolvedUrlTemplate =
       urlTemplate || attemptUrlTemplates.get(attemptSpan);
+    if (
+      resolvedUrlTemplate &&
+      clientRequestSpan &&
+      clientRequestFirstAttempt.get(clientRequestSpan) === attemptSpan
+    ) {
+      clientRequestSpan.setAttribute('url.template', resolvedUrlTemplate);
+    }
     attemptSpan.updateName(
       formatHttpAttemptSpanName(httpMethod, resolvedUrlTemplate),
     );
@@ -860,41 +872,19 @@ export function resolveServerExceptionDetails(e: Error): {
 }
 
 /**
- * Records an `exception` span event. For client-side errors, records local client
- * stack trace and client error message. For server-side errors, records server
- * error details and formats status details and metadata as `exception.stacktrace`
- * (replacing the local client stack trace).
+ * Records an `exception` span event with `exception.type`.
  */
 function recordExceptionEvent(
   span: Span,
   e: Error,
-  rpcType: 'grpc' | 'http',
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _rpcType: 'grpc' | 'http',
 ): void {
   const exceptionType = resolveExceptionType(e);
-
-  if (isServerSideError(e, rpcType)) {
-    // Record server error details and metadata instead of local stack trace.
-    const {message, stacktrace} = resolveServerExceptionDetails(e);
-
-    const attributes: Attributes = {
-      'exception.type': exceptionType,
-      'exception.message': message,
-    };
-    if (stacktrace) {
-      attributes['exception.stacktrace'] = stacktrace;
-    }
-    span.addEvent('exception', attributes);
-  } else {
-    // Record local client error message and stack trace.
-    const attributes: Attributes = {
-      'exception.type': exceptionType,
-      'exception.message': e.message,
-    };
-    if (e.stack) {
-      attributes['exception.stacktrace'] = e.stack;
-    }
-    span.addEvent('exception', attributes);
-  }
+  const attributes: Attributes = {
+    'exception.type': exceptionType,
+  };
+  span.addEvent('exception', attributes);
 }
 
 /**
@@ -1372,7 +1362,8 @@ export function traceCall(
  * HTTP attempt spans are named `"{http.request.method} {url.template}"` when a URL
  * template is available or `"{http.request.method}"` otherwise; gRPC attempt spans
  * are named `"{apiName}/{methodName}"` or `"{methodName}"`. Also updates `rpc.method`
- * on the parent client request span to `"{apiName}/{methodName}"` for both transports.
+ * on the parent client request span to `"{apiName}/{methodName}"` for both transports,
+ * and propagates `url.template` to the parent client request span from its first HTTP attempt.
  *
  * @param {AttemptTraceContext} dynamicArgs - Dynamic trace context for the RPC attempt.
  * @param {StaticTraceContext} staticArgs - Static trace context for the client library.
@@ -1410,6 +1401,13 @@ export function traceAttempt<T = GaxCallResult>(
     {kind: SpanKind.CLIENT},
     baseContext,
     (span: Span) => {
+      const isFirstAttemptForClientSpan =
+        clientRequestSpan !== undefined &&
+        !clientRequestFirstAttempt.has(clientRequestSpan);
+      if (isFirstAttemptForClientSpan) {
+        clientRequestFirstAttempt.set(clientRequestSpan, span);
+      }
+
       // Update parent client request span rpc.method from this child attempt.
       if (clientRequestSpan && rpcMethod) {
         clientRequestSpan.setAttribute('rpc.method', rpcMethod);
@@ -1427,6 +1425,9 @@ export function traceAttempt<T = GaxCallResult>(
         if (urlTemplate) {
           attemptUrlTemplates.set(span, urlTemplate);
           initialAttributes['url.template'] = urlTemplate;
+          if (clientRequestSpan && isFirstAttemptForClientSpan) {
+            clientRequestSpan.setAttribute('url.template', urlTemplate);
+          }
         }
       }
       if (urlDomain !== undefined) {
@@ -1457,8 +1458,22 @@ export function traceAttempt<T = GaxCallResult>(
             rawAddress,
             rawPort,
             onBeforeEnd: () => {
-              if (clientRequestSpan && rpcMethod) {
-                clientRequestSpan.setAttribute('rpc.method', rpcMethod);
+              if (clientRequestSpan) {
+                if (rpcMethod) {
+                  clientRequestSpan.setAttribute('rpc.method', rpcMethod);
+                }
+                const finalUrlTemplate =
+                  attemptUrlTemplates.get(span) ?? urlTemplate;
+                if (
+                  isFirstAttemptForClientSpan &&
+                  dynamicArgs.rpcType === 'http' &&
+                  finalUrlTemplate
+                ) {
+                  clientRequestSpan.setAttribute(
+                    'url.template',
+                    finalUrlTemplate,
+                  );
+                }
               }
             },
           },
