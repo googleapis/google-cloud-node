@@ -34,7 +34,7 @@ const randomUUID = () =>
  * is resolved dynamically at runtime.
  *
  * If the environment variable is not set, tracing requires the client option
- * and the client must have supplied `internalTelemetryInfo` (the extra protoc param).
+ * (`enableTelemetryTracing`).
  *
  * @param settings
  * @returns true if telemetry tracing is enabled, false otherwise
@@ -54,13 +54,9 @@ export function checkTelemetryEnabled(settings?: CallSettings): boolean {
     return lower === 'true' || lower === '1';
   }
 
-  const clientOptIn = Boolean(
+  return Boolean(
     settings?.enableTelemetryTracing ||
-    settings?.otherArgs?.enableTelemetryTracing,
-  );
-
-  return (
-    clientOptIn && settings?.otherArgs?.internalTelemetryInfo !== undefined
+      settings?.otherArgs?.enableTelemetryTracing,
   );
 }
 

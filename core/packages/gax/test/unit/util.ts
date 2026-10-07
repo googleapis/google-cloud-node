@@ -259,11 +259,20 @@ describe('util.ts', () => {
       assert.strictEqual(checkTelemetryEnabled(noTracingSettings), false);
     });
 
-    it('returns false when internalTelemetryInfo is not set on settings', () => {
+    it('returns true when enableTelemetryTracing is set without internalTelemetryInfo', () => {
       const noInfoSettings = new CallSettings({
         enableTelemetryTracing: true,
       });
-      assert.strictEqual(checkTelemetryEnabled(noInfoSettings), false);
+      assert.strictEqual(checkTelemetryEnabled(noInfoSettings), true);
+    });
+
+    it('returns true when otherArgs.enableTelemetryTracing is set without internalTelemetryInfo', () => {
+      const otherArgsSettings = new CallSettings({
+        otherArgs: {
+          enableTelemetryTracing: true,
+        },
+      });
+      assert.strictEqual(checkTelemetryEnabled(otherArgsSettings), true);
     });
 
     it('returns false when settings is undefined', () => {
