@@ -4,6 +4,24 @@
     {
       "changes": [
         {
+          "type": "feat",
+          "sha": "a5eec894b054e0605fd8e79591a88393bb2697c6",
+          "message": "Add individual CLI flags for Bun monkey patches",
+          "issues": [
+            "9533"
+          ],
+          "scope": "tools"
+        }
+      ],
+      "version": "8.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/storage",
+      "id": "21b60b79-d3ed-4119-a83b-fbca9bc0a996",
+      "createTime": "2026-10-07T13:35:39.845Z"
+    },
+    {
+      "changes": [
+        {
           "type": "fix",
           "sha": "4443d6d6b171975ce9d55fe9853ea144dade09d5",
           "message": "Align ClientConfig.port type with gax.GrpcClientOptions",
@@ -100053,5 +100071,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-10-06T19:55:59.925Z"
+  "updateTime": "2026-10-07T13:35:39.845Z"
 }
