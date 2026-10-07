@@ -60,11 +60,6 @@ const SHIM_FLAGS = [
     envOut: 'BUN_ENABLE_KEYPAIR_SHIM',
   },
   {
-    flag: '--require-shim',
-    envIn: 'BUN_REQUIRE_SHIM',
-    envOut: 'BUN_ENABLE_REQUIRE_SHIM',
-  },
-  {
     flag: '--abort-signal-timeout-shim',
     envIn: 'BUN_ABORT_SIGNAL_TIMEOUT_SHIM',
     envOut: 'BUN_ENABLE_ABORT_SIGNAL_TIMEOUT_SHIM',
