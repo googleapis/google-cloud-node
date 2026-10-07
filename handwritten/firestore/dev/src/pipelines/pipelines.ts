@@ -1866,9 +1866,16 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
   /**
    * Performs an insert operation on documents from previous stages.
    *
+   * @return A new {@code Pipeline} object with this stage appended to the stage list.
+   */
+  insert(): Pipeline;
+  /**
+   * Performs an insert operation on documents from previous stages.
+   *
    * @param options - Options defining how this Insert stage is evaluated.
    * @return A new {@code Pipeline} object with this stage appended to the stage list.
    */
+  insert(options: firestore.Pipelines.InsertStageOptions): Pipeline;
   insert(options?: firestore.Pipelines.InsertStageOptions): Pipeline {
     return this._addStage(
       new InsertStage((options ?? {}) as InternalInsertStageOptions),
