@@ -12931,10 +12931,16 @@ declare namespace FirebaseFirestore {
       /**
        * Performs an insert operation on documents from previous stages.
        *
+       * @return A new {@link Pipeline} object with this stage appended to the stage list.
+       */
+      insert(): Pipeline;
+      /**
+       * Performs an insert operation on documents from previous stages.
+       *
        * @param options - Options defining how this Insert stage is evaluated.
        * @return A new {@link Pipeline} object with this stage appended to the stage list.
        */
-      insert(options?: InsertStageOptions): Pipeline;
+      insert(options: InsertStageOptions): Pipeline;
       /**
        * Performs an upsert operation on documents from previous stages.
        *
