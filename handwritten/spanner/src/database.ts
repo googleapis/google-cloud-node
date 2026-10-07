@@ -60,8 +60,6 @@ import {
 import {PartialResultStream, Row} from './partial-result-stream';
 import {Session} from './session';
 import {
-  isSessionNotFoundError,
-  SessionPool,
   SessionPoolCloseCallback,
   SessionPoolInterface,
   SessionPoolOptions,
@@ -155,6 +153,11 @@ type GetSnapshotCallback = NormalCallback<Snapshot>;
 
 type GetTransactionCallback = NormalCallback<Transaction>;
 
+/**
+* @deprecated Session pool is deprecated and will be removed in a future release.
+    Multiplexed sessions are now used for all operations by default, eliminating
+    the need for session pooling.
+*/
 export interface SessionPoolConstructor {
   new (
     database: Database,
@@ -340,10 +343,15 @@ export interface WriteAtLeastOnceOptions extends CallOptions {
  * @class
  *
  * @param {string} name Name of the database.
- * @param {SessionPoolOptions|SessionPoolInterface} options Session pool
- *     configuration options or custom pool interface.
- * @param {google.spanner.v1.ExecuteSqlRequest.IQueryOptions} queryOptions
+ * @param {SessionPoolOptions|SessionPoolInterface} [poolOptions] Session pool
+ *     configuration options.
+ *     **Deprecated**. Session pool options is deprecated and will be removed in a future release.
+ *     Multiplexed sessions are now used for all operations by default, eliminating
+ *     the need for session pooling.
+ * @param {google.spanner.v1.ExecuteSqlRequest.IQueryOptions} [queryOptions]
  *     The default query options to use for queries on the database.
+ * @param {string} [databaseRole] The database role to use for sessions on
+ *     the database.
  *
  * @example
  * ```
@@ -356,10 +364,8 @@ export interface WriteAtLeastOnceOptions extends CallOptions {
 class Database extends common.GrpcServiceObject {
   private instance: Instance;
   formattedName_: string;
-  pool_: SessionPoolInterface;
   sessionFactory_: SessionFactoryInterface;
   queryOptions_?: spannerClient.spanner.v1.ExecuteSqlRequest.IQueryOptions;
-  isMuxEnabledForRW_?: boolean;
   commonHeaders_: {[k: string]: string};
   request: DatabaseRequest;
   databaseRole?: string | null;
@@ -460,43 +466,7 @@ class Database extends common.GrpcServiceObject {
         options: CreateDatabaseOptions,
         callback: CreateDatabaseCallback,
       ) => {
-        const pool = this.pool_ as SessionPool;
-        if (pool._pending > 0) {
-          // If there are BatchCreateSessions requests pending, then we should
-          // wait until these have finished before we try to create the database.
-          // Otherwise the results of these requests might be propagated to
-          // client requests that are submitted after the database has been
-          // created. If the pending requests have not finished within 10 seconds,
-          // they will be ignored and the database creation will proceed.
-          let timeout;
-          const promises = [
-            new Promise<void>(
-              resolve => (timeout = setTimeout(resolve, 10000)),
-            ),
-            new Promise<void>(resolve => {
-              pool
-                .on('available', () => {
-                  if (pool._pending === 0) {
-                    clearTimeout(timeout);
-                    resolve();
-                  }
-                })
-                .on('createError', () => {
-                  if (pool._pending === 0) {
-                    clearTimeout(timeout);
-                    resolve();
-                  }
-                });
-            }),
-          ];
-          Promise.race(promises)
-            .then(() =>
-              instance.createDatabase(formattedName_, options, callback),
-            )
-            .catch(() => {});
-        } else {
-          return instance.createDatabase(formattedName_, options, callback);
-        }
+        return instance.createDatabase(formattedName_, options, callback);
       },
     } as {} as ServiceObjectConfig);
 
@@ -528,14 +498,7 @@ class Database extends common.GrpcServiceObject {
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     this.requestStream = instance.requestStream as any;
-    this.sessionFactory_ = new SessionFactory(this, name, poolOptions);
-    this.pool_ = this.sessionFactory_.getPool();
-    this.isMuxEnabledForRW_ = this.sessionFactory_.isMultiplexedEnabledForRW();
-    const sessionPoolInstance = this.pool_ as SessionPool;
-    if (sessionPoolInstance) {
-      sessionPoolInstance._observabilityOptions =
-        instance._observabilityOptions;
-    }
+    this.sessionFactory_ = new SessionFactory(this, name);
     this.queryOptions_ = Object.assign(
       Object.assign({}, queryOptions),
       Database.getEnvironmentQueryOptions(),
@@ -862,18 +825,6 @@ class Database extends common.GrpcServiceObject {
    *     // Error handling omitted.
    *   }
    * });
-   *
-   * //-
-   * // In the event of a session leak, the error object will contain a
-   * // `messages` field.
-   * //-
-   * database.close(function(err) {
-   *   if (err && err.messages) {
-   *     err.messages.forEach(function(message) {
-   *       console.error(message);
-   *     });
-   *   }
-   * });
    * ```
    */
   close(callback: SessionPoolCloseCallback): void;
@@ -881,10 +832,16 @@ class Database extends common.GrpcServiceObject {
   close(
     callback?: SessionPoolCloseCallback,
   ): void | Promise<DatabaseCloseResponse> {
-    const key = this.id!.split('/').pop();
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (this.parent as any).databases_.delete(key);
-    this.pool_.close(callback!);
+    this.sessionFactory_?.close?.();
+    const databases = (this.parent as Instance).databases_;
+    for (const [key, database] of databases) {
+      if (database === this) {
+        databases.delete(key);
+      }
+    }
+    if (callback) {
+      process.nextTick(callback);
+    }
   }
   /**
    * @typedef {array} CreateTransactionResponse
@@ -939,15 +896,9 @@ class Database extends common.GrpcServiceObject {
             {session: session!},
             options,
           );
-          this._releaseOnEnd(session!, transaction, span);
           transaction.begin((err, resp) => {
             if (err) {
               setSpanError(span, err);
-              if (isSessionNotFoundError(err)) {
-                span.addEvent('No session available', {
-                  'session.id': session?.id,
-                });
-              }
               span.end();
               callback!(err, null, resp!);
               return;
@@ -1202,28 +1153,6 @@ class Database extends common.GrpcServiceObject {
       const table = this.table(tableName!);
       table._observabilityOptions = this._traceConfig!.opts;
       callback!(null, table, operation!, resp!);
-    });
-  }
-  /**
-   * Decorates transaction so that when end() is called it will return the session
-   * back into the pool.
-   *
-   * @private
-   *
-   * @param {Session} session The session to release.
-   * @param {Transaction} transaction The transaction to observe.
-   * @returns {Transaction}
-   */
-  private _releaseOnEnd(session: Session, transaction: Snapshot, span: Span) {
-    transaction.once('end', () => {
-      try {
-        this.sessionFactory_.release(session);
-      } catch (e) {
-        setSpanErrorAndException(span, e as Error);
-        this.emit('error', e);
-      } finally {
-        span.end();
-      }
     });
   }
   /**
@@ -2117,8 +2046,7 @@ class Database extends common.GrpcServiceObject {
    * Wrapper around {@link v1.SpannerClient#beginTransaction}.
    *
    * **NOTE:** When finished with the Snapshot, {@link Snapshot#end} should be
-   * called to release the underlying {@link Session}. **Failure to do could
-   * result in a Session leak.**
+   * called to end the snapshot transaction.
    *
    * **NOTE:** Since the returned {@link Snapshot} transaction is not a
    * single-use transaction, it is invalid to set the `minReadTimestamp` and
@@ -2207,33 +2135,16 @@ class Database extends common.GrpcServiceObject {
         }
 
         const snapshot = session!.snapshot(options, this.queryOptions_);
-
+        span.addEvent('Using Session', {'session.id': session?.id});
         snapshot.begin(err => {
           if (err) {
             setSpanError(span, err);
-            if (
-              isSessionNotFoundError(err) &&
-              !this.sessionFactory_.isMultiplexedEnabled()
-            ) {
-              span.addEvent('No session available', {
-                'session.id': session?.id,
-              });
-              session!.lastError = err;
-              this.sessionFactory_.release(session!);
-              span.end();
-              this.getSnapshot(options, callback!);
-            } else {
-              span.addEvent('Using Session', {'session.id': session?.id});
-              this.sessionFactory_.release(session!);
-              span.end();
-              callback!(err);
-            }
+            span.end();
+            callback!(err);
             return;
           }
-
-          this._releaseOnEnd(session!, snapshot, span);
           span.end();
-          callback!(err, snapshot);
+          callback!(null, snapshot);
         });
       });
     });
@@ -2252,9 +2163,8 @@ class Database extends common.GrpcServiceObject {
    *
    * **NOTE:** In the event that you encounter an error while reading/writing,
    * if you decide to forgo calling {@link Transaction#commit} or
-   * {@link Transaction#rollback}, then you need to call
-   * {@link Transaction#end} to release the underlying {@link Session} object.
-   * **Failure to do could result in a Session leak.**
+   * {@link Transaction#rollback}, then you should call
+   * {@link Transaction#end} to end the transaction.
    *
    * Wrapper around {@link v1.SpannerClient#beginTransaction}.
    *
@@ -2309,28 +2219,29 @@ class Database extends common.GrpcServiceObject {
         transactionTag: options.requestOptions?.transactionTag,
       },
       span => {
-        this.sessionFactory_.getSessionForReadWrite(
-          (err, session, transaction) => {
-            if (!err) {
-              if (options.requestOptions) {
-                transaction!.requestOptions = Object.assign(
-                  transaction!.requestOptions || {},
-                  options.requestOptions,
-                );
-              }
-              transaction?.setReadWriteTransactionOptions(
-                options as RunTransactionOptions,
-              );
-              span.addEvent('Using Session', {'session.id': session?.id});
-              transaction!._observabilityOptions = this._observabilityOptions;
-              this._releaseOnEnd(session!, transaction!, span);
-            } else {
-              setSpanError(span, err);
-            }
+        this.sessionFactory_.getSession((err, session, transaction) => {
+          if (err) {
+            setSpanError(span, err);
             span.end();
-            cb!(err as grpc.ServiceError | null, transaction);
-          },
-        );
+            cb!(err as grpc.ServiceError);
+            return;
+          }
+          const activeTransaction =
+            transaction ?? session!.transaction(this.queryOptions_);
+          if (options.requestOptions) {
+            activeTransaction!.requestOptions = Object.assign(
+              activeTransaction!.requestOptions || {},
+              options.requestOptions,
+            );
+          }
+          activeTransaction?.setReadWriteTransactionOptions(
+            options as RunTransactionOptions,
+          );
+          span.addEvent('Using Session', {'session.id': session?.id});
+          activeTransaction!._observabilityOptions = this._observabilityOptions;
+          span.end();
+          cb!(null, activeTransaction);
+        });
       },
     );
   }
@@ -2560,20 +2471,17 @@ class Database extends common.GrpcServiceObject {
       span.addEvent('Using Session', {'session.id': session?.id});
       config.reqOpts.session = session!.formattedName_;
       this.request<Session>(config, (err, ...args) => {
-        sessionFactory_.release(session!);
         callback!(err, ...args);
       });
     };
 
-    const session = sessionFactory_.isMultiplexedEnabledForRW?.()
-      ? sessionFactory_.getSessionSync?.()
-      : null;
+    const session = sessionFactory_.getSessionSync?.();
     if (session) {
       onSession(null, session);
       return;
     }
 
-    sessionFactory_.getSessionForReadWrite(onSession);
+    sessionFactory_.getSession(onSession);
   }
 
   /**
@@ -2589,11 +2497,11 @@ class Database extends common.GrpcServiceObject {
     const self = this;
     const sessionFactory_ = this.sessionFactory_;
     let requestStream: CancelableDuplex;
-    let session: Session | null;
+    let aborted = false;
     const waitForSessionStream = streamEvents(through.obj());
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (waitForSessionStream as any).abort = () => {
-      releaseSession();
+      aborted = true;
       if (requestStream) {
         requestStream.cancel();
       }
@@ -2601,29 +2509,21 @@ class Database extends common.GrpcServiceObject {
     function destroyStream(err: grpc.ServiceError) {
       waitForSessionStream.destroy(err);
     }
-    function releaseSession() {
-      if (session) {
-        sessionFactory_.release(session);
-        session = null;
-      }
-    }
     waitForSessionStream.on('reading', () => {
-      sessionFactory_.getSession((err, session_) => {
+      sessionFactory_.getSession((err, session) => {
+        if (aborted) {
+          return;
+        }
         const span = getActiveOrNoopSpan();
         if (err) {
           setSpanError(span, err as ServiceError);
           destroyStream(err as ServiceError);
           return;
         }
-        span.addEvent('Using Session', {'session.id': session_?.id});
-        session = session_!;
+        span.addEvent('Using Session', {'session.id': session?.id});
         config.reqOpts.session = session!.formattedName_;
         requestStream = self.requestStream(config);
-        requestStream
-          .on('error', releaseSession)
-          .on('error', destroyStream)
-          .on('end', releaseSession)
-          .pipe(waitForSessionStream);
+        requestStream.on('error', destroyStream).pipe(waitForSessionStream);
       });
     });
     return waitForSessionStream;
@@ -2930,10 +2830,7 @@ class Database extends common.GrpcServiceObject {
         ? (optionsOrCallback as TimestampBounds)
         : {};
 
-    if (
-      this.runStream !== Database.prototype.runStream ||
-      !this.sessionFactory_.isMultiplexedEnabled()
-    ) {
+    if (this.runStream !== Database.prototype.runStream) {
       this._runLegacy(query, options, callback!);
       return;
     }
@@ -2942,8 +2839,8 @@ class Database extends common.GrpcServiceObject {
 
   /**
    * Always runs the query through the full streaming pipeline (Database.prototype.runStream).
-   * Used when runStream has been overridden on Database, or when multiplexed
-   * sessions are disabled (requiring standard session pool checkout and session-not-found retries).
+   * Used when runStream has been overridden on Database to preserve backward compatibility
+   * with custom stream implementations.
    *
    * @private
    */
@@ -3020,7 +2917,7 @@ class Database extends common.GrpcServiceObject {
 
   /**
    * Acquires a session and executes the query on a snapshot, managing span
-   * lifetimes and session release.
+   * lifetimes.
    *
    * @private
    */
@@ -3063,7 +2960,7 @@ class Database extends common.GrpcServiceObject {
       streamSpan.addEvent('Using Session', {'session.id': session?.id});
       try {
         snapshot = session!.snapshot(options, this.queryOptions_);
-        this._runOnSnapshot(snapshot, session!, query, complete);
+        this._runOnSnapshot(snapshot, query, complete);
       } catch (syncError) {
         // Defer error delivery via nextTick so callback callers never experience
         // synchronous callback execution (Zalgo) when getSessionSync() returns synchronously.
@@ -3081,13 +2978,12 @@ class Database extends common.GrpcServiceObject {
   }
 
   /**
-   * Executes the query on the snapshot and binds session release to snapshot end.
+   * Executes the query on the snapshot.
    *
    * @private
    */
   private _runOnSnapshot(
     snapshot: Snapshot,
-    session: Session,
     query: string | ExecuteSqlRequest,
     callback: (
       error: grpc.ServiceError | null,
@@ -3096,16 +2992,6 @@ class Database extends common.GrpcServiceObject {
       metadata?: ResultSetMetadata,
     ) => void,
   ): void {
-    if (!session.metadata?.multiplexed) {
-      snapshot.once('end', () => {
-        try {
-          this.sessionFactory_.release(session);
-        } catch (releaseError) {
-          this.emit('error', releaseError);
-        }
-      });
-    }
-
     const snapshotWithRun = snapshot as Snapshot & {
       _run?: (
         query: string | ExecuteSqlRequest,
@@ -3163,7 +3049,7 @@ class Database extends common.GrpcServiceObject {
         ...getQueryTraceConfig(query),
       },
       span => {
-        this.sessionFactory_.getSessionForPartitionedOps((err, session) => {
+        this.sessionFactory_.getSession((err, session) => {
           if (err) {
             setSpanError(span, err);
             span.end();
@@ -3195,7 +3081,6 @@ class Database extends common.GrpcServiceObject {
     }
     transaction.begin(err => {
       if (err) {
-        this.sessionFactory_.release(session!);
         callback!(err, 0);
         return;
       }
@@ -3203,13 +3088,11 @@ class Database extends common.GrpcServiceObject {
       transaction.runUpdate(query, async (err, updateCount) => {
         if (err) {
           if (err.code !== grpc.status.ABORTED) {
-            this.sessionFactory_.release(session!);
             callback!(err, 0);
             return;
           }
           void this._runPartitionedUpdate(session, query, callback);
         } else {
-          this.sessionFactory_.release(session!);
           callback!(null, updateCount);
           return;
         }
@@ -3366,46 +3249,16 @@ class Database extends common.GrpcServiceObject {
 
           const snapshot = session!.snapshot(options, this.queryOptions_);
 
-          this._releaseOnEnd(session!, snapshot, span);
-
-          let dataReceived = false;
-          let dataStream = snapshot.runStream(query);
+          const dataStream = snapshot.runStream(query);
 
           const endListener = () => {
             snapshot.end();
           };
           dataStream
-            .once('data', () => (dataReceived = true))
             .once('error', err => {
               setSpanError(span, err);
-
-              if (
-                !dataReceived &&
-                isSessionNotFoundError(err as grpc.ServiceError) &&
-                !this.sessionFactory_.isMultiplexedEnabled()
-              ) {
-                // If it is a 'Session not found' error and we have not yet received
-                // any data, we can safely retry the query on a new session.
-                // Register the error on the session so the pool can discard it.
-                if (session) {
-                  session.lastError = err as grpc.ServiceError;
-                }
-                span.addEvent('No session available', {
-                  'session.id': session?.id,
-                });
-                // Remove the current data stream from the end user stream.
-                dataStream.unpipe(proxyStream);
-                dataStream.removeListener('end', endListener);
-                dataStream.end();
-                snapshot.end();
-                span.end();
-                // Create a new data stream and add it to the end user stream.
-                dataStream = this.runStream(query, options);
-                dataStream.pipe(proxyStream);
-              } else {
-                proxyStream.destroy(err);
-                snapshot.end();
-              }
+              proxyStream.destroy(err);
+              snapshot.end();
             })
             .on('stats', stats => proxyStream.emit('stats', stats))
             .on('response', response => proxyStream.emit('response', response))
@@ -3456,9 +3309,8 @@ class Database extends common.GrpcServiceObject {
    *
    * **NOTE:** In the event that you encounter an error while reading/writing,
    * if you decide to forgo calling {@link Transaction#commit} or
-   * {@link Transaction#rollback}, then you need to call
-   * {@link Transaction#end} to release the underlying {@link Session} object.
-   * **Failure to do could result in a Session leak.**
+   * {@link Transaction#rollback}, then you should call
+   * {@link Transaction#end} to end the transaction.
    *
    * For a more complete listing of functionality available to a Transaction, see
    * the {@link Transaction} API documentation. For a general overview of
@@ -3547,32 +3399,26 @@ class Database extends common.GrpcServiceObject {
     options: RunTransactionOptions,
     runFn: RunTransactionCallback,
   ): void {
-    this.sessionFactory_.getSessionForReadWrite(
-      (err, session?, transaction?) => {
-        if (err) {
-          setSpanError(span, err);
-          if (isSessionNotFoundError(err as grpc.ServiceError)) {
-            span.addEvent('No session available', {
-              'session.id': session?.id,
-            });
-            span.end();
-            this.runTransaction(options, runFn);
-            return;
-          }
-          span.end();
-          runFn(err as grpc.ServiceError);
-          return;
-        }
+    this.sessionFactory_.getSession((err, session?, transaction?) => {
+      if (err) {
+        setSpanError(span, err);
+        span.end();
+        runFn(err as grpc.ServiceError);
+        return;
+      }
 
-        this._executeTransactionRunner(
-          session!,
-          transaction!,
-          span,
-          options,
-          runFn,
-        );
-      },
-    );
+      span.addEvent('Using Session', {'session.id': session?.id});
+      const activeTransaction =
+        transaction ?? session!.transaction(this.queryOptions_);
+
+      this._executeTransactionRunner(
+        session!,
+        activeTransaction!,
+        span,
+        options,
+        runFn,
+      );
+    });
   }
 
   private _executeTransactionRunner(
@@ -3593,40 +3439,18 @@ class Database extends common.GrpcServiceObject {
       options as RunTransactionOptions,
     );
 
-    const release = () => {
-      this.sessionFactory_.release(session);
-      span.end();
-    };
-
     const runner = new TransactionRunner(session, transaction, runFn, options);
 
     runner
       .run()
-      .then(
-        () => {
-          release();
-          return null;
-        },
-        err => {
-          setSpanError(span, err!);
-
-          if (isSessionNotFoundError(err)) {
-            span.addEvent('No session available', {
-              'session.id': session.id,
-            });
-            release();
-            this.runTransaction(options, runFn);
-          } else {
-            setImmediate(runFn, err);
-            release();
-          }
-          return null;
-        },
-      )
-      .catch(err => {
-        setSpanErrorAndException(span, err as Error);
+      .then(() => {
         span.end();
-        this.emit('error', err);
+        return null;
+      })
+      .catch(err => {
+        setSpanError(span, err!);
+        setImmediate(runFn, err);
+        span.end();
       });
   }
 
@@ -3662,9 +3486,8 @@ class Database extends common.GrpcServiceObject {
    *
    * **NOTE:** In the event that you encounter an error while reading/writing,
    * if you decide to forgo calling {@link Transaction#commit} or
-   * {@link Transaction#rollback}, then you need to call
-   * {@link Transaction#end} to release the underlying {@link Session} object.
-   * **Failure to do could result in a Session leak.**
+   * {@link Transaction#rollback}, then you should call
+   * {@link Transaction#end} to end the transaction.
    *
    * For a more complete listing of functionality available to a Transaction, see
    * the {@link Transaction} API documentation. For a general overview of
@@ -3710,7 +3533,7 @@ class Database extends common.GrpcServiceObject {
         : {};
 
     let sessionId = '';
-    const getSession = this.sessionFactory_.getSessionForReadWrite.bind(
+    const getSession = this.sessionFactory_.getSession.bind(
       this.sessionFactory_,
     );
 
@@ -3721,47 +3544,32 @@ class Database extends common.GrpcServiceObject {
         transactionTag: options?.requestOptions?.transactionTag,
       },
       async span => {
-        // Loop to retry 'Session not found' errors.
-        // (and yes, we like while (true) more than for (;;) here)
-        // eslint-disable-next-line no-constant-condition
-        while (true) {
-          try {
-            const [session, transaction] = await promisify(getSession)();
-            transaction.requestOptions = Object.assign(
-              transaction.requestOptions || {},
-              options.requestOptions,
-            );
-            transaction!.setReadWriteTransactionOptions(
-              options as RunTransactionOptions,
-            );
-            sessionId = session?.id;
-            span.addEvent('Using Session', {'session.id': sessionId});
-            const runner = new AsyncTransactionRunner<T>(
-              session,
-              transaction,
-              runFn,
-              options,
-            );
+        try {
+          const [session, transaction] = await promisify(getSession)();
+          const activeTransaction =
+            transaction ?? session.transaction(this.queryOptions_);
+          activeTransaction.requestOptions = Object.assign(
+            activeTransaction.requestOptions || {},
+            options.requestOptions,
+          );
+          activeTransaction!.setReadWriteTransactionOptions(
+            options as RunTransactionOptions,
+          );
+          sessionId = session?.id;
+          span.addEvent('Using Session', {'session.id': sessionId});
+          const runner = new AsyncTransactionRunner<T>(
+            session,
+            activeTransaction,
+            runFn,
+            options,
+          );
 
-            try {
-              return await runner.run();
-            } catch (e) {
-              setSpanErrorAndException(span, e as Error);
-              throw e;
-            } finally {
-              span.end();
-              this.sessionFactory_.release(session);
-            }
-          } catch (e) {
-            if (isSessionNotFoundError(e as ServiceError)) {
-              span.addEvent('No session available', {
-                'session.id': sessionId,
-              });
-            } else {
-              span.end();
-              throw e;
-            }
-          }
+          return await runner.run();
+        } catch (e) {
+          setSpanErrorAndException(span, e as Error);
+          throw e;
+        } finally {
+          span.end();
         }
       },
     );
@@ -3838,7 +3646,7 @@ class Database extends common.GrpcServiceObject {
         transactionTag: options?.requestOptions?.transactionTag,
       },
       span => {
-        this.sessionFactory_.getSessionForReadWrite((err, session) => {
+        this.sessionFactory_.getSession((err, session) => {
           if (err) {
             proxyStream.destroy(err);
             setSpanError(span, err);
@@ -3857,8 +3665,7 @@ class Database extends common.GrpcServiceObject {
               excludeTxnFromChangeStream: options?.excludeTxnFromChangeStreams,
             },
           );
-          let dataReceived = false;
-          let dataStream = this.requestStream({
+          const dataStream = this.requestStream({
             client: 'SpannerClient',
             method: 'batchWrite',
             reqOpts,
@@ -3866,41 +3673,13 @@ class Database extends common.GrpcServiceObject {
             headers: this.commonHeaders_,
           });
           dataStream
-            .once('data', () => (dataReceived = true))
             .once('error', err => {
               setSpanError(span, err);
-
-              if (
-                !dataReceived &&
-                isSessionNotFoundError(err as grpc.ServiceError)
-              ) {
-                // If there's a 'Session not found' error and we have not yet received
-                // any data, we can safely retry the writes on a new session.
-                // Register the error on the session so the pool can discard it.
-                if (session) {
-                  session.lastError = err as grpc.ServiceError;
-                }
-                span.addEvent('No session available', {
-                  'session.id': session?.id,
-                });
-                // Remove the current data stream from the end user stream.
-                dataStream.unpipe(proxyStream);
-                dataStream.end();
-                span.end();
-                // Create a new stream and add it to the end user stream.
-                dataStream = this.batchWriteAtLeastOnce(
-                  mutationGroups,
-                  options,
-                );
-                dataStream.pipe(proxyStream);
-              } else {
-                span.end();
-                proxyStream.destroy(err);
-              }
+              span.end();
+              proxyStream.destroy(err);
             })
             .once('end', () => {
               span.end();
-              this.sessionFactory_.release(session!);
             })
             .pipe(proxyStream);
         });
@@ -3987,18 +3766,6 @@ class Database extends common.GrpcServiceObject {
 
     return startTrace('Database.writeAtLeastOnce', this._traceConfig, span => {
       this.sessionFactory_.getSession((err, session?, transaction?) => {
-        if (
-          err &&
-          isSessionNotFoundError(err as grpc.ServiceError) &&
-          !this.sessionFactory_.isMultiplexedEnabled()
-        ) {
-          span.addEvent('No session available', {
-            'session.id': session?.id,
-          });
-          span.end();
-          this.writeAtLeastOnce(mutations, options, cb!);
-          return;
-        }
         if (err) {
           setSpanError(span, err);
           span.end();
@@ -4015,7 +3782,6 @@ class Database extends common.GrpcServiceObject {
           cb!(error as grpc.ServiceError);
           return;
         }
-        this._releaseOnEnd(session!, activeTransaction, span);
         try {
           activeTransaction.setReadWriteTransactionOptions(
             options as RunTransactionOptions,

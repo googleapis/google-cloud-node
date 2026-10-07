@@ -58,6 +58,13 @@ export interface MultiplexedSessionInterface extends EventEmitter {
    * @name MultiplexedSessionInterface#getSessionSync
    */
   getSessionSync(): Session | null;
+
+  /**
+   * When called closes the multiplexed session and stops background maintenance.
+   *
+   * @name MultiplexedSessionInterface#close
+   */
+  close?(): void;
 }
 
 /**
@@ -81,6 +88,7 @@ export class MultiplexedSession
   _observabilityOptions?: ObservabilityOptions;
   // shared promise lock to handle concurrent session creation requests
   _sharedMuxSessionWaitPromise: Promise<void> | null;
+  private _isClosed = false;
   constructor(database: Database) {
     super();
     this.database = database;
@@ -101,7 +109,9 @@ export class MultiplexedSession
   createSession(): void {
     this._createSession()
       .then(() => {
-        this._maintain();
+        if (!this._isClosed) {
+          this._maintain();
+        }
         return null;
       })
       // Ignore errors here. If this fails, the next user request will
@@ -203,6 +213,16 @@ export class MultiplexedSession
   }
 
   /**
+   * Closes the multiplexed session by stopping the periodic refresh interval.
+   */
+  close(): void {
+    this._isClosed = true;
+    if (this._refreshHandle) {
+      clearInterval(this._refreshHandle);
+    }
+  }
+
+  /**
    * Synchronously returns the cached multiplexed session if available,
    * or null if no session is currently cached.
    *
@@ -220,8 +240,8 @@ export class MultiplexedSession
   /**
    * Retrieves a session asynchronously and invokes a callback with the session details.
    * Note: The callback receives `(null, session)`. To prevent unnecessary allocations on
-   * read query paths, a `Transaction` is not created here. Callers requiring a read-write
-   * transaction should use `SessionFactory.prototype.getSessionForReadWrite`.
+   * read query paths, a `Transaction` is not created here; callers requiring a read-write
+   * transaction instantiate it via `session.transaction()`.
    *
    * @param {GetSessionCallback} callback - The callback to be invoked once the session is acquired or an error occurs.
    *

@@ -16,7 +16,7 @@
 
 /* eslint-disable promise/always-return */
 
-import {after, before, beforeEach, describe, Done, it} from 'mocha';
+import {after, before, beforeEach, describe, it} from 'mocha';
 import * as assert from 'assert';
 import {grpc, Status, ServiceError} from 'google-gax';
 // eslint-disable-next-line n/no-extraneous-import
@@ -26,7 +26,6 @@ import {
   Instance,
   MutationGroup,
   MutationSet,
-  SessionPool,
   Snapshot,
   Spanner,
   Transaction,
@@ -45,15 +44,10 @@ import * as mockDatabaseAdmin from './mockserver/mockdatabaseadmin';
 import * as sinon from 'sinon';
 import {protos} from '@google-cloud/spanner-api';
 import google = protos.google;
-import {ExecuteSqlRequest, ReadRequest, RunResponse} from '../src/transaction';
+import {ExecuteSqlRequest, RunResponse} from '../src/transaction';
 import {Row} from '../src/partial-result-stream';
 import {GetDatabaseOperationsOptions} from '../src/instance';
-import {
-  isSessionNotFoundError,
-  SessionLeakError,
-  SessionPoolExhaustedError,
-  SessionPoolOptions,
-} from '../src/session-pool';
+import {SessionPoolOptions} from '../src/session-pool';
 import {Float, Int, Json, Numeric, SpannerDate} from '../src/codec';
 import * as stream from 'stream';
 import * as util from 'util';
@@ -386,6 +380,38 @@ describe('Spanner with mock server', () => {
         fail: false,
       });
       assert.notStrictEqual(dbWithDefaultOptions, dbWithWriteSessions);
+    });
+
+    it('should not return a closed database instance from the cache', async () => {
+      const name = `database-${dbCounter++}`;
+      const getDatabases = () => [
+        instance.database(name),
+        instance.database(name, {fail: false}),
+        instance.database(name, undefined, {optimizerVersion: '1'}),
+        instance.database(name, undefined, undefined, 'reader'),
+      ];
+      const closedDbs = getDatabases();
+      await Promise.all(closedDbs.map(db => db.close()));
+
+      const reopenedDbs = getDatabases();
+      reopenedDbs.forEach((db, i) => assert.notStrictEqual(db, closedDbs[i]));
+      await Promise.all(reopenedDbs.map(db => db.close()));
+    });
+
+    it('should not evict other cached database instances on close', async () => {
+      const name = `database-${dbCounter++}`;
+      const defaultDb = instance.database(name);
+      const dbWithRole = instance.database(
+        name,
+        undefined,
+        undefined,
+        'reader',
+      );
+
+      await dbWithRole.close();
+
+      assert.strictEqual(instance.database(name), defaultDb);
+      await defaultDb.close();
     });
 
     it('should disable channelz by default and allow overriding it', async () => {
@@ -1318,7 +1344,6 @@ describe('Spanner with mock server', () => {
       const database = newTestDatabase({incStep: 1, min: 0});
       try {
         const sessionFactory = database.sessionFactory_ as SessionFactory;
-        const pool = sessionFactory.pool_ as SessionPool;
         const multiplexedSession =
           sessionFactory.multiplexedSession_ as MultiplexedSession;
         const promises: Array<Promise<RunResponse>> = [];
@@ -1344,7 +1369,6 @@ describe('Spanner with mock server', () => {
       const database = newTestDatabase({incStep: 1, min: 0});
       try {
         const sessionFactory = database.sessionFactory_ as SessionFactory;
-        const pool = sessionFactory.pool_ as SessionPool;
         const multiplexedSession =
           sessionFactory.multiplexedSession_ as MultiplexedSession;
         const promises: Array<Promise<number | number[]>> = [];
@@ -2115,12 +2139,9 @@ describe('Spanner with mock server', () => {
           sql: selectSql,
         } as ExecuteSqlRequest;
         const database = newTestDatabase();
-        const pool = (database.sessionFactory_ as SessionFactory)
-          .pool_ as SessionPool;
         const multiplexedSession = (database.sessionFactory_ as SessionFactory)
           .multiplexedSession_ as MultiplexedSession;
         database.run(query, (err, resp) => {
-          assert.strictEqual(pool._inventory.borrowed.size, 0);
           // multiplexed session will get created by default
           assert.notEqual(multiplexedSession._multiplexedSession, null);
           assert.ifError(err);
@@ -2129,40 +2150,11 @@ describe('Spanner with mock server', () => {
         });
       });
 
-      it('should not register release listener or invoke release when running query on multiplexed session', done => {
-        const query = {
-          sql: selectSql,
-        } as ExecuteSqlRequest;
-        const database = newTestDatabase();
-        const testSandbox = sinon.createSandbox();
-        const releaseSpy = testSandbox.spy(database.sessionFactory_, 'release');
-        const onceSpy = testSandbox.spy(Snapshot.prototype, 'once');
-        database.run(query, (err, resp) => {
-          assert.ifError(err);
-          assert.strictEqual(resp.length, 3);
-          assert.strictEqual(
-            onceSpy.withArgs('end', sinon.match.func).callCount,
-            0,
-          );
-          setImmediate(() => {
-            try {
-              assert.strictEqual(releaseSpy.callCount, 0);
-              done();
-            } finally {
-              testSandbox.restore();
-            }
-          });
-        });
-      });
-
       it('should execute the transaction(database.getSnapshot) successfully using multiplexed session', done => {
         const database = newTestDatabase();
-        const pool = (database.sessionFactory_ as SessionFactory)
-          .pool_ as SessionPool;
         const multiplexedSession = (database.sessionFactory_ as SessionFactory)
           .multiplexedSession_ as MultiplexedSession;
         database.getSnapshot((err, resp) => {
-          assert.strictEqual(pool._inventory.borrowed.size, 0);
           // multiplexed session will get created by default
           assert.notEqual(multiplexedSession._multiplexedSession, null);
           assert.ifError(err);
@@ -2184,12 +2176,9 @@ describe('Spanner with mock server', () => {
           SingerId: 2,
           FirstName: 'Marc',
         });
-        const pool = (database.sessionFactory_ as SessionFactory)
-          .pool_ as SessionPool;
         const multiplexedSession = (database.sessionFactory_ as SessionFactory)
           .multiplexedSession_ as MultiplexedSession;
         database.writeAtLeastOnce(mutations, (err, resp) => {
-          assert.strictEqual(pool._inventory.borrowed.size, 0);
           // multiplexed session will get created by default
           assert.notEqual(multiplexedSession._multiplexedSession, null);
           assert.ifError(err);
@@ -2250,223 +2239,19 @@ describe('Spanner with mock server', () => {
         });
       });
     });
-
-    describe('when multiplexed session is disabled for read-only', () => {
-      before(() => {
-        process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS = 'false';
-      });
-
-      after(async () => {
-        delete process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS;
-      });
-      it('should make a request to BatchCreateSessions', async () => {
-        const database = newTestDatabase();
-        await database.run('SELECT 1');
-        const requests = spannerMock.getRequests().find(val => {
-          return (val as v1.BatchCreateSessionsRequest).sessionTemplate;
-        }) as v1.BatchCreateSessionsRequest;
-        assert.ok(requests, 'BatchCreateSessionsRequest should be called');
-        assert.strictEqual(
-          requests.sessionTemplate?.multiplexed,
-          false,
-          'Multiplexed should be false',
-        );
-      });
-
-      it('should execute the transaction(database.run) successfully using regular session', done => {
-        const query = {
-          sql: selectSql,
-        } as ExecuteSqlRequest;
-        const database = newTestDatabase({min: 1, max: 1});
-        const pool = (database.sessionFactory_ as SessionFactory)
-          .pool_ as SessionPool;
-        const multiplexedSession = (database.sessionFactory_ as SessionFactory)
-          .multiplexedSession_ as MultiplexedSession;
-        database.run(query, (err, resp) => {
-          assert.ifError(err);
-          assert.strictEqual(pool._inventory.sessions.length, 1);
-          // multiplexed session will get created by default
-          assert.notEqual(multiplexedSession._multiplexedSession, null);
-          assert.strictEqual(resp.length, 3);
-          done();
-        });
-      });
-
-      it('should release regular session on snapshot end when multiplexed session is disabled', done => {
-        const query = {
-          sql: selectSql,
-        } as ExecuteSqlRequest;
-        const database = newTestDatabase({min: 1, max: 1});
-        const testSandbox = sinon.createSandbox();
-        const releaseSpy = testSandbox.spy(database.sessionFactory_, 'release');
-        const onceSpy = testSandbox.spy(Snapshot.prototype, 'once');
-        database.run(query, (err, resp) => {
-          assert.ifError(err);
-          assert.strictEqual(resp.length, 3);
-          assert.strictEqual(
-            onceSpy.withArgs('end', sinon.match.func).callCount,
-            1,
-          );
-          setImmediate(() => {
-            try {
-              assert.strictEqual(releaseSpy.callCount, 1);
-              done();
-            } finally {
-              testSandbox.restore();
-            }
-          });
-        });
-      });
-
-      it('should execute the transaction(database.getSnapshot) successfully using regular session', done => {
-        const database = newTestDatabase({min: 1, max: 1});
-        const pool = (database.sessionFactory_ as SessionFactory)
-          .pool_ as SessionPool;
-        const multiplexedSession = (database.sessionFactory_ as SessionFactory)
-          .multiplexedSession_ as MultiplexedSession;
-        database.getSnapshot((err, resp) => {
-          assert.ifError(err);
-          assert.strictEqual(pool._inventory.borrowed.size, 1);
-          // multiplexed session will get created by default
-          assert.notEqual(multiplexedSession._multiplexedSession, null);
-          assert(resp instanceof Snapshot);
-          resp.end();
-          done();
-        });
-      });
-
-      it('should execute the transaction(database.writeAtLeastOnce) successfully using regular session', done => {
-        const database = newTestDatabase({min: 1, max: 1});
-        const mutations = new MutationSet();
-        mutations.upsert('Singers', {
-          SingerId: 1,
-          FirstName: 'Scarlet',
-          LastName: 'Terry',
-        });
-        mutations.upsert('Singers', {
-          SingerId: 2,
-          FirstName: 'Marc',
-        });
-        const pool = (database.sessionFactory_ as SessionFactory)
-          .pool_ as SessionPool;
-        const multiplexedSession = (database.sessionFactory_ as SessionFactory)
-          .multiplexedSession_ as MultiplexedSession;
-        database.writeAtLeastOnce(mutations, (err, resp) => {
-          assert.ifError(err);
-          assert.strictEqual(pool._inventory.borrowed.size, 1);
-          // multiplexed session will get created by default
-          assert.notEqual(multiplexedSession._multiplexedSession, null);
-          assert.strictEqual(typeof resp?.commitTimestamp?.nanos, 'number');
-          assert.strictEqual(typeof resp?.commitTimestamp?.seconds, 'string');
-          assert.strictEqual(resp?.commitStats, null);
-          done();
-        });
-      });
-    });
   });
 
   describe('partitioned ops', () => {
     describe('default session mode for partitioned ops', () => {
       it('should execute the transaction(database.runPartitionedUpdate) successfully using multiplexed session', done => {
         const database = newTestDatabase({min: 1, max: 1});
-        const pool = (database.sessionFactory_ as SessionFactory)
-          .pool_ as SessionPool;
         const multiplexedSession = (database.sessionFactory_ as SessionFactory)
           .multiplexedSession_ as MultiplexedSession;
         database.runPartitionedUpdate({sql: updateSql}, (err, resp) => {
-          assert.strictEqual(pool._inventory.borrowed.size, 0);
           // multiplexed session will get created by default
           assert.notEqual(multiplexedSession._multiplexedSession, null);
           assert.strictEqual(resp, 2);
           assert.ifError(err);
-          done();
-        });
-      });
-    });
-
-    describe('when only GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS is disabled', () => {
-      before(() => {
-        process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS = 'false';
-      });
-
-      after(async () => {
-        delete process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS;
-      });
-
-      it('should execute the transaction(database.runPartitionedUpdate) successfully using multiplexed session', done => {
-        const database = newTestDatabase({min: 1, max: 1});
-        const pool = (database.sessionFactory_ as SessionFactory)
-          .pool_ as SessionPool;
-        const multiplexedSession = (database.sessionFactory_ as SessionFactory)
-          .multiplexedSession_ as MultiplexedSession;
-        database.runPartitionedUpdate({sql: updateSql}, (err, resp) => {
-          assert.strictEqual(pool._inventory.borrowed.size, 0);
-          // multiplexed session will get created by default
-          assert.notEqual(multiplexedSession._multiplexedSession, null);
-          assert.strictEqual(resp, 2);
-          assert.ifError(err);
-          done();
-        });
-      });
-    });
-
-    describe('when only GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS_PARTITIONED_OPS is disabled', () => {
-      before(() => {
-        process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS_PARTITIONED_OPS =
-          'false';
-      });
-
-      after(async () => {
-        delete process.env
-          .GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS_PARTITIONED_OPS;
-      });
-
-      it('should execute the transaction(database.runPartitionedUpdate) successfully using multiplexed session', done => {
-        const database = newTestDatabase({min: 1, max: 1});
-        const pool = (database.sessionFactory_ as SessionFactory)
-          .pool_ as SessionPool;
-        const multiplexedSession = (database.sessionFactory_ as SessionFactory)
-          .multiplexedSession_ as MultiplexedSession;
-        database.runPartitionedUpdate({sql: updateSql}, (err, resp) => {
-          assert.strictEqual(pool._inventory.borrowed.size, 0);
-          // multiplexed session will get created by default
-          assert.notEqual(multiplexedSession._multiplexedSession, null);
-          assert.strictEqual(resp, 2);
-          assert.ifError(err);
-          done();
-        });
-      });
-    });
-
-    describe('when multiplexed session is disabled for partitioned ops', () => {
-      before(() => {
-        process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS = 'false';
-        process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS_PARTITIONED_OPS =
-          'false';
-      });
-
-      after(async () => {
-        delete process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS;
-        delete process.env
-          .GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS_PARTITIONED_OPS;
-      });
-
-      it('should execute the transaction(database.runPartitionedUpdate) successfully using regular/pool session', done => {
-        const database = newTestDatabase({min: 1, max: 1});
-        const pool = (database.sessionFactory_ as SessionFactory)
-          .pool_ as SessionPool;
-        const multiplexedSession = (database.sessionFactory_ as SessionFactory)
-          .multiplexedSession_ as MultiplexedSession;
-        database.runPartitionedUpdate({sql: updateSql}, (err, resp) => {
-          assert.ifError(err);
-          assert.strictEqual(pool._inventory.sessions.length, 1);
-          assert.strictEqual(
-            pool._inventory.sessions[0].metadata.multiplexed,
-            false,
-          );
-          // multiplexed session will get created by default
-          assert.notEqual(multiplexedSession._multiplexedSession, null);
-          assert.strictEqual(resp, 2);
           done();
         });
       });
@@ -2482,8 +2267,6 @@ describe('Spanner with mock server', () => {
           Name: 'One',
         });
         const database = newTestDatabase({min: 1, max: 1});
-        const pool = (database.sessionFactory_ as SessionFactory)
-          .pool_ as SessionPool;
         const multiplexedSession = (database.sessionFactory_ as SessionFactory)
           .multiplexedSession_ as MultiplexedSession;
         database.commonHeaders_ = {
@@ -2495,128 +2278,6 @@ describe('Spanner with mock server', () => {
           .on('data', response => {
             // ensure that response is coming
             assert.notEqual(response.commitTimestamp, null);
-            // multiplexed session will get created by default
-            assert.notEqual(multiplexedSession._multiplexedSession, null);
-
-            // regular session will not get created since GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS is not disabled
-            assert.strictEqual(pool._inventory.sessions.length, 0);
-          })
-          .on('end', done);
-      });
-    });
-
-    describe('when only GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS is disabled', () => {
-      before(() => {
-        process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS = 'false';
-      });
-
-      after(async () => {
-        delete process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS;
-      });
-
-      it('should use multiplexed session', done => {
-        const mutationGroup = new MutationGroup();
-        mutationGroup.upsert('FOO', {
-          Id: '1',
-          Name: 'One',
-        });
-        const database = newTestDatabase({min: 1, max: 1});
-        const pool = (database.sessionFactory_ as SessionFactory)
-          .pool_ as SessionPool;
-        const multiplexedSession = (database.sessionFactory_ as SessionFactory)
-          .multiplexedSession_ as MultiplexedSession;
-        database.commonHeaders_ = {
-          'x-goog-spanner-request-id': `1.${randIdForProcess}.1.1.5.1`,
-        };
-        database
-          .batchWriteAtLeastOnce([mutationGroup])
-          .on('error', done)
-          .on('data', response => {
-            // ensure that response is coming
-            assert.notEqual(response.commitTimestamp, null);
-            // multiplexed session will get created by default during client initialization
-            assert.notEqual(multiplexedSession._multiplexedSession, null);
-            // session pool will not get created since GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS is not false
-            assert.strictEqual(pool._inventory.sessions.length, 0);
-          })
-          .on('end', done);
-      });
-    });
-
-    describe('when only GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS_FOR_RW is disabled', () => {
-      before(() => {
-        process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS_FOR_RW = 'false';
-      });
-
-      after(async () => {
-        delete process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS_FOR_RW;
-      });
-
-      it('should use multiplexed session', done => {
-        const mutationGroup = new MutationGroup();
-        mutationGroup.upsert('FOO', {
-          Id: '1',
-          Name: 'One',
-        });
-        const database = newTestDatabase({min: 1, max: 1});
-        const pool = (database.sessionFactory_ as SessionFactory)
-          .pool_ as SessionPool;
-        const multiplexedSession = (database.sessionFactory_ as SessionFactory)
-          .multiplexedSession_ as MultiplexedSession;
-        database.commonHeaders_ = {
-          'x-goog-spanner-request-id': `1.${randIdForProcess}.1.1.5.1`,
-        };
-        database
-          .batchWriteAtLeastOnce([mutationGroup])
-          .on('error', done)
-          .on('data', response => {
-            // ensure that response is not null
-            assert.notEqual(response.commitTimestamp, null);
-            // multiplexed session will get created by default
-            assert.notEqual(multiplexedSession._multiplexedSession, null);
-            // session pool will not get created since GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS is not false
-            assert.strictEqual(pool._inventory.sessions.length, 0);
-          })
-          .on('end', done);
-      });
-    });
-
-    describe('when multiplexed session is disabled for r/w', () => {
-      before(() => {
-        process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS = 'false';
-        process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS_FOR_RW = 'false';
-      });
-
-      after(async () => {
-        delete process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS;
-        delete process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS_FOR_RW;
-      });
-
-      it('should use regular session', done => {
-        const mutationGroup = new MutationGroup();
-        mutationGroup.upsert('FOO', {
-          Id: '1',
-          Name: 'One',
-        });
-        const database = newTestDatabase({min: 1, max: 1});
-        const pool = (database.sessionFactory_ as SessionFactory)
-          .pool_ as SessionPool;
-        const multiplexedSession = (database.sessionFactory_ as SessionFactory)
-          .multiplexedSession_ as MultiplexedSession;
-        database.commonHeaders_ = {
-          'x-goog-spanner-request-id': `1.${randIdForProcess}.1.1.5.1`,
-        };
-        database
-          .batchWriteAtLeastOnce([mutationGroup])
-          .on('error', done)
-          .on('data', response => {
-            // ensure that response is coming
-            assert.notEqual(response.commitTimestamp, null);
-            assert.strictEqual(
-              Array.from(pool._inventory.borrowed)[0].metadata.multiplexed,
-              false,
-            );
-            assert.strictEqual(pool._inventory.borrowed.size, 1);
             // multiplexed session will get created by default
             assert.notEqual(multiplexedSession._multiplexedSession, null);
           })
@@ -3004,955 +2665,6 @@ describe('Spanner with mock server', () => {
           await database.close();
         }
       });
-    });
-  });
-
-  describe('session-not-found', () => {
-    before(() => {
-      process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS = 'false';
-      process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS_PARTITIONED_OPS =
-        'false';
-      process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS_FOR_RW = 'false';
-    });
-
-    after(async () => {
-      delete process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS;
-      delete process.env
-        .GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS_PARTITIONED_OPS;
-      delete process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS_FOR_RW;
-    });
-
-    it('should retry "Session not found" errors on Database.run()', done => {
-      const db = newTestDatabase({
-        incStep: 1,
-        min: 0,
-      });
-      spannerMock.setExecutionTime(
-        spannerMock.executeStreamingSql,
-        SimulatedExecutionTime.ofError({
-          code: grpc.status.NOT_FOUND,
-          message: 'Session not found',
-        } as MockError),
-      );
-      db.run(selectSql, (err, rows) => {
-        if (err) {
-          assert.fail(err);
-        }
-        assert.strictEqual(rows!.length, 3);
-        db.getSessions((err, results) => {
-          if (err) {
-            assert.fail(err);
-          }
-          // The mock server should have exactly 3 sessions.
-          // Two from session pool where, the first one was
-          // removed from the session pool because of the simulated
-          // 'Session not found' error. The second one was created by the retry.
-          // As we only simulate the 'Session not found' error, the first
-          // session is still present on the mock server.
-          // one session will be multiplexed session.
-          assert.strictEqual(results!.length, 3);
-          if (results!.length !== 3) {
-            done();
-          }
-          db.close()
-            .then(() => done())
-            .catch(err => assert.fail(err));
-        });
-      });
-    });
-
-    it('should retry "Session not found" errors for Database.runStream()', () => {
-      const db = newTestDatabase();
-      spannerMock.setExecutionTime(
-        spannerMock.executeStreamingSql,
-        SimulatedExecutionTime.ofError({
-          code: grpc.status.NOT_FOUND,
-          message: 'Session not found',
-        } as MockError),
-      );
-      let rowCount = 0;
-      db.runStream(selectSql)
-        .on('data', () => rowCount++)
-        .on('error', err => {
-          assert.fail(err);
-        })
-        .on('end', () => {
-          assert.strictEqual(rowCount, 3);
-        });
-    });
-
-    it('should retry multiple "Session not found" errors on Database.run()', done => {
-      const db = newTestDatabase();
-      for (let i = 0; i < 10; i++) {
-        spannerMock.setExecutionTime(
-          spannerMock.executeStreamingSql,
-          SimulatedExecutionTime.ofError({
-            code: grpc.status.NOT_FOUND,
-            message: 'Session not found',
-          } as MockError),
-        );
-      }
-      db.run(selectSql, (err, rows) => {
-        if (err) {
-          assert.fail(err);
-        }
-        assert.strictEqual(rows!.length, 3);
-        done();
-      });
-    });
-
-    it('should not retry "Session not found" errors halfway a stream', done => {
-      const db = newTestDatabase();
-      spannerMock.setExecutionTime(
-        spannerMock.executeStreamingSql,
-        SimulatedExecutionTime.ofError({
-          code: grpc.status.NOT_FOUND,
-          message: 'Session not found',
-          streamIndex: 1,
-        } as MockError),
-      );
-      db.run(selectSql, err => {
-        if (err) {
-          assert.ok(isSessionNotFoundError(err));
-          done();
-          return;
-        }
-        assert.fail('Missing expected "Session not found" error');
-      });
-    });
-
-    it('should retry "Session not found" errors for Database.getSnapshot() with callbacks', done => {
-      const db = newTestDatabase();
-      const sessionNotFound = {
-        code: grpc.status.NOT_FOUND,
-        message: 'Session not found',
-      } as MockError;
-      // The beginTransaction call will fail 3 times with 'Session not found'
-      // before succeeding.
-      spannerMock.setExecutionTime(
-        spannerMock.beginTransaction,
-        SimulatedExecutionTime.ofErrors([
-          sessionNotFound,
-          sessionNotFound,
-          sessionNotFound,
-        ]),
-      );
-      db.getSnapshot((err, snapshot) => {
-        assert.ifError(err);
-        snapshot!.run(selectSql, (err, rows) => {
-          assert.ifError(err);
-          assert.strictEqual(rows.length, 3);
-          snapshot!.end();
-          db.close(done);
-        });
-      });
-    });
-
-    it('should retry "Session not found" errors for a query on a session on Database.runTransaction()', done => {
-      const db = newTestDatabase({min: 1, incStep: 1});
-      const pool = db.pool_ as SessionPool;
-      // Wait until one session with a transaction has been created.
-      pool.once('available', () => {
-        assert.strictEqual(pool.size, 1);
-        spannerMock.setExecutionTime(
-          spannerMock.executeStreamingSql,
-          SimulatedExecutionTime.ofError({
-            code: grpc.status.NOT_FOUND,
-            message: 'Session not found',
-          } as MockError),
-        );
-        runTransactionWithExpectedSessionRetry(db, done);
-      });
-    });
-
-    function runTransactionWithExpectedSessionRetry(db: Database, done: Done) {
-      db.runTransaction((err, transaction) => {
-        assert.ifError(err);
-        transaction!.run(selectSql, (err, rows) => {
-          assert.ifError(err);
-          assert.strictEqual(rows.length, 3);
-          // Verify that the server has two sessions: The first one was marked
-          // as 'not found' by the client because of the mocked error, and a
-          // second one that was created as a result of the retry.
-          db.getSessions((err, sessions) => {
-            assert.ifError(err);
-            // sessions length is 3 as the list will contain default multiplexed session as well.
-            assert.strictEqual(sessions!.length, 3);
-            transaction!.commit(err => {
-              assert.ifError(err);
-              db.close(done);
-            });
-          });
-        });
-      });
-    }
-
-    it('should retry "Session not found" errors for Commit on a session on Database.runTransaction()', done => {
-      const db = newTestDatabase({min: 1, incStep: 1});
-      const pool = db.pool_ as SessionPool;
-      // Wait until one session with a transaction has been created.
-      pool.once('available', () => {
-        assert.strictEqual(pool.size, 1);
-        spannerMock.setExecutionTime(
-          spannerMock.commit,
-          SimulatedExecutionTime.ofError({
-            code: grpc.status.NOT_FOUND,
-            message: 'Session not found',
-          } as MockError),
-        );
-        db.runTransaction((err, transaction) => {
-          assert.ifError(err);
-          transaction!.insert('FOO', {Id: 1, Name: 'foo'});
-          transaction!.commit(err => {
-            assert.ifError(err);
-            db.getSessions((err, sessions) => {
-              assert.ifError(err);
-              // sessions length is 3 as the list will contain default multiplexed session as well.
-              assert.strictEqual(sessions!.length, 3);
-              db.close(done);
-            });
-          });
-        });
-      });
-    });
-
-    it('should retry "Session not found" errors for Database.getSnapshot()', done => {
-      const db = newTestDatabase();
-      spannerMock.setExecutionTime(
-        spannerMock.beginTransaction,
-        SimulatedExecutionTime.ofError({
-          code: grpc.status.NOT_FOUND,
-          message: 'Session not found',
-        } as MockError),
-      );
-      db.getSnapshot()
-        .then(response => {
-          const [snapshot] = response;
-          snapshot
-            .run(selectSql)
-            .then(response => {
-              const [rows] = response;
-              assert.strictEqual(rows.length, 3);
-              snapshot.end();
-              db.close(done);
-            })
-            .catch(done);
-        })
-        .catch(done);
-    });
-
-    it('should retry "Session not found" errors for runUpdate on a session on Database.runTransaction()', done => {
-      const db = newTestDatabase({min: 1, incStep: 1});
-      const pool = db.pool_ as SessionPool;
-      // Wait until one session with a transaction has been created.
-      pool.once('available', () => {
-        assert.strictEqual(pool.size, 1);
-        spannerMock.setExecutionTime(
-          spannerMock.executeStreamingSql,
-          SimulatedExecutionTime.ofError({
-            code: grpc.status.NOT_FOUND,
-            message: 'Session not found',
-          } as MockError),
-        );
-        db.runTransaction((err, transaction) => {
-          assert.ifError(err);
-          transaction!.runUpdate(insertSql, (err, updateCount) => {
-            assert.ifError(err);
-            assert.strictEqual(updateCount, 1);
-            transaction!.commit(err => {
-              assert.ifError(err);
-              db.getSessions((err, sessions) => {
-                assert.ifError(err);
-                // sessions length is 3 as the list will contain default multiplexed session as well.
-                assert.strictEqual(sessions!.length, 3);
-                db.close(done);
-              });
-            });
-          });
-        });
-      });
-    });
-
-    it('should retry "Session not found" errors for executeBatchDml on a session on Database.runTransaction()', done => {
-      const db = newTestDatabase({min: 1, incStep: 1});
-      const pool = db.pool_ as SessionPool;
-      // Wait until one session with a transaction has been created.
-      pool.once('available', () => {
-        assert.strictEqual(pool.size, 1);
-        spannerMock.setExecutionTime(
-          spannerMock.executeBatchDml,
-          SimulatedExecutionTime.ofError({
-            code: grpc.status.NOT_FOUND,
-            message: 'Session not found',
-          } as MockError),
-        );
-        db.runTransaction((err, transaction) => {
-          assert.ifError(err);
-          transaction!.batchUpdate(
-            [insertSql, insertSql],
-            (err, updateCounts) => {
-              assert.ifError(err);
-              assert.deepStrictEqual(updateCounts, [1, 1]);
-              transaction!.commit(err => {
-                assert.ifError(err);
-                db.getSessions((err, sessions) => {
-                  assert.ifError(err);
-                  // sessions length is 3 as the list will contain default multiplexed session as well.
-                  assert.strictEqual(sessions!.length, 3);
-                  db.close(done);
-                });
-              });
-            },
-          );
-        });
-      });
-    });
-
-    it('should retry "Session not found" errors for a query on a session on Database.runTransactionAsync()', done => {
-      const db = newTestDatabase({min: 1, incStep: 1});
-      const pool = db.pool_ as SessionPool;
-      // Wait until one session with a transaction has been created.
-      pool.once('available', () => {
-        assert.strictEqual(pool.size, 1);
-        spannerMock.setExecutionTime(
-          spannerMock.executeStreamingSql,
-          SimulatedExecutionTime.ofError({
-            code: grpc.status.NOT_FOUND,
-            message: 'Session not found',
-          } as MockError),
-        );
-        runAsyncTransactionWithExpectedSessionRetry(db).then(done).catch(done);
-      });
-    });
-
-    async function runAsyncTransactionWithExpectedSessionRetry(db: Database) {
-      try {
-        await db.runTransactionAsync(async (transaction): Promise<void> => {
-          try {
-            const [rows] = await transaction.run(selectSql);
-            assert.strictEqual(rows.length, 3);
-            const [sessions] = await db.getSessions();
-            // sessions length is 3 as the list will contain default multiplexed session as well.
-            assert.strictEqual(sessions!.length, 3);
-            await transaction.commit();
-            return Promise.resolve();
-          } catch (e) {
-            return Promise.reject(e);
-          }
-        });
-        await db.close();
-      } catch (e) {
-        assert.fail(e as ServiceError);
-      }
-    }
-
-    it('should retry "Session not found" errors for Commit on a session on Database.runTransactionAsync()', done => {
-      const db = newTestDatabase({min: 1, incStep: 1});
-      const pool = db.pool_ as SessionPool;
-      // Wait until one session with a transaction has been created.
-      pool.once('available', async () => {
-        assert.strictEqual(pool.size, 1);
-        spannerMock.setExecutionTime(
-          spannerMock.commit,
-          SimulatedExecutionTime.ofError({
-            code: grpc.status.NOT_FOUND,
-            message: 'Session not found',
-          } as MockError),
-        );
-        try {
-          await db
-            .runTransactionAsync(async (transaction): Promise<void> => {
-              transaction.insert('FOO', {Id: 1, Name: 'foo'});
-              await transaction.commit();
-              const [sessions] = await db.getSessions();
-              // sessions length is 3 as the list will contain default multiplexed session as well.
-              assert.strictEqual(sessions!.length, 3);
-            })
-            .catch(assert.ifError);
-          await db.close();
-        } catch (e) {
-          done(e);
-          return;
-        }
-        done();
-      });
-    });
-
-    it('should retry "Session not found" errors for runUpdate on a session on Database.runTransactionAsync()', done => {
-      const db = newTestDatabase({min: 1, incStep: 1});
-      const pool = db.pool_ as SessionPool;
-      // Wait until one session with a transaction has been created.
-      pool.once('available', async () => {
-        assert.strictEqual(pool.size, 1);
-        spannerMock.setExecutionTime(
-          spannerMock.executeStreamingSql,
-          SimulatedExecutionTime.ofError({
-            code: grpc.status.NOT_FOUND,
-            message: 'Session not found',
-          } as MockError),
-        );
-        try {
-          await db
-            .runTransactionAsync(async (transaction): Promise<void> => {
-              const [updateCount] = await transaction.runUpdate(insertSql);
-              assert.strictEqual(updateCount, 1);
-              await transaction.commit();
-              const [sessions] = await db.getSessions();
-              // sessions length is 3 as the list will contain default multiplexed session as well.
-              assert.strictEqual(sessions!.length, 3);
-            })
-            .catch(assert.ifError);
-          await db.close();
-        } catch (e) {
-          done(e);
-          return;
-        }
-        done();
-      });
-    });
-
-    it('should retry "Session not found" errors for executeBatchDml on a session on Database.runTransactionAsync()', done => {
-      const db = newTestDatabase({min: 1, incStep: 1});
-      const pool = db.pool_ as SessionPool;
-      // Wait until one session with a transaction has been created.
-      pool.once('available', async () => {
-        assert.strictEqual(pool.size, 1);
-        spannerMock.setExecutionTime(
-          spannerMock.executeBatchDml,
-          SimulatedExecutionTime.ofError({
-            code: grpc.status.NOT_FOUND,
-            message: 'Session not found',
-          } as MockError),
-        );
-        try {
-          await db
-            .runTransactionAsync(async (transaction): Promise<void> => {
-              const [updateCounts] = await transaction.batchUpdate([
-                insertSql,
-                insertSql,
-              ]);
-              assert.deepStrictEqual(updateCounts, [1, 1]);
-              await transaction.commit();
-              const [sessions] = await db.getSessions();
-              // sessions length is 3 as the list will contain default multiplexed session as well.
-              assert.strictEqual(sessions!.length, 3);
-            })
-            .catch(assert.ifError);
-          await db.close();
-        } catch (e) {
-          done(e);
-          return;
-        }
-        done();
-      });
-    });
-  });
-
-  describe('session-pool', () => {
-    before(() => {
-      process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS = 'false';
-      process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS_PARTITIONED_OPS =
-        'false';
-      process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS_FOR_RW = 'false';
-    });
-
-    after(async () => {
-      delete process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS;
-      delete process.env
-        .GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS_PARTITIONED_OPS;
-      delete process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS_FOR_RW;
-    });
-
-    it('should execute table mutations without leaking sessions', async () => {
-      const database = newTestDatabase();
-      try {
-        await database.table('foo').upsert({id: 1, name: 'bar'});
-      } finally {
-        await database.close();
-      }
-    });
-
-    it('should throw an error with a stacktrace when leaking a session', async () => {
-      await testLeakSession();
-    });
-
-    async function testLeakSession() {
-      // The query to execute
-      const query = {
-        sql: selectSql,
-      };
-      const db = newTestDatabase();
-      await db
-        .getSnapshot({strong: true, returnReadTimestamp: true})
-        .then(([tx]) => {
-          return tx.run(query);
-        })
-        .then(([rows]) => {
-          // Assert that we get all results from the server.
-          assert.strictEqual(rows.length, 3);
-          // Note that we do not call transaction.end(). This will cause a session leak.
-        })
-        .catch(reason => {
-          assert.fail(reason);
-        });
-      await db
-        .close()
-        .then(() => {
-          assert.fail('Missing expected SessionLeakError');
-        })
-        .catch((reason: SessionLeakError) => {
-          assert.strictEqual(reason.name, 'SessionLeakError', reason);
-          assert.strictEqual(reason.messages.length, 1);
-          assert.ok(reason.messages[0].indexOf('testLeakSession') > -1);
-        });
-    }
-
-    it('should reuse sessions', async () => {
-      const database = newTestDatabase({incStep: 1, min: 0});
-      try {
-        await verifyReadSessionReuse(database);
-      } finally {
-        await database.close();
-      }
-    });
-
-    it('should reuse sessions when fail=true', async () => {
-      const db = newTestDatabase({
-        min: 0,
-        max: 10,
-        incStep: 1,
-        concurrency: 5,
-        fail: true,
-      });
-      try {
-        await verifyReadSessionReuse(db);
-      } finally {
-        await db.close();
-      }
-    });
-
-    async function verifyReadSessionReuse(database: Database) {
-      // The query to execute
-      const query = {
-        sql: selectSql,
-      };
-      const pool = database.pool_ as SessionPool;
-      let sessionId = '';
-      for (let i = 0; i < 10; i++) {
-        const [rows] = await database.run(query);
-        assert.strictEqual(rows.length, 3);
-        rows.forEach(() => {});
-        assert.strictEqual(pool.size, 1);
-        if (i > 0) {
-          assert.strictEqual(pool._inventory.sessions[0].id, sessionId);
-        }
-        sessionId = pool._inventory.sessions[0].id;
-      }
-    }
-
-    it('should throw SessionPoolExhaustedError with stacktraces when pool is exhausted', async () => {
-      await testSessionPoolExhaustedError();
-    });
-
-    async function testSessionPoolExhaustedError() {
-      const database = newTestDatabase({
-        incStep: 1,
-        min: 0,
-        max: 1,
-        fail: true,
-      });
-      try {
-        const [tx1] = await database.getSnapshot();
-        try {
-          await database.getSnapshot();
-          assert.fail('missing expected exception');
-        } catch (e) {
-          assert.strictEqual(
-            (e as ServiceError).name,
-            SessionPoolExhaustedError.name,
-          );
-          const exhausted = e as SessionPoolExhaustedError;
-          assert.ok(exhausted.messages);
-          assert.strictEqual(exhausted.messages.length, 1);
-          assert.ok(
-            exhausted.messages[0].indexOf('testSessionPoolExhaustedError') > -1,
-          );
-        }
-        tx1.end();
-      } finally {
-        await database.close();
-      }
-    }
-
-    it('should reuse sessions after executing invalid sql', async () => {
-      // The query to execute
-      const requestIDRegex = new RegExp(`1.${randIdForProcess}.1.1.\\d+.1`);
-      const query = {
-        sql: invalidSql,
-      };
-      const database = newTestDatabase({incStep: 1, min: 0});
-      try {
-        const pool = database.pool_ as SessionPool;
-        for (let i = 0; i < 10; i++) {
-          try {
-            const [rows] = await database.run(query);
-            assert.fail(`missing expected exception, got ${rows.length} rows`);
-          } catch (e) {
-            assert.strictEqual(
-              (e as ServiceError).message,
-              `${grpc.status.NOT_FOUND} NOT_FOUND: ${fooNotFoundErr.message}`,
-            );
-            assert.deepStrictEqual(
-              (e as RequestIDError).requestID.match(requestIDRegex) !== null,
-              true,
-            );
-          }
-        }
-        assert.strictEqual(pool.size, 1);
-      } finally {
-        await database.close();
-      }
-    });
-
-    it('should reuse sessions after executing streaming sql', async () => {
-      // The query to execute
-      const query = {
-        sql: selectSql,
-      };
-      const database = newTestDatabase({incStep: 1, min: 0});
-      try {
-        const pool = database.pool_ as SessionPool;
-        for (let i = 0; i < 10; i++) {
-          const rowCount = await getRowCountFromStreamingSql(database, query);
-          assert.strictEqual(rowCount, 3);
-        }
-        assert.strictEqual(pool.size, 1);
-      } finally {
-        await database.close();
-      }
-    });
-
-    it('should reuse sessions after executing an invalid streaming sql', async () => {
-      // The query to execute
-      const requestIDRegex = new RegExp(`1.${randIdForProcess}.1.1.\\d+.1`);
-      const query = {
-        sql: invalidSql,
-      };
-      const database = newTestDatabase({incStep: 1, min: 0});
-      try {
-        const pool = database.pool_ as SessionPool;
-        for (let i = 0; i < 10; i++) {
-          try {
-            const rowCount = await getRowCountFromStreamingSql(database, query);
-            assert.fail(`missing expected exception, got ${rowCount}`);
-          } catch (e) {
-            assert.strictEqual(
-              (e as ServiceError).message,
-              `${grpc.status.NOT_FOUND} NOT_FOUND: ${fooNotFoundErr.message}`,
-            );
-            assert.deepStrictEqual(
-              (e as RequestIDError).requestID.match(requestIDRegex) !== null,
-              true,
-            );
-          }
-        }
-        assert.strictEqual(pool.size, 1);
-      } finally {
-        await database.close();
-      }
-    });
-
-    it('should reuse write sessions', async () => {
-      const database = newTestDatabase({incStep: 1, min: 0});
-      try {
-        await verifyWriteSessionReuse(database);
-      } finally {
-        await database.close();
-      }
-    });
-
-    it('should reuse write sessions when fail=true', async () => {
-      const db = newTestDatabase({
-        min: 0,
-        max: 10,
-        incStep: 1,
-        concurrency: 5,
-        fail: true,
-      });
-      try {
-        await verifyWriteSessionReuse(db);
-      } finally {
-        await db.close();
-      }
-    });
-
-    async function verifyWriteSessionReuse(database: Database) {
-      const update = {
-        sql: insertSql,
-      };
-      const pool = database.pool_ as SessionPool;
-      for (let i = 0; i < 10; i++) {
-        await executeSimpleUpdate(database, update);
-        // The pool should not contain more sessions than the number of transactions that we have executed.
-        // The exact number depends on the time needed to prepare new transactions, as checking in a read/write
-        // transaction to the pool will cause the session to be prepared with a read/write transaction before it is added
-        // to the list of available sessions.
-        assert.ok(pool.size <= i + 1);
-      }
-    }
-
-    it('should re-use write session as read-session', async () => {
-      const database = newTestDatabase({incStep: 1, max: 1});
-      const pool = database.pool_ as SessionPool;
-      try {
-        // Execute a simple read/write transaction to create 1 write session.
-        const w = executeSimpleUpdate(database, updateSql);
-        const r = database.run(selectSql);
-        await Promise.all([w, r]);
-        assert.strictEqual(pool.size, 1);
-      } finally {
-        await database.close();
-      }
-    });
-
-    it('should fail on session pool exhaustion and fail=true', async () => {
-      const database = newTestDatabase({
-        max: 1,
-        incStep: 1,
-        fail: true,
-      });
-      let tx1;
-      try {
-        try {
-          [tx1] = await database.getSnapshot();
-          await database.getSnapshot();
-          assert.fail('missing expected exception');
-        } catch (e) {
-          assert.strictEqual(
-            (e as ServiceError).message,
-            'No resources available.',
-          );
-        }
-      } finally {
-        if (tx1) {
-          tx1.end();
-        }
-        await database.close();
-      }
-    });
-
-    it('should pre-fill session pool', async () => {
-      const database = newTestDatabase({
-        min: 100,
-        max: 200,
-      });
-      const pool = database.pool_ as SessionPool;
-      const expectedAmount = pool.options.min!;
-      assert.strictEqual(pool.size, expectedAmount);
-      // Wait until all sessions have been created and prepared.
-      const started = new Date().getTime();
-      while (
-        pool._inventory.sessions.length < expectedAmount &&
-        new Date().getTime() - started < 1000
-      ) {
-        await sleep(1);
-      }
-      await database.close();
-    });
-
-    it('should use pre-filled session pool', async () => {
-      const database = newTestDatabase({
-        min: 100,
-        max: 200,
-      });
-      const pool = database.pool_ as SessionPool;
-      const expectedAmount = pool.options.min!;
-      // Start executing a query. This query should use one of the sessions that
-      // has been pre-filled into the pool.
-      const [rows] = await database.run(selectSql);
-      assert.strictEqual(rows.length, 3);
-      // Wait until all sessions have been created and prepared.
-      const started = new Date().getTime();
-      while (
-        pool._inventory.sessions.length < expectedAmount &&
-        new Date().getTime() - started < 1000
-      ) {
-        await sleep(1);
-      }
-      assert.strictEqual(pool.size, expectedAmount);
-      assert.strictEqual(pool._inventory.sessions.length, expectedAmount);
-      await database.close();
-    });
-
-    it('should propagate database not found errors', async () => {
-      spannerMock.setExecutionTime(
-        spannerMock.batchCreateSessions,
-        // Two errors; one for the initial _fill of the session pool, and one
-        // for the query.
-        SimulatedExecutionTime.ofErrors([
-          {
-            code: Status.NOT_FOUND,
-            message: 'Database not found',
-          },
-          {
-            code: Status.NOT_FOUND,
-            message: 'Database not found',
-          },
-        ] as MockError[]),
-      );
-      const database = newTestDatabase();
-      try {
-        await database.run(selectSql);
-        assert.fail('missing expected error');
-      } catch (err) {
-        assert.strictEqual((err as ServiceError).code, Status.NOT_FOUND);
-      } finally {
-        await database.close();
-      }
-    });
-
-    it('should not propagate instance and database not found errors for SessionPoolOptions.min > 0', async () => {
-      for (const msg of ['Instance not found', 'Database not found']) {
-        spannerMock.setExecutionTime(
-          spannerMock.batchCreateSessions,
-          SimulatedExecutionTime.ofErrors([
-            {
-              code: Status.NOT_FOUND,
-              message: msg,
-            },
-          ] as MockError[]),
-        );
-        try {
-          const database = newTestDatabase({
-            incStep: 1,
-            min: 25,
-            max: 400,
-          });
-          const response = await database.create();
-          assert.ok(response);
-          const [rows] = await database.run(selectSql);
-          assert.strictEqual(rows.length, 3);
-          // Make sure the pool of the newly created database is filled.
-          const pool = database.pool_ as SessionPool;
-          assert.strictEqual(pool.size, 25);
-          await database.close();
-        } catch (err) {
-          assert.fail(err as ServiceError);
-        }
-      }
-    });
-
-    it('should propagate permission denied errors on initialization', async () => {
-      spannerMock.setExecutionTime(
-        spannerMock.batchCreateSessions,
-        SimulatedExecutionTime.ofErrors([
-          {
-            code: Status.PERMISSION_DENIED,
-            message: 'Needs permission',
-          },
-          {
-            code: Status.PERMISSION_DENIED,
-            message: 'Needs permission',
-          },
-        ] as MockError[]),
-      );
-      const database = newTestDatabase().on('error', err => {
-        assert.strictEqual(err.code, Status.PERMISSION_DENIED);
-      });
-      try {
-        await database.run(selectSql);
-        assert.fail('missing expected error');
-      } catch (err) {
-        assert.strictEqual(
-          (err as ServiceError).code,
-          Status.PERMISSION_DENIED,
-        );
-      } finally {
-        await database.close();
-      }
-    });
-
-    it('should create new session when numWaiters >= pending', async () => {
-      const database = newTestDatabase({
-        min: 1,
-        max: 10,
-        incStep: 1,
-      });
-      const pool = database.pool_ as SessionPool;
-      // Start executing a query. This query should use the one session that is
-      // being pre-filled into the pool.
-      const promise1 = database.run(selectSql);
-      // Start executing another query. This query should initiate the creation
-      // of a new session.
-      const promise2 = database.run(selectSql);
-      const rows = await Promise.all([promise1, promise2]);
-      assert.strictEqual(pool.size, 2);
-      assert.strictEqual(rows[0][0].length, 3);
-      assert.strictEqual(rows[1][0].length, 3);
-      await database.close();
-    });
-
-    it('should respect options.incStep', async () => {
-      const database = newTestDatabase({
-        min: 100,
-        max: 400,
-        incStep: 25,
-      });
-      const pool = database.pool_ as SessionPool;
-      assert.strictEqual(pool.size, pool.options.min);
-      // Request options.min + 1 sessions.
-      const snapshots: Snapshot[] = [];
-      for (let i = 0; i < pool.options.min! + 1; i++) {
-        const [snapshot] = await database.getSnapshot();
-        snapshots.unshift(snapshot);
-      }
-      // The pool should create a batch of sessions.
-      assert.strictEqual(pool.size, pool.options.min! + pool.options.incStep!);
-      for (const s of snapshots) {
-        s.end();
-      }
-      await database.close();
-    });
-
-    it('should respect options.max', async () => {
-      const database = newTestDatabase({
-        min: 0,
-        max: 3,
-        incStep: 2,
-      });
-      const pool = database.pool_ as SessionPool;
-      const [tx1] = await database.getSnapshot();
-      assert.strictEqual(pool.size, pool.options.incStep);
-      const [tx2] = await database.getSnapshot();
-      const [tx3] = await database.getSnapshot();
-      assert.strictEqual(pool.size, pool.options.max);
-      tx1.end();
-      tx2.end();
-      tx3.end();
-      await database.close();
-    });
-
-    it('should respect options.max when a write session is requested', async () => {
-      const database = newTestDatabase({
-        min: 0,
-        max: 3,
-        incStep: 2,
-      });
-      const pool = database.pool_ as SessionPool;
-      const [tx1] = await database.getSnapshot();
-      const [tx2] = await database.getSnapshot();
-      assert.strictEqual(pool.size, pool.options.incStep);
-      await database.runTransactionAsync(async tx => {
-        if (!tx) {
-          assert.fail('Transaction failed');
-        }
-        await tx.runUpdate(updateSql);
-        await tx.commit();
-      });
-      assert.strictEqual(pool.size, pool.options.max);
-      tx1.end();
-      tx2.end();
-      await database.close();
     });
   });
 
@@ -4380,47 +3092,15 @@ describe('Spanner with mock server', () => {
     });
 
     describe('batch-readonly-transaction', () => {
-      describe('when multiplexed session is disabled', () => {
-        before(() => {
-          process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS = 'false';
-        });
-        after(async () => {
-          delete process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS;
-        });
-        it('should use session from pool', async () => {
-          const database = newTestDatabase({min: 0, incStep: 1});
-          const pool = database.pool_ as SessionPool;
-          assert.strictEqual(pool.size, 0);
-          const [transaction] = await database.createBatchTransaction();
-          assert.strictEqual(pool.size, 1);
-          assert.strictEqual(pool.available, 0);
-          transaction.close();
-          await database.close();
-        });
-        it('failing to close transaction should cause session leak error', async () => {
-          const database = newTestDatabase();
-          await database.createBatchTransaction();
-          try {
-            await database.close();
-            assert.fail('missing expected session leak error');
-          } catch (err) {
-            assert.ok(err instanceof SessionLeakError);
-          }
-        });
-      });
-
       describe('when session mode is default', () => {
         it('should use multiplexed session', async () => {
           const database = newTestDatabase({min: 0, incStep: 1});
-          const pool = database.pool_ as SessionPool;
           const multiplexedSession = (
             database.sessionFactory_ as SessionFactory
           ).multiplexedSession_ as MultiplexedSession;
-          // pool is empty before call to createBatchTransaction
-          assert.strictEqual(pool.size, 0);
+          assert.strictEqual(database.pool_, undefined);
           const [transaction] = await database.createBatchTransaction();
-          // pool is empty after call to createBatchTransaction
-          assert.strictEqual(pool.size, 0);
+          assert.strictEqual(database.pool_, undefined);
           // multiplexed session will get created by default
           assert.notEqual(multiplexedSession._multiplexedSession, null);
           transaction.close();
@@ -7239,7 +5919,7 @@ describe('Spanner with mock server', () => {
       // Assert that listing the databases does not cause a session pool to be
       // initialized for the databases.
       for (const db of databases) {
-        assert.strictEqual((db.pool_ as SessionPool).size, 0);
+        assert.strictEqual(db.pool_, undefined);
       }
     });
 
@@ -7356,20 +6036,6 @@ describe('Spanner with mock server', () => {
         `Mismatched events\n\tGot:  ${actualEventNames}\n\tWant: ${expectedEventNames}`,
       );
       done();
-    });
-  });
-
-  describe('session-factory', () => {
-    it('should not propagate any error when disabling GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS after client initialization', done => {
-      const database = newTestDatabase();
-      // disable env after database creation
-      process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS = 'false';
-      const sessionFactory = database.sessionFactory_ as SessionFactory;
-      sessionFactory.getSession((err, _) => {
-        assert.ifError(err);
-        delete process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS;
-        done();
-      });
     });
   });
 
@@ -7702,8 +6368,4 @@ function getRowCountFromStreamingSql(
         }
       });
   });
-}
-
-function sleep(ms): Promise<void> {
-  return new Promise(resolve => setTimeout(resolve, ms));
 }

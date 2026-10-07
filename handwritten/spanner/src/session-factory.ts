@@ -19,13 +19,8 @@ import {
   MultiplexedSession,
   MultiplexedSessionInterface,
 } from './multiplexed-session';
-import {
-  SessionPool,
-  SessionPoolInterface,
-  SessionPoolOptions,
-} from './session-pool';
-import {SessionPoolConstructor} from './database';
 import {ServiceObjectConfig} from '@google-cloud/common';
+import {ServiceError} from 'google-gax';
 const common = require('./common-grpc/service-object');
 
 /**
@@ -33,12 +28,10 @@ const common = require('./common-grpc/service-object');
  * @param {?Error} error Request error, if any.
  * @param {Session} [session] The session object.
  * @param {Transaction} [transaction] The transaction object, if applicable.
- *   Omitted for read-only multiplexed session acquisitions to prevent throwaway
- *   allocations. Provided by getSessionForReadWrite or when using regular session pools.
  */
 export interface GetSessionCallback {
   (
-    err: Error | null,
+    err: Error | ServiceError | null,
     session?: Session | null,
     transaction?: Transaction | null,
   ): void;
@@ -66,238 +59,164 @@ export interface SessionFactoryInterface {
   getSessionSync(): Session | null;
 
   /**
-   * When called returns a session for paritioned dml.
+   * When called returns a session for partitioned operations.
    *
+   * @deprecated Always delegates to {@link SessionFactoryInterface#getSession}.
    * @name SessionFactoryInterface#getSessionForPartitionedOps
    * @param {GetSessionCallback} callback The callback function.
    */
-  getSessionForPartitionedOps(callback: GetSessionCallback): void;
+  getSessionForPartitionedOps?(callback: GetSessionCallback): void;
 
   /**
-   * When called returns a session for read write.
+   * When called returns a session for read/write operations.
    *
+   * @deprecated Always delegates to {@link SessionFactoryInterface#getSession}.
    * @name SessionFactoryInterface#getSessionForReadWrite
    * @param {GetSessionCallback} callback The callback function.
    */
-  getSessionForReadWrite(callback: GetSessionCallback): void;
+  getSessionForReadWrite?(callback: GetSessionCallback): void;
 
   /**
-   * When called returns the pool object.
+   * Releases a session back into the pool. No-op for multiplexed sessions.
    *
-   * @name SessionFactoryInterface#getPool
-   */
-  getPool(): SessionPoolInterface;
-
-  /**
-   * To be called when releasing a session.
-   *
+   * @deprecated Regular session pooling has been removed; this method is a no-op.
    * @name SessionFactoryInterface#release
-   * @param {Session} session The session to be released.
+   * @param {Session} session The session object.
    */
-  release(session: Session): void;
+  release?(session: Session): void;
 
   /**
-   * When called returns if the multiplexed is enabled or not.
+   * Returns true if multiplexed sessions are enabled.
    *
+   * @deprecated Multiplexed sessions are always enabled.
    * @name SessionFactoryInterface#isMultiplexedEnabled
+   * @returns {boolean} Always true.
    */
-  isMultiplexedEnabled(): boolean;
+  isMultiplexedEnabled?(): boolean;
 
   /**
-   * When called returns if the multiplexed is enabled or not for read write transactions.
+   * Returns true if multiplexed sessions are enabled for read/write transactions.
    *
+   * @deprecated Multiplexed sessions are always enabled for read/write transactions.
    * @name SessionFactoryInterface#isMultiplexedEnabledForRW
+   * @returns {boolean} Always true.
    */
-  isMultiplexedEnabledForRW(): boolean;
+  isMultiplexedEnabledForRW?(): boolean;
+
+  /**
+   * When called closes the session factory and stops background maintenance.
+   *
+   * @name SessionFactoryInterface#close
+   */
+  close?(): void;
 }
 
 /**
  * Creates a SessionFactory object to manage the creation of
- *      session-pool and multiplexed session.
+ *      multiplexed session.
  *
  * @class
  *
  * @param {Database} database Database object.
  * @param {String} name Name of the database.
- * @param {SessionPoolOptions|SessionPoolInterface} options Session pool
- *     configuration options or custom pool inteface.
  */
 export class SessionFactory
   extends common.GrpcServiceObject
   implements SessionFactoryInterface
 {
   multiplexedSession_: MultiplexedSessionInterface;
-  pool_: SessionPoolInterface;
-  isMultiplexed: boolean;
-  isMultiplexedPartitionOps: boolean;
-  isMultiplexedRW: boolean;
-  constructor(
-    database: Database,
-    name: String,
-    poolOptions?: SessionPoolConstructor | SessionPoolOptions,
-  ) {
+  constructor(database: Database, name: String) {
     super({
       parent: database,
       id: name,
     } as {} as ServiceObjectConfig);
-    // initialize regular pool
-    this.pool_ =
-      typeof poolOptions === 'function'
-        ? new (poolOptions as SessionPoolConstructor)(database, null)
-        : new SessionPool(database, poolOptions);
 
     // initialize multiplexed session
     this.multiplexedSession_ = new MultiplexedSession(database);
     this.multiplexedSession_.createSession();
-
-    // set the isMultiplexed property to false if multiplexed session is disabled, otherwise set the property to true
-    this.isMultiplexed = !(
-      process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS === 'false'
-    );
-
-    // set the isMultiplexedPartitionedOps property to false if multiplexed session is disabled for paritioned ops, otherwise set the property to true
-    this.isMultiplexedPartitionOps = !(
-      process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS === 'false' &&
-      process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS_PARTITIONED_OPS ===
-        'false'
-    );
-
-    // set the isMultiplexedRW property to false if multiplexed session is disabled for read/write, otherwise set the property to true
-    this.isMultiplexedRW = !(
-      process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS === 'false' &&
-      process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS_FOR_RW === 'false'
-    );
-
-    // Regular sessions should only be created if mux is disabled.
-    if (!this.isMultiplexed) {
-      this.pool_.on('error', this.emit.bind(database, 'error'));
-      this.pool_.open();
-    }
   }
 
   /**
-   * Synchronously returns a cached multiplexed session if multiplexed sessions
-   * are enabled and one is available, otherwise null.
+   * Synchronously returns a cached multiplexed session if available,
+   * otherwise null.
    *
    * @returns {Session|null} The cached multiplexed session or null.
    */
   getSessionSync(): Session | null {
-    return this.isMultiplexed
-      ? (this.multiplexedSession_?.getSessionSync?.() ?? null)
-      : null;
+    return this.multiplexedSession_?.getSessionSync?.() ?? null;
   }
 
   /**
-   * Retrieves a session, either a regular session or a multiplexed session, based on the environment variable configuration.
-   *
-   * If the environment variable `GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS` is set to `false`, the method will attempt to
-   * retrieve a regular session. Otherwise, it will return a multiplexed session.
+   * Retrieves a multiplexed session.
    *
    * @param {GetSessionCallback} callback The callback function.
    */
   getSession(callback: GetSessionCallback): void {
-    const sessionHandler = this.isMultiplexed
-      ? this.multiplexedSession_
-      : this.pool_;
-
-    sessionHandler!.getSession(callback);
+    this.multiplexedSession_.getSession(callback);
   }
 
   /**
-   * Retrieves a session for partitioned operations, selecting the appropriate session type
-   * based on whether multiplexed sessions are disabled or not.
+   * Retrieves a session for partitioned operations.
    *
-   * If multiplexed sessions are disabled for partitioned ops this methods delegates the request to `getSession()`, which returns
-   * either a multiplexed session or a regular session based on the env configuration.
-   *
-   * If the multiplexed sessions are disabled, a session will get retrieved from the regular session pool.
-   * Otherwise a multiplexed session will be used.
-   *
+   * @deprecated Use {@link SessionFactory#getSession} instead.
    * @param {GetSessionCallback} callback The callback function.
    */
   getSessionForPartitionedOps(callback: GetSessionCallback): void {
-    this.isMultiplexedPartitionOps
-      ? this.getSession(callback)
-      : this.pool_.getSession(callback);
+    this.getSession(callback);
   }
 
   /**
-   * Retrieves a session for read write operations, selecting the appropriate session type
-   * based on whether multiplexed sessions are enabled.
+   * Retrieves a session for read/write operations.
    *
-   * If multiplexed sessions are disabled for read write this methods delegates the request to `getSession()`, which returns
-   * either a multiplexed session or a regular session based on the env configuration.
-   *
-   * If the multiplexed sessions are disabled, a session will get retrieved from the regular session pool.
-   * Otherise a multiplexed session will be used.
-   *
+   * @deprecated Use {@link SessionFactory#getSession} instead.
    * @param {GetSessionCallback} callback The callback function.
    */
   getSessionForReadWrite(callback: GetSessionCallback): void {
-    if (this.isMultiplexedRW) {
-      this.getSession((error, session, transaction) => {
-        if (error || !session) {
-          callback(error ?? new Error('No session found'), null);
-          return;
-        }
-        const database = session.parent as Database;
-        const activeTransaction =
-          transaction ?? session.transaction(database.queryOptions_);
-        callback(null, session, activeTransaction);
-      });
-    } else {
-      this.pool_.getSession(callback);
-    }
+    this.getSession((error, session, transaction) => {
+      if (error || !session) {
+        callback(error ?? new Error('No session found'), null);
+        return;
+      }
+      const database = session.parent as Database;
+      const activeTransaction =
+        transaction ?? session.transaction(database?.queryOptions_);
+      callback(null, session, activeTransaction);
+    });
   }
 
   /**
-   * Returns the regular session pool object.
+   * No-op release method retained for backwards compatibility.
    *
-   * @returns {SessionPoolInterface} The session pool used by current instance.
+   * @deprecated Multiplexed sessions do not require releasing back to a pool.
+   * @param {Session} _session The session object.
    */
-
-  getPool(): SessionPoolInterface {
-    return this.pool_;
-  }
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  release(_session: Session): void {}
 
   /**
-   * Releases a regular session back to the session pool.
+   * Checks whether multiplexed session is enabled.
    *
-   * This methods does not release a multiplexed session.
-   *
-   * It returns a session to the pool after it is no longer needed.
-   * It is a no-op for multiplexed sessions.
-   *
-   * @param {Session} session - The session to be released. This should be an instance of `Session` that was
-   * previously acquired from the session pool.
-   *
-   * @throws {Error} If the session is invalid or cannot be released.
-   */
-  release(session: Session): void {
-    if (!session.metadata?.multiplexed) {
-      this.pool_.release(session);
-    }
-  }
-
-  /**
-   * Returns if a multiplexed is enabled or not.
-   *
-   * This method returns true if multiplexed session is enabled, otherwise returns false
-   *
-   * @returns {boolean}
+   * @deprecated Multiplexed sessions are always enabled.
+   * @returns {boolean} Always returns `true`.
    */
   isMultiplexedEnabled(): boolean {
-    return this.isMultiplexed;
+    return true;
   }
 
   /**
-   * Returns if a multiplexed is enabled or not for read write transaction.
+   * Checks whether multiplexed session is enabled for read/write transactions.
    *
-   * This method returns true if multiplexed session is enabled for read write transactions, otherwise returns false
-   *
-   * @returns {boolean}
+   * @deprecated Multiplexed sessions are always enabled for read/write transactions.
+   * @returns {boolean} Always returns `true`.
    */
   isMultiplexedEnabledForRW(): boolean {
-    return this.isMultiplexedRW;
+    return true;
+  }
+
+  /**
+   * Closes the session factory and stops background maintenance.
+   */
+  close(): void {
+    this.multiplexedSession_?.close?.();
   }
 }
