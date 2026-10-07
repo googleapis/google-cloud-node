@@ -18,6 +18,8 @@ import api = protos.google.firestore.v1;
 
 import {DocumentReference} from '../reference/document-reference';
 import {hasUserData, ProtoSerializable, Serializer} from '../serializer';
+import {FieldTransform} from '../field-value';
+import {isPlainObject} from '../util';
 
 import {
   AggregateFunction,
@@ -1159,12 +1161,27 @@ export class LiteralsSource implements Stage {
   }
 
   _validateUserData(ignoreUndefinedProperties: boolean): void {
-    this.options.documents.forEach(doc => {
-      Object.values(doc).forEach(val => {
-        if (hasUserData(val)) {
-          val._validateUserData(ignoreUndefinedProperties);
-        }
-      });
-    });
+    const validate = (value: unknown, path: string[]): void => {
+      if (value instanceof FieldTransform) {
+        // FieldValue sentinels (serverTimestamp(), increment(), delete(), ...)
+        // have no representation in a pipeline, so they cannot be encoded.
+        // The error matches the Web SDK.
+        const location =
+          path.length > 0 ? ` (found in field ${path.join('.')})` : '';
+        throw new Error(
+          `Function literals() called with invalid data. ${value.methodName}() ` +
+            `can only be used with update() and set()${location}`,
+        );
+      } else if (hasUserData(value)) {
+        value._validateUserData(ignoreUndefinedProperties);
+      } else if (Array.isArray(value)) {
+        value.forEach(element => validate(element, path));
+      } else if (isPlainObject(value)) {
+        Object.entries(value as Record<string, unknown>).forEach(
+          ([key, fieldValue]) => validate(fieldValue, [...path, key]),
+        );
+      }
+    };
+    this.options.documents.forEach(doc => validate(doc, []));
   }
 }
