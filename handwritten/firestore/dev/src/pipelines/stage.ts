@@ -28,11 +28,16 @@ import {
   Expression,
   Field,
   field,
+  MapValue,
   Ordering,
 } from './expression';
 import {OptionsUtil} from './options-util';
 import {CollectionReference} from '../reference/collection-reference';
-import {validateUserDataHelper, selectablesToMap} from './pipeline-util';
+import {
+  validateUserDataHelper,
+  selectablesToMap,
+  valueToDefaultExpr,
+} from './pipeline-util';
 import {Pipeline} from './pipelines';
 
 /**
@@ -1146,9 +1151,20 @@ export class LiteralsSource implements Stage {
   constructor(private options: InternalLiteralsStageOptions) {}
 
   _toProto(serializer: Serializer): api.Pipeline.IStage {
-    const args: api.IValue[] = this.options.documents.map(doc =>
-      serializer.encodeValue(doc)!,
-    );
+    // Each document is sent as a top-level mapValue. The backend only
+    // evaluates expressions in the top-level fields of a literal document, so
+    // nested objects and arrays are converted to map() and array() expressions
+    // (the same conversion used for objects and arrays passed to expressions
+    // and to rawStage()). This allows expressions at any depth.
+    const args: api.IValue[] = this.options.documents.map(doc => {
+      const fields = new Map<string, Expression>();
+      for (const [key, value] of Object.entries(doc)) {
+        if (value !== undefined) {
+          fields.set(key, valueToDefaultExpr(value));
+        }
+      }
+      return new MapValue(fields)._toProto(serializer);
+    });
     return {
       name: this.name,
       args,
@@ -1162,16 +1178,26 @@ export class LiteralsSource implements Stage {
 
   _validateUserData(ignoreUndefinedProperties: boolean): void {
     const validate = (value: unknown, path: string[]): void => {
+      const location =
+        path.length > 0 ? ` (found in field ${path.join('.')})` : '';
       if (value instanceof FieldTransform) {
         // FieldValue sentinels (serverTimestamp(), increment(), delete(), ...)
         // have no representation in a pipeline, so they cannot be encoded.
         // The error matches the Web SDK.
-        const location =
-          path.length > 0 ? ` (found in field ${path.join('.')})` : '';
         throw new Error(
           `Function literals() called with invalid data. ${value.methodName}() ` +
             `can only be used with update() and set()${location}`,
         );
+      } else if (value === undefined) {
+        // Undefined values are omitted from the encoded document, which is
+        // only allowed when `ignoreUndefinedProperties` is enabled.
+        if (!ignoreUndefinedProperties) {
+          throw new Error(
+            'Function literals() called with invalid data. Cannot use ' +
+              `"undefined" as a Firestore value${location}. If you want to ` +
+              'ignore undefined values, enable `ignoreUndefinedProperties`.',
+          );
+        }
       } else if (value === null) {
         // null is a valid literal value.
       } else if (hasUserData(value)) {

@@ -828,6 +828,44 @@ describe.skipClassic('Pipeline class', () => {
         expect(res.results.length).to.equal(1);
         expect(res.results[0].data()).to.deep.equal({base: 10, computed: 35});
       });
+
+      it('can execute literals stage with nested expressions', async () => {
+        const res = await firestore
+          .pipeline()
+          .literals([
+            {
+              nested: {sum: add(constant(1), constant(2)), label: 'x'},
+              arr: [1, add(constant(3), constant(4))],
+              deep: {a: {b: [{c: add(constant(5), constant(6))}]}},
+            },
+          ])
+          .execute();
+        expect(res.results.length).to.equal(1);
+        expect(res.results[0].data()).to.deep.equal({
+          nested: {sum: 3, label: 'x'},
+          arr: [1, 7],
+          deep: {a: {b: [{c: 11}]}},
+        });
+      });
+
+      it('can execute literals stage with nested constant values', async () => {
+        const res = await firestore
+          .pipeline()
+          .literals([
+            {
+              emptyMap: {},
+              emptyArr: [],
+              nested: {a: 1, b: [true, null, 'str'], c: {d: 2.5}},
+            },
+          ])
+          .execute();
+        expect(res.results.length).to.equal(1);
+        expect(res.results[0].data()).to.deep.equal({
+          emptyMap: {},
+          emptyArr: [],
+          nested: {a: 1, b: [true, null, 'str'], c: {d: 2.5}},
+        });
+      });
     });
 
     it('empty snapshot as expected', async () => {
