@@ -771,40 +771,5 @@ describe('execute(Pipeline|PipelineExecuteOptions)', () => {
         collection: {referenceValue: '/users'},
       });
     });
-
-    it('supports deprecated transforms option for backward compatibility', async () => {
-      const spy = sinon.fake.returns(stream());
-      const firestore = await createInstance({
-        executePipeline: spy,
-      });
-
-      await firestore
-        .pipeline()
-        .collection('foo')
-        .upsert({
-          collection: 'users',
-          transforms: [constant(true).as('active')],
-        })
-        .execute();
-
-      const stages =
-        spy.args[FIRST_CALL][EXECUTE_PIPELINE_REQUEST]['structuredPipeline'][
-          'pipeline'
-        ]['stages'];
-
-      expect(stages[1].name).to.equal('upsert');
-      expect(stages[1].args).to.deep.equal([
-        {
-          mapValue: {
-            fields: {
-              active: {booleanValue: true},
-            },
-          },
-        },
-      ]);
-      expect(stages[1].options).to.deep.equal({
-        collection: {referenceValue: '/users'},
-      });
-    });
   });
 });
