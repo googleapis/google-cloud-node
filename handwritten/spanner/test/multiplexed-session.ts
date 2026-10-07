@@ -21,7 +21,7 @@ import * as sinon from 'sinon';
 import {Database} from '../src/database';
 import {Session} from '../src/session';
 import {MultiplexedSession} from '../src/multiplexed-session';
-import {FakeTransaction} from './session-pool';
+import {FakeTransaction} from './session-factory';
 import {grpc} from 'google-gax';
 
 describe('MultiplexedSession', () => {
@@ -144,6 +144,40 @@ describe('MultiplexedSession', () => {
       multiplexedSession._maintain();
       clock.tick(expectedInterval);
       assert.strictEqual(createSessionStub.callCount, 1);
+    });
+  });
+
+  describe('close', () => {
+    let clock;
+    let createSessionStub;
+
+    beforeEach(() => {
+      createSessionStub = sandbox
+        .stub(multiplexedSession, '_createSession')
+        .resolves();
+      clock = sandbox.useFakeTimers();
+    });
+
+    afterEach(() => {
+      clock.restore();
+    });
+
+    it('should stop the refresh interval when closed', () => {
+      const expectedInterval =
+        multiplexedSession.refreshRate! * 24 * 60 * 60000;
+
+      multiplexedSession._maintain();
+      multiplexedSession.close();
+      clock.tick(expectedInterval);
+      assert.strictEqual(createSessionStub.callCount, 0);
+    });
+
+    it('should not start maintenance if closed before initial createSession resolves', async () => {
+      const maintainSpy = sandbox.spy(multiplexedSession, '_maintain');
+      multiplexedSession.close();
+      multiplexedSession.createSession();
+      await Promise.resolve();
+      assert.strictEqual(maintainSpy.callCount, 0);
     });
   });
 
