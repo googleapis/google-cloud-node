@@ -799,6 +799,45 @@ describe.skipClassic('Pipeline class', () => {
         expect(snap.get('title')).to.equal('Tx Upsert Book');
       });
 
+      it('treats a string documentIdExpression as a field name', async () => {
+        const targetCol = getTestRoot();
+        const res = await firestore
+          .pipeline()
+          .collection(dmlCol.path)
+          .where(equal(field('__name__').documentId(), 'book1'))
+          .addFields(constant('id_from_field').as('customId'))
+          .insert({
+            collection: targetCol.path,
+            documentIdExpression: 'customId',
+          })
+          .execute({atomic: true});
+        expectResults(res, {documents_modified: 1});
+
+        const docSnap = await targetCol.doc('id_from_field').get();
+        expect(docSnap.exists).to.be.true;
+        expect(docSnap.get('title')).to.equal(
+          "The Hitchhiker's Guide to the Galaxy",
+        );
+        // A literal document ID 'customId' is not used.
+        expect((await targetCol.doc('customId').get()).exists).to.be.false;
+      });
+
+      it('upsert with documentIdExpression requires a collection', async () => {
+        let error: Error | undefined;
+        try {
+          await firestore
+            .pipeline()
+            .collection(dmlCol.path)
+            .upsert({documentIdExpression: constant('some_id')})
+            .execute({atomic: true});
+        } catch (e) {
+          error = e as Error;
+        }
+        expect(error?.message).to.contain(
+          "The 'upsert(...)' stage must specify a collection when a document id is provided.",
+        );
+      });
+
       it('can execute pipeline with literals stage', async () => {
         const res = await firestore
           .pipeline()
