@@ -20,7 +20,7 @@
     "@opentelemetry/instrumentation-http": "^0.222.0",
     "@opentelemetry/sdk-trace-base": "^2.11.0",
     "@opentelemetry/sdk-trace-node": "^2.11.0",
-    "google-gax": "^6.12.0"
+    "google-gax": "^6.12.1"
   },
   "devDependencies": {
     "c8": "^9.0.0",
