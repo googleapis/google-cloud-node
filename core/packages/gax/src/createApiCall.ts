@@ -146,9 +146,8 @@ export function createApiCall(
       : undefined;
 
     // Server-streaming calls retry inside the stream rather than through
-    // `retryable`, so the recorder is handed to the stream itself. It is the
-    // same span either way: the proxy outlives its resumptions, so the call
-    // span is still open while they happen.
+    // `retryable`, so the recorder is handed to the stream proxy so each
+    // resumed stream attempt span receives the incremented resendCount.
     if (recordResend && ongoingCall instanceof StreamProxy) {
       ongoingCall.recordResend = recordResend;
     }

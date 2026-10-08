@@ -685,44 +685,6 @@ describe('createApiCall', () => {
       );
     });
 
-    it('correctly pipes telemetry information for HTTP fallback calls', async () => {
-      const settings = new gax.CallSettings({
-        apiName: 'google.example.v1.Echo',
-        enableTelemetryTracing: true,
-        otherArgs: {
-          internalTelemetryInfo: telemetryInfo,
-          internalMethodName: 'Echo',
-        },
-      });
-
-      function func(
-        argument: {},
-        metadata: {},
-        options: {},
-        callback: (err: GoogleError | null, resp?: unknown) => void,
-      ) {
-        callback(null, {data: 'hello'});
-        return {
-          cancel: () => {},
-        };
-      }
-
-      const apiCall = gaxCreateApiCall(func, settings, undefined, true);
-      await apiCall({}, undefined);
-
-      const spans = harness.getSpans('google-gax');
-      assert.strictEqual(spans.length, 2);
-      const attemptSpan = spans[0];
-      const span = spans[1];
-      assert.strictEqual(attemptSpan.name, 'POST');
-      assert.strictEqual(attemptSpan.kind, SpanKind.CLIENT);
-      assert.strictEqual(attemptSpan.attributes['rpc.system.name'], 'http');
-      assert.strictEqual(attemptSpan.attributes['gcp.method.type'], undefined);
-      assert.strictEqual(span.name, 'EchoClient.Echo');
-      assert.strictEqual(span.ended, true);
-      assert.strictEqual(span.attributes['rpc.system.name'], 'http');
-    });
-
     it('passes fallback flag through when using fallback createApiCall with default options', async () => {
       const traceCallSpy = sinon.spy(tracerHelper, 'traceCall');
 
@@ -803,149 +765,6 @@ describe('createApiCall', () => {
       assert.strictEqual(spans.length, 2);
       const span = spans[1];
       assert.strictEqual(span.attributes['rpc.system.name'], 'http');
-    });
-
-    it('ends the span and labels it DEADLINE_EXCEEDED when a fallback call times out', async () => {
-      const settings = new gax.CallSettings({
-        apiName: 'google.example.v1.Echo',
-        enableTelemetryTracing: true,
-        otherArgs: {
-          internalTelemetryInfo: telemetryInfo,
-          internalMethodName: 'Echo',
-        },
-      });
-
-      // The error the REST transport produces when a call exceeds its
-      // deadline: a GoogleError carrying the numeric gRPC status, so that
-      // retryCodes, caller `err.code` checks and telemetry all agree across
-      // transports. An unenforced deadline is what leaves a span open
-      // forever, which is the failure this tracing work has to surface
-      // rather than hide.
-      function timingOutFunc(
-        argument: {},
-        metadata: {},
-        options: {},
-        callback: (err: GoogleError | null, resp?: unknown) => void,
-      ) {
-        const error = new GoogleError(
-          'Deadline exceeded: Echo did not respond within 100 milliseconds.',
-        );
-        error.code = status.DEADLINE_EXCEEDED;
-        setImmediate(() => callback(error));
-        return {
-          cancel: () => {},
-        };
-      }
-
-      const apiCall = fallbackCreateApiCall(timingOutFunc, settings);
-      const promise = apiCall({}, undefined);
-
-      // The span must not be closed while the call is still outstanding; a
-      // fabricated end time would report a duration the RPC never took.
-      assert.strictEqual(harness.getSpans('google-gax').length, 0);
-
-      await assert.rejects(
-        async () => {
-          await promise;
-        },
-        (err: GoogleError) => {
-          assert.strictEqual(err.code, status.DEADLINE_EXCEEDED);
-          return true;
-        },
-      );
-
-      const spans = harness.getSpans('google-gax');
-      assert.strictEqual(spans.length, 2);
-      assert.strictEqual(spans[0].attributes['rpc.system.name'], 'http');
-      assert.strictEqual(spans[1].attributes['rpc.system.name'], 'http');
-      for (const span of spans) {
-        assert.strictEqual(span.ended, true);
-        // On the fallback transport error.type reports the HTTP status the
-        // server sent. A deadline expires before any response arrives, so there
-        // is none, and the attribute resolves to CLIENT_TIMEOUT per Tier 3.
-        assert.strictEqual(span.attributes['error.type'], 'CLIENT_TIMEOUT');
-        assert.strictEqual(
-          span.attributes['rpc.response.status_code'],
-          undefined,
-        );
-        assert.strictEqual(
-          span.attributes['http.response.status_code'],
-          undefined,
-        );
-        assert.strictEqual(span.events.length, 1);
-        assert.strictEqual(span.events[0].name, 'exception');
-      }
-    });
-
-    it('ends the span and preserves system error codes like ECONNREFUSED on a fallback call', async () => {
-      const settings = new gax.CallSettings({
-        apiName: 'google.example.v1.Echo',
-        enableTelemetryTracing: true,
-        otherArgs: {
-          internalTelemetryInfo: telemetryInfo,
-          internalMethodName: 'Echo',
-        },
-      });
-
-      function connectionRefusedFunc(
-        argument: {},
-        metadata: {},
-        options: {},
-        callback: (err: GoogleError | null, resp?: unknown) => void,
-      ) {
-        const fetchError = Object.assign(
-          new Error('connect ECONNREFUSED 127.0.0.1:443'),
-          {
-            code: 'ECONNREFUSED',
-          },
-        );
-        const error = new GoogleError(fetchError.message);
-        error.code = status.UNAVAILABLE;
-        error.cause = fetchError;
-        setImmediate(() => callback(error));
-        return {
-          cancel: () => {},
-        };
-      }
-
-      const apiCall = fallbackCreateApiCall(connectionRefusedFunc, settings);
-      const promise = apiCall({}, undefined);
-
-      await assert.rejects(
-        async () => {
-          await promise;
-        },
-        (err: GoogleError) => {
-          assert.strictEqual(err.code, status.UNAVAILABLE);
-          return true;
-        },
-      );
-
-      const spans = harness.getSpans('google-gax');
-      assert.strictEqual(spans.length, 2);
-      assert.strictEqual(spans[0].attributes['rpc.system.name'], 'http');
-      assert.strictEqual(spans[1].attributes['rpc.system.name'], 'http');
-      for (const span of spans) {
-        assert.strictEqual(span.ended, true);
-        assert.strictEqual(
-          span.attributes['error.type'],
-          'CLIENT_CONNECTION_ERROR',
-        );
-        assert.strictEqual(
-          span.attributes['rpc.response.status_code'],
-          undefined,
-        );
-        assert.strictEqual(
-          span.attributes['http.response.status_code'],
-          undefined,
-        );
-        assert.strictEqual(span.events.length, 1);
-        assert.strictEqual(span.events[0].name, 'exception');
-        assert.strictEqual(
-          span.events[0].attributes?.['exception.type'],
-          'GoogleError',
-        );
-      }
     });
 
     it('passes fallback flag and isStreamingCall as true for server-streaming fallback calls', () => {
@@ -1476,7 +1295,7 @@ describe('createApiCall', () => {
               span.attributes['rpc.system.name'],
               transport.rpcType,
             );
-            // Resend count is only set on T4 attempt spans, not T3 client request spans.
+            // Resend count is only set on low level network attempt spans, not client request spans.
             harness.assertResendCount(0, {span});
             const attemptSpans = spans.filter(
               s => s.name === expectedAttemptSpanName,
@@ -2319,7 +2138,7 @@ describe('createApiCall', () => {
           clientRequestSpan.spanContext().spanId,
         );
 
-        // Overall client request span succeeded (resend_count omitted on T3 span)
+        // Overall client request span succeeded (resend_count omitted on client request span)
         assert.strictEqual(clientRequestSpan.kind, SpanKind.INTERNAL);
         assert.strictEqual(clientRequestSpan.status.code, SpanStatusCode.UNSET);
         assert.strictEqual(

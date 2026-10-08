@@ -118,7 +118,7 @@ export interface DynamicTraceContext {
 }
 
 /**
- * Dynamic metadata specific to an individual RPC transport attempt (T4 low level network span).
+ * Dynamic metadata specific to an individual RPC transport attempt (low level network span).
  */
 export interface AttemptTraceContext extends DynamicTraceContext {
   /**
@@ -170,6 +170,10 @@ function formatHttpAttemptSpanName(
 /**
  * Propagates `url.template` from an HTTP attempt span to its parent client request span,
  * binding the parent span to the first child attempt span that resolves a URL template.
+ *
+ * @param {Span | undefined} clientRequestSpan - The parent client request span, if active.
+ * @param {Span} attemptSpan - The child low level network HTTP attempt span.
+ * @param {string | undefined} urlTemplate - The URL path template resolved for the attempt.
  */
 function propagateUrlTemplateToClientSpan(
   clientRequestSpan: Span | undefined,
@@ -248,6 +252,8 @@ export function getGaxTracer(): Tracer {
 /**
  * Decodes binary gRPC status details (`grpc-status-details-bin`) onto the error
  * object if present and not yet parsed.
+ *
+ * @param {unknown} e - The error to inspect and populate with parsed gRPC status details.
  */
 function ensureGrpcStatusDetailsParsed(e: unknown): void {
   if (!e || typeof e !== 'object') {
@@ -273,6 +279,9 @@ function ensureGrpcStatusDetailsParsed(e: unknown): void {
 /**
  * Resolves google.rpc.ErrorInfo reason if present on the error or its cause chain.
  * Corresponds to Tier 1 in the error.type hierarchy.
+ *
+ * @param {unknown} e - The error to inspect.
+ * @returns {string | undefined} The ErrorInfo reason string if found, or undefined.
  */
 export function resolveErrorInfoReason(e: unknown): string | undefined {
   ensureGrpcStatusDetailsParsed(e);
@@ -342,6 +351,10 @@ export function resolveErrorInfoReason(e: unknown): string | undefined {
  * - For HTTP: The HTTP status code string (e.g. '400', '403', '503').
  * - For gRPC: The canonical gRPC status code name in uppercase (e.g. 'PERMISSION_DENIED', 'UNAVAILABLE').
  * Corresponds to Tier 2 in the error.type hierarchy.
+ *
+ * @param {unknown} e - The error to inspect.
+ * @param {'grpc' | 'http'} rpcType - The RPC transport protocol.
+ * @returns {string | undefined} The server error code string if the error came from the server, or undefined.
  */
 export function resolveServerErrorCode(
   e: unknown,
@@ -381,6 +394,9 @@ export function resolveServerErrorCode(
 /**
  * Resolves client-side network and operational errors to standard CLIENT_* identifiers.
  * Corresponds to Tier 3 in the error.type hierarchy.
+ *
+ * @param {unknown} e - The error to inspect.
+ * @returns {string | undefined} The standardized CLIENT_* error type if matched, or undefined.
  */
 export function resolveClientNetworkOrOperationalError(
   e: unknown,
@@ -477,6 +493,9 @@ export function resolveClientNetworkOrOperationalError(
  * Resolves a language-specific error type name (e.g. AbortError, TypeError, RangeError, CustomRpcError).
  * Generic wrapper types (Error, GoogleError, Object, DOMException) are excluded and unwrap e.cause.
  * Corresponds to Tier 4 in the error.type hierarchy.
+ *
+ * @param {unknown} e - The error to inspect.
+ * @returns {string | undefined} The language-specific error class or name if found, or undefined.
  */
 export function resolveLanguageSpecificErrorType(
   e: unknown,
@@ -532,6 +551,10 @@ export function resolveLanguageSpecificErrorType(
  * 3. Client-Side Network/Operational Errors (CLIENT_* standardized strings)
  * 4. Language-specific error type (e.g. AbortError, RangeError, TypeError, CustomRpcError)
  * 5. Internal Fallback ("INTERNAL")
+ *
+ * @param {unknown} e - The error to classify.
+ * @param {'grpc' | 'http'} rpcType - The RPC transport protocol.
+ * @returns {string} The resolved `error.type` value.
  */
 export function resolveErrorType(e: unknown, rpcType: 'grpc' | 'http'): string {
   // Tier 1: google.rpc.ErrorInfo.reason
@@ -567,6 +590,9 @@ export function resolveErrorType(e: unknown, rpcType: 'grpc' | 'http'): string {
  * exception names (e.g. `AbortError`, `TimeoutError`, `TypeError`) and
  * constructor names over generic `Error`, falling back to `e.name` when
  * the constructor is generic or `DOMException`.
+ *
+ * @param {Error} e - The Error instance.
+ * @returns {string} The resolved `exception.type` string.
  */
 function resolveExceptionType(e: Error): string {
   if (e.name && (e.name === 'AbortError' || e.name === 'TimeoutError')) {
@@ -587,6 +613,9 @@ function resolveExceptionType(e: Error): string {
 /**
  * Resolves a Node system error code (e.g. `ECONNREFUSED`), checking the error
  * itself and any underlying cause attached by fallback wrapping.
+ *
+ * @param {unknown} e - The error to inspect.
+ * @returns {string | undefined} The system error code string if present, or undefined.
  */
 function resolveSystemErrorCode(e: unknown): string | undefined {
   let current: unknown = e;
@@ -611,6 +640,9 @@ function resolveSystemErrorCode(e: unknown): string | undefined {
 /**
  * Resolves the canonical gRPC status name for a failed call. Status 0 (OK)
  * and codes outside the `Status` enum are treated as absent for failed calls.
+ *
+ * @param {unknown} e - The error to inspect.
+ * @returns {string | undefined} The canonical gRPC status name if present, or undefined.
  */
 function resolveRpcStatusName(e: unknown): string | undefined {
   let current: unknown = e;
@@ -638,6 +670,9 @@ function resolveRpcStatusName(e: unknown): string | undefined {
 
 /**
  * Reads the HTTP response status recorded on a fallback error.
+ *
+ * @param {unknown} e - The error to inspect.
+ * @returns {number | undefined} The numeric HTTP status code if present, or undefined.
  */
 function resolveHttpStatusCode(e: unknown): number | undefined {
   let current: unknown = e;
@@ -662,6 +697,9 @@ function resolveHttpStatusCode(e: unknown): number | undefined {
 /**
  * Determines if a failure occurred on the client side before DNS resolution
  * or connection establishment.
+ *
+ * @param {unknown} e - The error to inspect.
+ * @returns {boolean} True if the error occurred before connection establishment.
  */
 export function isPreConnectionFailure(e: unknown): boolean {
   let current: unknown = e;
@@ -731,6 +769,9 @@ export function isPreConnectionFailure(e: unknown): boolean {
 /**
  * Resolves a human-readable description for non-Error throws, extracting
  * `message` if present or falling back to `String(e)`.
+ *
+ * @param {unknown} e - The non-Error value thrown or reported.
+ * @returns {string} The resolved error message string.
  */
 function resolveErrorMessage(e: unknown): string {
   const message = (e as {message?: unknown} | null)?.message;
@@ -740,6 +781,10 @@ function resolveErrorMessage(e: unknown): string {
 /**
  * Determines whether a failure is a server-side error (i.e. a server response arrived),
  * excluding pre-connection failures, client network/operational errors, and aborts/timeouts.
+ *
+ * @param {unknown} e - The error to inspect.
+ * @param {'grpc' | 'http'} rpcType - The RPC transport protocol.
+ * @returns {boolean} True if a server error code was resolved for the transport.
  */
 export function isServerSideError(
   e: unknown,
@@ -750,6 +795,9 @@ export function isServerSideError(
 
 /**
  * Checks whether a value is a Node.js Buffer instance.
+ *
+ * @param {unknown} val - The value to check.
+ * @returns {boolean} True if `val` is a Buffer.
  */
 function isBuffer(val: unknown): val is Buffer {
   return typeof Buffer !== 'undefined' && Buffer.isBuffer(val);
@@ -758,6 +806,9 @@ function isBuffer(val: unknown): val is Buffer {
 /**
  * Safely converts a value to a JSON string without throwing exceptions on
  * circular references, BigInt values, or non-serializable properties.
+ *
+ * @param {unknown} value - The value to serialize.
+ * @returns {string | undefined} The serialized JSON string, or undefined if `value` is undefined or unserializable.
  */
 export function safeJsonStringify(value: unknown): string | undefined {
   if (value === undefined) {
@@ -801,8 +852,11 @@ export function safeJsonStringify(value: unknown): string | undefined {
 
 /**
  * Extracts and formats server-side error details (message, status details, and metadata)
- * attached by GFE/backend on server-side errors. Note that only `message` is used on T4
- * `exception` span events (`exception.stacktrace` is not recorded on spans).
+ * attached by GFE/backend on server-side errors. Note that only `message` is used on
+ * low level network `exception` span events (`exception.stacktrace` is not recorded on spans).
+ *
+ * @param {Error} e - The server Error instance.
+ * @returns {{message: string; stacktrace?: string}} The resolved server message and formatted details string.
  */
 export function resolveServerExceptionDetails(e: Error): {
   message: string;
@@ -891,13 +945,13 @@ export function resolveServerExceptionDetails(e: Error): {
 
 /**
  * Records an `exception` span event with `exception.type` (and `exception.message`
- * when `includeMessage` is true, such as on T4 low level network attempt spans).
+ * when `includeMessage` is true, such as on low level network attempt spans).
  *
  * @param {Span} span - The span on which to record the exception event.
  * @param {Error} e - The error instance.
  * @param {'grpc' | 'http'} rpcType - The RPC transport protocol.
  * @param {boolean} [includeMessage=false] - Whether to include `exception.message` on the event
- *   (true for T4 attempt spans, false for T3 client request spans).
+ *   (true for low level network attempt spans, false for client request spans).
  */
 function recordExceptionEvent(
   span: Span,
@@ -926,6 +980,10 @@ function recordExceptionEvent(
  *    that hold the actual promise on a `.promise` property.
  * 3. Promises originating from different execution realms (such as Node.js vm
  *    contexts or different package bundles) fail `instanceof Promise` checks.
+ *
+ * @template T
+ * @param {unknown} value - The value to check.
+ * @returns {boolean} True if `value` is a Promise or Thenable.
  */
 function isPromiseLike<T = unknown>(value: unknown): value is PromiseLike<T> {
   return (
@@ -939,6 +997,10 @@ function isPromiseLike<T = unknown>(value: unknown): value is PromiseLike<T> {
 /**
  * Extracts a PromiseLike target from a value, supporting native Promises,
  * custom Thenables, classes implementing CancellablePromise, and OngoingCallPromise wrappers.
+ *
+ * @template T
+ * @param {unknown} value - The operation return value to inspect.
+ * @returns {PromiseLike<T> | null} The underlying PromiseLike target, or null if not promise-like.
  */
 function getPromiseTarget<T = unknown>(value: unknown): PromiseLike<T> | null {
   if (isPromiseLike<T>(value)) {
@@ -1051,7 +1113,13 @@ export function handleStream(
 /**
  * Resolves and parses the server address, port, and target service domain (`url.domain`)
  * from dynamic and static trace contexts, splitting `"host:port"` or `"[ipv6]:port"`
- * strings and applying an optional default port when falling back to `url.domain`.
+ * strings. When `defaultPort` is provided (for low level network attempt spans), falls back to `url.domain`
+ * for the server address and defaults the port to `defaultPort` if not otherwise specified.
+ *
+ * @param {DynamicTraceContext} dynamicArgs - Dynamic trace context for the call or attempt.
+ * @param {StaticTraceContext} staticArgs - Static trace context for the client library.
+ * @param {number} [defaultPort] - Optional default port (e.g. 443 for low level network attempt spans).
+ * @returns {{rawAddress?: string; rawPort?: number; urlDomain?: string}} Resolved address, port, and domain.
  */
 function resolveEndpointAndDomain(
   dynamicArgs: DynamicTraceContext,
@@ -1097,7 +1165,12 @@ function resolveEndpointAndDomain(
 
 /**
  * Builds the common initial client, transport, and domain attributes shared by
- * T3 client request spans and T4 attempt spans.
+ * client request spans and low level network attempt spans.
+ *
+ * @param {DynamicTraceContext} dynamicArgs - Dynamic trace context for the call or attempt.
+ * @param {StaticTraceContext} staticArgs - Static trace context for the client library.
+ * @param {string} [urlDomain] - Resolved `url.domain` attribute value, if available.
+ * @returns {Attributes} The initial span attributes map.
  */
 function buildInitialAttributes(
   dynamicArgs: DynamicTraceContext,
@@ -1126,6 +1199,9 @@ function buildInitialAttributes(
  * parallel name. gRPC has no standard equivalent, so it takes the gcp.*
  * name instead of borrowing the http.* one, which would claim a protocol
  * the call never spoke.
+ *
+ * @param {'grpc' | 'http'} rpcType - The RPC transport protocol.
+ * @returns {string} The resend count attribute key (`gcp.grpc.resend_count` or `http.request.resend_count`).
  */
 function resolveResendCountAttribute(rpcType: 'grpc' | 'http'): string {
   return rpcType === 'grpc'
@@ -1137,6 +1213,15 @@ function resolveResendCountAttribute(rpcType: 'grpc' | 'http'): string {
  * Sets final response status code and server endpoint attributes on a span.
  * `server.address` and `server.port` are present on server-side errors and successful calls,
  * but omitted on client-side failures that occur before DNS resolution or connection establishment.
+ *
+ * @param {Span} span - The span on which to set final attributes.
+ * @param {'grpc' | 'http'} rpcType - The RPC transport protocol.
+ * @param {string | undefined} rpcStatusName - Resolved gRPC status name, if any.
+ * @param {number | undefined} httpStatusCode - Resolved HTTP status code, if any.
+ * @param {string | undefined} rawAddress - Parsed server address, if configured.
+ * @param {number | undefined} rawPort - Parsed server port, if configured.
+ * @param {boolean} errorRecorded - Whether an error was recorded on the span.
+ * @param {unknown} recordedError - The error recorded on the span, if any.
  */
 function setFinalStatusAttributes(
   span: Span,
@@ -1176,7 +1261,7 @@ function setFinalStatusAttributes(
  * @param {unknown} e - The error thrown or passed to the callback/stream/promise.
  * @param {'grpc' | 'http'} rpcType - The RPC transport protocol.
  * @param {boolean} [includeExceptionMessage=false] - Whether to include `exception.message`
- *   on the `exception` event (true for T4 attempt spans, false for T3 client request spans).
+ *   on the `exception` event (true for low level network attempt spans, false for client request spans).
  * @returns {{rpcStatusName?: string; httpStatusCode?: number}} The resolved status codes.
  */
 function recordSpanError(
@@ -1213,7 +1298,7 @@ interface SpanCompletionOptions {
   rawAddress?: string;
   /** Parsed server port to record when the call is not a pre-connection failure. */
   rawPort?: number;
-  /** Whether to include `exception.message` on `exception` span events (true for T4 spans). */
+  /** Whether to include `exception.message` on `exception` span events (true for low level network spans). */
   includeExceptionMessage?: boolean;
 }
 
@@ -1221,6 +1306,11 @@ interface SpanCompletionOptions {
  * Creates `recordError`, `endSpan`, and `tracedCallback` handlers for a traced call or attempt.
  * Leaves span status unset on success per OpenTelemetry semantic conventions, and ends the span
  * before invoking the user callback so user callback errors are not attributed to the RPC.
+ *
+ * @param {SpanCompletionOptions} options - Span and transport options for the completion handlers.
+ * @param {APICallback} [callback] - Optional user or attempt callback to wrap.
+ * @returns {{recordError: (e: unknown) => void; endSpan: () => void; tracedCallback?: APICallback}}
+ *   The error-recording, span-ending, and wrapped callback handlers.
  */
 function createSpanCompletionHandlers(
   options: SpanCompletionOptions,
@@ -1288,6 +1378,14 @@ function createSpanCompletionHandlers(
 /**
  * Executes `fn` within `executionContext` and attaches stream, promise, callback,
  * or synchronous completion handlers to its result.
+ *
+ * @template T
+ * @param {Context} executionContext - The OpenTelemetry context to activate during `fn` execution.
+ * @param {function} fn - The operation to execute, receiving `tracedCallback` if `callback` was provided.
+ * @param {boolean} isStreamCall - Whether the operation returns a stream (`EventEmitter`).
+ * @param {SpanCompletionOptions} options - Span completion options.
+ * @param {APICallback} [callback] - Optional callback to wrap for completion tracking.
+ * @returns {T} The return value of `fn`.
  */
 function executeTracedOperation<T>(
   executionContext: Context,
@@ -1319,12 +1417,12 @@ function executeTracedOperation<T>(
 }
 
 /**
- * Executes a function within an active OpenTelemetry T3 client request span
+ * Executes a function within an active OpenTelemetry client request span
  * (`"{clientName}.{methodName}"`), populating standard GCP client telemetry attributes
  * (`gcp.client.*`, `rpc.system.name`, `url.domain`, `server.address`, `server.port`,
  * `rpc.response.status_code` / `http.response.status_code`) and recording error
  * attributes (`error.type`, `status.message`, and `exception.type` event attribute)
- * if the operation fails. Child T4 attempt spans also propagate `rpc.method` and
+ * if the operation fails. Child low level network attempt spans also propagate `rpc.method` and
  * `url.template` onto this span.
  *
  * For callback-style invocations, pass the user's `callback` as the fifth
@@ -1397,7 +1495,7 @@ export function traceCall(
 
 /**
  * Executes an individual RPC transport attempt within an active OpenTelemetry
- * T4 CLIENT span (low level network span), parenting it to the active T3 client request span
+ * CLIENT span (low level network span), parenting it to the active client request span
  * and recording per-attempt client (`gcp.client.*`), network (`rpc.system.name`, `rpc.method`,
  * `http.request.method`, `url.template`, `url.domain`, `server.address`, `server.port`),
  * resend (`gcp.grpc.resend_count` / `http.request.resend_count`), status
