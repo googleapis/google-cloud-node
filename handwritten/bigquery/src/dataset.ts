@@ -576,6 +576,33 @@ class Dataset extends ServiceObject {
   }
 
   /**
+   * Run a query scoped to this dataset and stream Apache Arrow `RecordBatch`
+   * instances over a `Readable` stream.
+   */
+  createQueryArrowStream(options: Query | string) {
+    return this.bigQuery.createQueryArrowStream({
+      ...(typeof options === 'string' ? {query: options} : options),
+      defaultDataset: {datasetId: this.id},
+      location: this.location,
+    });
+  }
+
+  /**
+   * Run a query scoped to this dataset and return `[table, null, apiResponse]`.
+   */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  queryArrow(options: Query | string, callback?: any) {
+    return this.bigQuery.queryArrow(
+      {
+        ...(typeof options === 'string' ? {query: options} : options),
+        defaultDataset: {datasetId: this.id},
+        location: this.location,
+      },
+      callback,
+    );
+  }
+
+  /**
    * @callback CreateRoutineCallback
    * @param {?Error} err Request error, if any.
    * @param {Routine} routine The newly created routine.

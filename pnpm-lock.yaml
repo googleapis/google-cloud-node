@@ -1599,6 +1599,9 @@ importers:
       '@google-cloud/promisify':
         specifier: ^6.0.0
         version: 6.0.1
+      apache-arrow:
+        specifier: ^21.2.0
+        version: 21.2.0
       arrify:
         specifier: ^3.0.0
         version: 3.0.0
@@ -1618,6 +1621,9 @@ importers:
         specifier: ^11.0.0
         version: 11.0.1
     devDependencies:
+      '@google-cloud/bigquery-storage':
+        specifier: ^5.1.0
+        version: 5.1.2(protobufjs@8.8.0)
       '@google-cloud/storage':
         specifier: ^7.16.0
         version: 7.21.0(encoding@0.1.13)
@@ -16413,6 +16419,12 @@ packages:
     resolution: {integrity: sha512-PPBOLw5IKE2wcdz/U4DV4KjeGHmt2Najwq73wrx9Jg0nHJor70jgsrrgdRNJ/4UvZ33ALhH55w0wmr2qk7PFrg==}
     engines: {node: '>=22'}
 
+  '@google-cloud/bigquery-storage@5.1.2':
+    resolution: {integrity: sha512-Hz4R+yaBItMGQEVt9eE5XW8fmF0GhCfRGtQw2uoZ7AacBiniCB31f5hM8GEOH0iViZuXSihSXNFm3/esEvbiIA==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      protobufjs: ~7.5.5
+
   '@google-cloud/bigquery@9.0.2':
     resolution: {integrity: sha512-KLRSKdU+1VsXMDz9tmqtFASQXuBazLFN3VN8fTkuW/jDWWQK7HuNjT2RIKev+5xlBGfBsqQZs4Z5jqT0seV0aw==}
     engines: {node: '>=22'}
@@ -16526,6 +16538,10 @@ packages:
   '@google-cloud/paginator@5.0.2':
     resolution: {integrity: sha512-DJS3s0OVH4zFDB1PzjxAsHqJT6sKVbRwwML0ZBP9PbU7Yebtu/7SWMRzvO2J3nUi9pRNITCfu4LJeooM2w4pjg==}
     engines: {node: '>=14.0.0'}
+
+  '@google-cloud/paginator@6.1.0':
+    resolution: {integrity: sha512-9bxQ/QNhcq5c6ra75khWjA5Q9UHWp0vQnhwesmqPpLLF5PxmxCIsadIA5ssLxKted4/iZ2RlRPkW/E8p68W8cg==}
+    engines: {node: '>=18'}
 
   '@google-cloud/paginator@7.0.1':
     resolution: {integrity: sha512-k32cWlHAF8yTgg8rciLI8mPMI6UzuJdKp53YRxISRwMFxUl2FYplvs+Mr2UHxKn0W7rXsqZnUZy73AOJFDP8iA==}
@@ -25946,6 +25962,20 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  '@google-cloud/bigquery-storage@5.1.2(protobufjs@8.8.0)':
+    dependencies:
+      '@google-cloud/paginator': 6.1.0
+      '@google-cloud/precise-date': 5.1.0
+      apache-arrow: 21.2.0
+      core-js: 3.49.0
+      extend: 3.0.2
+      google-auth-library: 10.9.1
+      google-gax: 5.0.6
+      long: 5.3.2
+      protobufjs: 8.8.0
+    transitivePeerDependencies:
+      - supports-color
+
   '@google-cloud/bigquery@9.0.2':
     dependencies:
       '@google-cloud/common': 8.0.1
@@ -26182,6 +26212,10 @@ snapshots:
   '@google-cloud/paginator@5.0.2':
     dependencies:
       arrify: 2.0.1
+      extend: 3.0.2
+
+  '@google-cloud/paginator@6.1.0':
+    dependencies:
       extend: 3.0.2
 
   '@google-cloud/paginator@7.0.1':
@@ -28606,7 +28640,7 @@ snapshots:
 
   '@webpack-cli/configtest@3.0.1(webpack-cli@6.0.1)(webpack@5.109.0)':
     dependencies:
-      webpack: 5.109.0(webpack-cli@6.0.1)
+      webpack: 5.109.0(uglify-js@3.19.3)(webpack-cli@6.0.1)
       webpack-cli: 6.0.1(webpack@5.109.0)
 
   '@webpack-cli/info@2.0.2(webpack-cli@5.1.4)(webpack@5.109.0)':
@@ -28616,7 +28650,7 @@ snapshots:
 
   '@webpack-cli/info@3.0.1(webpack-cli@6.0.1)(webpack@5.109.0)':
     dependencies:
-      webpack: 5.109.0(webpack-cli@6.0.1)
+      webpack: 5.109.0(uglify-js@3.19.3)(webpack-cli@6.0.1)
       webpack-cli: 6.0.1(webpack@5.109.0)
 
   '@webpack-cli/serve@2.0.5(webpack-cli@5.1.4)(webpack@5.109.0)':
@@ -28626,7 +28660,7 @@ snapshots:
 
   '@webpack-cli/serve@3.0.1(webpack-cli@6.0.1)(webpack@5.109.0)':
     dependencies:
-      webpack: 5.109.0(webpack-cli@6.0.1)
+      webpack: 5.109.0(uglify-js@3.19.3)(webpack-cli@6.0.1)
       webpack-cli: 6.0.1(webpack@5.109.0)
 
   '@xtuc/ieee754@1.2.0': {}
@@ -34190,7 +34224,7 @@ snapshots:
     dependencies:
       loader-utils: 2.0.4
       schema-utils: 3.3.0
-      webpack: 5.109.0(webpack-cli@6.0.1)
+      webpack: 5.109.0(uglify-js@3.19.3)(webpack-cli@6.0.1)
 
   nunjucks@3.2.4(chokidar@3.6.0):
     dependencies:
@@ -36857,7 +36891,7 @@ snapshots:
       import-local: 3.2.0
       interpret: 3.1.1
       rechoir: 0.8.0
-      webpack: 5.109.0(webpack-cli@6.0.1)
+      webpack: 5.109.0(uglify-js@3.19.3)(webpack-cli@6.0.1)
       webpack-merge: 6.0.1
 
   webpack-merge@4.2.2:
