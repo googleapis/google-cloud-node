@@ -1369,10 +1369,9 @@ class Table extends ServiceObject {
     const callback =
       typeof metadataOrCallback === 'function' ? metadataOrCallback : cb;
 
-    this._createLoadJob(source, metadata).then(
-      ([resp]) => callback!(null, resp, resp.metadata),
-      err => callback!(err),
-    );
+    this._createLoadJob(source, metadata)
+      .then(([resp]) => callback!(null, resp, resp.metadata))
+      .catch(err => callback!(err));
   }
 
   /**
@@ -2137,10 +2136,9 @@ class Table extends ServiceObject {
 
     const promise = this._insertAndCreateTable(rows, options);
     if (callback) {
-      promise.then(
-        resp => callback(null, resp),
-        err => callback(err, null),
-      );
+      promise
+        .then(resp => callback(null, resp))
+        .catch(err => callback(err, null));
     } else {
       return promise.then(r => [r]);
     }

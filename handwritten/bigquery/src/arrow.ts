@@ -446,7 +446,13 @@ function attachStreamCleanups(
 ): Readable {
   const origDestroy = stream._destroy.bind(stream);
   stream._destroy = (err, cb) => {
-    ctx.cleanups?.forEach(fn => fn());
+    ctx.cleanups?.forEach(fn => {
+      try {
+        fn();
+      } catch {
+        // Ignore cleanup errors so all registered cleanups run.
+      }
+    });
     origDestroy(err, cb);
   };
   return stream;
@@ -480,7 +486,7 @@ export async function* iterateArrowRows(
   ctx: ArrowStreamContext = {},
 ): AsyncGenerator<RowMetadata> {
   const decodeOpts: ArrowDecodeOptions =
-    typeof query === 'object'
+    query && typeof query === 'object'
       ? {
           wrapIntegers: options.wrapIntegers ?? query.wrapIntegers,
           parseJSON: options.parseJSON ?? query.parseJSON,
@@ -516,8 +522,13 @@ export function executeArrowRowsQuery(
     if (!Number(apiResponse.totalRows)) {
       apiResponse.totalRows = String(rows.length);
     }
-    callback(null, rows, null, apiResponse);
-  })().catch(err => callback(err as Error, null, null, null));
+    return {rows, apiResponse};
+  })()
+    .then(
+      ({rows, apiResponse}) => callback(null, rows, null, apiResponse),
+      err => callback(err as Error, null, null, null),
+    )
+    .catch(() => {});
 }
 
 export function executeQueryArrow(
@@ -569,6 +580,11 @@ export function executeQueryArrow(
     if (!Number(apiResponse.totalRows)) {
       apiResponse.totalRows = String(table.numRows);
     }
-    callback(null, table, null, apiResponse);
-  })().catch(err => callback(err as Error));
+    return {table, apiResponse};
+  })()
+    .then(
+      ({table, apiResponse}) => callback(null, table, null, apiResponse),
+      err => callback(err as Error),
+    )
+    .catch(() => {});
 }

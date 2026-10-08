@@ -488,7 +488,9 @@ export class BigQuery extends Service {
     this.createQueryStream =
       typeof jsonQueryStream === 'function'
         ? (query?: Query | string) =>
-            typeof query === 'object' && query.queryResultsFormat === 'ARROW'
+            query &&
+            typeof query === 'object' &&
+            query.queryResultsFormat === 'ARROW'
               ? (createArrowRowStream(
                   this,
                   query,
@@ -2253,7 +2255,9 @@ export class BigQuery extends Service {
       typeof optionsOrCallback === 'function' ? optionsOrCallback : cb;
 
     if (
-      (typeof query === 'object' && query.queryResultsFormat === 'ARROW') ||
+      (query &&
+        typeof query === 'object' &&
+        query.queryResultsFormat === 'ARROW') ||
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (options as any).queryResultsFormat === 'ARROW'
     ) {
@@ -2481,9 +2485,9 @@ export class BigQuery extends Service {
    * Run a SQL query and return the assembled zero-copy Apache Arrow `Table`
    * in `[table, null, apiResponse]`.
    */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   queryArrow(
     options?: Query | string,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     callback?: any,
   ): Promise<ArrowQueryResponse> {
     return executeQueryArrow(
