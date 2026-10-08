@@ -12,6 +12,23 @@
           ]
         }
       ],
+      "version": "8.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/storage",
+      "id": "2c0b6dce-e7f0-486d-b04a-9646409cd09f",
+      "createTime": "2026-10-08T17:15:57.590Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "8b6837a9757cc8bb281e0611b173cb19b58d4ac5",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9554"
+          ]
+        }
+      ],
       "version": "7.1.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/grafeas",

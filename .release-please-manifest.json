@@ -35,7 +35,7 @@
   "handwritten/logging-winston": "7.3.0",
   "handwritten/pubsub": "6.3.0",
   "handwritten/spanner": "9.0.0",
-  "handwritten/storage": "8.3.0",
+  "handwritten/storage": "8.4.0",
   "packages/google-ads-admanager": "0.15.0",
   "packages/google-ads-datamanager": "1.3.0",
   "packages/google-ai-generativelanguage": "4.2.0",
