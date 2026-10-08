@@ -268,7 +268,7 @@ export class OtelHarness {
    * Asserts the response status attributes of a traced call.
    *
    * The transport-specific attribute is not named by the caller. It is derived
-   * from the span's own `gcp.method.type`, so a test cannot assert a
+   * from the span's own `rpc.system.name`, so a test cannot assert a
    * combination the tracer is not supposed to produce — such as an HTTP status
    * on a gRPC span. Both the presence of the attribute that applies and the
    * absence of the one that does not are checked, because the second half is
@@ -296,8 +296,7 @@ export class OtelHarness {
   ): void {
     const target = options.span ?? this.requireSingleSpan(options.tracerName);
     const actual = this.responseStatus(target);
-    const transport =
-      target.attributes['gcp.method.type'] ?? target.attributes['rpc.system'];
+    const transport = target.attributes['rpc.system.name'];
     const where = `span '${target.name}'`;
 
     if ('serverAddress' in expected || 'serverPort' in expected) {
@@ -309,7 +308,7 @@ export class OtelHarness {
 
     assert.ok(
       transport === 'grpc' || transport === 'http',
-      `${where} has gcp.method.type ${JSON.stringify(transport)}; the ` +
+      `${where} has rpc.system.name ${JSON.stringify(transport)}; the ` +
         'transport-specific status attribute cannot be checked without it. ' +
         'Was this span produced by traceCall?',
     );
@@ -432,13 +431,12 @@ export class OtelHarness {
     options: {tracerName?: string; span?: ReadableSpan} = {},
   ): void {
     const target = options.span ?? this.requireSingleSpan(options.tracerName);
-    const transport =
-      target.attributes['gcp.method.type'] ?? target.attributes['rpc.system'];
+    const transport = target.attributes['rpc.system.name'];
     const where = `span '${target.name}'`;
 
     assert.ok(
       transport === 'grpc' || transport === 'http',
-      `${where} has gcp.method.type ${JSON.stringify(transport)}; the ` +
+      `${where} has rpc.system.name ${JSON.stringify(transport)}; the ` +
         'transport-specific resend count cannot be checked without it. ' +
         'Was this span produced by traceCall?',
     );

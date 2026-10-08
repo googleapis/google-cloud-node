@@ -872,18 +872,24 @@ export function resolveServerExceptionDetails(e: Error): {
 }
 
 /**
- * Records an `exception` span event with `exception.type`.
+ * Records an `exception` span event with `exception.type` (and `exception.message`
+ * when `includeMessage` is true, such as on low level network attempt spans).
  */
 function recordExceptionEvent(
   span: Span,
   e: Error,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  _rpcType: 'grpc' | 'http',
+  rpcType: 'grpc' | 'http',
+  includeMessage = false,
 ): void {
   const exceptionType = resolveExceptionType(e);
   const attributes: Attributes = {
     'exception.type': exceptionType,
   };
+  if (includeMessage) {
+    attributes['exception.message'] = isServerSideError(e, rpcType)
+      ? resolveServerExceptionDetails(e).message
+      : e.message;
+  }
   span.addEvent('exception', attributes);
 }
 
@@ -1143,6 +1149,7 @@ function recordSpanError(
   span: Span,
   e: unknown,
   rpcType: 'grpc' | 'http',
+  includeExceptionMessage = false,
 ): {rpcStatusName?: string; httpStatusCode?: number} {
   const rpcStatusName = resolveRpcStatusName(e);
   const httpStatusCode = resolveHttpStatusCode(e);
@@ -1152,7 +1159,7 @@ function recordSpanError(
     'status.message': message,
   });
   if (e instanceof Error) {
-    recordExceptionEvent(span, e, rpcType);
+    recordExceptionEvent(span, e, rpcType, includeExceptionMessage);
   }
   span.setStatus({code: SpanStatusCode.ERROR, message});
   return {rpcStatusName, httpStatusCode};
@@ -1163,6 +1170,7 @@ interface SpanCompletionOptions {
   rpcType: 'grpc' | 'http';
   rawAddress?: string;
   rawPort?: number;
+  includeExceptionMessage?: boolean;
   onBeforeEnd?: () => void;
 }
 
@@ -1179,7 +1187,14 @@ function createSpanCompletionHandlers(
   endSpan: () => void;
   tracedCallback?: APICallback;
 } {
-  const {span, rpcType, rawAddress, rawPort, onBeforeEnd} = options;
+  const {
+    span,
+    rpcType,
+    rawAddress,
+    rawPort,
+    includeExceptionMessage,
+    onBeforeEnd,
+  } = options;
   let spanEnded = false;
   let errorRecorded = false;
   let recordedError: unknown;
@@ -1189,7 +1204,12 @@ function createSpanCompletionHandlers(
   const recordError = (e: unknown) => {
     recordedError = e;
     errorRecorded = true;
-    ({rpcStatusName, httpStatusCode} = recordSpanError(span, e, rpcType));
+    ({rpcStatusName, httpStatusCode} = recordSpanError(
+      span,
+      e,
+      rpcType,
+      includeExceptionMessage,
+    ));
   };
 
   const endSpan = () => {
@@ -1301,15 +1321,14 @@ export function traceCall(
 ): GaxCallResult {
   const spanName = `${dynamicArgs.clientName}.${dynamicArgs.methodName}`;
   return getGaxTracer().startActiveSpan(spanName, {}, (span: Span) => {
-    // Populate initial client, method, and domain attributes.
+    // Populate initial client, transport, and domain attributes.
     const urlDomain = resolveUrlDomain(dynamicArgs, staticArgs);
     const initialAttributes: Attributes = {
       'gcp.client.service': staticArgs.gcpClientService,
       'gcp.client.version': staticArgs.gcpVersion,
-      'gcp.repo': staticArgs.gcpRepo,
-      'gcp.artifact': staticArgs.gcpArtifact,
-      'gcp.method.name': dynamicArgs.methodName,
-      'gcp.method.type': dynamicArgs.rpcType,
+      'gcp.client.repo': staticArgs.gcpRepo,
+      'gcp.client.artifact': staticArgs.gcpArtifact,
+      'rpc.system.name': dynamicArgs.rpcType,
     };
     if (urlDomain !== undefined) {
       initialAttributes['url.domain'] = urlDomain;
@@ -1413,10 +1432,14 @@ export function traceAttempt<T = GaxCallResult>(
         clientRequestSpan.setAttribute('rpc.method', rpcMethod);
       }
 
-      // Populate initial transport, method, domain, and retry attributes.
+      // Populate initial client, transport, method, domain, and retry attributes.
       const urlDomain = resolveUrlDomain(dynamicArgs, staticArgs);
       const initialAttributes: Attributes = {
-        'rpc.system': dynamicArgs.rpcType,
+        'gcp.client.service': staticArgs.gcpClientService,
+        'gcp.client.version': staticArgs.gcpVersion,
+        'gcp.client.repo': staticArgs.gcpRepo,
+        'gcp.client.artifact': staticArgs.gcpArtifact,
+        'rpc.system.name': dynamicArgs.rpcType,
       };
       if (dynamicArgs.rpcType === 'grpc') {
         initialAttributes['rpc.method'] = rpcMethod;
@@ -1457,6 +1480,7 @@ export function traceAttempt<T = GaxCallResult>(
             rpcType: dynamicArgs.rpcType,
             rawAddress,
             rawPort,
+            includeExceptionMessage: true,
             onBeforeEnd: () => {
               if (clientRequestSpan) {
                 if (rpcMethod) {

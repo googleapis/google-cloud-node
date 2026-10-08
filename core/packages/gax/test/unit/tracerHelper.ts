@@ -113,15 +113,14 @@ describe('TracerHelper', () => {
       );
       assert.strictEqual(span.attributes['gcp.client.version'], '1.2.3');
       assert.strictEqual(
-        span.attributes['gcp.repo'],
+        span.attributes['gcp.client.repo'],
         'googleapis/google-cloud-node',
       );
       assert.strictEqual(
-        span.attributes['gcp.artifact'],
+        span.attributes['gcp.client.artifact'],
         '@google-cloud/storage',
       );
-      assert.strictEqual(span.attributes['gcp.method.name'], 'GetObject');
-      assert.strictEqual(span.attributes['gcp.method.type'], 'grpc');
+      assert.strictEqual(span.attributes['rpc.system.name'], 'grpc');
       assert.strictEqual(
         span.attributes['url.domain'],
         'storage.googleapis.com',
@@ -1988,10 +1987,9 @@ describe('TracerHelper', () => {
       assert.strictEqual(span.ended, true);
       assert.strictEqual(span.attributes['gcp.client.service'], undefined);
       assert.strictEqual(span.attributes['gcp.client.version'], undefined);
-      assert.strictEqual(span.attributes['gcp.repo'], undefined);
-      assert.strictEqual(span.attributes['gcp.artifact'], undefined);
-      assert.strictEqual(span.attributes['gcp.method.name'], 'GetObject');
-      assert.strictEqual(span.attributes['gcp.method.type'], 'grpc');
+      assert.strictEqual(span.attributes['gcp.client.repo'], undefined);
+      assert.strictEqual(span.attributes['gcp.client.artifact'], undefined);
+      assert.strictEqual(span.attributes['rpc.system.name'], 'grpc');
     });
 
     it('supports http rpcType', async () => {
@@ -2007,7 +2005,7 @@ describe('TracerHelper', () => {
 
       const spans = harness.getSpans('google-gax');
       assert.strictEqual(spans.length, 1);
-      assert.strictEqual(spans[0].attributes['gcp.method.type'], 'http');
+      assert.strictEqual(spans[0].attributes['rpc.system.name'], 'http');
     });
 
     describe('response status attributes', () => {
@@ -3829,7 +3827,7 @@ describe('TracerHelper', () => {
         'echo.googleapis.com',
       );
       assert.strictEqual(span.attributes['server.port'], 443);
-      assert.strictEqual(span.attributes['rpc.system'], 'grpc');
+      assert.strictEqual(span.attributes['rpc.system.name'], 'grpc');
       assert.strictEqual(
         span.attributes['rpc.method'],
         'google.example.v1.Echo/Echo',
@@ -3840,11 +3838,19 @@ describe('TracerHelper', () => {
         span.attributes['grpc.response.status_code'],
         undefined,
       );
-      assert.strictEqual(span.attributes['gcp.repo'], undefined);
-      assert.strictEqual(span.attributes['gcp.method.type'], undefined);
-      assert.strictEqual(span.attributes['gcp.method.name'], undefined);
-      assert.strictEqual(span.attributes['gcp.client.version'], undefined);
-      assert.strictEqual(span.attributes['gcp.artifact'], undefined);
+      assert.strictEqual(
+        span.attributes['gcp.client.repo'],
+        'googleapis/google-cloud-node',
+      );
+      assert.strictEqual(
+        span.attributes['gcp.client.service'],
+        'echo.googleapis.com',
+      );
+      assert.strictEqual(span.attributes['gcp.client.version'], '1.2.3');
+      assert.strictEqual(
+        span.attributes['gcp.client.artifact'],
+        '@google-cloud/echo',
+      );
       assert.strictEqual(span.attributes['status.message'], undefined);
     });
 
@@ -4017,7 +4023,7 @@ describe('TracerHelper', () => {
       );
       assert.strictEqual(
         span.events[0].attributes?.['exception.message'],
-        undefined,
+        'getaddrinfo ENOTFOUND',
       );
       assert.strictEqual(
         span.events[0].attributes?.['exception.stacktrace'],
@@ -4195,12 +4201,12 @@ describe('TracerHelper', () => {
       const grpcClientRequestSpan = spans.find(
         s =>
           s.name === 'EchoClient.Echo' &&
-          s.attributes['gcp.method.type'] === 'grpc',
+          s.attributes['rpc.system.name'] === 'grpc',
       )!;
       const httpClientRequestSpan = spans.find(
         s =>
           s.name === 'EchoClient.Echo' &&
-          s.attributes['gcp.method.type'] === 'http',
+          s.attributes['rpc.system.name'] === 'http',
       )!;
       assert.ok(grpcClientRequestSpan);
       assert.ok(httpClientRequestSpan);
@@ -4289,6 +4295,139 @@ describe('TracerHelper', () => {
         clientRequestSpan.attributes['url.template'],
         '/v1/{name}:access',
       );
+    });
+
+    it('ensures T3 and T4 spans only set their respective allowed attributes', async () => {
+      const allowedT3Attributes = new Set([
+        'error.type',
+        'gcp.client.artifact',
+        'gcp.client.repo',
+        'gcp.client.service',
+        'gcp.client.version',
+        'http.response.status_code',
+        'rpc.method',
+        'rpc.response.status_code',
+        'rpc.system.name',
+        'server.address',
+        'server.port',
+        'status.message',
+        'url.domain',
+        'url.template',
+      ]);
+      const allowedT3EventAttributes = new Set(['exception.type']);
+
+      const allowedT4Attributes = new Set([
+        'error.type',
+        'gcp.client.artifact',
+        'gcp.client.repo',
+        'gcp.client.service',
+        'gcp.client.version',
+        'gcp.grpc.resend_count',
+        'http.request.method',
+        'http.request.resend_count',
+        'http.response.status_code',
+        'rpc.method',
+        'rpc.response.status_code',
+        'rpc.system.name',
+        'server.address',
+        'server.port',
+        'status.message',
+        'url.domain',
+        'url.template',
+      ]);
+      const allowedT4EventAttributes = new Set([
+        'exception.message',
+        'exception.type',
+      ]);
+
+      const grpcErr = Object.assign(new GoogleError('gRPC failure'), {
+        code: Status.UNAVAILABLE,
+        details: 'Service unavailable',
+      });
+      await assert.rejects(async () => {
+        await traceCall(
+          {clientName: 'EchoClient', methodName: 'Echo', rpcType: 'grpc'},
+          telemetryInfo,
+          async () =>
+            traceAttempt(
+              {
+                apiName: 'google.example.v1.Echo',
+                clientName: 'EchoClient',
+                methodName: 'Echo',
+                rpcType: 'grpc',
+                resendCount: 1,
+              },
+              telemetryInfo,
+              async () => {
+                throw grpcErr;
+              },
+            ),
+        );
+      });
+
+      const httpErr = Object.assign(new GoogleError('HTTP failure'), {
+        code: Status.UNAVAILABLE,
+        httpStatusCode: 503,
+        details: 'Backend unavailable',
+      });
+      await assert.rejects(async () => {
+        await traceCall(
+          {clientName: 'EchoClient', methodName: 'Echo', rpcType: 'http'},
+          telemetryInfo,
+          async () =>
+            traceAttempt(
+              {
+                apiName: 'google.example.v1.Echo',
+                clientName: 'EchoClient',
+                methodName: 'Echo',
+                rpcType: 'http',
+                resendCount: 1,
+                httpMethod: 'POST',
+                urlTemplate: '/v1/echo:echo',
+              },
+              telemetryInfo,
+              async () => {
+                throw httpErr;
+              },
+            ),
+        );
+      });
+
+      const spans = harness.getSpans('google-gax');
+      assert.strictEqual(spans.length, 4);
+
+      for (const span of spans) {
+        const isT4 = span.kind === SpanKind.CLIENT;
+        const allowedAttrs = isT4 ? allowedT4Attributes : allowedT3Attributes;
+        const allowedEventAttrs = isT4
+          ? allowedT4EventAttributes
+          : allowedT3EventAttributes;
+
+        for (const key of Object.keys(span.attributes)) {
+          assert.ok(
+            allowedAttrs.has(key),
+            `Unexpected attribute '${key}' on ${isT4 ? 'T4' : 'T3'} span '${span.name}'`,
+          );
+        }
+
+        assert.strictEqual(span.events.length, 1);
+        const eventAttrs = span.events[0].attributes ?? {};
+        for (const key of Object.keys(eventAttrs)) {
+          assert.ok(
+            allowedEventAttrs.has(key),
+            `Unexpected event attribute '${key}' on ${isT4 ? 'T4' : 'T3'} span '${span.name}'`,
+          );
+        }
+        if (isT4) {
+          assert.ok(
+            typeof eventAttrs['exception.message'] === 'string' &&
+              eventAttrs['exception.message'].length > 0,
+            'Expected exception.message on T4 span exception event',
+          );
+        } else {
+          assert.strictEqual(eventAttrs['exception.message'], undefined);
+        }
+      }
     });
   });
 });

@@ -614,12 +614,14 @@ describe('createApiCall', () => {
       );
       assert.strictEqual(span.attributes['gcp.client.version'], '1.2.3');
       assert.strictEqual(
-        span.attributes['gcp.repo'],
+        span.attributes['gcp.client.repo'],
         'googleapis/google-cloud-node',
       );
-      assert.strictEqual(span.attributes['gcp.artifact'], '@google-cloud/echo');
-      assert.strictEqual(span.attributes['gcp.method.name'], 'Echo');
-      assert.strictEqual(span.attributes['gcp.method.type'], 'grpc');
+      assert.strictEqual(
+        span.attributes['gcp.client.artifact'],
+        '@google-cloud/echo',
+      );
+      assert.strictEqual(span.attributes['rpc.system.name'], 'grpc');
       assert.strictEqual(span.attributes['url.domain'], 'echo.googleapis.com');
     });
 
@@ -665,10 +667,9 @@ describe('createApiCall', () => {
       assert.strictEqual(span.ended, true);
       assert.strictEqual(span.attributes['gcp.client.service'], 'redis');
       assert.ok(span.attributes['gcp.client.version']);
-      assert.ok(span.attributes['gcp.repo']);
-      assert.ok(span.attributes['gcp.artifact']);
-      assert.strictEqual(span.attributes['gcp.method.name'], 'GetInstance');
-      assert.strictEqual(span.attributes['gcp.method.type'], 'grpc');
+      assert.ok(span.attributes['gcp.client.repo']);
+      assert.ok(span.attributes['gcp.client.artifact']);
+      assert.strictEqual(span.attributes['rpc.system.name'], 'grpc');
     });
 
     it('resolves static metadata from environment variables when configured', async () => {
@@ -705,10 +706,13 @@ describe('createApiCall', () => {
       assert.strictEqual(span.attributes['gcp.client.service'], 'env-service');
       assert.strictEqual(span.attributes['gcp.client.version'], '9.9.9');
       assert.strictEqual(
-        span.attributes['gcp.repo'],
+        span.attributes['gcp.client.repo'],
         'googleapis/google-cloud-node',
       );
-      assert.strictEqual(span.attributes['gcp.artifact'], '@custom/env-pkg');
+      assert.strictEqual(
+        span.attributes['gcp.client.artifact'],
+        '@custom/env-pkg',
+      );
     });
 
     it('correctly pipes telemetry information for HTTP fallback calls', async () => {
@@ -742,11 +746,11 @@ describe('createApiCall', () => {
       const span = spans[1];
       assert.strictEqual(attemptSpan.name, 'POST');
       assert.strictEqual(attemptSpan.kind, SpanKind.CLIENT);
-      assert.strictEqual(attemptSpan.attributes['rpc.system'], 'http');
+      assert.strictEqual(attemptSpan.attributes['rpc.system.name'], 'http');
       assert.strictEqual(attemptSpan.attributes['gcp.method.type'], undefined);
       assert.strictEqual(span.name, 'EchoClient.Echo');
       assert.strictEqual(span.ended, true);
-      assert.strictEqual(span.attributes['gcp.method.type'], 'http');
+      assert.strictEqual(span.attributes['rpc.system.name'], 'http');
     });
 
     it('passes fallback flag through when using fallback createApiCall with default options', async () => {
@@ -785,10 +789,10 @@ describe('createApiCall', () => {
       const attemptSpan = spans[0];
       const span = spans[1];
       assert.strictEqual(attemptSpan.name, 'POST');
-      assert.strictEqual(attemptSpan.attributes['rpc.system'], 'http');
+      assert.strictEqual(attemptSpan.attributes['rpc.system.name'], 'http');
       assert.strictEqual(span.name, 'EchoClient.Echo');
       assert.strictEqual(span.ended, true);
-      assert.strictEqual(span.attributes['gcp.method.type'], 'http');
+      assert.strictEqual(span.attributes['rpc.system.name'], 'http');
     });
 
     it('overrides an explicit _fallback argument, since the call is a fallback call by definition', async () => {
@@ -828,7 +832,7 @@ describe('createApiCall', () => {
       const spans = harness.getSpans('google-gax');
       assert.strictEqual(spans.length, 2);
       const span = spans[1];
-      assert.strictEqual(span.attributes['gcp.method.type'], 'http');
+      assert.strictEqual(span.attributes['rpc.system.name'], 'http');
     });
 
     it('ends the span and labels it DEADLINE_EXCEEDED when a fallback call times out', async () => {
@@ -882,8 +886,8 @@ describe('createApiCall', () => {
 
       const spans = harness.getSpans('google-gax');
       assert.strictEqual(spans.length, 2);
-      assert.strictEqual(spans[0].attributes['rpc.system'], 'http');
-      assert.strictEqual(spans[1].attributes['gcp.method.type'], 'http');
+      assert.strictEqual(spans[0].attributes['rpc.system.name'], 'http');
+      assert.strictEqual(spans[1].attributes['rpc.system.name'], 'http');
       for (const span of spans) {
         assert.strictEqual(span.ended, true);
         // On the fallback transport error.type reports the HTTP status the
@@ -949,8 +953,8 @@ describe('createApiCall', () => {
 
       const spans = harness.getSpans('google-gax');
       assert.strictEqual(spans.length, 2);
-      assert.strictEqual(spans[0].attributes['rpc.system'], 'http');
-      assert.strictEqual(spans[1].attributes['gcp.method.type'], 'http');
+      assert.strictEqual(spans[0].attributes['rpc.system.name'], 'http');
+      assert.strictEqual(spans[1].attributes['rpc.system.name'], 'http');
       for (const span of spans) {
         assert.strictEqual(span.ended, true);
         assert.strictEqual(
@@ -1032,8 +1036,8 @@ describe('createApiCall', () => {
 
       const spans = harness.getSpans('google-gax');
       assert.strictEqual(spans.length, 2);
-      assert.strictEqual(spans[0].attributes['rpc.system'], 'grpc');
-      assert.strictEqual(spans[1].attributes['gcp.method.type'], 'grpc');
+      assert.strictEqual(spans[0].attributes['rpc.system.name'], 'grpc');
+      assert.strictEqual(spans[1].attributes['rpc.system.name'], 'grpc');
     });
 
     it('sets rpcType to http when _fallback is "rest"', async () => {
@@ -1063,8 +1067,8 @@ describe('createApiCall', () => {
 
       const spans = harness.getSpans('google-gax');
       assert.strictEqual(spans.length, 2);
-      assert.strictEqual(spans[0].attributes['rpc.system'], 'http');
-      assert.strictEqual(spans[1].attributes['gcp.method.type'], 'http');
+      assert.strictEqual(spans[0].attributes['rpc.system.name'], 'http');
+      assert.strictEqual(spans[1].attributes['rpc.system.name'], 'http');
     });
 
     it('sets rpcType to http when _fallback is "proto"', async () => {
@@ -1094,8 +1098,8 @@ describe('createApiCall', () => {
 
       const spans = harness.getSpans('google-gax');
       assert.strictEqual(spans.length, 2);
-      assert.strictEqual(spans[0].attributes['rpc.system'], 'http');
-      assert.strictEqual(spans[1].attributes['gcp.method.type'], 'http');
+      assert.strictEqual(spans[0].attributes['rpc.system.name'], 'http');
+      assert.strictEqual(spans[1].attributes['rpc.system.name'], 'http');
     });
 
     it('pipes telemetry information configured via constructSettings', async () => {
@@ -1147,12 +1151,14 @@ describe('createApiCall', () => {
       );
       assert.strictEqual(span.attributes['gcp.client.version'], '1.2.3');
       assert.strictEqual(
-        span.attributes['gcp.repo'],
+        span.attributes['gcp.client.repo'],
         'googleapis/google-cloud-node',
       );
-      assert.strictEqual(span.attributes['gcp.artifact'], '@google-cloud/echo');
-      assert.strictEqual(span.attributes['gcp.method.name'], 'Echo');
-      assert.strictEqual(span.attributes['gcp.method.type'], 'grpc');
+      assert.strictEqual(
+        span.attributes['gcp.client.artifact'],
+        '@google-cloud/echo',
+      );
+      assert.strictEqual(span.attributes['rpc.system.name'], 'grpc');
     });
 
     it('records error details on the span when the API call fails', async () => {
@@ -1370,7 +1376,7 @@ describe('createApiCall', () => {
           assert.strictEqual(attemptSpan.kind, SpanKind.CLIENT);
           assert.strictEqual(span.ended, true);
           assert.strictEqual(span.name, 'EchoClient.Echo');
-          assert.strictEqual(span.attributes['gcp.method.type'], 'grpc');
+          assert.strictEqual(span.attributes['rpc.system.name'], 'grpc');
           done();
         } catch (e) {
           done(e);
@@ -1430,7 +1436,7 @@ describe('createApiCall', () => {
 
     describe('resend count', () => {
       // The unary retry loop is shared by both transports, and the only thing
-      // that distinguishes them on the span is `gcp.method.type` and the name
+      // that distinguishes them on the span is `rpc.system.name` and the name
       // the count is reported under. Running the same cases through both entry
       // points is what stops the count from being reported on one transport
       // only, or from being reported under the other transport's name.
@@ -1487,7 +1493,7 @@ describe('createApiCall', () => {
             // Asserting the transport too, so that a span accidentally
             // produced by the other one cannot satisfy this test.
             assert.strictEqual(
-              span.attributes['gcp.method.type'],
+              span.attributes['rpc.system.name'],
               transport.rpcType,
             );
             harness.assertResendCount(0, {span});
@@ -1526,7 +1532,7 @@ describe('createApiCall', () => {
             const span = spans.find(s => s.name === 'EchoClient.Echo')!;
             assert.ok(span);
             assert.strictEqual(
-              span.attributes['gcp.method.type'],
+              span.attributes['rpc.system.name'],
               transport.rpcType,
             );
             // Resend count is only set on T4 attempt spans, not T3 client request spans.
@@ -1592,7 +1598,7 @@ describe('createApiCall', () => {
             const span = spans.find(s => s.name === 'EchoClient.Echo')!;
             assert.ok(span);
             assert.strictEqual(
-              span.attributes['gcp.method.type'],
+              span.attributes['rpc.system.name'],
               transport.rpcType,
             );
             // 2 attempts made: initial send + 1 resend. The 2nd retry was not sent because maxRetries was reached.
@@ -1650,7 +1656,7 @@ describe('createApiCall', () => {
             const span = spans.find(s => s.name === 'EchoClient.Echo')!;
             assert.ok(span);
             assert.strictEqual(
-              span.attributes['gcp.method.type'],
+              span.attributes['rpc.system.name'],
               transport.rpcType,
             );
             harness.assertResendCount(0, {span});
@@ -1840,7 +1846,7 @@ describe('createApiCall', () => {
             assert.strictEqual(spans.length, 1 + attempts);
             const span = spans.find(s => s.name === 'EchoClient.Echo')!;
             assert.ok(span);
-            assert.strictEqual(span.attributes['gcp.method.type'], 'grpc');
+            assert.strictEqual(span.attributes['rpc.system.name'], 'grpc');
             harness.assertResendCount(0, {span});
             const attemptSpans = spans.filter(
               s => s.name === 'google.example.v1.Echo/Echo',
@@ -1903,7 +1909,7 @@ describe('createApiCall', () => {
             assert.strictEqual(spans.length, 1 + attempts);
             const span = spans.find(s => s.name === 'EchoClient.Echo')!;
             assert.ok(span);
-            assert.strictEqual(span.attributes['gcp.method.type'], 'grpc');
+            assert.strictEqual(span.attributes['rpc.system.name'], 'grpc');
             harness.assertResendCount(0, {span});
             const attemptSpans = spans.filter(
               s => s.name === 'google.example.v1.Echo/Echo',
