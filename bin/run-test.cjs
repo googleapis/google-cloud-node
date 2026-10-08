@@ -35,11 +35,6 @@ const noC8 = rawArgs.includes('--no-c8');
 
 const SHIM_FLAGS = [
   {
-    flag: '--fetch-shim',
-    envIn: 'BUN_FETCH_SHIM',
-    envOut: 'BUN_ENABLE_FETCH_SHIM',
-  },
-  {
     flag: '--bun-plugin-shim',
     envIn: 'BUN_PLUGIN_SHIM',
     envOut: 'BUN_ENABLE_BUN_PLUGIN_SHIM',

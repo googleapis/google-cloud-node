@@ -13,9 +13,9 @@
 
 import assert from 'assert';
 import nock from 'nock';
-import sinon from 'sinon';
+import * as sinon from 'sinon';
 import stream, {Readable} from 'stream';
-import {describe, it, afterEach} from 'mocha';
+import {describe, it, beforeEach, afterEach} from 'mocha';
 import {HttpsProxyAgent} from 'https-proxy-agent';
 import {
   Gaxios,
@@ -194,7 +194,9 @@ describe('🚙 error handling', () => {
       const chunks = [
         new Uint8Array(Buffer.from('{"error": {"code": 400, ')),
         new Uint8Array(Buffer.from('"message": "Invalid ')),
-        new Uint8Array(Buffer.from('argument", "status": "INVALID_ARGUMENT"}}')),
+        new Uint8Array(
+          Buffer.from('argument", "status": "INVALID_ARGUMENT"}}'),
+        ),
       ];
       const readableStream = Readable.from(chunks);
       const scope = nock(url).get('/').reply(400, readableStream);
@@ -217,7 +219,9 @@ describe('🚙 error handling', () => {
       const chunks = [
         '{"error": {"code": 400, ',
         Buffer.from('"message": "Invalid '),
-        new Uint8Array(Buffer.from('argument", "status": "INVALID_ARGUMENT"}}')),
+        new Uint8Array(
+          Buffer.from('argument", "status": "INVALID_ARGUMENT"}}'),
+        ),
       ];
       const readableStream = Readable.from(chunks);
       const scope = nock(url).get('/').reply(400, readableStream);
@@ -534,6 +538,133 @@ describe('🥁 configuration options', () => {
       assert(res.config.agent instanceof HttpsProxyAgent);
       assert.equal(res.config.agent.connectOpts.cert, cert);
       assert.equal(res.config.agent.connectOpts.key, key);
+    });
+
+    it('should pass proxy and tls options to fetchImplementation and omit proxy when noProxy matches', async () => {
+      scope.persist(false);
+      nock.cleanAll();
+      let capturedInit: Record<string, unknown> | undefined;
+      const customFetch = async (
+        _u: unknown,
+        init?: Record<string, unknown>,
+      ) => {
+        capturedInit = init;
+        return new Response(JSON.stringify(responseBody), {
+          status: 200,
+          headers: {'content-type': 'application/json'},
+        });
+      };
+
+      await request({
+        url,
+        proxy,
+        cert: 'cert',
+        key: 'key',
+        fetchImplementation:
+          customFetch as unknown as GaxiosOptions['fetchImplementation'],
+      });
+      assert.strictEqual(capturedInit?.proxy, proxy);
+      assert.deepStrictEqual(capturedInit?.tls, {cert: 'cert', key: 'key'});
+
+      await request({
+        url,
+        proxy,
+        noProxy: ['domain.example.com'],
+        fetchImplementation:
+          customFetch as unknown as GaxiosOptions['fetchImplementation'],
+      });
+      assert.strictEqual(capturedInit?.proxy, undefined);
+    });
+
+    it('should convert Node Readable request body and Web ReadableStream response body in Bun fetch path', async () => {
+      scope.persist(false);
+      nock.cleanAll();
+      const globalRecord = globalThis as Record<string, unknown>;
+      const hadBun = 'Bun' in globalRecord;
+      const origFetch = globalThis.fetch;
+      let capturedBody: unknown;
+      try {
+        if (!hadBun) {
+          globalRecord.Bun = {};
+        }
+        globalThis.fetch = (async (_u: unknown, init?: RequestInit) => {
+          capturedBody = init?.body;
+          return new Response(JSON.stringify(responseBody), {
+            status: 200,
+            headers: {'content-type': 'application/json'},
+          });
+        }) as typeof fetch;
+
+        const streamRes = await request<Readable>({
+          url,
+          method: 'POST',
+          data: Readable.from(['hello', ' ', 'world']),
+          responseType: 'stream',
+        });
+        assert(capturedBody instanceof ReadableStream);
+        assert(streamRes.data instanceof Readable);
+        assert.deepStrictEqual(await streamRes.json(), responseBody);
+
+        const byteReadable = new Readable({
+          read() {
+            this.push(Buffer.from('raw'));
+            this.push(null);
+          },
+        });
+        const streamRes2 = await request<Readable>({
+          url,
+          method: 'POST',
+          data: byteReadable,
+          responseType: 'stream',
+        });
+        assert(streamRes2.data instanceof Readable);
+        assert.strictEqual(
+          (await streamRes2.arrayBuffer()).byteLength,
+          Buffer.byteLength(JSON.stringify(responseBody)),
+        );
+
+        const streamRes3 = await request<Readable>({
+          url,
+          responseType: 'stream',
+        });
+        assert(streamRes3.data instanceof Readable);
+        assert.strictEqual((await streamRes3.blob()).size > 0, true);
+
+        const jsonRes = await request({url});
+        assert.deepStrictEqual(jsonRes.data, responseBody);
+
+        globalThis.fetch = (async () => {
+          throw Object.assign(new Error('The operation timed out.'), {
+            name: 'TimeoutError',
+          });
+        }) as typeof fetch;
+        await assert.rejects(request({url, retry: false}), {
+          message: 'The operation was aborted due to timeout',
+          code: 'ETIMEDOUT',
+        });
+
+        globalThis.fetch = (async () => {
+          throw Object.assign(new Error('The operation was aborted.'), {
+            name: 'AbortError',
+          });
+        }) as typeof fetch;
+        await assert.rejects(request({url, retry: false}), {
+          message: 'The user aborted a request.',
+        });
+
+        globalThis.fetch = (async () => {
+          throw {code: 'ECONNRESET', message: 'socket hang up'};
+        }) as typeof fetch;
+        await assert.rejects(request({url, retry: false}), {
+          code: 'ECONNRESET',
+          message: 'socket hang up',
+        });
+      } finally {
+        globalThis.fetch = origFetch;
+        if (!hadBun) {
+          delete globalRecord.Bun;
+        }
+      }
     });
 
     it('should load the proxy from the cache', async () => {
@@ -1396,6 +1527,9 @@ describe('🍂 defaults & instances', () => {
   });
 
   describe('mtls', () => {
+    beforeEach(() => {
+      setEnv({});
+    });
     class GaxiosAssertAgentCache extends Gaxios {
       getAgentCache() {
         return this.agentCache;

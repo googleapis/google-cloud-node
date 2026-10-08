@@ -15,10 +15,13 @@
  * limitations under the License.
  */
 
+import * as https from 'https';
 import {Agent, AgentOptions as HttpsAgentOptions} from 'https';
+import * as http from 'http';
 import {AgentOptions as HttpAgentOptions} from 'http';
 import type * as f from 'node-fetch' with {'resolution-mode': 'import'};
 import {PassThrough, Readable, pipeline} from 'stream';
+import * as zlib from 'zlib';
 import {getAgent} from './agents';
 import {TeenyStatistics} from './TeenyStatistics';
 import {randomUUID} from 'crypto';
@@ -27,8 +30,204 @@ const streamEvents = require('stream-events');
 
 import type nodeFetch from 'node-fetch' with {'resolution-mode': 'import'};
 
+function bunFetch(
+  url: URL | f.RequestInfo,
+  init: f.RequestInit & {timeout?: number} = {},
+): Promise<f.Response> {
+  const urlStr = String(url);
+  const parsedUrl = new URL(urlStr);
+  const isHttps = parsedUrl.protocol === 'https:';
+  const transport = isHttps ? https : http;
+
+  const headers: Record<string, string> = {};
+  if (init.headers) {
+    if (
+      typeof globalThis.Headers !== 'undefined' &&
+      init.headers instanceof globalThis.Headers
+    ) {
+      for (const [k, v] of init.headers.entries()) {
+        headers[k] = v;
+      }
+    } else if (Array.isArray(init.headers)) {
+      for (const [k, v] of init.headers) {
+        headers[k] = v;
+      }
+    } else if (
+      typeof (init.headers as {entries?: () => Iterable<[string, string]>})
+        .entries === 'function'
+    ) {
+      for (const [k, v] of (
+        init.headers as {entries: () => Iterable<[string, string]>}
+      ).entries()) {
+        headers[k] = v;
+      }
+    } else {
+      for (const [k, v] of Object.entries(init.headers)) {
+        if (v !== undefined) {
+          headers[k] = String(v);
+        }
+      }
+    }
+  }
+
+  if (init.compress !== false) {
+    const hasAcceptEncoding = Object.keys(headers).some(
+      k => k.toLowerCase() === 'accept-encoding',
+    );
+    if (!hasAcceptEncoding) {
+      headers['Accept-Encoding'] = 'gzip,deflate';
+    }
+  }
+
+  const reqOptions: https.RequestOptions & {proto?: string} = {
+    protocol: parsedUrl.protocol,
+    proto: isHttps ? 'https' : 'http',
+    method: init.method || 'GET',
+    hostname: parsedUrl.hostname,
+    port: parsedUrl.port || (isHttps ? 443 : 80),
+    path: (parsedUrl.pathname || '/') + parsedUrl.search,
+    headers,
+    agent: init.agent as Agent | http.Agent | boolean | undefined,
+  };
+
+  return new Promise<f.Response>((resolve, reject) => {
+    let activeResponseStream: PassThrough | undefined;
+    let timeoutId: ReturnType<typeof setTimeout> | undefined;
+    const clearReqTimeout = () => {
+      if (timeoutId !== undefined) {
+        clearTimeout(timeoutId);
+        timeoutId = undefined;
+      }
+    };
+    const req = transport.request(reqOptions, incoming => {
+      incoming.on('end', clearReqTimeout);
+      incoming.on('close', clearReqTimeout);
+      const responseStream = new PassThrough();
+      activeResponseStream = responseStream;
+      incoming.on('error', err => responseStream.destroy(err));
+      const status = incoming.statusCode || 200;
+      const encoding = (
+        incoming.headers['content-encoding'] || ''
+      ).toLowerCase();
+      if (
+        init.compress !== false &&
+        status !== 204 &&
+        status !== 304 &&
+        (reqOptions.method || 'GET').toUpperCase() !== 'HEAD' &&
+        (encoding === 'gzip' ||
+          encoding === 'x-gzip' ||
+          encoding === 'deflate' ||
+          encoding === 'br')
+      ) {
+        const decompressor =
+          encoding === 'br'
+            ? zlib.createBrotliDecompress()
+            : zlib.createUnzip();
+        incoming.on('error', err => decompressor.destroy(err));
+        decompressor.on('error', err => responseStream.destroy(err));
+        incoming.pipe(decompressor).pipe(responseStream);
+      } else {
+        incoming.pipe(responseStream);
+      }
+
+      const fetchHeaders = new globalThis.Headers();
+      for (const [k, v] of Object.entries(incoming.headers)) {
+        if (Array.isArray(v)) {
+          v.forEach(val => fetchHeaders.append(k, val));
+        } else if (v !== undefined) {
+          fetchHeaders.set(k, v);
+        }
+      }
+
+      const readText = async () => {
+        const chunks: Buffer[] = [];
+        for await (const chunk of responseStream) {
+          chunks.push(
+            Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk as Uint8Array),
+          );
+        }
+        return Buffer.concat(chunks).toString('utf8');
+      };
+
+      const res = {
+        url: urlStr,
+        status,
+        statusText: incoming.statusMessage || '',
+        headers: fetchHeaders,
+        body: responseStream,
+        text: readText,
+        json: async () => {
+          const text = await readText();
+          try {
+            return JSON.parse(text);
+          } catch (err) {
+            throw new Error(
+              `invalid json response body at ${urlStr} reason: ${(err as Error).message}`,
+            );
+          }
+        },
+      } as unknown as f.Response;
+
+      resolve(res);
+    });
+
+    if (init.timeout) {
+      const onTimeout = () => {
+        clearReqTimeout();
+        const timeoutErr = Object.assign(
+          new Error(`network timeout at: ${urlStr}`),
+          {
+            name: 'AbortError',
+            type: 'request-timeout',
+            code: 'ETIMEDOUT',
+          },
+        );
+        activeResponseStream?.destroy(timeoutErr);
+        req.destroy();
+        reject(timeoutErr);
+      };
+      req.setTimeout(init.timeout, onTimeout);
+      timeoutId = setTimeout(onTimeout, init.timeout);
+    }
+
+    req.on('error', err => {
+      clearReqTimeout();
+      activeResponseStream?.destroy(err);
+      reject(err);
+    });
+
+    if (init.body) {
+      if (
+        typeof init.body === 'object' &&
+        typeof (init.body as Readable).pipe === 'function'
+      ) {
+        (init.body as Readable).on('error', err => {
+          clearReqTimeout();
+          activeResponseStream?.destroy(err);
+          req.destroy();
+          reject(err);
+        });
+        (init.body as Readable).pipe(req);
+      } else if (
+        typeof init.body === 'string' ||
+        Buffer.isBuffer(init.body) ||
+        init.body instanceof Uint8Array
+      ) {
+        req.write(init.body);
+        req.end();
+      } else {
+        req.end();
+      }
+    } else {
+      req.end();
+    }
+  });
+}
+
 const fetch = (...args: Parameters<typeof nodeFetch>) =>
-  import('node-fetch').then(({default: fetch}) => fetch(...args));
+  'Bun' in globalThis
+    ? bunFetch(args[0], args[1])
+    : import('node-fetch').then(({default: fetch}) => fetch(...args));
 
 export interface CoreOptions {
   method?: string;
@@ -212,6 +411,7 @@ function createMultipartStream(boundary: string, multipart: RequestPart[]) {
 
 function teenyRequest(reqOpts: Options): Request;
 function teenyRequest(reqOpts: Options, callback: RequestCallback): void;
+/* eslint-disable promise/catch-or-return, promise/always-return, promise/no-callback-in-promise */
 function teenyRequest(
   reqOpts: Options,
   callback?: RequestCallback,

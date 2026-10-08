@@ -26,7 +26,7 @@ import {
   defaultErrorRedactor,
 } from './common.js';
 import {getRetryConfig} from './retry.js';
-import {Readable} from 'stream';
+import {PassThrough, Readable} from 'stream';
 import {GaxiosInterceptorManager} from './interceptor.js';
 
 const randomUUID = async () =>
@@ -154,8 +154,27 @@ export class Gaxios implements FetchCompliance {
 
     // node-fetch v3 warns when `data` is present
     // https://github.com/node-fetch/node-fetch/issues/1000
-    const preparedOpts = {...config};
+    const preparedOpts = {...config} as GaxiosOptionsPrepared & {
+      tls?: {cert: string; key: string};
+    };
     delete preparedOpts.data;
+
+    const proxyAgent = config.agent as {
+      proxy?: URL;
+      connectOpts?: {cert?: string; key?: string};
+    };
+    if (proxyAgent?.proxy) {
+      preparedOpts.proxy = proxyAgent.proxy.toString();
+    } else {
+      delete preparedOpts.proxy;
+    }
+
+    if (config.cert && config.key) {
+      preparedOpts.tls = {
+        cert: config.cert,
+        key: config.key,
+      };
+    }
 
     const res = (await fetchImpl(config.url, preparedOpts as {})) as Response;
     const data = await this.getResponseData(config, res);
@@ -658,6 +677,8 @@ export class Gaxios implements FetchCompliance {
   //
   static #fetch?: typeof nodeFetch | typeof fetch;
 
+  static #bunFetch?: typeof fetch;
+
   /**
    * Imports, caches, and returns a proxy agent - if not already imported
    *
@@ -669,13 +690,142 @@ export class Gaxios implements FetchCompliance {
     return this.#proxyAgent;
   }
 
+  static #createBunFetch(): typeof fetch {
+    return async (input, init) => {
+      let fetchInit = init as
+        (Omit<RequestInit, 'body'> & {body?: unknown}) | undefined;
+      if (
+        fetchInit?.body &&
+        typeof fetchInit.body === 'object' &&
+        typeof (fetchInit.body as Readable).pipe === 'function' &&
+        typeof Readable.toWeb === 'function' &&
+        (typeof ReadableStream === 'undefined' ||
+          !(fetchInit.body instanceof ReadableStream))
+      ) {
+        let stream: Readable;
+        if (
+          fetchInit.body instanceof Readable &&
+          !fetchInit.body.readableObjectMode
+        ) {
+          stream = fetchInit.body;
+        } else {
+          const passThrough = new PassThrough();
+          const src = fetchInit.body as Readable;
+          if (typeof src.on === 'function') {
+            src.on('error', err => passThrough.destroy(err));
+          }
+          stream = src.pipe(passThrough);
+        }
+        fetchInit = {
+          ...fetchInit,
+          body: Readable.toWeb(stream) as unknown as RequestInit['body'],
+        };
+      }
+
+      let res: Response;
+      try {
+        res = await globalThis.fetch(
+          input,
+          fetchInit as RequestInit | undefined,
+        );
+      } catch (err) {
+        const errorObj = err as {
+          message?: string;
+          name?: string;
+          code?: string;
+        };
+        const msg = String(errorObj?.message || err || '');
+        if (errorObj?.name === 'TimeoutError' || /timed out/i.test(msg)) {
+          throw Object.assign(
+            new Error('The operation was aborted due to timeout'),
+            {name: 'AbortError', type: 'aborted', code: 'ETIMEDOUT'},
+          );
+        }
+        if (
+          errorObj?.name === 'AbortError' ||
+          /aborted/i.test(msg) ||
+          init?.signal?.aborted
+        ) {
+          throw Object.assign(new Error('The user aborted a request.'), {
+            name: 'AbortError',
+            type: 'aborted',
+          });
+        }
+        if (!(err instanceof Error) && err && typeof err === 'object') {
+          throw Object.assign(
+            new Error(errorObj.message || errorObj.code || 'Error'),
+            err,
+          );
+        }
+        throw err;
+      }
+      if (
+        res?.body &&
+        typeof Readable.fromWeb === 'function' &&
+        !(res.body instanceof Readable)
+      ) {
+        let nodeStream: Readable | undefined;
+        const rawBody =
+          res.body as unknown as import('stream/web').ReadableStream;
+        const origText = res.text.bind(res);
+        const origJson = res.json.bind(res);
+        const origArrayBuffer = res.arrayBuffer.bind(res);
+        const origBlob = res.blob.bind(res);
+        const readBuffer = async () => {
+          const chunks: Buffer[] = [];
+          for await (const chunk of nodeStream!) {
+            chunks.push(
+              Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk as Uint8Array),
+            );
+          }
+          return Buffer.concat(chunks);
+        };
+        Object.defineProperty(res, 'body', {
+          get() {
+            nodeStream ||= Readable.fromWeb(rawBody);
+            return nodeStream;
+          },
+          configurable: true,
+          enumerable: true,
+        });
+        res.text = async () => {
+          if (!nodeStream) return origText();
+          return (await readBuffer()).toString('utf8');
+        };
+        res.json = async () => {
+          if (!nodeStream) return origJson();
+          return JSON.parse(await res.text());
+        };
+        res.arrayBuffer = async () => {
+          if (!nodeStream) return origArrayBuffer();
+          const buf = await readBuffer();
+          return buf.buffer.slice(
+            buf.byteOffset,
+            buf.byteOffset + buf.byteLength,
+          );
+        };
+        res.blob = async () => {
+          if (!nodeStream) return origBlob();
+          const buf = await readBuffer();
+          const contentType = res.headers?.get?.('content-type') ?? '';
+          return new Blob([buf], contentType ? {type: contentType} : undefined);
+        };
+      }
+      return res;
+    };
+  }
+
   static async #getFetch() {
     const hasWindow = typeof window !== 'undefined' && !!window;
-
-    this.#fetch ||= hasWindow
-      ? window.fetch
-      : (await import('node-fetch')).default;
-
+    if (hasWindow) {
+      this.#fetch ||= window.fetch;
+      return this.#fetch;
+    }
+    if ('Bun' in globalThis && typeof globalThis.fetch === 'function') {
+      this.#bunFetch ||= this.#createBunFetch();
+      return this.#bunFetch;
+    }
+    this.#fetch ||= (await import('node-fetch')).default;
     return this.#fetch;
   }
 

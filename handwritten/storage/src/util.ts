@@ -12,9 +12,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import {Gaxios, GaxiosOptions} from 'gaxios';
+import * as http from 'http';
+import * as https from 'https';
 import * as path from 'path';
 import * as querystring from 'querystring';
-import {PassThrough} from 'stream';
+import {PassThrough, Readable} from 'stream';
 import * as url from 'url';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
@@ -381,3 +384,428 @@ export function getPLimit(): Promise<PLimit> {
   }
   return pLimitPromise;
 }
+
+const initialGlobalFetch = globalThis.fetch;
+
+/**
+ * Ensures that Gaxios v7 uses a Bun-compatible fetch implementation when
+ * running under the Bun runtime. Can be removed once upgraded to Gaxios v8+.
+ *
+ * @internal
+ */
+export function ensureBunGaxiosFetch(GaxiosClass: typeof Gaxios): void {
+  if (
+    (globalThis as {window?: unknown}).window ||
+    !('Bun' in globalThis) ||
+    typeof GaxiosClass !== 'function'
+  ) {
+    return;
+  }
+  const ctor = GaxiosClass as typeof Gaxios & {
+    __bunPatched?: boolean;
+    __bunStoragePatched?: boolean;
+    __bunOrigAdapter?: (this: Gaxios, config: GaxiosOptions) => unknown;
+  };
+  if (ctor.__bunStoragePatched) {
+    return;
+  }
+  const proto = GaxiosClass.prototype as unknown as {
+    _defaultAdapter?: (this: Gaxios, config: GaxiosOptions) => unknown;
+  };
+  const origAdapter = ctor.__bunOrigAdapter || proto._defaultAdapter;
+  if (typeof origAdapter !== 'function') {
+    return;
+  }
+  ctor.__bunOrigAdapter = origAdapter;
+  ctor.__bunPatched = true;
+  ctor.__bunStoragePatched = true;
+
+  const wrapResponseBody = (res: Response): Response => {
+    if (
+      res?.body &&
+      typeof Readable.fromWeb === 'function' &&
+      !(res.body instanceof Readable)
+    ) {
+      let nodeStream: Readable | undefined;
+      const rawBody =
+        res.body as unknown as import('stream/web').ReadableStream;
+      const origText = res.text.bind(res);
+      const origJson = res.json.bind(res);
+      const origArrayBuffer = res.arrayBuffer.bind(res);
+      const origBlob = res.blob.bind(res);
+      const readBuffer = async () => {
+        const chunks: Buffer[] = [];
+        for await (const chunk of nodeStream!) {
+          chunks.push(
+            Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk as Uint8Array)
+          );
+        }
+        return Buffer.concat(chunks);
+      };
+      Object.defineProperty(res, 'body', {
+        get() {
+          nodeStream ||= Readable.fromWeb(rawBody);
+          return nodeStream;
+        },
+        configurable: true,
+        enumerable: true,
+      });
+      Object.assign(res, {
+        text: async () => {
+          if (!nodeStream) return origText();
+          return (await readBuffer()).toString('utf8');
+        },
+        json: async () => {
+          if (!nodeStream) return origJson();
+          return JSON.parse(await res.text());
+        },
+        arrayBuffer: async () => {
+          if (!nodeStream) return origArrayBuffer();
+          const buf = await readBuffer();
+          return buf.buffer.slice(
+            buf.byteOffset,
+            buf.byteOffset + buf.byteLength
+          );
+        },
+        blob: async () => {
+          if (!nodeStream) return origBlob();
+          const buf = await readBuffer();
+          const contentType = res.headers?.get?.('content-type') ?? '';
+          return new Blob([buf], contentType ? {type: contentType} : undefined);
+        },
+      });
+    }
+    return res;
+  };
+
+  const normalizeFetchError = (err: unknown, signal?: AbortSignal | null) => {
+    const errorObj = err as {
+      message?: string;
+      name?: string;
+      code?: string;
+    };
+    const msg = String(errorObj?.message || err || '');
+    if (errorObj?.name === 'TimeoutError' || /timed out/i.test(msg)) {
+      throw Object.assign(
+        new Error('The operation was aborted due to timeout'),
+        {name: 'AbortError', type: 'aborted', code: 'ETIMEDOUT'}
+      );
+    }
+    if (
+      errorObj?.name === 'AbortError' ||
+      /aborted/i.test(msg) ||
+      signal?.aborted
+    ) {
+      throw Object.assign(new Error('The user aborted a request.'), {
+        name: 'AbortError',
+        type: 'aborted',
+      });
+    }
+    if (!(err instanceof Error) && err && typeof err === 'object') {
+      throw Object.assign(
+        new Error(errorObj.message || errorObj.code || 'Error'),
+        err
+      );
+    }
+    throw err;
+  };
+
+  let bunFetchImpl: typeof fetch | undefined;
+  const getBunFetch = (): typeof fetch => {
+    if (bunFetchImpl) {
+      return bunFetchImpl;
+    }
+    bunFetchImpl = async (input, init) => {
+      let fetchInit = init as
+        | (Omit<RequestInit, 'body'> & {
+            body?: unknown;
+            agent?:
+              | http.Agent
+              | https.Agent
+              | boolean
+              | ((parsedUrl: URL) => http.Agent | https.Agent)
+              | {proxy?: URL};
+            proxy?: string;
+            cert?: string;
+            key?: string;
+            tls?: {cert: string; key: string};
+            timeout?: number;
+            fetchImplementation?: unknown;
+          })
+        | undefined;
+
+      const urlStr =
+        typeof input === 'string'
+          ? input
+          : input instanceof URL
+            ? input.href
+            : (input as {url?: string})?.url || String(input);
+      let parsedUrl: URL | undefined;
+      try {
+        parsedUrl = new URL(urlStr);
+      } catch {
+        parsedUrl = undefined;
+      }
+
+      if (
+        http.ClientRequest.name === 'OverriddenClientRequest' &&
+        globalThis.fetch === initialGlobalFetch &&
+        parsedUrl &&
+        (parsedUrl.protocol === 'http:' || parsedUrl.protocol === 'https:')
+      ) {
+        const isHttps = parsedUrl.protocol === 'https:';
+        const transport = isHttps ? https : http;
+        const headers: Record<string, string> = {};
+        if (fetchInit?.headers) {
+          if (
+            typeof Headers !== 'undefined' &&
+            fetchInit.headers instanceof Headers
+          ) {
+            for (const [k, v] of fetchInit.headers.entries()) {
+              headers[k] = v;
+            }
+          } else if (Array.isArray(fetchInit.headers)) {
+            for (const [k, v] of fetchInit.headers) {
+              headers[k] = v;
+            }
+          } else if (
+            typeof (
+              fetchInit.headers as {entries?: () => Iterable<[string, string]>}
+            ).entries === 'function'
+          ) {
+            for (const [k, v] of (
+              fetchInit.headers as {entries: () => Iterable<[string, string]>}
+            ).entries()) {
+              headers[k] = v;
+            }
+          } else {
+            for (const [k, v] of Object.entries(fetchInit.headers)) {
+              if (v !== undefined) headers[k] = String(v);
+            }
+          }
+        }
+        const resolvedAgent =
+          typeof fetchInit?.agent === 'function'
+            ? fetchInit.agent(parsedUrl)
+            : (fetchInit?.agent as
+                http.Agent | https.Agent | boolean | undefined);
+        const reqOptions: https.RequestOptions & {proto?: string} = {
+          protocol: parsedUrl.protocol,
+          proto: isHttps ? 'https' : 'http',
+          method: fetchInit?.method || 'GET',
+          hostname: parsedUrl.hostname,
+          port: parsedUrl.port || (isHttps ? 443 : 80),
+          path: (parsedUrl.pathname || '/') + parsedUrl.search,
+          headers,
+          agent: resolvedAgent,
+          cert: fetchInit?.cert,
+          key: fetchInit?.key,
+        };
+
+        try {
+          const res = await new Promise<Response>((resolve, reject) => {
+            let activePassThrough: PassThrough | undefined;
+            const req = transport.request(reqOptions, incoming => {
+              const passThrough = new PassThrough();
+              activePassThrough = passThrough;
+              incoming.on('error', err => passThrough.destroy(err));
+              incoming.pipe(passThrough);
+
+              const fetchHeaders = new Headers();
+              for (const [k, v] of Object.entries(incoming.headers)) {
+                if (Array.isArray(v)) {
+                  v.forEach(val => fetchHeaders.append(k, val));
+                } else if (v !== undefined) {
+                  fetchHeaders.set(k, v);
+                }
+              }
+
+              const status = incoming.statusCode || 200;
+              const isNullBodyStatus =
+                status === 204 || status === 205 || status === 304;
+              const webStream = isNullBodyStatus
+                ? null
+                : (Readable.toWeb(
+                    passThrough
+                  ) as unknown as ReadableStream<Uint8Array>);
+              const response = new Response(webStream, {
+                status,
+                statusText: incoming.statusMessage || '',
+                headers: fetchHeaders,
+              });
+              Object.defineProperty(response, 'url', {
+                value: urlStr,
+                configurable: true,
+              });
+              resolve(wrapResponseBody(response));
+            });
+
+            const failReq = (err: Error) => {
+              activePassThrough?.destroy(err);
+              req.destroy();
+              reject(err);
+            };
+
+            req.on('error', err => {
+              activePassThrough?.destroy(err);
+              reject(err);
+            });
+
+            if (fetchInit?.signal) {
+              if (fetchInit.signal.aborted) {
+                const abortErr = Object.assign(
+                  new Error('The user aborted a request.'),
+                  {name: 'AbortError'}
+                );
+                return failReq(abortErr);
+              }
+              const signal = fetchInit.signal;
+              const onAbort = () => {
+                failReq(
+                  Object.assign(new Error('The user aborted a request.'), {
+                    name: 'AbortError',
+                  })
+                );
+              };
+              signal.addEventListener('abort', onAbort, {once: true});
+              req.on('close', () => {
+                signal.removeEventListener('abort', onAbort);
+              });
+            }
+
+            if (fetchInit?.timeout) {
+              req.setTimeout(fetchInit.timeout, () => {
+                failReq(
+                  Object.assign(
+                    new Error('The operation was aborted due to timeout'),
+                    {name: 'AbortError', type: 'aborted', code: 'ETIMEDOUT'}
+                  )
+                );
+              });
+            }
+
+            const body = fetchInit?.body;
+            if (body) {
+              if (
+                typeof body === 'object' &&
+                typeof (body as Readable).pipe === 'function'
+              ) {
+                (body as Readable).on('error', failReq);
+                (body as Readable).pipe(req);
+              } else if (
+                typeof body === 'string' ||
+                Buffer.isBuffer(body) ||
+                body instanceof Uint8Array ||
+                body instanceof ArrayBuffer ||
+                ArrayBuffer.isView(body)
+              ) {
+                const chunk =
+                  body instanceof ArrayBuffer
+                    ? Buffer.from(body)
+                    : ArrayBuffer.isView(body)
+                      ? Buffer.from(
+                          body.buffer,
+                          body.byteOffset,
+                          body.byteLength
+                        )
+                      : body;
+                req.write(chunk);
+                req.end();
+              } else if (
+                typeof ReadableStream !== 'undefined' &&
+                body instanceof ReadableStream
+              ) {
+                const bodyStream = Readable.fromWeb(
+                  body as unknown as import('stream/web').ReadableStream
+                );
+                bodyStream.on('error', failReq);
+                bodyStream.pipe(req);
+              } else if (body instanceof URLSearchParams) {
+                req.write(body.toString());
+                req.end();
+              } else {
+                req.end();
+              }
+            } else {
+              req.end();
+            }
+          });
+          return res;
+        } catch (err) {
+          return normalizeFetchError(err, fetchInit?.signal);
+        }
+      }
+
+      if (fetchInit) {
+        fetchInit = {...fetchInit};
+        delete fetchInit.fetchImplementation;
+        const agentWithProxy = fetchInit.agent as {proxy?: URL} | undefined;
+        if (agentWithProxy?.proxy) {
+          fetchInit.proxy = agentWithProxy.proxy.toString();
+        } else {
+          delete fetchInit.proxy;
+        }
+        if (fetchInit.cert && fetchInit.key) {
+          fetchInit.tls = {cert: fetchInit.cert, key: fetchInit.key};
+        }
+        if (
+          fetchInit.body &&
+          typeof fetchInit.body === 'object' &&
+          typeof (fetchInit.body as Readable).pipe === 'function' &&
+          typeof Readable.toWeb === 'function' &&
+          (typeof ReadableStream === 'undefined' ||
+            !(fetchInit.body instanceof ReadableStream))
+        ) {
+          let stream: Readable;
+          if (
+            fetchInit.body instanceof Readable &&
+            !fetchInit.body.readableObjectMode
+          ) {
+            stream = fetchInit.body;
+          } else {
+            const passThrough = new PassThrough();
+            const src = fetchInit.body as Readable;
+            if (typeof src.on === 'function') {
+              src.on('error', err => passThrough.destroy(err));
+            }
+            stream = src.pipe(passThrough);
+          }
+          fetchInit.body = Readable.toWeb(
+            stream
+          ) as unknown as RequestInit['body'];
+        }
+      }
+
+      try {
+        const res = await globalThis.fetch(
+          input,
+          fetchInit as RequestInit | undefined
+        );
+        return wrapResponseBody(res);
+      } catch (err) {
+        return normalizeFetchError(err, init?.signal);
+      }
+    };
+    return bunFetchImpl;
+  };
+
+  proto._defaultAdapter = function (this: Gaxios, config: GaxiosOptions) {
+    if (
+      'Bun' in globalThis &&
+      config &&
+      !config.fetchImplementation &&
+      !this.defaults?.fetchImplementation &&
+      !(globalThis as {window?: unknown}).window
+    ) {
+      config.fetchImplementation = getBunFetch();
+      try {
+        return origAdapter.call(this, config);
+      } finally {
+        delete config.fetchImplementation;
+      }
+    }
+    return origAdapter.call(this, config);
+  };
+}
+
+ensureBunGaxiosFetch(Gaxios);

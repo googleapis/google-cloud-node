@@ -46,6 +46,17 @@ describe('teeny', () => {
   let statsStub: sinon.SinonStubbedInstance<TeenyStatistics>;
 
   beforeEach(() => {
+    for (const v of [
+      'http_proxy',
+      'https_proxy',
+      'HTTP_PROXY',
+      'HTTPS_PROXY',
+      'no_proxy',
+      'NO_PROXY',
+    ]) {
+      delete process.env[v];
+    }
+
     emitWarnStub = sandbox.stub(process, 'emitWarning');
 
     // don't mask other process warns
@@ -465,5 +476,126 @@ describe('teeny', () => {
       /Missing uri or url in reqOpts/,
       'Did not throw with expected message',
     );
+  });
+
+  it('should route requests through Node http/https under Bun', async () => {
+    const globalRecord = globalThis as Record<string, unknown>;
+    const hadBun = 'Bun' in globalRecord;
+    try {
+      if (!hadBun) {
+        Object.defineProperty(globalRecord, 'Bun', {
+          value: {},
+          configurable: true,
+          writable: true,
+        });
+      }
+
+      const jsonScope = nock(uri, {reqheaders: {'x-custom-entry': 'val'}})
+        .post('/')
+        .reply(200, {ok: true}, {'set-cookie': ['a=1', 'b=2']});
+      await new Promise<void>((resolve, reject) => {
+        const customHeaders = Object.defineProperty({}, 'entries', {
+          value: () =>
+            [
+              ['x-custom-entry', 'val'],
+              ['content-type', 'application/json'],
+            ][Symbol.iterator](),
+          enumerable: false,
+        });
+        teenyRequest(
+          {uri, method: 'POST', json: {hi: 1}, headers: customHeaders},
+          (err, res, body) => {
+            if (err) return reject(err);
+            try {
+              assert.strictEqual(res.statusCode, 200);
+              assert.deepStrictEqual(body, {ok: true});
+              jsonScope.done();
+              resolve();
+            } catch (e) {
+              reject(e);
+            }
+          },
+        );
+      });
+
+      const badJsonScope = nock(uri)
+        .get('/')
+        .reply(200, 'not-json', {'content-type': 'application/json'});
+      await new Promise<void>((resolve, reject) => {
+        teenyRequest({uri}, err => {
+          try {
+            assert.ok(err);
+            assert.match(err.message, /^invalid json response body/);
+            badJsonScope.done();
+            resolve();
+          } catch (e) {
+            reject(e);
+          }
+        });
+      });
+
+      const multipartScope = nock(uri).post('/').reply(200, 'uploaded');
+      await new Promise<void>((resolve, reject) => {
+        teenyRequest(
+          {
+            uri,
+            method: 'POST',
+            headers: {},
+            multipart: [{body: 'part1'}, {body: Readable.from(['part2'])}],
+          },
+          (err, res, body) => {
+            if (err) return reject(err);
+            try {
+              assert.strictEqual(res.statusCode, 200);
+              assert.strictEqual(body, 'uploaded');
+              multipartScope.done();
+              resolve();
+            } catch (e) {
+              reject(e);
+            }
+          },
+        );
+      });
+
+      const zlib = await import('zlib');
+      const gzipped = zlib.gzipSync(
+        Buffer.from(JSON.stringify({zipped: true})),
+      );
+      const gzipScope = nock(uri).get('/').reply(200, gzipped, {
+        'content-type': 'application/json',
+        'content-encoding': 'gzip',
+      });
+      await new Promise<void>((resolve, reject) => {
+        teenyRequest({uri, gzip: true}, (err, res, body) => {
+          if (err) return reject(err);
+          try {
+            assert.strictEqual(res.statusCode, 200);
+            assert.deepStrictEqual(body, {zipped: true});
+            gzipScope.done();
+            resolve();
+          } catch (e) {
+            reject(e);
+          }
+        });
+      });
+
+      const timeoutScope = nock(uri).get('/').delayConnection(100).reply(200);
+      await new Promise<void>((resolve, reject) => {
+        teenyRequest({uri, timeout: 10}, err => {
+          try {
+            assert.ok(err);
+            assert.strictEqual((err as {code?: string}).code, 'ETIMEDOUT');
+            timeoutScope.done();
+            resolve();
+          } catch (e) {
+            reject(e);
+          }
+        });
+      });
+    } finally {
+      if (!hadBun) {
+        delete globalRecord.Bun;
+      }
+    }
   });
 });

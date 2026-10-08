@@ -12,7 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import {Gaxios} from 'gaxios';
+import {ensureBunGaxiosFetch} from '../util';
 import {Transporter} from './tokenOptions';
+
+ensureBunGaxiosFetch(Gaxios);
 
 /** The URL for Google's OAuth 2.0 token revocation endpoint. */
 const GOOGLE_REVOKE_TOKEN_URL = 'https://oauth2.googleapis.com/revoke?token=';
