@@ -5,6 +5,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/bigtable?activeTab=versions
 
+## [7.4.0](https://github.com/googleapis/google-cloud-node/compare/bigtable-v7.3.0...bigtable-v7.4.0) (2026-10-07)
+
+
+### Features
+
+* **tools:** Add individual CLI flags for Bun monkey patches ([#9533](https://github.com/googleapis/google-cloud-node/issues/9533)) ([a5eec89](https://github.com/googleapis/google-cloud-node/commit/a5eec894b054e0605fd8e79591a88393bb2697c6))
+
 ## [7.3.0](https://github.com/googleapis/google-cloud-node/compare/bigtable-v7.2.0...bigtable-v7.3.0) (2026-09-15)
 
 

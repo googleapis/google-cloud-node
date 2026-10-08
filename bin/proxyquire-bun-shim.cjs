@@ -29,21 +29,36 @@ if (
 
   const origRequire = Module.prototype.require;
 
-  const enableFetchShim = process.env.BUN_ENABLE_FETCH_SHIM === 'true';
-  const enableBunPluginShim = process.env.BUN_ENABLE_BUN_PLUGIN_SHIM === 'true';
-  const enableGaxiosShim = process.env.BUN_ENABLE_GAXIOS_SHIM === 'true';
+  const enableFetchShim =
+    process.env.BUN_ENABLE_FETCH_SHIM === 'true' ||
+    process.env.BUN_FETCH_SHIM === 'true';
+  const enableBunPluginShim =
+    process.env.BUN_ENABLE_BUN_PLUGIN_SHIM === 'true' ||
+    process.env.BUN_PLUGIN_SHIM === 'true';
+  const enableGaxiosShim =
+    process.env.BUN_ENABLE_GAXIOS_SHIM === 'true' ||
+    process.env.BUN_GAXIOS_SHIM === 'true';
   const enableProxyquireShim =
-    process.env.BUN_ENABLE_PROXYQUIRE_SHIM === 'true';
-  const enableKeypairShim = process.env.BUN_ENABLE_KEYPAIR_SHIM === 'true';
-  const enableRequireShim = process.env.BUN_ENABLE_REQUIRE_SHIM === 'true';
+    process.env.BUN_ENABLE_PROXYQUIRE_SHIM === 'true' ||
+    process.env.BUN_PROXYQUIRE_SHIM === 'true';
+  const enableKeypairShim =
+    process.env.BUN_ENABLE_KEYPAIR_SHIM === 'true' ||
+    process.env.BUN_KEYPAIR_SHIM === 'true';
+  const enableRequireShim =
+    process.env.BUN_ENABLE_REQUIRE_SHIM === 'true' ||
+    process.env.BUN_REQUIRE_SHIM === 'true';
   const enableAbortSignalTimeoutShim =
-    process.env.BUN_ENABLE_ABORT_SIGNAL_TIMEOUT_SHIM === 'true';
+    process.env.BUN_ENABLE_ABORT_SIGNAL_TIMEOUT_SHIM === 'true' ||
+    process.env.BUN_ABORT_SIGNAL_TIMEOUT_SHIM === 'true';
   const enablePromiseAnyShim =
-    process.env.BUN_ENABLE_PROMISE_ANY_SHIM === 'true';
+    process.env.BUN_ENABLE_PROMISE_ANY_SHIM === 'true' ||
+    process.env.BUN_PROMISE_ANY_SHIM === 'true';
   const enableCryptoVerifyShim =
-    process.env.BUN_ENABLE_CRYPTO_VERIFY_SHIM === 'true';
+    process.env.BUN_ENABLE_CRYPTO_VERIFY_SHIM === 'true' ||
+    process.env.BUN_CRYPTO_VERIFY_SHIM === 'true';
   const enableAssertDeepEqualShim =
-    process.env.BUN_ENABLE_ASSERT_DEEP_EQUAL_SHIM === 'true';
+    process.env.BUN_ENABLE_ASSERT_DEEP_EQUAL_SHIM === 'true' ||
+    process.env.BUN_ASSERT_DEEP_EQUAL_SHIM === 'true';
 
   // ---------------------------------------------------------------------------
   // 1. Module._load Delegation
@@ -68,7 +83,7 @@ if (
   // ---------------------------------------------------------------------------
   // 2. Generational Module Cache Snapshots (Module._cache & require.cache)
   // ---------------------------------------------------------------------------
-  // Test isolation libraries (such as `mockery` and `proxyquire`) frequently swap
+  // Test isolation libraries (such as `mockery` in `handwritten/storage`) swap
   // the module cache using the following idiom:
   //
   //   const originalCache = Module._cache; // or `require.cache`
@@ -79,12 +94,12 @@ if (
   // In Bun, `require.cache` and `Module._cache` are native proxies to the C++ runtime's
   // internal module table (`bunNativeCache`). If we simply delete keys from `bunNativeCache`
   // in-place on assignment, `originalCache` (which holds a direct reference to that same object)
-  // has its properties deleted too. Consequently, when `mockery` or `proxyquire` attempts to
+  // has its properties deleted too. Consequently, when `mockery` attempts to
   // restore `Module._cache = originalCache`, the saved cache is already empty. This caused
   // previously loaded singletons/classes (like `Bucket` in Storage) to be re-required as distinct
   // instances, breaking `instanceof` checks across subsequent test files.
   //
-  // To solve this in Bun, we implement generational cache management:
+  // To solve this in Bun, we implement generational cache management under `enableRequireShim`:
   // - `createCacheGeneration`: Wraps the active cache state in a Proxy. While active, reads and
   //   writes reflect directly into Bun's native C++ cache (`bunNativeCache`) so Bun's native loader
   //   sees newly required modules.
@@ -95,7 +110,7 @@ if (
   // - `bunNativeCache` is then synchronized to match `newCache` (clearing deleted entries and
   //   repopulating new ones so Bun's native loader sees the clean or restored state).
   // - A new active generation is created and bound to both `Module._cache` and `require.cache`.
-  if (enableProxyquireShim) {
+  if (enableRequireShim) {
     const bunNativeCache = require.cache;
 
     function createCacheGeneration(initialEntries = {}) {
@@ -290,7 +305,7 @@ if (
 
   // Override Bun's native AbortSignal.timeout so its abort reason DOMException
   // uses the exact V8 message string ('The operation was aborted due to timeout')
-  // asserted by core/packages/gcp-metadata unit tests.
+  // asserted by core/packages/gaxios unit tests.
   if (
     enableAbortSignalTimeoutShim &&
     typeof AbortSignal !== 'undefined' &&
@@ -428,185 +443,272 @@ if (
   //   - `Mocks not yet satisfied` assertions from `nock`
   //
   // When opted into via `--fetch-shim` (`BUN_ENABLE_FETCH_SHIM=true`),
-  // `__googleCloudBunFetch` intercepts HTTP/HTTPS requests and routes them through
-  // Node's `http.request` / `https.request` stack, allowing `nock` to intercept
-  // requests seamlessly while returning standard Fetch `Response` objects expected
-  // by caller libraries.
-  if (enableFetchShim) {
+  // `--bun-plugin-shim` (`BUN_ENABLE_BUN_PLUGIN_SHIM=true`), or `--gaxios-shim`
+  // (`BUN_ENABLE_GAXIOS_SHIM=true`), `__googleCloudBunFetch` intercepts
+  // HTTP/HTTPS requests and routes them through Node's `http.request` /
+  // `https.request` stack, allowing `nock` to intercept requests seamlessly while
+  // returning standard Fetch `Response` objects expected by caller libraries.
+  if (enableFetchShim || enableBunPluginShim || enableGaxiosShim) {
     const origFetch = globalThis.fetch;
     globalThis.__googleCloudBunFetch = async (url, init = {}) => {
-    let parsedUrl;
-    try {
-      parsedUrl = new URL(String(url));
-    } catch {
-      parsedUrl = undefined;
-    }
-
-    if (
-      globalThis.fetch === origFetch &&
-      parsedUrl &&
-      (parsedUrl.protocol === 'http:' || parsedUrl.protocol === 'https:')
-    ) {
-      const isHttps = parsedUrl.protocol === 'https:';
-      const transport = isHttps ? https : http;
-
-      // Normalize headers from plain objects, Header instances, Arrays of tuples, or Maps.
-      let headers = {};
-      if (init.headers) {
-        if (
-          typeof Headers !== 'undefined' &&
-          init.headers instanceof Headers
-        ) {
-          for (const [k, v] of init.headers.entries()) {
-            headers[k] = v;
-          }
-        } else if (Array.isArray(init.headers)) {
-          for (const [k, v] of init.headers) {
-            headers[k] = v;
-          }
-        } else if (typeof init.headers.entries === 'function') {
-          for (const [k, v] of init.headers.entries()) {
-            headers[k] = v;
-          }
-        } else {
-          headers = {...init.headers};
-        }
+      let parsedUrl;
+      try {
+        parsedUrl = new URL(String(url));
+      } catch {
+        parsedUrl = undefined;
       }
 
-      const reqOptions = {
-        method: init.method || 'GET',
-        hostname: parsedUrl.hostname,
-        port: parsedUrl.port || (isHttps ? 443 : 80),
-        path: (parsedUrl.pathname || '/') + parsedUrl.search,
-        headers,
-        agent: init.agent,
-      };
+      if (
+        (globalThis.fetch === origFetch ||
+          globalThis.fetch === globalThis.__googleCloudBunFetch) &&
+        parsedUrl &&
+        (parsedUrl.protocol === 'http:' || parsedUrl.protocol === 'https:')
+      ) {
+        const isHttps = parsedUrl.protocol === 'https:';
+        const transport = isHttps ? https : http;
 
-      try {
-        const res = await new Promise((resolve, reject) => {
-          // Route through Node http/https transport so nock can intercept.
-          const req = transport.request(reqOptions, incoming => {
-            const responseStream = new PassThrough();
-            incoming.pipe(responseStream);
-
-            const fetchHeaders = new Headers();
-            for (const [k, v] of Object.entries(incoming.headers)) {
-              if (Array.isArray(v)) {
-                v.forEach(val => fetchHeaders.append(k, val));
-              } else if (v !== undefined) {
-                fetchHeaders.set(k, v);
-              }
+        // Normalize headers from plain objects, Header instances, Arrays of tuples, or Maps.
+        let headers = {};
+        if (init.headers) {
+          if (
+            typeof Headers !== 'undefined' &&
+            init.headers instanceof Headers
+          ) {
+            for (const [k, v] of init.headers.entries()) {
+              headers[k] = v;
             }
+          } else if (Array.isArray(init.headers)) {
+            for (const [k, v] of init.headers) {
+              headers[k] = v;
+            }
+          } else if (typeof init.headers.entries === 'function') {
+            for (const [k, v] of init.headers.entries()) {
+              headers[k] = v;
+            }
+          } else {
+            headers = {...init.headers};
+          }
+        }
 
-            const response = new Response(Readable.toWeb(responseStream), {
-              status: incoming.statusCode || 200,
-              statusText: incoming.statusMessage || '',
-              headers: fetchHeaders,
-            });
-            Object.defineProperty(response, 'url', {value: String(url)});
+        const reqOptions = {
+          method: init.method || 'GET',
+          hostname: parsedUrl.hostname,
+          port: parsedUrl.port || (isHttps ? 443 : 80),
+          path: (parsedUrl.pathname || '/') + parsedUrl.search,
+          headers,
+          agent: init.agent,
+        };
 
-            let nodeStream;
-            const rawBody = response.body;
-            const origText = response.text.bind(response);
-            const origJson = response.json.bind(response);
-            Object.defineProperty(response, 'body', {
-              get() {
-                nodeStream ||= Readable.fromWeb(rawBody);
-                return nodeStream;
-              },
-              configurable: true,
-              enumerable: true,
+        try {
+          const res = await new Promise((resolve, reject) => {
+            // Route through Node http/https transport so nock can intercept.
+            const req = transport.request(reqOptions, incoming => {
+              const responseStream = new PassThrough();
+              incoming.pipe(responseStream);
+
+              const fetchHeaders = new Headers();
+              for (const [k, v] of Object.entries(incoming.headers)) {
+                if (Array.isArray(v)) {
+                  v.forEach(val => fetchHeaders.append(k, val));
+                } else if (v !== undefined) {
+                  fetchHeaders.set(k, v);
+                }
+              }
+
+              const response = new Response(Readable.toWeb(responseStream), {
+                status: incoming.statusCode || 200,
+                statusText: incoming.statusMessage || '',
+                headers: fetchHeaders,
+              });
+              Object.defineProperty(response, 'url', {value: String(url)});
+
+              let nodeStream;
+              const rawBody = response.body;
+              const origText = response.text.bind(response);
+              const origJson = response.json.bind(response);
+              Object.defineProperty(response, 'body', {
+                get() {
+                  nodeStream ||= Readable.fromWeb(rawBody);
+                  return nodeStream;
+                },
+                configurable: true,
+                enumerable: true,
+              });
+              response.text = async () => {
+                if (!nodeStream) return origText();
+                const chunks = [];
+                for await (const chunk of nodeStream) {
+                  chunks.push(
+                    Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk),
+                  );
+                }
+                return Buffer.concat(chunks).toString('utf8');
+              };
+              response.json = async () => {
+                return JSON.parse(await response.text());
+              };
+
+              resolve(response);
             });
-            response.text = async () => {
-              if (!nodeStream) return origText();
-              const chunks = [];
-              for await (const chunk of nodeStream) {
-                chunks.push(
-                  Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk),
+
+            if (init.signal) {
+              if (init.signal.aborted) {
+                req.destroy(
+                  Object.assign(new Error('The user aborted a request.'), {
+                    name: 'AbortError',
+                  }),
+                );
+                return reject(
+                  Object.assign(new Error('The user aborted a request.'), {
+                    name: 'AbortError',
+                  }),
                 );
               }
-              return Buffer.concat(chunks).toString('utf8');
-            };
-            response.json = async () => {
-              return JSON.parse(await response.text());
-            };
-
-            resolve(response);
-          });
-
-          if (init.signal) {
-            if (init.signal.aborted) {
-              req.destroy(
-                Object.assign(new Error('The user aborted a request.'), {
-                  name: 'AbortError',
-                }),
-              );
-              return reject(
-                Object.assign(new Error('The user aborted a request.'), {
-                  name: 'AbortError',
-                }),
-              );
+              const abortHandler = () => {
+                req.destroy(
+                  Object.assign(new Error('The user aborted a request.'), {
+                    name: 'AbortError',
+                  }),
+                );
+              };
+              init.signal.addEventListener('abort', abortHandler, {once: true});
+              req.on('close', () => {
+                init.signal.removeEventListener('abort', abortHandler);
+              });
             }
-            init.signal.addEventListener('abort', () => {
-              req.destroy(
-                Object.assign(new Error('The user aborted a request.'), {
-                  name: 'AbortError',
-                }),
-              );
-            });
-          }
 
-          if (init.timeout) {
-            req.setTimeout(init.timeout, () => {
-              req.destroy(
-                Object.assign(
-                  new Error('The operation was aborted due to timeout'),
-                  {name: 'AbortError', type: 'aborted', code: 'ETIMEDOUT'},
-                ),
-              );
-            });
-          }
+            if (init.timeout) {
+              req.setTimeout(init.timeout, () => {
+                req.destroy(
+                  Object.assign(
+                    new Error('The operation was aborted due to timeout'),
+                    {name: 'AbortError', type: 'aborted', code: 'ETIMEDOUT'},
+                  ),
+                );
+              });
+            }
 
-          req.on('error', reject);
+            req.on('error', reject);
 
-          if (init.body) {
-            if (typeof init.body.pipe === 'function') {
-              init.body.pipe(req);
-            } else if (
-              typeof init.body === 'string' ||
-              Buffer.isBuffer(init.body) ||
-              init.body instanceof Uint8Array ||
-              init.body instanceof ArrayBuffer ||
-              (typeof ArrayBuffer !== 'undefined' &&
-                ArrayBuffer.isView(init.body))
-            ) {
-              const chunk =
-                init.body instanceof ArrayBuffer
-                  ? new Uint8Array(init.body)
-                  : init.body instanceof Uint8Array
-                  ? init.body
-                  : ArrayBuffer.isView(init.body)
-                  ? new Uint8Array(
-                      init.body.buffer,
-                      init.body.byteOffset,
-                      init.body.byteLength,
-                    )
-                  : init.body;
-              req.write(chunk);
-              req.end();
-            } else if (
-              typeof Readable.fromWeb === 'function' &&
-              typeof ReadableStream !== 'undefined' &&
-              init.body instanceof ReadableStream
-            ) {
-              Readable.fromWeb(init.body).pipe(req);
+            if (init.body) {
+              if (typeof init.body.pipe === 'function') {
+                init.body.pipe(req);
+              } else if (
+                typeof init.body === 'string' ||
+                Buffer.isBuffer(init.body) ||
+                init.body instanceof Uint8Array ||
+                init.body instanceof ArrayBuffer ||
+                (typeof ArrayBuffer !== 'undefined' &&
+                  ArrayBuffer.isView(init.body))
+              ) {
+                const chunk =
+                  init.body instanceof ArrayBuffer
+                    ? new Uint8Array(init.body)
+                    : init.body instanceof Uint8Array
+                    ? init.body
+                    : ArrayBuffer.isView(init.body)
+                    ? new Uint8Array(
+                        init.body.buffer,
+                        init.body.byteOffset,
+                        init.body.byteLength,
+                      )
+                    : init.body;
+                req.write(chunk);
+                req.end();
+              } else if (
+                typeof Readable.fromWeb === 'function' &&
+                typeof ReadableStream !== 'undefined' &&
+                init.body instanceof ReadableStream
+              ) {
+                Readable.fromWeb(init.body).pipe(req);
+              } else {
+                req.end();
+              }
             } else {
               req.end();
             }
-          } else {
-            req.end();
+          });
+          return res;
+        } catch (err) {
+          const msg = String(err?.message || err || '');
+          if (err?.name === 'TimeoutError' || /timed out/i.test(msg)) {
+            throw Object.assign(
+              new Error('The operation was aborted due to timeout'),
+              {name: 'AbortError', type: 'aborted', code: 'ETIMEDOUT'},
+            );
           }
-        });
+          if (
+            err?.name === 'AbortError' ||
+            /aborted/i.test(msg) ||
+            init?.signal?.aborted
+          ) {
+            throw Object.assign(new Error('The user aborted a request.'), {
+              name: 'AbortError',
+              type: 'aborted',
+            });
+          }
+          if (!(err instanceof Error) && err && typeof err === 'object') {
+            throw Object.assign(
+              new Error(err.message || err.code || 'Error'),
+              err,
+            );
+          }
+          throw err;
+        }
+      }
+
+      if (
+        init &&
+        init.body &&
+        typeof init.body === 'object' &&
+        typeof init.body.pipe === 'function' &&
+        typeof Readable.toWeb === 'function' &&
+        (typeof ReadableStream === 'undefined' ||
+          !(init.body instanceof ReadableStream))
+      ) {
+        const stream =
+          init.body instanceof Readable
+            ? init.body
+            : init.body.pipe(new PassThrough());
+        init = {...init, body: Readable.toWeb(stream)};
+      }
+      try {
+        const res = await (
+          globalThis.fetch === globalThis.__googleCloudBunFetch
+            ? origFetch
+            : globalThis.fetch
+        )(url, init);
+        if (
+          res &&
+          res.body &&
+          typeof Readable.fromWeb === 'function' &&
+          !(res.body instanceof Readable)
+        ) {
+          let nodeStream;
+          const rawBody = res.body;
+          const origText = res.text.bind(res);
+          const origJson = res.json.bind(res);
+          Object.defineProperty(res, 'body', {
+            get() {
+              nodeStream ||= Readable.fromWeb(rawBody);
+              return nodeStream;
+            },
+            configurable: true,
+            enumerable: true,
+          });
+          res.text = async () => {
+            if (!nodeStream) return origText();
+            const chunks = [];
+            for await (const chunk of nodeStream) {
+              chunks.push(Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk));
+            }
+            return Buffer.concat(chunks).toString('utf8');
+          };
+          res.json = async () => {
+            if (!nodeStream) return origJson();
+            return JSON.parse(await res.text());
+          };
+        }
         return res;
       } catch (err) {
         const msg = String(err?.message || err || '');
@@ -627,104 +729,34 @@ if (
           });
         }
         if (!(err instanceof Error) && err && typeof err === 'object') {
-          throw Object.assign(new Error(err.message || err.code || 'Error'), err);
+          throw Object.assign(
+            new Error(err.message || err.code || 'Error'),
+            err,
+          );
         }
         throw err;
       }
-    }
-
-    if (
-      init &&
-      init.body &&
-      typeof init.body === 'object' &&
-      typeof init.body.pipe === 'function' &&
-      typeof Readable.toWeb === 'function' &&
-      (typeof ReadableStream === 'undefined' ||
-        !(init.body instanceof ReadableStream))
-    ) {
-      const stream =
-        init.body instanceof Readable
-          ? init.body
-          : init.body.pipe(new PassThrough());
-      init = {...init, body: Readable.toWeb(stream)};
-    }
-    try {
-      const res = await globalThis.fetch(url, init);
-      if (
-        res &&
-        res.body &&
-        typeof Readable.fromWeb === 'function' &&
-        !(res.body instanceof Readable)
-      ) {
-        let nodeStream;
-        const rawBody = res.body;
-        const origText = res.text.bind(res);
-        const origJson = res.json.bind(res);
-        Object.defineProperty(res, 'body', {
-          get() {
-            nodeStream ||= Readable.fromWeb(rawBody);
-            return nodeStream;
-          },
-          configurable: true,
-          enumerable: true,
-        });
-        res.text = async () => {
-          if (!nodeStream) return origText();
-          const chunks = [];
-          for await (const chunk of nodeStream) {
-            chunks.push(Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk));
-          }
-          return Buffer.concat(chunks).toString('utf8');
-        };
-        res.json = async () => {
-          if (!nodeStream) return origJson();
-          return JSON.parse(await res.text());
-        };
-      }
-      return res;
-    } catch (err) {
-      const msg = String(err?.message || err || '');
-      if (err?.name === 'TimeoutError' || /timed out/i.test(msg)) {
-        throw Object.assign(
-          new Error('The operation was aborted due to timeout'),
-          {name: 'AbortError', type: 'aborted', code: 'ETIMEDOUT'},
-        );
-      }
-      if (
-        err?.name === 'AbortError' ||
-        /aborted/i.test(msg) ||
-        init?.signal?.aborted
-      ) {
-        throw Object.assign(new Error('The user aborted a request.'), {
-          name: 'AbortError',
-          type: 'aborted',
-        });
-      }
-      if (!(err instanceof Error) && err && typeof err === 'object') {
-        throw Object.assign(new Error(err.message || err.code || 'Error'), err);
-      }
-      throw err;
-    }
     };
+  }
 
-    if (
-      Module._extensions &&
-      typeof Module._extensions['.js'] === 'function'
-    ) {
-      const origJsExt = Module._extensions['.js'];
-      Module._extensions['.js'] = function (mod, filename) {
-        if (/teeny-request[\\/]+build[\\/]+src[\\/]+index\.js$/.test(filename)) {
-          const code = fs
-            .readFileSync(filename, 'utf8')
-            .replaceAll(
-              "import('node-fetch')",
-              'Promise.resolve({default: globalThis.__googleCloudBunFetch})',
-            );
-          return mod._compile(code, filename);
-        }
-        return origJsExt.apply(this, arguments);
-      };
-    }
+  if (
+    enableFetchShim &&
+    Module._extensions &&
+    typeof Module._extensions['.js'] === 'function'
+  ) {
+    const origJsExt = Module._extensions['.js'];
+    Module._extensions['.js'] = function (mod, filename) {
+      if (/teeny-request[\\/]+build[\\/]+src[\\/]+index\.js$/.test(filename)) {
+        const code = fs
+          .readFileSync(filename, 'utf8')
+          .replaceAll(
+            "import('node-fetch')",
+            'Promise.resolve({default: globalThis.__googleCloudBunFetch})',
+          );
+        return mod._compile(code, filename);
+      }
+      return origJsExt.apply(this, arguments);
+    };
   }
 
   if (enableBunPluginShim && typeof Bun.plugin === 'function') {

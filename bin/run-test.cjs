@@ -98,6 +98,28 @@ for (const {flag, envIn, envOut} of SHIM_FLAGS) {
 
 const args = rawArgs.filter(a => a !== '--no-c8' && !shimFlagSet.has(a));
 
+// Exit 0 if a package has no unit tests (e.g., single-service packages where
+// the service is marked deprecated and no test directory was generated). Every
+// requested compiled test directory and all source test directories must be
+// absent so running `pnpm test` before `pnpm run compile` (or with another
+// non-empty target directory) still runs/fails as expected.
+const normalizedArgs = new Set(
+  args.map(a => a.replace(/^\.\//, '').replace(/\/+$/, '')),
+);
+const hasSourceTests = ['test', 'esm/test', 'cjs/test'].some(dir =>
+  fs.existsSync(dir),
+);
+const targets = ['build/test', 'build/esm/test', 'build/cjs/test'].filter(t =>
+  normalizedArgs.has(t),
+);
+if (
+  !hasSourceTests &&
+  targets.length > 0 &&
+  targets.every(t => !fs.existsSync(t))
+) {
+  process.exit(0);
+}
+
 const isBunRuntime = typeof Bun !== 'undefined';
 const wantsBunRuntime = isBunRuntime || process.env.JS_RUNTIME === 'bun';
 

@@ -13,6 +13,312 @@
           "scope": "tools"
         }
       ],
+      "version": "10.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/translate",
+      "id": "64a5672f-0455-4de1-b5bc-82916741a659",
+      "createTime": "2026-10-07T14:54:48.483Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "752d1d72c75c2a4df5214027ea1a453a5e2c0d7f",
+          "message": "Avoid invoking callback inside promise handler in getClient_",
+          "issues": [
+            "9544"
+          ],
+          "scope": "pubsub"
+        },
+        {
+          "type": "feat",
+          "sha": "a5eec894b054e0605fd8e79591a88393bb2697c6",
+          "message": "Add individual CLI flags for Bun monkey patches",
+          "issues": [
+            "9533"
+          ],
+          "scope": "tools"
+        },
+        {
+          "type": "fix",
+          "sha": "f863ecc3a280a40304ec27e83b3629bd3e55a311",
+          "message": "Pause underlying pull streams and skip keepalive teardown while paused",
+          "issues": [
+            "9521"
+          ],
+          "scope": "pubsub"
+        }
+      ],
+      "version": "6.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/pubsub",
+      "id": "cebee9cd-6517-420a-acc8-f695b09f882e",
+      "createTime": "2026-10-07T14:54:48.457Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "a5eec894b054e0605fd8e79591a88393bb2697c6",
+          "message": "Add individual CLI flags for Bun monkey patches",
+          "issues": [
+            "9533"
+          ],
+          "scope": "tools"
+        }
+      ],
+      "version": "7.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/logging-winston",
+      "id": "9860aa37-6f30-4c73-b597-27aa7e51368a",
+      "createTime": "2026-10-07T14:54:48.434Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "a5eec894b054e0605fd8e79591a88393bb2697c6",
+          "message": "Add individual CLI flags for Bun monkey patches",
+          "issues": [
+            "9533"
+          ],
+          "scope": "tools"
+        }
+      ],
+      "version": "6.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/logging-bunyan",
+      "id": "3251134c-0fdf-4acd-9a37-e091b80f73ad",
+      "createTime": "2026-10-07T14:54:48.407Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "a5eec894b054e0605fd8e79591a88393bb2697c6",
+          "message": "Add individual CLI flags for Bun monkey patches",
+          "issues": [
+            "9533"
+          ],
+          "scope": "tools"
+        }
+      ],
+      "version": "12.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/logging",
+      "id": "6ca9ddfb-5d82-4fb8-81cb-970c73b05c88",
+      "createTime": "2026-10-07T14:54:48.385Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "a5eec894b054e0605fd8e79591a88393bb2697c6",
+          "message": "Add individual CLI flags for Bun monkey patches",
+          "issues": [
+            "9533"
+          ],
+          "scope": "tools"
+        }
+      ],
+      "version": "6.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dns",
+      "id": "789b4a00-e224-4c82-857c-cae7e78efe79",
+      "createTime": "2026-10-07T14:54:48.360Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "a5eec894b054e0605fd8e79591a88393bb2697c6",
+          "message": "Add individual CLI flags for Bun monkey patches",
+          "issues": [
+            "9533"
+          ],
+          "scope": "tools"
+        }
+      ],
+      "version": "4.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/error-reporting",
+      "id": "e4e0881c-7fa8-44f9-a089-9d2d86ca5e9c",
+      "createTime": "2026-10-07T14:54:48.338Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "a5eec894b054e0605fd8e79591a88393bb2697c6",
+          "message": "Add individual CLI flags for Bun monkey patches",
+          "issues": [
+            "9533"
+          ],
+          "scope": "tools"
+        }
+      ],
+      "version": "11.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/datastore",
+      "id": "cd00aa96-e56e-4e1b-8b6d-88b8ed712480",
+      "createTime": "2026-10-07T14:54:48.314Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "a5eec894b054e0605fd8e79591a88393bb2697c6",
+          "message": "Add individual CLI flags for Bun monkey patches",
+          "issues": [
+            "9533"
+          ],
+          "scope": "tools"
+        }
+      ],
+      "version": "7.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigtable",
+      "id": "4b6c1e55-b412-47b2-9f65-603d88b63c68",
+      "createTime": "2026-10-07T14:54:48.292Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "a5eec894b054e0605fd8e79591a88393bb2697c6",
+          "message": "Add individual CLI flags for Bun monkey patches",
+          "issues": [
+            "9533"
+          ],
+          "scope": "tools"
+        }
+      ],
+      "version": "9.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery",
+      "id": "4c09eda3-5f46-4d28-b77c-ffc99328ae7e",
+      "createTime": "2026-10-07T14:54:48.267Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "be25b6fa1a6c6c90337ecad8afdcbcaeb477ded2",
+          "message": "Make google-test-utils a private workspace package",
+          "issues": [
+            "9525"
+          ],
+          "scope": "test-utils"
+        }
+      ],
+      "version": "0.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "google-test-utils",
+      "id": "bd44f80c-f86e-4186-95ee-4a3ade441057",
+      "createTime": "2026-10-07T14:54:48.244Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "a5eec894b054e0605fd8e79591a88393bb2697c6",
+          "message": "Add individual CLI flags for Bun monkey patches",
+          "issues": [
+            "9533"
+          ],
+          "scope": "tools"
+        }
+      ],
+      "version": "9.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "googleapis-common",
+      "id": "8c9c5307-12c1-4beb-9276-a35e8addb108",
+      "createTime": "2026-10-07T14:54:48.220Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "a5eec894b054e0605fd8e79591a88393bb2697c6",
+          "message": "Add individual CLI flags for Bun monkey patches",
+          "issues": [
+            "9533"
+          ],
+          "scope": "tools"
+        }
+      ],
+      "version": "11.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "google-auth-library",
+      "id": "c3bdb375-86a4-4daa-9153-7b098125105c",
+      "createTime": "2026-10-07T14:54:48.196Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "a5eec894b054e0605fd8e79591a88393bb2697c6",
+          "message": "Add individual CLI flags for Bun monkey patches",
+          "issues": [
+            "9533"
+          ],
+          "scope": "tools"
+        }
+      ],
+      "version": "9.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "gcp-metadata",
+      "id": "b24ca39d-e971-47bb-af8c-6005731bce5d",
+      "createTime": "2026-10-07T14:54:48.170Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "a5eec894b054e0605fd8e79591a88393bb2697c6",
+          "message": "Add individual CLI flags for Bun monkey patches",
+          "issues": [
+            "9533"
+          ],
+          "scope": "tools"
+        }
+      ],
+      "version": "8.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "gaxios",
+      "id": "e92ea5e4-cf9e-441b-a5b8-3649058cb638",
+      "createTime": "2026-10-07T14:54:48.146Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "a5eec894b054e0605fd8e79591a88393bb2697c6",
+          "message": "Add individual CLI flags for Bun monkey patches",
+          "issues": [
+            "9533"
+          ],
+          "scope": "tools"
+        }
+      ],
+      "version": "6.12.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "google-gax",
+      "id": "e9c264ae-bf82-4ffa-8bd7-bf456d42e5f4",
+      "createTime": "2026-10-07T14:54:48.116Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "a5eec894b054e0605fd8e79591a88393bb2697c6",
+          "message": "Add individual CLI flags for Bun monkey patches",
+          "issues": [
+            "9533"
+          ],
+          "scope": "tools"
+        }
+      ],
       "version": "8.3.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/storage",
@@ -100071,5 +100377,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-10-07T13:35:39.845Z"
+  "updateTime": "2026-10-07T14:54:48.483Z"
 }
