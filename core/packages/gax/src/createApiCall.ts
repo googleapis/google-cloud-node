@@ -61,8 +61,10 @@ import {checkTelemetryEnabled} from './util';
  * @param {Promise<GRPCCall>|GRPCCall} func - is either a promise to be used to make
  *   a bare RPC call, or just a bare RPC call.
  * @param {CallSettings} settings - provides the settings for this call
- * @param {Descriptor} descriptor - optionally specify the descriptor for
+ * @param {Descriptor} [descriptor] - optionally specify the descriptor for
  *   the method call.
+ * @param {boolean | 'proto' | 'rest'} [_fallback] - optionally specify whether
+ *   the call uses HTTP/REST fallback transport rather than gRPC.
  * @return {GaxCall} func - a bound method on a request stub used
  *   to make an rpc call.
  */
@@ -70,8 +72,7 @@ export function createApiCall(
   func: Promise<GRPCCall> | GRPCCall,
   settings: CallSettings,
   descriptor?: Descriptor,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  _fallback?: boolean | 'proto' | 'rest', // unused here, used in fallback.ts implementation
+  _fallback?: boolean | 'proto' | 'rest',
 ): GaxCall {
   // we want to be able to accept both promise resolving to a function and a
   // function. Currently client librares are only calling this method with a

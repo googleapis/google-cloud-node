@@ -42,42 +42,49 @@ import {
 
 /**
  * Static metadata about the Google Cloud client library used to populate
- * telemetry span attributes.
+ * telemetry span attributes (`gcp.client.*`, `server.*`, `url.domain`).
  */
 export interface StaticTraceContext {
   /**
    * The target GCP service endpoint or domain (e.g. 'storage.googleapis.com').
+   * Populates `gcp.client.service`.
    */
   gcpClientService?: string;
   /**
    * The version of the client library (e.g. '1.2.3').
+   * Populates `gcp.client.version`.
    */
   gcpVersion?: string;
   /**
    * The GitHub repository name hosting the client library (e.g. 'googleapis/google-cloud-node').
+   * Populates `gcp.client.repo`.
    */
   gcpRepo?: string;
   /**
    * The NPM package name of the client library (e.g. '@google-cloud/storage').
+   * Populates `gcp.client.artifact`.
    */
   gcpArtifact?: string;
   /**
    * Server domain name or IP address for the RPC call.
+   * Populates `server.address`.
    */
   serverAddress?: string;
   /**
    * Server port number for the RPC call.
+   * Populates `server.port`.
    */
   serverPort?: number;
   /**
    * Target service domain (e.g. 'cloudkms.googleapis.com').
+   * Populates `url.domain`.
    */
   urlDomain?: string;
 }
 
 /**
  * Dynamic metadata specific to the individual RPC invocation used to populate
- * telemetry span attributes.
+ * telemetry span names and attributes.
  */
 export interface DynamicTraceContext {
   /**
@@ -90,41 +97,49 @@ export interface DynamicTraceContext {
   methodName: string;
   /**
    * The transport protocol used for the RPC ('grpc' or 'http').
+   * Populates `rpc.system.name`.
    */
   rpcType: 'grpc' | 'http';
   /**
    * Server domain name or IP address for the RPC call.
+   * Populates `server.address`.
    */
   serverAddress?: string;
   /**
    * Server port number for the RPC call.
+   * Populates `server.port`.
    */
   serverPort?: number;
   /**
    * Target service domain (e.g. 'cloudkms.googleapis.com').
+   * Populates `url.domain`.
    */
   urlDomain?: string;
 }
 
 /**
- * Dynamic metadata specific to an individual RPC transport attempt (low level network span).
+ * Dynamic metadata specific to an individual RPC transport attempt (T4 low level network span).
  */
 export interface AttemptTraceContext extends DynamicTraceContext {
   /**
    * The fully-qualified protobuf service name (e.g. 'google.cloud.kms.v1.KeyManagementService').
+   * Combined with `methodName` to populate `rpc.method`.
    */
   apiName?: string;
   /**
    * The ordinal resend count for this attempt (0 for the initial attempt, 1 for the first retry, etc.).
-   * Omitted from span attributes when 0 or undefined.
+   * Populates `gcp.grpc.resend_count` (gRPC) or `http.request.resend_count` (HTTP) when > 0;
+   * omitted from span attributes when 0 or undefined.
    */
   resendCount?: number;
   /**
    * The HTTP request method for REST fallback attempts (e.g. 'GET', 'POST', 'PUT', 'PATCH', 'DELETE').
+   * Populates `http.request.method`.
    */
   httpMethod?: string;
   /**
    * The URL path template for REST fallback attempts (e.g. '/v1/{name}:access').
+   * Populates `url.template`.
    */
   urlTemplate?: string;
 }
@@ -140,6 +155,10 @@ const clientRequestFirstAttempt = new WeakMap<Span, Span>();
  * Formats the span name for an HTTP low level network attempt span as
  * `"{http.request.method} {url.template}"` when a URL template is available,
  * or `"{http.request.method}"` otherwise.
+ *
+ * @param {string} httpMethod - The HTTP request method (e.g. 'GET', 'POST').
+ * @param {string} [urlTemplate] - Optional URL path template (e.g. '/v1/{name}:access').
+ * @returns {string} The formatted HTTP attempt span name.
  */
 function formatHttpAttemptSpanName(
   httpMethod: string,
@@ -152,6 +171,9 @@ function formatHttpAttemptSpanName(
  * Updates the `http.request.method` attribute, optional `url.template` attribute,
  * and span name on the currently active low level network attempt span, and
  * propagates `url.template` to the active client request span if this is its first attempt span.
+ *
+ * @param {string} httpMethod - The HTTP request method (e.g. 'GET', 'POST').
+ * @param {string} [urlTemplate] - Optional URL path template (e.g. '/v1/{name}:access').
  */
 export function setAttemptHttpMethod(
   httpMethod: string,
@@ -769,8 +791,9 @@ export function safeJsonStringify(value: unknown): string | undefined {
 }
 
 /**
- * Extracts and formats status details and metadata attached by GFE/backend on server-side errors,
- * returning the server error message and a formatted stacktrace string.
+ * Extracts and formats server-side error details (message, status details, and metadata)
+ * attached by GFE/backend on server-side errors. Note that only `message` is used on T4
+ * `exception` span events (`exception.stacktrace` is not recorded on spans).
  */
 export function resolveServerExceptionDetails(e: Error): {
   message: string;
@@ -854,7 +877,7 @@ export function resolveServerExceptionDetails(e: Error): {
     }
   }
 
-  // Combine status details and metadata into exception.stacktrace.
+  // Combine status details and metadata into a formatted stacktrace string.
   const stacktraceParts: string[] = [];
   if (statusDetailsStr) {
     stacktraceParts.push(`status_details: ${statusDetailsStr}`);
@@ -873,7 +896,13 @@ export function resolveServerExceptionDetails(e: Error): {
 
 /**
  * Records an `exception` span event with `exception.type` (and `exception.message`
- * when `includeMessage` is true, such as on low level network attempt spans).
+ * when `includeMessage` is true, such as on T4 low level network attempt spans).
+ *
+ * @param {Span} span - The span on which to record the exception event.
+ * @param {Error} e - The error instance.
+ * @param {'grpc' | 'http'} rpcType - The RPC transport protocol.
+ * @param {boolean} [includeMessage=false] - Whether to include `exception.message` on the event
+ *   (true for T4 attempt spans, false for T3 client request spans).
  */
 function recordExceptionEvent(
   span: Span,
@@ -1142,8 +1171,15 @@ function setFinalStatusAttributes(
 }
 
 /**
- * Records error attributes (`error.type`, `status.message`), exception event,
+ * Records error attributes (`error.type`, `status.message`), `exception` span event,
  * and `ERROR` status on a span, returning the resolved transport status codes.
+ *
+ * @param {Span} span - The span on which to record the error.
+ * @param {unknown} e - The error thrown or passed to the callback/stream/promise.
+ * @param {'grpc' | 'http'} rpcType - The RPC transport protocol.
+ * @param {boolean} [includeExceptionMessage=false] - Whether to include `exception.message`
+ *   on the `exception` event (true for T4 attempt spans, false for T3 client request spans).
+ * @returns {{rpcStatusName?: string; httpStatusCode?: number}} The resolved status codes.
  */
 function recordSpanError(
   span: Span,
@@ -1165,12 +1201,21 @@ function recordSpanError(
   return {rpcStatusName, httpStatusCode};
 }
 
+/**
+ * Options for configuring span completion and error-recording handlers.
+ */
 interface SpanCompletionOptions {
+  /** The span managed by the completion handlers. */
   span: Span;
+  /** The RPC transport protocol ('grpc' or 'http'). */
   rpcType: 'grpc' | 'http';
+  /** Parsed server address to record when the call is not a pre-connection failure. */
   rawAddress?: string;
+  /** Parsed server port to record when the call is not a pre-connection failure. */
   rawPort?: number;
+  /** Whether to include `exception.message` on `exception` span events (true for T4 spans). */
   includeExceptionMessage?: boolean;
+  /** Optional hook invoked immediately before `span.end()`. */
   onBeforeEnd?: () => void;
 }
 
@@ -1276,8 +1321,13 @@ function handleCallResult<T>(
 }
 
 /**
- * Executes a function within an active OpenTelemetry client request span, populating
- * standard GCP telemetry attributes and recording errors/exceptions if thrown.
+ * Executes a function within an active OpenTelemetry T3 client request span
+ * (`"{clientName}.{methodName}"`), populating standard GCP client telemetry attributes
+ * (`gcp.client.*`, `rpc.system.name`, `url.domain`, `server.address`, `server.port`,
+ * `rpc.response.status_code` / `http.response.status_code`) and recording error
+ * attributes (`error.type`, `status.message`, and `exception.type` event attribute)
+ * if the operation fails. Child T4 attempt spans also propagate `rpc.method` and
+ * `url.template` onto this span.
  *
  * For callback-style invocations, pass the user's `callback` as the fifth
  * argument so the span stays open until the callback or stream events finish.
@@ -1374,9 +1424,13 @@ export function traceCall(
 
 /**
  * Executes an individual RPC transport attempt within an active OpenTelemetry
- * CLIENT span (low level network span), parenting it to the active client request span
- * and recording per-attempt network, status, and error attributes without
- * injecting span context into outgoing headers.
+ * T4 CLIENT span (low level network span), parenting it to the active T3 client request span
+ * and recording per-attempt client (`gcp.client.*`), network (`rpc.system.name`, `rpc.method`,
+ * `http.request.method`, `url.template`, `url.domain`, `server.address`, `server.port`),
+ * resend (`gcp.grpc.resend_count` / `http.request.resend_count`), status
+ * (`rpc.response.status_code` / `http.response.status_code`), and error (`error.type`,
+ * `status.message`, and `exception.type` / `exception.message` event attributes) attributes
+ * without injecting span context into outgoing headers.
  *
  * HTTP attempt spans are named `"{http.request.method} {url.template}"` when a URL
  * template is available or `"{http.request.method}"` otherwise; gRPC attempt spans
@@ -1384,13 +1438,14 @@ export function traceCall(
  * on the parent client request span to `"{apiName}/{methodName}"` for both transports,
  * and propagates `url.template` to the parent client request span from its first HTTP attempt.
  *
+ * @template T
  * @param {AttemptTraceContext} dynamicArgs - Dynamic trace context for the RPC attempt.
  * @param {StaticTraceContext} staticArgs - Static trace context for the client library.
  * @param {function} fn - The transport attempt operation to trace.
  * @param {boolean} [isStreamCall=false] - Whether the operation is a stream call.
  * @param {APICallback} [callback] - The attempt callback.
  * @param {Context} [parentContext] - Optional parent OpenTelemetry context (e.g. client request span context).
- * @returns {GaxCallResult} The result of the traced attempt.
+ * @returns {T} The result of the traced attempt.
  */
 export function traceAttempt<T = GaxCallResult>(
   dynamicArgs: AttemptTraceContext,

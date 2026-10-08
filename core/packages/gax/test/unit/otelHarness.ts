@@ -265,7 +265,7 @@ export class OtelHarness {
   }
 
   /**
-   * Asserts the response status attributes of a traced call.
+   * Asserts the response status attributes of a traced call or attempt.
    *
    * The transport-specific attribute is not named by the caller. It is derived
    * from the span's own `rpc.system.name`, so a test cannot assert a
@@ -278,9 +278,11 @@ export class OtelHarness {
    * asserts that no HTTP status was reported, which is the expected result for
    * a failure that never received a response, such as an expired deadline.
    *
-   * @param {object} expected - Expected status values.
+   * @param {object} expected - Expected status and optional server endpoint values.
    * @param {string} [expected.rpcStatus] - gRPC status name, e.g. 'OK' or 'NOT_FOUND'. Undefined if no response arrived.
    * @param {number} [expected.httpStatus] - HTTP status expected on a fallback span.
+   * @param {string} [expected.serverAddress] - Optional expected server.address (delegates to assertServerAddressAndPort).
+   * @param {number} [expected.serverPort] - Optional expected server.port (delegates to assertServerAddressAndPort).
    * @param {object} [options] - Span selection.
    * @param {string} [options.tracerName] - Restrict the lookup to one instrumentation scope.
    * @param {ReadableSpan} [options.span] - Span to check; defaults to the only exported span.
@@ -310,7 +312,7 @@ export class OtelHarness {
       transport === 'grpc' || transport === 'http',
       `${where} has rpc.system.name ${JSON.stringify(transport)}; the ` +
         'transport-specific status attribute cannot be checked without it. ' +
-        'Was this span produced by traceCall?',
+        'Was this span produced by traceCall or traceAttempt?',
     );
 
     assert.strictEqual(
@@ -438,7 +440,7 @@ export class OtelHarness {
       transport === 'grpc' || transport === 'http',
       `${where} has rpc.system.name ${JSON.stringify(transport)}; the ` +
         'transport-specific resend count cannot be checked without it. ' +
-        'Was this span produced by traceCall?',
+        'Was this span produced by traceCall or traceAttempt?',
     );
 
     const isGrpc = transport === 'grpc';
@@ -467,16 +469,17 @@ export class OtelHarness {
   /**
    * Asserts the `exception` event attributes on a span.
    *
-   * Per OpenTelemetry semantic conventions and Google Cloud guidelines,
-   * client-side errors record local client stack trace and error message,
-   * while server-side errors record server error details (and any status details/metadata
-   * attached by GFE/backend) formatted as exception.stacktrace (replacing the local client stack trace).
+   * T3 client request spans (`traceCall`) record `exception.type` only (omitting
+   * `exception.message` and `exception.stacktrace`). T4 low-level network attempt
+   * spans (`traceAttempt`) record `exception.type` and `exception.message`
+   * (preferring server error details on server-side errors or `e.message` on
+   * client-side errors), while omitting `exception.stacktrace`.
    * Status details, metadata, reason, domain, and error_info_metadata are not recorded
    * as separate span or event attributes.
    *
    * @param {object} expected - Expected attributes on the exception event.
    * @param {string} [expected.type] - Expected exception.type.
-   * @param {string} [expected.message] - Expected exception.message.
+   * @param {string | null} [expected.message] - Expected exception.message, or null if asserted absent.
    * @param {string | null} [expected.stacktrace] - Expected exception.stacktrace, or null if asserted absent.
    * @param {object} [options] - Span selection.
    * @param {string} [options.tracerName] - Restrict the lookup to one instrumentation scope.
@@ -589,11 +592,11 @@ export class OtelHarness {
  * The response status attributes read off a traced span.
  */
 export interface ResponseStatusAttributes {
-  /** `rpc.response.status_code`: gRPC status name, reported on both transports. */
+  /** `rpc.response.status_code`: gRPC status name, reported on gRPC spans. */
   rpc: string | undefined;
-  /** `grpc.response.status_code`: gRPC spans only. */
+  /** `grpc.response.status_code`: legacy attribute asserted absent on all spans. */
   grpc: string | undefined;
-  /** `http.response.status_code`: fallback spans that received a response. */
+  /** `http.response.status_code`: HTTP status code, reported on fallback spans that received a response. */
   http: number | undefined;
 }
 
