@@ -21,6 +21,7 @@
   "core/precise-date": "6.1.0",
   "core/projectify": "6.1.0",
   "core/promisify": "6.1.0",
+  "core/test-utils": "0.2.1",
   "handwritten/bigquery": "9.2.0",
   "handwritten/bigquery-storage": "6.1.0",
   "handwritten/bigtable": "7.4.0",
@@ -279,6 +280,5 @@
   "packages/google-storage-control": "0.12.1",
   "packages/google-storagetransfer": "5.0.1",
   "packages/google-streetview-publish": "0.5.1",
-  "packages/grafeas": "7.0.1",
-  "core/test-utils": "0.2.1"
+  "packages/grafeas": "7.0.1"
 }

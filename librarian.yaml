@@ -1875,6 +1875,7 @@ libraries:
     version: 0.8.0
     apis:
       - path: google/devicesandservices/health/v4
+      - path: google/devicesandservices/health/v4beta
     copyright_year: "2026"
     nodejs:
       default_version: v4
