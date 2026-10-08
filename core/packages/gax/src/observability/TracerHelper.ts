@@ -168,9 +168,31 @@ function formatHttpAttemptSpanName(
 }
 
 /**
+ * Propagates `url.template` from an HTTP attempt span to its parent client request span,
+ * binding the parent span to the first child attempt span that resolves a URL template.
+ */
+function propagateUrlTemplateToClientSpan(
+  clientRequestSpan: Span | undefined,
+  attemptSpan: Span,
+  urlTemplate: string | undefined,
+): void {
+  if (!clientRequestSpan || !urlTemplate) {
+    return;
+  }
+  const boundAttempt = clientRequestFirstAttempt.get(clientRequestSpan);
+  if (!boundAttempt) {
+    clientRequestFirstAttempt.set(clientRequestSpan, attemptSpan);
+    clientRequestSpan.setAttribute('url.template', urlTemplate);
+  } else if (boundAttempt === attemptSpan) {
+    clientRequestSpan.setAttribute('url.template', urlTemplate);
+  }
+}
+
+/**
  * Updates the `http.request.method` attribute, optional `url.template` attribute,
  * and span name on the currently active low level network attempt span, and
- * propagates `url.template` to the active client request span if this is its first attempt span.
+ * propagates `url.template` to the active client request span if this is the first
+ * attempt span to resolve a URL template.
  *
  * @param {string} httpMethod - The HTTP request method (e.g. 'GET', 'POST').
  * @param {string} [urlTemplate] - Optional URL path template (e.g. '/v1/{name}:access').
@@ -189,17 +211,15 @@ export function setAttemptHttpMethod(
     if (urlTemplate) {
       attemptUrlTemplates.set(attemptSpan, urlTemplate);
       attemptSpan.setAttribute('url.template', urlTemplate);
+      propagateUrlTemplateToClientSpan(
+        clientRequestSpan,
+        attemptSpan,
+        urlTemplate,
+      );
     }
     // Preserve any previously recorded URL template when updating the span name.
     const resolvedUrlTemplate =
       urlTemplate || attemptUrlTemplates.get(attemptSpan);
-    if (
-      resolvedUrlTemplate &&
-      clientRequestSpan &&
-      clientRequestFirstAttempt.get(clientRequestSpan) === attemptSpan
-    ) {
-      clientRequestSpan.setAttribute('url.template', resolvedUrlTemplate);
-    }
     attemptSpan.updateName(
       formatHttpAttemptSpanName(httpMethod, resolvedUrlTemplate),
     );
@@ -226,22 +246,21 @@ export function getGaxTracer(): Tracer {
 }
 
 /**
- * Resolves google.rpc.ErrorInfo reason if present on the error or its cause chain.
- * Corresponds to Tier 1 in the error.type hierarchy.
+ * Decodes binary gRPC status details (`grpc-status-details-bin`) onto the error
+ * object if present and not yet parsed.
  */
-export function resolveErrorInfoReason(e: unknown): string | undefined {
+function ensureGrpcStatusDetailsParsed(e: unknown): void {
   if (!e || typeof e !== 'object') {
-    return undefined;
+    return;
   }
-
-  // Decode binary gRPC status details if present and not yet parsed.
-  const errWithMeta = e as GoogleError;
+  const errWithMeta = e as GoogleError & {statusDetails?: unknown};
   if (
+    !errWithMeta.reason &&
+    !errWithMeta.statusDetails &&
     errWithMeta.metadata &&
     typeof errWithMeta.metadata.get === 'function' &&
     (errWithMeta.metadata.get('grpc-status-details-bin') as unknown[])?.length >
-      0 &&
-    !errWithMeta.reason
+      0
   ) {
     try {
       GoogleError.parseGRPCStatusDetails(errWithMeta);
@@ -249,6 +268,14 @@ export function resolveErrorInfoReason(e: unknown): string | undefined {
       // Ignore decoding errors.
     }
   }
+}
+
+/**
+ * Resolves google.rpc.ErrorInfo reason if present on the error or its cause chain.
+ * Corresponds to Tier 1 in the error.type hierarchy.
+ */
+export function resolveErrorInfoReason(e: unknown): string | undefined {
+  ensureGrpcStatusDetailsParsed(e);
 
   let current: unknown = e;
   const seen = new Set<unknown>();
@@ -320,14 +347,32 @@ export function resolveServerErrorCode(
   e: unknown,
   rpcType: 'grpc' | 'http',
 ): string | undefined {
-  if (!isServerSideError(e, rpcType)) {
-    return undefined;
-  }
   if (rpcType === 'http') {
     const httpStatus = resolveHttpStatusCode(e);
     return httpStatus !== undefined ? httpStatus.toString() : undefined;
   }
   if (rpcType === 'grpc') {
+    if (
+      isPreConnectionFailure(e) ||
+      resolveClientNetworkOrOperationalError(e) !== undefined
+    ) {
+      return undefined;
+    }
+    // Exclude client-side aborts across the cause chain (timeouts are already
+    // matched by resolveClientNetworkOrOperationalError above).
+    let current: unknown = e;
+    const seen = new Set<unknown>();
+    for (let depth = 0; depth < DEPTH_TO_CHECK; depth++) {
+      if (!current || typeof current !== 'object' || seen.has(current)) {
+        break;
+      }
+      seen.add(current);
+      const err = current as {name?: unknown; cause?: unknown};
+      if (err.name === 'AbortError') {
+        return undefined;
+      }
+      current = err.cause;
+    }
     return resolveRpcStatusName(e);
   }
   return undefined;
@@ -436,10 +481,6 @@ export function resolveClientNetworkOrOperationalError(
 export function resolveLanguageSpecificErrorType(
   e: unknown,
 ): string | undefined {
-  if (!e || typeof e !== 'object') {
-    return undefined;
-  }
-
   let current: unknown = e;
   const seen = new Set<unknown>();
   for (let depth = 0; depth < DEPTH_TO_CHECK; depth++) {
@@ -704,39 +745,7 @@ export function isServerSideError(
   e: unknown,
   rpcType: 'grpc' | 'http',
 ): boolean {
-  if (rpcType === 'http') {
-    return resolveHttpStatusCode(e) !== undefined;
-  }
-  if (!e || typeof e !== 'object') {
-    return false;
-  }
-  if (isPreConnectionFailure(e)) {
-    return false;
-  }
-  if (resolveClientNetworkOrOperationalError(e) !== undefined) {
-    return false;
-  }
-  // Exclude client-side aborts and timeouts across the cause chain.
-  let current: unknown = e;
-  const seen = new Set<unknown>();
-  for (let depth = 0; depth < DEPTH_TO_CHECK; depth++) {
-    if (!current || typeof current !== 'object') {
-      break;
-    }
-    if (seen.has(current)) {
-      break;
-    }
-    seen.add(current);
-    const err = current as {name?: unknown; cause?: unknown};
-    if (err.name === 'AbortError' || err.name === 'TimeoutError') {
-      return false;
-    }
-    current = err.cause;
-  }
-  if (rpcType === 'grpc') {
-    return resolveRpcStatusName(e) !== undefined;
-  }
-  return false;
+  return resolveServerErrorCode(e, rpcType) !== undefined;
 }
 
 /**
@@ -799,6 +808,8 @@ export function resolveServerExceptionDetails(e: Error): {
   message: string;
   stacktrace?: string;
 } {
+  ensureGrpcStatusDetailsParsed(e);
+
   const errObj = e as {
     details?: unknown;
     statusDetails?: unknown;
@@ -814,22 +825,6 @@ export function resolveServerExceptionDetails(e: Error): {
           metadata?: unknown;
         })
       : undefined;
-
-  // Decode binary gRPC status details if not yet parsed.
-  const errWithMeta = e as GoogleError;
-  if (
-    !errObj.statusDetails &&
-    errWithMeta.metadata &&
-    typeof errWithMeta.metadata.get === 'function' &&
-    (errWithMeta.metadata.get('grpc-status-details-bin') as unknown[])?.length >
-      0
-  ) {
-    try {
-      GoogleError.parseGRPCStatusDetails(errWithMeta);
-    } catch {
-      // Ignore decoding errors.
-    }
-  }
 
   // Prefer server error details over generic error message.
   const serverDetails = errObj.details ?? causeObj?.details;
@@ -910,9 +905,8 @@ function recordExceptionEvent(
   rpcType: 'grpc' | 'http',
   includeMessage = false,
 ): void {
-  const exceptionType = resolveExceptionType(e);
   const attributes: Attributes = {
-    'exception.type': exceptionType,
+    'exception.type': resolveExceptionType(e),
   };
   if (includeMessage) {
     attributes['exception.message'] = isServerSideError(e, rpcType)
@@ -1026,9 +1020,9 @@ export function handleStream(
 
   const cleanup = () => {
     stream.removeListener('error', onError);
-    stream.removeListener('end', onEnd);
-    stream.removeListener('close', onClose);
-    stream.removeListener('finish', onFinish);
+    stream.removeListener('end', endSpanOnce);
+    stream.removeListener('close', endSpanOnce);
+    stream.removeListener('finish', endSpanOnce);
   };
 
   const endSpanOnce = () => {
@@ -1046,77 +1040,81 @@ export function handleStream(
     }
   };
 
-  const onEnd = () => {
-    endSpanOnce();
-  };
-
-  const onClose = () => {
-    endSpanOnce();
-  };
-
-  const onFinish = () => {
-    endSpanOnce();
-  };
-
   stream.on('error', onError);
-  stream.on('end', onEnd);
-  stream.on('close', onClose);
+  stream.on('end', endSpanOnce);
+  stream.on('close', endSpanOnce);
   if (useFinish) {
-    stream.on('finish', onFinish);
+    stream.on('finish', endSpanOnce);
   }
 }
 
 /**
- * Resolves and parses the server address and port from dynamic and static trace contexts,
- * splitting `"host:port"` or `"[ipv6]:port"` strings and applying an optional fallback
- * address and default port.
+ * Resolves and parses the server address, port, and target service domain (`url.domain`)
+ * from dynamic and static trace contexts, splitting `"host:port"` or `"[ipv6]:port"`
+ * strings and applying an optional default port when falling back to `url.domain`.
  */
-function resolveServerAddressAndPort(
+function resolveEndpointAndDomain(
   dynamicArgs: DynamicTraceContext,
   staticArgs: StaticTraceContext,
-  fallbackAddress?: string,
   defaultPort?: number,
-): {rawAddress?: string; rawPort?: number} {
-  let rawAddress =
-    dynamicArgs.serverAddress ?? staticArgs.serverAddress ?? fallbackAddress;
+): {rawAddress?: string; rawPort?: number; urlDomain?: string} {
+  let rawAddress = dynamicArgs.serverAddress ?? staticArgs.serverAddress;
   let rawPort = dynamicArgs.serverPort ?? staticArgs.serverPort;
-  if (rawAddress) {
-    // Split embedded port from "host:port" or "[ipv6]:port" if present.
-    const match = rawAddress.match(/^(\[[^\]]+\]|[^:]+):(\d+)$/);
+  const splitHostAndPort = (addr: string) => {
+    const match = addr.match(/^(\[[^\]]+\]|[^:]+):(\d+)$/);
     if (match) {
       rawAddress = match[1];
       rawPort = rawPort ?? Number(match[2]);
+    } else {
+      rawAddress = addr;
     }
-    if (defaultPort !== undefined) {
-      rawPort = rawPort ?? defaultPort;
-    }
-  }
-  return {rawAddress, rawPort};
-}
+  };
 
-/**
- * Resolves the target service domain (`url.domain`) from dynamic and static trace contexts,
- * checking explicit `urlDomain` values first, then `serverAddress`, and finally `gcpClientService`.
- */
-function resolveUrlDomain(
-  dynamicArgs: DynamicTraceContext,
-  staticArgs: StaticTraceContext,
-): string | undefined {
-  const explicit = dynamicArgs.urlDomain ?? staticArgs.urlDomain;
-  if (explicit) {
-    return explicit;
-  }
-  const {rawAddress} = resolveServerAddressAndPort(dynamicArgs, staticArgs);
   if (rawAddress) {
-    return rawAddress;
+    // Split embedded port from "host:port" or "[ipv6]:port" if present.
+    splitHostAndPort(rawAddress);
   }
-  // Append ".googleapis.com" when gcpClientService is a short service name.
-  if (staticArgs.gcpClientService) {
-    return staticArgs.gcpClientService.includes('.')
+
+  let urlDomain = dynamicArgs.urlDomain ?? staticArgs.urlDomain ?? rawAddress;
+  if (!urlDomain && staticArgs.gcpClientService) {
+    // Append ".googleapis.com" when gcpClientService is a short service name.
+    urlDomain = staticArgs.gcpClientService.includes('.')
       ? staticArgs.gcpClientService
       : `${staticArgs.gcpClientService}.googleapis.com`;
   }
-  return undefined;
+
+  if (defaultPort !== undefined) {
+    if (!rawAddress && urlDomain) {
+      splitHostAndPort(urlDomain);
+    }
+    if (rawAddress) {
+      rawPort = rawPort ?? defaultPort;
+    }
+  }
+
+  return {rawAddress, rawPort, urlDomain};
+}
+
+/**
+ * Builds the common initial client, transport, and domain attributes shared by
+ * T3 client request spans and T4 attempt spans.
+ */
+function buildInitialAttributes(
+  dynamicArgs: DynamicTraceContext,
+  staticArgs: StaticTraceContext,
+  urlDomain?: string,
+): Attributes {
+  const attributes: Attributes = {
+    'gcp.client.service': staticArgs.gcpClientService,
+    'gcp.client.version': staticArgs.gcpVersion,
+    'gcp.client.repo': staticArgs.gcpRepo,
+    'gcp.client.artifact': staticArgs.gcpArtifact,
+    'rpc.system.name': dynamicArgs.rpcType,
+  };
+  if (urlDomain !== undefined) {
+    attributes['url.domain'] = urlDomain;
+  }
+  return attributes;
 }
 
 /**
@@ -1187,8 +1185,10 @@ function recordSpanError(
   rpcType: 'grpc' | 'http',
   includeExceptionMessage = false,
 ): {rpcStatusName?: string; httpStatusCode?: number} {
-  const rpcStatusName = resolveRpcStatusName(e);
-  const httpStatusCode = resolveHttpStatusCode(e);
+  const rpcStatusName =
+    rpcType === 'grpc' ? resolveRpcStatusName(e) : undefined;
+  const httpStatusCode =
+    rpcType === 'http' ? resolveHttpStatusCode(e) : undefined;
   const message = e instanceof Error ? e.message : resolveErrorMessage(e);
   span.setAttributes({
     'error.type': resolveErrorType(e, rpcType),
@@ -1215,8 +1215,6 @@ interface SpanCompletionOptions {
   rawPort?: number;
   /** Whether to include `exception.message` on `exception` span events (true for T4 spans). */
   includeExceptionMessage?: boolean;
-  /** Optional hook invoked immediately before `span.end()`. */
-  onBeforeEnd?: () => void;
 }
 
 /**
@@ -1232,14 +1230,7 @@ function createSpanCompletionHandlers(
   endSpan: () => void;
   tracedCallback?: APICallback;
 } {
-  const {
-    span,
-    rpcType,
-    rawAddress,
-    rawPort,
-    includeExceptionMessage,
-    onBeforeEnd,
-  } = options;
+  const {span, rpcType, rawAddress, rawPort, includeExceptionMessage} = options;
   let spanEnded = false;
   let errorRecorded = false;
   let recordedError: unknown;
@@ -1275,7 +1266,6 @@ function createSpanCompletionHandlers(
         errorRecorded,
         recordedError,
       );
-      onBeforeEnd?.();
       span.end();
     }
   };
@@ -1296,28 +1286,36 @@ function createSpanCompletionHandlers(
 }
 
 /**
- * Attaches stream, promise, or synchronous completion handlers to a traced operation's result.
- * When a callback is supplied without a stream or promise, the span stays open until
- * `tracedCallback` completes.
+ * Executes `fn` within `executionContext` and attaches stream, promise, callback,
+ * or synchronous completion handlers to its result.
  */
-function handleCallResult<T>(
-  result: T,
+function executeTracedOperation<T>(
+  executionContext: Context,
+  fn: (tracedCallback?: APICallback) => T,
   isStreamCall: boolean,
-  hasCallback: boolean,
-  recordError: (e: unknown) => void,
-  endSpan: () => void,
+  options: SpanCompletionOptions,
+  callback?: APICallback,
 ): T {
-  const promiseTarget = !isStreamCall ? getPromiseTarget(result) : null;
-  if (isStreamCall && result instanceof EventEmitter) {
-    handleStream(result, recordError, endSpan, hasCallback);
-  } else if (promiseTarget) {
-    handlePromise(promiseTarget, recordError, endSpan);
-  } else if (hasCallback) {
-    // Span remains open until tracedCallback is invoked.
-  } else {
+  const {recordError, endSpan, tracedCallback} = createSpanCompletionHandlers(
+    options,
+    callback,
+  );
+  try {
+    const result = context.with(executionContext, () => fn(tracedCallback));
+    const promiseTarget = !isStreamCall ? getPromiseTarget(result) : null;
+    if (isStreamCall && result instanceof EventEmitter) {
+      handleStream(result, recordError, endSpan, !!tracedCallback);
+    } else if (promiseTarget) {
+      handlePromise(promiseTarget, recordError, endSpan);
+    } else if (!tracedCallback) {
+      endSpan();
+    }
+    return result;
+  } catch (e) {
+    recordError(e);
     endSpan();
+    throw e;
   }
-  return result;
 }
 
 /**
@@ -1371,27 +1369,21 @@ export function traceCall(
 ): GaxCallResult {
   const spanName = `${dynamicArgs.clientName}.${dynamicArgs.methodName}`;
   return getGaxTracer().startActiveSpan(spanName, {}, (span: Span) => {
-    // Populate initial client, transport, and domain attributes.
-    const urlDomain = resolveUrlDomain(dynamicArgs, staticArgs);
-    const initialAttributes: Attributes = {
-      'gcp.client.service': staticArgs.gcpClientService,
-      'gcp.client.version': staticArgs.gcpVersion,
-      'gcp.client.repo': staticArgs.gcpRepo,
-      'gcp.client.artifact': staticArgs.gcpArtifact,
-      'rpc.system.name': dynamicArgs.rpcType,
-    };
-    if (urlDomain !== undefined) {
-      initialAttributes['url.domain'] = urlDomain;
-    }
-    span.setAttributes(initialAttributes);
-
-    // Parse server address and port.
-    const {rawAddress, rawPort} = resolveServerAddressAndPort(
+    const {rawAddress, rawPort, urlDomain} = resolveEndpointAndDomain(
       dynamicArgs,
       staticArgs,
     );
+    span.setAttributes(
+      buildInitialAttributes(dynamicArgs, staticArgs, urlDomain),
+    );
 
-    const {recordError, endSpan, tracedCallback} = createSpanCompletionHandlers(
+    const activeContext = context
+      .active()
+      .setValue(CLIENT_REQUEST_SPAN_KEY, span);
+    return executeTracedOperation(
+      activeContext,
+      fn,
+      isStreamCall,
       {
         span,
         rpcType: dynamicArgs.rpcType,
@@ -1400,25 +1392,6 @@ export function traceCall(
       },
       callback,
     );
-
-    try {
-      // Run operation with active client request span in context.
-      const activeContext = trace
-        .setSpan(context.active(), span)
-        .setValue(CLIENT_REQUEST_SPAN_KEY, span);
-      const result = context.with(activeContext, () => fn(tracedCallback));
-      return handleCallResult(
-        result,
-        isStreamCall,
-        !!tracedCallback,
-        recordError,
-        endSpan,
-      );
-    } catch (e) {
-      recordError(e);
-      endSpan();
-      throw e;
-    }
   });
 }
 
@@ -1436,7 +1409,8 @@ export function traceCall(
  * template is available or `"{http.request.method}"` otherwise; gRPC attempt spans
  * are named `"{apiName}/{methodName}"` or `"{methodName}"`. Also updates `rpc.method`
  * on the parent client request span to `"{apiName}/{methodName}"` for both transports,
- * and propagates `url.template` to the parent client request span from its first HTTP attempt.
+ * and propagates `url.template` to the parent client request span from its first HTTP
+ * attempt that resolves a URL template.
  *
  * @template T
  * @param {AttemptTraceContext} dynamicArgs - Dynamic trace context for the RPC attempt.
@@ -1460,9 +1434,7 @@ export function traceAttempt<T = GaxCallResult>(
     ? `${dynamicArgs.apiName}/${dynamicArgs.methodName}`
     : dynamicArgs.methodName;
   const httpMethod = dynamicArgs.httpMethod ?? 'POST';
-  const urlTemplate =
-    dynamicArgs.urlTemplate ??
-    (dynamicArgs as {'url.template'?: string})['url.template'];
+  const urlTemplate = dynamicArgs.urlTemplate;
   const spanName =
     dynamicArgs.rpcType === 'http'
       ? formatHttpAttemptSpanName(httpMethod, urlTemplate)
@@ -1475,27 +1447,21 @@ export function traceAttempt<T = GaxCallResult>(
     {kind: SpanKind.CLIENT},
     baseContext,
     (span: Span) => {
-      const isFirstAttemptForClientSpan =
-        clientRequestSpan !== undefined &&
-        !clientRequestFirstAttempt.has(clientRequestSpan);
-      if (isFirstAttemptForClientSpan) {
-        clientRequestFirstAttempt.set(clientRequestSpan, span);
-      }
-
       // Update parent client request span rpc.method from this child attempt.
       if (clientRequestSpan && rpcMethod) {
         clientRequestSpan.setAttribute('rpc.method', rpcMethod);
       }
 
-      // Populate initial client, transport, method, domain, and retry attributes.
-      const urlDomain = resolveUrlDomain(dynamicArgs, staticArgs);
-      const initialAttributes: Attributes = {
-        'gcp.client.service': staticArgs.gcpClientService,
-        'gcp.client.version': staticArgs.gcpVersion,
-        'gcp.client.repo': staticArgs.gcpRepo,
-        'gcp.client.artifact': staticArgs.gcpArtifact,
-        'rpc.system.name': dynamicArgs.rpcType,
-      };
+      const {rawAddress, rawPort, urlDomain} = resolveEndpointAndDomain(
+        dynamicArgs,
+        staticArgs,
+        443,
+      );
+      const initialAttributes = buildInitialAttributes(
+        dynamicArgs,
+        staticArgs,
+        urlDomain,
+      );
       if (dynamicArgs.rpcType === 'grpc') {
         initialAttributes['rpc.method'] = rpcMethod;
       } else {
@@ -1503,13 +1469,12 @@ export function traceAttempt<T = GaxCallResult>(
         if (urlTemplate) {
           attemptUrlTemplates.set(span, urlTemplate);
           initialAttributes['url.template'] = urlTemplate;
-          if (clientRequestSpan && isFirstAttemptForClientSpan) {
-            clientRequestSpan.setAttribute('url.template', urlTemplate);
-          }
+          propagateUrlTemplateToClientSpan(
+            clientRequestSpan,
+            span,
+            urlTemplate,
+          );
         }
-      }
-      if (urlDomain !== undefined) {
-        initialAttributes['url.domain'] = urlDomain;
       }
       if (
         dynamicArgs.resendCount !== undefined &&
@@ -1520,63 +1485,21 @@ export function traceAttempt<T = GaxCallResult>(
       }
       span.setAttributes(initialAttributes);
 
-      // Parse server address and port, defaulting to port 443.
-      const {rawAddress, rawPort} = resolveServerAddressAndPort(
-        dynamicArgs,
-        staticArgs,
-        urlDomain,
-        443,
+      // Expose attempt span in context so HTTP transport can update method and URL template.
+      const attemptContext = context.active().setValue(ATTEMPT_SPAN_KEY, span);
+      return executeTracedOperation(
+        attemptContext,
+        fn,
+        isStreamCall,
+        {
+          span,
+          rpcType: dynamicArgs.rpcType,
+          rawAddress,
+          rawPort,
+          includeExceptionMessage: true,
+        },
+        callback,
       );
-
-      const {recordError, endSpan, tracedCallback} =
-        createSpanCompletionHandlers(
-          {
-            span,
-            rpcType: dynamicArgs.rpcType,
-            rawAddress,
-            rawPort,
-            includeExceptionMessage: true,
-            onBeforeEnd: () => {
-              if (clientRequestSpan) {
-                if (rpcMethod) {
-                  clientRequestSpan.setAttribute('rpc.method', rpcMethod);
-                }
-                const finalUrlTemplate =
-                  attemptUrlTemplates.get(span) ?? urlTemplate;
-                if (
-                  isFirstAttemptForClientSpan &&
-                  dynamicArgs.rpcType === 'http' &&
-                  finalUrlTemplate
-                ) {
-                  clientRequestSpan.setAttribute(
-                    'url.template',
-                    finalUrlTemplate,
-                  );
-                }
-              }
-            },
-          },
-          callback,
-        );
-
-      try {
-        // Expose attempt span in context so HTTP transport can update method and URL template.
-        const attemptContext = context
-          .active()
-          .setValue(ATTEMPT_SPAN_KEY, span);
-        const result = context.with(attemptContext, () => fn(tracedCallback));
-        return handleCallResult(
-          result,
-          isStreamCall,
-          !!tracedCallback,
-          recordError,
-          endSpan,
-        );
-      } catch (e) {
-        recordError(e);
-        endSpan();
-        throw e;
-      }
     },
   );
 }

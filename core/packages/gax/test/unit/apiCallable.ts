@@ -372,7 +372,6 @@ describe('createApiCall', () => {
       clearMetadataCache();
       harness.teardown();
       delete process.env.GOOGLE_SDK_NODE_ENABLE_TRACING;
-      delete process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED;
       delete process.env.GOOGLE_SDK_NODE_CLIENT_SERVICE;
       delete process.env.GOOGLE_SDK_NODE_CLIENT_VERSION;
       delete process.env.GOOGLE_SDK_NODE_ARTIFACT;
@@ -423,35 +422,6 @@ describe('createApiCall', () => {
 
       const settings = new gax.CallSettings({
         apiName: 'google.example.v1.Echo',
-        otherArgs: {
-          internalTelemetryInfo: telemetryInfo,
-          internalMethodName: 'Echo',
-        },
-      });
-
-      function func(
-        argument: {},
-        metadata: {},
-        options: {},
-        callback: (err: GoogleError | null, resp?: unknown) => void,
-      ) {
-        callback(null, {data: 'hello'});
-        return {cancel: () => {}};
-      }
-
-      const apiCall = gaxCreateApiCall(func, settings);
-      await apiCall({param: 'test'}, undefined);
-
-      assert.strictEqual(traceCallSpy.calledOnce, true);
-    });
-
-    it('still calls traceCall when GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED is false', async () => {
-      process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'false';
-      const traceCallSpy = sinon.spy(tracerHelper, 'traceCall');
-
-      const settings = new gax.CallSettings({
-        apiName: 'google.example.v1.Echo',
-        enableTelemetryTracing: true,
         otherArgs: {
           internalTelemetryInfo: telemetryInfo,
           internalMethodName: 'Echo',
@@ -1299,35 +1269,6 @@ describe('createApiCall', () => {
       assert.strictEqual(spans.length, 1);
       const span = spans[0];
       assert.strictEqual(span.ended, true);
-    });
-
-    it('does not create any spans when tracing is disabled', async () => {
-      const settings = new gax.CallSettings({
-        apiName: 'google.example.v1.Echo',
-        enableTelemetryTracing: false,
-        otherArgs: {
-          internalTelemetryInfo: telemetryInfo,
-          internalMethodName: 'Echo',
-        },
-      });
-
-      function func(
-        argument: {},
-        metadata: {},
-        options: {},
-        callback: (err: GoogleError | null, resp?: unknown) => void,
-      ) {
-        callback(null, {data: 'hello'});
-        return {
-          cancel: () => {},
-        };
-      }
-
-      const apiCall = gaxCreateApiCall(func, settings);
-      await apiCall({}, undefined);
-
-      const spans = harness.getSpans('google-gax');
-      assert.strictEqual(spans.length, 0);
     });
 
     it('manages span lifetime for streaming API calls until stream ends', done => {

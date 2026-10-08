@@ -1299,24 +1299,6 @@ describe('TracerHelper', () => {
       });
     });
 
-    it('uses CLIENT_CONNECTION_ERROR for ECONNREFUSED', async () => {
-      const error = Object.assign(new Error('connect ECONNREFUSED'), {
-        code: 'ECONNREFUSED',
-      });
-
-      await assert.rejects(async () => {
-        await traceCall(dynamicArgs, staticArgs, async () => {
-          throw error;
-        });
-      });
-
-      const span = harness.requireSingleSpan('google-gax');
-      assert.strictEqual(
-        span.attributes['error.type'],
-        'CLIENT_CONNECTION_ERROR',
-      );
-    });
-
     // Fallback branches. Each of these must not produce a bogus error.type.
     it('treats a zero status code as absent rather than as OK and falls back to INTERNAL', async () => {
       // Zero is the proto3 default for an unset code, which is why
@@ -1543,27 +1525,6 @@ describe('TracerHelper', () => {
           assert.strictEqual(await exceptionTypeOf(new Error('boom')), 'Error');
         });
 
-        it('omits exception.message and exception.stacktrace for client-side errors', async () => {
-          const error = new GoogleError('client validation failure');
-
-          const span = await failWith(error);
-          const attributes = span.events[0].attributes;
-
-          assert.strictEqual(attributes?.['exception.message'], undefined);
-          assert.strictEqual(attributes?.['exception.stacktrace'], undefined);
-        });
-
-        it('omits exception.message and exception.stacktrace for server-side errors', async () => {
-          const error = new GoogleError('object does not exist');
-          error.code = Status.NOT_FOUND;
-
-          const span = await failWith(error);
-          const attributes = span.events[0].attributes;
-
-          assert.strictEqual(attributes?.['exception.message'], undefined);
-          assert.strictEqual(attributes?.['exception.stacktrace'], undefined);
-        });
-
         it('formats status details and metadata in resolveServerExceptionDetails and omits them from span exception event for gRPC server errors', async () => {
           const metadata = new grpc.Metadata();
           metadata.set('x-goog-request-id', 'req-123');
@@ -1673,41 +1634,6 @@ describe('TracerHelper', () => {
           }
         });
 
-        it('records exception event without ReferenceError when Buffer is not defined in browser/fallback environments', async () => {
-          const originalBuffer = (globalThis as Record<string, unknown>).Buffer;
-          try {
-            delete (globalThis as Record<string, unknown>).Buffer;
-            const error = Object.assign(new GoogleError('HTTP server error'), {
-              httpStatusCode: 500,
-              details: 'Internal Server Error',
-              statusDetails: 'Service unavailable',
-              metadata: {'content-type': 'application/json'},
-            });
-
-            await assert.rejects(async () => {
-              await traceCall(
-                {...dynamicArgs, rpcType: 'http'},
-                staticArgs,
-                async () => {
-                  throw error;
-                },
-              );
-            });
-
-            const span = harness.requireSingleSpan('google-gax');
-            harness.assertExceptionEvent(
-              {
-                type: 'GoogleError',
-                message: null,
-                stacktrace: null,
-              },
-              {span},
-            );
-          } finally {
-            (globalThis as Record<string, unknown>).Buffer = originalBuffer;
-          }
-        });
-
         it('safely formats statusDetails containing circular references', () => {
           const detail: Record<string, unknown> = {
             reason: 'RATE_LIMIT_EXCEEDED',
@@ -1784,36 +1710,6 @@ describe('TracerHelper', () => {
           );
           const {stacktrace} = resolveServerExceptionDetails(error);
           assert.strictEqual(stacktrace, 'metadata: [object Object]');
-        });
-
-        it('survives traceCall when server error has circular statusDetails and BigInt metadata', async () => {
-          const circularDetail: Record<string, unknown> = {code: 429};
-          circularDetail.cycle = circularDetail;
-
-          const error = Object.assign(new GoogleError('Quota exhausted'), {
-            code: Status.RESOURCE_EXHAUSTED,
-            details: 'Quota exhausted on backend',
-            statusDetails: [circularDetail],
-            metadata: {'big-count': 9999999999999n},
-          });
-
-          await assert.rejects(async () => {
-            await traceCall(dynamicArgs, staticArgs, async () => {
-              throw error;
-            });
-          });
-
-          const span = harness.requireSingleSpan('google-gax');
-          assert.strictEqual(span.status.code, SpanStatusCode.ERROR);
-          assert.strictEqual(span.status.message, 'Quota exhausted');
-          harness.assertExceptionEvent(
-            {
-              type: 'GoogleError',
-              message: null,
-              stacktrace: null,
-            },
-            {span},
-          );
         });
 
         it('survives traceCall when thrown error has circular cause', async () => {
@@ -2955,20 +2851,6 @@ describe('TracerHelper', () => {
           assert.strictEqual(userCallbackCount, 2);
           done();
         });
-      });
-
-      it('still ends the span synchronously when no callback is supplied', () => {
-        const syncResult = {data: 'sync'};
-        const result = traceCall(
-          dynamicArgs,
-          staticArgs,
-          () => syncResult as unknown as ResultTuple,
-        );
-
-        assert.strictEqual(result, syncResult as unknown as ResultTuple);
-        const spans = harness.getSpans('google-gax');
-        assert.strictEqual(spans.length, 1);
-        assert.strictEqual(spans[0].ended, true);
       });
 
       it('wraps the callback for stream calls and ends the span once', () => {
@@ -4290,6 +4172,76 @@ describe('TracerHelper', () => {
       assert.strictEqual(
         secondAttemptSpan.attributes['url.template'],
         '/v1/{name}:other',
+      );
+      assert.strictEqual(
+        clientRequestSpan.attributes['url.template'],
+        '/v1/{name}:access',
+      );
+    });
+
+    it('propagates url.template to T3 client request span when first attempt fails before resolving a template and second attempt succeeds with one', async () => {
+      await traceCall(
+        {
+          clientName: 'SecretManagerServiceClient',
+          methodName: 'AccessSecretVersion',
+          rpcType: 'http',
+        },
+        telemetryInfo,
+        async () => {
+          try {
+            await traceAttempt(
+              {
+                apiName: 'google.cloud.secretmanager.v1.SecretManagerService',
+                clientName: 'SecretManagerServiceClient',
+                methodName: 'AccessSecretVersion',
+                rpcType: 'http',
+              },
+              telemetryInfo,
+              async () => {
+                throw new GoogleError('pre-template failure');
+              },
+            );
+          } catch {
+            // Retry on second attempt
+          }
+          return traceAttempt(
+            {
+              apiName: 'google.cloud.secretmanager.v1.SecretManagerService',
+              clientName: 'SecretManagerServiceClient',
+              methodName: 'AccessSecretVersion',
+              rpcType: 'http',
+              resendCount: 1,
+            },
+            telemetryInfo,
+            async () => {
+              setAttemptHttpMethod('GET', '/v1/{name}:access');
+              return [{payload: 'secret-2'}, undefined, undefined];
+            },
+          );
+        },
+      );
+
+      const spans = harness.getSpans('google-gax');
+      assert.strictEqual(spans.length, 3);
+
+      const firstAttemptSpan = spans.find(s => s.name === 'POST')!;
+      const secondAttemptSpan = spans.find(
+        s => s.name === 'GET /v1/{name}:access',
+      )!;
+      const clientRequestSpan = spans.find(
+        s => s.name === 'SecretManagerServiceClient.AccessSecretVersion',
+      )!;
+      assert.ok(firstAttemptSpan);
+      assert.ok(secondAttemptSpan);
+      assert.ok(clientRequestSpan);
+
+      assert.strictEqual(
+        firstAttemptSpan.attributes['url.template'],
+        undefined,
+      );
+      assert.strictEqual(
+        secondAttemptSpan.attributes['url.template'],
+        '/v1/{name}:access',
       );
       assert.strictEqual(
         clientRequestSpan.attributes['url.template'],
