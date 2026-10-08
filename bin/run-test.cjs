@@ -75,11 +75,6 @@ const SHIM_FLAGS = [
     envOut: 'BUN_ENABLE_PROMISE_ANY_SHIM',
   },
   {
-    flag: '--crypto-verify-shim',
-    envIn: 'BUN_CRYPTO_VERIFY_SHIM',
-    envOut: 'BUN_ENABLE_CRYPTO_VERIFY_SHIM',
-  },
-  {
     flag: '--assert-deep-equal-shim',
     envIn: 'BUN_ASSERT_DEEP_EQUAL_SHIM',
     envOut: 'BUN_ENABLE_ASSERT_DEEP_EQUAL_SHIM',

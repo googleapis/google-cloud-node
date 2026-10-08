@@ -53,9 +53,6 @@ if (
   const enablePromiseAnyShim =
     process.env.BUN_ENABLE_PROMISE_ANY_SHIM === 'true' ||
     process.env.BUN_PROMISE_ANY_SHIM === 'true';
-  const enableCryptoVerifyShim =
-    process.env.BUN_ENABLE_CRYPTO_VERIFY_SHIM === 'true' ||
-    process.env.BUN_CRYPTO_VERIFY_SHIM === 'true';
   const enableAssertDeepEqualShim =
     process.env.BUN_ENABLE_ASSERT_DEEP_EQUAL_SHIM === 'true' ||
     process.env.BUN_ASSERT_DEEP_EQUAL_SHIM === 'true';
@@ -340,55 +337,6 @@ if (
           throw err;
         });
       };
-    }
-  }
-
-  if (enableCryptoVerifyShim) {
-    try {
-      const crypto = require('crypto');
-      const verifyProto =
-        crypto.createVerify &&
-        Object.getPrototypeOf(crypto.createVerify('RSA-SHA256'));
-      if (verifyProto && typeof verifyProto.verify === 'function') {
-        const origVerify = verifyProto.verify;
-        verifyProto.verify = function (object, signature, sigEncoding) {
-          if (
-            typeof object === 'string' &&
-            object.includes('BEGIN PUBLIC KEY')
-          ) {
-            const b64 = object.replace(/-----[^-]+-----|\s+/g, '');
-            const der = Buffer.from(b64, 'base64');
-            // Explicit-parameter P-256 SPKI keys (>150 bytes ending in 65-byte uncompressed point 0x04||X||Y)
-            // are rejected by BoringSSL; convert to named-curve P-256 SPKI OID header.
-            if (der.length > 150 && der[der.length - 65] === 0x04) {
-              const spkiHeader = Buffer.from(
-                '3059301306072a8648ce3d020106082a8648ce3d030107034200',
-                'hex',
-              );
-              const namedDer = Buffer.concat([
-                spkiHeader,
-                der.subarray(der.length - 65),
-              ]);
-              object =
-                '-----BEGIN PUBLIC KEY-----\n' +
-                namedDer.toString('base64') +
-                '\n-----END PUBLIC KEY-----\n';
-            }
-          } else if (
-            object &&
-            typeof object === 'object' &&
-            object.format === 'jwk'
-          ) {
-            object = crypto.createPublicKey({
-              key: object.key,
-              format: 'jwk',
-            });
-          }
-          return origVerify.call(this, object, signature, sigEncoding);
-        };
-      }
-    } catch {
-      // ignore
     }
   }
 
