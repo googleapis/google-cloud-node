@@ -367,9 +367,6 @@ if (
           if (actual instanceof Headers && expected instanceof Headers) {
             const actualEntries = Object.fromEntries(actual.entries());
             const expectedEntries = Object.fromEntries(expected.entries());
-            if (Object.keys(actualEntries).length === 0) {
-              return;
-            }
             return origDeepEqual.call(
               this,
               actualEntries,
