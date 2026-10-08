@@ -238,7 +238,7 @@
   "packages/google-container": "7.2.1",
   "packages/google-dataflow": "5.1.1",
   "packages/google-developer-knowledge": "0.9.0",
-  "packages/google-devicesandservices-health": "0.8.0",
+  "packages/google-devicesandservices-health": "0.9.0",
   "packages/google-devtools-artifactregistry": "5.1.1",
   "packages/google-devtools-cloudbuild": "6.1.1",
   "packages/google-devtools-cloudprofiler": "0.10.1",

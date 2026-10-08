@@ -5,6 +5,24 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "5856881c06846fa7f9d2b26182ecf7e4a2e487d9",
+          "message": "Add v4beta",
+          "issues": [
+            "9579"
+          ],
+          "scope": "google-devicesandservices-health"
+        }
+      ],
+      "version": "0.9.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/health",
+      "id": "a3ae5c36-ba4b-4771-b1aa-7268873a5323",
+      "createTime": "2026-10-08T20:49:11.805Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "8b6837a9757cc8bb281e0611b173cb19b58d4ac5",
           "message": "Update API sources and regenerate",
           "issues": [
@@ -100667,5 +100685,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-10-08T19:20:59.544Z"
+  "updateTime": "2026-10-08T20:49:11.805Z"
 }

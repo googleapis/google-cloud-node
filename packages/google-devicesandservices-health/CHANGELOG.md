@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.9.0](https://github.com/googleapis/google-cloud-node/compare/health-v0.8.0...health-v0.9.0) (2026-10-08)
+
+
+### Features
+
+* **google-devicesandservices-health:** Add v4beta ([#9579](https://github.com/googleapis/google-cloud-node/issues/9579)) ([5856881](https://github.com/googleapis/google-cloud-node/commit/5856881c06846fa7f9d2b26182ecf7e4a2e487d9))
+
 ## [0.8.0](https://github.com/googleapis/google-cloud-node/compare/health-v0.7.0...health-v0.8.0) (2026-09-29)
 
 
