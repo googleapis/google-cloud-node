@@ -70,7 +70,7 @@ default:
       google/shopping/merchant: '@google-shopping'
 libraries:
   - name: google-ads-admanager
-    version: 0.14.1
+    version: 0.15.0
     apis:
       - path: google/ads/admanager/v1
     copyright_year: "2026"
@@ -315,7 +315,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-apphub
-    version: 0.8.1
+    version: 0.9.0
     apis:
       - path: google/cloud/apphub/v1
     copyright_year: "2026"
@@ -329,7 +329,7 @@ libraries:
     nodejs:
       default_version: v1beta
   - name: google-cloud-apptopology
-    version: 0.3.0
+    version: 0.4.0
     apis:
       - path: google/cloud/apptopology/v1
     copyright_year: "2026"
@@ -394,7 +394,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-beyondcorp-appconnections
-    version: 3.1.1
+    version: 3.2.0
     apis:
       - path: google/cloud/beyondcorp/appconnections/v1
     copyright_year: "2026"
@@ -403,7 +403,7 @@ libraries:
       package_name: '@google-cloud/appconnections'
       metadata_name_override: appconnections
   - name: google-cloud-beyondcorp-appconnectors
-    version: 3.1.1
+    version: 3.2.0
     apis:
       - path: google/cloud/beyondcorp/appconnectors/v1
     copyright_year: "2026"
@@ -412,7 +412,7 @@ libraries:
       package_name: '@google-cloud/appconnectors'
       metadata_name_override: appconnectors
   - name: google-cloud-beyondcorp-appgateways
-    version: 3.1.1
+    version: 3.2.0
     apis:
       - path: google/cloud/beyondcorp/appgateways/v1
     copyright_year: "2026"
@@ -507,7 +507,7 @@ libraries:
       metadata_name_override: bigquerystorage-api
       name_pretty_override: BigQuery Storage API
   - name: google-cloud-bigtable-api
-    version: 0.10.0
+    version: 0.11.0
     apis:
       - path: google/bigtable/v2
       - path: google/bigtable/admin/v2
@@ -627,7 +627,7 @@ libraries:
       - path: google/cloud/commerceproducer/v1beta
     copyright_year: "2026"
   - name: google-cloud-compute
-    version: 7.7.0
+    version: 7.8.0
     apis:
       - path: google/cloud/compute/v1
         nodejs:
@@ -739,7 +739,7 @@ libraries:
       default_version: v1
       package_name: '@google-cloud/configmanagement'
   - name: google-cloud-dataform
-    version: 3.4.0
+    version: 3.5.0
     apis:
       - path: google/cloud/dataform/v1
       - path: google/cloud/dataform/v1beta1
@@ -829,7 +829,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-dialogflow
-    version: 8.2.0
+    version: 8.3.0
     apis:
       - path: google/cloud/dialogflow/v2
       - path: google/cloud/dialogflow/v2beta1
@@ -838,7 +838,7 @@ libraries:
       default_version: v2
       main_service: dialogflow
   - name: google-cloud-dialogflow-cx
-    version: 6.2.1
+    version: 6.3.0
     apis:
       - path: google/cloud/dialogflow/cx/v3
         nodejs:
@@ -1215,7 +1215,7 @@ libraries:
       default_version: v3
       main_service: monitoring
   - name: google-cloud-netapp
-    version: 0.20.1
+    version: 0.21.0
     apis:
       - path: google/cloud/netapp/v1
     copyright_year: "2026"
@@ -1419,7 +1419,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-redis-cluster
-    version: 0.15.1
+    version: 0.16.0
     apis:
       - path: google/cloud/redis/cluster/v1
       - path: google/cloud/redis/cluster/v1beta1
@@ -1597,7 +1597,7 @@ libraries:
         pumpify: ^2.0.1
         stream-events: ^1.0.5
   - name: google-cloud-sql
-    version: 0.29.1
+    version: 0.30.0
     apis:
       - path: google/cloud/sql/v1
       - path: google/cloud/sql/v1beta4
@@ -1864,7 +1864,7 @@ libraries:
       default_version: v1beta3
       package_name: '@google-cloud/dataflow'
   - name: google-developer-knowledge
-    version: 0.8.0
+    version: 0.9.0
     apis:
       - path: google/developers/knowledge/v1
     copyright_year: "2026"
