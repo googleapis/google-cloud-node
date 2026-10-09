@@ -339,8 +339,7 @@ export function resolveStaticTraceContext(
 ): StaticTraceContext {
   const envMeta = extractFromEnvironment();
   const explicit = settings?.otherArgs?.internalTelemetryInfo as
-    | StaticTraceContext
-    | undefined;
+    StaticTraceContext | undefined;
 
   let dynamic: StaticTraceContext;
   if (settings?.apiName) {

@@ -758,10 +758,7 @@ describe('createApiCall', () => {
         span.spanContext().spanId,
       );
       assert.strictEqual(attemptSpan.attributes['rpc.system.name'], 'http');
-      assert.strictEqual(
-        attemptSpan.attributes['http.request.method'],
-        'POST',
-      );
+      assert.strictEqual(attemptSpan.attributes['http.request.method'], 'POST');
       assert.strictEqual(attemptSpan.attributes['rpc.method'], undefined);
       harness.assertServerAddressAndPort(
         {address: 'echo.googleapis.com', port: 443},

@@ -187,7 +187,10 @@ export function resolveErrorInfoReason(e: unknown): string | undefined {
           if (
             'errorInfo' in detail &&
             detail.errorInfo &&
-            typeof (detail.errorInfo as {reason?: unknown}).reason === 'string'
+            typeof detail.errorInfo === 'object' &&
+            typeof (detail.errorInfo as {reason?: unknown}).reason ===
+              'string' &&
+            (detail.errorInfo as {reason: string}).reason.length > 0
           ) {
             return (detail.errorInfo as {reason: string}).reason;
           }

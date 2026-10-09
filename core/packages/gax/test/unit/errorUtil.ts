@@ -110,6 +110,27 @@ describe('errorUtil', () => {
       );
       assert.strictEqual(
         resolveErrorInfoReason({
+          statusDetails: [{errorInfo: {reason: 'QUOTA_EXCEEDED'}}],
+        }),
+        'QUOTA_EXCEEDED',
+      );
+      assert.strictEqual(
+        resolveErrorInfoReason({
+          statusDetails: [
+            {errorInfo: {reason: ''}},
+            {errorInfo: {reason: 'VALID_REASON'}},
+          ],
+        }),
+        'VALID_REASON',
+      );
+      assert.strictEqual(
+        resolveErrorInfoReason({
+          statusDetails: [{errorInfo: {reason: ''}}],
+        }),
+        undefined,
+      );
+      assert.strictEqual(
+        resolveErrorInfoReason({
           cause: {reason: 'ACCESS_TOKEN_EXPIRED'},
         }),
         'ACCESS_TOKEN_EXPIRED',
@@ -151,7 +172,10 @@ describe('errorUtil', () => {
     });
 
     it('isServerSideError recognizes plain error objects with valid status codes', () => {
-      assert.strictEqual(isServerSideError({httpStatusCode: 500}, 'http'), true);
+      assert.strictEqual(
+        isServerSideError({httpStatusCode: 500}, 'http'),
+        true,
+      );
       assert.strictEqual(
         isServerSideError({code: Status.NOT_FOUND}, 'grpc'),
         true,
@@ -162,8 +186,14 @@ describe('errorUtil', () => {
         false,
       );
       assert.strictEqual(isServerSideError({code: 5}, 'http'), false);
-      assert.strictEqual(isServerSideError({message: 'no code'}, 'grpc'), false);
-      assert.strictEqual(isServerSideError({message: 'no code'}, 'http'), false);
+      assert.strictEqual(
+        isServerSideError({message: 'no code'}, 'grpc'),
+        false,
+      );
+      assert.strictEqual(
+        isServerSideError({message: 'no code'}, 'http'),
+        false,
+      );
     });
 
     it('resolveClientNetworkOrOperationalError maps timeout, connection, request, body, decode, redirect, and auth errors', () => {
@@ -332,7 +362,10 @@ describe('errorUtil', () => {
         const t3 = Object.assign(new TypeError('invalid type'), {
           code: 'ERR_INVALID_ARG_TYPE',
         });
-        assert.strictEqual(resolveErrorType(t3, 'grpc'), 'CLIENT_REQUEST_ERROR');
+        assert.strictEqual(
+          resolveErrorType(t3, 'grpc'),
+          'CLIENT_REQUEST_ERROR',
+        );
 
         // Tier 4 beats Tier 5
         const t4 = new TypeError('normal type error');
@@ -363,9 +396,12 @@ describe('errorUtil', () => {
         );
 
         // HTTP call without HTTP response falls through to Tier 3 client error
-        const deadlineErr = Object.assign(new GoogleError('Deadline exceeded'), {
-          code: Status.DEADLINE_EXCEEDED,
-        });
+        const deadlineErr = Object.assign(
+          new GoogleError('Deadline exceeded'),
+          {
+            code: Status.DEADLINE_EXCEEDED,
+          },
+        );
         assert.strictEqual(
           resolveErrorType(deadlineErr, 'http'),
           'CLIENT_TIMEOUT',
@@ -393,7 +429,10 @@ describe('errorUtil', () => {
           code: Status.CANCELLED,
           cause: abortCause,
         });
-        assert.strictEqual(resolveErrorType(wrappedAbort, 'grpc'), 'AbortError');
+        assert.strictEqual(
+          resolveErrorType(wrappedAbort, 'grpc'),
+          'AbortError',
+        );
 
         // Outer HTTP response status takes precedence over inner cause exception type
         const httpWithCause = Object.assign(
@@ -409,7 +448,10 @@ describe('errorUtil', () => {
 
       it('falls back to INTERNAL for zero, out-of-range, or empty string status codes', () => {
         assert.strictEqual(
-          resolveErrorType(Object.assign(new Error('unset'), {code: 0}), 'grpc'),
+          resolveErrorType(
+            Object.assign(new Error('unset'), {code: 0}),
+            'grpc',
+          ),
           'INTERNAL',
         );
         assert.strictEqual(
@@ -484,8 +526,10 @@ describe('errorUtil', () => {
     });
 
     it('recordExceptionEvent records exception.type and optionally exception.message', () => {
-      const events: Array<{name: string; attributes?: Record<string, unknown>}> =
-        [];
+      const events: Array<{
+        name: string;
+        attributes?: Record<string, unknown>;
+      }> = [];
       const fakeSpan = {
         addEvent(name: string, attributes?: Record<string, unknown>) {
           events.push({name, attributes});
