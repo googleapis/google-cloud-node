@@ -436,7 +436,10 @@ describe('Apache Arrow Support', () => {
   it('slices multi-page Arrow batches to respect total maxResults cap and cancels gRPC stream early', async () => {
     const bq = new BigQuery({projectId: 'my-project'});
     const page1 = buildArrowIpcPayloads([1n, 2n], ['one', 'two']);
-    const page2 = buildArrowIpcPayloads([3n, 4n, 5n], ['three', 'four', 'five']);
+    const page2 = buildArrowIpcPayloads(
+      [3n, 4n, 5n],
+      ['three', 'four', 'five'],
+    );
 
     const resolved = require.resolve('@google-cloud/bigquery-storage');
     const origModule = require.cache[resolved];
@@ -531,7 +534,11 @@ describe('Apache Arrow Support', () => {
             return [
               {
                 arrowSchema: {serializedSchema: page.schemaUint8},
-                streams: [{name: 'projects/my-project/locations/US/sessions/s1/streams/0'}],
+                streams: [
+                  {
+                    name: 'projects/my-project/locations/US/sessions/s1/streams/0',
+                  },
+                ],
               },
             ];
           }

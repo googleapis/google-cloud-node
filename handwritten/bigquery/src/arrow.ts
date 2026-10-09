@@ -431,7 +431,8 @@ export async function* iterateArrowBatches(
       destRef?.projectId && destRef.projectId !== '{{projectId}}'
         ? destRef.projectId
         : projectId;
-    const destDatasetId = destRef?.datasetId ?? arrowQuery.destination.dataset.id!;
+    const destDatasetId =
+      destRef?.datasetId ?? arrowQuery.destination.dataset.id!;
     const destTableId = destRef?.tableId ?? arrowQuery.destination.id!;
 
     const [session] = await storageClient.createReadSession({
