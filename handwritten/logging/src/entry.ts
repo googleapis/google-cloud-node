@@ -69,7 +69,7 @@ export type Data = any;
 // LoggingService API.
 export interface EntryJson {
   timestamp: Timestamp;
-  insertId: number;
+  insertId: string;
   jsonPayload?: google.protobuf.IStruct;
   textPayload?: string;
   httpRequest?: google.logging.type.IHttpRequest;
@@ -178,7 +178,7 @@ class Entry {
      * @name Entry#metadata
      * @type {object}
      * @property {Date} timestamp
-     * @property {number} insertId
+     * @property {string} insertId
      */
     this.metadata = extend(
       {
