@@ -14,11 +14,114 @@
  * limitations under the License.
  */
 
-import {StaticTraceContext} from './TracerHelper';
+import {Attributes} from '@opentelemetry/api';
 import {CallSettings} from '../gax';
 import {ignoredClientHeaderTokens} from '../util';
-
 export const DEFAULT_GCP_REPO = 'googleapis/google-cloud-node';
+
+/**
+ * Static metadata about the Google Cloud client library used to populate
+ * telemetry span attributes (`gcp.client.*`, `server.*`, `url.domain`).
+ */
+export interface StaticTraceContext {
+  /**
+   * The target GCP service endpoint or domain (e.g. 'storage.googleapis.com').
+   * Populates `gcp.client.service`.
+   */
+  gcpClientService?: string;
+  /**
+   * The version of the client library (e.g. '1.2.3').
+   * Populates `gcp.client.version`.
+   */
+  gcpVersion?: string;
+  /**
+   * The GitHub repository name hosting the client library (e.g. 'googleapis/google-cloud-node').
+   * Populates `gcp.client.repo`.
+   */
+  gcpRepo?: string;
+  /**
+   * The NPM package name of the client library (e.g. '@google-cloud/storage').
+   * Populates `gcp.client.artifact`.
+   */
+  gcpArtifact?: string;
+  /**
+   * Server domain name or IP address for the RPC call.
+   * Populates `server.address`.
+   */
+  serverAddress?: string;
+  /**
+   * Server port number for the RPC call.
+   * Populates `server.port`.
+   */
+  serverPort?: number;
+  /**
+   * Target service domain (e.g. 'cloudkms.googleapis.com').
+   * Populates `url.domain`.
+   */
+  urlDomain?: string;
+}
+
+/**
+ * Dynamic metadata specific to the individual RPC invocation used to populate
+ * telemetry span names and attributes.
+ */
+export interface DynamicTraceContext {
+  /**
+   * The name of the client class making the call (e.g. 'StorageClient').
+   */
+  clientName: string;
+  /**
+   * The name of the API method or RPC being invoked (e.g. 'GetObject').
+   */
+  methodName: string;
+  /**
+   * The transport protocol used for the RPC ('grpc' or 'http').
+   * Populates `rpc.system.name`.
+   */
+  rpcType: 'grpc' | 'http';
+  /**
+   * Server domain name or IP address for the RPC call.
+   * Populates `server.address`.
+   */
+  serverAddress?: string;
+  /**
+   * Server port number for the RPC call.
+   * Populates `server.port`.
+   */
+  serverPort?: number;
+  /**
+   * Target service domain (e.g. 'cloudkms.googleapis.com').
+   * Populates `url.domain`.
+   */
+  urlDomain?: string;
+}
+
+/**
+ * Dynamic metadata specific to an individual RPC transport attempt (low level network span).
+ */
+export interface AttemptTraceContext extends DynamicTraceContext {
+  /**
+   * The fully-qualified protobuf service name (e.g. 'google.cloud.kms.v1.KeyManagementService').
+   * Combined with `methodName` to populate `rpc.method`.
+   */
+  apiName?: string;
+  /**
+   * The ordinal resend count for this attempt (0 for the initial attempt, 1 for the first retry, etc.).
+   * Populates `gcp.grpc.resend_count` (gRPC) or `http.request.resend_count` (HTTP) when > 0;
+   * omitted from span attributes when 0 or undefined.
+   */
+  resendCount?: number;
+  /**
+   * The HTTP request method for REST fallback attempts (e.g. 'GET', 'POST', 'PUT', 'PATCH', 'DELETE').
+   * Populates `http.request.method`.
+   */
+  httpMethod?: string;
+  /**
+   * The URL path template for REST fallback attempts (e.g. '/v1/{name}:access').
+   * Populates `url.template`.
+   */
+  urlTemplate?: string;
+}
 
 /**
  * Derives the GCP client service name from an NPM package name.
@@ -236,7 +339,8 @@ export function resolveStaticTraceContext(
 ): StaticTraceContext {
   const envMeta = extractFromEnvironment();
   const explicit = settings?.otherArgs?.internalTelemetryInfo as
-    StaticTraceContext | undefined;
+    | StaticTraceContext
+    | undefined;
 
   let dynamic: StaticTraceContext;
   if (settings?.apiName) {
@@ -275,4 +379,31 @@ export function resolveStaticTraceContext(
   }
 
   return context;
+}
+
+/**
+ * Builds the common initial client, transport, and domain attributes shared by
+ * client request spans and low level network attempt spans.
+ *
+ * @param {DynamicTraceContext} dynamicArgs - Dynamic trace context for the call or attempt.
+ * @param {StaticTraceContext} staticArgs - Static trace context for the client library.
+ * @param {string} [urlDomain] - Resolved `url.domain` attribute value, if available.
+ * @returns {Attributes} The initial span attributes map.
+ */
+export function buildInitialAttributes(
+  dynamicArgs: DynamicTraceContext,
+  staticArgs: StaticTraceContext,
+  urlDomain?: string,
+): Attributes {
+  const attributes: Attributes = {
+    'gcp.client.service': staticArgs.gcpClientService,
+    'gcp.client.version': staticArgs.gcpVersion,
+    'gcp.client.repo': staticArgs.gcpRepo,
+    'gcp.client.artifact': staticArgs.gcpArtifact,
+    'rpc.system.name': dynamicArgs.rpcType,
+  };
+  if (urlDomain !== undefined) {
+    attributes['url.domain'] = urlDomain;
+  }
+  return attributes;
 }
