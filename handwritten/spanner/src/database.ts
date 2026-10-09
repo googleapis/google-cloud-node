@@ -379,12 +379,12 @@ class Database extends common.GrpcServiceObject {
     this._updateRequestIdPrefix();
   }
 
-  private _channelIdValue = 1;
+  private _channelIdValue = 0;
   public get _channelId(): number {
     return this._channelIdValue;
   }
   public set _channelId(value: number) {
-    this._channelIdValue = value ?? 1;
+    this._channelIdValue = value ?? 0;
     this._updateRequestIdPrefix();
   }
 
@@ -395,7 +395,7 @@ class Database extends common.GrpcServiceObject {
     );
   }
 
-  public _requestIdPrefix: string = getRequestIdPrefix(1, 1);
+  public _requestIdPrefix: string = getRequestIdPrefix(1, 0);
   constructor(
     instance: Instance,
     name: string,
@@ -2402,7 +2402,8 @@ class Database extends common.GrpcServiceObject {
   ): void;
   async getOperations(
     optionsOrCallback?:
-      GetDatabaseOperationsOptions | GetDatabaseOperationsCallback,
+      | GetDatabaseOperationsOptions
+      | GetDatabaseOperationsCallback,
   ): Promise<GetDatabaseOperationsResponse> {
     const options =
       typeof optionsOrCallback === 'object' ? optionsOrCallback : {};
@@ -3858,12 +3859,20 @@ class Database extends common.GrpcServiceObject {
             },
           );
           let dataReceived = false;
+          const headers = this._metadataWithRequestId(
+            this._nextNthRequest(),
+            1,
+            this.commonHeaders_,
+          );
+          if (this._getSpanner().routeToLeaderEnabled) {
+            addLeaderAwareRoutingHeader(headers);
+          }
           let dataStream = this.requestStream({
             client: 'SpannerClient',
             method: 'batchWrite',
             reqOpts,
             gaxOpts,
-            headers: this.commonHeaders_,
+            headers,
           });
           dataStream
             .once('data', () => (dataReceived = true))

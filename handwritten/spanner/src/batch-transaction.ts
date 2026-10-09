@@ -39,8 +39,12 @@ import {
   traceConfig,
   getQueryTraceConfig,
 } from './instrument';
-import {injectRequestIDIntoHeaders} from './request_id_header';
+import {
+  injectRequestIDIntoHeaders,
+  X_GOOG_SPANNER_REQUEST_ID_HEADER,
+} from './request_id_header';
 import {isString} from './helper';
+import * as extend from 'extend';
 
 export interface TransactionIdentifier {
   session: string | Session;
@@ -247,22 +251,31 @@ class BatchTransaction extends Snapshot {
       'BatchTransaction.createPartitions_',
       traceConfig,
       span => {
-        const baseRequest = Object.assign({}, config.reqOpts, {
+        const clonedConfig = extend(true, {}, config);
+        const baseRequest = Object.assign({}, clonedConfig.reqOpts, {
           session: this.session.formattedName_,
           transaction: {id: this.id},
         });
-        config.reqOpts = baseRequest;
+        clonedConfig.reqOpts = baseRequest;
         const headers = {
           [CLOUD_RESOURCE_HEADER]: (this.session.parent as Database)
             .formattedName_,
+          ...(clonedConfig.headers || {}),
         };
-        config.headers = injectRequestIDIntoHeaders(headers, this.session);
+        if (!headers[X_GOOG_SPANNER_REQUEST_ID_HEADER]) {
+          clonedConfig.headers = injectRequestIDIntoHeaders(
+            headers,
+            this.session,
+          );
+        } else {
+          clonedConfig.headers = headers;
+        }
         const {
           partitionOptions: _omittedPartitionOptions,
           ...baseRequestWithoutPartitionOptions
         } = baseRequest;
         void _omittedPartitionOptions;
-        this.session.request(config, (err, resp) => {
+        this.session.request(clonedConfig, (err, resp) => {
           if (err) {
             setSpanError(span, err);
             span.end();

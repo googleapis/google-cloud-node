@@ -1632,7 +1632,9 @@ export class Snapshot extends EventEmitter {
         });
       };
 
-      const retryableCodes = [grpc.status.UNAVAILABLE];
+      const retryableCodes = gaxOptions?.retry?.retryCodes ?? [
+        Status.UNAVAILABLE,
+      ];
       const wrappedMakeRequest = this._wrapWithIdWaiter(makeRequest);
       const startTime = Date.now();
       const timeout = gaxOptions?.timeout ?? Infinity;
@@ -2254,7 +2256,9 @@ export class Snapshot extends EventEmitter {
    */
   protected _getDirectedReadOptions(
     directedReadOptions:
-      google.spanner.v1.IDirectedReadOptions | null | undefined,
+      | google.spanner.v1.IDirectedReadOptions
+      | null
+      | undefined,
   ) {
     if (
       !directedReadOptions &&
@@ -2498,6 +2502,8 @@ export class Transaction extends Dml {
   commitTimestampProto?: spannerClient.protobuf.ITimestamp;
   private _queuedMutations: spannerClient.spanner.v1.Mutation[];
   private _retryCommit: Boolean;
+  private _commitNthRequest?: number;
+  private _commitAttempt?: number;
 
   /**
    * Timestamp at which the transaction was committed. Will be populated once
@@ -2956,19 +2962,28 @@ export class Transaction extends Dml {
           }
         }
 
+        const nthRequest = this._commitNthRequest ?? nextNthRequest(database);
+        this._commitNthRequest = nthRequest;
+        const attempt = this._commitAttempt
+          ? ++this._commitAttempt
+          : (this._commitAttempt = 1);
+
+        // Keep a reference to the config: the request-id interceptor writes the
+        // ID of every gax-level retry back into `requestConfig.headers`.
+        const requestConfig = {
+          client: 'SpannerClient',
+          method: 'commit',
+          reqOpts,
+          gaxOpts,
+          headers: injectRequestIDIntoHeaders(
+            this.commonHeaders_,
+            this.session,
+            nthRequest,
+            attempt,
+          ),
+        };
         this.request(
-          {
-            client: 'SpannerClient',
-            method: 'commit',
-            reqOpts,
-            gaxOpts,
-            headers: injectRequestIDIntoHeaders(
-              this.commonHeaders_,
-              this.session,
-              nextNthRequest(database),
-              1,
-            ),
-          },
+          requestConfig,
           (
             err: null | Error,
             resp: spannerClient.spanner.v1.ICommitResponse,
@@ -2980,6 +2995,20 @@ export class Transaction extends Dml {
             ) {
               this._retryCommit = true;
               this._updatePrecommitToken(resp);
+              // gax may have retried this commit internally (e.g. on
+              // UNAVAILABLE) before MultiplexedSessionRetry was returned.
+              // Continue from the last attempt actually sent so the next
+              // commit doesn't reuse an attempt number.
+              const sentId = String(
+                requestConfig.headers?.[X_GOOG_SPANNER_REQUEST_ID_HEADER] ?? '',
+              );
+              const lastSentAttempt = Number(sentId.split('.').pop());
+              if (
+                Number.isInteger(lastSentAttempt) &&
+                lastSentAttempt > (this._commitAttempt ?? 0)
+              ) {
+                this._commitAttempt = lastSentAttempt;
+              }
               return this.commit(options, callback);
             }
 
@@ -3312,7 +3341,8 @@ export class Transaction extends Dml {
   ): void;
   rollback(
     gaxOptionsOrCallback?:
-      CallOptions | spannerClient.spanner.v1.Spanner.RollbackCallback,
+      | CallOptions
+      | spannerClient.spanner.v1.Spanner.RollbackCallback,
     cb?: spannerClient.spanner.v1.Spanner.RollbackCallback,
   ): void | Promise<void> {
     let gaxOpts =
@@ -3335,6 +3365,8 @@ export class Transaction extends Dml {
         transactionId,
       };
 
+      const database = this.session?.parent as Database;
+
       if (this._affinityKey) {
         if (!gaxOpts || Object.keys(gaxOpts).length === 0) {
           gaxOpts = this._unbindGaxOpts as any;
@@ -3349,7 +3381,12 @@ export class Transaction extends Dml {
           method: 'rollback',
           reqOpts,
           gaxOpts,
-          headers: {...this.commonHeaders_},
+          headers: injectRequestIDIntoHeaders(
+            this.commonHeaders_,
+            this.session,
+            nextNthRequest(database),
+            1,
+          ),
         },
         (err: null | ServiceError) => {
           if (err) {
