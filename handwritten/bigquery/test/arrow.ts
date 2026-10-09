@@ -432,4 +432,255 @@ describe('Apache Arrow Support', () => {
       }
     }
   });
+
+  it('slices multi-page Arrow batches to respect total maxResults cap and cancels gRPC stream early', async () => {
+    const bq = new BigQuery({projectId: 'my-project'});
+    const page1 = buildArrowIpcPayloads([1n, 2n], ['one', 'two']);
+    const page2 = buildArrowIpcPayloads([3n, 4n, 5n], ['three', 'four', 'five']);
+
+    const resolved = require.resolve('@google-cloud/bigquery-storage');
+    const origModule = require.cache[resolved];
+    let cancelCalled = false;
+
+    require.cache[resolved] = {
+      id: resolved,
+      filename: resolved,
+      loaded: true,
+      exports: {
+        BigQueryReadClient: class MockReadClient {
+          readRows() {
+            const gen = (async function* () {
+              yield {
+                arrowSchema: {serializedSchema: page2.schemaUint8},
+                arrowRecordBatch: {serializedRecordBatch: page2.fullIpcUint8},
+              };
+            })();
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            (gen as any).cancel = () => {
+              cancelCalled = true;
+            };
+            return gen;
+          }
+          async close() {}
+        },
+      },
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } as any;
+
+    try {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (bq as any).request = (_reqOpts: any, callback: any) => {
+        process.nextTick(() =>
+          callback(null, {
+            jobComplete: true,
+            jobReference: {
+              projectId: 'my-project',
+              jobId: 'job-max',
+              location: 'US',
+            },
+            pageToken: 'page-2-token',
+            arrowSchema: {serializedSchema: page1.schemaBase64},
+            arrowRecordBatch: {
+              serializedRecordBatch: page1.fullIpcBase64,
+              rowCount: '2',
+            },
+          }),
+        );
+      };
+
+      const [table] = await bq.queryArrow({
+        query: 'SELECT id, name FROM big_table',
+        maxResults: 3,
+      });
+      assert.strictEqual(table.numRows, 3);
+      assert.strictEqual(table.getChild('id')!.get(2), 3n);
+      assert.strictEqual(cancelCalled, true);
+    } finally {
+      if (origModule) {
+        require.cache[resolved] = origModule;
+      } else {
+        delete require.cache[resolved];
+      }
+    }
+  });
+
+  it('reads explicit destination tables via createReadSession (maxStreamCount: 1)', async () => {
+    const bq = new BigQuery({projectId: 'my-project'});
+    const destTable = bq.dataset('dest_ds').table('dest_tbl');
+    const page = buildArrowIpcPayloads([10n, 20n], ['ten', 'twenty']);
+
+    const resolved = require.resolve('@google-cloud/bigquery-storage');
+    const origModule = require.cache[resolved];
+    let capturedTableRef = '';
+    let capturedMaxStreams = -1;
+    let capturedStreamName = '';
+
+    require.cache[resolved] = {
+      id: resolved,
+      filename: resolved,
+      loaded: true,
+      exports: {
+        BigQueryReadClient: class MockReadClient {
+          async createReadSession(req: {
+            parent: string;
+            readSession: {table: string; dataFormat: string};
+            maxStreamCount: number;
+          }) {
+            capturedTableRef = req.readSession.table;
+            capturedMaxStreams = req.maxStreamCount;
+            return [
+              {
+                arrowSchema: {serializedSchema: page.schemaUint8},
+                streams: [{name: 'projects/my-project/locations/US/sessions/s1/streams/0'}],
+              },
+            ];
+          }
+          readRows(req: {readStream: string; offset: number}) {
+            capturedStreamName = req.readStream;
+            return (async function* () {
+              yield {
+                arrowRecordBatch: {serializedRecordBatch: page.fullIpcUint8},
+              };
+            })();
+          }
+          async close() {}
+        },
+      },
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } as any;
+
+    try {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (bq as any).createQueryJob = (_q: any, cb: any) => {
+        const fakeJob = {
+          id: 'job-dest',
+          location: 'US',
+          metadata: {
+            configuration: {
+              query: {
+                destinationTable: {
+                  projectId: 'my-project',
+                  datasetId: 'dest_ds',
+                  tableId: 'dest_tbl',
+                },
+              },
+            },
+          },
+          getQueryResults: async () => [[], null, {totalRows: '2'}],
+        };
+        process.nextTick(() => cb(null, fakeJob, fakeJob.metadata));
+      };
+
+      const [table] = await bq.queryArrow({
+        query: 'SELECT id, name FROM src_tbl',
+        destination: destTable,
+      });
+      assert.strictEqual(
+        capturedTableRef,
+        'projects/my-project/datasets/dest_ds/tables/dest_tbl',
+      );
+      assert.strictEqual(capturedMaxStreams, 1);
+      assert.strictEqual(
+        capturedStreamName,
+        'projects/my-project/locations/US/sessions/s1/streams/0',
+      );
+      assert.strictEqual(table.numRows, 2);
+      assert.strictEqual(table.getChild('id')!.get(1), 20n);
+    } finally {
+      if (origModule) {
+        require.cache[resolved] = origModule;
+      } else {
+        delete require.cache[resolved];
+      }
+    }
+  });
+
+  it('emits a warning when installed @google-cloud/bigquery-storage lacks ReadRowsRequest.arrowSerializationOptions', async () => {
+    const bq = new BigQuery({projectId: 'my-project'});
+    const page1 = buildArrowIpcPayloads([1n], ['one']);
+    const page2 = buildArrowIpcPayloads([2n], ['two']);
+
+    const resolved = require.resolve('@google-cloud/bigquery-storage');
+    const origModule = require.cache[resolved];
+    const warnings: string[] = [];
+    const origEmitWarning = process.emitWarning;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    process.emitWarning = ((warning: string) => {
+      warnings.push(String(warning));
+    }) as typeof process.emitWarning;
+
+    require.cache[resolved] = {
+      id: resolved,
+      filename: resolved,
+      loaded: true,
+      exports: {
+        BigQueryReadClient: class OldMockReadClient {
+          _protos = {
+            google: {
+              cloud: {
+                bigquery: {
+                  storage: {
+                    v1: {
+                      ReadRowsRequest: {
+                        type: {field: [{name: 'readStream'}, {name: 'offset'}]},
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          };
+          readRows() {
+            return (async function* () {
+              yield {
+                arrowSchema: {serializedSchema: page2.schemaUint8},
+                arrowRecordBatch: {serializedRecordBatch: page2.fullIpcUint8},
+              };
+            })();
+          }
+          async close() {}
+        },
+      },
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } as any;
+
+    try {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (bq as any).request = (_reqOpts: any, callback: any) => {
+        process.nextTick(() =>
+          callback(null, {
+            jobComplete: true,
+            jobReference: {
+              projectId: 'my-project',
+              jobId: 'job-old-proto',
+              location: 'US',
+            },
+            pageToken: 'page-2-token',
+            arrowSchema: {serializedSchema: page1.schemaBase64},
+            arrowRecordBatch: {
+              serializedRecordBatch: page1.fullIpcBase64,
+              rowCount: '1',
+            },
+          }),
+        );
+      };
+
+      const [table] = await bq.queryArrow({
+        query: 'SELECT id, name FROM big_table',
+        arrowSerializationOptions: {
+          picosTimestampPrecision: 'TIMESTAMP_PRECISION_PICOS',
+        },
+      });
+      assert.strictEqual(table.numRows, 2);
+      assert.strictEqual(warnings.length, 1);
+      assert.match(warnings[0], /arrowSerializationOptions/);
+    } finally {
+      process.emitWarning = origEmitWarning;
+      if (origModule) {
+        require.cache[resolved] = origModule;
+      } else {
+        delete require.cache[resolved];
+      }
+    }
+  });
 });

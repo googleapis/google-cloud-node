@@ -325,6 +325,8 @@ export async function* iterateArrowBatches(
     queryResultsFormat: 'ARROW',
   };
 
+  const maxResults = arrowQuery.maxResults ?? options.maxResults;
+  let remaining = maxResults;
   let job: Job | undefined;
   let offset = 0;
 
@@ -362,9 +364,19 @@ export async function* iterateArrowBatches(
             page1Batches.reduce((sum, b) => sum + b.numRows, 0),
         );
         for (const batch of page1Batches) {
+          if (remaining !== undefined) {
+            if (remaining <= 0) {
+              return;
+            }
+            if (batch.numRows > remaining) {
+              yield batch.slice(0, remaining);
+              return;
+            }
+            remaining -= batch.numRows;
+          }
           yield batch;
         }
-        if (!res.pageToken) {
+        if ((remaining !== undefined && remaining <= 0) || !res.pageToken) {
           return;
         }
         offset = page1RowCount;
@@ -402,16 +414,77 @@ export async function* iterateArrowBatches(
   const arrowSerializationOptions =
     arrowQuery.arrowSerializationOptions ||
     (options as Query).arrowSerializationOptions;
-  const grpcStream = getOrCreateStorageReadClient(bq).readRows({
-    readStream: `projects/${projectId}/locations/${job!.location || bq.location || 'US'}/jobs/${job!.id}/streams/_default`,
+  const storageClient = getOrCreateStorageReadClient(bq);
+  const responseMeta = (ctx.response ||= {});
+
+  let serializedSchema: Uint8Array | string | undefined;
+  let readStream: string;
+
+  if (arrowQuery.destination) {
+    const [, , queryRes] = await job!.getQueryResults({maxResults: 0});
+    if (queryRes?.totalRows !== undefined) {
+      responseMeta.totalRows = queryRes.totalRows;
+    }
+    const destRef = (job!.metadata as bigquery.IJob)?.configuration?.query
+      ?.destinationTable;
+    const destProjectId =
+      destRef?.projectId && destRef.projectId !== '{{projectId}}'
+        ? destRef.projectId
+        : projectId;
+    const destDatasetId = destRef?.datasetId ?? arrowQuery.destination.dataset.id!;
+    const destTableId = destRef?.tableId ?? arrowQuery.destination.id!;
+
+    const [session] = await storageClient.createReadSession({
+      parent: `projects/${projectId}`,
+      readSession: {
+        table: `projects/${destProjectId}/datasets/${destDatasetId}/tables/${destTableId}`,
+        dataFormat: 'ARROW',
+        ...(arrowSerializationOptions && {
+          readOptions: {arrowSerializationOptions},
+        }),
+      },
+      maxStreamCount: 1,
+    });
+    if (session.arrowSchema) {
+      serializedSchema ||= session.arrowSchema.serializedSchema;
+      responseMeta.arrowSchema ||= session.arrowSchema;
+    }
+    if (!session.streams?.length || remaining === 0) {
+      return;
+    }
+    readStream = session.streams[0].name!;
+  } else {
+    readStream = `projects/${projectId}/locations/${job!.location || bq.location || 'US'}/jobs/${job!.id}/streams/_default`;
+  }
+
+  if (!arrowQuery.destination && arrowSerializationOptions) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const reqFields: Array<{name?: string}> | undefined = (storageClient as any)
+      ?._protos?.google?.cloud?.bigquery?.storage?.v1?.ReadRowsRequest?.type
+      ?.field;
+    if (
+      Array.isArray(reqFields) &&
+      !reqFields.some(
+        f =>
+          f.name === 'arrowSerializationOptions' ||
+          f.name === 'arrow_serialization_options',
+      )
+    ) {
+      process.emitWarning(
+        'The installed @google-cloud/bigquery-storage version does not support arrowSerializationOptions on ReadRowsRequest; gRPC stream pages will use default serialization options.',
+      );
+    }
+  }
+
+  const grpcStream = storageClient.readRows({
+    readStream,
     offset,
-    ...(arrowSerializationOptions && {arrowSerializationOptions}),
+    ...(!arrowQuery.destination &&
+      arrowSerializationOptions && {arrowSerializationOptions}),
   });
   ctx.cleanups?.push(() => grpcStream?.cancel?.());
 
-  let serializedSchema: Uint8Array | string | undefined;
   let rowsRead = offset;
-  const responseMeta = (ctx.response ||= {});
 
   try {
     for await (const item of grpcStream) {
@@ -422,13 +495,28 @@ export async function* iterateArrowBatches(
       if (item.arrowSchema && !responseMeta.arrowSchema) {
         responseMeta.arrowSchema = item.arrowSchema;
       }
+      if (remaining === 0) {
+        return;
+      }
       const rawBatch = item.arrowRecordBatch?.serializedRecordBatch;
       const batches =
         serializedSchema && rawBatch
           ? parseArrowRecordBatches(serializedSchema, rawBatch)
           : [];
       for (const batch of batches) {
+        if (remaining !== undefined && batch.numRows >= remaining) {
+          const sliced = batch.slice(0, remaining);
+          rowsRead += sliced.numRows;
+          if (Number(responseMeta.totalRows || 0) < rowsRead) {
+            responseMeta.totalRows = String(rowsRead);
+          }
+          yield sliced;
+          return;
+        }
         rowsRead += batch.numRows;
+        if (remaining !== undefined) {
+          remaining -= batch.numRows;
+        }
         if (Number(responseMeta.totalRows || 0) < rowsRead) {
           responseMeta.totalRows = String(rowsRead);
         }

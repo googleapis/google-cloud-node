@@ -148,19 +148,108 @@ describe('Apache Arrow System Tests', () => {
       }
     });
 
-    it('rejects explicit destination tables on _default stream with INVALID_ARGUMENT per backend spec', async () => {
+    it('reads explicit destination tables on fallback jobs.insert path via CreateReadSession (including 0-row schema preservation)', async () => {
       const destTable = dataset.table(
         `dest_${randomUUID().replace(/-/g, '_')}`,
       );
 
-      await assert.rejects(
-        () =>
-          bigquery.queryArrow({
-            query: 'SELECT 101 AS id, "dest_alpha" AS label',
-            destination: destTable,
-          }),
-        /does not support explicitly-specified destination tables/i,
+      const [arrowTable, , apiResponse] = await bigquery.queryArrow({
+        query:
+          'SELECT i AS id, CONCAT("dest_", CAST(i AS STRING)) AS label FROM UNNEST(GENERATE_ARRAY(1, 500)) AS i ORDER BY i',
+        destination: destTable,
+        arrowSerializationOptions: {
+          picosTimestampPrecision: 'TIMESTAMP_PRECISION_NANOS',
+        },
+      });
+
+      assert.strictEqual(arrowTable.numRows, 500);
+      assert.strictEqual(apiResponse.totalRows, '500');
+      assert.strictEqual(arrowTable.getChild('id')!.get(0), 1n);
+      assert.strictEqual(arrowTable.getChild('id')!.get(499), 500n);
+
+      const emptyDestTable = dataset.table(
+        `dest_empty_${randomUUID().replace(/-/g, '_')}`,
       );
+      const [emptyTable] = await bigquery.queryArrow({
+        query:
+          'SELECT 101 AS id, "dest_empty" AS label FROM UNNEST([1]) WHERE 1 = 0',
+        destination: emptyDestTable,
+      });
+
+      assert.strictEqual(emptyTable.numRows, 0);
+      assert.deepStrictEqual(
+        emptyTable.schema.fields.map((f: Field) => f.name),
+        ['id', 'label'],
+      );
+    });
+
+    it('enforces maxResults across single-page REST, multi-page hybrid (Page 1 REST + Page 2+ gRPC), 0-row schema, and fallback jobs.insert', async () => {
+      const multiPageSql = `
+        SELECT
+          i AS idx,
+          REPEAT('M', 2400) AS payload
+        FROM UNNEST(GENERATE_ARRAY(1, 15000)) AS i
+        ORDER BY i
+      `;
+
+      // 1. Multi-page hybrid cap across Page 1 (REST) + Page 2+ (gRPC)
+      const [hybridCapped] = await bigquery.queryArrow({
+        query: multiPageSql,
+        maxResults: 8500,
+      });
+      assert.strictEqual(hybridCapped.numRows, 8500);
+      assert.strictEqual(hybridCapped.getChild('idx')!.get(0), 1n);
+      assert.strictEqual(hybridCapped.getChild('idx')!.get(8499), 8500n);
+
+      // 2. Single-page cap (satisfied purely on Page 1 over REST)
+      const [singleCapped] = await bigquery.queryArrow({
+        query: multiPageSql,
+        maxResults: 100,
+      });
+      assert.strictEqual(singleCapped.numRows, 100);
+      assert.strictEqual(singleCapped.getChild('idx')!.get(99), 100n);
+
+      // 3. maxResults: 0 preserves schema with 0 rows
+      const [zeroCapped] = await bigquery.queryArrow({
+        query: 'SELECT 1 AS idx, "hello" AS label',
+        maxResults: 0,
+      });
+      assert.strictEqual(zeroCapped.numRows, 0);
+      assert.deepStrictEqual(
+        zeroCapped.schema.fields.map((f: Field) => f.name),
+        ['idx', 'label'],
+      );
+
+      // 4. Fallback jobs.insert + maxResults
+      const [fallbackCapped] = await bigquery.queryArrow({
+        query:
+          'SELECT i AS idx FROM UNNEST(GENERATE_ARRAY(1, 2000)) AS i ORDER BY i',
+        jobId: `arrow_max_res_${randomUUID().replace(/-/g, '_')}`,
+        maxResults: 750,
+      });
+      assert.strictEqual(fallbackCapped.numRows, 750);
+      assert.strictEqual(fallbackCapped.getChild('idx')!.get(749), 750n);
+    });
+
+    it('continues cached multi-page queries (cacheHit: true) seamlessly across REST Page 1 and gRPC Page 2+', async () => {
+      const uniqueTag = randomUUID().replace(/-/g, '_');
+      const sql = `
+        SELECT
+          i AS idx,
+          CONCAT('${uniqueTag}_', REPEAT('C', 2400)) AS payload
+        FROM UNNEST(GENERATE_ARRAY(1, 15000)) AS i
+        ORDER BY i
+      `;
+
+      const [firstTable, , firstResp] = await bigquery.queryArrow(sql);
+      const [cachedTable, , cachedResp] = await bigquery.queryArrow(sql);
+
+      assert.strictEqual(firstTable.numRows, 15000);
+      assert.strictEqual(cachedTable.numRows, 15000);
+      assert.strictEqual(firstResp.cacheHit, false);
+      assert.strictEqual(cachedResp.cacheHit, true);
+      assert.strictEqual(cachedTable.getChild('idx')!.get(0), 1n);
+      assert.strictEqual(cachedTable.getChild('idx')!.get(14999), 15000n);
     });
   });
 

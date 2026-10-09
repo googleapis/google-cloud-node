@@ -2437,7 +2437,7 @@ export class BigQuery extends Service {
       timeoutMs: options.timeoutMs,
       location: queryObj.location || options.location,
       formatOptions,
-      maxResults: queryObj.maxResults || options.maxResults,
+      maxResults: queryObj.maxResults ?? options.maxResults,
       query: queryObj.query,
       useLegacySql: false,
       requestId: randomUUID(),
