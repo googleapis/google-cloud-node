@@ -60,6 +60,22 @@ describe('TokenHandler', () => {
     // Check that options were updated
     assert.strictEqual(tokenOptions.key, credentials.privateKey);
     assert.strictEqual(tokenOptions.email, credentials.clientEmail);
+    assert.strictEqual(tokenOptions.iss, credentials.clientEmail);
+  });
+
+  it('should keep the given iss when the keyFile has no email', async () => {
+    const tokenOptions: TokenOptions = {
+      keyFile: 'key.pem',
+      iss: 'given@example.com',
+      transporter,
+    };
+    getCredentialsStub.resolves({privateKey: 'private-key'});
+    getTokenStub.resolves({access_token: 'token'});
+
+    const handler = new TokenHandler(tokenOptions);
+    await handler.getToken(false);
+
+    assert.strictEqual(tokenOptions.iss, 'given@example.com');
   });
 
   it('should use provided key to fetch a token', async () => {
