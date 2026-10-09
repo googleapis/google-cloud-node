@@ -55,6 +55,32 @@ function shouldUseProxyForURI(uri: string): boolean {
 }
 
 /**
+ * Returns the proxy URL to use for the given request if proxy configuration applies,
+ * or undefined if no proxy should be used.
+ * @private
+ * @param {string} uri The request uri
+ * @param {Options} reqOpts The request options
+ * @returns {string|undefined}
+ */
+export function getProxyUrl(uri: string, reqOpts: Options): string | undefined {
+  const proxy =
+    reqOpts.proxy ||
+    process.env.HTTP_PROXY ||
+    process.env.http_proxy ||
+    process.env.HTTPS_PROXY ||
+    process.env.https_proxy;
+
+  const manuallyProvidedProxy = !!reqOpts.proxy;
+  const shouldUseProxy = manuallyProvidedProxy || shouldUseProxyForURI(uri);
+
+  if (proxy && shouldUseProxy) {
+    return proxy;
+  }
+
+  return undefined;
+}
+
+/**
  * Returns a custom request Agent if one is found, otherwise returns undefined
  * which will result in the global http(s) Agent being used.
  * @private
@@ -67,19 +93,11 @@ export function getAgent(
   reqOpts: Options,
 ): HttpAnyAgent | undefined {
   const isHttp = uri.startsWith('http://');
-  const proxy =
-    reqOpts.proxy ||
-    process.env.HTTP_PROXY ||
-    process.env.http_proxy ||
-    process.env.HTTPS_PROXY ||
-    process.env.https_proxy;
+  const proxy = getProxyUrl(uri, reqOpts);
 
   const poolOptions = Object.assign({}, reqOpts.pool);
 
-  const manuallyProvidedProxy = !!reqOpts.proxy;
-  const shouldUseProxy = manuallyProvidedProxy || shouldUseProxyForURI(uri);
-
-  if (proxy && shouldUseProxy) {
+  if (proxy) {
     // tslint:disable-next-line variable-name
     const {HttpProxyAgent} = require('http-proxy-agent');
     const {HttpsProxyAgent} = require('https-proxy-agent');

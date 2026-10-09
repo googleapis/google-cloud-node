@@ -194,7 +194,9 @@ describe('🚙 error handling', () => {
       const chunks = [
         new Uint8Array(Buffer.from('{"error": {"code": 400, ')),
         new Uint8Array(Buffer.from('"message": "Invalid ')),
-        new Uint8Array(Buffer.from('argument", "status": "INVALID_ARGUMENT"}}')),
+        new Uint8Array(
+          Buffer.from('argument", "status": "INVALID_ARGUMENT"}}'),
+        ),
       ];
       const readableStream = Readable.from(chunks);
       const scope = nock(url).get('/').reply(400, readableStream);
@@ -217,7 +219,9 @@ describe('🚙 error handling', () => {
       const chunks = [
         '{"error": {"code": 400, ',
         Buffer.from('"message": "Invalid '),
-        new Uint8Array(Buffer.from('argument", "status": "INVALID_ARGUMENT"}}')),
+        new Uint8Array(
+          Buffer.from('argument", "status": "INVALID_ARGUMENT"}}'),
+        ),
       ];
       const readableStream = Readable.from(chunks);
       const scope = nock(url).get('/').reply(400, readableStream);
@@ -536,6 +540,42 @@ describe('🥁 configuration options', () => {
       assert.equal(res.config.agent.connectOpts.key, key);
     });
 
+    it('should pass proxy and tls options to fetchImplementation and omit proxy when noProxy matches', async () => {
+      scope.persist(false);
+      nock.cleanAll();
+      let capturedInit: Record<string, unknown> | undefined;
+      const customFetch = async (
+        _u: unknown,
+        init?: Record<string, unknown>,
+      ) => {
+        capturedInit = init;
+        return new Response(JSON.stringify(responseBody), {
+          status: 200,
+          headers: {'content-type': 'application/json'},
+        });
+      };
+
+      await request({
+        url,
+        proxy,
+        cert: 'cert',
+        key: 'key',
+        fetchImplementation:
+          customFetch as unknown as GaxiosOptions['fetchImplementation'],
+      });
+      assert.strictEqual(capturedInit?.proxy, proxy);
+      assert.deepStrictEqual(capturedInit?.tls, {cert: 'cert', key: 'key'});
+
+      await request({
+        url,
+        proxy,
+        noProxy: ['domain.example.com'],
+        fetchImplementation:
+          customFetch as unknown as GaxiosOptions['fetchImplementation'],
+      });
+      assert.strictEqual(capturedInit?.proxy, undefined);
+    });
+
     it('should load the proxy from the cache', async () => {
       const res1 = await request({url, proxy});
       const agent = res1.config.agent;
@@ -836,7 +876,10 @@ describe('🥁 configuration options', () => {
       const gaxios = new Gaxios();
       const timeout = 10;
 
-      await assert.rejects(() => gaxios.request({url, timeout}), /abort/);
+      await assert.rejects(
+        () => gaxios.request({url, timeout}),
+        /abort|timed out/i,
+      );
     });
 
     it('should a `timeout`, an existing `signal`, and be triggered by timeout', async () => {
@@ -847,7 +890,7 @@ describe('🥁 configuration options', () => {
 
       await assert.rejects(
         () => gaxios.request({url, timeout, signal}),
-        /abort/,
+        /abort|timed out/i,
       );
     });
 
@@ -867,6 +910,32 @@ describe('🥁 configuration options', () => {
         /abort/,
         // native `fetch` matches the error properly:
         // new RegExp(message)
+      );
+    });
+
+    it('should preserve non-Error abort reason and set AbortError code when fetch rejects with signal.reason', async () => {
+      nock(url).get('/').delay(2000).reply(204);
+      const gaxios = new Gaxios();
+      const ac = new AbortController();
+      const signal = ac.signal;
+      const message = 'Changed my mind - no request please';
+
+      setTimeout(() => ac.abort(message), 10);
+
+      await assert.rejects(
+        () =>
+          gaxios.request({
+            url,
+            signal,
+            fetchImplementation: fetch,
+          }),
+        (err: GaxiosError) => {
+          assert(err instanceof GaxiosError);
+          assert.strictEqual(err.code, 'AbortError');
+          assert.match(err.message, /abort/i);
+          assert.match(err.message, new RegExp(message));
+          return true;
+        },
       );
     });
   });

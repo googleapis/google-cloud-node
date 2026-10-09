@@ -20,7 +20,11 @@ import {describe, it, afterEach, beforeEach} from 'mocha';
 import nock from 'nock';
 import {Readable} from 'stream';
 import * as sinon from 'sinon';
-import {teenyRequest} from '../src';
+import {
+  teenyRequest,
+  requestToFetchOptions,
+  fetchToRequestResponse,
+} from '../src';
 import {TeenyStatistics, TeenyStatisticsWarning} from '../src/TeenyStatistics';
 import {pool} from '../src/agents';
 
@@ -465,5 +469,95 @@ describe('teeny', () => {
       /Missing uri or url in reqOpts/,
       'Did not throw with expected message',
     );
+  });
+
+  it('should create an AbortSignal when timeout is set in request options', done => {
+    const {options} = requestToFetchOptions({uri, timeout: 10});
+    assert.strictEqual((options as Record<string, unknown>).timeout, 10);
+    assert.ok(options.signal instanceof AbortSignal);
+
+    nock(uri).get('/').delay(2000).reply(200, {hello: '🌍'});
+    teenyRequest({uri, timeout: 10}, err => {
+      assert.ok(err);
+      assert.match(err.message, /abort|timed out/i);
+      done();
+    });
+  });
+
+  it('should populate proxy option in fetch options when proxy is configured and respect NO_PROXY', () => {
+    const withProxy = requestToFetchOptions({uri, proxy: 'https://fake.proxy'});
+    assert.strictEqual(
+      (withProxy.options as Record<string, unknown>).proxy,
+      'https://fake.proxy',
+    );
+
+    sandbox.stub(process, 'env').value({
+      HTTPS_PROXY: 'https://env.proxy',
+      NO_PROXY: 'example.com',
+    });
+    const bypassed = requestToFetchOptions({uri});
+    assert.strictEqual(
+      (bypassed.options as Record<string, unknown>).proxy,
+      undefined,
+    );
+  });
+
+  it('should populate tls option in fetch options when pool contains TLS settings', () => {
+    const {options} = requestToFetchOptions({
+      uri,
+      pool: {
+        cert: 'test-cert',
+        key: 'test-key',
+        ca: 'test-ca',
+        rejectUnauthorized: false,
+      },
+    });
+    assert.deepStrictEqual((options as Record<string, unknown>).tls, {
+      cert: 'test-cert',
+      key: 'test-key',
+      ca: 'test-ca',
+      rejectUnauthorized: false,
+    });
+  });
+
+  it('should support converted Readable stream and null body in fetchToRequestResponse', () => {
+    const webStream = new ReadableStream({
+      start(controller) {
+        controller.enqueue(Buffer.from('hello'));
+        controller.close();
+      },
+    });
+    const nodeStream = Readable.fromWeb(
+      webStream as unknown as import('stream/web').ReadableStream,
+    );
+    const fakeRes = {
+      status: 200,
+      statusText: 'OK',
+      url: uri,
+      headers: new Headers({'x-test': '1'}),
+      body: webStream,
+    };
+    const response = fetchToRequestResponse(
+      {},
+      fakeRes as unknown as Parameters<typeof fetchToRequestResponse>[1],
+      nodeStream,
+    );
+    assert.ok(response instanceof Readable);
+    assert.strictEqual(response.body, nodeStream);
+    assert.strictEqual(response.headers['x-test'], '1');
+
+    const emptyRes = {
+      status: 204,
+      statusText: 'No Content',
+      url: uri,
+      headers: new Headers(),
+      body: null,
+    };
+    const emptyResponse = fetchToRequestResponse(
+      {},
+      emptyRes as unknown as Parameters<typeof fetchToRequestResponse>[1],
+    );
+    assert.strictEqual(emptyResponse.statusCode, 204);
+    assert.strictEqual(emptyResponse.body, null);
   });
 });

@@ -19,7 +19,7 @@ import {Agent, AgentOptions as HttpsAgentOptions} from 'https';
 import {AgentOptions as HttpAgentOptions} from 'http';
 import type * as f from 'node-fetch' with {'resolution-mode': 'import'};
 import {PassThrough, Readable, pipeline} from 'stream';
-import {getAgent} from './agents';
+import {getAgent, getProxyUrl} from './agents';
 import {TeenyStatistics} from './TeenyStatistics';
 import {randomUUID} from 'crypto';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -27,8 +27,44 @@ const streamEvents = require('stream-events');
 
 import type nodeFetch from 'node-fetch' with {'resolution-mode': 'import'};
 
-const fetch = (...args: Parameters<typeof nodeFetch>) =>
-  import('node-fetch').then(({default: fetch}) => fetch(...args));
+const fetch = (
+  url: Parameters<typeof nodeFetch>[0],
+  init?: Parameters<typeof nodeFetch>[1],
+): ReturnType<typeof nodeFetch> => {
+  if ('Bun' in globalThis && typeof globalThis.fetch === 'function') {
+    const bunFetch = (globalThis as {__googleCloudBunFetch?: typeof nodeFetch})
+      .__googleCloudBunFetch;
+    if (typeof bunFetch === 'function') {
+      return Promise.resolve().then(() => bunFetch(url, init));
+    }
+    return Promise.resolve().then(async () => {
+      let fetchInit = init;
+      if (
+        fetchInit?.body &&
+        typeof fetchInit.body === 'object' &&
+        typeof (fetchInit.body as Readable).pipe === 'function' &&
+        typeof Readable.toWeb === 'function' &&
+        (typeof ReadableStream === 'undefined' ||
+          !(fetchInit.body instanceof ReadableStream))
+      ) {
+        const stream =
+          fetchInit.body instanceof Readable
+            ? fetchInit.body
+            : (fetchInit.body as Readable).pipe(new PassThrough());
+        fetchInit = {
+          ...fetchInit,
+          body: Readable.toWeb(stream) as unknown as f.BodyInit,
+        };
+      }
+      const res = await globalThis.fetch(
+        url as string | URL,
+        fetchInit as RequestInit,
+      );
+      return res as unknown as f.Response;
+    });
+  }
+  return import('node-fetch').then(({default: fetch}) => fetch(url, init));
+};
 
 export interface CoreOptions {
   method?: string;
@@ -98,7 +134,12 @@ interface Headers {
 function requestToFetchOptions(reqOpts: Options) {
   const options: f.RequestInit = {
     method: reqOpts.method || 'GET',
-    ...(reqOpts.timeout && {timeout: reqOpts.timeout}),
+    ...(reqOpts.timeout && {
+      timeout: reqOpts.timeout,
+      signal: AbortSignal.timeout(
+        reqOpts.timeout,
+      ) as unknown as f.RequestInit['signal'],
+    }),
     ...(typeof reqOpts.gzip === 'boolean' && {compress: reqOpts.gzip}),
   };
 
@@ -149,6 +190,29 @@ function requestToFetchOptions(reqOpts: Options) {
 
   options.agent = getAgent(uri, reqOpts);
 
+  const proxy = getProxyUrl(uri, reqOpts);
+  if (proxy) {
+    (options as Record<string, unknown>).proxy = proxy;
+  }
+
+  if (reqOpts.pool) {
+    const {cert, key, ca, rejectUnauthorized} =
+      reqOpts.pool as HttpsAgentOptions;
+    if (
+      cert !== undefined ||
+      key !== undefined ||
+      ca !== undefined ||
+      rejectUnauthorized !== undefined
+    ) {
+      (options as Record<string, unknown>).tls = {
+        ...(cert !== undefined && {cert}),
+        ...(key !== undefined && {key}),
+        ...(ca !== undefined && {ca}),
+        ...(rejectUnauthorized !== undefined && {rejectUnauthorized}),
+      };
+    }
+  }
+
   return {uri, options};
 }
 
@@ -159,7 +223,11 @@ function requestToFetchOptions(reqOpts: Options) {
  * @param res The Fetch response
  * @returns A `request` response object
  */
-function fetchToRequestResponse(opts: f.RequestInit, res: f.Response) {
+function fetchToRequestResponse(
+  opts: f.RequestInit,
+  res: f.Response,
+  bodyStream?: Readable | f.Response['body'],
+) {
   const request = {} as Request;
   request.agent = (opts.agent as Agent) || false;
   request.headers = (opts.headers || {}) as Headers;
@@ -168,11 +236,12 @@ function fetchToRequestResponse(opts: f.RequestInit, res: f.Response) {
   const resHeaders = {} as Headers;
   res.headers.forEach((value, key) => (resHeaders[key] = value));
 
-  const response = Object.assign(res.body as {}, {
+  const body = bodyStream !== undefined ? bodyStream : res.body;
+  const response = Object.assign((body || {}) as {}, {
     statusCode: res.status,
     statusMessage: res.statusText,
     request,
-    body: res.body,
+    body,
     headers: resHeaders,
     toJSON: () => ({headers: resHeaders}),
   });
@@ -210,6 +279,7 @@ function createMultipartStream(boundary: string, multipart: RequestPart[]) {
   return stream;
 }
 
+/* eslint-disable promise/catch-or-return, promise/always-return, promise/no-callback-in-promise */
 function teenyRequest(reqOpts: Options): Request;
 function teenyRequest(reqOpts: Options, callback: RequestCallback): void;
 function teenyRequest(
@@ -291,13 +361,20 @@ function teenyRequest(
     fetch(uri, options).then(
       res => {
         teenyRequest.stats.requestFinished();
-        responseStream = res.body;
+        responseStream =
+          res.body &&
+          !(res.body instanceof Readable) &&
+          typeof Readable.fromWeb === 'function'
+            ? Readable.fromWeb(
+                res.body as unknown as import('stream/web').ReadableStream,
+              )
+            : res.body;
 
         responseStream.on('error', (err: Error) => {
           requestStream.emit('error', err);
         });
 
-        const response = fetchToRequestResponse(options, res);
+        const response = fetchToRequestResponse(options, res, responseStream);
         requestStream.emit('response', response);
       },
       err => {
@@ -379,4 +456,4 @@ teenyRequest.resetStats = (): void => {
   teenyRequest.stats = new TeenyStatistics(teenyRequest.stats.getOptions());
 };
 
-export {teenyRequest};
+export {teenyRequest, requestToFetchOptions, fetchToRequestResponse};

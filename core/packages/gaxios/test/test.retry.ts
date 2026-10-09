@@ -397,4 +397,31 @@ describe('🛸 retry & exponential backoff', () => {
 
     scope.done();
   });
+
+  it('should retry on `timeout` with default fetch implementation', async () => {
+    const scope = nock(url).get('/').delay(500).reply(400).get('/').reply(204);
+
+    const gaxios = new Gaxios();
+    const timeout = 100;
+
+    async function onRetryAttempt(err: GaxiosError) {
+      assert(err.config.signal?.reason instanceof DOMException);
+      assert.equal(err.config.signal.reason.name, 'TimeoutError');
+      assert.equal(err.code, 'TimeoutError');
+      err.config.timeout = 10000;
+    }
+
+    const res = await gaxios.request({
+      url,
+      timeout,
+      retryConfig: {
+        onRetryAttempt,
+      },
+    });
+
+    assert.equal(res.status, 204);
+    assert.equal(res.config?.retryConfig?.currentRetryAttempt, 1);
+
+    scope.done();
+  });
 });

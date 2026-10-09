@@ -167,6 +167,13 @@ async function metadataAccessor<T>(
     params,
     responseType: 'text',
     timeout: requestTimeout(),
+    ...('Bun' in globalThis &&
+      typeof globalThis.fetch === 'function' && {
+        fetchImplementation: (
+          (globalThis as {__googleCloudBunFetch?: typeof fetch})
+            .__googleCloudBunFetch || globalThis.fetch
+        ).bind(globalThis),
+      }),
   } as GaxiosOptions;
   log.info('instance request %j', req);
 
@@ -215,7 +222,14 @@ async function fastFailMetadataRequest<T>(
   //
   const r1: Promise<GaxiosResponse> = request<T>(options);
   const r2: Promise<GaxiosResponse> = request<T>(secondaryOptions);
-  return Promise.any([r1, r2]);
+  try {
+    return await Promise.any([r1, r2]);
+  } catch (err) {
+    if (err instanceof AggregateError && !err.message) {
+      err.message = 'All promises were rejected';
+    }
+    throw err;
+  }
 }
 
 /**
@@ -403,6 +417,33 @@ function getErrorCodes(
   return ['UNKNOWN'];
 }
 
+function getErrorMessage(
+  err: ErrorWithDetails,
+  visited = new Set<unknown>(),
+  depth = 0,
+): string {
+  if (typeof err.message === 'string' && err.message.length > 0) {
+    return err.message;
+  }
+  if (visited.has(err) || depth > MAX_ERROR_DEPTH) {
+    return err.name || 'Unknown Error';
+  }
+  visited.add(err);
+  if (Array.isArray(err.errors) && err.errors.length > 0) {
+    const messages = err.errors
+      .map(subErr =>
+        isErrorWithDetails(subErr)
+          ? getErrorMessage(subErr, visited, depth + 1)
+          : String(subErr),
+      )
+      .filter(Boolean);
+    if (messages.length > 0) {
+      return [...new Set(messages)].join('; ');
+    }
+  }
+  return err.name || 'Unknown Error';
+}
+
 /**
  * Determine if the metadata server is currently available.
  */
@@ -475,8 +516,9 @@ export async function isAvailable() {
 
           if (!isExpected) {
             const code = [...new Set(codes)].join(', ');
+            const message = getErrorMessage(e);
             process.emitWarning(
-              `received unexpected error = ${e.message} code = ${code}`,
+              `received unexpected error = ${message} code = ${code}`,
               'MetadataLookupWarning',
             );
           }
