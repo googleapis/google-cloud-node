@@ -197,6 +197,7 @@ describe('v2.ProjectServiceClient', () => {
         .close()
         .then(() => {
           done();
+          return;
         })
         .catch(err => {
           throw err;
@@ -213,6 +214,7 @@ describe('v2.ProjectServiceClient', () => {
         .close()
         .then(() => {
           done();
+          return;
         })
         .catch(err => {
           throw err;

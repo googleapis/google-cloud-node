@@ -292,6 +292,7 @@ describe('v2.ConfigServiceV2Client', () => {
         .close()
         .then(() => {
           done();
+          return;
         })
         .catch(err => {
           throw err;
@@ -308,6 +309,7 @@ describe('v2.ConfigServiceV2Client', () => {
         .close()
         .then(() => {
           done();
+          return;
         })
         .catch(err => {
           throw err;

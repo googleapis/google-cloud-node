@@ -207,6 +207,7 @@ describe('v2alpha.PredictionServiceClient', () => {
         .close()
         .then(() => {
           done();
+          return;
         })
         .catch(err => {
           throw err;
@@ -224,6 +225,7 @@ describe('v2alpha.PredictionServiceClient', () => {
         .close()
         .then(() => {
           done();
+          return;
         })
         .catch(err => {
           throw err;

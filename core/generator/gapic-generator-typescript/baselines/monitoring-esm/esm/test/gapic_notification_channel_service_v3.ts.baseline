@@ -290,6 +290,7 @@ describe('v3.NotificationChannelServiceClient', () => {
         .close()
         .then(() => {
           done();
+          return;
         })
         .catch(err => {
           throw err;
@@ -309,6 +310,7 @@ describe('v3.NotificationChannelServiceClient', () => {
         .close()
         .then(() => {
           done();
+          return;
         })
         .catch(err => {
           throw err;

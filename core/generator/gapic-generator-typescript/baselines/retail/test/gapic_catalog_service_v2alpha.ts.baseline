@@ -261,6 +261,7 @@ describe('v2alpha.CatalogServiceClient', () => {
         .close()
         .then(() => {
           done();
+          return;
         })
         .catch(err => {
           throw err;
@@ -277,6 +278,7 @@ describe('v2alpha.CatalogServiceClient', () => {
         .close()
         .then(() => {
           done();
+          return;
         })
         .catch(err => {
           throw err;

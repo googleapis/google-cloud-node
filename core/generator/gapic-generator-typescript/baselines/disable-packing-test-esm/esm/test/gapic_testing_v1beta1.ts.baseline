@@ -222,6 +222,7 @@ describe('v1beta1.TestingClient', () => {
         .close()
         .then(() => {
           done();
+          return;
         })
         .catch(err => {
           throw err;
@@ -238,6 +239,7 @@ describe('v1beta1.TestingClient', () => {
         .close()
         .then(() => {
           done();
+          return;
         })
         .catch(err => {
           throw err;

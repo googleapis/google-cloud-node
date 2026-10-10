@@ -272,6 +272,7 @@ describe('v2alpha.ControlServiceClient', () => {
         .close()
         .then(() => {
           done();
+          return;
         })
         .catch(err => {
           throw err;
@@ -288,6 +289,7 @@ describe('v2alpha.ControlServiceClient', () => {
         .close()
         .then(() => {
           done();
+          return;
         })
         .catch(err => {
           throw err;

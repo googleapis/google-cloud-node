@@ -216,6 +216,7 @@ describe('v2alpha.GenerativeQuestionServiceClient', () => {
         .close()
         .then(() => {
           done();
+          return;
         })
         .catch(err => {
           throw err;
@@ -235,6 +236,7 @@ describe('v2alpha.GenerativeQuestionServiceClient', () => {
         .close()
         .then(() => {
           done();
+          return;
         })
         .catch(err => {
           throw err;

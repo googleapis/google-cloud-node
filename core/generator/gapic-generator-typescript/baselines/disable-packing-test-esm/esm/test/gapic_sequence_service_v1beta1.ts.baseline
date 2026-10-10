@@ -161,6 +161,7 @@ describe('v1beta1.SequenceServiceClient', () => {
         .close()
         .then(() => {
           done();
+          return;
         })
         .catch(err => {
           throw err;
@@ -177,6 +178,7 @@ describe('v1beta1.SequenceServiceClient', () => {
         .close()
         .then(() => {
           done();
+          return;
         })
         .catch(err => {
           throw err;
