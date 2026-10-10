@@ -1369,10 +1369,9 @@ class Table extends ServiceObject {
     const callback =
       typeof metadataOrCallback === 'function' ? metadataOrCallback : cb;
 
-    this._createLoadJob(source, metadata).then(
-      ([resp]) => callback!(null, resp, resp.metadata),
-      err => callback!(err),
-    );
+    this._createLoadJob(source, metadata)
+      .then(([resp]) => callback!(null, resp, resp.metadata))
+      .catch(err => callback!(err));
   }
 
   /**
@@ -1498,6 +1497,22 @@ class Table extends ServiceObject {
    */
   createQueryStream(query: Query): Duplex {
     return this.dataset.createQueryStream(query);
+  }
+
+  /**
+   * Run a query scoped to this table's dataset and stream Apache Arrow
+   * `RecordBatch` instances over a `Readable` stream.
+   */
+  createQueryArrowStream(query: Query | string) {
+    return this.dataset.createQueryArrowStream(query);
+  }
+
+  /**
+   * Run a query scoped to this table's dataset and return `[table, null, apiResponse]`.
+   */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  queryArrow(query: Query | string, callback?: any) {
+    return this.dataset.queryArrow(query, callback);
   }
 
   /**
@@ -2121,10 +2136,9 @@ class Table extends ServiceObject {
 
     const promise = this._insertAndCreateTable(rows, options);
     if (callback) {
-      promise.then(
-        resp => callback(null, resp),
-        err => callback(err, null),
-      );
+      promise
+        .then(resp => callback(null, resp))
+        .catch(err => callback(err, null));
     } else {
       return promise.then(r => [r]);
     }
