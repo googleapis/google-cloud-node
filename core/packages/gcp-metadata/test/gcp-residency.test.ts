@@ -101,6 +101,15 @@ describe('gcp-residency', () => {
       assert.equal(gcpResidency.isGoogleComputeEngine(), true);
     });
 
+    it('should return `false` on macOS even if a MAC address begins with `42:01`', () => {
+      residency.setGCENetworkInterface(true);
+      residency.setGCEPlatform('darwin');
+      residency.setGCELinuxBios(null);
+
+      assert.equal(gcpResidency.isGoogleComputeEngineMACAddress(), false);
+      assert.equal(gcpResidency.isGoogleComputeEngine(), false);
+    });
+
     it('should return `false` if the host MAC address does not begin with `42:01` & is not Linux', () => {
       residency.setGCENetworkInterface(false);
       residency.setGCEPlatform('win32');
