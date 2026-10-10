@@ -227,6 +227,7 @@ describe('EndToEnd', async () => {
             'Begin Transaction',
             'Transaction Creation Done',
             ...cacheSessionEvents,
+            'Using Session',
             'Starting stream',
           ];
           await verifySpansAndEvents(
