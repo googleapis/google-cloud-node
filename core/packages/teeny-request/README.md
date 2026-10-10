@@ -4,7 +4,7 @@
 
 # teeny-request 
 
-Like `request`, but much smaller - and with less options. Uses `node-fetch` under the hood. 
+Like `request`, but much smaller - and with less options. Uses `undici` under the hood. 
 Pop it in where you would use `request`. Improves load and parse time of modules. 
 
 ```js
