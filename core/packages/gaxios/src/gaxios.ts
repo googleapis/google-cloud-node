@@ -231,6 +231,30 @@ export class Gaxios implements FetchCompliance {
         err = new GaxiosError('Unexpected Gaxios Error', opts, undefined, e);
       }
 
+      // When `opts.timeout` is configured, `#appendTimeoutToSignal` attaches
+      // `AbortSignal.timeout(opts.timeout)` to `opts.signal`, which sets
+      // `opts.signal.reason` to a `TimeoutError` `DOMException` when it fires.
+      // However, `node-fetch` (and Bun's fetch/http shim when `nock` intercepts
+      // requests) rejects an aborted signal with a generic `AbortError`
+      // ('The user aborted a request.') rather than `opts.signal.reason`, and
+      // Bun's native `AbortSignal.timeout` uses the message 'The operation
+      // timed out.' instead of V8's 'The operation was aborted due to timeout'.
+      // Normalizing `err.code = 'TimeoutError'` and ensuring `err.message`
+      // describes the timeout allows `getRetryConfig` / `shouldRetryRequest`
+      // to recognize the error as a retriable timeout (retrying up to the
+      // configured retry limit, e.g. 3 attempts / `noResponseRetries`) rather
+      // than treating the aborted signal as a non-retriable user abort.
+      if (
+        !err.response &&
+        opts.signal?.aborted &&
+        opts.signal.reason?.name === 'TimeoutError'
+      ) {
+        err.code = 'TimeoutError';
+        if (!/timeout|timed out/i.test(err.message)) {
+          err.message = 'The operation was aborted due to timeout';
+        }
+      }
+
       const {shouldRetry, config} = await getRetryConfig(err);
       if (shouldRetry && config) {
         err.config.retryConfig!.currentRetryAttempt =
@@ -239,6 +263,9 @@ export class Gaxios implements FetchCompliance {
         // The error's config could be redacted - therefore we only want to
         // copy the retry state over to the existing config
         opts.retryConfig = err.config?.retryConfig;
+        if (typeof err.config?.timeout === 'number') {
+          opts.timeout = err.config.timeout;
+        }
 
         // re-prepare timeout for the next request
         this.#appendTimeoutToSignal(opts);
