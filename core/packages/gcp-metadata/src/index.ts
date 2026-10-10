@@ -215,7 +215,16 @@ async function fastFailMetadataRequest<T>(
   //
   const r1: Promise<GaxiosResponse> = request<T>(options);
   const r2: Promise<GaxiosResponse> = request<T>(secondaryOptions);
-  return Promise.any([r1, r2]);
+  try {
+    return await Promise.any([r1, r2]);
+  } catch (err) {
+    // Backfill the error message in case it is empty (e.g., in Bun/JavaScriptCore
+    // where Promise.any initializes AggregateError with an empty message).
+    if (err instanceof AggregateError && !err.message) {
+      err.message = 'All promises were rejected';
+    }
+    throw err;
+  }
 }
 
 /**
