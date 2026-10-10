@@ -1,0 +1,51 @@
+---
+name: breaking-change-check
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  breaking-change-check:
+    name: Check for breaking changes in public TypeScript interfaces
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          fetch-depth: 2
+          persist-credentials: false
+      - uses: dorny/paths-filter@fbd0ab8f3e69293af611ebaee6363fc25e6d187d # v4.0.1
+        id: changes
+        with:
+          filters: |
+            check:
+              - '**/*.ts'
+              - 'bin/breaking-change-check.mjs'
+              - 'bin/test/breaking-change-check.test.mjs'
+              - '.github/workflows/breaking-change-check.yaml'
+            checker_self:
+              - 'bin/breaking-change-check.mjs'
+              - 'bin/test/breaking-change-check.test.mjs'
+              - '.github/workflows/breaking-change-check.yaml'
+      - name: Use Node.js 24
+        if: steps.changes.outputs.check == 'true' || github.event_name == 'workflow_dispatch'
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6.5.0
+        with:
+          node-version: 24
+      - uses: ./.github/actions/pnpm-lockfile-check
+        if: steps.changes.outputs.check == 'true' || github.event_name == 'workflow_dispatch'
+      - name: Run breaking change checker unit tests
+        if: steps.changes.outputs.checker_self == 'true' || github.event_name == 'workflow_dispatch'
+        run: node --test ./bin/test/breaking-change-check.test.mjs
+      - name: Run breaking change check
+        if: steps.changes.outputs.check == 'true' || github.event_name == 'workflow_dispatch'
+        env:
+          GIT_DIFF_ARG: "HEAD^1...HEAD"
+        run: node ./bin/breaking-change-check.mjs --strict
