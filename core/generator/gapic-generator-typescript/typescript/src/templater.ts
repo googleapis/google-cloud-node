@@ -145,14 +145,9 @@ async function processOneTemplate(
       }
     }
   } else if (outputFilename.match(/\$service/)) {
+    // Render per-service templates (including unit test templates, which stub
+    // `client.warn` when `service.options.deprecated` is true).
     for (const service of api.services) {
-      // Do not generate tests for deprecated services
-      if (
-        service.options.deprecated === true &&
-        outputFilename.match('test/')
-      ) {
-        continue;
-      }
       result.push(
         await renderFile(
           outputFilename.replace(/\$service/, service.name!.toSnakeCase()),
