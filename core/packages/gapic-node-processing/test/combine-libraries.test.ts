@@ -18,6 +18,7 @@ import {
   writeFilesToGivenLocation,
   mergeVersionIndexExports,
   isVersionIndexFile,
+  setOnlyDefaultSystemTests,
 } from '../src/combine-libraries';
 import {describe, it} from 'mocha';
 import * as path from 'path';
@@ -303,6 +304,71 @@ export {BigtableInstanceAdminClient} from './bigtable_instance_admin_client';
 export {BigtableTableAdminClient} from './bigtable_table_admin_client';
 `
     );
+  });
+
+  describe('setOnlyDefaultSystemTests', () => {
+    const fixtureFiles = (rootPath: string, versionedDir: string) => [
+      {
+        filePath: `${rootPath}/${versionedDir}/system-test/fixtures/sample/src/index.ts`,
+      },
+    ];
+
+    it('should keep the default version and drop the other versions', () => {
+      const filePaths = fixtureFiles(
+        '/tmp/clean-run',
+        'google-analytics-data-v1beta-nodejs',
+      );
+      setOnlyDefaultSystemTests('v1beta', filePaths);
+      assert.strictEqual(filePaths.length, 1);
+    });
+
+    it('should drop a non-default version when the path above it contains the default version', () => {
+      // The temp directory Librarian generates can contain the default
+      // version, e.g. /tmp/upgrade-nodejs-v2Mp8W for v2.
+      const filePaths = fixtureFiles(
+        '/tmp/upgrade-nodejs-v2Mp8W',
+        'google-iam-v3-nodejs',
+      );
+      setOnlyDefaultSystemTests('v2', filePaths);
+      assert.strictEqual(filePaths.length, 0);
+    });
+
+    it('should not treat a version that starts with the default version as the default', () => {
+      const filePaths = fixtureFiles(
+        '/tmp/clean-run',
+        'google-cloud-speech-v1p1beta1-nodejs',
+      );
+      setOnlyDefaultSystemTests('v1', filePaths);
+      assert.strictEqual(filePaths.length, 0);
+    });
+
+    it('should find the versioned directory for esm libraries', () => {
+      const filePaths = [
+        {
+          filePath:
+            '/tmp/clean-run/google-cloud-tasks-v2-nodejs/esm/system-test/fixtures/sample/src/index.ts',
+        },
+      ];
+      setOnlyDefaultSystemTests('v2', filePaths);
+      assert.strictEqual(filePaths.length, 1);
+
+      const otherVersion = [
+        {
+          filePath:
+            '/tmp/clean-run/google-cloud-tasks-v2beta2-nodejs/esm/system-test/fixtures/sample/src/index.ts',
+        },
+      ];
+      setOnlyDefaultSystemTests('v2', otherVersion);
+      assert.strictEqual(otherVersion.length, 0);
+    });
+
+    it('should leave files outside the sample fixtures alone', () => {
+      const filePaths = [
+        {filePath: '/tmp/clean-run/google-iam-v3-nodejs/src/v3/index.ts'},
+      ];
+      setOnlyDefaultSystemTests('v2', filePaths);
+      assert.strictEqual(filePaths.length, 1);
+    });
   });
 
   describe('isVersionIndexFile', () => {

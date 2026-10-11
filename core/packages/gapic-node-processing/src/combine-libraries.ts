@@ -288,21 +288,40 @@ export async function ensureDirectoryExists(filePath: string): Promise<void> {
   }
 }
 
+const SYSTEM_TEST_FIXTURE_PATH = 'system-test/fixtures/sample/src';
+
+/**
+ * Returns the directory of the versioned library a sample fixture belongs to,
+ * e.g. "speech-v1p1beta1-nodejs". The version is part of that directory name
+ * rather than a path segment of its own, so it can only be read off there.
+ * ESM libraries nest their system tests one level deeper.
+ *
+ * @param normalizedPath A file path with forward slashes.
+ */
+function getVersionedLibraryDir(normalizedPath: string): string {
+  const parts = normalizedPath.split('/');
+  const systemTestIndex = parts.indexOf('system-test');
+  if (systemTestIndex < 0) return '';
+  let index = systemTestIndex - 1;
+  if (parts[index] === 'esm') index--;
+  return parts[index] ?? '';
+}
+
 export function setOnlyDefaultSystemTests(
   defaultVersion: string,
   filePaths: FilePaths[],
 ) {
-  const systemTestRegex = new RegExp(
-    'system-test/fixtures/sample/src',
-  );
-
   for (let i = filePaths.length - 1; i >= 0; i--) {
     const filePathObj = filePaths[i];
     const normalizedPath = filePathObj.filePath.replace(/\\/g, '/');
-    if (
-      systemTestRegex.test(normalizedPath) &&
-      !normalizedPath.includes(defaultVersion)
-    ) {
+    if (!normalizedPath.includes(SYSTEM_TEST_FIXTURE_PATH)) continue;
+    // Compare the version against the versioned library's directory name as a
+    // whole rather than looking for it anywhere in the path. Otherwise a
+    // directory that merely mentions the version (the temp directory Librarian
+    // runs in, or the "v1" inside "v1p1beta1") makes non-default versions look
+    // like the default one.
+    const versionedDir = getVersionedLibraryDir(normalizedPath);
+    if (!versionedDir.split('-').includes(defaultVersion)) {
       filePaths.splice(i, 1);
     }
   }
