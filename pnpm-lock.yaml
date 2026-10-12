@@ -1694,8 +1694,8 @@ importers:
   handwritten/bigquery-storage:
     dependencies:
       '@google-cloud/bigquery-storage-api':
-        specifier: ^0.3.0
-        version: 0.3.0
+        specifier: ^0.5.0
+        version: 0.5.0
       '@google-cloud/paginator':
         specifier: ^7.0.0
         version: 7.0.1
@@ -16412,8 +16412,8 @@ packages:
   '@foliojs-fork/restructure@2.0.2':
     resolution: {integrity: sha512-59SgoZ3EXbkfSX7b63tsou/SDGzwUEK6MuB5sKqgVK1/XE0fxmpsOb9DQI8LXW3KfGnAjImCGhhEb7uPPAUVNA==}
 
-  '@google-cloud/bigquery-storage-api@0.3.0':
-    resolution: {integrity: sha512-PPBOLw5IKE2wcdz/U4DV4KjeGHmt2Najwq73wrx9Jg0nHJor70jgsrrgdRNJ/4UvZ33ALhH55w0wmr2qk7PFrg==}
+  '@google-cloud/bigquery-storage-api@0.5.0':
+    resolution: {integrity: sha512-fN5uZpF13J61ukset7xhaHUweADtqTir5vI9KBq0CnRqirkEnKIvZxn34hoeO2NeP+rk8Ro2SeMVySJ6i16LuA==}
     engines: {node: '>=22'}
 
   '@google-cloud/bigquery@9.0.2':
@@ -26013,7 +26013,7 @@ snapshots:
 
   '@foliojs-fork/restructure@2.0.2': {}
 
-  '@google-cloud/bigquery-storage-api@0.3.0':
+  '@google-cloud/bigquery-storage-api@0.5.0':
     dependencies:
       google-gax: 6.1.0
     transitivePeerDependencies:
