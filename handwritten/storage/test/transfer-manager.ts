@@ -847,13 +847,13 @@ describe('Transfer Manager', () => {
       );
     });
 
-    it('should call abortUpload when a failure occurs after an uploadID is established', async () => {
+    it('should call abortUpload and reject with the original error when a failure occurs after an uploadID is established', async () => {
+      const fakeId = '123';
       const expectedErr = new MultiPartUploadError(
         'Hello World',
-        '',
+        fakeId,
         new Map<number, string>()
       );
-      const fakeId = '123';
 
       mockGeneratorFunction = (bucket, fileName, uploadId, partsMap) => {
         fakeHelper = sandbox.createStubInstance(FakeXMLHelper);
@@ -862,7 +862,7 @@ describe('Transfer Manager', () => {
         fakeHelper.initiateUpload.resolves();
         fakeHelper.uploadPart.callsFake(() => {
           fakeHelper.uploadId = fakeId;
-          return Promise.reject(expectedErr);
+          return Promise.reject(new Error(expectedErr.message));
         });
         fakeHelper.completeUpload.resolves();
         fakeHelper.abortUpload.callsFake(() => {
@@ -872,9 +872,45 @@ describe('Transfer Manager', () => {
         return fakeHelper;
       };
 
-      assert.doesNotThrow(() =>
-        transferManager.uploadFileInChunks(filePath, {}, mockGeneratorFunction)
+      await assert.rejects(
+        transferManager.uploadFileInChunks(filePath, {}, mockGeneratorFunction),
+        expectedErr
       );
+      assert.strictEqual(fakeHelper.abortUpload.calledOnce, true);
+    });
+
+    it('should reject with an error containing both messages when both uploadPart and abortUpload fail', async () => {
+      const fakeId = '123';
+      const uploadErr = new Error('Chunk upload failed');
+      const abortErr = new Error('Abort upload failed');
+      const expectedErr = new MultiPartUploadError(
+        `${uploadErr.message}\n${abortErr.message}`,
+        fakeId,
+        new Map<number, string>()
+      );
+
+      mockGeneratorFunction = (bucket, fileName, uploadId, partsMap) => {
+        fakeHelper = sandbox.createStubInstance(FakeXMLHelper);
+        fakeHelper.uploadId = uploadId || '';
+        fakeHelper.partsMap = partsMap || new Map<number, string>();
+        fakeHelper.initiateUpload.resolves();
+        fakeHelper.uploadPart.callsFake(() => {
+          fakeHelper.uploadId = fakeId;
+          return Promise.reject(uploadErr);
+        });
+        fakeHelper.completeUpload.resolves();
+        fakeHelper.abortUpload.callsFake(() => {
+          assert.strictEqual(fakeHelper.uploadId, fakeId);
+          return Promise.reject(abortErr);
+        });
+        return fakeHelper;
+      };
+
+      await assert.rejects(
+        transferManager.uploadFileInChunks(filePath, {}, mockGeneratorFunction),
+        expectedErr
+      );
+      assert.strictEqual(fakeHelper.abortUpload.calledOnce, true);
     });
 
     it('should set the appropriate `GCCL_GCS_CMD_KEY`', async () => {
