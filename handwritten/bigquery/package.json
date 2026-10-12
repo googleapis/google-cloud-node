@@ -54,6 +54,7 @@
     "@google-cloud/paginator": "^7.0.0",
     "@google-cloud/precise-date": "^6.0.0",
     "@google-cloud/promisify": "^6.0.0",
+    "apache-arrow": "^21.0.0",
     "teeny-request": "^11.0.0",
     "arrify": "^3.0.0",
     "big.js": "^7.0.0",
@@ -68,6 +69,7 @@
     }
   },
   "devDependencies": {
+    "@google-cloud/bigquery-storage": "^6.1.0",
     "@google-cloud/storage": "^7.16.0",
     "@types/big.js": "^6.2.2",
     "@types/duplexify": "^3.6.4",
