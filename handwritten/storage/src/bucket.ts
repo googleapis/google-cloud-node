@@ -13,10 +13,8 @@
 // limitations under the License.
 
 import {
-  ApiError,
-  BodyResponseCallback,
-  DecorateRequestOptions,
   DeleteCallback,
+  DeleteOptions,
   ExistsCallback,
   GetConfig,
   MetadataCallback,
@@ -24,12 +22,6 @@ import {
   SetMetadataResponse,
   util,
 } from './nodejs-common/index.js';
-import {
-  BaseMetadata,
-  DeleteOptions,
-  RequestResponse,
-  SetMetadataOptions,
-} from './nodejs-common/service-object.js';
 import {paginator} from '@google-cloud/paginator';
 import {promisifyAll} from '@google-cloud/promisify';
 import * as fs from 'fs';
@@ -37,6 +29,7 @@ import * as http from 'http';
 import * as path from 'path';
 import {promisify} from 'util';
 import AsyncRetry from 'async-retry';
+import {randomUUID} from 'crypto';
 import {
   convertObjKeysToSnakeCase,
   handleContextValidation,
@@ -51,6 +44,7 @@ import {
   FileOptions,
   CreateResumableUploadOptions,
   CreateWriteStreamOptions,
+  CreateWriteStreamOptionsInternal,
   FileMetadata,
   ContextValue,
 } from './file.js';
@@ -73,6 +67,13 @@ import {
 import {Readable} from 'stream';
 import {CRC32CValidatorGenerator} from './crc32c.js';
 import {URL} from 'url';
+import {
+  BaseMetadata,
+  Methods,
+  SetMetadataOptions,
+} from './nodejs-common/service-object.js';
+import {GaxiosError} from 'gaxios';
+import {StorageQueryParameters} from './storage-transport.js';
 
 interface SourceObject {
   name: string;
@@ -102,8 +103,13 @@ export interface GetFilesCallback {
     err: Error | null,
     files?: File[],
     nextQuery?: {},
-    apiResponse?: unknown
+    apiResponse?: unknown,
   ): void;
+}
+
+interface GetFilesResponseData {
+  items?: FileMetadata[];
+  nextPageToken?: string;
 }
 
 interface WatchAllOptions {
@@ -192,7 +198,7 @@ export class ComposeCleanupError extends Error {
     message: string,
     errors: Error[],
     newFile: File,
-    apiResponse: unknown
+    apiResponse: unknown,
   ) {
     super(message);
     this.name = 'ComposeCleanupError';
@@ -212,6 +218,10 @@ export interface CreateChannelOptions {
 
 export type CreateChannelResponse = [Channel, unknown];
 
+export interface CreateChannel extends BaseMetadata {
+  resourceId?: string;
+}
+
 export interface CreateChannelCallback {
   (err: Error | null, channel: Channel | null, apiResponse: unknown): void;
 }
@@ -228,7 +238,7 @@ export interface CreateNotificationCallback {
   (
     err: Error | null,
     notification: Notification | null,
-    apiResponse: unknown
+    apiResponse: unknown,
   ): void;
 }
 
@@ -290,7 +300,7 @@ export interface GetBucketOptions extends GetConfig {
 export type GetBucketResponse = [Bucket, unknown];
 
 export interface GetBucketCallback {
-  (err: ApiError | null, bucket: Bucket | null, apiResponse: unknown): void;
+  (err: GaxiosError | null, bucket: Bucket | null, apiResponse: unknown): void;
 }
 
 export interface GetLabelsOptions {
@@ -304,6 +314,8 @@ export interface GetLabelsCallback {
 }
 
 export interface RestoreOptions {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  [key: string]: any;
   generation: string;
   projection?: 'full' | 'noAcl';
 }
@@ -437,9 +449,9 @@ export type GetBucketMetadataResponse = [BucketMetadata, unknown];
 
 export interface GetBucketMetadataCallback {
   (
-    err: ApiError | null,
+    err: GaxiosError | null,
     metadata: BucketMetadata | null,
-    apiResponse: unknown
+    apiResponse: unknown,
   ): void;
 }
 
@@ -477,12 +489,15 @@ export interface GetNotificationsCallback {
   (
     err: Error | null,
     notifications: Notification[] | null,
-    apiResponse: unknown
+    apiResponse: unknown,
   ): void;
 }
 
 export type GetNotificationsResponse = [Notification[], unknown];
 
+export interface GetNotificationsResponseData {
+  items?: NotificationMetadata[];
+}
 export interface MakeBucketPrivateOptions {
   includeFiles?: boolean;
   force?: boolean;
@@ -587,6 +602,7 @@ export enum BucketExceptionMessages {
   SPECIFY_FILE_NAME = 'A file name must be specified.',
   METAGENERATION_NOT_PROVIDED = 'A metageneration must be provided.',
   SUPPLY_NOTIFICATION_ID = 'You must supply a notification ID.',
+  INVALID_CHANNEL_RESPONSE = 'Response data was null',
 }
 
 /**
@@ -941,7 +957,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
       requestQueryObject.userProject = userProject;
     }
 
-    const methods = {
+    const methods: Methods = {
       /**
        * Create a bucket.
        *
@@ -972,7 +988,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
        */
       create: {
         reqOpts: {
-          qs: requestQueryObject,
+          queryParameters: requestQueryObject,
         },
       },
       /**
@@ -1026,7 +1042,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
        */
       delete: {
         reqOpts: {
-          qs: requestQueryObject,
+          queryParameters: requestQueryObject,
         },
       },
       /**
@@ -1071,7 +1087,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
        */
       exists: {
         reqOpts: {
-          qs: requestQueryObject,
+          queryParameters: requestQueryObject,
         },
       },
       /**
@@ -1130,7 +1146,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
        */
       get: {
         reqOpts: {
-          qs: requestQueryObject,
+          queryParameters: requestQueryObject,
         },
       },
       /**
@@ -1186,7 +1202,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
        */
       getMetadata: {
         reqOpts: {
-          qs: requestQueryObject,
+          queryParameters: requestQueryObject,
         },
       },
       /**
@@ -1296,14 +1312,15 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
        */
       setMetadata: {
         reqOpts: {
-          qs: requestQueryObject,
+          queryParameters: requestQueryObject,
         },
       },
     };
 
     super({
+      storageTransport: storage.storageTransport,
       parent: storage,
-      baseUrl: '/b',
+      baseUrl: '/storage/v1/b',
       id: name,
       createMethod: storage.createBucket.bind(storage),
       methods,
@@ -1316,12 +1333,14 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
     this.userProject = options.userProject;
 
     this.acl = new Acl({
-      request: this.request.bind(this),
+      parent: this,
+      storageTransport: this.storageTransport,
       pathPrefix: '/acl',
     });
 
     this.acl.default = new Acl({
-      request: this.request.bind(this),
+      parent: this,
+      storageTransport: this.storageTransport,
       pathPrefix: '/defaultObjectAcl',
     });
 
@@ -1359,16 +1378,16 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
 
   addLifecycleRule(
     rule: LifecycleRule | LifecycleRule[],
-    options?: AddLifecycleRuleOptions
+    options?: AddLifecycleRuleOptions,
   ): Promise<SetBucketMetadataResponse>;
   addLifecycleRule(
     rule: LifecycleRule | LifecycleRule[],
     options: AddLifecycleRuleOptions,
-    callback: SetBucketMetadataCallback
+    callback: SetBucketMetadataCallback,
   ): void;
   addLifecycleRule(
     rule: LifecycleRule | LifecycleRule[],
-    callback: SetBucketMetadataCallback
+    callback: SetBucketMetadataCallback,
   ): void;
   /**
    * @typedef {object} AddLifecycleRuleOptions Configuration options for Bucket#addLifecycleRule().
@@ -1541,7 +1560,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
   addLifecycleRule(
     rule: LifecycleRule | LifecycleRule[],
     optionsOrCallback?: AddLifecycleRuleOptions | SetBucketMetadataCallback,
-    callback?: SetBucketMetadataCallback
+    callback?: SetBucketMetadataCallback,
   ): Promise<SetBucketMetadataResponse> | void {
     let options: AddLifecycleRuleOptions = {};
 
@@ -1580,13 +1599,14 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
 
     // The default behavior appends the previously-defined lifecycle rules with
     // the new ones just passed in by the user.
-    void this.getMetadata((err: ApiError | null, metadata: BucketMetadata) => {
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
+    this.getMetadata((err: GaxiosError | null, metadata: BucketMetadata) => {
       if (err) {
         callback!(err);
         return;
       }
 
-      const currentLifecycleRules = Array.isArray(metadata.lifecycle?.rule)
+      const currentLifecycleRules = Array.isArray(metadata?.lifecycle?.rule)
         ? metadata.lifecycle?.rule
         : [];
 
@@ -1595,7 +1615,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
           lifecycle: {rule: currentLifecycleRules!.concat(rules)},
         },
         options as AddLifecycleRuleOptions,
-        callback!
+        callback!,
       );
     });
   }
@@ -1603,18 +1623,18 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
   combine(
     sources: string[] | File[],
     destination: string | File,
-    options?: CombineOptions
+    options?: CombineOptions,
   ): Promise<CombineResponse>;
   combine(
     sources: string[] | File[],
     destination: string | File,
     options: CombineOptions,
-    callback: CombineCallback
+    callback: CombineCallback,
   ): void;
   combine(
     sources: string[] | File[],
     destination: string | File,
-    callback: CombineCallback
+    callback: CombineCallback,
   ): void;
   /**
    * @typedef {object} CombineOptions
@@ -1693,7 +1713,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
     sources: string[] | File[],
     destination: string | File,
     optionsOrCallback?: CombineOptions | CombineCallback,
-    callback?: CombineCallback
+    callback?: CombineCallback,
   ): Promise<CombineResponse> | void {
     if (!Array.isArray(sources) || sources.length === 0) {
       throw new Error(BucketExceptionMessages.PROVIDE_SOURCE_FILE);
@@ -1713,7 +1733,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
     if (options.contexts) {
       const validationError = handleContextValidation(
         options.contexts,
-        callback
+        callback,
       );
       if (validationError) return validationError;
     }
@@ -1721,7 +1741,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
     this.disableAutoRetryConditionallyIdempotent_(
       this.methods.setMetadata, // Not relevant but param is required
       AvailableServiceObjectMethods.setMetadata, // Same as above
-      options
+      options,
     );
 
     const convertToFile = (file: string | File): File => {
@@ -1770,48 +1790,14 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
           Object.assign(
             requestQueryObject,
             destinationFile.instancePreconditionOpts,
-            requestQueryObject
+            requestQueryObject,
           );
         }
 
-        // Make the request from the destination File object.
-        destinationFile.request(
-          {
-            method: 'POST',
-            uri: '/compose',
-            maxRetries,
-            json: {
-              destination: {
-                contentType: destinationFile.metadata.contentType,
-                contentEncoding: destinationFile.metadata.contentEncoding,
-                contexts:
-                  requestQueryObject.contexts ||
-                  destinationFile.metadata.contexts,
-              },
-              sourceObjects: (sources as File[]).map(source => {
-                const sourceObject = {
-                  name: source.name,
-                } as SourceObject;
-
-                const generation =
-                  source.generation ?? source.metadata?.generation;
-                if (generation !== undefined) {
-                  sourceObject.generation = parseInt(generation.toString());
-                }
-
-                return sourceObject;
-              }),
-            },
-            qs: requestQueryObject,
-          },
-          (err, resp) => {
-            this.storage.retryOptions.autoRetry = this.instanceRetryValue;
-            if (err) {
-              callback!(err, null, resp);
-              return;
-            }
-
-            if (deleteSourceObjects) {
+        const cleanupSourceObjects = (resp?: unknown) => {
+          // eslint-disable-next-line @typescript-eslint/no-floating-promises
+          (async () => {
+            try {
               const deletePromises = (sources as File[]).map(source => {
                 const deleteOptions: DeleteOptions = {
                   ignoreNotFound: true,
@@ -1821,7 +1807,9 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
                 const generation =
                   source.generation ?? source.metadata?.generation;
                 if (generation !== undefined) {
-                  deleteOptions.ifGenerationMatch = generation;
+                  deleteOptions.ifGenerationMatch = parseInt(
+                    generation.toString(),
+                  );
                 }
 
                 return source
@@ -1829,31 +1817,79 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
                   .catch(deleteErr => deleteErr as Error);
               });
 
-              void (async () => {
-                // eslint-disable-next-line promise/no-promise-in-callback
-                const results = await Promise.all(deletePromises);
-                const errors = results.filter(
-                  (res): res is Error => res instanceof Error
+              const results = await Promise.all(deletePromises);
+              const errors = results.filter(
+                (res): res is Error => res instanceof Error,
+              );
+
+              if (errors.length > 0) {
+                const cleanupErr = new ComposeCleanupError(
+                  `Compose operation succeeded, but cleaning up source objects failed. Failed to delete ${errors.length} source object(s).`,
+                  errors,
+                  destinationFile,
+                  resp,
                 );
+                callback!(cleanupErr, destinationFile, resp);
+                return;
+              }
 
-                if (errors.length > 0) {
-                  const cleanupErr = new ComposeCleanupError(
-                    `Compose operation succeeded, but cleaning up source objects failed. Failed to delete ${errors.length} source object(s).`,
-                    errors,
-                    destinationFile,
-                    resp
-                  );
-                  callback!(cleanupErr, destinationFile, resp);
-                  return;
-                }
-
-                callback!(null, destinationFile, resp);
-              })();
-            } else {
               callback!(null, destinationFile, resp);
+            } catch (cleanupErr) {
+              callback!(cleanupErr as Error, destinationFile, resp);
             }
-          }
-        );
+          })();
+        };
+
+        // Make the request from the destination File object.
+        destinationFile.storageTransport
+          .makeRequest(
+            {
+              method: 'POST',
+              url: `/storage/v1/b/${this.name}/o/${encodeURIComponent(destinationFile.name)}/compose`,
+              maxRetries,
+              body: JSON.stringify({
+                destination: {
+                  contentType: destinationFile.metadata.contentType,
+                  contentEncoding: destinationFile.metadata.contentEncoding,
+                  contexts:
+                    requestQueryObject.contexts ||
+                    destinationFile.metadata.contexts,
+                },
+                sourceObjects: (sources as File[]).map(source => {
+                  const sourceObject = {
+                    name: source.name,
+                  } as SourceObject;
+
+                  const generation =
+                    source.generation ?? source.metadata?.generation;
+                  if (generation !== undefined) {
+                    sourceObject.generation = parseInt(generation.toString());
+                  }
+
+                  return sourceObject;
+                }),
+              }),
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              queryParameters:
+                requestQueryObject as unknown as StorageQueryParameters,
+            },
+            (err, resp) => {
+              this.storage.retryOptions.autoRetry = this.instanceRetryValue;
+              if (err) {
+                callback!(err, null, resp);
+                return;
+              }
+
+              if (deleteSourceObjects) {
+                cleanupSourceObjects(resp);
+              } else {
+                callback!(null, destinationFile, resp);
+              }
+            },
+          )
+          ?.catch(err => callback!(err, null, null));
       } catch (err) {
         callback!(err as Error, null, null);
       }
@@ -1863,18 +1899,18 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
   createChannel(
     id: string,
     config: CreateChannelConfig,
-    options?: CreateChannelOptions
+    options?: CreateChannelOptions,
   ): Promise<CreateChannelResponse>;
   createChannel(
     id: string,
     config: CreateChannelConfig,
-    callback: CreateChannelCallback
+    callback: CreateChannelCallback,
   ): void;
   createChannel(
     id: string,
     config: CreateChannelConfig,
     options: CreateChannelOptions,
-    callback: CreateChannelCallback
+    callback: CreateChannelCallback,
   ): void;
   /**
    * See a {@link https://cloud.google.com/storage/docs/json_api/v1/objects/watchAll| Objects: watchAll request body}.
@@ -1971,7 +2007,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
     id: string,
     config: CreateChannelConfig,
     optionsOrCallback?: CreateChannelOptions | CreateChannelCallback,
-    callback?: CreateChannelCallback
+    callback?: CreateChannelCallback,
   ): Promise<CreateChannelResponse> | void {
     if (typeof id !== 'string') {
       throw new Error(BucketExceptionMessages.CHANNEL_ID_REQUIRED);
@@ -1984,43 +2020,54 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
       options = optionsOrCallback;
     }
 
-    this.request(
-      {
-        method: 'POST',
-        uri: '/o/watch',
-        json: Object.assign(
-          {
-            id,
-            type: 'web_hook',
-          },
-          config
-        ),
-        qs: options,
-      },
-      (err, apiResponse) => {
-        if (err) {
-          callback!(err, null, apiResponse);
-          return;
-        }
+    this.storageTransport
+      .makeRequest<CreateChannel>(
+        {
+          method: 'POST',
+          url: `${this.baseUrl}/${this.name}/o/watch`,
+          body: JSON.stringify(
+            Object.assign(
+              {
+                id,
+                type: 'web_hook',
+              },
+              config,
+            ),
+          ),
+          queryParameters: options as unknown as StorageQueryParameters,
+        },
+        (err, data, resp) => {
+          if (err) {
+            callback!(err, null, resp);
+            return;
+          }
+          if (data && data.resourceId) {
+            const resourceId = data.resourceId;
+            const channel = this.storage.channel(id, resourceId);
 
-        const resourceId = apiResponse.resourceId;
-        const channel = this.storage.channel(id, resourceId);
+            channel.metadata = data as BaseMetadata;
 
-        channel.metadata = apiResponse;
-
-        callback!(null, channel, apiResponse);
-      }
-    );
+            callback!(null, channel, resp);
+            return;
+          }
+          callback!(
+            new Error(BucketExceptionMessages.INVALID_CHANNEL_RESPONSE),
+            null,
+            resp,
+          );
+        },
+      )
+      .catch(err => callback!(err, null, null));
   }
 
   createNotification(
     topic: string,
-    options?: CreateNotificationOptions
+    options?: CreateNotificationOptions,
   ): Promise<CreateNotificationResponse>;
   createNotification(
     topic: string,
     options: CreateNotificationOptions,
-    callback: CreateNotificationCallback
+    callback: CreateNotificationCallback,
   ): void;
   createNotification(topic: string, callback: CreateNotificationCallback): void;
   /**
@@ -2130,7 +2177,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
   createNotification(
     topic: string,
     optionsOrCallback?: CreateNotificationOptions | CreateNotificationCallback,
-    callback?: CreateNotificationCallback
+    callback?: CreateNotificationCallback,
   ): Promise<CreateNotificationResponse> | void {
     let options: CreateNotificationOptions = {};
     if (typeof optionsOrCallback === 'function') {
@@ -2152,7 +2199,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
     const body = Object.assign({topic}, options);
 
     if (body.topic.indexOf('projects') !== 0) {
-      body.topic = 'projects/{{projectId}}/topics/' + body.topic;
+      body.topic = `projects/${this.storage.projectId}/topics/` + body.topic;
     }
 
     body.topic = `//pubsub.${this.storage.universeDomain}/` + body.topic;
@@ -2168,27 +2215,32 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
       delete body.userProject;
     }
 
-    this.request(
-      {
-        method: 'POST',
-        uri: '/notificationConfigs',
-        json: convertObjKeysToSnakeCase(body),
-        qs: query,
-        maxRetries: 0, //explicitly set this value since this is a non-idempotent function
-      },
-      (err, apiResponse) => {
-        if (err) {
-          callback!(err, null, apiResponse);
-          return;
-        }
+    this.storageTransport
+      .makeRequest(
+        {
+          method: 'POST',
+          url: `${this.baseUrl}/${this.name}/notificationConfigs`,
+          body: JSON.stringify(convertObjKeysToSnakeCase(body)),
+          queryParameters: query as unknown as StorageQueryParameters,
+          retry: false,
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        },
+        (err, data, resp) => {
+          if (err) {
+            callback!(err, null, resp);
+            return;
+          }
 
-        const notification = this.notification(apiResponse.id);
-
-        notification.metadata = apiResponse;
-
-        callback!(null, notification, apiResponse);
-      }
-    );
+          const notification = this.notification(
+            (data as NotificationMetadata).id!,
+          );
+          notification.metadata = data as NotificationMetadata;
+          callback!(null, notification, resp);
+        },
+      )
+      .catch(err => callback!(err, null, null));
   }
 
   deleteFiles(query?: DeleteFilesOptions): Promise<void>;
@@ -2276,7 +2328,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
    */
   deleteFiles(
     queryOrCallback?: DeleteFilesOptions | DeleteFilesCallback,
-    callback?: DeleteFilesCallback
+    callback?: DeleteFilesCallback,
   ): Promise<void> | void {
     let query: DeleteFilesOptions = {};
     if (typeof queryOrCallback === 'function') {
@@ -2298,7 +2350,8 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
       });
     };
 
-    void (async () => {
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
+    (async () => {
       try {
         let promises = [];
         const pLimit = await getPLimit();
@@ -2314,7 +2367,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
             limit(() => deleteFile(curFile)).catch(e => {
               filesStream.destroy();
               throw e;
-            })
+            }),
           );
         }
 
@@ -2332,13 +2385,13 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
   deleteLabels(callback: DeleteLabelsCallback): void;
   deleteLabels(
     labels: string | string[],
-    options: DeleteLabelsOptions
+    options: DeleteLabelsOptions,
   ): Promise<DeleteLabelsResponse>;
   deleteLabels(labels: string | string[], callback: DeleteLabelsCallback): void;
   deleteLabels(
     labels: string | string[],
     options: DeleteLabelsOptions,
-    callback: DeleteLabelsCallback
+    callback: DeleteLabelsCallback,
   ): void;
   /**
    * @deprecated
@@ -2397,7 +2450,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
     labelsOrCallbackOrOptions?:
       string | string[] | DeleteLabelsCallback | DeleteLabelsOptions,
     optionsOrCallback?: DeleteLabelsCallback | DeleteLabelsOptions,
-    callback?: DeleteLabelsCallback
+    callback?: DeleteLabelsCallback,
   ): Promise<DeleteLabelsResponse> | void {
     let labels = new Array<string>();
     let options: DeleteLabelsOptions = {};
@@ -2445,12 +2498,12 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
   }
 
   disableRequesterPays(
-    options?: DisableRequesterPaysOptions
+    options?: DisableRequesterPaysOptions,
   ): Promise<DisableRequesterPaysResponse>;
   disableRequesterPays(callback: DisableRequesterPaysCallback): void;
   disableRequesterPays(
     options: DisableRequesterPaysOptions,
-    callback: DisableRequesterPaysCallback
+    callback: DisableRequesterPaysCallback,
   ): void;
   /**
    * @typedef {array} DisableRequesterPaysResponse
@@ -2502,7 +2555,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
   disableRequesterPays(
     optionsOrCallback?:
       DisableRequesterPaysOptions | DisableRequesterPaysCallback,
-    callback?: DisableRequesterPaysCallback
+    callback?: DisableRequesterPaysCallback,
   ): Promise<DisableRequesterPaysResponse> | void {
     let options: DisableRequesterPaysOptions = {};
     if (typeof optionsOrCallback === 'function') {
@@ -2518,16 +2571,16 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
         },
       },
       options,
-      callback!
+      callback!,
     );
   }
 
   enableLogging(
-    config: EnableLoggingOptions
+    config: EnableLoggingOptions,
   ): Promise<SetBucketMetadataResponse>;
   enableLogging(
     config: EnableLoggingOptions,
-    callback: SetBucketMetadataCallback
+    callback: SetBucketMetadataCallback,
   ): void;
   /**
    * Configuration object for enabling logging.
@@ -2587,7 +2640,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
    */
   enableLogging(
     config: EnableLoggingOptions,
-    callback?: SetBucketMetadataCallback
+    callback?: SetBucketMetadataCallback,
   ): Promise<SetBucketMetadataResponse> | void {
     if (
       !config ||
@@ -2595,7 +2648,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
       typeof config.prefix === 'undefined'
     ) {
       throw new Error(
-        BucketExceptionMessages.CONFIGURATION_OBJECT_PREFIX_REQUIRED
+        BucketExceptionMessages.CONFIGURATION_OBJECT_PREFIX_REQUIRED,
       );
     }
 
@@ -2613,7 +2666,8 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
     if (config?.ifMetagenerationNotMatch) {
       options.ifMetagenerationNotMatch = config.ifMetagenerationNotMatch;
     }
-    void (async () => {
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
+    (async () => {
       try {
         const [policy] = await this.iam.getPolicy();
         policy.bindings.push({
@@ -2629,7 +2683,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
             },
           },
           options,
-          callback!
+          callback!,
         );
       } catch (e) {
         callback!(e as Error);
@@ -2639,12 +2693,12 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
   }
 
   enableRequesterPays(
-    options?: EnableRequesterPaysOptions
+    options?: EnableRequesterPaysOptions,
   ): Promise<EnableRequesterPaysResponse>;
   enableRequesterPays(callback: EnableRequesterPaysCallback): void;
   enableRequesterPays(
     options: EnableRequesterPaysOptions,
-    callback: EnableRequesterPaysCallback
+    callback: EnableRequesterPaysCallback,
   ): void;
 
   /**
@@ -2699,7 +2753,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
   enableRequesterPays(
     optionsOrCallback?:
       EnableRequesterPaysCallback | EnableRequesterPaysOptions,
-    cb?: EnableRequesterPaysCallback
+    cb?: EnableRequesterPaysCallback,
   ): Promise<EnableRequesterPaysResponse> | void {
     let options: EnableRequesterPaysOptions = {};
     if (typeof optionsOrCallback === 'function') {
@@ -2715,7 +2769,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
         },
       },
       options,
-      cb!
+      cb!,
     );
   }
 
@@ -2994,7 +3048,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
    */
   getFiles(
     queryOrCallback?: GetFilesOptions | GetFilesCallback,
-    callback?: GetFilesCallback
+    callback?: GetFilesCallback,
   ): void | Promise<GetFilesResponse> {
     let query = typeof queryOrCallback === 'object' ? queryOrCallback : {};
     if (!callback) {
@@ -3009,51 +3063,52 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
       query.fields = `${query.fields},nextPageToken`;
     }
 
-    this.request(
-      {
-        uri: '/o',
-        qs: query,
-      },
-      (err, resp) => {
-        if (err) {
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (callback as any)(err, null, null, resp);
-          return;
-        }
+    this.storageTransport
+      .makeRequest<GetFilesResponseData>(
+        {
+          url: `${this.baseUrl}/${this.name}/o`,
+          queryParameters: query as unknown as StorageQueryParameters,
+        },
+        (err, data, resp) => {
+          if (err) {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            (callback as any)(err, null, null, resp);
+            return;
+          }
+          const itemsArray = data?.items ?? [];
+          const files = itemsArray.map((file: FileMetadata) => {
+            const options = {} as FileOptions;
 
-        const itemsArray = resp.items ? resp.items : [];
-        const files = itemsArray.map((file: FileMetadata) => {
-          const options = {} as FileOptions;
+            if (query.fields) {
+              const fileInstance = file;
+              return fileInstance;
+            }
 
-          if (query.fields) {
-            const fileInstance = file;
+            if (query.versions) {
+              options.generation = file.generation;
+            }
+
+            if (file.kmsKeyName) {
+              options.kmsKeyName = file.kmsKeyName;
+            }
+
+            const fileInstance = this.file(file.name!, options);
+            fileInstance.metadata = file;
+
             return fileInstance;
-          }
-
-          if (query.versions) {
-            options.generation = file.generation;
-          }
-
-          if (file.kmsKeyName) {
-            options.kmsKeyName = file.kmsKeyName;
-          }
-
-          const fileInstance = this.file(file.name!, options);
-          fileInstance.metadata = file;
-
-          return fileInstance;
-        });
-
-        let nextQuery: object | null = null;
-        if (resp.nextPageToken) {
-          nextQuery = Object.assign({}, query, {
-            pageToken: resp.nextPageToken,
           });
-        }
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        (callback as any)(null, files, nextQuery, resp);
-      }
-    );
+
+          let nextQuery: object | null = null;
+          if (data?.nextPageToken) {
+            nextQuery = Object.assign({}, query, {
+              pageToken: data.nextPageToken,
+            });
+          }
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (callback as any)(null, files, nextQuery, resp);
+        },
+      )
+      .catch(err => callback!(err));
   }
 
   getLabels(options?: GetLabelsOptions): Promise<GetLabelsResponse>;
@@ -3113,7 +3168,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
    */
   getLabels(
     optionsOrCallback?: GetLabelsOptions | GetLabelsCallback,
-    callback?: GetLabelsCallback
+    callback?: GetLabelsCallback,
   ): Promise<GetLabelsResponse> | void {
     let options: GetLabelsOptions = {};
     if (typeof optionsOrCallback === 'function') {
@@ -3124,24 +3179,24 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
 
     this.getMetadata(
       options,
-      (err: ApiError | null, metadata: BucketMetadata | undefined) => {
+      (err: GaxiosError | null, metadata: BucketMetadata | undefined) => {
         if (err) {
           callback!(err, null);
           return;
         }
 
         callback!(null, metadata?.labels || {});
-      }
+      },
     );
   }
 
   getNotifications(
-    options?: GetNotificationsOptions
+    options?: GetNotificationsOptions,
   ): Promise<GetNotificationsResponse>;
   getNotifications(callback: GetNotificationsCallback): void;
   getNotifications(
     options: GetNotificationsOptions,
-    callback: GetNotificationsCallback
+    callback: GetNotificationsCallback,
   ): void;
   /**
    * @typedef {object} GetNotificationsOptions Configuration options for Bucket#getNotification().
@@ -3198,7 +3253,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
    */
   getNotifications(
     optionsOrCallback?: GetNotificationsOptions | GetNotificationsCallback,
-    callback?: GetNotificationsCallback
+    callback?: GetNotificationsCallback,
   ): Promise<GetNotificationsResponse> | void {
     let options: GetNotificationsOptions = {};
     if (typeof optionsOrCallback === 'function') {
@@ -3207,34 +3262,34 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
       options = optionsOrCallback;
     }
 
-    this.request(
-      {
-        uri: '/notificationConfigs',
-        qs: options,
-      },
-      (err, resp) => {
-        if (err) {
-          callback!(err, null, resp);
-          return;
-        }
-        const itemsArray = resp.items ? resp.items : [];
-        const notifications = itemsArray.map(
-          (notification: NotificationMetadata) => {
+    this.storageTransport
+      .makeRequest<GetNotificationsResponseData>(
+        {
+          url: `${this.baseUrl}/${this.name}/notificationConfigs`,
+          queryParameters: options as unknown as StorageQueryParameters,
+        },
+        (err, data, resp) => {
+          if (err) {
+            callback!(err, null, resp);
+            return;
+          }
+          const itemsArray = data?.items ?? [];
+          const notifications = itemsArray.map(notification => {
             const notificationInstance = this.notification(notification.id!);
             notificationInstance.metadata = notification;
             return notificationInstance;
-          }
-        );
+          });
 
-        callback!(null, notifications, resp);
-      }
-    );
+          callback!(null, notifications, resp);
+        },
+      )
+      .catch(err => callback!(err, null, null));
   }
 
   getSignedUrl(cfg: GetBucketSignedUrlConfig): Promise<GetSignedUrlResponse>;
   getSignedUrl(
     cfg: GetBucketSignedUrlConfig,
-    callback: GetSignedUrlCallback
+    callback: GetSignedUrlCallback,
   ): void;
   /**
    * @typedef {array} GetSignedUrlResponse
@@ -3364,7 +3419,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
    */
   getSignedUrl(
     cfg: GetBucketSignedUrlConfig,
-    callback?: GetSignedUrlCallback
+    callback?: GetSignedUrlCallback,
   ): void | Promise<GetSignedUrlResponse> {
     const method = BucketActionToHTTPMethod[cfg.action];
 
@@ -3381,16 +3436,16 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
 
     if (!this.signer) {
       this.signer = new URLSigner(
-        this.storage.authClient,
+        this.storage.storageTransport.authClient,
         this,
         undefined,
-        this.storage
+        this.storage,
       );
     }
 
     void this.signer!.getSignedUrl(signConfig).then(
       signedUrl => callback!(null, signedUrl),
-      callback!
+      callback!,
     );
   }
 
@@ -3431,23 +3486,25 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
    */
   lock(
     metageneration: number | string,
-    callback?: BucketLockCallback
+    callback?: BucketLockCallback,
   ): Promise<BucketLockResponse> | void {
     const metatype = typeof metageneration;
     if (metatype !== 'number' && metatype !== 'string') {
       throw new Error(BucketExceptionMessages.METAGENERATION_NOT_PROVIDED);
     }
 
-    this.request(
-      {
-        method: 'POST',
-        uri: '/lockRetentionPolicy',
-        qs: {
-          ifMetagenerationMatch: metageneration,
+    this.storageTransport
+      .makeRequest(
+        {
+          method: 'POST',
+          url: `${this.baseUrl}/${this.name}/lockRetentionPolicy`,
+          queryParameters: {
+            ifMetagenerationMatch: metageneration,
+          },
         },
-      },
-      callback!
-    );
+        callback!,
+      )
+      .catch(err => callback!(err));
   }
 
   /**
@@ -3462,22 +3519,22 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
    * @returns {Promise<Bucket>}
    */
   async restore(options: RestoreOptions): Promise<Bucket> {
-    const [bucket] = await this.request({
+    const response = await this.storageTransport.makeRequest<Bucket>({
       method: 'POST',
-      uri: '/restore',
-      qs: options,
+      url: `${this.baseUrl}/${this.name}/restore`,
+      queryParameters: options as unknown as StorageQueryParameters,
     });
 
-    return bucket as Bucket;
+    return response.data as Bucket;
   }
 
   makePrivate(
-    options?: MakeBucketPrivateOptions
+    options?: MakeBucketPrivateOptions,
   ): Promise<MakeBucketPrivateResponse>;
   makePrivate(callback: MakeBucketPrivateCallback): void;
   makePrivate(
     options: MakeBucketPrivateOptions,
-    callback: MakeBucketPrivateCallback
+    callback: MakeBucketPrivateCallback,
   ): void;
   /**
    * @typedef {array} MakeBucketPrivateResponse
@@ -3582,7 +3639,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
    */
   makePrivate(
     optionsOrCallback?: MakeBucketPrivateOptions | MakeBucketPrivateCallback,
-    callback?: MakeBucketPrivateCallback
+    callback?: MakeBucketPrivateCallback,
   ): Promise<MakeBucketPrivateResponse> | void {
     const options: MakeBucketPrivateRequest =
       typeof optionsOrCallback === 'object' ? optionsOrCallback : {};
@@ -3632,7 +3689,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
         try {
           if (options.includeFiles) {
             files = await promisify<MakeAllFilesPublicPrivateOptions, File[]>(
-              this.makeAllFilesPublicPrivate_
+              this.makeAllFilesPublicPrivate_,
             ).call(this, options);
           }
         } catch (callErr) {
@@ -3645,12 +3702,12 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
   }
 
   makePublic(
-    options?: MakeBucketPublicOptions
+    options?: MakeBucketPublicOptions,
   ): Promise<MakeBucketPublicResponse>;
   makePublic(callback: MakeBucketPublicCallback): void;
   makePublic(
     options: MakeBucketPublicOptions,
-    callback: MakeBucketPublicCallback
+    callback: MakeBucketPublicCallback,
   ): void;
   /**
    * @typedef {object} MakeBucketPublicOptions
@@ -3747,7 +3804,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
    */
   makePublic(
     optionsOrCallback?: MakeBucketPublicOptions | MakeBucketPublicCallback,
-    callback?: MakeBucketPublicCallback
+    callback?: MakeBucketPublicCallback,
   ): Promise<MakeBucketPublicResponse> | void {
     const options =
       typeof optionsOrCallback === 'object' ? optionsOrCallback : {};
@@ -3769,7 +3826,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
         });
         if (req.includeFiles) {
           files = await promisify<MakeAllFilesPublicPrivateOptions, File[]>(
-            this.makeAllFilesPublicPrivate_
+            this.makeAllFilesPublicPrivate_,
           ).call(this, req);
         }
       } catch (err) {
@@ -3804,12 +3861,12 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
   }
 
   removeRetentionPeriod(
-    options?: SetBucketMetadataOptions
+    options?: SetBucketMetadataOptions,
   ): Promise<SetBucketMetadataResponse>;
   removeRetentionPeriod(callback: SetBucketMetadataCallback): void;
   removeRetentionPeriod(
     options: SetBucketMetadataOptions,
-    callback: SetBucketMetadataCallback
+    callback: SetBucketMetadataCallback,
   ): void;
   /**
    * Remove an already-existing retention policy from this bucket, if it is not
@@ -3836,7 +3893,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
    */
   removeRetentionPeriod(
     optionsOrCallback?: SetBucketMetadataOptions | SetBucketMetadataCallback,
-    callback?: SetBucketMetadataCallback
+    callback?: SetBucketMetadataCallback,
   ): Promise<SetBucketMetadataResponse> | void {
     const options =
       typeof optionsOrCallback === 'object' ? optionsOrCallback : {};
@@ -3848,42 +3905,19 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
         retentionPolicy: null,
       },
       options,
-      callback!
+      callback!,
     );
-  }
-
-  request(reqOpts: DecorateRequestOptions): Promise<RequestResponse>;
-  request(
-    reqOpts: DecorateRequestOptions,
-    callback: BodyResponseCallback
-  ): void;
-  /**
-   * Makes request and applies userProject query parameter if necessary.
-   *
-   * @private
-   *
-   * @param {object} reqOpts - The request options.
-   * @param {function} callback - The callback function.
-   */
-  request(
-    reqOpts: DecorateRequestOptions,
-    callback?: BodyResponseCallback
-  ): void | Promise<RequestResponse> {
-    if (this.userProject && (!reqOpts.qs || !reqOpts.qs.userProject)) {
-      reqOpts.qs = {...reqOpts.qs, userProject: this.userProject};
-    }
-    return super.request(reqOpts, callback!);
   }
 
   setLabels(
     labels: Labels,
-    options?: SetLabelsOptions
+    options?: SetLabelsOptions,
   ): Promise<SetLabelsResponse>;
   setLabels(labels: Labels, callback: SetLabelsCallback): void;
   setLabels(
     labels: Labels,
     options: SetLabelsOptions,
-    callback: SetLabelsCallback
+    callback: SetLabelsCallback,
   ): void;
   /**
    * @deprecated
@@ -3945,7 +3979,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
   setLabels(
     labels: Labels,
     optionsOrCallback?: SetLabelsOptions | SetLabelsCallback,
-    callback?: SetLabelsCallback
+    callback?: SetLabelsCallback,
   ): Promise<SetLabelsResponse> | void {
     const options =
       typeof optionsOrCallback === 'object' ? optionsOrCallback : {};
@@ -3954,26 +3988,26 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
 
     callback = callback || util.noop;
 
-    this.setMetadata({labels}, options, callback);
+    this.setMetadata({labels}, options, callback!);
   }
 
   setMetadata(
     metadata: BucketMetadata,
-    options?: SetMetadataOptions
+    options?: SetMetadataOptions,
   ): Promise<SetMetadataResponse<BucketMetadata>>;
   setMetadata(
     metadata: BucketMetadata,
-    callback: MetadataCallback<BucketMetadata>
+    callback: MetadataCallback<BucketMetadata>,
   ): void;
   setMetadata(
     metadata: BucketMetadata,
     options: SetMetadataOptions,
-    callback: MetadataCallback<BucketMetadata>
+    callback: MetadataCallback<BucketMetadata>,
   ): void;
   setMetadata(
     metadata: BucketMetadata,
     optionsOrCallback: SetMetadataOptions | MetadataCallback<BucketMetadata>,
-    cb?: MetadataCallback<BucketMetadata>
+    cb?: MetadataCallback<BucketMetadata>,
   ): Promise<SetMetadataResponse<BucketMetadata>> | void {
     const options =
       typeof optionsOrCallback === 'object' ? optionsOrCallback : {};
@@ -3985,7 +4019,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
     this.disableAutoRetryConditionallyIdempotent_(
       this.methods.setMetadata,
       AvailableServiceObjectMethods.setMetadata,
-      options
+      options,
     );
 
     void (async () => {
@@ -3993,7 +4027,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
       try {
         resp = await super.setMetadata(metadata, options);
       } catch (err) {
-        cb!(err as Error);
+        cb!(err as GaxiosError);
         return;
       } finally {
         this.storage.retryOptions.autoRetry = this.instanceRetryValue;
@@ -4004,16 +4038,16 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
 
   setRetentionPeriod(
     duration: number,
-    options?: SetBucketMetadataOptions
+    options?: SetBucketMetadataOptions,
   ): Promise<SetBucketMetadataResponse>;
   setRetentionPeriod(
     duration: number,
-    callback: SetBucketMetadataCallback
+    callback: SetBucketMetadataCallback,
   ): void;
   setRetentionPeriod(
     duration: number,
     options: SetBucketMetadataOptions,
-    callback: SetBucketMetadataCallback
+    callback: SetBucketMetadataCallback,
   ): void;
   /**
    * Lock all objects contained in the bucket, based on their creation time. Any
@@ -4056,7 +4090,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
   setRetentionPeriod(
     duration: number,
     optionsOrCallback?: SetBucketMetadataOptions | SetBucketMetadataCallback,
-    callback?: SetBucketMetadataCallback
+    callback?: SetBucketMetadataCallback,
   ): Promise<SetBucketMetadataResponse> | void {
     const options =
       typeof optionsOrCallback === 'object' ? optionsOrCallback : {};
@@ -4069,22 +4103,22 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
         },
       },
       options,
-      callback!
+      callback!,
     );
   }
 
   setCorsConfiguration(
     corsConfiguration: Cors[],
-    options?: SetBucketMetadataOptions
+    options?: SetBucketMetadataOptions,
   ): Promise<SetBucketMetadataResponse>;
   setCorsConfiguration(
     corsConfiguration: Cors[],
-    callback: SetBucketMetadataCallback
+    callback: SetBucketMetadataCallback,
   ): void;
   setCorsConfiguration(
     corsConfiguration: Cors[],
     options: SetBucketMetadataOptions,
-    callback: SetBucketMetadataCallback
+    callback: SetBucketMetadataCallback,
   ): void;
   /**
    *
@@ -4135,7 +4169,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
   setCorsConfiguration(
     corsConfiguration: Cors[],
     optionsOrCallback?: SetBucketMetadataOptions | SetBucketMetadataCallback,
-    callback?: SetBucketMetadataCallback
+    callback?: SetBucketMetadataCallback,
   ): Promise<SetBucketMetadataResponse> | void {
     const options =
       typeof optionsOrCallback === 'object' ? optionsOrCallback : {};
@@ -4146,22 +4180,22 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
         cors: corsConfiguration,
       },
       options,
-      callback!
+      callback!,
     );
   }
 
   setStorageClass(
     storageClass: string,
-    options?: SetBucketStorageClassOptions
+    options?: SetBucketStorageClassOptions,
   ): Promise<SetBucketMetadataResponse>;
   setStorageClass(
     storageClass: string,
-    callback: SetBucketStorageClassCallback
+    callback: SetBucketStorageClassCallback,
   ): void;
   setStorageClass(
     storageClass: string,
     options: SetBucketStorageClassOptions,
-    callback: SetBucketStorageClassCallback
+    callback: SetBucketStorageClassCallback,
   ): void;
   /**
    * @typedef {object} SetBucketStorageClassOptions
@@ -4212,7 +4246,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
     storageClass: string,
     optionsOrCallback?:
       SetBucketStorageClassOptions | SetBucketStorageClassCallback,
-    callback?: SetBucketStorageClassCallback
+    callback?: SetBucketStorageClassCallback,
   ): Promise<SetBucketMetadataResponse> | void {
     const options =
       typeof optionsOrCallback === 'object' ? optionsOrCallback : {};
@@ -4260,10 +4294,10 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
       const methodConfig = this.methods[method];
       if (typeof methodConfig === 'object') {
         if (typeof methodConfig.reqOpts === 'object') {
-          Object.assign(methodConfig.reqOpts.qs, {userProject});
+          Object.assign(methodConfig.reqOpts.queryParameters!, {userProject});
         } else {
           methodConfig.reqOpts = {
-            qs: {userProject},
+            queryParameters: {userProject},
           };
         }
       }
@@ -4274,7 +4308,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
   upload(
     pathString: string,
     options: UploadOptions,
-    callback: UploadCallback
+    callback: UploadCallback,
   ): void;
   upload(pathString: string, callback: UploadCallback): void;
   /**
@@ -4534,11 +4568,12 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
   upload(
     pathString: string,
     optionsOrCallback?: UploadOptions | UploadCallback,
-    callback?: UploadCallback
+    callback?: UploadCallback,
   ): Promise<UploadResponse> | void {
+    const persistentInvocationId = randomUUID();
     const upload = (numberOfRetries: number | undefined) => {
       const returnValue = AsyncRetry(
-        async (bail: (err: Error) => void) => {
+        async (bail: (err: GaxiosError | Error) => void) => {
           await new Promise<void>((resolve, reject) => {
             if (
               numberOfRetries === 0 &&
@@ -4546,7 +4581,10 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
             ) {
               newFile.storage.retryOptions.autoRetry = false;
             }
-            const writable = newFile.createWriteStream(options);
+            const writable = newFile.createWriteStream({
+              ...options,
+              invocationId: persistentInvocationId,
+            } as CreateWriteStreamOptionsInternal);
             if (options.onUploadProgress) {
               writable.on('progress', options.onUploadProgress);
             }
@@ -4562,7 +4600,9 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
                 readStream.destroy();
                 if (
                   this.storage.retryOptions.autoRetry &&
-                  this.storage.retryOptions.retryableErrorFn!(err as ApiError)
+                  this.storage.retryOptions.retryableErrorFn!(
+                    err as GaxiosError,
+                  )
                 ) {
                   return reject(err);
                 } else {
@@ -4579,7 +4619,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
           factor: this.storage.retryOptions.retryDelayMultiplier,
           maxTimeout: this.storage.retryOptions.maxRetryDelay! * 1000, //convert to milliseconds
           maxRetryTime: this.storage.retryOptions.totalTimeout! * 1000, //convert to milliseconds
-        }
+        },
       );
 
       if (!callback) {
@@ -4611,7 +4651,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
       {
         metadata: {},
       },
-      options
+      options,
     );
 
     // Do not retry if precondition option ifGenerationMatch is not set
@@ -4651,16 +4691,17 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
       });
     }
 
-    return upload(maxRetries) as Promise<UploadResponse> | void;
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
+    upload(maxRetries);
   }
 
   makeAllFilesPublicPrivate_(
-    options?: MakeAllFilesPublicPrivateOptions
+    options?: MakeAllFilesPublicPrivateOptions,
   ): Promise<MakeAllFilesPublicPrivateResponse>;
   makeAllFilesPublicPrivate_(callback: MakeAllFilesPublicPrivateCallback): void;
   makeAllFilesPublicPrivate_(
     options: MakeAllFilesPublicPrivateOptions,
-    callback: MakeAllFilesPublicPrivateCallback
+    callback: MakeAllFilesPublicPrivateCallback,
   ): void;
   /**
    * @private
@@ -4709,7 +4750,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
   makeAllFilesPublicPrivate_(
     optionsOrCallback?:
       MakeAllFilesPublicPrivateOptions | MakeAllFilesPublicPrivateCallback,
-    callback?: MakeAllFilesPublicPrivateCallback
+    callback?: MakeAllFilesPublicPrivateCallback,
   ): Promise<MakeAllFilesPublicPrivateResponse> | void {
     const MAX_PARALLEL_LIMIT = 10;
     const errors = [] as Error[];
@@ -4756,14 +4797,14 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
   disableAutoRetryConditionallyIdempotent_(
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     coreOpts: any,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     methodType: AvailableServiceObjectMethods,
-    localPreconditionOptions?: PreconditionOptions
+    localPreconditionOptions?: PreconditionOptions,
   ): void {
     if (
       typeof coreOpts === 'object' &&
       coreOpts?.reqOpts?.qs?.ifMetagenerationMatch === undefined &&
       localPreconditionOptions?.ifMetagenerationMatch === undefined &&
+      this.instancePreconditionOpts?.ifMetagenerationMatch === undefined &&
       (methodType === AvailableServiceObjectMethods.setMetadata ||
         methodType === AvailableServiceObjectMethods.delete) &&
       this.storage.retryOptions.idempotencyStrategy ===

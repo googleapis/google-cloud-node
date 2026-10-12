@@ -44,7 +44,7 @@ function main() {
   if (numThreads > iterationsRemaining) {
     log(
       `${numThreads} is greater than number of iterations (${iterationsRemaining}). Using ${iterationsRemaining} threads instead.`,
-      argv.debug as boolean
+      argv.debug as boolean,
     );
     numThreads = iterationsRemaining;
   }
@@ -65,7 +65,7 @@ function createWorker() {
   iterationsRemaining--;
   log(
     `Starting new iteration. Current iterations remaining: ${iterationsRemaining}`,
-    argv.debug as boolean
+    argv.debug as boolean,
   );
   let testPath = '';
   if (
@@ -122,7 +122,7 @@ async function recordResult(results: TestResult[] | TestResult) {
     : [results];
 
   for await (const outputString of convertToCloudMonitoringFormat(
-    resultsToAppend
+    resultsToAppend,
   )) {
     argv.file_name
       ? await appendFile(argv.file_name as string, `${outputString}\n`)
